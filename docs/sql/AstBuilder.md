@@ -146,7 +146,7 @@ A 3-element tuple with a `TableIdentifier`, optional partition keys and the `exi
 INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)?
 ```
 
-In a way, `visitInsertOverwriteTable` is simply a more general version of the [visitInsertIntoTable](#visitInsertIntoTable) with the `exists` flag on or off based on existence of `IF NOT EXISTS`. The main difference is that [dynamic partitions](../spark-sql-dynamic-partition-inserts.md#dynamic-partitions) are used with no `IF NOT EXISTS`.
+In a way, `visitInsertOverwriteTable` is simply a more general version of the [visitInsertIntoTable](#visitInsertIntoTable) with the `exists` flag on or off based on existence of `IF NOT EXISTS`. The main difference is that [dynamic partitions](../dynamic-partition-inserts.md#dynamic-partitions) are used with no `IF NOT EXISTS`.
 
 ANTLR labeled alternative: `#insertOverwriteTable`
 

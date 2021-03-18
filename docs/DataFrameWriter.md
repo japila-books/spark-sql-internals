@@ -312,7 +312,7 @@ text(path: String): Unit
 ----
 |===
 
-`DataFrameWriter` is available using <<spark-sql-DataFrame.md#write, Dataset.write>> operator.
+`DataFrameWriter` is available using [Dataset.write](DataFrame.md#write) operator.
 
 [source, scala]
 ----
@@ -537,12 +537,6 @@ format(source: String): DataFrameWriter[T]
 
 `format` simply sets the <<source, source>> internal property.
 
-=== [[parquet]] Parquet
-
-CAUTION: FIXME
-
-NOTE: Parquet is the default data source format.
-
 === [[getBucketSpec]] `getBucketSpec` Internal Method
 
 [source, scala]
@@ -550,11 +544,11 @@ NOTE: Parquet is the default data source format.
 getBucketSpec: Option[BucketSpec]
 ----
 
-`getBucketSpec` returns a new <<spark-sql-BucketSpec.md#, BucketSpec>> if <<numBuckets, numBuckets>> was defined (with <<bucketColumnNames, bucketColumnNames>> and <<sortColumnNames, sortColumnNames>>).
+`getBucketSpec` returns a new [BucketSpec](BucketSpec.md) if [numBuckets](#numBuckets) was defined (with [bucketColumnNames](#bucketColumnNames) and [sortColumnNames](#sortColumnNames)).
 
 `getBucketSpec` throws an `IllegalArgumentException` when <<numBuckets, numBuckets>> are not defined when <<sortColumnNames, sortColumnNames>> are.
 
-```
+```text
 sortBy must be used together with bucketBy
 ```
 
@@ -569,7 +563,7 @@ createTable(
 
 `createTable` [builds a CatalogStorageFormat](DataSource.md#buildStorageFormatFromOptions) per [extraOptions](#extraOptions).
 
-`createTable` assumes the table being [external](CatalogTable.md#CatalogTableType) when [location URI](spark-sql-CatalogStorageFormat.md#locationUri) of `CatalogStorageFormat` is defined, and [managed](CatalogTable.md#CatalogTableType) otherwise.
+`createTable` assumes the table being [external](CatalogTable.md#CatalogTableType) when [location URI](CatalogStorageFormat.md#locationUri) of `CatalogStorageFormat` is defined, and [managed](CatalogTable.md#CatalogTableType) otherwise.
 
 `createTable` creates a [CatalogTable](CatalogTable.md) (with the [bucketSpec](CatalogTable.md#bucketSpec) per [getBucketSpec](#getBucketSpec)).
 

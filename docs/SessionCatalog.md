@@ -9,7 +9,7 @@
 SessionCatalog takes the following to be created:
 
 * <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](ExternalCatalog.md)
-* <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
+* <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](GlobalTempViewManager.md)
 * <span id="functionRegistry"> [FunctionRegistry](FunctionRegistry.md)
 * <span id="conf"> [SQLConf](SQLConf.md)
 * <span id="hadoopConf"> Hadoop Configuration
@@ -271,7 +271,7 @@ createGlobalTempView(
   overrideIfExists: Boolean): Unit
 ----
 
-`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to spark-sql-GlobalTempViewManager.md#create[register a global temporary view].
+`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to [register a global temporary view](GlobalTempViewManager.md#create).
 
 [NOTE]
 ====
@@ -388,7 +388,7 @@ scala> println(plan.numberedTreeString)
 
 Internally, `lookupRelation` looks up the `name` table using:
 
-. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the spark-sql-GlobalTempViewManager.md#database[name] of `GlobalTempViewManager`
+. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager`
 
 a. Gives `SubqueryAlias` or reports a `NoSuchTableException`
 
@@ -432,7 +432,7 @@ Internally, `getTempViewOrPermanentTableMetadata` branches off per database.
 
 When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a [CatalogTable](CatalogTable.md) (with `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 
-With the database name of the spark-sql-GlobalTempViewManager.md[GlobalTempViewManager], `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[global view definition] and creates a [CatalogTable](CatalogTable.md) (with the [name](spark-sql-GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
+With the database name of the [GlobalTempViewManager](GlobalTempViewManager.md), `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the [global view definition](GlobalTempViewManager.md#get) and creates a [CatalogTable](CatalogTable.md) (with the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
 
 With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply <<getTableMetadata, retrieves the table metadata from an external catalog>>.
 
@@ -472,7 +472,7 @@ NOTE: `reset` is used exclusively in the Spark SQL internal tests.
 dropGlobalTempView(name: String): Boolean
 ----
 
-`dropGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to <<spark-sql-GlobalTempViewManager.md#remove, remove>> the `name` global temporary view.
+`dropGlobalTempView` simply requests the [GlobalTempViewManager](#globalTempViewManager) to [remove](GlobalTempViewManager.md#remove) the `name` global temporary view.
 
 NOTE: `dropGlobalTempView` is used when...FIXME
 
@@ -508,7 +508,7 @@ getGlobalTempView(
   name: String): Option[LogicalPlan]
 ----
 
-`getGlobalTempView` requests the <<globalTempViewManager, GlobalTempViewManager>> for the spark-sql-GlobalTempViewManager.md#get[temporary view definition by the input name].
+`getGlobalTempView` requests the [GlobalTempViewManager](#globalTempViewManager) for the [temporary view definition by the input name](GlobalTempViewManager.md#get).
 
 `getGlobalTempView` is used when `CatalogImpl` is requested to [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView).
 

@@ -1,6 +1,6 @@
 # RowEncoder &mdash; Encoder for DataFrames
 
-`RowEncoder` is part of the [Encoder framework](Encoder.md) and acts as the encoder for [DataFrame](spark-sql-DataFrame.md)s ([Dataset](Dataset.md)s of [Row](spark-sql-Row.md)s).
+`RowEncoder` is part of the [Encoder framework](Encoder.md) and acts as the encoder for [DataFrame](DataFrame.md)s ([Dataset](Dataset.md)s of [Row](spark-sql-Row.md)s).
 
 NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `Encoder[Row]` available in scope which is indeed `RowEncoder` itself.
 

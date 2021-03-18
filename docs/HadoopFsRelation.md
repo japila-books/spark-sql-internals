@@ -21,7 +21,7 @@
 
 ## <span id="bucketSpec"> Bucketing Specification
 
-`HadoopFsRelation` can be given a [bucketing specification](spark-sql-BucketSpec.md) when [created](#creating-instance).
+`HadoopFsRelation` can be given a [bucketing specification](BucketSpec.md) when [created](#creating-instance).
 
 The bucketing specification is defined for [non-streaming file-based data sources](DataSource.md) and used for the following:
 

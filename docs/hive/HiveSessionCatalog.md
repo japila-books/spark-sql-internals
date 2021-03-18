@@ -32,12 +32,12 @@ res2: org.apache.spark.sql.catalyst.catalog.SessionCatalog = org.apache.spark.sq
 
 `HiveSessionCatalog` uses the legacy <<metastoreCatalog, HiveMetastoreCatalog>> (which is another session-scoped catalog of relational entities) exclusively to allow `RelationConversions` logical evaluation rule to <<convertToLogicalRelation, convert Hive metastore relations to data source relations>> when RelationConversions.md#apply[executed].
 
-=== [[creating-instance]] Creating HiveSessionCatalog Instance
+## Creating Instance
 
 `HiveSessionCatalog` takes the following to be created:
 
 * [[externalCatalog]] [HiveExternalCatalog](HiveExternalCatalog.md)
-* [[globalTempViewManager]] [GlobalTempViewManager](../spark-sql-GlobalTempViewManager.md)
+* [[globalTempViewManager]] [GlobalTempViewManager](../GlobalTempViewManager.md)
 * [[metastoreCatalog]] Legacy [HiveMetastoreCatalog](HiveMetastoreCatalog.md)
 * [[functionRegistry]] [FunctionRegistry](../FunctionRegistry.md)
 * [[conf]] [SQLConf](../SQLConf.md)

@@ -10,7 +10,7 @@
 * [Static Partitions](#staticPartitions)
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
-* <span id="bucketSpec"> [BucketSpec](../spark-sql-BucketSpec.md) if defined
+* <span id="bucketSpec"> [BucketSpec](../BucketSpec.md) if defined
 * <span id="fileFormat"> [FileFormat](../datasources/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
@@ -47,7 +47,7 @@ There will be no partitions when created for the following:
 dynamicPartitionOverwrite: Boolean
 ```
 
-`InsertIntoHadoopFsRelationCommand` defines a `dynamicPartitionOverwrite` flag to indicate whether [dynamic partition inserts](../spark-sql-dynamic-partition-inserts.md) is enabled or not.
+`InsertIntoHadoopFsRelationCommand` defines a `dynamicPartitionOverwrite` flag to indicate whether [dynamic partition inserts](../dynamic-partition-inserts.md) is enabled or not.
 
 `dynamicPartitionOverwrite` is based on the following (in the order of precedence):
 

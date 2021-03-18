@@ -157,7 +157,7 @@ clearCache(): Unit
 
 === [[implicits]] Implicits -- SQLContext.implicits
 
-The `implicits` object is a helper class with methods to convert  objects into Dataset.md[Datasets] and spark-sql-DataFrame.md[DataFrames], and also comes with many [Encoder](Encoder.md)s for "primitive" types as well as the collections thereof.
+The `implicits` object is a helper class with methods to convert  objects into [Dataset](Dataset.md)s and [DataFrame](DataFrame.md)s, and also comes with many [Encoder](Encoder.md)s for "primitive" types as well as the collections thereof.
 
 [NOTE]
 ====

@@ -1,6 +1,6 @@
 # Dataset API &mdash; Untyped Transformations
 
-**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](spark-sql-DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](RelationalGroupedDataset.md), a [DataFrameNaFunctions](spark-sql-DataFrameNaFunctions.md) or a [DataFrameStatFunctions](spark-sql-DataFrameStatFunctions.md) (and hence _untyped_).
+**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](RelationalGroupedDataset.md), a [DataFrameNaFunctions](spark-sql-DataFrameNaFunctions.md) or a [DataFrameStatFunctions](spark-sql-DataFrameStatFunctions.md) (and hence _untyped_).
 
 !!! note
     Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.

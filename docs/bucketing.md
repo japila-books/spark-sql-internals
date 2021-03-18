@@ -66,7 +66,7 @@ people.write
 ----
 
 !!! note
-    [DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) and [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) simply set respective internal properties that eventually become a [bucketing specification](spark-sql-BucketSpec.md).
+    [DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) and [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) simply set respective internal properties that eventually become a [bucketing specification](BucketSpec.md).
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 
@@ -179,9 +179,9 @@ scala> metadata.bucketSpec.foreach(println)
 4 buckets, bucket columns: [id], sort columns: [id]
 ----
 
-The spark-sql-BucketSpec.md#numBuckets[number of buckets] has to be between `0` and `100000` exclusive or Spark SQL throws an `AnalysisException`:
+The [number of buckets](BucketSpec.md#numBuckets) has to be between `0` and `100000` exclusive or Spark SQL throws an `AnalysisException`:
 
-```
+```text
 Number of buckets should be greater than 0 but less than 100000. Got `[numBuckets]`
 ```
 

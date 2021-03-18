@@ -1,6 +1,6 @@
 # RelationalGroupedDataset &mdash; Untyped Row-based Grouping
 
-`RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a spark-sql-DataFrame.md[DataFrame].
+`RelationalGroupedDataset` is an interface to <<operators, calculate aggregates over groups of rows>> in a [DataFrame](DataFrame.md).
 
 !!! note
     [KeyValueGroupedDataset](KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Rows](spark-sql-Row.md)).
@@ -67,7 +67,7 @@ agg(exprs: Map[String, String]): DataFrame
 agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
 ----
 
-`agg` creates a spark-sql-DataFrame.md[DataFrame] with the rows being the result of executing grouping expressions (specified using [Column](Column.md)s or names) over row groups.
+`agg` creates a [DataFrame](DataFrame.md) with the rows being the result of executing grouping expressions (specified using [Column](Column.md)s or names) over row groups.
 
 !!! NOTE
     There are [untyped](Column.md) and [typed](TypedColumn.md) column expressions.
@@ -160,7 +160,7 @@ NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDat
 
 `RelationalGroupedDataset` takes the following when created:
 
-* [[df]] spark-sql-DataFrame.md[DataFrame]
+* [[df]] [DataFrame](DataFrame.md)
 * [[groupingExprs]] Grouping expressions/Expression.md[expressions]
 * [[groupType]] Group type (to indicate the "source" operator)
 

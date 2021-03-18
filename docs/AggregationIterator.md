@@ -13,13 +13,13 @@ title: AggregationIterator
 | Name
 | Description
 
-| <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>
+| [ObjectAggregationIterator](ObjectAggregationIterator.md)
 | Used when [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) physical operator is executed
 
-| <<spark-sql-SortBasedAggregationIterator.md#, SortBasedAggregationIterator>>
-| Used exclusively when `SortAggregateExec` physical operator is SortAggregateExec.md#doExecute[executed].
+| [SortBasedAggregationIterator](SortBasedAggregationIterator.md)
+| Used when [SortAggregateExec](physical-operators/SortAggregateExec.md) physical operator is executed
 
-| TungstenAggregationIterator.md[TungstenAggregationIterator]
+| [TungstenAggregationIterator](TungstenAggregationIterator.md)
 a| Used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is executed
 
 |===
@@ -32,12 +32,12 @@ a| Used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physic
 | Description
 
 | [[aggregateFunctions]] `aggregateFunctions`
-| spark-sql-Expression-AggregateFunction.md[Aggregate functions]
+| [Aggregate functions](expressions/AggregateFunction.md)
 
 Used when...FIXME
 
 | [[allImperativeAggregateFunctions]] `allImperativeAggregateFunctions`
-| spark-sql-Expression-ImperativeAggregate.md[ImperativeAggregate] functions
+| [ImperativeAggregate](expressions/ImperativeAggregate.md) functions
 
 Used when...FIXME
 
@@ -52,18 +52,18 @@ Used when...FIXME
 Used when...FIXME
 
 | `generateOutput`
-a| [[generateOutput]] Function used to generate an <<UnsafeRow.md#, unsafe row>> (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
+a| [[generateOutput]] Function used to generate an [unsafe row](UnsafeRow.md) (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
 
 Used when:
 
-* `ObjectAggregationIterator` is requested for the <<spark-sql-ObjectAggregationIterator.md#next, next unsafe row>> and <<spark-sql-ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `ObjectAggregationIterator` is requested for the [next unsafe row](ObjectAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 
-* `SortBasedAggregationIterator` is requested for the <<spark-sql-SortBasedAggregationIterator.md#next, next unsafe row>> and <<spark-sql-SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `SortBasedAggregationIterator` is requested for the [next unsafe row](SortBasedAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 
-* `TungstenAggregationIterator` is requested for the <<TungstenAggregationIterator.md#next, next unsafe row>> and <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, outputForEmptyGroupingKeyWithoutInput>>
+* `TungstenAggregationIterator` is requested for the [next unsafe row](TungstenAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 
 | [[groupingAttributes]] `groupingAttributes`
-| Grouping spark-sql-Expression-Attribute.md[attributes]
+| Grouping [attribute](expressions/Attribute.md)s
 
 Used when...FIXME
 
@@ -78,21 +78,20 @@ Used when...FIXME
 Used when...FIXME
 |===
 
-=== [[creating-instance]] Creating AggregationIterator Instance
+## Creating Instance
 
 `AggregationIterator` takes the following when created:
 
-* [[groupingExpressions]] Grouping expressions/NamedExpression.md[named expressions]
-* [[inputAttributes]] Input spark-sql-Expression-Attribute.md[attributes]
+* [[groupingExpressions]] Grouping [named expressions](expressions/NamedExpression.md)
+* [[inputAttributes]] Input [attribute](expressions/Attribute.md)s
 * [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
-* [[aggregateAttributes]] Aggregate spark-sql-Expression-Attribute.md[attributes]
+* [[aggregateAttributes]] Aggregate [attribute](expressions/Attribute.md)s
 * [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Result expressions/NamedExpression.md[named expressions]
+* [[resultExpressions]] Result [named expressions](expressions/NamedExpression.md)
 * [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
 
-`AggregationIterator` initializes the <<internal-registries, internal registries and counters>>.
-
-NOTE: `AggregationIterator` is a Scala abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete AggregationIterators>>.
+!!! note
+    `AggregationIterator` is a Scala abstract class and cannot be created directly. It is created indirectly for the [concrete AggregationIterators](#implementations).
 
 === [[initializeAggregateFunctions]] `initializeAggregateFunctions` Internal Method
 

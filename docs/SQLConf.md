@@ -3,7 +3,7 @@
 `SQLConf` is an internal **configuration store** for configuration properties and hints used in Spark SQL.
 
 !!! important
-    `SQLConf` is an internal part of Spark SQL and is not supposed to be used directly. Spark SQL configuration is available through the developer-facing [RuntimeConfig](spark-sql-RuntimeConfig.md).
+    `SQLConf` is an internal part of Spark SQL and is not supposed to be used directly. Spark SQL configuration is available through the developer-facing [RuntimeConfig](RuntimeConfig.md).
 
 `SQLConf` offers methods to `get`, `set`, `unset` or `clear` values of the configuration properties and hints as well as to read the current values.
 

@@ -27,15 +27,15 @@
 
 === [[UnboundedWindowFunctionFrame]] `UnboundedWindowFunctionFrame`
 
-`UnboundedWindowFunctionFrame` is a <<WindowFunctionFrame, WindowFunctionFrame>> that gives the same value for every row in a partition.
+`UnboundedWindowFunctionFrame` is a [WindowFunctionFrame](#WindowFunctionFrame) that gives the same value for every row in a partition.
 
-`UnboundedWindowFunctionFrame` is <<UnboundedWindowFunctionFrame-creating-instance, created>> for spark-sql-Expression-AggregateFunction.md[AggregateFunctions] (in [AggregateExpression](../expressions/AggregateExpression.md)s) or expressions/AggregateWindowFunction.md[AggregateWindowFunctions] with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the WindowExec.md#entire-partition-frame[entire partition frame].
+`UnboundedWindowFunctionFrame` is [created](#UnboundedWindowFunctionFrame-creating-instance) for [AggregateFunction](../expressions/AggregateFunction.md)s (in [AggregateExpression](../expressions/AggregateExpression.md)s) or [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)s with no frame defined (i.e. no `rowsBetween` or `rangeBetween`) that boils down to using the WindowExec.md#entire-partition-frame[entire partition frame].
 
 [[UnboundedWindowFunctionFrame-creating-instance]]
 `UnboundedWindowFunctionFrame` takes the following when created:
 
 * [[UnboundedWindowFunctionFrame-target]] Target [InternalRow](../InternalRow.md)
-* [[UnboundedWindowFunctionFrame-processor]] spark-sql-AggregateProcessor.md[AggregateProcessor]
+* [[UnboundedWindowFunctionFrame-processor]] [AggregateProcessor](AggregateProcessor.md)
 
 ==== [[UnboundedWindowFunctionFrame-prepare]] `prepare` Method
 
@@ -44,11 +44,11 @@
 prepare(rows: ExternalAppendOnlyUnsafeRowArray): Unit
 ----
 
-`prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#initialize[initialize] passing in the number of `UnsafeRows` in the input `ExternalAppendOnlyUnsafeRowArray`.
+`prepare` requests [AggregateProcessor](#UnboundedWindowFunctionFrame-processor) to [initialize](AggregateProcessor.md#initialize) passing in the number of `UnsafeRows` in the input `ExternalAppendOnlyUnsafeRowArray`.
 
-`prepare` then requests `ExternalAppendOnlyUnsafeRowArray` to spark-sql-ExternalAppendOnlyUnsafeRowArray.md#generateIterator[generate an interator].
+`prepare` then requests `ExternalAppendOnlyUnsafeRowArray` to [generate an interator](../ExternalAppendOnlyUnsafeRowArray.md#generateIterator).
 
-In the end, `prepare` requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#update[update] passing in every `UnsafeRow` in the iterator one at a time.
+In the end, `prepare` requests [AggregateProcessor](UnboundedWindowFunctionFrame-processor) to [update](AggregateProcessor.md#update) passing in every `UnsafeRow` in the iterator one at a time.
 
 ==== [[UnboundedWindowFunctionFrame-write]] `write` Method
 
@@ -57,7 +57,7 @@ In the end, `prepare` requests <<UnboundedWindowFunctionFrame-processor, Aggrega
 write(index: Int, current: InternalRow): Unit
 ----
 
-`write` simply requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to spark-sql-AggregateProcessor.md#evaluate[evaluate] the <<UnboundedWindowFunctionFrame-target, target InternalRow>>.
+`write` simply requests <<UnboundedWindowFunctionFrame-processor, AggregateProcessor>> to AggregateProcessor.md#evaluate[evaluate] the <<UnboundedWindowFunctionFrame-target, target InternalRow>>.
 
 === [[contract]] WindowFunctionFrame Contract
 
@@ -80,8 +80,8 @@ NOTE: `WindowFunctionFrame` is a `private[window]` contract.
 | Description
 
 | [[prepare]] `prepare`
-| Used exclusively when `WindowExec` operator WindowExec.md#fetchNextPartition[fetches all UnsafeRows for a partition] (passing in spark-sql-ExternalAppendOnlyUnsafeRowArray.md[ExternalAppendOnlyUnsafeRowArray] with all `UnsafeRows`).
+| Used when `WindowExec` operator [fetches all UnsafeRows for a partition](WindowExec.md#fetchNextPartition) (passing in [ExternalAppendOnlyUnsafeRowArray](../ExternalAppendOnlyUnsafeRowArray.md) with all `UnsafeRows`).
 
 | [[write]] `write`
-| Used exclusively when the WindowExec.md#iterator[Iterator[InternalRow\]] (from WindowExec.md#doExecute[executing] `WindowExec`) is WindowExec.md#next[requested a next row].
+| Used when the [Iterator[InternalRow\]](WindowExec.md#iterator) (from [executing](WindowExec.md#doExecute) `WindowExec`) is [requested a next row](WindowExec.md#next)
 |===

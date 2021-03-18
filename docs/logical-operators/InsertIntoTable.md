@@ -80,21 +80,21 @@ val op = plan.p(0)
 assert(op.isInstanceOf[InsertIntoTable])
 ----
 
-=== [[creating-instance]] Creating InsertIntoTable Instance
+## Creating Instance
 
 `InsertIntoTable` takes the following when created:
 
-* [[table]] spark-sql-LogicalPlan.md[Logical plan] for the table to insert into
-* [[partition]] Partition keys (with optional partition values for <<spark-sql-dynamic-partition-inserts.md#, dynamic partition insert>>)
-* [[query]] spark-sql-LogicalPlan.md[Logical plan] representing the data to be written
+* [[table]] [Logical plan](LogicalPlan.md) for the table to insert into
+* [[partition]] Partition keys (with optional partition values for [dynamic partition insert](../dynamic-partition-inserts.md))
+* [[query]] [Logical plan](LogicalPlan.md) representing the data to be written
 * [[overwrite]] `overwrite` flag that indicates whether to overwrite an existing table or partitions (`true`) or not (`false`)
 * [[ifPartitionNotExists]] `ifPartitionNotExists` flag
 
-=== [[inserting-into-view-not-allowed]] Inserting Into View Not Allowed
+## Inserting Into View Not Allowed
 
-Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a <<UnresolvedRelation.md#, UnresolvedRelation>> leaf operator that is resolved to a <<View.md#, View>> unary operator fails at analysis (when [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution is executed).
+Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a [UnresolvedRelation](UnresolvedRelation.md) leaf operator that is resolved to a [View](View.md) unary operator fails at analysis (when [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution is executed).
 
-```
+```text
 Inserting into a view is not allowed. View: [name].
 ```
 

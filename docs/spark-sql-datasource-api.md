@@ -14,7 +14,7 @@ val spark = SparkSession.builder.getOrCreate
 val reader = spark.read
 ----
 
-`DataFrameReader` is an interface to create spark-sql-DataFrame.md[DataFrames] (aka `Dataset[Row]`) from [files](DataFrameReader.md#creating-dataframes-from-files), [Hive tables](DataFrameReader.md#creating-dataframes-from-tables) or [tables using JDBC](DataFrameReader.md#jdbc).
+`DataFrameReader` is an interface to create [DataFrame](DataFrame.md)s (aka `Dataset[Row]`) from [files](DataFrameReader.md#creating-dataframes-from-files), [Hive tables](DataFrameReader.md#creating-dataframes-from-tables) or [tables using JDBC](DataFrameReader.md#jdbc).
 
 [source, scala]
 ----

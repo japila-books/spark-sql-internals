@@ -49,12 +49,12 @@ Execute InsertIntoHiveDirCommand InsertIntoHiveDirCommand false, Storage(Locatio
 // spark.table(tableName)
 ----
 
-=== [[creating-instance]] Creating InsertIntoHiveDirCommand Instance
+## Creating Instance
 
 `InsertIntoHiveDirCommand` takes the following to be created:
 
 * [[isLocal]] `isLocal` Flag
-* [[storage]] ../spark-sql-CatalogStorageFormat.md[CatalogStorageFormat]
+* [[storage]] [CatalogStorageFormat](../CatalogStorageFormat.md)
 * [[query]] Structured query (as a ../spark-sql-LogicalPlan.md[LogicalPlan])
 * [[overwrite]] `overwrite` Flag
 * [[outputColumnNames]] Names of the output columns
@@ -70,19 +70,19 @@ run(
 
 NOTE: `run` is part of ../DataWritingCommand.md#run[DataWritingCommand] contract.
 
-`run` asserts that the ../spark-sql-CatalogStorageFormat.md#locationUri[table location] of the <<storage, CatalogStorageFormat>> is specified (or throws an `AssertionError`).
+`run` asserts that the [table location](../CatalogStorageFormat.md#locationUri) of the [CatalogStorageFormat](#storage) is specified (or throws an `AssertionError`).
 
-`run` ../spark-sql-SchemaUtils.md#checkColumnNameDuplication[checkColumnNameDuplication] of the given <<outputColumnNames, output columns>>.
+`run` [checkColumnNameDuplication](../spark-sql-SchemaUtils.md#checkColumnNameDuplication) of the given [output columns](#outputColumnNames).
 
 `run` creates a [CatalogTable](../CatalogTable.md) for the table location (and the `VIEW` table type) and HiveClientImpl.md#toHiveTable[converts it to a Hive Table metadata].
 
-`run` specifies `serialization.lib` metadata to the ../spark-sql-CatalogStorageFormat.md#serde[serde] of the given <<storage, CatalogStorageFormat>> or `LazySimpleSerDe` if not defined.
+`run` specifies `serialization.lib` metadata to the [serde](../CatalogStorageFormat.md#serde) of the given [CatalogStorageFormat](#storage) or `LazySimpleSerDe` if not defined.
 
-`run` creates a new map-reduce job for execution (a Hadoop {url-hadoop-javadoc}/org/apache/hadoop/mapred/JobConf.html[JobConf]) with a ../SessionState.md#newHadoopConf[new Hadoop Configuration] (from the input ../SparkSession.md[SparkSession]).
+`run` creates a new map-reduce job for execution (a Hadoop [JobConf]({{ hadoop.api }}/org/apache/hadoop/mapred/JobConf.html)) with a [new Hadoop Configuration](../SessionState.md#newHadoopConf) (from the input [SparkSession](../SparkSession.md)).
 
 `run` prepares the path to write to (based on the given <<isLocal, isLocal>> flag and creating it if necessary). `run` SaveAsHiveFile.md#getExternalTmpPath[getExternalTmpPath].
 
-`run` SaveAsHiveFile.md#saveAsHiveFile[saveAsHiveFile].
+`run` [saveAsHiveFile](SaveAsHiveFile.md#saveAsHiveFile).
 
 In the end, `run` SaveAsHiveFile.md#deleteExternalTmpPath[deleteExternalTmpPath].
 

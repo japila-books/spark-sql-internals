@@ -273,7 +273,7 @@ Refer to spark-logging.md[Logging].
 NOTE: `nextGroup` is the result of converting `nextRow` using <<grouping, grouping>> conversion function.
 
 [[buffer]]
-`doExecute` creates a [ExternalAppendOnlyUnsafeRowArray](../spark-sql-ExternalAppendOnlyUnsafeRowArray.md) buffer using [spark.sql.windowExec.buffer.spill.threshold](../configuration-properties.md#spark.sql.windowExec.buffer.spill.threshold) configuration property as the threshold for the number of rows buffered.
+`doExecute` creates a [ExternalAppendOnlyUnsafeRowArray](../ExternalAppendOnlyUnsafeRowArray.md) buffer using [spark.sql.windowExec.buffer.spill.threshold](../configuration-properties.md#spark.sql.windowExec.buffer.spill.threshold) configuration property as the threshold for the number of rows buffered.
 
 [[windowFunctionResult]]
 `doExecute` creates a `SpecificInternalRow` for the window function result (as `windowFunctionResult`).
@@ -285,7 +285,7 @@ NOTE: `SpecificInternalRow` is also used in the generated code for the `UnsafePr
 
 CAUTION: FIXME
 
-NOTE: spark-sql-ExternalAppendOnlyUnsafeRowArray.md[ExternalAppendOnlyUnsafeRowArray] is used to collect `UnsafeRow` objects from the child's partitions (one partition per buffer and up to `spark.sql.windowExec.buffer.spill.threshold`).
+[ExternalAppendOnlyUnsafeRowArray](../ExternalAppendOnlyUnsafeRowArray.md) is used to collect `UnsafeRow` objects from the child's partitions (one partition per buffer and up to `spark.sql.windowExec.buffer.spill.threshold`).
 
 ==== [[next]] `next` Method
 

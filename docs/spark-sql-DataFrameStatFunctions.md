@@ -1,6 +1,6 @@
 # DataFrameStatFunctions
 
-`DataFrameStatFunctions` is used to work with <<methods, statistic functions>> in a structured query (a <<spark-sql-DataFrame.md#, DataFrame>>).
+`DataFrameStatFunctions` is used to work with <<methods, statistic functions>> in a structured query (a [DataFrame](DataFrame.md)).
 
 [[methods]]
 .DataFrameStatFunctions API

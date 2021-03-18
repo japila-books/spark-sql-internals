@@ -59,7 +59,7 @@ getPartitions(
   partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
 ----
 
-Returns the <<spark-sql-CatalogTablePartition.md#, CatalogTablePartition>> of a table
+Returns the [CatalogTablePartition](../CatalogTablePartition.md) of a table
 
 Used exclusively when `HiveExternalCatalog` is requested to [list the partitions of a table](HiveExternalCatalog.md#listPartitions)
 

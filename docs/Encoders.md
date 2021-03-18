@@ -1,8 +1,6 @@
-title: Encoders
+# Encoders
 
-# Encoders Factory Object
-
-`Encoders` is a factory object that...FIXME
+`Encoders` is a factory object.
 
 === [[kryo]] Creating Encoder Using Kryo -- `kryo` Method
 

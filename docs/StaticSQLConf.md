@@ -111,7 +111,7 @@ Default: `1000`
 
 Default: `global_temp`
 
-Used exclusively to create a <<spark-sql-GlobalTempViewManager.md#creating-instance, GlobalTempViewManager>> when `SharedState` is first requested for the <<SharedState.md#globalTempViewManager, GlobalTempViewManager>>.
+Used to create a [GlobalTempViewManager](GlobalTempViewManager.md) when `SharedState` is first requested for [one](SharedState.md#globalTempViewManager).
 
 NOTE: The name of the internal database cannot conflict with the names of any database that is already available in <<SharedState.md#externalCatalog, ExternalCatalog>>.
 

@@ -188,17 +188,19 @@ describeFormattedDetailedPartitionInfo(
 
 . *Table* with the table of the given `tableIdentifier`
 
-. <<spark-sql-CatalogTablePartition.md#toLinkedHashMap, Partition specification>> (of the <<spark-sql-CatalogTablePartition.md#, CatalogTablePartition>>)
+. [Partition specification](../CatalogTablePartition.md#toLinkedHashMap) (of the [CatalogTablePartition](../CatalogTablePartition.md))
 
 . A new line
 
 . *# Storage Information*
 
-. <<spark-sql-BucketSpec.md#toLinkedHashMap, Bucketing specification>> of the [table](../CatalogTable.md#bucketSpec) (if defined)
+. [Bucketing specification](../BucketSpec.md#toLinkedHashMap) of the [table](../CatalogTable.md#bucketSpec) (if defined)
 
-. <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> of the [table](../CatalogTable.md#storage)
+. [Storage specification](../CatalogStorageFormat.md#toLinkedHashMap) of the [table](../CatalogTable.md#storage)
 
-NOTE: `describeFormattedDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<describeDetailedPartitionInfo, describeDetailedPartitionInfo>> with a non-empty <<partitionSpec, partitionSpec>> and the <<isExtended, isExtended>> flag on.
+`describeFormattedDetailedPartitionInfo` is used when:
+
+* `DescribeTableCommand` is requested to [describeDetailedPartitionInfo](#describeDetailedPartitionInfo) with a non-empty [partitionSpec](#partitionSpec) and the [isExtended](#isExtended) flag on.
 
 === [[describeFormattedTableInfo]] Describing Detailed Table Information -- `describeFormattedTableInfo` Internal Method
 

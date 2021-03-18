@@ -12,7 +12,7 @@ insert(
   overwrite: Boolean): Unit
 ```
 
-Inserts or overwrites data (from the given [DataFrame](spark-sql-DataFrame.md))
+Inserts or overwrites data (from the given [DataFrame](DataFrame.md))
 
 Used when:
 

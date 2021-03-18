@@ -19,9 +19,9 @@ maskCredentials(options: Map[String, String]): Map[String, String]
 
 Used when:
 
-* `CatalogStorageFormat` is requested to <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, convert the storage specification to a LinkedHashMap>>
+* `CatalogStorageFormat` is requested to [convert the storage specification to a LinkedHashMap](CatalogStorageFormat.md#toLinkedHashMap)
 
-* `CreateTempViewUsing` logical command is requested for the <<CreateTempViewUsing.md#argString, argString>>
+* `CreateTempViewUsing` logical command is requested for the [argString](logical-operators/CreateTempViewUsing.md#argString)
 
 | normalizeBucketSpec
 a| [[normalizeBucketSpec]]

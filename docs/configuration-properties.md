@@ -1263,7 +1263,7 @@ Use [SQLConf.enableRadixSort](SQLConf.md#enableRadixSort) method to access the c
 
 ## <span id="spark.sql.sources.bucketing.enabled"> spark.sql.sources.bucketing.enabled
 
-Enables [bucketing](spark-sql-bucketing.md) support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
+Enables [bucketing](bucketing.md) support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
 
 Default: `true`
 
@@ -1359,7 +1359,7 @@ Use [SQLConf.fileCompressionFactor](SQLConf.md#fileCompressionFactor) method to 
 
 ## <span id="spark.sql.sources.partitionOverwriteMode"> spark.sql.sources.partitionOverwriteMode
 
-Enables [dynamic partition inserts](spark-sql-dynamic-partition-inserts.md) when `dynamic`
+Enables [dynamic partition inserts](dynamic-partition-inserts.md) when `dynamic`
 
 Default: `static`
 

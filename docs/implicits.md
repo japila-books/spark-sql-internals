@@ -17,7 +17,7 @@ implicit def localSeqToDatasetHolder[T : Encoder](s: Seq[T]): DatasetHolder[T]
 ```
 
 | Encoders
-| [[Encoders]] <<spark-sql-Encoders.md#, Encoders>> for primitive and object types in Scala and Java (aka _boxed types_)
+| [[Encoders]] [Encoders](Encoders.md) for primitive and object types in Scala and Java (aka _boxed types_)
 
 | `StringToColumn`
 a| [[StringToColumn]] Converts `$"name"` into a [Column](Column.md)

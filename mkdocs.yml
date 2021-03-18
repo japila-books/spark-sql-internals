@@ -317,13 +317,13 @@ nav:
         - ExternalCatalog: ExternalCatalog.md
         - InMemoryCatalog: InMemoryCatalog.md
       - FunctionRegistry.md
-      - spark-sql-GlobalTempViewManager.md
+      - GlobalTempViewManager: GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
         - CatalogTable: CatalogTable.md
-        - spark-sql-CatalogStorageFormat.md
-        - spark-sql-CatalogTablePartition.md
-        - spark-sql-BucketSpec.md
+        - CatalogStorageFormat.md
+        - CatalogTablePartition.md
+        - BucketSpec.md
       - V2SessionCatalog: V2SessionCatalog.md
       - SessionState:
         - SessionState: SessionState.md
@@ -332,11 +332,11 @@ nav:
       - CacheManager:
         - CacheManager: CacheManager.md
         - CachedRDDBuilder: CachedRDDBuilder.md
-      - spark-sql-RuntimeConfig.md
+      - RuntimeConfig.md
       - SQLConf:
         - SQLConf: SQLConf.md
         - StaticSQLConf.md
-        - spark-sql-CatalystConf.md
+        - CatalystConf.md
       - UDFRegistration.md
     - Data Sources:
       - Noop:
@@ -427,7 +427,7 @@ nav:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
       - hive/spark-sql-hive-metastore.md
-      - DataSinks: hive/spark-sql-DataSinks.md
+      - DataSinks: hive/DataSinks.md
       - HiveFileFormat: hive/HiveFileFormat.md
       - HiveClient:
         - hive/HiveClient.md
@@ -790,11 +790,11 @@ nav:
       - UnsafeRow: UnsafeRow.md
       - AggregationIterator:
         - AggregationIterator.md
-        - spark-sql-ObjectAggregationIterator.md
-        - spark-sql-SortBasedAggregationIterator.md
+        - ObjectAggregationIterator.md
+        - SortBasedAggregationIterator.md
         - TungstenAggregationIterator.md
-      - spark-sql-CatalystSerde.md
-      - spark-sql-ExternalAppendOnlyUnsafeRowArray.md
+      - CatalystSerde.md
+      - ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
@@ -817,8 +817,8 @@ nav:
         - WritableColumnVector: WritableColumnVector.md
         - OnHeapColumnVector: OnHeapColumnVector.md
         - OffHeapColumnVector: OffHeapColumnVector.md
-    - spark-sql-dynamic-partition-inserts.md
-    - spark-sql-bucketing.md
+    - dynamic-partition-inserts.md
+    - bucketing.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md
       - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
@@ -853,9 +853,11 @@ nav:
     - SparkSessionExtensions: SparkSessionExtensions.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
+    - DataFrame: DataFrame.md
     - DataFrameReader: DataFrameReader.md
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
+    - Encoders: Encoders.md
   - Demos:
     - Welcome: demo/index.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
@@ -868,11 +870,9 @@ nav:
     - Developing Applications: spark-sql-fundamentals-spark-application-development.md
     - Encoder:
       - Encoder: Encoder.md
-      - spark-sql-Encoders.md
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - spark-sql-ExpressionEncoder-LocalDateTime.md
-    - DataFrame: spark-sql-DataFrame.md
     - Row: spark-sql-Row.md
     - Data Source API:
       - DataSource API: spark-sql-datasource-api.md
@@ -973,8 +973,8 @@ nav:
     - SizeEstimator: spark-sql-SizeEstimator.md
     - PartitioningUtils: spark-sql-PartitioningUtils.md
     - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
-    - CatalogUtils: spark-sql-CatalogUtils.md
-    - ExternalCatalogUtils: spark-sql-ExternalCatalogUtils.md
+    - CatalogUtils: CatalogUtils.md
+    - ExternalCatalogUtils: ExternalCatalogUtils.md
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
     - PushDownUtils: PushDownUtils.md

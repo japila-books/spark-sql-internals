@@ -52,9 +52,9 @@ a|
 
 Used when:
 
-* `AggregateProcessor` is spark-sql-AggregateProcessor.md[initialized] (for window aggregate functions)
+* `AggregateProcessor` is [initialized](../physical-operators/AggregateProcessor.md) (for window aggregate functions)
 
-* AggregationIterator.md[AggregationIterator], <<spark-sql-ObjectAggregationIterator.md#, ObjectAggregationIterator>>, TungstenAggregationIterator.md[TungstenAggregationIterator] (for aggregate functions)
+* [AggregationIterator](../AggregationIterator.md), [ObjectAggregationIterator](../ObjectAggregationIterator.md), [TungstenAggregationIterator](../TungstenAggregationIterator.md) (for aggregate functions)
 
 | [[inputAggBufferOffset]] `inputAggBufferOffset`
 |
@@ -64,7 +64,7 @@ a|
 
 Used when:
 
-* `AggregationIterator` does AggregationIterator.md#generateProcessRow[generateProcessRow] (for aggregate functions)
+* `AggregationIterator` does [generateProcessRow](../AggregationIterator.md#generateProcessRow) (for aggregate functions)
 
 | [[mutableAggBufferOffset]] `mutableAggBufferOffset`
 |
@@ -74,8 +74,8 @@ a|
 
 Used when:
 
-* `AggregateProcessor` is spark-sql-AggregateProcessor.md#update[updated] (for window aggregate functions)
-* AggregationIterator.md[AggregationIterator] (for aggregate functions)
+* `AggregateProcessor` is [updated](../physical-operators/AggregateProcessor.md#update) (for window aggregate functions)
+* [AggregationIterator](../AggregationIterator.md) (for aggregate functions)
 
 | [[withNewInputAggBufferOffset]] `withNewInputAggBufferOffset`
 |

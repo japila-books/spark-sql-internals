@@ -17,15 +17,15 @@ You can join two datasets using the <<join-operators, join operators>> with an o
 | Description
 
 | <<crossJoin, crossJoin>>
-| spark-sql-DataFrame.md[DataFrame]
+| [DataFrame](DataFrame.md)
 | Untyped ``Row``-based cross join
 
 | <<join, join>>
-| spark-sql-DataFrame.md[DataFrame]
+| [DataFrame](DataFrame.md)
 | Untyped ``Row``-based join
 
 | <<joinWith, joinWith>>
-| Dataset.md[Dataset]
+| [Dataset](Dataset.md)
 | Used for a type-preserving join with two output columns for records for which a join condition holds
 |===
 

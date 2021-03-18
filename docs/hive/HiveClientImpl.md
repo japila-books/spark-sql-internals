@@ -173,17 +173,19 @@ NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadat
 fromHivePartition(hp: HivePartition): CatalogTablePartition
 ----
 
-`fromHivePartition` simply creates a ../spark-sql-CatalogTablePartition.md#creating-instance[CatalogTablePartition] with the following:
+`fromHivePartition` simply creates a [CatalogTablePartition](../CatalogTablePartition.md) with the following:
 
-* ../spark-sql-CatalogTablePartition.md#spec[spec] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--++[Partition.getSpec] if available
+* [spec](../CatalogTablePartition.md#spec) from Hive's [Partition.getSpec]({{ hive.api }}/org/apache/hadoop/hive/ql/metadata/Partition.html#getSpec--) if available
 
-* ../spark-sql-CatalogTablePartition.md#storage[storage] from Hive's http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html[StorageDescriptor] of the table partition
+* [storage](../CatalogTablePartition.md#storage) from Hive's [StorageDescriptor]({{ hive.api }}/org/apache/hadoop/hive/metastore/api/StorageDescriptor.html) of the table partition
 
-* ../spark-sql-CatalogTablePartition.md#parameters[parameters] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available
+* [parameters](../CatalogTablePartition.md#parameters) from Hive's [Partition.getParameters]({{ hive.api }}/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--) if available
 
-* ../spark-sql-CatalogTablePartition.md#stats[stats] from Hive's ++http://hive.apache.org/javadocs/r2.3.2/api/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--++[Partition.getParameters] if available and <<readHiveStats, converted to table statistics format>>
+* [stats](../CatalogTablePartition.md#stats) from Hive's [Partition.getParameters]({{ hive.api }}/org/apache/hadoop/hive/ql/metadata/Partition.html#getParameters--) if available and [converted to table statistics format](#readHiveStats)
 
-NOTE: `fromHivePartition` is used when `HiveClientImpl` is requested for <<getPartitionOption, getPartitionOption>>, <<getPartitions, getPartitions>> and <<getPartitionsByFilter, getPartitionsByFilter>>.
+`fromHivePartition` is used when:
+
+* `HiveClientImpl` is requested for [getPartitionOption](#getPartitionOption), [getPartitions](#getPartitions) and [getPartitionsByFilter](#getPartitionsByFilter).
 
 ## <span id="toHiveTable"> Converting Native Table Metadata to Hive's Table
 
@@ -225,16 +227,12 @@ toHivePartition(
   ht: Table): Partition
 ----
 
-`toHivePartition` creates a Hive `org.apache.hadoop.hive.ql.metadata.Partition` for the input ../spark-sql-CatalogTablePartition.md[CatalogTablePartition] and the Hive `org.apache.hadoop.hive.ql.metadata.Table`.
+`toHivePartition` creates a Hive `org.apache.hadoop.hive.ql.metadata.Partition` for the input [CatalogTablePartition](../CatalogTablePartition.md) and the Hive `org.apache.hadoop.hive.ql.metadata.Table`.
 
-[NOTE]
-====
 `toHivePartition` is used when:
 
-* `HiveClientImpl` is requested to <<renamePartitions, renamePartitions>> or <<alterPartitions, alterPartitions>>
-
-* `HiveTableScanExec` physical operator is requested for the HiveTableScanExec.md#rawPartitions[raw Hive partitions]
-====
+* `HiveClientImpl` is requested to [renamePartitions](#renamePartitions) or [alterPartitions](#alterPartitions)
+* `HiveTableScanExec` physical operator is requested for the [raw Hive partitions](HiveTableScanExec.md#rawPartitions)
 
 === [[newSession]] Creating New HiveClientImpl -- `newSession` Method
 

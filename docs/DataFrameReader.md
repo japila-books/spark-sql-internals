@@ -58,7 +58,7 @@ load(
   paths: String*): DataFrame
 ```
 
-`load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped [DataFrame](spark-sql-DataFrame.md).
+`load` loads a dataset from a data source (with optional support for multiple `paths`) as an untyped [DataFrame](DataFrame.md).
 
 Internally, `load` [lookupDataSource](DataSource.md#lookupDataSource) for the [data source format](#source). `load` then branches off per its type (i.e. whether it is of `DataSourceV2` marker type or not).
 

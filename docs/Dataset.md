@@ -97,9 +97,9 @@ dataset.filter('value % 2 === 0).count
 dataset.filter("value % 2 = 0").count
 ----
 
-The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to spark-sql-DataFrame.md[DataFrames] that were a set of index- or column name-based spark-sql-Row.md[Rows]).
+The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based spark-sql-Row.md[Rows]).
 
-`Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to spark-sql-DataFrame.md[DataFrame] makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
+`Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to [DataFrame](DataFrame.md) makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
 [source, scala]
 ----
@@ -140,7 +140,7 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 +- *Range (0, 1, splits=8)
 ----
 
-It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using spark-sql-DataFrame.md[DataFrame], regular SQL queries or even RDDs).
+It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using [DataFrame](DataFrame.md), regular SQL queries or even RDDs).
 
 Using `Dataset` objects turns `DataFrames` of spark-sql-Row.md[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
@@ -219,7 +219,7 @@ rdd: RDD[T]
 
 NOTE: `rdd` gives `RDD` with the extra execution step to convert rows from their internal binary row format to JVM objects that will impact the JVM memory as the objects are inside JVM (while were outside before). You should not use `rdd` directly.
 
-Internally, `rdd` first spark-sql-CatalystSerde.md#deserialize[creates a new logical plan that deserializes] the Dataset's <<logicalPlan, logical plan>>.
+Internally, `rdd` first [creates a new logical plan that deserializes](CatalystSerde.md#deserialize) the Dataset's [logical plan](#logicalPlan).
 
 [source, scala]
 ----
@@ -274,7 +274,7 @@ inputFiles: Array[String]
 
 * [inputFiles](FileRelation.md#inputFiles) of the `FileRelations`
 
-* [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the `HiveTableRelation`
+* [locationUri](CatalogStorageFormat.md#locationUri) of the `HiveTableRelation`
 
 === [[resolve]] `resolve` Internal Method
 
@@ -335,7 +335,7 @@ ofRows(
 !!! note
     `ofRows` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
 
-`ofRows` returns spark-sql-DataFrame.md[DataFrame] (which is the type alias for `Dataset[Row]`). `ofRows` uses [RowEncoder](RowEncoder.md) to convert the schema (based on the input `logicalPlan` logical plan).
+`ofRows` returns [DataFrame](DataFrame.md) (which is the type alias for `Dataset[Row]`). `ofRows` uses [RowEncoder](RowEncoder.md) to convert the schema (based on the input `logicalPlan` logical plan).
 
 Internally, `ofRows` SessionState.md#executePlan[prepares the input `logicalPlan` for execution] and creates a `Dataset[Row]` with the current SparkSession.md[SparkSession], the [QueryExecution](QueryExecution.md) and [RowEncoder](RowEncoder.md).
 

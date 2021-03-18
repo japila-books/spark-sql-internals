@@ -401,7 +401,7 @@ NOTE: `checkpoint` is used in the `Dataset` [untyped transformations](Dataset-un
 rdd: RDD[T]
 ----
 
-Whenever you are in need to convert a `Dataset` into a `RDD`, executing `rdd` method gives you the RDD of the proper input object type (not spark-sql-DataFrame.md#features[Row as in DataFrames]) that sits behind the `Dataset`.
+Whenever you are in need to convert a `Dataset` into a `RDD`, executing `rdd` method gives you the RDD of the proper input object type (not [Row as in DataFrames](DataFrame.md#features)) that sits behind the `Dataset`.
 
 [source, scala]
 ----
@@ -442,7 +442,7 @@ toDF(): DataFrame
 toDF(colNames: String*): DataFrame
 ----
 
-`toDF` converts a Dataset.md[Dataset] into a spark-sql-DataFrame.md[DataFrame].
+`toDF` converts a Dataset.md[Dataset] into a [DataFrame](DataFrame.md).
 
 Internally, the empty-argument `toDF` creates a `Dataset[Row]` using the ``Dataset``'s SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) with the encoder being [RowEncoder](RowEncoder.md).
 

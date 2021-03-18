@@ -1,7 +1,7 @@
 # BucketSpec
 
 [[creating-instance]]
-`BucketSpec` is the **bucketing specification** of a table, i.e. the metadata of the spark-sql-bucketing.md[bucketing] of a table.
+`BucketSpec` is the **bucketing specification** of a table, i.e. the metadata of the [bucketing](bucketing.md) of a table.
 
 `BucketSpec` includes the following:
 

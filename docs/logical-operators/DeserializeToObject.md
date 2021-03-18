@@ -1,5 +1,3 @@
-title: DeserializeToObject
-
 # DeserializeToObject Unary Logical Operator
 
 [source, scala]
@@ -14,4 +12,4 @@ case class DeserializeToObject(
 
 `DeserializeToObject` is a `ObjectProducer` which produces domain objects as output. ``DeserializeToObject``'s output is a single-field safe row containing the produced object.
 
-NOTE: `DeserializeToObject` is the result of spark-sql-CatalystSerde.md#deserialize[CatalystSerde.deserialize].
+`DeserializeToObject` is the result of [CatalystSerde.deserialize](../CatalystSerde.md#deserialize).

@@ -61,7 +61,7 @@ import org.apache.spark.sql.execution.datasources.FileScanRDD
 assert(rdd.dependencies.head.rdd.isInstanceOf[FileScanRDD])
 ```
 
-`FileSourceScanExec` supports <<spark-sql-bucketing.md#bucket-pruning, bucket pruning>> so it only scans the bucket files required for a query.
+`FileSourceScanExec` supports [bucket pruning](../bucketing.md#bucket-pruning) so it only scans the bucket files required for a query.
 
 ```text
 scala> :type scan
@@ -253,7 +253,7 @@ inputRDD: RDD[InternalRow]
 
 When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../datasources/FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
 
-In case the `HadoopFsRelation` has [bucketing specification](../HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../spark-sql-bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
+In case the `HadoopFsRelation` has [bucketing specification](../HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
 
 ### <span id="dynamicallySelectedPartitions"> Dynamically Selected Partitions
 
@@ -286,11 +286,11 @@ selectedPartitions: Seq[PartitionDirectory]
 outputPartitioning: Partitioning
 ----
 
-NOTE: `outputPartitioning` is part of the <<SparkPlan.md#outputPartitioning, SparkPlan Contract>> to specify output data partitioning.
+`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
 
 `outputPartitioning` can be one of the following:
 
-* [HashPartitioning](Partitioning.md#HashPartitioning) (with the <<spark-sql-BucketSpec.md#bucketColumnNames, bucket column names>> and the <<spark-sql-BucketSpec.md#numBuckets, number of buckets>> of the [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the <<relation, HadoopFsRelation>>) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the <<relation, HadoopFsRelation>> has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
+* [HashPartitioning](Partitioning.md#HashPartitioning) (with the [bucket column names](../BucketSpec.md#bucketColumnNames) and the [number of buckets](../BucketSpec.md#numBuckets) of the [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation)) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the [HadoopFsRelation](#relation) has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
 
 * [UnknownPartitioning](Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
 
@@ -447,13 +447,13 @@ With <<supportsBatch, supportsBatch>> off and <<needsUnsafeRowConversion, needsU
 outputOrdering: Seq[SortOrder]
 ----
 
-NOTE: `outputOrdering` is part of the <<SparkPlan.md#outputOrdering, SparkPlan Contract>> to specify output data ordering.
+`outputOrdering` is part of the [SparkPlan](SparkPlan.md#outputOrdering) abstraction.
 
-`outputOrdering` is a `SortOrder` expression for every <<spark-sql-BucketSpec.md#sortColumnNames, sort column>> in `Ascending` order only when all the following hold:
+`outputOrdering` is a `SortOrder` expression for every [sort column](../BucketSpec.md#sortColumnNames) in `Ascending` order only when all the following hold:
 
 * [bucketing is enabled](../SQLConf.md#bucketingEnabled)
 
-* <<relation, HadoopFsRelation>> has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
+* [HadoopFsRelation](#relation) has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
 
 * All the buckets have a single file in it
 

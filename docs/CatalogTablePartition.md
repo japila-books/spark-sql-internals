@@ -20,14 +20,14 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is <<ShowTable
 [[toString]]
 `CatalogTablePartition` uses the following *text representation* (i.e. `toString`)...FIXME
 
-=== [[creating-instance]] Creating CatalogTablePartition Instance
+## Creating Instance
 
 `CatalogTablePartition` takes the following when created:
 
 * [[spec]] Partition specification
-* [[storage]] <<spark-sql-CatalogStorageFormat.md#, CatalogStorageFormat>>
+* [[storage]] [CatalogStorageFormat](CatalogStorageFormat.md)
 * [[parameters]] Parameters (default: an empty collection)
-* [[stats]] <<spark-sql-CatalogStatistics.md#, Table statistics>> (default: `None`)
+* [[stats]] [Table statistics](spark-sql-CatalogStatistics.md) (default: `None`)
 
 === [[toLinkedHashMap]] Converting Partition Specification to LinkedHashMap -- `toLinkedHashMap` Method
 
@@ -39,7 +39,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 `toLinkedHashMap` converts the partition specification to a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
 
 * *Partition Values* with the <<spec, spec>>
-* <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> (of the given <<storage, CatalogStorageFormat>>)
+* [Storage specification](CatalogStorageFormat.md#toLinkedHashMap) (of the given [CatalogStorageFormat](#storage))
 * *Partition Parameters* with the <<parameters, parameters>> (if not empty)
 * *Partition Statistics* with the <<stats, CatalogStatistics>> (if available)
 
@@ -59,7 +59,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 location: URI
 ----
 
-`location` simply returns the <<spark-sql-CatalogStorageFormat.md#locationUri, location URI>> of the <<storage, CatalogStorageFormat>> or throws an `AnalysisException`:
+`location` simply returns the [location URI](CatalogStorageFormat.md#locationUri) of the [CatalogStorageFormat](#storage) or throws an `AnalysisException`:
 
 ```
 Partition [[specString]] did not specify locationUri

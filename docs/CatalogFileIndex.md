@@ -70,7 +70,7 @@ For an unpartitioned table (no partition columns defined), `filterPartitions` si
 
 ### <span id="baseLocation"> Base Location
 
-Base location (as a Java [URI]({{ java.api }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](spark-sql-CatalogStorageFormat.md#locationUri) of the [storage](CatalogTable.md#storage))
+Base location (as a Java [URI]({{ java.api }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](CatalogStorageFormat.md#locationUri) of the [storage](CatalogTable.md#storage))
 
 Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions) and for the [root paths](#rootPaths)
 

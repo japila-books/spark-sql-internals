@@ -73,7 +73,7 @@ Otherwise, `isMutable` is disabled (`false`).
 
 * `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
 
-* `SortBasedAggregationIterator` is requested for [newBuffer](spark-sql-SortBasedAggregationIterator.md#newBuffer)
+* `SortBasedAggregationIterator` is requested for [newBuffer](SortBasedAggregationIterator.md#newBuffer)
 
 === [[KryoSerializable]] Kryo's KryoSerializable SerDe Protocol
 

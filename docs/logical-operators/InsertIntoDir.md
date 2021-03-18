@@ -25,14 +25,14 @@ NOTE: `InsertIntoDir` is similar to InsertIntoTable.md[InsertIntoTable] logical 
 |===
 
 [[output]]
-`InsertIntoDir` has no catalyst/QueryPlan.md#output[output columns].
+`InsertIntoDir` has no [output columns](../catalyst/QueryPlan.md#output).
 
-=== [[creating-instance]] Creating InsertIntoDir Instance
+## Creating Instance
 
 `InsertIntoDir` takes the following to be created:
 
 * [[isLocal]] `isLocal` Flag
-* [[storage]] spark-sql-CatalogStorageFormat.md[CatalogStorageFormat]
+* [[storage]] [CatalogStorageFormat](../CatalogStorageFormat.md)
 * [[provider]] Table provider
-* [[child]] Child spark-sql-LogicalPlan.md[logical operator]
+* [[child]] Child [logical operator](LogicalPlan.md)
 * [[overwrite]] `overwrite` Flag (default: `true`)

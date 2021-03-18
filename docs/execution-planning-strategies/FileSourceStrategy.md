@@ -37,7 +37,7 @@ org.apache.spark.sql.execution.FileSourceScanExec
 ```
 
 [[shouldPruneBuckets]]
-`FileSourceScanExec` supports [Bucket Pruning](../spark-sql-bucketing.md#bucket-pruning) for [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../HadoopFsRelation.md) with the [bucketing specification](../HadoopFsRelation.md#bucketSpec) with the following:
+`FileSourceScanExec` supports [Bucket Pruning](../bucketing.md#bucket-pruning) for [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../HadoopFsRelation.md) with the [bucketing specification](../HadoopFsRelation.md#bucketSpec) with the following:
 
 1. There is exactly one bucketing column
 1. The number of buckets is greater than 1

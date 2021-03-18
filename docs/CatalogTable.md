@@ -80,18 +80,18 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 `CatalogTable` takes the following to be created:
 
 * [[identifier]] `TableIdentifier`
-* [[tableType]] <<CatalogTableType, Table type>>
-* [[storage]] spark-sql-CatalogStorageFormat.md[CatalogStorageFormat]
+* [[tableType]] [Table type](#CatalogTableType)
+* [[storage]] [CatalogStorageFormat](CatalogStorageFormat.md)
 * [[schema]] [Schema](StructType.md)
 * [[provider]] Name of the table provider (optional)
 * [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] Optional <<spark-sql-BucketSpec.md#, Bucketing specification>> (default: `None`)
+* [[bucketSpec]] Optional [Bucketing specification](BucketSpec.md) (default: `None`)
 * [[owner]] Owner
 * [[createTime]] Create time
 * [[lastAccessTime]] Last access time
 * [[createVersion]] Create version
 * [[properties]] Properties
-* [[stats]] Optional spark-sql-CatalogStatistics.md[table statistics]
+* [[stats]] Optional [table statistics](spark-sql-CatalogStatistics.md)
 * [[viewText]] Optional view text
 * [[comment]] Optional comment
 * [[unsupportedFeatures]] Unsupported features
@@ -185,7 +185,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 * *Provider* with the <<provider, provider>> (if defined)
 
-* <<spark-sql-BucketSpec.md#toLinkedHashMap, Bucket specification>> (of the <<bucketSpec, BucketSpec>> if defined)
+* [Bucket specification](BucketSpec.md#toLinkedHashMap) (of the [BucketSpec](#bucketSpec) if defined)
 
 * *Comment* with the <<comment, comment>> (if defined)
 
@@ -195,7 +195,7 @@ toLinkedHashMap: mutable.LinkedHashMap[String, String]
 
 * *Statistics* with the <<stats, CatalogStatistics>> (if defined)
 
-* <<spark-sql-CatalogStorageFormat.md#toLinkedHashMap, Storage specification>> (of the <<storage, CatalogStorageFormat>> if defined)
+* [Storage specification](CatalogStorageFormat.md#toLinkedHashMap) (of the <<storage, CatalogStorageFormat>> if defined)
 
 * *Partition Provider* with *Catalog* if the <<tracksPartitionsInCatalog, tracksPartitionsInCatalog>> flag is on
 

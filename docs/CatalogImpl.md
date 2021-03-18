@@ -105,7 +105,7 @@ createExternalTable(
   options: Map[String, String]): DataFrame
 ----
 
-`createExternalTable` creates an external table `tableName` from the given `path` and returns the corresponding spark-sql-DataFrame.md[DataFrame].
+`createExternalTable` creates an external table `tableName` from the given `path` and returns the corresponding [DataFrame](DataFrame.md).
 
 [source, scala]
 ----
@@ -136,7 +136,7 @@ NOTE: `source` input parameter must not be `hive` as it leads to a `AnalysisExce
 
 `createExternalTable` sets the mandatory `path` option when specified explicitly in the input parameter list.
 
-`createExternalTable` parses `tableName` into `TableIdentifier` (using sql/SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a CreateTable.md[CreateTable] logical plan. The result spark-sql-DataFrame.md[DataFrame] is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](RowEncoder.md).
+`createExternalTable` parses `tableName` into `TableIdentifier` (using sql/SparkSqlParser.md[SparkSqlParser]). It creates a [CatalogTable](CatalogTable.md) and then SessionState.md#executePlan[executes] (by [toRDD](QueryExecution.md#toRdd)) a CreateTable.md[CreateTable] logical plan. The result [DataFrame](DataFrame.md) is a `Dataset[Row]` with the [QueryExecution](QueryExecution.md) after executing SubqueryAlias.md[SubqueryAlias] logical plan and [RowEncoder](RowEncoder.md).
 
 .CatalogImpl.createExternalTable
 image::images/spark-sql-CatalogImpl-createExternalTable.png[align="center"]

@@ -207,7 +207,7 @@ Internally, `range` creates a new `Dataset[Long]` with [Range](logical-operators
 sql(sqlText: String): DataFrame
 ```
 
-`sql` executes the `sqlText` SQL statement and creates a [DataFrame](spark-sql-DataFrame.md).
+`sql` executes the `sqlText` SQL statement and creates a [DataFrame](DataFrame.md).
 
 !!! note spark-shell
     `sql` is imported in `spark-shell` so you can execute SQL statements as if `sql` were a part of the environment.
@@ -240,7 +240,7 @@ Internally, `sql` requests the SessionState.md#sqlParser[current `ParserInterfac
 
 NOTE: `sql` uses `SessionState` SessionState.md#sqlParser[to access the current `ParserInterface`].
 
-`sql` then creates a [DataFrame](spark-sql-DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
+`sql` then creates a [DataFrame](DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
 
 !!! tip "spark-sql Command-Line Tool"
     Use [spark-sql](tools/spark-sql-spark-sql.md) command-line tool to use SQL directly (not Scala as in `spark-shell`).
@@ -289,7 +289,7 @@ table(
   tableIdent: TableIdentifier): DataFrame
 ```
 
-`table` creates a [DataFrame](spark-sql-DataFrame.md) for the input `tableName` table.
+`table` creates a [DataFrame](DataFrame.md) for the input `tableName` table.
 
 !!! note
     [baseRelationToDataFrame](#baseRelationToDataFrame) acts as a mechanism to plug `BaseRelation` object hierarchy in into adoc[LogicalPlan](logical-operators/LogicalPlan.md) object hierarchy that `SparkSession` uses to bridge them.
@@ -333,9 +333,9 @@ val dfReader: DataFrameReader = spark.read
 conf: RuntimeConfig
 ```
 
-`conf` returns the current [RuntimeConfig](spark-sql-RuntimeConfig.md).
+`conf` returns the current [RuntimeConfig](RuntimeConfig.md).
 
-Internally, `conf` creates a <<spark-sql-RuntimeConfig.md#creating-instance, RuntimeConfig>> (when requested the very first time and cached afterwards) with the <<SessionState.md#conf, SQLConf>> of the <<sessionState, SessionState>>.
+Internally, `conf` creates a [RuntimeConfig](RuntimeConfig.md) (when requested the very first time and cached afterwards) with the [SQLConf](SessionState.md#conf) (of the [SessionState](#sessionState)).
 
 ## <span id="experimentalMethods"> ExperimentalMethods
 
@@ -354,7 +354,7 @@ baseRelationToDataFrame(
   baseRelation: BaseRelation): DataFrame
 ```
 
-Internally, `baseRelationToDataFrame` creates a [DataFrame](spark-sql-DataFrame.md) from the input [BaseRelation](BaseRelation.md) wrapped inside [LogicalRelation](logical-operators/LogicalRelation.md).
+Internally, `baseRelationToDataFrame` creates a [DataFrame](DataFrame.md) from the input [BaseRelation](BaseRelation.md) wrapped inside [LogicalRelation](logical-operators/LogicalRelation.md).
 
 `baseRelationToDataFrame` is used when:
 

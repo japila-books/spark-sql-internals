@@ -64,11 +64,11 @@ While initialized:
 globalTempViewManager: GlobalTempViewManager
 ```
 
-[GlobalTempViewManager](spark-sql-GlobalTempViewManager.md)
+[GlobalTempViewManager](GlobalTempViewManager.md)
 
 When accessed for the very first time, `globalTempViewManager` gets the name of the global temporary view database based on [spark.sql.globalTempDatabase](StaticSQLConf.md#spark.sql.globalTempDatabase) internal static configuration property.
 
-In the end, `globalTempViewManager` creates a new [GlobalTempViewManager](spark-sql-GlobalTempViewManager.md) (with the configured database name).
+In the end, `globalTempViewManager` creates a new [GlobalTempViewManager](GlobalTempViewManager.md) (with the configured database name).
 
 `globalTempViewManager` throws a `SparkException` when the global temporary view database [exist](ExternalCatalog.md#databaseExists) in the [ExternalCatalog](#externalCatalog):
 
