@@ -252,27 +252,11 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSession/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSession-Builder/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSessionExtensions/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/implicits/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SharedState/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ColumnarRule/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2709,6 +2693,22 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/catalyst-dsl/DslLogicalPlan/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSession/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSession-Builder/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SparkSessionExtensions/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ColumnarRule/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
