@@ -1,10 +1,14 @@
 # DataFrameReader
 
-`DataFrameReader` is a high-level interface for Spark SQL developers to describe the input node in a data processing graph.
+`DataFrameReader[T]` is a high-level API for Spark SQL developers to describe the "read path" of a structured query (over rows of `T` type).
 
-`DataFrameReader` is used to describe the [input data source format](#format) to be used to ["load" data from a data source](#load) (e.g. files, Hive tables, JDBC or `Dataset[String]`).
+`DataFrameReader` is used to describe an input node in a data processing graph.
 
-`DataFrameReader` merely describes a process of loading a data (_pipeline_) and does not trigger a Spark job (until an action is called).
+`DataFrameReader` is used to describe the [input data source format](#format) to be used to ["load" data](#load) from a data source (e.g. files, Hive tables, JDBC or `Dataset[String]`).
+
+`DataFrameReader` merely describes a process of loading a data (_load specification_) and does not trigger a Spark job (until an action is called unlike [DataFrameWriter](DataFrameWriter.md)).
+
+`DataFrameReader` is available using [SparkSession.read](SparkSession.md#read) operator.
 
 ## Creating Instance
 
@@ -12,18 +16,15 @@
 
 * <span id="sparkSession"> [SparkSession](SparkSession.md)
 
-`DataFrameReader` is created when:
-
-* [SparkSession.read](SparkSession.md#read)
-
 ### Demo
 
 ```text
 import org.apache.spark.sql.SparkSession
 assert(spark.isInstanceOf[SparkSession])
 
-import org.apache.spark.sql.DataFrameReader
 val reader = spark.read
+
+import org.apache.spark.sql.DataFrameReader
 assert(reader.isInstanceOf[DataFrameReader])
 ```
 
