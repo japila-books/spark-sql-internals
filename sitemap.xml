@@ -756,7 +756,7 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-GlobalTempViewManager/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/GlobalTempViewManager/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -768,15 +768,15 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalogStorageFormat/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalogStorageFormat/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalogTablePartition/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalogTablePartition/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-BucketSpec/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/BucketSpec/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -804,7 +804,7 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-RuntimeConfig/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RuntimeConfig/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -816,7 +816,7 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalystConf/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystConf/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1120,7 +1120,7 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/hive/spark-sql-DataSinks/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/hive/DataSinks/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2500,11 +2500,11 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ObjectAggregationIterator/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ObjectAggregationIterator/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-SortBasedAggregationIterator/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SortBasedAggregationIterator/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2512,11 +2512,11 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalystSerde/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystSerde/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExternalAppendOnlyUnsafeRowArray/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExternalAppendOnlyUnsafeRowArray/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2596,11 +2596,11 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-dynamic-partition-inserts/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/dynamic-partition-inserts/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-bucketing/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/bucketing/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2716,6 +2716,10 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrame/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrameReader/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
@@ -2725,6 +2729,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataFrameWriterV2/</loc>
+     <lastmod>2021-03-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Encoders/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -2764,10 +2772,6 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Encoders/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExpressionEncoder/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
@@ -2777,10 +2781,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExpressionEncoder-LocalDateTime/</loc>
-     <lastmod>2021-03-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-DataFrame/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -3120,11 +3120,11 @@
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-CatalogUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalogUtils/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExternalCatalogUtils/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExternalCatalogUtils/</loc>
      <lastmod>2021-03-18</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
