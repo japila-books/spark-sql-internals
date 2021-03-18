@@ -182,13 +182,8 @@ nav:
       - SparkPlanner: SparkPlanner.md
       - SparkOptimizer: SparkOptimizer.md
       - QueryPlanningTracker: QueryPlanningTracker.md
-    - SparkSession:
-      - SparkSession: SparkSession.md
-      - SparkSession.Builder: SparkSession-Builder.md
-      - SparkSessionExtensions: SparkSessionExtensions.md
-      - Implicits: implicits.md
-      - SharedState: SharedState.md
-      - ColumnarRule: ColumnarRule.md
+    - Implicits: implicits.md
+    - SharedState: SharedState.md
     - Configuration Properties: configuration-properties.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
@@ -853,6 +848,10 @@ nav:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - High-Level APIs:
+    - SparkSession: SparkSession.md
+    - SparkSession.Builder: SparkSession-Builder.md
+    - SparkSessionExtensions: SparkSessionExtensions.md
+    - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
     - DataFrameReader: DataFrameReader.md
     - DataFrameWriter: DataFrameWriter.md
