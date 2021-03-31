@@ -273,29 +273,28 @@ export HIVE_HOME=/Users/jacek/dev/apps/hive
 
 You'll set up a remote metastore database (as https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreDatabase[This configuration of metastore database is recommended for any real use.]) and you'll be using https://www.enterprisedb.com/downloads/postgres-postgresql-downloads[PostgreSQL 12.2].
 
-```
+```text
 $ pg_ctl -D /usr/local/var/postgres start
 server started
 ```
 
-Download the most current version of https://jdbc.postgresql.org/download.html#current[PostgreSQL JDBC Driver], e.g. PostgreSQL JDBC 4.2 Driver, 42.2.11. Save the jar file (`postgresql-42.2.11.jar`) in `$HIVE_HOME/lib`.
+Download the most current version of [PostgreSQL JDBC Driver](https://jdbc.postgresql.org/download.html#current) (e.g. PostgreSQL JDBC 4.2 Driver, 42.2.11). Save the jar file (`postgresql-42.2.11.jar`) in `$HIVE_HOME/lib`.
 
 ## Setting Up Remote Metastore Database
 
 Create a database and a user in PostgreSQL for Hive.
 
-```
+```text
 createdb hive_demo
 ```
 
-```
+```text
 createuser APP
 ```
 
 Create `conf/hive-site.xml` (based on `conf/hive-default.xml.template`) with the following properties:
 
-[source, xml]
-----
+```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
@@ -312,11 +311,11 @@ Create `conf/hive-site.xml` (based on `conf/hive-default.xml.template`) with the
     <value>hdfs://localhost:9000/user/hive/warehouse</value>
   </property>
 </configuration>
-----
-
-Use the https://cwiki.apache.org/confluence/display/Hive/Hive+Schema+Tool[Hive Schema Tool] to create the metastore tables.
-
 ```
+
+Use the [Hive Schema Tool](https://cwiki.apache.org/confluence/display/Hive/Hive+Schema+Tool) to create the metastore tables.
+
+```text
 $ $HIVE_HOME/bin/schematool -dbType postgres -initSchema
 Metastore connection URL:	 jdbc:postgresql://localhost:5432/hive_demo
 Metastore Connection Driver :	 org.postgresql.Driver
@@ -327,7 +326,7 @@ Initialization script completed
 schemaTool completed
 ```
 
-```
+```text
 $ $HIVE_HOME/bin/schematool -dbType postgres -info
 Metastore connection URL:	 jdbc:postgresql://localhost:5432/hive_demo
 Metastore Connection Driver :	 org.postgresql.Driver
@@ -337,19 +336,19 @@ Metastore schema version:	 2.3.0
 schemaTool completed
 ```
 
-As per the https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHiveServer2andBeeline.1[official documentation of Hive]:
+As per the [official documentation of Hive](https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-RunningHiveServer2andBeeline.1):
 
 > HiveCLI is now deprecated in favor of Beeline
 
 Run HiveServer2.
 
-```
+```text
 $HIVE_HOME/bin/hiveserver2
 ```
 
 Run Beeline (the HiveServer2 CLI).
 
-```
+```text
 $ $HIVE_HOME/bin/beeline -u jdbc:hive2://localhost:10000
 ...
 Connecting to jdbc:hive2://localhost:10000
@@ -362,8 +361,9 @@ Beeline version 2.3.6 by Apache Hive
 
 ## Start Hive Metastore Server
 
-Start the Hive Metastore Server (as described in https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreServer[Remote Metastore Server]).
-```
+Start the Hive Metastore Server (as described in [Remote Metastore Server](https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration#AdminManualMetastoreAdministration-RemoteMetastoreServer)).
+
+```text
 $HIVE_HOME/bin/hive --service metastore
 ...
 Starting Hive Metastore Server
@@ -375,8 +375,7 @@ That is the server Spark SQL applications are going to connect to for metadata o
 
 Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.uris` configuration property (that is the thrift URL of the Hive Metastore Server).
 
-[source, xml]
-----
+```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
@@ -385,11 +384,11 @@ Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.uris` configu
     <value>thrift://localhost:9083</value>
   </property>
 </configuration>
-----
+```
 
 Optionally, you may want to add the following to `conf/log4j.properties` for a more low-level logging:
 
-```
+```text
 log4j.logger.org.apache.spark.sql.hive.HiveUtils$=ALL
 log4j.logger.org.apache.spark.sql.internal.SharedState=ALL
 log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=ALL
@@ -397,7 +396,7 @@ log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=ALL
 
 Start `spark-shell`.
 
-```
+```text
 $SPARK_HOME/bin/spark-shell \
   --jars \
     $HIVE_HOME/lib/hive-metastore-2.3.6.jar,\
@@ -412,7 +411,7 @@ $SPARK_HOME/bin/spark-shell \
 
 You should see the following welcome message:
 
-```
+```text
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
@@ -423,15 +422,13 @@ Welcome to
 Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_242)
 Type in expressions to have them evaluated.
 Type :help for more information.
-
-scala>
 ```
 
 With the `scala>` prompt you made sure that the `spark.sql.hive.metastore.version` and the JAR files are all correct (as the check happens while the `SparkSession` is created). _Congratulations!_
 
 You may also want to check out the `spark.sql.catalogImplementation` internal property that should be `hive`. With the extra logging turned on, you should also see the configuration file loaded (`hive-site.xml`) and the warehouse location.
 
-```
+```text
 scala> spark.conf.get("spark.sql.catalogImplementation")
 INFO SharedState: loading hive config file: file:/Users/jacek/dev/oss/spark/conf/hive-site.xml
 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('hdfs://localhost:9000/user/hive/warehouse').
@@ -441,7 +438,7 @@ res0: String = hive
 
 The most critical step is to check out the remote connection with the Hive Metastore Server (via the thrift protocol). Execute the following command to list all tables known to Spark SQL (incl. Hive tables if there were any, but there are none by default).
 
-```
+```text
 scala> spark.catalog.listTables.show
 +----+--------+-----------+---------+-----------+
 |name|database|description|tableType|isTemporary|
@@ -451,7 +448,7 @@ scala> spark.catalog.listTables.show
 
 There is one database in Hive by default.
 
-```
+```text
 0: jdbc:hive2://localhost:10000> show databases;
 +----------------+
 | database_name  |
@@ -463,13 +460,15 @@ There is one database in Hive by default.
 
 List the tables in the `default` database. There should be some Hive tables listed.
 
-```
+```text
 scala> spark.sharedState.externalCatalog.listTables("default")
 ```
 
-Create a partitioned table in Hive (based on the https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableCreate/Drop/TruncateTable[official documentation of Hive]). Execute the following DDL in beeline.
+Create a partitioned table in Hive (based on the [official documentation of Hive](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableCreate/Drop/TruncateTable)).
 
-```
+Execute the following DDL in beeline.
+
+```text
 CREATE TABLE demo_sales
 (id BIGINT, qty BIGINT, name STRING)
 COMMENT 'Demo: Connecting Spark SQL to Hive Metastore'
@@ -477,41 +476,48 @@ PARTITIONED BY (rx_mth_cd STRING COMMENT 'Prescription Date YYYYMM aggregated')
 STORED AS PARQUET;
 ```
 
-[TIP]
-====
-You can also create a Hive table from `spark-shell` using `CREATE TABLE ... USING hive` queries.
+!!! tip "CREATE TABLE ... USING hive"
+    You can also create a Hive table from `spark-shell` using `CREATE TABLE ... USING hive` queries.
 
-```
-CREATE TABLE hive_table_name (id LONG) USING hive
-```
-====
+    ```text
+    CREATE TABLE hive_table_name (id LONG) USING hive
+    ```
 
 In case of permission denied errors as the one below:
 
-```
+```text
 MetaException(message:Got exception: org.apache.hadoop.security.AccessControlException Permission denied: user=anonymous, access=WRITE, inode="/user/hive/warehouse":jacek:supergroup:drwxrwxr-x
 ```
 
 you may want to simply change the permissions of the warehouse directory to allow anybody to write:
 
+```text
+$HADOOP_HOME/bin/hadoop fs -chmod 777 /user/hive/warehouse
 ```
-$ $HADOOP_HOME/bin/hadoop fs -chmod 777 /user/hive/warehouse
-$ $HADOOP_HOME/bin/hadoop fs -ls /user/hive
+
+```text
+$HADOOP_HOME/bin/hadoop fs -ls /user/hive
+```
+
+```text
 Found 1 items
 drwxrwxrwx   - jacek supergroup          0 2020-03-21 11:15 /user/hive/warehouse
 ```
 
 Check out the table directory on HDFS.
 
+```text
+$HADOOP_HOME/bin/hadoop fs -ls /user/hive/warehouse
 ```
-$ $HADOOP_HOME/bin/hadoop fs -ls /user/hive/warehouse
+
+```text
 Found 1 items
 drwxrwxrwx   - anonymous supergroup          0 2020-03-22 16:07 /user/hive/warehouse/demo_sales
 ```
 
 Insert some data.
 
-```
+```text
 # (id BIGINT, qty BIGINT, name STRING)
 # PARTITIONED BY (rx_mth_cd STRING COMMENT 'Prescription Date YYYYMM aggregated')
 INSERT INTO demo_sales PARTITION (rx_mth_cd="202002") VALUES (2, 2000, 'two');
@@ -519,7 +525,7 @@ INSERT INTO demo_sales PARTITION (rx_mth_cd="202002") VALUES (2, 2000, 'two');
 
 Query the records in the table.
 
-```
+```text
 0: jdbc:hive2://localhost:10000> SELECT * FROM demo_sales;
 +----------------+-----------------+------------------+-----------------------+
 | demo_sales.id  | demo_sales.qty  | demo_sales.name  | demo_sales.rx_mth_cd  |
@@ -531,7 +537,7 @@ Query the records in the table.
 
 Display the partitions (there should really be one).
 
-```
+```text
 0: jdbc:hive2://localhost:10000> SHOW PARTITIONS demo_sales;
 +-------------------+
 |     partition     |
@@ -543,7 +549,7 @@ Display the partitions (there should really be one).
 
 Check out the table directory on HDFS.
 
-```
+```text
 $ $HADOOP_HOME/bin/hadoop fs -ls -R /user/hive/warehouse/demo_sales
 drwxrwxrwx   - anonymous supergroup          0 2020-03-22 16:10 /user/hive/warehouse/demo_sales/rx_mth_cd=202002
 -rwxrwxrwx   1 anonymous supergroup        454 2020-03-22 16:10 /user/hive/warehouse/demo_sales/rx_mth_cd=202002/000000_0
@@ -553,14 +559,14 @@ Time for some Spark.
 
 Query the tables in the `default` database. There should be at least the one you've just created.
 
-```
+```text
 scala> spark.sharedState.externalCatalog.listTables("default")
 res6: Seq[String] = Buffer(demo_sales)
 ```
 
 Query the rows in the table.
 
-```
+```text
 scala> spark.table("demo_sales").show
 +---+----+----+---------+
 | id| qty|name|rx_mth_cd|
@@ -571,7 +577,7 @@ scala> spark.table("demo_sales").show
 
 Display the metadata of the table from the Spark catalog (`DESCRIBE EXTENDED` SQL command).
 
-```
+```text
 scala> sql("DESCRIBE EXTENDED demo_sales").show(Integer.MAX_VALUE, truncate = false)
 +----------------------------+--------------------------------------------------------------+-----------------------------------+
 |col_name                    |data_type                                                     |comment                            |

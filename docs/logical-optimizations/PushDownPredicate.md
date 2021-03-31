@@ -97,8 +97,7 @@ TIP: Follow the instructions on how to set up PostgreSQL in exercises/spark-exer
 
 Given the following code:
 
-[source, scala]
-----
+```text
 // Start with the PostgreSQL driver on CLASSPATH
 
 case class Project(id: Long, name: String, website: String)
@@ -120,11 +119,11 @@ val df = spark.read
   .option("dbtable", "projects")
   .load()
   .where("""name like "%Spark%"""")
-----
+```
 
 `PushDownPredicate` translates the above query to the following SQL query:
 
-```
+```text
 LOG:  execute <unnamed>: SELECT "id","name","website" FROM projects WHERE (name LIKE '%Spark%')
 ```
 
@@ -139,10 +138,9 @@ log_statement = 'all'
 Add `log_statement = 'all'` to `/usr/local/var/postgres/postgresql.conf` on Mac OS X with PostgreSQL installed using `brew`.
 ====
 
-=== [[parquet]] Parquet Data Source
+## <span id="parquet"> Parquet Data Source
 
-[source, scala]
-----
+```text
 val spark: SparkSession = ...
 import spark.implicits._
 
@@ -179,19 +177,4 @@ scala> cities.filter(_.name == "Warsaw").queryExecution.executedPlan
 res24: org.apache.spark.sql.execution.SparkPlan =
 *Filter <function1>.apply
 +- *FileScan parquet [id#128L,name#129] Batched: true, Format: ParquetFormat, InputPaths: file:/Users/jacek/dev/oss/spark/cities.parquet, PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint,name:string>
-----
-
-=== [[hive]] Hive Data Source
-
-CAUTION: FIXME
-
-=== [[apply]] Executing Rule -- `apply` Method
-
-[source, scala]
-----
-apply(plan: LogicalPlan): LogicalPlan
-----
-
-`apply`...FIXME
-
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+```
