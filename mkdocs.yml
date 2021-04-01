@@ -122,6 +122,7 @@ nav:
       - Table: connector/Table.md
       - TableCapability: connector/TableCapability.md
       - TableProvider: connector/TableProvider.md
+      - SupportsDelete: connector/SupportsDelete.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
       - SupportsPushDownFilters: connector/SupportsPushDownFilters.md
@@ -627,6 +628,7 @@ nav:
         - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
         - physical-operators/DataWritingCommandExec.md
         - physical-operators/DebugExec.md
+        - DeleteFromTableExec: physical-operators/DeleteFromTableExec.md
         - DescribeTableExec: physical-operators/DescribeTableExec.md
         - physical-operators/DeserializeToObjectExec.md
         - DropNamespaceExec: physical-operators/DropNamespaceExec.md

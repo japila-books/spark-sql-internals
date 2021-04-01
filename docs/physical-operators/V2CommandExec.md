@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="run"> run
+### <span id="run"> Executing Command
 
 ```scala
 run(): Seq[InternalRow]

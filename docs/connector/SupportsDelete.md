@@ -1,0 +1,3 @@
+# SupportsDelete
+
+`SupportsDelete` is...FIXME

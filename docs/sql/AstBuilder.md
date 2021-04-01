@@ -25,9 +25,13 @@ ANALYZE TABLE multipartIdentifier partitionSpec? COMPUTE STATISTICS
 
 ANTLR labeled alternative: `#analyze`
 
-### visitDeleteFromTable
+### <span id="visitDeleteFromTable"> visitDeleteFromTable
 
-Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md)
+Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md) logical command
+
+```text
+DELETE FROM multipartIdentifier tableAlias whereClause?
+```
 
 ANTLR labeled alternative: `#deleteFromTable`
 
