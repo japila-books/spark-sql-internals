@@ -87,6 +87,21 @@ jacekReborn: Person = Person(0,Jacek)
 // Are the jacek instances same?
 scala> jacek == jacekReborn
 res6: Boolean = true
+
+// Begin Spark 3.* APIs
+scala> val toRow  =personExprEncoder.createSerializer()
+toRow: org.apache.spark.sql.catalyst.encoders.ExpressionEncoder.Serializer[Person] = <function1>
+
+scala> toRow(jacek)
+res8: org.apache.spark.sql.catalyst.InternalRow = [0,0,1800000005,6b6563614a]
+
+scala> val fromRow = personExprEncoder.resolveAndBind().createDeserializer()
+fromRow: org.apache.spark.sql.catalyst.encoders.ExpressionEncoder.Deserializer[Person] = <function1>
+    
+scala> val jacekReborn = fromRow(row)
+jacekReborn: Person = Person(0,Jacek)
+
+// END Spark 3.* APIs
 ----
 
 You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in SparkSession.md#implicits[`implicits` object].
