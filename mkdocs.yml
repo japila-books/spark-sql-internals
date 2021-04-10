@@ -491,8 +491,10 @@ nav:
         - CreateNamedStructUnsafe: expressions/CreateNamedStructUnsafe.md
         - CumeDist: expressions/CumeDist.md
         - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+        - DecodeUsingSerializer: expressions/DecodeUsingSerializer.md
         - DynamicPruningExpression: expressions/DynamicPruningExpression.md
         - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
+        - EncodeUsingSerializer: expressions/EncodeUsingSerializer.md
         - Exists: expressions/Exists.md
         - ExpectsInputTypes: expressions/ExpectsInputTypes.md
         - ExplodeBase: expressions/ExplodeBase.md
@@ -876,6 +878,7 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - spark-sql-ExpressionEncoder-LocalDateTime.md
+      - ScalaReflection: ScalaReflection.md
     - Row: spark-sql-Row.md
     - Data Source API:
       - DataSource API: spark-sql-datasource-api.md
@@ -965,7 +968,6 @@ nav:
     - DDLUtils: spark-sql-DDLUtils.md
     - SchemaUtils: spark-sql-SchemaUtils.md
     - AggUtils: AggUtils.md
-    - ScalaReflection: spark-sql-ScalaReflection.md
     - CreateStruct: CreateStruct.md
     - TypeCoercion: spark-sql-TypeCoercion.md
     - TypeCoercionRule: TypeCoercionRule.md

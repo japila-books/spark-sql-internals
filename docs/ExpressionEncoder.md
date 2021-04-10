@@ -1,6 +1,32 @@
 # ExpressionEncoder
 
-`ExpressionEncoder[T]` is a generic [Encoder](Encoder.md) of JVM objects of the type `T` to and from [internal binary rows](InternalRow.md).
+`ExpressionEncoder[T]` is an [Encoder](Encoder.md) of JVM objects (of type `T`) to and from [InternalRow](InternalRow.md)s.
+
+## Creating Instance
+
+`ExpressionEncoder` takes the following to be created:
+
+* <span id="objSerializer"> [Expression](expressions/Expression.md) to encode an object to a Spark SQL representation
+* <span id="objDeserializer"> [Expression](expressions/Expression.md) to construct an object from a Spark SQL representation
+* <span id="clsTag"> Scala `ClassTag[T]`
+
+`ExpressionEncoder` is created when:
+
+* `Encoders` utility is used for [genericSerializer](Encoders.md#genericSerializer)
+* ...FIXME
+
+## <span id="apply"> Creating ExpressionEncoder
+
+```scala
+apply[T : TypeTag](): ExpressionEncoder[T]
+```
+
+`apply` creates an `ExpressionEncoder` with the following:
+
+* [ScalaReflection.serializerForType](ScalaReflection.md#serializerForType)
+* [ScalaReflection.deserializerForType](ScalaReflection.md#deserializerForType)
+
+## Review Me
 
 `ExpressionEncoder[T]` uses expressions/Expression.md[expressions] for a <<serializer, serializer>> and a <<deserializer, deserializer>>.
 
@@ -52,15 +78,6 @@ Used...FIXME
 |===
 
 NOTE: `Encoders` object contains the default `ExpressionEncoders` for Scala and Java primitive types, e.g. `boolean`, `long`, `String`, `java.sql.Date`, `java.sql.Timestamp`, `Array[Byte]`.
-
-=== [[apply]] Creating ExpressionEncoder -- `apply` Method
-
-[source, scala]
-----
-apply[T : TypeTag](): ExpressionEncoder[T]
-----
-
-CAUTION: FIXME
 
 === [[creating-instance]] Creating ExpressionEncoder Instance
 

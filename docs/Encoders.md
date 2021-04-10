@@ -1,36 +1,51 @@
-# Encoders
+# Encoders Utility
 
-`Encoders` is a factory object.
+## Demo
 
-=== [[kryo]] Creating Encoder Using Kryo -- `kryo` Method
+```scala
+import org.apache.spark.sql.Encoders
+val encoder = Encoders.LOCALDATE
+```
 
-[source, scala]
-----
-kryo[T: ClassTag]: Encoder[T]
-----
+```text
+scala> :type encoder
+org.apache.spark.sql.Encoder[java.time.LocalDate]
+```
 
-`kryo` simply <<genericSerializer, creates an encoder>> that serializes objects of type `T` using Kryo (i.e. the `useKryo` flag is enabled).
+## <span id="javaSerialization"> Creating Generic ExpressionEncoder using Java Serialization
 
-NOTE: `kryo` is used when...FIXME
-
-=== [[javaSerialization]] Creating Encoder Using Java Serialization -- `javaSerialization` Method
-
-[source, scala]
-----
+```scala
 javaSerialization[T: ClassTag]: Encoder[T]
-----
+javaSerialization[T](
+  clazz: Class[T]): Encoder[T]
+```
 
-`javaSerialization` simply <<genericSerializer, creates an encoder>> that serializes objects of type `T` using the generic Java serialization (i.e. the `useKryo` flag is disabled).
+`javaSerialization` [creates a generic ExpressionEncoder](#genericSerializer) (with `useKryo` flag off).
 
-NOTE: `javaSerialization` is used when...FIXME
+## <span id="kryo"> Creating Generic ExpressionEncoder using Kryo Serialization
 
-=== [[genericSerializer]] Creating Generic Encoder -- `genericSerializer` Internal Method
+```scala
+kryo[T: ClassTag]: Encoder[T]
+kryo[T](
+  clazz: Class[T]): Encoder[T]
+```
 
-[source, scala]
-----
-genericSerializer[T: ClassTag](useKryo: Boolean): Encoder[T]
-----
+`kryo` [creates a generic ExpressionEncoder](#genericSerializer) (with `useKryo` flag on).
 
-`genericSerializer`...FIXME
+## <span id="genericSerializer"> Creating Generic ExpressionEncoder
 
-NOTE: `genericSerializer` is used when `Encoders` is requested for a generic encoder using <<kryo, Kryo>> and <<javaSerialization, Java Serialization>>.
+```scala
+genericSerializer[T: ClassTag](
+  useKryo: Boolean): Encoder[T]
+```
+
+`genericSerializer` creates an [ExpressionEncoder](ExpressionEncoder.md) with the following:
+
+Attribute | Catalyst Expression
+---------|---------
+ `objSerializer` | [EncodeUsingSerializer](expressions/EncodeUsingSerializer.md) with [BoundReference](expressions/BoundReference.md) (`ordinal` = 0, `dataType` = [ObjectType](DataType.md#ObjectType))
+ `objDeserializer` | [DecodeUsingSerializer](expressions/DecodeUsingSerializer.md) with `GetColumnByOrdinal` leaf expression
+
+`genericSerializer` is used when:
+
+* `Encoders` utility is used for a generic encoder using [Kryo](#kryo) and [Java](#javaSerialization) serialization
