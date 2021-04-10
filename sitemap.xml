@@ -2540,6 +2540,22 @@
      <lastmod>2021-04-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Encoder/</loc>
+     <lastmod>2021-04-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExpressionEncoder/</loc>
+     <lastmod>2021-04-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RowEncoder/</loc>
+     <lastmod>2021-04-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ScalaReflection/</loc>
+     <lastmod>2021-04-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSourceRDD/</loc>
      <lastmod>2021-04-10</lastmod>
      <changefreq>daily</changefreq>
@@ -2784,31 +2800,7 @@
      <lastmod>2021-04-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-fundamentals-spark-application-development/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Encoder/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExpressionEncoder/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RowEncoder/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-ExpressionEncoder-LocalDateTime/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ScalaReflection/</loc>
-     <lastmod>2021-04-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/spark-sql-Row/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/Row/</loc>
      <lastmod>2021-04-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
