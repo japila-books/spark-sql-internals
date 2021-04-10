@@ -318,7 +318,7 @@ as(alias: Symbol): Dataset[T]
 as[U: Encoder]: Dataset[U]
 ----
 
-`as[T]` allows for converting from a weakly-typed `Dataset` of spark-sql-Row.md[Rows] to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
+`as[T]` allows for converting from a weakly-typed `Dataset` of [Rows](Row.md) to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
 
 [source, scala]
 ----

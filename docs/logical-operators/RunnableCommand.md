@@ -11,7 +11,7 @@ run(
   sparkSession: SparkSession): Seq[Row]
 ```
 
-Executes the command for side effects (possibly giving [Row](../spark-sql-Row.md) back with the result)
+Executes the command for side effects (possibly giving [Row](../Row.md) back with the result)
 
 Used when:
 

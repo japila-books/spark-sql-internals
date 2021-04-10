@@ -800,6 +800,11 @@ nav:
       - CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
+    - Encoder:
+      - Encoder: Encoder.md
+      - ExpressionEncoder: ExpressionEncoder.md
+      - RowEncoder: RowEncoder.md
+      - ScalaReflection: ScalaReflection.md
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md
@@ -872,14 +877,7 @@ nav:
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
     - DataSourceV2Utils: DataSourceV2Utils.md
-    - Developing Applications: spark-sql-fundamentals-spark-application-development.md
-    - Encoder:
-      - Encoder: Encoder.md
-      - ExpressionEncoder: ExpressionEncoder.md
-      - RowEncoder: RowEncoder.md
-      - spark-sql-ExpressionEncoder-LocalDateTime.md
-      - ScalaReflection: ScalaReflection.md
-    - Row: spark-sql-Row.md
+    - Row: Row.md
     - Data Source API:
       - DataSource API: spark-sql-datasource-api.md
       - CreateTableWriter: CreateTableWriter.md

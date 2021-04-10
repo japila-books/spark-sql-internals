@@ -45,7 +45,7 @@ Default: [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.de
 needConversion: Boolean
 ```
 
-Controls type conversion (whether or not JVM objects inside [Rows](spark-sql-Row.md) needs to be converted to Catalyst types, e.g. `java.lang.String` to `UTF8String`)
+Controls type conversion (whether or not JVM objects inside [Row](Row.md)s needs to be converted to Catalyst types, e.g. `java.lang.String` to `UTF8String`)
 
 Default: `true`
 

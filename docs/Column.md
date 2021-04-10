@@ -254,7 +254,7 @@ overRange: org.apache.spark.sql.Column = someColumn OVER (RANGE BETWEEN UNBOUNDE
 
 === [[cast]] `cast` Operator
 
-`cast` method casts a column to a data type. It makes for type-safe maps with spark-sql-Row.md[Row] objects of the proper type (not `Any`).
+`cast` method casts a column to a data type. It makes for type-safe maps with [Row](Row.md) objects of the proper type (not `Any`).
 
 [source,scala]
 ----

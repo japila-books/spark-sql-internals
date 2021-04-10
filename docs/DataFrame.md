@@ -4,7 +4,7 @@ Spark SQL introduces a tabular functional data abstraction called *DataFrame*. I
 
 DataFrame is a data abstraction or a domain-specific language (DSL) for working with *structured* and *semi-structured data*, i.e. datasets that you can specify a schema for.
 
-DataFrame is a collection of spark-sql-Row.md[rows] with a spark-sql-schema.md[schema] that is the result of executing a structured query (once it will have been executed).
+`DataFrame` is a collection of [Row](Row.md)s with a [schema](spark-sql-schema.md) that is the result of executing a structured query (once it will have been executed).
 
 DataFrame uses the immutable, in-memory, resilient, distributed and parallel capabilities of spark-rdd.md[RDD], and applies a structure called schema to the data.
 
@@ -75,11 +75,11 @@ DataFrames use the [Catalyst logical query optimizer](catalyst/Optimizer.md) to 
 
 NOTE: Your DataFrames can also be type-safe and moreover further improve their performance through [specialized encoders](Encoder.md) that can significantly cut serialization and deserialization times.
 
-You can enforce types on spark-sql-Row.md[generic rows] and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
+You can enforce types on [generic rows](Row.md) and hence bring type safety (at compile time) by <<as, encoding rows into type-safe `Dataset` object>>. As of Spark 2.0 it is a preferred way of developing Spark applications.
 
 ## Features of DataFrame
 
-A `DataFrame` is a collection of "generic" spark-sql-Row.md[Row] instances (as `RDD[Row]`) and a spark-sql-schema.md[schema].
+A `DataFrame` is a collection of "generic" [Row](Row.md) instances (as `RDD[Row]`) and a spark-sql-schema.md[schema].
 
 NOTE: Regardless of how you create a `DataFrame`, it will always be a pair of `RDD[Row]` and [StructType](StructType.md).
 

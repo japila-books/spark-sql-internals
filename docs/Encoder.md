@@ -1,34 +1,64 @@
 # Encoder
 
-`Encoder` is the fundamental concept in the **serialization and deserialization (SerDe) framework**. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
+`Encoder[T]` is an [abstraction](#contract) of [converters](#implementations) that can convert JVM objects (of type `T`) to and from the internal Spark SQL representation ([InternalRow](InternalRow.md)).
+
+`Encoder`s are `Serializable` ([Java]({{ java.api }}/java.base/java/io/Serializable.html)).
+
+`Encoder` is the fundamental concept in the **Serialization and Deserialization (SerDe) Framework**. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
 
 !!! note
     Spark has borrowed the idea from the [Hive SerDe library](https://cwiki.apache.org/confluence/display/Hive/SerDe) so it might be worthwhile to get familiar with Hive a little bit, too.
 
-Encoders are modelled in Spark SQL 2.0 as `Encoder[T]` trait.
+`Encoder` is also called _"a container of serde expressions in Dataset"_.
 
-[source, scala]
-----
-trait Encoder[T] extends Serializable {
-  def schema: StructType
-  def clsTag: ClassTag[T]
-}
-----
+`Encoder` is a part of [Dataset](Dataset.md)s (to serialize and deserialize the records of this dataset).
 
-The type `T` stands for the type of records a `Encoder[T]` can deal with. An encoder of type `T`, i.e. `Encoder[T]`, is used to convert (_encode_ and _decode_) any JVM object or primitive of type `T` (that could be your domain object) to and from Spark SQL's [InternalRow](InternalRow.md) which is the internal binary row format representation (using Catalyst expressions and code generation).
+`Encoder` knows the [schema](#schema) of the records and that is how they offer significantly faster serialization and deserialization (comparing to the default Java or Kryo serializers).
 
-NOTE: `Encoder` is also called _"a container of serde expressions in Dataset"_.
+Custom `Encoder`s are created using [Encoders](Encoders.md) utility. `Encoder`s for common Scala types and their product types are already available in [implicits](SparkSession.md#implicits) object.
 
-NOTE: The one and only implementation of the `Encoder` trait in Spark SQL 2 is [ExpressionEncoder](ExpressionEncoder.md).
+```scala
+val spark = SparkSession.builder.getOrCreate()
+import spark.implicits._
+```
 
-Encoders are integral (and internal) part of any Dataset.md[Dataset[T\]] (of records of type `T`) with a `Encoder[T]` that is used to serialize and deserialize the records of this dataset.
+!!! TIP
+    The default encoders are already imported in `spark-shell`.
 
-NOTE: `Dataset[T]` type is a Scala type constructor with the type parameter `T`. So is `Encoder[T]` that handles serialization and deserialization of `T` to the internal representation.
+`Encoder`s map columns (of your dataset) to fields (of your JVM object) by name. It is by `Encoder`s that you can bridge JVM objects to data sources (CSV, JDBC, Parquet, Avro, JSON, Cassandra, Elasticsearch, memsql) and vice versa.
 
-Encoders know the spark-sql-schema.md[schema] of the records. This is how they offer significantly faster serialization and deserialization (comparing to the default Java or Kryo serializers).
+## Contract
 
-[source, scala]
-----
+### <span id="clsTag"> ClassTag
+
+```scala
+clsTag: ClassTag[T]
+```
+
+`ClassTag` ([Scala]({{ scala.api }}/scala/reflect/ClassTag.html)) for creating Arrays of `T`s
+
+Used when:
+
+* `AppendColumns` utility is used to create a `AppendColumns`
+* `MapElements` utility is used to create a `MapElements`
+* `TypedFilter` utility is used to create a `TypedFilter`
+* `TypedColumn` is requested to [withInputType](TypedColumn.md#withInputType)
+
+### <span id="schema"> Schema
+
+```scala
+schema: StructType
+```
+
+[Schema](StructType.md) of encoding this type of object as a [Row](Row.md)
+
+## Implementations
+
+* [ExpressionEncoder](ExpressionEncoder.md)
+
+## Demo
+
+```text
 // The domain object for your records in a large dataset
 case class Person(id: Long, name: String)
 
@@ -87,86 +117,18 @@ jacekReborn: Person = Person(0,Jacek)
 // Are the jacek instances same?
 scala> jacek == jacekReborn
 res6: Boolean = true
+```
 
-// Begin Spark 3.* APIs
-scala> val toRow  =personExprEncoder.createSerializer()
-toRow: org.apache.spark.sql.catalyst.encoders.ExpressionEncoder.Serializer[Person] = <function1>
+```scala
+val toRow = personExprEncoder.createSerializer()
+toRow(jacek)
+```
 
-scala> toRow(jacek)
-res8: org.apache.spark.sql.catalyst.InternalRow = [0,0,1800000005,6b6563614a]
+```scala
+val fromRow = personExprEncoder.resolveAndBind().createDeserializer()
+val jacekReborn = fromRow(row)
+```
 
-scala> val fromRow = personExprEncoder.resolveAndBind().createDeserializer()
-fromRow: org.apache.spark.sql.catalyst.encoders.ExpressionEncoder.Deserializer[Person] = <function1>
-    
-scala> val jacekReborn = fromRow(row)
-jacekReborn: Person = Person(0,Jacek)
+## Further Reading and Watching
 
-// END Spark 3.* APIs
-----
-
-You can <<creating-encoders, create custom encoders using static methods of `Encoders` object>>. Note however that encoders for common Scala types and their product types are already available in SparkSession.md#implicits[`implicits` object].
-
-[source, scala]
-----
-val spark = SparkSession.builder.getOrCreate()
-import spark.implicits._
-----
-
-TIP: The default encoders are already imported in spark-shell.md[spark-shell].
-
-Encoders map columns (of your dataset) to fields (of your JVM object) by name. It is by Encoders that you can bridge JVM objects to data sources (CSV, JDBC, Parquet, Avro, JSON, Cassandra, Elasticsearch, memsql) and vice versa.
-
-NOTE: In Spark SQL 2.0 `DataFrame` type is a mere type alias for `Dataset[Row]` with [RowEncoder](RowEncoder.md) being the encoder.
-
-=== [[creating-encoders]][[encoders]] Creating Custom Encoders (Encoders object)
-
-`Encoders` factory object defines methods to create `Encoder` instances.
-
-Import `org.apache.spark.sql` package to have access to the `Encoders` factory object.
-
-[source, scala]
-----
-import org.apache.spark.sql.Encoders
-
-scala> Encoders.LONG
-res1: org.apache.spark.sql.Encoder[Long] = class[value[0]: bigint]
-----
-
-You can find methods to create encoders for Java's object types, e.g. `Boolean`, `Integer`, `Long`, `Double`, `String`, `java.sql.Timestamp` or `Byte` array, that could be composed to create more advanced encoders for Java bean classes (using `bean` method).
-
-[source, scala]
-----
-import org.apache.spark.sql.Encoders
-
-scala> Encoders.STRING
-res2: org.apache.spark.sql.Encoder[String] = class[value[0]: string]
-----
-
-You can also create encoders based on Kryo or Java serializers.
-
-[source, scala]
-----
-import org.apache.spark.sql.Encoders
-
-case class Person(id: Int, name: String, speaksPolish: Boolean)
-
-scala> Encoders.kryo[Person]
-res3: org.apache.spark.sql.Encoder[Person] = class[value[0]: binary]
-
-scala> Encoders.javaSerialization[Person]
-res5: org.apache.spark.sql.Encoder[Person] = class[value[0]: binary]
-----
-
-You can create encoders for Scala's tuples and case classes, `Int`, `Long`, `Double`, etc.
-
-[source, scala]
-----
-import org.apache.spark.sql.Encoders
-
-scala> Encoders.tuple(Encoders.scalaLong, Encoders.STRING, Encoders.scalaBoolean)
-res9: org.apache.spark.sql.Encoder[(Long, String, Boolean)] = class[_1[0]: bigint, _2[0]: string, _3[0]: boolean]
-----
-
-=== [[i-want-more]] Further Reading and Watching
-
-* (video) https://youtu.be/_1byVWTEK1s[Modern Spark DataFrame and Dataset (Intermediate Tutorial)] by https://twitter.com/adbreind[Adam Breindel] from Databricks.
+* (video) [Modern Spark DataFrame and Dataset (Intermediate Tutorial)](https://youtu.be/_1byVWTEK1s) by [Adam Breindel](https://twitter.com/adbreind)

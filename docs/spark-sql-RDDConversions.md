@@ -24,13 +24,13 @@ rowToRowRdd(data: RDD[Row], outputTypes: Seq[DataType]): RDD[InternalRow]
 
 TIP: Use `RDD.toDebugString` to see the additional `MapPartitionsRDD` in an RDD lineage.
 
-The "map" function takes a Scala `Iterator` of spark-sql-Row.md[Row] objects and does the following:
+The "map" function takes a Scala `Iterator` of [Row](Row.md) objects and does the following:
 
 1. Creates a `GenericInternalRow` (of the size that is the number of columns per the input `Seq[DataType]`)
 
 1. [Creates a converter function](CatalystTypeConverters.md#createToCatalystConverter) for every `DataType` in `Seq[DataType]`
 
-1. For every [Row](spark-sql-Row.md) object in the partition (iterator), applies the converter function per position and adds the result value to the `GenericInternalRow`
+1. For every [Row](Row.md) object in the partition (iterator), applies the converter function per position and adds the result value to the `GenericInternalRow`
 
 1. In the end, returns a `GenericInternalRow` for every row
 

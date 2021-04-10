@@ -97,7 +97,7 @@ dataset.filter('value % 2 === 0).count
 dataset.filter("value % 2 = 0").count
 ----
 
-The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based spark-sql-Row.md[Rows]).
+The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based [Row](Row.md)s).
 
 `Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to [DataFrame](DataFrame.md) makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
@@ -142,7 +142,7 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 
 It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using [DataFrame](DataFrame.md), regular SQL queries or even RDDs).
 
-Using `Dataset` objects turns `DataFrames` of spark-sql-Row.md[Row] instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
+Using `Dataset` objects turns `DataFrames` of [Row](Row.md) instances into a `DataFrames` of case classes with proper names and types (following their equivalents in the case classes). Instead of using indices to access respective fields in a DataFrame and cast it to a type, all this is automatically handled by Datasets and checked by the Scala compiler.
 
 If however a logical-operators/LogicalPlan.md[LogicalPlan] is used to <<creating-instance, create a `Dataset`>>, the logical plan is first SessionState.md#executePlan[executed] (using the current SessionState.md#executePlan[SessionState] in the `SparkSession`) that yields the [QueryExecution](QueryExecution.md) plan.
 

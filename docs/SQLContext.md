@@ -78,7 +78,7 @@ createDataFrame[A <: Product](data: Seq[A]): DataFrame
 createDataFrame(rowRDD: RDD[Row], schema: StructType): DataFrame
 ----
 
-This variant of `createDataFrame` creates a `DataFrame` from `RDD` of spark-sql-Row.md[Row] and explicit schema.
+This variant of `createDataFrame` creates a `DataFrame` from `RDD` of [Row](Row.md) and explicit schema.
 
 === [[registering-udfs]] Registering User-Defined Functions (UDF)
 

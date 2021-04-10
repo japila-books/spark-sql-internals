@@ -1,6 +1,6 @@
 # ExpressionEncoder
 
-`ExpressionEncoder[T]` is an [Encoder](Encoder.md) of JVM objects (of type `T`) to and from [InternalRow](InternalRow.md)s.
+`ExpressionEncoder[T]` is the only built-in [Encoder](Encoder.md).
 
 !!! important
     `ExpressionEncoder` is the only supported [Encoder](Encoder.md) which is enforced when `Dataset` [is created](Dataset.md#exprEnc) (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
@@ -9,8 +9,8 @@
 
 `ExpressionEncoder` takes the following to be created:
 
-* <span id="objSerializer"> [Expression](expressions/Expression.md) to serialize (_encode_) an object to a Spark SQL representation
-* <span id="objDeserializer"> [Expression](expressions/Expression.md) to deserialize (_construct_) an object from a Spark SQL representation
+* <span id="objSerializer"> [Expression](expressions/Expression.md) for object serialization
+* <span id="objDeserializer"> [Expression](expressions/Expression.md) for object deserialization
 * <span id="clsTag"> `ClassTag[T]` ([Scala]({{ scala.api }}/scala/reflect/ClassTag.html))
 
 `ExpressionEncoder` is created when:
@@ -66,7 +66,8 @@ apply[T : TypeTag](): ExpressionEncoder[T]
 ## <span id="tuple"> Creating ExpressionEncoder for Scala Tuples
 
 ```scala
-tuple[T](e: ExpressionEncoder[T]): ExpressionEncoder[Tuple1[T]]
+tuple[T](
+  e: ExpressionEncoder[T]): ExpressionEncoder[Tuple1[T]]
 tuple[T1, T2](
   e1: ExpressionEncoder[T1],
   e2: ExpressionEncoder[T2]): ExpressionEncoder[(T1, T2)]
@@ -128,7 +129,7 @@ resolveAndBind(
 * `TypedAggregateExpression` is [created](expressions/TypedAggregateExpression.md#apply)
 * `ResolveEncodersInScalaAgg` extended resolution rule is executed
 * `JdbcUtils` is requested to [resultSetToRows](datasources/jdbc/JdbcUtils.md#resultSetToRows)
-* _some others_
+* _others_
 
 ### Demo
 
