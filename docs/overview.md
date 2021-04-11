@@ -24,7 +24,7 @@ Whichever query interface you use to describe a structured query, i.e. SQL or Qu
 
 ## Dataset Data Structure
 
-The main data abstraction of Spark SQL is [Dataset](Dataset.md) that represents a **structured data** (records with a known schema). This structured data representation `Dataset` enables [compact binary representation](spark-sql-tungsten.md) using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
+The main data abstraction of Spark SQL is [Dataset](Dataset.md) that represents a **structured data** (records with a known schema). This structured data representation `Dataset` enables [compact binary representation](tungsten/index.md) using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
 `Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
 
@@ -44,7 +44,7 @@ Spark SQL supports loading datasets from various data sources including tables i
 
 ## Query Optimizations
 
-Spark SQL offers performance query optimizations using [Catalyst Optimizer](catalyst/Optimizer.md), [Whole-Stage Codegen](whole-stage-code-generation/index.md) and [Tungsten execution engine](spark-sql-tungsten.md).
+Spark SQL offers performance query optimizations using [Catalyst Optimizer](catalyst/Optimizer.md), [Whole-Stage Codegen](whole-stage-code-generation/index.md) and [Tungsten execution engine](tungsten/index.md).
 
 Quoting [Apache Drill](https://drill.apache.org/) which applies to Spark SQL perfectly:
 

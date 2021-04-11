@@ -219,7 +219,7 @@ rdd: RDD[T]
 
 NOTE: `rdd` gives `RDD` with the extra execution step to convert rows from their internal binary row format to JVM objects that will impact the JVM memory as the objects are inside JVM (while were outside before). You should not use `rdd` directly.
 
-Internally, `rdd` first [creates a new logical plan that deserializes](CatalystSerde.md#deserialize) the Dataset's [logical plan](#logicalPlan).
+Internally, `rdd` [creates a deserializer](CatalystSerde.md#deserialize) the Dataset's [logical plan](#logicalPlan).
 
 [source, scala]
 ----

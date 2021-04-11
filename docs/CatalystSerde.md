@@ -1,36 +1,23 @@
-title: CatalystSerde
+# CatalystSerde Utility
 
-# CatalystSerde Helper Object
+## <span id="deserialize"> Creating Deserializer
 
-`CatalystSerde` is a Scala object that consists of three utility methods:
+```scala
+deserialize[T : Encoder](
+  child: LogicalPlan): DeserializeToObject
+```
 
-. <<deserialize, deserialize>> to create a new logical plan with the input logical plan wrapped inside DeserializeToObject.md[DeserializeToObject] logical operator.
-. <<serialize, serialize>>
-. <<generateObjAttr, generateObjAttr>>
+`deserialize` creates a [DeserializeToObject](logical-operators/DeserializeToObject.md) logical operator for the given `child` [logical plan](logical-operators/LogicalPlan.md).
 
-`CatalystSerde` and belongs to `org.apache.spark.sql.catalyst.plans.logical` package.
+Internally, `deserialize` creates an `UnresolvedDeserializer` for the deserializer for the type `T` first and passes it on to a `DeserializeToObject` with an `AttributeReference` (being the result of [generateObjAttr](#generateObjAttr)).
 
-=== [[deserialize]] Creating Logical Plan with DeserializeToObject Logical Operator for Logical Plan -- `deserialize` Method
+## <span id="serialize"> Creating Serializer
 
-[source, scala]
-----
-deserialize[T : Encoder](child: LogicalPlan): DeserializeToObject
-----
+```scala
+serialize[T : Encoder](
+  child: LogicalPlan): SerializeFromObject
+```
 
-`deserialize` creates a DeserializeToObject.md[`DeserializeToObject` logical operator] for the input `child` spark-sql-LogicalPlan.md[logical plan].
+`serialize` tries to find the [ExpressionEncoder](ExpressionEncoder.md) for the type `T` and requests it for [serializer expressions](ExpressionEncoder.md#namedExpressions).
 
-Internally, `deserialize` creates a `UnresolvedDeserializer` for the deserializer for the type `T` first and passes it on to a `DeserializeToObject` with a `AttributeReference` (being the result of <<generateObjAttr, generateObjAttr>>).
-
-=== [[serialize]] `serialize` Method
-
-[source, scala]
-----
-serialize[T : Encoder](child: LogicalPlan): SerializeFromObject
-----
-
-=== [[generateObjAttr]] `generateObjAttr` Method
-
-[source, scala]
-----
-generateObjAttr[T : Encoder]: Attribute
-----
+In the end, creates a `SerializeFromObject` logical operator with the serializer and the given `child` logical operator.

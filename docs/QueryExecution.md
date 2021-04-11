@@ -103,7 +103,7 @@ val dataset: Dataset[Long] = ...
 dataset.queryExecution.executedPlan
 ```
 
-`QueryExecution` uses the [Logical Query Optimizer](catalyst/Optimizer.md) and [Tungsten](spark-sql-tungsten.md) for better structured query performance.
+`QueryExecution` uses the [Logical Query Optimizer](catalyst/Optimizer.md) and [Tungsten](tungsten/index.md) for better structured query performance.
 
 `QueryExecution` uses the input `SparkSession` to access the current [SparkPlanner](SparkPlanner.md) (through [SessionState](SessionState.md)) when <<creating-instance, it is created>>. It then computes a [SparkPlan](physical-operators/SparkPlan.md) (a `PhysicalPlan` exactly) using the planner. It is available as the <<sparkPlan, `sparkPlan` attribute>>.
 

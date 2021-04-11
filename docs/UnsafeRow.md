@@ -1,8 +1,27 @@
 # UnsafeRow
 
-`UnsafeRow` is a [InternalRow](InternalRow.md) that represents a mutable internal raw-memory (and hence unsafe) binary row format.
+`UnsafeRow` is an [InternalRow](InternalRow.md) for mutable binary rows that are backed by raw memory outside JVM (instead of Java objects).
 
-In other words, `UnsafeRow` is an `InternalRow` that is backed by raw memory instead of Java objects.
+`UnsafeRow` supports Java's [Externalizable](#Externalizable) and Kryo's [KryoSerializable](#KryoSerializable) serialization/deserialization protocols.
+
+## <span id="KryoSerializable"> KryoSerializable SerDe Protocol
+
+Learn more in [KryoSerializable](https://github.com/EsotericSoftware/kryo#kryoserializable).
+
+## <span id="Externalizable"> Java's Externalizable SerDe Protocol
+
+Learn more in [java.io.Externalizable]({{ java.api }}/java.base/java/io/Externalizable.html).
+
+## <span id="sizeInBytes"> sizeInBytes
+
+`UnsafeRow` knows its size (in bytes).
+
+```text
+scala> println(unsafeRow.getSizeInBytes)
+32
+```
+
+## Demo
 
 ```text
 // Use ExpressionEncoder for simplicity
@@ -20,20 +39,12 @@ scala> unsafeRow.getUTF8String(0)
 res1: org.apache.spark.unsafe.types.UTF8String = hello world
 ```
 
-[[sizeInBytes]]
-`UnsafeRow` knows its *size in bytes*.
+## Field Offsets
 
-```text
-scala> println(unsafeRow.getSizeInBytes)
-32
-```
+The fields of a data row are placed using **field offsets**.
 
-`UnsafeRow` supports Java's <<Externalizable, Externalizable>> and Kryo's <<KryoSerializable, KryoSerializable>> serialization/deserialization protocols.
+## <span id="mutableFieldTypes"><span id="mutable-types"> Mutable Types
 
-The fields of a data row are placed using *field offsets*.
-
-[[mutableFieldTypes]]
-[[mutable-types]]
 `UnsafeRow` considers a [data type](DataType.md) mutable if it is one of the following:
 
 * [BooleanType](DataType.md#BooleanType)
@@ -48,78 +59,16 @@ The fields of a data row are placed using *field offsets*.
 * [ShortType](DataType.md#ShortType)
 * [TimestampType](DataType.md#TimestampType)
 
+## 8-Byte Word Alignment and Three Regions
+
 `UnsafeRow` is composed of three regions:
 
-. Null Bit Set Bitmap Region (1 bit/field) for tracking null values
-. Fixed-Length 8-Byte Values Region
-. Variable-Length Data Section
+1. **Null Bit Set Bitmap Region** (1 bit/field) for tracking `null` values
+1. Fixed-Length 8-Byte **Values Region**
+1. Variable-Length **Data Region**
 
-That gives the property of rows being always 8-byte word aligned and so their size is always a multiple of 8 bytes.
+`UnsafeRow` is always 8-byte word aligned and so their size is always a multiple of 8 bytes.
+
+## Equality and Hashing
 
 Equality comparision and hashing of rows can be performed on raw bytes since if two rows are identical so should be their bit-wise representation. No type-specific interpretation is required.
-
-=== [[isMutable]] `isMutable` Static Predicate
-
-[source, java]
-----
-static boolean isMutable(DataType dt)
-----
-
-`isMutable` is enabled (`true`) when the input [DataType](DataType.md) is among the [mutable field types](#mutableFieldTypes) or a [DecimalType](DataType.md#DecimalType).
-
-Otherwise, `isMutable` is disabled (`false`).
-
-`isMutable` is used when:
-
-* `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
-
-* `SortBasedAggregationIterator` is requested for [newBuffer](SortBasedAggregationIterator.md#newBuffer)
-
-=== [[KryoSerializable]] Kryo's KryoSerializable SerDe Protocol
-
-TIP: Read up on https://github.com/EsotericSoftware/kryo#kryoserializable[KryoSerializable].
-
-==== [[write]] Serializing JVM Object -- KryoSerializable's `write` Method
-
-[source, java]
-----
-void write(Kryo kryo, Output out)
-----
-
-==== [[read]] Deserializing Kryo-Managed Object -- KryoSerializable's `read` Method
-
-[source, java]
-----
-void read(Kryo kryo, Input in)
-----
-
-=== [[Externalizable]] Java's Externalizable SerDe Protocol
-
-TIP: Read up on https://docs.oracle.com/javase/8/docs/api/java/io/Externalizable.html[java.io.Externalizable].
-
-==== [[writeExternal]] Serializing JVM Object -- Externalizable's `writeExternal` Method
-
-[source, java]
-----
-void writeExternal(ObjectOutput out)
-throws IOException
-----
-
-==== [[readExternal]] Deserializing Java-Externalized Object -- Externalizable's `readExternal` Method
-
-[source, java]
-----
-void readExternal(ObjectInput in)
-throws IOException, ClassNotFoundException
-----
-
-=== [[pointTo]] `pointTo` Method
-
-[source, java]
-----
-void pointTo(Object baseObject, long baseOffset, int sizeInBytes)
-----
-
-`pointTo`...FIXME
-
-NOTE: `pointTo` is used when...FIXME

@@ -1,12 +1,56 @@
-# InternalRow &mdash; Abstract Binary Row Format
+# InternalRow
 
-NOTE: `InternalRow` is also called *Catalyst row* or *Spark SQL row*.
+`InternalRow` is an [abstraction](#contract) of [binary rows](#implementations).
 
-!!! note
-    [UnsafeRow](UnsafeRow.md) is a concrete `InternalRow`.
+`InternalRow` is also called *Catalyst row* or *Spark SQL row*.
 
-[source, scala]
-----
+## Contract
+
+### <span id="copy"> copy
+
+```scala
+copy(): InternalRow
+```
+
+### <span id="numFields"> numFields
+
+```scala
+numFields: Int
+```
+
+### <span id="setNullAt"> setNullAt
+
+```scala
+setNullAt(
+  i: Int): Unit
+```
+
+### <span id="update"> update
+
+```scala
+update(
+  i: Int,
+  value: Any): Unit
+```
+
+Updates the `value` at column `i`
+
+## Implementations
+
+* BaseGenericInternalRow
+* ColumnarBatchRow
+* ColumnarRow
+* JoinedRow
+* MutableColumnarRow
+* [UnsafeRow](UnsafeRow.md)
+
+## Serializable
+
+`InternalRow` is a `Serializable` ([Java]({{ java.api }}/java.base/java/io/Serializable.html)).
+
+## Demo
+
+```text
 // The type of your business objects
 case class Person(id: Long, name: String)
 
@@ -35,12 +79,9 @@ import org.apache.spark.sql.catalyst.InternalRow
 
 scala> val ir = InternalRow(5, "hello", (0, "nice"))
 ir: org.apache.spark.sql.catalyst.InternalRow = [5,hello,(0,nice)]
-----
+```
 
-There are methods to create `InternalRow` objects using the factory methods in the `InternalRow` object.
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.InternalRow
 
 scala> InternalRow.empty
@@ -51,8 +92,4 @@ res1: org.apache.spark.sql.catalyst.InternalRow = [0,string,(0,pair)]
 
 scala> InternalRow.fromSeq(Seq(0, "string", (0, "pair")))
 res2: org.apache.spark.sql.catalyst.InternalRow = [0,string,(0,pair)]
-----
-
-=== [[getString]] `getString` Method
-
-CAUTION: FIXME
+```
