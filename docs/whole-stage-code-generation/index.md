@@ -46,9 +46,10 @@ assert(spark.sessionState.conf.wholeStageEnabled)
 
 ## Code Generation Paths
 
-Code generation paths were coined in https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8[this commit].
+Code generation paths were coined in [this commit](https://github.com/apache/spark/commit/70221903f54eaa0514d5d189dfb6f175a62228a8).
 
-TIP: Review https://issues.apache.org/jira/browse/SPARK-12795[SPARK-12795 Whole stage codegen] to learn about the work to support it.
+!!! TIP
+    Learn more in [SPARK-12795 Whole stage codegen](https://issues.apache.org/jira/browse/SPARK-12795).
 
 ### Non-Whole-Stage-Codegen Path
 
@@ -62,19 +63,20 @@ A [physical operator](../physical-operators/SparkPlan.md) with [CodegenSupport](
 
 Whole-stage-codegen "consume" path
 
-=== [[BenchmarkWholeStageCodegen]] BenchmarkWholeStageCodegen -- Performance Benchmark
+## BenchmarkWholeStageCodegen
 
 `BenchmarkWholeStageCodegen` class provides a benchmark to measure whole stage codegen performance.
 
 You can execute it using the command:
 
-```
+```text
 build/sbt 'sql/testOnly *BenchmarkWholeStageCodegen'
 ```
 
-NOTE: You need to un-ignore tests in `BenchmarkWholeStageCodegen` by replacing `ignore` with `test`.
+!!! NOTE
+    You need to un-ignore tests in `BenchmarkWholeStageCodegen` by replacing `ignore` with `test`.
 
-```
+```text
 $ build/sbt 'sql/testOnly *BenchmarkWholeStageCodegen'
 ...
 Running benchmark: range/limit/sum
