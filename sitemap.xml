@@ -320,6 +320,18 @@
      <lastmod>2021-04-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/MapPartitions/</loc>
+     <lastmod>2021-04-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ObjectConsumer/</loc>
+     <lastmod>2021-04-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ObjectProducer/</loc>
+     <lastmod>2021-04-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Command/</loc>
      <lastmod>2021-04-11</lastmod>
      <changefreq>daily</changefreq>
@@ -1953,6 +1965,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/MapElementsExec/</loc>
+     <lastmod>2021-04-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/MapPartitionsExec/</loc>
      <lastmod>2021-04-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
