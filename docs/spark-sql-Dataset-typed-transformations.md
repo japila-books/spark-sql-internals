@@ -452,15 +452,6 @@ map[U : Encoder](func: T => U): Dataset[U]
 
 `map`...FIXME
 
-=== [[mapPartitions]] `mapPartitions` Typed Transformation
-
-[source, scala]
-----
-mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
-----
-
-`mapPartitions`...FIXME
-
 === [[randomSplit]] Randomly Split Dataset Into Two or More Datasets Per Weight -- `randomSplit` Typed Transformation
 
 [source, scala]

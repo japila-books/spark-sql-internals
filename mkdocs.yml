@@ -201,6 +201,9 @@ nav:
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
+      - MapPartitions: logical-operators/MapPartitions.md
+      - ObjectConsumer: logical-operators/ObjectConsumer.md
+      - ObjectProducer: logical-operators/ObjectProducer.md
       - Command: logical-operators/Command.md
       - DataWritingCommand: logical-operators/DataWritingCommand.md
       - LeafNode: logical-operators/LeafNode.md
@@ -647,6 +650,7 @@ nav:
         - InputRDDCodegen: physical-operators/InputRDDCodegen.md
         - physical-operators/LocalTableScanExec.md
         - physical-operators/MapElementsExec.md
+        - MapPartitionsExec: physical-operators/MapPartitionsExec.md
         - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
         - physical-operators/ObjectProducerExec.md
         - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
