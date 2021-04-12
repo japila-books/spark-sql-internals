@@ -2,11 +2,9 @@
 
 `SessionCatalog` is a catalog of relational entities in [SparkSession](SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).
 
-`SessionCatalog` is used to create [Logical Analyzer](Analyzer.md#catalog) and [SparkOptimizer](SparkOptimizer.md#catalog) (_among other things_).
-
 ## Creating Instance
 
-SessionCatalog takes the following to be created:
+`SessionCatalog` takes the following to be created:
 
 * <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](ExternalCatalog.md)
 * <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](GlobalTempViewManager.md)
@@ -22,7 +20,7 @@ SessionCatalog takes the following to be created:
 
 ## Accessing SessionCatalog
 
-`SessionCatalog` is available through [SessionState](SessionState.md#catalog) (of a [SparkSession](SparkSession.md#sessionState)).
+`SessionCatalog` is available through [SessionState](SessionState.md#catalog) (of the owning [SparkSession](SparkSession.md#sessionState)).
 
 ```text
 scala> :type spark
@@ -36,265 +34,13 @@ org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
 `SessionCatalog` defines `default` as the name of the default database.
 
-## ExternalCatalog
+## <span id="externalCatalog"> ExternalCatalog
 
-`SessionCatalog` uses an [ExternalCatalog](ExternalCatalog.md) for the metadata of permanent entities (i.e. [tables](#getTableMetadata)).
+`SessionCatalog` creates an [ExternalCatalog](ExternalCatalog.md) for the metadata of permanent entities (when first requested).
 
-`SessionCatalog` is in fact a layer over ExternalCatalog in a [SparkSession](SparkSession.md#sessionState) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)) to be used.
+`SessionCatalog` is in fact a layer over `ExternalCatalog` (in a [SparkSession](SparkSession.md#sessionState)) which allows for different metastores (i.e. `in-memory` or [hive](hive/HiveSessionCatalog.md)).
 
-## requireTableExists
-
-```scala
-requireTableExists(
-  name: TableIdentifier): Unit
-```
-
-`requireTableExists`...FIXME
-
-`requireTableExists` is used when...FIXME
-
-## databaseExists
-
-```scala
-databaseExists(
-  db: String): Boolean
-```
-
-`databaseExists`...FIXME
-
-`databaseExists` is used when...FIXME
-
-=== [[listTables]] `listTables` Method
-
-[source, scala]
-----
-listTables(db: String): Seq[TableIdentifier] // <1>
-listTables(db: String, pattern: String): Seq[TableIdentifier]
-----
-<1> Uses `"*"` as the pattern
-
-`listTables`...FIXME
-
-[NOTE]
-====
-`listTables` is used when:
-
-* `ShowTablesCommand` logical command is requested to <<ShowTablesCommand.md#run, run>>
-
-* `SessionCatalog` is requested to <<reset, reset>> (for testing)
-
-* `CatalogImpl` is requested to [listTables](CatalogImpl.md#listTables) (for testing)
-====
-
-=== [[isTemporaryTable]] Checking Whether Table Is Temporary View -- `isTemporaryTable` Method
-
-[source, scala]
-----
-isTemporaryTable(name: TableIdentifier): Boolean
-----
-
-`isTemporaryTable`...FIXME
-
-NOTE: `isTemporaryTable` is used when...FIXME
-
-=== [[alterPartitions]] `alterPartitions` Method
-
-[source, scala]
-----
-alterPartitions(tableName: TableIdentifier, parts: Seq[CatalogTablePartition]): Unit
-----
-
-`alterPartitions`...FIXME
-
-NOTE: `alterPartitions` is used when...FIXME
-
-=== [[listPartitions]] `listPartitions` Method
-
-[source, scala]
-----
-listPartitions(
-  tableName: TableIdentifier,
-  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
-----
-
-`listPartitions`...FIXME
-
-NOTE: `listPartitions` is used when...FIXME
-
-=== [[listPartitionsByFilter]] `listPartitionsByFilter` Method
-
-[source, scala]
-----
-listPartitionsByFilter(
-  tableName: TableIdentifier,
-  predicates: Seq[Expression]): Seq[CatalogTablePartition]
-----
-
-`listPartitionsByFilter`...FIXME
-
-NOTE: `listPartitionsByFilter` is used when...FIXME
-
-=== [[alterTable]] `alterTable` Method
-
-[source, scala]
-----
-alterTable(tableDefinition: CatalogTable): Unit
-----
-
-`alterTable`...FIXME
-
-NOTE: `alterTable` is used when `AlterTableSetPropertiesCommand`, `AlterTableUnsetPropertiesCommand`, `AlterTableChangeColumnCommand`, `AlterTableSerDePropertiesCommand`, [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md), `AlterTableSetLocationCommand`, AlterViewAsCommand.md#run[AlterViewAsCommand] (for AlterViewAsCommand.md#alterPermanentView[permanent views]) logical commands are executed.
-
-=== [[alterTableStats]] Altering Table Statistics in Metastore (and Invalidating Internal Cache) -- `alterTableStats` Method
-
-[source, scala]
-----
-alterTableStats(identifier: TableIdentifier, newStats: Option[CatalogStatistics]): Unit
-----
-
-`alterTableStats` requests <<externalCatalog, ExternalCatalog>> to [alter the statistics of the table](ExternalCatalog.md#alterTableStats) (per `identifier`) followed by <<refreshTable, invalidating the table relation cache>>.
-
-`alterTableStats` reports a `NoSuchDatabaseException` if the <<databaseExists, database does not exist>>.
-
-`alterTableStats` reports a `NoSuchTableException` if the <<tableExists, table does not exist>>.
-
-`alterTableStats` is used when the following logical commands are executed:
-
-* [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md), [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md), `AlterTableAddPartitionCommand`, [TruncateTableCommand](logical-operators/TruncateTableCommand.md)
-
-* (*indirectly* through `CommandUtils` when requested for [updating existing table statistics](CommandUtils.md#updateTableStats)) [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand`
-
-=== [[tableExists]] `tableExists` Method
-
-[source, scala]
-----
-tableExists(
-  name: TableIdentifier): Boolean
-----
-
-`tableExists` requests the <<externalCatalog, ExternalCatalog>> to [check out whether the table exists or not](ExternalCatalog.md#tableExists).
-
-`tableExists` assumes <<currentDb, default>> database unless defined in the input `TableIdentifier`.
-
-NOTE: `tableExists` is used when...FIXME
-
-=== [[functionExists]] `functionExists` Method
-
-[source, scala]
-----
-functionExists(name: FunctionIdentifier): Boolean
-----
-
-`functionExists`...FIXME
-
-`functionExists` is used in:
-
-* [LookupFunctions](logical-analysis-rules/LookupFunctions.md) logical rule (to make sure that spark-sql-Expression-UnresolvedFunction.md[UnresolvedFunction] can be resolved, i.e. is registered with `SessionCatalog`)
-
-* `CatalogImpl` to [check if a function exists in a database](CatalogImpl.md#functionExists)
-
-* ...
-
-=== [[listFunctions]] `listFunctions` Method
-
-[source, scala]
-----
-listFunctions(
-  db: String): Seq[(FunctionIdentifier, String)]
-listFunctions(
-  db: String,
-  pattern: String): Seq[(FunctionIdentifier, String)]
-----
-
-`listFunctions`...FIXME
-
-NOTE: `listFunctions` is used when...FIXME
-
-=== [[refreshTable]] Invalidating Table Relation Cache (aka Refreshing Table) -- `refreshTable` Method
-
-[source, scala]
-----
-refreshTable(name: TableIdentifier): Unit
-----
-
-`refreshTable`...FIXME
-
-NOTE: `refreshTable` is used when...FIXME
-
-=== [[loadFunctionResources]] `loadFunctionResources` Method
-
-[source, scala]
-----
-loadFunctionResources(resources: Seq[FunctionResource]): Unit
-----
-
-`loadFunctionResources`...FIXME
-
-NOTE: `loadFunctionResources` is used when...FIXME
-
-=== [[alterTempViewDefinition]] Altering (Updating) Temporary View (Logical Plan) -- `alterTempViewDefinition` Method
-
-[source, scala]
-----
-alterTempViewDefinition(name: TableIdentifier, viewDefinition: LogicalPlan): Boolean
-----
-
-`alterTempViewDefinition` alters the temporary view by <<createTempView, updating an in-memory temporary table>> (when a database is not specified and the table has already been registered) or a global temporary table (when a database is specified and it is for global temporary tables).
-
-NOTE: "Temporary table" and "temporary view" are synonyms.
-
-`alterTempViewDefinition` returns `true` when an update could be executed and finished successfully.
-
-NOTE: `alterTempViewDefinition` is used exclusively when `AlterViewAsCommand` logical command is <<AlterViewAsCommand.md#run, executed>>.
-
-=== [[createTempView]] Creating (Registering) Or Replacing Local Temporary View -- `createTempView` Method
-
-[source, scala]
-----
-createTempView(
-  name: String,
-  tableDefinition: LogicalPlan,
-  overrideIfExists: Boolean): Unit
-----
-
-`createTempView`...FIXME
-
-NOTE: `createTempView` is used when...FIXME
-
-=== [[createGlobalTempView]] Creating (Registering) Or Replacing Global Temporary View -- `createGlobalTempView` Method
-
-[source, scala]
-----
-createGlobalTempView(
-  name: String,
-  viewDefinition: LogicalPlan,
-  overrideIfExists: Boolean): Unit
-----
-
-`createGlobalTempView` simply requests the <<globalTempViewManager, GlobalTempViewManager>> to [register a global temporary view](GlobalTempViewManager.md#create).
-
-[NOTE]
-====
-`createGlobalTempView` is used when:
-
-* CreateViewCommand.md[CreateViewCommand] logical command is executed (for a global temporary view, i.e. when the CreateViewCommand.md#viewType[view type] is CreateViewCommand.md#GlobalTempView[GlobalTempView])
-
-* CreateTempViewUsing.md[CreateTempViewUsing] logical command is executed (for a global temporary view, i.e. when the CreateTempViewUsing.md#global[global] flag is enabled)
-====
-
-## Creating Table
-
-```
-createTable(
-  tableDefinition: CatalogTable,
-  ignoreIfExists: Boolean): Unit
-```
-
-`createTable`...FIXME
-
-NOTE: `createTable` is used when...FIXME
-
-## Finding Function by Name (Using FunctionRegistry)
+## <span id="lookupFunction"> Looking Up Function
 
 ```scala
 lookupFunction(
@@ -302,31 +48,46 @@ lookupFunction(
   children: Seq[Expression]): Expression
 ```
 
-`lookupFunction` finds a function by `name`.
+`lookupFunction` looks up a function by `name`.
 
-For a function with no database defined that exists in <<functionRegistry, FunctionRegistry>>, `lookupFunction` requests `FunctionRegistry` to FunctionRegistry.md#lookupFunction[find the function] (by its unqualified name, i.e. with no database).
+For a function with no database defined that exists in [FunctionRegistry](#functionRegistry), `lookupFunction` requests `FunctionRegistry` to [find the function](FunctionRegistry.md#lookupFunction) (by its unqualified name, i.e. with no database).
 
-If the `name` function has the database defined or does not exist in `FunctionRegistry`, `lookupFunction` uses the fully-qualified function `name` to check if the function exists in <<functionRegistry, FunctionRegistry>> (by its fully-qualified name, i.e. with a database).
+If the `name` function has the database defined or does not exist in `FunctionRegistry`, `lookupFunction` uses the fully-qualified function `name` to check if the function exists in [FunctionRegistry](#functionRegistry) (by its fully-qualified name, i.e. with a database).
 
-For other cases, `lookupFunction` requests <<externalCatalog, ExternalCatalog>> to find the function and <<loadFunctionResources, loads its resources>>. It then <<createTempFunction, creates a corresponding temporary function>> and FunctionRegistry.md#lookupFunction[looks up the function] again.
+For other cases, `lookupFunction` requests [ExternalCatalog](#externalCatalog) to find the function and [loads its resources](#loadFunctionResources). `lookupFunction` then [creates a corresponding temporary function](#createTempFunction) and [looks up the function](FunctionRegistry.md#lookupFunction) again.
 
 `lookupFunction` is used when:
 
-* [ResolveFunctions](logical-analysis-rules/ResolveFunctions.md) logical resolution rule executed (and resolves <<spark-sql-Expression-UnresolvedGenerator.md#, UnresolvedGenerator>> or <<spark-sql-Expression-UnresolvedFunction.md#, UnresolvedFunction>> expressions)
+* [ResolveFunctions](logical-analysis-rules/ResolveFunctions.md) logical resolution rule executed (and resolves [UnresolvedGenerator](expressions/UnresolvedGenerator.md) or [UnresolvedFunction](expressions/UnresolvedFunction.md) expressions)
+* `HiveSessionCatalog` is requested to [lookupFunction0](hive/HiveSessionCatalog.md#lookupFunction0)
 
-* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
+## <span id="lookupRelation"> Looking Up Relation
 
-=== [[lookupRelation]] Finding Relation (Table or View) in Catalogs -- `lookupRelation` Method
+```scala
+lookupRelation(
+  name: TableIdentifier): LogicalPlan
+```
 
-[source, scala]
-----
-lookupRelation(name: TableIdentifier): LogicalPlan
-----
+`lookupRelation` finds the `name` table in the catalogs (i.e. [GlobalTempViewManager](#globalTempViewManager), [ExternalCatalog](#externalCatalog) or [registry of temporary views](#tempViews)) and gives a `SubqueryAlias` per table type.
 
-`lookupRelation` finds the `name` table in the catalogs (i.e. <<globalTempViewManager, GlobalTempViewManager>>, <<externalCatalog, ExternalCatalog>> or <<tempViews, registry of temporary views>>) and gives a `SubqueryAlias` per table type.
+Internally, `lookupRelation` looks up the `name` table using:
 
-[source, scala]
-----
+1. [GlobalTempViewManager](#globalTempViewManager) when the database name of the table matches the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager`
+    * Gives `SubqueryAlias` or reports a `NoSuchTableException`
+
+1. [ExternalCatalog](#externalCatalog) when the database name of the table is specified explicitly or the [registry of temporary views](#tempViews) does not contain the table
+    * Gives `SubqueryAlias` with `View` when the table is a view (aka _temporary table_)
+    * Gives `SubqueryAlias` with `UnresolvedCatalogRelation` otherwise
+
+1. The [registry of temporary views](#tempViews)
+    * Gives `SubqueryAlias` with the logical plan per the table as registered in the [registry of temporary views](#tempViews)
+
+!!! NOTE
+    `lookupRelation` considers **default** to be the name of the database if the `name` table does not specify the database explicitly.
+
+### <span id="lookupRelation-demo"> Demo
+
+```text
 scala> :type spark.sessionState.catalog
 org.apache.spark.sql.catalyst.catalog.SessionCatalog
 
@@ -384,207 +145,19 @@ val plan = c.lookupRelation(v2)
 scala> println(plan.numberedTreeString)
 00 SubqueryAlias v2
 01 +- Range (0, 1, step=1, splits=Some(8))
-----
+```
 
-Internally, `lookupRelation` looks up the `name` table using:
+## <span id="getTempViewOrPermanentTableMetadata"> Retrieving Table Metadata
 
-. <<globalTempViewManager, GlobalTempViewManager>> when the database name of the table matches the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager`
+```scala
+getTempViewOrPermanentTableMetadata(
+  name: TableIdentifier): CatalogTable
+```
 
-a. Gives `SubqueryAlias` or reports a `NoSuchTableException`
+`getTempViewOrPermanentTableMetadata` branches off based on the database (in the given `TableIdentifier`).
 
-. <<externalCatalog, ExternalCatalog>> when the database name of the table is specified explicitly or the <<tempViews, registry of temporary views>> does not contain the table
+When a database name is not specified, `getTempViewOrPermanentTableMetadata` [finds a local temporary view](#getTempView) and creates a [CatalogTable](CatalogTable.md) (with `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or [retrieves the table metadata from an external catalog](#getTableMetadata).
 
-a. Gives `SubqueryAlias` with `View` when the table is a view (aka _temporary table_)
+With the database name of the [GlobalTempViewManager](GlobalTempViewManager.md), `getTempViewOrPermanentTableMetadata` requests [GlobalTempViewManager](#globalTempViewManager) for the [global view definition](GlobalTempViewManager.md#get) and creates a [CatalogTable](CatalogTable.md) (with the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
 
-b. Gives `SubqueryAlias` with `UnresolvedCatalogRelation` otherwise
-
-. The <<tempViews, registry of temporary views>>
-
-a. Gives `SubqueryAlias` with the logical plan per the table as registered in the <<tempViews, registry of temporary views>>
-
-NOTE: `lookupRelation` considers *default* to be the name of the database if the `name` table does not specify the database explicitly.
-
-`lookupRelation` is used when:
-
-* `DescribeTableCommand` logical command is <<DescribeTableCommand.md#run, executed>>
-
-* `ResolveRelations` logical evaluation rule is requested to [lookupTableFromCatalog](logical-analysis-rules/ResolveRelations.md#lookupTableFromCatalog)
-
-=== [[getTableMetadata]] Retrieving Table Metadata from External Catalog (Metastore) -- `getTableMetadata` Method
-
-[source, scala]
-----
-getTableMetadata(name: TableIdentifier): CatalogTable
-----
-
-`getTableMetadata` simply requests <<externalCatalog, external catalog>> (metastore) for the [table metadata](ExternalCatalog.md#getTable).
-
-Before requesting the external metastore, `getTableMetadata` makes sure that the <<requireDbExists, database>> and <<requireTableExists, table>> (of the input `TableIdentifier`) both exist. If either does not exist, `getTableMetadata` reports a `NoSuchDatabaseException` or `NoSuchTableException`, respectively.
-
-=== [[getTempViewOrPermanentTableMetadata]] Retrieving Table Metadata -- `getTempViewOrPermanentTableMetadata` Method
-
-[source, scala]
-----
-getTempViewOrPermanentTableMetadata(name: TableIdentifier): CatalogTable
-----
-
-Internally, `getTempViewOrPermanentTableMetadata` branches off per database.
-
-When a database name is not specified, `getTempViewOrPermanentTableMetadata` <<getTempView, finds a local temporary view>> and creates a [CatalogTable](CatalogTable.md) (with `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or <<getTableMetadata, retrieves the table metadata from an external catalog>>.
-
-With the database name of the [GlobalTempViewManager](GlobalTempViewManager.md), `getTempViewOrPermanentTableMetadata` requests <<globalTempViewManager, GlobalTempViewManager>> for the [global view definition](GlobalTempViewManager.md#get) and creates a [CatalogTable](CatalogTable.md) (with the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
-
-With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply <<getTableMetadata, retrieves the table metadata from an external catalog>>.
-
-[NOTE]
-====
-`getTempViewOrPermanentTableMetadata` is used when:
-
-* `CatalogImpl` is requested for [converting TableIdentifier to Table](CatalogImpl.md#makeTable), [listing the columns of a table (as Dataset)](CatalogImpl.md#listColumns) and [refreshing a table](CatalogImpl.md#refreshTable) (i.e. the analyzed logical plan of the table query and re-caching it)
-
-* `AlterTableAddColumnsCommand`, `CreateTableLikeCommand`, DescribeColumnCommand.md#run[DescribeColumnCommand], `ShowColumnsCommand` and <<ShowTablesCommand.md#run, ShowTablesCommand>> logical commands are requested to run (executed)
-====
-
-=== [[requireDbExists]] Reporting NoSuchDatabaseException When Specified Database Does Not Exist -- `requireDbExists` Internal Method
-
-[source, scala]
-----
-requireDbExists(db: String): Unit
-----
-
-`requireDbExists` reports a `NoSuchDatabaseException` if the <<databaseExists, specified database does not exist>>. Otherwise, `requireDbExists` does nothing.
-
-=== [[reset]] `reset` Method
-
-[source, scala]
-----
-reset(): Unit
-----
-
-`reset`...FIXME
-
-NOTE: `reset` is used exclusively in the Spark SQL internal tests.
-
-=== [[dropGlobalTempView]] Dropping Global Temporary View -- `dropGlobalTempView` Method
-
-[source, scala]
-----
-dropGlobalTempView(name: String): Boolean
-----
-
-`dropGlobalTempView` simply requests the [GlobalTempViewManager](#globalTempViewManager) to [remove](GlobalTempViewManager.md#remove) the `name` global temporary view.
-
-NOTE: `dropGlobalTempView` is used when...FIXME
-
-=== [[dropTable]] Dropping Table -- `dropTable` Method
-
-[source, scala]
-----
-dropTable(
-  name: TableIdentifier,
-  ignoreIfNotExists: Boolean,
-  purge: Boolean): Unit
-----
-
-`dropTable`...FIXME
-
-`dropTable` is used when:
-
-* [CreateViewCommand](logical-operators/CreateViewCommand.md) logical command is executed
-
-* [DropTableCommand](logical-operators/DropTableCommand.md) logical command is executed
-
-* `DataFrameWriter` is requested to [save a DataFrame to a table](DataFrameWriter.md#saveAsTable) (with `Overwrite` save mode)
-
-* [CreateHiveTableAsSelectCommand](hive/CreateHiveTableAsSelectCommand.md) logical command is executed
-
-* `SessionCatalog` is requested to [reset](#reset)
-
-=== [[getGlobalTempView]] Looking Up Global Temporary View by Name -- `getGlobalTempView` Method
-
-[source, scala]
-----
-getGlobalTempView(
-  name: String): Option[LogicalPlan]
-----
-
-`getGlobalTempView` requests the [GlobalTempViewManager](#globalTempViewManager) for the [temporary view definition by the input name](GlobalTempViewManager.md#get).
-
-`getGlobalTempView` is used when `CatalogImpl` is requested to [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView).
-
-=== [[registerFunction]] `registerFunction` Method
-
-[source, scala]
-----
-registerFunction(
-  funcDefinition: CatalogFunction,
-  overrideIfExists: Boolean,
-  functionBuilder: Option[FunctionBuilder] = None): Unit
-----
-
-`registerFunction`...FIXME
-
-[NOTE]
-====
-`registerFunction` is used when:
-
-* `SessionCatalog` is requested to <<lookupFunction, lookupFunction>>
-
-* `HiveSessionCatalog` is requested to hive/HiveSessionCatalog.md#lookupFunction0[lookupFunction0]
-
-* `CreateFunctionCommand` logical command is executed
-====
-
-=== [[lookupFunctionInfo]] `lookupFunctionInfo` Method
-
-[source, scala]
-----
-lookupFunctionInfo(name: FunctionIdentifier): ExpressionInfo
-----
-
-`lookupFunctionInfo`...FIXME
-
-NOTE: `lookupFunctionInfo` is used when...FIXME
-
-=== [[alterTableDataSchema]] `alterTableDataSchema` Method
-
-[source, scala]
-----
-alterTableDataSchema(
-  identifier: TableIdentifier,
-  newDataSchema: StructType): Unit
-----
-
-`alterTableDataSchema`...FIXME
-
-NOTE: `alterTableDataSchema` is used when...FIXME
-
-=== [[getCachedTable]] `getCachedTable` Method
-
-[source, scala]
-----
-getCachedTable(
-  key: QualifiedTableName): LogicalPlan
-----
-
-`getCachedTable`...FIXME
-
-NOTE: `getCachedTable` is used when...FIXME
-
-## Internal Properties
-
-### currentDb
-
-currentDb is...FIXME
-
-### tableRelationCache
-
-tableRelationCache is a cache of fully-qualified table names to spark-sql-LogicalPlan.md[table relation plans] (i.e. `LogicalPlan`).
-
-Used when `SessionCatalog` <<refreshTable, refreshes a table>>
-
-### tempViews
-
-tempViews is a registry of temporary views (i.e. non-global temporary tables)
-
-Used when `SessionCatalog` <<refreshTable, refreshes a table>>
+With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply [retrieves the table metadata from an external catalog](#getTableMetadata).
