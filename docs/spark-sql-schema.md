@@ -2,7 +2,7 @@
 
 A **schema** is the description of the structure of your data (which together create a [Dataset](Dataset.md) in Spark SQL). It can be *implicit* (and <<implicit-schema, inferred at runtime>>) or *explicit* (and known at compile time).
 
-A schema is described using [StructType](StructType.md) which is a collection of spark-sql-StructField.md[StructField] objects (that in turn are tuples of names, types, and `nullability` classifier).
+A schema is described using [StructType](StructType.md) which is a collection of [StructField](StructField.md)s (that in turn are tuples of names, types, and `nullability` classifier).
 
 `StructType` and `StructField` belong to the `org.apache.spark.sql.types` package.
 

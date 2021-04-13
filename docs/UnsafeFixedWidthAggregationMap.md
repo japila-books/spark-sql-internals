@@ -39,7 +39,7 @@ boolean supportsAggregationBufferSchema(
   StructType schema)
 ```
 
-`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a <<spark-sql-StructField.md#, field>> (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose <<spark-sql-StructField.md#dataType, data type>> is not <<UnsafeRow.md#isMutable, mutable>>.
+`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a [field](StructField.md) (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose [data type](StructField.md#dataType) is not [mutable](UnsafeRow.md#isMutable).
 
 [NOTE]
 ====

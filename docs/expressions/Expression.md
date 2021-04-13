@@ -56,13 +56,13 @@ a|
 | Marks `UnresolvedAliases` to be resolved to spark-sql-Expression-Alias.md[Aliases] with "pretty" SQLs when [ResolveAliases](../logical-analysis-rules/ResolveAliases.md#assignAliases) is executed
 a|
 
-* spark-sql-Expression-GetArrayItem.md[GetArrayItem]
+* [GetArrayItem](GetArrayItem.md)
 
-* spark-sql-Expression-GetArrayStructFields.md[GetArrayStructFields]
+* [GetArrayStructFields](GetArrayStructFields.md)
 
-* spark-sql-Expression-GetMapValue.md[GetMapValue]
+* [GetMapValue](GetMapValue.md)
 
-* spark-sql-Expression-GetStructField.md[GetStructField]
+* [GetStructField](GetStructField.md)
 
 | [[LeafExpression]] `LeafExpression`
 | abstract class

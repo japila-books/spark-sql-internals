@@ -923,7 +923,7 @@ nav:
     - Schema:
       - spark-sql-schema.md
       - StructType: StructType.md
-      - spark-sql-StructField.md
+      - StructField: StructField.md
       - DataType: DataType.md
     - spark-sql-multi-dimensional-aggregation.md
     - Caching and Persistence:

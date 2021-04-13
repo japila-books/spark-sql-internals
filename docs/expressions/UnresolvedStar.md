@@ -106,10 +106,9 @@ NOTE: `expand` is part of Star.md#expand[Star Contract] to...FIXME.
 
 With no result earlier, `expand` then requests the `input` logical query plan to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>> name parts to a named expression.
 
-For a named expression of [StructType](../StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a spark-sql-Expression-GetStructField.md#creating-instance[GetStructField] unary expression (with the resolved named expression and the field index).
+For a named expression of [StructType](../StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a [GetStructField](GetStructField.md) unary expression (with the resolved named expression and the field index).
 
-[source, scala]
-----
+```text
 val q = Seq((0, "zero")).toDF("id", "name").select(struct("id", "name") as "s")
 val analyzedPlan = q.queryExecution.analyzed
 
@@ -126,7 +125,7 @@ val getStructFields = exprs.collect { case Alias(g: GetStructField, _) => g }.ma
 scala> getStructFields.foreach(println)
 `s`.`id`
 `s`.`name`
-----
+```
 
 `expand` reports a `AnalysisException` when:
 
