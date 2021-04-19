@@ -1,0 +1,3 @@
+# SupportsMetadataColumns
+
+`SupportsMetadataColumns` is...FIXME

@@ -151,6 +151,9 @@ nav:
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
       - Transform: connector/Transform.md
+      - MetadataColumn: connector/MetadataColumn.md
+      - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
+      - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
     - Data Source API:
       - DataSourceRegister: DataSourceRegister.md
       - CreatableRelationProvider: CreatableRelationProvider.md
