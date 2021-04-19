@@ -816,6 +816,7 @@ nav:
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md
   - New &amp; Noteworthy:
+    - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Adaptive Query Execution: new-and-noteworthy/adaptive-query-execution.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
