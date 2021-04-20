@@ -34,8 +34,8 @@ Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSou
 | CreatableRelationProvider
 | Description
 
-| [ConsoleSinkProvider](spark-sql-ConsoleSinkProvider.md)
-| [[ConsoleSinkProvider]] Data source provider for <<spark-sql-console.md#, Console data source>>
+| [ConsoleSinkProvider](datasources/console/ConsoleSinkProvider.md)
+| [[ConsoleSinkProvider]] Data source provider for [console data source](datasources/console/index.md)
 
 | [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
 | [[JdbcRelationProvider]] Data source provider for [JDBC data source](datasources/jdbc/index.md)

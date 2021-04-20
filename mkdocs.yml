@@ -410,8 +410,8 @@ nav:
         - JdbcDialect: datasources/jdbc/JdbcDialect.md
         - JdbcUtils: datasources/jdbc/JdbcUtils.md
       - Console:
-        - spark-sql-console.md
-        - spark-sql-ConsoleSinkProvider.md
+        - datasources/console/index.md
+        - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
       - CSV:
         - CSVFileFormat: datasources/csv/CSVFileFormat.md
         - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
