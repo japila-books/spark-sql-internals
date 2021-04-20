@@ -6,7 +6,7 @@
 * [SessionConfigSupport](../connector/SessionConfigSupport.md)
 * [InputPartition](../connector/InputPartition.md)
 
-DataSource V2 was tracked under [SPARK-15689 DataSource V2](https://issues.apache.org/jira/browse/SPARK-15689) and was marked as fixed in Apache Spark 2.3.0.
+DataSource V2 was tracked under [SPARK-15689 DataSource V2](https://issues.apache.org/jira/browse/SPARK-15689) and was marked as fixed in Spark 2.3.0. This was subsequently rewamped alongside [Catalog Plugin API and Multi-Catalog Support](catalog-plugin-api-and-multi-catalog-support.md) and released in Spark 3.0.0 (which could've safely been referred to as **DataSource V3**).
 
 ## Query Planning and Execution
 
