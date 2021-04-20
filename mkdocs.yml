@@ -690,6 +690,7 @@ nav:
         - physical-operators/WholeStageCodegenExec.md
         - physical-operators/WriteToDataSourceV2Exec.md
     - Logical Analysis Rules:
+      - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
       - AliasViewChild: logical-analysis-rules/AliasViewChild.md
       - CleanupAliases: logical-analysis-rules/CleanupAliases.md
       - DataSourceAnalysis: logical-analysis-rules/DataSourceAnalysis.md

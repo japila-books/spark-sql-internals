@@ -1,59 +1,93 @@
 # DataSourceV2Relation Leaf Logical Operator
 
-`DataSourceV2Relation` is a <<LeafNode.md#, leaf logical operator>> that represents a data scan (_data reading_) or data writing in the [DataSource V2](../new-and-noteworthy/datasource-v2.md).
+`DataSourceV2Relation` is a [leaf logical operator](LeafNode.md) that represents a data scan over [tables with support for BATCH_READ](#TableCapabilityCheck) ([at the very least](#TableCapabilityCheck)).
 
-`DataSourceV2Relation` is <<creating-instance, created>> (indirectly via <<create, create>> helper method) exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](../DataFrameReader.md#load).
+## Creating Instance
 
-[[creating-instance]]
 `DataSourceV2Relation` takes the following to be created:
 
-* [[source]] FIXME
-* [[output]] Output <<spark-sql-Expression-AttributeReference.md#, attributes>> (`Seq[AttributeReference]`)
-* [[options]] Options (`Map[String, String]`)
-* [[tableIdent]] Optional `TableIdentifier` (default: undefined, i.e. `None`)
-* [[userSpecifiedSchema]] User-defined [schema](../StructType.md) (default: undefined, i.e. `None`)
+* <span id="table"> [Table](../connector/Table.md)
+* <span id="output"> Output [AttributeReference](../expressions/AttributeReference.md)s
+* <span id="catalog"> (optional) [CatalogPlugin](../connector/catalog/CatalogPlugin.md)
+* <span id="identifier"> (optional) `Identifier`
+* <span id="options"> Case-Insensitive Options
 
-When used to represent a data scan (_data reading_), `DataSourceV2Relation` is planned (_translated_) to a <<ProjectExec.md#, ProjectExec>> with a <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator (possibly under the <<FilterExec.md#, FilterExec>> operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-DataSourceV2Relation).
+`DataSourceV2Relation` is created (indirectly) using [create](#create) utility and [withMetadataColumns](#withMetadataColumns).
 
-When used to represent a data write (with <<AppendData.md#, AppendData>> logical operator), `DataSourceV2Relation` is planned (_translated_) to a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (with the <<newWriter, DataSourceWriter>>) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is requested to [plan a logical plan](../execution-planning-strategies/DataSourceV2Strategy.md#apply-AppendData).
+## <span id="create"> Creating DataSourceV2Relation
 
-=== [[create]] Creating DataSourceV2Relation Instance -- `create` Factory Method
-
-[source, scala]
-----
+```scala
 create(
-  source: DataSourceV2,
-  options: Map[String, String],
-  tableIdent: Option[TableIdentifier] = None,
-  userSpecifiedSchema: Option[StructType] = None): DataSourceV2Relation
-----
+  table: Table,
+  catalog: Option[CatalogPlugin],
+  identifier: Option[Identifier]): DataSourceV2Relation
+create(
+  table: Table,
+  catalog: Option[CatalogPlugin],
+  identifier: Option[Identifier],
+  options: CaseInsensitiveStringMap): DataSourceV2Relation
+```
 
-`create` requests the given FIXME to create a FIXME (with the given options and user-specified schema).
+`create` replaces `CharType` and `VarcharType` types in the schema of the given [Table](../connector/Table.md) with "annotated" `StringType` (as the query engine doesn't support char/varchar).
 
-`create` finds the table in the given options unless the optional `tableIdent` is defined.
+In the end, `create` uses the new schema to [create a DataSourceV2Relation](#creating-instance).
 
-In the end, `create` <<creating-instance, creates a DataSourceV2Relation>>.
+`create` is used when:
 
-NOTE: `create` is used exclusively when `DataFrameReader` is requested to ["load" data (as a DataFrame)](../DataFrameReader.md#load).
+* `CatalogV2Util` utility is used to [loadRelation](../connector/catalog/CatalogV2Util.md#loadRelation)
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto), [saveAsTable](../DataFrameWriter.md#saveAsTable) and [saveInternal](../DataFrameWriter.md#saveInternal)
+* `DataSourceV2Strategy` execution planning strategy is requested to [invalidateCache](../execution-planning-strategies/DataSourceV2Strategy.md#invalidateCache)
+* [RenameTableExec](../physical-operators/RenameTableExec.md) physical command is executed
+* [ResolveTables](../logical-analysis-rules/ResolveTables.md) logical resolution rule is executed (and requested to [lookupV2Relation](../logical-analysis-rules/ResolveTables.md#lookupV2Relation))
+* [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule is executed (and requested to [lookupRelation](../logical-analysis-rules/ResolveRelations.md#lookupRelation))
+* `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
 
-=== [[computeStats]] Computing Statistics -- `computeStats` Method
+## <span id="MultiInstanceRelation"> MultiInstanceRelation
 
-[source, scala]
-----
-computeStats(): Statistics
-----
+`DataSourceV2Relation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
-NOTE: `computeStats` is part of the <<LeafNode.md#computeStats, LeafNode Contract>> to compute a [Statistics](Statistics.md).
+## <span id="withMetadataColumns"> Creating DataSourceV2Relation with Metadata Columns
 
-`computeStats`...FIXME
+```scala
+withMetadataColumns(): DataSourceV2Relation
+```
 
-=== [[newWriter]] Creating DataSourceWriter -- `newWriter` Method
+`withMetadataColumns` [creates a DataSourceV2Relation](#creating-instance) with the extra [metadataOutput](#metadataOutput) (for the [output attributes](#output)) if defined.
 
-[source, scala]
-----
-newWriter(): DataSourceWriter
-----
+`withMetadataColumns` is used when:
 
-`newWriter` simply requests (_delegates to_) the <<source, DataSourceV2>> to <<createWriter, create a DataSourceWriter>>.
+* [AddMetadataColumns](../logical-analysis-rules/AddMetadataColumns.md) logical resolution rule is executed
 
-`newWriter` is used when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed.
+## <span id="TableCapabilityCheck"> Required Table Capabilities
+
+[TableCapabilityCheck](../logical-analysis-rules/TableCapabilityCheck.md) is used to assert the following regarding `DataSourceV2Relation` and the [Table](#table):
+
+1. [Table](#table) supports [BATCH_READ](../connector/TableCapability.md#BATCH_READ)
+1. [Table](#table) supports [BATCH_WRITE](../connector/TableCapability.md#BATCH_WRITE) or [V1_BATCH_WRITE](../connector/TableCapability.md#V1_BATCH_WRITE) for [AppendData](AppendData.md) (_append in batch mode_)
+1. [Table](#table) supports [BATCH_WRITE](../connector/TableCapability.md#BATCH_WRITE) with [OVERWRITE_DYNAMIC](../connector/TableCapability.md#OVERWRITE_DYNAMIC) for [OverwritePartitionsDynamic](OverwritePartitionsDynamic.md) (_dynamic overwrite in batch mode_)
+1. [Table](#table) supports [BATCH_WRITE](../connector/TableCapability.md#BATCH_WRITE), [V1_BATCH_WRITE](../connector/TableCapability.md#V1_BATCH_WRITE) or [OVERWRITE_BY_FILTER](../connector/TableCapability.md#OVERWRITE_BY_FILTER) possibly with [TRUNCATE](../connector/TableCapability.md#TRUNCATE) for [OverwriteByExpression](OverwriteByExpression.md) (_truncate in batch mode_ and _overwrite by filter in batch mode_)
+
+## <span id="name"> Name
+
+```scala
+name: String
+```
+
+`name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
+
+`name` requests the [Table](#table) for the [name](../connector/Table.md#name)
+
+## <span id="simpleString"> Simple Node Description
+
+```scala
+simpleString(
+  maxFields: Int): String
+```
+
+`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+
+`simpleString` gives the following (with the [output](#output) and the [name](#name)):
+
+```text
+RelationV2[output] [name]
+```

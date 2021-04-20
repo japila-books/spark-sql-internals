@@ -19,7 +19,7 @@ Set<TableCapability> capabilities()
 
 Used when `Table` is asked whether or not it [supports a given capability](TableHelper.md#supports)
 
-### name
+### Name
 
 ```java
 String name()
@@ -27,7 +27,7 @@ String name()
 
 Name of the table
 
-### partitioning
+### Partitioning
 
 ```java
 Transform[] partitioning()
@@ -43,7 +43,7 @@ Used when:
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [save](../DataFrameWriter.md#save)
 * [DescribeTableExec](../physical-operators/DescribeTableExec.md) physical operator is executed
 
-### properties
+### Properties
 
 ```java
 Map<String, String> properties()
@@ -57,7 +57,7 @@ Used when:
 
 * [DescribeTableExec](../physical-operators/DescribeTableExec.md) and `ShowTablePropertiesExec` physical operators are executed
 
-### schema
+### Schema
 
 ```java
 StructType schema()
