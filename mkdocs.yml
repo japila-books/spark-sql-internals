@@ -284,6 +284,7 @@ nav:
       - MergeIntoTable: logical-operators/MergeIntoTable.md
       - logical-operators/OneRowRelation.md
       - OverwriteByExpression: logical-operators/OverwriteByExpression.md
+      - OverwritePartitionsDynamic: logical-operators/OverwritePartitionsDynamic.md
       - logical-operators/Pivot.md
       - logical-operators/Project.md
       - logical-operators/Range.md

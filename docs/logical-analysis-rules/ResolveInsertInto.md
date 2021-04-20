@@ -20,7 +20,7 @@ apply(
 `apply` resolves [InsertIntoStatement](../logical-operators/InsertIntoStatement.md) logical operators with [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) tables to the following operators:
 
 * [AppendData](../logical-operators/AppendData.md)
-* OverwritePartitionsDynamic
+* [OverwritePartitionsDynamic](../logical-operators/OverwritePartitionsDynamic.md)
 * [OverwriteByExpression](../logical-operators/OverwriteByExpression.md)
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
