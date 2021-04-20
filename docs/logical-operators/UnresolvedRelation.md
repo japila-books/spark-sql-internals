@@ -1,5 +1,3 @@
-title: UnresolvedRelation
-
 # UnresolvedRelation Leaf Logical Operator for Table Reference
 
 [[tableIdentifier]][[creating-instance]]

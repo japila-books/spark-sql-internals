@@ -310,6 +310,7 @@ nav:
       - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
       - logical-operators/UnresolvedRelation.md
       - logical-operators/UnresolvedTableValuedFunction.md
+      - UnresolvedV2Relation: logical-operators/UnresolvedV2Relation.md
       - UseStatement: logical-operators/UseStatement.md
       - logical-operators/Window.md
       - logical-operators/WithWindowDefinition.md

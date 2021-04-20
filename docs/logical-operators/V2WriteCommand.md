@@ -1,4 +1,4 @@
-# V2WriteCommand Logical Operators
+# V2WriteCommand Logical Commands
 
 `V2WriteCommand` is an [extension](#contract) of the [Command](Command.md) abstraction for [commands](#implementations) that write [data](#query) to [tables](#table) in [DataSource V2](../new-and-noteworthy/datasource-v2.md).
 
