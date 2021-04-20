@@ -644,6 +644,10 @@
      <lastmod>2021-04-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/OverwritePartitionsDynamic/</loc>
+     <lastmod>2021-04-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Pivot/</loc>
      <lastmod>2021-04-20</lastmod>
      <changefreq>daily</changefreq>
