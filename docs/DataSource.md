@@ -10,8 +10,8 @@ Together with the [provider interfaces](#provider-interfaces), `DataSource` allo
 * [FileFormat](datasources/FileFormat.md)
 * [RelationProvider](RelationProvider.md)
 * [SchemaRelationProvider](SchemaRelationProvider.md)
-* StreamSinkProvider
-* StreamSourceProvider
+* StreamSinkProvider ([Spark Structured Streaming]({{ book.structured_streaming}}/StreamSinkProvider))
+* StreamSourceProvider ([Spark Structured Streaming]({{ book.structured_streaming}}/StreamSourceProvider))
 
 ## Accessing DataSource
 
@@ -76,43 +76,31 @@ resolveRelation(
 
 `resolveRelation` resolves (creates) a [BaseRelation](BaseRelation.md).
 
-Internally, `resolveRelation` creates an instance of the [providingClass](#providingClass) and branches based on type and whether the [user-defined schema](#userSpecifiedSchema) was specified or not.
+Internally, `resolveRelation` creates an instance of the [class](#providingClass) (of the provider) and branches off based on type and whether the [user-defined schema](#userSpecifiedSchema) was specified or not.
 
-.Resolving BaseRelation per Provider and User-Specified Schema
-[cols="1,3",options="header",width="100%"]
-|===
-| Provider
-| Behaviour
-
-| [SchemaRelationProvider](SchemaRelationProvider.md)
-| Executes [SchemaRelationProvider.createRelation](SchemaRelationProvider.md#createRelation) with the provided schema
-
-| RelationProvider.md[RelationProvider]
-| Executes RelationProvider.md#createRelation[RelationProvider.createRelation]
-
-| [FileFormat](datasources/FileFormat.md)
-| Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
-|===
+Provider | Behaviour
+---------|---------
+ [SchemaRelationProvider](SchemaRelationProvider.md) | Executes [SchemaRelationProvider.createRelation](SchemaRelationProvider.md#createRelation) with the provided schema
+ [RelationProvider](RelationProvider.md) | Executes [RelationProvider.createRelation](RelationProvider.md#createRelation)
+ [FileFormat](datasources/FileFormat.md) | Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
 
 `resolveRelation` is used when:
 
-* `DataSource` is requested to <<writeAndRead, write and read>> the result of a structured query (only when <<providingClass, providingClass>> is a [FileFormat](datasources/FileFormat.md))
+* `DataSource` is requested to [write and read](#writeAndRead) the result of a structured query (only when the [class](#providingClass) is a [FileFormat](datasources/FileFormat.md))
 
 * `DataFrameReader` is requested to [load data from a data source that supports multiple paths](DataFrameReader.md#load)
 
 * `TextInputCSVDataSource` and `TextInputJsonDataSource` are requested to infer schema
 
-* `CreateDataSourceTableCommand` runnable command is CreateDataSourceTableCommand.md#run[executed]
+* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md) logical command is executed
 
-* `CreateTempViewUsing` logical command is requested to <<CreateTempViewUsing.md#run, run>>
+* [CreateTempViewUsing](logical-operators/CreateTempViewUsing.md) logical command is executed
 
 * `FindDataSourceTable` is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable)
 
-* `ResolveSQLOnFile` is requested to convert a logical plan (when <<providingClass, providingClass>> is a [FileFormat](datasources/FileFormat.md))
+* `ResolveSQLOnFile` is requested to convert a logical plan (when the [class](#providingClass) is a [FileFormat](datasources/FileFormat.md))
 
-* `HiveMetastoreCatalog` is requested to hive/HiveMetastoreCatalog.md#convertToLogicalRelation[convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation]
-
-* Structured Streaming's `FileStreamSource` creates batches of records
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 
 ## <span id="planForWriting"> Creating Logical Command for Writing (for CreatableRelationProvider and FileFormat Data Sources)
 
@@ -124,7 +112,7 @@ planForWriting(
 
 `planForWriting` creates an instance of the [providingClass](#providingClass) and branches off per type as follows:
 
-* For a [CreatableRelationProvider](CreatableRelationProvider.md), `planForWriting` creates a <<SaveIntoDataSourceCommand.md#creating-instance, SaveIntoDataSourceCommand>> (with the input `data` and `mode`, the `CreatableRelationProvider` data source and the <<caseInsensitiveOptions, caseInsensitiveOptions>>)
+* For a [CreatableRelationProvider](CreatableRelationProvider.md), `planForWriting` creates a [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) (with the input `data` and `mode` and the `CreatableRelationProvider` data source)
 
 * For a [FileFormat](datasources/FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 
