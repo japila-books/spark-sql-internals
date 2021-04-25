@@ -177,6 +177,7 @@ nav:
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
       - TableCatalog: connector/catalog/TableCatalog.md
+      - TableChange: connector/catalog/TableChange.md
       - Utilities:
         - Catalogs: connector/catalog/Catalogs.md
         - CatalogV2Util: connector/catalog/CatalogV2Util.md
@@ -203,6 +204,8 @@ nav:
       - FieldReference: sql/FieldReference.md
     - Logical Operators:
       - LogicalPlan: logical-operators/LogicalPlan.md
+      - AlterTable: logical-operators/AlterTable.md
+      - CommentOnTable: logical-operators/CommentOnTable.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - MapPartitions: logical-operators/MapPartitions.md
       - ObjectConsumer: logical-operators/ObjectConsumer.md

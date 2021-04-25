@@ -12,7 +12,9 @@ run(): Seq[InternalRow]
 
 Executing the command (and computing the [result](#result))
 
-Used when `V2CommandExec` physical command is requested for a [result](#result).
+Used when:
+
+* `V2CommandExec` physical command is requested for a [result](#result)
 
 ## Implementations
 

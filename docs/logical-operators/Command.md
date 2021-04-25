@@ -8,9 +8,9 @@
 
 * AlterNamespaceSetLocation
 * AlterNamespaceSetProperties
-* AlterTable
+* [AlterTable](AlterTable.md)
 * CommentOnNamespace
-* CommentOnTable
+* [CommentOnTable](CommentOnTable.md)
 * CreateNamespace
 * CreateTableAsSelect
 * [CreateV2Table](CreateV2Table.md)

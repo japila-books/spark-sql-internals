@@ -30,3 +30,21 @@ loadTable(
 `loadTable` returns the [Table](../Table.md) if available or `None`.
 
 `loadTable` is used when...FIXME
+
+## <span id="createAlterTable"> Creating AlterTable Logical Command
+
+```scala
+createAlterTable(
+  originalNameParts: Seq[String],
+  catalog: CatalogPlugin,
+  tableName: Seq[String],
+  changes: Seq[TableChange]): AlterTable
+```
+
+`createAlterTable` converts the [CatalogPlugin](CatalogPlugin.md) to a [TableCatalog](CatalogHelper.md#asTableCatalog).
+
+`createAlterTable` creates an [AlterTable](../../logical-operators/AlterTable.md) (with an [UnresolvedV2Relation](../../logical-operators/UnresolvedV2Relation.md)).
+
+`createAlterTable` is used when:
+
+* [ResolveCatalogs](../../logical-analysis-rules/ResolveCatalogs.md) and [ResolveSessionCatalog](../../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rules are executed (and resolve `AlterTableAddColumnsStatement`, `AlterTableReplaceColumnsStatement`, `AlterTableAlterColumnStatement`, `AlterTableRenameColumnStatement`, `AlterTableDropColumnsStatement`, `AlterTableSetPropertiesStatement`, `AlterTableUnsetPropertiesStatement`, `AlterTableSetLocationStatement` operators)

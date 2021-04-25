@@ -25,6 +25,16 @@ ANALYZE TABLE multipartIdentifier partitionSpec? COMPUTE STATISTICS
 
 ANTLR labeled alternative: `#analyze`
 
+### <span id="visitCommentTable"> visitCommentTable
+
+Creates a [CommentOnTable](../logical-operators/CommentOnTable.md) logical command
+
+```text
+COMMENT ON TABLE tableIdentifier IS ('text' | NULL)
+```
+
+ANTLR labeled alternative: `#commentTable`
+
 ### <span id="visitDeleteFromTable"> visitDeleteFromTable
 
 Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md) logical command
