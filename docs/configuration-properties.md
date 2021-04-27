@@ -98,8 +98,6 @@ Enables [Adaptive Query Execution](adaptive-query-execution/index.md)
 
 Default: `false`
 
-Since: 1.6.0
-
 Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
 
 ## <span id="spark.sql.adaptive.fetchShuffleBlocksInBatch"> spark.sql.adaptive.fetchShuffleBlocksInBatch

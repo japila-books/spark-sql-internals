@@ -6,12 +6,14 @@
 
 `AdaptiveSparkPlanExec` takes the following to be created:
 
-* <span id="initialPlan"> Initial [physical query plan](SparkPlan.md)
+* <span id="inputPlan"> [SparkPlan](SparkPlan.md)
 * <span id="context"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
 * <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
 * <span id="isSubquery"> `isSubquery` flag
 
-`AdaptiveSparkPlanExec` is created when [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed.
+`AdaptiveSparkPlanExec` is created when:
+
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -144,15 +146,43 @@ finalStageOptimizerRules: Seq[Rule[SparkPlan]]
 
 `finalStageOptimizerRules`...FIXME
 
-## <span id="currentPhysicalPlan"> Current Optimized Physical Query Plan
+### <span id="createQueryStages"> createQueryStages
 
 ```scala
-currentPhysicalPlan: SparkPlan
+createQueryStages(
+  plan: SparkPlan): CreateStageResult
 ```
 
-`currentPhysicalPlan` is a [physical query plan](SparkPlan.md) that `AdaptiveSparkPlanExec` operator creates right when [created](#creating-instance).
+`createQueryStages`...FIXME
 
-`currentPhysicalPlan` is the [initial physical query plan](#initialPlan) after [applying](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules).
+### <span id="newQueryStage"> newQueryStage
+
+```scala
+newQueryStage(
+  e: Exchange): QueryStageExec
+```
+
+`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
+
+`newQueryStage` creates a [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` with the child physical plan as the optimized physical query plan:
+
+* For [ShuffleExchangeExec](ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
+
+* For [BroadcastExchangeExec](BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
+
+`newQueryStage` increments the [currentStageId](#currentStageId) counter.
+
+`newQueryStage` [setLogicalLinkForNewQueryStage](#setLogicalLinkForNewQueryStage) for the `QueryStageExec` physical operator.
+
+In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
+
+## <span id="currentPhysicalPlan"><span id="executedPlan"> Optimized Physical Query Plan
+
+`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](SparkPlan.md) (that is available as `executedPlan` method).
+
+Initially, when `AdaptiveSparkPlanExec` operator is [created](#creating-instance), `currentPhysicalPlan` is the [initialPlan](#initialPlan).
+
+`currentPhysicalPlan` may change in [getFinalPhysicalPlan](#getFinalPhysicalPlan) until the [isFinalPlan](#isFinalPlan) internal flag is on.
 
 ## <span id="queryStagePreparationRules"> QueryStage Preparation Rules
 
@@ -198,40 +228,6 @@ generateTreeString(
 `generateTreeString`...FIXME
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
-
-## <span id="createQueryStages"> createQueryStages
-
-```scala
-createQueryStages(
-  plan: SparkPlan): CreateStageResult
-```
-
-`createQueryStages`...FIXME
-
-`createQueryStages` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan).
-
-## <span id="newQueryStage"> newQueryStage
-
-```scala
-newQueryStage(
-  e: Exchange): QueryStageExec
-```
-
-`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
-
-`newQueryStage` creates a [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` with the child physical plan as the optimized physical query plan:
-
-* For [ShuffleExchangeExec](ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
-
-* For [BroadcastExchangeExec](BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
-
-`newQueryStage` increments the [currentStageId](#currentStageId) counter.
-
-`newQueryStage` [setLogicalLinkForNewQueryStage](#setLogicalLinkForNewQueryStage) for the `QueryStageExec` physical operator.
-
-In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
-
-`newQueryStage` is used when `AdaptiveSparkPlanExec` is requested to [createQueryStages](#createQueryStages).
 
 ## <span id="reuseQueryStage"> reuseQueryStage
 
@@ -317,16 +313,6 @@ Final plan: [currentPhysicalPlan]
 
 `finalPlanUpdate` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute).
 
-## <span id="logOnLevel"> logOnLevel
-
-```scala
-logOnLevel: ( => String) => Unit
-```
-
-`logOnLevel` uses [spark.sql.adaptive.logLevel](../configuration-properties.md#spark.sql.adaptive.logLevel) configuration property for the logging level and prints out the given message to the logs.
-
-`logOnLevel` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [finalPlanUpdate](#finalPlanUpdate).
-
 ## <span id="isFinalPlan"> isFinalPlan Internal Flag
 
 ```scala
@@ -385,3 +371,36 @@ applyPhysicalRules(
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
 * [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec=ALL
+```
+
+Refer to [Logging](../spark-logging.md).
+
+### <span id="planChangeLogger"> PlanChangeLogger
+
+`AdaptiveSparkPlanExec` uses a [PlanChangeLogger](../catalyst/PlanChangeLogger.md) for the following:
+
+* [initialPlan](#initialPlan) (`batchName`: **AQE Preparations**)
+* [getFinalPhysicalPlan](#getFinalPhysicalPlan) (`batchName`: **AQE Final Query Stage Optimization**)
+* [newQueryStage](#newQueryStage) (`batchName`: **AQE Query Stage Optimization** and **AQE Post Stage Creation**)
+* [reOptimize](#reOptimize) (`batchName`: **AQE Replanning**)
+
+### <span id="logOnLevel"> logOnLevel
+
+```scala
+logOnLevel: (=> String) => Unit
+```
+
+`logOnLevel` uses the internal [spark.sql.adaptive.logLevel](../configuration-properties.md#spark.sql.adaptive.logLevel) configuration property for the logging level and prints out the given message to the logs (at the log level).
+
+`logOnLevel` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [finalPlanUpdate](#finalPlanUpdate)

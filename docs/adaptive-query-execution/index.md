@@ -10,15 +10,25 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 > At runtime, the adaptive execution mode can change shuffle join to broadcast join if it finds the size of one table is less than the broadcast threshold. It can also handle skewed input data for join and change the partition number of the next stage to better fit the data scale. In general, adaptive execution decreases the effort involved in tuning SQL query parameters and improves the execution performance by choosing a better execution plan and parallelism at runtime.
 
+## spark.sql.adaptive.enabled
+
 Adaptive Query Execution is disabled by default and can be enabled using [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
+
+## InsertAdaptiveSparkPlan Physical Optimization
+
+Adaptive Query Execution is applied to a physical query plan using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization.
+
+## AdaptiveSparkPlanExec Physical Operator
 
 Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator (and the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)).
 
-!!! note
-    Adaptive Query Execution is disabled for `CacheManager` to [cacheQuery](../CacheManager.md#cacheQuery) and [recacheByCondition](../CacheManager.md#recacheByCondition)
+## CacheManager
 
-!!! important "Structured Streaming Not Supported"
-    Adaptive Query Execution is not supported for streaming queries.
+Adaptive Query Execution is disabled for `CacheManager` to [cacheQuery](../CacheManager.md#cacheQuery) and [recacheByCondition](../CacheManager.md#recacheByCondition)
+
+## Structured Streaming Not Supported
+
+Adaptive Query Execution is not supported for streaming queries ([Spark Structured Streaming]({{ book.structured_streaming }})).
 
 ## SparkListenerSQLAdaptiveExecutionUpdates
 

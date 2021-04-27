@@ -11,7 +11,9 @@
 
 * <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
 
-`InsertAdaptiveSparkPlan` is created when `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations).
+`InsertAdaptiveSparkPlan` is created when:
+
+* `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations)
 
 ## <span id="apply"> Executing Rule
 
@@ -20,40 +22,39 @@ apply(
   plan: SparkPlan): SparkPlan
 ```
 
-`apply` simply calls [applyInternal](#applyInternal) with the given [SparkPlan](../physical-operators/SparkPlan.md) and `isSubquery` flag disabled (`false`).
-
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-## applyInternal
+`apply` [applyInternal](#applyInternal) with the given [SparkPlan](../physical-operators/SparkPlan.md) and `isSubquery` flag disabled (`false`).
 
-<span id="applyInternal">
+## <span id="applyInternal"> applyInternal
+
 ```scala
 applyInternal(
   plan: SparkPlan,
   isSubquery: Boolean): SparkPlan
 ```
 
-`applyInternal` does nothing (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched") when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled.
+`applyInternal` returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched" when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled.
 
 `applyInternal` skips [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf operators (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched").
 
-For [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) unary operators, `applyInternal` handles the child.
+For [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) unary operators, `applyInternal` handles the child recursively.
 
-For [V2CommandExec](../physical-operators/V2CommandExec.md) operators, `applyInternal` handles the children.
+For [V2CommandExec](../physical-operators/V2CommandExec.md) operators, `applyInternal` handles the children recursively.
 
 For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) holds, `applyInternal` branches off based on [whether the physical plan supports Adaptive Query Execution or not](#supportAdaptive).
 
 ### Supported Query Plans
 
-`applyInternal` [collects subquery expressions](#buildSubqueryMap) in the query plan and creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization with them.
-`applyInternal` then [executes](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) the optimization rule on the plan.
-In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new optimized physical query plan.
+`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 
 ```text
 Adaptive execution enabled for plan: [plan]
 ```
+
+In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
 
 In case of `SubqueryAdaptiveNotSupportedException`, `applyInternal` prints out the WARN message and returns the given physical plan.
 
@@ -71,7 +72,9 @@ spark.sql.adaptive.enabled is enabled but is not supported for query: [plan].
 
 ### Usage
 
-`applyInternal` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#apply) (with the `isSubquery` flag disabled) and requested to [compileSubquery](#compileSubquery) (with the `isSubquery` flag enabled).
+`applyInternal` is used when:
+
+* `InsertAdaptiveSparkPlan` physical optimization is [executed](#apply) (with the `isSubquery` flag disabled) and requested to [compileSubquery](#compileSubquery) (with the `isSubquery` flag enabled)
 
 ## <span id="buildSubqueryMap"> Collecting Subquery Expressions
 
@@ -84,7 +87,9 @@ buildSubqueryMap(
 
 For every `ScalarSubquery` and `ListQuery` expressions, `buildSubqueryMap` [compileSubquery](#compileSubquery), [verifyAdaptivePlan](#verifyAdaptivePlan) and registers a new [SubqueryExec](../physical-operators/SubqueryExec.md) operator.
 
-`buildSubqueryMap` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal).
+`buildSubqueryMap` is used when:
+
+* `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal)
 
 ## <span id="compileSubquery"> compileSubquery
 

@@ -118,6 +118,7 @@ nav:
     - Overview: overview.md
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
+      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
     - DataSource: DataSource.md
@@ -476,6 +477,7 @@ nav:
       - QueryPlanner: catalyst/QueryPlanner.md
       - Optimizer: catalyst/Optimizer.md
       - GenericStrategy: catalyst/GenericStrategy.md
+      - PlanChangeLogger: catalyst/PlanChangeLogger.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
       - NonSQLExpression: expressions/NonSQLExpression.md
@@ -791,7 +793,6 @@ nav:
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
     - Physical Optimizations:
-      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
@@ -829,7 +830,6 @@ nav:
     - DataWritingSparkTask: DataWritingSparkTask.md
   - New &amp; Noteworthy:
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
-    - Adaptive Query Execution: adaptive-query-execution/index.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md

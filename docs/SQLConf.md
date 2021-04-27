@@ -75,9 +75,8 @@ The value of [spark.sql.adaptive.enabled](configuration-properties.md#spark.sql.
 
 Used when:
 
-* `AdaptiveSparkPlanHelper` is requested to `getOrCloneSessionWithAqeOff`
-
-* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
+* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* `SQLConf` is requested for the [numShufflePartitions](#numShufflePartitions)
 
 ## <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel
 
@@ -431,7 +430,7 @@ Used when [DemoteBroadcastHashJoin](logical-optimizations/DemoteBroadcastHashJoi
 
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 
-The value of [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property
+The value of [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property or...FIXME
 
 ## <span id="rangeExchangeSampleSizePerPartition"><span id="RANGE_EXCHANGE_SAMPLE_SIZE_PER_PARTITION"> rangeExchangeSampleSizePerPartition
 
