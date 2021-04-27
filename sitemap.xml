@@ -12,6 +12,10 @@
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AdaptiveExecutionContext/</loc>
+     <lastmod>2021-04-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/CostEvaluator/</loc>
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
@@ -1304,6 +1308,10 @@
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/catalyst/PlanChangeLogger/</loc>
+     <lastmod>2021-04-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Expression/</loc>
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
@@ -2508,10 +2516,6 @@
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AdaptiveExecutionContext/</loc>
-     <lastmod>2021-04-27</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ApplyColumnarRulesAndInsertTransitions/</loc>
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
@@ -2641,10 +2645,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/new-and-noteworthy/metadata-columns/</loc>
-     <lastmod>2021-04-27</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/</loc>
      <lastmod>2021-04-27</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
