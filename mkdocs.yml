@@ -116,6 +116,10 @@ nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
+    - Adaptive Query Execution:
+      - adaptive-query-execution/index.md
+      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
     - DataSource: DataSource.md
     - Connector API:
       - Connector API: connector/index.md
@@ -680,6 +684,7 @@ nav:
         - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
         - ShowTablesExec: physical-operators/ShowTablesExec.md
         - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
+        - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
         - physical-operators/ShuffledHashJoinExec.md
         - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
         - physical-operators/SortAggregateExec.md
@@ -786,7 +791,7 @@ nav:
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
     - Physical Optimizations:
-      - AdaptiveExecutionContext: physical-optimizations/AdaptiveExecutionContext.md
+      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
@@ -795,6 +800,7 @@ nav:
       - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
       - OptimizeLocalShuffleReader: physical-optimizations/OptimizeLocalShuffleReader.md
       - OptimizeSkewedJoin: physical-optimizations/OptimizeSkewedJoin.md
+      - CustomShuffleReaderRule: physical-optimizations/CustomShuffleReaderRule.md
       - PlanAdaptiveSubqueries: physical-optimizations/PlanAdaptiveSubqueries.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
@@ -823,7 +829,7 @@ nav:
     - DataWritingSparkTask: DataWritingSparkTask.md
   - New &amp; Noteworthy:
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
-    - Adaptive Query Execution: new-and-noteworthy/adaptive-query-execution.md
+    - Adaptive Query Execution: adaptive-query-execution/index.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md

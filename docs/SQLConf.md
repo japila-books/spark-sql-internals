@@ -415,7 +415,7 @@ Used when [HiveTableScanExec](hive/HiveTableScanExec.md) physical operator is ex
 
 [spark.sql.adaptive.minNumPostShufflePartitions](configuration-properties.md#spark.sql.adaptive.minNumPostShufflePartitions)
 
-Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md)).
+Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](adaptive-query-execution/index.md)).
 
 ## <span id="nestedSchemaPruningEnabled"><span id="NESTED_SCHEMA_PRUNING_ENABLED"> nestedSchemaPruningEnabled
 
@@ -600,7 +600,7 @@ Used when:
 
 [spark.sql.adaptive.shuffle.targetPostShuffleInputSize](configuration-properties.md#spark.sql.adaptive.shuffle.targetPostShuffleInputSize)
 
-Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](new-and-noteworthy/adaptive-query-execution.md))
+Used when [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (for [Adaptive Query Execution](adaptive-query-execution/index.md))
 
 ## <span id="truncateTableIgnorePermissionAcl"><span id="TRUNCATE_TABLE_IGNORE_PERMISSION_ACL"> truncateTableIgnorePermissionAcl
 

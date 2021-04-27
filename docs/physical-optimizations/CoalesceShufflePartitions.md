@@ -1,6 +1,6 @@
 # CoalesceShufflePartitions Physical Optimization
 
-`CoalesceShufflePartitions` is a physical query plan optimization for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
+`CoalesceShufflePartitions` is a physical query plan optimization for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `CoalesceShufflePartitions` uses [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
 

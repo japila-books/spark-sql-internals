@@ -1,6 +1,6 @@
 # DemoteBroadcastHashJoin Logical Optimization
 
-`DemoteBroadcastHashJoin` is a logical optimization in [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md) to [transform Join logical operators](#apply) (with no [join hints](../JoinStrategyHint.md)).
+`DemoteBroadcastHashJoin` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) to [transform Join logical operators](#apply) (with no [join hints](../JoinStrategyHint.md)).
 
 Quoting [What's new in Apache Spark 3.0 - demote broadcast hash join](https://www.waitingforcode.com/apache-spark-sql/whats-new-apache-spark-3-demote-broadcast-hash-join/read) article:
 

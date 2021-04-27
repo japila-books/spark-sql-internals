@@ -1,3 +1,0 @@
-# AdaptiveExecutionContext
-
-`AdaptiveExecutionContext` is...FIXME

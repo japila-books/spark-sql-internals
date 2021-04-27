@@ -62,7 +62,7 @@ If the input `operator` has multiple children and specifies child output distrib
 
 If the children's output partitionings are not all compatible, then...FIXME
 
-`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md) is enabled which is not by default).
+`ensureDistributionAndOrdering` <<withExchangeCoordinator, adds ExchangeCoordinator>> (only when [Adaptive Query Execution](../adaptive-query-execution/index.md) is enabled which is not by default).
 
 NOTE: At this point in `ensureDistributionAndOrdering` the required child distributions are already handled.
 

@@ -1,6 +1,6 @@
 # LogicalQueryStage Leaf Logical Operator
 
-`LogicalQueryStage` is a [leaf logical operator](LeafNode.md) for [Adaptive Query Execution](../new-and-noteworthy/adaptive-query-execution.md).
+`LogicalQueryStage` is a [leaf logical operator](LeafNode.md) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Query Optimization
 

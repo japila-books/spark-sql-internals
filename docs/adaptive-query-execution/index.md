@@ -20,6 +20,14 @@ Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operato
 !!! important "Structured Streaming Not Supported"
     Adaptive Query Execution is not supported for streaming queries.
 
+## SparkListenerSQLAdaptiveExecutionUpdates
+
+Adaptive Query Execution notifies Spark listeners about a physical plan change using `SparkListenerSQLAdaptiveExecutionUpdate` and `SparkListenerSQLAdaptiveSQLMetricUpdates` events.
+
+## Logging
+
+Adaptive Query Execution uses [logOnLevel](../physical-operators/AdaptiveSparkPlanExec.md#logOnLevel) to print out diagnostic messages to the log.
+
 ## References
 
 ### Articles

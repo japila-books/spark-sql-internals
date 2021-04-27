@@ -9,7 +9,7 @@
 
 `InsertAdaptiveSparkPlan` takes the following to be created:
 
-* <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](AdaptiveExecutionContext.md)
+* <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
 
 `InsertAdaptiveSparkPlan` is created when `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations).
 
