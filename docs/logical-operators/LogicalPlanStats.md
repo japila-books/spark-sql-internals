@@ -46,7 +46,7 @@ invalidateStatsCache(): Unit
 
 `invalidateStatsCache` clears the [cache](#statsCache) of the current logical operator and all of the [children](../catalyst/TreeNode.md#children).
 
-`invalidateStatsCache` is used when [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [reOptimize](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
+`invalidateStatsCache` is used when [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is requested to [reOptimize](../adaptive-query-execution/AdaptiveSparkPlanExec.md#reOptimize).
 
 ## <span id="statsCache"> Statistics Cache
 

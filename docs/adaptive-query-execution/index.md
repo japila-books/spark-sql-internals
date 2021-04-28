@@ -16,11 +16,11 @@ Adaptive Query Execution is disabled by default and can be enabled using [spark.
 
 ## InsertAdaptiveSparkPlan Physical Optimization
 
-Adaptive Query Execution is applied to a physical query plan using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization.
+Adaptive Query Execution is applied to a physical query plan using the [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md) physical optimization.
 
 ## AdaptiveSparkPlanExec Physical Operator
 
-Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator (and the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)).
+Adaptive Query Execution is based on [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator (and the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)).
 
 ## CacheManager
 
@@ -36,7 +36,7 @@ Adaptive Query Execution notifies Spark listeners about a physical plan change u
 
 ## Logging
 
-Adaptive Query Execution uses [logOnLevel](../physical-operators/AdaptiveSparkPlanExec.md#logOnLevel) to print out diagnostic messages to the log.
+Adaptive Query Execution uses [logOnLevel](AdaptiveSparkPlanExec.md#logOnLevel) to print out diagnostic messages to the log.
 
 ## References
 

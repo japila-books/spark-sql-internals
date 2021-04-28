@@ -1,19 +1,19 @@
 # AdaptiveSparkPlanExec Physical Operator
 
-`AdaptiveSparkPlanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Creating Instance
 
 `AdaptiveSparkPlanExec` takes the following to be created:
 
-* <span id="inputPlan"> [SparkPlan](SparkPlan.md)
+* <span id="inputPlan"> [SparkPlan](../physical-operators/SparkPlan.md)
 * <span id="context"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
 * <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
 * <span id="isSubquery"> `isSubquery` flag
 
 `AdaptiveSparkPlanExec` is created when:
 
-* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimisation is executed
+* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimisation is executed
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -21,13 +21,13 @@
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
+`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](../physical-operators/SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
 
 `doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
 
 `doExecute` returns the `RDD[InternalRow]`.
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+`doExecute` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecute) abstraction.
 
 ## <span id="executeCollect"> Executing for Collect Operator
 
@@ -37,7 +37,7 @@ executeCollect(): Array[InternalRow]
 
 `executeCollect`...FIXME
 
-`executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
+`executeCollect` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeCollect) abstraction.
 
 ## <span id="executeTail"> Executing for Tail Operator
 
@@ -48,7 +48,7 @@ executeTail(
 
 `executeTail`...FIXME
 
-`executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
+`executeTail` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeTail) abstraction.
 
 ## <span id="executeTake"> Executing for Take Operator
 
@@ -59,7 +59,7 @@ executeTake(
 
 `executeTake`...FIXME
 
-`executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
+`executeTake` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeTake) abstraction.
 
 ## <span id="getFinalPhysicalPlan"> Final Physical Query Plan
 
@@ -162,13 +162,13 @@ newQueryStage(
   e: Exchange): QueryStageExec
 ```
 
-`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
+`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](../physical-operators/Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
 
 `newQueryStage` creates a [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` with the child physical plan as the optimized physical query plan:
 
-* For [ShuffleExchangeExec](ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
+* For [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
 
-* For [BroadcastExchangeExec](BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
+* For [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
 
 `newQueryStage` increments the [currentStageId](#currentStageId) counter.
 
@@ -178,7 +178,7 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
 ## <span id="currentPhysicalPlan"><span id="executedPlan"> Optimized Physical Query Plan
 
-`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](SparkPlan.md) (that is available as `executedPlan` method).
+`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](../physical-operators/SparkPlan.md) (that is available as `executedPlan` method).
 
 Initially, when `AdaptiveSparkPlanExec` operator is [created](#creating-instance), `currentPhysicalPlan` is the [initialPlan](#initialPlan).
 
@@ -278,7 +278,7 @@ optimizer: RuleExecutor[LogicalPlan]
 
 `optimizer` is a [RuleExecutor](../catalyst/RuleExecutor.md) to transform [logical query plans](../logical-operators/LogicalPlan.md).
 
-`optimizer` has a single **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization only.
+`optimizer` has a single **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) logical optimization only.
 
 `optimizer` is used when `AdaptiveSparkPlanExec` physical operator is requested to [re-optimize a logical query plan](#reOptimize).
 
@@ -333,9 +333,9 @@ isFinalPlan: Boolean = false
 initialPlan: SparkPlan
 ```
 
-`AdaptiveSparkPlanExec` defines an `initialPlan` internal registry for a [physical query plan](SparkPlan.md) when [created](#creating-instance).
+`AdaptiveSparkPlanExec` defines an `initialPlan` internal registry for a [physical query plan](../physical-operators/SparkPlan.md) when [created](#creating-instance).
 
-`initialPlan` is a [physical query plan](SparkPlan.md) after [executing](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules) on the [inputPlan](#inputPlan) (with the [planChangeLogger](#planChangeLogger) and **AQE Preparations** name).
+`initialPlan` is a [physical query plan](../physical-operators/SparkPlan.md) after [executing](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules) on the [inputPlan](#inputPlan) (with the [planChangeLogger](#planChangeLogger) and **AQE Preparations** name).
 
 `initialPlan` is an internal flag to avoid expensive [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and return the [current optimized physical query plan](#currentPhysicalPlan) immediately)
 
@@ -365,12 +365,12 @@ applyPhysicalRules(
   rules: Seq[Rule[SparkPlan]]): SparkPlan
 ```
 
-`applyPhysicalRules` simply applies (_executes_) the given rules to the given [physical query plan](SparkPlan.md).
+`applyPhysicalRules` simply applies (_executes_) the given rules to the given [physical query plan](../physical-operators/SparkPlan.md).
 
 `applyPhysicalRules` is used when:
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
-* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## Logging
 

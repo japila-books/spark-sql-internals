@@ -1,11 +1,10 @@
 # BroadcastExchangeExec Unary Physical Operator for Broadcast Joins
 
-`BroadcastExchangeExec` is an [Exchange](Exchange.md) unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
+`BroadcastExchangeExec` is an [BroadcastExchangeLike](BroadcastExchangeLike.md) unary physical operator to collect and broadcast rows of a child relation (to worker nodes).
 
 `BroadcastExchangeExec` is <<creating-instance, created>> when [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed (that can really be either BroadcastHashJoinExec.md[BroadcastHashJoinExec] or BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] operators).
 
-[source, scala]
-----
+```text
 val t1 = spark.range(5)
 val t2 = spark.range(5)
 val q = t1.join(t2).where(t1("id") === t2("id"))
@@ -16,7 +15,7 @@ scala> q.explain
 :- *Range (0, 5, step=1, splits=Some(8))
 +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]))
    +- *Range (0, 5, step=1, splits=Some(8))
-----
+```
 
 [[metrics]]
 .BroadcastExchangeExec's Performance Metrics

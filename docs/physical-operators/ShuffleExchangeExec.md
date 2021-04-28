@@ -1,6 +1,6 @@
 # ShuffleExchangeExec Unary Physical Operator
 
-`ShuffleExchangeExec` is an [Exchange](Exchange.md) unary physical operator that is used to [perform a shuffle](#doExecute).
+`ShuffleExchangeExec` is an [Exchange](Exchange.md) (indirectly as a [ShuffleExchangeLike](ShuffleExchangeLike.md)) unary physical operator that is used to [perform a shuffle](#doExecute).
 
 ## Creating Instance
 
@@ -8,11 +8,13 @@
 
 * <span id="outputPartitioning"> Output [Partitioning](Partitioning.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
-* <span id="canChangeNumPartitions"> `canChangeNumPartitions` flag (default: `true`)
+* <span id="shuffleOrigin"> `ShuffleOrigin` (default: `ENSURE_REQUIREMENTS`)
 
 `ShuffleExchangeExec` is created when:
 
-* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Repartition](../logical-operators/RepartitionOperation.md#Repartition) with the [shuffle](../logical-operators/RepartitionOperation.md#shuffle) flag enabled or [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression))
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed and plans the following:
+    * [Repartition](../logical-operators/RepartitionOperation.md#Repartition) with the [shuffle](../logical-operators/RepartitionOperation.md#shuffle) flag enabled
+    * [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 ## <span id="nodeName"> Node Name
@@ -21,25 +23,25 @@
 nodeName: String
 ```
 
-`nodeName` is always **Exchange**.
-
 `nodeName` is part of the [TreeNode](../catalyst/TreeNode.md) abstraction.
+
+`nodeName` is **Exchange**.
 
 ## <span id="metrics"><span id="writeMetrics"><span id="readMetrics"> Performance Metrics
 
-Key | Name (in web UI) | Description
----------|----------|---------
-dataSize | data size |
-fetchWaitTime | fetch wait time |
-localBlocksFetched | local blocks read |
-localBytesRead | local bytes read |
-recordsRead | records read |
-remoteBlocksFetched | remote blocks read |
-remoteBytesRead | remote bytes read |
-remoteBytesReadToDisk | remote bytes read to disk |
-shuffleBytesWritten | shuffle bytes written |
-shuffleRecordsWritten | shuffle records written |
-shuffleWriteTime | shuffle write time |
+Key | Name (in web UI)
+---------|----------
+dataSize | data size
+fetchWaitTime | fetch wait time
+localBlocksFetched | local blocks read
+localBytesRead | local bytes read
+recordsRead | records read
+remoteBlocksFetched | remote blocks read
+remoteBytesRead | remote bytes read
+remoteBytesReadToDisk | remote bytes read to disk
+shuffleBytesWritten | shuffle bytes written
+shuffleRecordsWritten | shuffle records written
+shuffleWriteTime | shuffle write time
 
 ![ShuffleExchangeExec in web UI (Details for Query)](../images/ShuffleExchangeExec-webui.png)
 
@@ -49,11 +51,11 @@ shuffleWriteTime | shuffle write time |
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` gives a [ShuffledRowRDD](../ShuffledRowRDD.md) for the [ShuffleDependency](#shuffleDependency) and [read performance metrics](#readMetrics).
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute` gives a [ShuffledRowRDD](../ShuffledRowRDD.md) (with the [ShuffleDependency](#shuffleDependency) and [read performance metrics](#readMetrics)).
 
 `doExecute` uses [cachedShuffleRDD](#cachedShuffleRDD) to avoid multiple execution.
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 ## <span id="prepareShuffleDependency"> Creating ShuffleDependency
 
@@ -66,7 +68,7 @@ prepareShuffleDependency(
   writeMetrics: Map[String, SQLMetric]): ShuffleDependency[Int, InternalRow, InternalRow]
 ```
 
-`prepareShuffleDependency` creates a Spark Core `ShuffleDependency` with a `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the <<serializer, Serializer>> of the `ShuffleExchangeExec` physical operator).
+`prepareShuffleDependency` creates a `ShuffleDependency` ([Apache Spark]({{ book.spark_core }}/rdd/ShuffleDependency)) with an `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the [Serializer](#serializer) of the `ShuffleExchangeExec` physical operator).
 
 ### <span id="prepareShuffleDependency-part"> Partitioner
 

@@ -1,17 +1,17 @@
 # ShuffleQueryStageExec Leaf Physical Operator
 
-`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with [ShuffleExchangeExec](ShuffleExchangeExec.md) or [ReusedExchangeExec](ReusedExchangeExec.md) child operators.
+`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) or [ReusedExchangeExec](../physical-operators/ReusedExchangeExec.md) child operators.
 
 ## Creating Instance
 
 `ShuffleQueryStageExec` takes the following to be created:
 
 * <span id="id"> ID
-* <span id="plan"> [Physical Operator](SparkPlan.md) ([ShuffleExchangeExec](ShuffleExchangeExec.md) or [ReusedExchangeExec](ReusedExchangeExec.md))
+* <span id="plan"> [Physical Operator](../physical-operators/SparkPlan.md) ([ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) or [ReusedExchangeExec](../physical-operators/ReusedExchangeExec.md))
 
 `ShuffleQueryStageExec` is created when:
 
-* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](ShuffleExchangeExec.md))
+* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md))
 
 * `ShuffleQueryStageExec` physical operator is requested to [newReuseInstance](#newReuseInstance)
 
@@ -43,5 +43,5 @@ assertion failed: ShuffleQueryStageExec should already be ready
 
 `mapStats` is used when:
 
-* [DemoteBroadcastHashJoin](../logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed
+* [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) logical optimization is executed
 * [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) adaptive physical optimizations are executed

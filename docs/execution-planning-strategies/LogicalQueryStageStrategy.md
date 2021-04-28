@@ -2,7 +2,7 @@
 
 `LogicalQueryStageStrategy` is an [execution planning strategy](SparkStrategy.md) that [plans the following logical operators](#apply):
 
-* [LogicalQueryStage](../logical-operators/LogicalQueryStage.md) with [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md) physical operator
+* [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) with [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md) physical operator
 * [Join](../logical-operators/Join.md) thereof
 
 `LogicalQueryStageStrategy` is part of the [strategies](../SparkPlanner.md#strategies) of the [SparkPlanner](../SparkPlanner.md).
@@ -18,7 +18,7 @@ For [Join](../logical-operators/Join.md) operators with an [equi-join condition]
 
 For other Join operators and the left or right side being [broadcast stages](#isBroadcastStage), `apply` gives a [BroadcastNestedLoopJoinExec](../physical-operators/BroadcastNestedLoopJoinExec.md) physical operator.
 
-For [LogicalQueryStage](../logical-operators/LogicalQueryStage.md) operators, `apply` simply gives the associated [physical plan](../logical-operators/LogicalQueryStage.md#physicalPlan).
+For [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) operators, `apply` simply gives the associated [physical plan](../adaptive-query-execution/LogicalQueryStage.md#physicalPlan).
 
 `apply` is part of the [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
 
@@ -29,6 +29,6 @@ isBroadcastStage(
   plan: LogicalPlan): Boolean
 ```
 
-`isBroadcastStage` is `true` when the given [LogicalPlan](../logical-operators/LogicalPlan.md) is a [LogicalQueryStage](../logical-operators/LogicalQueryStage.md) leaf logical operator with a [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md) physical operator. Otherwise, `isBroadcastStage` is `false`.
+`isBroadcastStage` is `true` when the given [LogicalPlan](../logical-operators/LogicalPlan.md) is a [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) leaf logical operator with a [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md) physical operator. Otherwise, `isBroadcastStage` is `false`.
 
 `isBroadcastStage` is used when `LogicalQueryStageStrategy` is [executed](#apply).

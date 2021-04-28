@@ -1,0 +1,3 @@
+# EliminateJoinToEmptyRelation
+
+`EliminateJoinToEmptyRelation` is...FIXME

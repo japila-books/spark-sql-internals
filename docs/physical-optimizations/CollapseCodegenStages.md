@@ -40,7 +40,7 @@ With [spark.sql.codegen.wholeStage](../configuration-properties.md#spark.sql.cod
 `CollapseCodegenStages` is created when:
 
 * `QueryExecution` utility is used for the [preparations](../QueryExecution.md#preparations) batch
-* `AdaptiveSparkPlanExec` physical operator is requested for the [postStageCreationRules](../physical-operators/AdaptiveSparkPlanExec.md#postStageCreationRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [postStageCreationRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#postStageCreationRules)
 
 ## <span id="apply"> Executing Rule
 

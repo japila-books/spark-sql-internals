@@ -5,6 +5,23 @@
 !!! important
     `InsertAdaptiveSparkPlan` is disabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
 
+## <span id="shouldApplyAQE"> Adaptive Requirements
+
+```scala
+shouldApplyAQE(
+  plan: SparkPlan,
+  isSubquery: Boolean): Boolean
+```
+
+`shouldApplyAQE` is `true` when one of the following conditions holds:
+
+1. [spark.sql.adaptive.forceApply](../configuration-properties.md#spark.sql.adaptive.forceApply) configuration property is enabled
+1. The given `isSubquery` flag is enabled (a shortcut to continue since the input plan is from a sub-query and it was already decided to apply AQE for the main query)
+1. The given [physical query plan](../physical-operators/SparkPlan.md) uses a physical operator that matches or is the following:
+    1. [Exchange](../physical-operators/Exchange.md)
+    1. There is a [UnspecifiedDistribution](../physical-operators/Distribution.md#UnspecifiedDistribution) among the [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) of the operator (and the query may need to add exchanges)
+    1. Contains [SubqueryExpression](../expressions/SubqueryExpression.md)
+
 ## Creating Instance
 
 `InsertAdaptiveSparkPlan` takes the following to be created:
@@ -46,7 +63,7 @@ For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) ho
 
 ### Supported Query Plans
 
-`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
+`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 
@@ -54,7 +71,7 @@ For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) ho
 Adaptive execution enabled for plan: [plan]
 ```
 
-In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
+In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
 
 In case of `SubqueryAdaptiveNotSupportedException`, `applyInternal` prints out the WARN message and returns the given physical plan.
 
@@ -72,11 +89,12 @@ spark.sql.adaptive.enabled is enabled but is not supported for query: [plan].
 
 ### Usage
 
-`applyInternal` is used when:
+`applyInternal` is used by `InsertAdaptiveSparkPlan` when requested for the following:
 
-* `InsertAdaptiveSparkPlan` physical optimization is [executed](#apply) (with the `isSubquery` flag disabled) and requested to [compileSubquery](#compileSubquery) (with the `isSubquery` flag enabled)
+* [Execute](#apply) (with the `isSubquery` flag disabled)
+* [Compile a subquery](#compileSubquery) (with the `isSubquery` flag enabled)
 
-## <span id="buildSubqueryMap"> Collecting Subquery Expressions
+### <span id="buildSubqueryMap"> Collecting Subquery Expressions
 
 ```scala
 buildSubqueryMap(
@@ -87,22 +105,18 @@ buildSubqueryMap(
 
 For every `ScalarSubquery` and `ListQuery` expressions, `buildSubqueryMap` [compileSubquery](#compileSubquery), [verifyAdaptivePlan](#verifyAdaptivePlan) and registers a new [SubqueryExec](../physical-operators/SubqueryExec.md) operator.
 
-`buildSubqueryMap` is used when:
-
-* `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal)
-
-## <span id="compileSubquery"> compileSubquery
+### <span id="compileSubquery"> compileSubquery
 
 ```scala
 compileSubquery(
   plan: LogicalPlan): SparkPlan
 ```
 
-`compileSubquery`...FIXME
+`compileSubquery` requests the session-bound [SparkPlanner](../SparkPlanner.md) (from the [AdaptiveExecutionContext](#adaptiveExecutionContext)) to [plan](../execution-planning-strategies/SparkStrategies.md#plan) the given [LogicalPlan](../logical-operators/LogicalPlan.md) (that produces a [SparkPlan](../physical-operators/SparkPlan.md)).
 
-`compileSubquery` is used when `InsertAdaptiveSparkPlan` physical optimization is requested to [buildSubqueryMap](#buildSubqueryMap).
+In the end, `compileSubquery` [applyInternal](#applyInternal) with `isSubquery` flag turned on.
 
-## <span id="verifyAdaptivePlan"> verifyAdaptivePlan
+### <span id="verifyAdaptivePlan"> Enforcing AdaptiveSparkPlanExec
 
 ```scala
 verifyAdaptivePlan(
@@ -110,30 +124,7 @@ verifyAdaptivePlan(
   logicalPlan: LogicalPlan): Unit
 ```
 
-`verifyAdaptivePlan`...FIXME
-
-`verifyAdaptivePlan` is used when `InsertAdaptiveSparkPlan` physical optimization is requested to [buildSubqueryMap](#buildSubqueryMap).
-
-## shouldApplyAQE Predicate
-
-<span id="shouldApplyAQE">
-```scala
-shouldApplyAQE(
-  plan: SparkPlan,
-  isSubquery: Boolean): Boolean
-```
-
-`shouldApplyAQE` is `true` when one of the following conditions holds:
-
-1. [spark.sql.adaptive.forceApply](../configuration-properties.md#spark.sql.adaptive.forceApply) configuration property is enabled
-1. The given `isSubquery` flag is enabled
-1. The given [physical operator](../physical-operators/SparkPlan.md):
-
-    1. Is an [Exchange](../physical-operators/Exchange.md)
-    1. No [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) of the operator is [UnspecifiedDistribution](../physical-operators/Distribution.md#UnspecifiedDistribution)
-    1. Contains [SubqueryExpression](../expressions/SubqueryExpression.md)
-
-`shouldApplyAQE` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal).
+`verifyAdaptivePlan` throws a `SubqueryAdaptiveNotSupportedException` when the given [SparkPlan](../physical-operators/SparkPlan.md) is not a [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md).
 
 ## supportAdaptive Predicate
 
@@ -146,3 +137,15 @@ supportAdaptive(
 `supportAdaptive` is `true` when the given [physical operator](../physical-operators/SparkPlan.md) (including its children) has a [logical operator linked](../physical-operators/SparkPlan.md#logicalLink) that is neither streaming nor has [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expressions.
 
 `supportAdaptive` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal).
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.InsertAdaptiveSparkPlan` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.adaptive.InsertAdaptiveSparkPlan=ALL
+```
+
+Refer to [Logging](../spark-logging.md).

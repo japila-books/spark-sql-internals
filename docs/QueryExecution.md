@@ -132,7 +132,7 @@ stringWithStats: String
 preparations: Seq[Rule[SparkPlan]]
 ```
 
-`preparations` creates an [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) (with a new [AdaptiveExecutionContext](adaptive-query-execution/AdaptiveExecutionContext.md)) that is added to the [preparations rules](#preparations-internal-utility).
+`preparations` creates an [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (with a new [AdaptiveExecutionContext](adaptive-query-execution/AdaptiveExecutionContext.md)) that is added to the [preparations rules](#preparations-internal-utility).
 
 `preparations` is used when `QueryExecution` is requested for an [optimized physical query plan](#executedPlan).
 
@@ -146,7 +146,7 @@ preparations(
 
 `preparations` is the set of [Catalyst Rules](catalyst/Rule.md) for transforming [physical operators](physical-operators/SparkPlan.md) (to be more efficient and optimized for execution) in the following order:
 
-1. [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) (if defined)
+1. [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (if defined)
 1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
 1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
 1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)

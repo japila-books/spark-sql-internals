@@ -14,7 +14,7 @@
 `ApplyColumnarRulesAndInsertTransitions` is created when:
 
 * `QueryExecution` utility is requested for [preparations optimizations](../QueryExecution.md#preparations)
-* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested for [adaptive optimization](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is requested for [adaptive optimization](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 

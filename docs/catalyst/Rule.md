@@ -28,7 +28,7 @@ Applies the rule to a [TreeType](#treetype)
 Used when:
 
 * `QueryExecution` utility is used to [prepareForExecution](../QueryExecution.md#prepareForExecution)
-* `AdaptiveSparkPlanExec` utility is used to [applyPhysicalRules](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules)
+* `AdaptiveSparkPlanExec` utility is used to [applyPhysicalRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#applyPhysicalRules)
 
 ## <span id="ruleName"> Name
 

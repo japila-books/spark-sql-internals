@@ -67,7 +67,9 @@ res3: Int = 200
 
 [spark.sql.adaptive.forceApply](configuration-properties.md#spark.sql.adaptive.forceApply) configuration property
 
-Used when [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+Used when:
+
+* [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
 
@@ -75,14 +77,14 @@ The value of [spark.sql.adaptive.enabled](configuration-properties.md#spark.sql.
 
 Used when:
 
-* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
 * `SQLConf` is requested for the [numShufflePartitions](#numShufflePartitions)
 
 ## <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel
 
 The value of [spark.sql.adaptive.logLevel](configuration-properties.md#spark.sql.adaptive.logLevel) configuration property
 
-Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed
+Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed
 
 ## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 
@@ -252,7 +254,7 @@ The value of [spark.sql.exchange.reuse](configuration-properties.md#spark.sql.ex
 
 Used when:
 
-* [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](physical-operators/AdaptiveSparkPlanExec.md#createQueryStages)
+* [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](adaptive-query-execution/AdaptiveSparkPlanExec.md#createQueryStages)
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
 
@@ -426,7 +428,9 @@ Used when [SchemaPruning](logical-optimizations/SchemaPruning.md), [ColumnPrunin
 
 The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property
 
-Used when [DemoteBroadcastHashJoin](logical-optimizations/DemoteBroadcastHashJoin.md) logical optimization is executed
+Used when:
+
+* [DemoteBroadcastHashJoin](adaptive-query-execution/DemoteBroadcastHashJoin.md) logical optimization is executed
 
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 

@@ -12,7 +12,7 @@ supportedShuffleOrigins: Seq[ShuffleOrigin]
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [final physical query plan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [final physical query plan](../adaptive-query-execution/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
 * _others_ (FIXME: perhaps not as important?)
 
 ## Implementations
