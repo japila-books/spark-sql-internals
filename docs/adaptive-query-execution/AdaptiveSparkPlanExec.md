@@ -155,24 +155,31 @@ createQueryStages(
 
 `createQueryStages`...FIXME
 
-### <span id="newQueryStage"> newQueryStage
+### <span id="newQueryStage"> Creating QueryStageExec for Exchange
 
 ```scala
 newQueryStage(
   e: Exchange): QueryStageExec
 ```
 
-`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the child physical plan of the given [Exchange](../physical-operators/Exchange.md) (using the [queryStageOptimizerRules](#queryStageOptimizerRules)).
+`newQueryStage` creates a new [QueryStageExec](QueryStageExec.md) physical operator based on the type of the given [Exchange](../physical-operators/Exchange.md) physical operator.
 
-`newQueryStage` creates a [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` with the child physical plan as the optimized physical query plan:
+Exchange | QueryStageExec
+---------|---------
+ [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) | [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
+ [BroadcastExchangeLike](../physical-operators/BroadcastExchangeLike.md) | [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 
-* For [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md), `newQueryStage` creates a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `ShuffleExchangeExec` with the optimized plan as the child).
+---
 
-* For [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md), `newQueryStage` creates a [BroadcastQueryStageExec](BroadcastQueryStageExec.md) (with the [currentStageId](#currentStageId) counter and the `BroadcastExchangeExec` with the optimized plan as the child).
+`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [child physical plan](../physical-operators/UnaryExecNode.md#child) of the given [Exchange](../physical-operators/Exchange.md). `newQueryStage` uses the [adaptive optimizations](#queryStageOptimizerRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Query Stage Optimization** batch name.
+
+`newQueryStage` creates a new [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` operator (using the [currentStageId](#currentStageId) for the ID).
+
+After [applyPhysicalRules](#applyPhysicalRules) for the child operator, `newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [Exchange](../physical-operators/Exchange.md) itself (with the new optimized physical query plan for the child). `newQueryStage` uses the [post-stage-creation optimizations](#postStageCreationRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Post Stage Creation** batch name.
 
 `newQueryStage` increments the [currentStageId](#currentStageId) counter.
 
-`newQueryStage` [setLogicalLinkForNewQueryStage](#setLogicalLinkForNewQueryStage) for the `QueryStageExec` physical operator.
+`newQueryStage` [associates the new query stage operator](#setLogicalLinkForNewQueryStage) with the `Exchange` physical operator.
 
 In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
