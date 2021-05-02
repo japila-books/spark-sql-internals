@@ -277,17 +277,13 @@ Internally, `reOptimize` requests the given [logical query plan](../logical-oper
 
 `reOptimize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
 
-## <span id="optimizer"> Logical Adaptive Optimizer
+## <span id="optimizer"> Adaptive Logical Optimizer
 
 ```scala
-optimizer: RuleExecutor[LogicalPlan]
+optimizer: AQEOptimizer
 ```
 
-`optimizer` is a [RuleExecutor](../catalyst/RuleExecutor.md) to transform [logical query plans](../logical-operators/LogicalPlan.md).
-
-`optimizer` has a single **Demote BroadcastHashJoin** rule batch with [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) logical optimization only.
-
-`optimizer` is used when `AdaptiveSparkPlanExec` physical operator is requested to [re-optimize a logical query plan](#reOptimize).
+`AdaptiveSparkPlanExec` creates an [AQEOptimizer](AQEOptimizer.md) (while [created](#creating-instance)) for [re-optimizing a logical query plan](#reOptimize).
 
 ## <span id="executionContext"> QueryStageCreator Thread Pool
 

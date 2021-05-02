@@ -86,6 +86,14 @@ The value of [spark.sql.adaptive.logLevel](configuration-properties.md#spark.sql
 
 Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed
 
+## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
+
+[spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property
+
+Used when:
+
+* `AQEOptimizer` is requested for the [optimization batches](adaptive-query-execution/AQEOptimizer.md#batches)
+
 ## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 
 [spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property

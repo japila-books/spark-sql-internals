@@ -118,6 +118,14 @@ Default: `true`
 
 Since: `3.0.0`
 
+## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> spark.sql.adaptive.optimizer.excludedRules
+
+A comma-separated list of rules (names) to be disabled in the [adaptive optimizer](adaptive-query-execution/AQEOptimizer.md)
+
+Default: undefined
+
+Use [SQLConf.ADAPTIVE_OPTIMIZER_EXCLUDED_RULES](SQLConf.md#ADAPTIVE_OPTIMIZER_EXCLUDED_RULES) to reference the property.
+
 ## <span id="spark.sql.adaptive.skewJoin.enabled"> spark.sql.adaptive.skewJoin.enabled
 
 When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark dynamically handles skew in sort-merge join by splitting (and replicating if needed) skewed partitions.
