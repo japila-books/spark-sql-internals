@@ -279,7 +279,7 @@ nav:
       - InsertIntoStatement: logical-operators/InsertIntoStatement.md
       - InsertIntoTable: logical-operators/InsertIntoTable.md
       - logical-operators/Intersect.md
-      - logical-operators/Join.md
+      - Join: logical-operators/Join.md
       - logical-operators/LocalRelation.md
       - logical-operators/LogicalRDD.md
       - logical-operators/LogicalRelation.md
@@ -483,6 +483,7 @@ nav:
       - UnsafeProjection: expressions/UnsafeProjection.md
       - InterpretedProjection: expressions/InterpretedProjection.md
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
+      - RowOrdering: expressions/RowOrdering.md
       - Concrete Expressions:
         - AggregateExpression: expressions/AggregateExpression.md
         - AggregateFunction: expressions/AggregateFunction.md
@@ -572,6 +573,7 @@ nav:
         - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - SparkPlan: physical-operators/SparkPlan.md
+      - ShuffledJoin: physical-operators/ShuffledJoin.md
       - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
       - BaseAggregateExec: physical-operators/BaseAggregateExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
@@ -681,7 +683,7 @@ nav:
         - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
         - physical-operators/ShuffledHashJoinExec.md
         - physical-operators/SortAggregateExec.md
-        - physical-operators/SortMergeJoinExec.md
+        - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
         - physical-operators/SortExec.md
         - physical-operators/SubqueryExec.md
         - SubqueryBroadcastExec: physical-operators/SubqueryBroadcastExec.md

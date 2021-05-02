@@ -14,7 +14,7 @@ abstract class GenericStrategy[PhysicalPlan <: TreeNode[PhysicalPlan]]
 
 ## Contract
 
-### <span id="apply"> apply
+### <span id="apply"> Executing Rule
 
 ```scala
 apply(

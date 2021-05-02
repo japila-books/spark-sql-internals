@@ -1,10 +1,24 @@
-title: SortMergeJoinExec
+# SortMergeJoinExec Physical Operator
 
-# SortMergeJoinExec Binary Physical Operator for Sort Merge Join
+`SortMergeJoinExec` is a [ShuffledJoin](ShuffledJoin.md) binary physical operator for [sort merge join](#doExecute).
 
-`SortMergeJoinExec` is a SparkPlan.md#BinaryExecNode[binary physical operator] to <<doExecute, execute>> a *sort merge join*.
+## Creating Instance
 
-`ShuffledHashJoinExec` is <<creating-instance, selected>> to represent a Join.md[Join] logical operator when [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for joins with <<leftKeys, left join keys>> that are <<orderable, orderable>>, i.e. that can be ordered (sorted).
+`ShuffledHashJoinExec` takes the following to be created:
+
+* <span id="leftKeys"> Left Join Key [Expression](../expressions/Expression.md)s
+* <span id="rightKeys"> Right Join Key [Expression](../expressions/Expression.md)s
+* <span id="joinType"> [JoinType](../spark-sql-joins.md#JoinType)
+* <span id="condition"> Optional Join [Expression](../expressions/Expression.md)
+* <span id="left"> Left [Physical Operator](SparkPlan.md)
+* <span id="right"> Right [Physical Operator](SparkPlan.md)
+* <span id="isSkewJoin"> `isSkewJoin` flag (default: `false`)
+
+`ShuffledHashJoinExec` is created when:
+
+* [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for [joins](../logical-operators/Join.md) with [left join keys](#leftKeys) that are [orderable](#orderable)  (can be ordered / sorted).
+
+## Review Me
 
 [[orderable]]
 [NOTE]

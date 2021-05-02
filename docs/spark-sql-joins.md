@@ -1,10 +1,8 @@
-title: Joins
-
 # Dataset Join Operators
 
-From PostgreSQL's https://www.postgresql.org/docs/current/static/tutorial-join.html[2.6. Joins Between Tables]:
+From PostgreSQL's [2.6. Joins Between Tables](https://www.postgresql.org/docs/current/static/tutorial-join.html):
 
-> Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a *join query*.
+> Queries can access multiple tables at once, or access the same table in such a way that multiple rows of the table are being processed at the same time. A query that accesses multiple rows of the same or different tables at one time is called a **join query**.
 
 You can join two datasets using the <<join-operators, join operators>> with an optional <<join-condition, join condition>>.
 
@@ -54,7 +52,8 @@ You can specify the <<join-types, join type>> as part of join operators (using `
 df1.join(df2, $"df1Key" === $"df2Key", "inner")
 ----
 
-[[join-types]]
+## <span id="JoinType"><span id="join-types"> Join Types
+
 .Join Types
 [cols="1,1,1",options="header",width="100%"]
 |===

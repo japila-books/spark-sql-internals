@@ -1,6 +1,85 @@
 # JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to <<apply, plan a Join logical operator to one of the supported join physical operators>> (as described by <<join-selection-requirements, join physical operator selection requirements>>).
+`JoinSelection` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to [plan a Join logical operator to one of the supported join physical operators](#apply) (as described by [join physical operator selection requirements](#join-selection-requirements)).
+
+## <span id="apply"> Executing Rule
+
+```scala
+apply(
+  plan: LogicalPlan): Seq[SparkPlan]
+```
+
+`apply` is part of the [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
+
+`apply` does the following (in order until a join physical operator has been determined):
+
+1. [createBroadcastHashJoin](#createBroadcastHashJoin) (considering hints only)
+1. With a [hintToSortMergeJoin](#hintToSortMergeJoin) defined, [createSortMergeJoin](#createSortMergeJoin)
+1. [createShuffleHashJoin](#createShuffleHashJoin) (considering hints only)
+1. With a [hintToShuffleReplicateNL](#hintToShuffleReplicateNL) defined, [createCartesianProduct](#createCartesianProduct)
+1. [createJoinWithoutHint](#createJoinWithoutHint)
+
+## <span id="createBroadcastHashJoin"> Creating BroadcastHashJoinExec
+
+```scala
+createBroadcastHashJoin(
+  onlyLookingAtHint: Boolean): Option[Seq[BroadcastHashJoinExec]]
+```
+
+`createBroadcastHashJoin` [determines a BroadcastBuildSide](#getBroadcastBuildSide) and, if determined, creates a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md).
+
+## <span id="createShuffleHashJoin"> createShuffleHashJoin
+
+```scala
+createShuffleHashJoin(
+  onlyLookingAtHint: Boolean): Option[Seq[ShuffledHashJoinExec]]
+```
+
+`createShuffleHashJoin` [determines a ShuffleHashJoinBuildSide](#getShuffleHashJoinBuildSide) and, if determined, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
+
+## <span id="createSortMergeJoin"> Creating SortMergeJoinExec
+
+```scala
+createSortMergeJoin(): Option[Seq[SortMergeJoinExec]]
+```
+
+`createSortMergeJoin` creates a [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) if the left keys are [orderable](../expressions/RowOrdering.md#isOrderable).
+
+## <span id="createCartesianProduct"> createCartesianProduct
+
+```scala
+createCartesianProduct(): Option[Seq[CartesianProductExec]]
+```
+
+`createCartesianProduct` creates a [CartesianProductExec](../physical-operators/CartesianProductExec.md) for `InnerLike` join type.
+
+## <span id="createJoinWithoutHint"> createJoinWithoutHint
+
+```scala
+createJoinWithoutHint(): Seq[BaseJoinExec]
+```
+
+`createJoinWithoutHint`...FIXME
+
+## <span id="hintToSortMergeJoin"> hintToSortMergeJoin
+
+```scala
+hintToSortMergeJoin(
+  hint: JoinHint): Boolean
+```
+
+`hintToSortMergeJoin`...FIXME
+
+## <span id="hintToShuffleReplicateNL"> hintToShuffleReplicateNL
+
+```scala
+hintToShuffleReplicateNL(
+  hint: JoinHint): Boolean
+```
+
+`hintToShuffleReplicateNL`...FIXME
+
+## Review Me
 
 `JoinSelection` firstly <<apply, considers>> join physical operators per whether join keys are used or not. When join keys are used, `JoinSelection` considers <<BroadcastHashJoinExec, BroadcastHashJoinExec>>, <<ShuffledHashJoinExec, ShuffledHashJoinExec>> or <<SortMergeJoinExec, SortMergeJoinExec>> operators. Without join keys, `JoinSelection` considers <<BroadcastNestedLoopJoinExec, BroadcastNestedLoopJoinExec>> or <<CartesianProductExec, CartesianProductExec>>.
 
