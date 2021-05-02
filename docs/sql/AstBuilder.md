@@ -78,11 +78,15 @@ FIRST '(' expression (IGNORE NULLS)? ')'
 
 ANTLR labeled alternative: `#first`
 
-### visitFromClause
+### <span id="visitFromClause"> visitFromClause
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
-Supports multiple comma-separated relations (that all together build a condition-less INNER JOIN) with optional [LATERAL VIEW](../expressions/Generator.md#lateral-view).
+```text
+FROM relation (',' relation)* lateralView* pivotClause?
+```
+
+Supports multiple comma-separated relations (that all together build a condition-less [INNER JOIN](#withJoinRelations)) with optional [LATERAL VIEW](../expressions/Generator.md#lateral-view).
 
 A relation can be one of the following or a combination thereof:
 
@@ -402,9 +406,9 @@ Creates one of the following logical operators:
 
 `withInsertInto` is used for [visitMultiInsertQuery](#visitMultiInsertQuery) and [visitSingleInsertQuery](#visitSingleInsertQuery)
 
-### withJoinRelations
+### <span id="withJoinRelations"> withJoinRelations
 
-Adds a [Join](../logical-operators/Join.md) for a [FROM clause](#visitFromClause) and [relation](#visitRelation) alone.
+Creates one or more [Join](../logical-operators/Join.md) logical operators for a [FROM](#visitFromClause) clause and [relation](#visitRelation).
 
 The following join types are supported:
 

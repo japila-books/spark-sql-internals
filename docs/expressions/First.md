@@ -32,12 +32,11 @@ When requested to <<spark-sql-Expression-DeclarativeAggregate.md#evaluateExpress
 [[catalyst-dsl]]
 TIP: Use <<first, first>> operator from the [Catalyst DSL](../catalyst-dsl/index.md) to create an `First` aggregate function expression, e.g. for testing or Spark SQL internals exploration.
 
-=== [[first]] Catalyst DSL -- `first` Operator
+## Catalyst DSL
 
-[source, scala]
-----
+```scala
 first(e: Expression): Expression
-----
+```
 
 `first` <<creating-instance, creates>> a `First` expression and requests it to <<spark-sql-Expression-AggregateFunction.md#toAggregateExpression, convert to a AggregateExpression>>.
 

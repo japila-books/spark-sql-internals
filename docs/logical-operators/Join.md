@@ -1,19 +1,35 @@
 # Join Logical Operator
 
-`Join` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator], i.e. works with two logical operators. `Join` has a join type and an optional expression condition for the join.
+`Join` is a [binary logical operator](LogicalPlan.md#BinaryNode) that represents the following high-level operators in a logical plan:
 
-`Join` is <<creating-instance, created>> when...FIXME
+* [JOIN](../sql/AstBuilder.md#withJoinRelations) SQL statement
+* [Dataset.join](../Dataset.md#join), [Dataset.crossJoin](../Dataset.md#crossJoin) and [Dataset.joinWith](../Dataset.md#joinWith) operators
 
-NOTE: CROSS JOIN is just an INNER JOIN with no join condition.
+## Creating Instance
 
-[[output]]
-`Join` has catalyst/QueryPlan.md#output[output schema attributes]...FIXME
+`Join` takes the following to be created:
 
-=== [[creating-instance]] Creating Join Instance
+* <span id="left"> Left [logical operator](LogicalPlan.md)
+* <span id="right"> Right [logical operator](LogicalPlan.md)
+* <span id="joinType"> [JoinType](../spark-sql-joins.md#join-types)
+* <span id="condition"> Optional Join [Expression](../expressions/Expression.md)
+* <span id="hint"> `JoinHint`
 
-`Join` takes the following when created:
+`Join` is created when:
 
-* [[left]] spark-sql-LogicalPlan.md[Logical plan] of the left side
-* [[right]] spark-sql-LogicalPlan.md[Logical plan] of the right side
-* [[joinType]] spark-sql-joins.md#join-types[Join type]
-* [[condition]] Join condition (if available) as a expressions/Expression.md[Catalyst expression]
+* `AstBuilder` is requested to [withJoinRelations](../sql/AstBuilder.md#withJoinRelations) (and [visitFromClause](../sql/AstBuilder.md#visitFromClause))
+* [Dataset.join](../Dataset.md#join), [Dataset.crossJoin](../Dataset.md#crossJoin) and [Dataset.joinWith](../Dataset.md#joinWith) operators are used
+
+## Catalyst DSL
+
+`DslLogicalPlan` comes with [join](../catalyst-dsl/DslLogicalPlan.md#join) operator to create a `Join`.
+
+```scala
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+val t2 = table("t2")
+val j = t1.join(t2)
+
+import org.apache.spark.sql.catalyst.plans.logical.Join
+assert(j.isInstanceOf[Join])
+```
