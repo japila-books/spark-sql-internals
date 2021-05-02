@@ -1332,6 +1332,10 @@
      <lastmod>2021-05-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RowOrdering/</loc>
+     <lastmod>2021-05-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/AggregateExpression/</loc>
      <lastmod>2021-05-02</lastmod>
      <changefreq>daily</changefreq>
@@ -1673,6 +1677,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SparkPlan/</loc>
+     <lastmod>2021-05-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ShuffledJoin/</loc>
      <lastmod>2021-05-02</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
