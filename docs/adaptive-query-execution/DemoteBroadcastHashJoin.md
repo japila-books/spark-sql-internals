@@ -1,6 +1,6 @@
 # DemoteBroadcastHashJoin Logical Optimization
 
-`DemoteBroadcastHashJoin` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) to [transform Join logical operators](#apply) (with no [join hints](../JoinStrategyHint.md)).
+`DemoteBroadcastHashJoin` is a logical optimization in [Adaptive Query Execution](index.md) to [transform Join logical operators](#apply) (with no [join hints](../JoinStrategyHint.md)).
 
 Quoting [What's new in Apache Spark 3.0 - demote broadcast hash join](https://www.waitingforcode.com/apache-spark-sql/whats-new-apache-spark-3-demote-broadcast-hash-join/read) article:
 
@@ -12,13 +12,11 @@ Quoting [What's new in Apache Spark 3.0 - demote broadcast hash join](https://ww
 
 ## Creating Instance
 
-`DemoteBroadcastHashJoin` takes the following to be created:
-
-* <span id="conf"> [SQLConf](../SQLConf.md)
+`DemoteBroadcastHashJoin` takes no arguments to be created.
 
 `DemoteBroadcastHashJoin` is created when:
 
-* [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is requested for the [logical optimizer](../adaptive-query-execution/AdaptiveSparkPlanExec.md#optimizer)
+* `AQEOptimizer` is requested for the [batches](AQEOptimizer.md#batches)
 
 ## <span id="apply"> Executing Rule
 
@@ -40,8 +38,8 @@ shouldDemote(
   plan: LogicalPlan): Boolean
 ```
 
-`shouldDemote` supports [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) logical operators with [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md) physical operators only. For any other [logical operators](../logical-operators/LogicalPlan.md) `shouldDemote` is `false`.
+`shouldDemote` supports [LogicalQueryStage](LogicalQueryStage.md) logical operators with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) physical operators only. For any other [logical operators](../logical-operators/LogicalPlan.md) `shouldDemote` is `false`.
 
-`shouldDemote` makes sure that the [result](../adaptive-query-execution/QueryStageExec.md#resultOption) and [MapOutputStatistics](../adaptive-query-execution/ShuffleQueryStageExec.md#mapStats) of the `ShuffleQueryStageExec` operator are available. Otherwise, `shouldDemote` is `false`.
+`shouldDemote` makes sure that the [result](QueryStageExec.md#resultOption) and [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) of the `ShuffleQueryStageExec` operator are available. Otherwise, `shouldDemote` is `false`.
 
 `shouldDemote` is `true` when the ratio of the non-empty partitions to all the partitions (based on the `MapOutputStatistics`) is below [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property.

@@ -1,5 +1,3 @@
-title: Join
-
 # Join Logical Operator
 
 `Join` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator], i.e. works with two logical operators. `Join` has a join type and an optional expression condition for the join.
