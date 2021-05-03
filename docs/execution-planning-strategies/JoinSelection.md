@@ -1,6 +1,6 @@
 # JoinSelection Execution Planning Strategy
 
-`JoinSelection` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to [plan a Join logical operator to one of the supported join physical operators](#apply) (as described by [join physical operator selection requirements](#join-selection-requirements)).
+`JoinSelection` is an [execution planning strategy](SparkStrategy.md) for [Join](../logical-operators/Join.md) logical operators.
 
 ## <span id="apply"> Executing Rule
 
@@ -11,13 +11,35 @@ apply(
 
 `apply` is part of the [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
 
-`apply` does the following (in order until a join physical operator has been determined):
+`apply` uses [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md) Scala extractor to destructure the input [LogicalPlan](../logical-operators/LogicalPlan.md).
+
+`apply` does the following (in the order until a join physical operator has been determined):
 
 1. [createBroadcastHashJoin](#createBroadcastHashJoin) (considering hints only)
 1. With a [hintToSortMergeJoin](#hintToSortMergeJoin) defined, [createSortMergeJoin](#createSortMergeJoin)
 1. [createShuffleHashJoin](#createShuffleHashJoin) (considering hints only)
 1. With a [hintToShuffleReplicateNL](#hintToShuffleReplicateNL) defined, [createCartesianProduct](#createCartesianProduct)
 1. [createJoinWithoutHint](#createJoinWithoutHint)
+
+## <span id="canBroadcastBySize"> canBroadcastBySize
+
+```scala
+canBroadcastBySize(
+  plan: LogicalPlan,
+  conf: SQLConf): Boolean
+```
+
+`canBroadcastBySize` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a broadcast join (between `0` and the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property inclusive).
+
+## <span id="canBuildLocalHashMapBySize"> canBuildLocalHashMapBySize
+
+```scala
+canBuildLocalHashMapBySize(
+  plan: LogicalPlan,
+  conf: SQLConf): Boolean
+```
+
+`canBuildLocalHashMapBySize` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a shuffle hash join (below the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property multiplied by the configured [number of shuffle partitions](../SQLConf.md#numShufflePartitions)).
 
 ## <span id="createBroadcastHashJoin"> Creating BroadcastHashJoinExec
 
@@ -61,6 +83,79 @@ createJoinWithoutHint(): Seq[BaseJoinExec]
 
 `createJoinWithoutHint`...FIXME
 
+## <span id="getBroadcastBuildSide"> getBroadcastBuildSide
+
+```scala
+getBroadcastBuildSide(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  joinType: JoinType,
+  hint: JoinHint,
+  hintOnly: Boolean,
+  conf: SQLConf): Option[BuildSide]
+```
+
+`getBroadcastBuildSide` determines if build on the left side (`buildLeft`). With `hintOnly` enabled (`true`), `getBroadcastBuildSide` [hintToBroadcastLeft](#hintToBroadcastLeft). Otherwise, `getBroadcastBuildSide` checks if [canBroadcastBySize](#canBroadcastBySize) and not [hintToNotBroadcastLeft](#hintToNotBroadcastLeft).
+
+`getBroadcastBuildSide` determines if build on the right side (`buildRight`). With `hintOnly` enabled (`true`), `getBroadcastBuildSide` [hintToBroadcastRight](#hintToBroadcastRight). Otherwise, `getBroadcastBuildSide` checks if [canBroadcastBySize](#canBroadcastBySize) and not [hintToNotBroadcastRight](#hintToNotBroadcastRight).
+
+In the end, `getBroadcastBuildSide` [getBuildSide](#getBuildSide) with the following:
+
+* [canBuildBroadcastLeft](#canBuildBroadcastLeft) for the given `JoinType` and the `buildLeft` flag
+* [canBuildBroadcastRight](#canBuildBroadcastRight) for the given `JoinType` and the `buildRight` flag
+* Left [physical operator](../logical-operators/LogicalPlan.md)
+* Right [physical operator](../logical-operators/LogicalPlan.md)
+
+## <span id="getShuffleHashJoinBuildSide"> getShuffleHashJoinBuildSide
+
+```scala
+getShuffleHashJoinBuildSide(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  joinType: JoinType,
+  hint: JoinHint,
+  hintOnly: Boolean,
+  conf: SQLConf): Option[BuildSide]
+```
+
+`getShuffleHashJoinBuildSide` determines if build on the left side (`buildLeft`). With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinLeft](#hintToShuffleHashJoinLeft). Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the left operator is [muchSmaller](#muchSmaller) than the right.
+
+`getShuffleHashJoinBuildSide` determines if build on the right side (`buildRight`). With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinRight](#hintToShuffleHashJoinRight). Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the right operator is [muchSmaller](#muchSmaller) than the left.
+
+In the end, `getShuffleHashJoinBuildSide` [getBuildSide](#getBuildSide) with the following:
+
+* [canBuildShuffledHashJoinLeft](#canBuildShuffledHashJoinLeft) for the given `JoinType` and the `buildLeft` flag
+* [canBuildShuffledHashJoinRight](#canBuildShuffledHashJoinRight) for the given `JoinType` and the `buildRight` flag
+* Left [physical operator](../logical-operators/LogicalPlan.md)
+* Right [physical operator](../logical-operators/LogicalPlan.md)
+
+## <span id="hintToBroadcastLeft"> hintToBroadcastLeft
+
+```scala
+hintToBroadcastLeft(
+  hint: JoinHint): Boolean
+```
+
+`hintToBroadcastLeft` is enabled (`true`) when the given `JoinHint` has `BROADCAST`, `BROADCASTJOIN` or `MAPJOIN` hints associated with the left operator.
+
+## <span id="hintToShuffleHashJoinLeft"> hintToShuffleHashJoinLeft
+
+```scala
+hintToShuffleHashJoinLeft(
+  hint: JoinHint): Boolean
+```
+
+`hintToShuffleHashJoinLeft` is enabled (`true`) when the given `JoinHint` has `SHUFFLE_HASH` hint associated with the left operator.
+
+## <span id="hintToShuffleHashJoinRight"> hintToShuffleHashJoinRight
+
+```scala
+hintToShuffleHashJoinRight(
+  hint: JoinHint): Boolean
+```
+
+`hintToShuffleHashJoinRight` is enabled (`true`) when the given `JoinHint` has `SHUFFLE_HASH` hint associated with the right operator.
+
 ## <span id="hintToSortMergeJoin"> hintToSortMergeJoin
 
 ```scala
@@ -78,6 +173,16 @@ hintToShuffleReplicateNL(
 ```
 
 `hintToShuffleReplicateNL`...FIXME
+
+## <span id="muchSmaller"> muchSmaller
+
+```scala
+muchSmaller(
+  a: LogicalPlan,
+  b: LogicalPlan): Boolean
+```
+
+`muchSmaller` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the left table (the given `a` [LogicalPlan](../logical-operators/LogicalPlan.md)) is at least 3 times smaller than the size of the right table (the given `b` [LogicalPlan](../logical-operators/LogicalPlan.md)).
 
 ## Review Me
 
@@ -123,191 +228,10 @@ a| [[BroadcastNestedLoopJoinExec]] There are no join keys and one of the followi
 | No other join operator has matched already
 |===
 
-NOTE: `JoinSelection` uses spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure a `Join` logical operator.
-
-=== [[muchSmaller]] Is Left-Side Plan At Least 3 Times Smaller Than Right-Side Plan? -- `muchSmaller` Internal Condition
-
-[source, scala]
-----
-muchSmaller(a: LogicalPlan, b: LogicalPlan): Boolean
-----
-
-`muchSmaller` condition holds when plan `a` is at least 3 times smaller than plan `b`.
-
-Internally, `muchSmaller` spark-sql-LogicalPlan.md#stats[calculates the estimated statistics for the input logical plans] and compares their physical size in bytes (`sizeInBytes`).
-
-NOTE: `muchSmaller` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
-
-=== [[canBuildLocalHashMap]] `canBuildLocalHashMap` Internal Condition
-
-[source, scala]
-----
-canBuildLocalHashMap(plan: LogicalPlan): Boolean
-----
-
-`canBuildLocalHashMap` condition holds for the logical `plan` whose single partition is small enough to build a hash table (i.e. [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) multiplied by [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions)).
-
-Internally, `canBuildLocalHashMap` spark-sql-LogicalPlan.md#stats[calculates the estimated statistics for the input logical plans] and takes the size in bytes (`sizeInBytes`).
-
-NOTE: `canBuildLocalHashMap` is used when `JoinSelection` checks <<join-selection-requirements, join selection requirements>> for `ShuffledHashJoinExec` physical operator.
-
-=== [[canBroadcast]] Can Logical Plan Be Broadcast? -- `canBroadcast` Internal Condition
-
-[source, scala]
-----
-canBroadcast(plan: LogicalPlan): Boolean
-----
-
-`canBroadcast` is enabled (`true`) when the size of the output of the input logical plan (aka _sizeInBytes_) is less than [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property.
-
-`canBroadcast` uses the total size statistic from [Statistics](../logical-operators/LogicalPlanStats.md#stats) of a logical operator.
-
-`canBroadcast` is used when `JoinSelection` is requested to [canBroadcastBySizes](#canBroadcastBySizes) and [selects the build side per join type and total size statistic of join sides](#broadcastSideBySizes).
-
-=== [[canBroadcastByHints]] `canBroadcastByHints` Internal Method
-
-[source, scala]
-----
-canBroadcastByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): Boolean
-----
-
-`canBroadcastByHints` is positive (i.e. `true`) when either condition holds:
-
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is on
-
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is on
-
-Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
-
-NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
-
-=== [[broadcastSideByHints]] Selecting Build Side Per Join Type and Broadcast Hints -- `broadcastSideByHints` Internal Method
-
-[source, scala]
-----
-broadcastSideByHints(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): BuildSide
-----
-
-`broadcastSideByHints` computes `buildLeft` and `buildRight` flags:
-
-* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and the `left` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is positive
-
-* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and the `right` operator's [broadcast](../logical-operators/HintInfo.md#broadcast) hint flag is positive
-
-In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
-
-NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
-
-=== [[broadcastSide]] Choosing Join Side to Broadcast -- `broadcastSide` Internal Method
-
-[source, scala]
-----
-broadcastSide(
-  canBuildLeft: Boolean,
-  canBuildRight: Boolean,
-  left: LogicalPlan,
-  right: LogicalPlan): BuildSide
-----
-
-`broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per [total size](../logical-operators/Statistics.md#sizeInBytes) when `canBuildLeft` and `canBuildRight` are both positive (i.e. `true`).
-
-`broadcastSide` gives `BuildRight` when `canBuildRight` is positive.
-
-`broadcastSide` gives `BuildLeft` when `canBuildLeft` is positive.
-
-When all the above conditions are not met, `broadcastSide` gives the smaller side (`BuildRight` or `BuildLeft`) per [total size](../logical-operators/Statistics.md#sizeInBytes) (similarly to the first case when `canBuildLeft` and `canBuildRight` are both positive).
-
-NOTE: `broadcastSide` is used when `JoinSelection` is requested to <<broadcastSideByHints, broadcastSideByHints>>, <<broadcastSideBySizes, select the build side per join type and total size statistic of join sides>>, and <<apply, execute>> (and considers a BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
-
-=== [[canBuildLeft]] Checking If Join Type Allows For Left Join Side As Build Side -- `canBuildLeft` Internal Condition
-
-[source, scala]
-----
-canBuildLeft(joinType: JoinType): Boolean
-----
-
-`canBuildLeft` is positive (i.e. `true`) for spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] and spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] join types. Otherwise, `canBuildLeft` is negative (i.e. `false`).
-
-NOTE: `canBuildLeft` is used when `JoinSelection` is requested to <<canBroadcastByHints, canBroadcastByHints>>, <<broadcastSideByHints, broadcastSideByHints>>, <<canBroadcastBySizes, canBroadcastBySizes>>, <<broadcastSideBySizes, broadcastSideBySizes>> and <<apply, execute>> (when selecting a <<ShuffledHashJoinExec>> physical operator).
-
-=== [[canBuildRight]] Checking If Join Type Allows For Right Join Side As Build Side -- `canBuildRight` Internal Condition
-
-[source, scala]
-----
-canBuildRight(joinType: JoinType): Boolean
-----
-
-`canBuildRight` is positive (i.e. `true`) if the input join type is one of the following:
-
-* spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin]
-
-Otherwise, `canBuildRight` is negative (i.e. `false`).
-
-NOTE: `canBuildRight` is used when `JoinSelection` is requested to <<canBroadcastByHints, canBroadcastByHints>>, <<broadcastSideByHints, broadcastSideByHints>>, <<canBroadcastBySizes, canBroadcastBySizes>>, <<broadcastSideBySizes, broadcastSideBySizes>> and <<apply, execute>> (when selecting a <<ShuffledHashJoinExec>> physical operator).
-
-=== [[canBroadcastBySizes]] Checking If Join Type and Total Size Statistic of Join Sides Allow for Broadcast Join -- `canBroadcastBySizes` Internal Method
-
-[source, scala]
-----
-canBroadcastBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): Boolean
-----
-
-`canBroadcastBySizes` is positive (i.e. `true`) when either condition holds:
-
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
-
-. Join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
-
-Otherwise, `canBroadcastByHints` is negative (i.e. `false`).
-
-NOTE: `canBroadcastByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
-
-=== [[broadcastSideBySizes]] Selecting Build Side Per Join Type and Total Size Statistic of Join Sides -- `broadcastSideBySizes` Internal Method
-
-[source, scala]
-----
-broadcastSideBySizes(joinType: JoinType, left: LogicalPlan, right: LogicalPlan): BuildSide
-----
-
-`broadcastSideBySizes` computes `buildLeft` and `buildRight` flags:
-
-* `buildLeft` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER] or spark-sql-joins.md#RIGHT_OUTER[RIGHT OUTER] (i.e. <<canBuildLeft, canBuildLeft>> for the input `joinType` is positive) and `left` operator <<canBroadcast, can be broadcast per total size statistic>>
-
-* `buildRight` flag is positive (i.e. `true`) when the join type is spark-sql-joins.md#CROSS[CROSS], spark-sql-joins.md#INNER[INNER], spark-sql-joins.md#LEFT_ANTI[LEFT ANTI], spark-sql-joins.md#LEFT_OUTER[LEFT OUTER], spark-sql-joins.md#LEFT_SEMI[LEFT SEMI] or spark-sql-joins.md#ExistenceJoin[ExistenceJoin] (i.e. <<canBuildRight, canBuildRight>> for the input `joinType` is positive) and `right` operator <<canBroadcast, can be broadcast per total size statistic>>
-
-In the end, `broadcastSideByHints` <<broadcastSide, gives the join side to broadcast>>.
-
-NOTE: `broadcastSideByHints` is used when `JoinSelection` is requested to <<apply, plan a Join logical operator>> (and considers a BroadcastHashJoinExec.md[BroadcastHashJoinExec] or a BroadcastNestedLoopJoinExec.md[BroadcastNestedLoopJoinExec] physical operator).
-
-=== [[apply]] Applying JoinSelection Strategy to Logical Plan (Executing JoinSelection) -- `apply` Method
-
-[source, scala]
-----
-apply(plan: LogicalPlan): Seq[SparkPlan]
-----
-
-`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
-
-`apply` uses spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure the input logical `plan`.
+NOTE: `JoinSelection` uses ExtractEquiJoinKeys.md[ExtractEquiJoinKeys] Scala extractor to destructure a `Join` logical operator.
 
 ==== [[apply-BroadcastHashJoinExec]] Considering BroadcastHashJoinExec Physical Operator
 
 `apply` gives a BroadcastHashJoinExec.md#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastByHints, should be broadcast per join type and broadcast hints used>> (for the join type and left or right side of the join). `apply` <<broadcastSideByHints, selects the build side per join type and broadcast hints>>.
 
 `apply` gives a BroadcastHashJoinExec.md#creating-instance[BroadcastHashJoinExec] physical operator if the plan <<canBroadcastBySizes, should be broadcast per join type and size of join sides>> (for the join type and left or right side of the join). `apply` <<broadcastSideBySizes, selects the build side per join type and total size statistic of join sides>>.
-
-==== [[apply-ShuffledHashJoinExec]] Considering ShuffledHashJoinExec Physical Operator
-
-`apply` gives...FIXME
-
-==== [[apply-SortMergeJoinExec]] Considering SortMergeJoinExec Physical Operator
-
-`apply` gives...FIXME
-
-==== [[apply-BroadcastNestedLoopJoinExec]] Considering BroadcastNestedLoopJoinExec Physical Operator
-
-`apply` gives...FIXME
-
-==== [[apply-CartesianProductExec]] Considering CartesianProductExec Physical Operator
-
-`apply` gives...FIXME

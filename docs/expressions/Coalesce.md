@@ -44,7 +44,7 @@ Spark Optimizer uses NullPropagation.md[NullPropagation] logical optimization to
 
 * `RewriteDistinctAggregates` logical optimization is requested to `rewrite`
 
-* `ExtractEquiJoinKeys` Scala extractor is requested to spark-sql-ExtractEquiJoinKeys.md#unapply[destructure a logical plan]
+* `ExtractEquiJoinKeys` Scala extractor is requested to ExtractEquiJoinKeys.md#unapply[destructure a logical plan]
 
 * `ColumnStat` is requested to spark-sql-ColumnStat.md#statExprs[statExprs]
 

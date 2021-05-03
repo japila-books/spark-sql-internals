@@ -14,7 +14,7 @@ apply(
   plan: LogicalPlan): Seq[SparkPlan]
 ```
 
-For [Join](../logical-operators/Join.md) operators with an [equi-join condition](../spark-sql-ExtractEquiJoinKeys.md) and the left or right side being [broadcast stages](#isBroadcastStage), `apply` gives a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md) physical operator.
+For [Join](../logical-operators/Join.md) operators with an [equi-join condition](../ExtractEquiJoinKeys.md) and the left or right side being [broadcast stages](#isBroadcastStage), `apply` gives a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md) physical operator.
 
 For other Join operators and the left or right side being [broadcast stages](#isBroadcastStage), `apply` gives a [BroadcastNestedLoopJoinExec](../physical-operators/BroadcastNestedLoopJoinExec.md) physical operator.
 

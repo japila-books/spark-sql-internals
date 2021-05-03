@@ -818,7 +818,7 @@ nav:
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md
-  - New &amp; Noteworthy:
+  - New and Noteworthy:
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
       - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
@@ -838,6 +838,7 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
       - Demo: adaptive-query-execution/demo.md
+    - Statistics: new-and-noteworthy/statistics.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
@@ -998,7 +999,7 @@ nav:
     - CreateStruct: CreateStruct.md
     - TypeCoercion: spark-sql-TypeCoercion.md
     - TypeCoercionRule: TypeCoercionRule.md
-    - ExtractEquiJoinKeys: spark-sql-ExtractEquiJoinKeys.md
+    - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md

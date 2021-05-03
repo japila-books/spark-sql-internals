@@ -541,15 +541,13 @@ Default: `10` seconds
 
 Since: `3.0.0`
 
-## <span id="spark.sql.autoBroadcastJoinThreshold"> spark.sql.autoBroadcastJoinThreshold
+## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> spark.sql.autoBroadcastJoinThreshold
 
-Maximum size (in bytes) for a table that will be broadcast to all worker nodes when performing a join.
+Maximum size (in bytes) for a table that can be broadcast (to all worker nodes) in a join
 
-Default: `10L * 1024 * 1024` (10M)
+Default: `10M`
 
-If the size of the statistics of the logical plan of a table is at most the setting, the DataFrame is broadcast for join.
-
-Negative values or `0` disable broadcasting.
+`-1` (or any negative value) disables broadcasting
 
 Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) method to access the current value.
 

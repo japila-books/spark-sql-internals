@@ -88,7 +88,7 @@ Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec
 
 ## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
-[spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property
+The value of [spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property
 
 Used when:
 
@@ -96,7 +96,7 @@ Used when:
 
 ## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 
-[spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
+The value of [spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
 
 Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimizations are executed
 
@@ -104,7 +104,9 @@ Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePart
 
 The value of [spark.sql.autoBroadcastJoinThreshold](configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property
 
-Used in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy
+Used when:
+
+* [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy is executed
 
 ## <span id="autoSizeUpdateEnabled"> autoSizeUpdateEnabled
 

@@ -2,7 +2,7 @@
 
 `BroadcastHashJoinExec` is a [binary physical operator](BinaryExecNode.md) to [perform](#doExecute) a **broadcast hash join**.
 
-`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to spark-sql-ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
+`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
 
 `BroadcastHashJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
