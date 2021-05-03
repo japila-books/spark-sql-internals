@@ -1,3 +1,4 @@
+git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
 mkdocs-minify-plugin>=0.3.0
 mkdocs-git-revision-date-localized-plugin>=0.8
 mkdocs-git-revision-date-plugin>=0.3.1

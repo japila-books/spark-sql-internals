@@ -24,7 +24,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git@7.1.3-insiders-2.7.0
           pip install -r requirements.txt
       - name: Build documentation
         env:
