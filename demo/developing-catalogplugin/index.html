@@ -7,116 +7,116 @@
 
 <span class=n>libraryDependencies</span> <span class=o>+=</span> <span class=s>&quot;org.apache.spark&quot;</span> <span class=o>%%</span> <span class=s>&quot;spark-sql&quot;</span> <span class=o>%</span> <span class=s>&quot;3.0.1&quot;</span> <span class=o>%</span> <span class=nc>Provided</span>
 </code></pre></div> <h3 id=code>Code<a class=headerlink href=#code title="Permanent link">&para;</a></h3> <div class="admonition tip"> <p class=admonition-title>Tip</p> <p>Use <code>:paste -raw</code> in <code>spark-shell</code> to enter paste mode and paste the code (incl. the package declaration).</p> <div class=highlight><pre><span></span><code>:paste -raw
-</code></pre></div> </div> <div class=highlight><pre><span></span><code><span class=k>package</span> <span class=nn>pl.japila.spark.sql</span>
+</code></pre></div> </div> <div class=highlight><pre><span></span><code><span class=k>package</span> <span class=nn>pl</span><span class=p>.</span><span class=nn>japila</span><span class=p>.</span><span class=nn>spark</span><span class=p>.</span><span class=n>sql</span>
 
-<span class=k>import</span> <span class=nn>org.apache.spark.sql.connector.catalog._</span>
-<span class=k>import</span> <span class=nn>org.apache.spark.sql.connector.expressions.Transform</span>
-<span class=k>import</span> <span class=nn>org.apache.spark.sql.types.StructType</span>
-<span class=k>import</span> <span class=nn>org.apache.spark.sql.util.CaseInsensitiveStringMap</span>
+<span class=k>import</span> <span class=nn>org</span><span class=p>.</span><span class=nn>apache</span><span class=p>.</span><span class=nn>spark</span><span class=p>.</span><span class=nn>sql</span><span class=p>.</span><span class=nn>connector</span><span class=p>.</span><span class=nn>catalog</span><span class=p>.</span><span class=n>_</span>
+<span class=k>import</span> <span class=nn>org</span><span class=p>.</span><span class=nn>apache</span><span class=p>.</span><span class=nn>spark</span><span class=p>.</span><span class=nn>sql</span><span class=p>.</span><span class=nn>connector</span><span class=p>.</span><span class=nn>expressions</span><span class=p>.</span><span class=nc>Transform</span>
+<span class=k>import</span> <span class=nn>org</span><span class=p>.</span><span class=nn>apache</span><span class=p>.</span><span class=nn>spark</span><span class=p>.</span><span class=nn>sql</span><span class=p>.</span><span class=nn>types</span><span class=p>.</span><span class=nc>StructType</span>
+<span class=k>import</span> <span class=nn>org</span><span class=p>.</span><span class=nn>apache</span><span class=p>.</span><span class=nn>spark</span><span class=p>.</span><span class=nn>sql</span><span class=p>.</span><span class=nn>util</span><span class=p>.</span><span class=nc>CaseInsensitiveStringMap</span>
 
-<span class=k>import</span> <span class=nn>java.util.</span><span class=o>{</span><span class=nc>Map</span> <span class=o>=&gt;</span> <span class=nc>JMap</span><span class=o>}</span>
+<span class=k>import</span> <span class=nn>java</span><span class=p>.</span><span class=nn>util</span><span class=p>.{</span><span class=nc>Map</span> <span class=o>=&gt;</span> <span class=nc>JMap</span><span class=p>}</span>
 
 <span class=k>class</span> <span class=nc>DemoCatalog</span>
     <span class=k>extends</span> <span class=nc>CatalogPlugin</span>
     <span class=k>with</span> <span class=nc>TableCatalog</span>
-    <span class=k>with</span> <span class=nc>SupportsNamespaces</span> <span class=o>{</span>
+    <span class=k>with</span> <span class=nc>SupportsNamespaces</span> <span class=p>{</span>
 
-  <span class=k>val</span> <span class=nc>Success</span> <span class=o>=</span> <span class=kc>true</span>
+  <span class=kd>val</span> <span class=nc>Success</span> <span class=o>=</span> <span class=kc>true</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>name</span><span class=o>()</span><span class=k>:</span> <span class=kt>String</span> <span class=o>=</span> <span class=nc>DemoCatalog</span><span class=o>.</span><span class=nc>NAME</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>name</span><span class=p>():</span> <span class=nc>String</span> <span class=o>=</span> <span class=nc>DemoCatalog</span><span class=p>.</span><span class=nc>NAME</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>defaultNamespace</span><span class=o>()</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>]</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=k>val</span> <span class=n>ns</span> <span class=o>=</span> <span class=k>super</span><span class=o>.</span><span class=n>defaultNamespace</span><span class=o>()</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;defaultNamespace = </span><span class=si>${</span><span class=n>ns</span><span class=o>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>defaultNamespace</span><span class=p>():</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=kd>val</span> <span class=n>ns</span> <span class=o>=</span> <span class=bp>super</span><span class=p>.</span><span class=n>defaultNamespace</span><span class=p>()</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;defaultNamespace = </span><span class=si>${</span><span class=n>ns</span><span class=p>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>&quot;</span><span class=p>)</span>
     <span class=n>ns</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>initialize</span><span class=o>(</span><span class=n>name</span><span class=k>:</span> <span class=kt>String</span><span class=o>,</span> <span class=n>options</span><span class=k>:</span> <span class=kt>CaseInsensitiveStringMap</span><span class=o>)</span><span class=k>:</span> <span class=kt>Unit</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=k>import</span> <span class=nn>scala.collection.JavaConverters._</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; initialize(</span><span class=si>$name</span><span class=s>, </span><span class=si>${</span><span class=n>options</span><span class=o>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=o>)</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>initialize</span><span class=p>(</span><span class=n>name</span><span class=p>:</span> <span class=nc>String</span><span class=p>,</span> <span class=n>options</span><span class=p>:</span> <span class=nc>CaseInsensitiveStringMap</span><span class=p>):</span> <span class=nc>Unit</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=k>import</span> <span class=nn>scala</span><span class=p>.</span><span class=nn>collection</span><span class=p>.</span><span class=nc>JavaConverters</span><span class=p>.</span><span class=n>_</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; initialize(</span><span class=si>$</span><span class=n>name</span><span class=s>, </span><span class=si>${</span><span class=n>options</span><span class=p>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=p>)</span>
+  <span class=p>}</span>
 
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>listNamespaces</span><span class=o>()</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>]]</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>&quot;&gt;&gt;&gt; listNamespaces()&quot;</span><span class=o>)</span>
-    <span class=nc>Array</span><span class=o>.</span><span class=n>empty</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>listNamespaces</span><span class=p>():</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>&quot;&gt;&gt;&gt; listNamespaces()&quot;</span><span class=p>)</span>
+    <span class=nc>Array</span><span class=p>.</span><span class=n>empty</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>listNamespaces</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>]]</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; listNamespaces(</span><span class=si>$namespace</span><span class=s>)&quot;</span><span class=o>)</span>
-    <span class=nc>Array</span><span class=o>.</span><span class=n>empty</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>listNamespaces</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]):</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; listNamespaces(</span><span class=si>$</span><span class=n>namespace</span><span class=s>)&quot;</span><span class=p>)</span>
+    <span class=nc>Array</span><span class=p>.</span><span class=n>empty</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>loadNamespaceMetadata</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>JMap</span><span class=o>[</span><span class=kt>String</span><span class=p>,</span> <span class=kt>String</span><span class=o>]</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; loadNamespaceMetadata(</span><span class=si>${</span><span class=n>namespace</span><span class=o>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>)&quot;</span><span class=o>)</span>
-    <span class=k>import</span> <span class=nn>scala.collection.JavaConverters._</span>
-    <span class=nc>Map</span><span class=o>.</span><span class=n>empty</span><span class=o>[</span><span class=kt>String</span><span class=p>,</span> <span class=kt>String</span><span class=o>].</span><span class=n>asJava</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>loadNamespaceMetadata</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]):</span> <span class=nc>JMap</span><span class=p>[</span><span class=nc>String</span><span class=p>,</span> <span class=nc>String</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; loadNamespaceMetadata(</span><span class=si>${</span><span class=n>namespace</span><span class=p>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>)&quot;</span><span class=p>)</span>
+    <span class=k>import</span> <span class=nn>scala</span><span class=p>.</span><span class=nn>collection</span><span class=p>.</span><span class=nc>JavaConverters</span><span class=p>.</span><span class=n>_</span>
+    <span class=nc>Map</span><span class=p>.</span><span class=n>empty</span><span class=p>[</span><span class=nc>String</span><span class=p>,</span> <span class=nc>String</span><span class=p>].</span><span class=n>asJava</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>createNamespace</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>],</span> <span class=n>metadata</span><span class=k>:</span> <span class=kt>JMap</span><span class=o>[</span><span class=kt>String</span><span class=p>,</span> <span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>Unit</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=k>import</span> <span class=nn>scala.collection.JavaConverters._</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; createNamespace(</span><span class=si>$namespace</span><span class=s>, </span><span class=si>${</span><span class=n>metadata</span><span class=o>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=o>)</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>createNamespace</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>],</span> <span class=n>metadata</span><span class=p>:</span> <span class=nc>JMap</span><span class=p>[</span><span class=nc>String</span><span class=p>,</span> <span class=nc>String</span><span class=p>]):</span> <span class=nc>Unit</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=k>import</span> <span class=nn>scala</span><span class=p>.</span><span class=nn>collection</span><span class=p>.</span><span class=nc>JavaConverters</span><span class=p>.</span><span class=n>_</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; createNamespace(</span><span class=si>$</span><span class=n>namespace</span><span class=s>, </span><span class=si>${</span><span class=n>metadata</span><span class=p>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=p>)</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>alterNamespace</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>],</span> <span class=n>changes</span><span class=k>:</span> <span class=kt>NamespaceChange*</span><span class=o>)</span><span class=k>:</span> <span class=kt>Unit</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; alterNamespace(</span><span class=si>$namespace</span><span class=s>, </span><span class=si>$changes</span><span class=s>)&quot;</span><span class=o>)</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>alterNamespace</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>],</span> <span class=n>changes</span><span class=p>:</span> <span class=nc>NamespaceChange</span><span class=o>*</span><span class=p>):</span> <span class=nc>Unit</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; alterNamespace(</span><span class=si>$</span><span class=n>namespace</span><span class=s>, </span><span class=si>$</span><span class=n>changes</span><span class=s>)&quot;</span><span class=p>)</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>dropNamespace</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>Boolean</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; dropNamespace(</span><span class=si>$namespace</span><span class=s>)&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>dropNamespace</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]):</span> <span class=nc>Boolean</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; dropNamespace(</span><span class=si>$</span><span class=n>namespace</span><span class=s>)&quot;</span><span class=p>)</span>
     <span class=nc>Success</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>listTables</span><span class=o>(</span><span class=n>namespace</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>Identifier</span><span class=o>]</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; listTables(</span><span class=si>${</span><span class=n>namespace</span><span class=o>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>)&quot;</span><span class=o>)</span>
-    <span class=nc>Array</span><span class=o>.</span><span class=n>empty</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>listTables</span><span class=p>(</span><span class=n>namespace</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>String</span><span class=p>]):</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>Identifier</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; listTables(</span><span class=si>${</span><span class=n>namespace</span><span class=p>.</span><span class=n>toSeq</span><span class=si>}</span><span class=s>)&quot;</span><span class=p>)</span>
+    <span class=nc>Array</span><span class=p>.</span><span class=n>empty</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>loadTable</span><span class=o>(</span><span class=n>ident</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>)</span><span class=k>:</span> <span class=kt>Table</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; loadTable(</span><span class=si>$ident</span><span class=s>)&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>loadTable</span><span class=p>(</span><span class=n>ident</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>):</span> <span class=nc>Table</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; loadTable(</span><span class=si>$</span><span class=n>ident</span><span class=s>)&quot;</span><span class=p>)</span>
     <span class=o>???</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>createTable</span><span class=o>(</span>
-      <span class=n>ident</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>,</span>
-      <span class=n>schema</span><span class=k>:</span> <span class=kt>StructType</span><span class=o>,</span>
-      <span class=n>partitions</span><span class=k>:</span> <span class=kt>Array</span><span class=o>[</span><span class=kt>Transform</span><span class=o>],</span>
-      <span class=n>properties</span><span class=k>:</span> <span class=kt>JMap</span><span class=o>[</span><span class=kt>String</span><span class=p>,</span> <span class=kt>String</span><span class=o>])</span><span class=k>:</span> <span class=kt>Table</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=k>import</span> <span class=nn>scala.collection.JavaConverters._</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; createTable(</span><span class=si>$ident</span><span class=s>, </span><span class=si>$schema</span><span class=s>, </span><span class=si>$partitions</span><span class=s>, </span><span class=si>${</span><span class=n>properties</span><span class=o>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>createTable</span><span class=p>(</span>
+      <span class=n>ident</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>,</span>
+      <span class=n>schema</span><span class=p>:</span> <span class=nc>StructType</span><span class=p>,</span>
+      <span class=n>partitions</span><span class=p>:</span> <span class=nc>Array</span><span class=p>[</span><span class=nc>Transform</span><span class=p>],</span>
+      <span class=n>properties</span><span class=p>:</span> <span class=nc>JMap</span><span class=p>[</span><span class=nc>String</span><span class=p>,</span> <span class=nc>String</span><span class=p>]):</span> <span class=nc>Table</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=k>import</span> <span class=nn>scala</span><span class=p>.</span><span class=nn>collection</span><span class=p>.</span><span class=nc>JavaConverters</span><span class=p>.</span><span class=n>_</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; createTable(</span><span class=si>$</span><span class=n>ident</span><span class=s>, </span><span class=si>$</span><span class=n>schema</span><span class=s>, </span><span class=si>$</span><span class=n>partitions</span><span class=s>, </span><span class=si>${</span><span class=n>properties</span><span class=p>.</span><span class=n>asScala</span><span class=si>}</span><span class=s>)&quot;</span><span class=p>)</span>
     <span class=o>???</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>alterTable</span><span class=o>(</span><span class=n>ident</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>,</span> <span class=n>changes</span><span class=k>:</span> <span class=kt>TableChange*</span><span class=o>)</span><span class=k>:</span> <span class=kt>Table</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; alterTable(</span><span class=si>$ident</span><span class=s>, </span><span class=si>$changes</span><span class=s>)&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>alterTable</span><span class=p>(</span><span class=n>ident</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>,</span> <span class=n>changes</span><span class=p>:</span> <span class=nc>TableChange</span><span class=o>*</span><span class=p>):</span> <span class=nc>Table</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; alterTable(</span><span class=si>$</span><span class=n>ident</span><span class=s>, </span><span class=si>$</span><span class=n>changes</span><span class=s>)&quot;</span><span class=p>)</span>
     <span class=o>???</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>dropTable</span><span class=o>(</span><span class=n>ident</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>)</span><span class=k>:</span> <span class=kt>Boolean</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; dropTable(</span><span class=si>$ident</span><span class=s>)&quot;</span><span class=o>)</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>dropTable</span><span class=p>(</span><span class=n>ident</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>):</span> <span class=nc>Boolean</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; dropTable(</span><span class=si>$</span><span class=n>ident</span><span class=s>)&quot;</span><span class=p>)</span>
     <span class=nc>Success</span>
-  <span class=o>}</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>renameTable</span><span class=o>(</span><span class=n>oldIdent</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>,</span> <span class=n>newIdent</span><span class=k>:</span> <span class=kt>Identifier</span><span class=o>)</span><span class=k>:</span> <span class=kt>Unit</span> <span class=o>=</span> <span class=o>{</span>
-    <span class=n>println</span><span class=o>(</span><span class=s>s&quot;&gt;&gt;&gt; renameTable(</span><span class=si>$oldIdent</span><span class=s>, </span><span class=si>$newIdent</span><span class=s>)&quot;</span><span class=o>)</span>
-  <span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>renameTable</span><span class=p>(</span><span class=n>oldIdent</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>,</span> <span class=n>newIdent</span><span class=p>:</span> <span class=nc>Identifier</span><span class=p>):</span> <span class=nc>Unit</span> <span class=o>=</span> <span class=p>{</span>
+    <span class=n>println</span><span class=p>(</span><span class=s>s&quot;&gt;&gt;&gt; renameTable(</span><span class=si>$</span><span class=n>oldIdent</span><span class=s>, </span><span class=si>$</span><span class=n>newIdent</span><span class=s>)&quot;</span><span class=p>)</span>
+  <span class=p>}</span>
 
-  <span class=k>override</span> <span class=k>def</span> <span class=n>toString</span> <span class=o>=</span> <span class=s>s&quot;</span><span class=si>${</span><span class=k>this</span><span class=o>.</span><span class=n>getClass</span><span class=o>.</span><span class=n>getCanonicalName</span><span class=si>}</span><span class=s>(</span><span class=si>$name</span><span class=s>)&quot;</span>
-<span class=o>}</span>
+  <span class=k>override</span> <span class=k>def</span> <span class=nf>toString</span> <span class=o>=</span> <span class=s>s&quot;</span><span class=si>${</span><span class=bp>this</span><span class=p>.</span><span class=n>getClass</span><span class=p>.</span><span class=n>getCanonicalName</span><span class=si>}</span><span class=s>(</span><span class=si>$</span><span class=n>name</span><span class=s>)&quot;</span>
+<span class=p>}</span>
 
-<span class=k>object</span> <span class=nc>DemoCatalog</span> <span class=o>{</span>
-  <span class=k>val</span> <span class=nc>NAME</span> <span class=o>=</span> <span class=s>&quot;demo&quot;</span>
-<span class=o>}</span>
-</code></pre></div> <h2 id=configure-sparksession>Configure SparkSession<a class=headerlink href=#configure-sparksession title="Permanent link">&para;</a></h2> <p>Let's "install" this custom <code>CatalogPlugin</code> in the current <a href=../../SparkSession/ >SparkSession</a>.</p> <p>There are various ways to do it and <code>SET</code> SQL command is as fine as the others (for the demo at least).</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=o>(</span><span class=s>&quot;SET spark.sql.catalog.demo=pl.japila.spark.sql.DemoCatalog&quot;</span><span class=o>)</span>
-</code></pre></div> <h2 id=show-time>Show Time<a class=headerlink href=#show-time title="Permanent link">&para;</a></h2> <h3 id=access-demo-catalog-using-catalogmanager>Access Demo Catalog using CatalogManager<a class=headerlink href=#access-demo-catalog-using-catalogmanager title="Permanent link">&para;</a></h3> <p>Let's use the <a href=../../connector/catalog/CatalogManager/ >CatalogManager</a> to access the demo catalog.</p> <div class=highlight><pre><span></span><code><span class=k>val</span> <span class=n>demo</span> <span class=o>=</span> <span class=n>spark</span><span class=o>.</span><span class=n>sessionState</span><span class=o>.</span><span class=n>catalogManager</span><span class=o>.</span><span class=n>catalog</span><span class=o>(</span><span class=s>&quot;demo&quot;</span><span class=o>)</span>
+<span class=k>object</span> <span class=nc>DemoCatalog</span> <span class=p>{</span>
+  <span class=kd>val</span> <span class=nc>NAME</span> <span class=o>=</span> <span class=s>&quot;demo&quot;</span>
+<span class=p>}</span>
+</code></pre></div> <h2 id=configure-sparksession>Configure SparkSession<a class=headerlink href=#configure-sparksession title="Permanent link">&para;</a></h2> <p>Let's "install" this custom <code>CatalogPlugin</code> in the current <a href=../../SparkSession/ >SparkSession</a>.</p> <p>There are various ways to do it and <code>SET</code> SQL command is as fine as the others (for the demo at least).</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=p>(</span><span class=s>&quot;SET spark.sql.catalog.demo=pl.japila.spark.sql.DemoCatalog&quot;</span><span class=p>)</span>
+</code></pre></div> <h2 id=show-time>Show Time<a class=headerlink href=#show-time title="Permanent link">&para;</a></h2> <h3 id=access-demo-catalog-using-catalogmanager>Access Demo Catalog using CatalogManager<a class=headerlink href=#access-demo-catalog-using-catalogmanager title="Permanent link">&para;</a></h3> <p>Let's use the <a href=../../connector/catalog/CatalogManager/ >CatalogManager</a> to access the demo catalog.</p> <div class=highlight><pre><span></span><code><span class=kd>val</span> <span class=n>demo</span> <span class=o>=</span> <span class=n>spark</span><span class=p>.</span><span class=n>sessionState</span><span class=p>.</span><span class=n>catalogManager</span><span class=p>.</span><span class=n>catalog</span><span class=p>(</span><span class=s>&quot;demo&quot;</span><span class=p>)</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; val demo = spark.sessionState.catalogManager.catalog(&quot;demo&quot;)
 &gt;&gt;&gt; initialize(demo, Map())
 demo: org.apache.spark.sql.connector.catalog.CatalogPlugin = pl.japila.spark.sql.DemoCatalog(demo)
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=n>demo</span><span class=o>.</span><span class=n>defaultNamespace</span>
+</code></pre></div> <div class=highlight><pre><span></span><code><span class=n>demo</span><span class=p>.</span><span class=n>defaultNamespace</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; demo.defaultNamespace
 defaultNamespace = WrappedArray()
 res1: Array[String] = Array()
-</code></pre></div> <h3 id=show-tables>Show Tables<a class=headerlink href=#show-tables title="Permanent link">&para;</a></h3> <p>Let's use <code>SHOW TABLES</code> SQL command to show the tables in the demo catalog.</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=o>(</span><span class=s>&quot;SHOW TABLES IN demo&quot;</span><span class=o>).</span><span class=n>show</span><span class=o>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=o>)</span>
+</code></pre></div> <h3 id=show-tables>Show Tables<a class=headerlink href=#show-tables title="Permanent link">&para;</a></h3> <p>Let's use <code>SHOW TABLES</code> SQL command to show the tables in the demo catalog.</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=p>(</span><span class=s>&quot;SHOW TABLES IN demo&quot;</span><span class=p>).</span><span class=n>show</span><span class=p>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=p>)</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; sql(&quot;SHOW TABLES IN demo&quot;).show(truncate = false)
 &gt;&gt;&gt; initialize(demo, Map())
 &gt;&gt;&gt; listTables(WrappedArray())
@@ -124,21 +124,21 @@ res1: Array[String] = Array()
 |namespace|tableName|
 +---------+---------+
 +---------+---------+
-</code></pre></div> <h3 id=show-namespaces>Show Namespaces<a class=headerlink href=#show-namespaces title="Permanent link">&para;</a></h3> <p>Let's use <code>SHOW NAMESPACES</code> SQL command to show the catalogs (incl. ours).</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=o>(</span><span class=s>&quot;SHOW NAMESPACES IN demo&quot;</span><span class=o>).</span><span class=n>show</span><span class=o>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=o>)</span>
+</code></pre></div> <h3 id=show-namespaces>Show Namespaces<a class=headerlink href=#show-namespaces title="Permanent link">&para;</a></h3> <p>Let's use <code>SHOW NAMESPACES</code> SQL command to show the catalogs (incl. ours).</p> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=p>(</span><span class=s>&quot;SHOW NAMESPACES IN demo&quot;</span><span class=p>).</span><span class=n>show</span><span class=p>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=p>)</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; sql(&quot;SHOW NAMESPACES IN demo&quot;).show(truncate = false)
 &gt;&gt;&gt; listNamespaces()
 +---------+
 |namespace|
 +---------+
 +---------+
-</code></pre></div> <h3 id=create-namespace>Create Namespace<a class=headerlink href=#create-namespace title="Permanent link">&para;</a></h3> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=o>(</span><span class=s>&quot;CREATE NAMESPACE IF NOT EXISTS demo.hello&quot;</span><span class=o>).</span><span class=n>show</span><span class=o>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=o>)</span>
+</code></pre></div> <h3 id=create-namespace>Create Namespace<a class=headerlink href=#create-namespace title="Permanent link">&para;</a></h3> <div class=highlight><pre><span></span><code><span class=n>sql</span><span class=p>(</span><span class=s>&quot;CREATE NAMESPACE IF NOT EXISTS demo.hello&quot;</span><span class=p>).</span><span class=n>show</span><span class=p>(</span><span class=n>truncate</span> <span class=o>=</span> <span class=kc>false</span><span class=p>)</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; sql(&quot;CREATE NAMESPACE IF NOT EXISTS demo.hello&quot;).show(truncate = false)
 &gt;&gt;&gt; loadNamespaceMetadata(WrappedArray(hello))
 ++
 ||
 ++
 ++
-</code></pre></div> <h3 id=append-data-to-table>Append Data to Table<a class=headerlink href=#append-data-to-table title="Permanent link">&para;</a></h3> <div class=highlight><pre><span></span><code><span class=n>spark</span><span class=o>.</span><span class=n>range</span><span class=o>(</span><span class=mi>5</span><span class=o>).</span><span class=n>writeTo</span><span class=o>(</span><span class=s>&quot;demo.t1&quot;</span><span class=o>).</span><span class=n>append</span>
+</code></pre></div> <h3 id=append-data-to-table>Append Data to Table<a class=headerlink href=#append-data-to-table title="Permanent link">&para;</a></h3> <div class=highlight><pre><span></span><code><span class=n>spark</span><span class=p>.</span><span class=n>range</span><span class=p>(</span><span class=mi>5</span><span class=p>).</span><span class=n>writeTo</span><span class=p>(</span><span class=s>&quot;demo.t1&quot;</span><span class=p>).</span><span class=n>append</span>
 </code></pre></div> <div class=highlight><pre><span></span><code>scala&gt; spark.range(5).writeTo(&quot;demo.t1&quot;).append
 &gt;&gt;&gt; loadTable(t1)
 scala.NotImplementedError: an implementation is missing
