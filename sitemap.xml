@@ -1296,6 +1296,18 @@
      <lastmod>2021-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Predicate/</loc>
+     <lastmod>2021-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryComparison/</loc>
+     <lastmod>2021-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryOperator/</loc>
+     <lastmod>2021-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/NonSQLExpression/</loc>
      <lastmod>2021-05-04</lastmod>
      <changefreq>daily</changefreq>
@@ -1421,6 +1433,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/EncodeUsingSerializer/</loc>
+     <lastmod>2021-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/EqualNullSafe/</loc>
+     <lastmod>2021-05-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/EqualTo/</loc>
      <lastmod>2021-05-04</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
