@@ -34,7 +34,7 @@ prune(
 
 `prune` transforms [Join](../logical-operators/Join.md) operators of the following "shape":
 
-1. The join condition is defined and of type `EqualTo` (`=`)
+1. [EqualTo](../expressions/EqualTo.md) join conditions
 
 1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../HadoopFsRelation.md)
 

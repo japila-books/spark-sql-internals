@@ -232,16 +232,16 @@ q.foreach(_ => ())
 .SortMergeJoin of One Bucketed Table (Details for Query)
 image::images/spark-sql-bucketing-sortmergejoin-one-bucketed-table.png[align="center"]
 
-=== [[bucket-pruning]] Bucket Pruning -- Optimizing Filtering on Bucketed Column (Reducing Bucket Files to Scan)
+## Bucket Pruning
 
-As of https://issues.apache.org/jira/browse/SPARK-23803[Spark 2.4], Spark SQL supports *bucket pruning* to optimize filtering on bucketed column (by reducing the number of bucket files to scan).
+As of [Spark 2.4](https://issues.apache.org/jira/browse/SPARK-23803), Spark SQL supports *bucket pruning* to optimize filtering on bucketed column (by reducing the number of bucket files to scan).
 
 Bucket pruning supports the following predicate expressions:
 
-* `EqualTo` (`=`)
-* `EqualNullSafe` (`++<=>++`)
-* <<spark-sql-Expression-In.md#, In>>
-* <<spark-sql-Expression-InSet.md#, InSet>>
+* [EqualTo](expressions/EqualTo.md)
+* [EqualNullSafe](expressions/EqualNullSafe.md)
+* [In](expressions/In.md)
+* [InSet](expressions/InSet.md)
 * `And` and `Or` of the above
 
 [FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only <<LogicalRelation.md#, LogicalRelations>> over [HadoopFsRelation](HadoopFsRelation.md) with the [bucketing specification](HadoopFsRelation.md#bucketSpec) with the following:

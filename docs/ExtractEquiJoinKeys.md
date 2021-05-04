@@ -86,7 +86,7 @@ Considering join on: [condition]
 
 `unapply` then splits `condition` at `And` expression points (if there are any) to have a list of predicate expressions.
 
-`unapply` finds `EqualTo` and `EqualNullSafe` binary expressions to collect the join keys (for the left and right side).
+`unapply` finds [EqualTo](expressions/EqualTo.md) and [EqualNullSafe](expressions/EqualNullSafe.md) binary predicates to collect the join keys (for the left and right side).
 
 `unapply` takes the expressions that...FIXME...to build `otherPredicates`.
 

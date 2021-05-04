@@ -311,10 +311,10 @@ NOTE: `buildFilter` is a Scala lazy value which is computed once when accessed a
 | `Or`
 |
 
-| `EqualTo`
+| [EqualTo](../expressions/EqualTo.md)
 |
 
-| `EqualNullSafe`
+| [EqualNullSafe](../expressions/EqualNullSafe.md)
 |
 
 | `LessThan`

@@ -95,10 +95,10 @@ translateFilter(predicate: Expression): Option[Filter]
 | Catalyst Expression
 | Filter Predicate
 
-| `EqualTo`
+| [EqualTo](../expressions/EqualTo.md)
 | `EqualTo`
 
-| `EqualNullSafe`
+| [EqualNullSafe](../expressions/EqualNullSafe.md)
 | `EqualNullSafe`
 
 | `GreaterThan`
