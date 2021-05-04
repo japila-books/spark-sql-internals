@@ -1000,6 +1000,7 @@ nav:
     - TypeCoercion: spark-sql-TypeCoercion.md
     - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
+    - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
