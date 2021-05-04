@@ -474,6 +474,9 @@ nav:
       - PlanChangeLogger: catalyst/PlanChangeLogger.md
     - Catalyst Expressions:
       - Expression: expressions/Expression.md
+      - Predicate: expressions/Predicate.md
+      - BinaryComparison: expressions/BinaryComparison.md
+      - BinaryOperator: expressions/BinaryOperator.md
       - NonSQLExpression: expressions/NonSQLExpression.md
       - UserDefinedExpression: expressions/UserDefinedExpression.md
       - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
@@ -507,6 +510,8 @@ nav:
         - DynamicPruningExpression: expressions/DynamicPruningExpression.md
         - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
         - EncodeUsingSerializer: expressions/EncodeUsingSerializer.md
+        - EqualNullSafe: expressions/EqualNullSafe.md
+        - EqualTo: expressions/EqualTo.md
         - Exists: expressions/Exists.md
         - ExpectsInputTypes: expressions/ExpectsInputTypes.md
         - ExplodeBase: expressions/ExplodeBase.md

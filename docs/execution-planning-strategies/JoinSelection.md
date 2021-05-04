@@ -21,7 +21,7 @@ apply(
 
 ### <span id="ExtractEquiJoinKeys"> ExtractEquiJoinKeys
 
-`apply` uses [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md) to find [Join](../logical-operators/Join.md) logical operators with `EqualTo` and `EqualNullSafe` condition expressions.
+`apply` uses [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md) to find [Join](../logical-operators/Join.md) logical operators with [EqualTo](../expressions/EqualTo.md) and [EqualNullSafe](../expressions/EqualNullSafe.md) condition expressions.
 
 `apply` does the following (in the order until a join physical operator has been determined):
 
