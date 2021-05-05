@@ -1,10 +1,86 @@
-# BroadcastHashJoinExec Binary Physical Operator
+# BroadcastHashJoinExec Physical Operator
 
-`BroadcastHashJoinExec` is a [binary physical operator](BinaryExecNode.md) to [perform](#doExecute) a **broadcast hash join**.
+`BroadcastHashJoinExec` is a [hash-based join physical operator](HashJoin.md) to [perform](#doExecute) a **broadcast hash join**.
 
-`BroadcastHashJoinExec` is <<creating-instance, created>> after applying [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy to ExtractEquiJoinKeys.md[ExtractEquiJoinKeys]-destructurable logical query plans (i.e. [INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](../execution-planning-strategies/JoinSelection.md#canBuildRight)) of which the `right` physical operator [can be broadcast](../execution-planning-strategies/JoinSelection.md#canBroadcast).
+`BroadcastHashJoinExec` supports [Java code generation](CodegenSupport.md) ([variable prefix](CodegenSupport.md#variablePrefix): `bhj`).
 
-`BroadcastHashJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![BroadcastHashJoinExec in web UI (Details for Query)](../images/spark-sql-BroadcastHashJoinExec-webui-query-details.png)
+
+## Creating Instance
+
+`BroadcastHashJoinExec` takes the following to be created:
+
+* <span id="leftKeys"> Left Key [Expression](../expressions/Expression.md)s
+* <span id="rightKeys"> Right Key [Expression](../expressions/Expression.md)s
+* <span id="joinType"> [Join Type](../spark-sql-joins.md#join-types)
+* <span id="buildSide"> `BuildSide`
+* <span id="condition"> Optional Join Condition [Expression](../expressions/Expression.md)
+* <span id="left"> Left Child [Physical Operator](SparkPlan.md)
+* <span id="right"> Right Child [Physical Operator](SparkPlan.md)
+* [isNullAwareAntiJoin](#isNullAwareAntiJoin) flag
+
+`BroadcastHashJoinExec` is created when:
+
+* [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed ([createBroadcastHashJoin](../execution-planning-strategies/JoinSelection.md#createBroadcastHashJoin) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/JoinSelection.md#ExtractSingleColumnNullAwareAntiJoin))
+* [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy is executed ([ExtractEquiJoinKeys](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractEquiJoinKeys) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractSingleColumnNullAwareAntiJoin))
+
+## <span id="isNullAwareAntiJoin"> isNullAwareAntiJoin
+
+`BroadcastHashJoinExec` can be given `isNullAwareAntiJoin` flag when [created](#creating-instance) or defaults to `false`.
+
+If enabled, `BroadcastHashJoinExec` makes sure that the following all hold:
+
+1. There is one [left key](#leftKeys) only
+1. There is one [right key](#rightKeys) only
+1. [Join Type](#joinType) is `LeftAnti`
+1. [Build Side](#buildSide) is `BuildRight`
+1. [Join condition](#condition) is not defined
+
+`isNullAwareAntiJoin` is used for the following:
+
+* [requiredChildDistribution](#requiredChildDistribution)
+* _others_?
+
+## <span id="requiredChildDistribution"> Required Child Output Distribution
+
+```scala
+requiredChildDistribution: Seq[Distribution]
+```
+
+`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
+
+BuildSide | Left Child | Right Child
+----------|------------|------------
+ BuildLeft | [BroadcastDistribution](BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys) | [UnspecifiedDistribution](UnspecifiedDistribution.md)
+ BuildRight | [UnspecifiedDistribution](UnspecifiedDistribution.md) | [BroadcastDistribution](BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys)
+
+## <span id="outputPartitioning"> Output Data Partitioning Requirements
+
+```scala
+outputPartitioning: Partitioning
+```
+
+`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+
+`outputPartitioning`...FIXME
+
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute`...FIXME
+
+## Demo
 
 ```text
 val tokens = Seq(
@@ -26,32 +102,7 @@ scala> q.explain
       +- LocalTableScan [id#20, token#21]
 ```
 
-`BroadcastHashJoinExec` <<requiredChildDistribution, requires that partition requirements>> for the two children physical operators match [BroadcastDistribution](BroadcastDistribution.md) (with a [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md)) and [UnspecifiedDistribution](UnspecifiedDistribution.md) (for <<left, left>> and <<right, right>> sides of a join or vice versa).
-
-[[metrics]]
-.BroadcastHashJoinExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-
-| [[avgHashProbe]] `avgHashProbe`
-| avg hash probe
-|
-|===
-
-.BroadcastHashJoinExec in web UI (Details for Query)
-image::images/spark-sql-BroadcastHashJoinExec-webui-query-details.png[align="center"]
-
-NOTE: The prefix for variable names for `BroadcastHashJoinExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is *bhj*.
-
-[source, scala]
-----
+```text
 scala> q.queryExecution.debug.codegen
 Found 1 WholeStageCodegen subtrees.
 == Subtree 1 / 1 ==
@@ -77,112 +128,4 @@ Generated code:
 /* 013 */   private org.apache.spark.sql.catalyst.expressions.codegen.BufferHolder bhj_holder;
 /* 014 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter bhj_rowWriter;
 ...
-----
-
-[[requiredChildDistribution]]
-.BroadcastHashJoinExec's Required Child Output Distributions
-[cols="1m,2,2",options="header",width="100%"]
-|===
-| BuildSide
-| Left Child
-| Right Child
-
-| BuildLeft
-| [BroadcastDistribution](BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys)
-| [UnspecifiedDistribution](UnspecifiedDistribution.md)
-
-| BuildRight
-| [UnspecifiedDistribution](UnspecifiedDistribution.md)
-| [BroadcastDistribution](BroadcastDistribution.md) with [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md) broadcast mode of [build join keys](HashJoin.md#buildKeys)
-|===
-
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-`doExecute`...FIXME
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-=== [[codegenInner]] Generating Java Source Code for Inner Join -- `codegenInner` Internal Method
-
-[source, scala]
-----
-codegenInner(ctx: CodegenContext, input: Seq[ExprCode]): String
-----
-
-`codegenInner`...FIXME
-
-NOTE: `codegenInner` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
-
-=== [[codegenOuter]] Generating Java Source Code for Left or Right Outer Join -- `codegenOuter` Internal Method
-
-[source, scala]
-----
-codegenOuter(ctx: CodegenContext, input: Seq[ExprCode]): String
-----
-
-`codegenOuter`...FIXME
-
-NOTE: `codegenOuter` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
-
-=== [[codegenSemi]] Generating Java Source Code for Left Semi Join -- `codegenSemi` Internal Method
-
-[source, scala]
-----
-codegenSemi(ctx: CodegenContext, input: Seq[ExprCode]): String
-----
-
-`codegenSemi`...FIXME
-
-NOTE: `codegenSemi` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
-
-=== [[codegenAnti]] Generating Java Source Code for Anti Join -- `codegenAnti` Internal Method
-
-[source, scala]
-----
-codegenAnti(ctx: CodegenContext, input: Seq[ExprCode]): String
-----
-
-`codegenAnti`...FIXME
-
-NOTE: `codegenAnti` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
-
-=== [[codegenExistence]] `codegenExistence` Internal Method
-
-[source, scala]
-----
-codegenExistence(ctx: CodegenContext, input: Seq[ExprCode]): String
-----
-
-`codegenExistence`...FIXME
-
-NOTE: `codegenExistence` is used exclusively when `BroadcastHashJoinExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>>.
-
-=== [[genStreamSideJoinKey]] `genStreamSideJoinKey` Internal Method
-
-[source, scala]
-----
-genStreamSideJoinKey(
-  ctx: CodegenContext,
-  input: Seq[ExprCode]): (ExprCode, String)
-----
-
-`genStreamSideJoinKey`...FIXME
-
-NOTE: `genStreamSideJoinKey` is used when `BroadcastHashJoinExec` is requested to generate the Java source code for <<codegenInner, inner>>, <<codegenOuter, outer>>, <<codegenSemi, left semi>>, <<codegenAnti, anti>> and <<codegenExistence, existence>> joins (for the "consume" path in whole-stage code generation).
-
-=== [[creating-instance]] Creating BroadcastHashJoinExec Instance
-
-`BroadcastHashJoinExec` takes the following when created:
-
-* [[leftKeys]] Left join key expressions/Expression.md[expressions]
-* [[rightKeys]] Right join key expressions/Expression.md[expressions]
-* [[joinType]] spark-sql-joins.md#join-types[Join type]
-* [[buildSide]] `BuildSide`
-* [[condition]] Optional join condition expressions/Expression.md[expression]
-* [[left]] Left SparkPlan.md[physical operator]
-* [[right]] Right SparkPlan.md[physical operator]
+```

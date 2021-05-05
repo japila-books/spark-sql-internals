@@ -632,7 +632,7 @@ nav:
         - BlockingOperatorWithCodegen: physical-operators/BlockingOperatorWithCodegen.md
         - BroadcastExchangeExec: physical-operators/BroadcastExchangeExec.md
         - BroadcastExchangeLike: physical-operators/BroadcastExchangeLike.md
-        - physical-operators/BroadcastHashJoinExec.md
+        - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
         - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
         - physical-operators/CartesianProductExec.md
         - physical-operators/CoalesceExec.md

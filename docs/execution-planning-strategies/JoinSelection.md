@@ -24,6 +24,8 @@ The following sections are in the order of preference.
 
 * Join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER) or [RIGHT OUTER](../spark-sql-joins.md#RIGHT_OUTER)
 
+`BroadcastHashJoinExec` is created for [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md)-destructurable logical query plans ([INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](#canBuildRight)) of which the `right` physical operator [can be broadcast](#canBroadcast).
+
 ### <span id="ShuffledHashJoinExec"> ShuffledHashJoinExec
 
 `JoinSelection` plans a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) when there are join keys and one of the following holds:

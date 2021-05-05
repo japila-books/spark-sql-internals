@@ -68,7 +68,7 @@ Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical opera
 
 Final methods are used to generate the Java source code in different phases of [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 
-### <span id="consume"> Generating Java Source Code to Consume Generated Columns or Row From Current Physical Operator
+### <span id="consume"> Generating Java Source Code for Consume Code Path
 
 ```scala
 consume(
@@ -329,6 +329,30 @@ canCheckLimitNotReached: Boolean
 `canCheckLimitNotReached`...FIXME
 
 `canCheckLimitNotReached` is used when `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).
+
+## <span id="variablePrefix"> Variable Name Prefix
+
+```scala
+variablePrefix: String
+```
+
+`variablePrefix` is the prefix of the variable names of this physical operator.
+
+Physical Operator | Prefix
+------------------|----------
+ [HashAggregateExec](HashAggregateExec.md) | agg
+ [BroadcastHashJoinExec](BroadcastHashJoinExec.md) | bhj
+ [ShuffledHashJoinExec](ShuffledHashJoinExec.md) | shj
+ [SortMergeJoinExec](SortMergeJoinExec.md) | smj
+ [RDDScanExec](RDDScanExec.md) | rdd
+ [DataSourceScanExec](DataSourceScanExec.md) | scan
+ [InMemoryTableScanExec](InMemoryTableScanExec.md) | memoryScan
+ [WholeStageCodegenExec](WholeStageCodegenExec.md) | wholestagecodegen
+ _others_ | Lower-case [node name](../catalyst/TreeNode.md#nodeName)
+
+`variablePrefix` is used when:
+
+* `CodegenSupport` is requested to generate the Java source code for [produce](#produce) and [consume](#consume) code paths
 
 ## Demo
 
