@@ -618,6 +618,7 @@ nav:
         - LongHashedRelation: physical-operators/LongHashedRelation.md
         - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - HashJoin: physical-operators/HashJoin.md
+      - BaseJoinExec: physical-operators/BaseJoinExec.md
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
       - SupportsV1Write: physical-operators/SupportsV1Write.md

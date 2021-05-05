@@ -1,26 +1,8 @@
 # HashJoin &mdash; Hash-Based Join Physical Operators
 
-`HashJoin` is an [abstraction](#contract) of [hash-based join physical operators](#implementations).
+`HashJoin` is an [extension](#contract) of the [BaseJoinExec](BaseJoinExec.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](CodegenSupport.md).
 
 ## Contract
-
-### <span id="leftKeys"> leftKeys
-
-```scala
-leftKeys: Seq[Expression]
-```
-
-### <span id="rightKeys"> rightKeys
-
-```scala
-rightKeys: Seq[Expression]
-```
-
-### <span id="joinType"> joinType
-
-```scala
-joinType: JoinType
-```
 
 ### <span id="buildSide"> buildSide
 
@@ -28,22 +10,11 @@ joinType: JoinType
 buildSide: BuildSide
 ```
 
-### <span id="condition"> condition
+### <span id="prepareRelation"> Preparing Relation
 
 ```scala
-condition: Option[Expression]
-```
-
-### <span id="left"> left
-
-```scala
-left: SparkPlan
-```
-
-### <span id="right"> right
-
-```scala
-right: SparkPlan
+prepareRelation(
+  ctx: CodegenContext): HashedRelationInfo
 ```
 
 ## Implementations
@@ -51,7 +22,7 @@ right: SparkPlan
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md)
 * [ShuffledHashJoinExec](ShuffledHashJoinExec.md)
 
-## <span id="join"> join Method
+## <span id="join"> join
 
 ```scala
 join(
@@ -60,7 +31,7 @@ join(
   numOutputRows: SQLMetric): Iterator[InternalRow]
 ```
 
-`join` branches off per [joinType](#joinType) to create a join iterator of internal rows (`Iterator[InternalRow]`) for the input `streamedIter` and `hashed`:
+`join` branches off per [JoinType](BaseJoinExec.md#joinType) to create an joined rows iterator (off the rows from the input `streamedIter` and `hashed`):
 
 * [innerJoin](#innerJoin) for a [InnerLike](../spark-sql-joins.md#InnerLike) join
 
@@ -72,16 +43,16 @@ join(
 
 * [existenceJoin](#existenceJoin) for a [ExistenceJoin](../spark-sql-joins.md#ExistenceJoin) join
 
-`join` requests `TaskContext` to add a `TaskCompletionListener` to update the input avg hash probe SQL metric. The `TaskCompletionListener` is executed on a task completion (regardless of the task status: success, failure, or cancellation) and uses [getAverageProbesPerLookup](HashedRelation.md#getAverageProbesPerLookup) from the input `hashed` to set the input avg hash probe.
+`join` [creates a result projection](#createResultProjection).
 
-`join` [createResultProjection](#createResultProjection).
+In the end, for every row in the joined rows iterator `join` increments the input `numOutputRows` SQL metric and applies the result projection.
 
-In the end, for every row in the join iterator of internal rows `join` increments the input `numOutputRows` SQL metric and applies the result projection.
-
-`join` reports a `IllegalArgumentException` when the [joinType](#joinType) is not supported:
+`join` reports an `IllegalArgumentException` for unsupported [JoinType](BaseJoinExec.md#joinType):
 
 ```text
-[x] JoinType is not supported
+HashJoin should not take [joinType] as the JoinType
 ```
 
-`join` is used when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) are executed.
+`join` is used when:
+
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operators are executed

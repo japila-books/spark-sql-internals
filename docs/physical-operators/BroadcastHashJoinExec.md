@@ -8,7 +8,7 @@
 
 Key             | Name (in web UI)        | Description
 ----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
+ numOutputRows   | number of output rows   | Number of output rows
 
 ![BroadcastHashJoinExec in web UI (Details for Query)](../images/spark-sql-BroadcastHashJoinExec-webui-query-details.png)
 
@@ -78,7 +78,21 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
+`doExecute` requests the [buildPlan](HashJoin.md#buildPlan) to [executeBroadcast](SparkPlan.md#executeBroadcast) (that gives a broadcast variable with a [HashedRelation](HashedRelation.md)).
+
+`doExecute` branches off based on [isNullAwareAntiJoin](#isNullAwareAntiJoin) flag: [enabled](#doExecute-isNullAwareAntiJoin-enabled) or [not](#doExecute-isNullAwareAntiJoin-disabled).
+
+### <span id="doExecute-isNullAwareAntiJoin-enabled"> isNullAwareAntiJoin Enabled
+
 `doExecute`...FIXME
+
+### <span id="doExecute-isNullAwareAntiJoin-disabled"> isNullAwareAntiJoin Disabled
+
+`doExecute` requests the [streamedPlan](HashJoin.md#streamedPlan) to [execute](SparkPlan.md#execute) (that gives an `RDD[InternalRow]`) and maps over partitions (`RDD.mapPartitions`):
+
+1. Takes the read-only copy of the [HashedRelation](HashedRelation.md#asReadOnlyCopy) (from the broadcast variable)
+1. Increment the peak execution memory (of the task) by the [size](../KnownSizeEstimation.md#estimatedSize) of the `HashedRelation`
+1. [Joins](HashJoin.md#join) the rows with the `HashedRelation` (with the [numOutputRows](#metrics) metric)
 
 ## Demo
 
