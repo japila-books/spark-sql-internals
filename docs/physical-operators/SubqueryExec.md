@@ -24,26 +24,6 @@ scala> q.explain
 +- *FileScan parquet default.t1[] Batched: true, Format: Parquet, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/t1], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<>
 ----
 
-[[metrics]]
-.SubqueryExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[collectTime]] `collectTime`
-| time to collect (ms)
-|
-
-| [[dataSize]] `dataSize`
-| data size (bytes)
-|
-|===
-
-.SubqueryExec in web UI (Details for Query)
-image::images/spark-sql-SubqueryExec-webui-details-for-query.png[align="center"]
-
 NOTE: `SubqueryExec` physical operator is _almost_ an exact copy of BroadcastExchangeExec.md[BroadcastExchangeExec] physical operator.
 
 === [[doPrepare]] Executing Child Operator Asynchronously -- `doPrepare` Method
@@ -94,3 +74,12 @@ executeCollect(): Array[InternalRow]
 NOTE: `executeCollect` is part of SparkPlan.md#executeCollect[SparkPlan Contract] to execute a physical operator and collect the results as collection of internal rows.
 
 `executeCollect` waits till <<relationFuture, relationFuture>> gives a result (as a `Array[InternalRow]`).
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+collectTime     | time to collect (ms)  |
+dataSize        | data size (bytes)  |
+
+![SubqueryExec in web UI (Details for Query)](../images/spark-sql-SubqueryExec-webui-details-for-query.png)

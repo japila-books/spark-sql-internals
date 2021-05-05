@@ -201,22 +201,6 @@ scala> println(formattedCode)
 [[output]]
 The catalyst/QueryPlan.md#output[output schema] of a `GenerateExec` is...FIXME
 
-[[metrics]]
-.GenerateExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-.GenerateExec in web UI (Details for Query)
-image::images/spark-sql-GenerateExec-webui-details-for-query.png[align="center"]
-
 [[producedAttributes]]
 `producedAttributes`...FIXME
 
@@ -322,3 +306,11 @@ doExecute(): RDD[InternalRow]
 `doExecute`...FIXME
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![GenerateExec in web UI (Details for Query)](../images/spark-sql-GenerateExec-webui-details-for-query.png)

@@ -81,34 +81,6 @@ scala> println(q.queryExecution.executedPlan.numberedTreeString)
 04    +- LocalTableScan [id#41]
 ----
 
-[[metrics]]
-.ShuffledHashJoinExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[avgHashProbe]] `avgHashProbe`
-| avg hash probe
-|
-
-| [[buildDataSize]] `buildDataSize`
-| data size of build side
-|
-
-| [[buildTime]] `buildTime`
-| time to build hash map
-|
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-.ShuffledHashJoinExec in web UI (Details for Query)
-image::images/spark-sql-ShuffledHashJoinExec-webui-query-details.png[align="center"]
-
 [[requiredChildDistribution]]
 .ShuffledHashJoinExec's Required Child Output Distributions
 [cols="1,1",options="header",width="100%"]
@@ -186,3 +158,14 @@ NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is r
 * [[condition]] Optional join condition expressions/Expression.md[expression]
 * [[left]] Left SparkPlan.md[physical operator]
 * [[right]] Right SparkPlan.md[physical operator]
+
+## <span id="metrics"> Performance Metrics
+
+Key            | Name (in web UI)        | Description
+---------------|-------------------------|---------
+ numOutputRows | number of output rows   | Number of output rows
+ avgHashProbe  | avg hash probe          |
+ buildDataSize | data size of build side |
+ buildTime     | time to build hash map  |
+
+!ShuffledHashJoinExec in web UI (Details for Query)(../images/spark-sql-ShuffledHashJoinExec-webui-query-details.png)

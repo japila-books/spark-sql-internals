@@ -98,31 +98,6 @@ Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 Pushed Filters: [pushedDownFilters]
 ```
 
-[[metrics]]
-.FileSourceScanExec's Performance Metrics
-[cols="1m,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| metadataTime
-| metadata time (ms)
-| [[metadataTime]]
-
-| numFiles
-| number of files
-| [[numFiles]]
-
-| numOutputRows
-| number of output rows
-| [[numOutputRows]]
-
-| scanTime
-| scan time
-| [[scanTime]]
-|===
-
 As a DataSourceScanExec.md[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the DataSourceScanExec.md#nodeName[node name].
 
 [source, scala]
@@ -486,3 +461,12 @@ getBlockLocations(file: FileStatus): Array[BlockLocation]
 `getBlockLocations` simply requests the given Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[FileStatus] for the block locations (`getBlockLocations`) if it is a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[LocatedFileStatus]. Otherwise, `getBlockLocations` returns an empty array.
 
 NOTE: `getBlockLocations` is used when `FileSourceScanExec` physical operator is requested to <<createBucketedReadRDD, createBucketedReadRDD>> and <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
+
+## <span id="metrics"> Performance Metrics
+
+Key            | Name (in web UI)        | Description
+---------------|-------------------------|---------
+ metadataTime  | metadata time (ms)      |
+ numFiles      | number of files         |
+ numOutputRows | number of output rows   |
+ scanTime      | scan time               |

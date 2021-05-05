@@ -7,23 +7,6 @@
 [[needsUnsafeRowConversion]]
 `ColumnarBatchScan` uses the `needsUnsafeRowConversion` flag to control the name of the variable for an input row while [generating the Java source code to consume generated columns or row from a physical operator](CodegenSupport.md#consume) that is used while <<produceRows, generating the Java source code for producing rows>>. `needsUnsafeRowConversion` flag is enabled (i.e. `true`) by default that gives no name for the row term.
 
-[[metrics]]
-.ColumnarBatchScan's Performance Metrics
-[cols="1m,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| numOutputRows
-| number of output rows
-| [[numOutputRows]]
-
-| scanTime
-| scan time
-| [[scanTime]]
-|===
-
 [[implementations]]
 .ColumnarBatchScans
 [cols="1,3",options="header",width="100%"]
@@ -314,3 +297,10 @@ vectorTypes: Option[Seq[String]] = None
 `vectorTypes` gives no vector types by default (`None`).
 
 `vectorTypes` is used when `ColumnarBatchScan` is requested to [produceBatches](#produceBatches).
+
+## <span id="metrics"> Performance Metrics
+
+Key            | Name (in web UI)        | Description
+---------------|-------------------------|---------
+ numOutputRows | number of output rows   | Number of output rows
+ scanTime      | scan time |

@@ -56,39 +56,6 @@ Used when:
 [[children]]
 When requested for the <<Command.md#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
 
-`DataWritingCommand` defines custom <<metrics, performance metrics>>.
-
-[[metrics]]
-.DataWritingCommand's Performance Metrics
-[cols="1m,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| numFiles
-| number of written files
-| [[numFiles]]
-
-| numOutputBytes
-| bytes of written output
-| [[numOutputBytes]]
-
-| numOutputRows
-| number of output rows
-| [[numOutputRows]]
-
-| numParts
-| number of dynamic part
-| [[numParts]]
-|===
-
-The <<metrics, performance metrics>> are used when:
-
-* `DataWritingCommand` is requested for the <<basicWriteJobStatsTracker, BasicWriteJobStatsTracker>>
-
-* `DataWritingCommandExec` physical operator is requested for the <<DataWritingCommandExec.md#metrics, metrics>>
-
 [[extensions]]
 .DataWritingCommands (Direct Implementations and Extensions Only)
 [cols="1,2",options="header",width="100%"]
@@ -145,3 +112,12 @@ outputColumns: Seq[Attribute]
 
 * `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>>
 ====
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+ numFiles   | number of written files   |
+ numOutputBytes | bytes of written output |
+ numOutputRows | number of output rows |
+ numParts | number of dynamic part |

@@ -24,22 +24,6 @@
 
 * [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 
-## <span id="metrics"> Performance Metrics
-
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| `numOutputRows`
-| number of output rows
-| [[numOutputRows]]
-|===
-
-.FilterExec in web UI (Details for Query)
-image::images/spark-sql-FilterExec-webui-details-for-query.png[align="center"]
-
 [[inputRDDs]]
 [[outputOrdering]]
 [[outputPartitioning]]
@@ -144,3 +128,11 @@ In the end, `doExecute` requests the <<child, child>> physical operator to <<Spa
 .. Increments the <<numOutputRows, numOutputRows>> metric for positive evaluations (i.e. that returned `true`)
 
 NOTE: `doExecute` (by `RDD.mapPartitionsWithIndexInternal`) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![FilterExec in web UI (Details for Query)](../images/spark-sql-FilterExec-webui-details-for-query.png)

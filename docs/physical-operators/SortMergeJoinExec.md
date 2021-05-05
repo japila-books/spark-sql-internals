@@ -81,22 +81,6 @@ scala> q.explain
       +- ReusedExchange [id#9, token#10], Exchange hashpartitioning(id#5, 200)
 ----
 
-[[metrics]]
-.SortMergeJoinExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-.SortMergeJoinExec in web UI (Details for Query)
-image::images/spark-sql-SortMergeJoinExec-webui-query-details.png[align="center"]
-
 NOTE: The prefix for variable names for `SortMergeJoinExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **smj**.
 
 ```text
@@ -173,3 +157,11 @@ NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-pla
 * [[condition]] Optional join condition expressions/Expression.md[expression]
 * [[left]] Left SparkPlan.md[physical operator]
 * [[right]] Right SparkPlan.md[physical operator]
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![SortMergeJoinExec in web UI (Details for Query)](../images/spark-sql-SortMergeJoinExec-webui-query-details.png)

@@ -89,11 +89,13 @@ Used when:
 metrics: Map[String, SQLMetric]
 ```
 
-`RunnableCommand` can define optional [performance metrics](../physical-operators/SQLMetric.md).
+[Performance metrics](../physical-operators/SQLMetric.md)
 
 `metrics` is empty by default.
 
 ??? note "Lazy Value"
     `metrics` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.
 
-`metrics` is used when [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf physical operator is executed (and requested for [performance metrics](../physical-operators/ExecutedCommandExec.md#metrics)).
+`metrics` is used when:
+
+* [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf physical operator is executed (and requested for [performance metrics](../physical-operators/ExecutedCommandExec.md#metrics))

@@ -30,19 +30,11 @@ Scan hive [table]
 
 HiveTableScans.md[HiveTableScans] execution planning strategy creates a `HiveTableScanExec` physical operator for every HiveTableRelation.md[HiveTableRelation] operator in a query plan. When created, `HiveTableScanExec` is given the <<partitionPruningPred, partition pruning predicates>> that are predicate expressions with no references and among the HiveTableRelation.md#partitionCols[partition columns] of the `HiveTableRelation`.
 
-=== [[metrics]] Performance Metrics -- `metrics` Method
+## <span id="metrics"> Performance Metrics
 
-.HiveTableScanExec's Performance Metrics
-[cols="1m,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| numOutputRows
-| number of output rows
-| [[numOutputRows]]
-|===
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 

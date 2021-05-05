@@ -162,22 +162,6 @@ scala> println(CodeFormatter.format(code))
 
 When <<doExecute, executed>>, `WholeStageCodegenExec` gives <<pipelineTime, pipelineTime>> performance metric.
 
-[[metrics]]
-.WholeStageCodegenExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[pipelineTime]] `pipelineTime`
-| (empty)
-| Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
-|===
-
-.WholeStageCodegenExec in web UI (Details for Query)
-image::images/spark-sql-WholeStageCodegenExec-webui.png[align="center"]
-
 TIP: Use Dataset.md#explain[explain] operator to know the physical plan of a query and find out whether or not `WholeStageCodegen` is in use.
 
 [source, scala]
@@ -362,3 +346,11 @@ isTooManyFields(conf: SQLConf, dataType: DataType): Boolean
 `isTooManyFields`...FIXME
 
 NOTE: `isTooManyFields` is used when...FIXME
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+pipelineTime    | (empty)   | Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
+
+![WholeStageCodegenExec in web UI (Details for Query)](../images/spark-sql-WholeStageCodegenExec-webui.png)

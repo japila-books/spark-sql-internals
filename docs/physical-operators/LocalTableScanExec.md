@@ -53,60 +53,6 @@ scala> names.show
 +-----+
 ----
 
-[[metrics]]
-.LocalTableScanExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-[NOTE]
-====
-It _appears_ that when no Spark job is used to execute a `LocalTableScanExec` the <<numOutputRows, numOutputRows>> metric is not displayed in the web UI.
-
-[source, scala]
-----
-val names = Seq("Jacek", "Agata").toDF("name")
-
-// The following query gives no numOutputRows metric in web UI's Details for Query (SQL tab)
-scala> names.show
-+-----+
-| name|
-+-----+
-|Jacek|
-|Agata|
-+-----+
-
-// The query gives numOutputRows metric in web UI's Details for Query (SQL tab)
-scala> names.groupBy(length($"name")).count.show
-+------------+-----+
-|length(name)|count|
-+------------+-----+
-|           5|    2|
-+------------+-----+
-
-// The (type-preserving) query does also give numOutputRows metric in web UI's Details for Query (SQL tab)
-scala> names.as[String].map(_.toUpperCase).show
-+-----+
-|value|
-+-----+
-|JACEK|
-|AGATA|
-+-----+
-----
-====
-
-When <<doExecute, executed>>, `LocalTableScanExec`...FIXME
-
-.LocalTableScanExec in web UI (Details for Query)
-image::images/spark-sql-LocalTableScanExec-webui-query-details.png[align="center"]
-
 [[internal-registries]]
 .LocalTableScanExec's Internal Properties
 [cols="1,2",options="header",width="100%"]
@@ -141,3 +87,44 @@ doExecute(): RDD[InternalRow]
 
 * [[output]] Output schema [attributes](../expressions/Attribute.md)
 * [[rows]] [InternalRow](../InternalRow.md)s
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+!!! note
+    It _appears_ that when no Spark job is used to execute a `LocalTableScanExec` the <<numOutputRows, numOutputRows>> metric is not displayed in the web UI.
+
+    ```text
+    val names = Seq("Jacek", "Agata").toDF("name")
+
+    // The following query gives no numOutputRows metric in web UI's Details for Query (SQL tab)
+    scala> names.show
+    +-----+
+    | name|
+    +-----+
+    |Jacek|
+    |Agata|
+    +-----+
+
+    // The query gives numOutputRows metric in web UI's Details for Query (SQL tab)
+    scala> names.groupBy(length($"name")).count.show
+    +------------+-----+
+    |length(name)|count|
+    +------------+-----+
+    |           5|    2|
+    +------------+-----+
+
+    // The (type-preserving) query does also give numOutputRows metric in web UI's Details for Query (SQL tab)
+    scala> names.as[String].map(_.toUpperCase).show
+    +-----+
+    |value|
+    +-----+
+    |JACEK|
+    |AGATA|
+    +-----+
+    ```
+
+![LocalTableScanExec in web UI (Details for Query)](../images/spark-sql-LocalTableScanExec-webui-query-details.png)

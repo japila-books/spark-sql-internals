@@ -17,34 +17,6 @@ scala> q.explain
    +- *Range (0, 5, step=1, splits=Some(8))
 ```
 
-[[metrics]]
-.BroadcastExchangeExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[broadcastTime]] `broadcastTime`
-| time to broadcast (ms)
-|
-
-| [[buildTime]] `buildTime`
-| time to build (ms)
-|
-
-| [[collectTime]] `collectTime`
-| time to collect (ms)
-|
-
-| [[dataSize]] `dataSize`
-| data size (bytes)
-|
-|===
-
-.BroadcastExchangeExec in web UI (Details for Query)
-image::images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png[align="center"]
-
 [[outputPartitioning]]
 `BroadcastExchangeExec` uses [BroadcastPartitioning](Partitioning.md#BroadcastPartitioning) partitioning scheme (with the input <<mode, BroadcastMode>>).
 
@@ -123,3 +95,14 @@ NOTE: `doPrepare` is part of SparkPlan.md#doPrepare[SparkPlan Contract] to prepa
 
 * [[mode]] [BroadcastMode](BroadcastMode.md)
 * [[child]] Child [logical plan](../logical-operators/LogicalPlan.md)
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+ broadcastTime  | time to broadcast (ms)  |
+ buildTime      | time to build (ms)      |
+ collectTime    | time to collect (ms)    |
+ dataSize       | data size (bytes)       |
+
+![BroadcastExchangeExec in web UI (Details for Query)](../images/spark-sql-BroadcastExchangeExec-webui-details-for-query.png)

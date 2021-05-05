@@ -68,18 +68,11 @@ scala> println(aggExec.aggregateExpressions.head.numberedTreeString)
 02    +- id#112: int
 ```
 
-## Performance Metrics
+## <span id="metrics"> Performance Metrics
 
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
 
 ![ObjectHashAggregateExec in web UI (Details for Query)](../images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png)
 

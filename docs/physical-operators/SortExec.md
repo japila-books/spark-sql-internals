@@ -52,27 +52,6 @@ When requested for the <<SparkPlan.md#requiredChildDistribution, required partit
 
 `SortExec` operator uses the [spark.sql.sort.enableRadixSort](../SQLConf.md#spark.sql.sort.enableRadixSort) internal configuration property (enabled by default) to control...FIXME
 
-[[metrics]]
-.SortExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| `peakMemory`
-| peak memory
-| [[peakMemory]]
-
-| `sortTime`
-| sort time
-| [[sortTime]]
-
-| `spillSize`
-| spill size
-| [[spillSize]]
-|===
-
 === [[creating-instance]] Creating SortExec Instance
 
 `SortExec` takes the following when created:
@@ -81,3 +60,11 @@ When requested for the <<SparkPlan.md#requiredChildDistribution, required partit
 * [[global]] `global` flag
 * [[child]] Child <<SparkPlan.md#, physical plan>>
 * [[testSpillFrequency]] `testSpillFrequency` (default: `0`)
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+ peakMemory     | peak memory |
+ sortTime       | sort time |
+ spillSize      | spill size |

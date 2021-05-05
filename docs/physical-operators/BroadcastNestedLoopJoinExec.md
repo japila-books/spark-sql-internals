@@ -35,22 +35,6 @@ BroadcastNestedLoopJoin BuildRight, Cross
    +- LocalTableScan [letter#69]
 ```
 
-[[metrics]]
-.BroadcastNestedLoopJoinExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-.BroadcastNestedLoopJoinExec in web UI (Details for Query)
-image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[align="center"]
-
 [[requiredChildDistribution]]
 .BroadcastNestedLoopJoinExec's Required Child Output Distributions
 [cols="1m,2,2",options="header",width="100%"]
@@ -77,3 +61,11 @@ image::images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png[
 * [[buildSide]] `BuildSide`
 * [[joinType]] spark-sql-joins.md#join-types[Join type]
 * [[condition]] Optional join condition expressions/Expression.md[expressions]
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![BroadcastNestedLoopJoinExec in web UI (Details for Query)](../images/spark-sql-BroadcastNestedLoopJoinExec-webui-details-for-query.png)

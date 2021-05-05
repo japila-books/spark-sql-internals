@@ -53,22 +53,6 @@ val inmemoryScan = plan.collectFirst { case exec: InMemoryTableScanExec => exec 
 assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
 ```
 
-[[metrics]]
-.InMemoryTableScanExec's Performance Metrics
-[cols="1,2,2",options="header",width="100%"]
-|===
-| Key
-| Name (in web UI)
-| Description
-
-| [[numOutputRows]] `numOutputRows`
-| number of output rows
-|
-|===
-
-.InMemoryTableScanExec in web UI (Details for Query)
-image::images/spark-sql-InMemoryTableScanExec-webui-query-details.png[align="center"]
-
 [[supportCodegen]]
 `InMemoryTableScanExec` [supports Java code generation](CodegenSupport.md#supportCodegen) only if <<supportsBatch, batch decoding>> is enabled.
 
@@ -354,3 +338,11 @@ innerChildren: Seq[QueryPlan[_]]
 NOTE: `innerChildren` is part of catalyst/QueryPlan.md#innerChildren[QueryPlan Contract] to...FIXME.
 
 `innerChildren`...FIXME
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![InMemoryTableScanExec in web UI (Details for Query)](../images/spark-sql-InMemoryTableScanExec-webui-query-details.png)
