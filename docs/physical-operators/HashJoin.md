@@ -33,15 +33,15 @@ join(
 
 `join` branches off per [JoinType](BaseJoinExec.md#joinType) to create an joined rows iterator (off the rows from the input `streamedIter` and `hashed`):
 
-* [innerJoin](#innerJoin) for a [InnerLike](../spark-sql-joins.md#InnerLike) join
+* [innerJoin](#innerJoin) for a [InnerLike](../joins.md#InnerLike) join
 
-* [outerJoin](#outerJoin) for a [LeftOuter](../spark-sql-joins.md#LeftOuter) or a [RightOuter](../spark-sql-joins.md#RightOuter) join
+* [outerJoin](#outerJoin) for a [LeftOuter](../joins.md#LeftOuter) or a [RightOuter](../joins.md#RightOuter) join
 
-* [semiJoin](#semiJoin) for a [LeftSemi](../spark-sql-joins.md#LeftSemi) join
+* [semiJoin](#semiJoin) for a [LeftSemi](../joins.md#LeftSemi) join
 
-* [antiJoin](#antiJoin) for a [LeftAnti](../spark-sql-joins.md#LeftAnti) join
+* [antiJoin](#antiJoin) for a [LeftAnti](../joins.md#LeftAnti) join
 
-* [existenceJoin](#existenceJoin) for a [ExistenceJoin](../spark-sql-joins.md#ExistenceJoin) join
+* [existenceJoin](#existenceJoin) for a [ExistenceJoin](../joins.md#ExistenceJoin) join
 
 `join` [creates a result projection](#createResultProjection).
 

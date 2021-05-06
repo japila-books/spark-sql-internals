@@ -824,7 +824,10 @@ nav:
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md
-  - New and Noteworthy:
+  - New &amp; Noteworthy:
+    - Join Queries:
+      - Joins: joins.md
+      - spark-sql-joins-broadcast.md
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
       - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
@@ -934,9 +937,6 @@ nav:
       - spark-sql-basic-aggregation.md
       - RelationalGroupedDataset: RelationalGroupedDataset.md
       - KeyValueGroupedDataset: KeyValueGroupedDataset.md
-    - Joins:
-      - spark-sql-joins.md
-      - spark-sql-joins-broadcast.md
     - Window Aggregation:
       - spark-sql-window-aggregation.md
       - WindowSpec.md

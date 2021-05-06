@@ -153,7 +153,7 @@ NOTE: `buildHashedRelation` is used exclusively when `ShuffledHashJoinExec` is r
 
 * [[leftKeys]] Left join key expressions/Expression.md[expressions]
 * [[rightKeys]] Right join key expressions/Expression.md[expressions]
-* [[joinType]] spark-sql-joins.md#join-types[Join type]
+* [[joinType]] [Join type](../joins.md#join-types)
 * [[buildSide]] `BuildSide`
 * [[condition]] Optional join condition expressions/Expression.md[expression]
 * [[left]] Left SparkPlan.md[physical operator]

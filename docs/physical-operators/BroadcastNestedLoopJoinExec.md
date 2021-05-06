@@ -59,7 +59,7 @@ BroadcastNestedLoopJoin BuildRight, Cross
 * [[left]] Left SparkPlan.md[physical operator]
 * [[right]] Right SparkPlan.md[physical operator]
 * [[buildSide]] `BuildSide`
-* [[joinType]] spark-sql-joins.md#join-types[Join type]
+* [[joinType]] [Join type](../joins.md#join-types)
 * [[condition]] Optional join condition expressions/Expression.md[expressions]
 
 ## <span id="metrics"> Performance Metrics

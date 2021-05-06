@@ -8,7 +8,7 @@
 
 * <span id="leftKeys"> Left Join Key [Expression](../expressions/Expression.md)s
 * <span id="rightKeys"> Right Join Key [Expression](../expressions/Expression.md)s
-* <span id="joinType"> [JoinType](../spark-sql-joins.md#JoinType)
+* <span id="joinType"> [JoinType](../joins.md#JoinType)
 * <span id="condition"> Optional Join [Expression](../expressions/Expression.md)
 * <span id="left"> Left [Physical Operator](SparkPlan.md)
 * <span id="right"> Right [Physical Operator](SparkPlan.md)
@@ -17,6 +17,14 @@
 `ShuffledHashJoinExec` is created when:
 
 * [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for [joins](../logical-operators/Join.md) with [left join keys](#leftKeys) that are [orderable](#orderable)  (can be ordered / sorted).
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![SortMergeJoinExec in web UI (Details for Query)](../images/spark-sql-SortMergeJoinExec-webui-query-details.png)
 
 ## Review Me
 
@@ -146,22 +154,3 @@ The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the inp
 The SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
 
 NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (after [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical join operators have not met the requirements).
-
-=== [[creating-instance]] Creating SortMergeJoinExec Instance
-
-`SortMergeJoinExec` takes the following when created:
-
-* [[leftKeys]] Left join key expressions/Expression.md[expressions]
-* [[rightKeys]] Right join key expressions/Expression.md[expressions]
-* [[joinType]] spark-sql-joins.md#join-types[Join type]
-* [[condition]] Optional join condition expressions/Expression.md[expression]
-* [[left]] Left SparkPlan.md[physical operator]
-* [[right]] Right SparkPlan.md[physical operator]
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
-
-![SortMergeJoinExec in web UI (Details for Query)](../images/spark-sql-SortMergeJoinExec-webui-query-details.png)

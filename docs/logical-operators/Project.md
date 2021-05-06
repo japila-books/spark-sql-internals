@@ -1,5 +1,3 @@
-title: Project
-
 # Project Unary Logical Operator
 
 [[creating-instance]]
@@ -10,10 +8,10 @@ title: Project
 
 `Project` is <<creating-instance, created>> to represent the following:
 
-* Dataset operators, i.e. spark-sql-joins.md#joinWith[joinWith], spark-sql-dataset-operators.md#select[select] (incl. `selectUntyped`), `unionByName`
+* Dataset operators, i.e. [joinWith](../joins.md#joinWith), [select](../spark-sql-dataset-operators.md#select) (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
 * `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#aliasPlan, aliasPlan>>)
-* SQL's sql/AstBuilder.md#withQuerySpecification[SELECT] queries with named expressions
+* SQL's [SELECT](../sql/AstBuilder.md#withQuerySpecification) queries with named expressions
 
 `Project` can also appear in a logical plan after [analysis](../Analyzer.md) or [optimization](../catalyst/Optimizer.md) phases.
 

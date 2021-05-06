@@ -100,7 +100,7 @@ NOTE: `apply` uses `ExtractFiltersAndInnerJoins` Scala extractor object (using <
 createOrderedJoin(input: Seq[(LogicalPlan, InnerLike)], conditions: Seq[Expression]): LogicalPlan
 ----
 
-`createOrderedJoin` takes a collection of pairs of a spark-sql-LogicalPlan.md[logical plan] and the spark-sql-joins.md#join-types[join type] with join condition expressions/Expression.md[expressions] and...FIXME
+`createOrderedJoin` takes a collection of pairs of a spark-sql-LogicalPlan.md[logical plan] and the [join type](../joins.md#join-types) with join condition expressions/Expression.md[expressions] and...FIXME
 
 NOTE: `createOrderedJoin` makes sure that the `input` has at least two pairs in the `input`.
 
@@ -110,7 +110,7 @@ NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, app
 
 For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_) the input condition expressions to the ones that spark-sql-PredicateHelper.md#canEvaluateWithinJoin[can be evaluated within a join] and not.
 
-`createOrderedJoin` determines the join type of the result join. It chooses spark-sql-joins.md#inner[inner] if the left and right join types are both inner and spark-sql-joins.md#cross[cross] otherwise.
+`createOrderedJoin` determines the join type of the result join. It chooses [inner](../joins.md#inner) if the left and right join types are both inner and [cross](../joins.md#cross) otherwise.
 
 `createOrderedJoin` creates a Join.md#creating-instance[Join] logical operator with the input join conditions combined together using `And` expression and the join type (inner or cross).
 

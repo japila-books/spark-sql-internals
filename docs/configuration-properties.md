@@ -1251,7 +1251,7 @@ Use [SQLConf.runSQLonFile](SQLConf.md#runSQLonFile) method to access the current
 
 ## <span id="spark.sql.selfJoinAutoResolveAmbiguity"> spark.sql.selfJoinAutoResolveAmbiguity
 
-Controls whether to resolve ambiguity in join conditions for [self-joins](spark-sql-joins.md#join) automatically (`true`) or not (`false`)
+Controls whether to resolve ambiguity in join conditions for [self-joins](joins.md#join) automatically (`true`) or not (`false`)
 
 Default: `true`
 

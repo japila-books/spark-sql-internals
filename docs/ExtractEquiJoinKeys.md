@@ -2,7 +2,7 @@
 
 `ExtractEquiJoinKeys` is a Scala extractor to [destructure a Join logical operator](#unapply) into a tuple of the following elements:
 
-1. [Join type](spark-sql-joins.md#join-types)
+1. [Join type](joins.md#join-types)
 
 1. Left and right keys (for non-empty join keys in the [condition](logical-operators/Join.md#condition) of the `Join` operator)
 

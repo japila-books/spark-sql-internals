@@ -18,7 +18,7 @@ Key             | Name (in web UI)        | Description
 
 * <span id="leftKeys"> Left Key [Expression](../expressions/Expression.md)s
 * <span id="rightKeys"> Right Key [Expression](../expressions/Expression.md)s
-* <span id="joinType"> [Join Type](../spark-sql-joins.md#join-types)
+* <span id="joinType"> [Join Type](../joins.md#join-types)
 * <span id="buildSide"> `BuildSide`
 * <span id="condition"> Optional Join Condition [Expression](../expressions/Expression.md)
 * <span id="left"> Left Child [Physical Operator](SparkPlan.md)

@@ -16,7 +16,7 @@ condition: Option[Expression]
 joinType: JoinType
 ```
 
-[JoinType](../spark-sql-joins.md#JoinType)
+[JoinType](../joins.md#JoinType)
 
 ### <span id="leftKeys"> Left Keys
 

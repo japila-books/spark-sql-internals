@@ -20,9 +20,9 @@ The following sections are in the order of preference.
 
 `JoinSelection` plans a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md) when there are join keys and one of the following holds:
 
-* Join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER), [LEFT ANTI](../spark-sql-joins.md#LEFT_ANTI), [LEFT OUTER](../spark-sql-joins.md#LEFT_OUTER), [LEFT SEMI](../spark-sql-joins.md#LEFT_SEMI) or [ExistenceJoin](../spark-sql-joins.md#ExistenceJoin)
+* Join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER), [LEFT ANTI](../joins.md#LEFT_ANTI), [LEFT OUTER](../joins.md#LEFT_OUTER), [LEFT SEMI](../joins.md#LEFT_SEMI) or [ExistenceJoin](../joins.md#ExistenceJoin)
 
-* Join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER) or [RIGHT OUTER](../spark-sql-joins.md#RIGHT_OUTER)
+* Join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER) or [RIGHT OUTER](../joins.md#RIGHT_OUTER)
 
 `BroadcastHashJoinExec` is created for [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md)-destructurable logical query plans ([INNER, CROSS, LEFT OUTER, LEFT SEMI, LEFT ANTI](#canBuildRight)) of which the `right` physical operator [can be broadcast](#canBroadcast).
 
@@ -30,9 +30,9 @@ The following sections are in the order of preference.
 
 `JoinSelection` plans a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) when there are join keys and one of the following holds:
 
-* [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) is disabled, the join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER), [LEFT ANTI](../spark-sql-joins.md#LEFT_ANTI), [LEFT OUTER](../spark-sql-joins.md#LEFT_OUTER), [LEFT SEMI](../spark-sql-joins.md#LEFT_SEMI) or [ExistenceJoin](../spark-sql-joins.md#ExistenceJoin)
+* [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) is disabled, the join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER), [LEFT ANTI](../joins.md#LEFT_ANTI), [LEFT OUTER](../joins.md#LEFT_OUTER), [LEFT SEMI](../joins.md#LEFT_SEMI) or [ExistenceJoin](../joins.md#ExistenceJoin)
 
-* [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) is disabled, the join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER) or [RIGHT OUTER](../spark-sql-joins.md#RIGHT_OUTER)
+* [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) is disabled, the join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER) or [RIGHT OUTER](../joins.md#RIGHT_OUTER)
 
 * Left join keys are *not* [orderable](../physical-operators/SortMergeJoinExec.md#orderable)
 
@@ -44,13 +44,13 @@ The following sections are in the order of preference.
 
 `JoinSelection` plans a [BroadcastNestedLoopJoinExec](../physical-operators/BroadcastNestedLoopJoinExec.md) when there are no join keys and one of the following holds:
 
-* Join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER), [LEFT ANTI](../spark-sql-joins.md#LEFT_ANTI), [LEFT OUTER](../spark-sql-joins.md#LEFT_OUTER), [LEFT SEMI](../spark-sql-joins.md#LEFT_SEMI) or [ExistenceJoin](../spark-sql-joins.md#ExistenceJoin)
+* Join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER), [LEFT ANTI](../joins.md#LEFT_ANTI), [LEFT OUTER](../joins.md#LEFT_OUTER), [LEFT SEMI](../joins.md#LEFT_SEMI) or [ExistenceJoin](../joins.md#ExistenceJoin)
 
-* Join type is [CROSS](../spark-sql-joins.md#CROSS), [INNER](../spark-sql-joins.md#INNER) or [RIGHT OUTER](../spark-sql-joins.md#RIGHT_OUTER)
+* Join type is [CROSS](../joins.md#CROSS), [INNER](../joins.md#INNER) or [RIGHT OUTER](../joins.md#RIGHT_OUTER)
 
 ### <span id="CartesianProductExec"> CartesianProductExec
 
-`JoinSelection` plans a [CartesianProductExec](../physical-operators/CartesianProductExec.md) when there are no join keys and [join type](../spark-sql-joins.md#join-types) is [CROSS](../spark-sql-joins.md#CROSS) or [INNER](../spark-sql-joins.md#INNER)
+`JoinSelection` plans a [CartesianProductExec](../physical-operators/CartesianProductExec.md) when there are no join keys and [join type](../joins.md#join-types) is [CROSS](../joins.md#CROSS) or [INNER](../joins.md#INNER)
 
 ### <span id="BroadcastNestedLoopJoinExec"> BroadcastNestedLoopJoinExec
 

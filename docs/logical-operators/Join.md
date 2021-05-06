@@ -11,7 +11,7 @@
 
 * <span id="left"> Left [logical operator](LogicalPlan.md)
 * <span id="right"> Right [logical operator](LogicalPlan.md)
-* <span id="joinType"> [JoinType](../spark-sql-joins.md#join-types)
+* <span id="joinType"> [JoinType](../joins.md#join-types)
 * <span id="condition"> Optional Join [Expression](../expressions/Expression.md)
 * <span id="hint"> `JoinHint`
 

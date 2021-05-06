@@ -253,7 +253,7 @@ supportCodegen: Boolean
 
     * [GenerateExec](GenerateExec.md)
     * [HashAggregateExec](HashAggregateExec.md) with [ImperativeAggregate](../expressions/ImperativeAggregate.md) expressions
-    * [SortMergeJoinExec](SortMergeJoinExec.md) for all [join types](../spark-sql-joins.md#join-types) except `INNER` and `CROSS`
+    * [SortMergeJoinExec](SortMergeJoinExec.md) for all [join types](../joins.md#join-types) except `INNER` and `CROSS`
 
 ## <span id="prepareRowVar"> prepareRowVar Internal Method
 
