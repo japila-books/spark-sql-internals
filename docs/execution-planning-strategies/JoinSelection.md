@@ -73,7 +73,7 @@ apply(
 
 ### <span id="ExtractEquiJoinKeys"> ExtractEquiJoinKeys
 
-`apply` uses [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md) to find [Join](../logical-operators/Join.md) logical operators with [EqualTo](../expressions/EqualTo.md) and [EqualNullSafe](../expressions/EqualNullSafe.md) condition predicate expressions.
+`apply` uses [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md) to match on [Join](../logical-operators/Join.md) logical operators with [EqualTo](../expressions/EqualTo.md) and [EqualNullSafe](../expressions/EqualNullSafe.md) condition predicate expressions.
 
 `apply` does the following (in the order until a join physical operator has been determined):
 
@@ -85,14 +85,14 @@ apply(
 
 ### <span id="ExtractSingleColumnNullAwareAntiJoin"> ExtractSingleColumnNullAwareAntiJoin
 
-`apply` uses [ExtractSingleColumnNullAwareAntiJoin](../ExtractSingleColumnNullAwareAntiJoin.md) to find [Join](../logical-operators/Join.md) logical operators.
+`apply` uses [ExtractSingleColumnNullAwareAntiJoin](../ExtractSingleColumnNullAwareAntiJoin.md) to match on [Join](../logical-operators/Join.md) logical operators.
 
 For every `Join` operator, `apply` creates a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md) physical operator with the following:
 
-* `LeftAnti` join type
+* [LeftAnti](../joins.md#joinType) join type
 * `BuildRight` build side
 * Undefined join condition expressions
-* `isNullAwareAntiJoin` flag enabled (`true`)
+* [isNullAwareAntiJoin](../physical-operators/BroadcastHashJoinExec.md#isNullAwareAntiJoin) flag enabled (`true`)
 
 ### Other Joins
 

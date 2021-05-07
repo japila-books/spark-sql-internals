@@ -30,22 +30,30 @@ Key             | Name (in web UI)        | Description
 * [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed ([createBroadcastHashJoin](../execution-planning-strategies/JoinSelection.md#createBroadcastHashJoin) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/JoinSelection.md#ExtractSingleColumnNullAwareAntiJoin))
 * [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy is executed ([ExtractEquiJoinKeys](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractEquiJoinKeys) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractSingleColumnNullAwareAntiJoin))
 
-## <span id="isNullAwareAntiJoin"> isNullAwareAntiJoin
+## <span id="isNullAwareAntiJoin"> isNullAwareAntiJoin Flag
 
-`BroadcastHashJoinExec` can be given `isNullAwareAntiJoin` flag when [created](#creating-instance) or defaults to `false`.
+`BroadcastHashJoinExec` can be given `isNullAwareAntiJoin` flag when [created](#creating-instance).
+
+`isNullAwareAntiJoin` flag is `false` by default.
+
+`isNullAwareAntiJoin` flag is `true` when:
+
+* [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed (for an [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/JoinSelection.md#ExtractSingleColumnNullAwareAntiJoin))
+* [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy is executed (for an [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractSingleColumnNullAwareAntiJoin))
 
 If enabled, `BroadcastHashJoinExec` makes sure that the following all hold:
 
 1. There is one [left key](#leftKeys) only
 1. There is one [right key](#rightKeys) only
-1. [Join Type](#joinType) is `LeftAnti`
+1. [Join Type](#joinType) is [LeftAnti](../joins.md#joinType)
 1. [Build Side](#buildSide) is `BuildRight`
 1. [Join condition](#condition) is not defined
 
 `isNullAwareAntiJoin` is used for the following:
 
-* [requiredChildDistribution](#requiredChildDistribution)
-* _others_?
+* [Required Child Output Distribution](#requiredChildDistribution) (and create a [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md))
+* [Executing Physical Operator](#doExecute)
+* [Generating Java Code for Anti Join](#codegenAnti)
 
 ## <span id="requiredChildDistribution"> Required Child Output Distribution
 
@@ -93,6 +101,18 @@ doExecute(): RDD[InternalRow]
 1. Takes the read-only copy of the [HashedRelation](HashedRelation.md#asReadOnlyCopy) (from the broadcast variable)
 1. Increment the peak execution memory (of the task) by the [size](../KnownSizeEstimation.md#estimatedSize) of the `HashedRelation`
 1. [Joins](HashJoin.md#join) the rows with the `HashedRelation` (with the [numOutputRows](#metrics) metric)
+
+## <span id="codegenAnti"> Generating Java Code for Anti Join
+
+```scala
+codegenAnti(
+  ctx: CodegenContext,
+  input: Seq[ExprCode]): String
+```
+
+`codegenAnti` is part of the [HashJoin](HashJoin.md#codegenAnti) abstraction.
+
+`codegenAnti`...FIXME
 
 ## Demo
 

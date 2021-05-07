@@ -56,3 +56,18 @@ HashJoin should not take [joinType] as the JoinType
 `join` is used when:
 
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operators are executed
+
+## <span id="codegenAnti"> Generating Java Code for Anti Join
+
+```scala
+codegenAnti(
+  ctx: CodegenContext,
+  input: Seq[ExprCode]): String
+```
+
+`codegenAnti`...FIXME
+
+`codegenAnti` is used when:
+
+* `BroadcastHashJoinExec` physical operator is requested to [codegenAnti](BroadcastHashJoinExec.md#codegenAnti) (with the [isNullAwareAntiJoin](BroadcastHashJoinExec.md#isNullAwareAntiJoin) flag off)
+* `HashJoin` is requested to [doConsume](#doConsume)

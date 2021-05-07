@@ -8,11 +8,60 @@ From PostgreSQL's [2.6. Joins Between Tables](https://www.postgresql.org/docs/cu
 
 Operator | Return Type | Description
 ---------|----------|---------
- crossJoin | [DataFrame](DataFrame.md) | Untyped ``Row``-based cross join
- join | [DataFrame](DataFrame.md) | Untyped ``Row``-based join
- joinWith | [Dataset](Dataset.md) | Type-preserving join with two output columns for records for which a join condition holds
+ [crossJoin](#crossJoin) | [DataFrame](DataFrame.md) | Untyped ``Row``-based cross join
+ [join](#join) | [DataFrame](DataFrame.md) | Untyped ``Row``-based join
+ [joinWith](#joinWith) | [Dataset](Dataset.md) | Type-preserving join with two output columns for records for which a join condition holds
 
 `join` operators create a `DataFrame` with a [Join](logical-operators/Join.md) logical operator.
+
+### <span id="crossJoin"> crossJoin
+
+```scala
+crossJoin(
+  right: Dataset[_]): DataFrame
+```
+
+`crossJoin` creates a [Join](logical-operators/Join.md) logical operator with the [Cross](#JoinType) join type.
+
+### <span id="join"> join
+
+```scala
+join(
+  right: Dataset[_]): DataFrame
+join(
+  right: Dataset[_],
+  joinExprs: Column): DataFrame
+join(
+  right: Dataset[_],
+  joinExprs: Column,
+  joinType: String): DataFrame
+join(
+  right: Dataset[_],
+  usingColumns: Seq[String]): DataFrame
+join(
+  right: Dataset[_],
+  usingColumns: Seq[String],
+  joinType: String): DataFrame
+join(
+  right: Dataset[_],
+  usingColumn: String): DataFrame
+```
+
+`join` creates a [Join](logical-operators/Join.md) logical operator with the given join type or the [Inner](#JoinType).
+
+### <span id="joinWith"> joinWith
+
+```scala
+joinWith[U](
+  other: Dataset[U],
+  condition: Column): Dataset[(T, U)]
+joinWith[U](
+  other: Dataset[U],
+  condition: Column,
+  joinType: String): Dataset[(T, U)]
+```
+
+`joinWith` creates a [Join](logical-operators/Join.md) logical operator with the given join type or the [Inner](#JoinType).
 
 ## Query Execution Planning
 
@@ -28,7 +77,7 @@ df1.join(df2).where($"df1Key" === $"df2Key")
 df1.join(df2).filter($"df1Key" === $"df2Key")
 ```
 
-## <span id="JoinType"><span id="join-types"> Join Types
+## <span id="joinType"><span id="JoinType"><span id="join-types"> Join Types
 
 Join types can be specified using the [join operators](#dataset-join-operators) (using `joinType` optional parameter).
 
@@ -38,17 +87,17 @@ df1.join(df2, $"df1Key" === $"df2Key", "inner")
 
 Join names are case-insensitive and can use the underscore (`_`) at any position (e.g. `left_anti` and `L_E_F_T_A_N_T_I` are equivalent).
 
-SQL          | JoinType    | Name (joinType)
+SQL          | JoinType    | Parameter Name
 -------------|-------------|---------
  CROSS       | Cross       | cross
  INNER       | Inner       | inner
- FULL OUTER  | FullOuter   | `outer`, `full`, `fullouter`
- LEFT ANTI   | LeftAnti    | `leftanti`
- LEFT OUTER  | LeftOuter   | `leftouter`, `left`
- LEFT SEMI   | LeftSemi    | `leftsemi`
- RIGHT OUTER | RightOuter  | `rightouter`, `right`
- NATURAL     | NaturalJoin | Special case for `Inner`, `LeftOuter`, `RightOuter`, `FullOuter`
- USING       | UsingJoin   | Special case for `Inner`, `LeftOuter`, `LeftSemi`, `RightOuter`, `FullOuter`, `LeftAnti`
+ FULL OUTER  | FullOuter   | outer, full, fullouter
+ LEFT ANTI   | LeftAnti    | leftanti
+ LEFT OUTER  | LeftOuter   | leftouter, left
+ LEFT SEMI   | LeftSemi    | leftsemi
+ RIGHT OUTER | RightOuter  | rightouter, right
+ NATURAL     | NaturalJoin | Special case for Inner, LeftOuter, RightOuter, FullOuter
+ USING       | UsingJoin   | Special case for Inner, LeftOuter, LeftSemi, RightOuter, FullOuter, LeftAnti
 
 ## <span id="ExistenceJoin"> ExistenceJoin
 

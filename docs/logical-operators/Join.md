@@ -3,7 +3,7 @@
 `Join` is a [binary logical operator](LogicalPlan.md#BinaryNode) that represents the following high-level operators in a logical plan:
 
 * [JOIN](../sql/AstBuilder.md#withJoinRelations) SQL statement
-* [Dataset.join](../Dataset.md#join), [Dataset.crossJoin](../Dataset.md#crossJoin) and [Dataset.joinWith](../Dataset.md#joinWith) operators
+* [Dataset.crossJoin](../joins.md#crossJoin), [Dataset.join](../joins.md#join) and [Dataset.joinWith](../joins.md#joinWith) operators
 
 ## Creating Instance
 
@@ -18,7 +18,7 @@
 `Join` is created when:
 
 * `AstBuilder` is requested to [withJoinRelations](../sql/AstBuilder.md#withJoinRelations) (and [visitFromClause](../sql/AstBuilder.md#visitFromClause))
-* [Dataset.join](../Dataset.md#join), [Dataset.crossJoin](../Dataset.md#crossJoin) and [Dataset.joinWith](../Dataset.md#joinWith) operators are used
+* [Dataset.crossJoin](../joins.md#crossJoin), [Dataset.join](../joins.md#join) and [Dataset.joinWith](../joins.md#joinWith) operators are used
 
 ## Catalyst DSL
 
