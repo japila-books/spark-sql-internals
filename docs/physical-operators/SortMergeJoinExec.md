@@ -1,6 +1,16 @@
 # SortMergeJoinExec Physical Operator
 
-`SortMergeJoinExec` is a [ShuffledJoin](ShuffledJoin.md) binary physical operator for [sort merge join](#doExecute).
+`SortMergeJoinExec` is a [shuffle-based join physical operator](ShuffledJoin.md) for [sort-merge join](#doExecute) (with the [left join keys](#leftKeys) being [orderable](../expressions/RowOrdering.md#isorderable)).
+
+`SortMergeJoinExec` supports [Java code generation](CodegenSupport.md) ([variable prefix](CodegenSupport.md#variablePrefix): `smj`) for inner and cross joins.
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![SortMergeJoinExec in web UI (Details for Query)](../images/spark-sql-SortMergeJoinExec-webui-query-details.png)
 
 ## Creating Instance
 
@@ -12,52 +22,59 @@
 * <span id="condition"> Optional Join [Expression](../expressions/Expression.md)
 * <span id="left"> Left [Physical Operator](SparkPlan.md)
 * <span id="right"> Right [Physical Operator](SparkPlan.md)
-* <span id="isSkewJoin"> `isSkewJoin` flag (default: `false`)
+* [isSkewJoin](#isSkewJoin) flag
 
 `ShuffledHashJoinExec` is created when:
 
-* [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed for [joins](../logical-operators/Join.md) with [left join keys](#leftKeys) that are [orderable](#orderable)  (can be ordered / sorted).
+* [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed (for [equi joins with the left join keys orderable](../execution-planning-strategies/JoinSelection.md#createSortMergeJoin)).
 
-## <span id="metrics"> Performance Metrics
+## Physical Optimizations
 
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
+1. [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) is used to [optimize skewed sort-merge joins](../physical-optimizations/OptimizeSkewedJoin.md#optimizeSkewJoin)
 
-![SortMergeJoinExec in web UI (Details for Query)](../images/spark-sql-SortMergeJoinExec-webui-query-details.png)
+1. [CoalesceBucketsInJoin](../physical-optimizations/CoalesceBucketsInJoin.md) physical optimization is used for...FIXME
 
-## Review Me
+## <span id="isSkewJoin"> isSkewJoin Flag
 
-[[orderable]]
-[NOTE]
-====
-A join key is *orderable* when is of one of the following [data types](../DataType.md):
+`ShuffledHashJoinExec` can be given `isSkewJoin` flag when [created](#creating-instance).
 
-* `NullType`
-* [AtomicType](../DataType.md#AtomicType) (that represents all the available types except `NullType`, `StructType`, `ArrayType`, `UserDefinedType`, `MapType`, and `ObjectType`)
-* `StructType` with orderable fields
-* `ArrayType` of orderable type
-* `UserDefinedType` of orderable type
+`isSkewJoin` flag is `false` by default.
 
-Therefore, a join key is *not* orderable when is of the following data type:
+`isSkewJoin` flag is `true` when:
 
-* `MapType`
-* `ObjectType`
-====
+* FIXME
 
-!!! note
-   [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (and so Spark Planner) prefers sort merge join over [shuffled hash join](ShuffledHashJoinExec.md) based on [spark.sql.join.preferSortMergeJoin](../configuration-properties.md#spark.sql.join.preferSortMergeJoin) configuration property.
+`isSkewJoin` is used for the following:
 
-[[supportCodegen]]
-`SortMergeJoinExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) for inner and cross joins.
+* FIXME
 
-[TIP]
-====
-Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.planning.ExtractEquiJoinKeys` logger to see the join condition and the left and right join keys.
-====
+## <span id="nodeName"> Node Name
 
-[source, scala]
-----
+```scala
+nodeName: String
+```
+
+`nodeName` is part of the [TreeNode](../catalyst/TreeNode.md#nodeName) abstraction.
+
+`nodeName` adds `(skew=true)` suffix to the default [node name](../catalyst/TreeNode.md#nodeName) for [isSkewJoin](#isSkewJoin) flag on.
+
+## <span id="requiredChildDistribution"> Required Child Output Distribution
+
+```scala
+requiredChildDistribution: Seq[Distribution]
+```
+
+`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
+
+[HashClusteredDistributions](HashClusteredDistribution.md) of [left](#leftKeys) and [right](#rightKeys) join keys.
+
+Left Child | Right Child
+-----------|------------
+ [HashClusteredDistribution](HashClusteredDistribution.md) (per [left](#leftKeys) join key expressions) | [HashClusteredDistribution](HashClusteredDistribution.md) (per [right](#rightKeys) join key expressions>>)
+
+## Demo
+
+```text
 // Disable auto broadcasting so Broadcast Hash Join won't take precedence
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
 
@@ -87,9 +104,7 @@ scala> q.explain
    :     +- LocalTableScan [id#5, token#6]
    +- *(2) Sort [id#9 ASC NULLS FIRST], false, 0
       +- ReusedExchange [id#9, token#10], Exchange hashpartitioning(id#5, 200)
-----
-
-NOTE: The prefix for variable names for `SortMergeJoinExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **smj**.
+```
 
 ```text
 scala> q.queryExecution.debug.codegen
@@ -127,30 +142,3 @@ Generated code:
 /* 021 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter smj_rowWriter;
 ...
 ```
-
-[[output]]
-The catalyst/QueryPlan.md#output[output schema] of a `SortMergeJoinExec` is...FIXME
-
-[[outputPartitioning]]
-The SparkPlan.md#outputPartitioning[outputPartitioning] of a `SortMergeJoinExec` is...FIXME
-
-[[outputOrdering]]
-The SparkPlan.md#outputOrdering[outputOrdering] of a `SortMergeJoinExec` is...FIXME
-
-[[requiredChildDistribution]]
-The SparkPlan.md#requiredChildDistribution[partitioning requirements] of the input of a `SortMergeJoinExec` (aka _child output distributions_) are [HashClusteredDistributions](HashClusteredDistribution.md) of <<leftKeys, left>> and <<rightKeys, right>> join keys.
-
-.SortMergeJoinExec's Required Child Output Distributions
-[cols="1,1",options="header",width="100%"]
-|===
-| Left Child
-| Right Child
-
-| [HashClusteredDistribution](HashClusteredDistribution.md) (per <<leftKeys, left join key expressions>>)
-| [HashClusteredDistribution](HashClusteredDistribution.md) (per <<rightKeys, right join key expressions>>)
-|===
-
-[[requiredChildOrdering]]
-The SparkPlan.md#requiredChildOrdering[ordering requirements] of the input of a `SortMergeJoinExec` (aka _child output ordering_) is...FIXME
-
-NOTE: `SortMergeJoinExec` operator is chosen in [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy (after [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical join operators have not met the requirements).

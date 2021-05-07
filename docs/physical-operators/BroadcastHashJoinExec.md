@@ -1,6 +1,6 @@
 # BroadcastHashJoinExec Physical Operator
 
-`BroadcastHashJoinExec` is a [hash-based join physical operator](HashJoin.md) to [perform](#doExecute) a **broadcast hash join**.
+`BroadcastHashJoinExec` is a [hash-based join physical operator](HashJoin.md) for [broadcast hash join](#doExecute).
 
 `BroadcastHashJoinExec` supports [Java code generation](CodegenSupport.md) ([variable prefix](CodegenSupport.md#variablePrefix): `bhj`).
 

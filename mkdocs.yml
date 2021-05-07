@@ -792,6 +792,7 @@ nav:
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
+      - CoalesceBucketsInJoin: physical-optimizations/CoalesceBucketsInJoin.md
       - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
