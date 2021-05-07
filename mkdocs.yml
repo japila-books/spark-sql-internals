@@ -1008,6 +1008,7 @@ nav:
     - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
     - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
+    - ExtractJoinWithBuckets: ExtractJoinWithBuckets.md
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md

@@ -154,6 +154,14 @@ Used in:
 * [ReorderJoin](logical-optimizations/ReorderJoin.md) logical plan optimization (and indirectly in `StarSchemaDetection` for `reorderStarJoins`)
 * [CostBasedJoinReorder](logical-optimizations/CostBasedJoinReorder.md) logical plan optimization
 
+## <span id="coalesceBucketsInJoinEnabled"><span id="COALESCE_BUCKETS_IN_JOIN_ENABLED"> coalesceBucketsInJoinEnabled
+
+The value of [spark.sql.bucketing.coalesceBucketsInJoin.enabled](configuration-properties.md#spark.sql.bucketing.coalesceBucketsInJoin.enabled) configuration property
+
+Used when:
+
+* [CoalesceBucketsInJoin](physical-optimizations/CoalesceBucketsInJoin.md) physical optimization is executed
+
 ## <span id="coalesceShufflePartitionsEnabled"><span id="COALESCE_PARTITIONS_ENABLED"> coalesceShufflePartitionsEnabled
 
 The value of [spark.sql.adaptive.coalescePartitions.enabled](configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property

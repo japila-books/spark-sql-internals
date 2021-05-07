@@ -577,6 +577,17 @@ When negative, it is assumed infinite (i.e. `Duration.Inf`)
 
 Use [SQLConf.broadcastTimeout](SQLConf.md#broadcastTimeout) method to access the current value.
 
+## <span id="spark.sql.bucketing.coalesceBucketsInJoin.enabled"> spark.sql.bucketing.coalesceBucketsInJoin.enabled
+
+When enabled (`true`), if two bucketed tables with the different number of buckets are joined, the side with a bigger number of buckets will be coalesced to have the same number of buckets as the other side. Bigger number of buckets is divisible by the smaller number of buckets. Bucket coalescing is applied to sort-merge joins and shuffled hash join.
+
+!!! note
+    Coalescing bucketed table can avoid unnecessary shuffling in join, but it also reduces parallelism and could possibly cause OOM for shuffled hash join.
+
+Default: `false`
+
+Use [SQLConf.coalesceBucketsInJoinEnabled](SQLConf.md#coalesceBucketsInJoinEnabled) method to access the current value.
+
 ## <span id="spark.sql.caseSensitive"> spark.sql.caseSensitive
 
 **(internal)** Controls whether the query analyzer should be case sensitive (`true`) or not (`false`).

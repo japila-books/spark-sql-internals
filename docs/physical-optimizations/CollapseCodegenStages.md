@@ -14,7 +14,7 @@ When [executed](#apply) (with [whole-stage code generation enabled](../whole-sta
 
 `CollapseCodegenStages` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical query plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
-`CollapseCodegenStages` is part of [preparations](../QueryExecution.md#preparations) batch of physical query plan rules and is executed when `QueryExecution` is requested for the [optimized physical query plan](../QueryExecution.md#executedPlan) (in **executedPlan** phase of a query execution).
+`CollapseCodegenStages` is part of the [preparations](../QueryExecution.md#preparations) batch of physical query plan rules and is executed when `QueryExecution` is requested for the [optimized physical query plan](../QueryExecution.md#executedPlan) (in **executedPlan** phase of a query execution).
 
 With [spark.sql.codegen.wholeStage](../configuration-properties.md#spark.sql.codegen.wholeStage) internal configuration property enabled, `CollapseCodegenStages` [finds physical operators with CodegenSupport](#insertWholeStageCodegen) for which [whole-stage codegen requirements hold](#supportCodegen) and collapses them together as `WholeStageCodegenExec` physical operator (possibly with [InputAdapter](../physical-operators/InputAdapter.md) in-between for physical operators with no support for Java code generation).
 
