@@ -480,6 +480,14 @@ Used when:
 * `OrcFileFormat` is requested to [build a data reader with partition column values appended](datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetFileFormat` is requested for [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
+## <span id="optimizeNullAwareAntiJoin"><span id="OPTIMIZE_NULL_AWARE_ANTI_JOIN"> optimizeNullAwareAntiJoin
+
+[spark.sql.optimizeNullAwareAntiJoin](configuration-properties.md#spark.sql.optimizeNullAwareAntiJoin) configuration property
+
+Used when:
+
+* [ExtractSingleColumnNullAwareAntiJoin](ExtractSingleColumnNullAwareAntiJoin.md) Scala extractor is executed
+
 ## <span id="optimizerExcludedRules"><span id="OPTIMIZER_EXCLUDED_RULES"> optimizerExcludedRules
 
 The value of [spark.sql.optimizer.excludedRules](configuration-properties.md#spark.sql.optimizer.excludedRules) configuration property

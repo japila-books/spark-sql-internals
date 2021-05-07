@@ -1067,6 +1067,14 @@ Default: `4`
 
 Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access the current value.
 
+## <span id="spark.sql.optimizeNullAwareAntiJoin"> spark.sql.optimizeNullAwareAntiJoin
+
+**(internal)** Enables [single-column NULL-aware anti join execution planning](ExtractSingleColumnNullAwareAntiJoin.md#unapply) into [BroadcastHashJoinExec](physical-operators/BroadcastHashJoinExec.md) (with flag [isNullAwareAntiJoin](physical-operators/BroadcastHashJoinExec.md#isNullAwareAntiJoin) enabled), optimized from O(M*N) calculation into O(M) calculation using hash lookup instead of looping lookup.
+
+Default: `true`
+
+Use [SQLConf.optimizeNullAwareAntiJoin](SQLConf.md#optimizeNullAwareAntiJoin) method to access the current value.
+
 ## <span id="spark.sql.optimizer.excludedRules"> spark.sql.optimizer.excludedRules
 
 Comma-separated list of fully-qualified class names of the optimization rules that should be disabled (excluded) from [logical query optimization](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules).
