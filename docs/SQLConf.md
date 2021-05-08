@@ -412,6 +412,16 @@ Used when:
 * `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
 * `FileStatusCache` is requested to `getOrCreate`
 
+## <span id="maxMetadataStringLength"><span id="MAX_METADATA_STRING_LENGTH"> maxMetadataStringLength
+
+The value of [spark.sql.maxMetadataStringLength](configuration-properties.md#spark.sql.maxMetadataStringLength) configuration property
+
+Used when:
+
+* `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
+* `DataSourceScanExec` is requested for [simpleString](physical-operators/DataSourceScanExec.md#simpleString)
+* `FileScan` is requested for [description](FileScan.md#description) and [metadata](FileScan.md#getMetaData)
+
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
 
 The value of [spark.sql.files.maxRecordsPerFile](configuration-properties.md#spark.sql.files.maxRecordsPerFile) configuration property

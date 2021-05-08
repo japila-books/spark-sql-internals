@@ -200,7 +200,7 @@ foreach(f: BaseType => Unit): Unit
 
 `foreach` applies the input function `f` to itself (`this`) first and then (recursively) to the <<children, children>>.
 
-## <span id="nodeName"> nodeName
+## <span id="nodeName"> Node Name
 
 ```scala
 nodeName: String
@@ -208,7 +208,9 @@ nodeName: String
 
 `nodeName` returns the name of the class with `Exec` suffix removed (that is used as a naming convention for the class name of [physical operators](../physical-operators/SparkPlan.md)).
 
-`nodeName` is used when `TreeNode` is requested for <<simpleString, simpleString>> and <<asCode, asCode>>.
+`nodeName` is used when:
+
+* `TreeNode` is requested for [simpleString](#simpleString) and [asCode](#asCode)
 
 ## <span id="getTagValue"> getTagValue
 

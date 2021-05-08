@@ -507,6 +507,16 @@ Default: `EXCEPTION`
 
 Since: `3.0.0`
 
+## <span id="spark.sql.maxMetadataStringLength"> spark.sql.maxMetadataStringLength
+
+Maximum number of characters to output for a metadata string (e.g. file location in [DataSourceScanExec](physical-operators/DataSourceScanExec.md)), every value will be abbreviated if exceed length.
+
+Must be bigger than 3
+
+Default: `100`
+
+Use [SQLConf.maxMetadataStringLength](SQLConf.md#maxMetadataStringLength) method to access the current value.
+
 ## <span id="spark.sql.maven.additionalRemoteRepositories"> spark.sql.maven.additionalRemoteRepositories
 
 A comma-delimited string config of the optional additional remote Maven mirror repositories. This is only used for downloading Hive jars in IsolatedClientLoader if the default Maven Central repo is unreachable.
