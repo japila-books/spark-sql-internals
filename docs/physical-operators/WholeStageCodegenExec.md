@@ -292,35 +292,26 @@ In the end, `doCodeGen` returns the [CodegenContext](../whole-stage-code-generat
 
 * Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.md#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
 
-=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
+## <span id="doConsume"> Generating Java Source Code for Consume Path
 
-[source, scala]
-----
-doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-----
-
-`doConsume` generates a Java source code that:
-
-. Takes (from the input `row`) the code to evaluate a Catalyst expression on an input `InternalRow`
-. Takes (from the input `row`) the term for a value of the result of the evaluation
-  a. Adds `.copy()` to the term if <<needCopyResult, needCopyResult>> is turned on
-. Wraps the term inside `append()` code block
+```scala
+doConsume(
+  ctx: CodegenContext,
+  input: Seq[ExprCode],
+  row: ExprCode): String
+```
 
 `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
-```text
-import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
-val ctx = new CodegenContext()
+!!! danger
+    Review Me
 
-import org.apache.spark.sql.catalyst.expressions.codegen.ExprCode
-val exprCode = ExprCode(code = "my_code", isNull = "false", value = "my_value")
+`doConsume` generates a Java source code that:
 
-// wsce defined above, i.e at the top of the page
-val consumeCode = wsce.doConsume(ctx, input = Seq(), row = exprCode)
-scala> println(consumeCode)
-my_code
-append(my_value);
-```
+1. Takes (from the input `row`) the code to evaluate a Catalyst expression on an input `InternalRow`
+1. Takes (from the input `row`) the term for a value of the result of the evaluation
+  a. Adds `.copy()` to the term if <<needCopyResult, needCopyResult>> is turned on
+1. Wraps the term inside `append()` code block
 
 ## <span id="generatedClassName"> Generating Class Name
 
@@ -354,3 +345,19 @@ Key             | Name (in web UI)        | Description
 pipelineTime    | (empty)   | Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
 
 ![WholeStageCodegenExec in web UI (Details for Query)](../images/spark-sql-WholeStageCodegenExec-webui.png)
+
+## Demo
+
+```text
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext()
+
+import org.apache.spark.sql.catalyst.expressions.codegen.ExprCode
+val exprCode = ExprCode(code = "my_code", isNull = "false", value = "my_value")
+
+// wsce defined above, i.e at the top of the page
+val consumeCode = wsce.doConsume(ctx, input = Seq(), row = exprCode)
+scala> println(consumeCode)
+my_code
+append(my_value);
+```

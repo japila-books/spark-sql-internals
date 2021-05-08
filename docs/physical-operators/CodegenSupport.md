@@ -354,6 +354,16 @@ Physical Operator | Prefix
 
 * `CodegenSupport` is requested to generate the Java source code for [produce](#produce) and [consume](#consume) code paths
 
+## <span id="needCopyResult"> needCopyResult Flag
+
+```scala
+needCopyResult: Boolean
+```
+
+`needCopyResult` controls whether `WholeStageCodegenExec` physical operator should copy result when requested for the [Java source code for consume path](WholeStageCodegenExec.md#doConsume).
+
+`needCopyResult`...FIXME
+
 ## Demo
 
 ```text

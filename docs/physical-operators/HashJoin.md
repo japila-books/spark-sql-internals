@@ -10,12 +10,16 @@
 buildSide: BuildSide
 ```
 
-### <span id="prepareRelation"> Preparing Relation
+### <span id="prepareRelation"> Preparing HashedRelation
 
 ```scala
 prepareRelation(
   ctx: CodegenContext): HashedRelationInfo
 ```
+
+Used when:
+
+* `HashJoin` is requested to [codegenInner](#codegenInner), [codegenOuter](#codegenOuter), [codegenSemi](#codegenSemi), [codegenAnti](#codegenAnti), [codegenExistence](#codegenExistence)
 
 ## Implementations
 

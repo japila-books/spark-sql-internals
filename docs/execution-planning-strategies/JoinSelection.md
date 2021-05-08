@@ -152,14 +152,14 @@ createBroadcastNLJoin(
 
 `createBroadcastNLJoin` creates a [BroadcastNestedLoopJoinExec](../physical-operators/BroadcastNestedLoopJoinExec.md) when at least one of the `buildLeft` or `buildRight` flags are enabled.
 
-## <span id="createShuffleHashJoin"> createShuffleHashJoin
+## <span id="createShuffleHashJoin"> Creating ShuffledHashJoinExec
 
 ```scala
 createShuffleHashJoin(
   onlyLookingAtHint: Boolean): Option[Seq[ShuffledHashJoinExec]]
 ```
 
-`createShuffleHashJoin` [determines a ShuffleHashJoinBuildSide](#getShuffleHashJoinBuildSide) and, if determined, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
+`createShuffleHashJoin` [determines the BuildSide for a ShuffleHashJoinExec](#getShuffleHashJoinBuildSide) and, if successful, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
 
 ## <span id="createSortMergeJoin"> Creating SortMergeJoinExec
 
@@ -225,7 +225,7 @@ In the end, `getBroadcastBuildSide` [getBuildSide](#getBuildSide) with the follo
 * Left [physical operator](../logical-operators/LogicalPlan.md)
 * Right [physical operator](../logical-operators/LogicalPlan.md)
 
-## <span id="getShuffleHashJoinBuildSide"> getShuffleHashJoinBuildSide
+## <span id="getShuffleHashJoinBuildSide"> BuildSide for ShuffleHashJoinExec
 
 ```scala
 getShuffleHashJoinBuildSide(

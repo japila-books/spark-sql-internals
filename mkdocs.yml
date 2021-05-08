@@ -687,7 +687,7 @@ nav:
         - ShowTablesExec: physical-operators/ShowTablesExec.md
         - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
         - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
-        - physical-operators/ShuffledHashJoinExec.md
+        - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
         - physical-operators/SortAggregateExec.md
         - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
         - physical-operators/SortExec.md
