@@ -174,7 +174,7 @@ doPrepare(): Unit
 
 Part of [prepare](#prepare)
 
-### <span id="requiredChildDistribution"> requiredChildDistribution
+### <span id="requiredChildDistribution"> Required Child Output Distribution
 
 ```scala
 requiredChildDistribution: Seq[Distribution]

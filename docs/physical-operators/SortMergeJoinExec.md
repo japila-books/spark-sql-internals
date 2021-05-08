@@ -70,7 +70,7 @@ requiredChildDistribution: Seq[Distribution]
 
 Left Child | Right Child
 -----------|------------
- [HashClusteredDistribution](HashClusteredDistribution.md) (per [left](#leftKeys) join key expressions) | [HashClusteredDistribution](HashClusteredDistribution.md) (per [right](#rightKeys) join key expressions>>)
+ [HashClusteredDistribution](HashClusteredDistribution.md) (per [left](#leftKeys) join key expressions) | [HashClusteredDistribution](HashClusteredDistribution.md) (per [right](#rightKeys) join key expressions)
 
 ## Demo
 
