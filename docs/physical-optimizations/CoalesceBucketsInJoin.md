@@ -10,7 +10,7 @@
 
 `CoalesceBucketsInJoin` uses the [spark.sql.bucketing.coalesceBucketsInJoin.enabled](configuration-properties.md#spark.sql.bucketing.coalesceBucketsInJoin.enabled) configuration property.
 
-## <span id="apply"> apply
+## <span id="apply"> Executing Rule
 
 ```scala
 apply(
@@ -19,7 +19,7 @@ apply(
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-`apply` does nothing and returns when the [spark.sql.bucketing.coalesceBucketsInJoin.enabled](configuration-properties.md#spark.sql.bucketing.coalesceBucketsInJoin.enabled) configuration property is off.
+`apply` is a noop with the [spark.sql.bucketing.coalesceBucketsInJoin.enabled](configuration-properties.md#spark.sql.bucketing.coalesceBucketsInJoin.enabled) configuration property turned off.
 
 `apply` uses [ExtractJoinWithBuckets](../ExtractJoinWithBuckets.md) to match on [BaseJoinExec](../physical-operators/BaseJoinExec.md) physical operators.
 

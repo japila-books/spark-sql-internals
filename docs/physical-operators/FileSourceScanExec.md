@@ -1,6 +1,6 @@
 # FileSourceScanExec Leaf Physical Operator
 
-`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over collections of files (incl. Hive tables).
+`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over collections of files.
 
 `FileSourceScanExec` is <<creating-instance, created>> exclusively for a LogicalRelation.md[LogicalRelation] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md) when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
 
