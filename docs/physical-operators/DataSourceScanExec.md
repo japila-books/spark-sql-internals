@@ -1,4 +1,4 @@
-# DataSourceScanExec -- Leaf Physical Operators to Scan Over BaseRelation
+# DataSourceScanExec Leaf Physical Operators
 
 `DataSourceScanExec` is the <<contract, contract>> of <<implementations, leaf physical operators>> that represent scans over <<relation, BaseRelation>>.
 

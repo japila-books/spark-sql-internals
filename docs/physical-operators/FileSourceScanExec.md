@@ -1,8 +1,8 @@
-# FileSourceScanExec Leaf Physical Operator
+# FileSourceScanExec Physical Operator
 
-`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over collections of files.
+`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over files.
 
-`FileSourceScanExec` is <<creating-instance, created>> exclusively for a LogicalRelation.md[LogicalRelation] logical operator with a [HadoopFsRelation](../HadoopFsRelation.md) when [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed.
+## Demo
 
 ```text
 // Create a bucketed data source table
@@ -43,10 +43,14 @@ ReadSchema -> struct<id:bigint>
 SelectedBucketsCount -> 4 out of 4
 ```
 
-[[inputRDDs]]
-`FileSourceScanExec` uses the single <<inputRDD, input RDD>> as the [input RDDs](CodegenSupport.md#inputRDDs) (in [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)).
+As a [DataSourceScanExec](DataSourceScanExec.md), `FileSourceScanExec` uses **Scan** for the prefix of the [node name](DataSourceScanExec.md#nodeName).
 
-When <<doExecute, executed>>, `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for <<createBucketedReadRDD, bucketed>> and <<createNonBucketedReadRDD, non-bucketed reads>>).
+```scala
+val fileScanExec: FileSourceScanExec = ... // see the example earlier
+assert(fileScanExec.nodeName startsWith "Scan")
+```
+
+When [executed](#doExecute), `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for [bucketed](#createBucketedReadRDD) and [non-bucketed reads](#createNonBucketedReadRDD)).
 
 ```text
 scala> :type scan
@@ -88,132 +92,96 @@ Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00007-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
 ```
 
-`FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the <<outputPartitioning, output partitioning scheme>>.
+`FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the [output partitioning scheme](#outputPartitioning).
 
-`FileSourceScanExec` is a <<ColumnarBatchScan, ColumnarBatchScan>> and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../datasources/FileFormat.md#supportBatch).
-
-`FileSourceScanExec` supports <<pushedDownFilters, data source filters>> that are printed out to the console (at <<logging, INFO>> logging level) and available as <<metadata, metadata>> (e.g. in web UI or spark-sql-dataset-operators.md#explain[explain]).
+`FileSourceScanExec` supports [data source filters](#pushedDownFilters) that are printed out to the console (at [INFO](#logging) logging level) and available as [metadata](#metadata) (e.g. in web UI or [explain](../spark-sql-dataset-operators.md#explain)).
 
 ```text
 Pushed Filters: [pushedDownFilters]
 ```
 
-As a DataSourceScanExec.md[DataSourceScanExec], `FileSourceScanExec` uses *Scan* for the prefix of the DataSourceScanExec.md#nodeName[node name].
+## <span id="nodeNamePrefix"> Node Name Prefix
 
-[source, scala]
-----
-val fileScanExec: FileSourceScanExec = ... // see the example earlier
-assert(fileScanExec.nodeName startsWith "Scan")
-----
+```scala
+nodeNamePrefix: String
+```
 
-.FileSourceScanExec in web UI (Details for Query)
-image::images/spark-sql-FileSourceScanExec-webui-query-details.png[align="center"]
+`nodeNamePrefix` is part of the [DataSourceScanExec](DataSourceScanExec.md#nodeNamePrefix) abstraction.
 
-[[nodeNamePrefix]]
-`FileSourceScanExec` uses *File* for DataSourceScanExec.md#nodeNamePrefix[nodeNamePrefix] (that is used for the DataSourceScanExec.md#simpleString[simple node description] in query plans).
+`nodeNamePrefix` is always **File**.
 
-[source, scala]
-----
+```text
 val fileScanExec: FileSourceScanExec = ... // see the example earlier
 assert(fileScanExec.nodeNamePrefix == "File")
 
 scala> println(fileScanExec.simpleString)
 FileScan csv [id#20,name#21,city#22] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/Users/jacek/dev/oss/datasets/people.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:string,name:string,city:string>
-----
+```
 
-[[internal-registries]]
-.FileSourceScanExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,2",options="header",width="100%"]
-|===
-| Name
-| Description
+## <span id="metrics"> Performance Metrics
 
-| metadata
-a| [[metadata]]
+Key              | Name (in web UI)               | Description
+-----------------|--------------------------------|---------
+ filesSize       | size of files read             |
+ metadataTime    | metadata time (ms)             |
+ numFiles        | number of files                |
+ numOutputRows   | number of output rows          |
 
-[source, scala]
-----
+![FileSourceScanExec in web UI (Details for Query)](../images/spark-sql-FileSourceScanExec-webui-query-details.png)
+
+### <span id="metrics-supportsColumnar"> Columnar Scan Metrics
+
+The following performance metrics are available only [supportsColumnar](#supportsColumnar) enabled.
+
+Key              | Name (in web UI)               | Description
+-----------------|--------------------------------|---------
+ scanTime        | scan time                      |
+
+### <span id="metrics-partitionSchema"> Partition Scan Metrics
+
+The following performance metrics are available only when [partitions](../HadoopFsRelation.md#partitionSchemaOption) are used
+
+Key              | Name (in web UI)               | Description
+-----------------|--------------------------------|---------
+ numPartitions   | number of partitions read      |
+ pruningTime     | dynamic partition pruning time |
+
+### <span id="staticMetrics"> Dynamic Partition Pruning Scan Metrics
+
+The following performance metrics are available only for [isDynamicPruningFilter](#isDynamicPruningFilter) among the [partition filters](#partitionFilters).
+
+Key              | Name (in web UI)               | Description
+-----------------|--------------------------------|---------
+ staticFilesNum  | static number of files read    |
+ staticFilesSize | static size of files read      |
+
+## <span id="metadata"> Metadata
+
+```scala
 metadata: Map[String, String]
-----
-
-Metadata
-
-NOTE: `metadata` is part of DataSourceScanExec.md#metadata[DataSourceScanExec] contract.
-
-| pushedDownFilters
-a| [[pushedDownFilters]] [Data source filters](../Filter.md) that are <<dataFilters, dataFilters>> expressions [converted to their respective filters](../execution-planning-strategies/DataSourceStrategy.md#translateFilter)
-
-[TIP]
-====
-Enable <<logging, INFO>> logging level to see <<pushedDownFilters, pushedDownFilters>> printed out to the console.
-
-```
-Pushed Filters: [pushedDownFilters]
-```
-====
-
-Used when `FileSourceScanExec` is requested for the <<metadata, metadata>> and <<inputRDD, input RDD>>
-|===
-
-[[logging]]
-[TIP]
-====
-Enable `ALL` logging level for `org.apache.spark.sql.execution.FileSourceScanExec` logger to see what happens inside.
-
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=ALL
 ```
 
-Refer to spark-logging.md[Logging].
-====
+`metadata` is part of the [DataSourceScanExec](DataSourceScanExec.md#metadata) abstraction.
+
+`metadata`...FIXME
 
 ## Creating Instance
 
-`FileSourceScanExec` takes the following when created:
+`FileSourceScanExec` takes the following to be created:
 
-* [[relation]] [HadoopFsRelation](../HadoopFsRelation.md)
-* [[output]] Output schema [attributes](../expressions/Attribute.md)
-* [[requiredSchema]] [Schema](../StructType.md)
-* [[partitionFilters]] `partitionFilters` [expressions](../expressions/Expression.md)
-* [[optionalBucketSet]] Bucket IDs for bucket pruning (`Option[BitSet]`)
-* [[dataFilters]] `dataFilters` [expressions](../expressions/Expression.md)
-* [[tableIdentifier]] Optional `TableIdentifier`
+* <span id="relation"> [HadoopFsRelation](../HadoopFsRelation.md)
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+* <span id="requiredSchema"> Required [Schema](../StructType.md)
+* <span id="partitionFilters"> Partition Filter [Expression](../expressions/Expression.md)s
+* <span id="optionalBucketSet"> `optionalBucketSet`
+* <span id="optionalNumCoalescedBuckets"> `optionalNumCoalescedBuckets`
+* <span id="dataFilters"> Data Filter [Expression](../expressions/Expression.md)s
+* <span id="tableIdentifier"> Optional `TableIdentifier`
+* <span id="disableBucketedScan"> `disableBucketedScan` flag (default: `false`)
 
-=== [[createNonBucketedReadRDD]] Creating RDD for Non-Bucketed Reads -- `createNonBucketedReadRDD` Internal Method
+`FileSourceScanExec` is created when:
 
-[source, scala]
-----
-createNonBucketedReadRDD(
-  readFile: (PartitionedFile) => Iterator[InternalRow],
-  selectedPartitions: Seq[PartitionDirectory],
-  fsRelation: HadoopFsRelation): RDD[InternalRow]
-----
-
-`createNonBucketedReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
-
-* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
-
-* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
-
-`createNonBucketedReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
-
-The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
-
-`createNonBucketedReadRDD` prints out the following INFO message to the logs:
-
-```text
-Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
-```
-
-For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` <<getBlockLocations, gets the HDFS block locations>> to create [PartitionedFiles](../PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
-
-`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
-
-In the end, `createNonBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
-
-`createNonBucketedReadRDD` is used when `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and neither the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../HadoopFsRelation.md))
 
 ## <span id="inputRDD"> Input RDD
 
@@ -222,7 +190,7 @@ inputRDD: RDD[InternalRow]
 ```
 
 !!! note "lazy value"
-    `inputRDD` is a Scala lazy value which is computed once when accessed and cached afterwards.
+    `inputRDD` is a Scala lazy value which is computed once when accessed and never changes afterwards.
 
 `inputRDD` is an input `RDD` that is used when `FileSourceScanExec` physical operator is requested for [inputRDDs](#inputRDDs) and to [execute](#doExecute).
 
@@ -241,7 +209,9 @@ dynamicallySelectedPartitions: Array[PartitionDirectory]
 
 `dynamicallySelectedPartitions`...FIXME
 
-`dynamicallySelectedPartitions` is used when `FileSourceScanExec` is requested for [inputRDD](#inputRDD).
+`dynamicallySelectedPartitions` is used when:
+
+* `FileSourceScanExec` is requested for the [input RDD](#inputRDD)
 
 ### <span id="selectedPartitions"> Selected Partitions
 
@@ -254,14 +224,60 @@ selectedPartitions: Seq[PartitionDirectory]
 
 `selectedPartitions`...FIXME
 
-=== [[outputPartitioning]] Output Partitioning Scheme -- `outputPartitioning` Attribute
+## <span id="inputRDDs"> inputRDDs
 
-[source, scala]
-----
+```scala
+inputRDDs(): Seq[RDD[InternalRow]]
+```
+
+`inputRDDs` is part of the [DataSourceScanExec](DataSourceScanExec.md#inputRDDs) abstraction.
+
+`inputRDDs` is the single [input RDD](#inputRDD).
+
+## <span id="bucketedScan"> bucketedScan Flag
+
+```scala
+bucketedScan: Boolean
+```
+
+!!! note "lazy value"
+    `selectedPartitions` is a Scala lazy value which is computed once when accessed and cached afterwards.
+
+`bucketedScan`...FIXME
+
+`bucketedScan` is used when:
+
+* FIXME
+
+## <span id="outputOrdering"> Output Data Ordering Requirements
+
+```scala
+outputOrdering: Seq[SortOrder]
+```
+
+`outputOrdering` is part of the [SparkPlan](SparkPlan.md#outputOrdering) abstraction.
+
+!!! danger
+    Review Me
+
+`outputOrdering` is a [SortOrder](../expressions/SortOrder.md) expression for every [sort column](../BucketSpec.md#sortColumnNames) in `Ascending` order only when the following all hold:
+
+* [bucketing is enabled](../SQLConf.md#bucketingEnabled)
+* [HadoopFsRelation](#relation) has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
+* All the buckets have a single file in it
+
+Otherwise, `outputOrdering` is simply empty (`Nil`).
+
+## <span id="outputPartitioning"> Output Data Partitioning Requirements
+
+```scala
 outputPartitioning: Partitioning
-----
+```
 
-`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+
+!!! danger
+    Review Me
 
 `outputPartitioning` can be one of the following:
 
@@ -269,91 +285,166 @@ outputPartitioning: Partitioning
 
 * [UnknownPartitioning](Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
 
-=== [[createBucketedReadRDD]] Creating FileScanRDD with Bucketing Support -- `createBucketedReadRDD` Internal Method
+## <span id="vectorTypes"> Fully-Qualified Class Names of ColumnVectors
 
-[source, scala]
-----
+```scala
+vectorTypes: Option[Seq[String]]
+```
+
+`vectorTypes` is part of the [SparkPlan](SparkPlan.md#vectorTypes) abstraction.
+
+!!! danger
+    Review Me
+
+`vectorTypes` simply requests the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../datasources/FileFormat.md#vectorTypes).
+
+`vectorTypes` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#vectorTypes) abstraction.
+
+## <span id="doExecuteColumnar"> doExecuteColumnar
+
+```scala
+doExecuteColumnar(): RDD[ColumnarBatch]
+```
+
+`doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+!!! danger
+    Review Me
+
+`doExecute` branches off per [supportsBatch](#supportsBatch) flag.
+
+!!! note
+    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) built-in file formats (under certain conditions).
+
+With [supportsBatch](#supportsBatch) flag enabled, `doExecute` creates a [WholeStageCodegenExec](WholeStageCodegenExec.md) physical operator (with the `FileSourceScanExec` as the [child physical operator](WholeStageCodegenExec.md#child) and [codegenStageId](WholeStageCodegenExec.md#codegenStageId) as `0`) and [executes](SparkPlan.md#execute) it right after.
+
+With [supportsBatch](#supportsBatch) flag disabled, `doExecute` creates an `unsafeRows` RDD to scan over which is different per [needsUnsafeRowConversion](#needsUnsafeRowConversion) flag.
+
+If [needsUnsafeRowConversion](#needsUnsafeRowConversion) flag is on, `doExecute` takes the [input RDD](#inputRDD) and creates a new RDD by applying a function to each partition (using `RDD.mapPartitionsWithIndexInternal`):
+
+1. Creates a [UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [schema](../catalyst/QueryPlan.md#schema)
+
+1. Initializes the [UnsafeProjection](../expressions/Projection.md#initialize)
+
+1. Maps over the rows in a partition iterator using the `UnsafeProjection` projection
+
+Otherwise, `doExecute` simply takes the [input RDD](#inputRDD) as the `unsafeRows` RDD (with no changes).
+
+`doExecute` takes the [numOutputRows](ColumnarBatchScan.md#numOutputRows) metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
+
+!!! tip
+    Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the values of the [supportsBatch](#supportsBatch) and [needsUnsafeRowConversion](#needsUnsafeRowConversion) flags given the number of RDDs.
+
+    With [supportsBatch](#supportsBatch) off and [needsUnsafeRowConversion](#needsUnsafeRowConversion) on you should see two more RDDs in the RDD lineage.
+
+## <span id="createNonBucketedReadRDD"> Creating RDD for Non-Bucketed Reads
+
+```scala
+createNonBucketedReadRDD(
+  readFile: (PartitionedFile) => Iterator[InternalRow],
+  selectedPartitions: Array[PartitionDirectory],
+  fsRelation: HadoopFsRelation): RDD[InternalRow]
+```
+
+!!! danger
+    Review Me
+
+`createNonBucketedReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
+
+* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
+
+* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
+
+`createNonBucketedReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
+
+The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
+
+`createNonBucketedReadRDD` prints out the following INFO message to the logs:
+
+```text
+Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
+```
+
+For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` [gets the HDFS block locations](#getBlockLocations) to create [PartitionedFiles](../PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+
+`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
+
+In the end, `createNonBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
+
+`createNonBucketedReadRDD` is used when `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and neither the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
+
+## <span id="createBucketedReadRDD"> Creating FileScanRDD with Bucketing Support
+
+```scala
 createBucketedReadRDD(
   bucketSpec: BucketSpec,
   readFile: (PartitionedFile) => Iterator[InternalRow],
-  selectedPartitions: Seq[PartitionDirectory],
+  selectedPartitions: Array[PartitionDirectory],
   fsRelation: HadoopFsRelation): RDD[InternalRow]
-----
+```
+
+!!! danger
+    Review Me
 
 `createBucketedReadRDD` prints the following INFO message to the logs:
 
-```
+```text
 Planning with [numBuckets] buckets
 ```
 
-`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into [PartitionedFiles](../PartitionedFile.md). For every file, `createBucketedReadRDD` <<getBlockLocations, getBlockLocations>> and <<getBlockHosts, getBlockHosts>>.
+`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into [PartitionedFiles](../PartitionedFile.md). For every file, `createBucketedReadRDD` [getBlockLocations](#getBlockLocations) and [getBlockHosts](#getBlockHosts).
 
 `createBucketedReadRDD` then groups the `PartitionedFiles` by bucket ID.
 
-NOTE: Bucket ID is of the format *_0000n*, i.e. the bucket ID prefixed with up to four ``0``s.
+!!! NOTE
+    Bucket ID is of the format *_0000n*, i.e. the bucket ID prefixed with up to four ``0``s.
 
-`createBucketedReadRDD` prunes (filters out) the bucket files for the bucket IDs that are not listed in the <<optionalBucketSet, bucket IDs for bucket pruning>>.
+`createBucketedReadRDD` prunes (filters out) the bucket files for the bucket IDs that are not listed in the [bucket IDs for bucket pruning](#optionalBucketSet).
 
 `createBucketedReadRDD` creates a [FilePartition](../rdds/FileScanRDD.md#FilePartition) (_file block_) for every bucket ID and the (pruned) bucket `PartitionedFiles`.
 
 In the end, `createBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the input `readFile` for the [read function](../rdds/FileScanRDD.md#readFunction) and the file blocks (`FilePartitions`) for every bucket ID for [partitions](../rdds/FileScanRDD.md#filePartitions))
 
-[TIP]
-====
-Use `RDD.toDebugString` to see `FileScanRDD` in the RDD execution plan (aka RDD lineage).
+!!! tip
+    Use `RDD.toDebugString` to see `FileScanRDD` in the RDD execution plan (aka RDD lineage).
 
-[source, scala]
-----
-// Create a bucketed table
-spark.range(8).write.bucketBy(4, "id").saveAsTable("b1")
+    ```text
+    // Create a bucketed table
+    spark.range(8).write.bucketBy(4, "id").saveAsTable("b1")
 
-scala> sql("desc extended b1").where($"col_name" like "%Bucket%").show
-+--------------+---------+-------+
-|      col_name|data_type|comment|
-+--------------+---------+-------+
-|   Num Buckets|        4|       |
-|Bucket Columns|   [`id`]|       |
-+--------------+---------+-------+
+    scala> sql("desc extended b1").where($"col_name" like "%Bucket%").show
+    +--------------+---------+-------+
+    |      col_name|data_type|comment|
+    +--------------+---------+-------+
+    |   Num Buckets|        4|       |
+    |Bucket Columns|   [`id`]|       |
+    +--------------+---------+-------+
 
-val bucketedTable = spark.table("b1")
+    val bucketedTable = spark.table("b1")
 
-val lineage = bucketedTable.queryExecution.toRdd.toDebugString
-scala> println(lineage)
-(4) MapPartitionsRDD[26] at toRdd at <console>:26 []
- |  FileScanRDD[25] at toRdd at <console>:26 []
-----
-====
+    val lineage = bucketedTable.queryExecution.toRdd.toDebugString
+    scala> println(lineage)
+    (4) MapPartitionsRDD[26] at toRdd at <console>:26 []
+    |  FileScanRDD[25] at toRdd at <console>:26 []
+    ```
 
-NOTE: `createBucketedReadRDD` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, inputRDD>> (and the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined and [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
+`createBucketedReadRDD` is used when:
 
-=== [[supportsBatch]] `supportsBatch` Attribute
+* `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and the optional [bucketing specification](../HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined and [bucketing is enabled](../SQLConf.md#bucketingEnabled))
 
-[source, scala]
-----
-supportsBatch: Boolean
-----
+## <span id="needsUnsafeRowConversion"> needsUnsafeRowConversion Flag
 
-`supportsBatch` is enabled (`true`) only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports vectorized decoding](../datasources/FileFormat.md#supportBatch). Otherwise, `supportsBatch` is disabled (i.e. `false`).
-
-!!! note
-    [FileFormat](../datasources/FileFormat.md) does not support vectorized decoding by default (i.e. [supportBatch](../datasources/FileFormat.md#supportBatch) flag is disabled). Only [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) have support for it under certain conditions.
-
-`supportsBatch` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#supportsBatch) abstraction.
-
-=== [[ColumnarBatchScan]] FileSourceScanExec As ColumnarBatchScan
-
-`FileSourceScanExec` is a [ColumnarBatchScan](ColumnarBatchScan.md) and <<supportsBatch, supports batch decoding>> only when the [FileFormat](../HadoopFsRelation.md#fileFormat) (of the <<relation, HadoopFsRelation>>) [supports it](../datasources/FileFormat.md#supportBatch).
-
-`FileSourceScanExec` has <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag enabled for `ParquetFileFormat` data sources exclusively.
-
-`FileSourceScanExec` has <<vectorTypes, vectorTypes>>...FIXME
-
-==== [[needsUnsafeRowConversion]] `needsUnsafeRowConversion` Flag
-
-[source, scala]
-----
+```scala
 needsUnsafeRowConversion: Boolean
-----
+```
 
 `needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
 
@@ -363,110 +454,28 @@ needsUnsafeRowConversion: Boolean
 
 Otherwise, `needsUnsafeRowConversion` is disabled (i.e. `false`).
 
-NOTE: `needsUnsafeRowConversion` is used when `FileSourceScanExec` is <<doExecute, executed>> (and <<supportsBatch, supportsBatch>> flag is off).
+`needsUnsafeRowConversion` is used when:
 
-`needsUnsafeRowConversion` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#needsUnsafeRowConversion) abstraction.
+* `FileSourceScanExec` is [executed](#doExecute) (and [supportsBatch](#supportsBatch) flag is off)
 
-==== [[vectorTypes]] Fully-Qualified Class Names (Types) of Concrete ColumnVectors -- `vectorTypes` Method
+## <span id="supportsColumnar"> supportsColumnar Flag
 
-[source, scala]
-----
-vectorTypes: Option[Seq[String]]
-----
+```scala
+supportsColumnar: Boolean
+```
 
-`vectorTypes` simply requests the [FileFormat](../HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../datasources/FileFormat.md#vectorTypes).
+`supportsColumnar` is part of the [SparkPlan](SparkPlan.md#supportsColumnar) abstraction.
 
-`vectorTypes` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#vectorTypes) abstraction.
+`supportsColumnar`...FIXME
 
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
+## Logging
 
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
+Enable `ALL` logging level for `org.apache.spark.sql.execution.FileSourceScanExec` logger to see what happens inside.
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+Add the following line to `conf/log4j.properties`:
 
-`doExecute` branches off per <<supportsBatch, supportsBatch>> flag.
+```text
+log4j.logger.org.apache.spark.sql.execution.FileSourceScanExec=ALL
+```
 
-!!! note
-    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) built-in file formats (under certain conditions).
-
-With <<supportsBatch, supportsBatch>> flag enabled, `doExecute` creates a <<WholeStageCodegenExec.md#, WholeStageCodegenExec>> physical operator (with the `FileSourceScanExec` for the <<WholeStageCodegenExec.md#child, child physical operator>> and WholeStageCodegenExec.md#codegenStageId[codegenStageId] as `0`) and SparkPlan.md#execute[executes] it right after.
-
-With <<supportsBatch, supportsBatch>> flag disabled, `doExecute` creates an `unsafeRows` RDD to scan over which is different per <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag.
-
-If <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flag is on, `doExecute` takes the <<inputRDD, inputRDD>> and creates a new RDD by applying a function to each partition (using `RDD.mapPartitionsWithIndexInternal`):
-
-1. Creates a [UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [schema](../catalyst/QueryPlan.md#schema)
-
-1. Initializes the [UnsafeProjection](../expressions/Projection.md#initialize)
-
-1. Maps over the rows in a partition iterator using the `UnsafeProjection` projection
-
-Otherwise, `doExecute` simply takes the <<inputRDD, inputRDD>> as the `unsafeRows` RDD (with no changes).
-
-`doExecute` takes the [numOutputRows](ColumnarBatchScan.md#numOutputRows) metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
-
-[TIP]
-====
-Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the values of the <<supportsBatch, supportsBatch>> and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> flags given the number of RDDs.
-
-With <<supportsBatch, supportsBatch>> off and <<needsUnsafeRowConversion, needsUnsafeRowConversion>> on you should see two more RDDs in the RDD lineage.
-====
-
-=== [[outputOrdering]] Output Data Ordering -- `outputOrdering` Attribute
-
-[source, scala]
-----
-outputOrdering: Seq[SortOrder]
-----
-
-`outputOrdering` is part of the [SparkPlan](SparkPlan.md#outputOrdering) abstraction.
-
-`outputOrdering` is a `SortOrder` expression for every [sort column](../BucketSpec.md#sortColumnNames) in `Ascending` order only when all the following hold:
-
-* [bucketing is enabled](../SQLConf.md#bucketingEnabled)
-
-* [HadoopFsRelation](#relation) has a [bucketing specification](../HadoopFsRelation.md#bucketSpec) defined
-
-* All the buckets have a single file in it
-
-Otherwise, `outputOrdering` is simply empty (`Nil`).
-
-=== [[updateDriverMetrics]] `updateDriverMetrics` Internal Method
-
-[source, scala]
-----
-updateDriverMetrics(): Unit
-----
-
-`updateDriverMetrics` updates the following <<metrics, performance metrics>>:
-
-* <<numFiles, numFiles>> metric with the total of all the sizes of the files in the <<selectedPartitions, selectedPartitions>>
-
-* <<metadataTime, metadataTime>> metric with the time spent in the <<selectedPartitions, selectedPartitions>>
-
-In the end, `updateDriverMetrics` requests the `SQLMetrics` object to spark-sql-SQLMetric.md#postDriverMetricUpdates[posts the metric updates].
-
-NOTE: `updateDriverMetrics` is used exclusively when `FileSourceScanExec` physical operator is requested for the <<inputRDD, input RDD>> (the very first time).
-
-=== [[getBlockLocations]] `getBlockLocations` Internal Method
-
-[source, scala]
-----
-getBlockLocations(file: FileStatus): Array[BlockLocation]
-----
-
-`getBlockLocations` simply requests the given Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[FileStatus] for the block locations (`getBlockLocations`) if it is a Hadoop https://hadoop.apache.org/docs/r2.7.3/api/index.html?org/apache/hadoop/fs/LocatedFileStatus.html[LocatedFileStatus]. Otherwise, `getBlockLocations` returns an empty array.
-
-NOTE: `getBlockLocations` is used when `FileSourceScanExec` physical operator is requested to <<createBucketedReadRDD, createBucketedReadRDD>> and <<createNonBucketedReadRDD, createNonBucketedReadRDD>>.
-
-## <span id="metrics"> Performance Metrics
-
-Key            | Name (in web UI)        | Description
----------------|-------------------------|---------
- metadataTime  | metadata time (ms)      |
- numFiles      | number of files         |
- numOutputRows | number of output rows   |
- scanTime      | scan time               |
+Refer to [Logging](../spark-logging.md).
