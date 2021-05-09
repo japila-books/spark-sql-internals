@@ -180,9 +180,6 @@ Strategy: [fixedPoint](#fixedPoint)
 * <span id="conf"> [SQLConf](SQLConf.md)
 * <span id="maxIterations"> Maximum number of iterations (of the [FixedPoint](#fixedPoint) rule batches)
 
-!!! note
-    `Analyzer` can also be created without specifying the [maxIterations](#maxIterations) argument which is then configured using [optimizerMaxIterations](CatalystConf.md#optimizerMaxIterations) configuration setting.
-
 `Analyzer` is created when `SessionState` is requested for the [analyzer](SessionState.md#analyzer).
 
 ![Creating Analyzer](images/spark-sql-Analyzer.png)
@@ -240,8 +237,6 @@ scala> println(analyzedPlan.numberedTreeString)
 ## <span id="fixedPoint"> FixedPoint
 
 `FixedPoint` with [maxIterations](#maxIterations) for <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>> batches.
-
-Set when `Analyzer` is [created](#creating-instance) (and can be defined explicitly or through [optimizerMaxIterations](CatalystConf.md#optimizerMaxIterations) configuration setting).
 
 ## <span id="expandRelationName"> expandRelationName
 

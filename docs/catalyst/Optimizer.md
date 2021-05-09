@@ -330,7 +330,7 @@ scala> println(optimizedPlan.numberedTreeString)
 
 ## <span id="fixedPoint"> FixedPoint Strategy
 
-`FixedPoint` strategy with the number of iterations as defined by [spark.sql.optimizer.maxIterations](../CatalystConf.md#optimizerMaxIterations)
+`FixedPoint` strategy with the number of iterations as defined by [spark.sql.optimizer.maxIterations](../configuration-properties.md#spark.sql.optimizer.maxIterations) configuration property.
 
 ## <span id="extendedOperatorOptimizationRules"> Extended Operator Optimization Rules (Extension Point)
 

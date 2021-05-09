@@ -116,6 +116,10 @@ nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
+    - Configuration Properties: 
+      - Configuration Properties: configuration-properties.md
+      - SQLConf: SQLConf.md
+      - StaticSQLConf: StaticSQLConf.md
     - DataSource: DataSource.md
     - Connector API:
       - Connector API: connector/index.md
@@ -189,7 +193,6 @@ nav:
       - QueryPlanningTracker: QueryPlanningTracker.md
     - Implicits: implicits.md
     - SharedState: SharedState.md
-    - Configuration Properties: configuration-properties.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
       - ParserInterface: sql/ParserInterface.md
@@ -342,11 +345,7 @@ nav:
       - CacheManager:
         - CacheManager: CacheManager.md
         - CachedRDDBuilder: CachedRDDBuilder.md
-      - RuntimeConfig.md
-      - SQLConf:
-        - SQLConf: SQLConf.md
-        - StaticSQLConf.md
-        - CatalystConf.md
+      - RuntimeConfig: RuntimeConfig.md
       - UDFRegistration.md
     - Data Sources:
       - Noop:

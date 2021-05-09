@@ -47,7 +47,7 @@ createRelation(
 
 Internally, `createRelation` creates a [JDBCOptions](JDBCOptions.md) (from the input `parameters`).
 
-`createRelation` reads [caseSensitiveAnalysis](../../CatalystConf.md#caseSensitiveAnalysis) (using the input `sqlContext`).
+`createRelation`...FIXME
 
 `createRelation` checks whether the table (given `dbtable` and `url` [options](JDBCOptions.md#options) in the input `parameters`) exists.
 
