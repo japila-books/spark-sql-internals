@@ -676,7 +676,7 @@ nav:
         - ReplaceTableAsSelectExec: physical-operators/ReplaceTableAsSelectExec.md
         - ReplaceTableExec: physical-operators/ReplaceTableExec.md
         - physical-operators/ReusedExchangeExec.md
-        - physical-operators/RowDataSourceScanExec.md
+        - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
         - RowToColumnarExec: physical-operators/RowToColumnarExec.md
         - physical-operators/SampleExec.md
         - physical-operators/SerializeFromObjectExec.md

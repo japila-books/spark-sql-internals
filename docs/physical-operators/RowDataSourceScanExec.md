@@ -2,59 +2,74 @@
 
 `RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a [leaf physical operator](LeafExecNode.md)) for scanning data from a [BaseRelation](#relation).
 
-`RowDataSourceScanExec` is <<creating-instance, created>> to represent a LogicalRelation.md[LogicalRelation] with the following scan types when [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed:
+`RowDataSourceScanExec` is a [InputRDDCodegen](InputRDDCodegen.md).
 
-* `CatalystScan`, `PrunedFilteredScan`, `PrunedScan` (indirectly when `DataSourceStrategy` is requested to [pruneFilterProjectRaw](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw))
+## <span id="metrics"> Performance Metrics
 
-* `TableScan`
-
-`RowDataSourceScanExec` marks the <<filters, filters>> that are included in the <<handledFilters, handledFilters>> with `*` (star) in the <<metadata, metadata>> that is used for a simple text representation.
-
-[source, scala]
-----
-// DEMO RowDataSourceScanExec with a simple text representation with stars
-----
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-`doProduce`...FIXME
-
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+ numOutputRows  | number of output rows   | Number of output rows
 
 ## Creating Instance
 
 `RowDataSourceScanExec` takes the following to be created:
 
-* [[fullOutput]] Output schema [attributes](../expressions/Attribute.md)
-* [[requiredColumnsIndex]] Indices of required columns
-* [[filters]] [Filter predicates](../Filter.md)
-* [[handledFilters]] Handled [filter predicates](../Filter.md)
-* [[rdd]] RDD of [InternalRow](../InternalRow.md)s
-* [[relation]] [BaseRelation](../BaseRelation.md)
-* [[tableIdentifier]] `TableIdentifier`
+* <span id="output"> Output Schema ([Attribute](../expressions/Attribute.md)s)
+* <span id="requiredSchema"> Required Schema ([StructType](../StructType.md))
+* <span id="filters"> [Data Source Filter Predicate](../Filter.md)s
+* <span id="handledFilters"> Handled [Data Source Filter Predicate](../Filter.md)s
+* <span id="rdd"> `RDD[InternalRow]`
+* <span id="relation"> [BaseRelation](../BaseRelation.md)
+* <span id="tableIdentifier"> Optional `TableIdentifier`
 
-NOTE: The input <<filters, filter predicates>> and <<handledFilters, handled filters predicates>> are used exclusively for the <<metadata, metadata>> property that is part of DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
+`RowDataSourceScanExec` is created when:
 
-=== [[metadata]] `metadata` Property
+* [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators)
 
-[source, scala]
-----
+## <span id="metadata"> Metadata
+
+```scala
 metadata: Map[String, String]
-----
+```
 
-NOTE: `metadata` is part of DataSourceScanExec.md#metadata[DataSourceScanExec Contract] to describe a scan for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)].
+`metadata` is part of the [DataSourceScanExec](DataSourceScanExec.md#metadata) abstraction.
 
-`metadata` marks the <<filters, filter predicates>> that are included in the <<handledFilters, handled filters predicates>> with `*` (star).
+`metadata` marks the [filter predicates](#filters) that are included in the [handled filters predicates](#handledFilters) with `*` (star).
 
-NOTE: Filter predicates with `*` (star) are to denote filters that are pushed down to a relation (aka _data source_).
+!!! note
+    Filter predicates with `*` (star) are to denote filters that are pushed down to a relation (aka _data source_).
 
 In the end, `metadata` creates the following mapping:
 
-. *ReadSchema* with the <<output, output>> converted to [catalog representation](../StructType.md#catalogString)
+* **ReadSchema** with the [required schema](#requiredSchema) converted to [catalog representation](../StructType.md#catalogString)
+* **PushedFilters** with the marked and unmarked [filter predicates](#filters)
 
-. *PushedFilters* with the marked and unmarked <<filters, filter predicates>>
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute`...FIXME
+
+## <span id="createUnsafeProjection"> createUnsafeProjection
+
+```scala
+createUnsafeProjection: Boolean
+```
+
+`createUnsafeProjection` is part of the [InputRDDCodegen](InputRDDCodegen.md#createUnsafeProjection) abstraction.
+
+`createUnsafeProjection` is `true`.
+
+## <span id="inputRDD"> Input RDD
+
+```scala
+inputRDD: RDD[InternalRow]
+```
+
+`inputRDD` is part of the [InputRDDCodegen](InputRDDCodegen.md#inputRDD) abstraction.
+
+`inputRDD` is the [RDD](#rdd).

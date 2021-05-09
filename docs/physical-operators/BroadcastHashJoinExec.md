@@ -8,7 +8,7 @@
 
 Key             | Name (in web UI)        | Description
 ----------------|-------------------------|---------
- numOutputRows   | number of output rows   | Number of output rows
+ numOutputRows  | number of output rows   | Number of output rows
 
 ![BroadcastHashJoinExec in web UI (Details for Query)](../images/spark-sql-BroadcastHashJoinExec-webui-query-details.png)
 
