@@ -8,6 +8,18 @@
      <lastmod>2021-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/configuration-properties/</loc>
+     <lastmod>2021-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SQLConf/</loc>
+     <lastmod>2021-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/StaticSQLConf/</loc>
+     <lastmod>2021-05-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/DataSource/</loc>
      <lastmod>2021-05-09</lastmod>
      <changefreq>daily</changefreq>
@@ -277,10 +289,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SharedState/</loc>
-     <lastmod>2021-05-09</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/configuration-properties/</loc>
      <lastmod>2021-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -845,18 +853,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/RuntimeConfig/</loc>
-     <lastmod>2021-05-09</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/SQLConf/</loc>
-     <lastmod>2021-05-09</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/StaticSQLConf/</loc>
-     <lastmod>2021-05-09</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystConf/</loc>
      <lastmod>2021-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
