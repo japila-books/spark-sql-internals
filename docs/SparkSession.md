@@ -419,7 +419,7 @@ internalCreateDataFrame(
 listenerManager: ExecutionListenerManager
 ```
 
-`listenerManager` is the [ExecutionListenerManager](ExecutionListenerManager.md)
+[ExecutionListenerManager](ExecutionListenerManager.md)
 
 ## <span id="sharedState"> SharedState
 
@@ -427,7 +427,7 @@ listenerManager: ExecutionListenerManager
 sharedState: SharedState
 ```
 
-`sharedState` is the [SharedState](SharedState.md)
+[SharedState](SharedState.md)
 
 ## <span id="time"> Measuring Duration of Executing Code Block
 

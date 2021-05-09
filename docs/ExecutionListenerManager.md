@@ -1,71 +1,61 @@
 # ExecutionListenerManager
 
-`ExecutionListenerManager` is the <<methods, management interface>> for `QueryExecutionListeners` that listen for execution metrics:
+`ExecutionListenerManager` is the [management interface](#management-interface) for Spark developers to manage session-bound [QueryExecutionListener](QueryExecutionListener.md)s.
 
-* Name of the action (that triggered a query execution)
+## Management Interface
 
-* [QueryExecution](QueryExecution.md)
+### <span id="clear"> Removing All QueryExecutionListeners
 
-* Execution time of this query (in nanoseconds)
+```scala
+clear(): Unit
+```
 
-`ExecutionListenerManager` is available as SparkSession.md#listenerManager[listenerManager] property of `SparkSession` (and SessionState.md#listenerManager[listenerManager] property of `SessionState`).
+### <span id="register"> Registering QueryExecutionListener
 
-[source, scala]
-----
+```scala
+register(
+  listener: QueryExecutionListener): Unit
+```
+
+### <span id="unregister"> De-registering QueryExecutionListener
+
+```scala
+unregister(
+  listener: QueryExecutionListener): Unit
+```
+
+## <span id="listenerManager"> SparkSession
+
+`ExecutionListenerManager` is available as [SparkSession.listenerManager](SparkSession.md#listenerManager) (and [SessionState.listenerManager](SessionState.md#listenerManager)).
+
+```text
 scala> :type spark.listenerManager
 org.apache.spark.sql.util.ExecutionListenerManager
+```
 
+```text
 scala> :type spark.sessionState.listenerManager
 org.apache.spark.sql.util.ExecutionListenerManager
-----
+```
 
-[[conf]]
-[[creating-instance]]
-`ExecutionListenerManager` takes a single `SparkConf` when created
+## <span id="loadExtensions"><span id="spark.sql.queryExecutionListeners"> loadExtensions Flag and spark.sql.queryExecutionListeners
 
-While <<creating-instance, created>>, `ExecutionListenerManager` reads StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property with `QueryExecutionListeners` and <<register, registers>> them.
+`ExecutionListenerManager` is given `loadExtensions` flag when [created](#creating-instance).
 
-[[spark.sql.queryExecutionListeners]]
-`ExecutionListenerManager` uses StaticSQLConf.md#spark.sql.queryExecutionListeners[spark.sql.queryExecutionListeners] configuration property as the list of `QueryExecutionListeners` that should be automatically added to newly created sessions (and registers them while <<creating-instance, being created>>).
+When enabled, `ExecutionListenerManager` [registers](#register) the [QueryExecutionListener](QueryExecutionListener.md)s that are configured using the [spark.sql.queryExecutionListeners](StaticSQLConf.md#spark.sql.queryExecutionListeners) configuration property.
 
-[[methods]]
-.ExecutionListenerManager's Public Methods
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+## Creating Instance
 
-| <<register, register>>
-a|
+`ExecutionListenerManager` takes the following to be created:
 
-[source, scala]
-----
-register(listener: QueryExecutionListener): Unit
-----
+* <span id="session"> [SparkSession](SparkSession.md)
+* [loadExtensions](#loadExtensions) flag
 
-| <<unregister, unregister>>
-a|
+`ExecutionListenerManager` is created when:
 
-[source, scala]
-----
-unregister(listener: QueryExecutionListener): Unit
-----
+* `BaseSessionStateBuilder` is requested for the session-bound [ExecutionListenerManager](BaseSessionStateBuilder.md#listenerManager) (while `SessionState` is [built](BaseSessionStateBuilder.md#build))
 
-| <<clear, clear>>
-a|
-
-[source, scala]
-----
-clear(): Unit
-----
-|===
-
-`ExecutionListenerManager` is <<creating-instance, created>> exclusively when `BaseSessionStateBuilder` is requested for BaseSessionStateBuilder.md#listenerManager[ExecutionListenerManager] (while `SessionState` is BaseSessionStateBuilder.md#build[built]).
-
-[[listeners]]
-`ExecutionListenerManager` uses `listeners` internal registry for registered [QueryExecutionListener](QueryExecutionListener.md)s.
-
-## <span id="onSuccess"> onSuccess Internal Method
+## <span id="onSuccess"> onSuccess
 
 ```scala
 onSuccess(
@@ -79,10 +69,9 @@ onSuccess(
 `onSuccess` is used when:
 
 * `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has finished with no exceptions)
-
 * `Dataset` is requested to [withAction](Dataset.md#withAction)
 
-## <span id="onFailure"> onFailure Internal Method
+## <span id="onFailure"> onFailure
 
 ```scala
 onFailure(
@@ -96,25 +85,16 @@ onFailure(
 `onFailure` is used when:
 
 * `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has reported an exception)
-
 * `Dataset` is requested to [withAction](Dataset.md#withAction)
 
-=== [[withErrorHandling]] `withErrorHandling` Internal Method
+## Logging
 
-[source, scala]
-----
-withErrorHandling(f: QueryExecutionListener => Unit): Unit
-----
+Enable `ALL` logging level for `org.apache.spark.sql.util.ExecutionListenerManager` logger to see what happens inside.
 
-`withErrorHandling`...FIXME
+Add the following line to `conf/log4j.properties`:
 
-NOTE: `withErrorHandling` is used when `ExecutionListenerManager` is requested to <<onSuccess, onSuccess>> and <<onFailure, onFailure>>.
+```text
+log4j.logger.org.apache.spark.sql.util.ExecutionListenerManager=ALL
+```
 
-=== [[register]] Registering QueryExecutionListener -- `register` Method
-
-[source, scala]
-----
-register(listener: QueryExecutionListener): Unit
-----
-
-Internally, `register` simply registers (adds) the input [QueryExecutionListener](QueryExecutionListener.md) to the [listeners](#listeners) internal registry.
+Refer to [Logging](spark-logging.md).

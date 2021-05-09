@@ -322,7 +322,6 @@ nav:
       - Catalog:
         - Catalog: Catalog.md
         - CatalogImpl: CatalogImpl.md
-      - ExecutionListenerManager.md
       - ExperimentalMethods: ExperimentalMethods.md
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md
@@ -900,6 +899,7 @@ nav:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
     - SparkSessionExtensions: SparkSessionExtensions.md
+    - ExecutionListenerManager: ExecutionListenerManager.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md

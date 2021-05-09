@@ -41,6 +41,14 @@ Flag to revert to legacy behavior where a cloned SparkSession receives SparkConf
 
 Default: `false`
 
+## <span id="spark.sql.queryExecutionListeners"><span id="QUERY_EXECUTION_LISTENERS"> spark.sql.queryExecutionListeners
+
+Class names of [QueryExecutionListener](QueryExecutionListener.md)s that will be automatically [registered](ExecutionListenerManager.md#register) (with new [SparkSession](SparkSession.md)s)
+
+Default: (empty)
+
+The classes should have either a no-arg constructor, or a constructor that expects a `SparkConf` argument.
+
 ## <span id="spark.sql.defaultUrlStreamHandlerFactory.enabled"><span id="DEFAULT_URL_STREAM_HANDLER_FACTORY_ENABLED"> spark.sql.defaultUrlStreamHandlerFactory.enabled
 
 **(internal)** When true, register Hadoop's FsUrlStreamHandlerFactory to support ADD JAR against HDFS locations. It should be disabled when a different stream protocol handler should be registered to support a particular protocol type, or if Hadoop's FsUrlStreamHandlerFactory conflicts with other protocol types such as `http` or `https`. See also SPARK-25694 and HADOOP-14598.
@@ -120,14 +128,6 @@ NOTE: The name of the internal database cannot conflict with the names of any da
 When enabled (`true`), Hive Thrift server is running in a single session mode. All the JDBC/ODBC connections share the temporary views, function registries, SQL configuration and the current database.
 
 Default: `false`
-
-| [[spark.sql.queryExecutionListeners]][[QUERY_EXECUTION_LISTENERS]] *spark.sql.queryExecutionListeners*
-
-List of class names that implement [QueryExecutionListener](QueryExecutionListener.md) that will be automatically [registered](ExecutionListenerManager.md#register) to new `SparkSessions`.
-
-Default: (empty)
-
-The classes should have either a no-arg constructor, or a constructor that expects a `SparkConf` argument.
 
 | [[spark.sql.sources.schemaStringLengthThreshold]][[SCHEMA_STRING_LENGTH_THRESHOLD]] *spark.sql.sources.schemaStringLengthThreshold*
 
