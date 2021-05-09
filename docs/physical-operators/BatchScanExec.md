@@ -6,12 +6,14 @@
 
 `BatchScanExec` takes the following to be created:
 
-* <span id="output"> Output schema (`Seq[AttributeReference]`)
+* <span id="output"> Output Schema ([AttributeReference](../expressions/AttributeReference.md)s)
 * <span id="scan"> [Scan](../connector/Scan.md)
 
-`BatchScanExec` is created when `DataSourceV2Strategy` execution planning strategy is [executed](../execution-planning-strategies/DataSourceV2Strategy.md#apply) (for physical operators with [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) relations).
+`BatchScanExec` is created when:
 
-## <span id="batch"> batch
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (for physical operators with [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) relations)
+
+## <span id="batch"> Batch
 
 ```scala
 batch: Batch
@@ -19,34 +21,36 @@ batch: Batch
 
 `batch` requests the [Scan](#scan) to [toBatch](../connector/Scan.md#toBatch).
 
-`batch` is used when requested for [partitions](#partitions) and [readerFactory](#readerFactory).
+`batch` is used when:
 
-## <span id="inputRDD"> inputRDD
+* `BatchScanExec` is requested for [partitions](#partitions) and [readerFactory](#readerFactory)
+
+## <span id="inputRDD"> Input RDD
 
 ```scala
 inputRDD: RDD[InternalRow]
 ```
 
-`inputRDD` creates a [DataSourceRDD](../DataSourceRDD.md).
-
 `inputRDD` is part of the [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#inputRDD) abstraction.
 
-## <span id="partitions"> partitions
+`inputRDD` creates a [DataSourceRDD](../DataSourceRDD.md).
+
+## <span id="partitions"> InputPartitions
 
 ```scala
 partitions: Seq[InputPartition]
 ```
 
-`partitions`...FIXME
-
 `partitions` is part of the [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#partitions) abstraction.
 
-## <span id="readerFactory"> readerFactory
+`partitions`...FIXME
+
+## <span id="readerFactory"> PartitionReaderFactory
 
 ```scala
-readerFactory: Seq[InputPartition]
+readerFactory: PartitionReaderFactory
 ```
 
-`readerFactory`...FIXME
-
 `readerFactory` is part of the [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#readerFactory) abstraction.
+
+`readerFactory` requests the [Batch](#batch) to [createReaderFactory](../connector/Batch.md#createReaderFactory).

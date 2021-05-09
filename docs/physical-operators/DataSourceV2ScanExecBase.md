@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="inputRDD"> inputRDD
+### <span id="inputRDD"> Input RDD
 
 ```scala
 inputRDD: RDD[InternalRow]
@@ -12,7 +12,7 @@ inputRDD: RDD[InternalRow]
 
 Used when...FIXME
 
-### <span id="partitions"> partitions
+### <span id="partitions"> InputPartitions
 
 ```scala
 partitions: Seq[InputPartition]
@@ -26,7 +26,7 @@ Used when:
 
 * `DataSourceV2ScanExecBase` physical operator is requested to [outputPartitioning](#outputPartitioning) or [supportsColumnar](#supportsColumnar)
 
-### <span id="readerFactory"> readerFactory
+### <span id="readerFactory"> PartitionReaderFactory
 
 ```scala
 readerFactory: PartitionReaderFactory
@@ -42,7 +42,7 @@ Used when:
 
 * `DataSourceV2ScanExecBase` physical operator is requested to [outputPartitioning](#outputPartitioning) or [supportsColumnar](#supportsColumnar)
 
-### <span id="scan"> scan
+### <span id="scan"> Scan
 
 ```scala
 scan: Scan
@@ -61,9 +61,9 @@ Used when...FIXME
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute`...FIXME
-
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute`...FIXME
 
 ## <span id="doExecuteColumnar"> doExecuteColumnar
 
@@ -71,9 +71,9 @@ doExecute(): RDD[InternalRow]
 doExecuteColumnar(): RDD[ColumnarBatch]
 ```
 
-`doExecuteColumnar`...FIXME
-
 `doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+
+`doExecuteColumnar`...FIXME
 
 ## <span id="inputRDDs"> inputRDDs
 
@@ -85,36 +85,36 @@ inputRDDs(): Seq[RDD[InternalRow]]
 
 `inputRDDs` is used when...FIXME
 
-## <span id="metrics"> metrics
+## <span id="metrics"> Performance Metrics
 
 ```scala
 metrics: Map[String, SQLMetric]
 ```
 
-`metrics`...FIXME
-
 `metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
 
-## <span id="outputPartitioning"> outputPartitioning
+`metrics`...FIXME
+
+## <span id="outputPartitioning"> Output Data Partitioning Requirements
 
 ```scala
 outputPartitioning: physical.Partitioning
 ```
 
-`outputPartitioning`...FIXME
-
 `outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
 
-## <span id="simpleString"> simpleString
+`outputPartitioning`...FIXME
+
+## <span id="simpleString"> Simple Node Description
 
 ```scala
 simpleString(
     maxFields: Int): String
 ```
 
-`simpleString`...FIXME
-
 `simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+
+`simpleString`...FIXME
 
 ## <span id="supportsColumnar"> supportsColumnar
 
@@ -122,6 +122,6 @@ simpleString(
 supportsColumnar: Boolean
 ```
 
-`supportsColumnar`...FIXME
-
 `supportsColumnar` is part of the [SparkPlan](SparkPlan.md#supportsColumnar) abstraction.
+
+`supportsColumnar`...FIXME
