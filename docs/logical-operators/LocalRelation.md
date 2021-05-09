@@ -1,25 +1,44 @@
 # LocalRelation Leaf Logical Operator
 
-`LocalRelation` is a [leaf logical operator](LeafNode.md) that represents a scan over local collections (and allow for optimizations so functions like `collect` or `take` can be executed locally on the driver and with no executors).
+`LocalRelation` is a [leaf logical operator](LeafNode.md) that represents a scan over local collections (and so allows for optimizations for functions like `collect` or `take` to be executed locally on the driver with no executors).
 
-`LocalRelation` is <<creating-instance, created>> (using <<apply, apply>>, <<fromExternalRows, fromExternalRows>>, and <<fromProduct, fromProduct>> factory methods) when:
+## Creating Instance
 
-* [ResolveInlineTables](../logical-analysis-rules/ResolveInlineTables.md) logical resolution rule is executed (and [converts an UnresolvedInlineTable](../logical-analysis-rules/ResolveInlineTables.md#convert))
+`LocalRelation` takes the following to be created:
 
-* [PruneFilters](../catalyst/Optimizer.md#PruneFilters), [ConvertToLocalRelation](../catalyst/Optimizer.md#ConvertToLocalRelation), and [PropagateEmptyRelation](../catalyst/Optimizer.md#PropagateEmptyRelation), [OptimizeMetadataOnlyQuery](../catalyst/Optimizer.md#OptimizeMetadataOnlyQuery) logical optimization rules are executed (applied to an analyzed logical plan)
+* <span id="output"> Output Schema [Attribute](../expressions/Attribute.md)s
+* <span id="data"> Data ([InternalRow](../InternalRow.md)s)
+* [isStreaming](#isStreaming) flag
 
-* <<SparkSession.md#createDataset, SparkSession.createDataset>>, <<SparkSession.md#emptyDataset, SparkSession.emptyDataset>>, <<SparkSession.md#createDataFrame, SparkSession.createDataFrame>> operators are used
+While created, `LocalRelation` asserts that the [output](#output) attributes are all [resolved](../expressions/Expression.md#resolved) or throws an `IllegalArgumentException`:
 
-* `CatalogImpl` is requested for a [Dataset from DefinedByConstructorParams data](../CatalogImpl.md#makeDataset)
+```text
+Unresolved attributes found when constructing LocalRelation.
+```
 
-* `Dataset` is requested for the <<Dataset.md#logicalPlan, analyzed logical plan>> (and executes <<Command.md#, Command>> logical operators)
+`LocalRelation` can be created using [apply](#apply), [fromExternalRows](#fromExternalRows), and [fromProduct](#fromProduct) factory methods.
 
-* `StatFunctions` is requested to <<spark-sql-StatFunctions.md#crossTabulate, crossTabulate>> and <<spark-sql-StatFunctions.md#summary, generate summary statistics of Dataset (as DataFrame)>>
+## <span id="isStreaming"> isStreaming Flag
 
-NOTE: `Dataset` is <<Dataset.md#isLocal, local>> when the <<Dataset.md#logicalPlan, analyzed logical plan>> is exactly an instance of `LocalRelation`.
+```scala
+isStreaming: Boolean
+```
 
-[source, scala]
-----
+`isStreaming` is part of the [LogicalPlan](LogicalPlan.md#isStreaming) abstraction.
+
+`isStreaming` can be given when `LocalRelation` is [created](#creating-instance).
+
+`isStreaming` is `false` by default.
+
+## <span id="MultiInstanceRelation"> MultiInstanceRelation
+
+`LocalRelation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
+
+## Local Datasets
+
+`Dataset` is [local](../Dataset.md#isLocal) when the [analyzed logical plan](../Dataset.md#logicalPlan) is a `LocalRelation`.
+
+```text
 val data = Seq(1, 3, 4, 7)
 val nums = data.toDF
 
@@ -40,12 +59,13 @@ assert(sql == "VALUES (1), (3), (4), (7) AS demo(value)")
 val stats = relation.computeStats
 scala> println(stats)
 Statistics(sizeInBytes=48.0 B, hints=none)
-----
+```
 
-`LocalRelation` is resolved to <<LocalTableScanExec.md#, LocalTableScanExec>> leaf physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
+## Execution Planning
 
-[source, scala]
-----
+`LocalRelation` is resolved to [LocalTableScanExec](../physical-operators/LocalTableScanExec.md) leaf physical operator by [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
+
+```text
 import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
 assert(relation.isInstanceOf[LocalRelation])
 
@@ -57,78 +77,45 @@ val localScan = BasicOperators(relation).head
 
 import org.apache.spark.sql.execution.LocalTableScanExec
 assert(localScan.isInstanceOf[LocalTableScanExec])
-----
-
-[[computeStats]]
-When requested for <<LeafNode.md#computeStats, statistics>>, `LocalRelation` takes the size of the objects in a single row (per the <<output, output>> schema) and multiplies it by the number of rows (in the <<data, data>>).
-
-=== [[creating-instance]] Creating LocalRelation Instance
-
-`LocalRelation` takes the following to be created:
-
-* [[output]] Output schema spark-sql-Expression-Attribute.md[attributes]
-* [[data]] [InternalRow](../InternalRow.md)s
-* [[isStreaming]] `isStreaming` flag that indicates whether the <<data, data>> comes from a streaming source (default: `false`)
-
-While being created, `LocalRelation` makes sure that the <<output, output attributes>> are all <<expressions/Expression.md#resolved, resolved>> or throws an `IllegalArgumentException`:
-
-```
-Unresolved attributes found when constructing LocalRelation.
 ```
 
-=== [[apply]] Creating LocalRelation -- `apply` Object Method
+## <span id="computeStats"> Statistics
 
-[source, scala]
-----
-apply(output: Attribute*): LocalRelation
-apply(
-  output1: StructField,
-  output: StructField*): LocalRelation
-----
+```scala
+computeStats(): Statistics
+```
 
-`apply`...FIXME
+`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
 
-NOTE: `apply` is used when...FIXME
+`computeStats` is the size of the objects in a single row (per the [output](#output) schema) and multiplies it by the number of rows (in the [data](#data)).
 
-=== [[fromExternalRows]] Creating LocalRelation -- `fromExternalRows` Object Method
+## <span id="toSQL"> SQL Representation
 
-[source, scala]
-----
-fromExternalRows(
-  output: Seq[Attribute],
-  data: Seq[Row]): LocalRelation
-----
-
-`fromExternalRows`...FIXME
-
-NOTE: `fromExternalRows` is used when...FIXME
-
-=== [[fromProduct]] Creating LocalRelation -- `fromProduct` Object Method
-
-[source, scala]
-----
-fromProduct(
-  output: Seq[Attribute],
-  data: Seq[Product]): LocalRelation
-----
-
-`fromProduct`...FIXME
-
-NOTE: `fromProduct` is used when...FIXME
-
-=== [[toSQL]] Generating SQL Statement -- `toSQL` Method
-
-[source, scala]
-----
-toSQL(inlineTableName: String): String
-----
+```scala
+toSQL(
+  inlineTableName: String): String
+```
 
 `toSQL` generates a SQL statement of the format:
 
-```
+```text
 VALUES [data] AS [inlineTableName]([names])
 ```
 
-`toSQL` throws an `AssertionError` for the <<data, data>> empty.
+!!! note
+    `toSQL` does not _seem_ to be used.
 
-NOTE: `toSQL` does not _seem_ to be used at all.
+## Demo
+
+```scala
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.catalyst.expressions.AttributeReference
+import org.apache.spark.sql.types.IntegerType
+```
+
+```scala
+val relation = LocalRelation.fromExternalRows(
+  output = Seq(AttributeReference("id", IntegerType)()),
+  data = Seq(Row(1)))
+```

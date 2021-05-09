@@ -280,7 +280,7 @@ nav:
       - InsertIntoTable: logical-operators/InsertIntoTable.md
       - logical-operators/Intersect.md
       - Join: logical-operators/Join.md
-      - logical-operators/LocalRelation.md
+      - LocalRelation: logical-operators/LocalRelation.md
       - logical-operators/LogicalRDD.md
       - logical-operators/LogicalRelation.md
       - MergeIntoTable: logical-operators/MergeIntoTable.md
