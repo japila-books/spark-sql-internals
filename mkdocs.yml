@@ -851,8 +851,10 @@ nav:
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
-    - Hint Framework: new-and-noteworthy/hint-framework.md
-    - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
+    - Hints:
+      - Hint Framework: new-and-noteworthy/hint-framework.md
+      - JoinHint: JoinHint.md
+      - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md

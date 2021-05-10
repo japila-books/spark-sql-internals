@@ -4,6 +4,12 @@
 
 `JoinSelection` is part of the [strategies](../SparkPlanner.md#strategies) of the [SparkPlanner](../SparkPlanner.md).
 
+## Join Selection Priorities
+
+1. [Join Type](../joins.md#JoinType)
+1. [Hints](../JoinHint.md)
+1. Size ([Cost-Based Optimization](../spark-sql-cost-based-optimization.md), [Statistics](../logical-operators/Statistics.md))
+
 ## Join Selection Requirements
 
 The following sections are in the order of preference.
@@ -159,7 +165,7 @@ createShuffleHashJoin(
   onlyLookingAtHint: Boolean): Option[Seq[ShuffledHashJoinExec]]
 ```
 
-`createShuffleHashJoin` [determines the BuildSide for a ShuffleHashJoinExec](#getShuffleHashJoinBuildSide) and, if successful, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
+`createShuffleHashJoin` tries to [determine the BuildSide for a ShuffleHashJoinExec](#getShuffleHashJoinBuildSide) and, if successful, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
 
 ## <span id="createSortMergeJoin"> Creating SortMergeJoinExec
 
@@ -237,13 +243,19 @@ getShuffleHashJoinBuildSide(
   conf: SQLConf): Option[BuildSide]
 ```
 
-`getShuffleHashJoinBuildSide` determines if build on the left side (`buildLeft`). With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinLeft](#hintToShuffleHashJoinLeft). Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the left operator is [muchSmaller](#muchSmaller) than the right.
+`getShuffleHashJoinBuildSide` determines if to build on the left side (`buildLeft`):
 
-`getShuffleHashJoinBuildSide` determines if build on the right side (`buildRight`). With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinRight](#hintToShuffleHashJoinRight). Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the right operator is [muchSmaller](#muchSmaller) than the left.
+* With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinLeft](#hintToShuffleHashJoinLeft)
+* Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the left operator is [muchSmaller](#muchSmaller) than the right
 
-In the end, `getShuffleHashJoinBuildSide` [getBuildSide](#getBuildSide) with the following:
+`getShuffleHashJoinBuildSide` determines if to build on the right side (`buildRight`):
 
-* [canBuildShuffledHashJoinLeft](#canBuildShuffledHashJoinLeft) for the given `JoinType` and the `buildLeft` flag
+* With `hintOnly` enabled (`true`), `getShuffleHashJoinBuildSide` [hintToShuffleHashJoinRight](#hintToShuffleHashJoinRight)
+* Otherwise, `getShuffleHashJoinBuildSide` checks if [canBuildLocalHashMapBySize](#canBuildLocalHashMapBySize) and the right operator is [muchSmaller](#muchSmaller) than the left
+
+In the end, `getShuffleHashJoinBuildSide` tries to [determine the BuildSide](#getBuildSide) based on the following:
+
+* [Checks for BuildLeft](#canBuildShuffledHashJoinLeft) for the given [JoinType](../joins.md#JoinType) and the `buildLeft` flag
 * [canBuildShuffledHashJoinRight](#canBuildShuffledHashJoinRight) for the given `JoinType` and the `buildRight` flag
 * Left [physical operator](../logical-operators/LogicalPlan.md)
 * Right [physical operator](../logical-operators/LogicalPlan.md)
@@ -339,3 +351,16 @@ muchSmaller(
 ```
 
 `muchSmaller` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the left table (the given `a` [LogicalPlan](../logical-operators/LogicalPlan.md)) is at least 3 times smaller than the size of the right table (the given `b` [LogicalPlan](../logical-operators/LogicalPlan.md)).
+
+## <span id="canBuildShuffledHashJoinLeft"> Checking Left BuildSide for ShuffledHashJoin
+
+```scala
+canBuildShuffledHashJoinLeft(
+  joinType: JoinType): Boolean
+```
+
+`canBuildShuffledHashJoinLeft` is enabled (`true`) for the given [JoinType](../joins.md#JoinType) among the following:
+
+* [InnerLike](../joins.md#InnerLike)s: [Inner](../joins.md#Inner) and [Cross](../joins.md#Cross)
+* [RightOuter](../joins.md#RightOuter)
+* [FullOuter](../joins.md#FullOuter)

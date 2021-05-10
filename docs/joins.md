@@ -77,7 +77,7 @@ df1.join(df2).where($"df1Key" === $"df2Key")
 df1.join(df2).filter($"df1Key" === $"df2Key")
 ```
 
-## <span id="joinType"><span id="JoinType"><span id="join-types"> Join Types
+## <span id="joinType" /><span id="JoinType" /><span id="join-types" /><span id="Cross" /><span id="Inner" /><span id="FullOuter" /><span id="LeftAnti" /><span id="LeftOuter" /><span id="LeftSemi" /><span id="RightOuter" /><span id="NaturalJoin" /><span id="UsingJoin" /> Join Types
 
 Join types can be specified using the [join operators](#dataset-join-operators) (using `joinType` optional parameter).
 
