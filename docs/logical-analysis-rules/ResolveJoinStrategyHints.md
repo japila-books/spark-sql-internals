@@ -12,7 +12,9 @@
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`ResolveJoinStrategyHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches of rules](../Analyzer.md#batches).
+`ResolveJoinStrategyHints` is created when:
+
+* [Logical Analyzer](../Analyzer.md) is requested for the [batches of rules](../Analyzer.md#batches)
 
 ## <span id="apply"> Executing Rule
 
@@ -23,7 +25,7 @@ apply(
 
 `apply` traverses the given [logical query plan](../logical-operators/LogicalPlan.md) to find [UnresolvedHint](../logical-operators/UnresolvedHint.md) operators with names that are the [hintAliases](../JoinStrategyHint.md#hintAliases) of the supported [JoinStrategyHint](../JoinStrategyHint.md)s.
 
-For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with [HintInfo](../logical-operators/HintInfo.md) with just the name).
+For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with [HintInfo](../HintInfo.md) with just the name).
 
 For `UnresolvedHint`s with parameters, `apply` accepts two types of parameters:
 
@@ -34,7 +36,7 @@ For `UnresolvedHint`s with parameters, `apply` accepts two types of parameters:
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-## <span id="applyJoinStrategyHint"> applyJoinStrategyHint Internal Method
+## <span id="applyJoinStrategyHint"> applyJoinStrategyHint
 
 ```scala
 applyJoinStrategyHint(
@@ -46,9 +48,7 @@ applyJoinStrategyHint(
 
 `applyJoinStrategyHint`...FIXME
 
-`applyJoinStrategyHint` is used when `ResolveJoinStrategyHints` logical rule is [executed](#apply).
-
-## Example
+## Demo
 
 ```text
 // FIXME Review the example to use ResolveJoinStrategyHints and other hints

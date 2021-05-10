@@ -227,7 +227,6 @@ nav:
       - V2WriteCommand: logical-operators/V2WriteCommand.md
       - Statistics and Hints:
         - Statistics: logical-operators/Statistics.md
-        - HintInfo: logical-operators/HintInfo.md
         - LogicalPlanStats: logical-operators/LogicalPlanStats.md
         - LogicalPlanVisitor: logical-operators/LogicalPlanVisitor.md
         - SizeInBytesOnlyStatsPlanVisitor: logical-operators/SizeInBytesOnlyStatsPlanVisitor.md
@@ -296,7 +295,7 @@ nav:
       - RepairTableStatement: logical-operators/RepairTableStatement.md
       - Repartition: logical-operators/RepartitionOperation/#Repartition
       - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
-      - logical-operators/ResolvedHint.md
+      - ResolvedHint: logical-operators/ResolvedHint.md
       - logical-operators/SaveIntoDataSourceCommand.md
       - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
       - logical-operators/ShowCreateTableCommand.md
@@ -746,6 +745,7 @@ nav:
       - ConstantFolding: logical-optimizations/ConstantFolding.md
       - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
       - DecimalAggregates: logical-optimizations/DecimalAggregates.md
+      - EliminateResolvedHint: logical-optimizations/EliminateResolvedHint.md
       - EliminateSerialization: logical-optimizations/EliminateSerialization.md
       - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
       - EliminateView: logical-optimizations/EliminateView.md
@@ -854,6 +854,7 @@ nav:
     - Hints:
       - Hint Framework: new-and-noteworthy/hint-framework.md
       - JoinHint: JoinHint.md
+      - HintInfo: HintInfo.md
       - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md

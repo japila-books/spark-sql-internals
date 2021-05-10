@@ -1,20 +1,20 @@
-title: ResolvedHint
-
 # ResolvedHint Unary Logical Operator
 
-`ResolvedHint` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that...FIXME
+`ResolvedHint` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent resolved hint nodes in a [logical query plan](#child).
 
-`ResolvedHint` is <<creating-instance, created>> when...FIXME
+## Creating Instance
 
-[[output]]
-When requested for catalyst/QueryPlan.md#output[output schema], `ResolvedHint` uses the output of the child logical operator.
+`ResolvedHint` takes the following to be created:
 
-[[doCanonicalize]]
-`ResolvedHint` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.
+* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
+* <span id="hints"> [HintInfo](../HintInfo.md)
 
-=== [[creating-instance]] Creating ResolvedHint Instance
+`ResolvedHint` is created when:
 
-`ResolvedHint` takes the following when created:
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](../logical-analysis-rules/ResolveJoinStrategyHints.md#applyJoinStrategyHint)
+* [broadcast](../spark-sql-functions.md#broadcast) standard function is used (on a `Dataset`)
+* `CacheManager` is requested to [useCachedData](../CacheManager.md#useCachedData)
 
-* [[child]] Child [logical operator](LogicalPlan.md)
-* [[hints]] [Query hints](HintInfo.md)
+## Query Execution Planning
+
+[BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `IllegalStateException` for `ResolvedHint`s when executed.

@@ -1,4 +1,4 @@
-# Standard Functions -- functions Object
+# Standard Functions &mdash; functions Object
 
 `org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](Column.md).
 
