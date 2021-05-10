@@ -416,10 +416,6 @@
      <lastmod>2021-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/HintInfo/</loc>
-     <lastmod>2021-05-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/LogicalPlanStats/</loc>
      <lastmod>2021-05-10</lastmod>
      <changefreq>daily</changefreq>
@@ -2340,6 +2336,10 @@
      <lastmod>2021-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/EliminateResolvedHint/</loc>
+     <lastmod>2021-05-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/EliminateSerialization/</loc>
      <lastmod>2021-05-10</lastmod>
      <changefreq>daily</changefreq>
@@ -2725,6 +2725,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/JoinHint/</loc>
+     <lastmod>2021-05-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/HintInfo/</loc>
      <lastmod>2021-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
