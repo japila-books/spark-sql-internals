@@ -1,0 +1,3 @@
+# HintErrorHandler
+
+`HintErrorHandler` is...FIXME

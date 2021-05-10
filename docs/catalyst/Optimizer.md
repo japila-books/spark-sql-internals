@@ -20,9 +20,9 @@ Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 
 ## <span id="defaultBatches"> Default Batches
 
-`Optimizer` defines the **rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](../QueryExecution.md#optimizedPlan).
+`Optimizer` defines the **default rule batches of logical optimizations** that transform the query plan of a structured query to produce the [optimized logical query plan](../QueryExecution.md#optimizedPlan).
 
-The base rule batches can be further refined (extended or [excluded](#excludedRules)).
+The default rule batches can be further refined (extended or with [rules excluded](#excludedRules)).
 
 ### Eliminate Distinct
 
@@ -36,7 +36,7 @@ Strategy: `Once`
 
 Rules:
 
-* EliminateResolvedHint
+* [EliminateResolvedHint](../logical-optimizations/EliminateResolvedHint.md)
 * EliminateSubqueryAliases
 * EliminateView
 * ReplaceExpressions

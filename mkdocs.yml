@@ -856,6 +856,7 @@ nav:
       - JoinHint: JoinHint.md
       - HintInfo: HintInfo.md
       - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
+      - HintErrorHandler: HintErrorHandler.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md
