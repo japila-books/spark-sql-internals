@@ -310,7 +310,7 @@ nav:
       - logical-operators/Union.md
       - logical-operators/UnresolvedCatalogRelation.md
       - UnresolvedHaving: logical-operators/UnresolvedHaving.md
-      - logical-operators/UnresolvedHint.md
+      - UnresolvedHint: logical-operators/UnresolvedHint.md
       - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
       - logical-operators/UnresolvedRelation.md
       - logical-operators/UnresolvedTableValuedFunction.md
@@ -709,6 +709,7 @@ nav:
       - LookupFunctions: logical-analysis-rules/LookupFunctions.md
       - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
       - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
+      - RemoveAllHints: logical-analysis-rules/RemoveAllHints.md
       - ResolveAliases: logical-analysis-rules/ResolveAliases.md
       - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
       - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md

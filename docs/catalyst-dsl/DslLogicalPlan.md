@@ -34,17 +34,15 @@ groupBy(
 
 ### <span id="hint"> hint
 
-Creates an [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operator
-
 ```scala
 hint(
   name: String,
   parameters: Any*): LogicalPlan
 ```
 
-### <span id="join"> join
+Creates an [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operator
 
-Creates a [Join](../logical-operators/Join.md) logical operator
+### <span id="join"> join
 
 ```scala
 join(
@@ -52,6 +50,8 @@ join(
   joinType: JoinType = Inner,
   condition: Option[Expression] = None): LogicalPlan
 ```
+
+Creates a [Join](../logical-operators/Join.md) logical operator
 
 ## Demo
 

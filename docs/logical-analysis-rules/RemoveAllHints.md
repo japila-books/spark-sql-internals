@@ -1,0 +1,3 @@
+# RemoveAllHints
+
+`RemoveAllHints` is...FIXME

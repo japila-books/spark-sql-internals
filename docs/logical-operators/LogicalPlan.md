@@ -193,16 +193,13 @@ childrenResolved: Boolean
 
 A logical operator is considered **partially resolved** when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
-## resolved
+## <span id="resolved"> resolved Flag
 
-<span id="resolved">
 ```scala
 resolved: Boolean
 ```
 
-A logical operator is (fully) **resolved** to a specific schema when all catalyst/QueryPlan.md#expressions[expressions] and the <<childrenResolved, children are resolved>>.
+`resolved` is `true` for all [expressions](catalyst/QueryPlan.md#expressions) and the [children](childrenResolved) resolved.
 
-```scala
-scala> plan.resolved
-res2: Boolean = true
-```
+??? note "Lazy Value"
+    `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
