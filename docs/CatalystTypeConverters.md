@@ -2,16 +2,18 @@
 
 `CatalystTypeConverters` is a Scala object that is used to convert Scala types to Catalyst types and vice versa.
 
-=== [[createToCatalystConverter]] `createToCatalystConverter` Method
+## <span id="createToCatalystConverter"> Creating Catalyst Converter
 
-[source, scala]
-----
-createToCatalystConverter(dataType: DataType): Any => Any
-----
+```scala
+createToCatalystConverter(
+  dataType: DataType): Any => Any
+```
 
 `createToCatalystConverter`...FIXME
 
-NOTE: `createToCatalystConverter` is used when...FIXME
+`createToCatalystConverter` is used when:
+
+* FIXME
 
 === [[convertToCatalyst]] `convertToCatalyst` Method
 

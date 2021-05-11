@@ -66,27 +66,54 @@ mergeHints(
 
 ## Demo
 
-Create a logical query plan using [Catalyst DSL](../catalyst-dsl/index.md).
+Create a logical plan using [Catalyst DSL](../catalyst-dsl/index.md).
 
-!!! fixme
-    Needs more work
-
-```text
+```scala
 import org.apache.spark.sql.catalyst.dsl.plans._
+import org.apache.spark.sql.catalyst.plans.logical.{SHUFFLE_HASH, SHUFFLE_MERGE}
+import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
+```
 
-val t1 = table("t1").hint(...)
-val t2 = table("t2")
-
-import org.apache.spark.sql.catalyst.plans.logical.{HintInfo, SHUFFLE_HASH}
-val hintShuffleHash = Some(HintInfo(Some(SHUFFLE_HASH)))
-
-import org.apache.spark.sql.catalyst.plans.logical.JoinHint
-JoinHint(hintShuffleHash, hintShuffleHash)
-
-val plan = t1.join(t2)
+```scala
+val t1 = LocalRelation('id.long, 'name.string).hint(SHUFFLE_HASH.displayName)
+val t2 = LocalRelation('id.long, 'age.int).hint(SHUFFLE_MERGE.displayName)
+val logical = t1.join(t2)
 ```
 
 ```text
-import org.apache.spark.sql.catalyst.optimizer.EliminateResolvedHint
+scala> println(logical.numberedTreeString)
+00 'Join Inner
+01 :- 'UnresolvedHint shuffle_hash
+02 :  +- LocalRelation <empty>, [id#0L, name#1]
+03 +- 'UnresolvedHint merge
+04    +- LocalRelation <empty>, [id#2L, age#3]
+```
 
+Analyze the plan.
+
+```scala
+val analyzed = logical.analyze
+```
+
+```text
+scala> println(analyzed.numberedTreeString)
+00 Join Inner
+01 :- ResolvedHint (strategy=shuffle_hash)
+02 :  +- LocalRelation <empty>, [id#0L, name#1]
+03 +- ResolvedHint (strategy=merge)
+04    +- LocalRelation <empty>, [id#2L, age#3]
+```
+
+Optimize the plan (using `EliminateResolvedHint` only).
+
+```text
+import org.apache.spark.sql.catalyst.optimizer.EliminateResolvedHint
+val optimizedPlan = EliminateResolvedHint(analyzed)
+```
+
+```text
+scala> println(optimizedPlan.numberedTreeString)
+00 Join Inner, leftHint=(strategy=shuffle_hash), rightHint=(strategy=merge)
+01 :- LocalRelation <empty>, [id#0L, name#1]
+02 +- LocalRelation <empty>, [id#2L, age#3]
 ```
