@@ -1,5 +1,3 @@
-title: Sort
-
 # Sort Unary Logical Operator
 
 `Sort` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents the following in a logical plan:

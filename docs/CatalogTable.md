@@ -44,7 +44,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogTable
 [[simpleString]]
 The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME
 
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical command is <<ShowTablesCommand.md#run, executed>> (with a partition specification).
+NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical command is executed (with a partition specification).
 
 [[toString]]
 `CatalogTable` uses the following *text representation* (i.e. `toString`)...FIXME

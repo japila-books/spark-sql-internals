@@ -2,8 +2,6 @@
 
 `LogicalPlan` is an extension of the [QueryPlan](../catalyst/QueryPlan.md) abstraction for [logical operators](#implementations) to build a **logical query plan** (as a tree of logical operators).
 
-A logical query plan is a tree of [nodes](../catalyst/TreeNode.md) of logical operators that in turn can have (trees of) [Catalyst expressions](../expressions/Expression.md). In other words, there are _at least_ two trees at every level (operator).
-
 `LogicalPlan` is eventually resolved (_transformed_) to a [physical operator](../physical-operators/SparkPlan.md).
 
 ## Implementations
@@ -199,7 +197,7 @@ A logical operator is considered **partially resolved** when its [child operator
 resolved: Boolean
 ```
 
-`resolved` is `true` for all [expressions](catalyst/QueryPlan.md#expressions) and the [children](childrenResolved) resolved.
+`resolved` is `true` for all [expressions](../catalyst/QueryPlan.md#expressions) and the [children](childrenResolved) resolved.
 
 ??? note "Lazy Value"
     `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.

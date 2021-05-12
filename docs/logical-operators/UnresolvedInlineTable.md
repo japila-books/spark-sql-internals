@@ -1,6 +1,4 @@
-title: UnresolvedInlineTable
-
-# UnresolvedInlineTable Logical Operator
+# UnresolvedInlineTable Leaf Logical Operator
 
 `UnresolvedInlineTable` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents an inline table (aka _virtual table_ in Apache Hive).
 

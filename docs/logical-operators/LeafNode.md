@@ -1,69 +1,45 @@
-# LeafNode &mdash; Base Logical Operator with No Child Operators and Optional Statistics
+# LeafNode &mdash; Leaf Logical Operators
 
-`LeafNode` is the base of <<extensions, logical operators>> that have no [child](../catalyst/TreeNode.md#children) operators.
+`LeafNode` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [leaf logical operators](#implementations).
 
-`LeafNode` that wants to survive analysis has to define <<computeStats, computeStats>> as it throws an `UnsupportedOperationException` by default.
+## Implementations
 
-[[extensions]]
-.LeafNodes (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| LeafNode
-| Description
+* [DataSourceV2Relation](DataSourceV2Relation.md)
+* [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md)
+* [ExternalRDD](ExternalRDD.md)
+* [HiveTableRelation](../hive/HiveTableRelation.md)
+* [InMemoryRelation](InMemoryRelation.md)
+* [LocalRelation](LocalRelation.md)
+* [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md)
+* [LogicalRDD](LogicalRDD.md)
+* [LogicalRelation](LogicalRelation.md)
+* [OneRowRelation](OneRowRelation.md)
+* [Range](Range.md)
+* [UnresolvedCatalogRelation](UnresolvedCatalogRelation.md)
+* [UnresolvedInlineTable](UnresolvedInlineTable.md)
+* [UnresolvedRelation](UnresolvedRelation.md)
+* [UnresolvedTableValuedFunction](UnresolvedTableValuedFunction.md)
+* [UnresolvedV2Relation](UnresolvedV2Relation.md)
+* _others_
 
-| <<AnalysisBarrier.md#, AnalysisBarrier>>
-| [[AnalysisBarrier]]
+## <span id="children"> Children
 
-| <<DataSourceV2Relation.md#, DataSourceV2Relation>>
-| [[DataSourceV2Relation]]
+```scala
+children: Seq[LogicalPlan]
+```
 
-| <<ExternalRDD.md#, ExternalRDD>>
-| [[ExternalRDD]]
+`children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
 
-| hive/HiveTableRelation.md[HiveTableRelation]
-| [[HiveTableRelation]]
+`children` is an empty collection (to denote being a leaf in an operator tree).
 
-| [InMemoryRelation](InMemoryRelation.md)
-| [[InMemoryRelation]]
+## <span id="computeStats"> Statistics
 
-| <<LocalRelation.md#, LocalRelation>>
-| [[LocalRelation]]
-
-| <<LogicalRDD.md#, LogicalRDD>>
-| [[LogicalRDD]]
-
-| <<LogicalRelation.md#, LogicalRelation>>
-| [[LogicalRelation]]
-
-| <<OneRowRelation.md#, OneRowRelation>>
-| [[OneRowRelation]]
-
-| <<Range.md#, Range>>
-| [[Range]]
-
-| <<UnresolvedCatalogRelation.md#, UnresolvedCatalogRelation>>
-| [[UnresolvedCatalogRelation]]
-
-| <<UnresolvedInlineTable.md#, UnresolvedInlineTable>>
-| [[UnresolvedInlineTable]]
-
-| <<UnresolvedRelation.md#, UnresolvedRelation>>
-| [[UnresolvedRelation]]
-
-| <<UnresolvedTableValuedFunction.md#, UnresolvedTableValuedFunction>>
-| [[UnresolvedTableValuedFunction]]
-|===
-
-=== [[computeStats]] Computing Statistics -- `computeStats` Method
-
-[source, scala]
-----
+```scala
 computeStats(): Statistics
-----
+```
 
-`computeStats` simply throws an `UnsupportedOperationException`.
+`computeStats` throws an `UnsupportedOperationException`.
 
-!!! note
-    Logical operators (e.g. [ExternalRDD](ExternalRDD.md), [LogicalRDD](LogicalRDD.md) and [DataSourceV2Relation](DataSourceV2Relation.md)), or relations (e.g. `HadoopFsRelation` or `BaseRelation`), use [spark.sql.defaultSizeInBytes](../configuration-properties.md#spark.sql.defaultSizeInBytes) internal property for the default estimated size if the statistics could not be computed.
+`computeStats` is used when:
 
-`computeStats` is used when `SizeInBytesOnlyStatsPlanVisitor` uses the [default case](SizeInBytesOnlyStatsPlanVisitor.md#default) to compute the size statistic (in bytes) for a [logical operator](LogicalPlan.md).
+* `SizeInBytesOnlyStatsPlanVisitor` is requested for the [default size statistics](SizeInBytesOnlyStatsPlanVisitor.md#default)

@@ -1,4 +1,4 @@
-# LogicalRDD
+# LogicalRDD Leaf Logical Operator
 
 `LogicalRDD` is a [leaf logical operator](LeafNode.md) with <<newInstance, MultiInstanceRelation>> support for a logical representation of a scan over <<rdd, RDD of internal binary rows>>.
 

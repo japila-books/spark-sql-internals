@@ -1,3 +1,0 @@
-# Intersect
-
-`Intersect` is...FIXME

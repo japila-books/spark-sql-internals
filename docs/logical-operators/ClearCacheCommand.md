@@ -1,5 +1,3 @@
-title: ClearCacheCommand
-
 # ClearCacheCommand Logical Command
 
 `ClearCacheCommand` is a RunnableCommand.md[logical command] to [remove all cached tables from the in-memory cache](../Catalog.md#clearCache).

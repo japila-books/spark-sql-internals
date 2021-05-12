@@ -57,7 +57,7 @@ val messages = spark
 
 * `DataFrameWriter` is requested to [save to a data source (Data Source V1)](DataFrameWriter.md#saveToV1Source)
 
-* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md), [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md), [CreateTempViewUsing](logical-operators/CreateTempViewUsing.md) commands are executed
+* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md), `InsertIntoDataSourceDirCommand`, [CreateTempViewUsing](logical-operators/CreateTempViewUsing.md) commands are executed
 
 * [FindDataSourceTable](logical-analysis-rules/FindDataSourceTable.md) and [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rules are executed
 
@@ -125,7 +125,7 @@ planForWriting(
 `planForWriting` is used when:
 
 * `DataFrameWriter` is requested to [save (to a data source V1](DataFrameWriter.md#saveToV1Source)
-* [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed
+* `InsertIntoDataSourceDirCommand` logical command is executed
 
 ## <span id="writeAndRead"> Writing Data to Data Source (per Save Mode) Followed by Reading Rows Back (as BaseRelation)
 
@@ -172,7 +172,7 @@ Expected exactly one path to be specified, but got: [allPaths]
 
 * [Writing data to a data source followed by "reading" rows back](#writeAndRead) (for [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) logical command)
 
-* [Creating a logical command for writing](#planForWriting) (for [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command and [DataFrameWriter.save](DataFrameWriter.md#save) operator with DataSource V1 data sources)
+* [Creating a logical command for writing](#planForWriting) (for `InsertIntoDataSourceDirCommand` logical command and [DataFrameWriter.save](DataFrameWriter.md#save) operator with DataSource V1 data sources)
 
 ## <span id="providingClass"> Data Source Class
 
@@ -184,7 +184,7 @@ providingClass: Class[_]
 
 `providingClass` is used when:
 
-* [InsertIntoDataSourceDirCommand](logical-operators/InsertIntoDataSourceDirCommand.md) logical command is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
+* `InsertIntoDataSourceDirCommand` logical command is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
 * [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
 * `DataSource` is requested for [providingInstance](#providingInstance)
 

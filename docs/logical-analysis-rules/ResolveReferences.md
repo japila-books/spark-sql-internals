@@ -88,7 +88,7 @@ NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule t
 
 * Join.md[Join] logical operator with `duplicateResolved`...FIXME
 
-* Intersect.md[Intersect] logical operator with `duplicateResolved`...FIXME
+* Intersect logical operator with `duplicateResolved`...FIXME
 
 * Except.md[Except] logical operator with `duplicateResolved`...FIXME
 

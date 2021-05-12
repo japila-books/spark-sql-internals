@@ -1,5 +1,3 @@
-title: TruncateTableCommand
-
 # TruncateTableCommand Logical Command
 
 `TruncateTableCommand` is a RunnableCommand.md[logical command] that represents spark-sql-SparkSqlAstBuilder.md#visitTruncateTable[TRUNCATE TABLE] SQL statement.

@@ -1,6 +1,4 @@
-title: AnalyzePartitionCommand
-
-# AnalyzePartitionCommand Logical Command -- Computing Partition-Level Statistics
+# AnalyzePartitionCommand Logical Command
 
 `AnalyzePartitionCommand` is a RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
 

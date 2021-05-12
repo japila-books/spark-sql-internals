@@ -1,6 +1,4 @@
-title: UnresolvedCatalogRelation
-
-# UnresolvedCatalogRelation Leaf Logical Operator -- Placeholder of Catalog Tables
+# UnresolvedCatalogRelation Leaf Logical Operator
 
 `UnresolvedCatalogRelation` is a LeafNode.md[leaf logical operator] that acts as a placeholder in a logical query plan for [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rule to resolve it to a concrete relation logical operator (i.e. LogicalRelation.md[LogicalRelations] for data source tables or hive/HiveTableRelation.md[HiveTableRelations] for hive tables).
 

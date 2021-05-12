@@ -23,7 +23,7 @@
 | [[InsertIntoTable-InsertableRelation]]
 
 | InsertIntoDir.md[InsertIntoDir] [small]#(non-hive provider)#
-| <<InsertIntoDataSourceDirCommand.md#, InsertIntoDataSourceDirCommand>>
+| InsertIntoDataSourceDirCommand
 | [[InsertIntoDir]]
 
 | [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../HadoopFsRelation.md)

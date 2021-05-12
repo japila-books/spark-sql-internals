@@ -707,7 +707,7 @@ scala> q.show
 
 Internally, `unionByName` creates a <<Union.md#, Union>> logical operator for this `Dataset` and <<Project.md#, Project>> logical operator with the `other` Dataset.
 
-In the end, `unionByName` applies the <<CombineUnions.md#, CombineUnions>> logical optimization to the `Union` logical operator and requests the result `LogicalPlan` to [wrap the child operators](catalyst/TreeNode.md#mapChildren) with <<AnalysisBarrier.md#, AnalysisBarriers>>.
+In the end, `unionByName`...FIXME
 
 [source, scala]
 ----

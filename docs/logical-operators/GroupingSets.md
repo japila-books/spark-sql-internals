@@ -1,5 +1,3 @@
-title: GroupingSets
-
 # GroupingSets Unary Logical Operator
 
 `GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's sql/AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.

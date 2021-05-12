@@ -1,5 +1,3 @@
-title: View
-
 # View Unary Logical Operator
 
 [[children]]

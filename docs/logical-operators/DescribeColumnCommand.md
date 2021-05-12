@@ -1,6 +1,4 @@
-title: DescribeColumnCommand
-
-# DescribeColumnCommand Logical Command for DESCRIBE TABLE SQL Command with Column
+# DescribeColumnCommand Logical Command
 
 `DescribeColumnCommand` is a RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
 

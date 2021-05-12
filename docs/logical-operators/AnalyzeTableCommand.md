@@ -1,6 +1,4 @@
-title: AnalyzeTableCommand
-
-# AnalyzeTableCommand Logical Command -- Computing Table-Level Statistics
+# AnalyzeTableCommand Logical Command
 
 `AnalyzeTableCommand` is a RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for a <<tableIdent, table>> and stores the stats in a metastore.
 

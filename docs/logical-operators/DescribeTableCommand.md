@@ -1,5 +1,3 @@
-title: DescribeTableCommand
-
 # DescribeTableCommand Logical Command
 
 `DescribeTableCommand` is a <<RunnableCommand.md#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.

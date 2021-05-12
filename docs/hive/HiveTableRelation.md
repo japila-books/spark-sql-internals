@@ -1,4 +1,4 @@
-# HiveTableRelation Leaf Logical Operator -- Representing Hive Tables in Logical Plan
+# HiveTableRelation Leaf Logical Operator
 
 `HiveTableRelation` is a ../LeafNode.md[leaf logical operator] that represents a Hive table in a ../spark-sql-LogicalPlan.md[logical query plan].
 

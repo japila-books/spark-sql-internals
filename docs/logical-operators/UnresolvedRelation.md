@@ -1,4 +1,4 @@
-# UnresolvedRelation Leaf Logical Operator for Table Reference
+# UnresolvedRelation Leaf Logical Operator
 
 [[tableIdentifier]][[creating-instance]]
 `UnresolvedRelation` is a LeafNode.md[leaf logical operator] to represent a *table reference* in a logical query plan that has yet to be resolved (i.e. looked up in a catalog).

@@ -54,11 +54,11 @@ Used when:
 * DescribeFunctionCommand
 * DropDatabaseCommand
 * DropFunctionCommand
-* [DropTableCommand](DropTableCommand.md)
+* DropTableCommand
 * [ExplainCommand](ExplainCommand.md)
 * ExternalCommandExecutor
 * [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
-* [InsertIntoDataSourceDirCommand](InsertIntoDataSourceDirCommand.md)
+* InsertIntoDataSourceDirCommand
 * ListFilesCommand
 * ListJarsCommand
 * LoadDataCommand
@@ -73,7 +73,7 @@ Used when:
 * ShowFunctionsCommand
 * ShowPartitionsCommand
 * ShowTablePropertiesCommand
-* [ShowTablesCommand](ShowTablesCommand.md)
+* ShowTablesCommand
 * ShowViewsCommand
 * StreamingExplainCommand
 * [TruncateTableCommand](TruncateTableCommand.md)

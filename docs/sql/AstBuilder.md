@@ -386,7 +386,7 @@ Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md)
 
 ### withHints
 
-Adds a [Hint](../logical-operators/Hint.md) for `/*+ hint */` in `SELECT` queries.
+Adds an [UnresolvedHint](../logical-operators/UnresolvedHint.md) for `/*+ hint */` in `SELECT` queries.
 
 !!! note
     Note `+` (plus) between `/*` and `*/`

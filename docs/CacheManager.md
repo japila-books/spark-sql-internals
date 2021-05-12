@@ -114,7 +114,7 @@ uncacheQuery(
 `uncacheQuery` is used when:
 
 * [Dataset.unpersist](spark-sql-dataset-operators.md#unpersist) basic action is used
-* [DropTableCommand](logical-operators/DropTableCommand.md) and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
+* `DropTableCommand` and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
 * `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
 ## <span id="cacheQuery"> Caching Query
