@@ -234,6 +234,7 @@ nav:
       - OrderPreservingUnaryNode: logical-operators/OrderPreservingUnaryNode.md
       - ParsedStatement: logical-operators/ParsedStatement.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
+      - ResolvedTable: logical-operators/ResolvedTable.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
@@ -241,9 +242,10 @@ nav:
       - Aggregate: logical-operators/Aggregate.md
       - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
       - AlterTableRecoverPartitionsStatement: logical-operators/AlterTableRecoverPartitionsStatement.md
+      - AnalyzeColumn: logical-operators/AnalyzeColumn.md
       - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
-      - AnalyzeColumnStatement: logical-operators/AnalyzeColumnStatement.md
       - AnalyzePartitionCommand: logical-operators/AnalyzePartitionCommand.md
+      - AnalyzeTable: logical-operators/AnalyzeTable.md
       - AnalyzeTableCommand: logical-operators/AnalyzeTableCommand.md
       - AppendData: logical-operators/AppendData.md
       - ClearCacheCommand: logical-operators/ClearCacheCommand.md

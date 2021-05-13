@@ -1,6 +1,6 @@
 # AnalyzeColumnCommand Logical Command
 
-`AnalyzeColumnCommand` is a [logical command](RunnableCommand.md) for [ANALYZE TABLE](../sql/AstBuilder.md#visitAnalyze) SQL statement.
+`AnalyzeColumnCommand` is a [logical runnable command](RunnableCommand.md) for [AnalyzeColumn](AnalyzeColumn.md) logical operators.
 
 `AnalyzeColumnCommand` is not supported on views.
 
@@ -12,7 +12,9 @@
 * <span id="columnNames"> Column Names (optional)
 * <span id="allColumns"> `allColumns` Flag
 
-`AnalyzeColumnCommand` is created when [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to resolve an [AnalyzeColumnStatement](AnalyzeColumnStatement.md)).
+`AnalyzeColumnCommand` is created when:
+
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to resolve an [AnalyzeColumn](AnalyzeColumn.md))
 
 ## <span id="run"> Executing Logical Command
 
@@ -21,12 +23,12 @@ run(
   sparkSession: SparkSession): Seq[Row]
 ```
 
+`run` is part of [RunnableCommand](RunnableCommand.md#run) abstraction.
+
 `run` calculates the following statistics:
 
 * sizeInBytes
 * stats for each column
-
-`run` is part of [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 ### <span id="computeColumnStats"> Computing Statistics for Specified Columns
 

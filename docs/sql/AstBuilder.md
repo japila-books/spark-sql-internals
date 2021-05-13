@@ -16,7 +16,7 @@
 
 ### <span id="visitAnalyze"> visitAnalyze
 
-Creates an [AnalyzeColumnStatement](../logical-operators/AnalyzeColumnStatement.md) or an `AnalyzeTableStatement` logical operator
+Creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) or [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) logical operator
 
 ```text
 ANALYZE TABLE multipartIdentifier partitionSpec? COMPUTE STATISTICS
