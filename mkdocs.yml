@@ -235,6 +235,7 @@ nav:
       - ParsedStatement: logical-operators/ParsedStatement.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
       - ResolvedTable: logical-operators/ResolvedTable.md
+      - ResolvedView: logical-operators/ResolvedView.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SupportsSubquery: logical-operators/SupportsSubquery.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
@@ -309,6 +310,8 @@ nav:
       - UnresolvedHint: logical-operators/UnresolvedHint.md
       - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
       - UnresolvedRelation: logical-operators/UnresolvedRelation.md
+      - UnresolvedTable: logical-operators/UnresolvedTable.md
+      - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedTableValuedFunction: logical-operators/UnresolvedTableValuedFunction.md
       - UnresolvedV2Relation: logical-operators/UnresolvedV2Relation.md
       - UseStatement: logical-operators/UseStatement.md
@@ -723,6 +726,7 @@ nav:
       - ResolveSQLOnFile: logical-analysis-rules/ResolveSQLOnFile.md
       - ResolveSubquery: logical-analysis-rules/ResolveSubquery.md
       - ResolveTables: logical-analysis-rules/ResolveTables.md
+      - ResolveTempViews: logical-analysis-rules/ResolveTempViews.md
       - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
       - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md

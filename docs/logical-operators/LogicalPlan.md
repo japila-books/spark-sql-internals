@@ -191,7 +191,7 @@ childrenResolved: Boolean
 
 A logical operator is considered **partially resolved** when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
-## <span id="resolved"> resolved Flag
+## <span id="resolved"> resolved
 
 ```scala
 resolved: Boolean
