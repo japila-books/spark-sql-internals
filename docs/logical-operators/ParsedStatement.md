@@ -26,7 +26,7 @@
 * CacheTableStatement
 * CreateFunctionStatement
 * CreateNamespaceStatement
-* CreateTableAsSelectStatement
+* [CreateTableAsSelectStatement](CreateTableAsSelectStatement.md)
 * CreateTableStatement
 * CreateViewStatement
 * DescribeColumnStatement

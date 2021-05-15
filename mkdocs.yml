@@ -222,6 +222,7 @@ nav:
       - LogicalPlan: logical-operators/LogicalPlan.md
       - AlterTable: logical-operators/AlterTable.md
       - CommentOnTable: logical-operators/CommentOnTable.md
+      - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - MapPartitions: logical-operators/MapPartitions.md
       - ObjectConsumer: logical-operators/ObjectConsumer.md
@@ -254,6 +255,7 @@ nav:
       - CreateDataSourceTableAsSelectCommand: logical-operators/CreateDataSourceTableAsSelectCommand.md
       - CreateDataSourceTableCommand: logical-operators/CreateDataSourceTableCommand.md
       - CreateTable: logical-operators/CreateTable.md
+      - CreateTableAsSelectStatement: logical-operators/CreateTableAsSelectStatement.md
       - CreateTableCommand: logical-operators/CreateTableCommand.md
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
       - CreateV2Table: logical-operators/CreateV2Table.md
@@ -595,6 +597,7 @@ nav:
       - V1FallbackWriters: physical-operators/V1FallbackWriters.md
       - SQLMetric: physical-operators/SQLMetric.md
       - SQLShuffleWriteMetricsReporter: physical-operators/SQLShuffleWriteMetricsReporter.md
+      - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
         - Partitioning: physical-operators/Partitioning.md

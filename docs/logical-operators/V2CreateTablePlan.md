@@ -4,13 +4,13 @@
 
 ## Contract
 
-### <span id="partitioning"> partitioning
+### <span id="partitioning"> Partitioning Transforms
 
 ```scala
 partitioning: Seq[Transform]
 ```
 
-Used when...FIXME
+Partitioning [Transform](../connector/Transform.md)s
 
 ### <span id="tableName"> tableName
 
@@ -20,13 +20,11 @@ tableName: Identifier
 
 Used when [PreprocessTableCreation](../logical-analysis-rules/PreprocessTableCreation.md) post-hoc logical resolution rule is executed
 
-### <span id="tableSchema"> tableSchema
+### <span id="tableSchema"> Table Schema
 
 ```scala
 tableSchema: StructType
 ```
-
-Used when...FIXME
 
 ### <span id="withPartitioning"> withPartitioning
 
@@ -35,11 +33,9 @@ withPartitioning(
   rewritten: Seq[Transform]): V2CreateTablePlan
 ```
 
-Used when...FIXME
-
 ## Implementations
 
-* CreateTableAsSelect
+* [CreateTableAsSelect](CreateTableAsSelect.md)
 * [CreateV2Table](CreateV2Table.md)
 * ReplaceTable
 * ReplaceTableAsSelect
