@@ -28,15 +28,63 @@
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Table/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Batch/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableCapability/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/BatchWrite/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableProvider/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriter/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriterFactory/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/InputPartition/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/FileTable/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/MetadataColumn/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/MetadataColumnsHelper/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReader/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReaderFactory/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Scan/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/ScanBuilder/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SessionConfigSupport/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SimpleTableProvider/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/StagedTable/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -45,6 +93,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsDynamicOverwrite/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsMetadataColumns/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -84,7 +136,23 @@
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/ScanBuilder/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Table/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableCapability/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableHelper/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableProvider/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Transform/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -92,47 +160,7 @@
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/BatchWrite/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriterFactory/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/DataWriter/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Scan/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/V1Scan/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Batch/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReaderFactory/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/PartitionReader/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/InputPartition/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/FileTable/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/StagedTable/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -141,34 +169,6 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/V1WriteBuilder/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/TableHelper/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SessionConfigSupport/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SimpleTableProvider/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/Transform/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/MetadataColumn/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/SupportsMetadataColumns/</loc>
-     <lastmod>2021-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/connector/MetadataColumnsHelper/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1069,6 +1069,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCRelation/</loc>
+     <lastmod>2021-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCScan/</loc>
      <lastmod>2021-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
