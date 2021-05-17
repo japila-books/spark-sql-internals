@@ -1,6 +1,4 @@
-title: TableScan
-
-# TableScan -- Relations with Column Pruning
+# TableScan &mdash; Relations with Column Pruning
 
 `TableScan` is the <<contract, contract>> of <<implementations, BaseRelations>> with support for <<buildScan, column pruning>>, i.e. can eliminate unneeded columns before producing an RDD containing all of its tuples as `Row` objects.
 

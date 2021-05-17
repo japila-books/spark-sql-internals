@@ -33,7 +33,7 @@ Logical Operator | Physical Operator
 
 `DataSourceV2Strategy` is created when:
 
-* `SparkPlanner` is requested for the [strategies](SparkPlanner.md#strategies)
+* `SparkPlanner` is requested for the [strategies](../SparkPlanner.md#strategies)
 
 ## <span id="apply"> Executing Rule
 

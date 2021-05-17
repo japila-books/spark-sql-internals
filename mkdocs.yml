@@ -122,12 +122,25 @@ nav:
       - StaticSQLConf: StaticSQLConf.md
     - DataSource: DataSource.md
     - Connector API:
-      - Connector API: connector/index.md
-      - Table: connector/Table.md
-      - TableCapability: connector/TableCapability.md
-      - TableProvider: connector/TableProvider.md
+      - connector/index.md
+      - Batch: connector/Batch.md
+      - BatchWrite: connector/BatchWrite.md
+      - DataWriter: connector/DataWriter.md
+      - DataWriterFactory: connector/DataWriterFactory.md
+      - InputPartition: connector/InputPartition.md
+      - FileTable: connector/FileTable.md
+      - MetadataColumn: connector/MetadataColumn.md
+      - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
+      - PartitionReader: connector/PartitionReader.md
+      - PartitionReaderFactory: connector/PartitionReaderFactory.md
+      - Scan: connector/Scan.md
+      - ScanBuilder: connector/ScanBuilder.md
+      - SessionConfigSupport: connector/SessionConfigSupport.md
+      - SimpleTableProvider: connector/SimpleTableProvider.md
+      - StagedTable: connector/StagedTable.md
       - SupportsDelete: connector/SupportsDelete.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
+      - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
       - SupportsPushDownFilters: connector/SupportsPushDownFilters.md
       - SupportsPushDownRequiredColumns: connector/SupportsPushDownRequiredColumns.md
@@ -137,29 +150,16 @@ nav:
       - SupportsStreamingUpdate: connector/SupportsStreamingUpdate.md
       - SupportsTruncate: connector/SupportsTruncate.md
       - SupportsWrite: connector/SupportsWrite.md
-      - ScanBuilder: connector/ScanBuilder.md
+      - Table: connector/Table.md
+      - TableCapability: connector/TableCapability.md
+      - TableHelper: connector/TableHelper.md
+      - TableProvider: connector/TableProvider.md
+      - Transform: connector/Transform.md
       - WriteBuilder: connector/WriteBuilder.md
-      - BatchWrite: connector/BatchWrite.md
-      - DataWriterFactory: connector/DataWriterFactory.md
-      - DataWriter: connector/DataWriter.md
-      - Scan: connector/Scan.md
       - V1Scan: connector/V1Scan.md
-      - Batch: connector/Batch.md
-      - PartitionReaderFactory: connector/PartitionReaderFactory.md
-      - PartitionReader: connector/PartitionReader.md
-      - InputPartition: connector/InputPartition.md
-      - FileTable: connector/FileTable.md
-      - StagedTable: connector/StagedTable.md
       - V1Table: connector/V1Table.md
       - V1WriteBuilder: connector/V1WriteBuilder.md
-      - TableHelper: connector/TableHelper.md
-      - SessionConfigSupport: connector/SessionConfigSupport.md
-      - SimpleTableProvider: connector/SimpleTableProvider.md
-      - Transform: connector/Transform.md
-      - MetadataColumn: connector/MetadataColumn.md
-      - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
-      - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
-    - Data Source API:
+    - DataSource V1 API:
       - DataSourceRegister: DataSourceRegister.md
       - CreatableRelationProvider: CreatableRelationProvider.md
       - RelationProvider: RelationProvider.md
@@ -408,6 +408,7 @@ nav:
         - JDBCOptions: datasources/jdbc/JDBCOptions.md
         - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
         - JDBCRelation: datasources/jdbc/JDBCRelation.md
+        - JDBCScan: datasources/jdbc/JDBCScan.md
         - JDBCRDD: datasources/jdbc/JDBCRDD.md
         - JdbcDialect: datasources/jdbc/JdbcDialect.md
         - JdbcUtils: datasources/jdbc/JdbcUtils.md
