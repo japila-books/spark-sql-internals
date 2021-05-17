@@ -1146,6 +1146,22 @@ Acceptable values:
 * `hive`
 * `native`
 
+## <span id="spark.sql.planChangeLog.level"> spark.sql.planChangeLog.level
+
+**(internal)** Configures the log level for logging the change from the original plan to the new plan after a rule or batch is applied.
+
+Default: `trace`
+
+Supported Values (case-insensitive):
+
+* trace
+* debug
+* info
+* warn
+* error
+
+Use [SQLConf.planChangeLogLevel](SQLConf.md#planChangeLogLevel) method to access the current value.
+
 ## <span id="spark.sql.pyspark.jvmStacktrace.enabled"> spark.sql.pyspark.jvmStacktrace.enabled
 
 When true, it shows the JVM stacktrace in the user-facing PySpark exception together with Python stacktrace. By default, it is disabled and hides JVM stacktrace and shows a Python-friendly exception only.

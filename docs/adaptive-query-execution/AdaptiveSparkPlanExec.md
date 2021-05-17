@@ -380,10 +380,13 @@ replaceWithQueryStagesInLogicalPlan(
 ```scala
 applyPhysicalRules(
   plan: SparkPlan,
-  rules: Seq[Rule[SparkPlan]]): SparkPlan
+  rules: Seq[Rule[SparkPlan]],
+  loggerAndBatchName: Option[(PlanChangeLogger[SparkPlan], String)] = None): SparkPlan
 ```
 
-`applyPhysicalRules` simply applies (_executes_) the given rules to the given [physical query plan](../physical-operators/SparkPlan.md).
+By default (with no `loggerAndBatchName` given) `applyPhysicalRules` applies (_executes_) the given rules to the given [physical query plan](../physical-operators/SparkPlan.md).
+
+With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and, for every rule, requests the [PlanChangeLogger](../catalyst/PlanChangeLogger.md) to [logRule](../catalyst/PlanChangeLogger.md#logRule). In the end, `applyPhysicalRules` requests the `PlanChangeLogger` to [logBatch](../catalyst/PlanChangeLogger.md#logBatch).
 
 `applyPhysicalRules` is used when:
 

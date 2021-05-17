@@ -580,6 +580,14 @@ The value of [spark.sql.sources.partitionOverwriteMode](configuration-properties
 
 Used when [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 
+## <span id="planChangeLogLevel"><span id="PLAN_CHANGE_LOG_LEVEL"> planChangeLogLevel
+
+The value of [spark.sql.planChangeLog.level](configuration-properties.md#spark.sql.planChangeLog.level) configuration property
+
+Used when:
+
+* [PlanChangeLogger](catalyst/PlanChangeLogger.md) is created
+
 ## <span id="preferSortMergeJoin"> preferSortMergeJoin
 
 [spark.sql.join.preferSortMergeJoin](configuration-properties.md#spark.sql.join.preferSortMergeJoin)
