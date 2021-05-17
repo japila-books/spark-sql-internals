@@ -1,75 +1,66 @@
 # ProjectExec Unary Physical Operator
 
-`ProjectExec` is a [unary physical operator](UnaryExecNode.md) that...FIXME
+`ProjectExec` is a [unary physical operator](UnaryExecNode.md) with support for [Java code generation](CodegenSupport.md) that represents [Project](../logical-operators/Project.md) logical operator at execution.
 
-`ProjectExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
+## Creating Instance
 
-`ProjectExec` is <<creating-instance, created>> when:
+`ProjectExec` takes the following to be created:
 
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) and [HiveTableScans](../hive/HiveTableScans.md) execution planning strategies are executed (and request `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
+* <span id="projectList"> [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="child"> Child [Physical Operator](SparkPlan.md)
 
-* [BasicOperators](../execution-planning-strategies/BasicOperators.md#Project) execution planning strategy is executed
+`ProjectExec` is created when:
 
-* `DataSourceStrategy` execution planning strategy is requested to [creates a RowDataSourceScanExec](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (to plan [Project](../logical-operators/Project.md) logical operator)
+* `SparkPlanner` is requested to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject)
+* [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is [executed](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
+* `FileFormatWriter` is requested to [write](../FileFormatWriter.md#write)
 
-* `FileSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a HadoopFsRelation](../execution-planning-strategies/FileSourceStrategy.md#apply)
+## <span id="doConsume"> Java Source Code for Consume Path
 
-* [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
+```scala
+doConsume(
+  ctx: CodegenContext,
+  input: Seq[ExprCode],
+  row: ExprCode): String
+```
 
-!!! note
-    The following is the order of applying the above execution planning strategies to logical query plans when `SparkPlanner` or hive/HiveSessionStateBuilder.md#planner[Hive-specific SparkPlanner] are requested to catalyst/QueryPlanner.md#plan[plan a logical query plan into one or more physical query plans]:
-
-    1. [HiveTableScans](../hive/HiveTableScans.md)
-    1. [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md)
-    1. [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md)
-    1. [InMemoryScans](../execution-planning-strategies/InMemoryScans.md)
-    1. [BasicOperators](../execution-planning-strategies/BasicOperators.md)
-
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-`doExecute` requests the input <<child, child physical plan>> to SparkPlan.md#execute[produce an RDD of internal rows] and applies a <<doExecute-mapPartitionsWithIndexInternal, calculation over indexed partitions>> (using `RDD.mapPartitionsWithIndexInternal`).
-
-.RDD.mapPartitionsWithIndexInternal
-[source, scala]
-----
-mapPartitionsWithIndexInternal[U](
-  f: (Int, Iterator[T]) => Iterator[U],
-  preservesPartitioning: Boolean = false)
-----
-
-==== [[doExecute-mapPartitionsWithIndexInternal]] Inside `doExecute` (`RDD.mapPartitionsWithIndexInternal`)
-
-Inside the function (that is part of `RDD.mapPartitionsWithIndexInternal`), `doExecute` creates an [UnsafeProjection](../expressions/UnsafeProjection.md#create) with the following:
-
-. <<projectList, Named expressions>>
-
-. catalyst/QueryPlan.md#output[Output] of the <<child, child>> physical operator as the input schema
-
-. SparkPlan.md#subexpressionEliminationEnabled[subexpressionEliminationEnabled] flag
-
-`doExecute` requests the `UnsafeProjection` to Projection.md#initialize[initialize] and maps over the internal rows (of a partition) using the projection.
-
-=== [[creating-instance]] Creating ProjectExec Instance
-
-`ProjectExec` takes the following when created:
-
-* [[projectList]] expressions/NamedExpression.md[NamedExpressions] for the projection
-* [[child]] Child SparkPlan.md[physical operator]
-
-=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
-
-[source, scala]
-----
-doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-----
+`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 `doConsume`...FIXME
 
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute` requests the [child physical plan](#child) to [execute](SparkPlan.md#execute) and [mapPartitionsWithIndexInternal](#doExecute-mapPartitionsWithIndexInternal).
+
+### <span id="doExecute-mapPartitionsWithIndexInternal"> mapPartitionsWithIndexInternal
+
+`doExecute` uses `RDD.mapPartitionsWithIndexInternal`.
+
+```scala
+mapPartitionsWithIndexInternal[U](
+  f: (Int, Iterator[T]) => Iterator[U],
+  preservesPartitioning: Boolean = false)
+```
+
+`doExecute` creates an [UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [named expressions](#projectList) and (the [output](../catalyst/QueryPlan.md#output) of) the [child](#child) physical operator.
+
+`doExecute` requests the `UnsafeProjection` to [initialize](../expressions/Projection.md#initialize) and maps over the internal rows (of a partition) using the projection.
+
+## <span id="output"> Output Attributes
+
+```scala
+output: Seq[Attribute]
+```
+
+`output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
+
+`output` is the [NamedExpression](#projectList)s converted to [Attribute](../expressions/NamedExpression.md#toAttribute)s.

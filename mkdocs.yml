@@ -671,7 +671,7 @@ nav:
         - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
         - OverwriteByExpressionExecV1: physical-operators/OverwriteByExpressionExecV1.md
         - OverwritePartitionsDynamicExec: physical-operators/OverwritePartitionsDynamicExec.md
-        - physical-operators/ProjectExec.md
+        - ProjectExec: physical-operators/ProjectExec.md
         - physical-operators/RangeExec.md
         - physical-operators/RDDScanExec.md
         - RefreshTableExec: physical-operators/RefreshTableExec.md

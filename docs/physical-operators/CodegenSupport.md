@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="doConsume"> Generating Java Source Code for Consume Path
+### <span id="doConsume"> Java Source Code for Consume Path
 
 ```scala
 doConsume(
@@ -20,7 +20,7 @@ Generates a Java source code (as a text) for the physical operator for the ["con
 
 Used when the physical operator is requested to [generate the Java source code for consume code path](#consume) (a Java code that consumers the generated columns or a row from a physical operator)
 
-### <span id="doProduce"> Generating Java Source Code for Produce Path
+### <span id="doProduce"> Java Source Code for Produce Path
 
 ```scala
 doProduce(
