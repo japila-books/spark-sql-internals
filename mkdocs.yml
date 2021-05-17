@@ -143,6 +143,7 @@ nav:
       - DataWriterFactory: connector/DataWriterFactory.md
       - DataWriter: connector/DataWriter.md
       - Scan: connector/Scan.md
+      - V1Scan: connector/V1Scan.md
       - Batch: connector/Batch.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionReader: connector/PartitionReader.md

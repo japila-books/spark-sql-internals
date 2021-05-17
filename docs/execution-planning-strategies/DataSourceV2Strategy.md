@@ -1,124 +1,59 @@
 # DataSourceV2Strategy Execution Planning Strategy
 
-`DataSourceV2Strategy` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to <<apply, plan logical operators>> (from the [DataSource V2](../new-and-noteworthy/datasource-v2.md)).
+`DataSourceV2Strategy` is an [execution planning strategy](SparkStrategy.md).
 
-[[logical-operators]]
-.DataSourceV2Strategy's Execution Planning
-[cols="1,1",options="header",width="100%"]
-|===
-| Logical Operator
-| Physical Operator
+Logical Operator | Physical Operator
+-----------------|------------------
+ [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) with [V1Scan](../connector/V1Scan.md) | [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md)
+ [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [BatchScanExec](../physical-operators/BatchScanExec.md)
+ `StreamingDataSourceV2Relation` |
+ [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) | [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md)
+ [CreateV2Table](../logical-operators/CreateV2Table.md) | [CreateTableExec](../physical-operators/CreateTableExec.md)
+ [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) | [AtomicCreateTableAsSelectExec](../physical-operators/AtomicCreateTableAsSelectExec.md) or [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
+ `RefreshTable` | [RefreshTableExec](../physical-operators/RefreshTableExec.md)
+ `ReplaceTable` | [AtomicReplaceTableExec](../physical-operators/AtomicReplaceTableExec.md) or [ReplaceTableExec](../physical-operators/ReplaceTableExec.md)
+ `ReplaceTableAsSelect` | [AtomicReplaceTableAsSelectExec](../physical-operators/AtomicReplaceTableAsSelectExec.md) or [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md)
+ [AppendData](../logical-operators/AppendData.md) | [AppendDataExecV1](../physical-operators/AppendDataExecV1.md) or [AppendDataExec](../physical-operators/AppendDataExec.md)
+ [OverwriteByExpression](../logical-operators/OverwriteByExpression.md) with a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) | [OverwriteByExpressionExecV1](../physical-operators/OverwriteByExpressionExecV1.md) or [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md)
+ [OverwritePartitionsDynamic](../logical-operators/OverwritePartitionsDynamic.md) | [OverwritePartitionsDynamicExec](../physical-operators/OverwritePartitionsDynamicExec.md)
+ [DeleteFromTable](../logical-operators/DeleteFromTable.md) with [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [DeleteFromTableExec](../physical-operators/DeleteFromTableExec.md)
+ `WriteToContinuousDataSource` | `WriteToContinuousDataSourceExec`
+ `DescribeNamespace` | `DescribeNamespaceExec`
+ [DescribeRelation](../logical-operators/DescribeRelation.md) | [DescribeTableExec](../physical-operators/DescribeTableExec.md)
+ `DropTable` | [DropTableExec](../physical-operators/DropTableExec.md)
+ `NoopDropTable` | [LocalTableScanExec](../physical-operators/LocalTableScanExec.md)
+ [AlterTable](../logical-operators/AlterTable.md) | [AlterTableExec](../physical-operators/AlterTableExec.md)
+ _others_ |
 
-| <<apply-DataSourceV2Relation, DataSourceV2Relation>>
-| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+## Creating Instance
 
-| <<apply-StreamingDataSourceV2Relation, StreamingDataSourceV2Relation>>
-| <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>>
+`DataSourceV2Strategy` takes the following to be created:
 
-| <<apply-WriteToDataSourceV2, WriteToDataSourceV2>>
-| <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
+* <span id="session"> [SparkSession](../SparkSession.md)
 
-| <<apply-AppendData, AppendData>> with <<DataSourceV2Relation.md#, DataSourceV2Relation>>
-| <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>>
+`DataSourceV2Strategy` is created when:
 
-| <<apply-WriteToContinuousDataSource, WriteToContinuousDataSource>>
-| `WriteToContinuousDataSourceExec`
+* `SparkPlanner` is requested for the [strategies](SparkPlanner.md#strategies)
 
-| <<apply-Repartition, Repartition>> with a `StreamingDataSourceV2Relation` and a `ContinuousReader`
-| `ContinuousCoalesceExec`
-|===
-
-[[logging]]
-[TIP]
-====
-Enable `INFO` logging level for `org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy` logger to see what happens inside.
-
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy=INFO
-```
-
-Refer to spark-logging.md[Logging].
-====
-
-## <span id="apply"> Applying DataSourceV2Strategy Strategy to Logical Plan
+## <span id="apply"> Executing Rule
 
 ```scala
 apply(
   plan: LogicalPlan): Seq[SparkPlan]
 ```
 
-`apply` branches off per the given <<spark-sql-LogicalPlan.md#, logical operator>>.
-
 `apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
 
-==== [[apply-DataSourceV2Relation]] DataSourceV2Relation Logical Operator
+`apply` branches off per the type of the given [logical operator](../logical-operators/LogicalPlan.md).
 
-For a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator, `apply`...FIXME
+## Logging
 
-`apply` then <<pushFilters, pushFilters>> followed by <<pruneColumns, pruneColumns>>.
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy` logger to see what happens inside.
 
-`apply` prints out the following INFO message to the logs:
+Add the following line to `conf/log4j.properties`:
 
-```
-Pushing operators to [ClassName of DataSourceV2]
-Pushed Filters: [pushedFilters]
-Post-Scan Filters: [postScanFilters]
-Output: [output]
+```text
+log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy=ALL
 ```
 
-`apply` uses the `DataSourceV2Relation` to create a <<DataSourceV2ScanExec.md#, DataSourceV2ScanExec>> physical operator.
-
-If there are any `postScanFilters`, `apply` creates a <<FilterExec.md#, FilterExec>> physical operator with the `DataSourceV2ScanExec` physical operator as the child.
-
-In the end, `apply` creates a <<ProjectExec.md#, ProjectExec>> physical operator with the `FilterExec` with the `DataSourceV2ScanExec` or directly with the `DataSourceV2ScanExec` physical operator.
-
-==== [[apply-StreamingDataSourceV2Relation]] StreamingDataSourceV2Relation Logical Operator
-
-For a `StreamingDataSourceV2Relation` logical operator, `apply`...FIXME
-
-==== [[apply-WriteToDataSourceV2]] WriteToDataSourceV2 Logical Operator
-
-For a <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator, `apply` simply creates a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
-
-==== [[apply-AppendData]] AppendData Logical Operator
-
-For a <<AppendData.md#, AppendData>> logical operator with a <<DataSourceV2Relation.md#, DataSourceV2Relation>>, `apply` requests the <<AppendData.md#table, DataSourceV2Relation>> to <<DataSourceV2Relation.md#newWriter, create a DataSourceWriter>> that is used to create a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator.
-
-==== [[apply-WriteToContinuousDataSource]] WriteToContinuousDataSource Logical Operator
-
-For a `WriteToContinuousDataSource` logical operator, `apply`...FIXME
-
-==== [[apply-Repartition]] Repartition Logical Operator
-
-For a [Repartition](../logical-operators/RepartitionOperation.md#Repartition) logical operator, `apply`...FIXME
-
-=== [[pushFilters]] `pushFilters` Internal Method
-
-[source, scala]
-----
-pushFilters(
-  reader: DataSourceReader,
-  filters: Seq[Expression]): (Seq[Expression], Seq[Expression])
-----
-
-`pushFilters`...FIXME
-
-In the end, `pushFilters` returns a pair of filters pushed and not.
-
-NOTE: `pushFilters` is used exclusively when `DataSourceV2Strategy` execution planning strategy is <<apply, executed>> (applied to a <<apply-DataSourceV2Relation, DataSourceV2Relation>> logical operator).
-
-=== [[pruneColumns]] Column Pruning -- `pruneColumns` Internal Method
-
-[source, scala]
-----
-pruneColumns(
-  reader: DataSourceReader,
-  relation: DataSourceV2Relation,
-  exprs: Seq[Expression]): Seq[AttributeReference]
-----
-
-`pruneColumns`...FIXME
-
-NOTE: `pruneColumns` is used when...FIXME
+Refer to [Logging](../spark-logging.md).
