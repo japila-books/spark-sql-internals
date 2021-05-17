@@ -1148,7 +1148,7 @@ Acceptable values:
 
 ## <span id="spark.sql.planChangeLog.level"> spark.sql.planChangeLog.level
 
-**(internal)** Configures the log level for logging the change from the original plan to the new plan after a rule or batch is applied.
+**(internal)** Log level for logging the change from the original plan to the new plan after a rule or batch is applied.
 
 Default: `trace`
 
@@ -1161,6 +1161,22 @@ Supported Values (case-insensitive):
 * error
 
 Use [SQLConf.planChangeLogLevel](SQLConf.md#planChangeLogLevel) method to access the current value.
+
+## <span id="spark.sql.planChangeLog.batches"> spark.sql.planChangeLog.batches
+
+**(internal)** Comma-separated list of batch names for plan changes logging
+
+Default: (undefined)
+
+Use [SQLConf.planChangeBatches](SQLConf.md#planChangeBatches) method to access the current value.
+
+## <span id="spark.sql.planChangeLog.rules"> spark.sql.planChangeLog.rules
+
+**(internal)** Comma-separated list of rule names for plan changes logging
+
+Default: (undefined)
+
+Use [SQLConf.planChangeRules](SQLConf.md#planChangeRules) method to access the current value.
 
 ## <span id="spark.sql.pyspark.jvmStacktrace.enabled"> spark.sql.pyspark.jvmStacktrace.enabled
 

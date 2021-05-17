@@ -588,6 +588,22 @@ Used when:
 
 * [PlanChangeLogger](catalyst/PlanChangeLogger.md) is created
 
+## <span id="planChangeBatches"><span id="PLAN_CHANGE_LOG_BATCHES"> planChangeBatches
+
+The value of [spark.sql.planChangeLog.batches](configuration-properties.md#spark.sql.planChangeLog.batches) configuration property
+
+Used when:
+
+* `PlanChangeLogger` is requested to [logBatch](catalyst/PlanChangeLogger.md#logBatch)
+
+## <span id="planChangeRules"><span id="PLAN_CHANGE_LOG_RULES"> planChangeRules
+
+The value of [spark.sql.planChangeLog.rules](configuration-properties.md#spark.sql.planChangeLog.rules) configuration property
+
+Used when:
+
+* `PlanChangeLogger` is requested to [logRule](catalyst/PlanChangeLogger.md#logRule)
+
 ## <span id="preferSortMergeJoin"> preferSortMergeJoin
 
 [spark.sql.join.preferSortMergeJoin](configuration-properties.md#spark.sql.join.preferSortMergeJoin)

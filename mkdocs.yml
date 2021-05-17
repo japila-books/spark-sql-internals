@@ -463,7 +463,7 @@ nav:
       - DetermineTableStats: hive/DetermineTableStats.md
       - HiveAnalysis: hive/HiveAnalysis.md
     - Catalyst:
-      - Tree Manipulation Framework: catalyst/index.md
+      - catalyst/index.md
       - TreeNode: catalyst/TreeNode.md
       - QueryPlan: catalyst/QueryPlan.md
       - RuleExecutor: catalyst/RuleExecutor.md
