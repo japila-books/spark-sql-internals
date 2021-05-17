@@ -30,7 +30,7 @@ numOutputRows   | number of output rows   | Number of output rows
 
 ## Physical Optimizations
 
-1. [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) is used to [optimize skewed sort-merge joins](../physical-optimizations/OptimizeSkewedJoin.md#optimizeSkewJoin)
+1. [OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md) is used to [optimize skewed sort-merge joins](../adaptive-query-execution/OptimizeSkewedJoin.md#optimizeSkewJoin)
 
 1. [CoalesceBucketsInJoin](../physical-optimizations/CoalesceBucketsInJoin.md) physical optimization is used for...FIXME
 

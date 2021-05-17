@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="buildForBatch"> Creating BatchWrite
+### <span id="buildForBatch"> BatchWrite
 
 ```java
 BatchWrite buildForBatch()
@@ -16,7 +16,7 @@ Used when:
 
 * [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md), [AppendDataExec](../physical-operators/AppendDataExec.md), [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md), [OverwritePartitionsDynamicExec](../physical-operators/OverwritePartitionsDynamicExec.md), [AtomicTableWriteExec](../physical-operators/AtomicTableWriteExec.md) physical commands are executed
 
-### <span id="buildForStreaming"> Creating StreamingWrite
+### <span id="buildForStreaming"> StreamingWrite
 
 ```java
 StreamingWrite buildForStreaming()
@@ -26,7 +26,7 @@ StreamingWrite buildForStreaming()
 
 Used when:
 
-* `StreamExecution` stream execution engine (Spark Structured Streaming) is requested to `createStreamingWrite`
+* `StreamExecution` stream execution engine ([Spark Structured Streaming]({{ book.structured_streaming }}/StreamExecution)) is requested to `createStreamingWrite`
 
 ## Implementations
 

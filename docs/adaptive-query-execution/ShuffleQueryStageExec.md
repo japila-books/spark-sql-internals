@@ -44,4 +44,4 @@ assertion failed: ShuffleQueryStageExec should already be ready
 `mapStats` is used when:
 
 * [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) logical optimization is executed
-* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) adaptive physical optimizations are executed
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](OptimizeSkewedJoin.md) adaptive physical optimizations are executed

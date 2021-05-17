@@ -207,16 +207,31 @@ queryStagePreparationRules: Seq[Rule[SparkPlan]]
 queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 ```
 
-`AdaptiveSparkPlanExec` uses the following adaptive optimizations (physical optimization rules):
+`queryStageOptimizerRules` is the following adaptive optimizations (physical optimization rules):
 
-* [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
-* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
-* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md)
-* [OptimizeLocalShuffleReader](../physical-optimizations/OptimizeLocalShuffleReader.md)
+* [ReuseAdaptiveSubquery](ReuseAdaptiveSubquery.md)
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md)
+* [OptimizeSkewedJoin](OptimizeSkewedJoin.md)
+* [OptimizeLocalShuffleReader](OptimizeLocalShuffleReader.md)
+
+`queryStageOptimizerRules` is used when:
+
+* `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage)
+
+## <span id="postStageCreationRules"> Post-Stage-Creation Adaptive Optimizations
+
+```scala
+postStageCreationRules: Seq[Rule[SparkPlan]]
+```
+
+`postStageCreationRules` is the following adaptive optimizations (physical optimization rules):
+
 * [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
 * [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md)
 
-`queryStageOptimizerRules` is used when `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage).
+`postStageCreationRules` is used when:
+
+* `AdaptiveSparkPlanExec` is requested to [finalStageOptimizerRules](#finalStageOptimizerRules) and [newQueryStage](#newQueryStage)
 
 ## <span id="generateTreeString"> generateTreeString
 

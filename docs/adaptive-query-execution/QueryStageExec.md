@@ -46,7 +46,7 @@ id: Int
 
 Used when:
 
-* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md) adaptive physical optimization is executed
 
 ### <span id="newReuseInstance"> newReuseInstance
 

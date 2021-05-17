@@ -98,7 +98,9 @@ Used when:
 
 The value of [spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
 
-Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimizations are executed
+Used when:
+
+* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimizations are executed
 
 ## <span id="autoBroadcastJoinThreshold"> autoBroadcastJoinThreshold
 
@@ -166,7 +168,9 @@ Used when:
 
 The value of [spark.sql.adaptive.coalescePartitions.enabled](configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property
 
-Used when [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
+Used when:
+
+* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
 
 ## <span id="COLUMN_BATCH_SIZE"><span id="columnBatchSize"> columnBatchSize
 
@@ -474,19 +478,25 @@ Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physi
 
 [spark.sql.adaptive.skewJoin.skewedPartitionFactor](configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property
 
-Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+Used when:
+
+* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="SKEW_JOIN_SKEWED_PARTITION_THRESHOLD"> SKEW_JOIN_SKEWED_PARTITION_THRESHOLD
 
 [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes) configuration property
 
-Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+Used when:
+
+* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="SKEW_JOIN_ENABLED"> SKEW_JOIN_ENABLED
 
 [spark.sql.adaptive.skewJoin.enabled](configuration-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property
 
-Used when [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+Used when:
+
+* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="offHeapColumnVectorEnabled"> offHeapColumnVectorEnabled
 

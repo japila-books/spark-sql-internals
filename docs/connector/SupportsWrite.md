@@ -1,6 +1,6 @@
-# SupportsWrite
+# SupportsWrite &mdash; Writable Tables
 
-`SupportsWrite` is an [extension](#contract) of the [Table](Table.md) abstraction for [tables](#implementations) that are [writable](#newWriteBuilder).
+`SupportsWrite` is an [extension](#contract) of the [Table](Table.md) abstraction for [writable tables](#implementations).
 
 ## Contract
 
