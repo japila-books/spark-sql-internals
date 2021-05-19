@@ -1,41 +1,24 @@
-# Projection
+# Projection Functions
 
-`Projection` is a <<contract, contract>> of Scala functions that produce an [InternalRow](../InternalRow.md) for a given internal row.
+`Projection` is an [abstraction](#contract) of [InternalRow converter functions](#implementations) to produce an [InternalRow](../InternalRow.md) for a given `InternalRow`.
 
-[source, scala]
-----
+```scala
 Projection: InternalRow => InternalRow
-----
+```
 
-[[initialize]]
-`Projection` can optionally be *initialized* with the current partition index (which by default does nothing).
+## Contract
 
-[source, scala]
-----
-initialize(partitionIndex: Int): Unit = {}
-----
+### <span id="initialize"> Initialization
 
-NOTE: `initialize` is overriden by [InterpretedProjection](InterpretedProjection.md#initialize) and `InterpretedMutableProjection` projections that are used in [interpreted expression evaluation](Expression.md#eval).
+```scala
+initialize(
+  partitionIndex: Int): Unit
+```
 
-[[implementations]]
-.Projections
-[cols="1,2",options="header",width="100%"]
-|===
-| Projection
-| Description
+## Implementations
 
-| [[UnsafeProjection]] [UnsafeProjection](UnsafeProjection.md)
-|
-
-| [[InterpretedProjection]] [InterpretedProjection](InterpretedProjection.md)
-|
-
-| [[IdentityProjection]] `IdentityProjection`
-|
-
-| [[MutableProjection]] `MutableProjection`
-|
-
-| [[InterpretedMutableProjection]] `InterpretedMutableProjection`
-| _Appears not to be used anymore_
-|===
+* `IdentityProjection`
+* [InterpretedProjection](InterpretedProjection.md)
+* `InterpretedSafeProjection`
+* [MutableProjection](MutableProjection.md)
+* [UnsafeProjection](UnsafeProjection.md)

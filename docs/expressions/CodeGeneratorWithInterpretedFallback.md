@@ -1,56 +1,58 @@
-# CodeGeneratorWithInterpretedFallback
+# CodeGeneratorWithInterpretedFallback Generators
 
-`CodeGeneratorWithInterpretedFallback` is the <<contract, base>> of <<extensions, codegen object generators>> that can create objects for <<createCodeGeneratedObject, codegen>> and <<createInterpretedObject, interpreted>> evaluation paths.
+`CodeGeneratorWithInterpretedFallback` is an [abstraction](#contract) of [codegen object generators](#implementations) that can create objects for [codegen](#createCodeGeneratedObject) and [interpreted](#createInterpretedObject) evaluation paths.
 
-[[contract]]
-.CodeGeneratorWithInterpretedFallback Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Method
-| Description
+## Type Constructor
 
-| createCodeGeneratedObject
-a| [[createCodeGeneratedObject]]
+`CodeGeneratorWithInterpretedFallback` is a Scala type constructor (_generic class_) with `IN` and `OUT` type aliases.
 
-[source, scala]
-----
-createCodeGeneratedObject(in: IN): OUT
-----
+```scala
+CodeGeneratorWithInterpretedFallback[IN, OUT]
+```
 
-Used when...FIXME
+## Contract
 
-| createInterpretedObject
-a| [[createInterpretedObject]]
+### <span id="createCodeGeneratedObject"> createCodeGeneratedObject
 
-[source, scala]
-----
-createInterpretedObject(in: IN): OUT
-----
+```scala
+createCodeGeneratedObject(
+  in: IN): OUT
+```
 
-Used when...FIXME
-|===
+### <span id="createInterpretedObject"> createInterpretedObject
 
-[[extensions]]
-NOTE: [UnsafeProjection](../expressions/UnsafeProjection.md) is the one and only known implementation of the <<contract, CodeGeneratorWithInterpretedFallback Contract>> in Apache Spark.
+```scala
+createInterpretedObject(
+  in: IN): OUT
+```
 
-[[IN]][[OUT]]
-[NOTE]
-====
-`CodeGeneratorWithInterpretedFallback` is a Scala type constructor (aka _generic type_) that accepts two types referred as `IN` and `OUT`.
+## Implementations
 
-[source, scala]
-----
-abstract class CodeGeneratorWithInterpretedFallback[IN, OUT]
-----
-====
+* [MutableProjection](MutableProjection.md)
+* [Predicate](Predicate.md)
+* [RowOrdering](RowOrdering.md)
+* [SafeProjection](SafeProjection.md)
+* [UnsafeProjection](UnsafeProjection.md)
 
-=== [[createObject]] `createObject` Method
+## <span id="createObject"> Creating Object
 
-[source, scala]
-----
-createObject(in: IN): OUT
-----
+```scala
+createObject(
+  in: IN): OUT
+```
 
-`createObject`...FIXME
+`createObject` [createCodeGeneratedObject](#createCodeGeneratedObject).
 
-NOTE: `createObject` is used exclusively when `UnsafeProjection` is requested to <<UnsafeProjection.md#create, create an UnsafeProjection for Catalyst expressions>>.
+In case of a non-fatal exception, `createObject` prints out the following WARN message to the logs and [createInterpretedObject](#createInterpretedObject).
+
+```text
+Expr codegen error and falling back to interpreter mode
+```
+
+`createObject` is used when:
+
+* `MutableProjection` utility is used to [create a MutableProjection](MutableProjection.md#create)
+* `Predicate` utility is used to [create a BasePredicate](Predicate.md#create)
+* `RowOrdering` utility is used to [create a BaseOrdering](RowOrdering.md#create)
+* `SafeProjection` utility is used to [create a Projection](SafeProjection.md#create)
+* `UnsafeProjection` utility is used to [create a UnsafeProjection](UnsafeProjection.md#create)

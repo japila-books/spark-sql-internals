@@ -678,9 +678,9 @@ Default: `FALLBACK`
 
 Acceptable values:
 
-* <span id="spark.sql.codegen.factoryMode-CODEGEN_ONLY"> `CODEGEN_ONLY` - disable fallback mode
-* <span id="spark.sql.codegen.factoryMode-FALLBACK"> `FALLBACK` - try codegen first and, if any compile error happens, fallback to interpreted mode
-* <span id="spark.sql.codegen.factoryMode-NO_CODEGEN"> `NO_CODEGEN` - skips codegen and always uses interpreted path
+* `CODEGEN_ONLY` - disable fallback mode
+* `FALLBACK` - try codegen first and, if any compile error happens, fallback to interpreted mode
+* `NO_CODEGEN` - skips codegen and always uses interpreted path
 
 Used when `CodeGeneratorWithInterpretedFallback` is requested to [createObject](expressions/CodeGeneratorWithInterpretedFallback.md#createObject) (when `UnsafeProjection` is requested to [create an UnsafeProjection for Catalyst expressions](expressions/UnsafeProjection.md#create))
 

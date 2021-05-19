@@ -21,6 +21,36 @@ Encodes the given [InternalRow](../InternalRow.md) to an [UnsafeRow](../UnsafeRo
 
 * `InterpretedUnsafeProjection`
 
+## <span id="CodeGeneratorWithInterpretedFallback"> CodeGeneratorWithInterpretedFallback
+
+`UnsafeProjection` factory object is a [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md) of `UnsafeProjection`s (based on [Expression](Expression.md)s).
+
+```scala
+CodeGeneratorWithInterpretedFallback[Seq[Expression], UnsafeProjection]
+```
+
+### <span id="createCodeGeneratedObject"> createCodeGeneratedObject
+
+```scala
+createCodeGeneratedObject(
+  in: Seq[Expression]): UnsafeProjection
+```
+
+`createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
+
+`createCodeGeneratedObject`...FIXME
+
+### <span id="createInterpretedObject"> createInterpretedObject
+
+```scala
+createInterpretedObject(
+  in: Seq[Expression]): UnsafeProjection
+```
+
+`createInterpretedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createInterpretedObject) abstraction.
+
+`createInterpretedObject`...FIXME
+
 ## <span id="create"> create
 
 ```scala
