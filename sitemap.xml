@@ -1292,62 +1292,6 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Expression/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Predicate/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryComparison/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryOperator/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/NonSQLExpression/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UserDefinedExpression/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ExecSubqueryExpression/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/PlanExpression/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Unevaluable/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Projection/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UnsafeProjection/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/InterpretedProjection/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/CodeGeneratorWithInterpretedFallback/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RowOrdering/</loc>
-     <lastmod>2021-05-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/AggregateExpression/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
@@ -1372,6 +1316,14 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryComparison/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BinaryOperator/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/BoundReference/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
@@ -1381,6 +1333,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Coalesce/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/CodeGeneratorWithInterpretedFallback/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1444,6 +1400,10 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ExecSubqueryExpression/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Exists/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
@@ -1453,6 +1413,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/ExplodeBase/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Expression/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1524,6 +1488,10 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/InterpretedProjection/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/JsonToStructs/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
@@ -1548,11 +1516,19 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/MutableProjection/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/NamedExpression/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Nondeterministic/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/NonSQLExpression/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1568,7 +1544,19 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/PlanExpression/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Predicate/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/PrettyAttribute/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Projection/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1588,7 +1576,15 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RowOrdering/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/RuntimeReplaceable/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/SafeProjection/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1652,6 +1648,10 @@
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/Unevaluable/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UnixTimestamp/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
@@ -1681,6 +1681,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UnresolvedWindowExpression/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UnsafeProjection/</loc>
+     <lastmod>2021-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/expressions/UserDefinedExpression/</loc>
      <lastmod>2021-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
