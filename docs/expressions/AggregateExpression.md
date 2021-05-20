@@ -52,7 +52,7 @@
 | <<aggregateFunction, AggregateFunction>> expression (for which `AggregateExpression` was created).
 
 | `dataType`
-| [DataType](../DataType.md) of [AggregateFunction](#aggregateFunction) expression
+| [DataType](../types/DataType.md) of [AggregateFunction](#aggregateFunction) expression
 
 | `foldable`
 | Disabled (i.e. `false`)

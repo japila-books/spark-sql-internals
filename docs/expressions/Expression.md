@@ -97,7 +97,7 @@ a|
 
 | [[Predicate]] `Predicate`
 | trait
-| Result [data type](Expression.md#dataType) is always [boolean](../DataType.md#BooleanType)
+| Result [data type](Expression.md#dataType) is always [boolean](../types/DataType.md#BooleanType)
 a|
 * `And`
 * `AtLeastNNonNulls`
@@ -213,7 +213,7 @@ abstract class Expression extends TreeNode[Expression] {
 |
 
 | [[dataType]] `dataType`
-| [Data type](../DataType.md) of the result of evaluating an expression
+| [Data type](../types/DataType.md) of the result of evaluating an expression
 
 | [[doGenCode]] `doGenCode`
 | *Code-generated expression evaluation* that generates a Java source code (that is used to evaluate the expression in a more optimized way not directly using <<eval, eval>>).

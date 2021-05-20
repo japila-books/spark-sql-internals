@@ -45,19 +45,19 @@ The fields of a data row are placed using **field offsets**.
 
 ## <span id="mutableFieldTypes"><span id="mutable-types"> Mutable Types
 
-`UnsafeRow` considers a [data type](DataType.md) mutable if it is one of the following:
+`UnsafeRow` considers a [data type](types/DataType.md) mutable if it is one of the following:
 
-* [BooleanType](DataType.md#BooleanType)
-* [ByteType](DataType.md#ByteType)
-* [DateType](DataType.md#DateType)
-* [DecimalType](DataType.md#DecimalType) (see [isMutable](#isMutable))
-* [DoubleType](DataType.md#DoubleType)
-* [FloatType](DataType.md#FloatType)
-* [IntegerType](DataType.md#IntegerType)
-* [LongType](DataType.md#LongType)
-* [NullType](DataType.md#NullType)
-* [ShortType](DataType.md#ShortType)
-* [TimestampType](DataType.md#TimestampType)
+* [BooleanType](types/DataType.md#BooleanType)
+* [ByteType](types/DataType.md#ByteType)
+* [DateType](types/DataType.md#DateType)
+* [DecimalType](types/DataType.md#DecimalType) (see [isMutable](#isMutable))
+* [DoubleType](types/DataType.md#DoubleType)
+* [FloatType](types/DataType.md#FloatType)
+* [IntegerType](types/DataType.md#IntegerType)
+* [LongType](types/DataType.md#LongType)
+* [NullType](types/DataType.md#NullType)
+* [ShortType](types/DataType.md#ShortType)
+* [TimestampType](types/DataType.md#TimestampType)
 
 ## 8-Byte Word Alignment and Three Regions
 

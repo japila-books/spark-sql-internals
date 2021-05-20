@@ -138,11 +138,11 @@ coerceTypes(plan: LogicalPlan): LogicalPlan
 createBoundaryCast(boundary: Expression, dt: DataType): Expression
 ----
 
-`createBoundaryCast` returns a <<expressions/Expression.md#, Catalyst expression>> per the input `boundary` <<expressions/Expression.md#, Expression>> and the `dt` [DataType](../DataType.md) (in the order of execution):
+`createBoundaryCast` returns a <<expressions/Expression.md#, Catalyst expression>> per the input `boundary` <<expressions/Expression.md#, Expression>> and the `dt` [DataType](../types/DataType.md) (in the order of execution):
 
 * The input `boundary` expression if it is a `SpecialFrameBoundary`
 
-* The input `boundary` expression if the `dt` data type is [DateType](../DataType.md#DateType) or [TimestampType](../DataType.md#TimestampType)
+* The input `boundary` expression if the `dt` data type is [DateType](../types/DataType.md#DateType) or [TimestampType](../types/DataType.md#TimestampType)
 
 * `Cast` unary operator with the input `boundary` expression and the `dt` data type if the <<expressions/Expression.md#dataType, result type>> of the `boundary` expression is not the `dt` data type, but the result type can be cast to the `dt` data type
 

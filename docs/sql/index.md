@@ -1,6 +1,6 @@
 # SQL Parsing Framework
 
-**SQL Parser Framework** in Spark SQL uses ANTLR[^1] to translate SQL statements to relational entities (e.g. [data types](../DataType.md), [Catalyst expressions](../expressions/Expression.md), [logical operators](../logical-operators/LogicalPlan.md)).
+**SQL Parser Framework** in Spark SQL uses ANTLR[^1] to translate SQL statements to relational entities (e.g. [data types](../types/DataType.md), [Catalyst expressions](../expressions/Expression.md), [logical operators](../logical-operators/LogicalPlan.md)).
 
 [^1]: [ANTLR's home page](https://www.antlr.org/)
 

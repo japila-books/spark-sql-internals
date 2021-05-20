@@ -11,7 +11,7 @@
 * [[bufferSerializer]] Buffer serializer ([NamedExpression](NamedExpression.md)s)
 * [[bufferDeserializer]] Buffer deserializer Expression.md[expression]
 * [[outputSerializer]] Output serializer ([Expression](Expression.md)s)
-* [[dataType]] [DataType](../DataType.md)
+* [[dataType]] [DataType](../types/DataType.md)
 * [[nullable]] `nullable` flag
 * [[mutableAggBufferOffset]] `mutableAggBufferOffset` (default: `0`)
 * [[inputAggBufferOffset]] `inputAggBufferOffset` (default: `0`)

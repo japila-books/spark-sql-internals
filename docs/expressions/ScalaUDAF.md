@@ -46,7 +46,7 @@ When evaluated, `ScalaUDAF`...FIXME
 | [bufferSchema](../UserDefinedAggregateFunction.md#bufferSchema) of <<udaf, UserDefinedAggregateFunction>>
 
 | `dataType`
-| [DataType](../DataType.md) of [UserDefinedAggregateFunction](#udaf)
+| [DataType](../types/DataType.md) of [UserDefinedAggregateFunction](#udaf)
 
 | `deterministic`
 | `deterministic` of <<udaf, UserDefinedAggregateFunction>>
@@ -55,7 +55,7 @@ When evaluated, `ScalaUDAF`...FIXME
 | Copy of <<aggBufferAttributes, aggBufferAttributes>>
 
 | `inputTypes`
-| [Data types](../DataType.md) from [inputSchema](../UserDefinedAggregateFunction.md#inputSchema) of [UserDefinedAggregateFunction](#udaf)
+| [Data types](../types/DataType.md) from [inputSchema](../UserDefinedAggregateFunction.md#inputSchema) of [UserDefinedAggregateFunction](#udaf)
 
 | `nullable`
 | Always enabled (i.e. `true`)

@@ -106,7 +106,7 @@ supportsBatch: Boolean
 
 1. [spark.sql.inMemoryColumnarStorage.enableVectorizedReader](../configuration-properties.md#spark.sql.inMemoryColumnarStorage.enableVectorizedReader) configuration property is enabled
 
-1. The [output schema](../catalyst/QueryPlan.md#schema) of the [InMemoryRelation](#relation) uses primitive data types only [BooleanType](../DataType.md#BooleanType), [ByteType](../DataType.md#ByteType), [ShortType](../DataType.md#ShortType), [IntegerType](../DataType.md#IntegerType), [LongType](../DataType.md#LongType), [FloatType](../DataType.md#FloatType), [DoubleType](../DataType.md#DoubleType)
+1. The [output schema](../catalyst/QueryPlan.md#schema) of the [InMemoryRelation](#relation) uses primitive data types only [BooleanType](../types/DataType.md#BooleanType), [ByteType](../types/DataType.md#ByteType), [ShortType](../types/DataType.md#ShortType), [IntegerType](../types/DataType.md#IntegerType), [LongType](../types/DataType.md#LongType), [FloatType](../types/DataType.md#FloatType), [DoubleType](../types/DataType.md#DoubleType)
 
 1. The number of nested fields in the output schema of the [InMemoryRelation](#relation) is at most [spark.sql.codegen.maxFields](../configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 

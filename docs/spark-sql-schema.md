@@ -32,7 +32,7 @@ val schemaTyped = new StructType()
 
 TIP: Read up on spark-sql-CatalystSqlParser.md[CatalystSqlParser] that is responsible for parsing data types.
 
-It is however recommended to use the singleton [DataTypes](DataType.md#DataTypes) class with static methods to create schema types.
+It is however recommended to use the singleton [DataTypes](types/DataType.md#DataTypes) class with static methods to create schema types.
 
 ```text
 import org.apache.spark.sql.types.DataTypes._

@@ -266,7 +266,7 @@ ANTLR labeled alternative: `#showTables`
 
 ### visitSingleDataType
 
-Creates a [DataType](../DataType.md)
+Creates a [DataType](../types/DataType.md)
 
 ANTLR rule: `singleDataType`
 

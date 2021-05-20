@@ -22,7 +22,7 @@ res0: Boolean = true
 NOTE: `UnixTimestamp` is `UnixTime` expression internally (as is `ToUnixTimestamp` expression).
 
 [[inputTypes]][[dataType]]
-`UnixTimestamp` supports `StringType`, [DateType](../DataType.md#DateType) and `TimestampType` as input types for a time expression and returns `LongType`.
+`UnixTimestamp` supports `StringType`, [DateType](../types/DataType.md#DateType) and `TimestampType` as input types for a time expression and returns `LongType`.
 
 ```
 scala> c1.expr.eval()

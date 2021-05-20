@@ -47,7 +47,7 @@ from_json(e: Column, schema: StructType): Column
 from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
 
-Extract data from arbitrary JSON-encoded values into a [StructType](StructType.md) or [ArrayType](DataType.md#ArrayType) of `StructType` elements with the specified schema
+Extract data from arbitrary JSON-encoded values into a [StructType](StructType.md) or [ArrayType](types/ArrayType.md) of `StructType` elements with the specified schema
 
 | <<map_keys, map_keys>>
 a|
@@ -222,7 +222,7 @@ from_json(e: Column, schema: String, options: Map[String, String]): Column // <5
 <4> Relays to the other `from_json` with empty `options`
 <5> Uses schema as `DataType` in the JSON format or falls back to `StructType` in the DDL format
 
-`from_json` parses a column with a JSON-encoded value into a [StructType](StructType.md) or [ArrayType](DataType.md#ArrayType) of `StructType` elements with the specified schema.
+`from_json` parses a column with a JSON-encoded value into a [StructType](StructType.md) or [ArrayType](types/ArrayType.md) of `StructType` elements with the specified schema.
 
 ```text
 val jsons = Seq("""{ "id": 0 }""").toDF("json")
@@ -244,7 +244,7 @@ scala> jsons.select(from_json($"json", schema) as "ids").show
 ====
 A schema can be one of the following:
 
-* [DataType](DataType.md) as a Scala object or in the JSON format
+* [DataType](types/DataType.md) as a Scala object or in the JSON format
 
 * [StructType](StructType.md) in the DDL format
 ====
@@ -397,7 +397,7 @@ array_contains(
   value: Any): Column
 ```
 
-`array_contains` creates a `Column` for a `column` argument as an [array](DataType.md#ArrayType) and the `value` of same type as the type of the elements of the array.
+`array_contains` creates a `Column` for a `column` argument as an [ArrayType](types/ArrayType.md) and the `value` of same type as the type of the elements of the array.
 
 Internally, `array_contains` creates a [Column](Column.md#apply) with a `ArrayContains` expression.
 

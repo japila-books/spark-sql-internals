@@ -4,7 +4,7 @@
 `StructField` describes a single field in a [StructType](StructType.md) with the following:
 
 * [[name]] Name
-* [[dataType]] [DataType](DataType.md)
+* [[dataType]] [DataType](types/DataType.md)
 * [[nullable]] `nullable` flag (enabled by default)
 * [[metadata]] `Metadata` (empty by default)
 

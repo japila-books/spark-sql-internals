@@ -5,7 +5,7 @@
 `ShowCreateTableCommand` is <<creating-instance, created>> when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitShowCreateTable, SHOW CREATE TABLE>> SQL statement.
 
 [[output]]
-`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type [StringType](../DataType.md#StringType)) for the [output schema](Command.md#output).
+`ShowCreateTableCommand` uses a single `createtab_stmt` column (of type [StringType](../types/DataType.md#StringType)) for the [output schema](Command.md#output).
 
 ```text
 import org.apache.spark.sql.SaveMode

@@ -140,9 +140,9 @@ eval(
 `ScalaUDF` takes the following when created:
 
 * [[function]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output [data type](../DataType.md)
+* [[dataType]] Output [data type](../types/DataType.md)
 * [[children]] Child Expression.md[Catalyst expressions]
-* [[inputTypes]] Input [data types](../DataType.md) (default: `Nil`)
+* [[inputTypes]] Input [data types](../types/DataType.md) (default: `Nil`)
 * [[udfName]] Optional name (default: `None`)
 * [[nullable]] `nullable` flag (default: `true`)
 * [[udfDeterministic]] `udfDeterministic` flag (default: `true`)

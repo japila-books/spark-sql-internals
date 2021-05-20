@@ -27,4 +27,4 @@ dataType: DataType
 
 `dataType` is part of the [Expression](Expression.md#dataType) abstraction.
 
-`dataType` is always [BooleanType](../DataType.md#BooleanType).
+`dataType` is always [BooleanType](../types/DataType.md#BooleanType).

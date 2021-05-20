@@ -5,7 +5,7 @@
 NOTE: `Generator` corresponds to SQL's sql/AstBuilder.md#withGenerate[LATERAL VIEW].
 
 [[dataType]]
-`dataType` in `Generator` is simply an [ArrayType](../DataType.md#ArrayType) of <<elementSchema, elementSchema>>.
+`dataType` in `Generator` is simply an [ArrayType](../types/ArrayType.md) of <<elementSchema, elementSchema>>.
 
 [[foldable]]
 [[nullable]]

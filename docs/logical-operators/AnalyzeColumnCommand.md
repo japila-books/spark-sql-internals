@@ -54,7 +54,7 @@ computePercentiles(
 
 ## Demo
 
-`AnalyzeColumnCommand` can [generate column histograms](#computeColumnStats) when [spark.sql.statistics.histogram.enabled](../configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property is enabled. `AnalyzeColumnCommand` supports column histograms for the following [data types](../DataType.md):
+`AnalyzeColumnCommand` can [generate column histograms](#computeColumnStats) when [spark.sql.statistics.histogram.enabled](../configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property is enabled. `AnalyzeColumnCommand` supports column histograms for the following [data types](../types/DataType.md):
 
 * `IntegralType`
 * `DecimalType`

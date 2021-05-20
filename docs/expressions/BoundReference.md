@@ -46,46 +46,46 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 | DataType
 | InternalRow's Method
 
-| [BooleanType](../DataType.md#BooleanType)
+| [BooleanType](../types/DataType.md#BooleanType)
 | getBoolean
 
-| [ByteType](../DataType.md#ByteType)
+| [ByteType](../types/DataType.md#ByteType)
 | getByte
 
-| [ShortType](../DataType.md#ShortType)
+| [ShortType](../types/DataType.md#ShortType)
 | getShort
 
-| [IntegerType](../DataType.md#IntegerType) or [DateType](../DataType.md#DateType)
+| [IntegerType](../types/DataType.md#IntegerType) or [DateType](../types/DataType.md#DateType)
 | getInt
 
-| [LongType](../DataType.md#LongType) or [TimestampType](../DataType.md#TimestampType)
+| [LongType](../types/DataType.md#LongType) or [TimestampType](../types/DataType.md#TimestampType)
 | getLong
 
-| [FloatType](../DataType.md#FloatType)
+| [FloatType](../types/DataType.md#FloatType)
 | getFloat
 
-| [DoubleType](../DataType.md#DoubleType)
+| [DoubleType](../types/DataType.md#DoubleType)
 | getDouble
 
-| [StringType](../DataType.md#StringType)
+| [StringType](../types/DataType.md#StringType)
 | getUTF8String
 
-| [BinaryType](../DataType.md#BinaryType)
+| [BinaryType](../types/DataType.md#BinaryType)
 | getBinary
 
-| [CalendarIntervalType](../DataType.md#CalendarIntervalType)
+| [CalendarIntervalType](../types/DataType.md#CalendarIntervalType)
 | getInterval
 
-| [DecimalType](../DataType.md#DecimalType)
+| [DecimalType](../types/DataType.md#DecimalType)
 | getDecimal
 
-| [StructType](../DataType.md#StructType)
+| [StructType](../types/DataType.md#StructType)
 | getStruct
 
-| [ArrayType](../DataType.md#ArrayType)
+| [ArrayType](../types/ArrayType.md)
 | getArray
 
-| [MapType](../DataType.md#MapType)
+| [MapType](../types/DataType.md#MapType)
 | getMap
 
 | _others_
@@ -97,7 +97,7 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 `BoundReference` takes the following to be created:
 
 * [[ordinal]] Ordinal, i.e. the position
-* [[dataType]] [Data type](../DataType.md) of the value
+* [[dataType]] [Data type](../types/DataType.md) of the value
 * [[nullable]] `nullable` flag that controls whether the value can be `null` or not
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method

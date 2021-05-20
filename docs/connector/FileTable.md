@@ -40,9 +40,9 @@ supportsDataType(
     dataType: DataType): Boolean = true
 ```
 
-`supportsDataType` indicates whether a given [DataType](../DataType.md) is supported in read/write path or not.
+`supportsDataType` indicates whether a given [DataType](../types/DataType.md) is supported in read/write path or not.
 
-Default: All [DataType](../DataType.md)s are supported by default
+Default: All [DataType](../types/DataType.md)s are supported by default
 
 * `FileTable` is requested for a [schema](#schema)
 * _others_ (in [FileTables](#implementations))

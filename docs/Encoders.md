@@ -43,7 +43,7 @@ genericSerializer[T: ClassTag](
 
 Attribute | Catalyst Expression
 ---------|---------
- `objSerializer` | [EncodeUsingSerializer](expressions/EncodeUsingSerializer.md) with [BoundReference](expressions/BoundReference.md) (`ordinal` = 0, `dataType` = [ObjectType](DataType.md#ObjectType))
+ `objSerializer` | [EncodeUsingSerializer](expressions/EncodeUsingSerializer.md) with [BoundReference](expressions/BoundReference.md) (`ordinal` = 0, `dataType` = [ObjectType](types/DataType.md#ObjectType))
  `objDeserializer` | [DecodeUsingSerializer](expressions/DecodeUsingSerializer.md) with `GetColumnByOrdinal` leaf expression
 
 `genericSerializer` is used when:

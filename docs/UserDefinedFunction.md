@@ -112,7 +112,7 @@ NOTE: `withName` is used when...FIXME
 `UserDefinedFunction` takes the following when created:
 
 * [[f]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output [data type](DataType.md)
-* [[inputTypes]] Input [data types](DataType.md) (if available)
+* [[dataType]] Output [data type](types/DataType.md)
+* [[inputTypes]] Input [data types](types/DataType.md) (if available)
 
 `UserDefinedFunction` initializes the <<internal-registries, internal registries and counters>>.

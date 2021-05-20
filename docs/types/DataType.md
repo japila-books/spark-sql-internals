@@ -60,9 +60,8 @@
 | [[ShortType]] `ShortType`
 |
 
-
 .8+^.^|
-| [[ArrayType]] `ArrayType`
+| [[ArrayType]] [ArrayType](ArrayType.md)
 |
 
 | [[CalendarIntervalType]] `CalendarIntervalType`

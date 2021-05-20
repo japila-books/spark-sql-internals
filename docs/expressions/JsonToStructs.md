@@ -43,14 +43,14 @@ a| `JacksonParser` with <<rowSchema, rowSchema>> and [JSON options](../datasourc
 a| [StructType](../StructType.md) that...FIXME
 
 * <<schema, schema>> when of type `StructType`
-* `StructType` of the elements in <<schema, schema>> when of type `ArrayType`
+* `StructType` of the elements in <<schema, schema>> when of type [ArrayType](../types/ArrayType.md)
 |===
 
 === [[creating-instance]] Creating JsonToStructs Instance
 
 `JsonToStructs` takes the following when created:
 
-* [[schema]] [DataType](../DataType.md)
+* [[schema]] [DataType](../types/DataType.md)
 * [[options]] Options
 * [[child]] Child [expression](Expression.md)
 * [[timeZoneId]] Optional time zone ID
@@ -64,9 +64,9 @@ a| [StructType](../StructType.md) that...FIXME
 validateSchemaLiteral(exp: Expression): StructType
 ----
 
-`validateSchemaLiteral` requests [CatalystSqlParser](../sql/CatalystSqlParser.md) to [parseTableSchema](../sql/AbstractSqlParser.md#parseTableSchema) for [Literal](Literal.md) of [StringType](../DataType.md#StringType).
+`validateSchemaLiteral` requests [CatalystSqlParser](../sql/CatalystSqlParser.md) to [parseTableSchema](../sql/AbstractSqlParser.md#parseTableSchema) for [Literal](Literal.md) of [StringType](../types/DataType.md#StringType).
 
-For any other non-``StringType`` [types](../DataType.md), `validateSchemaLiteral` reports a `AnalysisException`:
+For any other non-``StringType`` [types](../types/DataType.md), `validateSchemaLiteral` reports a `AnalysisException`:
 
 ```text
 Expected a string literal instead of [expression]

@@ -11,6 +11,6 @@ OffHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 ----
 <1> Simply converts `StructType` to `StructField[]` and calls the other `allocateColumns`
 
-`allocateColumns` creates an array of `OffHeapColumnVector` for every field (to hold `capacity` number of elements of the [data type](DataType.md) per field).
+`allocateColumns` creates an array of `OffHeapColumnVector` for every field (to hold `capacity` number of elements of the [data type](types/DataType.md) per field).
 
 NOTE: `allocateColumns` is used when...FIXME

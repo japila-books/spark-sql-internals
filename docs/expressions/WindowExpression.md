@@ -51,7 +51,7 @@ res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 | Collection of two Expression.md[expressions], i.e. <<windowFunction, windowFunction>> and <<windowSpec, WindowSpecDefinition>>, for which `WindowExpression` was created.
 
 | `dataType`
-| [DataType](../DataType.md) of [windowFunction](#windowFunction)
+| [DataType](../types/DataType.md) of [windowFunction](#windowFunction)
 
 | `foldable`
 | Whether or not <<windowFunction, windowFunction>> is foldable.

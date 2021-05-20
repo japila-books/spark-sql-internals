@@ -1,6 +1,6 @@
 # StructType
 
-`StructType` is a recursive [DataType](DataType.md) with [fields](#fields) and [being a collection of fields itself](#seq).
+`StructType` is a recursive [DataType](types/DataType.md) with [fields](#fields) and [being a collection of fields itself](#seq).
 
 `StructType` is used to define a schema.
 
@@ -24,11 +24,11 @@ StructField(b,StringType,true)
 
 ## <span id="sql"> SQL Representation
 
-`StructType` uses `STRUCT<...>` for [SQL representation](DataType.md#sql) (in query plans or SQL statements).
+`StructType` uses `STRUCT<...>` for [SQL representation](types/DataType.md#sql) (in query plans or SQL statements).
 
 ## <span id="catalogString"> Catalog Representation
 
-`StructType` uses `struct<...>` for [catalog representation](DataType.md#catalogString).
+`StructType` uses `struct<...>` for [catalog representation](types/DataType.md#catalogString).
 
 ## Demo
 

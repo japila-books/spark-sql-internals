@@ -9,12 +9,12 @@ isOrderable(
   exprs: Seq[Expression]): Boolean
 ```
 
-`isOrderable` holds `true` when the [DataType](../DataType.md) is one of the following:
+`isOrderable` holds `true` when the [DataType](../types/DataType.md) is one of the following:
 
-* [NullType](../DataType.md#NullType)
-* [AtomicType](../DataType.md#AtomicType)
+* [NullType](../types/DataType.md#NullType)
+* [AtomicType](../types/DataType.md#AtomicType)
 * [StructType](../StructType.md) with all [fields](../StructType.md#fields) orderable (recursive)
-* [ArrayType](../DataType.md#ArrayType.md) with orderable type of the elements
+* [ArrayType](../types/ArrayType.md) with orderable type of the elements
 * `UserDefinedType`
 
 `isOrderable` is used when:

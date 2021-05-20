@@ -14,7 +14,7 @@ abstract class AggregateWindowFunction extends DeclarativeAggregate with WindowF
 ----
 
 [[dataType]]
-`AggregateWindowFunction` uses [IntegerType](../DataType.md#IntegerType) as the [data type](Expression.md#dataType) of the result of evaluating itself.
+`AggregateWindowFunction` uses [IntegerType](../types/DataType.md#IntegerType) as the [data type](Expression.md#dataType) of the result of evaluating itself.
 
 [[nullable]]
 `AggregateWindowFunction` is [nullable](Expression.md#nullable) by default.

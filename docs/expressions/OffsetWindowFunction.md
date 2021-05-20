@@ -49,7 +49,7 @@ abstract class OffsetWindowFunction ... {
 When requested for the <<Expression.md#dataType, dataType>>, `OffsetWindowFunction` simply requests the <<input, input>> expression for the data type.
 
 [[dataType]]
-When requested for the <<spark-sql-Expression-ExpectsInputTypes.md#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, [IntegerType](../DataType.md#IntegerType) with the [data type](Expression.md#dataType) of the <<input, input>> expression and the [NullType](../DataType.md#NullType).
+When requested for the <<spark-sql-Expression-ExpectsInputTypes.md#inputTypes, inputTypes>>, `OffsetWindowFunction` returns the `AnyDataType`, [IntegerType](../types/DataType.md#IntegerType) with the [data type](Expression.md#dataType) of the <<input, input>> expression and the [NullType](../types/DataType.md#NullType).
 
 [[toString]]
 `OffsetWindowFunction` uses the following *text representation* (i.e. `toString`):

@@ -427,7 +427,7 @@ Used when...FIXME
 `WritableColumnVector` takes the following to be created:
 
 * [[capacity]] Number of rows to hold in a vector (aka `capacity`)
-* [[type]] [Data type](DataType.md) of the rows stored
+* [[type]] [Data type](types/DataType.md) of the rows stored
 
 NOTE: `WritableColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete WritableColumnVectors>>.
 

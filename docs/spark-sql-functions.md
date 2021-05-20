@@ -458,7 +458,7 @@ from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
 <1> *New in 2.4.0*
 
-Parses a column with a JSON string into a [StructType](StructType.md) or [ArrayType](DataType.md#ArrayType) of `StructType` elements with the specified schema.
+Parses a column with a JSON string into a [StructType](StructType.md) or [ArrayType](types/ArrayType.md) of `StructType` elements with the specified schema.
 
 | <<spark-sql-functions-collection.md#map_concat, map_concat>>
 a| [[map_concat]]

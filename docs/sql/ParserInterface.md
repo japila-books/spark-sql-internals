@@ -23,11 +23,11 @@ parseDataType(
   sqlText: String): DataType
 ```
 
-Parses a SQL text to a [DataType](../DataType.md)
+Parses a SQL text to a [DataType](../types/DataType.md)
 
 Used when:
 
-* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../DataType.md#fromDDL)
+* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
 
 * `StructType` is requested to [add a field](../StructType.md#add)
 
@@ -150,7 +150,7 @@ Parses a SQL text to a [StructType](../StructType.md)
 
 Used when:
 
-* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../DataType.md#fromDDL)
+* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
 
 * `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../StructType.md#fromDDL)
 

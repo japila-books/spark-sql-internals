@@ -195,7 +195,7 @@ Used for testing purposes only
 [[creating-instance]]
 [[type]]
 [[dataType]]
-`ColumnVector` takes a [DataType](DataType.md) of the column to be created.
+`ColumnVector` takes a [DataType](types/DataType.md) of the column to be created.
 
 NOTE: `ColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete ColumnVectors>>.
 

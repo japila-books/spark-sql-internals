@@ -35,7 +35,7 @@ NOTE: `StaticInvoke` is similar to `CallMethodViaReflection` expression.
 `StaticInvoke` takes the following when created:
 
 * [[staticObject]] Target object of the static call
-* [[dataType]] [Data type](../DataType.md) of the return value of the <<functionName, method>>
+* [[dataType]] [Data type](../types/DataType.md) of the return value of the <<functionName, method>>
 * [[functionName]] Name of the method to call on the <<staticObject, static object>>
 * [[arguments]] Optional Expression.md[expressions] to pass as input arguments to the <<functionName, function>>
 * [[propagateNull]] Flag to control whether to propagate `nulls` or not (enabled by default). If any of the arguments is `null`, `null` is returned instead of calling the <<functionName, function>>

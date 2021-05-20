@@ -17,7 +17,7 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 ----
 <1> Simply converts `StructType` to `StructField[]` and calls the other `allocateColumns`
 
-`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the [data type](DataType.md) per field).
+`allocateColumns` creates an array of `OnHeapColumnVector` for every field (to hold `capacity` number of elements of the [data type](types/DataType.md) per field).
 
 `allocateColumns` is used when:
 
@@ -36,7 +36,7 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 `OnHeapColumnVector` takes the following when created:
 
 * [[capacity]] Number of elements to hold in a vector (aka `capacity`)
-* [[type]] [Data type](DataType.md) of the elements stored
+* [[type]] [Data type](types/DataType.md) of the elements stored
 
 When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and [reset](WritableColumnVector.md#reset).
 

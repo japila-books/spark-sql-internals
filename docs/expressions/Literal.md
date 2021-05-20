@@ -23,14 +23,14 @@
 create(v: Any, dataType: DataType): Literal
 ----
 
-`create` uses `CatalystTypeConverters` helper object to [convert](../CatalystTypeConverters.md#convertToCatalyst) the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input [DataType](../DataType.md)).
+`create` uses `CatalystTypeConverters` helper object to [convert](../CatalystTypeConverters.md#convertToCatalyst) the input `v` Scala value to a Catalyst rows or types and creates a <<creating-instance, Literal>> (with the Catalyst value and the input [DataType](../types/DataType.md)).
 
 ## Creating Instance
 
 `Literal` takes the following when created:
 
 * [[value]] Scala value (of type `Any`)
-* [[dataType]] [DataType](../DataType.md)
+* [[dataType]] [DataType](../types/DataType.md)
 
 === [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
 

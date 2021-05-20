@@ -27,5 +27,5 @@
 * [[bufferSerializer]] Buffer serializer (as a collection of expressions/NamedExpression.md[named expressions])
 * [[bufferDeserializer]] Buffer deserializer Expression.md[expression]
 * [[outputSerializer]] Output serializer (as a collection of Expression.md[expressions])
-* [[dataType]] [DataType](../DataType.md)
+* [[dataType]] [DataType](../types/DataType.md)
 * [[nullable]] `nullable` flag

@@ -97,7 +97,7 @@ supportDataType(
   dataType: DataType): Boolean
 ```
 
-Controls whether this format supports the given [DataType](../DataType.md) in read or write paths
+Controls whether this format supports the given [DataType](../types/DataType.md) in read or write paths
 
 Default: `true` (all data types are supported)
 

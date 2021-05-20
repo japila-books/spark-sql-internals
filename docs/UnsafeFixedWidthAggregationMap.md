@@ -43,9 +43,9 @@ boolean supportsAggregationBufferSchema(
 
 [NOTE]
 ====
-The [mutable](UnsafeRow.md#isMutable) data types: [BooleanType](DataType.md#BooleanType), [ByteType](DataType.md#ByteType), [DateType](DataType.md#DateType), [DecimalType](DataType.md#DecimalType), [DoubleType](DataType.md#DoubleType), [FloatType](DataType.md#FloatType), [IntegerType](DataType.md#IntegerType), [LongType](DataType.md#LongType), [NullType](DataType.md#NullType), [ShortType](DataType.md#ShortType) and [TimestampType](DataType.md#TimestampType).
+The [mutable](UnsafeRow.md#isMutable) data types: [BooleanType](types/DataType.md#BooleanType), [ByteType](types/DataType.md#ByteType), [DateType](types/DataType.md#DateType), [DecimalType](types/DataType.md#DecimalType), [DoubleType](types/DataType.md#DoubleType), [FloatType](types/DataType.md#FloatType), [IntegerType](types/DataType.md#IntegerType), [LongType](types/DataType.md#LongType), [NullType](types/DataType.md#NullType), [ShortType](types/DataType.md#ShortType) and [TimestampType](types/DataType.md#TimestampType).
 
-Examples (possibly all) of data types that are not [mutable](UnsafeRow.md#isMutable): [ArrayType](DataType.md#ArrayType), [BinaryType](DataType.md#BinaryType), [StringType](DataType.md#StringType), [CalendarIntervalType](DataType.md#CalendarIntervalType), [MapType](DataType.md#MapType), [ObjectType](DataType.md#ObjectType) and [StructType](DataType.md#StructType).
+Examples (possibly all) of data types that are not [mutable](UnsafeRow.md#isMutable): [ArrayType](types/ArrayType.md), [BinaryType](types/DataType.md#BinaryType), [StringType](types/DataType.md#StringType), [CalendarIntervalType](types/DataType.md#CalendarIntervalType), [MapType](types/DataType.md#MapType), [ObjectType](types/DataType.md#ObjectType) and [StructType](types/DataType.md#StructType).
 ====
 
 [source, scala]

@@ -3,7 +3,7 @@
 `SimplifyCasts` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, eliminates redundant casts>> in the following cases:
 
 . The input is already the type to cast to.
-. The input is of `ArrayType` or `MapType` type and contains no `null` elements.
+. The input is of [ArrayType](../types/ArrayType.md) or `MapType` type and contains no `null` elements.
 
 `SimplifyCasts` is part of the [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 

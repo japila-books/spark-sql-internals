@@ -968,7 +968,10 @@ nav:
       - spark-sql-schema.md
       - StructType: StructType.md
       - StructField: StructField.md
-      - DataType: DataType.md
+    - Types:
+      - types/index.md
+      - DataType: types/DataType.md
+      - ArrayType: types/ArrayType.md
     - spark-sql-multi-dimensional-aggregation.md
     - Caching and Persistence:
       - spark-sql-caching-and-persistence.md

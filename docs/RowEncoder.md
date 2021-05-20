@@ -51,7 +51,7 @@ CAUTION: FIXME What does being native type mean?
 
 2. For ``UserDefinedType``s, it takes the UDT class from the `SQLUserDefinedType` annotation or `UDTRegistration` object and returns an expression with `Invoke` to call `serialize` method on a `NewInstance` of the UDT class.
 
-3. For [TimestampType](DataType.md#TimestampType), it returns an expression with a [StaticInvoke](expressions/StaticInvoke.md) to call `fromJavaTimestamp` on `DateTimeUtils` class.
+3. For [TimestampType](types/DataType.md#TimestampType), it returns an expression with a [StaticInvoke](expressions/StaticInvoke.md) to call `fromJavaTimestamp` on `DateTimeUtils` class.
 
 4. ...FIXME
 

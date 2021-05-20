@@ -36,7 +36,7 @@ Used exclusively when `JdbcRelationProvider` is requested to [write the rows of 
 ! (undefined)
 a! [[customSchema]] Specifies the custom data types of the read schema (that is used at [load time](../../DataFrameReader.md#jdbc))
 
-`customSchema` is a comma-separated list of field definitions with column names and their [DataType](../../DataType.md)s in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
+`customSchema` is a comma-separated list of field definitions with column names and their [DataType](../../types/DataType.md)s in a canonical SQL representation, e.g. `id DECIMAL(38, 0), name STRING`.
 
 `customSchema` defines the data types of the columns that will override the data types inferred from the table schema and follows the following pattern:
 

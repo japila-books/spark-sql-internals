@@ -93,7 +93,7 @@ Project [count(1) OVER (PARTITION BY token ORDER BY id ASC NULLS FIRST RANGE BET
 | Enabled (i.e. `true`)
 
 | `resolved`
-| Enabled when <<children, children>> are and the input [DataType](../DataType.md) is valid and the input [frameSpecification](#frameSpecification) is a `SpecifiedWindowFrame`.
+| Enabled when <<children, children>> are and the input [DataType](../types/DataType.md) is valid and the input [frameSpecification](#frameSpecification) is a `SpecifiedWindowFrame`.
 
 | `sql`
 a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, partitionSpec>> (if defined) with `ORDER BY` with comma-separated elements of <<orderSpec, orderSpec>> (if defined) followed by <<frameSpecification, frameSpecification>>.
@@ -119,11 +119,11 @@ a| Contains `PARTITION BY` with comma-separated elements of <<partitionSpec, par
 isValidFrameType(ft: DataType): Boolean
 ----
 
-`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` [data type](../DataType.md) are as follows:
+`isValidFrameType` is positive (`true`) when the data type of the <<orderSpec, window order specification>> and the input `ft` [data type](../types/DataType.md) are as follows:
 
-* [DateType](../DataType.md#DateType) and [IntegerType](../DataType.md#IntegerType)
+* [DateType](../types/DataType.md#DateType) and [IntegerType](../types/DataType.md#IntegerType)
 
-* [TimestampType](../DataType.md#TimestampType) and [CalendarIntervalType](../DataType.md#CalendarIntervalType)
+* [TimestampType](../types/DataType.md#TimestampType) and [CalendarIntervalType](../types/DataType.md#CalendarIntervalType)
 
 * Equal
 

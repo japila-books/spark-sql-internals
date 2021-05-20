@@ -36,7 +36,7 @@ spark.read.schema(schema).load("parquet-datasets")
 
 * The number of fields in the schema is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
-* All the fields in the output schema are of [AtomicType](../../DataType.md#AtomicType)
+* All the fields in the output schema are of [AtomicType](../../types/DataType.md#AtomicType)
 
 `ParquetFileFormat` supports *filter predicate push-down optimization* (via <<createFilter, createFilter>>) as per the following <<ParquetFilters, table>>.
 
@@ -175,10 +175,10 @@ buildReaderWithPartitionValues(
 | [[parquet.read.support.class]] [ParquetReadSupport](ParquetReadSupport.md)
 
 | org.apache.spark.sql.parquet.row.requested_schema
-| [[org.apache.spark.sql.parquet.row.requested_schema]] [JSON](../../DataType.md#json) representation of `requiredSchema`
+| [[org.apache.spark.sql.parquet.row.requested_schema]] [JSON](../../types/DataType.md#json) representation of `requiredSchema`
 
 | org.apache.spark.sql.parquet.row.attributes
-| [[org.apache.spark.sql.parquet.row.attributes]] [JSON](../../DataType.md#json) representation of `requiredSchema`
+| [[org.apache.spark.sql.parquet.row.attributes]] [JSON](../../types/DataType.md#json) representation of `requiredSchema`
 
 | spark.sql.session.timeZone
 | [[spark.sql.session.timeZone]] [spark.sql.session.timeZone](../../configuration-properties.md#spark.sql.session.timeZone)
@@ -201,7 +201,7 @@ buildReaderWithPartitionValues(
 With [spark.sql.parquet.filterPushdown](../../configuration-properties.md#spark.sql.parquet.filterPushdown) configuration property enabled, `buildReaderWithPartitionValues` takes the input Spark data source `filters` and converts them to Parquet filter predicates if possible (as described in the <<ParquetFilters, table>>). Otherwise, the Parquet filter predicate is not specified.
 
 !!! note
-    `buildReaderWithPartitionValues` creates filter predicates for the following types: [BooleanType](../../DataType.md#BooleanType), [IntegerType](../../DataType.md#IntegerType), ([LongType](../../DataType.md#LongType), [FloatType](../../DataType.md#FloatType), [DoubleType](../../DataType.md#DoubleType), [StringType](../../DataType.md#StringType), [BinaryType](../../DataType.md#BinaryType).
+    `buildReaderWithPartitionValues` creates filter predicates for the following types: [BooleanType](../../types/DataType.md#BooleanType), [IntegerType](../../types/DataType.md#IntegerType), ([LongType](../../types/DataType.md#LongType), [FloatType](../../types/DataType.md#FloatType), [DoubleType](../../types/DataType.md#DoubleType), [StringType](../../types/DataType.md#StringType), [BinaryType](../../types/DataType.md#BinaryType).
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
 

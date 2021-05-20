@@ -35,7 +35,7 @@
 current_date(): Column
 ```
 
-`current_date` function gives the current date as a [date](DataType.md#DateType) column.
+`current_date` function gives the current date as a [date](types/DataType.md#DateType) column.
 
 ```text
 val df = spark.range(1).select(current_date)
@@ -208,7 +208,7 @@ scala> val timeColumn = window('time, "5 seconds")
 timeColumn: org.apache.spark.sql.Column = timewindow(time, 5000000, 5000000, 0) AS `window`
 ----
 
-`timeColumn` should be of [TimestampType](DataType.md#TimestampType), i.e. with [java.sql.Timestamp]({{ java.api }}/java/sql/Timestamp.html) values.
+`timeColumn` should be of [TimestampType](types/DataType.md#TimestampType), i.e. with [java.sql.Timestamp]({{ java.api }}/java/sql/Timestamp.html) values.
 
 !!! tip
     Use [java.sql.Timestamp.from]({{ java.api }}/java/sql/Timestamp.html#from-java.time.Instant-) or [java.sql.Timestamp.valueOf]({{ java.api }}/java/sql/Timestamp.html#valueOf-java.time.LocalDateTime-) factory methods to create `Timestamp` instances.
@@ -316,7 +316,7 @@ to_date(
   fmt: String): Column
 ```
 
-`to_date` converts the column into [DateType](DataType.md#DateType) (by casting to `DateType`).
+`to_date` converts the column into [DateType](types/DataType.md#DateType) (by casting to `DateType`).
 
 !!! note
     `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
@@ -336,7 +336,7 @@ to_timestamp(
   fmt: String): Column
 ```
 
-`to_timestamp` converts the column into [TimestampType](DataType.md#TimestampType) (by casting to `TimestampType`).
+`to_timestamp` converts the column into [TimestampType](types/DataType.md#TimestampType) (by casting to `TimestampType`).
 
 !!! note
     `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).

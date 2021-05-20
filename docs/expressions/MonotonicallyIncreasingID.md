@@ -28,7 +28,7 @@ count_0++;
 ```
 
 [[dataType]]
-`MonotonicallyIncreasingID` uses [LongType](../DataType.md#LongType) as the <<Expression.md#dataType, data type>> of the result of evaluating itself.
+`MonotonicallyIncreasingID` uses [LongType](../types/DataType.md#LongType) as the <<Expression.md#dataType, data type>> of the result of evaluating itself.
 
 [[nullable]]
 `MonotonicallyIncreasingID` is never [nullable](Expression.md#nullable).
