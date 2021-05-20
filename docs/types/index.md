@@ -1,5 +1,3 @@
 # Data Types
 
-Among the supported types are the following:
-
-* [ArrayType](ArrayType.md)
+[DataType](DataType.md) is the base type of all the data types in Spark SQL.

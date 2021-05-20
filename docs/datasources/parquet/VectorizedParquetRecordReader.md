@@ -2,7 +2,7 @@
 
 `VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](SpecificParquetRecordReaderBase.md) for [parquet](ParquetFileFormat.md) file format for [Vectorized Parquet Decoding](../../vectorized-parquet-reader.md).
 
-`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) property enabled and the read schema with [AtomicType](../../types/DataType.md#AtomicType) data types only).
+`VectorizedParquetRecordReader` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) property enabled and the read schema with [AtomicType](../../types/AtomicType.md) data types only).
 
 [[creating-instance]]
 `VectorizedParquetRecordReader` takes the following to be created:

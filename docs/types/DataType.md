@@ -1,220 +1,38 @@
-# Data Types
+# DataType
 
-`DataType` abstract class is the base type of all built-in data types in Spark SQL, e.g. strings, longs.
+`DataType` is an [extension](#contract) of the [AbstractDataType](AbstractDataType.md) abstraction for [data types](#implementations) in Spark SQL.
 
-`DataType` has two main type families:
+## Contract
 
-* <<AtomicType, Atomic Types>> as an internal type to represent types that are not `null`, UDTs, arrays, structs, and maps
-* [[NumericType]] *Numeric Types* with <<FractionalType, fractional>> and <<IntegralType, integral>> types
+### <span id="asNullable"> asNullable
 
-[[standard-types]]
-.Standard Data Types
-[align="center",width="100%",options="header",cols="1,1,1"]
-|===
-^.^| Type Family
-| Data Type
-| Scala Types
+```scala
+asNullable: DataType
+```
 
-.5+^.^| *Atomic Types*
+### <span id="defaultSize"> Default Size
 
-(except <<FractionalType, fractional>> and <<IntegralType, integral>> types)
-| [[AtomicType]][[BinaryType]] `BinaryType`
-|
+```scala
+defaultSize: Int
+```
 
-| [[BooleanType]] `BooleanType`
-|
+Default size of a value of this data type
 
-| [[DateType]] `DateType`
-|
+Used when:
 
-| [[StringType]] `StringType`
-|
+* `ResolveGroupingAnalytics` logical resolution is executed
+* `CommandUtils` is used to [statExprs](../CommandUtils.md#statExprs)
+* `JoinEstimation` is used to [estimateInnerOuterJoin](../logical-operators/JoinEstimation.md#estimateInnerOuterJoin)
+* _others_
 
-| [[TimestampType]] `TimestampType` | `java.sql.Timestamp`
+## Implementations
 
-.3+^.^| [[FractionalType]] *Fractional Types*
-
-(concrete <<NumericType, NumericType>>)
-| [[DecimalType]] `DecimalType`
-|
-
-| [[DoubleType]] `DoubleType`
-|
-
-| [[FloatType]] `FloatType`
-|
-
-
-.4+^.^| [[IntegralType]] *Integral Types*
-
-(concrete <<NumericType, NumericType>>)
-| [[ByteType]] `ByteType`
-|
-
-| [[IntegerType]] `IntegerType`
-|
-
-| [[LongType]] `LongType`
-|
-
-| [[ShortType]] `ShortType`
-|
-
-.8+^.^|
-| [[ArrayType]] [ArrayType](ArrayType.md)
-|
-
-| [[CalendarIntervalType]] `CalendarIntervalType`
-|
-
-| [[MapType]] `MapType`
-|
-
-| [[NullType]] `NullType`
-|
-
-| [[ObjectType]] `ObjectType`
-|
-
-| [[StructType]] [StructType](StructType.md)
-|
-
-| [[UserDefinedType]] `UserDefinedType`
-|
-
-| [[AnyDataType]] `AnyDataType` | Matches any concrete data type
-|===
-
-CAUTION: FIXME What about AbstractDataType?
-
-You can extend the type system and create your own <<user-defined-types, user-defined types (UDTs)>>.
-
-The <<contract, DataType Contract>> defines methods to build SQL, JSON and string representations.
-
-NOTE: `DataType` (and the concrete Spark SQL types) live in `org.apache.spark.sql.types` package.
-
-[source, scala]
-----
-import org.apache.spark.sql.types.StringType
-
-scala> StringType.json
-res0: String = "string"
-
-scala> StringType.sql
-res1: String = STRING
-
-scala> StringType.catalogString
-res2: String = string
-----
-
-You should use <<DataTypes, DataTypes>> object in your code to create complex Spark SQL types, i.e. arrays or maps.
-
-[source, scala]
-----
-import org.apache.spark.sql.types.DataTypes
-
-scala> val arrayType = DataTypes.createArrayType(BooleanType)
-arrayType: org.apache.spark.sql.types.ArrayType = ArrayType(BooleanType,true)
-
-scala> val mapType = DataTypes.createMapType(StringType, LongType)
-mapType: org.apache.spark.sql.types.MapType = MapType(StringType,LongType,true)
-----
-
-`DataType` has support for Scala's pattern matching using `unapply` method.
-
-[source, scala]
-----
-???
-----
-
-=== [[contract]] DataType Contract
-
-Any type in Spark SQL follows the `DataType` contract which means that the types define the following methods:
-
-* [[json]] `json` and `prettyJson` to build JSON representations of a data type
-* `defaultSize` to know the default size of values of a type
-* `simpleString` and `catalogString` to build user-friendly string representations (with the latter for external catalogs)
-* `sql` to build SQL representation
-
-[source, scala]
-----
-import org.apache.spark.sql.types.DataTypes._
-
-val maps = StructType(
-  StructField("longs2strings", createMapType(LongType, StringType), false) :: Nil)
-
-scala> maps.prettyJson
-res0: String =
-{
-  "type" : "struct",
-  "fields" : [ {
-    "name" : "longs2strings",
-    "type" : {
-      "type" : "map",
-      "keyType" : "long",
-      "valueType" : "string",
-      "valueContainsNull" : true
-    },
-    "nullable" : false,
-    "metadata" : { }
-  } ]
-}
-
-scala> maps.defaultSize
-res1: Int = 2800
-
-scala> maps.simpleString
-res2: String = struct<longs2strings:map<bigint,string>>
-
-scala> maps.catalogString
-res3: String = struct<longs2strings:map<bigint,string>>
-
-scala> maps.sql
-res4: String = STRUCT<`longs2strings`: MAP<BIGINT, STRING>>
-----
-
-=== [[DataTypes]] DataTypes -- Factory Methods for Data Types
-
-`DataTypes` is a Java class with methods to access simple or create complex `DataType` types in Spark SQL, i.e. arrays and maps.
-
-TIP: It is recommended to use `DataTypes` class to define `DataType` types in a schema.
-
-`DataTypes` lives in `org.apache.spark.sql.types` package.
-
-[source, scala]
-----
-import org.apache.spark.sql.types.DataTypes
-
-scala> val arrayType = DataTypes.createArrayType(BooleanType)
-arrayType: org.apache.spark.sql.types.ArrayType = ArrayType(BooleanType,true)
-
-scala> val mapType = DataTypes.createMapType(StringType, LongType)
-mapType: org.apache.spark.sql.types.MapType = MapType(StringType,LongType,true)
-----
-
-[NOTE]
-====
-Simple `DataType` types themselves, i.e. `StringType` or `CalendarIntervalType`, come with their own Scala's ``case object``s alongside their definitions.
-
-You may also import the `types` package and have access to the types.
-
-[source, scala]
-----
-import org.apache.spark.sql.types._
-----
-====
-
-=== [[user-defined-types]] UDTs -- User-Defined Types
-
-CAUTION: FIXME
-
-=== [[fromDDL]] Converting DDL into DataType -- `fromDDL` Utility
-
-[source, scala]
-----
-fromDDL(ddl: String): DataType
-----
-
-`fromDDL`...FIXME
-
-NOTE: `fromDDL` is used when...FIXME
+* [ArrayType](ArrayType.md)
+* [AtomicType](AtomicType.md)
+* CalendarIntervalType
+* HiveVoidType
+* MapType
+* NullType
+* ObjectType
+* [StructType](../StructType.md)
+* UserDefinedType

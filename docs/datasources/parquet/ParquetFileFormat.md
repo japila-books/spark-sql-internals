@@ -36,7 +36,7 @@ spark.read.schema(schema).load("parquet-datasets")
 
 * The number of fields in the schema is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
-* All the fields in the output schema are of [AtomicType](../../types/DataType.md#AtomicType)
+* All the fields in the output schema are of [AtomicType](../../types/AtomicType.md)
 
 `ParquetFileFormat` supports *filter predicate push-down optimization* (via <<createFilter, createFilter>>) as per the following <<ParquetFilters, table>>.
 
