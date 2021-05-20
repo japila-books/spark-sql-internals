@@ -3116,11 +3116,19 @@
      <lastmod>2021-05-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/types/DataType/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/types/AbstractDataType/</loc>
      <lastmod>2021-05-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/types/ArrayType/</loc>
+     <lastmod>2021-05-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/types/AtomicType/</loc>
+     <lastmod>2021-05-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/types/DataType/</loc>
      <lastmod>2021-05-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
