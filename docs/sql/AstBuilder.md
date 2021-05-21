@@ -327,9 +327,19 @@ Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)
 
 ANTLR labeled alternative: `#subqueryExpression`
 
+### <span id="visitUpdateTable"> visitUpdateTable
+
+Creates an [UpdateTable](../logical-operators/UpdateTable.md) logical operator
+
+```text
+UPDATE multipartIdentifier tableAlias setClause whereClause?
+```
+
+ANTLR labeled alternative: `#updateTable`
+
 ### visitUse
 
-Creates a [UseStatement](../logical-operators/UseStatement.md) for the following SQL statement:
+Creates a [UseStatement](../logical-operators/UseStatement.md)
 
 ```text
 USE NAMESPACE? multipartIdentifier

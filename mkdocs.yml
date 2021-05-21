@@ -86,6 +86,7 @@ extra:
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
     spark_core: https://books.japila.pl/apache-spark-internals
+    delta: https://books.japila.pl/delta-lake-internals
   hadoop:
     version: 3.2.0
     doc: https://hadoop.apache.org/docs/r3.2.0
@@ -317,6 +318,7 @@ nav:
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedTableValuedFunction: logical-operators/UnresolvedTableValuedFunction.md
       - UnresolvedV2Relation: logical-operators/UnresolvedV2Relation.md
+      - UpdateTable: logical-operators/UpdateTable.md
       - UseStatement: logical-operators/UseStatement.md
       - Window: logical-operators/Window.md
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md

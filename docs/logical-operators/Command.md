@@ -32,7 +32,7 @@
 * ShowTableProperties
 * [ShowTables](ShowTables.md)
 * ShowViews
-* UpdateTable
+* [UpdateTable](UpdateTable.md)
 * [V2WriteCommand](V2WriteCommand.md)
 
 ## <span id="output"> Output Attributes

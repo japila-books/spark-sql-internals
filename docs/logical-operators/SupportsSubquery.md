@@ -8,4 +8,4 @@
 
 * [DeleteFromTable](DeleteFromTable.md)
 * [MergeIntoTable](MergeIntoTable.md)
-* UpdateTable
+* [UpdateTable](UpdateTable.md)
