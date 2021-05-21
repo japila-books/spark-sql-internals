@@ -81,10 +81,11 @@ extra:
       link: https://twitter.com/jaceklaskowski
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
-  spark:
-    version: 3.1.1
-    github: https://github.com/apache/spark/tree/v3.1.1
-    doc: http://spark.apache.org/docs/3.1.1
+  book:
+    title: Spark SQL
+    structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
+    kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
+    spark_core: https://books.japila.pl/apache-spark-internals
   hadoop:
     version: 3.2.0
     doc: https://hadoop.apache.org/docs/r3.2.0
@@ -102,11 +103,10 @@ extra:
   kafka:
     version: 2.6.0
     api: https://kafka.apache.org/26/javadoc
-  book:
-    title: Spark SQL
-    structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
-    kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
-    spark_core: https://books.japila.pl/apache-spark-internals
+  spark:
+    version: 3.1.1
+    github: https://github.com/apache/spark/tree/v3.1.1
+    doc: http://spark.apache.org/docs/3.1.1
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
