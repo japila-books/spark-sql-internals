@@ -1124,11 +1124,7 @@
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetTable/</loc>
-     <lastmod>2021-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetScanBuilder/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/</loc>
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1140,7 +1136,15 @@
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/VectorizedParquetRecordReader/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetScanBuilder/</loc>
+     <lastmod>2021-05-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/ParquetTable/</loc>
+     <lastmod>2021-05-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/SpecificParquetRecordReaderBase/</loc>
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -1148,7 +1152,7 @@
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/SpecificParquetRecordReaderBase/</loc>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/parquet/VectorizedParquetRecordReader/</loc>
      <lastmod>2021-05-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
