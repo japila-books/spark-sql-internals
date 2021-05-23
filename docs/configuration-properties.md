@@ -1338,7 +1338,7 @@ Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method to access the
 
 Default data source to use for loading or saving data
 
-Default: `parquet`
+Default: [parquet](datasources/parquet/index.md)
 
 Use [SQLConf.defaultDataSourceName](SQLConf.md#defaultDataSourceName) method to access the current value.
 

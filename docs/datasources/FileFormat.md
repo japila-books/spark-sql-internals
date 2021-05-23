@@ -27,7 +27,7 @@ buildReader is not supported for [this]
 
 Used when `FileFormat` is requested to [buildReaderWithPartitionValues](#buildReaderWithPartitionValues).
 
-### <span id="inferSchema"> Inferring Schema
+### <span id="inferSchema"> Schema Inference
 
 ```scala
 inferSchema(

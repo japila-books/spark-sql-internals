@@ -4,11 +4,13 @@
 
 ## Contract
 
-### <span id="shortName"> shortName
+### <span id="shortName"> Short Name
 
 ```scala
 shortName(): String
 ```
+
+Short name (_alias_) of the data source
 
 Used when:
 

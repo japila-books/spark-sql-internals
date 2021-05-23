@@ -426,13 +426,14 @@ nav:
         - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
         - OrcFileFormat: datasources/orc/OrcFileFormat.md
       - Parquet:
-        - ParquetTable: datasources/parquet/ParquetTable.md
-        - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
+        - datasources/parquet/index.md
         - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
         - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
-        - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
-        - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
+        - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
+        - ParquetTable: datasources/parquet/ParquetTable.md
         - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
+        - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
+        - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
       - Text:
         - TextFileFormat: datasources/text/TextFileFormat.md
     - Hive Integration:
