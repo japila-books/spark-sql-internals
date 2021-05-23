@@ -84,7 +84,7 @@ Download and install [Hadoop 2.10.0](https://hadoop.apache.org/release/2.10.0.ht
 export HADOOP_HOME=/Users/jacek/dev/apps/hadoop
 ```
 
-Follow the official documentation in [Hadoop: Setting up a Single Node Cluster]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html) to set up a single-node Hadoop installation.
+Follow the official documentation in [Hadoop: Setting up a Single Node Cluster]({{ hadoop.docs }}/hadoop-project-dist/hadoop-common/SingleCluster.html) to set up a single-node Hadoop installation.
 
 ```text
 $ $HADOOP_HOME/bin/hadoop version
@@ -96,7 +96,7 @@ From source with checksum 7b2d8877c5ce8c9a2cca5c7e81aa4026
 This command was run using /Users/jacek/dev/apps/hadoop-2.10.0/share/hadoop/common/hadoop-common-2.10.0.jar
 ```
 
-This demo assumes running [a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation).
+This demo assumes running [a single-node in a pseudo-distributed mode where each Hadoop daemon runs in a separate Java process]({{ hadoop.docs }}/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation).
 
 !!! tip
     Use `hadoop.tmp.dir` configuration property as the base for temporary directories.
@@ -246,7 +246,7 @@ $ jps -lm
 ```
 
 !!! note
-    FIXME Are the steps in [YARN on a Single Node]({{ hadoop.doc }}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node) required for Hive?
+    FIXME Are the steps in [YARN on a Single Node]({{ hadoop.docs }}/hadoop-project-dist/hadoop-common/SingleCluster.html#YARN_on_a_Single_Node) required for Hive?
 
 ## Running Hive
 

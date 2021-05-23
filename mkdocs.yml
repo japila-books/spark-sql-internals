@@ -83,19 +83,18 @@ extra:
       link: https://linkedin.com/in/jaceklaskowski
   book:
     title: Spark SQL
-    structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
+    delta: https://books.japila.pl/delta-lake-internals
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
     spark_core: https://books.japila.pl/apache-spark-internals
-    delta: https://books.japila.pl/delta-lake-internals
+    structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
   hadoop:
     version: 3.2.0
-    doc: https://hadoop.apache.org/docs/r3.2.0
+    docs: https://hadoop.apache.org/docs/r3.2.0
     api: https://hadoop.apache.org/docs/r3.2.0/api
   hive:
     version: 2.3.7
     api: https://hive.apache.org/javadocs/r2.3.7/api
   java:
-    version: 11
     api: https://docs.oracle.com/en/java/javase/11/docs/api
   scala:
     version: 2.12.10
@@ -107,7 +106,7 @@ extra:
   spark:
     version: 3.1.1
     github: https://github.com/apache/spark/tree/v3.1.1
-    doc: http://spark.apache.org/docs/3.1.1
+    docs: http://spark.apache.org/docs/3.1.1
 
 google_analytics:
   - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
