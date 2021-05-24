@@ -803,10 +803,13 @@ nav:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceBucketsInJoin: physical-optimizations/CoalesceBucketsInJoin.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
+      - DisableUnnecessaryBucketedScan: physical-optimizations/DisableUnnecessaryBucketedScan.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
+      - RemoveRedundantProjects: physical-optimizations/RemoveRedundantProjects.md
+      - RemoveRedundantSorts: physical-optimizations/RemoveRedundantSorts.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
     - Tungsten Execution Backend:

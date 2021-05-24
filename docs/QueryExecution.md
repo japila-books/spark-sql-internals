@@ -126,15 +126,34 @@ stringWithStats: String
 
 `stringWithStats` is used when [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed (with `cost` flag enabled).
 
-## <span id="preparations"> Physical Query Optimizations (Physical Plan Preparation Rules)
+## Physical Query Optimizations
+
+**Physical Query Optimizations** are [Catalyst Rules](catalyst/Rule.md) for transforming [physical operators](physical-operators/SparkPlan.md) (to be more efficient and optimized for execution). They are executed in the following order:
+
+1. [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (if defined)
+1. [CoalesceBucketsInJoin](adaptive-query-execution/CoalesceBucketsInJoin.md)
+1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
+1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
+1. [RemoveRedundantProjects](physical-optimizations/RemoveRedundantProjects.md)
+1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)
+1. [RemoveRedundantSorts](physical-optimizations/RemoveRedundantSorts.md)
+1. [DisableUnnecessaryBucketedScan](physical-optimizations/DisableUnnecessaryBucketedScan.md)
+1. [ApplyColumnarRulesAndInsertTransitions](physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
+1. [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md)
+1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
+1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
+
+### <span id="preparations"> preparations
 
 ```scala
 preparations: Seq[Rule[SparkPlan]]
 ```
 
-`preparations` creates an [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (with a new [AdaptiveExecutionContext](adaptive-query-execution/AdaptiveExecutionContext.md)) that is added to the [preparations rules](#preparations-internal-utility).
+`preparations` creates an [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (with a new [AdaptiveExecutionContext](adaptive-query-execution/AdaptiveExecutionContext.md)) that is added to the other [preparations rules](#preparations-internal-utility).
 
-`preparations` is used when `QueryExecution` is requested for an [optimized physical query plan](#executedPlan).
+`preparations` is used when:
+
+* `QueryExecution` is requested for an [optimized physical query plan](#executedPlan)
 
 ### preparations Internal Utility
 
@@ -144,22 +163,12 @@ preparations(
   adaptiveExecutionRule: Option[InsertAdaptiveSparkPlan] = None): Seq[Rule[SparkPlan]]
 ```
 
-`preparations` is the set of [Catalyst Rules](catalyst/Rule.md) for transforming [physical operators](physical-operators/SparkPlan.md) (to be more efficient and optimized for execution) in the following order:
-
-1. [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (if defined)
-1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
-1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
-1. [EnsureRequirements](physical-optimizations/EnsureRequirements.md)
-1. [ApplyColumnarRulesAndInsertTransitions](physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md)
-1. [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md)
-1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
-1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
+`preparations` is the [Physical Query Optimizations](#physical-query-optimizations).
 
 `preparations` is used when:
 
-* `QueryExecution` is requested for [physical optimization rules (preparations)](#preparations)
-
-* `QueryExecution` utility is requested to [prepareExecutedPlan](#prepareExecutedPlan)
+* `QueryExecution` is requested for the [physical optimization rules (preparations)](#preparations) (with the `InsertAdaptiveSparkPlan` defined)
+* `QueryExecution` utility is requested to [prepareExecutedPlan](#prepareExecutedPlan) (with no `InsertAdaptiveSparkPlan`)
 
 ## <span id="prepareExecutedPlan"><span id="prepareExecutedPlan-SparkPlan"> prepareExecutedPlan for Physical Operators
 
@@ -169,7 +178,7 @@ prepareExecutedPlan(
   plan: SparkPlan): SparkPlan
 ```
 
-`prepareExecutedPlan` is...FIXME
+`prepareExecutedPlan` [applies](#prepareForExecution) the [preparations](#preparations) physical query optimization rules (with no `InsertAdaptiveSparkPlan` optimization) to the physical plan.
 
 `prepareExecutedPlan` is used when:
 
