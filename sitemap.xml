@@ -2564,6 +2564,10 @@
      <lastmod>2021-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/DisableUnnecessaryBucketedScan/</loc>
+     <lastmod>2021-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/EnsureRequirements/</loc>
      <lastmod>2021-05-24</lastmod>
      <changefreq>daily</changefreq>
@@ -2577,6 +2581,14 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/PlanSubqueries/</loc>
+     <lastmod>2021-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/RemoveRedundantProjects/</loc>
+     <lastmod>2021-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/RemoveRedundantSorts/</loc>
      <lastmod>2021-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
