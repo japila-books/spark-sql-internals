@@ -10,7 +10,9 @@
 
 * <span id="catalogManager"> [CatalogManager](../connector/catalog/CatalogManager.md)
 
-`ResolveCatalogs` is created when `Analyzer` is requested for [batches](../Analyzer.md#batches).
+`ResolveCatalogs` is created when:
+
+* `Analyzer` is requested for [batches](../Analyzer.md#batches)
 
 ## <span id="apply"> Executing Rule
 

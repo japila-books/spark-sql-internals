@@ -2,7 +2,7 @@
 
 `GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's sql/AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
 
-```
+```text
 val q = sql("""
   SELECT customer, year, SUM(sales)
   FROM VALUES ("abc", 2017, 30) AS t1 (customer, year, sales)

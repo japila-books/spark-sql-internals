@@ -63,7 +63,7 @@ Rules:
 
 Strategy: [fixedPoint](#fixedPoint)
 
-### Resolution
+### <span id="Resolution"> Resolution
 
 Rules:
 
@@ -78,7 +78,7 @@ Rules:
 * ResolveDeserializer
 * ResolveNewInstance
 * ResolveUpCast
-* ResolveGroupingAnalytics
+* [ResolveGroupingAnalytics](logical-analysis-rules/ResolveGroupingAnalytics.md)
 * ResolvePivot
 * ResolveOrdinalInOrderByAndGroupBy
 * ResolveAggAliasInGroupBy
@@ -95,7 +95,7 @@ Rules:
 * ResolveOutputRelation
 * ExtractWindowExpressions
 * GlobalAggregates
-* ResolveAggregateFunctions
+* [ResolveAggregateFunctions](logical-analysis-rules/ResolveAggregateFunctions.md)
 * TimeWindowing
 * ResolveInlineTables
 * ResolveHigherOrderFunctions

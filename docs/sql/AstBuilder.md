@@ -394,6 +394,10 @@ withHavingClause(
 
 Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md)
 
+```text
+HAVING booleanExpression
+```
+
 ### withHints
 
 Adds an [UnresolvedHint](../logical-operators/UnresolvedHint.md) for `/*+ hint */` in `SELECT` queries.

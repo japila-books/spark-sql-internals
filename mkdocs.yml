@@ -717,11 +717,13 @@ nav:
       - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
       - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
       - RemoveAllHints: logical-analysis-rules/RemoveAllHints.md
+      - ResolveAggregateFunctions: logical-analysis-rules/ResolveAggregateFunctions.md
       - ResolveAliases: logical-analysis-rules/ResolveAliases.md
       - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
       - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
       - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
       - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
+      - ResolveGroupingAnalytics: logical-analysis-rules/ResolveGroupingAnalytics.md
       - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md
       - ResolveInsertInto: logical-analysis-rules/ResolveInsertInto.md
       - ResolveJoinStrategyHints: logical-analysis-rules/ResolveJoinStrategyHints.md

@@ -43,7 +43,7 @@ Internal error: logical hint operator should have been removed during analysis
 
 ## Catalyst DSL
 
-The [hint](../catalyst-dsl/DslLogicalPlan.md#hint) operator in [Catalyst DSL](../catalyst-dsl/index.md) is used in tests to create an `UnresolvedHint` logical operator.
+`UnresolvedHint` can be created using the [hint](../catalyst-dsl/DslLogicalPlan.md#hint) operator in [Catalyst DSL](../catalyst-dsl/index.md).
 
 ```scala
 import org.apache.spark.sql.catalyst.plans.logical.LocalRelation

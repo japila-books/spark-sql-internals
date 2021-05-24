@@ -44,6 +44,6 @@ unapply(
   e: Expression): Boolean
 ```
 
-`unapply` is `true` when the [data type](../expressions/Expression.md#dataType) of the input [../expressions/Expression](Expression.md) is an `AtomicType`.
+`unapply` is `true` when the [data type](../expressions/Expression.md#dataType) of the input [../expressions/Expression](../expressions/Expression.md) is an `AtomicType`.
 
 `unapply` allows pattern matching in Scala against `AtomicType` for expressions.

@@ -1,4 +1,4 @@
-# ResolveFunctions Logical Resolution Rule -- Resolving grouping__id UnresolvedAttribute, UnresolvedGenerator And UnresolvedFunction Expressions
+# ResolveFunctions Logical Resolution Rule
 
 `ResolveFunctions` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveFunctions) uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
 
