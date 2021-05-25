@@ -1,25 +1,24 @@
 # ObjectAggregationIterator
 
-`ObjectAggregationIterator` is...FIXME
+`ObjectAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) physical operator.
 
-==== [[next]] `next` Method
+## Creating Instance
 
-[source, scala]
-----
-next(): UnsafeRow
-----
+`ObjectAggregationIterator` takes the following to be created:
 
-NOTE: `next` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator[scala.collection.Iterator] interface that returns the next element and discards it from the iterator.
+* <span id="partIndex"> Partition ID
+* <span id="outputAttributes"> Output [Attribute](expressions/Attribute.md)s (unused)
+* <span id="groupingExpressions"> Grouping [NamedExpression](expressions/NamedExpression.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](expressions/Attribute.md)s
+* <span id="initialInputBufferOffset"> Initial input buffer offset
+* <span id="resultExpressions"> Result [NamedExpression](expressions/NamedExpression.md)s
+* <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
+* <span id="originalInputAttributes"> Original Input [Attribute](expressions/Attribute.md)s
+* <span id="inputRows"> Input [InternalRow](InternalRow.md)s
+* <span id="fallbackCountThreshold"> `fallbackCountThreshold`
+* <span id="numOutputRows"> `numOutputRows` [SQLMetric](physical-operators/SQLMetric.md)
 
-`next`...FIXME
+`ObjectAggregationIterator` is created when:
 
-=== [[outputForEmptyGroupingKeyWithoutInput]] `outputForEmptyGroupingKeyWithoutInput` Method
-
-[source, scala]
-----
-outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
-----
-
-`outputForEmptyGroupingKeyWithoutInput`...FIXME
-
-NOTE: `outputForEmptyGroupingKeyWithoutInput` is used when...FIXME
+* `ObjectHashAggregateExec` physical operator is requested to [doExecute](physical-operators/ObjectHashAggregateExec.md#doExecute)

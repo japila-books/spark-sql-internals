@@ -1,36 +1,22 @@
 # SortBasedAggregationIterator
 
-`SortBasedAggregationIterator` is...FIXME
+`SortBasedAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [SortAggregateExec](physical-operators/SortAggregateExec.md) physical operator.
 
-==== [[next]] `next` Method
+## Creating Instance
 
-[source, scala]
-----
-next(): UnsafeRow
-----
+`SortBasedAggregationIterator` takes the following to be created:
 
-NOTE: `next` is part of Scala's http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator[scala.collection.Iterator] interface that returns the next element and discards it from the iterator.
+* <span id="partIndex"> Partition ID
+* <span id="groupingExpressions"> Grouping [NamedExpression](expressions/NamedExpression.md)s
+* <span id="valueAttributes"> Value [Attribute](expressions/Attribute.md)s
+* <span id="inputIterator"> Input Iterator of [InternalRow](InternalRow.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](expressions/Attribute.md)s
+* <span id="initialInputBufferOffset"> Initial input buffer offset
+* <span id="resultExpressions"> Result [NamedExpression](expressions/NamedExpression.md)s
+* <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
+* <span id="numOutputRows"> `numOutputRows` [SQLMetric](physical-operators/SQLMetric.md)
 
-`next`...FIXME
+`SortBasedAggregationIterator` is created when:
 
-=== [[outputForEmptyGroupingKeyWithoutInput]] `outputForEmptyGroupingKeyWithoutInput` Method
-
-[source, scala]
-----
-outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
-----
-
-`outputForEmptyGroupingKeyWithoutInput`...FIXME
-
-NOTE: `outputForEmptyGroupingKeyWithoutInput` is used when...FIXME
-
-=== [[newBuffer]] `newBuffer` Internal Method
-
-[source, scala]
-----
-newBuffer: InternalRow
-----
-
-`newBuffer`...FIXME
-
-NOTE: `newBuffer` is used when...FIXME
+* `SortAggregateExec` physical operator is requested to [doExecute](physical-operators/SortAggregateExec.md#doExecute)

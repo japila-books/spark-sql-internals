@@ -192,7 +192,6 @@ nav:
       - SparkPlanner: SparkPlanner.md
       - SparkOptimizer: SparkOptimizer.md
       - QueryPlanningTracker: QueryPlanningTracker.md
-    - Implicits: implicits.md
     - SharedState: SharedState.md
     - SQL Support:
       - SQL Parsing Framework: sql/index.md
@@ -624,84 +623,83 @@ nav:
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
       - SupportsV1Write: physical-operators/SupportsV1Write.md
-      - Concrete Operators:
-        - AppendDataExec: physical-operators/AppendDataExec.md
-        - AppendDataExecV1: physical-operators/AppendDataExecV1.md
-        - AlterTableExec: physical-operators/AlterTableExec.md
-        - AtomicCreateTableAsSelectExec: physical-operators/AtomicCreateTableAsSelectExec.md
-        - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
-        - AtomicReplaceTableExec: physical-operators/AtomicReplaceTableExec.md
-        - BatchScanExec: physical-operators/BatchScanExec.md
-        - BlockingOperatorWithCodegen: physical-operators/BlockingOperatorWithCodegen.md
-        - BroadcastExchangeExec: physical-operators/BroadcastExchangeExec.md
-        - BroadcastExchangeLike: physical-operators/BroadcastExchangeLike.md
-        - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
-        - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
-        - physical-operators/CartesianProductExec.md
-        - physical-operators/CoalesceExec.md
-        - physical-operators/CoGroupExec.md
-        - CollectLimitExec: physical-operators/CollectLimitExec.md
-        - CollectMetricsExec: physical-operators/CollectMetricsExec.md
-        - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
-        - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
-        - CreateTableExec: physical-operators/CreateTableExec.md
-        - CustomShuffleReaderExec: physical-operators/CustomShuffleReaderExec.md
-        - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
-        - physical-operators/DataWritingCommandExec.md
-        - physical-operators/DebugExec.md
-        - DeleteFromTableExec: physical-operators/DeleteFromTableExec.md
-        - DescribeTableExec: physical-operators/DescribeTableExec.md
-        - physical-operators/DeserializeToObjectExec.md
-        - DropNamespaceExec: physical-operators/DropNamespaceExec.md
-        - DropTableExec: physical-operators/DropTableExec.md
-        - physical-operators/ExecutedCommandExec.md
-        - physical-operators/ExpandExec.md
-        - physical-operators/ExternalRDDScanExec.md
-        - FileSourceScanExec: physical-operators/FileSourceScanExec.md
-        - physical-operators/FilterExec.md
-        - physical-operators/GenerateExec.md
-        - HashAggregateExec: physical-operators/HashAggregateExec.md
-        - physical-operators/InMemoryTableScanExec.md
-        - InputAdapter: physical-operators/InputAdapter.md
-        - InputRDDCodegen: physical-operators/InputRDDCodegen.md
-        - physical-operators/LocalTableScanExec.md
-        - physical-operators/MapElementsExec.md
-        - MapPartitionsExec: physical-operators/MapPartitionsExec.md
-        - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
-        - physical-operators/ObjectProducerExec.md
-        - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
-        - OverwriteByExpressionExecV1: physical-operators/OverwriteByExpressionExecV1.md
-        - OverwritePartitionsDynamicExec: physical-operators/OverwritePartitionsDynamicExec.md
-        - ProjectExec: physical-operators/ProjectExec.md
-        - physical-operators/RangeExec.md
-        - physical-operators/RDDScanExec.md
-        - RefreshTableExec: physical-operators/RefreshTableExec.md
-        - RenameTableExec: physical-operators/RenameTableExec.md
-        - ReplaceTableAsSelectExec: physical-operators/ReplaceTableAsSelectExec.md
-        - ReplaceTableExec: physical-operators/ReplaceTableExec.md
-        - physical-operators/ReusedExchangeExec.md
-        - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
-        - RowToColumnarExec: physical-operators/RowToColumnarExec.md
-        - physical-operators/SampleExec.md
-        - physical-operators/SerializeFromObjectExec.md
-        - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
-        - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
-        - ShowTablesExec: physical-operators/ShowTablesExec.md
-        - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
-        - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
-        - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
-        - physical-operators/SortAggregateExec.md
-        - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
-        - physical-operators/SortExec.md
-        - physical-operators/SubqueryExec.md
-        - SubqueryBroadcastExec: physical-operators/SubqueryBroadcastExec.md
-        - TakeOrderedAndProjectExec: physical-operators/TakeOrderedAndProjectExec.md
-        - WindowExec:
-          - physical-operators/WindowExec.md
-          - physical-operators/AggregateProcessor.md
-          - physical-operators/WindowFunctionFrame.md
-        - physical-operators/WholeStageCodegenExec.md
-        - physical-operators/WriteToDataSourceV2Exec.md
+      - AppendDataExec: physical-operators/AppendDataExec.md
+      - AppendDataExecV1: physical-operators/AppendDataExecV1.md
+      - AlterTableExec: physical-operators/AlterTableExec.md
+      - AtomicCreateTableAsSelectExec: physical-operators/AtomicCreateTableAsSelectExec.md
+      - AtomicReplaceTableAsSelectExec: physical-operators/AtomicReplaceTableAsSelectExec.md
+      - AtomicReplaceTableExec: physical-operators/AtomicReplaceTableExec.md
+      - BatchScanExec: physical-operators/BatchScanExec.md
+      - BlockingOperatorWithCodegen: physical-operators/BlockingOperatorWithCodegen.md
+      - BroadcastExchangeExec: physical-operators/BroadcastExchangeExec.md
+      - BroadcastExchangeLike: physical-operators/BroadcastExchangeLike.md
+      - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
+      - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
+      - physical-operators/CartesianProductExec.md
+      - physical-operators/CoalesceExec.md
+      - physical-operators/CoGroupExec.md
+      - CollectLimitExec: physical-operators/CollectLimitExec.md
+      - CollectMetricsExec: physical-operators/CollectMetricsExec.md
+      - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
+      - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
+      - CreateTableExec: physical-operators/CreateTableExec.md
+      - CustomShuffleReaderExec: physical-operators/CustomShuffleReaderExec.md
+      - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
+      - physical-operators/DataWritingCommandExec.md
+      - physical-operators/DebugExec.md
+      - DeleteFromTableExec: physical-operators/DeleteFromTableExec.md
+      - DescribeTableExec: physical-operators/DescribeTableExec.md
+      - physical-operators/DeserializeToObjectExec.md
+      - DropNamespaceExec: physical-operators/DropNamespaceExec.md
+      - DropTableExec: physical-operators/DropTableExec.md
+      - physical-operators/ExecutedCommandExec.md
+      - physical-operators/ExpandExec.md
+      - physical-operators/ExternalRDDScanExec.md
+      - FileSourceScanExec: physical-operators/FileSourceScanExec.md
+      - physical-operators/FilterExec.md
+      - physical-operators/GenerateExec.md
+      - HashAggregateExec: physical-operators/HashAggregateExec.md
+      - physical-operators/InMemoryTableScanExec.md
+      - InputAdapter: physical-operators/InputAdapter.md
+      - InputRDDCodegen: physical-operators/InputRDDCodegen.md
+      - physical-operators/LocalTableScanExec.md
+      - physical-operators/MapElementsExec.md
+      - MapPartitionsExec: physical-operators/MapPartitionsExec.md
+      - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
+      - physical-operators/ObjectProducerExec.md
+      - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+      - OverwriteByExpressionExecV1: physical-operators/OverwriteByExpressionExecV1.md
+      - OverwritePartitionsDynamicExec: physical-operators/OverwritePartitionsDynamicExec.md
+      - ProjectExec: physical-operators/ProjectExec.md
+      - physical-operators/RangeExec.md
+      - physical-operators/RDDScanExec.md
+      - RefreshTableExec: physical-operators/RefreshTableExec.md
+      - RenameTableExec: physical-operators/RenameTableExec.md
+      - ReplaceTableAsSelectExec: physical-operators/ReplaceTableAsSelectExec.md
+      - ReplaceTableExec: physical-operators/ReplaceTableExec.md
+      - physical-operators/ReusedExchangeExec.md
+      - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
+      - RowToColumnarExec: physical-operators/RowToColumnarExec.md
+      - physical-operators/SampleExec.md
+      - physical-operators/SerializeFromObjectExec.md
+      - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
+      - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
+      - ShowTablesExec: physical-operators/ShowTablesExec.md
+      - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
+      - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
+      - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
+      - physical-operators/SortAggregateExec.md
+      - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
+      - physical-operators/SortExec.md
+      - physical-operators/SubqueryExec.md
+      - SubqueryBroadcastExec: physical-operators/SubqueryBroadcastExec.md
+      - TakeOrderedAndProjectExec: physical-operators/TakeOrderedAndProjectExec.md
+      - WindowExec:
+        - physical-operators/WindowExec.md
+        - physical-operators/AggregateProcessor.md
+        - physical-operators/WindowFunctionFrame.md
+      - physical-operators/WholeStageCodegenExec.md
+      - physical-operators/WriteToDataSourceV2Exec.md
     - Logical Analysis Rules:
       - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
       - AliasViewChild: logical-analysis-rules/AliasViewChild.md
@@ -814,11 +812,6 @@ nav:
       - tungsten/index.md
       - InternalRow: InternalRow.md
       - UnsafeRow: UnsafeRow.md
-      - AggregationIterators:
-        - AggregationIterator: AggregationIterator.md
-        - ObjectAggregationIterator: ObjectAggregationIterator.md
-        - SortBasedAggregationIterator: SortBasedAggregationIterator.md
-        - TungstenAggregationIterator: TungstenAggregationIterator.md
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
@@ -827,9 +820,6 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
-    - DataSourceRDD: DataSourceRDD.md
-    - DataSourceRDDPartition: DataSourceRDDPartition.md
-    - DataWritingSparkTask: DataWritingSparkTask.md
   - New &amp; Noteworthy:
     - Join Queries:
       - Joins: joins.md
@@ -929,10 +919,14 @@ nav:
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
-  - Extras:
+  - Misc:
+    - DataSourceRDD: DataSourceRDD.md
+    - DataSourceRDDPartition: DataSourceRDDPartition.md
+    - DataWritingSparkTask: DataWritingSparkTask.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
     - DataSourceV2Utils: DataSourceV2Utils.md
+    - Implicits: implicits.md
     - Row: Row.md
     - Data Source API:
       - DataSource API: spark-sql-datasource-api.md
@@ -985,6 +979,11 @@ nav:
       - spark-sql-caching-webui-storage.md
     - spark-sql-checkpointing.md
     - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
+    - AggregationIterators:
+      - AggregationIterator: AggregationIterator.md
+      - ObjectAggregationIterator: ObjectAggregationIterator.md
+      - SortBasedAggregationIterator: SortBasedAggregationIterator.md
+      - TungstenAggregationIterator: TungstenAggregationIterator.md
     - FileScanRDD: rdds/FileScanRDD.md
     - Monitoring:
       - SQLTab: SQLTab.md
