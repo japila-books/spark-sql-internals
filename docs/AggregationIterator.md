@@ -1,139 +1,34 @@
-title: AggregationIterator
+# AggregationIterators
 
-# AggregationIterator -- Generic Iterator of UnsafeRows for Aggregate Physical Operators
+`AggregationIterator` is an [abstraction](#contract) of [iterators](#implementations) of [UnsafeRow](UnsafeRow.md)s.
 
-`AggregationIterator` is the base for <<implementations, iterators>> of <<UnsafeRow.md, UnsafeRows>> that...FIXME
+```scala
+abstract class AggregationIterator(...)
+extends Iterator[UnsafeRow]
+```
+
+From [scala.collection.Iterator]({{ scala.api }}/scala/collection/Iterator.html):
 
 > Iterators are data structures that allow to iterate over a sequence of elements. They have a `hasNext` method for checking if there is a next element available, and a `next` method which returns the next element and discards it from the iterator.
 
-[[implementations]]
-.AggregationIterator's Implementations
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
+## Implementations
 
-| [ObjectAggregationIterator](ObjectAggregationIterator.md)
-| Used when [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) physical operator is executed
-
-| [SortBasedAggregationIterator](SortBasedAggregationIterator.md)
-| Used when [SortAggregateExec](physical-operators/SortAggregateExec.md) physical operator is executed
-
-| [TungstenAggregationIterator](TungstenAggregationIterator.md)
-a| Used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is executed
-
-|===
-
-[[internal-registries]]
-.AggregationIterator's Internal Registries and Counters
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[aggregateFunctions]] `aggregateFunctions`
-| [Aggregate functions](expressions/AggregateFunction.md)
-
-Used when...FIXME
-
-| [[allImperativeAggregateFunctions]] `allImperativeAggregateFunctions`
-| [ImperativeAggregate](expressions/ImperativeAggregate.md) functions
-
-Used when...FIXME
-
-| [[allImperativeAggregateFunctionPositions]] `allImperativeAggregateFunctionPositions`
-| Positions
-
-Used when...FIXME
-
-| [[expressionAggInitialProjection]] `expressionAggInitialProjection`
-| `MutableProjection`
-
-Used when...FIXME
-
-| `generateOutput`
-a| [[generateOutput]] Function used to generate an [unsafe row](UnsafeRow.md) (i.e. `(UnsafeRow, InternalRow) => UnsafeRow`)
-
-Used when:
-
-* `ObjectAggregationIterator` is requested for the [next unsafe row](ObjectAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
-
-* `SortBasedAggregationIterator` is requested for the [next unsafe row](SortBasedAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
-
-* `TungstenAggregationIterator` is requested for the [next unsafe row](TungstenAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
-
-| [[groupingAttributes]] `groupingAttributes`
-| Grouping [attribute](expressions/Attribute.md)s
-
-Used when...FIXME
-
-| [[groupingProjection]] `groupingProjection`
-| [UnsafeProjection](expressions/UnsafeProjection.md)
-
-Used when...FIXME
-
-| [[processRow]] `processRow`
-| `(InternalRow, InternalRow) => Unit`
-
-Used when...FIXME
-|===
+* [ObjectAggregationIterator](ObjectAggregationIterator.md)
+* [SortBasedAggregationIterator](SortBasedAggregationIterator.md)
+* [TungstenAggregationIterator](TungstenAggregationIterator.md)
 
 ## Creating Instance
 
-`AggregationIterator` takes the following when created:
+`AggregationIterator` takes the following to be created:
 
-* [[groupingExpressions]] Grouping [named expressions](expressions/NamedExpression.md)
-* [[inputAttributes]] Input [attribute](expressions/Attribute.md)s
-* [[aggregateExpressions]] [Aggregate expressions](expressions/AggregateExpression.md)
-* [[aggregateAttributes]] Aggregate [attribute](expressions/Attribute.md)s
-* [[initialInputBufferOffset]] Initial input buffer offset
-* [[resultExpressions]] Result [named expressions](expressions/NamedExpression.md)
-* [[newMutableProjection]] Function to create a new `MutableProjection` given expressions and attributes
+* <span id="partIndex"> Partition ID
+* <span id="groupingExpressions"> Grouping [NamedExpression](expressions/NamedExpression.md)s
+* <span id="inputAttributes"> Input [Attribute](expressions/Attribute.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](expressions/Attribute.md)s
+* <span id="initialInputBufferOffset"> Initial input buffer offset
+* <span id="resultExpressions"> Result [NamedExpression](expressions/NamedExpression.md)s
+* <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 
-!!! note
-    `AggregationIterator` is a Scala abstract class and cannot be created directly. It is created indirectly for the [concrete AggregationIterators](#implementations).
-
-=== [[initializeAggregateFunctions]] `initializeAggregateFunctions` Internal Method
-
-[source, scala]
-----
-initializeAggregateFunctions(
-  expressions: Seq[AggregateExpression],
-  startingInputBufferOffset: Int): Array[AggregateFunction]
-----
-
-`initializeAggregateFunctions`...FIXME
-
-NOTE: `initializeAggregateFunctions` is used when...FIXME
-
-=== [[generateProcessRow]] `generateProcessRow` Internal Method
-
-[source, scala]
-----
-generateProcessRow(
-  expressions: Seq[AggregateExpression],
-  functions: Seq[AggregateFunction],
-  inputAttributes: Seq[Attribute]): (InternalRow, InternalRow) => Unit
-----
-
-`generateProcessRow`...FIXME
-
-NOTE: `generateProcessRow` is used when...FIXME
-
-=== [[generateResultProjection]] `generateResultProjection` Method
-
-[source, scala]
-----
-generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
-----
-
-`generateResultProjection`...FIXME
-
-[NOTE]
-====
-`generateResultProjection` is used when:
-
-* `AggregationIterator` is <<generateOutput, created>>
-
-* `TungstenAggregationIterator` is requested for the <<TungstenAggregationIterator.md#generateResultProjection, generateResultProjection>>
-====
+??? note "Abstract Class"
+    `AggregationIterator` is an abstract class and cannot be created directly. It is created indirectly for the [concrete AggregationIterators](#implementations).

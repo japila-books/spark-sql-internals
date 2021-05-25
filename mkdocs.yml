@@ -814,11 +814,11 @@ nav:
       - tungsten/index.md
       - InternalRow: InternalRow.md
       - UnsafeRow: UnsafeRow.md
-      - AggregationIterator:
-        - AggregationIterator.md
-        - ObjectAggregationIterator.md
-        - SortBasedAggregationIterator.md
-        - TungstenAggregationIterator.md
+      - AggregationIterators:
+        - AggregationIterator: AggregationIterator.md
+        - ObjectAggregationIterator: ObjectAggregationIterator.md
+        - SortBasedAggregationIterator: SortBasedAggregationIterator.md
+        - TungstenAggregationIterator: TungstenAggregationIterator.md
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md

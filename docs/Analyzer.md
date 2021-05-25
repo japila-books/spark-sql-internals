@@ -2,7 +2,7 @@
 
 `Analyzer` (_Spark Analyzer_ or _Query Analyzer_) is the **logical query plan analyzer** that [validates and transforms an unresolved logical plan](#execute) to an **analyzed logical plan**.
 
-`Analyzer` is a [RuleExecutor](catalyst/RuleExecutor.md) of rules that transform [logical operators](logical-operators/LogicalPlan.md) (`RuleExecutor[LogicalPlan]`).
+`Analyzer` is a [RuleExecutor](catalyst/RuleExecutor.md) to transform [logical operators](logical-operators/LogicalPlan.md) (`RuleExecutor[LogicalPlan]`).
 
 ```text
 Analyzer: Unresolved Logical Plan ==> Analyzed Logical Plan
@@ -236,7 +236,7 @@ scala> println(analyzedPlan.numberedTreeString)
 
 ## <span id="fixedPoint"> FixedPoint
 
-`FixedPoint` with [maxIterations](#maxIterations) for <<Hints, Hints>>, <<Substitution, Substitution>>, <<Resolution, Resolution>> and <<Cleanup, Cleanup>> batches.
+`FixedPoint` with [maxIterations](#maxIterations) for [Hints](#Hints), [Substitution](#Substitution), [Resolution](#Resolution) and [Cleanup](#Cleanup) batches.
 
 ## <span id="expandRelationName"> expandRelationName
 
