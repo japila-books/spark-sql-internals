@@ -478,6 +478,7 @@ nav:
       - AggregateExpression: expressions/AggregateExpression.md
       - AggregateFunction: expressions/AggregateFunction.md
       - AggregateWindowFunction: expressions/AggregateWindowFunction.md
+      - Aggregator: expressions/Aggregator.md
       - AttributeReference: expressions/AttributeReference.md
       - Alias: expressions/Alias.md
       - Attribute: expressions/Attribute.md
@@ -987,7 +988,6 @@ nav:
       - spark-sql-caching-webui-storage.md
     - spark-sql-checkpointing.md
     - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
-    - Aggregator: Aggregator.md
     - FileScanRDD: rdds/FileScanRDD.md
     - Monitoring:
       - SQLTab: SQLTab.md

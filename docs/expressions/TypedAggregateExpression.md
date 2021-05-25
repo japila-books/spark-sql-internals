@@ -1,5 +1,3 @@
-title: TypedAggregateExpression
-
 # TypedAggregateExpression Expression
 
 `TypedAggregateExpression` is the <<contract, contract>> for spark-sql-Expression-AggregateFunction.md[AggregateFunction] expressions that...FIXME
@@ -34,7 +32,7 @@ trait TypedAggregateExpression extends AggregateFunction {
 | Description
 
 | [[aggregator]] `aggregator`
-| [Aggregator](../Aggregator.md)
+| [Aggregator](Aggregator.md)
 
 | [[inputClass]] `inputClass`
 | Used when...FIXME
@@ -73,4 +71,4 @@ apply[BUF : Encoder, OUT : Encoder](
 
 `apply`...FIXME
 
-`apply` is used when `Aggregator` is requested to [convert itself to a TypedColumn](../Aggregator.md#toColumn).
+`apply` is used when `Aggregator` is requested to [convert itself to a TypedColumn](Aggregator.md#toColumn).

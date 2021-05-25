@@ -4,7 +4,7 @@
 
 `ComplexTypedAggregateExpression` takes the following to be created:
 
-* [[aggregator]] [Aggregator](../Aggregator.md)
+* [[aggregator]] [Aggregator](Aggregator.md)
 * [[inputDeserializer]] Optional input deserializer [expression](Expression.md)
 * [[inputClass]] Optional Java class for the input
 * [[inputSchema]] Optional [schema](../StructType.md) for the input
