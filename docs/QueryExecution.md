@@ -131,7 +131,7 @@ stringWithStats: String
 **Physical Query Optimizations** are [Catalyst Rules](catalyst/Rule.md) for transforming [physical operators](physical-operators/SparkPlan.md) (to be more efficient and optimized for execution). They are executed in the following order:
 
 1. [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) (if defined)
-1. [CoalesceBucketsInJoin](adaptive-query-execution/CoalesceBucketsInJoin.md)
+1. [CoalesceBucketsInJoin](physical-optimizations/CoalesceBucketsInJoin.md)
 1. [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md)
 1. [PlanSubqueries](physical-optimizations/PlanSubqueries.md)
 1. [RemoveRedundantProjects](physical-optimizations/RemoveRedundantProjects.md)

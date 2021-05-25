@@ -43,7 +43,7 @@ NOTE: Aggregate functions are not [foldable](Expression.md#foldable), i.e. FIXME
 |
 |
 
-| [[TypedAggregateExpression]] spark-sql-Expression-TypedAggregateExpression.md[TypedAggregateExpression]
+| TypedAggregateExpression
 |
 |
 |===

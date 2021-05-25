@@ -490,7 +490,6 @@ nav:
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
       - CodegenFallback: expressions/CodegenFallback.md
       - CollectionGenerator: expressions/CollectionGenerator.md
-      - ComplexTypedAggregateExpression: expressions/ComplexTypedAggregateExpression.md
       - CreateArray: expressions/CreateArray.md
       - CreateNamedStruct: expressions/CreateNamedStruct.md
       - CreateNamedStructLike: expressions/CreateNamedStructLike.md
@@ -555,7 +554,6 @@ nav:
       - expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md
       - ScalaUDF: expressions/ScalaUDF.md
       - ScalaUDAF: expressions/ScalaUDAF.md
-      - SimpleTypedAggregateExpression: expressions/SimpleTypedAggregateExpression.md
       - SizeBasedWindowFunction: expressions/SizeBasedWindowFunction.md
       - SortOrder: expressions/SortOrder.md
       - Stack: expressions/Stack.md
@@ -563,7 +561,6 @@ nav:
       - StaticInvoke: expressions/StaticInvoke.md
       - SubqueryExpression: expressions/SubqueryExpression.md
       - TimeWindow: expressions/TimeWindow.md
-      - TypedAggregateExpression: expressions/TypedAggregateExpression.md
       - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
       - UnaryExpression: expressions/UnaryExpression.md
       - Unevaluable: expressions/Unevaluable.md

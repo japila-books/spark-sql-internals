@@ -1,5 +1,3 @@
-title: DeclarativeAggregate
-
 # DeclarativeAggregate -- Unevaluable Aggregate Function Expressions
 
 `DeclarativeAggregate` is an <<contract, extension>> of the <<spark-sql-Expression-AggregateFunction.md#, AggregateFunction Contract>> for <<implementations, aggregate function expressions>> that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
@@ -92,7 +90,7 @@ updateExpressions: Seq[Expression]
 | Min
 | [[Min]]
 
-| <<spark-sql-Expression-SimpleTypedAggregateExpression.md#, SimpleTypedAggregateExpression>>
+| SimpleTypedAggregateExpression
 | [[SimpleTypedAggregateExpression]]
 
 | Sum

@@ -30,7 +30,7 @@ finish(
 
 Used when:
 
-* `ComplexTypedAggregateExpression` is requested to [eval](ComplexTypedAggregateExpression.md#eval)
+* `ComplexTypedAggregateExpression` is requested to `eval`
 * `ScalaAggregator` is requested to `eval`
 
 ### <span id="merge"> merge
@@ -43,7 +43,7 @@ merge(
 
 Used when:
 
-* `ComplexTypedAggregateExpression` is requested to [merge](ComplexTypedAggregateExpression.md#merge)
+* `ComplexTypedAggregateExpression` is requested to `merge`
 * `ScalaAggregator` is requested to `merge`
 
 ### <span id="outputEncoder"> outputEncoder
@@ -67,7 +67,7 @@ reduce(
 
 Used when:
 
-* `ComplexTypedAggregateExpression` is requested to [update](ComplexTypedAggregateExpression.md#update)
+* `ComplexTypedAggregateExpression` is requested to `update`
 * `ScalaAggregator` is requested to `update`
 
 ### <span id="zero"> zero
@@ -78,8 +78,8 @@ zero: BUF
 
 Used when:
 
-* `SimpleTypedAggregateExpression` is requested for [initialValues](SimpleTypedAggregateExpression.md#initialValues)
-* `ComplexTypedAggregateExpression` is requested to [createAggregationBuffer](ComplexTypedAggregateExpression.md#createAggregationBuffer)
+* `SimpleTypedAggregateExpression` is requested for `initialValues`
+* `ComplexTypedAggregateExpression` is requested to `createAggregationBuffer`
 * `ScalaAggregator` is requested to `createAggregationBuffer`
 
 ## Implementations

@@ -50,4 +50,4 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * <<spark-sql-functions.md#struct, struct>> standard function is used
 
-* `SimpleTypedAggregateExpression` expression is requested for the <<spark-sql-Expression-SimpleTypedAggregateExpression.md#evaluateExpression, evaluateExpression>> and <<spark-sql-Expression-SimpleTypedAggregateExpression.md#resultObjToRow, resultObjToRow>>
+* `SimpleTypedAggregateExpression` expression is requested `evaluateExpression` and `resultObjToRow`

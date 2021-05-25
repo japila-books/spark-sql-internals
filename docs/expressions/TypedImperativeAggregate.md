@@ -35,7 +35,7 @@
 | `Collect`
 |
 
-| spark-sql-Expression-ComplexTypedAggregateExpression.md[ComplexTypedAggregateExpression]
+| ComplexTypedAggregateExpression
 |
 
 | `CountMinSketchAgg`
