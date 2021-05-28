@@ -171,9 +171,39 @@ ANTLR labeled alternative: `#insertOverwriteTable`
 !!! note
     `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
 
-### visitMergeIntoTable
+### <span id="visitMergeIntoTable"> visitMergeIntoTable
 
-Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md)
+Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md) logical command
+
+```text
+MERGE INTO target targetAlias
+USING (source | '(' sourceQuery ')') sourceAlias
+ON mergeCondition
+matchedClause*
+notMatchedClause*
+
+matchedClause
+  : WHEN MATCHED (AND matchedCond)? THEN matchedAction
+
+notMatchedClause
+  : WHEN NOT MATCHED (AND notMatchedCond)? THEN notMatchedAction
+
+matchedAction
+  : DELETE
+  | UPDATE SET *
+  | UPDATE SET assignment (',' assignment)*
+
+notMatchedAction
+  : INSERT *
+  | INSERT '(' columns ')'
+    VALUES '(' expression (',' expression)* ')'
+```
+
+Requirements:
+
+1. There must be at least one `WHEN` clause
+1. When there are more than one `MATCHED` clauses, only the last `MATCHED` clause can omit the condition
+1. When there are more than one `NOT MATCHED` clauses, only the last `NOT MATCHED` clause can omit the condition
 
 ANTLR labeled alternative: `#mergeIntoTable`
 

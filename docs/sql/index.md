@@ -23,35 +23,7 @@ Let's take a look at `MERGE INTO` SQL statement to deep dive into how Spark SQL 
 
     It is not finished yet since [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `UnsupportedOperationException` for `MERGE INTO` and `UPDATE` SQL statements.
 
-`MERGE INTO` is described in [SqlBase.g4](AstBuilder.md#grammar) grammar (in `#mergeIntoTable` labeled alternative) as follows:
-
-```text
-MERGE INTO target=multipartIdentifier targetAlias=tableAlias
-    USING (source=multipartIdentifier |
-        '(' sourceQuery=query')') sourceAlias=tableAlias
-    ON mergeCondition=booleanExpression
-    matchedClause*
-    notMatchedClause*
-
-matchedClause
-    : WHEN MATCHED (AND matchedCond=booleanExpression)? THEN matchedAction
-    ;
-notMatchedClause
-    : WHEN NOT MATCHED (AND notMatchedCond=booleanExpression)? THEN notMatchedAction
-    ;
-
-matchedAction
-    : DELETE
-    | UPDATE SET ASTERISK
-    | UPDATE SET assignmentList
-    ;
-
-notMatchedAction
-    : INSERT ASTERISK
-    | INSERT '(' columns=multipartIdentifierList ')'
-        VALUES '(' expression (',' expression)* ')'
-    ;
-```
+`MERGE INTO` is described in [SqlBase.g4](AstBuilder.md#grammar) grammar (in `#mergeIntoTable` labeled alternative).
 
 `AstBuilder` [translates a `MERGE INTO` SQL query into a MergeIntoTable logical command](AstBuilder.md#visitMergeIntoTable).
 

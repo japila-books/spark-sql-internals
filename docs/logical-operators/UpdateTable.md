@@ -8,7 +8,7 @@
 
 `UpdateTable` takes the following to be created:
 
-* <span id="table"> [LogicalPlan](LogicalPlan.md) of the table
+* <span id="table"> Table ([LogicalPlan](LogicalPlan.md))
 * <span id="assignments"> `Assignment`s
 * <span id="condition"> Condition [Expression](../expressions/Expression.md) (optional)
 
