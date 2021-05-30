@@ -1,45 +1,32 @@
-# StructField &mdash; Single Field in StructType
+# StructField
 
-[[creating-instance]]
-`StructField` describes a single field in a [StructType](StructType.md) with the following:
+`StructField` is a named field of a [StructType](StructType.md).
 
-* [[name]] Name
-* [[dataType]] [DataType](DataType.md)
-* [[nullable]] `nullable` flag (enabled by default)
-* [[metadata]] `Metadata` (empty by default)
+## Creating Instance
 
-A comment is part of metadata under `comment` key and is used to build a Hive column or when describing a table.
+`StructField` takes the following to be created:
 
-[source, scala]
-----
-scala> schemaTyped("a").getComment
-res0: Option[String] = None
+* <span id="name"> Field Name
+* <span id="dataType"> [DataType](DataType.md)
+* <span id="nullable"> `nullable` flag (default: `true`)
+* <span id="metadata"> `Metadata` (default: `Metadata.empty`)
 
-scala> schemaTyped("a").withComment("this is a comment").getComment
-res1: Option[String] = Some(this is a comment)
-----
+## <span id="toDDL"> Converting to DDL Format
 
-As of Spark 2.4.0, `StructField` can be converted to DDL format using <<toDDL, toDDL>> method.
-
-.Example: Using StructField.toDDL
-[source, scala]
-----
-import org.apache.spark.sql.types.MetadataBuilder
-val metadata = new MetadataBuilder()
-  .putString("comment", "this is a comment")
-  .build
-import org.apache.spark.sql.types.{LongType, StructField}
-val f = new StructField(name = "id", dataType = LongType, nullable = false, metadata)
-scala> println(f.toDDL)
-`id` BIGINT COMMENT 'this is a comment'
-----
-
-=== [[toDDL]] Converting to DDL Format -- `toDDL` Method
-
-[source, scala]
-----
+```scala
 toDDL: String
-----
+```
+
+`toDDL` uses the [sql](DataType.md#sql) format of the [DataType](#dataType) and the [comment](#getDDLComment) for conversion:
+
+```text
+[name] [sql][comment]
+```
+
+`toDDL` is used when:
+
+* `StructType` is requested to [toDDL](StructType.md#toDDL)
+* [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md), `ShowCreateTableAsSerdeCommand` logical commands are executed
 
 `toDDL` gives a text in the format:
 
@@ -51,3 +38,40 @@ toDDL: String
 
 * `StructType` is requested to [convert itself to DDL format](StructType.md#toDDL)
 * [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md) logical command is executed
+
+## <span id="getComment"> Comment
+
+```scala
+getComment(): Option[String]
+```
+
+`getComment` is the value of the `comment` key in the [Metadata](#metadata) (if defined).
+
+## <span id="getDDLComment"> DDL Comment
+
+```scala
+getDDLComment: String
+```
+
+`getDDLComment`...FIXME
+
+## Demo
+
+```scala
+import org.apache.spark.sql.types.{LongType, StructField}
+val f = StructField(
+    name = "id",
+    dataType = LongType,
+    nullable = false)
+  .withComment("this is a comment")
+```
+
+```text
+scala> println(f)
+StructField(id,LongType,false)
+```
+
+```text
+scala> println(f.toDDL)
+`id` BIGINT COMMENT 'this is a comment'
+```
