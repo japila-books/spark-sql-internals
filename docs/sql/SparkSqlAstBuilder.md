@@ -121,13 +121,9 @@ Creates a [CreateTable](../logical-operators/CreateTable.md)
 
 ANTLR labeled alternative: `#createHiveTable`
 
-### visitCreateTable
+### <span id="visitCreateTable"> visitCreateTable
 
-Creates one of the following logical operators:
-
-* [CreateTable](../logical-operators/CreateTable.md) logical operator for `CREATE TABLE &hellip; AS &hellip;`
-
-* [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;`
+Creates [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;` or falls back to [AstBuilder](AstBuilder.md#visitCreateTable)
 
 ANTLR labeled alternative: `#createTable`
 
@@ -135,7 +131,7 @@ ANTLR labeled alternative: `#createTable`
 
 Creates a [CreateViewCommand](../logical-operators/CreateViewCommand.md) for `CREATE VIEW AS` SQL statement.
 
-```
+```sql
 CREATE [OR REPLACE] [[GLOBAL] TEMPORARY]
 VIEW [IF NOT EXISTS] tableIdentifier
 [identifierCommentList] [COMMENT STRING]

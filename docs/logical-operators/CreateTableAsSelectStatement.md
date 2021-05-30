@@ -30,5 +30,5 @@
 
 `CreateTableAsSelectStatement` is resolved to the following logical operators:
 
-* [CreateTableAsSelect](CreateTableAsSelect.md) logical command (by [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical resolution rule).
+* [CreateTableAsSelect](CreateTableAsSelect.md) logical command (by [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical resolution rule)
 * [CreateTable](CreateTable.md) or [CreateTableAsSelect](CreateTableAsSelect.md) logical commands (by [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule)

@@ -35,6 +35,20 @@ COMMENT ON TABLE tableIdentifier IS ('text' | NULL)
 
 ANTLR labeled alternative: `#commentTable`
 
+### <span id="visitCreateTable"> visitCreateTable
+
+Creates a [CreateTableAsSelectStatement](../logical-operators/CreateTableAsSelectStatement.md) or a [CreateTableStatement](../logical-operators/CreateTableStatement.md) logical command
+
+```text
+CREATE TEMPORARY? EXTERNAL? TABLE (IF NOT EXISTS)? [multipartIdentifier]
+  ('(' [colType] (',' [colType])* ')')?
+  (USING [multipartIdentifier])?
+  [createTableClauses]
+  (AS? query)?
+```
+
+ANTLR labeled alternative: `#createTable`
+
 ### <span id="visitDeleteFromTable"> visitDeleteFromTable
 
 Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md) logical command

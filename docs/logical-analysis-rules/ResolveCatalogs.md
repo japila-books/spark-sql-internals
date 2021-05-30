@@ -36,8 +36,8 @@ AlterViewSetPropertiesStatement    | throws a `AnalysisException`
 AlterViewUnsetPropertiesStatement  | throws a `AnalysisException`
 RenameTableStatement               | RenameTable
 DescribeColumnStatement            | throws a `AnalysisException`
-CreateTableStatement               | [CreateV2Table](../logical-operators/CreateV2Table.md)
-CreateTableAsSelectStatement       | CreateTableAsSelect
+[CreateTableStatement](../logical-operators/CreateTableStatement.md) | [CreateV2Table](../logical-operators/CreateV2Table.md)
+[CreateTableAsSelectStatement](../logical-operators/CreateTableAsSelectStatement.md) | CreateTableAsSelect
 RefreshTableStatement              | RefreshTable
 ReplaceTableStatement              | ReplaceTable
 ReplaceTableAsSelectStatement      | ReplaceTableAsSelect

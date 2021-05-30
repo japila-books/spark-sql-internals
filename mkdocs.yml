@@ -257,6 +257,7 @@ nav:
       - CreateTable: logical-operators/CreateTable.md
       - CreateTableAsSelectStatement: logical-operators/CreateTableAsSelectStatement.md
       - CreateTableCommand: logical-operators/CreateTableCommand.md
+      - CreateTableStatement: logical-operators/CreateTableStatement.md
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
       - CreateV2Table: logical-operators/CreateV2Table.md
       - CreateViewCommand: logical-operators/CreateViewCommand.md
