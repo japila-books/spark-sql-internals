@@ -29,7 +29,7 @@ Used when:
 
 * `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
 
-* `StructType` is requested to [add a field](../StructType.md#add)
+* `StructType` is requested to [add a field](../types/StructType.md#add)
 
 * [Column.cast](../Column.md#cast)
 
@@ -146,13 +146,13 @@ parseTableSchema(
   sqlText: String): StructType
 ```
 
-Parses a SQL text to a [StructType](../StructType.md)
+Parses a SQL text to a [StructType](../types/StructType.md)
 
 Used when:
 
 * `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
 
-* `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../StructType.md#fromDDL)
+* `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../types/StructType.md#fromDDL)
 
 * `JdbcUtils` utility is requested to [parseUserSpecifiedCreateTableColumnTypes](../datasources/jdbc/JdbcUtils.md#parseUserSpecifiedCreateTableColumnTypes) and [getCustomSchema](../datasources/jdbc/JdbcUtils.md#getCustomSchema)
 

@@ -40,7 +40,7 @@ scala> println(jsonExpr.numberedTreeString)
 a| `JacksonParser` with <<rowSchema, rowSchema>> and [JSON options](../datasources/json/JsonFileFormat.md#JSONOptions)
 
 | [[rowSchema]] `rowSchema`
-a| [StructType](../StructType.md) that...FIXME
+a| [StructType](../types/StructType.md) that...FIXME
 
 * <<schema, schema>> when of type `StructType`
 * `StructType` of the elements in <<schema, schema>> when of type [ArrayType](../types/ArrayType.md)

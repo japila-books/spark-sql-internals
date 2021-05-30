@@ -50,7 +50,7 @@ Used when:
 schema: StructType
 ```
 
-[Schema](StructType.md) of encoding this type of object as a [Row](Row.md)
+[Schema](types/StructType.md) of encoding this type of object as a [Row](Row.md)
 
 ## Implementations
 

@@ -113,7 +113,7 @@ fromProduct(
   data: Seq[Product]): LocalRelation
 ```
 
-`fromProduct` creates a `LocalRelation` with the given output [attributes](../expressions/Attribute.md) and the data converted to [InternalRow](../InternalRow.md)s (using a [Catalyst converter](../CatalystTypeConverters.md#createToCatalystConverter) from the [schema](../StructType.md#fromAttributes) of the given attributes).
+`fromProduct` creates a `LocalRelation` with the given output [attributes](../expressions/Attribute.md) and the data converted to [InternalRow](../InternalRow.md)s (using a [Catalyst converter](../CatalystTypeConverters.md#createToCatalystConverter) from the [schema](../types/StructType.md#fromAttributes) of the given attributes).
 
 ## Demo
 

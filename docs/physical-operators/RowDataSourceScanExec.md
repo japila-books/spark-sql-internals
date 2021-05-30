@@ -15,7 +15,7 @@ Key             | Name (in web UI)        | Description
 `RowDataSourceScanExec` takes the following to be created:
 
 * <span id="output"> Output Schema ([Attribute](../expressions/Attribute.md)s)
-* <span id="requiredSchema"> Required Schema ([StructType](../StructType.md))
+* <span id="requiredSchema"> Required Schema ([StructType](../types/StructType.md))
 * <span id="filters"> [Data Source Filter Predicate](../Filter.md)s
 * <span id="handledFilters"> Handled [Data Source Filter Predicate](../Filter.md)s
 * <span id="rdd"> `RDD[InternalRow]`
@@ -41,7 +41,7 @@ metadata: Map[String, String]
 
 In the end, `metadata` creates the following mapping:
 
-* **ReadSchema** with the [required schema](#requiredSchema) converted to [catalog representation](../StructType.md#catalogString)
+* **ReadSchema** with the [required schema](#requiredSchema) converted to [catalog representation](../types/StructType.md#catalogString)
 * **PushedFilters** with the marked and unmarked [filter predicates](#filters)
 
 ## <span id="doExecute"> Executing Physical Operator

@@ -6,7 +6,7 @@ NOTE: `DataFrame` type is a mere type alias for `Dataset[Row]` that expects a `E
 
 `RowEncoder` is an `object` in Scala with <<apply, apply>> and other factory methods.
 
-`RowEncoder` can create `ExpressionEncoder[Row]` from a [schema](StructType.md) (using <<apply, apply method>>).
+`RowEncoder` can create `ExpressionEncoder[Row]` from a [schema](types/StructType.md) (using <<apply, apply method>>).
 
 ```text
 import org.apache.spark.sql.types._
@@ -30,7 +30,7 @@ res0: Boolean = false
 apply(schema: StructType): ExpressionEncoder[Row]
 ----
 
-`apply` builds [ExpressionEncoder](ExpressionEncoder.md) of [Row](Row.md), i.e. `ExpressionEncoder[Row]`, from the input [StructType](spark-sql-schema.md) (as `schema`).
+`apply` builds [ExpressionEncoder](ExpressionEncoder.md) of [Row](Row.md), i.e. `ExpressionEncoder[Row]`, from the input [StructType](types/index.md) (as `schema`).
 
 Internally, `apply` creates a [BoundReference](expressions/BoundReference.md) for the [Row](Row.md) type and returns a `ExpressionEncoder[Row]` for the input `schema`, a `CreateNamedStruct` serializer (using <<serializerFor, `serializerFor` internal method>>), a deserializer for the schema, and the `Row` type.
 

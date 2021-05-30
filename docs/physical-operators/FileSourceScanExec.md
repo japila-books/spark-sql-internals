@@ -171,7 +171,7 @@ metadata: Map[String, String]
 
 * <span id="relation"> [HadoopFsRelation](../HadoopFsRelation.md)
 * <span id="output"> Output [Attribute](../expressions/Attribute.md)s
-* <span id="requiredSchema"> Required [Schema](../StructType.md)
+* <span id="requiredSchema"> Required [Schema](../types/StructType.md)
 * <span id="partitionFilters"> Partition Filter [Expression](../expressions/Expression.md)s
 * <span id="optionalBucketSet"> `optionalBucketSet`
 * <span id="optionalNumCoalescedBuckets"> `optionalNumCoalescedBuckets`

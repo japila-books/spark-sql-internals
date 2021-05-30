@@ -7,7 +7,7 @@
 Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (with many features of HiveQL) and the high-level SQL-like functional declarative [Dataset API](Dataset.md) (_Structured Query DSL_).
 
 !!! note
-    Semi- and structured data are collections of records that can be described using [schema](spark-sql-schema.md) with column names, their types and whether a column can be null or not (_nullability_).
+    Semi- and structured data are collections of records that can be described using [schema](types/index.md) with column names, their types and whether a column can be null or not (_nullability_).
 
 Spark SQL comes with a uniform interface for data access in distributed storage systems like Cassandra or HDFS (Hive, Parquet, JSON) using specialized [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) objects.
 

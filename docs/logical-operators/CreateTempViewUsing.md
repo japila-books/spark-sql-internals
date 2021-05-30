@@ -48,7 +48,7 @@ Hive data source can only be used with tables, you can't use it with CREATE TEMP
 `CreateTempViewUsing` takes the following when created:
 
 * [[tableIdent]] `TableIdentifier`
-* [[userSpecifiedSchema]] Optional user-defined schema ([StructType](../StructType.md))
+* [[userSpecifiedSchema]] Optional user-defined schema ([StructType](../types/StructType.md))
 * [[replace]] `replace` flag
 * [[global]] `global` flag
 * [[provider]] Name of the [data source provider](../DataSource.md)

@@ -46,4 +46,4 @@ Default: `null`
 
 ## <span id="MetadataColumnsHelper"> MetadataColumnsHelper
 
-`MetadataColumn`s can be converted (_implicitly_) to [StructType](../StructType.md)s or [AttributeReference](../expressions/AttributeReference.md)s using [MetadataColumnsHelper](MetadataColumnsHelper.md) implicit class.
+`MetadataColumn`s can be converted (_implicitly_) to [StructType](../types/StructType.md)s or [AttributeReference](../expressions/AttributeReference.md)s using [MetadataColumnsHelper](MetadataColumnsHelper.md) implicit class.

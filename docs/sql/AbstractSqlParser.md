@@ -14,7 +14,7 @@ astBuilder: AstBuilder
 
 ## Implementations
 
-* [CatalystSqlParser](CatalystSqlParser.md) for parsing canonical textual representation of [data types](../types/DataType.md) and [schema](../StructType.md)
+* [CatalystSqlParser](CatalystSqlParser.md) for parsing canonical textual representation of [data types](../types/DataType.md) and [schema](../types/StructType.md)
 
 * [SparkSqlParser](SparkSqlParser.md) that is the default SQL parser in [SessionState](../SessionState.md#sqlParser)
 

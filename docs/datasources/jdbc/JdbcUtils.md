@@ -208,13 +208,13 @@ getCustomSchema(
   nameEquality: Resolver): StructType
 ----
 
-`getCustomSchema` replaces the data type of the fields in the input `tableSchema` [schema](../../StructType.md) that are included in the input `customSchema` (if defined).
+`getCustomSchema` replaces the data type of the fields in the input `tableSchema` [schema](../../types/StructType.md) that are included in the input `customSchema` (if defined).
 
 Internally, `getCustomSchema` branches off per the input `customSchema`.
 
 If the input `customSchema` is undefined or empty, `getCustomSchema` simply returns the input `tableSchema` unchanged.
 
-Otherwise, if the input `customSchema` is not empty, `getCustomSchema` requests `CatalystSqlParser` to spark-sql-AbstractSqlParser.md#parseTableSchema[parse it] (i.e. create a new [StructType](../../StructType.md) for the given `customSchema` canonical schema representation).
+Otherwise, if the input `customSchema` is not empty, `getCustomSchema` requests `CatalystSqlParser` to spark-sql-AbstractSqlParser.md#parseTableSchema[parse it] (i.e. create a new [StructType](../../types/StructType.md) for the given `customSchema` canonical schema representation).
 
 `getCustomSchema` then uses `SchemaUtils` to spark-sql-SchemaUtils.md#checkColumnNameDuplication[checkColumnNameDuplication] (in the column names of the user-defined `customSchema` schema with the input `nameEquality`).
 

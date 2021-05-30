@@ -25,7 +25,7 @@ sqlContext: SQLContext
 schema: StructType
 ```
 
-[Schema](StructType.md) of the tuples of the relation
+[Schema](types/StructType.md) of the tuples of the relation
 
 ### <span id="sizeInBytes"> Size
 

@@ -146,7 +146,7 @@ trait Generator extends Expression {
 | Description
 
 | [[elementSchema]] `elementSchema`
-| [Schema](../StructType.md) of the elements to be generated
+| [Schema](../types/StructType.md) of the elements to be generated
 
 | [[eval]] `eval`
 |

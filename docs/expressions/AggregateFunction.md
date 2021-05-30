@@ -67,7 +67,7 @@ abstract class AggregateFunction extends Expression {
 | Description
 
 | [[aggBufferSchema]] `aggBufferSchema`
-| [Schema](../StructType.md) of an aggregation buffer to hold partial aggregate results.
+| [Schema](../types/StructType.md) of an aggregation buffer to hold partial aggregate results.
 
 Used mostly in expressions/ScalaUDAF.md[ScalaUDAF] and AggregationIterator.md#initializeAggregateFunctions[AggregationIterator]
 

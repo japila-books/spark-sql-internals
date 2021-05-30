@@ -106,7 +106,7 @@ NOTE: `expand` is part of Star.md#expand[Star Contract] to...FIXME.
 
 With no result earlier, `expand` then requests the `input` logical query plan to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>> name parts to a named expression.
 
-For a named expression of [StructType](../StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a [GetStructField](GetStructField.md) unary expression (with the resolved named expression and the field index).
+For a named expression of [StructType](../types/StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a [GetStructField](GetStructField.md) unary expression (with the resolved named expression and the field index).
 
 ```text
 val q = Seq((0, "zero")).toDF("id", "name").select(struct("id", "name") as "s")
@@ -129,7 +129,7 @@ scala> getStructFields.foreach(println)
 
 `expand` reports a `AnalysisException` when:
 
-* The Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>>) is not a [StructType](../StructType.md).
+* The Expression.md#dataType[data type] of the named expression (when the `input` logical plan was requested to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>>) is not a [StructType](../types/StructType.md).
 +
 ```
 Can only star expand struct data types. Attribute: `[target]`

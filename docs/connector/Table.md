@@ -63,7 +63,7 @@ Used when:
 StructType schema()
 ```
 
-[StructType](../StructType.md) of the table
+[StructType](../types/StructType.md) of the table
 
 Used when:
 

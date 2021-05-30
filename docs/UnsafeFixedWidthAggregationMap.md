@@ -39,7 +39,7 @@ boolean supportsAggregationBufferSchema(
   StructType schema)
 ```
 
-`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a [field](StructField.md) (in the [fields](StructType.md#fields) of the input [schema](StructType.md)) whose [data type](StructField.md#dataType) is not [mutable](UnsafeRow.md#isMutable).
+`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a [field](types/StructField.md) (in the [fields](types/StructType.md#fields) of the input [schema](types/StructType.md)) whose [data type](types/StructField.md#dataType) is not [mutable](UnsafeRow.md#isMutable).
 
 [NOTE]
 ====
@@ -68,8 +68,8 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 `UnsafeFixedWidthAggregationMap` takes the following when created:
 
 * [[emptyAggregationBuffer]] Empty aggregation buffer (as an [InternalRow](InternalRow.md))
-* [[aggregationBufferSchema]] Aggregation buffer [schema](StructType.md)
-* [[groupingKeySchema]] Grouping key [schema](StructType.md)
+* [[aggregationBufferSchema]] Aggregation buffer [schema](types/StructType.md)
+* [[groupingKeySchema]] Grouping key [schema](types/StructType.md)
 * [[taskMemoryManager]] Spark Core's `TaskMemoryManager`
 * [[initialCapacity]] Initial capacity
 * [[pageSizeBytes]] Page size (in bytes)

@@ -34,5 +34,5 @@ Used when:
 * MapType
 * NullType
 * ObjectType
-* [StructType](../StructType.md)
+* [StructType](StructType.md)
 * UserDefinedType

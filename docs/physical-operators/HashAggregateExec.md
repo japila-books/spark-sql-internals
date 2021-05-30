@@ -342,7 +342,7 @@ supportsAggregate(
   aggregateBufferAttributes: Seq[Attribute]): Boolean
 ```
 
-`supportsAggregate` firstly [creates the schema](../StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to [supportsAggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) (i.e. the schema uses [mutable field data types](../UnsafeRow.md#mutableFieldTypes) only that have fixed length and can be mutated in place in an [UnsafeRow](../UnsafeRow.md)).
+`supportsAggregate` firstly [creates the schema](../types/StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to [supportsAggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) (i.e. the schema uses [mutable field data types](../UnsafeRow.md#mutableFieldTypes) only that have fixed length and can be mutated in place in an [UnsafeRow](../UnsafeRow.md)).
 
 `supportsAggregate` is used when:
 
@@ -361,10 +361,10 @@ supportsAggregate(
 | [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
 
 | bufferSchema
-| [[bufferSchema]] [StructType](../StructType.md#fromAttributes) built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
+| [[bufferSchema]] [StructType](../types/StructType.md#fromAttributes) built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
 
 | groupingKeySchema
-| [[groupingKeySchema]] [StructType](../StructType.md#fromAttributes) built from the <<groupingAttributes, groupingAttributes>>
+| [[groupingKeySchema]] [StructType](../types/StructType.md#fromAttributes) built from the <<groupingAttributes, groupingAttributes>>
 
 | groupingAttributes
 | [[groupingAttributes]] <<expressions/NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>

@@ -52,15 +52,6 @@ NOTE: Properties that start with *spark.sql* are reserved for Spark SQL.
 
 === [[creating-dataframes]] Creating DataFrames
 
-==== emptyDataFrame
-
-[source, scala]
-----
-emptyDataFrame: DataFrame
-----
-
-`emptyDataFrame` creates an empty `DataFrame`. It calls `createDataFrame` with an empty `RDD[Row]` and an empty schema spark-sql-schema.md[StructType(Nil)].
-
 ==== createDataFrame for RDD and Seq
 
 [source, scala]

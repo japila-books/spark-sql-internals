@@ -82,7 +82,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 * [[identifier]] `TableIdentifier`
 * [[tableType]] [Table type](#CatalogTableType)
 * [[storage]] [CatalogStorageFormat](CatalogStorageFormat.md)
-* [[schema]] [Schema](StructType.md)
+* [[schema]] [Schema](types/StructType.md)
 * [[provider]] Name of the table provider (optional)
 * [[partitionColumnNames]] Partition column names
 * [[bucketSpec]] Optional [Bucketing specification](BucketSpec.md) (default: `None`)

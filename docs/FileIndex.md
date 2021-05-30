@@ -52,7 +52,7 @@ Used when `FileSourceScanExec` physical operator is requested for [partitions](p
 partitionSchema: StructType
 ```
 
-Partition schema ([StructType](StructType.md))
+Partition schema ([StructType](types/StructType.md))
 
 Used when:
 

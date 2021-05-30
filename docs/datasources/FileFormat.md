@@ -36,7 +36,7 @@ inferSchema(
   files: Seq[FileStatus]): Option[StructType]
 ```
 
-Infers the [schema](../StructType.md) of the given files (as Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es) if supported. Otherwise, `None` should be returned.
+Infers the [schema](../types/StructType.md) of the given files (as Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es) if supported. Otherwise, `None` should be returned.
 
 Used when:
 

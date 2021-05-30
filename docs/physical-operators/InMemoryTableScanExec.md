@@ -71,7 +71,7 @@ assert(inmemoryScan.supportCodegen == inmemoryScan.supportsBatch)
 | Description
 
 | [[columnarBatchSchema]] `columnarBatchSchema`
-| [Schema](../StructType.md) of a columnar batch
+| [Schema](../types/StructType.md) of a columnar batch
 
 Used exclusively when `InMemoryTableScanExec` is requested to <<createAndDecompressColumn, createAndDecompressColumn>>.
 

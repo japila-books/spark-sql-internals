@@ -13,7 +13,7 @@ isOrderable(
 
 * [NullType](../types/DataType.md#NullType)
 * [AtomicType](../types/AtomicType.md)
-* [StructType](../StructType.md) with all [fields](../StructType.md#fields) orderable (recursive)
+* [StructType](../types/StructType.md) with all [fields](../types/StructType.md#fields) orderable (recursive)
 * [ArrayType](../types/ArrayType.md) with orderable type of the elements
 * `UserDefinedType`
 

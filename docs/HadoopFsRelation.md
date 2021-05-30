@@ -7,8 +7,8 @@
 `HadoopFsRelation` takes the following to be created:
 
 * <span id="location"> [FileIndex](FileIndex.md)
-* <span id="partitionSchema"> Partition Schema ([StructType](StructType.md))
-* <span id="dataSchema"> Data Schema ([StructType](StructType.md))
+* <span id="partitionSchema"> Partition Schema ([StructType](types/StructType.md))
+* <span id="dataSchema"> Data Schema ([StructType](types/StructType.md))
 * Optional [bucketing specification](#bucketSpec)
 * <span id="fileFormat"> [FileFormat](datasources/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)

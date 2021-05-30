@@ -63,7 +63,7 @@ Default: All [DataType](../types/DataType.md)s are supported by default
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
 * <span id="options"> Options
 * <span id="paths"> Paths
-* <span id="userSpecifiedSchema"> Optional user-defined [schema](../StructType.md) (`Option[StructType]`)
+* <span id="userSpecifiedSchema"> Optional user-defined [schema](../types/StructType.md) (`Option[StructType]`)
 
 `FileTable` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileTables](#implementations).
 
@@ -87,7 +87,7 @@ capabilities: java.util.Set[TableCapability]
 dataSchema: StructType
 ```
 
-`dataSchema` is a [schema](../StructType.md) of the data of the file-backed table
+`dataSchema` is a [schema](../types/StructType.md) of the data of the file-backed table
 
 ??? note "Lazy Value"
     `dataSchema` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.

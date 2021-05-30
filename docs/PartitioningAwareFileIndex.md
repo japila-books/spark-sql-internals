@@ -41,7 +41,7 @@ Used for a [partition schema](#partitionSchema), to [list the files matching fil
 
 * <span id="sparkSession"> [SparkSession](SparkSession.md)
 * <span id="parameters"> Options for partition discovery (`Map[String, String]`)
-* <span id="userSpecifiedSchema"> Optional User-Defined [Schema](StructType.md)
+* <span id="userSpecifiedSchema"> Optional User-Defined [Schema](types/StructType.md)
 * <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
 
 ??? note "Abstract Class"

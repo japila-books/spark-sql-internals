@@ -40,7 +40,7 @@ When evaluated, `ScalaUDAF`...FIXME
 | Description
 
 | `aggBufferAttributes`
-| [AttributeReferences](../StructType.md#toAttributes) of <<aggBufferSchema, aggBufferSchema>>
+| [AttributeReferences](../types/StructType.md#toAttributes) of <<aggBufferSchema, aggBufferSchema>>
 
 | `aggBufferSchema`
 | [bufferSchema](../UserDefinedAggregateFunction.md#bufferSchema) of <<udaf, UserDefinedAggregateFunction>>

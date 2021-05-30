@@ -4,7 +4,7 @@
 `StructField` describes a single field in a [StructType](StructType.md) with the following:
 
 * [[name]] Name
-* [[dataType]] [DataType](types/DataType.md)
+* [[dataType]] [DataType](DataType.md)
 * [[nullable]] `nullable` flag (enabled by default)
 * [[metadata]] `Metadata` (empty by default)
 
@@ -50,4 +50,4 @@ toDDL: String
 `toDDL` is used when:
 
 * `StructType` is requested to [convert itself to DDL format](StructType.md#toDDL)
-* [ShowCreateTableCommand](logical-operators/ShowCreateTableCommand.md) logical command is executed
+* [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md) logical command is executed

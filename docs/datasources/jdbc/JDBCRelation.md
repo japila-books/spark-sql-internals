@@ -64,7 +64,7 @@ unhandledFilters(filters: Array[Filter]): Array[Filter]
 schema: StructType
 ----
 
-`schema` uses `JDBCRDD` to [resolveTable](JDBCRDD.md#resolveTable) given the [JDBCOptions](#jdbcOptions) (that simply returns the [schema](../../StructType.md) of the table, also known as the default table schema).
+`schema` uses `JDBCRDD` to [resolveTable](JDBCRDD.md#resolveTable) given the [JDBCOptions](#jdbcOptions) (that simply returns the [schema](../../types/StructType.md) of the table, also known as the default table schema).
 
 If [customSchema](JDBCOptions.md#customSchema) JDBC option was defined, `schema` uses `JdbcUtils` to [replace the data types in the default table schema](JdbcUtils.md#getCustomSchema).
 
