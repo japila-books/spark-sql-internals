@@ -9,3 +9,10 @@
 ```java
 MetadataColumn[] metadataColumns()
 ```
+
+[MetadataColumn](MetadataColumn.md)s of this table
+
+Used when:
+
+* `DataSourceV2Relation` is requested for the [metadata output](../logical-operators/DataSourceV2Relation.md#metadataOutput)
+* [DescribeTableExec](../physical-operators/DescribeTableExec.md) physical command is [executed](../physical-operators/DescribeTableExec.md#addMetadataColumns)
