@@ -46,6 +46,18 @@ In the end, `create` uses the new schema to [create a DataSourceV2Relation](#cre
 
 `DataSourceV2Relation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
+## <span id="metadataOutput"> Metadata Columns
+
+```scala
+metadataOutput: Seq[AttributeReference]
+```
+
+`metadataOutput` is part of the [LogicalPlan](LogicalPlan.md#metadataOutput) abstraction.
+
+`metadataOutput` requests the [Table](#table) for the [metadata columns](../connector/SupportsMetadataColumns.md#metadataColumns) (if it is a [SupportsMetadataColumns](../connector/SupportsMetadataColumns.md)).
+
+`metadataOutput` filters out metadata columns with the same name as regular [output columns](../catalyst/QueryPlan.md#output).
+
 ## <span id="withMetadataColumns"> Creating DataSourceV2Relation with Metadata Columns
 
 ```scala

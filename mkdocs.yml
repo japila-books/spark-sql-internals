@@ -123,16 +123,22 @@ nav:
     - DataSource: DataSource.md
     - Connector API:
       - connector/index.md
+      - ApplyTransform: connector/ApplyTransform.md
       - Batch: connector/Batch.md
       - BatchWrite: connector/BatchWrite.md
+      - DataSourceV2Implicits: connector/DataSourceV2Implicits.md
       - DataWriter: connector/DataWriter.md
       - DataWriterFactory: connector/DataWriterFactory.md
       - InputPartition: connector/InputPartition.md
       - FileTable: connector/FileTable.md
       - MetadataColumn: connector/MetadataColumn.md
+      - MetadataColumnHelper: connector/MetadataColumnHelper.md
       - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
+      - OptionsHelper: connector/OptionsHelper.md
       - PartitionReader: connector/PartitionReader.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
+      - PartitionSpecsHelper: connector/PartitionSpecsHelper.md
+      - RewritableTransform: connector/RewritableTransform.md
       - Scan: connector/Scan.md
       - ScanBuilder: connector/ScanBuilder.md
       - SessionConfigSupport: connector/SessionConfigSupport.md

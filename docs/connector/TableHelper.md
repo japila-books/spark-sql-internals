@@ -1,7 +1,12 @@
 # TableHelper Implicit Class
 
-<span id="table" />
-`TableHelper` is an implicit class in Scala that extends [Table](Table.md) abstraction.
+`TableHelper` is a Scala implicit class for [Table](#table).
+
+## Creating Instance
+
+`TableHelper` takes the following to be created:
+
+* <span id="table"> [Table](Table.md)
 
 ## <span id="asDeletable"> asDeletable
 

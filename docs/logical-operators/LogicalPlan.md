@@ -201,3 +201,17 @@ resolved: Boolean
 
 ??? note "Lazy Value"
     `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+## <span id="metadataOutput"> Metadata Output Attributes
+
+```scala
+metadataOutput: Seq[Attribute]
+```
+
+`metadataOutput` requests the [children](#children) for the `metadataOutput` (recursively).
+
+is used when:
+
+* `SubqueryAlias` is requested for the [metadataOutput](SubqueryAlias.md#metadataOutput)
+* `LogicalPlan` is requested for the [childAttributes](#childAttributes)
+* `DataSourceV2Relation` is requested to [include metadata columns](DataSourceV2Relation.md#withMetadataColumns)

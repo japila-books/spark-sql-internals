@@ -28,11 +28,17 @@ boolean isNullable()
 
 Default: `true`
 
-### <span id="name"> name
+### <span id="name"> Name
 
 ```java
 String name()
 ```
+
+Used when:
+
+* `MetadataColumnsHelper` implicit class is requested to [asStruct](MetadataColumnsHelper.md#asStruct)
+* `DataSourceV2Relation` is requested for the [metadata columns](../logical-operators/DataSourceV2Relation.md#metadataOutput)
+* `DescribeTableExec` is requested to [addMetadataColumns](../physical-operators/DescribeTableExec.md#addMetadataColumns)
 
 ### <span id="transform"> transform
 
@@ -40,7 +46,7 @@ String name()
 Transform transform()
 ```
 
-Produces this metadata column from data rows
+[Transform](Transform.md) to produce values for this metadata column from data rows
 
 Default: `null`
 
