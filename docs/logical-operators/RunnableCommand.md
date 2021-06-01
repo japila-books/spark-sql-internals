@@ -72,7 +72,7 @@ Used when:
 * [ShowCreateTableCommand](ShowCreateTableCommand.md)
 * ShowFunctionsCommand
 * ShowPartitionsCommand
-* ShowTablePropertiesCommand
+* [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
 * ShowTablesCommand
 * ShowViewsCommand
 * StreamingExplainCommand

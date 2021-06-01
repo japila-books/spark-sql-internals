@@ -308,6 +308,8 @@ nav:
       - ShowCreateTableCommand: logical-operators/ShowCreateTableCommand.md
       - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
       - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
+      - ShowTableProperties: logical-operators/ShowTableProperties.md
+      - ShowTablePropertiesCommand: logical-operators/ShowTablePropertiesCommand.md
       - ShowTables: logical-operators/ShowTables.md
       - Sort: logical-operators/Sort.md
       - SubqueryAlias: logical-operators/SubqueryAlias.md
@@ -692,6 +694,7 @@ nav:
       - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
       - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
       - ShowTablesExec: physical-operators/ShowTablesExec.md
+      - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
       - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
       - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
       - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md

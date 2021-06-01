@@ -29,7 +29,7 @@
 * [SetCatalogAndNamespace](SetCatalogAndNamespace.md)
 * [ShowCurrentNamespace](ShowCurrentNamespace.md)
 * ShowNamespaces
-* ShowTableProperties
+* [ShowTableProperties](ShowTableProperties.md)
 * [ShowTables](ShowTables.md)
 * ShowViews
 * [UpdateTable](UpdateTable.md)

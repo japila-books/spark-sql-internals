@@ -297,6 +297,17 @@ SHOW CURRENT NAMESPACE
 
 ANTLR labeled alternative: `#showCurrentNamespace`
 
+### <span id="visitShowTblProperties"> visitShowTblProperties
+
+Creates a [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command
+
+```text
+SHOW TBLPROPERTIES [multi-part table identifier]
+  ('(' [dot-separated table property key] ')')?
+```
+
+ANTLR labeled alternative: `#showTblProperties`
+
 ### visitShowTables
 
 Creates a [ShowTables](../logical-operators/ShowTables.md) for the following SQL statement:

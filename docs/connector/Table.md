@@ -55,7 +55,7 @@ Default: (empty)
 
 Used when:
 
-* [DescribeTableExec](../physical-operators/DescribeTableExec.md) and `ShowTablePropertiesExec` physical operators are executed
+* [DescribeTableExec](../physical-operators/DescribeTableExec.md) and [ShowTablePropertiesExec](../physical-operators/ShowTablePropertiesExec.md) physical operators are executed
 
 ### Schema
 
