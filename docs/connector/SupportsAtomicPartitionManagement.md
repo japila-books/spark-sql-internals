@@ -1,0 +1,3 @@
+# SupportsAtomicPartitionManagement
+
+`SupportsAtomicPartitionManagement` is...FIXME

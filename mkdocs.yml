@@ -144,6 +144,7 @@ nav:
       - SessionConfigSupport: connector/SessionConfigSupport.md
       - SimpleTableProvider: connector/SimpleTableProvider.md
       - StagedTable: connector/StagedTable.md
+      - SupportsAtomicPartitionManagement: connector/SupportsAtomicPartitionManagement.md
       - SupportsDelete: connector/SupportsDelete.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsMetadataColumns: connector/SupportsMetadataColumns.md

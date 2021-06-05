@@ -93,3 +93,13 @@ res1: org.apache.spark.sql.catalyst.InternalRow = [0,string,(0,pair)]
 scala> InternalRow.fromSeq(Seq(0, "string", (0, "pair")))
 res2: org.apache.spark.sql.catalyst.InternalRow = [0,string,(0,pair)]
 ```
+
+```text
+import org.apache.spark.sql.catalyst.InternalRow
+import org.apache.spark.unsafe.types.UTF8String
+val demoRow = InternalRow(UTF8String.fromString("demo"))
+```
+
+```text
+assert(demoRow.getString(0).equals("demo"))
+```
