@@ -70,3 +70,24 @@ In the end, `checkAnalysis` [marks the entire logical plan as analyzed](logical-
 * Catalyst DSL's [analyze](catalyst-dsl/DslLogicalPlan.md#analyze) operator is used
 * `ExpressionEncoder` is requested to [resolveAndBind](ExpressionEncoder.md#resolveAndBind)
 * [RelationalGroupedDataset.as](RelationalGroupedDataset.md#as) operator is used
+
+## <span id="checkShowPartitions"> checkShowPartitions
+
+```scala
+checkShowPartitions(
+  showPartitions: ShowPartitions): Unit
+```
+
+`checkShowPartitions` branches off based on the input `ShowPartitions`.
+
+For `ShowPartitions` with [ResolvedTable](logical-operators/ResolvedTable.md) child with a [Table](logical-operators/ResolvedTable.md#table) that is not [SupportsPartitionManagement](connector/SupportsPartitionManagement.md), `checkShowPartitions` [failAnalysis](#failAnalysis) with the following message:
+
+```text
+SHOW PARTITIONS cannot run for a table which does not support partitioning
+```
+
+For `ShowPartitions` with [ResolvedTable](logical-operators/ResolvedTable.md) child with a [Table](logical-operators/ResolvedTable.md#table) that is [SupportsPartitionManagement](connector/SupportsPartitionManagement.md) with no partitions, `checkShowPartitions` [failAnalysis](#failAnalysis) with the following message:
+
+```text
+SHOW PARTITIONS is not allowed on a table that is not partitioned: [name]
+```

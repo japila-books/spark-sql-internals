@@ -1,0 +1,3 @@
+# SupportsPartitionManagement
+
+`SupportsPartitionManagement` is...FIXME

@@ -148,6 +148,7 @@ nav:
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
+      - SupportsPartitionManagement: connector/SupportsPartitionManagement.md
       - SupportsPushDownFilters: connector/SupportsPushDownFilters.md
       - SupportsPushDownRequiredColumns: connector/SupportsPushDownRequiredColumns.md
       - SupportsRead: connector/SupportsRead.md
