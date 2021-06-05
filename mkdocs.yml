@@ -1026,7 +1026,7 @@ nav:
     - CatalystTypeConverters: CatalystTypeConverters.md
     - StatFunctions: spark-sql-StatFunctions.md
     - SubExprUtils: spark-sql-SubExprUtils.md
-    - PredicateHelper: spark-sql-PredicateHelper.md
+    - PredicateHelper: PredicateHelper.md
     - DDLUtils: spark-sql-DDLUtils.md
     - SchemaUtils: spark-sql-SchemaUtils.md
     - AggUtils: AggUtils.md

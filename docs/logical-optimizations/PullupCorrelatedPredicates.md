@@ -22,7 +22,7 @@ val plan = ???
 val optimizedPlan = PullupCorrelatedPredicates(plan)
 ----
 
-`PullupCorrelatedPredicates` uses spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
+`PullupCorrelatedPredicates` uses [PredicateHelper](../PredicateHelper.md).
 
 === [[pullOutCorrelatedPredicates]] `pullOutCorrelatedPredicates` Internal Method
 

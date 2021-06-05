@@ -29,7 +29,7 @@
 [[outputPartitioning]]
 `FilterExec` uses whatever the <<child, child>> physical operator uses for the [input RDDs](CodegenSupport.md#inputRDDs), the [outputOrdering](SparkPlan.md#outputOrdering) and the [outputPartitioning](SparkPlan.md#outputPartitioning).
 
-`FilterExec` uses the spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
+`FilterExec` uses [PredicateHelper](../PredicateHelper.md).
 
 [[internal-registries]]
 .FilterExec's Internal Properties (e.g. Registries, Counters and Flags)

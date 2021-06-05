@@ -83,7 +83,7 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` transforms Filter.md[Filter] unary operators in the input spark-sql-LogicalPlan.md[logical plan].
 
-`apply` spark-sql-PredicateHelper.md#splitConjunctivePredicates[splits conjunctive predicates] in the Filter.md#condition[condition expression] (i.e. expressions separated by `And` expression) and then partitions them into two collections of expressions spark-sql-Expression-SubqueryExpression.md#hasInOrExistsSubquery[with and without In or Exists subquery expressions].
+`apply` [splits conjunctive predicates](../PredicateHelper.md#splitConjunctivePredicates) in the Filter.md#condition[condition expression] (i.e. expressions separated by `And` expression) and then partitions them into two collections of expressions spark-sql-Expression-SubqueryExpression.md#hasInOrExistsSubquery[with and without In or Exists subquery expressions].
 
 `apply` creates a Filter.md#creating-instance[Filter] operator for condition (sub)expressions without subqueries (combined with `And` expression) if available or takes the Filter.md#child[child] operator (of the input `Filter` unary operator).
 
@@ -95,7 +95,7 @@ In the end, `apply` creates a new logical plan with Join.md[Join] operators for 
 
 * For spark-sql-Expression-In.md[In] predicate expressions with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>> followed by <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Join.md#creating-instance[Join] operator with [LeftSemi](../joins.md#LeftSemi) join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
-* For `Not` expressions with a spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>>, <<rewriteExistentialExpr, rewriteExistentialExpr>> followed by spark-sql-PredicateHelper.md#splitConjunctivePredicates[splitting conjunctive predicates] and creates a Join.md#creating-instance[Join] operator with [LeftAnti](../joins.md#LeftAnti) join type. In the end, `apply` <<dedupJoin, dedupJoin>>
+* For `Not` expressions with a spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression, `apply` <<getValueExpression, getValueExpression>>, <<rewriteExistentialExpr, rewriteExistentialExpr>> followed by [splitting conjunctive predicates](../PredicateHelper.md#splitConjunctivePredicates) and creates a Join.md#creating-instance[Join] operator with [LeftAnti](../joins.md#LeftAnti) join type. In the end, `apply` <<dedupJoin, dedupJoin>>
 
 * For other predicate expressions, `apply` <<rewriteExistentialExpr, rewriteExistentialExpr>> and creates a Project.md#creating-instance[Project] unary operator with a Filter.md#creating-instance[Filter] operator
 

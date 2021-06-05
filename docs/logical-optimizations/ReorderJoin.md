@@ -108,13 +108,13 @@ NOTE: `createOrderedJoin` is used recursively when `ReorderJoin` is <<apply, app
 
 ==== [[createOrderedJoin-two-joins]] "Two Logical Plans" Case
 
-For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_) the input condition expressions to the ones that spark-sql-PredicateHelper.md#canEvaluateWithinJoin[can be evaluated within a join] and not.
+For two joins exactly (i.e. the `input` has two logical plans and their join types), `createOrderedJoin` partitions (aka _splits_) the input condition expressions to the ones that [can be evaluated within a join](../PredicateHelper.md#canEvaluateWithinJoin) and not.
 
 `createOrderedJoin` determines the join type of the result join. It chooses [inner](../joins.md#inner) if the left and right join types are both inner and [cross](../joins.md#cross) otherwise.
 
 `createOrderedJoin` creates a Join.md#creating-instance[Join] logical operator with the input join conditions combined together using `And` expression and the join type (inner or cross).
 
-If there are condition expressions that spark-sql-PredicateHelper.md#canEvaluateWithinJoin[could not be evaluated within a join], `createOrderedJoin` creates a Filter.md#creating-instance[Filter] logical operator with the join conditions combined together using `And` expression and the result join operator as the Filter.md#child[child] operator.
+If there are condition expressions that [could not be evaluated within a join](../PredicateHelper.md#canEvaluateWithinJoin), `createOrderedJoin` creates a Filter.md#creating-instance[Filter] logical operator with the join conditions combined together using `And` expression and the result join operator as the Filter.md#child[child] operator.
 
 ```text
 import org.apache.spark.sql.catalyst.expressions.Expression
@@ -160,7 +160,7 @@ For three or more spark-sql-LogicalPlan.md[logical plans] in the `input`, `creat
 
 . catalyst/QueryPlan.md#outputSet[Output attributes] together with the first plan's output attributes are the superset of the expressions/Expression.md#references[references] of a join condition expression (i.e. both plans are required to resolve join references)
 
-. References of the join condition spark-sql-PredicateHelper.md#canEvaluate[cannot be evaluated] using the first plan's or the current plan's catalyst/QueryPlan.md#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
+. References of the join condition [cannot be evaluated](../PredicateHelper.md#canEvaluate) using the first plan's or the current plan's catalyst/QueryPlan.md#outputSet[output attributes] (i.e. neither the first plan nor the current plan themselves are enough to resolve join references)
 
 .createOrderedJoin with Three Joins (Before)
 image::images/ReorderJoin-createOrderedJoin-four-plans-before.png[align="center"]
@@ -255,7 +255,7 @@ scala> println(plan.numberedTreeString)
 
 . expressions/Expression.md#references[Expression references] being a subset of the catalyst/QueryPlan.md#outputSet[output attributes] of the left and the right operators
 
-. spark-sql-PredicateHelper.md#canEvaluateWithinJoin[Can be evaluated within a join]
+. [Can be evaluated within a join](../PredicateHelper.md#canEvaluateWithinJoin)
 
 `createOrderedJoin` creates a Join.md#creating-instance[Join] logical operator with:
 

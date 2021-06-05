@@ -1,6 +1,6 @@
 # CheckAnalysis &mdash; Analysis Validation
 
-`CheckAnalysis` is an [extension](#contract) of the [PredicateHelper](spark-sql-PredicateHelper.md) abstraction for [logical analysis checkers](#implementations) that can [check analysis phase](#checkAnalysis).
+`CheckAnalysis` is an [extension](#contract) of the [PredicateHelper](PredicateHelper.md) abstraction for [logical analysis checkers](#implementations) that can [check analysis phase](#checkAnalysis).
 
 `CheckAnalysis` defines [extendedCheckRules](#extendedCheckRules) extension point for extra analysis check rules.
 

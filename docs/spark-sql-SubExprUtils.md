@@ -1,8 +1,6 @@
-# SubExprUtils Helper Object
+# SubExprUtils Utility
 
-`SubExprUtils` is a Scala object that is used for...FIXME
-
-`SubExprUtils` uses spark-sql-PredicateHelper.md[PredicateHelper] for...FIXME
+`SubExprUtils` uses [PredicateHelper](PredicateHelper.md).
 
 `SubExprUtils` is used to <<hasNullAwarePredicateWithinNot, check whether a condition expression has any null-aware predicate subqueries inside Not expressions>>.
 
@@ -13,7 +11,7 @@
 hasNullAwarePredicateWithinNot(condition: Expression): Boolean
 ----
 
-`hasNullAwarePredicateWithinNot` spark-sql-PredicateHelper.md#splitConjunctivePredicates[splits conjunctive predicates] (i.e. expressions separated by `And` expression).
+`hasNullAwarePredicateWithinNot` [splits conjunctive predicates](PredicateHelper.md#splitConjunctivePredicates) (i.e. expressions separated by `And` expression).
 
 `hasNullAwarePredicateWithinNot` is positive (i.e. `true`) and is considered to have a *null-aware predicate subquery inside a Not expression* when conjuctive predicate expressions include a `Not` expression with an spark-sql-Expression-In.md[In] predicate expression with a spark-sql-Expression-ListQuery.md[ListQuery] subquery expression.
 
