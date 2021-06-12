@@ -12,9 +12,11 @@ Table alterTable(
   TableChange... changes)
 ```
 
-Used when the following commands are executed:
+[TableChange](TableChange.md)s to alter a table
 
-* [AlterTableExec](../../physical-operators/AlterTableExec.md)
+Used when:
+
+* [AlterTableExec](../../physical-operators/AlterTableExec.md) physical command is executed
 
 ### <span id="createTable"> createTable
 
