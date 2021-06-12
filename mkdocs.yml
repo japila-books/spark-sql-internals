@@ -74,13 +74,9 @@ plugins:
   - macros
 
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/jaceklaskowski
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/jaceklaskowski
-    - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/jaceklaskowski
+  analytics:
+    provider: google
+    property: !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
   book:
     title: Spark SQL
     delta: https://books.japila.pl/delta-lake-internals
@@ -96,21 +92,23 @@ extra:
     api: https://hive.apache.org/javadocs/r2.3.7/api
   java:
     api: https://docs.oracle.com/en/java/javase/11/docs/api
+  kafka:
+    api: https://kafka.apache.org/26/javadoc
   scala:
     version: 2.12.10
     api: https://www.scala-lang.org/api/2.12.10
     docs: https://docs.scala-lang.org/
-  kafka:
-    version: 2.6.0
-    api: https://kafka.apache.org/26/javadoc
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/jaceklaskowski
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/jaceklaskowski
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/jaceklaskowski
   spark:
     version: 3.1.2
     github: https://github.com/apache/spark/tree/v3.1.2
     docs: http://spark.apache.org/docs/3.1.2
-
-google_analytics:
-  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
-  - auto
 
 nav:
   - Home: index.md
