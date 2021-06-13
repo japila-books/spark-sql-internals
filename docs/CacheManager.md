@@ -195,7 +195,7 @@ useCachedData(
 
 `useCachedData` traverses the given [logical query plan](logical-operators/LogicalPlan.md) down (parent operators first, children later) and replaces them with [cached representation](#lookupCachedData) (i.e. [InMemoryRelation](logical-operators/InMemoryRelation.md)) if found. `useCachedData` does this operator substitution for [SubqueryExpression](expressions/SubqueryExpression.md) expressions, too.
 
-`useCachedData` skips `IgnoreCachedData` commands (and leaves them unchanged).
+`useCachedData` skips [IgnoreCachedData](logical-operators/IgnoreCachedData.md) commands (and leaves them unchanged).
 
 `useCachedData` is used (recursively) when `QueryExecution` is requested for a [logical query plan with cached data](QueryExecution.md#withCachedData).
 

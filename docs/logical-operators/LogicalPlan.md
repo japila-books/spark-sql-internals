@@ -25,7 +25,7 @@ Logical operators with a single [child](../catalyst/TreeNode.md#children) logica
 ### Other Logical Operators
 
 * [CreateTable](CreateTable.md)
-* IgnoreCachedData
+* [IgnoreCachedData](IgnoreCachedData.md)
 * [NamedRelation](NamedRelation.md)
 * ObjectProducer
 * [ParsedStatement](ParsedStatement.md)

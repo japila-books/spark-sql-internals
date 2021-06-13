@@ -230,6 +230,7 @@ nav:
       - CommentOnTable: logical-operators/CommentOnTable.md
       - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
+      - IgnoreCachedData: logical-operators/IgnoreCachedData.md
       - MapPartitions: logical-operators/MapPartitions.md
       - ObjectConsumer: logical-operators/ObjectConsumer.md
       - ObjectProducer: logical-operators/ObjectProducer.md
