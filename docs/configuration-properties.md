@@ -776,9 +776,11 @@ Default: `true`
 
 Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
 
-## <span id="spark.sql.execution.useObjectHashAggregateExec"> spark.sql.execution.useObjectHashAggregateExec
+## <span id="spark.sql.execution.useObjectHashAggregateExec"> execution.useObjectHashAggregateExec
 
-Enables [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed.
+**spark.sql.execution.useObjectHashAggregateExec**
+
+**(internal)** [Prefers ObjectHashAggregateExec (over SortAggregateExec) for aggregation](AggUtils.md#createAggregate)
 
 Default: `true`
 
