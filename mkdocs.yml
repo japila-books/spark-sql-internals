@@ -81,6 +81,7 @@ extra:
     title: Spark SQL
     delta: https://books.japila.pl/delta-lake-internals
     kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
+    pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
   hadoop:
@@ -192,7 +193,7 @@ nav:
       - Utilities:
         - Catalogs: connector/catalog/Catalogs.md
         - CatalogV2Util: connector/catalog/CatalogV2Util.md
-    - Structured Query Execution:
+    - Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md
       - SparkPlanner: SparkPlanner.md

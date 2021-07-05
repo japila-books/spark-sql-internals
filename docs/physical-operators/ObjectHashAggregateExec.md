@@ -1,6 +1,8 @@
 # ObjectHashAggregateExec Aggregate Physical Operator
 
-`ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md).
+`ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.
+
+![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
 
 ## Creating Instance
 
@@ -24,8 +26,6 @@ Key             | Name (in web UI)
 ----------------|--------------------------
 numOutputRows   | number of output rows
 aggTime         | time in aggregation build
-
-![ObjectHashAggregateExec in web UI (Details for Query)](../images/spark-sql-ObjectHashAggregateExec-webui-details-for-query.png)
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -54,22 +54,22 @@ supportsAggregate(
 
 ## Demo
 
-```text
-// ObjectHashAggregateExec selected due to:
-// 1. spark.sql.execution.useObjectHashAggregateExec internal flag is enabled
-assert(spark.conf.get("spark.sql.execution.useObjectHashAggregateExec"))
+`ObjectHashAggregateExec` is selected when [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled.
 
-// 2. The following data types are used in aggregateBufferAttributes
-// BinaryType
-// StringType
-// ArrayType
-// MapType
-// ObjectType
-// StructType
+```scala
+assert(spark.sessionState.conf.useObjectHashAggregation)
+```
+
+Use proper data types for `aggregateBufferAttributes`.
+
+```scala
 val dataset = Seq(
   (0, Seq.empty[Int]),
   (1, Seq(1, 1)),
   (2, Seq(2, 2))).toDF("id", "nums")
+```
+
+```scala
 import org.apache.spark.sql.functions.size
 val q = dataset.
   groupBy(size($"nums") as "group"). // <-- size over array
@@ -79,20 +79,20 @@ val q = dataset.
 ```text
 scala> q.explain
 == Physical Plan ==
-ObjectHashAggregate(keys=[size(nums#113)#127], functions=[collect_list(id#112, 0, 0)])
-+- Exchange hashpartitioning(size(nums#113)#127, 200)
-   +- ObjectHashAggregate(keys=[size(nums#113) AS size(nums#113)#127], functions=[partial_collect_list(id#112, 0, 0)])
-      +- LocalTableScan [id#112, nums#113]
+ObjectHashAggregate(keys=[size(nums#8, true)#18], functions=[collect_list(id#7, 0, 0)])
++- Exchange hashpartitioning(size(nums#8, true)#18, 200), ENSURE_REQUIREMENTS, [id=#10]
+   +- ObjectHashAggregate(keys=[size(nums#8, true) AS size(nums#8, true)#18], functions=[partial_collect_list(id#7, 0, 0)])
+      +- LocalTableScan [id#7, nums#8]
 ```
 
 ```text
 scala> println(q.queryExecution.sparkPlan.numberedTreeString)
-00 ObjectHashAggregate(keys=[size(nums#113)#130], functions=[collect_list(id#112, 0, 0)], output=[group#117, ids#122])
-01 +- ObjectHashAggregate(keys=[size(nums#113) AS size(nums#113)#130], functions=[partial_collect_list(id#112, 0, 0)], output=[size(nums#113)#130, buf#132])
-02    +- LocalTableScan [id#112, nums#113]
+00 ObjectHashAggregate(keys=[size(nums#8, true)#18], functions=[collect_list(id#7, 0, 0)], output=[group#11, ids#15])
+01 +- ObjectHashAggregate(keys=[size(nums#8, true) AS size(nums#8, true)#18], functions=[partial_collect_list(id#7, 0, 0)], output=[size(nums#8, true)#18, buf#20])
+02    +- LocalTableScan [id#7, nums#8]
 ```
 
-Going low level...watch your steps :)
+Going low level. Watch your steps :)
 
 ```text
 // copied from HashAggregateExec as it is the preferred aggreate physical operator
@@ -103,27 +103,32 @@ import org.apache.spark.sql.catalyst.plans.logical.Aggregate
 val aggLog = optimizedPlan.asInstanceOf[Aggregate]
 import org.apache.spark.sql.catalyst.planning.PhysicalAggregation
 import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateExpression
-val aggregateExpressions: Seq[AggregateExpression] = PhysicalAggregation.unapply(aggLog).get._2
-val aggregateBufferAttributes = aggregateExpressions.
- flatMap(_.aggregateFunction.aggBufferAttributes)
-
-// That's one of the reasons why ObjectHashAggregateExec was selected
-// HashAggregateExec did not meet the requirements
-
-import org.apache.spark.sql.execution.aggregate.HashAggregateExec
-assert(HashAggregateExec.supportsAggregate(aggregateBufferAttributes))
+// groupingExpressions, aggregateExpressions, resultExpressions, child
+val (_, aggregateExpressions: Seq[AggregateExpression], _, _) = PhysicalAggregation.unapply(aggLog).get
+val aggregateBufferAttributes =
+  aggregateExpressions.flatMap(_.aggregateFunction.aggBufferAttributes)
 ```
 
-```text
+One of the reasons why `ObjectHashAggregateExec` was selected is that `HashAggregateExec` did not meet the requirements.
+
+```scala
+import org.apache.spark.sql.execution.aggregate.HashAggregateExec
+assert(HashAggregateExec.supportsAggregate(aggregateBufferAttributes) == false)
+```
+
+```scala
 // collect_list aggregate function uses CollectList TypedImperativeAggregate under the covers
 import org.apache.spark.sql.execution.aggregate.ObjectHashAggregateExec
 assert(ObjectHashAggregateExec.supportsAggregate(aggregateExpressions))
 ```
 
-```text
+```scala
 val aggExec = q.queryExecution.sparkPlan.children.head.asInstanceOf[ObjectHashAggregateExec]
+```
+
+```text
 scala> println(aggExec.aggregateExpressions.head.numberedTreeString)
-00 partial_collect_list(id#112, 0, 0)
-01 +- collect_list(id#112, 0, 0)
-02    +- id#112: int
+00 partial_collect_list(id#7, 0, 0)
+01 +- collect_list(id#7, 0, 0)
+02    +- id#7: int
 ```

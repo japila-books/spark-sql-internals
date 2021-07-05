@@ -5,7 +5,7 @@
 * [extra strategies](#extraStrategies) (by means of [ExperimentalMethods](#experimentalMethods))
 * [extraPlanningStrategies](#extraPlanningStrategies)
 
-`SparkPlanner` is expected to plan (_generate_) at least one [physical plan](physical-operators/SparkPlan.md) for a given [logical plan](logical-operators/LogicalPlan.md).
+`SparkPlanner` is expected to plan (_create_) at least one [physical plan](physical-operators/SparkPlan.md) for a given [logical plan](logical-operators/LogicalPlan.md).
 
 `SparkPlanner` extends [SparkStrategies](execution-planning-strategies/SparkStrategies.md) abstract class.
 
@@ -72,7 +72,7 @@ collectPlaceholders(
 
 `collectPlaceholders` is part of [QueryPlanner](catalyst/QueryPlanner.md#collectPlaceholders) abstraction.
 
-## <span id="pruneFilterProject"> Creating Physical Operator (Possibly Under FilterExec and ProjectExec Operators)
+## <span id="pruneFilterProject"> Filter and Project Pruning
 
 ```scala
 pruneFilterProject(

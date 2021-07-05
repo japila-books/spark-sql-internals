@@ -1,9 +1,65 @@
-# Aggregation Execution Planning Strategy for Aggregate Physical Operators
+# Aggregation Execution Planning Strategy
 
-`Aggregation` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses to <<apply, select aggregate physical operator>> for <<Aggregate.md#, Aggregate>> logical operator in a <<spark-sql-LogicalPlan.md#, logical query plan>>.
+`Aggregation` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses for [planning Aggregate logical operators](#apply) (in the order of preference):
 
-[source, scala]
-----
+1. [HashAggregateExec](../physical-operators/HashAggregateExec.md)
+1. [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
+1. [SortAggregateExec](../physical-operators/SortAggregateExec.md)
+
+## <span id="apply"> Executing Rule
+
+```scala
+apply(
+  plan: LogicalPlan): Seq[SparkPlan]
+```
+
+`apply` is part of the [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
+
+`apply` works with [Aggregate](../logical-operators/Aggregate.md) logical operators with all the aggregate expressions being either [AggregateExpression](#apply-AggregateExpressions)s or [PythonUDF](#apply-PythonUDFs)s only. Otherwise, `apply` throws an [AnalysisException](#apply-AnalysisException).
+
+`apply` [destructures the Aggregate logical operator](../PhysicalAggregation.md#unapply) (into a four-element tuple) with the following:
+
+* Grouping Expressions
+* Aggregration Expressions
+* Result Expressions
+* Child Logical Operator
+
+### <span id="apply-AggregateExpressions"> AggregateExpressions
+
+For [Aggregate](../logical-operators/Aggregate.md) logical operators with [AggregateExpression](../expressions/AggregateExpression.md)s, `apply` splits them based on the [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag.
+
+Without distinct aggregate functions (expressions), `apply` [planAggregateWithoutDistinct](../AggUtils.md#planAggregateWithoutDistinct). Otherwise, `apply` [planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct).
+
+In the end, `apply` creates one of the following physical operators based on whether [there is distinct aggregate function](../AggUtils.md#planAggregateWithOneDistinct) or [not](../AggUtils.md#planAggregateWithoutDistinct).
+
+!!! note
+    It is assumed that all the distinct aggregate functions have the same column expressions.
+
+    ```text
+    COUNT(DISTINCT foo), MAX(DISTINCT foo)
+    ```
+
+    The following is not valid due to different column expressions
+
+    ```text
+    COUNT(DISTINCT bar), COUNT(DISTINCT foo)
+    ```
+
+### <span id="apply-PythonUDFs"> PythonUDFs
+
+For [Aggregate](../logical-operators/Aggregate.md) logical operators with `PythonUDF`s ([PySpark]({{ book.pyspark }}/sql/PythonUDF))...FIXME
+
+### <span id="apply-AnalysisException"> AnalysisException
+
+`apply` can throw an `AnalysisException`:
+
+```text
+Cannot use a mixture of aggregate function and group aggregate pandas UDF
+```
+
+## Demo
+
+```text
 scala> :type spark
 org.apache.spark.sql.SparkSession
 
@@ -25,32 +81,4 @@ scala> println(physicalPlan.head.numberedTreeString)
 00 HashAggregate(keys=[(id#0L % 2)#12L], functions=[count(1)], output=[group#3L, count#8L])
 01 +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_count(1)], output=[(id#0L % 2)#12L, count#14L])
 02    +- PlanLater Range (0, 5, step=1, splits=Some(8))
-----
-
-[[aggregate-physical-operator-preference]]
-`Aggregation` [can select](../AggUtils.md#aggregate-physical-operator-selection-criteria) the following aggregate physical operators (in the order of preference):
-
-1. [HashAggregateExec](../physical-operators/HashAggregateExec.md)
-
-1. [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
-
-1. [SortAggregateExec](../physical-operators/SortAggregateExec.md)
-
-=== [[apply]] Applying Aggregation Strategy to Logical Plan (Executing Aggregation) -- `apply` Method
-
-[source, scala]
-----
-apply(plan: LogicalPlan): Seq[SparkPlan]
-----
-
-`apply` requests `PhysicalAggregation` extractor for PhysicalAggregation.md#unapply[Aggregate logical operators] and creates a single aggregate physical operator for every Aggregate.md[Aggregate] logical operator found.
-
-Internally, `apply` requests `PhysicalAggregation` to PhysicalAggregation.md#unapply[destructure a Aggregate logical operator] (into a four-element tuple) and splits [aggregate expressions](../expressions/AggregateExpression.md) per whether they are distinct or not (using their [isDistinct](../expressions/AggregateExpression.md#isDistinct) flag).
-
-`apply` then creates a physical operator using the following helper methods:
-
-* [AggUtils.planAggregateWithoutDistinct](../AggUtils.md#planAggregateWithoutDistinct) when no distinct aggregate expression is used
-
-* [AggUtils.planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct) when at least one distinct aggregate expression is used.
-
-`apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
+```
