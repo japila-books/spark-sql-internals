@@ -1,3 +1,3 @@
-# LeafExecNode Physical Operators
+# LeafExecNode &mdash; Leaf Physical Operators
 
 `LeafExecNode` is...FIXME

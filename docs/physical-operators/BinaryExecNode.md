@@ -1,3 +1,3 @@
-# BinaryExecNode Physical Operators
+# BinaryExecNode &mdash; Binary Physical Operators
 
 `BinaryExecNode` is...FIXME

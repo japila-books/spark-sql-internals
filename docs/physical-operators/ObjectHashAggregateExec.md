@@ -39,7 +39,7 @@ doExecute(): RDD[InternalRow]
 
 `doExecute`...FIXME
 
-## <span id="supportsAggregate"> Checking Support
+## <span id="supportsAggregate"> Aggregation Requirements
 
 ```scala
 supportsAggregate(
@@ -54,7 +54,7 @@ supportsAggregate(
 
 ## Demo
 
-`ObjectHashAggregateExec` is selected when [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled.
+`ObjectHashAggregateExec` is selected when [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled (and [HashAggregateExec](HashAggregateExec.md) could not be used).
 
 ```scala
 assert(spark.sessionState.conf.useObjectHashAggregation)

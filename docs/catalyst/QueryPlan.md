@@ -209,22 +209,24 @@ append[T <: QueryPlan[T]](
 * `QueryExecution` is requested to [simpleString](../QueryExecution.md#simpleString), [writePlans](../QueryExecution.md#writePlans) and [stringWithStats](../QueryExecution.md#stringWithStats)
 * `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`
 
-## <span id="verboseStringWithOperatorId"> verboseStringWithOperatorId
+## <span id="verboseStringWithOperatorId"> Detailed Description (with Operator Id)
 
 ```scala
 verboseStringWithOperatorId(): String
 ```
 
-`verboseStringWithOperatorId` uses [spark.sql.debug.maxToStringFields](../configuration-properties.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node and the [formattedNodeName](#formattedNodeName) to build a text of the following format:
+`verboseStringWithOperatorId` returns the following text (with [spark.sql.debug.maxToStringFields](../configuration-properties.md#spark.sql.debug.maxToStringFields) configuration property for the number of arguments to this node, if there are any, and the [formatted node name](#formattedNodeName)):
 
 ```text
 [formattedNodeName]
 Arguments: [argumentString]
 ```
 
-`verboseStringWithOperatorId` is used when `QueryExecution` is requested for [simpleString](../QueryExecution.md#simpleString) (and `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`).
+`verboseStringWithOperatorId` is used when:
 
-## <span id="formattedNodeName"> formattedNodeName
+* `QueryExecution` is requested for [simple description](../QueryExecution.md#simpleString) (and `ExplainUtils` utility is requested to `processPlanSkippingSubqueries`)
+
+## <span id="formattedNodeName"> Formatted Node Name
 
 ```scala
 formattedNodeName: String
@@ -232,4 +234,6 @@ formattedNodeName: String
 
 `formattedNodeName`...FIXME
 
-`formattedNodeName` is used when [QueryPlan](#verboseStringWithOperatorId) (in general) and ProjectExec, FilterExec, DataSourceScanExec, FileSourceScanExec, LeafExecNode, [UnaryExecNode](../physical-operators/UnaryExecNode.md), BinaryExecNode, BaseAggregateExec, ReusedExchangeExec, CartesianProductExec, HashJoin, SortMergeJoinExec physical operators (in particular) are requested for `verboseStringWithOperatorId`
+`formattedNodeName` is used when:
+
+* `QueryPlan` is requested for [verboseStringWithOperatorId](#verboseStringWithOperatorId)

@@ -42,7 +42,7 @@ When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetri
 
 The metrics are displayed as part of [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](SQLTab.md#ExecutionPage)).
 
-![HashAggregateExec in web UI (Details for Query)](images/spark-sql-HashAggregateExec-webui-details-for-query.png)
+![HashAggregateExec in web UI (Details for Query)](images/HashAggregateExec-webui-details-for-query.png)
 
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 

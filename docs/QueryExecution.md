@@ -293,26 +293,29 @@ toString: String
 
 ## <span id="simpleString"> Simple (Basic) Text Representation
 
-```scala
-// Uses formatted `false`
-simpleString: String
+``` { .scala .annotate }
+simpleString: String // (1)
 simpleString(
   formatted: Boolean): String
 ```
 
-`simpleString` requests the <<executedPlan, optimized SparkPlan>> for the [text representation](catalyst/TreeNode.md#treeString) (of all nodes in the query tree) with `verbose` flag turned off.
+1. `formatted` is `false`
 
-In the end, `simpleString` adds *== Physical Plan ==* header to the text representation and <<withRedaction, redacts sensitive information>>.
+`simpleString` requests the [optimized physical plan](#executedPlan) for the [text representation](catalyst/TreeNode.md#treeString) (of all nodes in the query tree) with `verbose` flag turned off.
 
-```text
+In the end, `simpleString` adds **== Physical Plan ==** header to the text representation and [redacts sensitive information](#withRedaction).
+
+```scala
 import org.apache.spark.sql.{functions => f}
 val q = spark.range(10).withColumn("rand", f.rand())
 val output = q.queryExecution.simpleString
+```
 
+```text
 scala> println(output)
 == Physical Plan ==
-*(1) Project [id#5L, rand(6017561978775952851) AS rand#7]
-+- *(1) Range (0, 10, step=1, splits=8)
+*(1) Project [id#53L, rand(-5226178239369056152) AS rand#55]
++- *(1) Range (0, 10, step=1, splits=16)
 ```
 
 ## <span id="withRedaction"> Redacting Sensitive Information

@@ -2,14 +2,14 @@
 
 `HashAggregateExec` is a [unary physical operator](BaseAggregateExec.md) for **hash-based aggregation**.
 
-![HashAggregateExec in web UI (Details for Query)](../images/spark-sql-HashAggregateExec-webui-details-for-query.png)
+![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
 `HashAggregateExec` is a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md).
 
 `HashAggregateExec` is a [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
 
 !!! note
-    `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over `ObjectHashAggregateExec` and `SortAggregateExec`).
+    `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md)).
 
 `HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
@@ -335,7 +335,7 @@ createHashMap(): UnsafeFixedWidthAggregationMap
 
 `createHashMap` creates a [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
-## <span id="supportsAggregate"> supportsAggregate Utility
+## <span id="supportsAggregate"> Aggregation Requirements
 
 ```scala
 supportsAggregate(
