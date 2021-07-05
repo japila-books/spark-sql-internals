@@ -1,6 +1,38 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's <<map, BytesToBytesMap>> to allow for <<UnsafeRow.md#, UnsafeRow>> keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](UnsafeRow.md) keys and values.
+
+## <span id="supportsAggregationBufferSchema"> supportsAggregationBufferSchema
+
+```java
+boolean supportsAggregationBufferSchema(
+  StructType schema)
+```
+
+`supportsAggregationBufferSchema` is enabled (`true`) if all of the [top-level fields](types/StructType.md#fields) (of the given [schema](types/StructType.md)) are [mutable](UnsafeRow.md#isMutable).
+
+```scala
+import org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap
+import org.apache.spark.sql.types._
+```
+
+```scala
+val schemaWithImmutableField = StructType(
+  StructField("name", StringType) :: Nil)
+assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWithImmutableField) == false)
+```
+
+```scala
+val schemaWithMutableFields = StructType(
+  StructField("id", IntegerType) :: StructField("bool", BooleanType) :: Nil)
+assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWithMutableFields))
+```
+
+`supportsAggregationBufferSchema` is used when:
+
+* `HashAggregateExec` utility is used for the [selection requirements](physical-operators/HashAggregateExec.md#supportsAggregate)
+
+## Review Me
 
 Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
 
@@ -31,37 +63,6 @@ Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggr
 | map
 a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled
 |===
-
-=== [[supportsAggregationBufferSchema]] `supportsAggregationBufferSchema` Static Method
-
-```java
-boolean supportsAggregationBufferSchema(
-  StructType schema)
-```
-
-`supportsAggregationBufferSchema` is a predicate that is enabled (`true`) unless there is a [field](types/StructField.md) (in the [fields](types/StructType.md#fields) of the input [schema](types/StructType.md)) whose [data type](types/StructField.md#dataType) is not [mutable](UnsafeRow.md#isMutable).
-
-[NOTE]
-====
-The [mutable](UnsafeRow.md#isMutable) data types: [BooleanType](types/DataType.md#BooleanType), [ByteType](types/DataType.md#ByteType), [DateType](types/DataType.md#DateType), [DecimalType](types/DataType.md#DecimalType), [DoubleType](types/DataType.md#DoubleType), [FloatType](types/DataType.md#FloatType), [IntegerType](types/DataType.md#IntegerType), [LongType](types/DataType.md#LongType), [NullType](types/DataType.md#NullType), [ShortType](types/DataType.md#ShortType) and [TimestampType](types/DataType.md#TimestampType).
-
-Examples (possibly all) of data types that are not [mutable](UnsafeRow.md#isMutable): [ArrayType](types/ArrayType.md), [BinaryType](types/DataType.md#BinaryType), [StringType](types/DataType.md#StringType), [CalendarIntervalType](types/DataType.md#CalendarIntervalType), [MapType](types/DataType.md#MapType), [ObjectType](types/DataType.md#ObjectType) and [StructType](types/DataType.md#StructType).
-====
-
-[source, scala]
-----
-import org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap
-
-import org.apache.spark.sql.types._
-val schemaWithImmutableField = StructType(StructField("string", StringType) :: Nil)
-assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWithImmutableField) == false)
-
-val schemaWithMutableFields = StructType(
-  StructField("int", IntegerType) :: StructField("bool", BooleanType) :: Nil)
-assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWithMutableFields))
-----
-
-`supportsAggregationBufferSchema` is used when `HashAggregateExec` is requested to [supportsAggregate](physical-operators/HashAggregateExec.md#supportsAggregate).
 
 ## Creating Instance
 

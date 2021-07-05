@@ -4,6 +4,35 @@
 
 `UnsafeRow` supports Java's [Externalizable](#Externalizable) and Kryo's [KryoSerializable](#KryoSerializable) serialization/deserialization protocols.
 
+## <span id="isMutable"> Mutable Data Types
+
+The following [DataType](types/DataType.md)s are considered **mutable data types**:
+
+* `BooleanType`
+* `ByteType`
+* `CalendarIntervalType`
+* `DateType`
+* `DecimalType`
+* `DoubleType`
+* `FloatType`
+* `IntegerType`
+* `LongType`
+* `NullType`
+* `ShortType`
+* `TimestampType`
+* `UserDefinedType` (over a mutable data type)
+
+Mutable data types have fixed length and can be mutated in place.
+
+Examples (possibly all) of the data types that are not mutable:
+
+* [ArrayType](types/ArrayType.md)
+* `BinaryType`
+* `StringType`
+* `MapType`
+* `ObjectType`
+* [StructType](types/StructType.md)
+
 ## <span id="KryoSerializable"> KryoSerializable SerDe Protocol
 
 Learn more in [KryoSerializable](https://github.com/EsotericSoftware/kryo#kryoserializable).

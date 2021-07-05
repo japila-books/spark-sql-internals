@@ -26,6 +26,20 @@
     falling back to sort based aggregation.
     ```
 
+## <span id="supportsAggregate"> Selection Requirements
+
+```scala
+supportsAggregate(
+  aggregateBufferAttributes: Seq[Attribute]): Boolean
+```
+
+`supportsAggregate` [checks support for aggregation](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) given the aggregation buffer [Attribute](../expressions/Attribute.md)s.
+
+`supportsAggregate` is used when:
+
+* `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
+* `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](#aggregateBufferAttributes) are supported)
+
 ## Creating Instance
 
 `HashAggregateExec` takes the following to be created:
@@ -66,17 +80,22 @@ scala> println(execPlan.numberedTreeString)
 00 HashAggregate(keys=[(id#0L % 2)#15L], functions=[sum(id#0L)], output=[group#3L, sum#7L])
 01 +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#15L], functions=[partial_sum(id#0L)], output=[(id#0L % 2)#15L, sum#17L])
 02    +- Range (0, 10, step=1, splits=8)
+```
 
-// Going low level...watch your steps :)
+Going low level...watch your steps :)
 
+```scala
 import q.queryExecution.optimizedPlan
 import org.apache.spark.sql.catalyst.plans.logical.Aggregate
 val aggLog = optimizedPlan.asInstanceOf[Aggregate]
 import org.apache.spark.sql.catalyst.planning.PhysicalAggregation
 import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateExpression
-val aggregateExpressions: Seq[AggregateExpression] = PhysicalAggregation.unapply(aggLog).get._2
-val aggregateBufferAttributes = aggregateExpressions.
- flatMap(_.aggregateFunction.aggBufferAttributes)
+val (_, aggregateExpressions: Seq[AggregateExpression], _, _) = PhysicalAggregation.unapply(aggLog).get
+val aggregateBufferAttributes =
+  aggregateExpressions.flatMap(_.aggregateFunction.aggBufferAttributes)
+```
+
+```text
 import org.apache.spark.sql.execution.aggregate.HashAggregateExec
 // that's the exact reason why HashAggregateExec was selected
 // Aggregation execution planning strategy prefers HashAggregateExec
@@ -334,20 +353,6 @@ createHashMap(): UnsafeFixedWidthAggregationMap
 ```
 
 `createHashMap` creates a [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
-
-## <span id="supportsAggregate"> Aggregation Requirements
-
-```scala
-supportsAggregate(
-  aggregateBufferAttributes: Seq[Attribute]): Boolean
-```
-
-`supportsAggregate` firstly [creates the schema](../types/StructType.md#fromAttributes) (from the input aggregation buffer attributes) and requests `UnsafeFixedWidthAggregationMap` to [supportsAggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) (i.e. the schema uses [mutable field data types](../UnsafeRow.md#mutableFieldTypes) only that have fixed length and can be mutated in place in an [UnsafeRow](../UnsafeRow.md)).
-
-`supportsAggregate` is used when:
-
-* `AggUtils` is requested to [creates an aggregate physical operator given aggregate expressions](../AggUtils.md#createAggregate)
-* `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](#aggregateBufferAttributes) are supported)
 
 ## Internal Properties
 

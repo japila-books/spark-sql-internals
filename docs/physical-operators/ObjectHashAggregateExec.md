@@ -4,6 +4,19 @@
 
 ![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
 
+## <span id="supportsAggregate"> Selection Requirements
+
+```scala
+supportsAggregate(
+  aggregateExpressions: Seq[AggregateExpression]): Boolean
+```
+
+`supportsAggregate` is enabled (`true`) when there is a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
+
+`supportsAggregate` is used when:
+
+* `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
+
 ## Creating Instance
 
 `ObjectHashAggregateExec` takes the following to be created:
@@ -39,19 +52,6 @@ doExecute(): RDD[InternalRow]
 
 `doExecute`...FIXME
 
-## <span id="supportsAggregate"> Aggregation Requirements
-
-```scala
-supportsAggregate(
-  aggregateExpressions: Seq[AggregateExpression]): Boolean
-```
-
-`supportsAggregate` is enabled (`true`) when there is a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
-
-`supportsAggregate` is used when:
-
-* `AggUtils` utility is used to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
-
 ## Demo
 
 `ObjectHashAggregateExec` is selected when [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled (and [HashAggregateExec](HashAggregateExec.md) could not be used).
@@ -60,7 +60,7 @@ supportsAggregate(
 assert(spark.sessionState.conf.useObjectHashAggregation)
 ```
 
-Use proper data types for `aggregateBufferAttributes`.
+Use [immutable](../UnsafeRow.md#isMutable) data types for `aggregateBufferAttributes`.
 
 ```scala
 val dataset = Seq(
