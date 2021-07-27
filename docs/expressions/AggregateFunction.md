@@ -42,7 +42,7 @@ foldable: Boolean
 
 ## <span id="toAggregateExpression"> Converting to AggregateExpression
 
-``` { .scala .annotate }
+```scala
 toAggregateExpression(): AggregateExpression // (1)
 toAggregateExpression(
   isDistinct: Boolean,

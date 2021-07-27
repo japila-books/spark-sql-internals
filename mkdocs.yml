@@ -16,6 +16,8 @@ theme:
     logo: material/book-open-page-variant
     repo: fontawesome/brands/github
   features:
+    # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-annotations
+    - content.code.annotate
     - navigation.indexes
     - navigation.instant
     - navigation.tabs

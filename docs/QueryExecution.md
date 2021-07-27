@@ -293,7 +293,7 @@ toString: String
 
 ## <span id="simpleString"> Simple (Basic) Text Representation
 
-``` { .scala .annotate }
+```scala
 simpleString: String // (1)
 simpleString(
   formatted: Boolean): String
