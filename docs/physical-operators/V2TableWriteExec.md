@@ -29,6 +29,34 @@ writeWithV2(
   batchWrite: BatchWrite): Seq[InternalRow]
 ```
 
-`writeWithV2`...FIXME
+`writeWithV2` requests the [physical query plan](#query) to [execute](SparkPlan.md#execute) (that gives a `RDD[InternalRow]`).
 
-`writeWithV2` is used when the [unary physical commands](#implementations) are executed.
+`writeWithV2` requests the given `BatchWrite` for a [DataWriterFactory](../connector/BatchWrite.md#createBatchWriterFactory).
+
+`writeWithV2` prints out the following INFO message to the logs:
+
+```text
+Start processing data source write support: [batchWrite]. The input RDD has [n] partitions.
+```
+
+`writeWithV2` runs a Spark job ([Spark Core]({{ book.spark_core }}/SparkContext#runJob)) with the [DataWritingSparkTask](../DataWritingSparkTask.md#run) for every partition. `writeWithV2` requests the `BatchWrite` to [onDataWriterCommit](../connector/BatchWrite.md#onDataWriterCommit) (with the result `WriterCommitMessage`) after every partition has been processed successfully.
+
+`writeWithV2` prints out the following INFO message to the logs:
+
+```text
+Data source write support [batchWrite] is committing.
+```
+
+`writeWithV2` requests the `BatchWrite` to [commit](../connector/BatchWrite.md#commit) (with all the result `WriterCommitMessage`s).
+
+`writeWithV2` prints out the following INFO message to the logs:
+
+```text
+Data source write support [batchWrite] committed.
+```
+
+In the end, `writeWithV2` returns no `InternalRow`s.
+
+`writeWithV2` is used when:
+
+* [V2TableWriteExec commands](#implementations) are executed
