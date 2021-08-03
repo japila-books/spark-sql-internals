@@ -256,17 +256,43 @@ CAUTION: FIXME Picture between Spark SQL's Dataset => Spark Core's RDD
 
 ## <span id="decodeUnsafeRows"> Decoding Byte Arrays Back to UnsafeRows
 
-CAUTION: FIXME
-
-## <span id="getByteArrayRdd"> Compressing Partitions of UnsafeRows (to Byte Arrays) After Executing Physical Operator
-
 ```scala
-getByteArrayRdd(n: Int = -1): RDD[Array[Byte]]
+decodeUnsafeRows(
+  bytes: Array[Byte]): Iterator[InternalRow]
 ```
 
-`getByteArrayRdd`...FIXME
+`decodeUnsafeRows`...FIXME
 
-`getByteArrayRdd` is used when...FIXME
+`decodeUnsafeRows` is used when:
+
+* `SparkPlan` is requested to [executeCollect](#executeCollect), [executeCollectIterator](#executeCollectIterator), [executeToIterator](#executeToIterator), and [executeTake](#executeTake)
+
+## <span id="getByteArrayRdd"> Compressing Partitions of UnsafeRows to Byte Arrays
+
+```scala
+getByteArrayRdd(
+  n: Int = -1,
+  takeFromEnd: Boolean = false): RDD[(Long, Array[Byte])]
+```
+
+`getByteArrayRdd` [executes this operator](#execute) and maps over partitions ([Spark Core]({{ book.spark_core }}/rdd/RDD#mapPartitionsInternal)) using the [partition processing function](#getByteArrayRdd-function).
+
+!!! note
+    `getByteArrayRdd` adds a `MapPartitionsRDD` ([Spark Core]({{ book.spark_core }}/rdd/MapPartitionsRDD)) to the RDD lineage.
+
+`getByteArrayRdd` is used when:
+
+* `SparkPlan` is requested to [executeCollect](#executeCollect), [executeCollectIterator](#executeCollectIterator), [executeToIterator](#executeToIterator), and [executeTake](#executeTake)
+
+### <span id="getByteArrayRdd-function"> Partition Processing Function
+
+The function creates a `CompressionCodec` ([Spark Core]({{ book.spark_core }}/CompressionCodec)) (to compress the output to a byte array).
+
+The function takes [UnsafeRow](../UnsafeRow.md)s from the partition (one at a time) and writes them out (compressed) to the output as a series of the [size](../UnsafeRow.md#getSizeInBytes) and the [bytes](../UnsafeRow.md#writeToStream) of a single row.
+
+Once all rows have been processed, the function writes out `-1` to the output, flushes and closes it.
+
+In the end, the function returns the count of the rows written out and the byte array (with the rows).
 
 ## resetMetrics
 
