@@ -74,6 +74,9 @@ plugins:
       enabled_if_env: CI
   - awesome-pages
   - macros
+  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/
+  - tags:
+      tags_file: tags.md
 
 extra:
   analytics:
@@ -98,9 +101,9 @@ extra:
   kafka:
     api: https://kafka.apache.org/26/javadoc
   scala:
-    version: 2.12.10
     api: https://www.scala-lang.org/api/2.12.10
     docs: https://docs.scala-lang.org/
+    spec: https://www.scala-lang.org/files/archive/spec/2.12
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/jaceklaskowski
@@ -117,6 +120,7 @@ nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
+    - Tags: tags.md
     - Configuration Properties: 
       - Configuration Properties: configuration-properties.md
       - SQLConf: SQLConf.md
