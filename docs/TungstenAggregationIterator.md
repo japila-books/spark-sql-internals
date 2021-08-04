@@ -44,6 +44,24 @@ The metrics are displayed as part of [HashAggregateExec](physical-operators/Hash
 
 ![HashAggregateExec in web UI (Details for Query)](images/HashAggregateExec-webui-details-for-query.png)
 
+## <span id="next"> Next UnsafeRow
+
+```scala
+next(): UnsafeRow
+```
+
+`next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
+
+`next`...FIXME
+
+### <span id="processCurrentSortedGroup"> processCurrentSortedGroup
+
+```scala
+processCurrentSortedGroup(): Unit
+```
+
+`processCurrentSortedGroup`...FIXME
+
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 
 [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md)
@@ -61,6 +79,18 @@ When executed (once per partition), the `TaskCompletionListener` updates the fol
 * [peakMemory](#peakMemory)
 * [spillSize](#spillSize)
 * [avgHashProbe](#avgHashProbe)
+
+## <span id="outputForEmptyGroupingKeyWithoutInput"> outputForEmptyGroupingKeyWithoutInput
+
+```scala
+outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
+```
+
+`outputForEmptyGroupingKeyWithoutInput`...FIXME
+
+`outputForEmptyGroupingKeyWithoutInput` is used when:
+
+* `HashAggregateExec` physical operator is requested to [execute](physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
 
 ## Demo
 

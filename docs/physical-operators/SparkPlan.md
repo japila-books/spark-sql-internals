@@ -267,7 +267,7 @@ decodeUnsafeRows(
 
 * `SparkPlan` is requested to [executeCollect](#executeCollect), [executeCollectIterator](#executeCollectIterator), [executeToIterator](#executeToIterator), and [executeTake](#executeTake)
 
-## <span id="getByteArrayRdd"> Compressing Partitions of UnsafeRows to Byte Arrays
+## <span id="getByteArrayRdd"> Compressing RDD Partitions (of UnsafeRows) to Byte Arrays
 
 ```scala
 getByteArrayRdd(

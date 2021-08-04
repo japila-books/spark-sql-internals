@@ -1,0 +1,3 @@
+# UnsafeRowSerializerInstance
+
+`UnsafeRowSerializerInstance` is...FIXME
