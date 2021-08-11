@@ -180,6 +180,8 @@ subqueries: Seq[PlanType]
 simpleStringWithNodeId(): String
 ```
 
+`simpleStringWithNodeId` is part of the [TreeNode](TreeNode.md#simpleStringWithNodeId) abstraction.
+
 `simpleStringWithNodeId` [finds the operatorId tag](TreeNode.md#getTagValue) or defaults to `unknown`.
 
 `simpleStringWithNodeId` uses the [nodeName](TreeNode.md#nodeName) to return the following text:
@@ -187,8 +189,6 @@ simpleStringWithNodeId(): String
 ```text
 [nodeName] ([operatorId])
 ```
-
-`simpleStringWithNodeId` is part of the [TreeNode](TreeNode.md#simpleStringWithNodeId) abstraction.
 
 ## <span id="append"> append
 

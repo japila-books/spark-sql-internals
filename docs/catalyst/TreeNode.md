@@ -20,7 +20,9 @@ simpleStringWithNodeId(): String
 
 One-line description of this node with the node identifier
 
-Used when `TreeNode` is requested to [generateTreeString](#generateTreeString)
+Used when:
+
+* `TreeNode` is requested to [generateTreeString](#generateTreeString) (with node ID)
 
 ### <span id="verboseString"> verboseString
 
@@ -107,8 +109,7 @@ toString: String
 ## <span id="treeString"> Text Representation of All Nodes in Tree
 
 ```scala
-// Turns `verbose` flag on
-treeString: String
+treeString: String // (1)
 treeString(
   verbose: Boolean,
   addSuffix: Boolean = false,
@@ -122,7 +123,15 @@ treeString(
   printOperatorId: Boolean): Unit
 ```
 
+1. `verbose` flag is enabled (`true`)
+
 `treeString` gives the string representation of all the nodes in the `TreeNode`.
+
+`printOperatorId` argument is `false` by default and seems turned on only when:
+
+* `ExplainUtils` utility is used to `processPlanSkippingSubqueries`
+
+### <span id="treeString-demo"> Demo
 
 ```text
 import org.apache.spark.sql.{functions => f}
@@ -157,7 +166,8 @@ generateTreeString(
   prefix: String = "",
   addSuffix: Boolean = false,
   maxFields: Int,
-  printNodeId: Boolean): Unit
+  printNodeId: Boolean,
+  indent: Int = 0): Unit
 ```
 
 `generateTreeString`...FIXME
@@ -165,7 +175,6 @@ generateTreeString(
 `generateTreeString` is used when:
 
 * `TreeNode` is requested for [text representation of all nodes in the tree](#treeString)
-
 * [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md#generateTreeString), [InputAdapter](../physical-operators/InputAdapter.md#generateTreeString), [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#generateTreeString), [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md#generateTreeString), [QueryStageExec](../adaptive-query-execution/QueryStageExec.md#generateTreeString) physical operators are requested to `generateTreeString`
 
 ## <span id="innerChildren"> Inner Child Nodes
@@ -212,17 +221,6 @@ nodeName: String
 
 * `TreeNode` is requested for [simpleString](#simpleString) and [asCode](#asCode)
 
-## <span id="getTagValue"> getTagValue
-
-```scala
-getTagValue[T](
-  tag: TreeNodeTag[T]): Option[T]
-```
-
-`getTagValue`...FIXME
-
-`getTagValue` is used when...FIXME
-
 ## Scala Definition
 
 ```scala
@@ -246,3 +244,55 @@ NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and 
 `TreeNode` can itself be a node in a tree or a collection of nodes, i.e. itself and the <<children, children>> nodes. Not only does `TreeNode` come with the <<methods, methods>> that you may have used in https://docs.scala-lang.org/overviews/collections/overview.html[Scala Collection API] (e.g. <<map, map>>, <<flatMap, flatMap>>, <<collect, collect>>, <<collectFirst, collectFirst>>, <<foreach, foreach>>), but also specialized ones for more advanced tree manipulation, e.g. <<mapChildren, mapChildren>>, <<transform, transform>>, <<transformDown, transformDown>>, <<transformUp, transformUp>>, <<foreachUp, foreachUp>>, <<numberedTreeString, numberedTreeString>>, <<p, p>>, <<asCode, asCode>>, <<prettyJson, prettyJson>>.
 
 `TreeNode` abstract type is a fairly advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
+
+## <span id="tags"> Tags
+
+```scala
+tags: Map[TreeNodeTag[_], Any]
+```
+
+`TreeNode` can have a metadata assigned (as a mutable map of tags and their values).
+
+`tags` can be [set](#setTagValue), [unset](#unsetTagValue) and [looked up](#getTagValue).
+
+`tags` are [copied](#copyTagsFrom) (from another `TreeNode`) only when a `TreeNode` has none defined.
+
+### <span id="copyTagsFrom"> Copying Tags
+
+```scala
+copyTagsFrom(
+  other: BaseType): Unit
+```
+
+`copyTagsFrom` is used when:
+
+* `ResolveRelations` logical resolution rule is requested to [lookupRelation](../logical-analysis-rules/ResolveRelations.md#lookupRelation)
+* `ResolveReferences` logical resolution rule is requested to [collectConflictPlans](../logical-analysis-rules/ResolveReferences.md#collectConflictPlans)
+* `OneRowRelation` leaf logical operator is requested to [makeCopy](../logical-operators/OneRowRelation.md#makeCopy)
+* `TreeNode` is requested to [transformDown](#transformDown), [transformUp](#transformUp) and [makeCopy](#makeCopy)
+
+### <span id="getTagValue"> Looking Up Tag
+
+```scala
+getTagValue[T](
+  tag: TreeNodeTag[T]): Option[T]
+```
+
+### <span id="setTagValue"> Setting Tag
+
+```scala
+setTagValue[T](
+  tag: TreeNodeTag[T], value: T): Unit
+```
+
+### <span id="unsetTagValue"> Unsetting Tag
+
+```scala
+unsetTagValue[T](
+  tag: TreeNodeTag[T]): Unit
+```
+
+`unsetTagValue` is used when:
+
+* `ExplainUtils` utility is used to `removeTags`
+* `AdaptiveSparkPlanExec` leaf physical operator is requested to [cleanUpTempTags](../adaptive-query-execution/AdaptiveSparkPlanExec.md#cleanUpTempTags)

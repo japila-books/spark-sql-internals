@@ -305,6 +305,13 @@ simpleString(
 
 In the end, `simpleString` adds **== Physical Plan ==** header to the text representation and [redacts sensitive information](#withRedaction).
 
+`simpleString` is used when:
+
+* `QueryExecution` is requested to [explainString](#explainString)
+* _others_
+
+### <span id="simpleString-demo"> Demo
+
 ```scala
 import org.apache.spark.sql.{functions => f}
 val q = spark.range(10).withColumn("rand", f.rand())
@@ -317,6 +324,27 @@ scala> println(output)
 *(1) Project [id#53L, rand(-5226178239369056152) AS rand#55]
 +- *(1) Range (0, 10, step=1, splits=16)
 ```
+
+## <span id="explainString"> explainString
+
+```scala
+explainString(
+  mode: ExplainMode): String
+explainString(
+  mode: ExplainMode,
+  maxFields: Int,
+  append: String => Unit): Unit
+```
+
+`explainString`...FIXME
+
+`explainString` is used when:
+
+* `Dataset` is requested to [explain](Dataset.md#explain)
+* `SQLExecution` utility is used to [withNewExecutionId](SQLExecution.md#withNewExecutionId)
+* `AdaptiveSparkPlanExec` leaf physical operator is requested to [onUpdatePlan](adaptive-query-execution/AdaptiveSparkPlanExec.md#onUpdatePlan)
+* `ExplainCommand` logical command is [executed](logical-operators/ExplainCommand.md#run)
+* `debug` utility is used to `toFile`
 
 ## <span id="withRedaction"> Redacting Sensitive Information
 
