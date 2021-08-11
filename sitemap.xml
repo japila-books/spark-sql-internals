@@ -236,6 +236,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExplainUtils/</loc>
+         <lastmod>2021-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExpressionEncoder/</loc>
          <lastmod>2021-08-11</lastmod>
          <changefreq>daily</changefreq>
