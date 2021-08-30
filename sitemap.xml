@@ -3101,6 +3101,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Subquery/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/SubqueryAlias/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
@@ -3402,6 +3407,11 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/SimplifyCasts/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/UpdateCTERelationStats/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
