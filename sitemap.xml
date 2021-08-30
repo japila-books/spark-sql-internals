@@ -1126,6 +1126,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/catalyst/TreePattern/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/catalyst/TreePatternBits/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/catalyst-dsl/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
@@ -2436,6 +2446,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/CTESubstitution/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/CleanupAliases/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
@@ -2601,6 +2616,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/ResolveWithCTE/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-analysis-rules/TableCapabilityCheck/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
@@ -2692,6 +2712,16 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/BasicStatsPlanVisitor/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CTERelationDef/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CTERelationRef/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3206,6 +3236,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/WithCTE/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/WithWindowDefinition/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
@@ -3292,6 +3327,11 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/InferFiltersFromConstraints/</loc>
+         <lastmod>2021-08-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/InlineCTE/</loc>
          <lastmod>2021-08-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
