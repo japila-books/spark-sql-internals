@@ -88,18 +88,18 @@ extra:
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
   hadoop:
-    version: 3.2.0
-    docs: https://hadoop.apache.org/docs/r3.2.0
-    api: https://hadoop.apache.org/docs/r3.2.0/api
+    version: 3.3.1
+    docs: https://hadoop.apache.org/docs/r3.3.1
+    api: https://hadoop.apache.org/docs/r3.3.1/api
   hive:
     version: 2.3.7
     api: https://hive.apache.org/javadocs/r2.3.7/api
   java:
     api: https://docs.oracle.com/en/java/javase/11/docs/api
   kafka:
-    api: https://kafka.apache.org/26/javadoc
+    api: https://kafka.apache.org/28/javadoc
   scala:
-    api: https://www.scala-lang.org/api/2.12.10
+    api: https://www.scala-lang.org/api/2.12.14
     docs: https://docs.scala-lang.org/
     spec: https://www.scala-lang.org/files/archive/spec/2.12
   social:
@@ -112,9 +112,8 @@ extra:
     - icon: fontawesome/brands/medium
       link: https://jaceklaskowski.medium.com
   spark:
-    version: 3.1.2
-    github: https://github.com/apache/spark/tree/v3.1.2
-    docs: http://spark.apache.org/docs/3.1.2
+    version: 3.2.0 (RC1)
+    github: https://github.com/apache/spark/tree/v3.2.0-rc1
 
 nav:
   - Home: index.md
