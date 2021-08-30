@@ -13,7 +13,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` does nothing and simply returns the given [LogicalPlan](../logical-operators/LogicalPlan.md) when applied to a [Subquery](../logical-operators/Subquery.md) or non-`CTE` query tree. Otherwise, `apply` [updateCTEStats](#updateCTEStats).
+`apply` does nothing and simply returns the given [LogicalPlan](../logical-operators/LogicalPlan.md) when applied to a [Subquery](../logical-operators/Subquery.md) or a non-`CTE` query plan. Otherwise, `apply` [updateCTEStats](#updateCTEStats).
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
@@ -28,7 +28,7 @@ updateCTEStats(
 `updateCTEStats` branches off based on the type of the [logical operator](../logical-operators/LogicalPlan.md):
 
 1. `WithCTE`
-1. `CTERelationRef`
+1. [CTERelationRef](../logical-operators/CTERelationRef.md)
 1. Others with `CTE` tree pattern
 
 For all other types, `updateCTEStats` returns the given `LogicalPlan`.

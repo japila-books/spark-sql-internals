@@ -235,6 +235,7 @@ nav:
       - AlterTable: logical-operators/AlterTable.md
       - CommentOnTable: logical-operators/CommentOnTable.md
       - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
+      - CTERelationRef: logical-operators/CTERelationRef.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - IgnoreCachedData: logical-operators/IgnoreCachedData.md
       - MapPartitions: logical-operators/MapPartitions.md
@@ -274,6 +275,7 @@ nav:
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
       - CreateV2Table: logical-operators/CreateV2Table.md
       - CreateViewCommand: logical-operators/CreateViewCommand.md
+      - CTERelationDef: logical-operators/CTERelationDef.md
       - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
       - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
       - DeleteFromTable: logical-operators/DeleteFromTable.md
@@ -336,6 +338,7 @@ nav:
       - UpdateTable: logical-operators/UpdateTable.md
       - UseStatement: logical-operators/UseStatement.md
       - Window: logical-operators/Window.md
+      - WithCTE: logical-operators/WithCTE.md
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md
       - WriteToDataSourceV2: logical-operators/WriteToDataSourceV2.md
       - View: logical-operators/View.md
@@ -483,6 +486,8 @@ nav:
     - Catalyst:
       - catalyst/index.md
       - TreeNode: catalyst/TreeNode.md
+      - TreePattern: catalyst/TreePattern.md
+      - TreePatternBits: catalyst/TreePatternBits.md
       - QueryPlan: catalyst/QueryPlan.md
       - RuleExecutor: catalyst/RuleExecutor.md
       - Rule: catalyst/Rule.md
@@ -722,6 +727,7 @@ nav:
       - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
       - AliasViewChild: logical-analysis-rules/AliasViewChild.md
       - CleanupAliases: logical-analysis-rules/CleanupAliases.md
+      - CTESubstitution: logical-analysis-rules/CTESubstitution.md
       - DataSourceAnalysis: logical-analysis-rules/DataSourceAnalysis.md
       - ExtractWindowExpressions: logical-analysis-rules/ExtractWindowExpressions.md
       - FindDataSourceTable: logical-analysis-rules/FindDataSourceTable.md
@@ -754,6 +760,7 @@ nav:
       - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
       - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
+      - ResolveWithCTE: logical-analysis-rules/ResolveWithCTE.md
       - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
       - TimeWindowing: logical-analysis-rules/TimeWindowing.md
       - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
@@ -777,6 +784,7 @@ nav:
       - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
       - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
       - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
+      - InlineCTE: logical-optimizations/InlineCTE.md
       - LimitPushDown: logical-optimizations/LimitPushDown.md
       - NullPropagation: logical-optimizations/NullPropagation.md
       - OptimizeIn: logical-optimizations/OptimizeIn.md

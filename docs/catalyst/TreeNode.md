@@ -245,6 +245,41 @@ NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and 
 
 `TreeNode` abstract type is a fairly advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
 
+## <span id="treePatternBits"> treePatternBits
+
+```scala
+treePatternBits: BitSet
+```
+
+`treePatternBits` [getDefaultTreePatternBits](#getDefaultTreePatternBits).
+
+??? note "Lazy Value"
+    `treePatternBits` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+`treePatternBits` is part of the [TreePatternBits](TreePatternBits.md#treePatternBits) abstraction.
+
+## <span id="getDefaultTreePatternBits"> getDefaultTreePatternBits
+
+```scala
+getDefaultTreePatternBits: BitSet
+```
+
+`getDefaultTreePatternBits`...FIXME
+
+`getDefaultTreePatternBits` is used when:
+
+* `PlanExpression` is requested for the [treePatternBits](../expressions/PlanExpression.md#treePatternBits)
+* `QueryPlan` is requested for the [treePatternBits](QueryPlan.md#treePatternBits)
+* `TreeNode` is requested for the [treePatternBits](#treePatternBits)
+
+### <span id="nodePatterns"> Node Patterns
+
+```scala
+nodePatterns: Seq[TreePattern]
+```
+
+`nodePatterns` is empty by default (and is supposed to be overriden by the [implementations](#implementations)).
+
 ## <span id="tags"> Tags
 
 ```scala

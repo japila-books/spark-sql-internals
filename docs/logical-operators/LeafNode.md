@@ -4,6 +4,7 @@
 
 ## Implementations
 
+* [CTERelationRef](CTERelationRef.md)
 * [DataSourceV2Relation](DataSourceV2Relation.md)
 * [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md)
 * [ExternalRDD](ExternalRDD.md)

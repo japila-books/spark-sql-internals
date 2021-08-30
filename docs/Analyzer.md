@@ -52,11 +52,12 @@ Rules:
 
 Strategy: Once
 
-### Substitution
+### <span id="Substitution"> Substitution
 
 Rules:
 
-* CTESubstitution
+* OptimizeUpdateFields
+* [CTESubstitution](logical-analysis-rules/CTESubstitution.md)
 * [WindowsSubstitution](logical-analysis-rules/WindowsSubstitution.md)
 * EliminateUnions
 * SubstituteUnresolvedOrdinals
@@ -104,6 +105,7 @@ Rules:
 * ResolveRandomSeed
 * ResolveBinaryArithmetic
 * [Type Coercion Rules](spark-sql-TypeCoercion.md#typeCoercionRules)
+* [ResolveWithCTE](logical-analysis-rules/ResolveWithCTE.md)
 * [extendedResolutionRules](#extendedResolutionRules)
 
 Strategy: [fixedPoint](#fixedPoint)

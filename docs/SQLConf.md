@@ -610,6 +610,10 @@ Used when:
 
 Used in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy to prefer sort merge join over shuffle hash join.
 
+## <span id="LEGACY_CTE_PRECEDENCE_POLICY"> LEGACY_CTE_PRECEDENCE_POLICY
+
+[spark.sql.legacy.ctePrecedencePolicy](configuration-properties.md#spark.sql.legacy.ctePrecedencePolicy)
+
 ## <span id="replaceDatabricksSparkAvroEnabled"><span id="LEGACY_REPLACE_DATABRICKS_SPARK_AVRO_ENABLED"> replaceDatabricksSparkAvroEnabled
 
 [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](configuration-properties.md#spark.sql.legacy.replaceDatabricksSparkAvro.enabled)

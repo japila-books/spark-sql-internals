@@ -32,19 +32,19 @@ Rules:
 
 Strategy: `Once`
 
-### Finish Analysis
+### <span id="Finish-Analysis"> Finish Analysis
 
 Rules:
 
 * [EliminateResolvedHint](../logical-optimizations/EliminateResolvedHint.md)
 * EliminateSubqueryAliases
 * EliminateView
+* [InlineCTE](../logical-optimizations/InlineCTE.md)
 * ReplaceExpressions
 * RewriteNonCorrelatedExists
-* ComputeCurrentTime
-* GetCurrentDatabase
-* RewriteDistinctAggregates
-* ReplaceDeduplicateWithAggregate
+* PullOutGroupingExpressions
+* [ComputeCurrentTime](../logical-optimizations/ComputeCurrentTime.md)
+* ReplaceCurrentLike
 
 Strategy: `Once`
 

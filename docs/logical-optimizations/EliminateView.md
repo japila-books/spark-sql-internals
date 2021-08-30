@@ -35,7 +35,8 @@ scala> println(afterEliminateView.numberedTreeString)
 ## <span id="apply"> Executing Rule
 
 ```scala
-apply(plan: LogicalPlan): LogicalPlan
+apply(
+  plan: LogicalPlan): LogicalPlan
 ```
 
 `apply` simply removes (eliminates) <<View.md#, View>> unary logical operators from the input <<spark-sql-LogicalPlan.md#, logical plan>> and replaces them with their <<View.md#child, child>> logical operator.

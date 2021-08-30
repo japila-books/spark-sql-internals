@@ -894,9 +894,13 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.ctePrecedencePolicy"> spark.sql.legacy.ctePrecedencePolicy
 
-**(internal)** When LEGACY, outer CTE definitions takes precedence over inner definitions. If set to CORRECTED, inner CTE definitions take precedence. The default value is EXCEPTION, AnalysisException is thrown while name conflict is detected in nested CTE. This config will be removed in future versions and CORRECTED will be the only behavior.
+**(internal)** This config will be removed in future versions and `CORRECTED` will be the only behavior.
 
-Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
+Possible values:
+
+1. `CORRECTED` - inner CTE definitions take precedence
+1. `EXCEPTION` - `AnalysisException` is thrown while name conflict is detected in nested CTE
+1. `LEGACY` - outer CTE definitions takes precedence over inner definitions
 
 Default: `EXCEPTION`
 
