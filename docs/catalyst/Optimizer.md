@@ -179,6 +179,14 @@ Rules:
 
 Strategy: `Once`
 
+### <span id="Update-CTE-Relation-Stats"> Update CTE Relation Stats
+
+Rules:
+
+* [UpdateCTERelationStats](../logical-optimizations/UpdateCTERelationStats.md)
+
+Strategy: `Once`
+
 ### Join Reorder
 
 Rules:

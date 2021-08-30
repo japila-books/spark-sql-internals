@@ -319,6 +319,7 @@ nav:
       - ShowTablePropertiesCommand: logical-operators/ShowTablePropertiesCommand.md
       - ShowTables: logical-operators/ShowTables.md
       - Sort: logical-operators/Sort.md
+      - Subquery: logical-operators/Subquery.md
       - SubqueryAlias: logical-operators/SubqueryAlias.md
       - TruncateTableCommand: logical-operators/TruncateTableCommand.md
       - TypedFilter: logical-operators/TypedFilter.md
@@ -799,6 +800,7 @@ nav:
       - RewritePredicateSubquery: logical-optimizations/RewritePredicateSubquery.md
       - SchemaPruning: logical-optimizations/SchemaPruning.md
       - SimplifyCasts: logical-optimizations/SimplifyCasts.md
+      - UpdateCTERelationStats: logical-optimizations/UpdateCTERelationStats.md
       - V2ScanRelationPushDown: logical-optimizations/V2ScanRelationPushDown.md
     - Execution Planning Strategies:
       - SparkStrategy: execution-planning-strategies/SparkStrategy.md
