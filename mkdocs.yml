@@ -485,16 +485,16 @@ nav:
       - HiveAnalysis: hive/HiveAnalysis.md
     - Catalyst:
       - catalyst/index.md
+      - GenericStrategy: catalyst/GenericStrategy.md
+      - Optimizer: catalyst/Optimizer.md
+      - PlanChangeLogger: catalyst/PlanChangeLogger.md
+      - QueryPlan: catalyst/QueryPlan.md
+      - QueryPlanner: catalyst/QueryPlanner.md
+      - Rule: catalyst/Rule.md
+      - RuleExecutor: catalyst/RuleExecutor.md
       - TreeNode: catalyst/TreeNode.md
       - TreePattern: catalyst/TreePattern.md
       - TreePatternBits: catalyst/TreePatternBits.md
-      - QueryPlan: catalyst/QueryPlan.md
-      - RuleExecutor: catalyst/RuleExecutor.md
-      - Rule: catalyst/Rule.md
-      - QueryPlanner: catalyst/QueryPlanner.md
-      - Optimizer: catalyst/Optimizer.md
-      - GenericStrategy: catalyst/GenericStrategy.md
-      - PlanChangeLogger: catalyst/PlanChangeLogger.md
     - Expressions:
       - AggregateExpression: expressions/AggregateExpression.md
       - AggregateFunction: expressions/AggregateFunction.md

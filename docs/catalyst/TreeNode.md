@@ -245,40 +245,48 @@ NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and 
 
 `TreeNode` abstract type is a fairly advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
 
-## <span id="treePatternBits"> treePatternBits
+## <span id="node-patterns"> Node Patterns
+
+`TreeNode`s can optionally define [node patterns](#nodePatterns) for faster query planning (offering a so-called tree traversal pruning as part of [SPARK-35042](https://issues.apache.org/jira/browse/SPARK-35042)).
+
+Node Patterns are a new feature in Apache Spark 3.2.0.
+
+### <span id="nodePatterns"> nodePatterns
+
+```scala
+nodePatterns: Seq[TreePattern]
+```
+
+`nodePatterns` is a collection of [TreePattern](TreePattern.md)s.
+
+`nodePatterns` is empty by default (and is supposed to be overriden by the [implementations](#implementations)).
+
+### <span id="treePatternBits"> Tree Pattern Bits
 
 ```scala
 treePatternBits: BitSet
 ```
 
-`treePatternBits` [getDefaultTreePatternBits](#getDefaultTreePatternBits).
+`treePatternBits` is the [default tree pattern bits](#getDefaultTreePatternBits).
 
 ??? note "Lazy Value"
     `treePatternBits` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
 
 `treePatternBits` is part of the [TreePatternBits](TreePatternBits.md#treePatternBits) abstraction.
 
-## <span id="getDefaultTreePatternBits"> getDefaultTreePatternBits
+### <span id="getDefaultTreePatternBits"> Default Tree Pattern Bits
 
 ```scala
 getDefaultTreePatternBits: BitSet
 ```
 
-`getDefaultTreePatternBits`...FIXME
+`getDefaultTreePatternBits` is a `BitSet` with the [nodePatterns](#nodePatterns) bits on (`true`) unioned with the [treePatternBits](#treePatternBits) of the [children](#children) (if any).
 
 `getDefaultTreePatternBits` is used when:
 
 * `PlanExpression` is requested for the [treePatternBits](../expressions/PlanExpression.md#treePatternBits)
 * `QueryPlan` is requested for the [treePatternBits](QueryPlan.md#treePatternBits)
 * `TreeNode` is requested for the [treePatternBits](#treePatternBits)
-
-### <span id="nodePatterns"> Node Patterns
-
-```scala
-nodePatterns: Seq[TreePattern]
-```
-
-`nodePatterns` is empty by default (and is supposed to be overriden by the [implementations](#implementations)).
 
 ## <span id="tags"> Tags
 

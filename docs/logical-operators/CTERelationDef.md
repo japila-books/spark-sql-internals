@@ -19,6 +19,6 @@
 nodePatterns: Seq[TreePattern]
 ```
 
-`nodePatterns` is `CTE`.
+`nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
 
 `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.

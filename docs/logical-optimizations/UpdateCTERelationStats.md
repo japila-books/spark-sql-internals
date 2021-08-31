@@ -1,6 +1,6 @@
 # UpdateCTERelationStats Logical Optimization
 
-`UpdateCTERelationStats` is a [logical optimization](../catalyst/Optimizer.md#batches) that [updateCTEStats](#updateCTEStats) for `CTE` operators.
+`UpdateCTERelationStats` is a [logical optimization](../catalyst/Optimizer.md#batches) that [updateCTEStats](#updateCTEStats) for [CTE](../catalyst/TreePattern.md#CTE) logical operators.
 
 `UpdateCTERelationStats` is part of the [Update CTE Relation Stats](../catalyst/Optimizer.md#Update-CTE-Relation-Stats) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
@@ -13,7 +13,7 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` does nothing and simply returns the given [LogicalPlan](../logical-operators/LogicalPlan.md) when applied to a [Subquery](../logical-operators/Subquery.md) or a non-`CTE` query plan. Otherwise, `apply` [updateCTEStats](#updateCTEStats).
+`apply` does nothing and simply returns the given [LogicalPlan](../logical-operators/LogicalPlan.md) when applied to a [Subquery](../logical-operators/Subquery.md) or a non-[CTE](../catalyst/TreePattern.md#CTE) query plan. Otherwise, `apply` [updateCTEStats](#updateCTEStats).
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
@@ -27,9 +27,9 @@ updateCTEStats(
 
 `updateCTEStats` branches off based on the type of the [logical operator](../logical-operators/LogicalPlan.md):
 
-1. `WithCTE`
+1. [WithCTE](../logical-operators/WithCTE.md)
 1. [CTERelationRef](../logical-operators/CTERelationRef.md)
-1. Others with `CTE` tree pattern
+1. Others with [CTE](../catalyst/TreePattern.md#CTE) tree pattern
 
 For all other types, `updateCTEStats` returns the given `LogicalPlan`.
 
