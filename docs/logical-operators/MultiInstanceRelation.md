@@ -1,63 +1,29 @@
-# MultiInstanceRelation
+# MultiInstanceRelation Logical Operators
 
-`MultiInstanceRelation` is a <<contact, contact>> of spark-sql-LogicalPlan.md[logical operators] which a <<newInstance, single instance>> might appear multiple times in a logical query plan.
+`MultiInstanceRelation` is an [abstraction](#contract) of [logical operators](#implementations) for which a single instance might appear multiple times in a logical query plan.
 
-[[newInstance]]
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.analysis
+## Contract
 
-trait MultiInstanceRelation {
-  def newInstance(): LogicalPlan
-}
-----
+### <span id="newInstance"> Creating New Instance
 
-When [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical evaluation is executed, every `MultiInstanceRelation` in a logical query plan is requested to <<newInstance, produce a new version of itself with globally unique expression ids>>.
+```scala
+newInstance(): LogicalPlan
+```
 
-[[implementations]]
-.MultiInstanceRelations
-[cols="1,2",options="header",width="100%"]
-|===
-| MultiInstanceRelation
-| Description
+Used when:
 
-| `ContinuousExecutionRelation`
-| [[ContinuousExecutionRelation]] Used in Spark Structured Streaming
+* [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule is executed
+* `DeduplicateRelations` logical resolution rule is executed
 
-| DataSourceV2Relation.md[DataSourceV2Relation]
-| [[DataSourceV2Relation]]
+## Implementations
 
-| ExternalRDD.md[ExternalRDD]
-| [[ExternalRDD]]
-
-| hive/HiveTableRelation.md[HiveTableRelation]
-| [[HiveTableRelation]]
-
-| [InMemoryRelation](../logical-operators/InMemoryRelation.md)
-| [[InMemoryRelation]]
-
-| LocalRelation.md[LocalRelation]
-| [[LocalRelation]]
-
-| LogicalRDD.md[LogicalRDD]
-| [[LogicalRDD]]
-
-| LogicalRelation.md[LogicalRelation]
-| [[LogicalRelation]]
-
-| Range.md[Range]
-| [[Range]]
-
-| View.md[View]
-| [[View]]
-
-| `StreamingExecutionRelation`
-| [[StreamingExecutionRelation]] Used in Spark Structured Streaming
-
-| `StreamingRelation`
-| [[StreamingRelation]] Used in Spark Structured Streaming
-
-| `StreamingRelationV2`
-| [[StreamingRelationV2]] Used in Spark Structured Streaming
-|===
+* [CTERelationRef](CTERelationRef.md)
+* [DataSourceV2Relation](DataSourceV2Relation.md)
+* [ExternalRDD](ExternalRDD.md)
+* [HiveTableRelation](../hive/HiveTableRelation.md)
+* [InMemoryRelation](InMemoryRelation.md)
+* [LocalRelation](LocalRelation.md)
+* [LogicalRDD](LogicalRDD.md)
+* [LogicalRelation](LogicalRelation.md)
+* [Range](Range.md)
+* _others_ (in Spark Structured Streaming)
