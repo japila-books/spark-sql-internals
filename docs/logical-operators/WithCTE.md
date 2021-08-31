@@ -14,3 +14,13 @@
 * [CTESubstitution](../logical-analysis-rules/CTESubstitution.md) logical analysis rule is executed
 * [InlineCTE](../logical-optimizations/InlineCTE.md) logical optimization is executed
 * [UpdateCTERelationStats](../logical-optimizations/UpdateCTERelationStats.md) logical optimization is executed
+
+## <span id="nodePatterns"> Node Patterns
+
+```scala
+nodePatterns: Seq[TreePattern]
+```
+
+`nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
+
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.

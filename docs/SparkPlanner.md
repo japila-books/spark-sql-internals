@@ -23,6 +23,8 @@
 1. Window
 1. [JoinSelection](execution-planning-strategies/JoinSelection.md)
 1. [InMemoryScans](execution-planning-strategies/InMemoryScans.md)
+1. SparkScripts
+1. WithCTEStrategy
 1. [BasicOperators](execution-planning-strategies/BasicOperators.md)
 
 ## Creating Instance

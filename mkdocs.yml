@@ -335,6 +335,7 @@ nav:
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedTableValuedFunction: logical-operators/UnresolvedTableValuedFunction.md
       - UnresolvedV2Relation: logical-operators/UnresolvedV2Relation.md
+      - UnresolvedWith: logical-operators/UnresolvedWith.md
       - UpdateTable: logical-operators/UpdateTable.md
       - UseStatement: logical-operators/UseStatement.md
       - Window: logical-operators/Window.md

@@ -19,3 +19,13 @@
 ## <span id="MultiInstanceRelation"> MultiInstanceRelation
 
 `CTERelationRef` is a [MultiInstanceRelation](MultiInstanceRelation.md).
+
+## <span id="nodePatterns"> Node Patterns
+
+```scala
+nodePatterns: Seq[TreePattern]
+```
+
+`nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
+
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.

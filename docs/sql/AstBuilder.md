@@ -422,18 +422,23 @@ ANTLR rule: `windowDef`
 
 ### <span id="withAggregationClause"> withAggregationClause
 
-```scala
-withAggregationClause(
-  ctx: AggregationClauseContext,
-  selectExpressions: Seq[NamedExpression],
-  query: LogicalPlan): LogicalPlan
-```
-
 Adds one of the following logical operators:
 
-* [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY &hellip; GROUPING SETS (&hellip;)`
+* [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY ... GROUPING SETS (...)`
 
-* [Aggregate](../logical-operators/Aggregate.md) for `GROUP BY &hellip; (WITH CUBE | WITH ROLLUP)?`
+* [Aggregate](../logical-operators/Aggregate.md) for `GROUP BY ... (WITH CUBE | WITH ROLLUP)?`
+
+### <span id="withCTE"> withCTE
+
+Creates a [UnresolvedWith](../logical-operators/UnresolvedWith.md) logical operator for Common Table Expressions (CTEs) in [visitQuery](#visitQuery) and [visitDmlStatement](#visitDmlStatement)
+
+```text
+WITH namedQuery (',' namedQuery)*
+
+namedQuery
+    : name (columnAliases)? AS? '(' query ')'
+    ;
+```
 
 ### <span id="withGenerate"> withGenerate
 
@@ -441,19 +446,13 @@ Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator]
 
 ### <span id="withHavingClause"> withHavingClause
 
-```scala
-withHavingClause(
-  ctx: HavingClauseContext,
-  plan: LogicalPlan): LogicalPlan
-```
-
-Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md)
+Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md) for the following:
 
 ```text
 HAVING booleanExpression
 ```
 
-### withHints
+### <span id="withHints"> withHints
 
 Adds an [UnresolvedHint](../logical-operators/UnresolvedHint.md) for `/*+ hint */` in `SELECT` queries.
 
@@ -504,17 +503,17 @@ For transform `SELECT` (with `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQu
 
 For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQuerySpecification` adds (in that order):
 
-. [Generate](#withGenerate) unary logical operators (if used in the parsed SQL text)
+1. [Generate](#withGenerate) unary logical operators (if used in the parsed SQL text)
 
-. [Filter](../logical-operators/Filter.md) unary logical plan (if used in the parsed SQL text)
+1. [Filter](../logical-operators/Filter.md) unary logical plan (if used in the parsed SQL text)
 
-. [GroupingSets or Aggregate](#withAggregation) unary logical operators (if used in the parsed SQL text)
+1. [GroupingSets or Aggregate](#withAggregation) unary logical operators (if used in the parsed SQL text)
 
-. `Project` and/or `Filter` unary logical operators
+1. `Project` and/or `Filter` unary logical operators
 
-. [WithWindowDefinition](#withWindows) unary logical operator (if used in the parsed SQL text)
+1. [WithWindowDefinition](#withWindows) unary logical operator (if used in the parsed SQL text)
 
-. [UnresolvedHint](#withHints) unary logical operator (if used in the parsed SQL text)
+1. [UnresolvedHint](#withHints) unary logical operator (if used in the parsed SQL text)
 
 ### withPredicate
 
@@ -529,14 +528,7 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 ### <span id="withRepartitionByExpression"> withRepartitionByExpression
 
-```scala
-withRepartitionByExpression(
-  ctx: QueryOrganizationContext,
-  expressions: Seq[Expression],
-  query: LogicalPlan): LogicalPlan
-```
-
-`withRepartitionByExpression` simply throws a `ParseException`:
+`withRepartitionByExpression` throws a `ParseException`:
 
 ```text
 DISTRIBUTE BY is not supported

@@ -6,8 +6,8 @@
 
 `CTERelationDef` takes the following to be created:
 
-* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
-* <span id="id"> ID
+* <span id="child"> Child [logical operator](LogicalPlan.md)
+* <span id="id"> ID (default: a new unique ID)
 
 `CTERelationDef` is created when:
 
