@@ -1,5 +1,3 @@
-title: Alias
-
 # Alias Unary Expression
 
 `Alias` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and a expressions/NamedExpression.md[named expression].

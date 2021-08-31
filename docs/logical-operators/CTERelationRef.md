@@ -29,3 +29,7 @@ nodePatterns: Seq[TreePattern]
 `nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
 
 `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+## Query Planning
+
+`CTERelationRef` logical operators are planned by [WithCTEStrategy](../execution-planning-strategies/WithCTEStrategy.md) execution planning strategy (to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operators).

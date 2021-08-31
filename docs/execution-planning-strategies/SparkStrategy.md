@@ -28,7 +28,7 @@ type Strategy = SparkStrategy
 
 `PlanLater` cannot be executed and, when requested to execute (using `doExecute`), simply throws an `UnsupportedOperationException`.
 
-## planLater
+## <span id="planLater"> planLater
 
 ```scala
 planLater(
