@@ -823,6 +823,7 @@ nav:
       - LogicalQueryStageStrategy: execution-planning-strategies/LogicalQueryStageStrategy.md
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
+      - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - CoalesceBucketsInJoin: physical-optimizations/CoalesceBucketsInJoin.md
@@ -850,6 +851,7 @@ nav:
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
   - New &amp; Noteworthy:
+    - Common Table Expressions: common-table-expressions.md
     - Join Queries:
       - Joins: joins.md
       - spark-sql-joins-broadcast.md
