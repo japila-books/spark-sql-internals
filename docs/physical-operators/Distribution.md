@@ -1,6 +1,6 @@
 # Distributions
 
-`Distribution` is an [abstraction](#contract) of the [data distribution requirements](#implementations) of a [physical operator](SparkPlan.md#requiredChildDistribution).
+`Distribution` is an [abstraction](#contract) of the [data distribution requirements](#implementations) of [physical operators](#physical-operators-distribution-requirements).
 
 `Distribution` is enforced by [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization.
 
@@ -42,3 +42,21 @@ Used when:
 * [HashClusteredDistribution](HashClusteredDistribution.md)
 * [OrderedDistribution](OrderedDistribution.md)
 * [UnspecifiedDistribution](UnspecifiedDistribution.md)
+
+## Physical Operators' Distribution Requirements
+
+[Physical operators](SparkPlan.md) use `Distribution`s to specify the [required child distribution](SparkPlan.md#requiredChildDistribution) for every [child operator](SparkPlan.md#children).
+
+The default `Distribution`s are [UnspecifiedDistribution](UnspecifiedDistribution.md)s for all the [children](SparkPlan.md#children).
+
+Physical Operator | Required Child Distribution
+------------------|----------------------------
+ [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) | [UnspecifiedDistribution](UnspecifiedDistribution.md) or [AQEUtils.getRequiredDistribution](../adaptive-query-execution/AQEUtils.md#getRequiredDistribution)
+ [BaseAggregateExec](BaseAggregateExec.md) | One of [AllTuples](AllTuples.md), [ClusteredDistribution](ClusteredDistribution.md) and [UnspecifiedDistribution](UnspecifiedDistribution.md)
+ [BroadcastHashJoinExec](BroadcastHashJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa
+ [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa
+ [CoGroupExec](CoGroupExec.md)      | [HashClusteredDistribution](HashClusteredDistribution.md)s
+ GlobalLimitExec  | [AllTuples](AllTuples.md)
+ [ShuffledJoin](ShuffledJoin.md) | [UnspecifiedDistribution](UnspecifiedDistribution.md)s or [HashClusteredDistribution](HashClusteredDistribution.md)s
+ [SortExec](SortExec.md)      | [OrderedDistribution](OrderedDistribution.md) or [UnspecifiedDistribution](UnspecifiedDistribution.md)
+ _others_ |

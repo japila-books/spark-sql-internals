@@ -858,6 +858,7 @@ nav:
       - spark-sql-joins-broadcast.md
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
+      - AQEUtils: adaptive-query-execution/AQEUtils.md
       - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
       - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
       - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
