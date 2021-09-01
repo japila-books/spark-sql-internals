@@ -1,68 +1,64 @@
-# Attribute &mdash; Base of Leaf Named Expressions
+# Attribute Named Leaf Expressions
 
-`Attribute` is the <<contract, base>> of <<extensions, leaf named expressions>>.
+`Attribute` is an [extension](#contract) of the [LeafExpression](Expression.md#LeafExpression) and [NamedExpression](NamedExpression.md) abstractions for [named leaf expressions](#implementations).
 
-NOTE: catalyst/QueryPlan.md#output[QueryPlan uses Attributes] to build the [schema](../types/StructType.md) of the query (it represents).
+[Attribute](catalyst/QueryPlan.md#output)s are used by `QueryPlan` to build the [schema](../types/StructType.md) of the structured query (it represents).
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
+## Contract
 
-abstract class Attribute extends ... {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def withMetadata(newMetadata: Metadata): Attribute
-  def withName(newName: String): Attribute
-  def withNullability(newNullability: Boolean): Attribute
-  def withQualifier(newQualifier: Option[String]): Attribute
-  def newInstance(): Attribute
-}
-----
+### <span id="newInstance"> newInstance
 
-.Attribute Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Property
-| Description
+```scala
+newInstance(): Attribute
+```
 
-| withMetadata
-| [[withMetadata]]
+!!! note
+    `newInstance` is part of the [NamedExpression](NamedExpression.md#newInstance) abstraction but changes the return type to `Attribute` (from the base `NamedExpression`).
 
-| withName
-| [[withName]]
+### <span id="withDataType"> withDataType
 
-| withNullability
-| [[withNullability]]
+```scala
+withDataType(
+  newType: DataType): Attribute
+```
 
-| withQualifier
-| [[withQualifier]]
+### <span id="withExprId"> withExprId
 
-| newInstance
-| [[newInstance]]
-|===
+```scala
+withExprId(
+  newExprId: ExprId): Attribute
+```
 
-[[references]]
-When requested for <<Expression.md#references, references>>, `Attribute` gives the reference to itself only.
+### <span id="withMetadata"> withMetadata
 
-[[toAttribute]]
-As a <<expressions/NamedExpression.md#, NamedExpression>>, `Attribute` gives the reference to itself only when requested for <<expressions/NamedExpression.md#toAttribute, toAttribute>>.
+```scala
+withMetadata(
+  newMetadata: Metadata): Attribute
+```
 
-[[extensions]]
-.Attributes (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| Attribute
-| Description
+### <span id="withName"> withName
 
-| <<spark-sql-Expression-AttributeReference.md#, AttributeReference>>
-| [[AttributeReference]]
+```scala
+withName(
+  newName: String): Attribute
+```
 
-| <<spark-sql-Expression-PrettyAttribute.md#, PrettyAttribute>>
-| [[PrettyAttribute]]
+### <span id="withNullability"> withNullability
 
-| <<spark-sql-Expression-UnresolvedAttribute.md#, UnresolvedAttribute>>
-| [[UnresolvedAttribute]]
-|===
+```scala
+withNullability(
+  newNullability: Boolean): Attribute
+```
 
-As an optimization, `Attribute` is marked as to not tolerate `nulls`, and when given a `null` input produces a `null` output.
+### <span id="withQualifier"> withQualifier
+
+```scala
+withQualifier(
+  newQualifier: Seq[String]): Attribute
+```
+
+## Implementations
+
+* [AttributeReference](AttributeReference.md)
+* [PrettyAttribute](PrettyAttribute.md)
+* [UnresolvedAttribute](UnresolvedAttribute.md)
