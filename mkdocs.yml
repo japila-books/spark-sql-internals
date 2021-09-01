@@ -139,6 +139,7 @@ nav:
       - MetadataColumnHelper: connector/MetadataColumnHelper.md
       - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
       - OptionsHelper: connector/OptionsHelper.md
+      - Partitioning: connector/Partitioning.md
       - PartitionReader: connector/PartitionReader.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionSpecsHelper: connector/PartitionSpecsHelper.md

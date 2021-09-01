@@ -20,14 +20,14 @@ requiredNumPartitions: Option[Int]
 
 `requiredNumPartitions` is part of the [Distribution](Distribution.md#requiredNumPartitions) abstraction.
 
-## <span id="createPartitioning"> Creating BroadcastPartitioning
+## <span id="createPartitioning"> Creating Partitioning
 
 ```scala
 createPartitioning(
   numPartitions: Int): Partitioning
 ```
 
-`createPartitioning` creates a [BroadcastPartitioning](Partitioning.md#BroadcastPartitioning).
+`createPartitioning` creates a [BroadcastPartitioning](Partitioning.md#BroadcastPartitioning) (with the [BroadcastMode](#mode)).
 
 `createPartitioning` throws an `AssertionError` when the given `numPartitions` is not `1`:
 

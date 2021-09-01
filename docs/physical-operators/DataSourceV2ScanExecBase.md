@@ -1,4 +1,4 @@
-# DataSourceV2ScanExecBase
+# DataSourceV2ScanExecBase Leaf Physical Operators
 
 `DataSourceV2ScanExecBase` is an [extension](#contract) of [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) that [track number of output rows](#metrics) when executed ([with](#doExecuteColumnar) or [without](#doExecute) support for [columnar reads](#supportsColumnar)).
 
