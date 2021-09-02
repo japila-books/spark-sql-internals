@@ -1,98 +1,65 @@
-# SortOrder Unevaluable Unary Expression
+# SortOrder Unevaluable Expression
 
-`SortOrder` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents the following operators in a logical plan:
+`SortOrder` is an [Expression](Expression.md) that represents the following operators in a structured query:
 
-* `AstBuilder` is requested to <<sql/AstBuilder.md#visitSortItem, parse ORDER BY or SORT BY sort specifications>>
+* `AstBuilder` is requested to [parse ORDER BY or SORT BY sort specifications](../sql/AstBuilder.md#visitSortItem)
 
-* <<spark-sql-column-operators.md#asc, Column.asc>>, <<spark-sql-column-operators.md#asc_nulls_first, Column.asc_nulls_first>>, <<spark-sql-column-operators.md#asc_nulls_last, Column.asc_nulls_last>>, <<spark-sql-column-operators.md#desc, Column.desc>>, <<spark-sql-column-operators.md#desc_nulls_first, Column.desc_nulls_first>>, and <<spark-sql-column-operators.md#desc_nulls_last, Column.desc_nulls_last>> operators are used
+* [Column.asc](../spark-sql-column-operators.md#asc), [Column.asc_nulls_first](../spark-sql-column-operators.md#asc_nulls_first), [Column.asc_nulls_last](../spark-sql-column-operators.md#asc_nulls_last), [Column.desc](../spark-sql-column-operators.md#desc), [Column.desc_nulls_first](../spark-sql-column-operators.md#desc_nulls_first), and [Column.desc_nulls_last](../spark-sql-column-operators.md#desc_nulls_last) high-level operators
 
-`SortOrder` is used to specify the <<SparkPlan.md#, output data ordering requirements>> of a physical operator.
+## Creating Instance
 
-`SortOrder` is an [unevaluable expression](Unevaluable.md).
+`SortOrder` takes the following to be created:
 
-[[foldable]]
-`SortOrder` is never <<Expression.md#foldable, foldable>> (as an unevaluable expression with no evaluation).
+* <span id="child"> Child [Expression](Expression.md)
+* <span id="direction"> [SortDirection](#SortDirection)
+* <span id="nullOrdering"> [NullOrdering](#NullOrdering)
+* <span id="sameOrderExpressions"> "Same Order" [Expression](Expression.md)s
 
-[[catalyst-dsl]]
-TIP: Use <<asc, asc>>, <<asc_nullsLast, asc_nullsLast>>, <<desc, desc>> or <<desc_nullsFirst, desc_nullsFirst>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `SortOrder` expression, e.g. for testing or Spark SQL internals exploration.
+## <span id="SortDirection"> SortDirection
 
-NOTE: <<spark-sql-dataset-operators.md#repartitionByRange, Dataset.repartitionByRange>>, <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<WindowSpec.md#orderBy, WindowSpec.orderBy>> default to <<Ascending, Ascending>> sort direction.
+SortDirection | Default Null Ordering | SQL
+--------------|-----------------------|---------
+ `Ascending`  | NullsFirst            | ASC
+ `Descending` | NullsLast             | DESC
 
-=== [[apply]] Creating SortOrder Instance -- `apply` Factory Method
+## <span id="NullOrdering"> NullOrdering
 
-[source, scala]
-----
+NullOrdering  | SQL
+--------------|---------
+ `NullsFirst` | NULLS FIRST
+ `NullsLast`  | NULLS LAST
+
+## <span id="apply"> Creating SortOrder
+
+```scala
 apply(
   child: Expression,
   direction: SortDirection,
-  sameOrderExpressions: Set[Expression] = Set.empty): SortOrder
-----
+  sameOrderExpressions: Seq[Expression] = Seq.empty): SortOrder
+```
 
-`apply` is a convenience method to create a <<SortOrder, SortOrder>> with the `defaultNullOrdering` of the <<SortDirection, SortDirection>>.
+`apply` creates a [SortOrder](#creating-instance) (with the `defaultNullOrdering` of the given [SortDirection](#SortDirection)).
 
-NOTE: `apply` is used exclusively in spark-sql-functions-datetime.md#window[window] function.
+## Catalyst DSL
 
-=== [[asc]][[asc_nullsLast]][[desc]][[desc_nullsFirst]] Catalyst DSL -- `asc`, `asc_nullsLast`, `desc` and `desc_nullsFirst` Operators
+[Catalyst DSL](../catalyst-dsl/index.md) defines the following operators to create `SortOrder`s:
 
-[source, scala]
-----
-asc: SortOrder
-asc_nullsLast: SortOrder
-desc: SortOrder
-desc_nullsFirst: SortOrder
-----
+* [asc](../catalyst-dsl/index.md#asc) (with `null`s first)
+* [asc_nullsLast](../catalyst-dsl/index.md#asc_nullsLast)
+* [desc](../catalyst-dsl/index.md#desc) (with `null`s last)
+* [desc_nullsFirst](../catalyst-dsl/index.md#desc_nullsFirst)
 
-`asc`, `asc_nullsLast`, `desc` and `desc_nullsFirst` <<creating-instance, create>> a `SortOrder` expression with the `Ascending` or `Descending` sort direction, respectively.
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.catalyst.dsl.expressions._
 val sortNullsLast = 'id.asc_nullsLast
 scala> println(sortNullsLast.sql)
 `id` ASC NULLS LAST
-----
+```
 
-=== [[creating-instance]] Creating SortOrder Instance
+## <span id="Unevaluable"> Unevaluable
 
-`SortOrder` takes the following when created:
+`SortOrder` is an [Unevaluable](Unevaluable.md) expression.
 
-* [[child]] Child <<Expression.md#, expression>>
-* [[direction]] <<SortDirection, SortDirection>>
-* [[nullOrdering]] `NullOrdering`
-* [[sameOrderExpressions]] "Same Order" <<Expression.md#, expressions>>
+## Physical Operators
 
-=== [[SortDirection]] SortDirection Contract
-
-`SortDirection` is the <<SortDirection-contract, base>> of <<SortDirection-extensions, sort directions>>.
-
-[[SortDirection-contract]]
-.SortDirection Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| defaultNullOrdering
-a| [[defaultNullOrdering]]
-
-[source, scala]
-----
-defaultNullOrdering: NullOrdering
-----
-
-Used when...FIXME
-
-| sql
-a| [[sql]]
-
-[source, scala]
-----
-sql: String
-----
-
-Used when...FIXME
-|===
-
-==== [[SortDirection-extensions]][[Ascending]][[Descending]] Ascending and Descending Sort Directions
-
-There are two <<SortDirection, sorting directions>> available, i.e. `Ascending` and `Descending`.
+`SortOrder` is used to specify the [output data ordering requirements](../physical-operators/SparkPlan.md#outputOrdering) and the [required child ordering](../physical-operators/SparkPlan.md#requiredChildOrdering) of [physical operator](../physical-operators/SparkPlan.md)s.
