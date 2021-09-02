@@ -1,5 +1,3 @@
-title: SortOrder
-
 # SortOrder Unevaluable Unary Expression
 
 `SortOrder` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> that represents the following operators in a logical plan:

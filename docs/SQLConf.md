@@ -286,7 +286,9 @@ Used when:
 
 [spark.sql.sort.enableRadixSort](configuration-properties.md#spark.sql.sort.enableRadixSort)
 
-Used when `SortExec` physical operator is requested for a <<SortExec.md#createSorter, UnsafeExternalRowSorter>>.
+Used when:
+
+* `SortExec` physical operator is requested to [create an UnsafeExternalRowSorter](physical-operators/SortExec.md#createSorter).
 
 ## <span id="fallBackToHdfsForStatsEnabled"> fallBackToHdfsForStatsEnabled
 
@@ -472,7 +474,17 @@ The value of [spark.sql.shuffle.partitions](configuration-properties.md#spark.sq
 
 The value of [spark.sql.execution.rangeExchange.sampleSizePerPartition](configuration-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
 
-Used when [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operator is executed
+Used when:
+
+* [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operator is executed
+
+## <span id="REMOVE_REDUNDANT_SORTS_ENABLED"> REMOVE_REDUNDANT_SORTS_ENABLED
+
+The value of [spark.sql.execution.removeRedundantSorts](configuration-properties.md#spark.sql.execution.removeRedundantSorts) configuration property
+
+Used when:
+
+* [RemoveRedundantSorts](physical-optimizations/RemoveRedundantSorts.md) physical optimization is executed
 
 ## <span id="SKEW_JOIN_SKEWED_PARTITION_FACTOR"> SKEW_JOIN_SKEWED_PARTITION_FACTOR
 

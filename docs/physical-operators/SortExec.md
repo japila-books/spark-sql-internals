@@ -1,14 +1,96 @@
 # SortExec Unary Physical Operator
 
-`SortExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> when:
+`SortExec` is a [unary physical operator](UnaryExecNode.md) (that, among other use cases, represents [Sort](../logical-operators/Sort.md) logical operators at execution).
 
-* [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed
+## Creating Instance
 
-* `FileFormatWriter` helper object is used to [write out a query result](../FileFormatWriter.md#write)
+`SortExec` takes the following to be created:
 
+* <span id="sortOrder"> [SortOrder](../expressions/SortOrder.md) expressions
+* <span id="global"> `global` flag
+* <span id="child"> Child [physical operator](SparkPlan.md)
+* <span id="testSpillFrequency"> `testSpillFrequency` (default: `0`)
+
+`SortExec` is created when:
+
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed (with a [Sort](../logical-operators/Sort.md) logical operator)
+* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
-`SortExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+ peakMemory     | peak memory             |
+ sortTime       | sort time               |
+ spillSize      | spill size              |
+
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute`...FIXME
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+## <span id="enableRadixSort"><span id="spark.sql.sort.enableRadixSort"> Radix Sort
+
+`SortExec` operator uses the [spark.sql.sort.enableRadixSort](configuration-properties.md#spark.sql.sort.enableRadixSort) configuration property when [creating an UnsafeExternalRowSorter](#createSorter).
+
+## <span id="BlockingOperatorWithCodegen"> BlockingOperatorWithCodegen
+
+`SortExec` is a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md).
+
+## <span id="CodegenSupport"> CodegenSupport
+
+`SortExec` supports [Java code generation](CodegenSupport.md) (indirectly as a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md)).
+
+## <span id="outputOrdering"> Output Data Ordering Requirements
+
+```scala
+outputOrdering: Seq[SortOrder]
+```
+
+`outputOrdering` is the given [SortOrder](#sortOrder) expressions.
+
+`outputOrdering` is part of the [SparkPlan](SparkPlan.md#outputOrdering) abstraction.
+
+## <span id="requiredChildDistribution"> Required Child Output Distribution
+
+```scala
+requiredChildDistribution: Seq[Distribution]
+```
+
+`requiredChildDistribution` is a [OrderedDistribution](OrderedDistribution.md) (with the [SortOrder](#sortOrder) expressions) with the [global](#global) flag enabled or a [UnspecifiedDistribution](UnspecifiedDistribution.md).
+
+`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
+
+## Physical Optimizations
+
+### OptimizeSkewedJoin
+
+[OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is used to optimize skewed [SortMergeJoinExec](SortMergeJoinExec.md)s (with `SortExec` operators) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
+
+### RemoveRedundantSorts
+
+`SortExec` operators can be removed from a physical query plan by [RemoveRedundantSorts](../physical-optimizations/RemoveRedundantSorts.md) physical optimization (with [spark.sql.execution.removeRedundantSorts](../configuration-properties.md#spark.sql.execution.removeRedundantSorts) enabled).
+
+## <span id="createSorter"> Creating UnsafeExternalRowSorter
+
+```scala
+createSorter(): UnsafeExternalRowSorter
+```
+
+`createSorter`...FIXME
+
+`createSorter` is used when:
+
+* `SortExec` is requested to [execute](#doExecute)
+* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write)
+
+## Demo
 
 ```text
 val q = Seq((0, "zero"), (1, "one")).toDF("id", "name").sort('id)
@@ -37,34 +119,3 @@ import org.apache.spark.sql.execution.SortExec
 val sortExec = executedPlan.collect { case se: SortExec => se }.head
 assert(sortExec.isInstanceOf[SortExec])
 ```
-
-[[output]]
-When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
-
-[[outputOrdering]]
-`SortExec` uses the <<sortOrder, sorting order expressions>> for the <<SparkPlan.md#outputOrdering, output data ordering requirements>>.
-
-[[outputPartitioning]]
-When requested for the <<SparkPlan.md#outputPartitioning, output data partitioning requirements>>, `SortExec` simply gives whatever the <<child, child operator>> uses.
-
-[[requiredChildDistribution]]
-When requested for the <<SparkPlan.md#requiredChildDistribution, required partition requirements>>, `SortExec` gives the [OrderedDistribution](OrderedDistribution.md) (with the <<sortOrder, sorting order expressions>> for the [ordering](OrderedDistribution.md#ordering)) when the <<global, global>> flag is enabled (`true`) or the [UnspecifiedDistribution](UnspecifiedDistribution.md).
-
-`SortExec` operator uses the [spark.sql.sort.enableRadixSort](../SQLConf.md#spark.sql.sort.enableRadixSort) internal configuration property (enabled by default) to control...FIXME
-
-=== [[creating-instance]] Creating SortExec Instance
-
-`SortExec` takes the following when created:
-
-* [[sortOrder]] <<spark-sql-Expression-SortOrder.md#, Sorting order expressions>> (`Seq[SortOrder]`)
-* [[global]] `global` flag
-* [[child]] Child <<SparkPlan.md#, physical plan>>
-* [[testSpillFrequency]] `testSpillFrequency` (default: `0`)
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
- peakMemory     | peak memory |
- sortTime       | sort time |
- spillSize      | spill size |

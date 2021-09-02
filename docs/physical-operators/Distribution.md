@@ -1,4 +1,4 @@
-# Distributions
+# Distribution
 
 `Distribution` is an [abstraction](#contract) of the [data distribution requirements](#implementations) of [physical operators](#physical-operators-distribution-requirements).
 
@@ -26,6 +26,8 @@ requiredNumPartitions: Option[Int]
 ```
 
 Required number of partitions for this data distribution
+
+When defined, only [Partitioning](Partitioning.md)s with the same number of partitions can [satisfy the distribution requirement](Partitioning.md#satisfies).
 
 When undefined (`None`), indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions)).
 

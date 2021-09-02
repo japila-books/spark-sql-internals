@@ -240,6 +240,14 @@ Default: `false`
 
 Since: `3.0.0`
 
+## <span id="spark.sql.execution.removeRedundantSorts"> spark.sql.execution.removeRedundantSorts
+
+**(internal)** Whether to remove redundant physical sort node
+
+Default: `true`
+
+Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SORTS_ENABLED)
+
 ## <span id="spark.sql.execution.reuseSubquery"> spark.sql.execution.reuseSubquery
 
 **(internal)** When true, the planner will try to find out duplicated subqueries and re-use them.
