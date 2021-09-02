@@ -1,28 +1,34 @@
 # OrderedDistribution
 
-`OrderedDistribution` is a [Distribution](Distribution.md).
+`OrderedDistribution` is a [Distribution](Distribution.md) for [ordered](#ordering) data distribution requirement (of [SortExec](SortExec.md#requiredChildDistribution) physical operator with global sort).
 
-[[requiredNumPartitions]]
-`OrderedDistribution` specifies `None` for the Distribution.md#requiredNumPartitions[required number of partitions].
+## Creating Instance
 
-!!! note
-    `None` for the required number of partitions indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property).
+`OrderedDistribution` takes the following to be created:
 
-`OrderedDistribution` is <<creating-instance, created>> when...FIXME
+* <span id="ordering"> [SortOrder](../expressions/SortOrder.md) expressions (for ordering)
 
-[[creating-instance]]
-[[ordering]]
-`OrderedDistribution` takes `SortOrder` expressions for ordering when created.
+`OrderedDistribution` is created when:
 
-`OrderedDistribution` requires that the <<ordering, ordering expressions>> should not be empty (i.e. `Nil`).
+* `SortExec` physical operator is requested for the [requiredChildDistribution](SortExec.md#requiredChildDistribution) (with global sort)
 
-=== [[createPartitioning]] `createPartitioning` Method
+## <span id="requiredNumPartitions"> Required Number of Partitions
 
-[source, scala]
-----
-createPartitioning(numPartitions: Int): Partitioning
-----
+```scala
+requiredNumPartitions: Option[Int]
+```
 
-`createPartitioning`...FIXME
+`requiredNumPartitions` is undefined (`None`).
 
-`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.
+`requiredNumPartitions` is part of the [Distribution](Distribution.md#requiredNumPartitions) abstraction.
+
+## <span id="createPartitioning"> Creating Partitioning
+
+```scala
+createPartitioning(
+  numPartitions: Int): Partitioning
+```
+
+`createPartitioning` creates a [RangePartitioning](../expressions/RangePartitioning.md) expression.
+
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

@@ -13,7 +13,7 @@ createPartitioning(
   numPartitions: Int): Partitioning
 ```
 
-Creates a [Partitioning](Partitioning.md)
+Creates a [Partitioning](Partitioning.md) for the given number of partitions
 
 Used when:
 
@@ -26,6 +26,8 @@ requiredNumPartitions: Option[Int]
 ```
 
 Required number of partitions for this data distribution
+
+When undefined (`None`), indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions)).
 
 Used when:
 
