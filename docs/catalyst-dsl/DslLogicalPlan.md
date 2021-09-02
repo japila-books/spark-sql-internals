@@ -53,6 +53,24 @@ join(
 
 Creates a [Join](../logical-operators/Join.md) logical operator
 
+### <span id="orderBy"> orderBy
+
+```scala
+orderBy(
+  sortExprs: SortOrder*): LogicalPlan
+```
+
+Creates a [Sort](../logical-operators/Sort.md) logical operator (with the [global sorting](../logical-operators/Sort.md#global))
+
+### <span id="sortBy"> sortBy
+
+```scala
+sortBy(
+  sortExprs: SortOrder*): LogicalPlan
+```
+
+Creates a [Sort](../logical-operators/Sort.md) logical operator (without [global sorting](../logical-operators/Sort.md#global))
+
 ## Demo
 
 ```text

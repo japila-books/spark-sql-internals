@@ -1,5 +1,3 @@
-title: UnresolvedOrdinal
-
 # UnresolvedOrdinal Unevaluable Leaf Expression
 
 `UnresolvedOrdinal` is a <<Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<Sort.md#, Sort>> logical operators (in <<Sort.md#order, SortOrder>> ordering expressions) and in <<Aggregate.md#, Aggregate>> logical operators (in <<Aggregate.md#groupingExpressions, grouping expressions>>) in a logical plan.

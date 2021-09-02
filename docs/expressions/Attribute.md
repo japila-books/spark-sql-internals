@@ -2,7 +2,7 @@
 
 `Attribute` is an [extension](#contract) of the [LeafExpression](Expression.md#LeafExpression) and [NamedExpression](NamedExpression.md) abstractions for [named leaf expressions](#implementations).
 
-[Attribute](catalyst/QueryPlan.md#output)s are used by `QueryPlan` to build the [schema](../types/StructType.md) of the structured query (it represents).
+[Attribute](../catalyst/QueryPlan.md#output)s are used by `QueryPlan` to build the [schema](../types/StructType.md) of the structured query (it represents).
 
 ## Contract
 

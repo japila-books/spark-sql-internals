@@ -37,7 +37,7 @@ doExecute(): RDD[InternalRow]
 
 ## <span id="enableRadixSort"><span id="spark.sql.sort.enableRadixSort"> Radix Sort
 
-`SortExec` operator uses the [spark.sql.sort.enableRadixSort](configuration-properties.md#spark.sql.sort.enableRadixSort) configuration property when [creating an UnsafeExternalRowSorter](#createSorter).
+`SortExec` operator uses the [spark.sql.sort.enableRadixSort](../configuration-properties.md#spark.sql.sort.enableRadixSort) configuration property when [creating an UnsafeExternalRowSorter](#createSorter).
 
 ## <span id="BlockingOperatorWithCodegen"> BlockingOperatorWithCodegen
 

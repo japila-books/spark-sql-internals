@@ -1,13 +1,58 @@
 # Sort Unary Logical Operator
 
-`Sort` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents the following in a logical plan:
+`Sort` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following operators in a logical plan:
 
-* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to <<sql/AstBuilder.md#withQueryResultClauses, parse a query>>)
+* `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to [parse a query](../sql/AstBuilder.md#withQueryResultClauses))
 
-* <<spark-sql-dataset-operators.md#sortWithinPartitions, Dataset.sortWithinPartitions>>, <<spark-sql-dataset-operators.md#sort, Dataset.sort>> and <<spark-sql-dataset-operators.md#randomSplit, Dataset.randomSplit>> operators
+* [Dataset.sortWithinPartitions](../spark-sql-dataset-operators.md#sortWithinPartitions), [Dataset.sort](../spark-sql-dataset-operators.md#sort) and [Dataset.randomSplit](../spark-sql-dataset-operators.md#randomSplit) operators
 
-[source, scala]
-----
+## Creating Instance
+
+`Sort` takes the following to be created:
+
+* <span id="order"> [SortOrder](../expressions/SortOrder.md) expressions
+* <span id="global"> `global` flag (for global (`true`) or partition-only (`false`) sorting)
+* <span id="child"> Child [logical operator](LogicalPlan.md)
+
+## Execution Planning
+
+`Sort` logical operator is resolved to [SortExec](../physical-operators/SortExec.md) unary physical operator by [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy.
+
+## Catalyst DSL
+
+[Catalyst DSL](../catalyst-dsl/index.md) defines [orderBy](../catalyst-dsl/DslLogicalPlan.md#orderBy) and [sortBy](../catalyst-dsl/DslLogicalPlan.md#sortBy) operators to create `Sort` operators (with the [global](#global) flag enabled or not, respectively).
+
+```scala
+import org.apache.spark.sql.catalyst.dsl.expressions._
+import org.apache.spark.sql.catalyst.dsl.plans._
+val t1 = table("t1")
+```
+
+```scala
+val globalSortById = t1.orderBy('id.asc_nullsLast)
+```
+
+```text
+// Note true for the global flag
+scala> println(globalSortById.numberedTreeString)
+00 'Sort ['id ASC NULLS LAST], true
+01 +- 'UnresolvedRelation `t1`
+```
+
+```scala
+val partitionOnlySortById = t1.sortBy('id.asc_nullsLast)
+```
+
+```text
+// Note false for the global flag
+scala> println(partitionOnlySortById.numberedTreeString)
+00 'Sort ['id ASC NULLS LAST], false
+01 +- 'UnresolvedRelation `t1`
+```
+
+## Demo
+
+```text
 // Using the feature of ordinal literal
 val ids = Seq(1,3,2).toDF("id").sort(lit(1))
 val logicalPlan = ids.queryExecution.logical
@@ -24,10 +69,9 @@ scala> println(sortOp.numberedTreeString)
 01 +- AnalysisBarrier
 02       +- Project [value#22 AS id#24]
 03          +- LocalRelation [value#22]
-----
+```
 
-[source, scala]
-----
+```text
 val nums = Seq((0, "zero"), (1, "one")).toDF("id", "name")
 // Creates a Sort logical operator:
 // - descending sort direction for id column (specified explicitly)
@@ -38,54 +82,4 @@ scala> println(logicalPlan.numberedTreeString)
 00 'Sort ['id DESC NULLS LAST, 'name ASC NULLS FIRST], true
 01 +- Project [_1#11 AS id#14, _2#12 AS name#15]
 02    +- LocalRelation [_1#11, _2#12]
-----
-
-[[creating-instance]]
-`Sort` takes the following when created:
-
-* [[order]] <<spark-sql-Expression-SortOrder.md#, SortOrder>> ordering expressions
-* [[global]] `global` flag for global (`true`) or partition-only (`false`) sorting
-* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
-
-[[output]]
-The <<catalyst/QueryPlan.md#output, output schema>> of a `Sort` operator is the output of the <<child, child>> logical operator.
-
-[[maxRows]]
-The <<spark-sql-LogicalPlan.md#maxRows, maxRows>> of a `Sort` operator is the `maxRows` of the <<child, child>> logical operator.
-
-[[catalyst-dsl]]
-TIP: Use <<orderBy, orderBy>> or <<sortBy, sortBy>> operators from the [Catalyst DSL](../catalyst-dsl/index.md) to create a `Sort` logical operator, e.g. for testing or Spark SQL internals exploration.
-
-NOTE: Sorting is supported for columns of orderable type only (which is enforced at analysis when `CheckAnalysis` is requested to <<CheckAnalysis.md#checkAnalysis, checkAnalysis>>).
-
-NOTE: `Sort` logical operator is resolved to <<SortExec.md#, SortExec>> unary physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed.
-
-=== [[orderBy]][[sortBy]] Catalyst DSL -- `orderBy` and `sortBy` Operators
-
-[source, scala]
-----
-orderBy(sortExprs: SortOrder*): LogicalPlan
-sortBy(sortExprs: SortOrder*): LogicalPlan
-----
-
-`orderBy` and `sortBy` <<creating-instance, create>> a `Sort` logical operator with the <<global, global>> flag on and off, respectively.
-
-[source, scala]
-----
-import org.apache.spark.sql.catalyst.dsl.plans._
-val t1 = table("t1")
-
-import org.apache.spark.sql.catalyst.dsl.expressions._
-val globalSortById = t1.orderBy('id.asc_nullsLast)
-
-// Note true for the global flag
-scala> println(globalSortById.numberedTreeString)
-00 'Sort ['id ASC NULLS LAST], true
-01 +- 'UnresolvedRelation `t1`
-
-// Note false for the global flag
-val partitionOnlySortById = t1.sortBy('id.asc_nullsLast)
-scala> println(partitionOnlySortById.numberedTreeString)
-00 'Sort ['id ASC NULLS LAST], false
-01 +- 'UnresolvedRelation `t1`
-----
+```
