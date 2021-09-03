@@ -63,6 +63,14 @@ scala> conf.numShufflePartitions
 res3: Int = 200
 ```
 
+## <span id="ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD"> ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD
+
+[spark.sql.adaptive.autoBroadcastJoinThreshold](configuration-properties.md#spark.sql.adaptive.autoBroadcastJoinThreshold) configuration property
+
+Used when:
+
+* `JoinSelectionHelper` is requested to [canBroadcastBySize](JoinSelectionHelper.md#canBroadcastBySize)
+
 ## <span id="ADAPTIVE_EXECUTION_FORCE_APPLY"> ADAPTIVE_EXECUTION_FORCE_APPLY
 
 [spark.sql.adaptive.forceApply](configuration-properties.md#spark.sql.adaptive.forceApply) configuration property
@@ -85,6 +93,14 @@ Used when:
 The value of [spark.sql.adaptive.logLevel](configuration-properties.md#spark.sql.adaptive.logLevel) configuration property
 
 Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed
+
+## <span id="ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD"> ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD
+
+[spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold](configuration-properties.md#spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold) configuration property
+
+Used when:
+
+* `DynamicJoinSelection` is requested to `preferShuffledHashJoin`
 
 ## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
@@ -163,6 +179,22 @@ The value of [spark.sql.bucketing.coalesceBucketsInJoin.enabled](configuration-p
 Used when:
 
 * [CoalesceBucketsInJoin](physical-optimizations/CoalesceBucketsInJoin.md) physical optimization is executed
+
+## <span id="COALESCE_PARTITIONS_MIN_PARTITION_SIZE"> COALESCE_PARTITIONS_MIN_PARTITION_SIZE
+
+[spark.sql.adaptive.coalescePartitions.minPartitionSize](configuration-properties.md#spark.sql.adaptive.coalescePartitions.minPartitionSize) configuration property
+
+Used when:
+
+* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) physical optimization is executed
+
+## <span id="COALESCE_PARTITIONS_PARALLELISM_FIRST"> COALESCE_PARTITIONS_PARALLELISM_FIRST
+
+[spark.sql.adaptive.coalescePartitions.parallelismFirst](configuration-properties.md#spark.sql.adaptive.coalescePartitions.parallelismFirst) configuration property
+
+Used when:
+
+* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) physical optimization is executed
 
 ## <span id="coalesceShufflePartitionsEnabled"><span id="COALESCE_PARTITIONS_ENABLED"> coalesceShufflePartitionsEnabled
 
@@ -244,7 +276,17 @@ Used when:
 
 The value of [spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio) configuration property
 
-Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+Used when:
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
+
+## <span id="DYNAMIC_PARTITION_PRUNING_PRUNING_SIDE_EXTRA_FILTER_RATIO"><span id="dynamicPartitionPruningPruningSideExtraFilterRatio"> dynamicPartitionPruningPruningSideExtraFilterRatio
+
+The value of [spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio) configuration property
+
+Used when:
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_USE_STATS"><span id="dynamicPartitionPruningUseStats"> dynamicPartitionPruningUseStats
 
@@ -295,6 +337,14 @@ Used when:
 [spark.sql.statistics.fallBackToHdfs](configuration-properties.md#spark.sql.statistics.fallBackToHdfs)
 
 Used when `DetermineTableStats` logical resolution rule is executed.
+
+## <span id="ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD"> ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD
+
+[spark.sql.adaptive.autoBroadcastJoinThreshold](configuration-properties.md#spark.sql.adaptive.autoBroadcastJoinThreshold) configuration property
+
+Used when:
+
+* `JoinSelectionHelper` is requested for [canBroadcastBySize](JoinSelectionHelper.md#canBroadcastBySize)
 
 ## <span id="FETCH_SHUFFLE_BLOCKS_IN_BATCH"><span id="fetchShuffleBlocksInBatch"> fetchShuffleBlocksInBatch
 
@@ -621,6 +671,14 @@ Used when:
 [spark.sql.join.preferSortMergeJoin](configuration-properties.md#spark.sql.join.preferSortMergeJoin)
 
 Used in [JoinSelection](execution-planning-strategies/JoinSelection.md) execution planning strategy to prefer sort merge join over shuffle hash join.
+
+## <span id="LEAF_NODE_DEFAULT_PARALLELISM"> LEAF_NODE_DEFAULT_PARALLELISM
+
+[spark.sql.leafNodeDefaultParallelism](configuration-properties.md#spark.sql.leafNodeDefaultParallelism)
+
+Used when:
+
+* `SparkSession` is requested for the [leafNodeDefaultParallelism](SparkSession.md#leafNodeDefaultParallelism)
 
 ## <span id="LEGACY_CTE_PRECEDENCE_POLICY"> LEGACY_CTE_PRECEDENCE_POLICY
 

@@ -460,3 +460,19 @@ Cannot use [extensionConfClassName] to configure session extensions.
 
 * `SparkSession.Builder` is requested to [get active or create a new SparkSession instance](SparkSession-Builder.md#getOrCreate)
 * `SparkSession` is [created](#creating-instance) (from a `SparkContext`)
+
+## <span id="leafNodeDefaultParallelism"> Default Parallelism of Leaf Nodes
+
+```scala
+leafNodeDefaultParallelism: Int
+```
+
+`leafNodeDefaultParallelism` is the value of [spark.sql.leafNodeDefaultParallelism](configuration-properties.md#spark.sql.leafNodeDefaultParallelism) if defined or `SparkContext.defaultParallelism` ([Spark Core]({{ book.spark_core }}/SparkContext#defaultParallelism)).
+
+`leafNodeDefaultParallelism` is used when:
+
+* `SparkSession` is requested to [range](SparkSession.md#range)
+* `RangeExec` leaf physical operator is [created](physical-operators/RangeExec.md#numSlices)
+* `CommandResultExec` physical operator is requested for the `RDD[InternalRow]`
+* `LocalTableScanExec` physical operator is requested for the [RDD](physical-operators/LocalTableScanExec.md#rdd)
+* `FilePartition` utility is used to `maxSplitBytes`

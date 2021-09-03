@@ -28,6 +28,18 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> spark.sql.adaptive.autoBroadcastJoinThreshold
+
+The maximum size (in bytes) of a table to be broadcast when performing a join. `-1` turns broadcasting off. The default value is same as [spark.sql.autoBroadcastJoinThreshold](#spark.sql.autoBroadcastJoinThreshold).
+
+Used only in [Adaptive Query Execution](adaptive-query-execution/index.md)
+
+Default: (undefined)
+
+Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
+
+Since: `3.2.0`
+
 ## <span id="spark.sql.adaptive.forceApply"> spark.sql.adaptive.forceApply
 
 **(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](adaptive-query-execution/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
@@ -37,16 +49,6 @@ Default: `false`
 Since: `3.0.0`
 
 Use [SQLConf.ADAPTIVE_EXECUTION_FORCE_APPLY](SQLConf.md#ADAPTIVE_EXECUTION_FORCE_APPLY) method to access the property (in a type-safe way).
-
-## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
-
-**(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
-
-Default: `DEBUG`
-
-Since: `3.0.0`
-
-Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) method to access the current value.
 
 ## <span id="spark.sql.adaptive.coalescePartitions.enabled"> spark.sql.adaptive.coalescePartitions.enabled
 
@@ -59,6 +61,26 @@ Default: `true`
 Since: `3.0.0`
 
 Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+## <span id="spark.sql.adaptive.coalescePartitions.minPartitionSize"> spark.sql.adaptive.coalescePartitions.minPartitionSize
+
+The minimum size (in bytes unless specified) of shuffle partitions after coalescing. This is useful when the adaptively calculated target size is too small during partition coalescing
+
+Default: `1MB`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+Since: `3.2.0`
+
+## <span id="spark.sql.adaptive.coalescePartitions.parallelismFirst"> spark.sql.adaptive.coalescePartitions.parallelismFirst
+
+When `true`, Spark does not respect the target size specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) when coalescing contiguous shuffle partitions, but adaptively calculate the target size according to the default parallelism of the Spark cluster. The calculated size is usually smaller than the configured target size. This is to maximize the parallelism and avoid performance regression when enabling adaptive query execution. It's recommended to set this config to `false` and respect the configured target size.
+
+Default: `true`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+Since: `3.2.0`
 
 ## <span id="spark.sql.adaptive.advisoryPartitionSizeInBytes"> spark.sql.adaptive.advisoryPartitionSizeInBytes
 
@@ -117,6 +139,26 @@ When true and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabl
 Default: `true`
 
 Since: `3.0.0`
+
+## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
+
+**(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
+
+Default: `DEBUG`
+
+Since: `3.0.0`
+
+Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) method to access the current value.
+
+## <span id="spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold"> spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold
+
+The maximum size (in bytes) per partition that can be allowed to build local hash map. If this value is not smaller than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) and all the partition size are not larger than this config, join selection prefer to use shuffled hash join instead of sort merge join regardless of the value of [spark.sql.join.preferSortMergeJoin](#spark.sql.join.preferSortMergeJoin).
+
+Default: `0`
+
+Available as [SQLConf.ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD](SQLConf.md#ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD)
+
+Since: `3.2.0`
 
 ## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> spark.sql.adaptive.optimizer.excludedRules
 
@@ -426,6 +468,18 @@ Default: `true`
 Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
 
 Since: `3.0.0`
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio"> spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio
+
+**(internal)** When filtering side doesn't support broadcast by join type, and doing DPP means running an extra query that may have significant overhead. This config will be used as the extra filter ratio for computing the data size of the pruning side after DPP, in order to evaluate if it is worth adding an extra subquery as the pruning filter.
+
+Must be a double between `0.0` and `1.0`
+
+Default: `0.04`
+
+Use [SQLConf.dynamicPartitionPruningPruningSideExtraFilterRatio](SQLConf.md#dynamicPartitionPruningPruningSideExtraFilterRatio) to access the current value.
+
+Since: `3.2.0`
 
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.useStats"> spark.sql.optimizer.dynamicPartitionPruning.useStats
 
@@ -891,6 +945,16 @@ Whether to ignore null fields when generating JSON objects in JSON data source a
 Default: `true`
 
 Since: `3.0.0`
+
+## <span id="spark.sql.leafNodeDefaultParallelism"> spark.sql.leafNodeDefaultParallelism
+
+The default parallelism of leaf operators that produce data (e.g. the file scan node, the local data scan node, the range node).
+
+Must be positive
+
+Default: `SparkContext.defaultParallelism` ([Spark Core]({{ book.spark_core }}/SparkContext#defaultParallelism))
+
+Since: `3.2.0`
 
 ## <span id="spark.sql.legacy.doLooseUpcast"> spark.sql.legacy.doLooseUpcast
 
