@@ -1,50 +1,56 @@
-title: NamedExpression
+# NamedExpression
 
-# NamedExpression -- Catalyst Expressions with Name, ID and Qualifier
+`NamedExpression` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [named expressions](#implementations) (with an [ExprId](#exprId) and an optional [qualifier](#qualifier)).
 
-`NamedExpression` is a <<contract, contract>> of Expression.md[Catalyst expressions] that have a <<name, name>>, <<exprId, exprId>>, and optional <<qualifier, qualifier>>.
+## Contract
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
+### <span id="exprId"> ExprId
 
-trait NamedExpression extends Expression {
-  // only required methods that have no implementation
-  def exprId: ExprId
-  def name: String
-  def newInstance(): NamedExpression
-  def qualifier: Option[String]
-  def toAttribute: Attribute
-}
-----
+```scala
+exprId: ExprId
+```
 
-.NamedExpression Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+### <span id="name"> Name
 
-| `exprId`
-| [[exprId]] Used when...FIXME
+```scala
+name: String
+```
 
-| `name`
-| [[name]] Used when...FIXME
+### <span id="newInstance"> Creating NamedExpression
 
-| `qualifier`
-| [[qualifier]] Used when...FIXME
+```scala
+newInstance(): NamedExpression
+```
 
-| `toAttribute`
-| [[toAttribute]]
-|===
+### <span id="qualifier"> Qualifier
 
-=== [[newExprId]] Creating ExprId -- `newExprId` Object Method
+```scala
+qualifier: Seq[String]
+```
 
-[source, scala]
-----
-newExprId: ExprId
-----
+### <span id="toAttribute"> toAttribute
 
-`newExprId`...FIXME
+```scala
+toAttribute: Attribute
+```
 
-NOTE: `newExprId` is used when...FIXME
+## Implementations
+
+* [Alias](Alias.md)
+* [Attribute](Attribute.md)
+* MultiAlias
+* NamedLambdaVariable
+* OuterReference
+* [Star](Star.md)
+* UnresolvedAlias
+* UnresolvedNamedLambdaVariable
+
+## <span id="foldable"> foldable
+
+```scala
+foldable: Boolean
+```
+
+`foldable` is always `false` (in order to not remove the alias).
+
+`foldable` is part of the [Expression](Expression.md#foldable) abstraction.
