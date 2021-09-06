@@ -378,6 +378,8 @@ Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access t
 
 Default: `1024`
 
+Use [SQLConf.methodSplitThreshold](SQLConf.md#methodSplitThreshold) for the current value
+
 Since: `3.0.0`
 
 ## <span id="spark.sql.debug.maxToStringFields"> spark.sql.debug.maxToStringFields

@@ -603,6 +603,17 @@ The value of [spark.sql.debug.maxToStringFields](configuration-properties.md#spa
 
 Used when [HiveTableScanExec](hive/HiveTableScanExec.md) physical operator is executed with a partitioned table (and requested for [rawPartitions](hive/HiveTableScanExec.md#rawPartitions))
 
+## <span id="methodSplitThreshold"><span id="CODEGEN_METHOD_SPLIT_THRESHOLD"> methodSplitThreshold
+
+[spark.sql.codegen.methodSplitThreshold](configuration-properties.md#spark.sql.codegen.methodSplitThreshold)
+
+Used when:
+
+* `Expression` is requested to [reduceCodeSize](expressions/Expression.md#reduceCodeSize)
+* `CodegenContext` is requested to [buildCodeBlocks](whole-stage-code-generation/CodegenContext.md#buildCodeBlocks) and [subexpressionEliminationForWholeStageCodegen](whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen)
+* `ExpandExec` physical operator is requested to [doConsume](physical-operators/ExpandExec.md#doConsume)
+* `HashAggregateExec` physical operator is requested to [generateEvalCodeForAggFuncs](physical-operators/HashAggregateExec.md#generateEvalCodeForAggFuncs)
+
 ## <span id="minNumPostShufflePartitions"> minNumPostShufflePartitions
 
 [spark.sql.adaptive.minNumPostShufflePartitions](configuration-properties.md#spark.sql.adaptive.minNumPostShufflePartitions)
