@@ -537,6 +537,7 @@ nav:
       - GetArrayItem: expressions/GetArrayItem.md
       - GetMapValue: expressions/GetMapValue.md
       - GetStructField: expressions/GetStructField.md
+      - HashExpression: expressions/HashExpression.md
       - HashPartitioning: expressions/HashPartitioning.md
       - Higher-Order Functions:
         - HigherOrderFunction: expressions/HigherOrderFunction.md
