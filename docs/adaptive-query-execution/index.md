@@ -12,7 +12,7 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 ## spark.sql.adaptive.enabled
 
-Adaptive Query Execution is disabled by default and can be enabled using [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
+Adaptive Query Execution is enabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
 
 ## InsertAdaptiveSparkPlan Physical Optimization
 

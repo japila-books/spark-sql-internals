@@ -1,10 +1,11 @@
 # ResolveCoalesceHints Logical Resolution Rule
 
-`ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with `COALESCE`, `REPARTITION` or `REPARTITION_BY_RANGE` names.
+`ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply).
 
 Hint Name | Arguments | Logical Operator
 ----------|-----------|-----------------
  `COALESCE` | Number of partitions | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` off / `false`)
+ `REBALANCE` | | [RebalancePartitions](../logical-operators/RebalancePartitions.md)
  `REPARTITION` | Number of partitions alone or like `REPARTITION_BY_RANGE` | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` on / `true`)
  `REPARTITION_BY_RANGE` | Column names with an optional number of partitions (default: [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property) | [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression)
 
@@ -32,12 +33,22 @@ apply(
 Hint Name | Trigger
 ----------|----------
  `COALESCE` | [createRepartition](#createRepartition) (with `shuffle` off)
+ `REBALANCE` | [createRebalance](#createRebalance)
  `REPARTITION` | [createRepartition](#createRepartition) (with `shuffle` on)
  `REPARTITION_BY_RANGE` | [createRepartitionByRange](#createRepartitionByRange)
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-## <span id="createRepartition"> createRepartition Internal Method
+### <span id="createRebalance"> createRebalance
+
+```scala
+createRebalance(
+  hint: UnresolvedHint): LogicalPlan
+```
+
+`createRebalance` handles a `REBALANCE` hint and creates a [Repartition](../logical-operators/RebalancePartitions.md) logical operator.
+
+### <span id="createRepartition"> createRepartition
 
 ```scala
 createRepartition(
@@ -47,7 +58,7 @@ createRepartition(
 
 `createRepartition` handles `COALESCE` and `REPARTITION` hints (and creates [Repartition](../logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators).
 
-## <span id="createRepartitionByRange"> createRepartitionByRange Internal Method
+### <span id="createRepartitionByRange"> createRepartitionByRange
 
 ```scala
 createRepartitionByRange(

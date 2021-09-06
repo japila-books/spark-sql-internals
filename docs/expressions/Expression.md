@@ -47,15 +47,20 @@ nullable: Boolean
 
 ## Implementations
 
-* BinaryExpression
+### <span id="BinaryExpression"> BinaryExpression
+
+### <span id="LeafExpression"> LeafExpression
+
+### <span id="TernaryExpression"> TernaryExpression
+
+### Other Expressions
+
 * [CodegenFallback](CodegenFallback.md)
 * [ExpectsInputTypes](ExpectsInputTypes.md)
-* LeafExpression
 * [NamedExpression](NamedExpression.md)
 * [Nondeterministic](Nondeterministic.md)
 * [NonSQLExpression](NonSQLExpression.md)
 * [Predicate](Predicate.md)
-* TernaryExpression
 * [UnaryExpression](UnaryExpression.md)
 * [Unevaluable](Unevaluable.md)
 * _many others_

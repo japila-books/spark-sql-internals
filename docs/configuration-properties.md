@@ -239,7 +239,7 @@ Since: `3.0.0`
 
 Enables [Adaptive Query Execution](adaptive-query-execution/index.md)
 
-Default: `false`
+Default: `true`
 
 Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
 
