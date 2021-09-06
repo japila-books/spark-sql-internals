@@ -1,21 +1,67 @@
 # HashPartitioning
 
-[[Partitioning]]
-`HashPartitioning` is a [Partitioning](../physical-operators/Partitioning.md) in which rows are distributed across partitions based on the <<partitionIdExpression, MurMur3 hash>> of <<expressions, partitioning expressions>> (modulo the <<numPartitions, number of partitions>>).
+`HashPartitioning` is a [Catalyst Partitioning](../physical-operators/Partitioning.md) in which rows are distributed across partitions using the [MurMur3 hash](#partitionIdExpression) (of the [partitioning expressions](#expressions)) modulo the [number of partitions](#numPartitions).
 
-[[creating-instance]]
+`HashPartitioning` is an [Expression](Expression.md) that computes the [partition Id](#partitionIdExpression) for data distribution to be consistent across shuffling and bucketing (for joins of bucketed and regular tables).
+
+## Creating Instance
+
 `HashPartitioning` takes the following to be created:
 
-* [[expressions]] Partitioning Expression.md[expressions]
-* [[numPartitions]] Number of partitions
+* <span id="expressions"> Partitioning [Expression](Expression.md)s
+* <span id="numPartitions"> Number of partitions
 
-[[Unevaluable]][[Expression]]
-`HashPartitioning` is an [Unevaluable Expression](Unevaluable.md) that Expression.md#[cannot be evaluated] (and produce a value given an internal row).
+`HashPartitioning` is created when:
 
-`HashPartitioning` uses the spark-sql-Expression-Murmur3Hash.md[MurMur3 Hash] to compute the <<partitionIdExpression, partitionId>> for data distribution (consistent for shuffling and bucketing that is crucial for joins of bucketed and regular tables).
+* `RepartitionByExpression` is requested for the [partitioning](../logical-operators/RepartitionOperation.md#partitioning)
+* `RebalancePartitions` is requested for the [partitioning](../logical-operators/RebalancePartitions.md#partitioning)
+* `ClusteredDistribution` is requested to [create a Partitioning](../physical-operators/ClusteredDistribution.md)
+* `HashClusteredDistribution` is requested to [create a Partitioning](../physical-operators/HashClusteredDistribution.md)
+* `FileSourceScanExec` physical operator is requested for the [output partitioning](../physical-operators/FileSourceScanExec.md#outputPartitioning)
+* `BucketingUtils` utility is used to `getBucketIdFromValue`
+* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write) (with a bucketing spec)
+* `BroadcastHashJoinExec` physical operator is requested to [expandOutputPartitioning](../physical-operators/BroadcastHashJoinExec.md#expandOutputPartitioning)
 
-[source, scala]
-----
+## <span id="Unevaluable"> Unevaluable
+
+`HashPartitioning` is an [Unevaluable](Unevaluable.md) expression.
+
+## <span id="satisfies0"> Satisfying Distribution
+
+```scala
+satisfies0(
+  required: Distribution): Boolean
+```
+
+`satisfies0` is positive (`true`) when either the base [satisfies0](../physical-operators/Partitioning.md#satisfies0) holds or one of the given [Distribution](../physical-operators/Distribution.md) satisfies the following:
+
+* For a [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md), the number of the given [partitioning expressions](#expressions) and the [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md#expressions)'s are the same and [semantically equal](Expression.md#semanticEquals) pair-wise
+
+* For a [ClusteredDistribution](../physical-operators/ClusteredDistribution.md), the given [partitioning expressions](#expressions) are among the [clustering expressions](../physical-operators/ClusteredDistribution.md#clustering) (of the ClusteredDistribution) and they are [semantically equal](Expression.md#semanticEquals) pair-wise
+
+Otherwise, `satisfies0` is negative (`false`).
+
+`satisfies0` is part of the [Partitioning](../physical-operators/Partitioning.md#satisfies0) abstraction.
+
+## <span id="partitionIdExpression"> PartitionId Expression
+
+```scala
+partitionIdExpression: Expression
+```
+
+`partitionIdExpression` gives an [Expression](Expression.md) that produces a valid partition ID.
+
+`partitionIdExpression` is a `Pmod` expression of a [Murmur3Hash](Murmur3Hash.md) (with the [partitioning expressions](#expressions)) and a [Literal](Literal.md) (with the [number of partitions](#numPartitions)).
+
+`partitionIdExpression` is used when:
+
+* `BucketingUtils` utility is used to `getBucketIdFromValue`
+* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write) (with a bucketing spec)
+* `ShuffleExchangeExec` utility is used to [prepare a ShuffleDependency](../physical-operators/ShuffleExchangeExec.md#prepareShuffleDependency)
+
+## Demo
+
+```text
 val nums = spark.range(5)
 val numParts = 200 // the default number of partitions
 val partExprs = Seq(nums("id"))
@@ -25,6 +71,9 @@ scala> partitionIdExpression.explain(extended = true)
 pmod(hash(id#32L, 42), 200)
 
 val q = nums.withColumn("partitionId", partitionIdExpression)
+```
+
+```text
 scala> q.show
 +---+-----------+
 | id|partitionId|
@@ -35,44 +84,4 @@ scala> q.show
 |  3|        107|
 |  4|        140|
 +---+-----------+
-----
-
-=== [[satisfies0]] `satisfies0` Method
-
-[source, scala]
-----
-satisfies0(
-  required: Distribution): Boolean
-----
-
-`satisfies0` is positive (`true`) when the following conditions all hold:
-
-* The base [satisfies0](../physical-operators/Partitioning.md#satisfies0) holds
-
-* For an input [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md), the number of the given <<expressions, partitioning expressions>> and the [HashClusteredDistribution's](../physical-operators/HashClusteredDistribution.md#expressions) are the same and [semantically equal](Expression.md#semanticEquals) pair-wise
-
-* For an input [ClusteredDistribution](../physical-operators/ClusteredDistribution.md), the given <<expressions, partitioning expressions>> are among the [ClusteredDistribution's clustering expressions](../physical-operators/ClusteredDistribution.md#clustering) and they are [semantically equal](Expression.md#semanticEquals) pair-wise
-
-Otherwise, `satisfies0` is negative (`false`).
-
-`satisfies0` is part of the [Partitioning](../physical-operators/Partitioning.md#satisfies0) abstraction.
-
-=== [[partitionIdExpression]] `partitionIdExpression` Method
-
-[source, scala]
-----
-partitionIdExpression: Expression
-----
-
-`partitionIdExpression` creates (_returns_) a `Pmod` expression of a spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] (with the <<expressions, partitioning expressions>>) and a spark-sql-Expression-Literal.md[Literal] (with the <<numPartitions, number of partitions>>).
-
-[NOTE]
-====
-`partitionIdExpression` is used when:
-
-* `BucketingUtils` utility is used for `getBucketIdFromValue` (for bucketing support)
-
-* `FileFormatWriter` utility is used for [write out a query result](../FileFormatWriter.md#write) (for bucketing support)
-
-* `ShuffleExchangeExec` utility is used to ShuffleExchangeExec.md#prepareShuffleDependency[prepare a ShuffleDependency]
-====
+```

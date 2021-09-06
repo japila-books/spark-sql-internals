@@ -309,6 +309,7 @@ nav:
       - Pivot: logical-operators/Pivot.md
       - Project: logical-operators/Project.md
       - Range: logical-operators/Range.md
+      - RebalancePartitions: logical-operators/RebalancePartitions.md
       - RepairTableStatement: logical-operators/RepairTableStatement.md
       - Repartition: logical-operators/RepartitionOperation/#Repartition
       - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
