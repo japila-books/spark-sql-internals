@@ -62,7 +62,7 @@ Used when:
 
 ## Implementations
 
-* [FileBatchWrite](../FileBatchWrite.md)
+* FileBatchWrite
 * [KafkaBatchWrite](../datasources/kafka/KafkaBatchWrite.md)
 * MicroBatchWrite ([Spark Structured Streaming]({{ book.structured_streaming }}/micro-batch-execution/MicroBatchWriter))
 * [NoopBatchWrite](../datasources/noop/NoopBatchWrite.md)

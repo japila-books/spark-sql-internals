@@ -33,6 +33,6 @@ rightKeys: Seq[Expression]
 ## Implementations
 
 * [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md)
-* [CartesianProductExec](CartesianProductExec.md)
+* CartesianProductExec
 * [HashJoin](HashJoin.md)
 * [ShuffledJoin](ShuffledJoin.md)

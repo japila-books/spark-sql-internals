@@ -9,7 +9,7 @@
 * `SparkSession` is requested to [create a DataFrame from an RDD of internal binary rows](../SparkSession.md#internalCreateDataFrame)
 
 !!! note
-    `LogicalRDD` is resolved to [RDDScanExec](../physical-operators/RDDScanExec.md) when [BasicOperators](../execution-planning-strategies/BasicOperators.md#LogicalRDD) execution planning strategy is executed.
+    `LogicalRDD` is resolved to `RDDScanExec` physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md#LogicalRDD) execution planning strategy is executed.
 
 === [[newInstance]] `newInstance` Method
 

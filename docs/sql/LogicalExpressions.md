@@ -1,7 +1,5 @@
 # LogicalExpressions
 
-`LogicalExpressions` is...FIXME
-
 ## CatalystSqlParser
 
 ```scala

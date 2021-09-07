@@ -27,7 +27,7 @@ Used exclusively when `DataSourceStrategy` execution planning strategy is reques
 |===
 
 !!! note
-    `PrunedFilteredScan` is a "lighter" and stable version of the [CatalystScan](CatalystScan.md) abstraction.
+    `PrunedFilteredScan` is a "lighter" and stable version of the `CatalystScan` abstraction.
 
 [[implementations]]
 NOTE: [JDBCRelation](datasources/jdbc/JDBCRelation.md) is the one and only known implementation of the <<contract, PrunedFilteredScan Contract>> in Spark SQL.

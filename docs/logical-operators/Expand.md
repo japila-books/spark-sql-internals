@@ -16,7 +16,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 ```
 
 !!! note
-    `Expand` logical operator is resolved to [ExpandExec](../physical-operators/ExpandExec.md) physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
+    `Expand` logical operator is resolved to `ExpandExec` physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
 
 [[properties]]
 .Expand's Properties

@@ -1,3 +1,0 @@
-# CatalystScan
-
-`CatalystScan` is...FIXME

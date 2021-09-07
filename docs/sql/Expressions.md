@@ -1,7 +1,5 @@
 # Expressions
 
-`Expressions` is...FIXME
-
 ## column
 
 ```java

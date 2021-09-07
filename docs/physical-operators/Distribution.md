@@ -59,7 +59,7 @@ Physical Operator | Required Child Distribution
  [BaseAggregateExec](BaseAggregateExec.md) | One of [AllTuples](AllTuples.md), [ClusteredDistribution](ClusteredDistribution.md) and [UnspecifiedDistribution](UnspecifiedDistribution.md)
  [BroadcastHashJoinExec](BroadcastHashJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa
  [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa
- [CoGroupExec](CoGroupExec.md)      | [HashClusteredDistribution](HashClusteredDistribution.md)s
+ CoGroupExec      | [HashClusteredDistribution](HashClusteredDistribution.md)s
  GlobalLimitExec  | [AllTuples](AllTuples.md)
  [ShuffledJoin](ShuffledJoin.md) | [UnspecifiedDistribution](UnspecifiedDistribution.md)s or [HashClusteredDistribution](HashClusteredDistribution.md)s
  [SortExec](SortExec.md)      | [OrderedDistribution](OrderedDistribution.md) or [UnspecifiedDistribution](UnspecifiedDistribution.md)

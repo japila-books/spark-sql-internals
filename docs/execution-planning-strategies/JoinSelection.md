@@ -56,7 +56,7 @@ The following sections are in the order of preference.
 
 ### <span id="CartesianProductExec"> CartesianProductExec
 
-`JoinSelection` plans a [CartesianProductExec](../physical-operators/CartesianProductExec.md) when there are no join keys and [join type](../joins.md#join-types) is [CROSS](../joins.md#CROSS) or [INNER](../joins.md#INNER)
+`JoinSelection` plans a `CartesianProductExec` when there are no join keys and [join type](../joins.md#join-types) is [CROSS](../joins.md#CROSS) or [INNER](../joins.md#INNER)
 
 ### <span id="BroadcastNestedLoopJoinExec"> BroadcastNestedLoopJoinExec
 
@@ -181,7 +181,7 @@ createSortMergeJoin(): Option[Seq[SortMergeJoinExec]]
 createCartesianProduct(): Option[Seq[CartesianProductExec]]
 ```
 
-`createCartesianProduct` creates a [CartesianProductExec](../physical-operators/CartesianProductExec.md) for `InnerLike` join type.
+`createCartesianProduct` creates a `CartesianProductExec` for `InnerLike` join type.
 
 ## <span id="createJoinWithoutHint"> createJoinWithoutHint
 

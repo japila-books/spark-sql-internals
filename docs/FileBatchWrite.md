@@ -1,3 +1,0 @@
-# FileBatchWrite
-
-`FileBatchWrite` is...FIXME

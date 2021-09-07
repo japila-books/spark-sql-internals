@@ -1,5 +1,3 @@
-title: ReusedExchangeExec
-
 # ReusedExchangeExec Leaf Physical Operator
 
-`ReusedExchangeExec` is a SparkPlan.md#LeafExecNode[leaf physical operator] that...FIXME
+`ReusedExchangeExec` is a [leaf physical operator](LeafExecNode.md).

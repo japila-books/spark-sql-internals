@@ -10,7 +10,7 @@
 | Logical Operator
 | Description
 
-| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [CatalystScan](../CatalystScan.md) relation
+| [LogicalRelation](../logical-operators/LogicalRelation.md) with a `CatalystScan` relation
 | [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
 
 `CatalystScan` does not seem to be used in Spark SQL.

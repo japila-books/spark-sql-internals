@@ -1,7 +1,5 @@
 # GenerateSafeProjection
 
-`GenerateSafeProjection` is...FIXME
-
 === [[create]] Creating Projection -- `create` Method
 
 [source, scala]

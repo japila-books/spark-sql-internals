@@ -1,7 +1,5 @@
 # EquivalentExpressions
 
-`EquivalentExpressions` is...FIXME
-
 [[internal-registries]]
 .EquivalentExpressions's Internal Properties (e.g. Registries, Counters and Flags)
 [cols="1,2",options="header",width="100%"]

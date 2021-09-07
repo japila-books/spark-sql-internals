@@ -1,5 +1,3 @@
-title: CoalesceExec
-
 # CoalesceExec Unary Physical Operator
 
 `CoalesceExec` is a [unary physical operator](UnaryExecNode.md) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.

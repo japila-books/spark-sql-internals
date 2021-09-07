@@ -1,7 +1,5 @@
 # GenerateMutableProjection
 
-`GenerateMutableProjection` is...FIXME
-
 === [[create]] Creating MutableProjection -- `create` Internal Method
 
 [source, scala]

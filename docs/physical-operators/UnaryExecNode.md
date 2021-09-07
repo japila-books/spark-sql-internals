@@ -32,7 +32,7 @@ Used when:
 * [DeserializeToObjectExec](DeserializeToObjectExec.md)
 * [EvalPythonExec](EvalPythonExec.md)
 * [Exchange](Exchange.md)
-* [ExpandExec](ExpandExec.md)
+* ExpandExec
 * [FilterExec](FilterExec.md)
 * FlatMapGroupsInPandasExec ([PySpark]({{ book.pyspark }}/sql/FlatMapGroupsInPandasExec))
 * FlatMapGroupsWithStateExec ([Structured Streaming]({{ book.structured_streaming }}/physical-operators/FlatMapGroupsWithStateExec))
@@ -44,7 +44,7 @@ Used when:
 * [ObjectConsumerExec](ObjectConsumerExec.md)
 * [ProjectExec](ProjectExec.md)
 * [RowToColumnarExec](RowToColumnarExec.md)
-* [SampleExec](SampleExec.md)
+* SampleExec
 * ScriptTransformationExec
 * [SortExec](SortExec.md)
 * [SubqueryBroadcastExec](SubqueryBroadcastExec.md)

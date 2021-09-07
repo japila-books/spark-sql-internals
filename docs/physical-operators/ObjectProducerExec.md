@@ -1,6 +1,4 @@
-title: ObjectProducerExec
-
-# ObjectProducerExec -- Physical Operators With Single Object Output
+# ObjectProducerExec Physical Operators
 
 `ObjectProducerExec` is the <<contract, extension>> of the <<SparkPlan.md#, SparkPlan contract>> for <<implementations, physical operators>> that produce a single <<outputObjAttr, object>>.
 

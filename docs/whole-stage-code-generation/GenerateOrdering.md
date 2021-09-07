@@ -1,7 +1,5 @@
 # GenerateOrdering
 
-`GenerateOrdering` is...FIXME
-
 === [[create]] Creating BaseOrdering -- `create` Method
 
 [source, scala]

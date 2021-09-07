@@ -52,14 +52,14 @@ Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical opera
 * [ColumnarToRowExec](ColumnarToRowExec.md)
 * [DebugExec](DebugExec.md)
 * [DeserializeToObjectExec](DeserializeToObjectExec.md)
-* [ExpandExec](ExpandExec.md)
+* ExpandExec
 * [FilterExec](FilterExec.md)
 * [GenerateExec](GenerateExec.md)
 * [InputRDDCodegen](InputRDDCodegen.md)
 * [MapElementsExec](MapElementsExec.md)
 * [ProjectExec](ProjectExec.md)
 * [RangeExec](RangeExec.md)
-* [SampleExec](SampleExec.md)
+* SampleExec
 * [SerializeFromObjectExec](SerializeFromObjectExec.md)
 * [SortMergeJoinExec](SortMergeJoinExec.md)
 * [WholeStageCodegenExec](WholeStageCodegenExec.md)
@@ -344,7 +344,7 @@ Physical Operator | Prefix
  [BroadcastHashJoinExec](BroadcastHashJoinExec.md) | bhj
  [ShuffledHashJoinExec](ShuffledHashJoinExec.md) | shj
  [SortMergeJoinExec](SortMergeJoinExec.md) | smj
- [RDDScanExec](RDDScanExec.md) | rdd
+ RDDScanExec | rdd
  [DataSourceScanExec](DataSourceScanExec.md) | scan
  [InMemoryTableScanExec](InMemoryTableScanExec.md) | memoryScan
  [WholeStageCodegenExec](WholeStageCodegenExec.md) | wholestagecodegen

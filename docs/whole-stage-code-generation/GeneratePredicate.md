@@ -1,7 +1,5 @@
 # GeneratePredicate
 
-`GeneratePredicate` is...FIXME
-
 === [[create]] Creating Predicate -- `create` Method
 
 [source, scala]

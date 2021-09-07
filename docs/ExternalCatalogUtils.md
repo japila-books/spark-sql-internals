@@ -1,7 +1,5 @@
 # ExternalCatalogUtils
 
-`ExternalCatalogUtils` is...FIXME
-
 === [[prunePartitionsByFilter]] `prunePartitionsByFilter` Method
 
 [source, scala]
