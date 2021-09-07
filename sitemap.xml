@@ -996,6 +996,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AQEShuffleReadRule/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AQEUtils/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -1026,11 +1031,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/CustomShuffleReaderRule/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/DemoteBroadcastHashJoin/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -1051,12 +1051,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/OptimizeLocalShuffleReader/</loc>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/OptimizeShuffleWithLocalRead/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/OptimizeSkewInRebalancePartitions/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/OptimizeSkewedJoin/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/PlanAdaptiveDynamicPruningFilters/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
