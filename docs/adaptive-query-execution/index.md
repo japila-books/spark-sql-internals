@@ -40,10 +40,6 @@ Adaptive Query Execution uses [logOnLevel](AdaptiveSparkPlanExec.md#logOnLevel) 
 
 ## References
 
-### Articles
-
-* [An adaptive execution mode for Spark SQL](https://conferences.oreilly.com/strata/strata-sg/public/schedule/detail/62938) by Carson Wang (Intel), Yucai Yu (Intel) at Strata Data Conference in Singapore, December 7, 2017
-
 ### Videos
 
 * [An Adaptive Execution Engine For Apache Spark SQL &mdash; Carson Wang](https://youtu.be/FZgojLWdjaw)

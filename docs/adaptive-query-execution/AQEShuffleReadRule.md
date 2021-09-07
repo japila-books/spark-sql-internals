@@ -1,6 +1,6 @@
-# CustomShuffleReaderRule Physical Optimization Rules
+# AQEShuffleReadRule Physical Optimization Rules
 
-`CustomShuffleReaderRule` is an [extension](#contract) of the [Rule](../catalyst/Rule.md) abstraction for [physical optimization rules](#implementations) (`Rule[SparkPlan]`) that [supportedShuffleOrigins](#supportedShuffleOrigins).
+`AQEShuffleReadRule` is an [extension](#contract) of the [Rule](../catalyst/Rule.md) abstraction for [physical optimization rules](#implementations) (`Rule[SparkPlan]`) that [supportedShuffleOrigins](#supportedShuffleOrigins).
 
 ## Contract
 
@@ -18,5 +18,6 @@ Used when:
 ## Implementations
 
 * [CoalesceShufflePartitions](CoalesceShufflePartitions.md)
-* [OptimizeLocalShuffleReader](OptimizeLocalShuffleReader.md)
+* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md)
 * [OptimizeSkewedJoin](OptimizeSkewedJoin.md)
+* [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md)

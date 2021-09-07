@@ -237,3 +237,24 @@ formattedNodeName: String
 `formattedNodeName` is used when:
 
 * `QueryPlan` is requested for [verboseStringWithOperatorId](#verboseStringWithOperatorId)
+
+## <span id="transformAllExpressionsWithPruning"> transformAllExpressionsWithPruning
+
+```scala
+transformAllExpressionsWithPruning(
+  cond: TreePatternBits => Boolean,
+  ruleId: RuleId = UnknownRuleId)(
+  rule: PartialFunction[Expression, Expression]): this.type
+```
+
+`transformAllExpressionsWithPruning`...FIXME
+
+`transformAllExpressionsWithPruning` is used when:
+
+* `QueryPlan` is requested for [transformAllExpressions](#transformAllExpressions) and [normalizeExpressions](#normalizeExpressions)
+* `AnalysisHelper` is requested to `transformAllExpressionsWithPruning`
+* `PlanSubqueries` physical optimization is [executed](../physical-optimizations/PlanSubqueries.md#apply)
+* `PlanDynamicPruningFilters` physical optimization is [executed](../physical-optimizations/PlanDynamicPruningFilters.md#apply)
+* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md#apply)
+* `PlanAdaptiveSubqueries` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveSubqueries.md#apply)
+* `ReuseAdaptiveSubquery` physical optimization is [executed](../adaptive-query-execution/ReuseAdaptiveSubquery.md#apply)

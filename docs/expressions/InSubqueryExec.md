@@ -75,18 +75,16 @@ updateResult(): Unit
 
 `updateResult` is part of the [ExecSubqueryExpression](ExecSubqueryExpression.md#updateResult) abstraction.
 
-## result Internal Registry
+## <span id="result"> result Registry
 
-<span id="result">
 ```scala
 result: Array[Any]
 ```
 
 `result`...FIXME
 
-## prepareResult Internal Method
+## <span id="prepareResult"> prepareResult
 
-<span id="prepareResult">
 ```scala
 prepareResult(): Unit
 ```

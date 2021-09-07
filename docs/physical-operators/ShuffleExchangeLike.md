@@ -33,7 +33,7 @@ numMappers: Int
 
 Used when:
 
-* `OptimizeLocalShuffleReader` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeLocalShuffleReader.md#getPartitionSpecs)
+* `OptimizeShuffleWithLocalRead` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#getPartitionSpecs)
 
 ### <span id="numPartitions"> numPartitions
 
@@ -43,7 +43,7 @@ numPartitions: Int
 
 Used when:
 
-* `OptimizeLocalShuffleReader` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeLocalShuffleReader.md#getPartitionSpecs)
+* `OptimizeShuffleWithLocalRead` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#getPartitionSpecs)
 
 ### <span id="runtimeStatistics"> runtimeStatistics
 
@@ -65,7 +65,7 @@ Used when:
 
 * `AdaptiveSparkPlanExec` physical operator is requested for the [finalStageOptimizerRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#finalStageOptimizerRules)
 * `CoalesceShufflePartitions` physical optimization is requested to [supportCoalesce](../adaptive-query-execution/CoalesceShufflePartitions.md#supportCoalesce)
-* `OptimizeLocalShuffleReader` physical optimization is requested to [supportLocalReader](../adaptive-query-execution/OptimizeLocalShuffleReader.md#supportLocalReader)
+* `OptimizeShuffleWithLocalRead` physical optimization is requested to [supportLocalReader](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#supportLocalReader)
 * `ShuffleStage` utility is used to [destructure a SparkPlan to a ShuffleStageInfo](../adaptive-query-execution/ShuffleStage.md#supportLocalReader)
 
 ## Implementations

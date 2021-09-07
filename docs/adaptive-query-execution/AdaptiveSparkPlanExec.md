@@ -209,10 +209,12 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 
 `queryStageOptimizerRules` is the following adaptive optimizations (physical optimization rules):
 
+* [PlanAdaptiveDynamicPruningFilters](PlanAdaptiveDynamicPruningFilters.md)
 * [ReuseAdaptiveSubquery](ReuseAdaptiveSubquery.md)
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md)
 * [OptimizeSkewedJoin](OptimizeSkewedJoin.md)
-* [OptimizeLocalShuffleReader](OptimizeLocalShuffleReader.md)
+* [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md)
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md)
+* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md)
 
 `queryStageOptimizerRules` is used when:
 

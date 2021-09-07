@@ -161,7 +161,7 @@ shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow]
 `shuffleDependency` is used when:
 
 * [CustomShuffleReaderExec](CustomShuffleReaderExec.md) physical operator is executed
-* [OptimizeLocalShuffleReader](../adaptive-query-execution/OptimizeLocalShuffleReader.md) is requested to `getPartitionSpecs`
+* [OptimizeShuffleWithLocalRead](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md) is requested to `getPartitionSpecs`
 * [OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
 * `ShuffleExchangeExec` physical operator is [executed](#doExecute) and requested for [MapOutputStatistics](#mapOutputStatisticsFuture)
 

@@ -10,6 +10,17 @@ Used as a [node pattern](TreeNode.md#nodePatterns):
 * [CTERelationRef](../logical-operators/CTERelationRef.md)
 * [WithCTE](../logical-operators/WithCTE.md)
 
+## <span id="DYNAMIC_PRUNING_EXPRESSION"> DYNAMIC_PRUNING_EXPRESSION
+
+Used as a [node pattern](TreeNode.md#nodePatterns):
+
+* [DynamicPruningExpression](../expressions/DynamicPruningExpression.md)
+
+Used to transform query plans in the following rules:
+
+* [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md)
+* [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md)
+
 ## <span id="PLAN_EXPRESSION"> PLAN_EXPRESSION
 
 Used as a [node pattern](TreeNode.md#nodePatterns):

@@ -1,3 +1,0 @@
-# OptimizeLocalShuffleReader
-
-`OptimizeLocalShuffleReader` is...FIXME
