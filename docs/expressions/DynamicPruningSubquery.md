@@ -17,7 +17,9 @@
 * <span id="onlyInBroadcast"> `onlyInBroadcast` Flag
 * <span id="exprId"> `ExprId` (default: `NamedExpression.newExprId`)
 
-`DynamicPruningSubquery` is created when [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is executed.
+`DynamicPruningSubquery` is created when:
+
+* [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is executed
 
 ## <span id="toString"> Textual Representation
 
