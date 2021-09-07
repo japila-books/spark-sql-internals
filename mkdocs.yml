@@ -836,6 +836,7 @@ nav:
       - RemoveRedundantProjects: physical-optimizations/RemoveRedundantProjects.md
       - RemoveRedundantSorts: physical-optimizations/RemoveRedundantSorts.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
+      - ReuseExchangeAndSubquery: physical-optimizations/ReuseExchangeAndSubquery.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
     - Tungsten Execution Backend:
       - tungsten/index.md
