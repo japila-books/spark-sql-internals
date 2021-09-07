@@ -403,7 +403,7 @@ Used when:
 
 ## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
 
-The value of [spark.sql.exchange.reuse](configuration-properties.md#spark.sql.exchange.reuse) configuration property
+[spark.sql.exchange.reuse](configuration-properties.md#spark.sql.exchange.reuse)
 
 Used when:
 
@@ -883,6 +883,15 @@ Used when:
 [spark.sql.subexpressionElimination.enabled](configuration-properties.md#spark.sql.subexpressionElimination.enabled)
 
 Used when `SparkPlan` is requested for [subexpressionEliminationEnabled](physical-operators/SparkPlan.md#subexpressionEliminationEnabled) flag.
+
+## <span id="subqueryReuseEnabled"><span id="SUBQUERY_REUSE_ENABLED"> subqueryReuseEnabled
+
+[spark.sql.execution.reuseSubquery](configuration-properties.md#spark.sql.execution.reuseSubquery)
+
+Used when:
+
+* [ReuseAdaptiveSubquery](adaptive-query-execution/ReuseAdaptiveSubquery.md) adaptive physical optimization is executed
+* [ReuseExchangeAndSubquery](physical-optimizations/ReuseExchangeAndSubquery.md) physical optimization is executed
 
 ## <span id="supportQuotedRegexColumnName"> supportQuotedRegexColumnName
 

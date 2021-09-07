@@ -425,9 +425,11 @@ Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SOR
 
 ## <span id="spark.sql.execution.reuseSubquery"> spark.sql.execution.reuseSubquery
 
-**(internal)** When true, the planner will try to find out duplicated subqueries and re-use them.
+**(internal)** When `true`, the planner will try to find duplicated subqueries and re-use them.
 
 Default: `true`
+
+Use [SQLConf.subqueryReuseEnabled](SQLConf.md#subqueryReuseEnabled) for the current value
 
 Since: `3.0.0`
 

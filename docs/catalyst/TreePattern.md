@@ -21,6 +21,16 @@ Used to transform query plans in the following rules:
 * [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md)
 * [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md)
 
+## <span id="EXCHANGE"> EXCHANGE
+
+Used as a [node pattern](TreeNode.md#nodePatterns):
+
+* [Exchange](../physical-operators/Exchange.md)
+
+Used to transform query plans in the following rules:
+
+* [ReuseExchangeAndSubquery](../physical-optimizations/ReuseExchangeAndSubquery.md)
+
 ## <span id="PLAN_EXPRESSION"> PLAN_EXPRESSION
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
