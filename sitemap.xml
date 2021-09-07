@@ -86,11 +86,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystScan/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/CatalystSerde/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -272,11 +267,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/ExtractSingleColumnNullAwareAntiJoin/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/FileBatchWrite/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3561,6 +3551,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AggregateProcessor/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -3691,17 +3686,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CartesianProductExec/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ClusteredDistribution/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CoGroupExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3817,11 +3802,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ExecutedCommandExec/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ExpandExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3966,11 +3946,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RDDScanExec/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RangeExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -4001,6 +3976,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReusedSubqueryExec/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RowDataSourceScanExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
@@ -4017,11 +3997,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SQLShuffleWriteMetricsReporter/</loc>
-         <lastmod>2021-09-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SampleExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4087,6 +4062,11 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SparkPlan/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryAdaptiveBroadcastExec/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
