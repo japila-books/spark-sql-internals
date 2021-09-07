@@ -605,6 +605,8 @@ nav:
     - Physical Operators:
       - SparkPlan: physical-operators/SparkPlan.md
       - ShuffledJoin: physical-operators/ShuffledJoin.md
+      - AliasAwareOutputExpression: physical-operators/AliasAwareOutputExpression.md
+      - AliasAwareOutputOrdering: physical-operators/AliasAwareOutputOrdering.md
       - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
       - BaseAggregateExec: physical-operators/BaseAggregateExec.md
       - BaseLimitExec: physical-operators/BaseLimitExec.md
