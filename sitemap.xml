@@ -4201,6 +4201,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ReuseExchangeAndSubquery/</loc>
+         <lastmod>2021-09-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-optimizations/ReuseSubquery/</loc>
          <lastmod>2021-09-07</lastmod>
          <changefreq>daily</changefreq>
