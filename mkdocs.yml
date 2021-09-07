@@ -550,7 +550,6 @@ nav:
       - InSubqueryExec: expressions/InSubqueryExec.md
       - InterpretedProjection: expressions/InterpretedProjection.md
       - JsonToStructs: expressions/JsonToStructs.md
-      - JsonTuple: expressions/JsonTuple.md
       - ListQuery: expressions/ListQuery.md
       - Literal: expressions/Literal.md
       - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md

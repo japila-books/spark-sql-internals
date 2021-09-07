@@ -47,7 +47,7 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | [[Inline]] spark-sql-Expression-Inline.md[Inline]
 | Corresponds to `inline` and `inline_outer` functions.
 
-| [[JsonTuple]] spark-sql-Expression-JsonTuple.md[JsonTuple]
+| JsonTuple
 |
 
 | [[PosExplode]] spark-sql-Expression-ExplodeBase.md#PosExplode[PosExplode]
