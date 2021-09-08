@@ -850,39 +850,40 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
+  - AQE:
+    - adaptive-query-execution/index.md
+    - AQEUtils: adaptive-query-execution/AQEUtils.md
+    - ShuffleOrigin: adaptive-query-execution/ShuffleOrigin.md
+    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
+    - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
+    - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
+    - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
+    - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
+    - ShuffleStage: adaptive-query-execution/ShuffleStage.md
+    - Adaptive Logical Optimizer:
+      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
+      - DemoteBroadcastHashJoin: adaptive-query-execution/DemoteBroadcastHashJoin.md
+      - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
+    - Physical Optimizations:
+      - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
+      - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md
+      - OptimizeShuffleWithLocalRead: adaptive-query-execution/OptimizeShuffleWithLocalRead.md
+      - OptimizeSkewInRebalancePartitions: adaptive-query-execution/OptimizeSkewInRebalancePartitions.md
+      - OptimizeSkewedJoin: adaptive-query-execution/OptimizeSkewedJoin.md
+      - PlanAdaptiveDynamicPruningFilters: adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md
+      - ReuseAdaptiveSubquery: adaptive-query-execution/ReuseAdaptiveSubquery.md
+    - QueryStageExecs:
+      - QueryStageExec: adaptive-query-execution/QueryStageExec.md
+      - BroadcastQueryStageExec: adaptive-query-execution/BroadcastQueryStageExec.md
+      - ShuffleQueryStageExec: adaptive-query-execution/ShuffleQueryStageExec.md
+    - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+    - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
+    - Demo: adaptive-query-execution/demo.md
   - New &amp; Noteworthy:
     - Common Table Expressions: common-table-expressions.md
     - Join Queries:
       - Joins: joins.md
       - spark-sql-joins-broadcast.md
-    - Adaptive Query Execution:
-      - adaptive-query-execution/index.md
-      - AQEUtils: adaptive-query-execution/AQEUtils.md
-      - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
-      - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
-      - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
-      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
-      - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
-      - ShuffleStage: adaptive-query-execution/ShuffleStage.md
-      - Adaptive Logical Optimizer:
-        - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-        - DemoteBroadcastHashJoin: adaptive-query-execution/DemoteBroadcastHashJoin.md
-        - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
-      - Physical Optimizations:
-        - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
-        - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md
-        - OptimizeShuffleWithLocalRead: adaptive-query-execution/OptimizeShuffleWithLocalRead.md
-        - OptimizeSkewInRebalancePartitions: adaptive-query-execution/OptimizeSkewInRebalancePartitions.md
-        - OptimizeSkewedJoin: adaptive-query-execution/OptimizeSkewedJoin.md
-        - PlanAdaptiveDynamicPruningFilters: adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md
-        - ReuseAdaptiveSubquery: adaptive-query-execution/ReuseAdaptiveSubquery.md
-      - QueryStageExecs:
-        - QueryStageExec: adaptive-query-execution/QueryStageExec.md
-        - BroadcastQueryStageExec: adaptive-query-execution/BroadcastQueryStageExec.md
-        - ShuffleQueryStageExec: adaptive-query-execution/ShuffleQueryStageExec.md
-      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-      - Demo: adaptive-query-execution/demo.md
     - Statistics: new-and-noteworthy/statistics.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md

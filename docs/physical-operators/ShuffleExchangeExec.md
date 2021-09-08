@@ -8,7 +8,7 @@
 
 * <span id="outputPartitioning"> Output [Partitioning](Partitioning.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
-* <span id="shuffleOrigin"> `ShuffleOrigin` (default: `ENSURE_REQUIREMENTS`)
+* <span id="shuffleOrigin"> [ShuffleOrigin](ShuffleExchangeLike.md#shuffleOrigin) (default: [ENSURE_REQUIREMENTS](ShuffleExchangeLike.md#ENSURE_REQUIREMENTS))
 
 `ShuffleExchangeExec` is created when:
 

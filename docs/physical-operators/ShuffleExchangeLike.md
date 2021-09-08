@@ -35,7 +35,7 @@ Used when:
 
 * `OptimizeShuffleWithLocalRead` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#getPartitionSpecs)
 
-### <span id="numPartitions"> numPartitions
+### <span id="numPartitions"> Number of Partitions
 
 ```scala
 numPartitions: Int
@@ -55,11 +55,13 @@ Used when:
 
 * `ShuffleQueryStageExec` physical operator is requested for [runtime statistics](../adaptive-query-execution/ShuffleQueryStageExec.md)
 
-### <span id="shuffleOrigin"> shuffleOrigin
+### <span id="shuffleOrigin"> ShuffleOrigin
 
 ```scala
 shuffleOrigin: ShuffleOrigin
 ```
+
+[ShuffleOrigin](ShuffleOrigin.md)
 
 Used when:
 
