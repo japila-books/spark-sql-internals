@@ -555,6 +555,14 @@ Used when:
 
 Used when a physical operator is requested [the first n rows as an array](physical-operators/SparkPlan.md#executeTake).
 
+## <span id="LOCAL_SHUFFLE_READER_ENABLED"> LOCAL_SHUFFLE_READER_ENABLED
+
+[spark.sql.adaptive.localShuffleReader.enabled](configuration-properties.md#spark.sql.adaptive.localShuffleReader.enabled)
+
+Used when:
+
+* [OptimizeShuffleWithLocalRead](adaptive-query-execution/OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed
+
 ## <span id="manageFilesourcePartitions"><span id="HIVE_MANAGE_FILESOURCE_PARTITIONS"> manageFilesourcePartitions
 
 [spark.sql.hive.manageFilesourcePartitions](hive/configuration-properties.md#spark.sql.hive.manageFilesourcePartitions)

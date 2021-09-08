@@ -255,9 +255,11 @@ Use [SQLConf.fetchShuffleBlocksInBatch](SQLConf.md#fetchShuffleBlocksInBatch) me
 
 ## <span id="spark.sql.adaptive.localShuffleReader.enabled"> spark.sql.adaptive.localShuffleReader.enabled
 
-When true and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark tries to use local shuffle reader to read the shuffle data when the shuffle partitioning is not needed, for example, after converting sort-merge join to broadcast-hash join.
+When `true` (and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`), Spark SQL tries to use local shuffle reader to read the shuffle data when the shuffle partitioning is not needed, for example, after converting sort-merge join to broadcast-hash join.
 
 Default: `true`
+
+Use [SQLConf.LOCAL_SHUFFLE_READER_ENABLED](SQLConf.md#LOCAL_SHUFFLE_READER_ENABLED) to access the property (in a type-safe way)
 
 Since: `3.0.0`
 
@@ -267,9 +269,9 @@ Since: `3.0.0`
 
 Default: `DEBUG`
 
-Since: `3.0.0`
+Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) for the current value
 
-Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) method to access the current value.
+Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold"> spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold
 

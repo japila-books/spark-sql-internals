@@ -857,6 +857,7 @@ nav:
     - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
     - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
     - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
+    - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
     - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
     - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
     - ShuffleStage: adaptive-query-execution/ShuffleStage.md
