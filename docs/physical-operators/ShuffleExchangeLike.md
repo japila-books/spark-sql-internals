@@ -11,6 +11,8 @@ getShuffleRDD(
   partitionSpecs: Array[ShufflePartitionSpec]): RDD[_]
 ```
 
+`RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD))
+
 Used when:
 
 * `CustomShuffleReaderExec` physical operator is requested for the [shuffleRDD](CustomShuffleReaderExec.md#shuffleRDD)

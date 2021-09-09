@@ -81,7 +81,7 @@ executeBroadcast[T](): broadcast.Broadcast[T]
 
 Calls [doExecuteBroadcast](#doExecuteBroadcast).
 
-### <span id="executeColumnar"> executeColumnar
+### <span id="executeColumnar"> Columnar Execution
 
 ```scala
 executeColumnar(): RDD[ColumnarBatch]
@@ -89,7 +89,9 @@ executeColumnar(): RDD[ColumnarBatch]
 
 `executeColumnar` [executeQuery](#executeQuery) with [doExecuteColumnar](#doExecuteColumnar).
 
-`executeColumnar` is used when [ColumnarToRowExec](ColumnarToRowExec.md) unary physical operator is executed and requested for the [inputRDDs](ColumnarToRowExec.md#inputRDDs).
+`executeColumnar` is used when:
+
+* [ColumnarToRowExec](ColumnarToRowExec.md) unary physical operator is executed and requested for the [inputRDDs](ColumnarToRowExec.md#inputRDDs)
 
 ### <span id="executeQuery"> executeQuery
 
@@ -162,7 +164,7 @@ Internal Error [class] has column support mismatch:
 [this]
 ```
 
-Part of [executeColumnar](#executeColumnar)
+Part of [Columnar Execution](#executeColumnar)
 
 ### <span id="doPrepare"> doPrepare
 
