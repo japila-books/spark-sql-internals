@@ -73,3 +73,20 @@ Used when:
 ## Implementations
 
 * [ShuffleExchangeExec](ShuffleExchangeExec.md)
+
+## <span id="submitShuffleJob"> Submitting Shuffle Job
+
+```scala
+submitShuffleJob: Future[MapOutputStatistics]
+```
+
+`submitShuffleJob` [executes a query](SparkPlan.md#executeQuery) with the [mapOutputStatisticsFuture](#mapOutputStatisticsFuture).
+
+??? note "Final Method"
+    `submitShuffleJob` is a Scala **final method** and may not be overridden in [subclasses](#implementations).
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#final).
+
+`submitShuffleJob` is used when:
+
+* `ShuffleQueryStageExec` adaptive leaf physical operator is requested for the [shuffleFuture](../adaptive-query-execution/ShuffleQueryStageExec.md#shuffleFuture)

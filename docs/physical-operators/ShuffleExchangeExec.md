@@ -145,14 +145,16 @@ The purpose of `cachedShuffleRDD` is to avoid multiple [executions](#doExecute) 
 shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow]
 ```
 
-`shuffleDependency` is a Spark Core `ShuffleDependency`.
+`shuffleDependency` is a `ShuffleDependency` ([Spark Core]({{ book.spark_core }}/rdd/ShuffleDependency)).
 
-??? note "shuffleDependency lazy value"
-    `shuffleDependency` is a Scala lazy value which is computed once when accessed and cached afterwards.
+??? note "Lazy Value"
+    `shuffleDependency` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
 `ShuffleExchangeExec` operator [creates a ShuffleDependency](#prepareShuffleDependency) for the following:
 
-* [RDD[InternalRow]](#inputRDD)
+* [Input RDD](#inputRDD)
 * [Output attributes](../catalyst/QueryPlan.md#output) of the [child physical operator](#child)
 * [Output partitioning](#outputPartitioning)
 * [UnsafeRowSerializer](#serializer)
@@ -164,6 +166,25 @@ shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow]
 * [OptimizeShuffleWithLocalRead](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md) is requested to `getPartitionSpecs`
 * [OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
 * `ShuffleExchangeExec` physical operator is [executed](#doExecute) and requested for [MapOutputStatistics](#mapOutputStatisticsFuture)
+
+## <span id="mapOutputStatisticsFuture"> mapOutputStatisticsFuture
+
+```scala
+mapOutputStatisticsFuture: Future[MapOutputStatistics]
+```
+
+`mapOutputStatisticsFuture` requests the [inputRDD](#inputRDD) for the number of partitions:
+
+* If there are zero partitions, `mapOutputStatisticsFuture` simply creates an already completed `Future` ([Scala]({{ scala.api }}/scala/concurrent/Future.html)) with `null` value
+
+* Otherwise, `mapOutputStatisticsFuture` requests the operator's `SparkContext` to `submitMapStage` ([Spark Core]({{ book.spark_core }}/SparkContext#submitMapStage)) with the [ShuffleDependency](#shuffleDependency).
+
+??? note "Lazy Value"
+    `mapOutputStatisticsFuture` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+`mapOutputStatisticsFuture` is part of the [ShuffleExchangeLike](ShuffleExchangeLike.md#mapOutputStatisticsFuture) abstraction.
 
 ## <span id="createShuffleWriteProcessor"> createShuffleWriteProcessor
 

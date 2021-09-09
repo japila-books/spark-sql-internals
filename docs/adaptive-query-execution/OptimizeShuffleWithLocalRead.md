@@ -1,8 +1,8 @@
 # OptimizeShuffleWithLocalRead Adaptive Physical Optimization
 
-`OptimizeShuffleWithLocalRead` is a [AQEShuffleReadRule](AQEShuffleReadRule.md).
+`OptimizeShuffleWithLocalRead` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
-`OptimizeShuffleWithLocalRead` can be turned on and off using [spark.sql.adaptive.localShuffleReader.enabled](../configuration-properties.md#spark.sql.adaptive.localShuffleReader.enabled).
+`OptimizeShuffleWithLocalRead` can be turned on and off using [spark.sql.adaptive.localShuffleReader.enabled](../configuration-properties.md#spark.sql.adaptive.localShuffleReader.enabled) configuration property.
 
 ## <span id="supportedShuffleOrigins"> Supported ShuffleOrigins
 

@@ -115,12 +115,22 @@ Otherwise, `computeStats` returns no statistics.
 materialize(): Future[Any]
 ```
 
-`materialize` [prepares the operator for execution](../physical-operators/SparkPlan.md#executeQuery) followed by [doMaterialize](#doMaterialize).
+`materialize` prints out the following DEBUG message to the logs (with the [id](#id)):
 
-!!! note
-    `materialize` is a final method and cannot be overriden.
+```text
+Materialize query stage [simpleName]: [id]
+```
 
-`materialize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
+`materialize` [doMaterialize](#doMaterialize).
+
+??? note "Final Method"
+    `materialize` is a Scala **final method** and may not be overridden in [subclasses](#implementations).
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#final).
+
+`materialize` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
 
 ## <span id="generateTreeString"> Text Representation
 

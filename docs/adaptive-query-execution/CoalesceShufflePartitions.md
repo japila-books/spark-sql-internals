@@ -1,10 +1,8 @@
-# CoalesceShufflePartitions Physical Optimization
+# CoalesceShufflePartitions Adaptive Physical Optimization
 
-`CoalesceShufflePartitions` is a physical query plan optimization for [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`CoalesceShufflePartitions` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
-`CoalesceShufflePartitions` uses [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
-
-`CoalesceShufflePartitions` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
+`CoalesceShufflePartitions` can be turned on and off using [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
 
 ## Creating Instance
 
@@ -12,7 +10,9 @@
 
 * <span id="session"> [SparkSession](../SparkSession.md)
 
-`CoalesceShufflePartitions` is created when `AdaptiveSparkPlanExec` physical operator is requested for the [QueryStage Optimizer Rules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules).
+`CoalesceShufflePartitions` is created when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [QueryStage Optimizer Rules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 
@@ -38,3 +38,17 @@ apply(
 `apply`...FIXME
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+### <span id="updateShuffleReads"> updateShuffleReads
+
+```scala
+updateShuffleReads(
+  plan: SparkPlan,
+  specsMap: Map[Int, Seq[ShufflePartitionSpec]]): SparkPlan
+```
+
+`updateShuffleReads`...FIXME
+
+`updateShuffleReads` is used when:
+
+* FIXME

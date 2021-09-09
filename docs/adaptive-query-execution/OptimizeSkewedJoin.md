@@ -1,12 +1,8 @@
-# OptimizeSkewedJoin Physical Optimization
+# OptimizeSkewedJoin Adaptive Physical Optimization
 
-`OptimizeSkewedJoin` is a physical query plan optimization to [make data distribution more even](#apply) in [Adaptive Query Execution](index.md).
-
-`OptimizeSkewedJoin` is a [AQEShuffleReadRule](AQEShuffleReadRule.md).
+`OptimizeSkewedJoin` is a [physical optimization](AQEShuffleReadRule.md) to [make data distribution more even](#apply) in [Adaptive Query Execution](index.md).
 
 `OptimizeSkewedJoin` is also called **skew join optimization**.
-
-`OptimizeSkewedJoin` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
 ## <span id="supportedJoinTypes"> Supported Join Types
 
@@ -34,7 +30,9 @@
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`OptimizeSkewedJoin` is created when `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules).
+`OptimizeSkewedJoin` is created when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 
@@ -54,7 +52,7 @@ apply(
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-## <span id="optimizeSkewJoin"> Optimizing Skewed Joins
+### <span id="optimizeSkewJoin"> Optimizing Skewed Joins
 
 ```scala
 optimizeSkewJoin(
@@ -86,6 +84,17 @@ number of skewed partitions: left [numPartitions], right [numPartitions]
 ```
 
 In the end, `optimizeSkewJoin` creates [CustomShuffleReaderExec](../physical-operators/CustomShuffleReaderExec.md) physical operators for the left and right children of the [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) operator if and only if the number of skewed partitions for either side is greater than `0`. `optimizeSkewJoin` turns on the [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) flag (of the `SortMergeJoinExec` operator). Otherwise, `optimizeSkewJoin` leaves the `SortMergeJoinExec` operator "untouched".
+
+### <span id="tryOptimizeJoinChildren"> tryOptimizeJoinChildren
+
+```scala
+tryOptimizeJoinChildren(
+  left: ShuffleQueryStageExec,
+  right: ShuffleQueryStageExec,
+  joinType: JoinType): Option[(SparkPlan, SparkPlan)]
+```
+
+`tryOptimizeJoinChildren`...FIXME
 
 ## <span id="isSkewed"> isSkewed Predicate
 
