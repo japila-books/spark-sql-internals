@@ -1086,11 +1086,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/ShuffleOrigin/</loc>
-         <lastmod>2021-09-09</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/ShuffleQueryStageExec/</loc>
          <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
@@ -4042,6 +4037,11 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ShuffleExchangeLike/</loc>
+         <lastmod>2021-09-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ShuffleOrigin/</loc>
          <lastmod>2021-09-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
