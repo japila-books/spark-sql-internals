@@ -33,15 +33,17 @@ newReuseInstance(
 mapStats: Option[MapOutputStatistics]
 ```
 
-`mapStats` takes a `MapOutputStatistics` from the [resultOption](QueryStageExec.md#resultOption).
-
-`mapStats` throws an `AssertionError` when the [resultOption](QueryStageExec.md#resultOption) is not available:
+`mapStats` assumes that the [resultOption](QueryStageExec.md#resultOption) (with the `MapOutputStatistics`) is already available or throws an `AssertionError`:
 
 ```text
 assertion failed: ShuffleQueryStageExec should already be ready
 ```
 
+`mapStats` takes a `MapOutputStatistics` from the [resultOption](QueryStageExec.md#resultOption).
+
 `mapStats` is used when:
 
-* [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) logical optimization is executed
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](OptimizeSkewedJoin.md) adaptive physical optimizations are executed
+* `AQEShuffleReadExec` unary physical operator is requested for the [partitionDataSizes](AQEShuffleReadExec.md#partitionDataSizes)
+* [DynamicJoinSelection](DynamicJoinSelection.md) adaptive optimization is executed (and [selectJoinStrategy](DynamicJoinSelection.md#selectJoinStrategy))
+* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed (and [canUseLocalShuffleRead](OptimizeShuffleWithLocalRead.md#canUseLocalShuffleRead))
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md), [OptimizeSkewedJoin](OptimizeSkewedJoin.md) and [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md) adaptive physical optimizations are executed

@@ -865,6 +865,7 @@ nav:
       - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
       - DemoteBroadcastHashJoin: adaptive-query-execution/DemoteBroadcastHashJoin.md
       - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
+      - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
     - Physical Optimizations:
       - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
       - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md

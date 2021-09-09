@@ -66,13 +66,27 @@ createLocalRead(
   plan: SparkPlan): AQEShuffleReadExec
 ```
 
-`createLocalRead`...FIXME
+`createLocalRead` branches off based on the type of the given [physical operator](../physical-operators/SparkPlan.md) and creates a new [AQEShuffleReadExec](AQEShuffleReadExec.md) (with or without _advisory parallelism_ specified to [determine ShufflePartitionSpecs](#getPartitionSpecs)):
+
+* For [AQEShuffleReadExec](AQEShuffleReadExec.md)s with a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) leaf physical operator, the [advisory parallelism](#getPartitionSpecs) is the size of the [ShufflePartitionSpec](AQEShuffleReadExec.md#partitionSpecs)
+
+* For [ShuffleQueryStageExec](ShuffleQueryStageExec.md)s, the [advisory parallelism](#getPartitionSpecs) is undefined
 
 ### <span id="createProbeSideLocalRead"> createProbeSideLocalRead
 
 ```scala
 createProbeSideLocalRead(
   plan: SparkPlan): SparkPlan
+```
+
+`createProbeSideLocalRead`...FIXME
+
+### <span id="getPartitionSpecs"> getPartitionSpecs
+
+```scala
+getPartitionSpecs(
+  shuffleStage: ShuffleQueryStageExec,
+  advisoryParallelism: Option[Int]): Seq[ShufflePartitionSpec]
 ```
 
 `createProbeSideLocalRead`...FIXME
