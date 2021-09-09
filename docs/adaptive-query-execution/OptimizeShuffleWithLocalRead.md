@@ -10,10 +10,10 @@
 supportedShuffleOrigins: Seq[ShuffleOrigin]
 ```
 
-`supportedShuffleOrigins` is the following [ShuffleOrigin](ShuffleOrigin.md)s:
+`supportedShuffleOrigins` is the following [ShuffleOrigin](../physical-operators/ShuffleOrigin.md)s:
 
-* [ENSURE_REQUIREMENTS](ShuffleOrigin.md#ENSURE_REQUIREMENTS)
-* [REBALANCE_PARTITIONS_BY_NONE](ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_NONE)
+* [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
+* [REBALANCE_PARTITIONS_BY_NONE](../physical-operators/ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_NONE)
 
 `supportedShuffleOrigins` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#supportedShuffleOrigins) abstraction.
 
@@ -27,7 +27,7 @@ isSupported(
 `isSupported` is `true` when the following all hold:
 
 * The [outputPartitioning](../physical-operators/SparkPlan.md#outputPartitioning) of the given [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) is not `SinglePartition`
-* The [shuffleOrigin](ShuffleExchangeLike.md#shuffleOrigin) of the given [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) is [supported](#supportedShuffleOrigins)
+* The [shuffleOrigin](../physical-operators/ShuffleExchangeLike.md#shuffleOrigin) of the given [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) is [supported](#supportedShuffleOrigins)
 
 `isSupported` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#isSupported) abstraction.
 
@@ -55,7 +55,7 @@ canUseLocalShuffleRead(
 
 1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) with the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) available and the [ShuffleExchangeLike](ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)
 
-1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [AQEShuffleReadExec](AQEShuffleReadExec.md) with a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) with the above requirements met (the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) is available and the [ShuffleExchangeLike](ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)) and the [shuffleOrigin](../physical-operators/ShuffleExchangeLike.md#shuffleOrigin) of the `ShuffleExchangeLike` is [ENSURE_REQUIREMENTS](ShuffleOrigin.md#ENSURE_REQUIREMENTS)
+1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [AQEShuffleReadExec](AQEShuffleReadExec.md) with a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) with the above requirements met (the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) is available and the [ShuffleExchangeLike](ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)) and the [shuffleOrigin](../physical-operators/ShuffleExchangeLike.md#shuffleOrigin) of the `ShuffleExchangeLike` is [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
 
 `canUseLocalShuffleRead` is `false` otherwise.
 

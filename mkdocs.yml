@@ -654,6 +654,7 @@ nav:
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
       - ShuffledJoin: physical-operators/ShuffledJoin.md
+      - ShuffleOrigin: physical-operators/ShuffleOrigin.md
       - SparkPlan: physical-operators/SparkPlan.md
       - SQLMetric: physical-operators/SQLMetric.md
       - SQLShuffleWriteMetricsReporter: physical-operators/SQLShuffleWriteMetricsReporter.md
@@ -853,7 +854,6 @@ nav:
   - AQE:
     - adaptive-query-execution/index.md
     - AQEUtils: adaptive-query-execution/AQEUtils.md
-    - ShuffleOrigin: adaptive-query-execution/ShuffleOrigin.md
     - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
     - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
     - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
