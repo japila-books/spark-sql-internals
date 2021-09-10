@@ -41,7 +41,7 @@ Used when `TreeNode` is requested to [verboseStringWithSuffix](#verboseStringWit
 * <span id="Expression"> [Expression](../expressions/Expression.md)
 * <span id="QueryPlan"> [QueryPlan](../catalyst/QueryPlan.md)
 
-## <span id="simpleString"> Simple Node Description
+## <span id="simpleString"> Simple Description
 
 ```scala
 simpleString: String
@@ -339,3 +339,29 @@ unsetTagValue[T](
 
 * `ExplainUtils` utility is used to `removeTags`
 * `AdaptiveSparkPlanExec` leaf physical operator is requested to [cleanUpTempTags](../adaptive-query-execution/AdaptiveSparkPlanExec.md#cleanUpTempTags)
+
+## <span id="argString"> Node Arguments (Comma-Separated Text)
+
+```scala
+argString(
+  maxFields: Int): String
+```
+
+`argString` concatenates node arguments (based on the [stringArgs](#stringArgs)).
+
+`argString` is used when:
+
+* `TreeNode` is requested for the [simple description](#simpleString)
+* `QueryPlan` is requested for the [detailed description (with operator id)](QueryPlan.md#verboseStringWithOperatorId)
+
+### <span id="stringArgs"> stringArgs
+
+```scala
+stringArgs: Iterator[Any]
+```
+
+`stringArgs` gives all the elements of this node (using Scala's [Product.productIterator]({{ scala.api }}/scala/Product.html#productIterator:Iterator[Any]) by default).
+
+`stringArgs` is used when:
+
+* `TreeNode` is requested for the [argString](#argString)

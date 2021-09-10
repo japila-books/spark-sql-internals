@@ -104,3 +104,30 @@ doExecuteColumnar(): RDD[ColumnarBatch]
 `doExecuteColumnar` returns the [Shuffle RDD](#shuffleRDD).
 
 `doExecuteColumnar` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecuteColumnar) abstraction.
+
+## <span id="stringArgs"> Node Arguments
+
+```scala
+stringArgs: Iterator[Any]
+```
+
+`stringArgs` is one of the following:
+
+* `local` when [isLocalRead](#isLocalRead)
+* `coalesced and skewed` when [hasCoalescedPartition](#hasCoalescedPartition) and [hasSkewedPartition](#hasSkewedPartition)
+* `coalesced` when [hasCoalescedPartition](#hasCoalescedPartition)
+* `skewed` when [hasSkewedPartition](#hasSkewedPartition)
+
+`stringArgs` is part of the [TreeNode](../catalyst/TreeNode.md#stringArgs) abstraction.
+
+## <span id="isLocalRead"> isLocalRead
+
+```scala
+isLocalRead: Boolean
+```
+
+`isLocalRead` is `true` when either `PartialMapperPartitionSpec` or `CoalescedMapperPartitionSpec` are among the [partition specs](#partitionSpecs).
+
+`isLocalRead` is used when:
+
+* `AQEShuffleReadExec` is requested for the [node arguments](#stringArgs), the [partition data sizes](#partitionDataSizes) and the [performance metrics](#metrics)

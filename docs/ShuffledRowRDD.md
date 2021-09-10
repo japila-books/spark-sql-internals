@@ -11,7 +11,7 @@
 
 * <span id="dependency"> `ShuffleDependency[Int, InternalRow, InternalRow]` ([Spark Core]({{ book.spark_core }}/rdd/ShuffleDependency))
 * <span id="metrics"> [SQLMetric](physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
-* [Partition Specs](#partitionSpecs) (`Array[ShufflePartitionSpec]`)
+* [ShufflePartitionSpec](#partitionSpecs)s (default: `CoalescedPartitionSpec`s)
 
 When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksInBatch](configuration-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property to set the **__fetch_continuous_blocks_in_batch_enabled** local property to `true`.
 
