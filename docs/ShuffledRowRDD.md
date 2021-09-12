@@ -1,9 +1,15 @@
 # ShuffledRowRDD
 
-`ShuffledRowRDD` is an `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD)) of [InternalRow](InternalRow.md)s (`RDD[InternalRow]`) for execution of [CollectLimitExec](physical-operators/CollectLimitExec.md), [CustomShuffleReaderExec](physical-operators/CustomShuffleReaderExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators.
+`ShuffledRowRDD` is an `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD)) of [InternalRow](InternalRow.md)s (`RDD[InternalRow]`) used for execution of the following physical operators:
 
-!!! note
-    `ShuffledRowRDD` is similar to `ShuffledRDD` ([Spark Core]({{ book.spark_core }}/rdd/ShuffledRDD)), with the difference of the type of the values to process, i.e. [InternalRow](InternalRow.md) and `(K, C)` key-value pairs, respectively.
+* [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md) ([Adaptive Query Execution](adaptive-query-execution/index.md))
+* [CollectLimitExec](physical-operators/CollectLimitExec.md)
+* [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md)
+* [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md)
+
+## <span id="ShuffledRDD"> ShuffledRDD
+
+`ShuffledRowRDD` is similar to `ShuffledRDD` ([Spark Core]({{ book.spark_core }}/rdd/ShuffledRDD)), with the difference of the type of the values to process, i.e. [InternalRow](InternalRow.md) and `(K, C)` key-value pairs, respectively.
 
 ## Creating Instance
 
@@ -18,7 +24,7 @@ When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksIn
 `ShuffledRowRDD` is created when:
 
 * [CollectLimitExec](physical-operators/CollectLimitExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators are executed
-* `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [CustomShuffleReaderExec](physical-operators/CustomShuffleReaderExec.md))
+* `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md))
 
 ## <span id="compute"> Computing Partition
 
@@ -28,21 +34,27 @@ compute(
   context: TaskContext): Iterator[InternalRow]
 ```
 
-`compute` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#compute)) abstraction.
-
-`compute` requests the given `TaskContext` ([Spark Core]({{ book.spark_core }}/scheduler/TaskContext)) for the `TaskMetrics` ([Spark Core]({{ book.spark_core }}/executor/TaskMetrics)) that are in turn requested for a `TempShuffleReadMetrics`.
+`compute` requests the given `TaskContext` ([Spark Core]({{ book.spark_core }}/scheduler/TaskContext)) for the `TaskMetrics` ([Spark Core]({{ book.spark_core }}/executor/TaskMetrics)) that is in turn requested for a `TempShuffleReadMetrics`.
 
 `compute` creates a `SQLShuffleReadMetricsReporter` (with the `TempShuffleReadMetrics` and the [SQL Metrics](#metrics)).
 
 `compute` assumes that the given `Partition` ([Spark Core]({{ book.spark_core }}/rdd/Partition)) is a `ShuffledRowRDDPartition` and requests it for the `ShufflePartitionSpec`.
 
-`compute` requests the `ShuffleManager` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleManager)) for a `ShuffleReader` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleReader)) based on the type of `ShufflePartitionSpec`:
+`compute` requests the `ShuffleManager` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleManager)) for a `ShuffleReader` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleReader)) based on the type of `ShufflePartitionSpec`.
 
-1. `CoalescedPartitionSpec`
-1. `PartialReducerPartitionSpec`
-1. `PartialMapperPartitionSpec`
+ShufflePartitionSpec    | startPartition    | endPartition
+------------------------|-------------------|-------------------------
+ CoalescedPartitionSpec | startReducerIndex | endReducerIndex
 
-In the end, `compute` requests the `ShuffleReader` to read combined records (`Iterator[Product2[Int, InternalRow]]`) and takes out `InternalRow`s only.
+ShufflePartitionSpec          | startMapIndex | endMapIndex  | startPartition    | endPartition
+------------------------------|---------------|--------------|-------------------|------------
+ PartialReducerPartitionSpec  | startMapIndex | endMapIndex  | reducerIndex      | reducerIndex + 1
+ PartialMapperPartitionSpec   | mapIndex      | mapIndex + 1 | startReducerIndex | endReducerIndex
+ CoalescedMapperPartitionSpec | startMapIndex | endMapIndex  | 0                 | numReducers
+
+In the end, `compute` requests the `ShuffleReader` to read combined records (`Iterator[Product2[Int, InternalRow]]`) and takes out `InternalRow` values only (and ignoring keys).
+
+`compute` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#compute)) abstraction.
 
 ## <span id="partitionSpecs"> Partition Specs
 
