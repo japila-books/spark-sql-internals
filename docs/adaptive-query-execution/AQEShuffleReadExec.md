@@ -126,8 +126,20 @@ stringArgs: Iterator[Any]
 isLocalRead: Boolean
 ```
 
-`isLocalRead` is `true` when either `PartialMapperPartitionSpec` or `CoalescedMapperPartitionSpec` are among the [partition specs](#partitionSpecs).
+`isLocalRead` indicates whether either `PartialMapperPartitionSpec` or `CoalescedMapperPartitionSpec` are among the [partition specs](#partitionSpecs) or not.
 
 `isLocalRead` is used when:
 
 * `AQEShuffleReadExec` is requested for the [node arguments](#stringArgs), the [partition data sizes](#partitionDataSizes) and the [performance metrics](#metrics)
+
+## <span id="isCoalescedRead"> isCoalescedRead
+
+```scala
+isCoalescedRead: Boolean
+```
+
+`isCoalescedRead` indicates **coalesced shuffle read** and is whether the [partition specs](#partitionSpecs) are all `CoalescedPartitionSpec`s pair-wise (with the `endReducerIndex` and `startReducerIndex` being adjacent) or not.
+
+`isCoalescedRead` is used when:
+
+* `AQEShuffleReadExec` is requested for the [outputPartitioning](#outputPartitioning)
