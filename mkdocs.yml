@@ -92,14 +92,14 @@ extra:
     docs: https://hadoop.apache.org/docs/r3.3.1
     api: https://hadoop.apache.org/docs/r3.3.1/api
   hive:
-    version: 2.3.7
-    api: https://hive.apache.org/javadocs/r2.3.7/api
+    version: 2.3.9
+    api: https://hive.apache.org/javadocs/r2.3.9/api
   java:
     api: https://docs.oracle.com/en/java/javase/11/docs/api
   kafka:
     api: https://kafka.apache.org/28/javadoc
   scala:
-    api: https://www.scala-lang.org/api/2.12.14
+    api: https://www.scala-lang.org/api/2.12.15
     docs: https://docs.scala-lang.org/
     spec: https://www.scala-lang.org/files/archive/spec/2.12
   social:
@@ -112,8 +112,8 @@ extra:
     - icon: fontawesome/brands/medium
       link: https://jaceklaskowski.medium.com
   spark:
-    version: 3.2.0 (RC2)
-    github: https://github.com/apache/spark/tree/v3.2.0-rc2
+    version: 3.2.0 (RC5)
+    github: https://github.com/apache/spark/tree/v3.2.0-rc5
 
 nav:
   - Home: index.md
