@@ -25,11 +25,11 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
-
 `apply` transforms [Join](../logical-operators/Join.md) logical operators with no [JoinStrategyHint](../JoinStrategyHint.md) hints.
 
 `apply` checks whether to [demote or not](#shouldDemote) for the left first and then for the right side of the join operator. If so, `apply` registers [NO_BROADCAST_HASH](../JoinStrategyHint.md#NO_BROADCAST_HASH) join hint with the join operator.
+
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 ### <span id="shouldDemote"> shouldDemote
 

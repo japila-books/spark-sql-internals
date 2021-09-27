@@ -1,21 +1,19 @@
-# PushDownPredicate -- Predicate Pushdown / Filter Pushdown Logical Optimization
+# PushDownPredicate Logical Optimization
 
-`PushDownPredicate` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, removes (eliminates) View logical operators from a logical query plan>>.
+!!! danger
+    `PushDownPredicate` no longer exists in Spark SQL and is being migrated to [PushDownPredicates](PushDownPredicates.md) logical optimization.
 
-`PushDownPredicate` is part of the [Operator Optimization before Inferring Filters](../catalyst/Optimizer.md#Operator_Optimization_before_Inferring_Filters) fixed-point batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
-
-`PushDownPredicate` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+## Review Me
 
 When you execute Dataset.md#where[where] or Dataset.md#filter[filter] operators right after [loading a dataset](../DataFrameReader.md#load), Spark SQL will try to push the where/filter predicate down to the data source using a corresponding SQL query with `WHERE` clause (or whatever the proper language for the data source is).
 
-This optimization is called *filter pushdown* or *predicate pushdown* and aims at pushing down the filtering to the "bare metal", i.e. a data source engine. That is to increase the performance of queries since the filtering is performed at the very low level rather than dealing with the entire dataset after it has been loaded to Spark's memory and perhaps causing memory issues.
+This optimization is called **filter pushdown** or **predicate pushdown** and aims at pushing down the filtering to the "bare metal", i.e. a data source engine. That is to increase the performance of queries since the filtering is performed at the very low level rather than dealing with the entire dataset after it has been loaded to Spark's memory and perhaps causing memory issues.
 
-`PushDownPredicate` is also applied to structured queries with <<select, filters after projections>> or <<windows, filtering on window partitions>>.
+`PushDownPredicate` is also applied to structured queries with [filters after projections](#select) or [filtering on window partitions](#windows).
 
-=== [[select]] Pushing Filter Operator Down Using Projection
+## <span id="select"> Pushing Filter Operator Down Using Projection
 
-[source, scala]
-----
+```text
 val dataset = spark.range(2)
 
 scala> dataset.select('id as "_id").filter('_id === 0).explain(extended = true)
@@ -46,12 +44,11 @@ Project [id#11L AS _id#14L]
 *Project [id#11L AS _id#14L]
 +- *Filter (id#11L = 0)
    +- *Range (0, 2, step=1, splits=Some(8))
-----
+```
 
-=== [[windows]] Optimizing Window Aggregate Operators
+## <span id="windows"> Optimizing Window Aggregate Operators
 
-[source, scala]
-----
+```text
 val dataset = spark.range(5).withColumn("group", 'id % 3)
 scala> dataset.show
 +---+-----+
@@ -89,11 +86,9 @@ Window [rank(id#32L) windowspecdefinition(group#35L, id#32L ASC, ROWS BETWEEN UN
 +- Project [id#32L, (id#32L % 3) AS group#35L]
    +- Filter NOT ((id#32L % 3) = 2)
       +- Range (0, 5, step=1, splits=Some(8))
-----
+```
 
-=== [[jdbc]] JDBC Data Source
-
-TIP: Follow the instructions on how to set up PostgreSQL in exercises/spark-exercise-dataframe-jdbc-postgresql.md[Creating DataFrames from Tables using JDBC and PostgreSQL].
+## <span id="jdbc"> JDBC Data Source
 
 Given the following code:
 
@@ -127,16 +122,14 @@ val df = spark.read
 LOG:  execute <unnamed>: SELECT "id","name","website" FROM projects WHERE (name LIKE '%Spark%')
 ```
 
-[TIP]
-====
-Enable `all` logs in PostgreSQL to see the above SELECT and other query statements.
-
-```
-log_statement = 'all'
-```
-
-Add `log_statement = 'all'` to `/usr/local/var/postgres/postgresql.conf` on Mac OS X with PostgreSQL installed using `brew`.
-====
+!!! tip
+    Enable `all` logs in PostgreSQL to see the above SELECT and other query statements.
+    
+    ```text
+    log_statement = 'all'
+    ```
+    
+    Add `log_statement = 'all'` to `/usr/local/var/postgres/postgresql.conf` on Mac OS X with PostgreSQL installed using `brew`.
 
 ## <span id="parquet"> Parquet Data Source
 
