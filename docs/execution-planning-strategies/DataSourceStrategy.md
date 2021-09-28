@@ -1,61 +1,38 @@
 # DataSourceStrategy Execution Planning Strategy
 
-`DataSourceStrategy` is an [execution planning strategy](SparkStrategy.md) (of [SparkPlanner](../SparkPlanner.md)) that [plans LogicalRelation logical operators as RowDataSourceScanExec physical operators](#apply) (possibly under `FilterExec` and `ProjectExec` logical operators).
+`DataSourceStrategy` is an [execution planning strategy](SparkStrategy.md) (of [SparkPlanner](../SparkPlanner.md)) that [plans LogicalRelation logical operators as RowDataSourceScanExec physical operators](#apply) (possibly under [FilterExec](../physical-operators/FilterExec.md) and [ProjectExec](../physical-operators/ProjectExec.md) logical operators).
 
-[[apply]]
-[[selection-requirements]]
-.DataSourceStrategy's Selection Requirements (in execution order)
-[cols="1,2",options="header",width="100%"]
-|===
-| Logical Operator
-| Description
+## <span id="apply"><span id="selection-requirements"> Executing Rule
 
-| [LogicalRelation](../logical-operators/LogicalRelation.md) with a `CatalystScan` relation
-| [[CatalystScan]] Uses <<pruneFilterProjectRaw, pruneFilterProjectRaw>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
+```scala
+apply(
+  plan: LogicalPlan): Seq[SparkPlan]
+```
 
-`CatalystScan` does not seem to be used in Spark SQL.
+`apply` plans the given [LogicalPlan](../logical-operators/LogicalPlan.md) into a corresponding [SparkPlan](../physical-operators/SparkPlan.md).
 
-| [LogicalRelation](../logical-operators/LogicalRelation.md) with [PrunedFilteredScan](../PrunedFilteredScan.md) relation
-| [[PrunedFilteredScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
+Logical Operator | Description
+-----------------|---------
+ [LogicalRelation](../logical-operators/LogicalRelation.md) with a `CatalystScan` relation | <ul><li>[pruneFilterProjectRaw](#pruneFilterProjectRaw) (with the [RDD conversion to RDD[InternalRow]](#toCatalystRDD) as part of `scanBuilder`)</li><li>`CatalystScan` does not seem to be used in Spark SQL</li></ul>
+ [LogicalRelation](../logical-operators/LogicalRelation.md) with [PrunedFilteredScan](../PrunedFilteredScan.md) relation | <ul><li>[pruneFilterProject](#pruneFilterProject) (with the [RDD conversion to RDD[InternalRow]](#toCatalystRDD) as part of `scanBuilder`)</li><li>Matches [JDBCRelation](../datasources/jdbc/JDBCRelation.md) exclusively</li></ul>
+ [LogicalRelation](../logical-operators/LogicalRelation.md) with a [PrunedScan](../PrunedScan.md) relation | <ul><li>[pruneFilterProject](#pruneFilterProject) (with the [RDD conversion to RDD[InternalRow]](#toCatalystRDD) as part of `scanBuilder`)</li><li>`PrunedScan` does not seem to be used in Spark SQL</li></ul>
+ [LogicalRelation](../logical-operators/LogicalRelation.md) with a [TableScan](../TableScan.md) relation | <ul><li>Creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) directly (requesting the `TableScan` to [buildScan](../TableScan.md#buildScan) followed by [RDD conversion to RDD[InternalRow]](#toCatalystRDD))</li><li>Matches [KafkaRelation](../datasources/kafka/KafkaRelation.md) exclusively</li></ul>
 
-Matches [JDBCRelation](../datasources/jdbc/JDBCRelation.md) exclusively
+## <span id="pruneFilterProject"> pruneFilterProject
 
-| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [PrunedScan](../PrunedScan.md) relation
-| [[PrunedScan]] Uses <<pruneFilterProject, pruneFilterProject>> (with the <<toCatalystRDD, RDD conversion to RDD[InternalRow]>> as part of `scanBuilder`).
-
-`PrunedScan` does not seem to be used in Spark SQL.
-
-| [LogicalRelation](../logical-operators/LogicalRelation.md) with a [TableScan](../TableScan.md) relation
-a| [[TableScan]] Creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) directly (requesting the `TableScan` to [buildScan](../TableScan.md#buildScan) followed by [RDD conversion to RDD[InternalRow]](#toCatalystRDD))
-
-Matches [KafkaRelation](../datasources/kafka/KafkaRelation.md) exclusively
-|===
-
-[source, scala]
-----
-import org.apache.spark.sql.execution.datasources.DataSourceStrategy
-val strategy = DataSourceStrategy(spark.sessionState.conf)
-
-import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
-val plan: LogicalPlan = ???
-
-val sparkPlan = strategy(plan).head
-----
-
-=== [[pruneFilterProject]] `pruneFilterProject` Internal Method
-
-[source, scala]
-----
+```scala
 pruneFilterProject(
   relation: LogicalRelation,
   projects: Seq[NamedExpression],
   filterPredicates: Seq[Expression],
-  scanBuilder: (Seq[Attribute], Array[Filter]) => RDD[InternalRow])
-----
+  scanBuilder: (Seq[Attribute], Array[Filter]) => RDD[InternalRow]): SparkPlan
+```
 
-`pruneFilterProject` simply calls <<pruneFilterProjectRaw, pruneFilterProjectRaw>> with `scanBuilder` ignoring the `Seq[Expression]` input parameter.
+`pruneFilterProject` [pruneFilterProjectRaw](#pruneFilterProjectRaw) (with `scanBuilder` ignoring the `Seq[Expression]` input argument).
 
-`pruneFilterProject` is used when `DataSourceStrategy` execution planning strategy is <<apply, executed>> (for [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators with a [PrunedFilteredScan](../PrunedFilteredScan.md) or a [PrunedScan](../PrunedScan.md)).
+`pruneFilterProject` is used when:
+
+* `DataSourceStrategy` execution planning strategy is [executed](#apply) (with [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [PrunedFilteredScan](../PrunedFilteredScan.md) or a [PrunedScan](../PrunedScan.md))
 
 ## <span id="selectFilters"> Selecting Catalyst Expressions Convertible to Data Source Filter Predicates
 
@@ -79,78 +56,82 @@ In the end, `selectFilters` returns a 3-element tuple with the following:
 
 `selectFilters` is used when `DataSourceStrategy` execution planning strategy is [executed](#apply) (and [creates a RowDataSourceScanExec physical operator](#pruneFilterProjectRaw)).
 
-=== [[translateFilter]] Translating Catalyst Expression Into Data Source Filter Predicate -- `translateFilter` Method
+## <span id="translateFilter"> Translating Catalyst Expression into Data Source Filter Predicate
 
-[source, scala]
-----
-translateFilter(predicate: Expression): Option[Filter]
-----
+```scala
+translateFilter(
+  predicate: Expression,
+  supportNestedPredicatePushdown: Boolean): Option[Filter]
+```
 
-`translateFilter` translates a expressions/Expression.md[Catalyst expression] into a corresponding [Filter predicate](../Filter.md) if possible. If not, `translateFilter` returns `None`.
-
-[[translateFilter-conversions]]
-.translateFilter's Conversions
-[cols="1,1",options="header",width="100%"]
-|===
-| Catalyst Expression
-| Filter Predicate
-
-| [EqualTo](../expressions/EqualTo.md)
-| `EqualTo`
-
-| [EqualNullSafe](../expressions/EqualNullSafe.md)
-| `EqualNullSafe`
-
-| `GreaterThan`
-| `GreaterThan`
-
-| `LessThan`
-| `LessThan`
-
-| `GreaterThanOrEqual`
-| `GreaterThanOrEqual`
-
-| `LessThanOrEqual`
-| `LessThanOrEqual`
-
-| spark-sql-Expression-InSet.md[InSet]
-| `In`
-
-| spark-sql-Expression-In.md[In]
-| `In`
-
-| `IsNull`
-| `IsNull`
-
-| `IsNotNull`
-| `IsNotNull`
-
-| `And`
-| `And`
-
-| `Or`
-| `Or`
-
-| `Not`
-| `Not`
-
-| `StartsWith`
-| `StringStartsWith`
-
-| `EndsWith`
-| `StringEndsWith`
-
-| `Contains`
-| `StringContains`
-|===
-
-NOTE: The Catalyst expressions and their corresponding data source filter predicates have the same names _in most cases_ but belong to different Scala packages, i.e. `org.apache.spark.sql.catalyst.expressions` and `org.apache.spark.sql.sources`, respectively.
+`translateFilter` [translateFilterWithMapping](#translateFilterWithMapping) (with the input parameters and an undefined (`None`) `translatedFilterToExpr`).
 
 `translateFilter` is used when:
 
-* [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) is created (and initializes [pushedDownFilters](../physical-operators/FileSourceScanExec.md#pushedDownFilters))
-* `DataSourceStrategy` is requested to [selectFilters](#selectFilters)
-* [PushDownOperatorsToDataSource](../logical-optimizations/PushDownOperatorsToDataSource.md) logical optimization is executed (for [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) leaf operators with a [SupportsPushDownFilters](../connector/SupportsPushDownFilters.md) data source reader)
+* `FileSourceScanExec` physical operator is requested for the [pushedDownFilters](../physical-operators/FileSourceScanExec.md#pushedDownFilters)
+* `DataSourceStrategy` execution planning strategy is requested to [selectFilters](#selectFilters)
+* `FileSourceStrategy` execution planning strategy is [executed](FileSourceStrategy.md#apply)
+* `DataSourceV2Strategy` execution planning strategy is [executed](DataSourceV2Strategy.md#apply)
+* `V2Writes` is requested to `apply`
+
+## <span id="translateFilterWithMapping"> translateFilterWithMapping
+
+```scala
+translateFilterWithMapping(
+  predicate: Expression,
+  translatedFilterToExpr: Option[mutable.HashMap[sources.Filter, Expression]],
+  nestedPredicatePushdownEnabled: Boolean): Option[Filter]
+```
+
+`translateFilterWithMapping` translates the input [Catalyst Expression](../expressions/Expression.md) to a [Data Source Filter predicate](../Filter.md).
+
+---
+
+`translateFilterWithMapping` branches off based on the given predicate expression:
+
+* For `And`s, `translateFilterWithMapping` [translateFilterWithMapping](#translateFilterWithMapping) with the left and right expressions and creates a `And` filter
+
+* For `Or`s, `translateFilterWithMapping` [translateFilterWithMapping](#translateFilterWithMapping) with the left and right expressions and creates a `Or` filter
+
+* For `Not`s, `translateFilterWithMapping` [translateFilterWithMapping](#translateFilterWithMapping) with the child expression and creates a `Not` filter
+
+* For all the other cases, `translateFilterWithMapping` [translateLeafNodeFilter](#translateLeafNodeFilter) and, if successful, adds the filter and the predicate expression to `translatedFilterToExpr` collection
+
+`translateFilterWithMapping` is used when:
+
+* `DataSourceStrategy` is requested to [translateFilter](#translateFilter)
+* `PushDownUtils` is requested to [pushFilters](../PushDownUtils.md#pushFilters)
+
+### <span id="translateLeafNodeFilter"> translateLeafNodeFilter
+
+```scala
+translateLeafNodeFilter(
+  predicate: Expression,
+  pushableColumn: PushableColumnBase): Option[Filter]
+```
+
+`translateLeafNodeFilter` translates a given [Catalyst Expression](../expressions/Expression.md) into a corresponding [Filter predicate](../Filter.md) if possible. If not, `translateFilter` returns `None`.
+
+Catalyst Expression | Filter Predicate
+--------------------|-----------------
+ [EqualTo](../expressions/EqualTo.md) (with a "pushable" column and a `Literal`) | `EqualTo`
+ [EqualNullSafe](../expressions/EqualNullSafe.md) (with a "pushable" column and a `Literal`) | `EqualNullSafe`
+ `GreaterThan` (with a "pushable" column and a `Literal`) | `GreaterThan` or `LessThan`
+ `LessThan` (with a "pushable" column and a `Literal`) | `LessThan` or `GreaterThan`
+ `GreaterThanOrEqual` (with a "pushable" column and a `Literal`) | `GreaterThanOrEqual` or `LessThanOrEqual`
+ `LessThanOrEqual` (with a "pushable" column and a `Literal`) | `LessThanOrEqual` or `GreaterThanOrEqual`
+ [InSet](../expressions/InSet.md) (with a "pushable" column and values) | `In`
+ [InSet](../expressions/In.md) (with a "pushable" column and expressions) | `In`
+ `IsNull` (with a "pushable" column) | `IsNull`
+ `IsNotNull` (with a "pushable" column) | `IsNotNull`
+ `StartsWith` (with a "pushable" column and a string `Literal`) | `StringStartsWith`
+ `EndsWith` (with a "pushable" column and a string `Literal`) | `StringEndsWith`
+ `Contains` (with a "pushable" column and a string `Literal`) | `StringContains`
+ `Literal` (with `true`) | `AlwaysTrue`
+ `Literal` (with `false`) | `AlwaysFalse`
+
+!!! note
+    The Catalyst expressions and their corresponding data source filter predicates have the same names _in most cases_ but belong to different Scala packages (`org.apache.spark.sql.catalyst.expressions` and `org.apache.spark.sql.sources`, respectively).
 
 ## <span id="toCatalystRDD"> RDD Conversion (Converting RDD of Rows to Catalyst RDD of InternalRows)
 
@@ -182,23 +163,25 @@ pruneFilterProjectRaw(
   scanBuilder: (Seq[Attribute], Seq[Expression], Seq[Filter]) => RDD[InternalRow]): SparkPlan
 ```
 
-`pruneFilterProjectRaw` creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) leaf physical operator with the [LogicalRelation](../logical-operators/LogicalRelation.md) leaf logical operator (possibly as a child of a [FilterExec](../physical-operators/FilterExec.md) and a [ProjectExec](../physical-operators/ProjectExec.md) unary physical operators).
-
-In other words, `pruneFilterProjectRaw` simply converts a <<LogicalRelation.md#, LogicalRelation>> leaf logical operator into a <<RowDataSourceScanExec.md#, RowDataSourceScanExec>> leaf physical operator (possibly under a <<FilterExec.md#, FilterExec>> and a <<ProjectExec.md#, ProjectExec>> unary physical operators).
+`pruneFilterProjectRaw` converts the given [LogicalRelation](../logical-operators/LogicalRelation.md) leaf logical operator into a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) leaf physical operator with the [LogicalRelation](../logical-operators/LogicalRelation.md) leaf logical operator (possibly as a child of a [FilterExec](../physical-operators/FilterExec.md) and a [ProjectExec](../physical-operators/ProjectExec.md) unary physical operators).
 
 !!! note
     `pruneFilterProjectRaw` is almost like [SparkPlanner.pruneFilterProject](../SparkPlanner.md#pruneFilterProject).
 
-Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressions to <<selectFilters, select the Catalyst expressions that can be converted to data source filter predicates>> (and handled by the <<LogicalRelation.md#relation, BaseRelation>> of the `LogicalRelation`).
+Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressions to [select the Catalyst expressions that can be converted to data source filter predicates](#selectFilters) (and handled by the underlying [BaseRelation](../logical-operators/LogicalRelation.md#relation) of the `LogicalRelation`).
 
-`pruneFilterProjectRaw` combines all expressions that are neither convertible to data source filters nor can be handled by the relation using `And` binary expression (that creates a so-called `filterCondition` that will eventually be used to create a <<FilterExec.md#, FilterExec>> physical operator if non-empty).
+`pruneFilterProjectRaw` combines all expressions that are neither convertible to data source filters nor can be handled by the relation using `And` binary expression (that creates a so-called `filterCondition` that will eventually be used to create a [FilterExec](../physical-operators/FilterExec.md) physical operator if non-empty).
 
-`pruneFilterProjectRaw` creates a <<RowDataSourceScanExec.md#creating-instance, RowDataSourceScanExec>> leaf physical operator.
+`pruneFilterProjectRaw` creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) leaf physical operator.
 
-If it is possible to use a column pruning only to get the right projection and if the columns of this projection are enough to evaluate all filter conditions, `pruneFilterProjectRaw` creates a <<FilterExec.md#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions and the `RowDataSourceScanExec` leaf physical operator as the child).
+## Demo
 
-NOTE: In this case no extra <<ProjectExec.md#, ProjectExec>> unary physical operator is created.
+```text
+import org.apache.spark.sql.execution.datasources.DataSourceStrategy
+val strategy = DataSourceStrategy(spark.sessionState.conf)
 
-Otherwise, `pruneFilterProjectRaw` creates a <<FilterExec.md#creating-instance, FilterExec>> unary physical operator (with the unhandled predicate expressions and the `RowDataSourceScanExec` leaf physical operator as the child) that in turn becomes the <<ProjectExec.md#child, child>> of a new <<ProjectExec.md#creating-instance, ProjectExec>> unary physical operator.
+import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
+val plan: LogicalPlan = ???
 
-`pruneFilterProjectRaw` is used when `DataSourceStrategy` execution planning strategy is [executed](#apply).
+val sparkPlan = strategy(plan).head
+```
