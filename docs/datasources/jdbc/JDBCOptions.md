@@ -1,16 +1,97 @@
 # JDBCOptions
 
-`JDBCOptions` is the options of the [JDBC](index.md) data source.
+`JDBCOptions` is the class with the options of the [JDBC](index.md) data source.
 
-## Options
+## <span id="JDBC_URL"><span id="url"> url
 
-[[options]]
-.Options for JDBC Data Source
-[cols="1m,1,2",options="header",width="100%",separator="!"]
-|===
-! Option / Key
-! Default Value
-! Description
+(**required**) A JDBC URL to use to connect to a database
+
+## <span id="JDBC_TABLE_NAME"><span id="dbtable"> dbtable
+
+## <span id="JDBC_QUERY_STRING"><span id="query"> query
+
+## <span id="JDBC_DRIVER_CLASS"><span id="driver"> driver
+
+## <span id="JDBC_PARTITION_COLUMN"><span id="partitionColumn"> partitionColumn
+
+The name of the column used to partition dataset (using a `JDBCPartitioningInfo`)
+
+When defined, the other partitioned-reading properties should also be defined:
+
+* [lowerBound](#lowerBound)
+* [upperBound](#upperBound)
+* [numPartitions](#numPartitions)
+
+Cannot be used with [query](#query) option
+
+When undefined, the other partitioned-reading properties should not be defined:
+
+* [lowerBound](#lowerBound)
+* [upperBound](#upperBound)
+
+Used when:
+
+* `DataFrameReader` is requested to [jdbc](../../DataFrameReader.md#jdbc)
+
+## <span id="JDBC_LOWER_BOUND"><span id="lowerBound"> lowerBound
+
+## <span id="JDBC_UPPER_BOUND"><span id="upperBound"> upperBound
+
+The upper bound of a [partitionColumn](#partitionColumn) for reading
+
+Required when the other properties are defined:
+
+* [partitionColumn](#partitionColumn)
+* [lowerBound](#lowerBound)
+* [numPartitions](#numPartitions)
+
+Used when:
+
+* `DataFrameReader` is requested to [jdbc](../../DataFrameReader.md#jdbc)
+
+## <span id="JDBC_NUM_PARTITIONS"><span id="numPartitions"> numPartitions
+
+## <span id="JDBC_QUERY_TIMEOUT"><span id="queryTimeout"> queryTimeout
+
+## <span id="JDBC_BATCH_FETCH_SIZE"><span id="fetchsize"> fetchsize
+
+## <span id="JDBC_TRUNCATE"><span id="truncate"> truncate
+
+## <span id="JDBC_CASCADE_TRUNCATE"><span id="cascadeTruncate"> cascadeTruncate
+
+## <span id="JDBC_CREATE_TABLE_OPTIONS"><span id="createTableOptions"> createTableOptions
+
+## <span id="JDBC_CREATE_TABLE_COLUMN_TYPES"><span id="createTableColumnTypes"> createTableColumnTypes
+
+## <span id="JDBC_CUSTOM_DATAFRAME_COLUMN_TYPES"><span id="customSchema"> customSchema
+
+## <span id="JDBC_BATCH_INSERT_SIZE"><span id="batchsize"> batchsize
+
+## <span id="JDBC_TXN_ISOLATION_LEVEL"><span id="isolationLevel"> isolationLevel
+
+## <span id="JDBC_SESSION_INIT_STATEMENT"><span id="sessionInitStatement"> sessionInitStatement
+
+## <span id="JDBC_KEYTAB"><span id="keytab"> keytab
+
+## <span id="JDBC_PRINCIPAL"><span id="principal"> principal
+
+## <span id="JDBC_PUSHDOWN_AGGREGATE"><span id="pushDownAggregate"> pushDownAggregate
+
+## <span id="JDBC_PUSHDOWN_PREDICATE"><span id="pushDownPredicate"> pushDownPredicate
+
+## <span id="JDBC_REFRESH_KRB5_CONFIG"><span id="refreshKrb5Config"> refreshKrb5Config
+
+## <span id="JDBC_TABLE_COMMENT"><span id="tableComment"> tableComment
+
+## Creating Instance
+
+`JDBCOptions` takes the following to be created:
+
+* <span id="url"> URL
+* <span id="table"> Table (corresponds to the [dbtable](#dbtable) option)
+* <span id="parameters"> Configuration Parameters
+
+## Review Me
 
 ! batchsize
 ! `1000`
@@ -123,16 +204,6 @@ Used when:
 
 * `JdbcUtils` is requested to <<spark-sql-JdbcUtils.md#saveTable, saveTable>>
 
-! `partitionColumn`
-!
-! [[partitionColumn]] Name of the column used to partition dataset (using a `JDBCPartitioningInfo`).
-
-Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](JdbcRelationProvider.md#createRelation-RelationProvider) for reading (with proper `JDBCPartitions` with `WHERE` clause)
-
-When defined, the <<lowerBound, lowerBound>>, <<upperBound, upperBound>> and <<numPartitions, numPartitions>> options are also required.
-
-When undefined, <<lowerBound, lowerBound>> and <<upperBound, upperBound>> have to be undefined.
-
 ! `truncate`
 ! `false`
 ! [[truncate]][[isTruncate]] (used only for writing) Enables table truncation
@@ -144,58 +215,4 @@ Used exclusively when `JdbcRelationProvider` is requested to [write the rows of 
 ! [[sessionInitStatement]] A generic SQL statement (or PL/SQL block) executed before reading a table/query
 
 Used exclusively when `JDBCRDD` is requested to [compute a partition](JDBCRDD.md#compute).
-
-! `upperBound`
-!
-! [[upperBound]] Upper bound of the partition column
-
-Used exclusively when `JdbcRelationProvider` is requested to [create a BaseRelation](JdbcRelationProvider.md#createRelation-RelationProvider) for reading
-
-! `url`
-!
-! [[url]] (*required*) A JDBC URL to use to connect to a database
 |===
-
-NOTE: The <<options, options>> are case-insensitive.
-
-`JDBCOptions` is <<creating-instance, created>> when:
-
-* `DataFrameReader` is requested to [load data from an external table using JDBC](../../DataFrameReader.md#jdbc) (and create a `DataFrame` to represent the process of loading the data)
-
-* `JdbcRelationProvider` is requested to create a `BaseRelation` (as a [RelationProvider](JdbcRelationProvider.md#createRelation-RelationProvider) for loading and a [CreatableRelationProvider](JdbcRelationProvider.md#createRelation-CreatableRelationProvider) for writing)
-
-## Creating Instance
-
-`JDBCOptions` takes the following to be created:
-
-* JDBC URL
-* [[table]] Name of the table
-* [[parameters]] Case-insensitive configuration parameters (i.e. `Map[String, String]`)
-
-The input `URL` and <<table, table>> are set as the current <<url, url>> and <<dbtable, dbtable>> options (overriding the values in the input <<parameters, parameters>> if defined).
-
-=== [[asProperties]] Converting Parameters (Options) to Java Properties -- `asProperties` Property
-
-[source, scala]
-----
-asProperties: Properties
-----
-
-`asProperties`...FIXME
-
-`asProperties` is used when:
-
-* `JDBCRDD` is requested to [compute a partition](JDBCRDD.md#compute) (that requests a `JdbcDialect` to [beforeFetch](JdbcDialect.md#beforeFetch))
-
-* `JDBCRelation` is requested to [insert a data (from a DataFrame) to a table](JDBCRelation.md#insert)
-
-=== [[asConnectionProperties]] `asConnectionProperties` Property
-
-[source, scala]
-----
-asConnectionProperties: Properties
-----
-
-`asConnectionProperties`...FIXME
-
-NOTE: `asConnectionProperties` is used exclusively when `JdbcUtils` is requested to spark-sql-JdbcUtils.md#createConnectionFactory[createConnectionFactory]

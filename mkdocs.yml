@@ -370,92 +370,6 @@ nav:
         - CachedRDDBuilder: CachedRDDBuilder.md
       - RuntimeConfig: RuntimeConfig.md
       - UDFRegistration.md
-    - Data Sources:
-      - Noop:
-        - Noop Data Source: datasources/noop/index.md
-        - NoopDataSource: datasources/noop/NoopDataSource.md
-        - NoopTable: datasources/noop/NoopTable.md
-        - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
-        - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
-        - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
-      - Files:
-        - FileScan: FileScan.md
-        - FileScanBuilder: FileScanBuilder.md
-        - FileDataSourceV2: FileDataSourceV2.md
-        - HadoopFsRelation: HadoopFsRelation.md
-        - FileIndex:
-          - FileIndex.md
-          - CatalogFileIndex.md
-          - InMemoryFileIndex.md
-          - PartitioningAwareFileIndex.md
-          - PrunedInMemoryFileIndex.md
-        - FileFormatWriter: FileFormatWriter.md
-        - FileWriteBuilder: FileWriteBuilder.md
-        - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
-        - PartitionedFile: PartitionedFile.md
-        - RecordReaderIterator: RecordReaderIterator.md
-        - FileFormat: datasources/FileFormat.md
-        - TextBasedFileFormat: datasources/TextBasedFileFormat.md
-      - Kafka:
-        - Kafka Data Source: datasources/kafka/index.md
-        - Configuration Properties: datasources/kafka/configuration-properties.md
-        - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
-        - KafkaTable: datasources/kafka/KafkaTable.md
-        - Options: datasources/kafka/options.md
-        - KafkaScan: datasources/kafka/KafkaScan.md
-        - KafkaBatch: datasources/kafka/KafkaBatch.md
-        - KafkaBatchWrite: datasources/kafka/KafkaBatchWrite.md
-        - KafkaRelation: datasources/kafka/KafkaRelation.md
-        - KafkaSourceRDD:
-          - KafkaSourceRDD: datasources/kafka/KafkaSourceRDD.md
-          - KafkaSourceRDDPartition: datasources/kafka/KafkaSourceRDDPartition.md
-        - ConsumerStrategy: datasources/kafka/ConsumerStrategy.md
-        - KafkaOffsetReader: datasources/kafka/KafkaOffsetReader.md
-        - KafkaOffsetRangeLimit: datasources/kafka/KafkaOffsetRangeLimit.md
-        - KafkaDataConsumer: datasources/kafka/KafkaDataConsumer.md
-        - InternalKafkaConsumer: datasources/kafka/InternalKafkaConsumer.md
-        - KafkaWriter: datasources/kafka/KafkaWriter.md
-        - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
-        - JsonUtils: datasources/kafka/JsonUtils.md
-        - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
-      - Avro:
-        - Avro Data Source: datasources/avro/index.md
-        - AvroOptions: datasources/avro/AvroOptions.md
-        - AvroFileFormat: datasources/avro/AvroFileFormat.md
-        - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
-        - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
-      - JDBC:
-        - JDBC Data Source: datasources/jdbc/index.md
-        - JDBCOptions: datasources/jdbc/JDBCOptions.md
-        - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
-        - JDBCRelation: datasources/jdbc/JDBCRelation.md
-        - JDBCScan: datasources/jdbc/JDBCScan.md
-        - JDBCRDD: datasources/jdbc/JDBCRDD.md
-        - JdbcDialect: datasources/jdbc/JdbcDialect.md
-        - JdbcUtils: datasources/jdbc/JdbcUtils.md
-      - Console:
-        - datasources/console/index.md
-        - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
-      - CSV:
-        - CSVFileFormat: datasources/csv/CSVFileFormat.md
-        - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
-      - JSON:
-        - JsonFileFormat: datasources/json/JsonFileFormat.md
-        - JsonDataSource: datasources/json/JsonDataSource.md
-      - ORC:
-        - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
-        - OrcFileFormat: datasources/orc/OrcFileFormat.md
-      - Parquet:
-        - datasources/parquet/index.md
-        - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
-        - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
-        - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
-        - ParquetTable: datasources/parquet/ParquetTable.md
-        - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
-        - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
-        - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
-      - Text:
-        - TextFileFormat: datasources/text/TextFileFormat.md
     - Hive Integration:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
@@ -938,6 +852,93 @@ nav:
     - Catalyst DSL:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
+  - Data Sources:
+    - Noop:
+      - Noop Data Source: datasources/noop/index.md
+      - NoopDataSource: datasources/noop/NoopDataSource.md
+      - NoopTable: datasources/noop/NoopTable.md
+      - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
+      - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
+      - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
+    - Files:
+      - FileScan: FileScan.md
+      - FileScanBuilder: FileScanBuilder.md
+      - FileDataSourceV2: FileDataSourceV2.md
+      - HadoopFsRelation: HadoopFsRelation.md
+      - FileIndex:
+        - FileIndex.md
+        - CatalogFileIndex.md
+        - InMemoryFileIndex.md
+        - PartitioningAwareFileIndex.md
+        - PrunedInMemoryFileIndex.md
+      - FileFormatWriter: FileFormatWriter.md
+      - FileWriteBuilder: FileWriteBuilder.md
+      - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
+      - PartitionedFile: PartitionedFile.md
+      - RecordReaderIterator: RecordReaderIterator.md
+      - FileFormat: datasources/FileFormat.md
+      - TextBasedFileFormat: datasources/TextBasedFileFormat.md
+    - Kafka:
+      - Kafka Data Source: datasources/kafka/index.md
+      - Configuration Properties: datasources/kafka/configuration-properties.md
+      - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
+      - KafkaTable: datasources/kafka/KafkaTable.md
+      - Options: datasources/kafka/options.md
+      - KafkaScan: datasources/kafka/KafkaScan.md
+      - KafkaBatch: datasources/kafka/KafkaBatch.md
+      - KafkaBatchWrite: datasources/kafka/KafkaBatchWrite.md
+      - KafkaRelation: datasources/kafka/KafkaRelation.md
+      - KafkaSourceRDD:
+        - KafkaSourceRDD: datasources/kafka/KafkaSourceRDD.md
+        - KafkaSourceRDDPartition: datasources/kafka/KafkaSourceRDDPartition.md
+      - ConsumerStrategy: datasources/kafka/ConsumerStrategy.md
+      - KafkaOffsetReader: datasources/kafka/KafkaOffsetReader.md
+      - KafkaOffsetRangeLimit: datasources/kafka/KafkaOffsetRangeLimit.md
+      - KafkaDataConsumer: datasources/kafka/KafkaDataConsumer.md
+      - InternalKafkaConsumer: datasources/kafka/InternalKafkaConsumer.md
+      - KafkaWriter: datasources/kafka/KafkaWriter.md
+      - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
+      - JsonUtils: datasources/kafka/JsonUtils.md
+      - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
+    - Avro:
+      - Avro Data Source: datasources/avro/index.md
+      - AvroOptions: datasources/avro/AvroOptions.md
+      - AvroFileFormat: datasources/avro/AvroFileFormat.md
+      - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
+      - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
+    - JDBC:
+      - JDBC Data Source: datasources/jdbc/index.md
+      - JDBCOptions: datasources/jdbc/JDBCOptions.md
+      - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
+      - JDBCRelation: datasources/jdbc/JDBCRelation.md
+      - JDBCScan: datasources/jdbc/JDBCScan.md
+      - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
+      - JDBCRDD: datasources/jdbc/JDBCRDD.md
+      - JdbcDialect: datasources/jdbc/JdbcDialect.md
+      - JdbcUtils: datasources/jdbc/JdbcUtils.md
+    - Console:
+      - datasources/console/index.md
+      - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
+    - CSV:
+      - CSVFileFormat: datasources/csv/CSVFileFormat.md
+      - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
+    - JSON:
+      - JsonFileFormat: datasources/json/JsonFileFormat.md
+      - JsonDataSource: datasources/json/JsonDataSource.md
+    - ORC:
+      - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
+      - OrcFileFormat: datasources/orc/OrcFileFormat.md
+    - Parquet:
+      - datasources/parquet/index.md
+      - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
+      - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
+      - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
+      - ParquetTable: datasources/parquet/ParquetTable.md
+      - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
+      - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
+      - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
+    - Text:
+      - TextFileFormat: datasources/text/TextFileFormat.md
   - High-Level APIs:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md

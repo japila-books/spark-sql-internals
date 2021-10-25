@@ -7,7 +7,7 @@
 
 ## Contract
 
-### <span id="createRelation"> createRelation
+### <span id="createRelation"> Creating BaseRelation
 
 ```scala
 createRelation(
@@ -15,7 +15,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ```
 
-Creates a [BaseRelation](BaseRelation.md) (given `parameters` and [SQLContext](SQLContext.md))
+Creates a [BaseRelation](BaseRelation.md)
 
 Used when:
 

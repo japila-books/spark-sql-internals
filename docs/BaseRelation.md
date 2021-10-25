@@ -2,6 +2,8 @@
 
 `BaseRelation` is an [abstraction](#contract) of [relations](#implementations) that are collections of tuples (_rows_) with a known [schema](#schema).
 
+`BaseRelation` represents an external data source with data to load datasets from or write to.
+
 `BaseRelation` is "created" when `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation).
 
 `BaseRelation` is then transformed into a `DataFrame` when `SparkSession` is requested to [create a DataFrame](SparkSession.md#baseRelationToDataFrame).

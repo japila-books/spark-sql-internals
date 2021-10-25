@@ -1,23 +1,15 @@
 # JdbcRelationProvider
 
-[[shortName]]
-`JdbcRelationProvider` is a [DataSourceRegister](../../DataSourceRegister.md) and registers itself to handle *jdbc* data source format.
+`JdbcRelationProvider` is used as a [RelationProvider](#createRelation-RelationProvider) and a [CreatableRelationProvider](#createRelation-CreatableRelationProvider) of the [JDBC Data Source](../../DataFrameReader.md#jdbc).
+
+## <span id="DataSourceRegister"><span id="shortName"> DataSourceRegister
+
+`JdbcRelationProvider` is the [DataSourceRegister](../../DataSourceRegister.md) to handle **jdbc** data source format.
 
 !!! note
-    `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration which is available in the [source code](https://github.com/apache/spark/blob/master/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark.
+    `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for registration that is available in the [source code]({{ spark.github }}/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister#L2) of Apache Spark.
 
-`JdbcRelationProvider` is a [RelationProvider](#createRelation-RelationProvider) and a [CreatableRelationProvider](#createRelation-CreatableRelationProvider).
-
-`JdbcRelationProvider` is used when `DataFrameReader` is requested to load data from [jdbc](../../DataFrameReader.md#jdbc) data source.
-
-```text
-val table = spark.read.jdbc(...)
-
-// or in a more verbose way
-val table = spark.read.format("jdbc").load(...)
-```
-
-## <span id="createRelation-RelationProvider"> Loading Data from Table Using JDBC
+## <span id="createRelation-RelationProvider"> Creating BaseRelation
 
 ```scala
 createRelation(
@@ -25,13 +17,15 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ```
 
+`createRelation` creates a [JDBCOptions](JDBCOptions.md) (with the given `parameters`).
+
+`createRelation` [gets the schema](JDBCRelation.md#getSchema) (by querying the database system).
+
+`createRelation` [creates column partitions](JDBCRelation.md#columnPartition).
+
+In the end, `createRelation` creates a [JDBCRelation](JDBCRelation.md).
+
 `createRelation` is part of the [RelationProvider](../../RelationProvider.md#createRelation) abstraction.
-
-`createRelation` creates a `JDBCPartitioningInfo` (using [JDBCOptions](JDBCOptions.md) and the input `parameters` that correspond to the [Options for JDBC Data Source](JDBCOptions.md#options)).
-
-NOTE: `createRelation` uses [partitionColumn](../../DataFrameReader.md#partitionColumn), [lowerBound](../../DataFrameReader.md#lowerBound), [upperBound](../../DataFrameReader.md#upperBound) and [numPartitions](../../DataFrameReader.md#numPartitions).
-
-In the end, `createRelation` creates a datasources/jdbc/JDBCRelation.md#creating-instance[JDBCRelation] with datasources/jdbc/JDBCRelation.md#columnPartition[column partitions] (and [JDBCOptions](JDBCOptions.md)).
 
 ## <span id="createRelation-CreatableRelationProvider"> Writing Rows of Structured Query (DataFrame) to Table Using JDBC
 

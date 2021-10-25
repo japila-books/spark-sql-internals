@@ -1,21 +1,98 @@
 # JDBCRelation
 
-`JDBCRelation` is a <<BaseRelation, BaseRelation>> that supports <<InsertableRelation, inserting or overwriting data>> and <<PrunedFilteredScan, column pruning with filter pushdown>>.
+`JDBCRelation` is a [BaseRelation](../../BaseRelation.md) with support for [column pruning with filter pushdown](#PrunedFilteredScan) and [inserting or overwriting data](#InsertableRelation).
 
-[[BaseRelation]]
-As a [BaseRelation](../../BaseRelation.md), `JDBCRelation` defines the <<schema, schema of tuples (data)>> and the <<sqlContext, SQLContext>>.
+![JDBCRelation in web UI (Details for Query)](../../images/spark-sql-JDBCRelation-webui-query-details.png)
 
-[[InsertableRelation]]
-As a [InsertableRelation](../../InsertableRelation.md), `JDBCRelation` supports <<insert, inserting or overwriting data>>.
+## <span id="PrunedFilteredScan"> PrunedFilteredScan
 
-[[PrunedFilteredScan]]
-As a [PrunedFilteredScan](../../PrunedFilteredScan.md), `JDBCRelation` supports <<buildScan, building distributed data scan with column pruning and filter pushdown>>.
+`JDBCRelation` is an [PrunedFilteredScan](../../PrunedFilteredScan.md) and supports supports [column pruning with filter pushdown](#buildScan).
 
-`JDBCRelation` is <<creating-instance, created>> when:
+## <span id="InsertableRelation"> InsertableRelation
 
-* `DataFrameReader` is requested to [load data from an external table using JDBC data source](../../DataFrameReader.md#jdbc)
+`JDBCRelation` is an [InsertableRelation](../../InsertableRelation.md) and supports [inserting or overwriting data](#insert).
 
-* `JdbcRelationProvider` is requested to [create a BaseRelation for reading data from a JDBC table](JdbcRelationProvider.md#createRelation-RelationProvider)
+## Creating Instance
+
+`JDBCRelation` takes the following to be created:
+
+* <span id="schema"> [StructType](../../types/StructType.md)
+* <span id="parts"> `Partition`s
+* <span id="jdbcOptions"> [JDBCOptions](JDBCOptions.md)
+* <span id="sparkSession"> [SparkSession](../../SparkSession.md)
+
+`JDBCRelation` is created (possibly using [apply](#apply)) when:
+
+* `DataFrameReader` is requested to [jdbc](../../DataFrameReader.md#jdbc)
+* `JDBCRelation` utility is used to [apply](#apply)
+* `JdbcRelationProvider` is requested to [create a BaseRelation (for reading)](JdbcRelationProvider.md#createRelation)
+* `JDBCScanBuilder` is requested to [build a Scan](JDBCScanBuilder.md#build)
+
+### <span id="apply"> Creating JDBCRelation
+
+```scala
+apply(
+  parts: Array[Partition],
+  jdbcOptions: JDBCOptions)(
+  sparkSession: SparkSession): JDBCRelation
+```
+
+`apply` [gets the schema](#getSchema) (establishing a connection to the database system directly) and creates a [JDBCRelation](#creating-instance).
+
+## <span id="getSchema"> getSchema
+
+```scala
+getSchema(
+  resolver: Resolver,
+  jdbcOptions: JDBCOptions): StructType
+```
+
+`getSchema` [resolves the table](JDBCRDD.md#resolveTable) (from the given [JDBCOptions](JDBCOptions.md)).
+
+With the [customSchema](JDBCOptions.md#customSchema) option specified, `getSchema` [gets the custom schema](JdbcUtils.md#getCustomSchema) (based on the table schema from the database system). Otherwise, `getSchema` returns the table schema from the database system.
+
+`getSchema` is used when:
+
+* `JDBCRelation` utility is used to [create a JDBCRelation](#apply)
+* `JdbcRelationProvider` is requested to [create a BaseRelation (for reading)](JdbcRelationProvider.md#createRelation)
+
+## <span id="columnPartition"> columnPartition
+
+```scala
+columnPartition(
+  schema: StructType,
+  resolver: Resolver,
+  timeZoneId: String,
+  jdbcOptions: JDBCOptions): Array[Partition]
+```
+
+`columnPartition`...FIXME
+
+In the end, `columnPartition` prints out the following INFO message to the logs:
+
+```text
+Number of partitions: [numPartitions], WHERE clauses of these partitions:
+[whereClause]
+```
+
+`columnPartition` is used when:
+
+* `JdbcRelationProvider` is requested to [create a BaseRelation (for reading)](JdbcRelationProvider.md#createRelation)
+* `JDBCScanBuilder` is requested to [build a Scan](JDBCScanBuilder.md#build)
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.jdbc.JDBCRelation` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.datasources.jdbc.JDBCRelation=ALL
+```
+
+Refer to [Logging](../../spark-logging.md).
+
+## Review Me
 
 [[toString]]
 When requested for a human-friendly text representation, `JDBCRelation` requests the <<jdbcOptions, JDBCOptions>> for the name of the table and the <<parts, number of partitions>> (if defined).
@@ -24,27 +101,14 @@ When requested for a human-friendly text representation, `JDBCRelation` requests
 JDBCRelation([table]) [numPartitions=[number]]
 ```
 
-![JDBCRelation in web UI (Details for Query)](../../images/spark-sql-JDBCRelation-webui-query-details.png)
-
 ```
 scala> df.explain
 == Physical Plan ==
 *Scan JDBCRelation(projects) [numPartitions=1] [id#0,name#1,website#2] ReadSchema: struct<id:int,name:string,website:string>
 ```
 
-[[sqlContext]]
-`JDBCRelation` uses the <<sparkSession, SparkSession>> to return a SparkSession.md#sqlContext[SQLContext].
-
 [[needConversion]]
 `JDBCRelation` turns the [needConversion](../../BaseRelation.md#needConversion) flag off (to announce that <<buildScan, buildScan>> returns an `RDD[InternalRow]` already and `DataSourceStrategy` execution planning strategy does not have to do the [RDD conversion](../../execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan)).
-
-## Creating Instance
-
-`JDBCRelation` takes the following to be created:
-
-* [[parts]] Array of Spark Core's `Partitions`
-* [[jdbcOptions]] [JDBCOptions](JDBCOptions.md)
-* [[sparkSession]] [SparkSession](../../SparkSession.md)
 
 === [[unhandledFilters]] Finding Unhandled Filter Predicates -- `unhandledFilters` Method
 
