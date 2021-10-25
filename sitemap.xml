@@ -1541,6 +1541,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JDBCScanBuilder/</loc>
+         <lastmod>2021-10-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/datasources/jdbc/JdbcDialect/</loc>
          <lastmod>2021-10-25</lastmod>
          <changefreq>daily</changefreq>
