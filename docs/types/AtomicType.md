@@ -28,14 +28,14 @@ ordering: Ordering[InternalType]
 
 ## Implementations
 
-* BinaryType
-* BooleanType
-* CharType
-* DateType
-* NumericType
-* StringType
-* TimestampType
-* VarcharType
+* `BinaryType`
+* `BooleanType`
+* `CharType`
+* <span id="DateType"> `DateType`
+* <span id="NumericType"> `NumericType`
+* `StringType`
+* <span id="TimestampType"> `TimestampType`
+* `VarcharType`
 
 ## <span id="unapply"> Extractor
 
