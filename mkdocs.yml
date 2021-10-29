@@ -114,12 +114,13 @@ extra:
   spark:
     version: 3.2.0
     github: https://github.com/apache/spark/tree/v3.2.0
+    jira: https://issues.apache.org/jira/browse
 
 nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
-    - Tags: tags.md
+#    - Tags: tags.md
     - Configuration Properties: 
       - Configuration Properties: configuration-properties.md
       - SQLConf: SQLConf.md
@@ -958,6 +959,7 @@ nav:
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
+    - SQLExecutionRDD: SQLExecutionRDD.md
     - JoinSelectionHelper: JoinSelectionHelper.md
     - ExplainUtils: ExplainUtils.md
     - DataSourceRDD: DataSourceRDD.md

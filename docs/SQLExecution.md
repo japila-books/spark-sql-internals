@@ -1,15 +1,14 @@
-# SQLExecution Helper Object
+# SQLExecution
 
-[[EXECUTION_ID_KEY]]
-[[spark.sql.execution.id]]
-`SQLExecution` defines `spark.sql.execution.id` Spark property that is used to track multiple Spark jobs that should all together constitute a single structured query execution (that could be easily reported as a single execution unit).
+## <span id="EXECUTION_ID_KEY"><span id=spark.sql.execution.id"> spark.sql.execution.id
 
-[source, scala]
-----
+`SQLExecution` defines `spark.sql.execution.id` Spark property that is used to track multiple Spark jobs that should all together constitute a single execution of a structured query (and could be reported as a single execution unit).
+
+```scala
 import org.apache.spark.sql.execution.SQLExecution
 scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
-----
+```
 
 Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's [SQL tab](SQLTab.md)).
 
