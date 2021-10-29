@@ -2706,22 +2706,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/AggregateEstimation/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/AlterTable/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/AlterTableRecoverPartitionsCommand/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/AlterTableRecoverPartitionsStatement/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2821,11 +2811,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CreateTableCommand/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/CreateTableStatement/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -2886,11 +2871,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/EstimationUtils/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Except/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -2907,16 +2887,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ExternalRDD/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Filter/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/FilterEstimation/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3036,26 +3006,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ObjectConsumer/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ObjectProducer/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/OneRowRelation/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/OrderPreservingUnaryNode/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/OverwriteByExpression/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3081,16 +3031,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ProjectEstimation/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Range/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/RebalancePartitions/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3112,11 +3052,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ResolvedTable/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/ResolvedView/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3181,11 +3116,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Subquery/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/SubqueryAlias/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3197,16 +3127,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/TruncateTableCommand/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/TypedFilter/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/Union/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3242,16 +3162,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedTableOrView/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedTableValuedFunction/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedV2Relation/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3601,31 +3511,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AppendDataExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AppendDataExecV1/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicCreateTableAsSelectExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicReplaceTableAsSelectExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicReplaceTableExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/AtomicTableWriteExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3641,11 +3526,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BaseLimitExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BaseSubqueryExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3657,16 +3537,6 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BatchWriteHelper/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BinaryExecNode/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/BlockingOperatorWithCodegen/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3741,16 +3611,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CreateTableExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/CustomShuffleReaderExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DataSourceScanExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3786,22 +3646,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DeserializeToObjectExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/Distribution/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DropNamespaceExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/DropTableExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3866,32 +3716,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/IdentityBroadcastMode/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/InMemoryTableScanExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/InputAdapter/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/InputRDDCodegen/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/LeafExecNode/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/LimitExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3906,16 +3736,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/MapElementsExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/MapPartitionsExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ObjectConsumerExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -3926,27 +3746,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ObjectProducerExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OrderedDistribution/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwriteByExpressionExecV1/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/OverwritePartitionsDynamicExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3966,26 +3771,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RefreshTableExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RenameTableExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReplaceTableAsSelectExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReplaceTableExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/ReusedExchangeExec/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
@@ -4001,17 +3786,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/RowToColumnarExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SQLMetric/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SQLShuffleWriteMetricsReporter/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4086,22 +3861,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryAdaptiveBroadcastExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryBroadcastExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SubqueryExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/SupportsV1Write/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4111,27 +3871,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/TakeOrderedAndProjectExec/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/UnaryExecNode/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/UnsafeHashedRelation/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/UnspecifiedDistribution/</loc>
-         <lastmod>2021-10-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/physical-operators/V1FallbackWriters/</loc>
          <lastmod>2021-10-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
