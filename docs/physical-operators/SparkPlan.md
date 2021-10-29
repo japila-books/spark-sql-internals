@@ -229,13 +229,8 @@ In the end, `waitForSubqueries` clears up the [runningSubqueries](#runningSubque
 ## Implementations
 
 * [BaseSubqueryExec](BaseSubqueryExec.md)
-* [BinaryExecNode](BinaryExecNode.md)
 * [CodegenSupport](CodegenSupport.md)
-* [LeafExecNode](LeafExecNode.md)
-* [ObjectProducerExec](ObjectProducerExec.md)
-* SupportsV1Write
 * [UnaryExecNode](UnaryExecNode.md)
-* UnionExec
 * [V2CommandExec](V2CommandExec.md)
 * _others_
 
@@ -348,7 +343,7 @@ Internally, `executeBroadcast` calls [doExecuteBroadcast](#doExecuteBroadcast) i
 
 `executeBroadcast` is used when:
 
-* [SubqueryBroadcastExec](SubqueryBroadcastExec.md) physical operator is requested for [relationFuture](SubqueryBroadcastExec.md#relationFuture)
+* `SubqueryBroadcastExec` physical operator is requested for `relationFuture`
 * [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator is requested for [doExecuteBroadcast](../adaptive-query-execution/QueryStageExec.md#doExecuteBroadcast)
 * [DebugExec](DebugExec.md) physical operator is requested for [doExecuteBroadcast](DebugExec.md#doExecuteBroadcast)
 * [ReusedExchangeExec](ReusedExchangeExec.md) physical operator is requested for [doExecuteBroadcast](ReusedExchangeExec.md#doExecuteBroadcast)
@@ -550,7 +545,7 @@ supportsColumnar: Boolean
 !!! note
     `supportsColumnar` is or could possibly be `true` for the following physical operators (that override `supportsColumnar`):
 
-    * [RowToColumnarExec](RowToColumnarExec.md)
+    * `RowToColumnarExec`
     * [FileSourceScanExec](FileSourceScanExec.md)
     * [InMemoryTableScanExec](InMemoryTableScanExec.md)
     * [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md)

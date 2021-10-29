@@ -17,7 +17,7 @@ Inserts or overwrites data (from the given [DataFrame](DataFrame.md))
 Used when:
 
 * [InsertIntoDataSourceCommand](logical-operators/InsertIntoDataSourceCommand.md) logical command is executed
-* [SupportsV1Write](physical-operators/SupportsV1Write.md) physical operator is executed
+* `SupportsV1Write` physical operator is executed
 
 Used when...FIXME
 

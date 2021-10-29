@@ -93,17 +93,6 @@ needCopyResult: Boolean
 
 `needCopyResult` is `true`.
 
-## <span id="prepareRelation"> Preparing HashedRelation
-
-```scala
-prepareRelation(
-  ctx: CodegenContext): HashedRelationInfo
-```
-
-`prepareRelation` is part of the [HashJoin](HashJoin.md#prepareRelation) abstraction.
-
-`prepareRelation`...FIXME
-
 ## Demo
 
 Enable `DEBUG` logging level for [ExtractEquiJoinKeys](../ExtractEquiJoinKeys.md#logging) logger to see the join condition and the left and right join keys.

@@ -15,7 +15,7 @@ getShuffleRDD(
 
 Used when:
 
-* `CustomShuffleReaderExec` physical operator is requested for the [shuffleRDD](CustomShuffleReaderExec.md#shuffleRDD)
+* `CustomShuffleReaderExec` physical operator is requested for the shuffleRDD
 
 ### <span id="mapOutputStatisticsFuture"> mapOutputStatisticsFuture
 

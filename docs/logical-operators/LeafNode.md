@@ -14,13 +14,9 @@
 * [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md)
 * [LogicalRDD](LogicalRDD.md)
 * [LogicalRelation](LogicalRelation.md)
-* [OneRowRelation](OneRowRelation.md)
-* [Range](Range.md)
 * [UnresolvedCatalogRelation](UnresolvedCatalogRelation.md)
 * [UnresolvedInlineTable](UnresolvedInlineTable.md)
 * [UnresolvedRelation](UnresolvedRelation.md)
-* [UnresolvedTableValuedFunction](UnresolvedTableValuedFunction.md)
-* [UnresolvedV2Relation](UnresolvedV2Relation.md)
 * _others_
 
 ## <span id="children"> Children

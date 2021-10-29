@@ -18,19 +18,6 @@
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
 * `FileFormatWriter` is requested to [write](../FileFormatWriter.md#write)
 
-## <span id="doConsume"> Java Source Code for Consume Path
-
-```scala
-doConsume(
-  ctx: CodegenContext,
-  input: Seq[ExprCode],
-  row: ExprCode): String
-```
-
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
-
-`doConsume`...FIXME
-
 ## <span id="doExecute"> Executing Physical Operator
 
 ```scala

@@ -1,3 +1,0 @@
-# ObjectProducer
-
-`ObjectProducer` is...FIXME

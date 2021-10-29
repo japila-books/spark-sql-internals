@@ -20,12 +20,12 @@
 
 Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
 
-| [Filter](Filter.md)
+| `Filter`
 | `Except` (DISTINCT) in [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md) logical optimization rule
 
 Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
 
-| Union.md[Union], Aggregate.md[Aggregate] and Generate.md[Generate]
+| `Union`, Aggregate.md[Aggregate] and Generate.md[Generate]
 | `Except` (ALL) in RewriteExceptAll.md[RewriteExceptAll] logical optimization rule
 
 Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators>>

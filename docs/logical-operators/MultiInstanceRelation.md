@@ -25,5 +25,4 @@ Used when:
 * [LocalRelation](LocalRelation.md)
 * [LogicalRDD](LogicalRDD.md)
 * [LogicalRelation](LogicalRelation.md)
-* [Range](Range.md)
-* _others_ (in Spark Structured Streaming)
+* _others_

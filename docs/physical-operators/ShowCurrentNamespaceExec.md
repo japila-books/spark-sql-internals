@@ -19,13 +19,3 @@ scala> sql("SHOW CURRENT NAMESPACE").show(truncate = false)
 * <span id="catalogManager"> [CatalogManager](../connector/catalog/CatalogManager.md)
 
 `ShowCurrentNamespaceExec` is created when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (and plans a [ShowCurrentNamespace](../logical-operators/ShowCurrentNamespace.md) logical command).
-
-## <span id="run"> Executing Command
-
-```scala
-run(): Seq[InternalRow]
-```
-
-`run`...FIXME
-
-`run` is part of the [V2CommandExec](V2CommandExec.md#run) abstraction.

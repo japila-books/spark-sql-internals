@@ -251,7 +251,7 @@ Creates a [SubqueryAlias](../logical-operators/SubqueryAlias.md)
 
 ### visitQuerySpecification
 
-Creates [OneRowRelation](../logical-operators/OneRowRelation.md) or [LogicalPlan](../logical-operators/LogicalPlan.md)
+Creates `OneRowRelation` or [LogicalPlan](../logical-operators/LogicalPlan.md)
 
 ??? note "OneRowRelation"
     `visitQuerySpecification` creates a `OneRowRelation` for a `SELECT` without a `FROM` clause.
@@ -505,7 +505,7 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 1. [Generate](#withGenerate) unary logical operators (if used in the parsed SQL text)
 
-1. [Filter](../logical-operators/Filter.md) unary logical plan (if used in the parsed SQL text)
+1. `Filter` unary logical plan (if used in the parsed SQL text)
 
 1. [GroupingSets or Aggregate](#withAggregation) unary logical operators (if used in the parsed SQL text)
 

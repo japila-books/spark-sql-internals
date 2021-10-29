@@ -106,7 +106,7 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 `apply` PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and [Filter](../logical-operators/Filter.md) logical operators).
+`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and `Filter` logical operators).
 
 `apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the [partitionSchema](../HadoopFsRelation.md#partitionSchema) of the `HadoopFsRelation`.
 

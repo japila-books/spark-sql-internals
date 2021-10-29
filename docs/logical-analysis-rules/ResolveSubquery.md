@@ -2,7 +2,7 @@
 
 `ResolveSubquery` is a **logical resolution rule** that [resolves SubqueryExpressions](#apply) in the following logical operators:
 
-* [Filter](../logical-operators/Filter.md)s with a child [Aggregate](../logical-operators/Aggregate.md)
+* `Filter`s with a child [Aggregate](../logical-operators/Aggregate.md)
 * [Unary operators](../logical-operators/LogicalPlan.md#UnaryNode)
 * [Join](../logical-operators/Join.md)
 * [SupportsSubquery](../logical-operators/SupportsSubquery.md)
@@ -55,7 +55,7 @@ apply(
 
 `apply` [resolves SubqueryExpressions](#resolveSubQueries) in the following logical operators in the given [logical plan](../logical-operators/LogicalPlan.md):
 
-* [Filter](../logical-operators/Filter.md)s with a child [Aggregate](../logical-operators/Aggregate.md)
+* `Filter`s with a child [Aggregate](../logical-operators/Aggregate.md)
 
 * [Unary operators](../logical-operators/LogicalPlan.md#UnaryNode)
 

@@ -311,7 +311,7 @@ copyTagsFrom(
 
 * `ResolveRelations` logical resolution rule is requested to [lookupRelation](../logical-analysis-rules/ResolveRelations.md#lookupRelation)
 * `ResolveReferences` logical resolution rule is requested to [collectConflictPlans](../logical-analysis-rules/ResolveReferences.md#collectConflictPlans)
-* `OneRowRelation` leaf logical operator is requested to [makeCopy](../logical-operators/OneRowRelation.md#makeCopy)
+* `OneRowRelation` leaf logical operator is requested to `makeCopy`
 * `TreeNode` is requested to [transformDown](#transformDown), [transformUp](#transformUp) and [makeCopy](#makeCopy)
 
 ### <span id="getTagValue"> Looking Up Tag

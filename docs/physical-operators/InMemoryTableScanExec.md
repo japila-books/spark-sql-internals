@@ -1,6 +1,6 @@
 # InMemoryTableScanExec Leaf Physical Operator
 
-`InMemoryTableScanExec` is a [leaf physical operator](LeafExecNode.md) that represents an [InMemoryRelation](#relation) logical operator at execution time.
+`InMemoryTableScanExec` is a leaf physical operator that represents an [InMemoryRelation](#relation) logical operator at execution time.
 
 `InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an InMemoryRelation.md[InMemoryRelation] logical operator in a logical query plan.
 

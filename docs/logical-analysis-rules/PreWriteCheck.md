@@ -19,7 +19,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * [[apply-InsertableRelation]] For an `InsertIntoTable` with a <<LogicalRelation.md#, LogicalRelation>>...FIXME
 
-* For any `InsertIntoTable`, `apply` throws a `AnalysisException` if the <<InsertIntoTable.md#table, logical plan for the table to insert into>> is neither a <<LeafNode.md#, LeafNode>> nor one of the following leaf logical operators: <<Range.md#, Range>>, <<OneRowRelation.md#, OneRowRelation>>, <<LocalRelation.md#, LocalRelation>>.
+* For any `InsertIntoTable`, `apply` throws a `AnalysisException` if the <<InsertIntoTable.md#table, logical plan for the table to insert into>> is neither a <<LeafNode.md#, LeafNode>> nor one of the following leaf logical operators: `Range`, `OneRowRelation`, <<LocalRelation.md#, LocalRelation>>.
 +
 ```
 Inserting into an RDD-based table is not allowed.

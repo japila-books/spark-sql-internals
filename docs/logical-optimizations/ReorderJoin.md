@@ -114,7 +114,7 @@ For two joins exactly (i.e. the `input` has two logical plans and their join typ
 
 `createOrderedJoin` creates a Join.md#creating-instance[Join] logical operator with the input join conditions combined together using `And` expression and the join type (inner or cross).
 
-If there are condition expressions that [could not be evaluated within a join](../PredicateHelper.md#canEvaluateWithinJoin), `createOrderedJoin` creates a Filter.md#creating-instance[Filter] logical operator with the join conditions combined together using `And` expression and the result join operator as the Filter.md#child[child] operator.
+If there are condition expressions that [could not be evaluated within a join](../PredicateHelper.md#canEvaluateWithinJoin), `createOrderedJoin` creates a `Filter` logical operator with the join conditions combined together using `And` expression and the result join operator as the Filter.md#child[child] operator.
 
 ```text
 import org.apache.spark.sql.catalyst.expressions.Expression
@@ -412,7 +412,7 @@ b. The join conditions from `flattenJoin` with the conditions of the join
 * For a Filter.md[Filter] with an inner or cross Join.md[Join] child operator, `flattenJoin` calls itself recursively on the join (that simply removes the `Filter` "layer" and assumes an inner join) and gives:
 
 a. The logical plans from recursive `flattenJoin`
-b. The join conditions from `flattenJoin` with ``Filter``'s Filter.md#condition[conditions]
+b. The join conditions from `flattenJoin` with `Filter` conditions
 
 * For all other logical operators, `flattenJoin` gives the input `plan`, the current join type (an inner or cross join) and the empty join condition.
 

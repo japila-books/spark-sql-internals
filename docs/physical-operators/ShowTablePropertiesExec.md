@@ -13,13 +13,3 @@
 `ShowTablePropertiesExec` is created when:
 
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (and plans a [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command)
-
-## <span id="run"> Executing Command
-
-```scala
-run(): Seq[InternalRow]
-```
-
-`run` is part of the [V2CommandExec](V2CommandExec.md#run) abstraction.
-
-`run`...FIXME

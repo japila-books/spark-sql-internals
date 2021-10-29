@@ -1,6 +1,6 @@
 # GlobalLimit Logical Operator
 
-`GlobalLimit` is an [order-preserving unary logical operator](OrderPreservingUnaryNode.md).
+`GlobalLimit` is an order-preserving unary logical operator.
 
 ## Creating Instance
 

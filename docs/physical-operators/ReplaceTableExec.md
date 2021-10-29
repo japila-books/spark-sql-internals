@@ -1,3 +1,0 @@
-# ReplaceTableExec
-
-`ReplaceTableExec` is...FIXME

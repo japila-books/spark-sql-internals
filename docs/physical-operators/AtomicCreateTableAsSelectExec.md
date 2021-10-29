@@ -1,3 +1,0 @@
-# AtomicCreateTableAsSelectExec
-
-`AtomicCreateTableAsSelectExec` is...FIXME

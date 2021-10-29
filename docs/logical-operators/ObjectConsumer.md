@@ -1,3 +1,0 @@
-# ObjectConsumer
-
-`ObjectConsumer` is...FIXME

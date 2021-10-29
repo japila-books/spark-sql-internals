@@ -176,31 +176,6 @@ Internally, `createDataset` first looks up the implicit [ExpressionEncoder](Expr
 
 The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of [InternalRow](InternalRow.md)s. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a LocalRelation.md[`LocalRelation` logical query plan].
 
-## <span id="range"> Creating Dataset With Single Long Column
-
-```scala
-range(end: Long): Dataset[java.lang.Long]
-range(start: Long, end: Long): Dataset[java.lang.Long]
-range(start: Long, end: Long, step: Long): Dataset[java.lang.Long]
-range(start: Long, end: Long, step: Long, numPartitions: Int): Dataset[java.lang.Long]
-```
-
-`range` method family create a [Dataset](Dataset.md) of `Long` numbers.
-
-```text
-scala> spark.range(start = 0, end = 4, step = 2, numPartitions = 5).show
-+---+
-| id|
-+---+
-|  0|
-|  2|
-+---+
-```
-
-The three first variants (that do not specify `numPartitions` explicitly) use `SparkContext.defaultParallelism` for the number of partitions.
-
-Internally, `range` creates a new `Dataset[Long]` with [Range](logical-operators/Range.md) leaf logical operator and `Encoders.LONG` encoder.
-
 ## <span id="sql"> Executing SQL Queries (aka SQL Mode)
 
 ```scala

@@ -1,3 +1,0 @@
-# AtomicReplaceTableAsSelectExec
-
-`AtomicReplaceTableAsSelectExec` is...FIXME

@@ -1,6 +1,6 @@
 # CollectLimitExec Physical Operator
 
-`CollectLimitExec` is a [unary physical operator](LimitExec.md) that represents [GlobalLimit](../logical-operators/GlobalLimit.md) unary logical operator at execution time.
+`CollectLimitExec` is a unary physical operator that represents [GlobalLimit](../logical-operators/GlobalLimit.md) unary logical operator at execution time.
 
 ## Creating Instance
 

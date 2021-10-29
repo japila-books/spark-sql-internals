@@ -1,3 +1,3 @@
 # ExternalRDDScanExec Leaf Physical Operator
 
-`ExternalRDDScanExec` is a [leaf physical operator](LeafExecNode.md).
+`ExternalRDDScanExec` is a leaf physical operator.

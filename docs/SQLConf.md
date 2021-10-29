@@ -283,7 +283,7 @@ The value of [spark.sql.inMemoryColumnarStorage.batchSize](configuration-propert
 Used when:
 
 * `CacheManager` is requested to [cache a structured query](CacheManager.md#cacheQuery)
-* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](physical-operators/RowToColumnarExec.md#doExecuteColumnar)
+* `RowToColumnarExec` physical operator is requested to `doExecuteColumnar`
 
 ## <span id="constraintPropagationEnabled"><span id="CONSTRAINT_PROPAGATION_ENABLED"> constraintPropagationEnabled
 

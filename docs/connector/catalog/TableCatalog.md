@@ -30,10 +30,10 @@ Table createTable(
 
 Used when the following commands are executed:
 
-* [CreateTableExec](../../physical-operators/CreateTableExec.md)
-* [ReplaceTableExec](../../physical-operators/ReplaceTableExec.md)
+* `CreateTableExec`
+* `ReplaceTableExec`
 * [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md)
-* [ReplaceTableAsSelectExec](../../physical-operators/ReplaceTableAsSelectExec.md)
+* `ReplaceTableAsSelectExec`
 
 ### <span id="dropTable"> dropTable
 
@@ -44,22 +44,10 @@ boolean dropTable(
 
 Used when the following commands are executed:
 
-* [DropTableExec](../../physical-operators/DropTableExec.md)
-* [ReplaceTableExec](../../physical-operators/ReplaceTableExec.md)
+* `DropTableExec`
+* `ReplaceTableExec`
 * [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md)
-* [ReplaceTableAsSelectExec](../../physical-operators/ReplaceTableAsSelectExec.md)
-
-### <span id="invalidateTable"> invalidateTable
-
-```java
-void invalidateTable(
-  Identifier ident)
-```
-
-Used when the following commands are executed:
-
-* [RefreshTableExec](../../physical-operators/RefreshTableExec.md)
-* [RenameTableExec](../../physical-operators/RenameTableExec.md)
+* `ReplaceTableAsSelectExec`
 
 ### <span id="listTables"> Listing Tables
 
@@ -99,7 +87,7 @@ void renameTable(
 
 Used when the following commands are executed:
 
-* [RenameTableExec](../../physical-operators/RenameTableExec.md)
+* `RenameTableExec`
 
 ### <span id="tableExists"> tableExists
 
@@ -111,14 +99,14 @@ boolean tableExists(
 Used when:
 
 * The following commands are executed:
-  * [AtomicCreateTableAsSelectExec](../../physical-operators/AtomicCreateTableAsSelectExec.md)
-  * [AtomicReplaceTableAsSelectExec](../../physical-operators/AtomicReplaceTableAsSelectExec.md)
-  * [AtomicReplaceTableExec](../../physical-operators/AtomicReplaceTableExec.md)
+  * `AtomicCreateTableAsSelectExec`
+  * `AtomicReplaceTableAsSelectExec`
+  * `AtomicReplaceTableExec`
   * [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md)
-  * [CreateTableExec](../../physical-operators/CreateTableExec.md)
-  * [DropTableExec](../../physical-operators/DropTableExec.md)
-  * [ReplaceTableAsSelectExec](../../physical-operators/ReplaceTableAsSelectExec.md)
-  * [ReplaceTableExec](../../physical-operators/ReplaceTableExec.md)
+  * `CreateTableExec`
+  * `DropTableExec`
+  * `ReplaceTableAsSelectExec`
+  * `ReplaceTableExec`
 
 * `V2SessionCatalog` is requested to [renameTable](../../V2SessionCatalog.md#renameTable)
 

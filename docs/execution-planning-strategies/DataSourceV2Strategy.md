@@ -8,19 +8,19 @@ Logical Operator | Physical Operator
  [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [BatchScanExec](../physical-operators/BatchScanExec.md)
  `StreamingDataSourceV2Relation` |
  [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) | [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md)
- [CreateV2Table](../logical-operators/CreateV2Table.md) | [CreateTableExec](../physical-operators/CreateTableExec.md)
- [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) | [AtomicCreateTableAsSelectExec](../physical-operators/AtomicCreateTableAsSelectExec.md) or [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
- `RefreshTable` | [RefreshTableExec](../physical-operators/RefreshTableExec.md)
- `ReplaceTable` | [AtomicReplaceTableExec](../physical-operators/AtomicReplaceTableExec.md) or [ReplaceTableExec](../physical-operators/ReplaceTableExec.md)
- `ReplaceTableAsSelect` | [AtomicReplaceTableAsSelectExec](../physical-operators/AtomicReplaceTableAsSelectExec.md) or [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md)
- [AppendData](../logical-operators/AppendData.md) | [AppendDataExecV1](../physical-operators/AppendDataExecV1.md) or [AppendDataExec](../physical-operators/AppendDataExec.md)
- [OverwriteByExpression](../logical-operators/OverwriteByExpression.md) with a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) | [OverwriteByExpressionExecV1](../physical-operators/OverwriteByExpressionExecV1.md) or [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md)
- [OverwritePartitionsDynamic](../logical-operators/OverwritePartitionsDynamic.md) | [OverwritePartitionsDynamicExec](../physical-operators/OverwritePartitionsDynamicExec.md)
+ [CreateV2Table](../logical-operators/CreateV2Table.md) | `CreateTableExec`
+ [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) | `AtomicCreateTableAsSelectExec` or [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
+ `RefreshTable` | `RefreshTableExec`
+ `ReplaceTable` | `AtomicReplaceTableExec` or `ReplaceTableExec`
+ `ReplaceTableAsSelect` | `AtomicReplaceTableAsSelectExec` or `ReplaceTableAsSelectExec`
+ [AppendData](../logical-operators/AppendData.md) | `AppendDataExecV1` or `AppendDataExec`
+ [OverwriteByExpression](../logical-operators/OverwriteByExpression.md) with a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) | `OverwriteByExpressionExecV1` or [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md)
+ [OverwritePartitionsDynamic](../logical-operators/OverwritePartitionsDynamic.md) | `OverwritePartitionsDynamicExec`
  [DeleteFromTable](../logical-operators/DeleteFromTable.md) with [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [DeleteFromTableExec](../physical-operators/DeleteFromTableExec.md)
  `WriteToContinuousDataSource` | `WriteToContinuousDataSourceExec`
  `DescribeNamespace` | `DescribeNamespaceExec`
  [DescribeRelation](../logical-operators/DescribeRelation.md) | [DescribeTableExec](../physical-operators/DescribeTableExec.md)
- `DropTable` | [DropTableExec](../physical-operators/DropTableExec.md)
+ `DropTable` | `DropTableExec`
  `NoopDropTable` | [LocalTableScanExec](../physical-operators/LocalTableScanExec.md)
  [AlterTable](../logical-operators/AlterTable.md) | [AlterTableExec](../physical-operators/AlterTableExec.md)
  _others_ |

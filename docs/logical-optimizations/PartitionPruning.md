@@ -30,7 +30,7 @@ prune(
 
 `prune` transforms up all logical operators in the given [logical query plan](../logical-operators/LogicalPlan.md).
 
-`prune` leaves [Join](../logical-operators/Join.md) operators unmodified when either operators are [Filter](../logical-operators/Filter.md)s with [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) condition.
+`prune` leaves [Join](../logical-operators/Join.md) operators unmodified when either operators are `Filter`s with [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) condition.
 
 `prune` transforms [Join](../logical-operators/Join.md) operators of the following "shape":
 

@@ -17,36 +17,6 @@
 
 NOTE: `AggregateProcessor` is <<creating-instance, created>> using `AggregateProcessor` factory object (using <<apply, apply>> method).
 
-=== [[initialize]] `initialize` Method
-
-[source, scala]
-----
-initialize(size: Int): Unit
-----
-
-CAUTION: FIXME
-
-[NOTE]
-====
-`initialize` is used when:
-
-* `SlidingWindowFunctionFrame` writes out to the target row
-* `UnboundedWindowFunctionFrame` is prepared
-* `UnboundedPrecedingWindowFunctionFrame` is prepared
-* `UnboundedFollowingWindowFunctionFrame` writes out to the target row
-====
-
-=== [[evaluate]] `evaluate` Method
-
-[source, scala]
-----
-evaluate(target: InternalRow): Unit
-----
-
-CAUTION: FIXME
-
-NOTE: `evaluate` is used when...FIXME
-
 === [[apply]][[functions]] `apply` Factory Method
 
 [source, scala]

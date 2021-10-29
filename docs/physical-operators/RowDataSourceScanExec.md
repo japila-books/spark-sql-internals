@@ -1,8 +1,8 @@
 # RowDataSourceScanExec Leaf Physical Operator
 
-`RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a [leaf physical operator](LeafExecNode.md)) for scanning data from a [BaseRelation](#relation).
+`RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a leaf physical operator) for scanning data from a [BaseRelation](#relation).
 
-`RowDataSourceScanExec` is a [InputRDDCodegen](InputRDDCodegen.md).
+`RowDataSourceScanExec` is an `InputRDDCodegen`.
 
 ## <span id="metrics"> Performance Metrics
 
@@ -44,25 +44,15 @@ In the end, `metadata` creates the following mapping:
 * **ReadSchema** with the [required schema](#requiredSchema) converted to [catalog representation](../types/StructType.md#catalogString)
 * **PushedFilters** with the marked and unmarked [filter predicates](#filters)
 
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-`doExecute`...FIXME
-
 ## <span id="createUnsafeProjection"> createUnsafeProjection
 
 ```scala
 createUnsafeProjection: Boolean
 ```
 
-`createUnsafeProjection` is part of the [InputRDDCodegen](InputRDDCodegen.md#createUnsafeProjection) abstraction.
-
 `createUnsafeProjection` is `true`.
+
+`createUnsafeProjection` is part of the `InputRDDCodegen` abstraction.
 
 ## <span id="inputRDD"> Input RDD
 
@@ -70,6 +60,6 @@ createUnsafeProjection: Boolean
 inputRDD: RDD[InternalRow]
 ```
 
-`inputRDD` is part of the [InputRDDCodegen](InputRDDCodegen.md#inputRDD) abstraction.
-
 `inputRDD` is the [RDD](#rdd).
+
+`inputRDD` is part of the `InputRDDCodegen` abstraction.

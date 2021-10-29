@@ -83,7 +83,7 @@ Right side partitions size info:
 number of skewed partitions: left [numPartitions], right [numPartitions]
 ```
 
-In the end, `optimizeSkewJoin` creates [CustomShuffleReaderExec](../physical-operators/CustomShuffleReaderExec.md) physical operators for the left and right children of the [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) operator if and only if the number of skewed partitions for either side is greater than `0`. `optimizeSkewJoin` turns on the [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) flag (of the `SortMergeJoinExec` operator). Otherwise, `optimizeSkewJoin` leaves the `SortMergeJoinExec` operator "untouched".
+In the end, `optimizeSkewJoin` creates `CustomShuffleReaderExec` physical operators for the left and right children of the [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) operator if and only if the number of skewed partitions for either side is greater than `0`. `optimizeSkewJoin` turns on the [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) flag (of the `SortMergeJoinExec` operator). Otherwise, `optimizeSkewJoin` leaves the `SortMergeJoinExec` operator "untouched".
 
 ### <span id="tryOptimizeJoinChildren"> tryOptimizeJoinChildren
 

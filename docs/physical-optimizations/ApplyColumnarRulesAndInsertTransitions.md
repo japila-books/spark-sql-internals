@@ -43,4 +43,4 @@ insertRowToColumnar(
   plan: SparkPlan): SparkPlan
 ```
 
-`insertRowToColumnar` simply creates a [RowToColumnarExec](../physical-operators/RowToColumnarExec.md) physical operator for the given [SparkPlan](../physical-operators/SparkPlan.md) that does not [supportsColumnar](../physical-operators/SparkPlan.md#supportsColumnar). The child of the `RowToColumnarExec` operator is created using [insertTransitions](#insertTransitions). Otherwise, `insertRowToColumnar` requests the operator for child operators and [insertRowToColumnar](#insertRowToColumnar).
+`insertRowToColumnar` simply creates a `RowToColumnarExec` physical operator for the given [SparkPlan](../physical-operators/SparkPlan.md) that does not [supportsColumnar](../physical-operators/SparkPlan.md#supportsColumnar). The child of the `RowToColumnarExec` operator is created using [insertTransitions](#insertTransitions). Otherwise, `insertRowToColumnar` requests the operator for child operators and [insertRowToColumnar](#insertRowToColumnar).

@@ -153,7 +153,7 @@ Since: `3.2.0`
 
 ## <span id="spark.sql.optimizer.optimizeOneRowRelationSubquery"> spark.sql.optimizer.optimizeOneRowRelationSubquery
 
-**(innternal)** When `true`, the optimizer will inline subqueries with [OneRowRelation](logical-operators/OneRowRelation.md) as leaf nodes
+**(internal)** When `true`, the optimizer will inline subqueries with `OneRowRelation` leaf nodes
 
 Default: `true`
 

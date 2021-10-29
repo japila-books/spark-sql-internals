@@ -32,4 +32,4 @@ Used when:
 * [DataSourceV2Relation](DataSourceV2Relation.md)
 * [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md)
 * [UnresolvedRelation](UnresolvedRelation.md)
-* [UnresolvedV2Relation](UnresolvedV2Relation.md)
+* `UnresolvedV2Relation`

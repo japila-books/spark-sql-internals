@@ -3,7 +3,7 @@
 `ShowTablePropertiesCommand` is a [RunnableCommand](RunnableCommand.md) that represents [ShowTableProperties](ShowTableProperties.md) logical operator with the following logical operators at execution:
 
 * [ResolvedTable](ResolvedTable.md) for [V1Table](../connector/V1Table.md) in [SessionCatalog](../connector/catalog/CatalogV2Util.md#isSessionCatalog)
-* [ResolvedView](ResolvedView.md)
+* `ResolvedView`
 
 !!! note
     [ShowTableProperties](ShowTableProperties.md) logical operator can also be planned to [ShowTablePropertiesExec](../physical-operators/ShowTablePropertiesExec.md) physical command for the other cases.

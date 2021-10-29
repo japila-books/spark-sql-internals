@@ -1,6 +1,6 @@
 # HiveTableScanExec Leaf Physical Operator
 
-`HiveTableScanExec` is a [leaf physical operator](../physical-operators/LeafExecNode.md) that represents a [HiveTableRelation](#relation) logical operator at execution time.
+`HiveTableScanExec` is a leaf physical operator that represents a [HiveTableRelation](#relation) logical operator at execution time.
 
 `HiveTableScanExec` is <<creating-instance, created>> exclusively when HiveTableScans.md[HiveTableScans] execution planning strategy plans a `HiveTableRelation` logical operator (i.e. is executed on a logical query plan with a `HiveTableRelation` logical operator).
 

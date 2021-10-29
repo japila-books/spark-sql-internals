@@ -76,7 +76,7 @@ toPlanStats(
 
 `toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
 
-With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the [estimated total (output) size](logical-operators/EstimationUtils.md#getOutputSize), <<rowCount, row count>> and column statistics.
+With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
 
 NOTE: Cost-based optimization is enabled when [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) configuration property is turned on, i.e. `true`, and is disabled by default.
 

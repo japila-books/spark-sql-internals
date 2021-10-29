@@ -15,8 +15,8 @@ Creates a [WriteBuilder](WriteBuilder.md) for writing (batch and streaming)
 
 Used when:
 
-* `V1FallbackWriters` physical operator is requested to [newWriteBuilder](../physical-operators/V1FallbackWriters.md#newWriteBuilder)
-* [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md) physical commands are executed
+* `V1FallbackWriters` physical operator is requested to `newWriteBuilder`
+* [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), `ReplaceTableAsSelectExec` physical commands are executed
 * `BatchWriteHelper` physical operator is requested to [newWriteBuilder](../physical-operators/BatchWriteHelper.md#newWriteBuilder)
 * `AtomicTableWriteExec` physical command is requested to [writeToStagedTable](../physical-operators/AtomicTableWriteExec.md#writeToStagedTable)
 * `StreamExecution` stream execution engine (Spark Structured Streaming) is requested to `createStreamingWrite`

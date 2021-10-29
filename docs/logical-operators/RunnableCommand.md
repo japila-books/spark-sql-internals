@@ -20,64 +20,22 @@ Used when:
 
 ## Implementations
 
-* AddFileCommand
-* AddJarCommand
-* AlterDatabasePropertiesCommand
-* AlterDatabaseSetLocationCommand
-* AlterTableAddColumnsCommand
-* AlterTableAddPartitionCommand
-* AlterTableChangeColumnCommand
-* AlterTableDropPartitionCommand
-* AlterTableRecoverPartitionsCommand
-* AlterTableRenameCommand
-* AlterTableRenamePartitionCommand
-* AlterTableSerDePropertiesCommand
-* AlterTableSetLocationCommand
-* AlterTableSetPropertiesCommand
-* AlterTableUnsetPropertiesCommand
-* AlterViewAsCommand
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md)
 * [AnalyzePartitionCommand](AnalyzePartitionCommand.md)
 * [AnalyzeTableCommand](AnalyzeTableCommand.md)
 * [CacheTableCommand](CacheTableCommand.md)
 * [ClearCacheCommand](ClearCacheCommand.md)
-* CreateDatabaseCommand
 * [CreateDataSourceTableCommand](CreateDataSourceTableCommand.md)
-* CreateFunctionCommand
-* [CreateTableCommand](CreateTableCommand.md)
-* CreateTableLikeCommand
 * [CreateTempViewUsing](CreateTempViewUsing.md)
 * [CreateViewCommand](CreateViewCommand.md)
 * [DescribeColumnCommand](DescribeColumnCommand.md)
-* DescribeCommandBase
-* DescribeDatabaseCommand
-* DescribeFunctionCommand
-* DropDatabaseCommand
-* DropFunctionCommand
-* DropTableCommand
 * [ExplainCommand](ExplainCommand.md)
-* ExternalCommandExecutor
 * [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
-* InsertIntoDataSourceDirCommand
-* ListFilesCommand
-* ListJarsCommand
-* LoadDataCommand
-* RefreshResource
-* RefreshTable
-* ResetCommand
 * [SaveIntoDataSourceCommand](SaveIntoDataSourceCommand.md)
-* SetCommand
-* ShowColumnsCommand
-* ShowCreateTableAsSerdeCommand
 * [ShowCreateTableCommand](ShowCreateTableCommand.md)
-* ShowFunctionsCommand
-* ShowPartitionsCommand
 * [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
-* ShowTablesCommand
-* ShowViewsCommand
-* StreamingExplainCommand
 * [TruncateTableCommand](TruncateTableCommand.md)
-* UncacheTableCommand
+* _others_
 
 ## Query Planning
 

@@ -1,3 +1,0 @@
-# SubqueryAdaptiveBroadcastExec
-
-`SubqueryAdaptiveBroadcastExec` is...FIXME

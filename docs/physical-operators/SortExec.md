@@ -25,27 +25,17 @@ Key             | Name (in web UI)        | Description
  sortTime       | sort time               |
  spillSize      | spill size              |
 
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute`...FIXME
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
 ## <span id="enableRadixSort"><span id="spark.sql.sort.enableRadixSort"> Radix Sort
 
 `SortExec` operator uses the [spark.sql.sort.enableRadixSort](../configuration-properties.md#spark.sql.sort.enableRadixSort) configuration property when [creating an UnsafeExternalRowSorter](#createSorter).
 
 ## <span id="BlockingOperatorWithCodegen"> BlockingOperatorWithCodegen
 
-`SortExec` is a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md).
+`SortExec` is a `BlockingOperatorWithCodegen`.
 
 ## <span id="CodegenSupport"> CodegenSupport
 
-`SortExec` supports [Java code generation](CodegenSupport.md) (indirectly as a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md)).
+`SortExec` supports [Java code generation](CodegenSupport.md) (indirectly as a `BlockingOperatorWithCodegen`).
 
 ## <span id="outputOrdering"> Output Data Ordering Requirements
 

@@ -18,26 +18,15 @@ Used when:
 
 ## Implementations
 
-* `AlterNamespaceSetPropertiesExec`
 * [AlterTableExec](AlterTableExec.md)
-* [AtomicReplaceTableExec](AtomicReplaceTableExec.md)
-* `CreateNamespaceExec`
-* [CreateTableExec](CreateTableExec.md)
-* `DeleteFromTableExec`
-* `DescribeNamespaceExec`
 * [DescribeTableExec](DescribeTableExec.md)
 * [DropNamespaceExec](DropNamespaceExec.md)
-* [DropTableExec](DropTableExec.md)
-* [RefreshTableExec](RefreshTableExec.md)
-* [RenameTableExec](RenameTableExec.md)
-* [ReplaceTableExec](ReplaceTableExec.md)
 * [SetCatalogAndNamespaceExec](SetCatalogAndNamespaceExec.md)
 * [ShowCurrentNamespaceExec](ShowCurrentNamespaceExec.md)
-* `ShowNamespacesExec`
 * [ShowTablePropertiesExec](ShowTablePropertiesExec.md)
 * [ShowTablesExec](ShowTablesExec.md)
-* [V1FallbackWriters](V1FallbackWriters.md)
 * [V2TableWriteExec](V2TableWriteExec.md)
+* _others_
 
 ## <span id="result"> result
 

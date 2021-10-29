@@ -1,6 +1,6 @@
 # FileSourceScanExec Physical Operator
 
-`FileSourceScanExec` is a [leaf physical operator](LeafExecNode.md) (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over files.
+`FileSourceScanExec` is a leaf physical operator (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over files.
 
 ## Demo
 

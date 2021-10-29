@@ -1,6 +1,6 @@
 # DataSourceScanExec Leaf Physical Operators
 
-`DataSourceScanExec` is an [extension](#contract) of the [LeafExecNode](LeafExecNode.md) abstraction for [leaf physical operators](#implementations) that represent scans over a [BaseRelation](#relation).
+`DataSourceScanExec` is an [extension](#contract) of the `LeafExecNode` abstraction for [leaf physical operators](#implementations) that represent scans over a [BaseRelation](#relation).
 
 `DataSourceScanExec` uses `scan` for the [variable name prefix](CodegenSupport.md#variablePrefix) for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 

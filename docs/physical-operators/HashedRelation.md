@@ -68,12 +68,14 @@ Used when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is
 keys(): Iterator[InternalRow]
 ```
 
-Used when [SubqueryBroadcastExec](SubqueryBroadcastExec.md) physical operator is requested for [relationFuture](SubqueryBroadcastExec.md#relationFuture)
+Used when:
+
+* `SubqueryBroadcastExec` physical operator is requested for `relationFuture`
 
 ## Implementations
 
 * [LongHashedRelation](LongHashedRelation.md)
-* [UnsafeHashedRelation](UnsafeHashedRelation.md)
+* `UnsafeHashedRelation`
 
 ## <span id="apply"> Creating HashedRelation
 
@@ -85,7 +87,7 @@ apply(
   taskMemoryManager: TaskMemoryManager = null): HashedRelation
 ```
 
-`apply` creates a [LongHashedRelation](LongHashedRelation.md#apply) when the input `key` collection has a single [expression](../expressions/Expression.md) of type `long` or a [UnsafeHashedRelation](UnsafeHashedRelation.md#apply) otherwise.
+`apply` creates a [LongHashedRelation](LongHashedRelation.md#apply) when the input `key` collection has a single [expression](../expressions/Expression.md) of type `long` or a `UnsafeHashedRelation` otherwise.
 
 !!! note
     The input `key` expressions are:

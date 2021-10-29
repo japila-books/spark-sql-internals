@@ -2,7 +2,7 @@
 
 `CleanupDynamicPruningFilters` is a logical optimization for [Dynamic Partition Pruning](../new-and-noteworthy/dynamic-partition-pruning.md).
 
-`CleanupDynamicPruningFilters` removes `DynamicPruning` predicate expressions in [Filter](../logical-operators/Filter.md) logical operators.
+`CleanupDynamicPruningFilters` removes `DynamicPruning` predicate expressions in `Filter` logical operators.
 
 `CleanupDynamicPruningFilters` is a `Rule[LogicalPlan]` (a [rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
 
@@ -21,6 +21,6 @@ apply(
 
 * [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators with [HadoopFsRelation](../HadoopFsRelation.md) are left unmodified (_pass through_)
 
-* `DynamicPruning` predicate expressions in [Filter](../logical-operators/Filter.md) logical operators are replaced with `true` literals (_cleaned up_)
+* `DynamicPruning` predicate expressions in `Filter` logical operators are replaced with `true` literals (_cleaned up_)
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

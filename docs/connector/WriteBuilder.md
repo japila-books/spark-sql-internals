@@ -14,7 +14,7 @@ BatchWrite buildForBatch()
 
 Used when:
 
-* [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md), [AppendDataExec](../physical-operators/AppendDataExec.md), [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md), [OverwritePartitionsDynamicExec](../physical-operators/OverwritePartitionsDynamicExec.md), [AtomicTableWriteExec](../physical-operators/AtomicTableWriteExec.md) physical commands are executed
+* [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), `ReplaceTableAsSelectExec`, `AppendDataExec`, [OverwriteByExpressionExec](../physical-operators/OverwriteByExpressionExec.md), `OverwritePartitionsDynamicExec`, [AtomicTableWriteExec](../physical-operators/AtomicTableWriteExec.md) physical commands are executed
 
 ### <span id="buildForStreaming"> StreamingWrite
 

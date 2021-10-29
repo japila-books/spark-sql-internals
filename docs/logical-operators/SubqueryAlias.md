@@ -10,7 +10,7 @@
 
 * `SessionCatalog` is requested to [find a table or view in catalogs](../SessionCatalog.md#lookupRelation)
 
-* `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<RewriteCorrelatedScalarSubquery.md#constructLeftJoins, constructLeftJoins>> (when <<RewriteCorrelatedScalarSubquery.md#apply, applied>> to <<Aggregate.md#, Aggregate>>, [Project](Project.md) or [Filter](Filter.md) logical operators with correlated scalar subqueries)
+* `RewriteCorrelatedScalarSubquery` logical optimization is requested to <<RewriteCorrelatedScalarSubquery.md#constructLeftJoins, constructLeftJoins>> (when <<RewriteCorrelatedScalarSubquery.md#apply, applied>> to <<Aggregate.md#, Aggregate>>, [Project](Project.md) or `Filter` logical operators with correlated scalar subqueries)
 
 [[doCanonicalize]]
 `SubqueryAlias` simply requests the <<child, child logical operator>> for the <<catalyst/QueryPlan.md#doCanonicalize, canonicalized version>>.

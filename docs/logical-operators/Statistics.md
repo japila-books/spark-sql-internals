@@ -12,8 +12,8 @@
 `Statistics` is created when:
 
 * `CatalogStatistics` is requested to [convert metastore statistics](../spark-sql-CatalogStatistics.md#toPlanStats)
-* [DataSourceV2Relation](DataSourceV2Relation.md), [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md), [ExternalRDD](ExternalRDD.md), [LocalRelation](LocalRelation.md), [LogicalRDD](LogicalRDD.md), [LogicalRelation](LogicalRelation.md), [Range](Range.md), [OneRowRelation](OneRowRelation.md) logical operators are requested to `computeStats`
-* [AggregateEstimation](AggregateEstimation.md) and [JoinEstimation](JoinEstimation.md) utilities are requested to `estimate`
+* [DataSourceV2Relation](DataSourceV2Relation.md), [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md), [ExternalRDD](ExternalRDD.md), [LocalRelation](LocalRelation.md), [LogicalRDD](LogicalRDD.md), [LogicalRelation](LogicalRelation.md), `Range`, `OneRowRelation` logical operators are requested to `computeStats`
+* `AggregateEstimation` and [JoinEstimation](JoinEstimation.md) utilities are requested to `estimate`
 * [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) is executed
 * [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator is requested to `computeStats`
 * [DetermineTableStats](../hive/DetermineTableStats.md) logical resolution rule is executed

@@ -154,9 +154,9 @@ Inserting into an RDD-based table is not allowed, i.e. a query plan with an `Ins
 
 * Logical operator is not a <<LeafNode.md#, leaf node>>
 
-* [Range](Range.md) leaf operator
+* `Range` leaf operator
 
-* [OneRowRelation](OneRowRelation.md) leaf operator
+* `OneRowRelation` leaf operator
 
 * [LocalRelation](LocalRelation.md) leaf operator
 

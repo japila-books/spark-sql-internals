@@ -9,7 +9,7 @@ unapply(
 
 `unapply` makes sure that the given [SparkPlan](physical-operators/SparkPlan.md) is a [BaseJoinExec](physical-operators/BaseJoinExec.md) and [applicable](#isApplicable).
 
-If so, `unapply` [getBucketSpec](#getBucketSpec) for the [left](physical-operators/BinaryExecNode.md#left) and [right](physical-operators/BinaryExecNode.md#right) join child operators.
+If so, `unapply` [getBucketSpec](#getBucketSpec) for the `left` and `right` join child operators.
 
 `unapply`...FIXME
 
@@ -28,9 +28,9 @@ isApplicable(
 
 1. The given [BaseJoinExec](physical-operators/BaseJoinExec.md) physical operator is either a [SortMergeJoinExec](physical-operators/SortMergeJoinExec.md) or a [ShuffledHashJoinExec](physical-operators/ShuffledHashJoinExec.md)
 
-1. The [left](physical-operators/BinaryExecNode.md#left) side of the join [has a FileSourceScanExec operator](ExtractJoinWithBuckets.md#hasScanOperation)
+1. The `left` side of the join [has a FileSourceScanExec operator](ExtractJoinWithBuckets.md#hasScanOperation)
 
-1. The [right](physical-operators/BinaryExecNode.md#right) side of the join [has a FileSourceScanExec operator](ExtractJoinWithBuckets.md#hasScanOperation)
+1. The `right` side of the join [has a FileSourceScanExec operator](ExtractJoinWithBuckets.md#hasScanOperation)
 
 1. [satisfiesOutputPartitioning](#satisfiesOutputPartitioning) on the [leftKeys](physical-operators/BaseJoinExec.md#leftKeys) and the [outputPartitioning](physical-operators/SparkPlan.md#outputPartitioning) of the left join operator
 

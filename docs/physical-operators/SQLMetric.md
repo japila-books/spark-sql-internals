@@ -96,5 +96,5 @@ postDriverMetricUpdates(
 * `BasicWriteJobStatsTracker` is requested for [processStats](../BasicWriteJobStatsTracker.md#processStats)
 * `BroadcastExchangeExec` is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
 * `FileSourceScanExec` physical operator is requested for [sendDriverMetrics](FileSourceScanExec.md#sendDriverMetrics)
-* `SubqueryBroadcastExec` physical operator is requested for [relationFuture](SubqueryBroadcastExec.md#relationFuture)
+* `SubqueryBroadcastExec` physical operator is requested for `relationFuture`
 * `SubqueryExec` physical operator is requested for [relationFuture](SubqueryExec.md#relationFuture)

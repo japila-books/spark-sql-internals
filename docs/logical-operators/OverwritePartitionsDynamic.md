@@ -46,7 +46,7 @@ byPosition(
 
 ## Execution Planning
 
-`OverwritePartitionsDynamic` (over [DataSourceV2Relation](DataSourceV2Relation.md)) is planned as [OverwritePartitionsDynamicExec](../physical-operators/OverwritePartitionsDynamicExec.md) physical operator by [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy.
+`OverwritePartitionsDynamic` (over [DataSourceV2Relation](DataSourceV2Relation.md)) is planned as `OverwritePartitionsDynamicExec` physical operator by [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy.
 
 ## TableCapabilityCheck
 

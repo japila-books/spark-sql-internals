@@ -31,17 +31,6 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` requests the [child](#child) physical operator to [executeColumnar](SparkPlan.md#executeColumnar) and `RDD.mapPartitionsInternal` over batches (`Iterator[ColumnarBatch]`) to "unpack" to rows. `doExecute` counts the number of batches and rows (as the [metrics](#metrics)).
 
-## <span id="doProduce"> Generating Java Source Code for Produce Path
-
-```scala
-doProduce(
-  ctx: CodegenContext): String
-```
-
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
-
-`doProduce`...FIXME
-
 ## <span id="inputRDDs"> Input RDDs
 
 ```scala
@@ -61,18 +50,3 @@ canCheckLimitNotReached: Boolean
 `canCheckLimitNotReached` is always `true`.
 
 `canCheckLimitNotReached` is part of the [CodegenSupport](CodegenSupport.md#canCheckLimitNotReached) abstraction.
-
-## <span id="genCodeColumnVector"> genCodeColumnVector Internal Method
-
-```scala
-genCodeColumnVector(
-  ctx: CodegenContext,
-  columnVar: String,
-  ordinal: String,
-  dataType: DataType,
-  nullable: Boolean): ExprCode
-```
-
-`genCodeColumnVector`...FIXME
-
-`genCodeColumnVector` is used when `ColumnarToRowExec` physical operator is requested to [generate Java source code for produce path](#doProduce).

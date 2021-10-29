@@ -26,16 +26,6 @@ Key             | Name (in web UI)
 ----------------|--------------------------
 numOutputRows   | number of output rows
 
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-`doExecute`...FIXME
-
 ## Demo
 
 Let's disable preference for [ObjectHashAggregateExec](ObjectHashAggregateExec.md) physical operator (using the [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property).

@@ -30,7 +30,7 @@ pushDownRequiredColumns(plan: LogicalPlan, requiredByParent: AttributeSet): Logi
 +
 Note that the input `requiredByParent` attributes are not considered in the required columns.
 
-. For <<Filter.md#, Filter>> unary logical operator, `pushDownRequiredColumns` adds the <<expressions/Expression.md#references, references>> of the <<Filter.md#condition, filter condition>> to the input `requiredByParent` attributes and executes itself recursively on the <<Filter.md#child, child logical operator>>
+. For `Filter` unary logical operator, `pushDownRequiredColumns` adds the <<expressions/Expression.md#references, references>> of the filter condition to the input `requiredByParent` attributes and executes itself recursively on the child logical operator
 
 . For <<DataSourceV2Relation.md#, DataSourceV2Relation>> unary logical operator, `pushDownRequiredColumns`...FIXME
 
@@ -49,9 +49,9 @@ unapply(plan: LogicalPlan): Option[(Seq[NamedExpression], Expression, DataSource
 
 `unapply` works with (matches) the following logical operators:
 
-. For a <<Filter.md#, Filter>> with a <<DataSourceV2Relation.md#, DataSourceV2Relation>> leaf logical operator, `unapply`...FIXME
+. For a `Filter` with a <<DataSourceV2Relation.md#, DataSourceV2Relation>> leaf logical operator, `unapply`...FIXME
 
-. For a <<Filter.md#, Filter>> with a <<Project.md#, Project>> over a <<DataSourceV2Relation.md#, DataSourceV2Relation>> leaf logical operator, `unapply`...FIXME
+. For a `Filter` with a <<Project.md#, Project>> over a <<DataSourceV2Relation.md#, DataSourceV2Relation>> leaf logical operator, `unapply`...FIXME
 
 . For others, `unapply` returns `None` (i.e. does nothing / does not match)
 

@@ -1,6 +1,6 @@
 # AlterTableRecoverPartitionsCommand Logical Command
 
-`AlterTableRecoverPartitionsCommand` is a [runnable logical command](RunnableCommand.md) that represents [RepairTableStatement](RepairTableStatement.md) and [AlterTableRecoverPartitionsStatement](AlterTableRecoverPartitionsStatement.md) parsed statements.
+`AlterTableRecoverPartitionsCommand` is a [runnable logical command](RunnableCommand.md) that represents [RepairTableStatement](RepairTableStatement.md) and `AlterTableRecoverPartitionsStatement` parsed statements.
 
 ## Creating Instance
 
@@ -11,7 +11,7 @@
 
 `AlterTableRecoverPartitionsCommand` is created when:
 
-* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (and resolves [RepairTableStatement](RepairTableStatement.md) and [AlterTableRecoverPartitionsStatement](AlterTableRecoverPartitionsStatement.md) parsed statements)
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (and resolves [RepairTableStatement](RepairTableStatement.md) and `AlterTableRecoverPartitionsStatement` parsed statements)
 
 * [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed (for a partitioned [HadoopFsRelation](../HadoopFsRelation.md))
 

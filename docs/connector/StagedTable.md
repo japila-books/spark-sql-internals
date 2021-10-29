@@ -12,7 +12,7 @@ void abortStagedChanges()
 
 Used when:
 
-* [AtomicReplaceTableExec](../physical-operators/AtomicReplaceTableExec.md) physical command is [executed](../physical-operators/AtomicReplaceTableExec.md#commitOrAbortStagedChanges)
+* `AtomicReplaceTableExec` physical command is executed
 * `TableWriteExecHelper` is requested to [writeToTable](../physical-operators/TableWriteExecHelper.md#writeToTable)
 
 ### <span id="commitStagedChanges"> commitStagedChanges
@@ -23,5 +23,5 @@ void commitStagedChanges()
 
 Used when:
 
-* [AtomicReplaceTableExec](../physical-operators/AtomicReplaceTableExec.md) physical command is [executed](../physical-operators/AtomicReplaceTableExec.md#commitOrAbortStagedChanges)
+* `AtomicReplaceTableExec` physical command is `executed`
 * `TableWriteExecHelper` is requested to [writeToTable](../physical-operators/TableWriteExecHelper.md#writeToTable)

@@ -5,7 +5,7 @@
 * [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md) ([Adaptive Query Execution](adaptive-query-execution/index.md))
 * [CollectLimitExec](physical-operators/CollectLimitExec.md)
 * [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md)
-* [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md)
+* `TakeOrderedAndProjectExec`
 
 ## <span id="ShuffledRDD"> ShuffledRDD
 
@@ -23,7 +23,7 @@ When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksIn
 
 `ShuffledRowRDD` is created when:
 
-* [CollectLimitExec](physical-operators/CollectLimitExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and [TakeOrderedAndProjectExec](physical-operators/TakeOrderedAndProjectExec.md) physical operators are executed
+* [CollectLimitExec](physical-operators/CollectLimitExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and `TakeOrderedAndProjectExec` physical operators are executed
 * `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md))
 
 ## <span id="compute"> Computing Partition

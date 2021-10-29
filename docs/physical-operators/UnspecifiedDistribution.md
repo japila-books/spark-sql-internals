@@ -7,14 +7,3 @@
 
 !!! note
     `None` for the required number of partitions indicates to use any number of partitions (possibly [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property).
-
-=== [[createPartitioning]] `createPartitioning` Method
-
-[source, scala]
-----
-createPartitioning(numPartitions: Int): Partitioning
-----
-
-`createPartitioning`...FIXME
-
-`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

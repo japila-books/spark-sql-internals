@@ -40,9 +40,9 @@ Used when:
 
 ## Implementations
 
-* [AppendDataExec](AppendDataExec.md)
+* `AppendDataExec`
 * [OverwriteByExpressionExec](OverwriteByExpressionExec.md)
-* [OverwritePartitionsDynamicExec](OverwritePartitionsDynamicExec.md)
+* `OverwritePartitionsDynamicExec`
 
 ## <span id="newWriteBuilder"> Creating WriteBuilder
 
@@ -54,4 +54,4 @@ newWriteBuilder(): WriteBuilder
 
 `newWriteBuilder` is used when:
 
-* [AppendDataExec](AppendDataExec.md), [OverwriteByExpressionExec](OverwriteByExpressionExec.md) and [OverwritePartitionsDynamicExec](OverwritePartitionsDynamicExec.md) physical operators are executed
+* `AppendDataExec`, [OverwriteByExpressionExec](OverwriteByExpressionExec.md) and `OverwritePartitionsDynamicExec` physical operators are executed

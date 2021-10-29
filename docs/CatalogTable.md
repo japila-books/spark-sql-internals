@@ -59,7 +59,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 
 * `DescribeTableCommand` logical command is requested to <<DescribeTableCommand.md#run, describe detailed partition and storage information>> (when <<DescribeTableCommand.md#run, executed>>)
 
-* <<ShowCreateTableCommand.md#, ShowCreateTableCommand>> logical command is executed
+* [ShowCreateTableCommand](logical-operators/ShowCreateTableCommand.md) logical command is executed
 
 * <<CreateDataSourceTableCommand.md#run, CreateDataSourceTableCommand>> and <<CreateDataSourceTableAsSelectCommand.md#run, CreateDataSourceTableAsSelectCommand>> logical commands are executed
 

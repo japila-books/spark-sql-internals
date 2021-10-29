@@ -27,7 +27,7 @@ apply(
 * [Aggregate](../logical-operators/Aggregate.md) with `Cube`
 * [Aggregate](../logical-operators/Aggregate.md) with `Rollup`
 * [GroupingSets](../logical-operators/GroupingSets.md)
-* [Filter](../logical-operators/Filter.md) with `Grouping` or `GroupingID` expressions
+* `Filter` with `Grouping` or `GroupingID` expressions
 * [Sort](../logical-operators/Sort.md) with `Grouping` or `GroupingID` expressions
 
 ## <span id="tryResolveHavingCondition"> tryResolveHavingCondition

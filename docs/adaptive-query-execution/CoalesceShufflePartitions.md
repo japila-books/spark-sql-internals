@@ -27,7 +27,7 @@ apply(
 `apply` makes sure that one of the following holds or does nothing (and simply gives the input [SparkPlan](../physical-operators/SparkPlan.md) back unmodified):
 
 1. All the leaves in the query plan are [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operators
-1. No [CustomShuffleReaderExec](../physical-operators/CustomShuffleReaderExec.md) physical operator in the given query plan
+1. No `CustomShuffleReaderExec` physical operator in the given query plan
 
 `apply` collects all [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md) leaf physical operators in the input [physical query plan](../physical-operators/SparkPlan.md).
 

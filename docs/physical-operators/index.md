@@ -6,6 +6,6 @@
 
 The main abstraction is [SparkPlan](SparkPlan.md) that is a recursive data structure with zero, one, two or more child logical operators:
 
-* [LeafExecNode](LeafExecNode.md)
+* `LeafExecNode`
 * [UnaryExecNode](UnaryExecNode.md)
-* [BinaryExecNode](BinaryExecNode.md)
+* `BinaryExecNode`

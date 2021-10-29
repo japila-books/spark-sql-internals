@@ -1,6 +1,6 @@
 # BaseJoinExec Physical Operators
 
-`BaseJoinExec` is an [extension](#contract) of the [BinaryExecNode](BinaryExecNode.md) abstraction for [join physical operators](#implementations).
+`BaseJoinExec` is an [extension](#contract) of the `BinaryExecNode` abstraction for [join physical operators](#implementations).
 
 ## Contract
 

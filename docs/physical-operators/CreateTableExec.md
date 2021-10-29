@@ -1,3 +1,0 @@
-# CreateTableExec
-
-`CreateTableExec` is...FIXME

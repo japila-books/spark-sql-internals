@@ -90,7 +90,7 @@ hasCorrelatedSubquery(
 
 * `EliminateOuterJoin` logical optimization is executed
 * `Subquery` is created (from an expression)
-* [Filter](../logical-operators/Filter.md) logical operator is requested for `validConstraints`
+* `Filter` logical operator is requested for `validConstraints`
 
 ## hasSubquery Utility
 

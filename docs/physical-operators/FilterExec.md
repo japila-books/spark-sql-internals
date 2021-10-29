@@ -1,6 +1,6 @@
 # FilterExec Unary Physical Operator
 
-`FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents [Filter](../logical-operators/Filter.md) and [TypedFilter](../logical-operators/TypedFilter.md) unary logical operators at execution time.
+`FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents `Filter` and `TypedFilter` unary logical operators at execution time.
 
 `FilterExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) as follows:
 

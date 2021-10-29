@@ -2,7 +2,7 @@
 
 `MapPartitions` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent [Dataset.mapPartitions](../Dataset.md#mapPartitions) operator.
 
-`MapPartitions` is an [ObjectConsumer](ObjectConsumer.md) and an [ObjectProducer](ObjectProducer.md).
+`MapPartitions` is an `ObjectConsumer` and an `ObjectProducer`.
 
 ## Creating Instance
 
@@ -18,7 +18,7 @@
 
 ## Execution Planning
 
-`MapPartitions` is planned as [MapPartitionsExec](../physical-operators/MapPartitionsExec.md) physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
+`MapPartitions` is planned as `MapPartitionsExec` physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
 ## <span id="apply"> Creating MapPartitions
 

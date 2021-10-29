@@ -1,3 +1,0 @@
-# SQLShuffleWriteMetricsReporter
-
-`SQLShuffleWriteMetricsReporter` is...FIXME

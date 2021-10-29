@@ -39,4 +39,4 @@ transform(
 ## Implementations
 
 * [HashedRelationBroadcastMode](HashedRelationBroadcastMode.md)
-* [IdentityBroadcastMode](IdentityBroadcastMode.md)
+* `IdentityBroadcastMode`

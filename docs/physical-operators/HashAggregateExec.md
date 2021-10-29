@@ -4,7 +4,7 @@
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
-`HashAggregateExec` is a [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md).
+`HashAggregateExec` is a `BlockingOperatorWithCodegen`.
 
 `HashAggregateExec` is a [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
 

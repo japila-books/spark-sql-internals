@@ -14,12 +14,12 @@ query: SparkPlan
 
 ## Implementations
 
-* [AppendDataExec](AppendDataExec.md)
+* `AppendDataExec`
 * [AtomicTableWriteExec](AtomicTableWriteExec.md)
 * [CreateTableAsSelectExec](CreateTableAsSelectExec.md)
 * [OverwriteByExpressionExec](OverwriteByExpressionExec.md)
-* [OverwritePartitionsDynamicExec](OverwritePartitionsDynamicExec.md)
-* [ReplaceTableAsSelectExec](ReplaceTableAsSelectExec.md)
+* `OverwritePartitionsDynamicExec`
+* `ReplaceTableAsSelectExec`
 * [WriteToDataSourceV2Exec](WriteToDataSourceV2Exec.md)
 
 ## <span id="writeWithV2"> writeWithV2

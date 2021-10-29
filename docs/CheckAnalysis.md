@@ -18,7 +18,7 @@ isView(
 
 Used when:
 
-* `CheckAnalysis` is requested to [check analysis](#checkAnalysis) (of a logical plan with [UnresolvedV2Relation](logical-operators/UnresolvedV2Relation.md)s)
+* `CheckAnalysis` is requested to [check analysis](#checkAnalysis) (of a logical plan with `UnresolvedV2Relation`s)
 
 ## Implementations
 

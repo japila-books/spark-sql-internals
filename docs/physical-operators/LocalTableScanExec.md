@@ -70,17 +70,6 @@ scala> names.show
 |
 |===
 
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-`doExecute`...FIXME
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
 ## Creating Instance
 
 `LocalTableScanExec` takes the following when created:

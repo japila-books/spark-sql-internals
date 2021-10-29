@@ -43,7 +43,7 @@ createAlterTable(
 
 `createAlterTable` converts the [CatalogPlugin](CatalogPlugin.md) to a [TableCatalog](CatalogHelper.md#asTableCatalog).
 
-`createAlterTable` creates an [AlterTable](../../logical-operators/AlterTable.md) (with an [UnresolvedV2Relation](../../logical-operators/UnresolvedV2Relation.md)).
+`createAlterTable` creates an [AlterTable](../../logical-operators/AlterTable.md) (with an `UnresolvedV2Relation`).
 
 `createAlterTable` is used when:
 

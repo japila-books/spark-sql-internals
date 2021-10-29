@@ -1,3 +1,0 @@
-# MapPartitionsExec
-
-`MapPartitionsExec` is...FIXME

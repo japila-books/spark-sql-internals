@@ -22,28 +22,6 @@
 * [[serializer]] Serializer (as `Seq[NamedExpression]`)
 * [[child]] Child <<SparkPlan.md#, physical operator>> (that supports [Java code generation](CodegenSupport.md))
 
-=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
-
-[source, scala]
-----
-doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-----
-
-`doConsume`...FIXME
-
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-`doProduce`...FIXME
-
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
-
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
 [source, scala]

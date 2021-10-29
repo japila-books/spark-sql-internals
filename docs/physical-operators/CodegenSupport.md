@@ -46,23 +46,17 @@ Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical opera
 
 ## Implementations
 
-* [BaseLimitExec](BaseLimitExec.md)
-* [BlockingOperatorWithCodegen](BlockingOperatorWithCodegen.md)
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md)
 * [ColumnarToRowExec](ColumnarToRowExec.md)
 * [DebugExec](DebugExec.md)
-* [DeserializeToObjectExec](DeserializeToObjectExec.md)
-* ExpandExec
 * [FilterExec](FilterExec.md)
 * [GenerateExec](GenerateExec.md)
-* [InputRDDCodegen](InputRDDCodegen.md)
-* [MapElementsExec](MapElementsExec.md)
 * [ProjectExec](ProjectExec.md)
 * [RangeExec](RangeExec.md)
-* SampleExec
 * [SerializeFromObjectExec](SerializeFromObjectExec.md)
 * [SortMergeJoinExec](SortMergeJoinExec.md)
 * [WholeStageCodegenExec](WholeStageCodegenExec.md)
+* _others_
 
 ## Final Methods
 
@@ -169,7 +163,7 @@ Found 2 WholeStageCodegen subtrees.
 limitNotReachedCond: String
 ```
 
-`limitNotReachedCond` is used as a loop condition by [ColumnarToRowExec](ColumnarToRowExec.md), [SortExec](SortExec.md), [InputRDDCodegen](InputRDDCodegen.md) and [HashAggregateExec](HashAggregateExec.md) physical operators (when requested to [doProduce](#doProduce)).
+`limitNotReachedCond` is used as a loop condition by [ColumnarToRowExec](ColumnarToRowExec.md), [SortExec](SortExec.md), `InputRDDCodegen` and [HashAggregateExec](HashAggregateExec.md) physical operators (when requested to [doProduce](#doProduce)).
 
 `limitNotReachedCond` requests the [parent](#parent) physical operator for the [limit-not-reached checks](#limitNotReachedChecks).
 
@@ -317,7 +311,7 @@ limitNotReachedChecks: Seq[String]
 `limitNotReachedChecks` is used when:
 
 * `RangeExec` physical operator is requested to [doProduce](RangeExec.md#doProduce)
-* `BaseLimitExec` physical operator is requested to [limitNotReachedChecks](BaseLimitExec.md#limitNotReachedChecks)
+* `BaseLimitExec` physical operator is requested to `limitNotReachedChecks`
 * `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond)
 
 ## <span id="canCheckLimitNotReached"> canCheckLimitNotReached Method

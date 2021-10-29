@@ -14,7 +14,7 @@ InsertableRelation buildForV1Write()
 
 Used when:
 
-* [AppendDataExecV1](../physical-operators/AppendDataExecV1.md), [OverwriteByExpressionExecV1](../physical-operators/OverwriteByExpressionExecV1.md), [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), [ReplaceTableAsSelectExec](../physical-operators/ReplaceTableAsSelectExec.md) and [AtomicTableWriteExec](../physical-operators/AtomicTableWriteExec.md) physical commands are executed
+* `AppendDataExecV1`, `OverwriteByExpressionExecV1`, [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md), `ReplaceTableAsSelectExec` and [AtomicTableWriteExec](../physical-operators/AtomicTableWriteExec.md) physical commands are executed
 
 ## Implementations
 

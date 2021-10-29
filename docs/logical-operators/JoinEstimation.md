@@ -209,7 +209,7 @@ estimateInnerOuterJoin(): Option[Statistics]
 
 `estimateInnerOuterJoin` destructures <<join, Join logical operator>> into a join type with the left and right keys.
 
-`estimateInnerOuterJoin` simply returns `None` (i.e. _nothing_) when either side of the <<join, Join logical operator>> have no [row count statistic](EstimationUtils.md#rowCountsExist).
+`estimateInnerOuterJoin` simply returns `None` (i.e. _nothing_) when either side of the <<join, Join logical operator>> have no row count statistic.
 
 NOTE: `estimateInnerOuterJoin` is used exclusively when `JoinEstimation` is requested to <<estimate, estimate statistics and query hints of a Join logical operator>> for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
@@ -264,7 +264,7 @@ NOTE: `computeByHistogram` is used exclusively when `JoinEstimation` is requeste
 estimateLeftSemiAntiJoin(): Option[Statistics]
 ----
 
-`estimateLeftSemiAntiJoin` estimates statistics of the <<join, Join>> logical operator only when [estimated row count statistic is available](EstimationUtils.md#rowCountsExist). Otherwise, `estimateLeftSemiAntiJoin` simply returns `None` (i.e. no statistics estimated).
+`estimateLeftSemiAntiJoin` estimates statistics of the <<join, Join>> logical operator only when estimated row count statistic is available. Otherwise, `estimateLeftSemiAntiJoin` simply returns `None` (i.e. no statistics estimated).
 
 NOTE: spark-sql-cost-based-optimization.md#rowCount[row count] statistic of a table is available only after spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
 
@@ -276,7 +276,7 @@ NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPU
 
 In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](Statistics.md) with the following estimates:
 
-. [Total size (in bytes)](Statistics.md#sizeInBytes) is the [output size](EstimationUtils.md#getOutputSize) for the Join.md#output[output schema] of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
+. [Total size (in bytes)](Statistics.md#sizeInBytes) is the output size for the [output schema](Join.md#output) of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
 
 . [Row count](Statistics.md#rowCount) is exactly the row count of the left side
 

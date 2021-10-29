@@ -1,3 +1,0 @@
-# OrderPreservingUnaryNode
-
-`OrderPreservingUnaryNode` is...FIXME

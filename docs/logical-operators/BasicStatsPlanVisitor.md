@@ -19,11 +19,11 @@
 
 | [[Aggregate]] Aggregate.md[Aggregate]
 | [[visitAggregate]] [visitAggregate](LogicalPlanVisitor.md#visitAggregate)
-| Requests `AggregateEstimation` for [statistics estimates and query hints](AggregateEstimation.md#estimate) or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
+| Requests `AggregateEstimation` for statistics estimates and query hints or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
 
 | [[Filter]] `Filter`
 | [[visitFilter]] [visitFilter](LogicalPlanVisitor.md#visitFilter)
-| Requests `FilterEstimation` for [statistics estimates and query hints](FilterEstimation.md#estimate) or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
+| Requests `FilterEstimation` for statistics estimates and query hints or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
 
 | [[Join]] Join.md[Join]
 | [[visitJoin]] [visitJoin](LogicalPlanVisitor.md#visitJoin)
@@ -31,5 +31,5 @@
 
 | [[Project]] Project.md[Project]
 | [[visitProject]] [visitProject](LogicalPlanVisitor.md#visitProject)
-| Requests `ProjectEstimation` for [statistics estimates and query hints](ProjectEstimation.md#estimate) or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
+| Requests `ProjectEstimation` for statistics estimates and query hints or falls back to [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
 |===

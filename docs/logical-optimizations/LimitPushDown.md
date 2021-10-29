@@ -2,7 +2,7 @@
 
 `LimitPushDown` is a logical optimization to [transform](#apply) the following logical operators:
 
-* `LocalLimit` with [Union](../logical-operators/Union.md)
+* `LocalLimit` with `Union`
 * `LocalLimit` with [Join](../logical-operators/Join.md)
 
 `LimitPushDown` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).

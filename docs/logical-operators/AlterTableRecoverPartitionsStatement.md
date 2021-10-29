@@ -1,3 +1,0 @@
-# AlterTableRecoverPartitionsStatement
-
-`AlterTableRecoverPartitionsStatement` is...FIXME

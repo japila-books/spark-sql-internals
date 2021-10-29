@@ -25,9 +25,6 @@ trait ObjectConsumerExec extends UnaryExecNode {
 | `AppendColumnsWithObjectExec`
 | [[AppendColumnsWithObjectExec]]
 
-| <<MapElementsExec.md#, MapElementsExec>>
-| [[MapElementsExec]]
-
 | `MapPartitionsExec`
 | [[MapPartitionsExec]]
 

@@ -682,69 +682,6 @@ scala> dataset.transform(withDoubled).show
 
 Internally, `transform` executes `t` function on the current `Dataset[T]`.
 
-=== [[unionByName]] `unionByName` Typed Transformation
-
-[source, scala]
-----
-unionByName(other: Dataset[T]): Dataset[T]
-----
-
-`unionByName` creates a new `Dataset` that is an union of the rows in this and the other Datasets column-wise, i.e. the order of columns in Datasets does not matter as long as their names and number match.
-
-[source, scala]
-----
-val left = spark.range(1).withColumn("rand", rand()).select("id", "rand")
-val right = Seq(("0.1", 11)).toDF("rand", "id")
-val q = left.unionByName(right)
-scala> q.show
-+---+-------------------+
-| id|               rand|
-+---+-------------------+
-|  0|0.14747380134150134|
-| 11|                0.1|
-+---+-------------------+
-----
-
-Internally, `unionByName` creates a <<Union.md#, Union>> logical operator for this `Dataset` and <<Project.md#, Project>> logical operator with the `other` Dataset.
-
-In the end, `unionByName`...FIXME
-
-[source, scala]
-----
-scala> println(q.queryExecution.logical.numberedTreeString)
-00 'Union
-01 :- AnalysisBarrier
-02 :     +- Project [id#90L, rand#92]
-03 :        +- Project [id#90L, rand(-9144575865446031058) AS rand#92]
-04 :           +- Range (0, 1, step=1, splits=Some(8))
-05 +- AnalysisBarrier
-06       +- Project [id#103, rand#102]
-07          +- Project [_1#99 AS rand#102, _2#100 AS id#103]
-08             +- LocalRelation [_1#99, _2#100]
-----
-
-`unionByName` throws an `AnalysisException` if there are duplicate columns in either Dataset.
-
-```
-Found duplicate column(s)
-```
-
-`unionByName` throws an `AnalysisException` if there are columns in this Dataset has a column that is not available in the `other` Dataset.
-
-```
-Cannot resolve column name "[name]" among ([rightNames])
-```
-
-=== [[where]] `where` Typed Transformation
-
-[source, scala]
-----
-where(condition: Column): Dataset[T]
-where(conditionExpr: String): Dataset[T]
-----
-
-`where` is simply a synonym of the <<filter, filter>> operator, i.e. passes the input parameters along to `filter`.
-
 === [[withWatermark]] Creating Streaming Dataset with EventTimeWatermark Logical Operator -- `withWatermark` Streaming Typed Transformation
 
 [source, scala]

@@ -31,8 +31,8 @@ Used when:
 ## Implementations
 
 * [ReusedSubqueryExec](ReusedSubqueryExec.md)
-* [SubqueryAdaptiveBroadcastExec](SubqueryAdaptiveBroadcastExec.md)
-* [SubqueryBroadcastExec](SubqueryBroadcastExec.md)
+* `SubqueryAdaptiveBroadcastExec`
+* `SubqueryBroadcastExec`
 * [SubqueryExec](SubqueryExec.md)
 
 ## <span id="generateTreeString"> Text Representation

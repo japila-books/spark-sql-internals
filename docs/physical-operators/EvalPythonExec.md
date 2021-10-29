@@ -34,13 +34,3 @@ Used when `EvalPythonExec` physical operator is [executed](#doExecute)
 
 !!! note "Abstract Class"
     `EvalPythonExec` is an abstract class and cannot be created directly. It is created indirectly for the [concrete EvalPythonExecs](#implementations).
-
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute`...FIXME
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
