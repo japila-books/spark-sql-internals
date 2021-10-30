@@ -2,7 +2,7 @@
 
 ## Structured Data Processing with Relational Queries on Massive Scale
 
-**Spark SQL** allows expressing distributed in-memory computations using relational operators.
+**Spark SQL** allows expressing distributed in-memory computations using [relational operators](logical-operators/LogicalPlan.md).
 
 Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (with many features of HiveQL) and the high-level SQL-like functional declarative [Dataset API](Dataset.md) (_Structured Query DSL_).
 

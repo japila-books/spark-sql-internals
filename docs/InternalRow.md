@@ -46,7 +46,7 @@ Updates the `value` at column `i`
 
 ## Serializable
 
-`InternalRow` is a `Serializable` ([Java]({{ java.api }}/java.base/java/io/Serializable.html)).
+`InternalRow` is a `Serializable` ([Java]({{ java.api }}/java/io/Serializable.html)).
 
 ## Demo
 

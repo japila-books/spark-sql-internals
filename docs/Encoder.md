@@ -2,7 +2,7 @@
 
 `Encoder[T]` is an [abstraction](#contract) of [converters](#implementations) that can convert JVM objects (of type `T`) to and from the internal Spark SQL representation ([InternalRow](InternalRow.md)).
 
-`Encoder`s are `Serializable` ([Java]({{ java.api }}/java.base/java/io/Serializable.html)).
+`Encoder`s are `Serializable` ([Java]({{ java.api }}/java/io/Serializable.html)).
 
 `Encoder` is the fundamental concept in the **Serialization and Deserialization (SerDe) Framework**. Spark SQL uses the SerDe framework for IO to make it efficient time- and space-wise.
 

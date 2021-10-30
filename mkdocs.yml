@@ -95,7 +95,7 @@ extra:
     version: 2.3.9
     api: https://hive.apache.org/javadocs/r2.3.9/api
   java:
-    api: https://docs.oracle.com/en/java/javase/11/docs/api
+    api: https://docs.oracle.com/en/java/javase/11/docs/api/java.base
   kafka:
     api: https://kafka.apache.org/28/javadoc
   scala:
@@ -398,6 +398,7 @@ nav:
       - AggregateWindowFunction: expressions/AggregateWindowFunction.md
       - Aggregator: expressions/Aggregator.md
       - AttributeReference: expressions/AttributeReference.md
+      - AttributeSeq: expressions/AttributeSeq.md
       - Alias: expressions/Alias.md
       - Attribute: expressions/Attribute.md
       - BinaryComparison: expressions/BinaryComparison.md

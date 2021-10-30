@@ -43,7 +43,7 @@ res4: Seq[org.apache.spark.sql.catalyst.expressions.Attribute] = List(id#0L)
 ```
 
 !!! tip
-    You can build a [StructType](../types/StructType.md) from `output` collection of attributes using `toStructType` method (that is available through the implicit class `AttributeSeq`).
+    You can build a [StructType](../types/StructType.md) from `output` attributes using [toStructType](../expressions/AttributeSeq.md#toStructType).
 
     ```text
     scala> q.queryExecution.analyzed.output.toStructType

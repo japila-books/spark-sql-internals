@@ -20,7 +20,7 @@
 toString: String
 ```
 
-`toString` is part of the `Object` ([Java]({{ java.api }}/java.base/java/lang/Object.html#toString())) abstraction.
+`toString` is part of the `Object` ([Java]({{ java.api }}/java/lang/Object.html#toString())) abstraction.
 
 `toString` returns the following (with the [strategy](#strategy) if defined or `none`):
 

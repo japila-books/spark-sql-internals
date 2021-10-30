@@ -1,6 +1,6 @@
-# BoundReference Leaf Expression -- Reference to Value in Internal Binary Row
+# BoundReference Leaf Expression
 
-`BoundReference` is a [leaf expression](Expression.md#LeafExpression) that <<eval, evaluates to a value in an internal binary row>> at a specified <<ordinal, position>> and of a given <<dataType, data type>>.
+`BoundReference` is a [leaf expression](Expression.md#LeafExpression) that [evaluates to a value in an internal binary row](#eval) at a specified [position](#ordinal) and of a given [data type](#dataType).
 
 ```text
 import org.apache.spark.sql.catalyst.expressions.BoundReference
@@ -25,14 +25,20 @@ scala> println(boundRef)
 input[4, string, true]
 ```
 
-=== [[eval]] Evaluating Expression -- `eval` Method
+## Creating Instance
 
-[source, scala]
-----
-eval(input: InternalRow): Any
-----
+`BoundReference` takes the following to be created:
 
-`eval` is part of the [Expression](Expression.md#eval) abstraction.
+* [[ordinal]] Ordinal, i.e. the position
+* [[dataType]] [Data type](../types/DataType.md) of the value
+* [[nullable]] `nullable` flag that controls whether the value can be `null` or not
+
+## <span id="eval"> Evaluating Expression
+
+```scala
+eval(
+  input: InternalRow): Any
+```
 
 `eval` gives the value at <<ordinal, position>> from the given [InternalRow](../InternalRow.md) that is of a correct type.
 
@@ -92,35 +98,4 @@ Otherwise, `eval` uses the methods of `InternalRow` per the defined <<dataType, 
 | get(ordinal, dataType)
 |===
 
-## Creating Instance
-
-`BoundReference` takes the following to be created:
-
-* [[ordinal]] Ordinal, i.e. the position
-* [[dataType]] [Data type](../types/DataType.md) of the value
-* [[nullable]] `nullable` flag that controls whether the value can be `null` or not
-
-=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
-
-[source, scala]
-----
-doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
-----
-
-NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
-
-`doGenCode`...FIXME
-
-=== [[BindReferences]][[bindReference]] `BindReferences.bindReference` Method
-
-[source, scala]
-----
-bindReference[A <: Expression](
-  expression: A,
-  input: AttributeSeq,
-  allowFailures: Boolean = false): A
-----
-
-`bindReference`...FIXME
-
-NOTE: `bindReference` is used when...FIXME
+`eval` is part of the [Expression](Expression.md#eval) abstraction.

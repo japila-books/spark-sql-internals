@@ -79,7 +79,7 @@ The [sub-tree](../physical-operators/SparkPlan.md) of the main query plan of thi
 _resultOption: AtomicReference[Option[Any]]
 ```
 
-`QueryStageExec` uses a `_resultOption` transient volatile internal variable (of type [AtomicReference]({{ java.api }}/java.base/java/util/concurrent/atomic/AtomicReference.html)) for the result of a successful [materialization](#materialize) of the `QueryStageExec` operator (when preparing for query execution):
+`QueryStageExec` uses a `_resultOption` transient volatile internal variable (of type [AtomicReference]({{ java.api }}/java/util/concurrent/atomic/AtomicReference.html)) for the result of a successful [materialization](#materialize) of the `QueryStageExec` operator (when preparing for query execution):
 
 * [Broadcast variable](BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 * [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) (_submitting map stages_) for [ShuffleQueryStageExec](ShuffleQueryStageExec.md)

@@ -3,7 +3,7 @@
 [[creating-instance]]
 `CatalogStorageFormat` is the **storage specification** of a partition or a table, i.e. the metadata that includes the following:
 
-* [[locationUri]] Location URI (Java [URI]({{ java.api }}/java.base/java/net/URI.html))
+* [[locationUri]] Location URI (Java [URI]({{ java.api }}/java/net/URI.html))
 * [[inputFormat]] Input format
 * [[outputFormat]] Output format
 * [[serde]] SerDe

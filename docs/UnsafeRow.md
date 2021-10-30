@@ -51,7 +51,7 @@ Learn more in [KryoSerializable](https://github.com/EsotericSoftware/kryo#kryose
 
 ## <span id="Externalizable"> Java's Externalizable SerDe Protocol
 
-Learn more in [java.io.Externalizable]({{ java.api }}/java.base/java/io/Externalizable.html).
+Learn more in [java.io.Externalizable]({{ java.api }}/java/io/Externalizable.html).
 
 ## <span id="sizeInBytes"> sizeInBytes
 
@@ -181,7 +181,7 @@ void readExternal(
   ObjectInput in)
 ```
 
-`readExternal` is part of the `Externalizable` ([Java]({{ java.api }}/java.base/java/io/Externalizable.html#readExternal(java.io.ObjectInput))) abstraction.
+`readExternal` is part of the `Externalizable` ([Java]({{ java.api }}/java/io/Externalizable.html#readExternal(java.io.ObjectInput))) abstraction.
 
 ## Demo
 

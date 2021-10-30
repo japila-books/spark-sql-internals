@@ -35,7 +35,7 @@ With [spark.sql.codegen.wholeStage](../configuration-properties.md#spark.sql.cod
 
 `CollapseCodegenStages` takes the following to be created:
 
-* <span id="codegenStageCounter"> Codegen Stage Counter (Java's [AtomicInteger]({{ java.api }}/java.base/java/util/concurrent/atomic/AtomicInteger.html))
+* <span id="codegenStageCounter"> Codegen Stage Counter (Java's [AtomicInteger]({{ java.api }}/java/util/concurrent/atomic/AtomicInteger.html))
 
 `CollapseCodegenStages` is created when:
 

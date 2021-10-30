@@ -18,4 +18,4 @@ Used when:
 
 ## Data Source Discovery
 
-`DataSourceRegister` should register itself in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for Java's [ServiceLoader]({{ java.api }}/java.base/java/util/ServiceLoader.html#load(java.lang.Class,java.lang.ClassLoader)) to discover the service.
+`DataSourceRegister` should register itself in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for Java's [ServiceLoader]({{ java.api }}/java/util/ServiceLoader.html#load(java.lang.Class,java.lang.ClassLoader)) to discover the service.

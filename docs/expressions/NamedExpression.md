@@ -22,11 +22,13 @@ name: String
 newInstance(): NamedExpression
 ```
 
-### <span id="qualifier"> Qualifier
+### <span id="qualifier"> Qualifier (Parts)
 
 ```scala
 qualifier: Seq[String]
 ```
+
+Optional qualifier parts (with the names of catalog, database, table, fields, incl. nested fields)
 
 ### <span id="toAttribute"> toAttribute
 
@@ -38,12 +40,8 @@ toAttribute: Attribute
 
 * [Alias](Alias.md)
 * [Attribute](Attribute.md)
-* MultiAlias
-* NamedLambdaVariable
-* OuterReference
 * [Star](Star.md)
-* UnresolvedAlias
-* UnresolvedNamedLambdaVariable
+* _others_
 
 ## <span id="foldable"> foldable
 

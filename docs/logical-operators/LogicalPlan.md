@@ -84,37 +84,18 @@ refresh(): Unit
 
 * `CatalogImpl` is requested to [refresh a table](../CatalogImpl.md#refreshTable)
 
-## <span id="resolveQuoted"> resolveQuoted
-
-```scala
-resolveQuoted(
-  name: String,
-  resolver: Resolver): Option[NamedExpression]
-```
-
-`resolveQuoted`...FIXME
-
-`resolveQuoted` is used when...FIXME
-
 ## <span id="resolve"> Resolving Column Attributes to References in Query Plan
 
 ```scala
 resolve(
-  schema: StructType,
-  resolver: Resolver): Seq[Attribute]
-resolve(
   nameParts: Seq[String],
   resolver: Resolver): Option[NamedExpression]
 resolve(
-  nameParts: Seq[String],
-  input: Seq[Attribute],
-  resolver: Resolver): Option[NamedExpression]  // <1>
+  schema: StructType,
+  resolver: Resolver): Seq[Attribute]
 ```
-<1> A protected method
 
-`resolve`...FIXME
-
-`resolve` is used when...FIXME
+`resolve` requests the [outputAttributes](#outputAttributes) to [resolve](../expressions/AttributeSeq.md#resolve) and then the [outputMetadataAttributes](#outputMetadataAttributes) if the first [resolve](../expressions/AttributeSeq.md#resolve) did not give a [NamedExpression](../expressions/NamedExpression.md).
 
 ## Accessing Logical Query Plan of Structured Query
 
