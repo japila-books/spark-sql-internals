@@ -3136,27 +3136,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedCatalogRelation/</loc>
-         <lastmod>2021-10-30</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedHaving/</loc>
          <lastmod>2021-10-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedHint/</loc>
-         <lastmod>2021-10-30</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedInlineTable/</loc>
-         <lastmod>2021-10-30</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-operators/UnresolvedRelation/</loc>
          <lastmod>2021-10-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
