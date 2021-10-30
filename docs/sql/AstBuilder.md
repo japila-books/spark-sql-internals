@@ -472,7 +472,7 @@ Creates one of the following logical operators:
 * [InsertIntoStatement](../logical-operators/InsertIntoStatement.md)
 * [InsertIntoDir](../logical-operators/InsertIntoDir.md)
 
-`withInsertInto` is used for [visitMultiInsertQuery](#visitMultiInsertQuery) and [visitSingleInsertQuery](#visitSingleInsertQuery)
+Used in [visitMultiInsertQuery](#visitMultiInsertQuery) and [visitSingleInsertQuery](#visitSingleInsertQuery)
 
 ### <span id="withJoinRelations"> withJoinRelations
 
@@ -495,7 +495,7 @@ The following join criteria are supported:
 
 Joins can be `NATURAL` (with no join criteria)
 
-### withQuerySpecification
+### <span id="withQuerySpecification"> withQuerySpecification
 
 Adds a query specification to a logical operator
 
@@ -521,10 +521,15 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 * `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../expressions/In.md) predicate expression
 
-### <span id="withQueryResultClauses"> withQueryResultClauses
+### <span id="withPivot"> withPivot
 
-!!! important FIXME
-    This section needs your help
+Creates a [Pivot](../logical-operators/Pivot.md) unary logical operator for the following SQL clause:
+
+```text
+PIVOT '(' aggregates FOR pivotColumn IN '(' pivotValue (',' pivotValue)* ')' ')'
+```
+
+Used in [visitFromClause](#visitFromClause)
 
 ### <span id="withRepartitionByExpression"> withRepartitionByExpression
 
@@ -534,49 +539,15 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 DISTRIBUTE BY is not supported
 ```
 
-`withRepartitionByExpression` is used when `AstBuilder` is requested to [withQueryResultClauses](#withQueryResultClauses) (for `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses).
-
-### <span id="withSample"> withSample
-
-!!! important FIXME
-    This section needs your help
-
-### <span id="withSelectQuerySpecification"> withSelectQuerySpecification
-
-!!! important FIXME
-    This section needs your help
+Used in [withQueryResultClauses](#withQueryResultClauses)
 
 ### withWindows
 
 Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../spark-sql-functions-windows.md) (given `WINDOW` definitions).
-
-Used for [withQueryResultClauses](#withQueryResultClauses) and [withQuerySpecification](#withQuerySpecification) with `windows` definition.
 
 ```text
 WINDOW identifier AS windowSpec
   (',' identifier AS windowSpec)*
 ```
 
-## `aliasPlan` Method
-
-```scala
-aliasPlan(
-  alias: ParserRuleContext,
-  plan: LogicalPlan): LogicalPlan
-```
-
-`aliasPlan`...FIXME
-
-`aliasPlan` is used when...FIXME
-
-## `mayApplyAliasPlan` Method
-
-```scala
-mayApplyAliasPlan(
-  tableAlias: TableAliasContext,
-  plan: LogicalPlan): LogicalPlan
-```
-
-`mayApplyAliasPlan`...FIXME
-
-`mayApplyAliasPlan` is used when...FIXME
+Used in [withQueryResultClauses](#withQueryResultClauses) and [withQuerySpecification](#withQuerySpecification)
