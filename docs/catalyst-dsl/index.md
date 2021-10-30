@@ -110,7 +110,7 @@ import org.apache.spark.sql.catalyst.dsl.plans._
 
 ### <span id="table"> table
 
-`table` creates a [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) logical operator.
+`table` creates a `UnresolvedRelation` logical operator.
 
 ```scala
 table(

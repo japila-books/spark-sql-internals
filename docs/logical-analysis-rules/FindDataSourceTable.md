@@ -1,4 +1,4 @@
-# FindDataSourceTable Logical Evaluation Rule -- Resolving UnresolvedCatalogRelations
+# FindDataSourceTable Logical Evaluation Rule
 
 `FindDataSourceTable` is a catalyst/Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.
 
@@ -48,21 +48,20 @@ scala> println(tablesResolvedPlan.numberedTreeString)
 02    +- Relation[id#10L] parquet
 ```
 
-=== [[apply]] Applying Rule to Logical Plan (Resolving UnresolvedCatalogRelations) -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(
   plan: LogicalPlan): LogicalPlan
-----
+```
 
-NOTE: `apply` is part of catalyst/Rule.md#apply[Rule] contract.
+`apply` resolves `UnresolvedCatalogRelation`s for Spark (Data Source) and Hive tables:
 
-`apply` resolves UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] for Spark (Data Source) and Hive tables:
+* `apply` [creates HiveTableRelation logical operators](#readDataSourceTable) for `UnresolvedCatalogRelation`s of [Spark tables](../spark-sql-DDLUtils.md#isDatasourceTable) (incl. `InsertIntoTable`s)
 
-* `apply` <<readDataSourceTable, creates HiveTableRelation logical operators>> for UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of spark-sql-DDLUtils.md#isDatasourceTable[Spark tables] (incl. InsertIntoTable.md[InsertIntoTable] operators)
+* `apply` [creates LogicalRelation logical operators](#readHiveTable) for `InsertIntoTable`s with `UnresolvedCatalogRelation` of a Hive table or `UnresolvedCatalogRelation`s of a Hive table
 
-* `apply` <<readHiveTable, creates LogicalRelation logical operators>> for InsertIntoTable.md[InsertIntoTable] operators with UnresolvedCatalogRelation.md[UnresolvedCatalogRelation] of a Hive table or UnresolvedCatalogRelation.md[UnresolvedCatalogRelations] of a Hive table
+`apply` is part of [Rule](../catalyst/Rule.md#apply) contract.
 
 === [[readHiveTable]] Creating HiveTableRelation Logical Operator -- `readHiveTable` Internal Method
 

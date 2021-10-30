@@ -37,4 +37,4 @@ Reference '[name]' is ambiguous, could be: [referenceNames].
 `resolve` is used when:
 
 * `LateralJoin` is requested to `resolveChildren`
-* `LogicalPlan` is requested to [resolveChildren](../LogicalPlan.md#resolveChildren) and [resolve](../LogicalPlan.md#resolve)
+* `LogicalPlan` is requested to [resolveChildren](../logical-operators/LogicalPlan.md#resolveChildren) and [resolve](../logical-operators/LogicalPlan.md#resolve)

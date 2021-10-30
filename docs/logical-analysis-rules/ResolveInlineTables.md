@@ -32,18 +32,18 @@ scala> println(planAfterResolveInlineTables.numberedTreeString)
 00 LocalRelation [col1#2]
 ```
 
-=== [[apply]] Executing Rule -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
-apply(plan: LogicalPlan): LogicalPlan
-----
+```scala
+apply(
+  plan: LogicalPlan): LogicalPlan
+```
 
-`apply` simply [searches the input plan upwards](../catalyst/TreeNode.md#transformUp) to find <<UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operators with <<UnresolvedInlineTable.md#expressionsResolved, rows expressions resolved>>.
+`apply` simply [searches the input plan upwards](../catalyst/TreeNode.md#transformUp) to find `UnresolvedInlineTable` logical operators with rows expressions resolved.
 
-For such a <<UnresolvedInlineTable.md#, UnresolvedInlineTable>> logical operator, `apply` <<validateInputDimension, validateInputDimension>> and <<validateInputEvaluable, validateInputEvaluable>>.
+For such a `UnresolvedInlineTable` logical operator, `apply` [validateInputDimension](#validateInputDimension) and [validateInputEvaluable](#validateInputEvaluable).
 
-In the end, `apply` <<convert, converts the UnresolvedInlineTable to a LocalRelation>>.
+In the end, `apply` [converts the UnresolvedInlineTable to a LocalRelation](#convert).
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 

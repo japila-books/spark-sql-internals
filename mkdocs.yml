@@ -227,27 +227,8 @@ nav:
       - JoinEstimation: logical-operators/JoinEstimation.md
     - Logical Operators:
       - logical-operators/index.md
-      - LogicalPlan: logical-operators/LogicalPlan.md
-      - AlterTable: logical-operators/AlterTable.md
-      - CommentOnTable: logical-operators/CommentOnTable.md
-      - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
-      - CTERelationRef: logical-operators/CTERelationRef.md
-      - CacheTableCommand: logical-operators/CacheTableCommand.md
-      - IgnoreCachedData: logical-operators/IgnoreCachedData.md
-      - MapPartitions: logical-operators/MapPartitions.md
-      - Command: logical-operators/Command.md
-      - DataWritingCommand: logical-operators/DataWritingCommand.md
-      - LeafNode: logical-operators/LeafNode.md
-      - MultiInstanceRelation: logical-operators/MultiInstanceRelation.md
-      - NamedRelation: logical-operators/NamedRelation.md
-      - ParsedStatement: logical-operators/ParsedStatement.md
-      - RepartitionOperation: logical-operators/RepartitionOperation.md
-      - ResolvedTable: logical-operators/ResolvedTable.md
-      - RunnableCommand: logical-operators/RunnableCommand.md
-      - SupportsSubquery: logical-operators/SupportsSubquery.md
-      - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
-      - V2WriteCommand: logical-operators/V2WriteCommand.md
       - Aggregate: logical-operators/Aggregate.md
+      - AlterTable: logical-operators/AlterTable.md
       - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
       - AnalyzeColumn: logical-operators/AnalyzeColumn.md
       - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
@@ -255,19 +236,25 @@ nav:
       - AnalyzeTable: logical-operators/AnalyzeTable.md
       - AnalyzeTableCommand: logical-operators/AnalyzeTableCommand.md
       - AppendData: logical-operators/AppendData.md
+      - CacheTableCommand: logical-operators/CacheTableCommand.md
       - ClearCacheCommand: logical-operators/ClearCacheCommand.md
       - CollectMetrics: logical-operators/CollectMetrics.md
+      - Command: logical-operators/Command.md
+      - CommentOnTable: logical-operators/CommentOnTable.md
       - CreateDataSourceTableAsSelectCommand: logical-operators/CreateDataSourceTableAsSelectCommand.md
       - CreateDataSourceTableCommand: logical-operators/CreateDataSourceTableCommand.md
       - CreateTable: logical-operators/CreateTable.md
+      - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
       - CreateTableAsSelectStatement: logical-operators/CreateTableAsSelectStatement.md
       - CreateTableStatement: logical-operators/CreateTableStatement.md
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
       - CreateV2Table: logical-operators/CreateV2Table.md
       - CreateViewCommand: logical-operators/CreateViewCommand.md
       - CTERelationDef: logical-operators/CTERelationDef.md
+      - CTERelationRef: logical-operators/CTERelationRef.md
       - DataSourceV2Relation: logical-operators/DataSourceV2Relation.md
       - DataSourceV2ScanRelation: logical-operators/DataSourceV2ScanRelation.md
+      - DataWritingCommand: logical-operators/DataWritingCommand.md
       - DeleteFromTable: logical-operators/DeleteFromTable.md
       - DescribeColumnCommand: logical-operators/DescribeColumnCommand.md
       - DescribeRelation: logical-operators/DescribeRelation.md
@@ -280,6 +267,7 @@ nav:
       - Generate: logical-operators/Generate.md
       - GlobalLimit: logical-operators/GlobalLimit.md
       - GroupingSets: logical-operators/GroupingSets.md
+      - IgnoreCachedData: logical-operators/IgnoreCachedData.md
       - InMemoryRelation: logical-operators/InMemoryRelation.md
       - InsertIntoDataSourceCommand: logical-operators/InsertIntoDataSourceCommand.md
       - InsertIntoDir: logical-operators/InsertIntoDir.md
@@ -287,19 +275,26 @@ nav:
       - InsertIntoStatement: logical-operators/InsertIntoStatement.md
       - InsertIntoTable: logical-operators/InsertIntoTable.md
       - Join: logical-operators/Join.md
+      - LeafNode: logical-operators/LeafNode.md
       - LocalRelation: logical-operators/LocalRelation.md
+      - LogicalPlan: logical-operators/LogicalPlan.md
       - LogicalRDD: logical-operators/LogicalRDD.md
       - LogicalRelation: logical-operators/LogicalRelation.md
+      - MapPartitions: logical-operators/MapPartitions.md
       - MergeIntoTable: logical-operators/MergeIntoTable.md
+      - MultiInstanceRelation: logical-operators/MultiInstanceRelation.md
+      - NamedRelation: logical-operators/NamedRelation.md
       - OverwriteByExpression: logical-operators/OverwriteByExpression.md
       - OverwritePartitionsDynamic: logical-operators/OverwritePartitionsDynamic.md
+      - ParsedStatement: logical-operators/ParsedStatement.md
       - Pivot: logical-operators/Pivot.md
       - Project: logical-operators/Project.md
       - RebalancePartitions: logical-operators/RebalancePartitions.md
       - RepairTableStatement: logical-operators/RepairTableStatement.md
-      - Repartition: logical-operators/RepartitionOperation/#Repartition
-      - RepartitionByExpression: logical-operators/RepartitionOperation/#RepartitionByExpression
+      - RepartitionOperation: logical-operators/RepartitionOperation.md
       - ResolvedHint: logical-operators/ResolvedHint.md
+      - ResolvedTable: logical-operators/ResolvedTable.md
+      - RunnableCommand: logical-operators/RunnableCommand.md
       - SaveIntoDataSourceCommand: logical-operators/SaveIntoDataSourceCommand.md
       - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
       - ShowCreateTableCommand: logical-operators/ShowCreateTableCommand.md
@@ -310,22 +305,22 @@ nav:
       - ShowTables: logical-operators/ShowTables.md
       - Sort: logical-operators/Sort.md
       - SubqueryAlias: logical-operators/SubqueryAlias.md
+      - SupportsSubquery: logical-operators/SupportsSubquery.md
       - TruncateTableCommand: logical-operators/TruncateTableCommand.md
-      - UnresolvedCatalogRelation: logical-operators/UnresolvedCatalogRelation.md
       - UnresolvedHaving: logical-operators/UnresolvedHaving.md
       - UnresolvedHint: logical-operators/UnresolvedHint.md
-      - UnresolvedInlineTable: logical-operators/UnresolvedInlineTable.md
-      - UnresolvedRelation: logical-operators/UnresolvedRelation.md
       - UnresolvedTable: logical-operators/UnresolvedTable.md
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedWith: logical-operators/UnresolvedWith.md
       - UpdateTable: logical-operators/UpdateTable.md
       - UseStatement: logical-operators/UseStatement.md
+      - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
+      - V2WriteCommand: logical-operators/V2WriteCommand.md
+      - View: logical-operators/View.md
       - Window: logical-operators/Window.md
       - WithCTE: logical-operators/WithCTE.md
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md
       - WriteToDataSourceV2: logical-operators/WriteToDataSourceV2.md
-      - View: logical-operators/View.md
     - SparkSession Registries:
       - Catalog:
         - Catalog: Catalog.md

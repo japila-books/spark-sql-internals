@@ -31,5 +31,5 @@ Used when:
 
 * [DataSourceV2Relation](DataSourceV2Relation.md)
 * [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md)
-* [UnresolvedRelation](UnresolvedRelation.md)
+* `UnresolvedRelation`
 * `UnresolvedV2Relation`

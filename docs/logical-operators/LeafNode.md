@@ -1,6 +1,6 @@
-# LeafNode &mdash; Leaf Logical Operators
+# LeafNodes
 
-`LeafNode` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [leaf logical operators](#implementations).
+`LeafNode` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [leaf logical operators](#implementations) (with no [child nodes](#children)).
 
 ## Implementations
 
@@ -14,9 +14,6 @@
 * [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md)
 * [LogicalRDD](LogicalRDD.md)
 * [LogicalRelation](LogicalRelation.md)
-* [UnresolvedCatalogRelation](UnresolvedCatalogRelation.md)
-* [UnresolvedInlineTable](UnresolvedInlineTable.md)
-* [UnresolvedRelation](UnresolvedRelation.md)
 * _others_
 
 ## <span id="children"> Children
@@ -25,9 +22,9 @@
 children: Seq[LogicalPlan]
 ```
 
-`children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
-
 `children` is an empty collection (to denote being a leaf in an operator tree).
+
+`children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
 
 ## <span id="computeStats"> Statistics
 

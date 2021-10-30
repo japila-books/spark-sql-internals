@@ -137,7 +137,7 @@ res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecde
 
 ### visitInlineTable
 
-Creates a [UnresolvedInlineTable](../logical-operators/UnresolvedInlineTable.md) unary logical operator (as the child of [SubqueryAlias](../logical-operators/SubqueryAlias.md) for `tableAlias`)
+Creates a `UnresolvedInlineTable` unary logical operator (as the child of [SubqueryAlias](../logical-operators/SubqueryAlias.md) for `tableAlias`)
 
 ```text
 VALUES expression (',' expression)* tableAlias
@@ -223,7 +223,7 @@ ANTLR labeled alternative: `#mergeIntoTable`
 
 ### visitMultiInsertQuery
 
-Creates a logical operator with a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (and [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) leaf operator)
+Creates a logical operator with a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (and `UnresolvedRelation` leaf operator)
 
 ```text
 FROM relation (',' relation)* lateralView*

@@ -2,14 +2,14 @@
 
 ## Structured Data Processing with Relational Queries on Massive Scale
 
-**Spark SQL** allows expressing distributed in-memory computations using [relational operators](logical-operators/LogicalPlan.md).
+**Spark SQL** allows expressing distributed in-memory computations using [relational operators](logical-operators/index.md).
 
-Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (with many features of HiveQL) and the high-level SQL-like functional declarative [Dataset API](Dataset.md) (_Structured Query DSL_).
+Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (incl. HiveQL) and the high-level SQL-like functional declarative [Dataset API](Dataset.md) (_Structured Query DSL_).
 
 !!! note
     Semi- and structured data are collections of records that can be described using [schema](types/index.md) with column names, their types and whether a column can be null or not (_nullability_).
 
-Spark SQL comes with a uniform interface for data access in distributed storage systems like Cassandra or HDFS (Hive, Parquet, JSON) using specialized [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) objects.
+Spark SQL comes with a uniform and pluggable interface for data access in distributed storage systems and formats (e.g. Hadoop DFS, [Hive](hive/index.md), [Parquet](datasources/parquet/index.md), [Avro](datasources/avro/index.md), [Apache Kafka](datasources/kafka/index.md)) using [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) APIs.
 
 Spark SQL allows you to execute SQL-like queries on large volume of data that can live in Hadoop HDFS or Hadoop-compatible file systems like S3. It can access data from different data sources - files or tables.
 

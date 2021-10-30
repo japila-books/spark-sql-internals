@@ -1,8 +1,8 @@
 # ResolveRelations Logical Resolution Rule
 
-`ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to <<apply, resolve UnresolvedRelations>> (in a logical query plan), i.e.
+`ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to [resolve UnresolvedRelations](#apply) (in a logical query plan), i.e.
 
-* Resolves UnresolvedRelation.md[UnresolvedRelation] logical operators (in InsertIntoTable.md[InsertIntoTable] operators)
+* Resolves `UnresolvedRelation` logical operators (in `InsertIntoTable` operators)
 
 * Other uses of `UnresolvedRelation`
 
@@ -70,37 +70,24 @@ scala> println(resolvedPlan.numberedTreeString)
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
 ```
 
-=== [[apply]] Applying ResolveRelations to Logical Plan -- `apply` Method
+## <span id="apply"> Executing Rule
 
-[source, scala]
-----
+```scala
 apply(
   plan: LogicalPlan): LogicalPlan
-----
-
-NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to execute a rule on a spark-sql-LogicalPlan.md[logical plan].
-
-For a InsertIntoTable.md[InsertIntoTable] logical operator with a UnresolvedRelation.md[UnresolvedRelation] child operator, `apply` <<lookupTableFromCatalog, lookupTableFromCatalog>> and executes the EliminateSubqueryAliases.md[EliminateSubqueryAliases] optimization rule.
-
-For a View.md[View] operator, `apply` substitutes the resolved table for the InsertIntoTable.md[InsertIntoTable] operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For View.md[View] operator, `apply` fail analysis with the exception:
-
 ```
+
+For a `InsertIntoTable` logical operator with a `UnresolvedRelation` child operator, `apply` [lookupTableFromCatalog](#lookupTableFromCatalog) and executes the [EliminateSubqueryAliases](../logical-optimizations/EliminateSubqueryAliases.md) optimization rule.
+
+For a [View](../logical-operators/View.md) operator, `apply` substitutes the resolved table for the [InsertIntoTable](../logical-operators/InsertIntoTable.md) operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For [View](../logical-operators/View.md) operator, `apply` fail analysis with the exception:
+
+```text
 Inserting into a view is not allowed. View: [identifier].
 ```
 
-For UnresolvedRelation.md[UnresolvedRelation] logical operators, `apply` simply <<resolveRelation, resolveRelation>>.
+For `UnresolvedRelation` logical operators, `apply` simply [resolveRelation](#resolveRelation).
 
-=== [[resolveRelation]] Resolving Relation -- `resolveRelation` Method
-
-[source, scala]
-----
-resolveRelation(
-  plan: LogicalPlan): LogicalPlan
-----
-
-`resolveRelation`...FIXME
-
-NOTE: `resolveRelation` is used when `ResolveRelations` rule is <<apply, executed>> (for a UnresolvedRelation.md[UnresolvedRelation] logical operator).
+`apply` is part of [Rule Contract](../catalyst/Rule.md#apply) abstraction.
 
 === [[isRunningDirectlyOnFiles]] `isRunningDirectlyOnFiles` Internal Method
 
@@ -119,7 +106,7 @@ isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
 
 * The [database](../SessionCatalog.md#databaseExists) or the [table](../SessionCatalog.md#tableExists) do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
 
-NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a UnresolvedRelation.md[UnresolvedRelation] leaf logical operator for a table reference).
+NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a `UnresolvedRelation` leaf logical operator for a table reference).
 
 === [[lookupTableFromCatalog]] Finding Table in Session-Scoped Catalog of Relational Entities -- `lookupTableFromCatalog` Internal Method
 
@@ -134,8 +121,6 @@ lookupTableFromCatalog(
 
 NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current [SessionCatalog](../Analyzer.md#catalog).
 
-NOTE: The table is described using UnresolvedRelation.md#tableIdentifier[TableIdentifier] of the input `UnresolvedRelation`.
-
 `lookupTableFromCatalog` fails the analysis phase (by reporting a `AnalysisException`) when the table or the table's database cannot be found.
 
-NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for InsertIntoTable.md[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" UnresolvedRelation.md[UnresolvedRelations]).
+NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for InsertIntoTable.md[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" `UnresolvedRelation`).

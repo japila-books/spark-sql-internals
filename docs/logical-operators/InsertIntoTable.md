@@ -43,7 +43,7 @@ CAUTION: FIXME What's the difference between HiveAnalysis that converts `InsertI
 
 NOTE: Inserting into <<inserting-into-view-not-allowed, views>> or <<inserting-into-rdd-based-table-not-allowed, RDD-based tables>> is not allowed (and fails at analysis).
 
-`InsertIntoTable` (with UnresolvedRelation.md[UnresolvedRelation] leaf logical operator) is <<creating-instance, created>> when:
+`InsertIntoTable` (with `UnresolvedRelation` leaf logical operator) is <<creating-instance, created>> when:
 
 * [[INSERT_INTO_TABLE]][[INSERT_OVERWRITE_TABLE]] `INSERT INTO` or `INSERT OVERWRITE TABLE` SQL statements are executed (as a sql/AstBuilder.md#visitSingleInsertQuery[single insert] or a sql/AstBuilder.md#visitMultiInsertQuery[multi-insert] query)
 
@@ -92,7 +92,7 @@ assert(op.isInstanceOf[InsertIntoTable])
 
 ## Inserting Into View Not Allowed
 
-Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a [UnresolvedRelation](UnresolvedRelation.md) leaf operator that is resolved to a [View](View.md) unary operator fails at analysis (when [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution is executed).
+Inserting into a view is not allowed, i.e. a query plan with an `InsertIntoTable` operator with a `UnresolvedRelation` leaf operator that is resolved to a [View](View.md) unary operator fails at analysis (when [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution is executed).
 
 ```text
 Inserting into a view is not allowed. View: [name].

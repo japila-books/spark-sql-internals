@@ -1,6 +1,6 @@
 # Logical Operators
 
-**Logical Operators** (_Logical Relational Operators_) are building blocks of logical query plans.
+**Logical Operators** (_Logical Relational Operators_) are building blocks of logical query plans in Spark SQL.
 
 **Logical Query Plan** is a tree of [nodes](../catalyst/TreeNode.md) of logical operators that in turn can have (trees of) [Catalyst expressions](../expressions/Expression.md). In other words, there are _at least_ two trees at every level (operator).
 
