@@ -1,26 +1,34 @@
 # Aggregate Logical Operator
 
-`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode).
+`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in a [logical query plan](LogicalPlan.md):
+
+* `AstBuilder` is requested to [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan) (`HAVING` clause without `GROUP BY`) and [parse GROUP BY clause](../sql/AstBuilder.md#withAggregationClause)
+* `KeyValueGroupedDataset` is requested to [agg](../KeyValueGroupedDataset.md#agg) (and [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped))
+* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
 
 ## Creating Instance
 
 `Aggregate` takes the following to be created:
 
-* <span id="groupingExpressions"> Grouping [expressions](../expressions/Expression.md)
-* <span id="aggregateExpressions"> Aggregate [named expressions](../expressions/NamedExpression.md)
-* <span id="child"> Child [logical plan](LogicalPlan.md)
+* <span id="groupingExpressions"> Grouping [Expression](../expressions/Expression.md)s
+* <span id="aggregateExpressions"> Aggregate [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
 
 `Aggregate` is created when:
 
-* `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
 * `AstBuilder` is requested to [withSelectQuerySpecification](../sql/AstBuilder.md#withSelectQuerySpecification) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
+* `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
 * `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped)
 * `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
 
 ## Query Planning
 
-`Aggregate` logical operator is planned to one of [HashAggregateExec](../physical-operators/HashAggregateExec.md), [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
+`Aggregate` logical operator is planned to one of the physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (using [PhysicalAggregation](../PhysicalAggregation.md) utility):
+
+* [HashAggregateExec](../physical-operators/HashAggregateExec.md)
+* [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
+* [SortAggregateExec](../physical-operators/SortAggregateExec.md)
 
 ## Logical Optimization
 

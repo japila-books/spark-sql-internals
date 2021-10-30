@@ -35,6 +35,10 @@ COMMENT ON TABLE tableIdentifier IS ('text' | NULL)
 
 ANTLR labeled alternative: `#commentTable`
 
+### <span id="visitCommonSelectQueryClausePlan"> visitCommonSelectQueryClausePlan
+
+Used in [withTransformQuerySpecification](#withTransformQuerySpecification) and [withSelectQuerySpecification](#withSelectQuerySpecification)
+
 ### <span id="visitCreateTable"> visitCreateTable
 
 Creates a [CreateTableAsSelectStatement](../logical-operators/CreateTableAsSelectStatement.md) or a [CreateTableStatement](../logical-operators/CreateTableStatement.md) logical command
@@ -422,7 +426,7 @@ ANTLR rule: `windowDef`
 
 ### <span id="withAggregationClause"> withAggregationClause
 
-Adds one of the following logical operators:
+Creates one of the following logical operators:
 
 * [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY ... GROUPING SETS (...)`
 
@@ -439,6 +443,10 @@ namedQuery
     : name (columnAliases)? AS? '(' query ')'
     ;
 ```
+
+### <span id="withFromStatementBody"> withFromStatementBody
+
+Used in [visitFromStatement](#visitFromStatement) and [visitMultiInsertQuery](#visitMultiInsertQuery)
 
 ### <span id="withGenerate"> withGenerate
 
@@ -541,7 +549,15 @@ DISTRIBUTE BY is not supported
 
 Used in [withQueryResultClauses](#withQueryResultClauses)
 
-### withWindows
+### <span id="withSelectQuerySpecification"> withSelectQuerySpecification
+
+Used in [withFromStatementBody](#withFromStatementBody) and [visitRegularQuerySpecification](#visitRegularQuerySpecification)
+
+### <span id="withTransformQuerySpecification"> withTransformQuerySpecification
+
+Used in [withFromStatementBody](#withFromStatementBody) and [visitTransformQuerySpecification](#visitTransformQuerySpecification)
+
+### <span id="withWindows"> withWindows
 
 Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../spark-sql-functions-windows.md) (given `WINDOW` definitions).
 
