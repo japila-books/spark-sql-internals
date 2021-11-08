@@ -36,3 +36,9 @@ Used to transform query plans in the following rules:
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
 * [PlanExpression](../expressions/PlanExpression.md)
+
+## <span id="UNRESOLVED_HINT"> UNRESOLVED_HINT
+
+Used as a [node pattern](TreeNode.md#nodePatterns):
+
+* [UnresolvedHint](../logical-operators/UnresolvedHint.md#nodePatterns)

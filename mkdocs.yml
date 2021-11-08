@@ -712,19 +712,18 @@ nav:
       - ScalaReflection: ScalaReflection.md
   - AQE:
     - adaptive-query-execution/index.md
-    - AQEUtils: adaptive-query-execution/AQEUtils.md
-    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
-    - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
-    - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
-    - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
-    - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
-    - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
-    - ShuffleStage: adaptive-query-execution/ShuffleStage.md
     - Adaptive Logical Optimizer:
       - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
       - DemoteBroadcastHashJoin: adaptive-query-execution/DemoteBroadcastHashJoin.md
       - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
       - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
+    - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
+    - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
+    - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
+    - AQEUtils: adaptive-query-execution/AQEUtils.md
+    - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
+    - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
     - Physical Optimizations:
       - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
       - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md
@@ -733,11 +732,12 @@ nav:
       - OptimizeSkewedJoin: adaptive-query-execution/OptimizeSkewedJoin.md
       - PlanAdaptiveDynamicPruningFilters: adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md
       - ReuseAdaptiveSubquery: adaptive-query-execution/ReuseAdaptiveSubquery.md
+    - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
     - QueryStageExecs:
       - QueryStageExec: adaptive-query-execution/QueryStageExec.md
       - BroadcastQueryStageExec: adaptive-query-execution/BroadcastQueryStageExec.md
       - ShuffleQueryStageExec: adaptive-query-execution/ShuffleQueryStageExec.md
-    - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+    - ShuffleStage: adaptive-query-execution/ShuffleStage.md
     - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
     - Demo: adaptive-query-execution/demo.md
   - New &amp; Noteworthy:
