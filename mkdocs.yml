@@ -714,7 +714,6 @@ nav:
     - adaptive-query-execution/index.md
     - Adaptive Logical Optimizer:
       - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-      - DemoteBroadcastHashJoin: adaptive-query-execution/DemoteBroadcastHashJoin.md
       - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
       - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
     - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
@@ -740,7 +739,7 @@ nav:
     - ShuffleStage: adaptive-query-execution/ShuffleStage.md
     - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
     - Demo: adaptive-query-execution/demo.md
-  - New &amp; Noteworthy:
+  - Notable Features:
     - Common Table Expressions: common-table-expressions.md
     - Join Queries:
       - Joins: joins.md

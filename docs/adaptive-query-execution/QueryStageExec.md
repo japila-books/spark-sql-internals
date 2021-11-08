@@ -93,7 +93,7 @@ _resultOption: AtomicReference[Option[Any]]
 * `AdaptiveSparkPlanExec` operator is requested to [createQueryStages](AdaptiveSparkPlanExec.md#createQueryStages)
 * `QueryStageExec` operator is requested for the [statistics](#computeStats)
 * `ShuffleQueryStageExec` operator is requested for the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats)
-* [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md) and [EliminateJoinToEmptyRelation](EliminateJoinToEmptyRelation.md) logical optimizations are executed
+* [EliminateJoinToEmptyRelation](EliminateJoinToEmptyRelation.md) logical optimizations are executed
 
 ## <span id="computeStats"> Computing Statistics
 

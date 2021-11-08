@@ -100,7 +100,7 @@ Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec
 
 Used when:
 
-* `DynamicJoinSelection` is requested to `preferShuffledHashJoin`
+* `DynamicJoinSelection` is requested to [preferShuffledHashJoin](adaptive-query-execution/DynamicJoinSelection.md#preferShuffledHashJoin)
 
 ## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
@@ -112,7 +112,7 @@ Used when:
 
 ## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 
-The value of [spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
+[spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
 
 Used when:
 
@@ -637,10 +637,6 @@ Used when [SchemaPruning](logical-optimizations/SchemaPruning.md), [ColumnPrunin
 ## <span id="nonEmptyPartitionRatioForBroadcastJoin"><span id="NON_EMPTY_PARTITION_RATIO_FOR_BROADCAST_JOIN"> nonEmptyPartitionRatioForBroadcastJoin
 
 The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property
-
-Used when:
-
-* [DemoteBroadcastHashJoin](adaptive-query-execution/DemoteBroadcastHashJoin.md) logical optimization is executed
 
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 

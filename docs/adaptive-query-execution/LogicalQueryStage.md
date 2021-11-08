@@ -4,7 +4,7 @@
 
 ## Query Optimization
 
-`LogicalQueryStage` is a "target" of [DemoteBroadcastHashJoin](../adaptive-query-execution/DemoteBroadcastHashJoin.md) logical optimization.
+`LogicalQueryStage` is a "target" of FIXME logical optimization.
 
 ## Query Planning
 

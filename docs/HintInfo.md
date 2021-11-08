@@ -12,7 +12,6 @@
 * [ResolvedHint](logical-operators/ResolvedHint.md) logical operator is created
 * `HintInfo` is requested to [merge with another HintInfo](#merge)
 * [broadcast](spark-sql-functions.md#broadcast) standard function is used (on a `Dataset`)
-* [DemoteBroadcastHashJoin](adaptive-query-execution/DemoteBroadcastHashJoin.md) logical optimization is executed
 
 ## <span id="toString"> Text Representation
 

@@ -32,7 +32,7 @@ Adaptive Query Execution uses [logOnLevel](AdaptiveSparkPlanExec.md#logOnLevel) 
 
 ### CacheManager
 
-Adaptive Query Execution can change number of shuffle partitions and [CacheManager](CacheManager.md#forceDisableConfigs) makes sure that this configuration is disabled (for to [cacheQuery](../CacheManager.md#cacheQuery) and [recacheByCondition](../CacheManager.md#recacheByCondition))
+Adaptive Query Execution can change number of shuffle partitions and [CacheManager](../CacheManager.md#forceDisableConfigs) makes sure that this configuration is disabled (for to [cacheQuery](../CacheManager.md#cacheQuery) and [recacheByCondition](../CacheManager.md#recacheByCondition))
 
 ### Structured Streaming
 

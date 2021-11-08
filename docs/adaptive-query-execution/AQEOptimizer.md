@@ -15,8 +15,7 @@
 ## <span id="defaultBatches"> Default Batches
 
 Batch Name | Strategy | Rules
----------|----------|---------
- Demote BroadcastHashJoin | Once | [DemoteBroadcastHashJoin](DemoteBroadcastHashJoin.md)
+-----------|----------|---------
  Eliminate Join to Empty Relation | Once | [EliminateJoinToEmptyRelation](EliminateJoinToEmptyRelation.md)
 
 ## <span id="batches"> Batches
