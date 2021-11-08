@@ -1031,11 +1031,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/DemoteBroadcastHashJoin/</loc>
-         <lastmod>2021-11-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/DynamicJoinSelection/</loc>
          <lastmod>2021-11-08</lastmod>
          <changefreq>daily</changefreq>
