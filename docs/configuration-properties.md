@@ -321,11 +321,9 @@ Since: `3.0.0`
 
 **(internal)** A relation with a non-empty partition ratio (the number of non-empty partitions to all partitions) lower than this config will not be considered as the build side of a broadcast-hash join in [Adaptive Query Execution](adaptive-query-execution/index.md) regardless of the size.
 
-This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`.
+Effective with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) `true`
 
 Default: `0.2`
-
-Since: `3.0.0`
 
 Use [SQLConf.nonEmptyPartitionRatioForBroadcastJoin](SQLConf.md#nonEmptyPartitionRatioForBroadcastJoin) method to access the current value.
 

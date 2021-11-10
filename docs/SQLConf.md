@@ -638,6 +638,10 @@ Used when [SchemaPruning](logical-optimizations/SchemaPruning.md), [ColumnPrunin
 
 The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property
 
+Used when:
+
+* [DynamicJoinSelection](adaptive-query-execution/DynamicJoinSelection.md) adaptive logical optimization is executed (and [shouldDemoteBroadcastHashJoin](adaptive-query-execution/DynamicJoinSelection.md#shouldDemoteBroadcastHashJoin))
+
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 
 The value of [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property or...FIXME
