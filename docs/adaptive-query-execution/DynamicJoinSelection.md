@@ -54,7 +54,7 @@ preferShuffledHashJoin(
   mapStats: MapOutputStatistics): Boolean
 ```
 
-`preferShuffledHashJoin` holds (`true`) when all of the following hold:
+`preferShuffledHashJoin` takes a `MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics)) and holds (`true`) when all of the following hold:
 
 1. [spark.sql.adaptive.advisoryPartitionSizeInBytes](../configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) is at most [spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold](../configuration-properties.md#spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold)
 1. Approximate number of output bytes (`bytesByPartitionId`) of every map output partition of the given `MapOutputStatistics` is at most [spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold](../configuration-properties.md#spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold)
@@ -66,7 +66,7 @@ shouldDemoteBroadcastHashJoin(
   mapStats: MapOutputStatistics): Boolean
 ```
 
-`shouldDemoteBroadcastHashJoin` holds (`true`) when all of the following hold:
+`shouldDemoteBroadcastHashJoin` takes a `MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics)) and holds (`true`) when all of the following hold:
 
 1. There is at least 1 partition with data (based on the `bytesByPartitionId` collection of the given `MapOutputStatistics`)
 1. The ratio of the non-empty partitions to all partitions is below [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](../configuration-properties.md#spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin) configuration property

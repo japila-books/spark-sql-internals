@@ -47,7 +47,7 @@ wrong plan for shuffle stage:
 shuffleFuture: Future[MapOutputStatistics]
 ```
 
-`shuffleFuture` requests the [ShuffleExchangeLike](#shuffle) to [submit a shuffle job](../physical-operators/ShuffleExchangeLike.md#submitShuffleJob)
+`shuffleFuture` requests the [ShuffleExchangeLike](#shuffle) to [submit a shuffle job](../physical-operators/ShuffleExchangeLike.md#submitShuffleJob) (and eventually produce a `MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics))).
 
 ??? note "Lazy Value"
     `shuffleFuture` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
@@ -96,13 +96,13 @@ newReuseInstance(
 mapStats: Option[MapOutputStatistics]
 ```
 
-`mapStats` assumes that the [resultOption](QueryStageExec.md#resultOption) (with the `MapOutputStatistics`) is already available or throws an `AssertionError`:
+`mapStats` assumes that the [MapOutputStatistics](QueryStageExec.md#resultOption) is already available or throws an `AssertionError`:
 
 ```text
 assertion failed: ShuffleQueryStageExec should already be ready
 ```
 
-`mapStats` takes a `MapOutputStatistics` from the [resultOption](QueryStageExec.md#resultOption).
+`mapStats` returns the [MapOutputStatistics](QueryStageExec.md#resultOption).
 
 `mapStats` is used when:
 

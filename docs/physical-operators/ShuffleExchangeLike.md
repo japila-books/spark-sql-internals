@@ -15,7 +15,7 @@ getShuffleRDD(
 
 Used when:
 
-* `CustomShuffleReaderExec` physical operator is requested for the shuffleRDD
+* `CustomShuffleReaderExec` physical operator is requested for the `shuffleRDD`
 
 ### <span id="mapOutputStatisticsFuture"> mapOutputStatisticsFuture
 
@@ -23,11 +23,13 @@ Used when:
 mapOutputStatisticsFuture: Future[MapOutputStatistics]
 ```
 
+`MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics))
+
 Used when:
 
 * `ShuffleQueryStageExec` physical operator is requested to [doMaterialize](../adaptive-query-execution/ShuffleQueryStageExec.md#doMaterialize) and [cancel](../adaptive-query-execution/ShuffleQueryStageExec.md#cancel)
 
-### <span id="numMappers"> numMappers
+### <span id="numMappers"> Number of Mappers
 
 ```scala
 numMappers: Int
@@ -47,7 +49,7 @@ Used when:
 
 * `OptimizeShuffleWithLocalRead` physical optimization is requested for the [shuffle partition specification](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#getPartitionSpecs)
 
-### <span id="runtimeStatistics"> runtimeStatistics
+### <span id="runtimeStatistics"> Runtime Statistics
 
 ```scala
 runtimeStatistics: Statistics
