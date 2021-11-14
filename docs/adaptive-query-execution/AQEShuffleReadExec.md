@@ -1,6 +1,6 @@
 # AQEShuffleReadExec Unary Physical Operator
 
-`AQEShuffleReadExec` is a [unary physical operator](../physical-operators/UnaryExecNode.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`AQEShuffleReadExec` is a [unary physical operator](../physical-operators/UnaryExecNode.md) in [Adaptive Query Execution](index.md).
 
 ## Creating Instance
 

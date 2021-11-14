@@ -1,14 +1,6 @@
 # LogicalQueryStage Leaf Logical Operator
 
-`LogicalQueryStage` is a [leaf logical operator](../logical-operators/LeafNode.md) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
-
-## Query Optimization
-
-`LogicalQueryStage` is a "target" of FIXME logical optimization.
-
-## Query Planning
-
-`LogicalQueryStage` is planned by [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy.
+`LogicalQueryStage` is a [leaf logical operator](../logical-operators/LeafNode.md) for [Adaptive Query Execution](index.md).
 
 ## Creating Instance
 
@@ -17,7 +9,20 @@
 * <span id="logicalPlan"> [Logical Plan](../logical-operators/LogicalPlan.md)
 * <span id="physicalPlan"> [Physical Plan](../physical-operators/SparkPlan.md)
 
-`LogicalQueryStage` is created when [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed.
+`LogicalQueryStage` is created when:
+
+* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md#replaceWithQueryStagesInLogicalPlan) physical operator is executed
+
+## Query Optimization
+
+`LogicalQueryStage` is a "target" of the following logical optimizations:
+
+* [AQEPropagateEmptyRelation](AQEPropagateEmptyRelation.md)
+* [DynamicJoinSelection](DynamicJoinSelection.md)
+
+## Query Planning
+
+`LogicalQueryStage` is planned by [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy.
 
 ## <span id="computeStats"> Statistics
 
@@ -25,7 +30,7 @@
 computeStats(): Statistics
 ```
 
-`computeStats` tries to find the first [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](../adaptive-query-execution/QueryStageExec.md#computeStats).
+`computeStats` tries to find the first [QueryStageExec](QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](QueryStageExec.md#computeStats).
 
 `computeStats` prints out the following DEBUG messages to the logs based on the availability of the statistics.
 

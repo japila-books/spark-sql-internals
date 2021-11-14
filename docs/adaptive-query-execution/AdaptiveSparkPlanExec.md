@@ -1,19 +1,19 @@
 # AdaptiveSparkPlanExec Leaf Physical Operator
 
-`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](index.md).
 
 ## Creating Instance
 
 `AdaptiveSparkPlanExec` takes the following to be created:
 
 * <span id="inputPlan"> [SparkPlan](../physical-operators/SparkPlan.md)
-* <span id="context"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
+* <span id="context"> [AdaptiveExecutionContext](AdaptiveExecutionContext.md)
 * <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
 * <span id="isSubquery"> `isSubquery` flag
 
 `AdaptiveSparkPlanExec` is created when:
 
-* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimisation is executed
+* [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md) physical optimisation is executed
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -104,7 +104,7 @@ In case of errors, `getFinalPhysicalPlan` [cleanUpAndThrowException](#cleanUpAnd
 
 ### <span id="getFinalPhysicalPlan-while-allChildStagesMaterialized-evaluateCost"> Step 2.6 Evaluating Cost
 
-`getFinalPhysicalPlan` requests the [SimpleCostEvaluator](#costEvaluator) to [evaluateCost](../adaptive-query-execution/SimpleCostEvaluator.md#evaluateCost) of the [currentPhysicalPlan](#currentPhysicalPlan) and the new `newPhysicalPlan`.
+`getFinalPhysicalPlan` requests the [SimpleCostEvaluator](#costEvaluator) to [evaluateCost](SimpleCostEvaluator.md#evaluateCost) of the [currentPhysicalPlan](#currentPhysicalPlan) and the new `newPhysicalPlan`.
 
 ### <span id="getFinalPhysicalPlan-while-allChildStagesMaterialized-plan-changed"> Step 2.7 Adopting New Physical Plan
 
@@ -393,7 +393,7 @@ With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and
 `applyPhysicalRules` is used when:
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
-* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## Logging
 

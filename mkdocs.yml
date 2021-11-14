@@ -714,6 +714,7 @@ nav:
     - adaptive-query-execution/index.md
     - Adaptive Logical Optimizer:
       - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
+      - AQEPropagateEmptyRelation: adaptive-query-execution/AQEPropagateEmptyRelation.md
       - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
       - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
     - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md

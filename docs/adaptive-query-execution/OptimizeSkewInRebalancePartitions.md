@@ -1,6 +1,6 @@
 # OptimizeSkewInRebalancePartitions Adaptive Physical Optimization
 
-`OptimizeSkewInRebalancePartitions` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`OptimizeSkewInRebalancePartitions` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](index.md).
 
 `OptimizeSkewInRebalancePartitions` can be turned on and off using [spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled) configuration property.
 

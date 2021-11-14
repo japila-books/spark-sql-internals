@@ -32,7 +32,7 @@
 
 `OptimizeSkewedJoin` is created when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](../adaptive-query-execution/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 
@@ -43,10 +43,10 @@ apply(
 
 `apply` uses [spark.sql.adaptive.skewJoin.enabled](../configuration-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property to determine whether to apply any optimizations or not.
 
-`apply` collects [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md) physical operators.
+`apply` collects [ShuffleQueryStageExec](ShuffleQueryStageExec.md) physical operators.
 
 !!! note
-    `apply` does nothing and simply gives the query plan "untouched" when applied to a query plan with the number of [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md) physical operators different than `2`.
+    `apply` does nothing and simply gives the query plan "untouched" when applied to a query plan with the number of [ShuffleQueryStageExec](ShuffleQueryStageExec.md) physical operators different than `2`.
 
 `apply`...FIXME
 
@@ -59,7 +59,7 @@ optimizeSkewJoin(
   plan: SparkPlan): SparkPlan
 ```
 
-`optimizeSkewJoin` transforms [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) physical operators (with the [supportedJoinTypes](#supportedJoinTypes)) of two [SortExec](../physical-operators/SortExec.md) operators with [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md) children.
+`optimizeSkewJoin` transforms [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) physical operators (with the [supportedJoinTypes](#supportedJoinTypes)) of two [SortExec](../physical-operators/SortExec.md) operators with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) children.
 
 `optimizeSkewJoin` handles `SortMergeJoinExec` operators with the left and right operators of the same number of partitions.
 

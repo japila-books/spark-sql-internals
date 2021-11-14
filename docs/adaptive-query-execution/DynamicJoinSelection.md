@@ -1,4 +1,4 @@
-# DynamicJoinSelection Logical Optimization
+# DynamicJoinSelection Adaptive Logical Optimization
 
 `DynamicJoinSelection` is a logical optimization in [Adaptive Query Execution](index.md) to [transform Join logical operators](#apply) with [JoinHint](../JoinHint.md)s.
 
