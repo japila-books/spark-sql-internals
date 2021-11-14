@@ -1041,11 +1041,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/EliminateJoinToEmptyRelation/</loc>
-         <lastmod>2021-11-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/InsertAdaptiveSparkPlan/</loc>
          <lastmod>2021-11-14</lastmod>
          <changefreq>daily</changefreq>
@@ -3241,6 +3236,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/ConvertToLocalRelation/</loc>
+         <lastmod>2021-11-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/CostBasedJoinReorder/</loc>
          <lastmod>2021-11-14</lastmod>
          <changefreq>daily</changefreq>
@@ -3402,6 +3402,11 @@
     </url>
     <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/SimplifyCasts/</loc>
+         <lastmod>2021-11-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/logical-optimizations/UpdateAttributeNullability/</loc>
          <lastmod>2021-11-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
