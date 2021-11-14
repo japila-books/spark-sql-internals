@@ -635,6 +635,7 @@ nav:
       - CombineUnions: logical-optimizations/CombineUnions.md
       - ComputeCurrentTime: logical-optimizations/ComputeCurrentTime.md
       - ConstantFolding: logical-optimizations/ConstantFolding.md
+      - ConvertToLocalRelation: logical-optimizations/ConvertToLocalRelation.md
       - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
       - DecimalAggregates: logical-optimizations/DecimalAggregates.md
       - EliminateResolvedHint: logical-optimizations/EliminateResolvedHint.md
@@ -669,6 +670,7 @@ nav:
       - SchemaPruning: logical-optimizations/SchemaPruning.md
       - SimplifyCasts: logical-optimizations/SimplifyCasts.md
       - UpdateCTERelationStats: logical-optimizations/UpdateCTERelationStats.md
+      - UpdateAttributeNullability: logical-optimizations/UpdateAttributeNullability.md
       - V2ScanRelationPushDown: logical-optimizations/V2ScanRelationPushDown.md
     - Execution Planning Strategies:
       - SparkStrategy: execution-planning-strategies/SparkStrategy.md
@@ -712,18 +714,17 @@ nav:
       - ScalaReflection: ScalaReflection.md
   - AQE:
     - adaptive-query-execution/index.md
-    - Adaptive Logical Optimizer:
-      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-      - AQEPropagateEmptyRelation: adaptive-query-execution/AQEPropagateEmptyRelation.md
-      - EliminateJoinToEmptyRelation: adaptive-query-execution/EliminateJoinToEmptyRelation.md
-      - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
     - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
     - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
+    - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
     - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
     - AQEUtils: adaptive-query-execution/AQEUtils.md
     - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
     - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
+    - Logical Optimizations:
+      - AQEPropagateEmptyRelation: adaptive-query-execution/AQEPropagateEmptyRelation.md
+      - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
+    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
     - Physical Optimizations:
       - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
       - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md

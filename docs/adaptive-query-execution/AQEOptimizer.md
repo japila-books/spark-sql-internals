@@ -14,9 +14,15 @@
 
 ## <span id="defaultBatches"> Default Batches
 
-Batch Name | Strategy | Rules
------------|----------|---------
- Eliminate Join to Empty Relation | Once | [EliminateJoinToEmptyRelation](EliminateJoinToEmptyRelation.md)
+### Propagate Empty Relations
+
+* [AQEPropagateEmptyRelation](AQEPropagateEmptyRelation.md)
+* [ConvertToLocalRelation](../logical-optimizations/ConvertToLocalRelation.md)
+* [UpdateAttributeNullability](../logical-optimizations/UpdateAttributeNullability.md)
+
+### Dynamic Join Selection
+
+* [DynamicJoinSelection](DynamicJoinSelection.md)
 
 ## <span id="batches"> Batches
 
@@ -39,3 +45,15 @@ For batches with all rules excluded, `batches` prints out the following INFO mes
 ```text
 Optimization batch '[name]' is excluded from the optimizer as all enclosed rules have been excluded.
 ```
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.AQEOptimizer` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.adaptive.AQEOptimizer=ALL
+```
+
+Refer to [Logging](../spark-logging.md).
