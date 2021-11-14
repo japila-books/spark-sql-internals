@@ -991,6 +991,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AQEPropagateEmptyRelation/</loc>
+         <lastmod>2021-11-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://jaceklaskowski.github.io/mastering-spark-sql-book/adaptive-query-execution/AQEShuffleReadExec/</loc>
          <lastmod>2021-11-14</lastmod>
          <changefreq>daily</changefreq>
