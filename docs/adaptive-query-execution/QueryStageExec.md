@@ -84,30 +84,36 @@ _resultOption: AtomicReference[Option[Any]]
 * [Broadcast variable](BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 * [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) (_submitting map stages_) for [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
 
-`_resultOption` is available using `resultOption` method. As `AtomicReference` is mutable that is enough to change the value.
+As `AtomicReference` is mutable that is enough to change the value.
 
 `_resultOption` is set when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
 
+`_resultOption` is available using [resultOption](#resultOption).
+
+### <span id="resultOption"> resultOption
+
+```scala
+resultOption: AtomicReference[Option[Any]]
+```
+
+`resultOption` returns the current value of the [_resultOption](#_resultOption) registry.
+
 `resultOption` is used when:
 
-* `AdaptiveSparkPlanExec` operator is requested to [createQueryStages](AdaptiveSparkPlanExec.md#createQueryStages)
-* `QueryStageExec` operator is requested for the [statistics](#computeStats)
-* `ShuffleQueryStageExec` operator is requested for the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats)
-* [EliminateJoinToEmptyRelation](EliminateJoinToEmptyRelation.md) logical optimizations are executed
+* `QueryStageExec` is requested to [isMaterialized](#isMaterialized)
+* `ShuffleQueryStageExec` is requested for the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats)
 
-## <span id="computeStats"> Computing Statistics
+## <span id="computeStats"> Statistics
 
 ```scala
 computeStats(): Option[Statistics]
 ```
 
-`computeStats` uses the [resultOption](#resultOption) to access the underlying [ReusedExchangeExec](../physical-operators/ReusedExchangeExec.md) or [Exchange](../physical-operators/Exchange.md) physical operators.
+If this `QueryStageExec` has been [materialized](#isMaterialized), `computeStats` gives a new [Statistics](../logical-operators/Statistics.md) with the [runtime statistics](#getRuntimeStatistics). Otherwise, `computeStats` returns no statistics (`None`).
 
-If available, `computeStats` creates [Statistics](../logical-operators/Statistics.md) with the [sizeInBytes](../logical-operators/Statistics.md#sizeInBytes) as the **dataSize** [performance metric](../physical-operators/SparkPlan.md#metrics) of the physical operator.
+`computeStats` is used when:
 
-Otherwise, `computeStats` returns no statistics.
-
-`computeStats` is used when [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) logical operator is requested for the [stats](../adaptive-query-execution/LogicalQueryStage.md#computeStats).
+* [LogicalQueryStage](LogicalQueryStage.md) logical operator is requested for the [Statistics](LogicalQueryStage.md#computeStats)
 
 ## <span id="materialize"> Materializing Query Stage
 

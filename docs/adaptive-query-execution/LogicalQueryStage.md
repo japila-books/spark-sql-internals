@@ -19,7 +19,7 @@
 
 `LogicalQueryStage` is created when [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed.
 
-## <span id="computeStats"> Computing Statistics
+## <span id="computeStats"> Statistics
 
 ```scala
 computeStats(): Statistics
@@ -40,3 +40,15 @@ Physical stats not available for plan: [physicalPlan]
 In the end, `computeStats` gives the statistics of the physical operator or requests the [logical plan](#logicalPlan) for [them](../logical-operators/LogicalPlanStats.md#stats).
 
 `computeStats` is part of the [LeafNode](../logical-operators/LeafNode.md#computeStats) abstraction.
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.LogicalQueryStage` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
+
+```text
+log4j.logger.org.apache.spark.sql.execution.adaptive.LogicalQueryStage=ALL
+```
+
+Refer to [Logging](../spark-logging.md).
