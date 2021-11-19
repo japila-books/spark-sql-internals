@@ -1,6 +1,6 @@
 # InsertableRelation
 
-`InsertableRelation` is an [abstraction](#contract) of [relations](#implementations) that support [inserting or overwriting data](#insert).
+`InsertableRelation` is an [abstraction](#contract) of [relations](#implementations) with support for [inserting or overwriting data](#insert).
 
 ## Contract
 
@@ -18,8 +18,6 @@ Used when:
 
 * [InsertIntoDataSourceCommand](logical-operators/InsertIntoDataSourceCommand.md) logical command is executed
 * `SupportsV1Write` physical operator is executed
-
-Used when...FIXME
 
 ## Implementations
 

@@ -1,46 +1,30 @@
 # CreatableRelationProvider
 
-`CreatableRelationProvider` is the <<contract, abstraction>> of <<implementations, data source providers>> that can <<createRelation, write the rows of a structured query (a DataFrame) differently per save mode>>.
+`CreatableRelationProvider` is an [abstraction](#contract) of [data source providers](#implementations) that can [save data and create a BaseRelation](#createRelation).
 
-[[contract]]
-.CreatableRelationProvider Contract
-[cols="30m,70",options="header",width="100%"]
-|===
-| Method
-| Description
+## Contract
 
-| createRelation
-a| [[createRelation]]
+### <span id="createRelation"> createRelation
 
-[source, scala]
-----
+```scala
 createRelation(
   sqlContext: SQLContext,
   mode: SaveMode,
   parameters: Map[String, String],
   data: DataFrame): BaseRelation
-----
+```
 
-Creates a [BaseRelation](BaseRelation.md) that represents the rows of a structured query (a DataFrame) saved to an external data source (per [SaveMode](DataFrameWriter.md#SaveMode))
+Saves the given `DataFrame` to this data source (and creates a [BaseRelation](BaseRelation.md) to represent the relation)
 
-The save mode specifies what should happen when the target relation (destination) already exists.
+The `SaveMode` specifies what should happen when the target relation (destination) already exists.
 
-Used when [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) logical commands are executed
+Used when:
 
-[[implementations]]
-.CreatableRelationProviders
-[cols="30,70",options="header",width="100%"]
-|===
-| CreatableRelationProvider
-| Description
+* `DataSource` is requested to [writeAndRead](DataSource.md#writeAndRead)
+* `SaveIntoDataSourceCommand` logical command is requested to [run](logical-operators/SaveIntoDataSourceCommand.md#run)
 
-| [ConsoleSinkProvider](datasources/console/ConsoleSinkProvider.md)
-| [[ConsoleSinkProvider]] Data source provider for [console data source](datasources/console/index.md)
+## Implementations
 
-| [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
-| [[JdbcRelationProvider]] Data source provider for [JDBC data source](datasources/jdbc/index.md)
-
-| [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
-| [[KafkaSourceProvider]] Data source provider for [Kafka data source](datasources/kafka/index.md)
-
-|===
+* [ConsoleSinkProvider](datasources/console/ConsoleSinkProvider.md)
+* [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
+* [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)

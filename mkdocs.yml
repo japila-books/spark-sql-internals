@@ -120,7 +120,7 @@ nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
-#    - Tags: tags.md
+    - Tags: tags.md
     - Configuration Properties: 
       - Configuration Properties: configuration-properties.md
       - SQLConf: SQLConf.md
