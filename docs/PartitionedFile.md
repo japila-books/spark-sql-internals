@@ -1,6 +1,6 @@
 # PartitionedFile
 
-`PartitionedFile` is a part (_block_) of a file that is in a sense similar to a Pqruet block or a HDFS split.
+`PartitionedFile` is a part (_block_) of a file that is in a sense similar to a Parquet block or a HDFS split.
 
 `PartitionedFile` represents a chunk of a file that will be read, along with <<partitionValues, partition column values>> appended to each row, in a partition.
 
