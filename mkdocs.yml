@@ -1,13 +1,13 @@
 site_name: The Internals of Spark SQL
-site_url: https://jaceklaskowski.github.io/mastering-spark-sql-book/
+site_url: https://books.japila.pl/spark-sql-internals
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
 repo_name: spark-sql-internals
-repo_url: https://github.com/jaceklaskowski/mastering-spark-sql-book
+repo_url: https://github.com/japila-books/spark-sql-internals
 edit_uri: edit/main/docs/
 
-copyright: Copyright &copy; 2021 Jacek Laskowski
+copyright: Copyright &copy; 2022 Jacek Laskowski
 
 theme:
   name: material
@@ -83,7 +83,7 @@ extra:
   book:
     title: Spark SQL
     delta: https://books.japila.pl/delta-lake-internals
-    kafka: https://jaceklaskowski.gitbooks.io/apache-kafka/content
+    kafka: https://books.japila.pl/kafka-internals
     pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
