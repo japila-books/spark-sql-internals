@@ -6,7 +6,7 @@
 
 `HashAggregateExec` is a `BlockingOperatorWithCodegen`.
 
-`HashAggregateExec` is a [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
+`HashAggregateExec` is an [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
 
 !!! note
     `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md)).
@@ -52,7 +52,7 @@ supportsAggregate(
 * <span id="resultExpressions"> Output [named expressions](../expressions/NamedExpression.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 
-`HashAggregateExec` is created when (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
+`HashAggregateExec` is created when (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator
 

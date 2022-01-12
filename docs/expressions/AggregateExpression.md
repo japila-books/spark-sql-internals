@@ -1,18 +1,41 @@
 # AggregateExpression
 
-`AggregateExpression` is an [unevaluable expression](Unevaluable.md) that acts as a container for an [AggregateFunction](#aggregateFunction).
+`AggregateExpression` is an [unevaluable expression](Unevaluable.md) that acts as a container (_wrapper_) for an [AggregateFunction](#aggregateFunction).
 
 ## Creating Instance
 
 `AggregateExpression` takes the following to be created:
 
 * <span id="aggregateFunction"> [AggregateFunction](AggregateFunction.md)
-* <span id="mode"> `AggregateMode`
+* [AggregateMode](#mode)
 * <span id="isDistinct"> `isDistinct` flag
 * <span id="filter"> (optional) Filter [Expression](Expression.md)
 * <span id="resultId"> Result `ExprId`
 
-`AggregateExpression` is created using [apply](#apply) utility.
+`AggregateExpression` is created using [apply](#apply) utility.
+
+## <span id="mode"> AggregateMode
+
+`AggregateExpression` is given an `AggregateMode` when [created](#creating-instance).
+
+* For `PartialMerge` or `Final` modes, the input to the [AggregateFunction](#aggregateFunction) is [immutable input aggregation buffers](AggregateFunction.md#inputAggBufferAttributes), and the actual children of the `AggregateFunction` is not used
+
+* [AggregateExpression](../AggregationIterator.md#aggregateExpressions)s of a [AggregationIterator](../AggregationIterator.md) cannot have more than 2 distinct modes nor the modes be among `Partial` and `PartialMerge` or `Final` and `Complete` mode pairs
+
+* `Partial` and `Complete` or `PartialMerge` and `Final` pairs are supported
+
+### <span id="Complete"> Complete
+
+### <span id="Final"> Final
+
+### <span id="Partial"> Partial
+
+* Partial aggregation
+* `partial_` prefix (in [toString](#toString))
+
+### <span id="PartialMerge"> PartialMerge
+
+* `merge_` prefix (in [toString](#toString))
 
 ## <span id="apply"> Creating AggregateExpression
 

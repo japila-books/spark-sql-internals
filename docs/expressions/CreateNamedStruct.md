@@ -1,8 +1,6 @@
-title: CreateNamedStruct
-
 # CreateNamedStruct Expression
 
-`CreateNamedStruct` is a <<spark-sql-Expression-CreateNamedStructLike.md#, CreateNamedStructLike>> expression that...FIXME
+`CreateNamedStruct` is a `CreateNamedStructLike` expression.
 
 [[prettyName]]
 `CreateNamedStruct` uses *named_struct* for the <<Expression.md#prettyName, user-facing name>>.

@@ -1,16 +1,16 @@
 # AggregateFunction Expressions
 
-`AggregateFunction` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [aggregate functions](#implementations).
+`AggregateFunction` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [aggregate functions](#implementations).
 
 ## Contract
 
-### <span id="aggBufferAttributes"> aggBufferAttributes
+### <span id="aggBufferAttributes"> aggBufferAttributes
 
 ```scala
 aggBufferAttributes: Seq[AttributeReference]
 ```
 
-### <span id="aggBufferSchema"> aggBufferSchema
+### <span id="aggBufferSchema"> aggBufferSchema
 
 ```scala
 aggBufferSchema: StructType
@@ -18,7 +18,7 @@ aggBufferSchema: StructType
 
 [Schema](../types/StructType.md) of an aggregation buffer with partial aggregate results
 
-### <span id="inputAggBufferAttributes"> inputAggBufferAttributes
+### <span id="inputAggBufferAttributes"> inputAggBufferAttributes
 
 ```scala
 inputAggBufferAttributes: Seq[AttributeReference]
@@ -36,7 +36,7 @@ inputAggBufferAttributes: Seq[AttributeReference]
 foldable: Boolean
 ```
 
-`foldable` is part of the [Expression](Expression.md#foldable) abstraction.
+`foldable` is part of the [Expression](Expression.md#foldable) abstraction.
 
 `foldable` is always `false`.
 
@@ -65,7 +65,7 @@ scala> println(aggFn.numberedTreeString)
 01 +- 'gid
 ```
 
-`toAggregateExpression` is used when:
+`toAggregateExpression` is used when:
 
 * `AggregateFunction` is requested to [toAggregateExpression](#toAggregateExpression)
 * `functions` utility is used to [withAggregateFunction](../spark-sql-functions.md#withAggregateFunction)

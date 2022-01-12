@@ -6,7 +6,7 @@
 
 `BatchScanExec` takes the following to be created:
 
-* <span id="output"> Output Schema ([AttributeReference](../expressions/AttributeReference.md)s)
+* <span id="output"> Output Schema (`AttributeReference`s)
 * <span id="scan"> [Scan](../connector/Scan.md)
 
 `BatchScanExec` is created when:

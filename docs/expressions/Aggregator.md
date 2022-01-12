@@ -10,7 +10,7 @@ abstract class Aggregator[-IN, BUF, OUT]
 
 ## Contract
 
-### <span id="bufferEncoder"> bufferEncoder
+### <span id="bufferEncoder"> bufferEncoder
 
 ```scala
 bufferEncoder: Encoder[BUF]
@@ -21,7 +21,7 @@ Used when:
 * `Aggregator` is requested to [toColumn](#toColumn)
 * `UserDefinedAggregator` is requested to `scalaAggregator`
 
-### <span id="finish"> finish
+### <span id="finish"> finish
 
 ```scala
 finish(
@@ -33,7 +33,7 @@ Used when:
 * `ComplexTypedAggregateExpression` is requested to `eval`
 * `ScalaAggregator` is requested to `eval`
 
-### <span id="merge"> merge
+### <span id="merge"> merge
 
 ```scala
 merge(
@@ -46,7 +46,7 @@ Used when:
 * `ComplexTypedAggregateExpression` is requested to `merge`
 * `ScalaAggregator` is requested to `merge`
 
-### <span id="outputEncoder"> outputEncoder
+### <span id="outputEncoder"> outputEncoder
 
 ```scala
 outputEncoder: Encoder[OUT]
@@ -57,7 +57,7 @@ Used when:
 * `ScalaAggregator` is requested for the `outputEncoder`
 * `Aggregator` is requested to [toColumn](#toColumn)
 
-### <span id="reduce"> reduce
+### <span id="reduce"> reduce
 
 ```scala
 reduce(
@@ -70,7 +70,7 @@ Used when:
 * `ComplexTypedAggregateExpression` is requested to `update`
 * `ScalaAggregator` is requested to `update`
 
-### <span id="zero"> zero
+### <span id="zero"> zero
 
 ```scala
 zero: BUF

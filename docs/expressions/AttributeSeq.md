@@ -24,7 +24,7 @@ resolve(
 
 `resolve` can return:
 
-* [Alias](Alias.md) with `ExtractValue`s for nested fields
+* `Alias` with `ExtractValue`s for nested fields
 * [NamedExpression](NamedExpression.md) if there were no nested fields to resolve
 * `None` (_undefined_ value) for no candidate
 

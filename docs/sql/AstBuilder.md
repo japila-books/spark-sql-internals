@@ -243,7 +243,7 @@ ANTLR rule: `multiInsertQueryBody`
 
 Creates one of the following Catalyst expressions:
 
-* [Alias](../expressions/Alias.md) (for a single alias)
+* `Alias` (for a single alias)
 * `MultiAlias` (for a parenthesis enclosed alias list)
 * a bare [Expression](../expressions/Expression.md)
 

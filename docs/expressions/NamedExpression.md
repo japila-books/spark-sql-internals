@@ -1,28 +1,28 @@
 # NamedExpression
 
-`NamedExpression` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [named expressions](#implementations) (with an [ExprId](#exprId) and an optional [qualifier](#qualifier)).
+`NamedExpression` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [named expressions](#implementations) (with an [ExprId](#exprId) and an optional [qualifier](#qualifier)).
 
 ## Contract
 
-### <span id="exprId"> ExprId
+### <span id="exprId"> ExprId
 
 ```scala
 exprId: ExprId
 ```
 
-### <span id="name"> Name
+### <span id="name"> Name
 
 ```scala
 name: String
 ```
 
-### <span id="newInstance"> Creating NamedExpression
+### <span id="newInstance"> Creating NamedExpression
 
 ```scala
 newInstance(): NamedExpression
 ```
 
-### <span id="qualifier"> Qualifier (Parts)
+### <span id="qualifier"> Qualifier (Parts)
 
 ```scala
 qualifier: Seq[String]
@@ -30,7 +30,7 @@ qualifier: Seq[String]
 
 Optional qualifier parts (with the names of catalog, database, table, fields, incl. nested fields)
 
-### <span id="toAttribute"> toAttribute
+### <span id="toAttribute"> toAttribute
 
 ```scala
 toAttribute: Attribute
@@ -38,7 +38,7 @@ toAttribute: Attribute
 
 ## Implementations
 
-* [Alias](Alias.md)
+* `Alias`
 * [Attribute](Attribute.md)
 * [Star](Star.md)
 * _others_
@@ -51,4 +51,4 @@ foldable: Boolean
 
 `foldable` is always `false` (in order to not remove the alias).
 
-`foldable` is part of the [Expression](Expression.md#foldable) abstraction.
+`foldable` is part of the [Expression](Expression.md#foldable) abstraction.

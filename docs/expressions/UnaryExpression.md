@@ -4,17 +4,17 @@
 
 ## Contract
 
-### <span id="child"> child
+### <span id="child"> Child Expression
 
 ```scala
 child: Expression
 ```
 
-The child [expression](Expression.md)
+Child [Expression](Expression.md)
 
 ## Implementations
 
-* [Alias](Alias.md)
+* `Alias`
 * ArrayDistinct
 * ArrayMax
 * ArrayMin

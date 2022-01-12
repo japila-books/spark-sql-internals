@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="comment"> comment
+### <span id="comment"> comment
 
 ```java
 String comment()
@@ -14,13 +14,13 @@ Documentation of this metadata column
 
 Default: `null`
 
-### <span id="dataType"> dataType
+### <span id="dataType"> dataType
 
 ```java
 DataType dataType()
 ```
 
-### <span id="isNullable"> isNullable
+### <span id="isNullable"> isNullable
 
 ```java
 boolean isNullable()
@@ -28,7 +28,7 @@ boolean isNullable()
 
 Default: `true`
 
-### <span id="name"> Name
+### <span id="name"> Name
 
 ```java
 String name()
@@ -40,7 +40,7 @@ Used when:
 * `DataSourceV2Relation` is requested for the [metadata columns](../logical-operators/DataSourceV2Relation.md#metadataOutput)
 * `DescribeTableExec` is requested to [addMetadataColumns](../physical-operators/DescribeTableExec.md#addMetadataColumns)
 
-### <span id="transform"> transform
+### <span id="transform"> transform
 
 ```java
 Transform transform()
@@ -52,4 +52,4 @@ Default: `null`
 
 ## <span id="MetadataColumnsHelper"> MetadataColumnsHelper
 
-`MetadataColumn`s can be converted (_implicitly_) to [StructType](../types/StructType.md)s or [AttributeReference](../expressions/AttributeReference.md)s using [MetadataColumnsHelper](MetadataColumnsHelper.md) implicit class.
+`MetadataColumn`s can be converted (_implicitly_) to [StructType](../types/StructType.md)s or `AttributeReference`s using [MetadataColumnsHelper](MetadataColumnsHelper.md) implicit class.

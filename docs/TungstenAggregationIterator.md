@@ -2,7 +2,7 @@
 
 `TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator.
 
-`TungstenAggregationIterator` prefers hash-based aggregation (before [switching to sort-based aggregation](#switchToSortBasedAggregation)).
+`TungstenAggregationIterator` prefers hash-based aggregation (before [switching to a sort-based aggregation](#switchToSortBasedAggregation)).
 
 ## Creating Instance
 
@@ -23,14 +23,14 @@
 * <span id="spillSize"> `spillSize` [SQLMetric](physical-operators/SQLMetric.md)
 * <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](physical-operators/SQLMetric.md)
 
-`TungstenAggregationIterator` is created when:
+`TungstenAggregationIterator` is created when:
 
 * `HashAggregateExec` physical operator is requested to [doExecute](physical-operators/HashAggregateExec.md#doExecute)
 
 !!! note
     The SQL metrics ([numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe)) belong to the [HashAggregateExec](physical-operators/HashAggregateExec.md#metrics) physical operator that created the `TungstenAggregationIterator`.
 
-`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) if did not [switch to sort-based aggregation](#sortBased).
+`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) if did not [switch to a sort-based aggregation](#sortBased).
 
 ## <span id="metrics"> Performance Metrics
 
@@ -50,7 +50,7 @@ The metrics are displayed as part of [HashAggregateExec](physical-operators/Hash
 next(): UnsafeRow
 ```
 
-`next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
+`next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
 
 `next`...FIXME
 

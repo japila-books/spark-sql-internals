@@ -27,7 +27,7 @@ Used when:
 aliasMap: AttributeMap[Attribute]
 ```
 
-`aliasMap` is a collection of [AttributeReference](../expressions/AttributeReference.md) expressions (of the [Alias](../expressions/Alias.md) expressions with the `AttributeReference` expressions in the [output named expressions](#outputExpressions)) and the `Alias`es converted to [Attribute](../expressions/Alias.md#toAttribute)s.
+`aliasMap` is a collection of `AttributeReference` expressions (of the `Alias` expressions with the `AttributeReference` expressions in the [output named expressions](#outputExpressions)) and the `Alias`es converted to `Attribute`s.
 
 ??? note "Lazy Value"
     `aliasMap` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.

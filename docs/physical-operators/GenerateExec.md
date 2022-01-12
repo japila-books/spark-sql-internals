@@ -251,7 +251,7 @@ codeGenCollection(
 
 `codeGenCollection`...FIXME
 
-NOTE: `codeGenCollection` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>> (when <<boundGenerator, Generator>> is a spark-sql-Expression-CollectionGenerator.md[CollectionGenerator]).
+NOTE: `codeGenCollection` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>> (when <<boundGenerator, Generator>> is a `CollectionGenerator`).
 
 === [[codeGenTraversableOnce]] `codeGenTraversableOnce` Internal Method
 
@@ -266,7 +266,7 @@ codeGenTraversableOnce(
 
 `codeGenTraversableOnce`...FIXME
 
-NOTE: `codeGenTraversableOnce` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the consume path in whole-stage code generation>> (when <<boundGenerator, Generator>> is not a spark-sql-Expression-CollectionGenerator.md[CollectionGenerator]).
+NOTE: `codeGenTraversableOnce` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the consume path in whole-stage code generation>> (when <<boundGenerator, Generator>> is not a `CollectionGenerator`).
 
 === [[codeGenAccessor]] `codeGenAccessor` Internal Method
 

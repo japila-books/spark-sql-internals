@@ -12,14 +12,14 @@ CodeGeneratorWithInterpretedFallback[IN, OUT]
 
 ## Contract
 
-### <span id="createCodeGeneratedObject"> createCodeGeneratedObject
+### <span id="createCodeGeneratedObject"> createCodeGeneratedObject
 
 ```scala
 createCodeGeneratedObject(
   in: IN): OUT
 ```
 
-### <span id="createInterpretedObject"> createInterpretedObject
+### <span id="createInterpretedObject"> createInterpretedObject
 
 ```scala
 createInterpretedObject(
@@ -49,7 +49,7 @@ In case of a non-fatal exception, `createObject` prints out the following WARN m
 Expr codegen error and falling back to interpreter mode
 ```
 
-`createObject` is used when:
+`createObject` is used when:
 
 * `MutableProjection` utility is used to [create a MutableProjection](MutableProjection.md#create)
 * `Predicate` utility is used to [create a BasePredicate](Predicate.md#create)

@@ -9,7 +9,7 @@
 `LogicalRelation` takes the following to be created:
 
 * <span id="relation"> [BaseRelation](../BaseRelation.md)
-* <span id="output"> Output Schema ([AttributeReference](../expressions/AttributeReference.md)s)
+* <span id="output"> Output Schema (`AttributeReference`s)
 * <span id="catalogTable"> Optional [CatalogTable](../CatalogTable.md)
 * <span id="isStreaming"> `isStreaming` flag
 

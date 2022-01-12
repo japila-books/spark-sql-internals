@@ -1,3 +1,0 @@
-# AttributeReference
-
-`AttributeReference` is...FIXME

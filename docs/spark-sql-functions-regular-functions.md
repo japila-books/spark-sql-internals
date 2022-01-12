@@ -1,5 +1,3 @@
-title: Regular Functions
-
 # Regular Functions (Non-Aggregate Functions)
 
 [[functions]]
@@ -114,7 +112,7 @@ coalesce(
 
 `coalesce` requires at least one column and all columns have to be of the same or compatible types.
 
-Internally, `coalesce` creates a [Column](Column.md#apply) with a [Coalesce](expressions/Coalesce.md) expression (with the children being the [expressions](Column.md#expr) of the input `Column`).
+Internally, `coalesce` creates a [Column](Column.md#apply) with a `Coalesce` expression (with the children being the [expressions](Column.md#expr) of the input `Column`).
 
 ### <span id="coalesce-example"> Demo: coalesce
 

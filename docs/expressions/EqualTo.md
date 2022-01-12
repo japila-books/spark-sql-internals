@@ -12,7 +12,7 @@
 * <span id="left"> Left [Expression](Expression.md)
 * <span id="right"> Right [Expression](Expression.md)
 
-`EqualTo` is created when:
+`EqualTo` is created when:
 
 * `AstBuilder` is requested to [parse a comparison](../sql/AstBuilder.md#visitComparison) (for `=`, `==`, `<>`, `!=` operators) and [visitSimpleCase](../sql/AstBuilder.md#visitSimpleCase)
 * `Column.===`, `Column.=!=` and `Column.notEqual` operators are used
@@ -24,7 +24,7 @@
 symbol: String
 ```
 
-`symbol` is part of the [BinaryOperator](BinaryOperator.md#symbol) abstraction.
+`symbol` is part of the `BinaryOperator` abstraction.
 
 `symbol` is `=` (_equal sign_).
 

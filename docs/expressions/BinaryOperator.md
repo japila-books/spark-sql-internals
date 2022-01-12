@@ -1,3 +1,0 @@
-# BinaryOperator
-
-`BinaryOperator` is...FIXME

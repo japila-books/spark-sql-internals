@@ -1,6 +1,6 @@
 # AggregationIterators
 
-`AggregationIterator` is an [abstraction](#contract) of [iterators](#implementations) of [UnsafeRow](UnsafeRow.md)s.
+`AggregationIterator` is an [abstraction](#contract) of [aggregation iterators](#implementations) of [UnsafeRow](UnsafeRow.md)s.
 
 ```scala
 abstract class AggregationIterator(...)
@@ -31,7 +31,7 @@ From [scala.collection.Iterator]({{ scala.api }}/scala/collection/Iterator.html)
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 
 ??? note "Abstract Class"
-    `AggregationIterator` is an abstract class and cannot be created directly. It is created indirectly for the [concrete AggregationIterators](#implementations).
+    `AggregationIterator` is an abstract class and cannot be created directly. It is created indirectly for the [concrete AggregationIterators](#implementations).
 
 ## <span id="AggregateModes"> AggregateModes
 
@@ -60,7 +60,7 @@ initializeAggregateFunctions(
 
 `initializeAggregateFunctions`...FIXME
 
-`initializeAggregateFunctions` is used when:
+`initializeAggregateFunctions` is used when:
 
 * `AggregationIterator` is requested for the [aggregateFunctions](#aggregateFunctions)
 * `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](ObjectAggregationIterator.md#mergeAggregationBuffers)
@@ -77,7 +77,7 @@ generateProcessRow(
 
 `generateProcessRow`...FIXME
 
-`generateProcessRow` is used when:
+`generateProcessRow` is used when:
 
 * `AggregationIterator` is requested for the [processRow function](#processRow)
 * `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers function](ObjectAggregationIterator.md#mergeAggregationBuffers)
@@ -91,7 +91,7 @@ generateOutput: (UnsafeRow, InternalRow) => UnsafeRow
 
 When [created](#creating-instance), `AggregationIterator` [creates a ResultProjection function](#generateResultProjection).
 
-`generateOutput` is used when:
+`generateOutput` is used when:
 
 * `ObjectAggregationIterator` is requested for the [next element](ObjectAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 * `SortBasedAggregationIterator` is requested for the [next element](SortBasedAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)

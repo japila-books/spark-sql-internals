@@ -19,7 +19,7 @@
 * <span id="left"> Left [Expression](Expression.md)
 * <span id="right"> Right [Expression](Expression.md)
 
-`EqualNullSafe` is created when:
+`EqualNullSafe` is created when:
 
 * `AstBuilder` is requested to [parse a comparison](../sql/AstBuilder.md#visitComparison) (for `<=>` operator) and [withPredicate](../sql/AstBuilder.md#withPredicate)
 * `Column.<=>` operator is used
@@ -31,7 +31,7 @@
 symbol: String
 ```
 
-`symbol` is part of the [BinaryOperator](BinaryOperator.md#symbol) abstraction.
+`symbol` is part of the `BinaryOperator` abstraction.
 
 `symbol` is `<=>`.
 
@@ -41,7 +41,7 @@ symbol: String
 nullable: Boolean
 ```
 
-`nullable` is part of the [Expression](Expression.md#nullable) abstraction.
+`nullable` is part of the [Expression](Expression.md#nullable) abstraction.
 
 `nullable` is always `false`.
 

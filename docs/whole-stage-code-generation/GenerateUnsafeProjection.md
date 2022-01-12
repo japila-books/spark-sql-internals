@@ -157,7 +157,7 @@ mutableStateArray[0]
 
 `createCode` is used when:
 
-* `CreateNamedStructUnsafe` is requested to [generate a Java source code](../expressions/CreateNamedStructUnsafe.md#doGenCode)
+* `CreateNamedStructUnsafe` is requested to generate a Java source code
 
 * `GenerateUnsafeProjection` is requested to [create a UnsafeProjection](#create)
 

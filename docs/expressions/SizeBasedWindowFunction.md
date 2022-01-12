@@ -19,7 +19,7 @@ trait SizeBasedWindowFunction extends AggregateWindowFunction {
 | Description
 
 | n
-| [[n]] Size of the current window as a <<spark-sql-Expression-AttributeReference.md#, AttributeReference>> expression with `++window__partition__size++` name, [IntegerType](../types/DataType.md#IntegerType) data type and not nullable
+| [[n]] Size of the current window as an `AttributeReference` expression with `++window__partition__size++` name, [IntegerType](../types/DataType.md#IntegerType) data type and not nullable
 |===
 
 [[implementations]]

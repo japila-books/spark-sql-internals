@@ -8,9 +8,9 @@
 
 * <span id="relation"> [DataSourceV2Relation](DataSourceV2Relation.md)
 * <span id="scan"> [Scan](../connector/Scan.md)
-* <span id="output"> Output Schema ([AttributeReference](../expressions/AttributeReference.md)s)
+* <span id="output"> Output Schema (`AttributeReference`s)
 
-`DataSourceV2ScanRelation` is created when:
+`DataSourceV2ScanRelation` is created when:
 
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (for a [DataSourceV2Relation](DataSourceV2Relation.md))
 
@@ -20,7 +20,7 @@
 name: String
 ```
 
-`name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
+`name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
 
 `name` requests the [DataSourceV2Relation](#relation) for the [Table](DataSourceV2Relation.md#table) that is in turn requested for the [name](../connector/Table.md#name).
 
@@ -31,7 +31,7 @@ simpleString(
   maxFields: Int): String
 ```
 
-`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
 
 `simpleString` is the following (with the [output schema](#output) and the [name](#name)):
 
@@ -45,7 +45,7 @@ RelationV2[output] [name]
 computeStats(): Statistics
 ```
 
-`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
 
 `computeStats`...FIXME
 

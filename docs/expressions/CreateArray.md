@@ -1,3 +1,0 @@
-# CreateArray
-
-`CreateArray` is...FIXME

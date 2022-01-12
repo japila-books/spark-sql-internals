@@ -37,7 +37,7 @@ output: Seq[Attribute]
 
 `output` is part of the [Command](Command.md#output) abstraction.
 
-`output` is two [AttributeReference](../expressions/AttributeReference.md)s:
+`output` is two `AttributeReference`s:
 
 * <span id="key"> `key`
 * <span id="value"> `value`

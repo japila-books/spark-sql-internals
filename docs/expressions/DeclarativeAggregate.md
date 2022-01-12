@@ -1,98 +1,69 @@
-# DeclarativeAggregate -- Unevaluable Aggregate Function Expressions
+# DeclarativeAggregate &mdash; Unevaluable Aggregate Function Expressions
 
-`DeclarativeAggregate` is an <<contract, extension>> of the <<spark-sql-Expression-AggregateFunction.md#, AggregateFunction Contract>> for <<implementations, aggregate function expressions>> that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
+`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [aggregate function expressions](#implementations) that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
 
-[[contract]]
-.DeclarativeAggregate Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Property
-| Description
+## Contract
 
-| evaluateExpression
-a| [[evaluateExpression]]
+### <span id="evaluateExpression"> evaluateExpression
 
-[source, scala]
-----
+```scala
 evaluateExpression: Expression
-----
+```
 
-The <<Expression.md#, expression>> that returns the final value for the aggregate function
+[Expression](Expression.md) to calculate the final value of this aggregate function
 
 Used when:
 
+* `EliminateAggregateFilter` logical optimization is executed
+* `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
 * `AggregationIterator` is requested for the [generateResultProjection](../AggregationIterator.md#generateResultProjection)
-
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
+* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply)
 
-* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply) (when `WindowExec` physical operator is <<WindowExec.md#, executed>>)
+### <span id="initialValues"> initialValues
 
-| initialValues
-a| [[initialValues]]
-
-[source, scala]
-----
+```scala
 initialValues: Seq[Expression]
-----
+```
 
-| mergeExpressions
-a| [[mergeExpressions]]
+[Expression](Expression.md) for initial values of this aggregate function
 
-[source, scala]
-----
+Used when:
+
+* `EliminateAggregateFilter` logical optimization is executed
+* `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
+* `AggregationIterator` is [created](../AggregationIterator.md#expressionAggInitialProjection)
+* `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys), [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap) and [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
+* `HashMapGenerator` is created
+* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply)
+
+### <span id="mergeExpressions"> mergeExpressions
+
+```scala
 mergeExpressions: Seq[Expression]
-----
+```
 
-| updateExpressions
-a| [[updateExpressions]]
+### <span id="updateExpressions"> updateExpressions
 
-[source, scala]
-----
+```scala
 updateExpressions: Seq[Expression]
-----
+```
 
-|===
+## Implementations
 
-[[extensions]]
-.DeclarativeAggregates (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| DeclarativeAggregate
-| Description
-
-| <<expressions/AggregateWindowFunction.md#, AggregateWindowFunction>>
-| [[AggregateWindowFunction]] Contract for declarative window aggregate function expressions
-
-| Average
-| [[Average]]
-
-| CentralMomentAgg
-| [[CentralMomentAgg]]
-
-| Corr
-| [[Corr]]
-
-| Count
-| [[Count]]
-
-| Covariance
-| [[Covariance]]
-
-| <<spark-sql-Expression-First.md#, First>>
-| [[First]]
-
-| Last
-| [[Last]]
-
-| Max
-| [[Max]]
-
-| Min
-| [[Min]]
-
-| SimpleTypedAggregateExpression
-| [[SimpleTypedAggregateExpression]]
-
-| Sum
-| [[Sum]]
-|===
+* [AggregateWindowFunction](AggregateWindowFunction.md)
+* `Average`
+* `BitAggregate`
+* `CentralMomentAgg`
+* `Count`
+* `Covariance`
+* [First](First.md)
+* `Last`
+* `Max`
+* `MaxMinBy`
+* `Min`
+* `PearsonCorrelation`
+* `Product`
+* `SimpleTypedAggregateExpression`
+* `Sum`
+* `UnevaluableAggregate`

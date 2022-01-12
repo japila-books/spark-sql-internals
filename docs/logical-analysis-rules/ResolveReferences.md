@@ -154,7 +154,7 @@ scala> println(plan.numberedTreeString)
 
 * For <<spark-sql-Expression-CreateNamedStruct.md#, CreateNamedStruct>> expressions with expressions/Star.md[Star] child expressions among the values, `expandStarExpression`...FIXME
 
-* For spark-sql-Expression-CreateArray.md[CreateArray] expressions with expressions/Star.md[Star] child expressions, `expandStarExpression`...FIXME
+* `CreateArray` expressions with expressions/Star.md[Star] child expressions, `expandStarExpression`...FIXME
 
 * For spark-sql-Expression-Murmur3Hash.md[Murmur3Hash] expressions with expressions/Star.md[Star] child expressions, `expandStarExpression`...FIXME
 

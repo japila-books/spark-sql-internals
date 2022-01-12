@@ -29,9 +29,6 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | Name
 | Description
 
-| [[CollectionGenerator]] spark-sql-Expression-CollectionGenerator.md[CollectionGenerator]
-|
-
 | [[ExplodeBase]] spark-sql-Expression-ExplodeBase.md[ExplodeBase]
 |
 

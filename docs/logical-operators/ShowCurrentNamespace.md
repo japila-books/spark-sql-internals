@@ -16,7 +16,7 @@
 output: Seq[Attribute]
 ```
 
-`output` is two [AttributeReference](../expressions/AttributeReference.md)s:
+`output` is two `AttributeReference`s:
 
 * <span id="catalog"> `catalog`
 * <span id="namespace"> `namespace`

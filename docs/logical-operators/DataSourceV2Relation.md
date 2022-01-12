@@ -7,7 +7,7 @@
 `DataSourceV2Relation` takes the following to be created:
 
 * <span id="table"> [Table](../connector/Table.md)
-* <span id="output"> Output [AttributeReference](../expressions/AttributeReference.md)s
+* <span id="output"> Output `AttributeReference`s
 * <span id="catalog"> (optional) [CatalogPlugin](../connector/catalog/CatalogPlugin.md)
 * <span id="identifier"> (optional) `Identifier`
 * <span id="options"> Case-Insensitive Options
