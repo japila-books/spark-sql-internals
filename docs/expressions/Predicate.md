@@ -1,6 +1,6 @@
 # Predicate Expressions
 
-`Predicate` is an extension of the [Expression](Expression.md) abstraction for [expressions](#implementations) that return a [boolean](#dataType) value (_predicates_).
+`Predicate` is an extension of the [Expression](Expression.md) abstraction for [expressions](#implementations) that return a [boolean](#dataType) value (_predicates_).
 
 ## Implementations
 
@@ -11,7 +11,7 @@
 * [Exists](Exists.md)
 * [In](In.md)
 * [InSet](InSet.md)
-* [InSubquery](InSubquery.md)
+* `InSubquery`
 * IsNaN
 * IsNotNull
 * IsNull
@@ -25,6 +25,6 @@
 dataType: DataType
 ```
 
-`dataType` is part of the [Expression](Expression.md#dataType) abstraction.
+`dataType` is part of the [Expression](Expression.md#dataType) abstraction.
 
 `dataType` is always [BooleanType](../types/DataType.md#BooleanType).

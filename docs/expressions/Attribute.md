@@ -60,5 +60,5 @@ withQualifier(
 ## Implementations
 
 * `AttributeReference`
-* [PrettyAttribute](PrettyAttribute.md)
+* `PrettyAttribute`
 * [UnresolvedAttribute](UnresolvedAttribute.md)

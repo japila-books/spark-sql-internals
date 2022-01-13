@@ -1,10 +1,10 @@
 # HashExpression
 
-`HashExpression[E]` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [hashing expressions](#implementations) that [calculate hash value](#computeHash) (for a group of expressions).
+`HashExpression[E]` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [hashing expressions](#implementations) that [calculate hash value](#computeHash) (for a group of expressions).
 
 ## Contract
 
-### <span id="computeHash"> Computing Hash
+### <span id="computeHash"> Computing Hash
 
 ```scala
 computeHash(
@@ -17,7 +17,7 @@ Used when:
 
 * `HashExpression` is requested to [eval](#eval) and [doGenCode](#doGenCode)
 
-### <span id="hasherClassName"> hasherClassName
+### <span id="hasherClassName"> hasherClassName
 
 ```scala
 hasherClassName: String
@@ -27,7 +27,7 @@ Used when:
 
 * `HashExpression` is requested to [genHashInt](#genHashInt), [genHashLong](#genHashLong), [genHashBytes](#genHashBytes), [genHashCalendarInterval](#genHashCalendarInterval), [genHashString](#genHashString)
 
-### <span id="seed"> Seed
+### <span id="seed"> Seed
 
 ```scala
 seed: E
@@ -52,7 +52,7 @@ eval(
 
 `eval`...FIXME
 
-`eval` is part of the [Expression](Expression.md#eval) abstraction.
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
 
 ## <span id="doGenCode"> doGenCode
 
@@ -64,4 +64,4 @@ doGenCode(
 
 `doGenCode`...FIXME
 
-`doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+`doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.

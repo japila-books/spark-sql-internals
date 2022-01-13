@@ -187,7 +187,7 @@ col(
 
 Internally, `col` branches off per the input column name.
 
-If the column name is `*` (a star), `col` simply creates a [Column](Column.md#apply) with [ResolvedStar](expressions/ResolvedStar.md) expression (with the [schema output attributes](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](Dataset.md#queryExecution)).
+If the column name is `*` (a star), `col` simply creates a [Column](Column.md#apply) with `ResolvedStar` expression (with the [schema output attributes](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](Dataset.md#queryExecution)).
 
 Otherwise, `col` uses [colRegex](#colRegex) untyped transformation when [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is enabled.
 

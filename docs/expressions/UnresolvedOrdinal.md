@@ -47,7 +47,4 @@ unresolvedordinal(1)
 [[analysis-phase]]
 NOTE: `UnresolvedOrdinal` is resolved when [ResolveOrdinalInOrderByAndGroupBy](../logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md) logical resolution rule is executed.
 
-[[NonSQLExpression]]
-`UnresolvedOrdinal` has <<Expression.md#NonSQLExpression, no representation in SQL>>.
-
 NOTE: `UnresolvedOrdinal` in GROUP BY ordinal position is not allowed for a select list with a star (`*`).

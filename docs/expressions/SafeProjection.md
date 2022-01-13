@@ -1,3 +1,0 @@
-# SafeProjection
-
-`SafeProjection` is...FIXME

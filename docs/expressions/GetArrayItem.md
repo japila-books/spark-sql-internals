@@ -1,3 +1,0 @@
-# GetArrayItem
-
-`GetArrayItem` is...FIXME

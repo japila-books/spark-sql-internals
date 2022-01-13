@@ -1,6 +1,6 @@
-# InSubqueryExec Expression
+# InSubqueryExec
 
-`InSubqueryExec` is a [ExecSubqueryExpression](ExecSubqueryExpression.md) that represents [InSubquery](InSubquery.md) and [DynamicPruningSubquery](DynamicPruningSubquery.md) expressions at execution time.
+`InSubqueryExec` is a [ExecSubqueryExpression](ExecSubqueryExpression.md) that represents `InSubquery` and [DynamicPruningSubquery](DynamicPruningSubquery.md) expressions at execution time.
 
 ## Creating Instance
 
@@ -13,8 +13,8 @@
 
 `InSubqueryExec` is created when:
 
-* [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans [InSubquery](InSubquery.md) expressions)
-* [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed (and plans [InSubquery](InSubquery.md) expressions)
+* [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans `InSubquery` expressions)
+* [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed (and plans `InSubquery` expressions)
 * [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed (and plans [DynamicPruningSubquery](DynamicPruningSubquery.md) expressions)
 
 ## Broadcasted Result

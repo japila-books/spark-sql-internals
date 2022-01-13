@@ -1,4 +1,4 @@
-# SortOrder Unevaluable Expression
+# SortOrder
 
 `SortOrder` is an [Expression](Expression.md) that represents the following operators in a structured query:
 

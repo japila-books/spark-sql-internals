@@ -75,9 +75,9 @@ extractCorrelatedScalarSubqueries[E <: Expression](
   subqueries: ArrayBuffer[ScalarSubquery]): E
 ----
 
-`extractCorrelatedScalarSubqueries` finds all spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md[ScalarSubquery] expressions with at least one spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md#children[child] in the input `expression` and adds them to the input `subqueries` collection.
+`extractCorrelatedScalarSubqueries` finds all [ScalarSubquery](../expressions/ExecSubqueryExpression-ScalarSubquery.md) expressions with at least one [child](../expressions/ExecSubqueryExpression-ScalarSubquery.md#children) in the input `expression` and adds them to the input `subqueries` collection.
 
-`extractCorrelatedScalarSubqueries` traverses the input `expression` down (the expression tree) and, every time a `ScalarSubquery` with at least one child is found, returns the head of the output attributes of the spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md#plan[subquery plan].
+`extractCorrelatedScalarSubqueries` traverses the input `expression` down (the expression tree) and, every time a `ScalarSubquery` with at least one child is found, returns the head of the output attributes of the [subquery plan](../expressions/ExecSubqueryExpression-ScalarSubquery.md#plan).
 
 In the end, `extractCorrelatedScalarSubqueries` returns the rewritten expression.
 

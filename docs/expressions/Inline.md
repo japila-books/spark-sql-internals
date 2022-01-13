@@ -1,11 +1,10 @@
 # Inline Generator Expression
 
-`Inline` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and a `CollectionGenerator`.
+`Inline` is a [UnaryExpression](UnaryExpression.md) and a `CollectionGenerator`.
 
 `Inline` is created by `inline` and `inline_outer` standard functions.
 
-[source, scala]
-----
+```text
 // Query with inline function
 val q = spark.range(1)
   .selectExpr("inline(array(struct(1, 'a'), struct(2, 'b')))")
@@ -33,4 +32,4 @@ val inline = generator.asInstanceOf[Inline]
 // Inline Generator expression is also CollectionGenerator
 scala> inline.collectionType.catalogString
 res1: String = array<struct<col1:int,col2:string>>
-----
+```

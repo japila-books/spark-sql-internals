@@ -50,7 +50,7 @@ terminate(): TraversableOnce[InternalRow] = Nil
 | [[PosExplode]] spark-sql-Expression-ExplodeBase.md#PosExplode[PosExplode]
 |
 
-| [[Stack]] spark-sql-Expression-Stack.md[Stack]
+| `Stack`
 |
 
 | [[UnresolvedGenerator]] spark-sql-Expression-UnresolvedGenerator.md[UnresolvedGenerator]

@@ -38,9 +38,7 @@ toAttribute: Attribute
 
 ## Implementations
 
-* `Alias`
 * [Attribute](Attribute.md)
-* [Star](Star.md)
 * _others_
 
 ## <span id="foldable"> foldable

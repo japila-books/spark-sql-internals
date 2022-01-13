@@ -1,4 +1,4 @@
-# MonotonicallyIncreasingID Nondeterministic Leaf Expression
+# MonotonicallyIncreasingID Leaf Expression
 
 `MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that is the internal representation of the `monotonically_increasing_id` [standard](../spark-sql-functions.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions.
 

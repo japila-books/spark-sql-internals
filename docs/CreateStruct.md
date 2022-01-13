@@ -38,7 +38,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `ExpressionEncoder` is requested to [create an ExpressionEncoder for a tuple](ExpressionEncoder.md#tuple)
 
-* `Stack` generator expression is requested to <<spark-sql-Expression-Stack.md#doGenCode, generate a Java source code>>
+* `Stack` generator expression is requested to generate a Java source code
 
 * `AstBuilder` is requested to parse a <<sql/AstBuilder.md#visitStruct, struct>> and <<sql/AstBuilder.md#visitRowConstructor, row constructor>>
 

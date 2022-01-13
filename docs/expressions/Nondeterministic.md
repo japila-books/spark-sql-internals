@@ -1,96 +1,46 @@
-# Nondeterministic Expression Contract
+# Nondeterministic Expressions
 
-`Nondeterministic` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that are non-[deterministic](#deterministic) and non-[foldable](#foldable).
+`Nondeterministic` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [non-deterministic and non-foldable expressions](#implementations).
 
-`Nondeterministic` expressions require explicit <<initialize, initialization>> (with the current partition index) before <<eval, evaluating a value>>.
+Nondeterministic expression should be [initialized](#initialize) (with the partition ID) before [evaluation](#eval).
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
+## Contract
 
-trait Nondeterministic extends Expression {
-  // only required methods that have no implementation
-  protected def initializeInternal(partitionIndex: Int): Unit
-  protected def evalInternal(input: InternalRow): Any
-}
-----
+### <span id="evalInternal"> evalInternal
 
-.Nondeterministic Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+```scala
+evalInternal(
+  input: InternalRow): Any
+```
 
-| `initializeInternal`
-| [[initializeInternal]] Initializing the `Nondeterministic` expression
+Used when:
 
-Used exclusively when `Nondeterministic` expression is requested to <<initialize, initialize>>
+* `Nondeterministic` is requested to [eval](#eval)
 
-| `evalInternal`
-| [[evalInternal]] Evaluating the `Nondeterministic` expression
+### <span id="initializeInternal"> initializeInternal
 
-Used exclusively when `Nondeterministic` expression is requested to <<eval, evaluate a value>>
-|===
+```scala
+initializeInternal(
+  partitionIndex: Int): Unit
+```
+
+Used when:
+
+* `Nondeterministic` is requested to [initialize](#initialize)
+
+## Implementations
+
+* [CallMethodViaReflection](CallMethodViaReflection.md)
+* `CurrentBatchTimestamp`
+* `InputFileBlockLength`
+* `InputFileBlockStart`
+* `InputFileName`
+* `SparkPartitionID`
+* `Stateful`
+
+## Review Me
 
 NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic` logical plan rule.
-
-[[implementations]]
-.Nondeterministic Expressions
-[cols="1,2",options="header",width="100%"]
-|===
-| Expression
-| Description
-
-| `CurrentBatchTimestamp`
-| [[CurrentBatchTimestamp]]
-
-| `InputFileBlockLength`
-| [[InputFileBlockLength]]
-
-| `InputFileBlockStart`
-| [[InputFileBlockStart]]
-
-| `InputFileName`
-| [[InputFileName]]
-
-| expressions/MonotonicallyIncreasingID.md[MonotonicallyIncreasingID]
-| [[MonotonicallyIncreasingID]]
-
-| `NondeterministicExpression`
-| [[NondeterministicExpression]]
-
-| `Rand`
-| [[Rand]]
-
-| `Randn`
-| [[Randn]]
-
-| `RDG`
-| [[RDG]]
-
-| `SparkPartitionID`
-| [[SparkPartitionID]]
-|===
-
-[[internal-registries]]
-.Nondeterministic's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[deterministic]] Expression.md#deterministic[deterministic]
-| Always turned off (i.e. `false`)
-
-| [[foldable]] Expression.md#foldable[foldable]
-| Always turned off (i.e. `false`)
-
-| [[initialized]] `initialized`
-| Controls whether a `Nondeterministic` expression has been <<initialize, initialized>> before <<eval, evaluation>>.
-
-Turned off by default.
-|===
 
 === [[initialize]] Initializing Expression -- `initialize` Method
 

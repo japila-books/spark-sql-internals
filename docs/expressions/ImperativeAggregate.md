@@ -20,8 +20,6 @@
 | expressions/ScalaUDAF.md[ScalaUDAF]
 |
 
-| spark-sql-Expression-TypedImperativeAggregate.md[TypedImperativeAggregate]
-|
 |===
 
 === [[contract]] ImperativeAggregate Contract

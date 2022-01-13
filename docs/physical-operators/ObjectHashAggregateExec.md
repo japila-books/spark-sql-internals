@@ -11,9 +11,9 @@ supportsAggregate(
   aggregateExpressions: Seq[AggregateExpression]): Boolean
 ```
 
-`supportsAggregate` is enabled (`true`) when there is a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
+`supportsAggregate` is enabled (`true`) when there is a `TypedImperativeAggregate` aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
 
-`supportsAggregate` is used when:
+`supportsAggregate` is used when:
 
 * `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
 
@@ -29,7 +29,7 @@ supportsAggregate(
 * <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="child"> Child [Physical Operator](SparkPlan.md)
 
-`ObjectHashAggregateExec` is created when:
+`ObjectHashAggregateExec` is created when:
 
 * `AggUtils` utility is used to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
 
@@ -46,7 +46,7 @@ aggTime         | time in aggregation build
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` uses [ObjectAggregationIterator](../ObjectAggregationIterator.md) for aggregation (one per partition).
 

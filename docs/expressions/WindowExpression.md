@@ -10,7 +10,7 @@
 
 * `AstBuilder` is requested to [parse a function call](../sql/AstBuilder.md#visitFunctionCall) in a SQL statement
 
-`WindowExpression` can only be  with [AggregateExpression](AggregateExpression.md), [AggregateWindowFunction](AggregateWindowFunction.md) or [OffsetWindowFunction](OffsetWindowFunction.md) expressions which is enforced at [analysis](../CheckAnalysis.md#WindowExpression).
+`WindowExpression` can only be  with [AggregateExpression](AggregateExpression.md), [AggregateWindowFunction](AggregateWindowFunction.md) or `OffsetWindowFunction` expressions which is enforced at [analysis](../CheckAnalysis.md#WindowExpression).
 
 ```scala
 // Using Catalyst DSL
@@ -70,7 +70,7 @@ NOTE: `WindowExpression` is subject to <<NullPropagation.md#, NullPropagation>> 
 
 NOTE: Distinct window functions are not supported which is enforced at <<CheckAnalysis.md#WindowExpression-AggregateExpression-isDistinct, analysis>>.
 
-NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at <<CheckAnalysis.md#WindowExpression-OffsetWindowFunction, analysis>>.
+NOTE: An offset window function can only be evaluated in an ordered row-based window frame with a single offset which is enforced at [analysis](../CheckAnalysis.md#WindowExpression-OffsetWindowFunction).
 
 === [[catalyst-dsl]][[windowExpr]] Catalyst DSL -- `windowExpr` Operator
 

@@ -11,7 +11,7 @@
 * <span id="expressions"> Partitioning [Expression](Expression.md)s
 * <span id="numPartitions"> Number of partitions
 
-`HashPartitioning` is created when:
+`HashPartitioning` is created when:
 
 * `RepartitionByExpression` is requested for the [partitioning](../logical-operators/RepartitionOperation.md#partitioning)
 * `RebalancePartitions` is requested for the [partitioning](../logical-operators/RebalancePartitions.md#partitioning)
@@ -41,7 +41,7 @@ satisfies0(
 
 Otherwise, `satisfies0` is negative (`false`).
 
-`satisfies0` is part of the [Partitioning](../physical-operators/Partitioning.md#satisfies0) abstraction.
+`satisfies0` is part of the [Partitioning](../physical-operators/Partitioning.md#satisfies0) abstraction.
 
 ## <span id="partitionIdExpression"> PartitionId Expression
 
@@ -53,7 +53,7 @@ partitionIdExpression: Expression
 
 `partitionIdExpression` is a `Pmod` expression of a [Murmur3Hash](Murmur3Hash.md) (with the [partitioning expressions](#expressions)) and a [Literal](Literal.md) (with the [number of partitions](#numPartitions)).
 
-`partitionIdExpression` is used when:
+`partitionIdExpression` is used when:
 
 * `BucketingUtils` utility is used to `getBucketIdFromValue`
 * `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write) (with a bucketing spec)

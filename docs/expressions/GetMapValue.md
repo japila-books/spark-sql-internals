@@ -1,3 +1,0 @@
-# GetMapValue
-
-`GetMapValue` is...FIXME

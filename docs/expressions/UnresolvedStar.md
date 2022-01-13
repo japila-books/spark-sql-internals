@@ -1,6 +1,6 @@
 # UnresolvedStar Expression
 
-`UnresolvedStar` is a [Star](Star.md) expression that represents a star (i.e. all) expression in a logical query plan.
+`UnresolvedStar` is a `Star` expression that represents a star (i.e. all) expression in a logical query plan.
 
 `UnresolvedStar` is [created](#creating-instance) when:
 
@@ -27,7 +27,8 @@ scala> println(namedExprs.head.numberedTreeString)
 [[resolved]]
 `UnresolvedStar` can never be Expression.md#resolved[resolved], and is <<expand, expanded>> at analysis (when [ResolveReferences](../logical-analysis-rules/ResolveReferences.md) logical resolution rule is executed).
 
-NOTE: `UnresolvedStar` can only be used in Star.md#expand[Project, Aggregate or ScriptTransformation logical operators].
+!!! note
+    `UnresolvedStar` can only be used in `Project`, `Aggregate` or `ScriptTransformation` logical operators.
 
 [[Unevaluable]][[eval]][[doGenCode]]
 Given `UnresolvedStar` can never be <<resolved, resolved>> it should not come as a surprise that it [cannot be evaluated](Unevaluable.md) either (i.e. produce a value given an internal row). When requested to evaluate, `UnresolvedStar` simply reports a `UnsupportedOperationException`.
@@ -96,8 +97,6 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 expand(input: LogicalPlan, resolver: Resolver): Seq[NamedExpression]
 ----
 
-NOTE: `expand` is part of Star.md#expand[Star Contract] to...FIXME.
-
 `expand` first expands to named expressions per <<target, target>>:
 
 * For unspecified <<target, target>>, `expand` gives the catalyst/QueryPlan.md#output[output] schema of the `input` logical query plan (that assumes that the star refers to a relation / table)
@@ -106,7 +105,7 @@ NOTE: `expand` is part of Star.md#expand[Star Contract] to...FIXME.
 
 With no result earlier, `expand` then requests the `input` logical query plan to spark-sql-LogicalPlan.md#resolve[resolve] the <<target, target>> name parts to a named expression.
 
-For a named expression of [StructType](../types/StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a [GetStructField](GetStructField.md) unary expression (with the resolved named expression and the field index).
+For a named expression of [StructType](../types/StructType.md) data type, `expand` creates an spark-sql-Expression-Alias.md#creating-instance[Alias] expression with a `GetStructField` unary expression (with the resolved named expression and the field index).
 
 ```text
 val q = Seq((0, "zero")).toDF("id", "name").select(struct("id", "name") as "s")

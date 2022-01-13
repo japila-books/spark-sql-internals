@@ -31,7 +31,7 @@ createInterpretedObject(
 * [MutableProjection](MutableProjection.md)
 * [Predicate](Predicate.md)
 * [RowOrdering](RowOrdering.md)
-* [SafeProjection](SafeProjection.md)
+* `SafeProjection`
 * [UnsafeProjection](UnsafeProjection.md)
 
 ## <span id="createObject"> Creating Object
@@ -54,5 +54,5 @@ Expr codegen error and falling back to interpreter mode
 * `MutableProjection` utility is used to [create a MutableProjection](MutableProjection.md#create)
 * `Predicate` utility is used to [create a BasePredicate](Predicate.md#create)
 * `RowOrdering` utility is used to [create a BaseOrdering](RowOrdering.md#create)
-* `SafeProjection` utility is used to [create a Projection](SafeProjection.md#create)
+* `SafeProjection` utility is used to create a Projection
 * `UnsafeProjection` utility is used to [create a UnsafeProjection](UnsafeProjection.md#create)

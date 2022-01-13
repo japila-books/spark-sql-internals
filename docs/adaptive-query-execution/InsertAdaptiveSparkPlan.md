@@ -98,7 +98,7 @@ buildSubqueryMap(
   plan: SparkPlan): Map[Long, SubqueryExec]
 ```
 
-`buildSubqueryMap` finds [ScalarSubquery](../expressions/ScalarSubquery) and [ListQuery](../expressions/ListQuery.md) (in [InSubquery](../expressions/InSubquery.md)) expressions (unique by expression ID to reuse the execution plan from another sub-query) in the given [physical query plan](../physical-operators/SparkPlan.md).
+`buildSubqueryMap` finds [ScalarSubquery](../expressions/ScalarSubquery) and [ListQuery](../expressions/ListQuery.md) (in `InSubquery`) expressions (unique by expression ID to reuse the execution plan from another sub-query) in the given [physical query plan](../physical-operators/SparkPlan.md).
 
 For every `ScalarSubquery` and `ListQuery` expressions, `buildSubqueryMap` [compileSubquery](#compileSubquery), [verifyAdaptivePlan](#verifyAdaptivePlan) and registers a new [SubqueryExec](../physical-operators/SubqueryExec.md) operator.
 

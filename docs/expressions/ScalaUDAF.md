@@ -1,4 +1,4 @@
-# ScalaUDAF &mdash; Catalyst Expression Adapter for UserDefinedAggregateFunction
+# ScalaUDAF
 
 `ScalaUDAF` is a [Catalyst expression](Expression.md) adapter to manage the lifecycle of [UserDefinedAggregateFunction](#udaf) and hook it to Catalyst execution path.
 
@@ -30,7 +30,7 @@
 [[eval]]
 When evaluated, `ScalaUDAF`...FIXME
 
-`ScalaUDAF` has Expression.md#NonSQLExpression[no representation in SQL].
+`ScalaUDAF` has no representation in SQL.
 
 [[properties]]
 .ScalaUDAF's Properties

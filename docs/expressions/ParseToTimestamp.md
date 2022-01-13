@@ -1,11 +1,16 @@
-title: ParseToTimestamp
+# ParseToTimestamp
 
-# ParseToTimestamp Expression
+`ParseToTimestamp` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_timestamp](../spark-sql-functions-datetime.md#to_timestamp) standard function (in logical query plans).
 
-`ParseToTimestamp` is a spark-sql-Expression-RuntimeReplaceable.md[RuntimeReplaceable] expression that <<creating-instance, represents>> the spark-sql-functions-datetime.md#to_timestamp[to_timestamp] function (in logical query plans).
+As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the [child](#child) expression:
 
-[source, scala]
-----
+* `Cast(left, TimestampType)` for `to_timestamp(s: Column): Column` function
+
+* `Cast(UnixTimestamp(left, format), TimestampType)` for `to_timestamp(s: Column, fmt: String): Column` function
+
+## Demo
+
+```text
 // DEMO to_timestamp(s: Column): Column
 import java.sql.Timestamp
 import java.time.LocalDateTime
@@ -32,26 +37,4 @@ scala> println(ptt.numberedTreeString)
 00 to_timestamp('time, None)
 01 +- cast(time#18 as timestamp)
 02    +- time#18: string
-
-// FIXME DEMO to_timestamp(s: Column, fmt: String): Column
-----
-
-As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the <<child, child>> expression:
-
-* `Cast(left, TimestampType)` for `to_timestamp(s: Column): Column` function
-
-* `Cast(UnixTimestamp(left, format), TimestampType)` for `to_timestamp(s: Column, fmt: String): Column` function
-
-[source, scala]
-----
-// FIXME DEMO Conversion to `Cast(left, TimestampType)`
-// FIXME DEMO Conversion to `Cast(UnixTimestamp(left, format), TimestampType)`
-----
-
-=== [[creating-instance]] Creating ParseToTimestamp Instance
-
-`ParseToTimestamp` takes the following when created:
-
-* [[left]] Left Expression.md[expression]
-* [[format]] `format` Expression.md[expression]
-* [[child]] Child Expression.md[expression]
+```

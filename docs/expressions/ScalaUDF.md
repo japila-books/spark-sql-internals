@@ -1,10 +1,10 @@
-# ScalaUDF &mdash; Catalyst Expression to Manage Lifecycle of User-Defined Function
+# ScalaUDF
 
-`ScalaUDF` is a [Catalyst expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) and hook it to Catalyst execution path.
+`ScalaUDF` is an [Expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) and hook it to Catalyst execution path.
 
-`ScalaUDF` is a `ImplicitCastInputTypes` and `UserDefinedExpression`.
+`ScalaUDF` is a `ImplicitCastInputTypes` and [UserDefinedExpression](UserDefinedExpression.md).
 
-`ScalaUDF` has [no representation in SQL](Expression.md#NonSQLExpression).
+`ScalaUDF` has no representation in SQL.
 
 `ScalaUDF` is <<creating-instance, created>> when:
 
@@ -12,8 +12,7 @@
 
 * `UDFRegistration` is requested to UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 
-[source, scala]
-----
+```text
 val lengthUDF = udf { s: String => s.length }.withName("lengthUDF")
 val c = lengthUDF($"name")
 scala> println(c.expr.treeString)
@@ -22,12 +21,53 @@ UDF:lengthUDF('name)
 
 import org.apache.spark.sql.catalyst.expressions.ScalaUDF
 val scalaUDF = c.expr.asInstanceOf[ScalaUDF]
-----
+```
 
 NOTE: [Logical Analyzer](../Analyzer.md) uses [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) logical evaluation rule to...FIXME
 
+[[deterministic]]
+`ScalaUDF` is <<Expression.md#deterministic, deterministic>> when the given <<udfDeterministic, udfDeterministic>> flag is enabled (`true`) and all the <<children, children expressions>> are deterministic.
+
+=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
+
 [source, scala]
 ----
+doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
+----
+
+NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+
+`doGenCode`...FIXME
+
+=== [[eval]] Evaluating Expression -- `eval` Method
+
+[source, scala]
+----
+eval(
+  input: InternalRow): Any
+----
+
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
+
+`eval` executes the <<function, Scala function>> on the input [InternalRow](../InternalRow.md).
+
+## Creating Instance
+
+`ScalaUDF` takes the following when created:
+
+* [[function]] A Scala function (as Scala's `AnyRef`)
+* [[dataType]] Output [data type](../types/DataType.md)
+* [[children]] Child Expression.md[Catalyst expressions]
+* [[inputTypes]] Input [data types](../types/DataType.md) (default: `Nil`)
+* [[udfName]] Optional name (default: `None`)
+* [[nullable]] `nullable` flag (default: `true`)
+* [[udfDeterministic]] `udfDeterministic` flag (default: `true`)
+
+`ScalaUDF` initializes the <<internal-registries, internal registries and counters>>.
+
+## Demo
+
+```text
 // Defining a zero-argument UDF
 val myUDF = udf { () => "Hello World" }
 
@@ -107,44 +147,4 @@ scala> q.show
 |Hello Jacek|
 |Hello Agata|
 +-----------+
-----
-
-[[deterministic]]
-`ScalaUDF` is <<Expression.md#deterministic, deterministic>> when the given <<udfDeterministic, udfDeterministic>> flag is enabled (`true`) and all the <<children, children expressions>> are deterministic.
-
-=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
-
-[source, scala]
-----
-doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
-----
-
-NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
-
-`doGenCode`...FIXME
-
-=== [[eval]] Evaluating Expression -- `eval` Method
-
-[source, scala]
-----
-eval(
-  input: InternalRow): Any
-----
-
-`eval` is part of the [Expression](Expression.md#eval) abstraction.
-
-`eval` executes the <<function, Scala function>> on the input [InternalRow](../InternalRow.md).
-
-## Creating Instance
-
-`ScalaUDF` takes the following when created:
-
-* [[function]] A Scala function (as Scala's `AnyRef`)
-* [[dataType]] Output [data type](../types/DataType.md)
-* [[children]] Child Expression.md[Catalyst expressions]
-* [[inputTypes]] Input [data types](../types/DataType.md) (default: `Nil`)
-* [[udfName]] Optional name (default: `None`)
-* [[nullable]] `nullable` flag (default: `true`)
-* [[udfDeterministic]] `udfDeterministic` flag (default: `true`)
-
-`ScalaUDF` initializes the <<internal-registries, internal registries and counters>>.
+```

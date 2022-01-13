@@ -10,7 +10,7 @@
 
 * <span id="reuseMap"> [Subquery Cache](AdaptiveExecutionContext.md#subqueryCache)
 
-`ReuseAdaptiveSubquery` is created when:
+`ReuseAdaptiveSubquery` is created when:
 
 * `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
@@ -27,4 +27,4 @@ apply(
 
 * For a [ExecSubqueryExpression](../expressions/ExecSubqueryExpression.md) expression, `apply` replaces the [plan](../expressions/PlanExpression.md#plan) with a new [ReusedSubqueryExec](../physical-operators/ReusedSubqueryExec.md) physical operator with a cached plan if found in the [cache](#reuseMap).
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

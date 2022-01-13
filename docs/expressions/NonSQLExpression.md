@@ -1,3 +1,0 @@
-# NonSQLExpression
-
-`NonSQLExpression` is...FIXME

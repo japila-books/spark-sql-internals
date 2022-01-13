@@ -28,20 +28,3 @@ As a <<spark-sql-Expression-WindowFunction.md#, WindowFunction>> expression, `Ag
 ```text
 Window Functions do not support merging.
 ```
-
-[[extensions]]
-.AggregateWindowFunctions (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| AggregateWindowFunction
-| Description
-
-| <<spark-sql-Expression-RankLike.md#, RankLike>>
-| [[RankLike]]
-
-| <<spark-sql-Expression-RowNumberLike.md#, RowNumberLike>>
-| [[RowNumberLike]]
-
-| <<spark-sql-Expression-SizeBasedWindowFunction.md#, SizeBasedWindowFunction>>
-| [[SizeBasedWindowFunction]] Window functions that require the size of the current window for calculation
-|===

@@ -1,11 +1,8 @@
-title: TimeWindow
+# TimeWindow
 
-# TimeWindow Unevaluable Unary Expression
+`TimeWindow` is an [unevaluable](Unevaluable.md) and non-SQL unary expression that represents [window](../spark-sql-functions.md#window) function.
 
-`TimeWindow` is an [unevaluable](Unevaluable.md) and Expression.md#NonSQLExpression[non-SQL] unary expression that represents spark-sql-functions.md#window[window] function.
-
-[source, scala]
-----
+```text
 import org.apache.spark.sql.functions.window
 scala> val timeColumn = window('time, "5 seconds")
 timeColumn: org.apache.spark.sql.Column = timewindow(time, 5000000, 5000000, 0) AS `window`
@@ -21,7 +18,7 @@ scala> println(timeWindowExpr.numberedTreeString)
 import org.apache.spark.sql.catalyst.expressions.TimeWindow
 scala> val timeWindow = timeColumn.expr.children.head.asInstanceOf[TimeWindow]
 timeWindow: org.apache.spark.sql.catalyst.expressions.TimeWindow = timewindow('time, 5000000, 5000000, 0)
-----
+```
 
 [[units]]
 `interval` can include the following units:

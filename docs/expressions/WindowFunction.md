@@ -1,32 +1,6 @@
-title: WindowFunction
-
-# WindowFunction -- Window Function Expressions With WindowFrame
+# WindowFunction
 
 `WindowFunction` is the <<contract, contract>> of <<implementations, function expressions>> that define a <<frame, WindowFrame>> in which the window operator must be executed.
-
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions
-
-trait WindowFunction extends Expression {
-  // No required properties (vals and methods) that have no implementation
-}
-----
-
-[[implementations]]
-.WindowFunctions (Direct Implementations)
-[cols="1,2",options="header",width="100%"]
-|===
-| WindowFunction
-| Description
-
-| <<expressions/AggregateWindowFunction.md#, AggregateWindowFunction>>
-| [[AggregateWindowFunction]]
-
-| <<expressions/OffsetWindowFunction.md#, OffsetWindowFunction>>
-| [[OffsetWindowFunction]]
-|===
 
 === [[frame]] Defining WindowFrame for Execution -- `frame` Method
 

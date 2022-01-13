@@ -9,9 +9,9 @@
 
 `ResolveSubquery` resolves subqueries ([logical query plans](../logical-operators/LogicalPlan.md)) in the following [SubqueryExpressions](../expressions/SubqueryExpression.md):
 
-* [ScalarSubquery](../expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md)
+* [ScalarSubquery](../expressions/ExecSubqueryExpression-ScalarSubquery.md)
 * [Exists](../expressions/Exists.md)
-* [ListQuery](../expressions/ListQuery.md) (in [InSubquery](../expressions/InSubquery.md) expressions)
+* [ListQuery](../expressions/ListQuery.md) (in `InSubquery` expressions)
 
 `ResolveSubquery` is part of [Resolution](../Analyzer.md#Resolution) rule batch of the [Logical Analyzer](../Analyzer.md).
 
@@ -77,9 +77,9 @@ resolveSubQueries(
 
 `resolveSubQueries` [resolves subquery plans](#resolveSubQuery) in the following [SubqueryExpression](../expressions/SubqueryExpression.md) expressions (by [transforming expressions](../catalyst/QueryPlan.md#transformExpressions) down the operator tree) in the given [logical plan](../logical-operators/LogicalPlan.md):
 
-* [ScalarSubquery](../expressions/spark-sql-Expression-ExecSubqueryExpression-ScalarSubquery.md)
+* [ScalarSubquery](../expressions/ExecSubqueryExpression-ScalarSubquery.md)
 * [Exists](../expressions/Exists.md)
-* [ListQuery](../expressions/ListQuery.md) (in [InSubquery](../expressions/InSubquery.md) expressions)
+* [ListQuery](../expressions/ListQuery.md) (in `InSubquery` expressions)
 
 `resolveSubQueries` is used when `ResolveSubquery` is [executed](#apply).
 

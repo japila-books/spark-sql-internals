@@ -92,13 +92,11 @@ guarantees: Any `Partitioning` that is guaranteed by any of the input `partition
 
 ### <span id="RangePartitioning"> RangePartitioning
 
-[RangePartitioning](../expressions/RangePartitioning.md)
-
 compatibleWith: `RangePartitioning` when semantically equal (i.e. underlying expressions are deterministic and canonically equal)
 
 guarantees: `RangePartitioning` when semantically equal (i.e. underlying expressions are deterministic and canonically equal)
 
-[numPartitions](#numPartitions): the given [numPartitions](../expressions/RangePartitioning.md#numPartitions)
+[numPartitions](#numPartitions): the given `numPartitions`
 
 [satisfies](#satisfies):
 

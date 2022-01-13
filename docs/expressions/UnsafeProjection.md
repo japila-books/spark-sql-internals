@@ -8,7 +8,7 @@ UnsafeProjection: InternalRow =[apply]=> UnsafeRow
 
 ## Contract
 
-### <span id="apply"> Encoding InternalRow as UnsafeRow
+### <span id="apply"> Encoding InternalRow as UnsafeRow
 
 ```scala
 apply(
@@ -36,7 +36,7 @@ createCodeGeneratedObject(
   in: Seq[Expression]): UnsafeProjection
 ```
 
-`createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
+`createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
 
 `createCodeGeneratedObject`...FIXME
 
@@ -47,7 +47,7 @@ createInterpretedObject(
   in: Seq[Expression]): UnsafeProjection
 ```
 
-`createInterpretedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createInterpretedObject) abstraction.
+`createInterpretedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createInterpretedObject) abstraction.
 
 `createInterpretedObject`...FIXME
 

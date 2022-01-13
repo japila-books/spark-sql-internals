@@ -8,7 +8,7 @@
 
 * <span id="ordering"> [SortOrder](../expressions/SortOrder.md) expressions (for ordering)
 
-`OrderedDistribution` is created when:
+`OrderedDistribution` is created when:
 
 * `SortExec` physical operator is requested for the [requiredChildDistribution](SortExec.md#requiredChildDistribution) (with global sort)
 
@@ -20,7 +20,7 @@ requiredNumPartitions: Option[Int]
 
 `requiredNumPartitions` is undefined (`None`).
 
-`requiredNumPartitions` is part of the [Distribution](Distribution.md#requiredNumPartitions) abstraction.
+`requiredNumPartitions` is part of the [Distribution](Distribution.md#requiredNumPartitions) abstraction.
 
 ## <span id="createPartitioning"> Creating Partitioning
 
@@ -29,6 +29,6 @@ createPartitioning(
   numPartitions: Int): Partitioning
 ```
 
-`createPartitioning` creates a [RangePartitioning](../expressions/RangePartitioning.md) expression.
+`createPartitioning` creates a `RangePartitioning` expression.
 
-`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.
+`createPartitioning` is part of the [Distribution](Distribution.md#createPartitioning) abstraction.

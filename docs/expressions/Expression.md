@@ -1,12 +1,12 @@
-# Catalyst Expressions
+# Expressions
 
-`Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable expressions](#implementations) (in the [Catalyst Tree Manipulation Framework](../catalyst/index.md)).
+`Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable expressions](#implementations) (in the [Catalyst Tree Manipulation Framework](../catalyst/index.md)).
 
 `Expression` is an executable [node](../catalyst/TreeNode.md) that can be evaluated and produce a JVM object (for an [InternalRow](../InternalRow.md)) in the faster [code-generated](#genCode) or the slower [interpreted](#eval) modes.
 
 ## Contract
 
-### <span id="dataType"> DataType
+### <span id="dataType"> DataType
 
 ```scala
 dataType: DataType
@@ -14,7 +14,7 @@ dataType: DataType
 
 The [DataType](../types/DataType.md) of the result of evaluating this expression
 
-### <span id="doGenCode"> ExprCode
+### <span id="doGenCode"> ExprCode
 
 ```scala
 doGenCode(
@@ -28,18 +28,18 @@ Used when:
 
 * `Expression` is requested to [generate a Java code](#genCode)
 
-### <span id="eval"> Interpreted Expression Evaluation
+### <span id="eval"> Interpreted Expression Evaluation
 
 ```scala
 eval(
   input: InternalRow = null): Any
 ```
 
-**Interpreted (non-code-generated) expression evaluation** that evaluates this expression to a JVM object for a given [InternalRow](../InternalRow.md) (and skipping [generating a corresponding Java code](#genCode))
+**Interpreted expression evaluation** that evaluates this expression to a JVM object for a given [InternalRow](../InternalRow.md) (and skipping [generating a corresponding Java code](#genCode))
 
-`eval` is a slower "relative" of the [code-generated (non-interpreted) expression evaluation](#genCode)
+`eval` is a slower "relative" of the [code-generated expression evaluation](#genCode)
 
-### <span id="nullable"> nullable
+### <span id="nullable"> nullable
 
 ```scala
 nullable: Boolean
@@ -59,24 +59,23 @@ nullable: Boolean
 * [ExpectsInputTypes](ExpectsInputTypes.md)
 * [NamedExpression](NamedExpression.md)
 * [Nondeterministic](Nondeterministic.md)
-* [NonSQLExpression](NonSQLExpression.md)
 * [Predicate](Predicate.md)
 * [UnaryExpression](UnaryExpression.md)
 * [Unevaluable](Unevaluable.md)
 * _many others_
 
-## <span id="genCode"> Code-Generated (Non-Interpreted) Expression Evaluation
+## <span id="genCode"> Code-Generated Expression Evaluation
 
 ```scala
 genCode(
   ctx: CodegenContext): ExprCode
 ```
 
-`genCode` generates a Java source code for **code-generated (non-interpreted) expression evaluation** (on an input [InternalRow](../InternalRow.md).
+`genCode` generates a Java source code for expression evaluation (on an input [InternalRow](../InternalRow.md)).
 
 Similar to [doGenCode](#doGenCode) but supports expression reuse using [Subexpression Elimination](../spark-sql-subexpression-elimination.md).
 
-`genCode` is a faster "relative" of the [interpreted (non-code-generated) expression evaluation](#eval).
+`genCode` is a faster "relative" of the [interpreted expression evaluation](#eval).
 
 ### <span id="reduceCodeSize"> reduceCodeSize
 

@@ -76,7 +76,7 @@ prepareShuffleDependency(
 
 * For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning), `prepareShuffleDependency` creates a `HashPartitioner` for the same number of partitions
 * For [HashPartitioning](Partitioning.md#HashPartitioning), `prepareShuffleDependency` creates a `Partitioner` for the same number of partitions and `getPartition` that is an "identity"
-* For [RangePartitioning](Partitioning.md#RangePartitioning), `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](../configuration-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
+* For `RangePartitioning`, `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](../configuration-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
 * For [SinglePartition](Partitioning.md#SinglePartition), `prepareShuffleDependency` creates a `Partitioner` with `1` for the number of partitions and `getPartition` that always gives `0`
 
 ### <span id="prepareShuffleDependency-getPartitionKeyExtractor"> getPartitionKeyExtractor Internal Method
@@ -91,7 +91,7 @@ getPartitionKeyExtractor(): InternalRow => Any
 
 * For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning),...FIXME
 * For [HashPartitioning](Partitioning.md#HashPartitioning),...FIXME
-* For [RangePartitioning](Partitioning.md#RangePartitioning),...FIXME
+* For `RangePartitioning`,...FIXME
 * For [SinglePartition](Partitioning.md#SinglePartition),...FIXME
 
 ### <span id="prepareShuffleDependency-isRoundRobin"> isRoundRobin Internal Flag
