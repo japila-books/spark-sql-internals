@@ -1,4 +1,4 @@
-# Aggregator &mdash; Typed User-Defined Aggregate Functions (UDAFs)
+# Aggregator Expressions
 
 `Aggregator` is an [abstraction](#contract) of [typed user-defined aggregate functions](#implementations) (_user-defined typed aggregations_ or _UDAFs_).
 
@@ -6,7 +6,7 @@
 abstract class Aggregator[-IN, BUF, OUT]
 ```
 
-`Aggregator` is `Serializable`.
+`Aggregator` is a `Serializable` ([Java]({{ java.api }}/java/lang/Serializable.html)).
 
 ## Contract
 

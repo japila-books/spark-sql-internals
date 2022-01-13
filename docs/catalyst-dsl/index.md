@@ -31,7 +31,7 @@ at(
   ordinal: Int): BoundReference
 ```
 
-`ExpressionConversions` adds `at` method to `AttributeReferences` to create [BoundReference](../expressions/BoundReference.md) expressions.
+`ExpressionConversions` adds `at` method to `AttributeReferences` to create a [BoundReference](../expressions/BoundReference.md) expression.
 
 ```text
 import org.apache.spark.sql.catalyst.dsl.expressions._

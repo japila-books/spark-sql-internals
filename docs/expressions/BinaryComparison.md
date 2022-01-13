@@ -1,4 +1,4 @@
-# BinaryComparison &mdash; Comparison Expressions
+# BinaryComparison Expressions
 
 `BinaryComparison` is an extension of the `BinaryOperator` and [Predicate](Predicate.md) abstractions for [comparison expressions](#implementations).
 
@@ -6,7 +6,7 @@
 
 * [EqualNullSafe](EqualNullSafe.md)
 * [EqualTo](EqualTo.md)
-* GreaterThan
-* GreaterThanOrEqual
-* LessThan
-* LessThanOrEqual
+* `GreaterThan`
+* `GreaterThanOrEqual`
+* `LessThan`
+* `LessThanOrEqual`

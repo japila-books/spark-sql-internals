@@ -1,4 +1,4 @@
-# Attribute Named Leaf Expressions
+# Attribute Expressions
 
 `Attribute` is an [extension](#contract) of the [LeafExpression](Expression.md#LeafExpression) and [NamedExpression](NamedExpression.md) abstractions for [named leaf expressions](#implementations).
 
