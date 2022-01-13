@@ -2066,11 +2066,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/expressions/MutableProjection/</loc>
-         <lastmod>2022-01-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/NamedExpression/</loc>
          <lastmod>2022-01-13</lastmod>
          <changefreq>daily</changefreq>
@@ -2191,17 +2186,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/expressions/UnresolvedRegex/</loc>
-         <lastmod>2022-01-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/UnresolvedStar/</loc>
-         <lastmod>2022-01-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/expressions/UnresolvedWindowExpression/</loc>
          <lastmod>2022-01-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2211,17 +2196,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/expressions/UserDefinedExpression/</loc>
-         <lastmod>2022-01-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/WindowExpression/</loc>
-         <lastmod>2022-01-13</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/expressions/WindowFunction/</loc>
          <lastmod>2022-01-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
