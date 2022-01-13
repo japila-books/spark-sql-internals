@@ -20,9 +20,7 @@ Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, in
 * [UnresolvedAttribute](UnresolvedAttribute.md)
 * [UnresolvedFunction](UnresolvedFunction.md)
 * [UnresolvedOrdinal](UnresolvedOrdinal.md)
-* [UnresolvedRegex](UnresolvedRegex.md)
 * [UnresolvedStar](UnresolvedStar.md)
-* [UnresolvedWindowExpression](UnresolvedWindowExpression.md)
 * [WindowExpression](WindowExpression.md)
 * [WindowSpecDefinition](WindowSpecDefinition.md)
 * _others_

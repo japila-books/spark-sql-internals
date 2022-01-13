@@ -1,6 +1,6 @@
-# UnresolvedFunction Unevaluable Expression
+# UnresolvedFunction
 
-`UnresolvedFunction` is an [Catalyst expression](Expression.md) that represents a function (application) in a logical query plan.
+`UnresolvedFunction` is an [Expression](Expression.md) that represents a function (application) in a logical query plan.
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
@@ -24,24 +24,6 @@ Cannot evaluate expression: [this]
 
 TIP: Use Catalyst DSL's [function](../catalyst-dsl/index.md#function) or [distinctFunction](../catalyst-dsl/index.md#distinctFunction) to create a `UnresolvedFunction` with <<isDistinct, isDistinct>> flag off and on, respectively.
 
-[source, scala]
-----
-// Using Catalyst DSL to create UnresolvedFunctions
-import org.apache.spark.sql.catalyst.dsl.expressions._
-
-// Scala Symbols supported only
-val f = 'f.function()
-scala> :type f
-org.apache.spark.sql.catalyst.analysis.UnresolvedFunction
-
-scala> f.isDistinct
-res0: Boolean = false
-
-val g = 'g.distinctFunction()
-scala> g.isDistinct
-res1: Boolean = true
-----
-
 === [[apply]] Creating UnresolvedFunction (With Database Undefined) -- `apply` Factory Method
 
 [source, scala]
@@ -64,3 +46,22 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 * [[name]] `FunctionIdentifier`
 * [[children]] Child Expression.md[expressions]
 * [[isDistinct]] `isDistinct` flag
+
+## Demo
+
+```text
+// Using Catalyst DSL to create UnresolvedFunctions
+import org.apache.spark.sql.catalyst.dsl.expressions._
+
+// Scala Symbols supported only
+val f = 'f.function()
+scala> :type f
+org.apache.spark.sql.catalyst.analysis.UnresolvedFunction
+
+scala> f.isDistinct
+res0: Boolean = false
+
+val g = 'g.distinctFunction()
+scala> g.isDistinct
+res1: Boolean = true
+```

@@ -207,9 +207,9 @@ colRegex(
 
 Internally, `colRegex` matches the input column name to different regular expressions (in the order):
 
-1. For column names with quotes without a qualifier, `colRegex` simply creates a [Column](Column.md#apply) with a [UnresolvedRegex](expressions/UnresolvedRegex.md) (with no table)
+1. For column names with quotes without a qualifier, `colRegex` simply creates a [Column](Column.md#apply) with a `UnresolvedRegex` (with no table)
 
-1. For column names with quotes with a qualifier, `colRegex` simply creates a [Column](Column.md#apply) with a [UnresolvedRegex](expressions/UnresolvedRegex.md) (with a table specified)
+1. For column names with quotes with a qualifier, `colRegex` simply creates a [Column](Column.md#apply) with a `UnresolvedRegex` (with a table specified)
 
 1. For other column names, `colRegex` (behaves like [col](#col) and) creates a [Column](Column.md#apply) with the column name [resolved](Dataset.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md))
 

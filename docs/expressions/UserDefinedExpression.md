@@ -1,3 +1,0 @@
-# UserDefinedExpression
-
-`UserDefinedExpression` is...FIXME

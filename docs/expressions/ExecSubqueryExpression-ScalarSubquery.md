@@ -1,4 +1,4 @@
-# ScalarSubquery (ExecSubqueryExpression) Expression
+# ScalarSubquery (ExecSubqueryExpression)
 
 `ScalarSubquery` is an [ExecSubqueryExpression](ExecSubqueryExpression.md) that <<updateResult, can give exactly one value>> (i.e. the value of executing <<plan, SubqueryExec>> subquery that can result in a single row and a single column or `null` if no row were computed).
 

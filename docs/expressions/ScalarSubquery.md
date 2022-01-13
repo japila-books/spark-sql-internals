@@ -1,4 +1,4 @@
-# ScalarSubquery Expression
+# ScalarSubquery
 
 `ScalarSubquery` is a [SubqueryExpression](SubqueryExpression.md) that returns a single row and a single column only.
 

@@ -1,4 +1,4 @@
-# JsonToStructs Unary Expression
+# JsonToStructs
 
 `JsonToStructs` is a [UnaryExpression](UnaryExpression.md) with [timezone](Expression.md#TimeZoneAwareExpression) support and [CodegenFallback](Expression.md#CodegenFallback).
 

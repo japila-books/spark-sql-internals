@@ -1,6 +1,4 @@
-title: UnresolvedAttribute
-
-# UnresolvedAttribute Leaf Expression
+# UnresolvedAttribute
 
 [[name]]
 `UnresolvedAttribute` is a named spark-sql-Expression-Attribute.md[Attribute] leaf expression (i.e. it has a name) that represents a reference to an entity in a logical query plan.
@@ -40,23 +38,6 @@ Cannot evaluate expression: [this]
 [[creating-instance]]
 [[nameParts]]
 `UnresolvedAttribute` takes *name parts* when created.
-
-[source, scala]
-----
-import org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute
-
-scala> val t1 = UnresolvedAttribute("t1")
-t1: org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute = 't1
-
-scala> val t2 = UnresolvedAttribute("db1.t2")
-t2: org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute = 'db1.t2
-
-scala> println(s"Number of name parts: ${t2.nameParts.length}")
-Number of name parts: 2
-
-scala> println(s"Name parts: ${t2.nameParts.mkString(",")}")
-Name parts: db1,t2
-----
 
 [[apply]]
 `UnresolvedAttribute` can be created with a fully-qualified name with dots to separate name parts.
@@ -136,3 +117,21 @@ scala> :type nameResolved
 org.apache.spark.sql.catalyst.expressions.NamedExpression
 ----
 ====
+
+## Demo
+
+```text
+import org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute
+
+scala> val t1 = UnresolvedAttribute("t1")
+t1: org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute = 't1
+
+scala> val t2 = UnresolvedAttribute("db1.t2")
+t2: org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute = 'db1.t2
+
+scala> println(s"Number of name parts: ${t2.nameParts.length}")
+Number of name parts: 2
+
+scala> println(s"Name parts: ${t2.nameParts.mkString(",")}")
+Name parts: db1,t2
+```

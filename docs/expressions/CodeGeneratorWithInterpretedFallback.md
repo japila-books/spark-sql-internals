@@ -28,7 +28,7 @@ createInterpretedObject(
 
 ## Implementations
 
-* [MutableProjection](MutableProjection.md)
+* `MutableProjection`
 * [Predicate](Predicate.md)
 * [RowOrdering](RowOrdering.md)
 * `SafeProjection`
@@ -51,8 +51,8 @@ Expr codegen error and falling back to interpreter mode
 
 `createObject` is used when:
 
-* `MutableProjection` utility is used to [create a MutableProjection](MutableProjection.md#create)
+* `MutableProjection` utility is used to create a `MutableProjection`
 * `Predicate` utility is used to [create a BasePredicate](Predicate.md#create)
 * `RowOrdering` utility is used to [create a BaseOrdering](RowOrdering.md#create)
-* `SafeProjection` utility is used to create a Projection
+* `SafeProjection` utility is used to create a `Projection`
 * `UnsafeProjection` utility is used to [create a UnsafeProjection](UnsafeProjection.md#create)

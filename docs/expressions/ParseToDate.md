@@ -1,4 +1,4 @@
-# ParseToDate Expression
+# ParseToDate
 
 `ParseToDate` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_date](../spark-sql-functions-datetime.md#to_date) function (in logical query plans).
 

@@ -1,4 +1,4 @@
-# WindowSpecDefinition Unevaluable Expression
+# WindowSpecDefinition
 
 `WindowSpecDefinition` is an [unevaluable expression](Unevaluable.md).
 

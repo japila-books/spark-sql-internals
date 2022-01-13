@@ -54,7 +54,7 @@ frame: WindowFrame
 !!! note
     The [frame](#frame) of a `CumeDist` expression is range-based instead of row-based, because it has to return the same value for tie values in a window (equal values per `ORDER BY` specification).
 
-`frame` is part of the [WindowFunction](WindowFunction.md#frame) abstraction.
+`frame` is part of the `WindowFunction` abstraction.
 
 ## <span id="evaluateExpression"> evaluateExpression
 

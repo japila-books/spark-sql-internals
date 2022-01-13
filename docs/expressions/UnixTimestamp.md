@@ -1,4 +1,4 @@
-# UnixTimestamp TimeZoneAware Binary Expression
+# UnixTimestamp
 
 `UnixTimestamp` is a [binary](Expression.md#BinaryExpression) expression with [timezone](Expression.md#TimeZoneAwareExpression) support that represents [unix_timestamp](../spark-sql-functions-datetime.md#unix_timestamp) function (and indirectly [to_date](../spark-sql-functions-datetime.md#to_date) and [to_timestamp](../spark-sql-functions-datetime.md#to_timestamp)).
 

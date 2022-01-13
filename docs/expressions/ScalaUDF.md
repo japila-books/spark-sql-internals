@@ -2,7 +2,7 @@
 
 `ScalaUDF` is an [Expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) and hook it to Catalyst execution path.
 
-`ScalaUDF` is a `ImplicitCastInputTypes` and [UserDefinedExpression](UserDefinedExpression.md).
+`ScalaUDF` is a `ImplicitCastInputTypes` and `UserDefinedExpression`.
 
 `ScalaUDF` has no representation in SQL.
 

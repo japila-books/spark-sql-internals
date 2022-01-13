@@ -1,11 +1,10 @@
-# UnresolvedOrdinal Unevaluable Leaf Expression
+# UnresolvedOrdinal
 
-`UnresolvedOrdinal` is a <<Expression.md#LeafExpression, leaf expression>> that represents a single integer literal in <<Sort.md#, Sort>> logical operators (in <<Sort.md#order, SortOrder>> ordering expressions) and in <<Aggregate.md#, Aggregate>> logical operators (in <<Aggregate.md#groupingExpressions, grouping expressions>>) in a logical plan.
+`UnresolvedOrdinal` is a [leaf expression](Expression.md#LeafExpression) that represents a single integer literal in [Sort](../logical-operators/Sort.md) logical operators (in [SortOrder](../logical-operators/Sort.md#order) ordering expressions) and in [Aggregate](../logical-operators/Aggregate.md) logical operators (in [grouping expressions](../logical-operators/Aggregate.md#groupingExpressions)) in a logical plan.
 
 `UnresolvedOrdinal` is <<creating-instance, created>> when `SubstituteUnresolvedOrdinals` logical resolution rule is executed.
 
-[source, scala]
-----
+```text
 // Note "order by 1" clause
 val sqlText = "select id from VALUES 1, 2, 3 t1(id) order by 1"
 val logicalPlan = spark.sql(sqlText).queryExecution.logical
@@ -33,7 +32,7 @@ import org.apache.spark.sql.catalyst.analysis.UnresolvedOrdinal
 val unresolvedOrdinalExpr = sortOrder.child.asInstanceOf[UnresolvedOrdinal]
 scala> println(unresolvedOrdinalExpr)
 unresolvedordinal(1)
-----
+```
 
 [[creating-instance]]
 [[ordinal]]

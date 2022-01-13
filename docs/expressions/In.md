@@ -1,4 +1,4 @@
-# In Predicate Expression
+# In
 
 `In` is a [predicate expression](Expression.md#Predicate).
 

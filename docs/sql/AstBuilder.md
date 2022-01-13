@@ -120,7 +120,7 @@ Creates one of the following:
 
 * [UnresolvedFunction](../expressions/UnresolvedFunction.md) for a bare function (with no window specification)
 
-* [UnresolvedWindowExpression](../expressions/UnresolvedWindowExpression.md) for a function evaluated in a windowed context with a `WindowSpecReference`
+* `UnresolvedWindowExpression` for a function evaluated in a windowed context with a `WindowSpecReference`
 
 * [WindowExpression](../expressions/WindowExpression.md) for a function over a window
 

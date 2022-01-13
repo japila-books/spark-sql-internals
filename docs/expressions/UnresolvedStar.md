@@ -1,4 +1,4 @@
-# UnresolvedStar Expression
+# UnresolvedStar
 
 `UnresolvedStar` is a `Star` expression that represents a star (i.e. all) expression in a logical query plan.
 

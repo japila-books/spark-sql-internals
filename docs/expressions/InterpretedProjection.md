@@ -1,13 +1,12 @@
 # InterpretedProjection
 
-`InterpretedProjection` is a Projection.md[Projection] that...FIXME
+`InterpretedProjection` is a [Projection](Projection.md).
 
 [[creating-instance]]
 [[expressions]]
-`InterpretedProjection` takes expressions/Expression.md[expressions] when created.
+`InterpretedProjection` takes [Expression](Expression.md)s when created.
 
-[source, scala]
-----
+```text
 // HACK: Disable symbolToColumn implicit conversion
 // It is imported automatically in spark-shell (and makes demos impossible)
 // implicit def symbolToColumn(s: Symbol): org.apache.spark.sql.ColumnName
@@ -24,7 +23,7 @@ import org.apache.spark.sql.catalyst.expressions.InterpretedProjection
 val ip = new InterpretedProjection(expressions)
 scala> println(ip)
 Row => [1,input[4, string, true]]
-----
+```
 
 `InterpretedProjection` is <<creating-instance, created>> when:
 

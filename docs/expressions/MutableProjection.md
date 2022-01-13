@@ -1,3 +1,0 @@
-# MutableProjection
-
-`MutableProjection` is...FIXME

@@ -1,4 +1,4 @@
-# Inline Generator Expression
+# Inline
 
 `Inline` is a [UnaryExpression](UnaryExpression.md) and a `CollectionGenerator`.
 

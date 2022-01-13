@@ -20,5 +20,5 @@ initialize(
 * `IdentityProjection`
 * [InterpretedProjection](InterpretedProjection.md)
 * `InterpretedSafeProjection`
-* [MutableProjection](MutableProjection.md)
+* `MutableProjection`
 * [UnsafeProjection](UnsafeProjection.md)
