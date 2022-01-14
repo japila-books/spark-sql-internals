@@ -2,9 +2,21 @@
 
 `InterpretedProjection` is a [Projection](Projection.md).
 
-[[creating-instance]]
-[[expressions]]
-`InterpretedProjection` takes [Expression](Expression.md)s when created.
+## Creating Instance
+
+`InterpretedProjection` takes the following to be created:
+
+* <span id="expressions"> [Expression](Expression.md)s
+* <span id="inputSchema"> Input Schema ([Attribute](Attribute.md)s)
+
+`InterpretedProjection` is created when:
+
+* `HiveGenericUDTF` is requested to `eval`
+* `HiveScriptTransformationExec` is requested to `processIterator`
+* `SparkScriptTransformationExec` is requested to `processIterator`
+* `UserDefinedGenerator` is requested to `initializeConverters`
+
+## Demo
 
 ```text
 // HACK: Disable symbolToColumn implicit conversion
@@ -24,24 +36,3 @@ val ip = new InterpretedProjection(expressions)
 scala> println(ip)
 Row => [1,input[4, string, true]]
 ```
-
-`InterpretedProjection` is <<creating-instance, created>> when:
-
-* `UserDefinedGenerator` is requested to `initializeConverters`
-
-* `ConvertToLocalRelation` logical optimization is executed (to transform `Project` logical operators)
-
-* `HiveGenericUDTF` is evaluated
-
-* `ScriptTransformationExec` physical operator is executed
-
-=== [[initialize]] Initializing Nondeterministic Expressions -- `initialize` Method
-
-[source, scala]
-----
-initialize(partitionIndex: Int): Unit
-----
-
-NOTE: `initialize` is part of Projection.md#initialize[Projection Contract] to...FIXME.
-
-`initialize` requests `Nondeterministic` expressions (in <<expressions, expressions>>) to spark-sql-Expression-Nondeterministic.md#initialize[initialize] with the `partitionIndex`.
