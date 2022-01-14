@@ -6,7 +6,7 @@
 
 ## Contract
 
-### <span id="dataType"> DataType
+### <span id="dataType"> dataType
 
 ```scala
 dataType: DataType
@@ -14,7 +14,7 @@ dataType: DataType
 
 The [DataType](../types/DataType.md) of the result of evaluating this expression
 
-### <span id="doGenCode"> ExprCode
+### <span id="doGenCode"> doGenCode
 
 ```scala
 doGenCode(

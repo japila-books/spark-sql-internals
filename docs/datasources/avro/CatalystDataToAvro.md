@@ -8,7 +8,7 @@
 
 `CatalystDataToAvro` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
 
-```
+```text
 import org.apache.spark.sql.avro.CatalystDataToAvro
 val catalystDataToAvro = CatalystDataToAvro($"id".expr)
 
@@ -30,7 +30,7 @@ scala> println(trim(code))
 // See the following example
 ```
 
-```
+```text
 // Let's use a workaround to create a CatalystDataToAvro expression
 // with the child resolved
 val q = spark.range(1).withColumn("to_avro_id", to_avro('id))

@@ -1,6 +1,6 @@
 # BoundReference
 
-`BoundReference` is a [LeafExpression](Expression.md#LeafExpression) that [gives (evaluates to)](#eval) the value in the given `InternalRow` at a specified [position](#ordinal) (and of a given [data type](#dataType)).
+`BoundReference` is a [LeafExpression](Expression.md#LeafExpression) that [gives (evaluates to)](#eval) the value of the given [InternalRow](../InternalRow.md) at a specified [position](#ordinal) (and of a given [data type](#dataType)).
 
 ## Creating Instance
 
@@ -21,9 +21,37 @@
 * `RowEncoder` utility is used to [create a RowEncoder](../RowEncoder.md#apply)
 * `BindReferences` utility is used to `bindReference`
 * `UnsafeProjection` utility is used to [create an UnsafeProjection](UnsafeProjection.md#create)
+* `FileSourceScanExec` physical operator is requested for [dynamicallySelectedPartitions](../physical-operators/FileSourceScanExec.md#dynamicallySelectedPartitions)
 * _others_
 
-## <span id="eval"> Evaluating Expression
+## <span id="doGenCode"> Code-Generated Expression Evaluation
+
+```scala
+doGenCode(
+  ctx: CodegenContext,
+  ev: ExprCode): ExprCode
+```
+
+`doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+
+```text
+import org.apache.spark.sql.catalyst.expressions.BoundReference
+import org.apache.spark.sql.types.LongType
+val boundRef = BoundReference(ordinal = 0, dataType = LongType, nullable = true)
+
+// doGenCode is used when Expression.genCode is executed
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val code = boundRef.genCode(ctx).code
+
+scala> println(code)
+boolean isNull_0 = i.isNullAt(0);
+long value_0 = isNull_0 ?
+  -1L : (i.getLong(0));
+```
+
+## <span id="eval"> Interpreted Expression Evaluation
 
 ```scala
 eval(

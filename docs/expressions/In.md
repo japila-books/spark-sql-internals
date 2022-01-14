@@ -214,8 +214,7 @@ NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to
 
 `doGenCode`...FIXME
 
-[source, scala]
-----
+```text
 val in = $"id" isin (1, 2, 3)
 val q = spark.range(4).filter(in)
 val plan = q.queryExecution.executedPlan
@@ -237,4 +236,4 @@ scala> println(CodeFormatter.format(code))
 // FIXME Make it work
 // I thought I'd reuse ctx to have expression: id#14L evaluated
 inExpr.genCode(ctx)
-----
+```
