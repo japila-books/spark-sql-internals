@@ -443,10 +443,10 @@ nav:
       - Projection: expressions/Projection.md
       - RowOrdering: expressions/RowOrdering.md
       - RuntimeReplaceable: expressions/RuntimeReplaceable.md
+      - ScalaAggregator: expressions/ScalaAggregator.md
       - ScalarSubquery: expressions/ScalarSubquery.md
       - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
       - ScalaUDF: expressions/ScalaUDF.md
-      - ScalaUDAF: expressions/ScalaUDAF.md
       - SortOrder: expressions/SortOrder.md
       - Stateful: expressions/Stateful.md
       - StaticInvoke: expressions/StaticInvoke.md
@@ -461,6 +461,11 @@ nav:
       - UnresolvedOrdinal: expressions/UnresolvedOrdinal.md
       - UnresolvedStar: expressions/UnresolvedStar.md
       - UnsafeProjection: expressions/UnsafeProjection.md
+      - UserDefinedAggregator: expressions/UserDefinedAggregator.md
+      - User-Defined Functions:
+        - spark-sql-udfs.md
+        - spark-sql-udfs-blackbox.md
+        - UserDefinedFunction: expressions/UserDefinedFunction.md
       - WindowExpression: expressions/WindowExpression.md
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
@@ -918,10 +923,6 @@ nav:
       - spark-sql-functions-datetime.md
       - spark-sql-functions-regular-functions.md
       - spark-sql-functions-windows.md
-    - User-Defined Functions:
-      - spark-sql-udfs.md
-      - spark-sql-udfs-blackbox.md
-      - UserDefinedFunction.md
     - Data Types:
       - types/index.md
       - AbstractDataType: types/AbstractDataType.md

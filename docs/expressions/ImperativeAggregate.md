@@ -4,24 +4,6 @@
 
 `ImperativeAggregate` is a [Catalyst expression](Expression.md) with [CodegenFallback](Expression.md#CodegenFallback).
 
-[[implementations]]
-.ImperativeAggregate's Direct Implementations
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
-
-| `HyperLogLogPlusPlus`
-|
-
-| `PivotFirst`
-|
-
-| expressions/ScalaUDAF.md[ScalaUDAF]
-|
-
-|===
-
 === [[contract]] ImperativeAggregate Contract
 
 [source, scala]

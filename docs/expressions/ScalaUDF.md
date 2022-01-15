@@ -8,7 +8,7 @@
 
 `ScalaUDF` is <<creating-instance, created>> when:
 
-* `UserDefinedFunction` is UserDefinedFunction.md#apply[executed]
+* `UserDefinedFunction` is [executed](UserDefinedFunction.md#apply)
 
 * `UDFRegistration` is requested to UDFRegistration.md#register[register a Scala function as a user-defined function] (in `FunctionRegistry`)
 

@@ -1,0 +1,3 @@
+# ScalaAggregator
+
+`ScalaAggregator` is...FIXME

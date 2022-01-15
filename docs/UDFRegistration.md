@@ -55,6 +55,6 @@ register(
 
 `register` FunctionRegistry.md#registerFunction[registers a UserDefinedAggregateFunction] under `name` with <<functionRegistry, FunctionRegistry>>.
 
-`register` creates a expressions/ScalaUDAF.md[ScalaUDAF] internally to register a UDAF.
+`register`...FIXME
 
 NOTE: `register` gives the input `udaf` aggregate function back after the function has been registered with <<functionRegistry, FunctionRegistry>>.
