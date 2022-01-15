@@ -448,6 +448,7 @@ nav:
       - ScalaUDF: expressions/ScalaUDF.md
       - ScalaUDAF: expressions/ScalaUDAF.md
       - SortOrder: expressions/SortOrder.md
+      - Stateful: expressions/Stateful.md
       - StaticInvoke: expressions/StaticInvoke.md
       - SubqueryExpression: expressions/SubqueryExpression.md
       - TimeWindow: expressions/TimeWindow.md

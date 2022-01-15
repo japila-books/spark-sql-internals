@@ -34,7 +34,7 @@ doGenCode(
 
 `doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
 
-```text
+```scala
 import org.apache.spark.sql.catalyst.expressions.BoundReference
 import org.apache.spark.sql.types.LongType
 val boundRef = BoundReference(ordinal = 0, dataType = LongType, nullable = true)
@@ -44,7 +44,9 @@ val boundRef = BoundReference(ordinal = 0, dataType = LongType, nullable = true)
 import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
 val ctx = new CodegenContext
 val code = boundRef.genCode(ctx).code
+```
 
+```text
 scala> println(code)
 boolean isNull_0 = i.isNullAt(0);
 long value_0 = isNull_0 ?

@@ -1,77 +1,72 @@
 # MonotonicallyIncreasingID
 
-`MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that is the internal representation of the `monotonically_increasing_id` [standard](../spark-sql-functions.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions.
+`MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that represents `monotonically_increasing_id` [standard](../spark-sql-functions.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions in [logical query plans](../logical-operators/LogicalPlan.md).
 
-As a `Nondeterministic` expression, `MonotonicallyIncreasingID` requires explicit <<initializeInternal, initialization>> (with the current partition index) before <<evalInternal, evaluating a value>>.
+## <span id="dataType"> DataType
 
-`MonotonicallyIncreasingID` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
-
-```text
-import org.apache.spark.sql.catalyst.expressions.MonotonicallyIncreasingID
-val monotonicallyIncreasingID = MonotonicallyIncreasingID()
-
-import org.apache.spark.sql.catalyst.expressions.codegen.{CodegenContext, ExprCode}
-val ctx = new CodegenContext
-// doGenCode is used when Expression.genCode is executed
-val ExprCode(code, _, _) = monotonicallyIncreasingID.genCode(ctx)
-
-// Helper methods
-def trim(code: String): String = {
-  code.trim.split("\n").map(_.trim).filter(line => line.nonEmpty).mkString("\n")
-}
-def prettyPrint(code: String) = println(trim(code))
-// END: Helper methods
-
-scala> println(trim(code))
-final long value_0 = partitionMask + count_0;
-count_0++;
+```scala
+dataType: DataType
 ```
 
-[[dataType]]
-`MonotonicallyIncreasingID` uses [LongType](../types/DataType.md#LongType) as the <<Expression.md#dataType, data type>> of the result of evaluating itself.
+`dataType` is always [LongType](../types/DataType.md#LongType)
 
-[[nullable]]
-`MonotonicallyIncreasingID` is never [nullable](Expression.md#nullable).
+`dataType` is part of the [Expression](Expression.md#dataType) abstraction.
 
-[[prettyName]]
-`MonotonicallyIncreasingID` uses *monotonically_increasing_id* for the <<Expression.md#prettyName, user-facing name>>.
+## <span id="nullable"> Never Nullable
 
-[[sql]]
-`MonotonicallyIncreasingID` uses *monotonically_increasing_id()* for the <<Expression.md#sql, SQL representation>>.
+```scala
+nullable: Boolean
+```
 
-`MonotonicallyIncreasingID` is <<creating-instance, created>> when <<spark-sql-functions.md#monotonically_increasing_id, monotonically_increasing_id>> standard function is used in a structured query.
+`nullable` is always `false`.
 
-`MonotonicallyIncreasingID` is <<FunctionRegistry.md#expressions, registered>> as `monotonically_increasing_id` SQL function.
+`nullable` is part of the [Expression](Expression.md#nullable) abstraction.
 
-[[creating-instance]]
-`MonotonicallyIncreasingID` takes no input parameters when created.
+## <span id="initializeInternal"> Initialization
 
-[[internal-registries]]
-.MonotonicallyIncreasingID's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+```scala
+initializeInternal(
+  partitionIndex: Int): Unit
+```
 
-| `count`
-| [[count]] Number of <<evalInternal, evalInternal>> calls, i.e. the number of rows for which `MonotonicallyIncreasingID` was evaluated
+`initializeInternal` initializes the following internal registries:
 
-Initialized when `MonotonicallyIncreasingID` is requested to <<initializeInternal, initialize>> and used to <<evalInternal, evaluate a value>>.
+* [count](#count) to `0`
+* [partitionMask](#partitionMask) as `partitionIndex.toLong << 33`
 
-| `partitionMask`
-| [[partitionMask]] Current partition index shifted 33 bits left
+```text
+val partitionIndex = 1
+val partitionMask = partitionIndex.toLong << 33
+scala> println(partitionMask.toBinaryString)
+1000000000000000000000000000000000
+```
 
-Initialized when `MonotonicallyIncreasingID` is requested to <<initializeInternal, initialize>> and used to <<evalInternal, evaluate a value>>.
-|===
+`initializeInternal` is part of the [Nondeterministic](Nondeterministic.md#initializeInternal) abstraction.
 
-=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
+## <span id="evalInternal"> Interpreted Expression Evaluation
 
-[source, scala]
-----
-doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
-----
+```scala
+evalInternal(
+  input: InternalRow): Long
+```
 
-NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
+`evalInternal` increments the [count](#count) internal counter.
+
+`evalInternal` increments the [partitionMask](#partitionMask) internal registry by the previous [count](#count).
+
+`evalInternal` is part of the [Nondeterministic](Nondeterministic.md#evalInternal) abstraction.
+
+## <span id="doGenCode"> Code-Generated Expression Evaluation
+
+```scala
+doGenCode(
+  ctx: CodegenContext,
+  ev: ExprCode): ExprCode
+```
+
+`doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+
+---
 
 `doGenCode` requests the `CodegenContext` to [add a mutable state](../whole-stage-code-generation/CodegenContext.md#addMutableState) as `count` name and `long` Java type.
 
@@ -88,34 +83,25 @@ final [dataType] [value] = [partitionMaskTerm] + [countTerm];
       [countTerm]++;
 ```
 
-=== [[initializeInternal]] Initializing Nondeterministic Expression -- `initializeInternal` Method
+---
 
-[source, scala]
-----
-initializeInternal(input: InternalRow): Long
-----
+```scala
+import org.apache.spark.sql.catalyst.expressions.MonotonicallyIncreasingID
+val monotonicallyIncreasingID = MonotonicallyIncreasingID()
 
-NOTE: `initializeInternal` is part of <<Nondeterministic.md#initializeInternal, Nondeterministic Contract>> to initialize a `Nondeterministic` expression.
+// doGenCode is used when Expression.genCode is executed
 
-`initializeInternal` simply sets the <<count, count>> to `0` and the <<partitionMask, partitionMask>> to `partitionIndex.toLong << 33`.
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val code = monotonicallyIncreasingID.genCode(ctx).code
+```
 
-[source, scala]
-----
-val partitionIndex = 1
-val partitionMask = partitionIndex.toLong << 33
-scala> println(partitionMask.toBinaryString)
-1000000000000000000000000000000000
-----
+```text
+scala> println(code)
+final long value_0 = partitionMask + count_0;
+      count_0++;
+```
 
-=== [[evalInternal]] Evaluating Nondeterministic Expression -- `evalInternal` Method
+## <span id="Stateful"> Stateful
 
-[source, scala]
-----
-evalInternal(input: InternalRow): Long
-----
-
-NOTE: `evalInternal` is part of <<Nondeterministic.md#evalInternal, Nondeterministic Contract>> to evaluate the value of a `Nondeterministic` expression.
-
-`evalInternal` remembers the current value of the <<count, count>> and increments it.
-
-In the end, `evalInternal` returns the sum of the current value of the <<partitionMask, partitionMask>> and the remembered value of the <<count, count>>.
+`MonotonicallyIncreasingID` is a [Stateful](Stateful.md).
