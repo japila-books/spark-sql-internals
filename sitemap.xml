@@ -316,6 +316,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/FunctionRegistryBase/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/GlobalTempViewManager/</loc>
          <lastmod>2022-01-16</lastmod>
          <changefreq>daily</changefreq>
@@ -571,6 +576,21 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SimpleFunctionRegistry/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SimpleFunctionRegistryBase/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SimpleTableFunctionRegistry/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/SortBasedAggregationIterator/</loc>
          <lastmod>2022-01-16</lastmod>
          <changefreq>daily</changefreq>
@@ -602,6 +622,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/StaticSQLConf/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/TableFunctionRegistry/</loc>
          <lastmod>2022-01-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
