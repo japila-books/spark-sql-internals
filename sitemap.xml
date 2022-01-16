@@ -2226,6 +2226,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/UserDefinedExpression/</loc>
+         <lastmod>2022-01-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/UserDefinedFunction/</loc>
          <lastmod>2022-01-16</lastmod>
          <changefreq>daily</changefreq>
