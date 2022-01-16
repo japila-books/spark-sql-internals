@@ -13,10 +13,6 @@ apply(
 
 [Column](../Column.md) with [Expression](Expression.md) to execute this `UserDefinedFunction`
 
-Used when:
-
-* FIXME
-
 ### <span id="withName"> withName
 
 ```scala
@@ -24,9 +20,10 @@ withName(
   name: String): UserDefinedFunction
 ```
 
+Associates the given name with this `UserDefinedFunction`
+
 Used when:
 
-* `Bucketizer` (Spark MLlib) is requested to `transform`
 * `UDFRegistration` is requested to [register a named UserDefinedFunction](../UDFRegistration.md#register)
 
 ## Implementations

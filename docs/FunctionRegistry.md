@@ -1,6 +1,21 @@
-title: FunctionRegistry
+# FunctionRegistry
 
-# FunctionRegistry -- Contract for Function Registries (Catalogs)
+## <span id="builtin"> Built-In Functions
+
+```scala
+builtin: SimpleFunctionRegistry
+```
+
+`builtin` creates a new [SimpleFunctionRegistry](SimpleFunctionRegistry.md) and [registers](SimpleFunctionRegistryBase.md#internalRegisterFunction) all the [built-in function expressions](#expressions).
+
+`builtin` is used when:
+
+* `FunctionRegistry` utility is used for [functionSet](#functionSet)
+* `SessionCatalog` is requested to [isTemporaryFunction](SessionCatalog.md#isTemporaryFunction) and [reset](SessionCatalog.md#reset)
+* `DropFunctionCommand` and `RefreshFunctionCommand` commands are executed
+* `BaseSessionStateBuilder` is requested for a [FunctionRegistry](BaseSessionStateBuilder.md#functionRegistry)
+
+## Review Me
 
 `FunctionRegistry` is the <<contract, contract>> of <<implementations, function registries>> (_catalogs_) of native and user-defined functions.
 
@@ -81,17 +96,6 @@ org.apache.spark.sql.catalyst.analysis.FunctionRegistry
 ----
 
 NOTE: You can register a new user-defined function using UDFRegistration.md[UDFRegistration].
-
-[[attributes]]
-.FunctionRegistry's Attributes
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
-
-| [[builtin]] `builtin`
-| <<SimpleFunctionRegistry, SimpleFunctionRegistry>> with the <<expressions, built-in functions>> registered.
-|===
 
 [[expressions]]
 `FunctionRegistry` manages *function expression registry* of <<expressions/Expression.md#, Catalyst expressions>> and the corresponding built-in/native SQL functions (that can be used in SQL statements).

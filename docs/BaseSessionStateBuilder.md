@@ -106,6 +106,23 @@ sqlParser: ParserInterface
 
 [ParserInterface](sql/ParserInterface.md)
 
+### <span id="tableFunctionRegistry"> TableFunctionRegistry
+
+```scala
+tableFunctionRegistry: TableFunctionRegistry
+```
+
+[TableFunctionRegistry](TableFunctionRegistry.md)
+
+---
+
+When requested for the first time (as a `lazy val`), `tableFunctionRegistry` requests the [parent SessionState](#parentState) (if available) to clone the [tableFunctionRegistry](SessionState.md#tableFunctionRegistry) or requests the [SparkSessionExtensions](#extensions) to [register](SparkSessionExtensions.md#registerTableFunctions) the [built-in function expressions](TableFunctionRegistry.md#builtin).
+
+`tableFunctionRegistry` is used when:
+
+* `HiveSessionStateBuilder` is requested for a [HiveSessionCatalog](hive/HiveSessionStateBuilder.md#catalog)
+* `BaseSessionStateBuilder` is requested for a [SessionCatalog](BaseSessionStateBuilder.md#catalog) and a [SessionState](BaseSessionStateBuilder.md#build)
+
 ### <span id="v2SessionCatalog"> V2SessionCatalog
 
 ```scala

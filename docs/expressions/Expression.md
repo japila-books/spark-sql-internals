@@ -2,6 +2,10 @@
 
 `Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable expressions](#implementations) (in the [Catalyst Tree Manipulation Framework](../catalyst/index.md)).
 
+```scala
+abstract class Expression extends TreeNode[Expression]
+```
+
 `Expression` is an executable [node](../catalyst/TreeNode.md) that can be evaluated and produce a JVM object (for an [InternalRow](../InternalRow.md)) in the faster [code-generated](#genCode) or the slower [interpreted](#eval) modes.
 
 ## Contract

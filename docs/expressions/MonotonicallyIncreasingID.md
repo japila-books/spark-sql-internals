@@ -2,7 +2,9 @@
 
 `MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that represents `monotonically_increasing_id` [standard](../spark-sql-functions.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions in [logical query plans](../logical-operators/LogicalPlan.md).
 
-## <span id="dataType"> DataType
+`MonotonicallyIncreasingID` supports [code-generated](#doGenCode) and [interpreted](#evalInternal) execution modes.
+
+## <span id="dataType"> Result DataType
 
 ```scala
 dataType: DataType
