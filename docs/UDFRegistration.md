@@ -1,60 +1,31 @@
-title: UDFRegistration
+# UDFRegistration
 
-# UDFRegistration -- Session-Scoped FunctionRegistry
+`UDFRegistration` is a facade to a session-scoped [FunctionRegistry](#functionRegistry) to register user-defined functions (UDFs) and user-defined aggregate functions (UDAFs).
 
-`UDFRegistration` is an interface to the session-scoped <<functionRegistry, FunctionRegistry>> to register user-defined functions (UDFs) and <<register, user-defined aggregate functions>> (UDAFs).
+## Creating Instance
 
-`UDFRegistration` is available using SparkSession.md#udf[SparkSession].
+`UDFRegistration` takes the following to be created:
 
-[source, scala]
-----
+* <span id="functionRegistry"> [FunctionRegistry](FunctionRegistry.md)
+
+`UDFRegistration` is created when:
+
+* `BaseSessionStateBuilder` is requested for the [UDFRegistration](BaseSessionStateBuilder.md#udfRegistration)
+
+## Accessing UDFRegistration
+
+`UDFRegistration` is available using [SparkSession.udf](SparkSession.md#udf).
+
+```scala
 import org.apache.spark.sql.SparkSession
-val spark: SparkSession = ...
-spark.udf
-----
+assert(spark.isInstanceOf[SparkSession])
+```
 
-[[functionRegistry]]
-[[creating-instance]]
-`UDFRegistration` takes a <<FunctionRegistry.md#, FunctionRegistry>> when created.
+```scala
+import org.apache.spark.sql.UDFRegistration
+assert(spark.udf.isInstanceOf[UDFRegistration])
+```
 
-`UDFRegistration` is <<creating-instance, created>> exclusively for SessionState.md#creating-instance[SessionState].
+## <span id="SessionState"> SessionState
 
-=== [[register]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
-
-[source, scala]
-----
-register(name: String, func: Function0[RT]): UserDefinedFunction
-register(name: String, func: Function1[A1, RT]): UserDefinedFunction
-...
-register(name: String, func: Function22[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22, RT]): UserDefinedFunction
-----
-
-`register`...FIXME
-
-NOTE: `register` is used when...FIXME
-
-=== [[register-UserDefinedFunction]] Registering UserDefinedFunction (with FunctionRegistry) -- `register` Method
-
-[source, scala]
-----
-register(name: String, udf: UserDefinedFunction): UserDefinedFunction
-----
-
-`register`...FIXME
-
-NOTE: `register` is used when...FIXME
-
-=== [[register-UserDefinedAggregateFunction]] Registering UserDefinedAggregateFunction (with FunctionRegistry) -- `register` Method
-
-[source, scala]
-----
-register(
-  name: String,
-  udaf: UserDefinedAggregateFunction): UserDefinedAggregateFunction
-----
-
-`register` FunctionRegistry.md#registerFunction[registers a UserDefinedAggregateFunction] under `name` with <<functionRegistry, FunctionRegistry>>.
-
-`register`...FIXME
-
-NOTE: `register` gives the input `udaf` aggregate function back after the function has been registered with <<functionRegistry, FunctionRegistry>>.
+`UDFRegistration` is used to [create a SessionState](SessionState.md#UDFRegistration).

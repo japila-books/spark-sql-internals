@@ -4,17 +4,23 @@ The [Catalyst Tree Manipulation Framework](../catalyst/index.md) defines [Expres
 
 Spark SQL uses `Expression` abstraction to represent standard and user-defined functions as well as subqueries in logical query plans. Every time you use one of them in a query it creates a new `Expression`.
 
-In the end, when the query is executed, `Expression`s are evaluated (i.e. requested to produce a value for an input [InternalRow](../InternalRow.md)). There are two execution modes:
+## Execution Modes
+
+When the query is executed, `Expression`s are evaluated (i.e. requested to produce a value for an input [InternalRow](../InternalRow.md)). There are two execution modes:
 
 1. [Code-Generated](Expression.md#genCode)
 1. [Interpreted](Expression.md#eval)
 
-Specialized `Expression`s:
+## Why Not to User-Defined Function
 
-1. [Unevaluable](Unevaluable.md)s
-1. [AggregateFunction](AggregateFunction.md)s
-1. [Attribute](Attribute.md)s
-1. _others_ (FIXME)
+There are many reasons why you should not write your own user-defined functions. First and foremost, [they are a blackbox to Catalyst optimizer](../spark-sql-udfs-blackbox.md).
+
+Speaking of memory usage, UDFs are written in a programming language like Scala, Java or Python that require an internal representation of data ([InternalRow](../InternalRow.md)) to be fully deserialized and available as an object to the UDFs (that most of the time and for a reason know nothing about [InternalRow](../InternalRow.md) and such). If it happens that two or more UDFs share computation (unless the UDFs are [deterministic](Expression.md#deterministic)) they cannot share anything. Spark SQL cannot do much to optimize such queries.
+
+!!! danger
+    There comes a thought that I'm still shaping in my head and haven't fully "dissected" yet.
+
+Given that expressions (incl. UDFs) can be executed in [code-generated execution mode](Expression.md#genCode) that begs the question about possible performance optimizations if an UDF is using `Expression`s (as the programming language). I'm not really sure what the benefits could be yet, but gives some hope.
 
 ## <span id="MonotonicallyIncreasingID"> MonotonicallyIncreasingID Expression
 

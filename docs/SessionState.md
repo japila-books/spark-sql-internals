@@ -103,13 +103,13 @@ conf: SQLConf
 streamingQueryManager: StreamingQueryManager
 ```
 
-### <span id="udfRegistration"> UDFRegistration
+### <span id="udfRegistration"><span id="UDFRegistration"> UDFRegistration
 
 ```scala
 udfRegistration: UDFRegistration
 ```
 
-[UDFRegistration](UDFRegistration.md)
+`SessionState` is given an [UDFRegistration](UDFRegistration.md) when [created](#creating-instance).
 
 ## Creating Instance
 
@@ -136,15 +136,16 @@ udfRegistration: UDFRegistration
 
 ![Creating SessionState](images/spark-sql-SessionState.png)
 
-!!! note
-    When requested for the [SessionState](SparkSession.md#sessionState), `SparkSession` uses [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property to load and create a [BaseSessionStateBuilder](BaseSessionStateBuilder.md) that is then requested to [create a SessionState instance](BaseSessionStateBuilder.md#build).
+---
 
-    There are two `BaseSessionStateBuilders` available:
+When requested for the [SessionState](SparkSession.md#sessionState), `SparkSession` uses [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property to load and create a [BaseSessionStateBuilder](BaseSessionStateBuilder.md) that is then requested to [create a SessionState instance](BaseSessionStateBuilder.md#build).
 
-    * (default) [SessionStateBuilder](SessionStateBuilder.md) for `in-memory` catalog
-    * [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) for `hive` catalog
+There are two `BaseSessionStateBuilders` available:
 
-    `hive` catalog is set when the `SparkSession` was [created](SparkSession-Builder.md#getOrCreate) with the Hive support enabled (using [Builder.enableHiveSupport](SparkSession-Builder.md#enableHiveSupport)).
+* (default) [SessionStateBuilder](SessionStateBuilder.md) for `in-memory` catalog
+* [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) for `hive` catalog
+
+`hive` catalog is set when the `SparkSession` was [created](SparkSession-Builder.md#getOrCreate) with the Hive support enabled (using [Builder.enableHiveSupport](SparkSession-Builder.md#enableHiveSupport)).
 
 ## <span id="executePlan"> Creating QueryExecution For LogicalPlan
 
@@ -181,7 +182,7 @@ newHadoopConfWithOptions(
 
 ## Accessing SessionState
 
-`SessionState` is available as the [SparkSession.sessionState](SparkSession.md#sessionState).
+`SessionState` is available using [SparkSession.sessionState](SparkSession.md#sessionState).
 
 ```text
 import org.apache.spark.sql.SparkSession

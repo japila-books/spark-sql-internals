@@ -11,7 +11,7 @@ apply(
   exprs: Column*): Column
 ```
 
-[Column](../Column.md) with [Expression](expression.md) to invoke this `UserDefinedFunction`
+[Column](../Column.md) with [Expression](Expression.md) to execute this `UserDefinedFunction`
 
 Used when:
 

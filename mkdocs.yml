@@ -329,28 +329,28 @@ nav:
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md
         - InMemoryCatalog: InMemoryCatalog.md
-      - FunctionRegistry.md
+      - FunctionRegistry: FunctionRegistry.md
       - GlobalTempViewManager: GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
         - CatalogTable: CatalogTable.md
-        - CatalogStorageFormat.md
-        - CatalogTablePartition.md
-        - BucketSpec.md
+        - CatalogStorageFormat: CatalogStorageFormat.md
+        - CatalogTablePartition: CatalogTablePartition.md
+        - BucketSpec: BucketSpec.md
       - V2SessionCatalog: V2SessionCatalog.md
       - SessionState:
         - SessionState: SessionState.md
         - BaseSessionStateBuilder: BaseSessionStateBuilder.md
-        - SessionStateBuilder.md
+        - SessionStateBuilder: SessionStateBuilder.md
       - CacheManager:
         - CacheManager: CacheManager.md
         - CachedRDDBuilder: CachedRDDBuilder.md
       - RuntimeConfig: RuntimeConfig.md
-      - UDFRegistration.md
+      - UDFRegistration: UDFRegistration.md
     - Hive Integration:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
-      - hive/spark-sql-hive-metastore.md
+      - Hive Metastore: hive/spark-sql-hive-metastore.md
       - DataSinks: hive/DataSinks.md
       - HiveFileFormat: hive/HiveFileFormat.md
       - HiveClient:
@@ -464,8 +464,8 @@ nav:
       - UserDefinedAggregator: expressions/UserDefinedAggregator.md
       - User-Defined Functions:
         - spark-sql-udfs.md
-        - spark-sql-udfs-blackbox.md
         - UserDefinedFunction: expressions/UserDefinedFunction.md
+        - UDFs are Blackbox: spark-sql-udfs-blackbox.md
       - WindowExpression: expressions/WindowExpression.md
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
