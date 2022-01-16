@@ -10,7 +10,7 @@
 
 * <span id="child"> Child [expression](Expression.md)
 
-`DynamicPruningExpression` is created when:
+`DynamicPruningExpression` is created when:
 
 * [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) physical optimization is executed
 * [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed
@@ -24,7 +24,7 @@ nodePatterns: Seq[TreePattern]
 
 `nodePatterns` is [DYNAMIC_PRUNING_EXPRESSION](../catalyst/TreePattern.md#DYNAMIC_PRUNING_EXPRESSION).
 
-`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 ## Query Planning
 

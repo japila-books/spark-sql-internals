@@ -9,7 +9,7 @@
 * <span id="plan"> [Logical operator](LogicalPlan.md)
 * <span id="cteDefs"> [CTERelationDef](CTERelationDef.md)s
 
-`WithCTE` is created when:
+`WithCTE` is created when:
 
 * [CTESubstitution](../logical-analysis-rules/CTESubstitution.md) logical analysis rule is executed
 * [InlineCTE](../logical-optimizations/InlineCTE.md) logical optimization is executed
@@ -23,7 +23,7 @@ nodePatterns: Seq[TreePattern]
 
 `nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
 
-`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 ## Query Planning
 

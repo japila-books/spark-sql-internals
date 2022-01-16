@@ -11,7 +11,7 @@
 * <span id="output"> Output [Attribute](../expressions/Attribute.md)s
 * <span id="statsOpt"> Optional [Statistics](Statistics.md) (default: `None`)
 
-`CTERelationRef` is created when:
+`CTERelationRef` is created when:
 
 * [CTESubstitution](../logical-analysis-rules/CTESubstitution.md) logical resolution rule is executed
 * [ResolveWithCTE](../logical-analysis-rules/ResolveWithCTE.md) logical resolution rule is executed
@@ -28,7 +28,7 @@ nodePatterns: Seq[TreePattern]
 
 `nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
 
-`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 ## Query Planning
 

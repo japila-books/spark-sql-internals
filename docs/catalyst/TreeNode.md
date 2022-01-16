@@ -245,7 +245,7 @@ NOTE: Spark SQL uses `TreeNode` for <<catalyst/QueryPlan.md#, query plans>> and 
 
 `TreeNode` abstract type is a fairly advanced Scala type definition (at least comparing to the other Scala types in Spark) so understanding its behaviour even outside Spark might be worthwhile by itself.
 
-## <span id="node-patterns"> Node Patterns
+## Node Patterns
 
 `TreeNode`s can optionally define [node patterns](#nodePatterns) for faster query planning (offering a so-called tree traversal pruning as part of [SPARK-35042](https://issues.apache.org/jira/browse/SPARK-35042)).
 

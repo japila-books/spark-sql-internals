@@ -470,6 +470,7 @@ nav:
       - UserDefinedAggregator: expressions/UserDefinedAggregator.md
       - User-Defined Functions:
         - spark-sql-udfs.md
+        - UserDefinedExpression: expressions/UserDefinedExpression.md
         - UserDefinedFunction: expressions/UserDefinedFunction.md
         - UDFs are Blackbox: spark-sql-udfs-blackbox.md
       - WindowExpression: expressions/WindowExpression.md
