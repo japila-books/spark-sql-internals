@@ -961,11 +961,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-subexpression-elimination/</loc>
-         <lastmod>2022-01-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-subqueries/</loc>
          <lastmod>2022-01-18</lastmod>
          <changefreq>daily</changefreq>
@@ -987,6 +982,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-window-aggregation/</loc>
+         <lastmod>2022-01-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/subexpression-elimination/</loc>
          <lastmod>2022-01-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
