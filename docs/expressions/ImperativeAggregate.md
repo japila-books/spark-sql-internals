@@ -1,65 +1,59 @@
-# ImperativeAggregate &mdash; Aggregate Function Expressions with Imperative Methods
+# ImperativeAggregate Expressions
 
-`ImperativeAggregate` is the <<contract, contract>> for [aggregate functions](AggregateFunction.md) that are expressed in terms of imperative <<initialize, initialize>>, <<update, update>>, and <<merge, merge>> methods (that operate on ``Row``-based aggregation buffers).
+`ImperativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [aggregate functions](#implementations) that are expressed using imperative [initialize](#initialize), [merge](#merge) and [update](#update) methods (that operate on `Row`-based aggregation buffers).
 
-`ImperativeAggregate` is a [Catalyst expression](Expression.md) with [CodegenFallback](Expression.md#CodegenFallback).
+## Contract (Subset)
 
-=== [[contract]] ImperativeAggregate Contract
+### <span id="initialize"> initialize
 
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions.aggregate
-
-abstract class ImperativeAggregate {
-  def initialize(mutableAggBuffer: InternalRow): Unit
-  val inputAggBufferOffset: Int
-  def merge(mutableAggBuffer: InternalRow, inputAggBuffer: InternalRow): Unit
-  val mutableAggBufferOffset: Int
-  def update(mutableAggBuffer: InternalRow, inputRow: InternalRow): Unit
-  def withNewInputAggBufferOffset(newInputAggBufferOffset: Int): ImperativeAggregate
-  def withNewMutableAggBufferOffset(newMutableAggBufferOffset: Int): ImperativeAggregate
-}
-----
-
-.ImperativeAggregate Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[initialize]] `initialize`
-a|
+```scala
+initialize(
+  mutableAggBuffer: InternalRow): Unit
+```
 
 Used when:
 
-* `AggregateProcessor` is [initialized](../physical-operators/AggregateProcessor.md) (for window aggregate functions)
+* `EliminateAggregateFilter` logical optimization is executed
+* `AggregatingAccumulator` is requested to `createBuffer`
+* `AggregationIterator` is requested to [initializeBuffer](../AggregationIterator.md#initializeBuffer)
+* `ObjectAggregationIterator` is requested to [initAggregationBuffer](../ObjectAggregationIterator.md#initAggregationBuffer)
+* `TungstenAggregationIterator` is requested to [createNewAggregationBuffer](../TungstenAggregationIterator.md#createNewAggregationBuffer)
+* `AggregateProcessor` is requested to [initialize](../physical-operators/AggregateProcessor.md#initialize)
 
-* [AggregationIterator](../AggregationIterator.md), [ObjectAggregationIterator](../ObjectAggregationIterator.md), [TungstenAggregationIterator](../TungstenAggregationIterator.md) (for aggregate functions)
+### <span id="merge"> merge
 
-| [[inputAggBufferOffset]] `inputAggBufferOffset`
-|
-
-| [[merge]] `merge`
-a|
-
-Used when:
-
-* `AggregationIterator` does [generateProcessRow](../AggregationIterator.md#generateProcessRow) (for aggregate functions)
-
-| [[mutableAggBufferOffset]] `mutableAggBufferOffset`
-|
-
-| [[update]] `update`
-a|
+```scala
+merge(
+  mutableAggBuffer: InternalRow,
+  inputAggBuffer: InternalRow): Unit
+```
 
 Used when:
 
-* `AggregateProcessor` is [updated](../physical-operators/AggregateProcessor.md#update) (for window aggregate functions)
-* [AggregationIterator](../AggregationIterator.md) (for aggregate functions)
+* `AggregatingAccumulator` is requested to `merge`
+* `AggregationIterator` is requested to [generateProcessRow](../AggregationIterator.md#generateProcessRow)
 
-| [[withNewInputAggBufferOffset]] `withNewInputAggBufferOffset`
-|
+### <span id="update"> update
 
-| [[withNewMutableAggBufferOffset]] `withNewMutableAggBufferOffset`
-|
-|===
+```scala
+update(
+  mutableAggBuffer: InternalRow,
+  inputRow: InternalRow): Unit
+```
+
+Used when:
+
+* `AggregatingAccumulator` is requested to `add` an `InternalRow`
+* `AggregationIterator` is requested to [generateProcessRow](../AggregationIterator.md#generateProcessRow)
+* `AggregateProcessor` is requested to [update](../physical-operators/AggregateProcessor.md#update)
+
+## Implementations
+
+* `HyperLogLogPlusPlus`
+* `PivotFirst`
+* `ScalaUDAF`
+* `TypedImperativeAggregate`
+
+## <span id="CodegenFallback"> CodegenFallback
+
+`ImperativeAggregate` is a [CodegenFallback](CodegenFallback.md).
