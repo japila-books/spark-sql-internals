@@ -62,7 +62,7 @@ Used when `CodegenContext` is requested to <<declareAddedFunctions, declareAdded
 | `equivalentExpressions`
 a| [[equivalentExpressions]] [EquivalentExpressions](../EquivalentExpressions.md)
 
-Expressions are [added](../EquivalentExpressions.md#addExprTree) and then [fetched as equivalent sets](../EquivalentExpressions.md#getAllEquivalentExprs) when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
+Expressions are [added](../EquivalentExpressions.md#addExprTree) and then [fetched as equivalent sets](../EquivalentExpressions.md#getAllEquivalentExprs) when `CodegenContext` is requested to <<subexpressionElimination, subexpressionElimination>> (for <<generateExpressions, generateExpressions>> with subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled)
 
 | `currentVars`
 | [[currentVars]] The list of generated columns as input of current operator
@@ -114,7 +114,7 @@ generateExpressions(
   doSubexpressionElimination: Boolean = false): Seq[ExprCode]
 ----
 
-(only with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
+(only with subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled) `generateExpressions` does <<subexpressionElimination, subexpressionElimination>> of the input `expressions`.
 
 In the end, `generateExpressions` requests every expressions to expressions/Expression.md#genCode[generate the Java source code for code-generated (non-interpreted) expression evaluation].
 
@@ -181,7 +181,7 @@ For every equivalent expression set, `subexpressionElimination` does the followi
 
 . Creates a `SubExprEliminationState` and adds it with every common expression in the equivalent expression set to <<subExprEliminationExprs, subExprEliminationExprs>>
 
-NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with spark-sql-subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
+NOTE: `subexpressionElimination` is used exclusively when `CodegenContext` is requested to <<generateExpressions, generateExpressions>> (with subexpression-elimination.md#spark.sql.subexpressionElimination.enabled[subexpression elimination] enabled).
 
 === [[addMutableState]] Adding Mutable State -- `addMutableState` Method
 

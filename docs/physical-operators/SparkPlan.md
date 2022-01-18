@@ -568,7 +568,7 @@ Flag that controls that [prepare](#prepare) is executed only once.
 
 ### subexpressionEliminationEnabled
 
-Flag to control whether the [subexpression elimination optimization](../spark-sql-subexpression-elimination.md) is enabled or not.
+Flag to control whether the [subexpression elimination optimization](../subexpression-elimination.md) is enabled or not.
 
 Used when the following physical operators are requested to execute (i.e. describe a distributed computation as an RDD of internal rows):
 

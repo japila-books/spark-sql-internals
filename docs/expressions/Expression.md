@@ -1,4 +1,4 @@
-# Expressions
+# Expression
 
 `Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable expressions](#implementations) (in the [Catalyst Tree Manipulation Framework](../catalyst/index.md)).
 
@@ -6,7 +6,7 @@
 abstract class Expression extends TreeNode[Expression]
 ```
 
-`Expression` is an executable [node](../catalyst/TreeNode.md) that can be evaluated and produce a JVM object (for an [InternalRow](../InternalRow.md)) in the faster [code-generated](#genCode) or the slower [interpreted](#eval) modes.
+`Expression` is an executable [TreeNode](../catalyst/TreeNode.md) that can be evaluated and produce a JVM object (for an [InternalRow](../InternalRow.md)) in the faster [code-generated](#genCode) or the slower [interpreted](#eval) modes.
 
 ## Contract
 
@@ -26,7 +26,7 @@ doGenCode(
   ev: ExprCode): ExprCode
 ```
 
-**Code-generated expression evaluation** that generates a Java source code (that is used to evaluate the expression in a more optimized way and skipping [eval](#eval)).
+**Code-Generated Expression Evaluation** that generates a Java source code (that is used to evaluate the expression in a more optimized way and skipping [eval](#eval)).
 
 Used when:
 
@@ -75,11 +75,17 @@ genCode(
   ctx: CodegenContext): ExprCode
 ```
 
-`genCode` generates a Java source code for expression evaluation (on an input [InternalRow](../InternalRow.md)).
+`genCode` returns a `ExprCode` with a Java source code for expression evaluation (on an input [InternalRow](../InternalRow.md)).
 
-Similar to [doGenCode](#doGenCode) but supports expression reuse using [Subexpression Elimination](../spark-sql-subexpression-elimination.md).
+Similar to [doGenCode](#doGenCode) but supports expression reuse using [Subexpression Elimination](../subexpression-elimination.md).
 
 `genCode` is a faster "relative" of the [interpreted expression evaluation](#eval).
+
+`genCode` is used when:
+
+* `CodegenContext` is requested to [subexpressionEliminationForWholeStageCodegen](../whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen), [subexpressionElimination](../whole-stage-code-generation/CodegenContext.md#subexpressionElimination) and [generateExpressions](../whole-stage-code-generation/CodegenContext.md#generateExpressions)
+* `GenerateSafeProjection` utility is used to [create a Projection](../whole-stage-code-generation/GenerateSafeProjection.md#create)
+* _others_
 
 ### <span id="reduceCodeSize"> reduceCodeSize
 

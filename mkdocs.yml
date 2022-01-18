@@ -768,7 +768,7 @@ nav:
       - GenerateSafeProjection: whole-stage-code-generation/GenerateSafeProjection.md
       - spark-sql-BytesToBytesMap.md
       - Subexpression Elimination:
-        - spark-sql-subexpression-elimination.md
+        - Subexpression Elimination: subexpression-elimination.md
         - EquivalentExpressions: EquivalentExpressions.md
     - Vectorized Query Execution:
       - spark-sql-vectorized-query-execution.md

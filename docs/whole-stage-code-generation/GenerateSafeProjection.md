@@ -1,12 +1,25 @@
 # GenerateSafeProjection
 
-=== [[create]] Creating Projection -- `create` Method
+`GenerateSafeProjection` utility is a [CodeGenerator](CodeGenerator.md).
 
-[source, scala]
-----
-create(expressions: Seq[Expression]): Projection
-----
+```scala
+CodeGenerator[Seq[Expression], Projection]
+```
 
-`create` is part of the [CodeGenerator](CodeGenerator.md#create) abstraction.
+`GenerateSafeProjection` is used when:
+
+* `SafeProjection` utility is used to `createCodeGeneratedObject`
+* `DeserializeToObjectExec` physical operator is executed (`doExecute`)
+* `ObjectOperator` utility is used to `deserializeRowToObject`
+* `ComplexTypedAggregateExpression` is requested for `inputRowToObj` and `bufferRowToObject`
+
+## <span id="create"> Creating Projection
+
+```scala
+create(
+  expressions: Seq[Expression]): Projection
+```
 
 `create`...FIXME
+
+`create` is part of the [CodeGenerator](CodeGenerator.md#create) abstraction.
