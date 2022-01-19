@@ -505,6 +505,7 @@ nav:
       - DebugExec: physical-operators/DebugExec.md
       - DeleteFromTableExec: physical-operators/DeleteFromTableExec.md
       - DescribeTableExec: physical-operators/DescribeTableExec.md
+      - DeserializeToObjectExec: physical-operators/DeserializeToObjectExec.md
       - DropNamespaceExec: physical-operators/DropNamespaceExec.md
       - EvalPythonExec: physical-operators/EvalPythonExec.md
       - Exchange: physical-operators/Exchange.md
@@ -514,6 +515,7 @@ nav:
       - HashJoin: physical-operators/HashJoin.md
       - LongHashedRelation: physical-operators/LongHashedRelation.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - ObjectProducerExec: physical-operators/ObjectProducerExec.md
       - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
       - ShuffledJoin: physical-operators/ShuffledJoin.md
       - ShuffleOrigin: physical-operators/ShuffleOrigin.md

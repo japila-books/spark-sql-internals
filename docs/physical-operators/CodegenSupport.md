@@ -153,7 +153,7 @@ Found 2 WholeStageCodegen subtrees.
 
 `consume` is used when:
 
-* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, `DeserializeToObjectExec`, `ExpandExec`, <<FilterExec.md#doConsume, FilterExec>>, GenerateExec.md#doConsume[GenerateExec], ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for ["consume" path](../whole-stage-code-generation/index.md#consume-path) in whole-stage code generation
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md#doConsume), `BaseLimitExec`, [DeserializeToObjectExec](DeserializeToObjectExec.md#doConsume), `ExpandExec`, <<FilterExec.md#doConsume, FilterExec>>, GenerateExec.md#doConsume[GenerateExec], ProjectExec.md#doConsume[ProjectExec], `SampleExec`, `SerializeFromObjectExec`, `MapElementsExec`, `DebugExec` physical operators are requested to generate the Java source code for ["consume" path](../whole-stage-code-generation/index.md#consume-path) in whole-stage code generation
 
 * [ColumnarBatchScan](ColumnarBatchScan.md#doProduce), [HashAggregateExec](HashAggregateExec.md#doProduce), [InputAdapter](InputAdapter.md#doProduce), [RowDataSourceScanExec](RowDataSourceScanExec.md#doProduce), [RangeExec](RangeExec.md#doProduce), [SortExec](SortExec.md#doProduce), [SortMergeJoinExec](SortMergeJoinExec.md#doProduce) physical operators are requested to generate the Java source code for the ["produce" path](../whole-stage-code-generation/index.md#produce-path) in whole-stage code generation
 

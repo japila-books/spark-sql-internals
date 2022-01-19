@@ -9,7 +9,7 @@ CodeGenerator[Seq[Expression], Projection]
 `GenerateSafeProjection` is used when:
 
 * `SafeProjection` utility is used to `createCodeGeneratedObject`
-* `DeserializeToObjectExec` physical operator is executed (`doExecute`)
+* `DeserializeToObjectExec` physical operator is [executed](../physical-operators/DeserializeToObjectExec.md#doExecute)
 * `ObjectOperator` utility is used to `deserializeRowToObject`
 * `ComplexTypedAggregateExpression` is requested for `inputRowToObj` and `bufferRowToObject`
 

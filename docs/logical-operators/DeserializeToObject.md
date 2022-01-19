@@ -1,15 +1,36 @@
-# DeserializeToObject Unary Logical Operator
+# DeserializeToObject
 
-[source, scala]
-----
-case class DeserializeToObject(
-  deserializer: Expression,
-  outputObjAttr: Attribute,
-  child: LogicalPlan) extends UnaryNode with ObjectProducer
-----
+`DeserializeToObject` is a [unary logical operator](LogicalPlan.md#UnaryNode) and a `ObjectProducer`.
 
-`DeserializeToObject` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that takes the input row from the input `child` spark-sql-LogicalPlan.md[logical plan] and turns it into the input `outputObjAttr` spark-sql-Expression-Attribute.md[attribute] using the given `deserializer` expressions/Expression.md[expression].
+## Creating Instance
 
-`DeserializeToObject` is a `ObjectProducer` which produces domain objects as output. ``DeserializeToObject``'s output is a single-field safe row containing the produced object.
+`DeserializeToObject` takes the following to be created:
 
-`DeserializeToObject` is the result of [CatalystSerde.deserialize](../CatalystSerde.md#deserialize).
+* <span id="deserializer"> Deserializer [Expression](../expressions/Expression.md)
+* [Attribute](#outputObjAttr)
+* <span id="child"> Child [logical operator](LogicalPlan.md)
+
+`DeserializeToObject` is created when:
+
+* `CatalystSerde` utility is used to [create a deserializer (for a logical operator)](../CatalystSerde.md#deserialize)
+
+## <span id="nodePatterns"> Node Patterns
+
+```scala
+nodePatterns: Seq[TreePattern]
+```
+
+`nodePatterns` is [DESERIALIZE_TO_OBJECT](../catalyst/TreePattern.md#DESERIALIZE_TO_OBJECT).
+
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+## Logical Optimization
+
+`DeserializeToObject` is a target of the following logical optimizations:
+
+* [EliminateSerialization](../logical-optimizations/EliminateSerialization.md)
+* [ColumnPruning](../logical-optimizations/ColumnPruning.md)
+
+## Execution Planning
+
+`DeserializeToObject` is planned for execution as [DeserializeToObjectExec](../physical-operators/DeserializeToObjectExec.md) physical operator (by [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy).

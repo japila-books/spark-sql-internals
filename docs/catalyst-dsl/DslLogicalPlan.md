@@ -22,6 +22,14 @@ Resolves attribute references (using [EliminateSubqueryAliases](../logical-optim
 
 ## Operators
 
+### <span id="deserialize"> deserialize
+
+```scala
+deserialize[T : Encoder]: LogicalPlan
+```
+
+`deserialize` creates an [DeserializeToObject](../CatalystSerde.md#deserialize) logical operator
+
 ### <span id="groupBy"> groupBy
 
 ```scala
