@@ -46,6 +46,55 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
+## Lazy Values
+
+The following are Scala **lazy values** of `Dataset`. Using lazy values guarantees that the code to initialize them is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+### <span id="rdd"> RDD
+
+```scala
+rdd: RDD[T]
+```
+
+`rdd` ...FIXME
+
+`rdd` is used when:
+
+* `Dataset` is requested for an [RDD](#rdd) and [withNewRDDExecutionId](#withNewRDDExecutionId)
+
+### <span id="rddQueryExecution"> QueryExecution
+
+```scala
+rddQueryExecution: QueryExecution
+```
+
+`rddQueryExecution` [creates a deserializer](CatalystSerde.md#deserialize) for the `T` type and the [logical query plan](#logicalPlan) of this `Dataset`.
+
+In other words, `rddQueryExecution` simply adds a new [DeserializeToObject](logical-operators/DeserializeToObject.md) unary logical operator as the parent of the current [logical query plan](#logicalPlan) (that becomes a child operator).
+
+In the end, `rddQueryExecution` requests the [SparkSession](#sparkSession) for the [SessionState](SparkSession.md#sessionState) to [create a QueryExecution](SessionState.md#executePlan).
+
+`rddQueryExecution` is used when:
+
+* `Dataset` is requested for an [RDD](#rdd) and [withNewRDDExecutionId](#withNewRDDExecutionId)
+
+## <span id="withNewRDDExecutionId"> withNewRDDExecutionId
+
+```scala
+withNewRDDExecutionId[U](
+  body: => U): U
+```
+
+`withNewRDDExecutionId` executes the input `body` action (that produces the result of type `U`) under a [new execution id](SQLExecution.md#withNewExecutionId) (with the [QueryExecution](#rddQueryExecution)).
+
+`withNewRDDExecutionId` requests the [QueryExecution](#rddQueryExecution) for the [SparkPlan](#executedPlan) to [resetMetrics](physical-operators/SparkPlan.md#resetMetrics).
+
+`withNewRDDExecutionId` is used when the following `Dataset` operators are used:
+
+* [reduce](#reduce), [foreach](#foreach) and [foreachPartition](#foreachPartition)
+
 ## <span id="writeTo"> writeTo
 
 ```scala
@@ -75,12 +124,11 @@ collectToPython(): Array[Any]
 
 * `DataFrame` (PySpark) is requested to `collect`
 
-## Others to be Reviewed
+## Review Me
 
 Datasets are _lazy_ and structured query operators and expressions are only triggered when an action is invoked.
 
-[source, scala]
-----
+```text
 import org.apache.spark.sql.SparkSession
 val spark: SparkSession = ...
 
@@ -95,14 +143,13 @@ dataset.filter('value % 2 === 0).count
 
 // Variant 3: filter operator accepts a SQL query
 dataset.filter("value % 2 = 0").count
-----
+```
 
 The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based [Row](Row.md)s).
 
 `Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to [DataFrame](DataFrame.md) makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
-[source, scala]
-----
+```text
 scala> spark.range(1).filter('id === 0).explain(true)
 == Parsed Logical Plan ==
 'Filter ('id = 0)
@@ -138,7 +185,7 @@ TypedFilter <function1>, class java.lang.Long, [StructField(value,LongType,true)
 == Physical Plan ==
 *Filter <function1>.apply
 +- *Range (0, 1, splits=8)
-----
+```
 
 It is only with Datasets to have syntax and analysis checks at compile time (that was not possible using [DataFrame](DataFrame.md), regular SQL queries or even RDDs).
 
@@ -168,11 +215,6 @@ NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](Qu
 ! Name
 ! Description
 
-! [[boundEnc]] `boundEnc`
-! [ExpressionEncoder](ExpressionEncoder.md)
-
-Used when...FIXME
-
 ! [[deserializer]] `deserializer`
 a! Deserializer expressions/Expression.md[expression] to convert internal rows to objects of type `T`
 
@@ -185,11 +227,6 @@ Used when:
 * spark-sql-dataset-operators.md#spark-sql-dataset-operators.md[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
 
 * `Dataset` is requested to <<collectFromPlan, collect all rows from a spark plan>>
-
-! [[exprEnc]] `exprEnc`
-! Implicit [ExpressionEncoder](ExpressionEncoder.md)
-
-Used when...FIXME
 
 ! `logicalPlan`
 a! [[logicalPlan]] Analyzed <<logical-operators/LogicalPlan.md#, logical plan>> with all <<Command.md#, logical commands>> executed and turned into a <<LocalRelation.md#creating-instance, LocalRelation>>.
@@ -310,19 +347,6 @@ Internally, `isStreaming` takes the Dataset's logical-operators/LogicalPlan.md[l
 === [[Queryable]] Queryable
 
 CAUTION: FIXME
-
-=== [[withNewRDDExecutionId]] `withNewRDDExecutionId` Internal Method
-
-[source, scala]
-----
-withNewRDDExecutionId[U](body: => U): U
-----
-
-`withNewRDDExecutionId` executes the input `body` action under [new execution id](SQLExecution.md#withNewExecutionId).
-
-CAUTION: FIXME What's the difference between `withNewRDDExecutionId` and <<withNewExecutionId, withNewExecutionId>>?
-
-NOTE: `withNewRDDExecutionId` is used when <<spark-sql-dataset-operators.md#foreach, Dataset.foreach>> and <<spark-sql-dataset-operators.md#foreachPartition, Dataset.foreachPartition>> actions are used.
 
 ## <span id="ofRows"> Creating DataFrame (For Logical Query Plan and SparkSession)
 
