@@ -120,6 +120,8 @@ resolveAndBind(
   analyzer: Analyzer = SimpleAnalyzer): ExpressionEncoder[T]
 ```
 
+`resolveAndBind` [creates a deserializer](CatalystSerde.md#deserialize) for a [LocalRelation](logical-operators/LocalRelation.md) with the given [Attribute](expressions/Attribute.md)s (to create a dummy query plan).
+
 `resolveAndBind`...FIXME
 
 `resolveAndBind` is used when:
