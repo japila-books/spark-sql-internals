@@ -4,13 +4,13 @@
 
 ## Contract
 
-### <span id="asNullable"> asNullable
+### <span id="asNullable"> asNullable
 
 ```scala
 asNullable: DataType
 ```
 
-### <span id="defaultSize"> Default Size
+### <span id="defaultSize"> Default Size
 
 ```scala
 defaultSize: Int
@@ -29,10 +29,10 @@ Used when:
 
 * [ArrayType](ArrayType.md)
 * [AtomicType](AtomicType.md)
-* CalendarIntervalType
-* HiveVoidType
-* MapType
-* NullType
-* ObjectType
+* `CalendarIntervalType`
+* `HiveVoidType`
+* `MapType`
+* `NullType`
+* `ObjectType`
 * [StructType](StructType.md)
-* UserDefinedType
+* `UserDefinedType`

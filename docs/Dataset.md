@@ -8,13 +8,11 @@ The following figure shows the relationship of low-level entities of Spark SQL t
 
 ![Dataset's Internals](images/spark-sql-Dataset.png)
 
-It is fair to say that `Dataset` is a Spark SQL developer-friendly layer over the following three low-level entities:
+It is fair to say that `Dataset` is a Spark SQL developer-friendly layer over the following two low-level entities:
 
 1. [QueryExecution](QueryExecution.md) (with the parsed yet unanalyzed [LogicalPlan](logical-operators/LogicalPlan.md) of a structured query)
 
 1. [Encoder](Encoder.md) (of the type of the records for fast serialization and deserialization to and from [InternalRow](InternalRow.md))
-
-1. [SparkSession](SparkSession.md)
 
 ## Creating Instance
 
@@ -46,6 +44,18 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
+## <span id="logicalPlan"> LogicalPlan
+
+```scala
+logicalPlan: LogicalPlan
+```
+
+`Dataset` initializes an internal [LogicalPlan](logical-operators/LogicalPlan.md) when [created](#creating-instance).
+
+`logicalPlan` requests the [QueryExecution](#queryExecution) for a [LogicalPlan](#commandExecuted) (with commands executed per the [command execution mode](QueryExecution.md#mode)).
+
+With [SQLConf.FAIL_AMBIGUOUS_SELF_JOIN_ENABLED](SQLConf.md#FAIL_AMBIGUOUS_SELF_JOIN_ENABLED) enabled, `logicalPlan`...FIXME. Otherwise, `logicalPlan` returns the `LogicalPlan` intact.
+
 ## Lazy Values
 
 The following are Scala **lazy values** of `Dataset`. Using lazy values guarantees that the code to initialize them is executed once only (when accessed for the first time) and the computed value never changes afterwards.
@@ -72,9 +82,9 @@ rddQueryExecution: QueryExecution
 
 `rddQueryExecution` [creates a deserializer](CatalystSerde.md#deserialize) for the `T` type and the [logical query plan](#logicalPlan) of this `Dataset`.
 
-In other words, `rddQueryExecution` simply adds a new [DeserializeToObject](logical-operators/DeserializeToObject.md) unary logical operator as the parent of the current [logical query plan](#logicalPlan) (that becomes a child operator).
+In other words, `rddQueryExecution` simply adds a new [DeserializeToObject](logical-operators/DeserializeToObject.md) unary logical operator as the parent of the current [logical query plan](#logicalPlan) (that in turn becomes a child operator).
 
-In the end, `rddQueryExecution` requests the [SparkSession](#sparkSession) for the [SessionState](SparkSession.md#sessionState) to [create a QueryExecution](SessionState.md#executePlan).
+In the end, `rddQueryExecution` requests the [SparkSession](#sparkSession) for the [SessionState](SparkSession.md#sessionState) to [create a QueryExecution](SessionState.md#executePlan) for the query plan with the top-most `DeserializeToObject`.
 
 `rddQueryExecution` is used when:
 

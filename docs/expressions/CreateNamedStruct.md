@@ -1,4 +1,4 @@
-# CreateNamedStruct Expression
+# CreateNamedStruct
 
 `CreateNamedStruct` is a `CreateNamedStructLike` expression.
 
