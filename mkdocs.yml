@@ -733,6 +733,7 @@ nav:
       - spark-sql-joins-broadcast.md
     - Statistics: new-and-noteworthy/statistics.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
+    - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
@@ -889,9 +890,8 @@ nav:
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
+    - SerializerBuildHelper: SerializerBuildHelper.md
     - SQLExecutionRDD: SQLExecutionRDD.md
-    - JoinSelectionHelper: JoinSelectionHelper.md
-    - ExplainUtils: ExplainUtils.md
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
     - DataWritingSparkTask: DataWritingSparkTask.md
@@ -939,11 +939,10 @@ nav:
       - DataType: types/DataType.md
       - StructField: types/StructField.md
       - StructType: types/StructType.md
-    - Multi-Dimensional Aggregation: spark-sql-multi-dimensional-aggregation.md
     - Caching and Persistence:
       - spark-sql-caching-and-persistence.md
       - spark-sql-caching-webui-storage.md
-    - spark-sql-checkpointing.md
+    - Checkpointing: checkpointing.md
     - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
     - AggregationIterators:
       - AggregationIterator: AggregationIterator.md

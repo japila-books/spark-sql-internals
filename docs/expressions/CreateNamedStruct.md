@@ -10,7 +10,7 @@
 
 `CreateNamedStruct` is created when:
 
-* `SerializerBuildHelper` utility is used to `createSerializerForObject`
+* `SerializerBuildHelper` utility is used to [createSerializerForObject](../SerializerBuildHelper.md#createSerializerForObject)
 * `ResolveExpressionsWithNamePlaceholders` logical analysis rule is executed
 * `ResolveUnion` logical analysis rule is executed
 * [Catalyst DSL](../catalyst-dsl/index.md)'s `namedStruct` operator is used

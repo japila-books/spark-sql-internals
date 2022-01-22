@@ -69,7 +69,7 @@ res3: Int = 200
 
 Used when:
 
-* `JoinSelectionHelper` is requested to [canBroadcastBySize](JoinSelectionHelper.md#canBroadcastBySize)
+* `JoinSelectionHelper` is requested to `canBroadcastBySize`
 
 ## <span id="ADAPTIVE_EXECUTION_FORCE_APPLY"> ADAPTIVE_EXECUTION_FORCE_APPLY
 

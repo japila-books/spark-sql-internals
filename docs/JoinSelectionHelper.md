@@ -1,3 +1,0 @@
-# JoinSelectionHelper
-
-`JoinSelectionHelper` is...FIXME

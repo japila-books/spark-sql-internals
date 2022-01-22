@@ -8,8 +8,8 @@
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
 * [groupBy](spark-sql-basic-aggregation.md#groupBy)
-* [rollup](spark-sql-multi-dimensional-aggregation.md#rollup)
-* [cube](spark-sql-multi-dimensional-aggregation.md#cube)
+* [rollup](multi-dimensional-aggregation.md#rollup)
+* [cube](multi-dimensional-aggregation.md#cube)
 * [pivot](#pivot)
 
 [[operators]]
