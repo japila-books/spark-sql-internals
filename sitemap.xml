@@ -81,11 +81,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/CatalogUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CatalystSerde/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -246,11 +241,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/ExternalCatalogUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/ExtractEquiJoinKeys/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -317,6 +307,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/GlobalTempViewManager/</loc>
+         <lastmod>2022-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/HadoopFileLinesReader/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -427,11 +422,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/PrunedScan/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/PushDownUtils/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -621,6 +611,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SubExprUtils/</loc>
+         <lastmod>2022-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/TableFunctionRegistry/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -632,11 +627,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/TungstenAggregationIterator/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/TypeCoercionRule/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -657,11 +647,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/UnsafeRow/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/UnsupportedOperationChecker/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -771,11 +756,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-DDLUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-DataFrameNaFunctions/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -801,37 +781,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-PartitioningUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-RDDConversions/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-SchemaUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-SizeEstimator/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-StatFunctions/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-SubExprUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-TypeCoercion/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -947,11 +897,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-performance-tuning/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-spark-HadoopFileLinesReader/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1567,11 +1512,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/jdbc/JdbcRelationProvider/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/datasources/jdbc/JdbcUtils/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2407,11 +2347,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/HandleNullInputsForUDF/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/InConversion/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3932,11 +3867,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/thrift-server/spark-sql-thriftserver-SparkSQLEnv/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/tools/spark-sql-spark-sql/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
