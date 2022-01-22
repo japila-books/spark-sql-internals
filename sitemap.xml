@@ -231,11 +231,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/ExplainUtils/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/ExpressionEncoder/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -362,11 +357,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/JoinHint/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/JoinSelectionHelper/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -551,6 +541,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SerializerBuildHelper/</loc>
+         <lastmod>2022-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/SessionCatalog/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -706,6 +701,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/checkpointing/</loc>
+         <lastmod>2022-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/common-table-expressions/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -727,6 +727,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/joins/</loc>
+         <lastmod>2022-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/multi-dimensional-aggregation/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -866,11 +871,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-checkpointing/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-column-operators/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
@@ -937,11 +937,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-joins-broadcast/</loc>
-         <lastmod>2022-01-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-multi-dimensional-aggregation/</loc>
          <lastmod>2022-01-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
