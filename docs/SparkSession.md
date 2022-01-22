@@ -218,7 +218,7 @@ NOTE: `sql` uses `SessionState` SessionState.md#sqlParser[to access the current 
 `sql` then creates a [DataFrame](DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
 
 !!! tip "spark-sql Command-Line Tool"
-    Use [spark-sql](tools/spark-sql-spark-sql.md) command-line tool to use SQL directly (not Scala as in `spark-shell`).
+    Use `spark-sql` command-line tool to use SQL directly (not Scala as in `spark-shell`).
 
     ```text
     spark-sql> show databases;

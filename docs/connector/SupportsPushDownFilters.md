@@ -12,7 +12,7 @@ Filter[] pushedFilters()
 
 [Data source filters](../Filter.md) that were pushed down to the data source (in [pushFilters](#pushFilters))
 
-Used when [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to [pushFilters](../PushDownUtils.md#pushFilters))
+Used when [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to `pushFilters`)
 
 ### <span id="pushFilters"> pushFilters
 
@@ -25,7 +25,7 @@ Filter[] pushFilters(
 
 Used when:
 
-* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to [pushFilters](../PushDownUtils.md#pushFilters))
+* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to `pushFilters`)
 * `CSVScanBuilder` is requested for a [Scan](../datasources/csv/CSVScanBuilder.md#build)
 * `OrcScanBuilder` is requested for a [Scan](../datasources/orc/OrcScanBuilder.md#build)
 

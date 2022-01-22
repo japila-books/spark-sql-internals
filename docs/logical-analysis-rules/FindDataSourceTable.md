@@ -57,7 +57,7 @@ apply(
 
 `apply` resolves `UnresolvedCatalogRelation`s for Spark (Data Source) and Hive tables:
 
-* `apply` [creates HiveTableRelation logical operators](#readDataSourceTable) for `UnresolvedCatalogRelation`s of [Spark tables](../spark-sql-DDLUtils.md#isDatasourceTable) (incl. `InsertIntoTable`s)
+* `apply` [creates HiveTableRelation logical operators](#readDataSourceTable) for `UnresolvedCatalogRelation`s of Spark tables (incl. `InsertIntoTable`s)
 
 * `apply` [creates LogicalRelation logical operators](#readHiveTable) for `InsertIntoTable`s with `UnresolvedCatalogRelation` of a Hive table or `UnresolvedCatalogRelation`s of a Hive table
 

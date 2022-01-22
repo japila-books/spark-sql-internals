@@ -57,7 +57,7 @@ Upper bound: [upperBound].
 Used when:
 
 * `DataFrameReader` is requested to [jdbc](../../DataFrameReader.md#jdbc) (and `JDBCRelation` utility is used to [determine partitions](JDBCRelation.md#columnPartition))
-* `JdbcUtils` is requested to [saveTable](JdbcUtils.md#saveTable)
+* `JdbcUtils` is requested to `saveTable`
 
 ## <span id="JDBC_PARTITION_COLUMN"><span id="partitionColumn"> partitionColumn
 

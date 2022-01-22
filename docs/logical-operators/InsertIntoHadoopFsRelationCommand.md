@@ -85,6 +85,6 @@ Otherwise (for non-insertion case), `run` simply prints out the following INFO m
 Skipping insertion into a relation that already exists.
 ```
 
-`run` [makes sure that there are no duplicates](../spark-sql-SchemaUtils.md#checkColumnNameDuplication) in the [outputColumnNames](#outputColumnNames).
+`run` makes sure that there are no duplicates in the [outputColumnNames](#outputColumnNames).
 
 `run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.

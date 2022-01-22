@@ -12,7 +12,7 @@ estimatedSize: Long
 
 `estimatedSize` is used when:
 
-* `SizeEstimator` is requested to [visitSingleObject](spark-sql-SizeEstimator.md#visitSingleObject)
+* `SizeEstimator` is requested to `visitSingleObject`
 * [BroadcastExchangeExec](physical-operators/BroadcastExchangeExec.md) physical operator is requested for [relationFuture](physical-operators/BroadcastExchangeExec.md#relationFuture)
 * [BroadcastHashJoinExec](physical-operators/BroadcastHashJoinExec.md) physical operator is [executed](physical-operators/BroadcastHashJoinExec.md#doExecute)
 * [ShuffledHashJoinExec](physical-operators/ShuffledHashJoinExec.md) physical operator is requested to [buildHashedRelation](physical-operators/ShuffledHashJoinExec.md#buildHashedRelation)

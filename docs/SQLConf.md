@@ -571,7 +571,7 @@ Used when:
 
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 * [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
-* `DDLUtils` utility is used to [verifyPartitionProviderIsHive](spark-sql-DDLUtils.md#verifyPartitionProviderIsHive)
+* `DDLUtils` utility is used to `verifyPartitionProviderIsHive`
 * `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
 * `FileStatusCache` is requested to `getOrCreate`
 

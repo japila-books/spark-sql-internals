@@ -104,7 +104,7 @@ Rules:
 * ResolveTimeZone
 * ResolveRandomSeed
 * ResolveBinaryArithmetic
-* [Type Coercion Rules](spark-sql-TypeCoercion.md#typeCoercionRules)
+* Type Coercion Rules
 * [ResolveWithCTE](logical-analysis-rules/ResolveWithCTE.md)
 * [extendedResolutionRules](#extendedResolutionRules)
 

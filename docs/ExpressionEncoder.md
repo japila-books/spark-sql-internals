@@ -130,7 +130,6 @@ resolveAndBind(
 * `Dataset` is requested for [resolvedEnc](Dataset.md#resolvedEnc)
 * `TypedAggregateExpression` is created
 * `ResolveEncodersInScalaAgg` extended resolution rule is executed
-* `JdbcUtils` is requested to [resultSetToRows](datasources/jdbc/JdbcUtils.md#resultSetToRows)
 * _others_
 
 ### Demo

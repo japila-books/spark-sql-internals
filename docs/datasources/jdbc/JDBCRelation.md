@@ -49,7 +49,7 @@ getSchema(
 
 `getSchema` [resolves the table](JDBCRDD.md#resolveTable) (from the given [JDBCOptions](JDBCOptions.md)).
 
-With the [customSchema](JDBCOptions.md#customSchema) option specified, `getSchema` [gets the custom schema](JdbcUtils.md#getCustomSchema) (based on the table schema from the database system). Otherwise, `getSchema` returns the table schema from the database system.
+With the [customSchema](JDBCOptions.md#customSchema) option specified, `getSchema` gets the custom schema (based on the table schema from the database system). Otherwise, `getSchema` returns the table schema from the database system.
 
 `getSchema` is used when:
 
@@ -130,7 +130,7 @@ schema: StructType
 
 `schema` uses `JDBCRDD` to [resolveTable](JDBCRDD.md#resolveTable) given the [JDBCOptions](#jdbcOptions) (that simply returns the [schema](../../types/StructType.md) of the table, also known as the default table schema).
 
-If [customSchema](JDBCOptions.md#customSchema) JDBC option was defined, `schema` uses `JdbcUtils` to [replace the data types in the default table schema](JdbcUtils.md#getCustomSchema).
+If [customSchema](JDBCOptions.md#customSchema) JDBC option was defined, `schema` uses `JdbcUtils` to replace the data types in the default table schema.
 
 `schema` is part of [BaseRelation](../../BaseRelation.md#schema) abstraction.
 

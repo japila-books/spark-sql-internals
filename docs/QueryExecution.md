@@ -218,7 +218,7 @@ prepareForExecution(
 assertSupported(): Unit
 ```
 
-`assertSupported` requests `UnsupportedOperationChecker` to [checkForBatch](UnsupportedOperationChecker.md#checkForBatch) when...FIXME
+`assertSupported` requests `UnsupportedOperationChecker` to `checkForBatch`.
 
 `assertSupported` is used when `QueryExecution` is requested for [withCachedData](#withCachedData) logical plan.
 

@@ -4,7 +4,7 @@
 
 `CreateHiveTableAsSelectCommand` uses the given <<tableDesc, CatalogTable>> for the [table name](../CatalogTable.md#identifier).
 
-`CreateHiveTableAsSelectCommand` is <<creating-instance, created>> when HiveAnalysis.md[HiveAnalysis] logical resolution rule is executed and resolves a ../CreateTable.md[CreateTable] logical operator with a child structured query and a ../spark-sql-DDLUtils.md#isHiveTable[Hive table].
+`CreateHiveTableAsSelectCommand` is <<creating-instance, created>> when HiveAnalysis.md[HiveAnalysis] logical resolution rule is executed and resolves a ../CreateTable.md[CreateTable] logical operator with a child structured query and a Hive table.
 
 When <<run, executed>>, `CreateHiveTableAsSelectCommand` runs (_morphs itself into_) a InsertIntoHiveTable.md[InsertIntoHiveTable] logical command.
 

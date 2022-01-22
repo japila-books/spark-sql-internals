@@ -38,4 +38,4 @@ Operation not allowed: TRUNCATE TABLE on views: [tableIdentWithDB]
 Operation not allowed: TRUNCATE TABLE ... PARTITION is not supported for tables that are not partitioned: [tableIdentWithDB]
 ```
 
-`run` throws an `AnalysisException` when executed with <<partitionSpec, TablePartitionSpec>> with spark-sql-DDLUtils.md#verifyPartitionProviderIsHive[filesource partition disabled or partition metadata not in a Hive metastore].
+`run` throws an `AnalysisException` when executed with <<partitionSpec, TablePartitionSpec>> with filesource partition disabled or partition metadata not in a Hive metastore.

@@ -8,7 +8,7 @@
 
 * New [OrcFileFormat](datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues) and [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) are requested to build a data reader
 
-* [HadoopFileLinesReader](spark-sql-spark-HadoopFileLinesReader.md#iterator) and `HadoopFileWholeTextReader` are requested for an value iterator
+* [HadoopFileLinesReader](HadoopFileLinesReader.md#iterator) and `HadoopFileWholeTextReader` are requested for an value iterator
 
 * Legacy `OrcFileFormat` is requested to [build a data reader](datasources/orc/OrcFileFormat.md#buildReader)
 

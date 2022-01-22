@@ -68,11 +68,11 @@ run(
   child: SparkPlan): Seq[Row]
 ----
 
-NOTE: `run` is part of ../DataWritingCommand.md#run[DataWritingCommand] contract.
+NOTE: `run` is part of [DataWritingCommand](../logical-operators/DataWritingCommand.md#run) contract.
 
 `run` asserts that the [table location](../CatalogStorageFormat.md#locationUri) of the [CatalogStorageFormat](#storage) is specified (or throws an `AssertionError`).
 
-`run` [checkColumnNameDuplication](../spark-sql-SchemaUtils.md#checkColumnNameDuplication) of the given [output columns](#outputColumnNames).
+`run` makes sure that there are no duplicates among the given [output columns](#outputColumnNames).
 
 `run` creates a [CatalogTable](../CatalogTable.md) for the table location (and the `VIEW` table type) and HiveClientImpl.md#toHiveTable[converts it to a Hive Table metadata].
 

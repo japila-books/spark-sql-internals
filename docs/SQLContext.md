@@ -384,7 +384,7 @@ scala> :imports
 ```
 ====
 
-TIP: You may also use spark-sql-spark-sql.md[spark-sql shell script] to interact with Hive.
+TIP: You may also use `spark-sql` shell script to interact with Hive.
 
 Internally, it uses `SessionState.sqlParser.parsePlan(sql)` method to create a spark-sql-LogicalPlan.md[LogicalPlan].
 

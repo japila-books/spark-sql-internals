@@ -4,314 +4,7 @@
 
 NOTE: Typed transformations are the methods in the `Dataset` Scala class that are grouped in `typedrel` group name, i.e. `@group typedrel`.
 
-[[methods]]
-.Dataset API's Typed Transformations
-[cols="1,2",options="header",width="100%"]
-|===
-| Transformation
-| Description
-
-| <<alias, alias>>
-a|
-
-[source, scala]
-----
-alias(alias: String): Dataset[T]
-alias(alias: Symbol): Dataset[T]
-----
-
-| <<as-alias, as>>
-a|
-
-[source, scala]
-----
-as(alias: String): Dataset[T]
-as(alias: Symbol): Dataset[T]
-----
-
-| <<as-type, as>>
-a|
-
-[source, scala]
-----
-as[U : Encoder]: Dataset[U]
-----
-
-| <<coalesce, coalesce>>
-a| Repartitions a Dataset
-
-[source, scala]
-----
-coalesce(numPartitions: Int): Dataset[T]
-----
-
-| <<distinct, distinct>>
-a|
-
-[source, scala]
-----
-distinct(): Dataset[T]
-----
-
-| <<dropDuplicates, dropDuplicates>>
-a|
-
-[source, scala]
-----
-dropDuplicates(): Dataset[T]
-dropDuplicates(colNames: Array[String]): Dataset[T]
-dropDuplicates(colNames: Seq[String]): Dataset[T]
-dropDuplicates(col1: String, cols: String*): Dataset[T]
-----
-
-| except
-a| [[except]]
-
-[source, scala]
-----
-except(
-  other: Dataset[T]): Dataset[T]
-----
-
-Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an Except.md[Except] logical operator (with the `isAll` flag enabled).
-
-| exceptAll
-a| [[exceptAll]]
-
-[source, scala]
-----
-exceptAll(
-  other: Dataset[T]): Dataset[T]
-----
-
-(*New in 2.4.0*)
-
-Internally, `exceptAll` Dataset.md#withSetOperator[withSetOperator] with an Except.md[Except] logical operator (with the `isAll` flag disabled).
-
-| <<filter, filter>>
-a|
-
-[source, scala]
-----
-filter(condition: Column): Dataset[T]
-filter(conditionExpr: String): Dataset[T]
-filter(func: T => Boolean): Dataset[T]
-----
-
-| <<flatMap, flatMap>>
-a|
-
-[source, scala]
-----
-flatMap[U : Encoder](func: T => TraversableOnce[U]): Dataset[U]
-----
-
-| <<groupByKey, groupByKey>>
-a|
-
-[source, scala]
-----
-groupByKey[K: Encoder](func: T => K): KeyValueGroupedDataset[K, T]
-----
-
-| intersect
-a| [[intersect]]
-
-[source, scala]
-----
-intersect(
-  other: Dataset[T]): Dataset[T]
-----
-
-| intersectAll
-a| [[intersectAll]]
-
-[source, scala]
-----
-intersectAll(
-  other: Dataset[T]): Dataset[T]
-----
-
-(*New in 2.4.0*)
-
-| <<joinWith, joinWith>>
-a|
-
-[source, scala]
-----
-joinWith[U](other: Dataset[U], condition: Column): Dataset[(T, U)]
-joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
-----
-
-| <<limit, limit>>
-a|
-
-[source, scala]
-----
-limit(n: Int): Dataset[T]
-----
-
-| <<map, map>>
-a|
-
-[source, scala]
-----
-map[U: Encoder](func: T => U): Dataset[U]
-----
-
-| <<mapPartitions, mapPartitions>>
-a|
-
-[source, scala]
-----
-mapPartitions[U : Encoder](func: Iterator[T] => Iterator[U]): Dataset[U]
-----
-
-| <<orderBy, orderBy>>
-a|
-
-[source, scala]
-----
-orderBy(sortExprs: Column*): Dataset[T]
-orderBy(sortCol: String, sortCols: String*): Dataset[T]
-----
-
-| <<randomSplit, randomSplit>>
-a|
-
-[source, scala]
-----
-randomSplit(weights: Array[Double]): Array[Dataset[T]]
-randomSplit(weights: Array[Double], seed: Long): Array[Dataset[T]]
-----
-
-| <<repartition, repartition>>
-a|
-
-[source, scala]
-----
-repartition(partitionExprs: Column*): Dataset[T]
-repartition(numPartitions: Int): Dataset[T]
-repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
-----
-
-| <<repartitionByRange, repartitionByRange>>
-a|
-
-[source, scala]
-----
-repartitionByRange(partitionExprs: Column*): Dataset[T]
-repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
-----
-
-| <<sample, sample>>
-a|
-
-[source, scala]
-----
-sample(withReplacement: Boolean, fraction: Double): Dataset[T]
-sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
-sample(fraction: Double): Dataset[T]
-sample(fraction: Double, seed: Long): Dataset[T]
-----
-
-| <<select, select>>
-a|
-
-[source, scala]
-----
-select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
-select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
-select[U1, U2, U3](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
-select[U1, U2, U3, U4](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
-select[U1, U2, U3, U4, U5](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4],
-  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
-----
-
-| <<sort, sort>>
-a|
-
-[source, scala]
-----
-sort(sortExprs: Column*): Dataset[T]
-sort(sortCol: String, sortCols: String*): Dataset[T]
-----
-
-| <<sortWithinPartitions, sortWithinPartitions>>
-a|
-
-[source, scala]
-----
-sortWithinPartitions(sortExprs: Column*): Dataset[T]
-sortWithinPartitions(sortCol: String, sortCols: String*): Dataset[T]
-----
-
-| <<toJSON, toJSON>>
-a|
-
-[source, scala]
-----
-toJSON: Dataset[String]
-----
-
-| <<transform, transform>>
-a|
-
-[source, scala]
-----
-transform[U](t: Dataset[T] => Dataset[U]): Dataset[U]
-----
-
-| union
-a| [[union]]
-
-[source, scala]
-----
-union(
-  other: Dataset[T]): Dataset[T]
-----
-
-| <<unionByName, unionByName>>
-a|
-
-[source, scala]
-----
-unionByName(
-  other: Dataset[T]): Dataset[T]
-----
-
-| <<where, where>>
-a|
-
-[source, scala]
-----
-where(condition: Column): Dataset[T]
-where(conditionExpr: String): Dataset[T]
-----
-|===
-
-=== [[as]][[as-alias]] `as` Typed Transformation
-
-[source, scala]
-----
-as(alias: String): Dataset[T]
-as(alias: Symbol): Dataset[T]
-----
-
-`as`...FIXME
-
-=== [[as-type]] Enforcing Type -- `as` Typed Transformation
+=== [[as]] Enforcing Type -- `as` Typed Transformation
 
 [source, scala]
 ----
@@ -320,8 +13,7 @@ as[U: Encoder]: Dataset[U]
 
 `as[T]` allows for converting from a weakly-typed `Dataset` of [Rows](Row.md) to `Dataset[T]` with `T` being a domain class (that can enforce a stronger schema).
 
-[source, scala]
-----
+```text
 // Create DataFrame of pairs
 val df = Seq("hello", "world!").zipWithIndex.map(_.swap).toDF("id", "token")
 
@@ -338,7 +30,7 @@ final case class MyRecord(id: Int, token: String)
 
 scala> val myRecords = df.as[MyRecord]
 myRecords: org.apache.spark.sql.Dataset[MyRecord] = [id: int, token: string]
-----
+```
 
 === [[coalesce]] Repartitioning Dataset with Shuffle Disabled -- `coalesce` Typed Transformation
 
@@ -372,29 +64,6 @@ Coalesce 1
 +- *Range (0, 5, step=1, splits=Some(8))
 ----
 
-=== [[dropDuplicates]] `dropDuplicates` Typed Transformation
-
-[source, scala]
-----
-dropDuplicates(): Dataset[T]
-dropDuplicates(colNames: Array[String]): Dataset[T]
-dropDuplicates(colNames: Seq[String]): Dataset[T]
-dropDuplicates(col1: String, cols: String*): Dataset[T]
-----
-
-`dropDuplicates`...FIXME
-
-=== [[filter]] `filter` Typed Transformation
-
-[source, scala]
-----
-filter(condition: Column): Dataset[T]
-filter(conditionExpr: String): Dataset[T]
-filter(func: T => Boolean): Dataset[T]
-----
-
-`filter`...FIXME
-
 === [[flatMap]] Creating Zero or More Records -- `flatMap` Typed Transformation
 
 [source, scala]
@@ -423,34 +92,6 @@ scala> sentences.flatMap(s => s.text.split("\\s+")).show
 ----
 
 Internally, `flatMap` calls <<mapPartitions, mapPartitions>> with the partitions `flatMap(ped)`.
-
-=== [[joinWith]] `joinWith` Typed Transformation
-
-[source, scala]
-----
-joinWith[U](other: Dataset[U], condition: Column): Dataset[(T, U)]
-joinWith[U](other: Dataset[U], condition: Column, joinType: String): Dataset[(T, U)]
-----
-
-`joinWith`...FIXME
-
-=== [[limit]] `limit` Typed Transformation
-
-[source, scala]
-----
-limit(n: Int): Dataset[T]
-----
-
-`limit`...FIXME
-
-=== [[map]] `map` Typed Transformation
-
-[source, scala]
-----
-map[U : Encoder](func: T => U): Dataset[U]
-----
-
-`map`...FIXME
 
 === [[randomSplit]] Randomly Split Dataset Into Two or More Datasets Per Weight -- `randomSplit` Typed Transformation
 
@@ -506,8 +147,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 `repartition` creates a [Repartition](logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
 
-[source, scala]
-----
+```text
 scala> spark.range(5).repartition(1).explain(extended = true)
 == Parsed Logical Plan ==
 Repartition 1, true
@@ -525,7 +165,7 @@ Repartition 1, true
 == Physical Plan ==
 Exchange RoundRobinPartitioning(1)
 +- *Range (0, 5, step=1, splits=Some(8))
-----
+```
 
 NOTE: `repartition` methods correspond to SQL's spark-sql-SparkSqlAstBuilder.md#withRepartitionByExpression[DISTRIBUTE BY or CLUSTER BY clauses].
 
@@ -560,58 +200,13 @@ scala> println(q.queryExecution.toRdd.toDebugString)
 
 `repartitionByRange` uses a `SortOrder` with the `Ascending` sort order, i.e. _ascending nulls first_, when no explicit sort order is specified.
 
+---
+
 `repartitionByRange` throws a `IllegalArgumentException` when no `partitionExprs` partition-by expression is specified.
 
-```
+```text
 requirement failed: At least one partition-by expression must be specified.
 ```
-
-=== [[sample]] `sample` Typed Transformation
-
-[source, scala]
-----
-sample(withReplacement: Boolean, fraction: Double): Dataset[T]
-sample(withReplacement: Boolean, fraction: Double, seed: Long): Dataset[T]
-sample(fraction: Double): Dataset[T]
-sample(fraction: Double, seed: Long): Dataset[T]
-----
-
-`sample`...FIXME
-
-=== [[select]] `select` Typed Transformation
-
-[source, scala]
-----
-select[U1](c1: TypedColumn[T, U1]): Dataset[U1]
-select[U1, U2](c1: TypedColumn[T, U1], c2: TypedColumn[T, U2]): Dataset[(U1, U2)]
-select[U1, U2, U3](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3]): Dataset[(U1, U2, U3)]
-select[U1, U2, U3, U4](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4]): Dataset[(U1, U2, U3, U4)]
-select[U1, U2, U3, U4, U5](
-  c1: TypedColumn[T, U1],
-  c2: TypedColumn[T, U2],
-  c3: TypedColumn[T, U3],
-  c4: TypedColumn[T, U4],
-  c5: TypedColumn[T, U5]): Dataset[(U1, U2, U3, U4, U5)]
-----
-
-`select`...FIXME
-
-=== [[sort]] `sort` Typed Transformation
-
-[source, scala]
-----
-sort(sortExprs: Column*): Dataset[T]
-sort(sortCol: String, sortCols: String*): Dataset[T]
-----
-
-`sort`...FIXME
 
 === [[sortWithinPartitions]] `sortWithinPartitions` Typed Transformation
 
@@ -632,8 +227,7 @@ toJSON: Dataset[String]
 
 `toJSON` maps the content of `Dataset` to a `Dataset` of strings in JSON format.
 
-[source, scala]
-----
+```text
 scala> val ds = Seq("hello", "world", "foo bar").toDS
 ds: org.apache.spark.sql.Dataset[String] = [value: string]
 
@@ -645,7 +239,9 @@ scala> ds.toJSON.show
 |  {"value":"world"}|
 |{"value":"foo bar"}|
 +-------------------+
-----
+```
+
+---
 
 Internally, `toJSON` grabs the `RDD[InternalRow]` (of the QueryExecution.md#toRdd[QueryExecution] of the `Dataset`) and spark-rdd-transformations.md#mapPartitions[maps the records (per RDD partition)] into JSON.
 
@@ -660,8 +256,7 @@ transform[U](t: Dataset[T] => Dataset[U]): Dataset[U]
 
 `transform` applies `t` function to the source `Dataset[T]` to produce a result `Dataset[U]`. It is for chaining custom transformations.
 
-[source, scala]
-----
+```text
 val dataset = spark.range(5)
 
 // Transformation t
@@ -678,7 +273,9 @@ scala> dataset.transform(withDoubled).show
 |  3|      6|
 |  4|      8|
 +---+-------+
-----
+```
+
+---
 
 Internally, `transform` executes `t` function on the current `Dataset[T]`.
 

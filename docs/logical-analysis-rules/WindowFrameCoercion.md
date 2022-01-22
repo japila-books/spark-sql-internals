@@ -1,6 +1,6 @@
 # WindowFrameCoercion Type Coercion Logical Rule
 
-`WindowFrameCoercion` is a [type coercion logical rule](../TypeCoercionRule.md) that <<coerceTypes, cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition>> in a [logical plan](../logical-operators/LogicalPlan.md).
+`WindowFrameCoercion` is a `TypeCoercionRule` that [cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition](#coerceTypes) in a [logical plan](../logical-operators/LogicalPlan.md).
 
 ```text
 import java.time.LocalDate
@@ -127,7 +127,7 @@ scala> println(afterWindowFrameCoercion.numberedTreeString)
 coerceTypes(plan: LogicalPlan): LogicalPlan
 ----
 
-`coerceTypes` is part of the [TypeCoercionRule](../TypeCoercionRule.md#coerceTypes) abstraction.
+`coerceTypes` is part of the `TypeCoercionRule` abstraction.
 
 `coerceTypes` <<catalyst/QueryPlan.md#transformAllExpressions, traverses all Catalyst expressions>> (in the input <<spark-sql-LogicalPlan.md#, LogicalPlan>>) and replaces the <<spark-sql-Expression-WindowSpecDefinition.md#frameSpecification, frameSpecification>> of every <<spark-sql-Expression-WindowSpecDefinition.md#, WindowSpecDefinition>> with a `RangeFrame` window frame and the single <<spark-sql-Expression-WindowSpecDefinition.md#orderSpec, order specification>> expression <<expressions/Expression.md#resolved, resolved>> with the lower and upper window frame boundary expressions cast to the <<expressions/Expression.md#dataType, data type>> of the order specification expression.
 

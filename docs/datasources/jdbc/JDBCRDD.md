@@ -64,7 +64,7 @@ scanTable(
 
 `scanTable` finds the corresponding JDBC dialect (per the `url` option) and requests it to quote the column identifiers in the input `requiredColumns`.
 
-`scanTable` uses the `JdbcUtils` object to <<spark-sql-JdbcUtils.md#createConnectionFactory, createConnectionFactory>> and <<pruneSchema, prune columns>> from the input `schema` to include the input `requiredColumns` only.
+`scanTable` uses the `JdbcUtils` object to `createConnectionFactory` and <<pruneSchema, prune columns>> from the input `schema` to include the input `requiredColumns` only.
 
 In the end, `scanTable` creates a new <<creating-instance, JDBCRDD>>.
 

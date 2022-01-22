@@ -14,7 +14,7 @@
 
 * `Encoders` utility is used to [genericSerializer](../Encoders.md#genericSerializer)
 * `JavaTypeInference` utility is used to `serializerFor`
-* `ExternalCatalogUtils` utility is used to [prunePartitionsByFilter](../ExternalCatalogUtils.md#prunePartitionsByFilter)
+* `ExternalCatalogUtils` utility is used to `prunePartitionsByFilter`
 * `ScalaReflection` utility is used to [serializerForType](../ScalaReflection.md#serializerForType)
 * `StructFilters` is used to `toRef`
 * `ExpressionEncoder` utility is used to [tuple](../ExpressionEncoder.md#tuple)

@@ -147,7 +147,7 @@ scala> println(in.sql)
 
 * [ResolveSubquery](../logical-analysis-rules/ResolveSubquery.md) resolution rule
 
-* [InConversion](../logical-analysis-rules/InConversion.md) type coercion rule
+* `InConversion` type coercion rule
 
 [[InMemoryTableScanExec]]
 `In` expression has a InMemoryTableScanExec.md#buildFilter-expressions[custom support] in InMemoryTableScanExec.md[InMemoryTableScanExec] physical operator.

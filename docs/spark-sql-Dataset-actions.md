@@ -219,7 +219,7 @@ The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `
 
 NOTE: `summary` accepts arbitrary approximate percentiles specified as a percentage (e.g. `10%`).
 
-Internally, `summary` uses the `StatFunctions` to <<spark-sql-StatFunctions.md#summary, calculate the requested summaries for the Dataset>>.
+Internally, `summary` uses the `StatFunctions` to calculate the requested summaries for the `Dataset`.
 
 === [[take]] Taking First Records -- `take` Action
 

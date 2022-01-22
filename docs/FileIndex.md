@@ -89,7 +89,7 @@ Used when:
 * `OptimizedCreateHiveTableAsSelectCommand` is executed
 * `CacheManager` is requested to [recache by path](CacheManager.md#recacheByPath)
 * `FileSourceScanExec` physical operator is requested for the [metadata](physical-operators/FileSourceScanExec.md#metadata) and [verboseStringWithOperatorId](physical-operators/FileSourceScanExec.md#verboseStringWithOperatorId)
-* `DDLUtils` utility is used to [verifyNotReadPath](spark-sql-DDLUtils.md#verifyNotReadPath)
+* `DDLUtils` utility is used to `verifyNotReadPath`
 * [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for an `InsertIntoStatement` over a [HadoopFsRelation](HadoopFsRelation.md))
 * `FileScan` is requested for a [description](FileScan.md#description)
 

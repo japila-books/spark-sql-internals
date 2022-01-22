@@ -578,7 +578,6 @@ nav:
       - ExtractWindowExpressions: logical-analysis-rules/ExtractWindowExpressions.md
       - FindDataSourceTable: logical-analysis-rules/FindDataSourceTable.md
       - HandleNullInputsForUDF: logical-analysis-rules/HandleNullInputsForUDF.md
-      - InConversion: logical-analysis-rules/InConversion.md
       - LookupFunctions: logical-analysis-rules/LookupFunctions.md
       - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
       - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
@@ -847,7 +846,6 @@ nav:
       - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
       - JDBCRDD: datasources/jdbc/JDBCRDD.md
       - JdbcDialect: datasources/jdbc/JdbcDialect.md
-      - JdbcUtils: datasources/jdbc/JdbcUtils.md
     - Console:
       - datasources/console/index.md
       - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
@@ -906,7 +904,7 @@ nav:
       - WriteConfigMethods: WriteConfigMethods.md
     - Dataset API:
       - spark-sql-dataset-operators.md
-      - spark-sql-Dataset-typed-transformations.md
+      - Typed Transformations: spark-sql-Dataset-typed-transformations.md
       - Untyped Transformations: Dataset-untyped-transformations.md
       - spark-sql-Dataset-basic-actions.md
       - spark-sql-Dataset-actions.md
@@ -971,37 +969,25 @@ nav:
       - Performance Tuning: spark-sql-performance-tuning.md
       - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
       - Debugging Query Execution: spark-sql-debugging-query-execution.md
-    - Tools: tools/spark-sql-spark-sql.md
     - Spark Thrift Server:
       - thrift-server/spark-sql-thrift-server.md
       - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
     - SQLExecution: SQLExecution.md
     - RDDConversions: spark-sql-RDDConversions.md
     - ShuffledRowRDD: ShuffledRowRDD.md
-    - UnsupportedOperationChecker: UnsupportedOperationChecker.md
     - CheckAnalysis: CheckAnalysis.md
     - CatalystTypeConverters: CatalystTypeConverters.md
-    - StatFunctions: spark-sql-StatFunctions.md
-    - SubExprUtils: spark-sql-SubExprUtils.md
+    - SubExprUtils: SubExprUtils.md
     - PredicateHelper: PredicateHelper.md
-    - DDLUtils: spark-sql-DDLUtils.md
-    - SchemaUtils: spark-sql-SchemaUtils.md
     - AggUtils: AggUtils.md
     - CreateStruct: CreateStruct.md
-    - TypeCoercion: spark-sql-TypeCoercion.md
-    - TypeCoercionRule: TypeCoercionRule.md
     - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
     - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
     - ExtractJoinWithBuckets: ExtractJoinWithBuckets.md
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
-    - SizeEstimator: spark-sql-SizeEstimator.md
-    - PartitioningUtils: spark-sql-PartitioningUtils.md
-    - HadoopFileLinesReader: spark-sql-spark-HadoopFileLinesReader.md
-    - CatalogUtils: CatalogUtils.md
-    - ExternalCatalogUtils: ExternalCatalogUtils.md
+    - HadoopFileLinesReader: HadoopFileLinesReader.md
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
-    - PushDownUtils: PushDownUtils.md
     - SQLContext: SQLContext.md

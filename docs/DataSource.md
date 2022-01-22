@@ -158,7 +158,7 @@ planForWritingFileFormat(
 !!! note
     `planForWritingFileFormat` uses Hadoop HDFS's Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html) to requests for the [FileSystem]({{ hadoop.api }}/org/apache/hadoop/fs/FileSystem.html) that owns it (using a [Hadoop Configuration](SessionState.md#newHadoopConf)).
 
-`planForWritingFileFormat` [validates partition columns](spark-sql-PartitioningUtils.md#validatePartitionColumn) in the given [partitionColumns](#partitionColumns).
+`planForWritingFileFormat` validates partition columns in the given [partitionColumns](#partitionColumns).
 
 In the end, `planForWritingFileFormat` returns a new [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md).
 
