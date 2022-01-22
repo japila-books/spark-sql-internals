@@ -608,7 +608,6 @@ nav:
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
       - ResolveWithCTE: logical-analysis-rules/ResolveWithCTE.md
       - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
-      - TimeWindowing: logical-analysis-rules/TimeWindowing.md
       - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
       - WindowFrameCoercion: logical-analysis-rules/WindowFrameCoercion.md
       - WidenSetOperationTypes: logical-analysis-rules/WidenSetOperationTypes.md

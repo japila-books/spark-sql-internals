@@ -1,114 +1,153 @@
 # CreateNamedStruct
 
-`CreateNamedStruct` is a `CreateNamedStructLike` expression.
+`CreateNamedStruct` is an [Expression](Expression.md).
 
-[[prettyName]]
-`CreateNamedStruct` uses *named_struct* for the <<Expression.md#prettyName, user-facing name>>.
+## Creating Instance
 
-[source, scala]
-----
-// Using Catalyst DSL
-import org.apache.spark.sql.catalyst.dsl.expressions._
-val s = namedStruct("*")
-scala> println(s)
-named_struct(*)
-----
+`CreateNamedStruct` takes the following to be created:
 
-`CreateNamedStruct` is registered in <<FunctionRegistry.md#expressions, FunctionRegistry>> under the name of `named_struct` SQL function.
+* <span id="children"> Child [Expression](Expression.md)s
 
-[source, scala]
-----
-import org.apache.spark.sql.catalyst.FunctionIdentifier
-val fid = FunctionIdentifier(funcName = "named_struct")
-val className = spark.sessionState.functionRegistry.lookupFunction(fid).get.getClassName
-scala> println(className)
-org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
+`CreateNamedStruct` is created when:
 
-val q = sql("SELECT named_struct('id', 0)")
-// analyzed so the function is resolved already (using FunctionRegistry)
-val analyzedPlan = q.queryExecution.analyzed
-scala> println(analyzedPlan.numberedTreeString)
-00 Project [named_struct(id, 0) AS named_struct(id, 0)#7]
-01 +- OneRowRelation
+* `SerializerBuildHelper` utility is used to `createSerializerForObject`
+* `ResolveExpressionsWithNamePlaceholders` logical analysis rule is executed
+* `ResolveUnion` logical analysis rule is executed
+* [Catalyst DSL](../catalyst-dsl/index.md)'s `namedStruct` operator is used
+* `ExpressionEncoder` is [created](../ExpressionEncoder.md#serializer)
+* `RowEncoder` utility is used to [create a serializer for a StructType](../RowEncoder.md#serializerFor)
+* `CreateStruct` utility is used to [create a CreateNamedStruct](../CreateStruct.md#apply)
+* `ObjectSerializerPruning` logical optimization is executed
+* _many many others_
 
-val e = analyzedPlan.expressions.head.children.head
-import org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
-assert(e.isInstanceOf[CreateNamedStruct])
-----
+## <span id="nullable"> Never Nullable
 
-`CreateNamedStruct` is <<creating-instance, created>> when:
+```scala
+nullable: Boolean
+```
 
-* [ScalaReflection](../ScalaReflection.md#serializerFor), [RowEncoder](../RowEncoder.md#serializerFor) and `JavaTypeInference` are requested for a serializer of a type
+`nullable` is always disabled (`false`).
 
-* [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) and [ResolveCreateNamedStruct](../logical-analysis-rules/ResolveCreateNamedStruct.md) logical resolution rules are executed
+`nullable` is part of the [Expression](Expression.md#nullable) abstraction.
 
-* `CreateStruct` is requested to <<CreateStruct.md#apply, create a CreateNamedStruct expression>>
+## <span id="nodePatterns"> Node Patterns
 
-[[children]]
-[[creating-instance]]
-`CreateNamedStruct` takes a collection of <<Expression.md#, Catalyst expressions>> when created.
+```scala
+nodePatterns: Seq[TreePattern]
+```
 
-`CreateNamedStruct` <<doGenCode, generates Java source code (as ExprCode) for code-generated expression evaluation>>.
+`nodePatterns` is [CREATE_NAMED_STRUCT](../catalyst/TreePattern.md#CREATE_NAMED_STRUCT).
 
-[source, scala]
-----
-// You could also use Seq("*")
+`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+## <span id="prettyName"> Pretty Name
+
+```scala
+prettyName: String
+```
+
+`prettyName` is either [function alias](../catalyst/TreeNode.md#getTagValue) for the `functionAliasName` tag (if defined) or **named_struct**.
+
+`prettyName` is part of the [Expression](Expression.md#prettyName) abstraction.
+
+## <span id="eval"> Interpreted Expression Evaluation
+
+```scala
+eval(
+  input: InternalRow): Any
+```
+
+`eval` creates an [InternalRow](../InternalRow.md) with the result of [evaluation](Expression.md#eval) of all the [value expressions](#valExprs).
+
+`eval` is part of the [Expression](Expression.md#eval) abstraction.
+
+## <span id="doGenCode"> Code-Generated Expression Evaluation
+
+```scala
+doGenCode(
+  ctx: CodegenContext,
+  ev: ExprCode): ExprCode
+```
+
+`doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+
+```scala
 import org.apache.spark.sql.functions.lit
 val exprs = Seq("a", 1).map(lit).map(_.expr)
 
-import org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
-val createNamedStruct = CreateNamedStruct(exprs)
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val ns = namedStruct(exprs: _*)
 
-import org.apache.spark.sql.catalyst.expressions.codegen.{CodegenContext, ExprCode}
-val ctx = new CodegenContext
 // doGenCode is used when Expression.genCode is executed
-val ExprCode(code, _, _) = createNamedStruct.genCode(ctx)
 
-// Helper methods
-def trim(code: String): String = {
-  code.trim.split("\n").map(_.trim).filter(line => line.nonEmpty).mkString("\n")
-}
-def prettyPrint(code: String) = println(trim(code))
-// END: Helper methods
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val code = ns.genCode(ctx).code
+```
 
-scala> println(trim(code))
+```text
+scala> println(code)
 Object[] values_0 = new Object[1];
+
+
 if (false) {
-values_0[0] = null;
+  values_0[0] = null;
 } else {
-values_0[0] = 1;
+  values_0[0] = 1;
 }
+
 final InternalRow value_0 = new org.apache.spark.sql.catalyst.expressions.GenericInternalRow(values_0);
 values_0 = null;
-----
+```
 
-[TIP]
-====
-Use `namedStruct` operator from Catalyst DSL's [expressions](../catalyst-dsl/index.md#expressions) to create a `CreateNamedStruct` expression.
+## <span id="FunctionRegistry"> FunctionRegistry
 
-[source, scala]
-----
+`CreateNamedStruct` is registered in [FunctionRegistry](../FunctionRegistry.md#expressions) under the name of `named_struct` SQL function.
+
+```scala
+import org.apache.spark.sql.catalyst.FunctionIdentifier
+val fid = FunctionIdentifier(funcName = "named_struct")
+val className = spark.sessionState.functionRegistry.lookupFunction(fid).get.getClassName
+```
+
+```text
+scala> println(className)
+org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
+```
+
+```scala
+val q = sql("SELECT named_struct('id', 0)")
+// analyzed so the function is resolved already (using FunctionRegistry)
+val analyzedPlan = q.queryExecution.analyzed
+```
+
+```text
+scala> println(analyzedPlan.numberedTreeString)
+00 Project [named_struct(id, 0) AS named_struct(id, 0)#7]
+01 +- OneRowRelation
+```
+
+```scala
+val e = analyzedPlan.expressions.head.children.head
+import org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
+assert(e.isInstanceOf[CreateNamedStruct])
+```
+
+## Catalyst DSL
+
+[Catalyst DSL](../catalyst-dsl/index.md) defines [namedStruct](../catalyst-dsl/index.md#expressions) operator to create a `CreateNamedStruct` expression.
+
+```scala
 import org.apache.spark.sql.catalyst.dsl.expressions._
 val s = namedStruct()
-scala> :type s
-org.apache.spark.sql.catalyst.expressions.Expression
 
 import org.apache.spark.sql.catalyst.expressions.CreateNamedStruct
 assert(s.isInstanceOf[CreateNamedStruct])
 
 val s = namedStruct("*")
+```
+
+```text
 scala> println(s)
 named_struct(*)
-----
-====
-
-=== [[doGenCode]] Generating Java Source Code (ExprCode) For Code-Generated Expression Evaluation -- `doGenCode` Method
-
-[source, scala]
-----
-doGenCode(ctx: CodegenContext, ev: ExprCode): ExprCode
-----
-
-NOTE: `doGenCode` is part of <<Expression.md#doGenCode, Expression Contract>> to generate a Java source code (ExprCode) for code-generated expression evaluation.
-
-`doGenCode`...FIXME
+```

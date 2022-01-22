@@ -38,7 +38,7 @@ scala> println(q.queryExecution.logical.numberedTreeString)
 
 * [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics) (for `Cube`, `Rollup`, [GroupingSets](GroupingSets.md) logical operators)
 
-* [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) (for expressions/TimeWindow.md[TimeWindow] logical operator)
+* `TimeWindowing` (for [TimeWindow](../expressions/TimeWindow.md) logical operator)
 
 NOTE: Aggregate -> (Cube|Rollup|GroupingSets) -> constructAggregate -> constructExpand
 

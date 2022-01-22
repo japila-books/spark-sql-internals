@@ -43,7 +43,7 @@ Used when:
 * [Murmur3Hash](Murmur3Hash.md)
 * XxHash64
 
-## <span id="eval"> eval
+## <span id="eval"> Interpreted Expression Evaluation
 
 ```scala
 eval(

@@ -28,9 +28,8 @@ resultBroadcast: Broadcast[Array[Any]]
 
 `resultBroadcast` is updated when `InSubqueryExec` is requested to [update the collected result](#updateResult).
 
-## Interpreted Expression Evaluation
+## <span id="eval"> Interpreted Expression Evaluation
 
-<span id="eval">
 ```scala
 eval(
   input: InternalRow): Any

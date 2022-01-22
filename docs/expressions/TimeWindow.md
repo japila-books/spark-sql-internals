@@ -57,9 +57,9 @@ CAUTION: FIXME
 
 === [[analyzer]] Analysis Phase
 
-`TimeWindow` is resolved to Expand.md[Expand] logical operator when [TimeWindowing](../logical-analysis-rules/TimeWindowing.md) logical evaluation rule is executed.
+`TimeWindow` is resolved to Expand.md[Expand] logical operator when `TimeWindowing` logical evaluation rule is executed.
 
-```
+```text
 // https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
 import java.time.LocalDateTime
 // https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html
