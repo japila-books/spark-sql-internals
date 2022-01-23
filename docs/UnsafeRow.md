@@ -1,8 +1,8 @@
 # UnsafeRow
 
-`UnsafeRow` is an [InternalRow](InternalRow.md) for mutable binary rows that are backed by raw memory outside JVM (instead of Java objects that are in JVM memory space and would lead to more frequent GCs).
+`UnsafeRow` is an [InternalRow](InternalRow.md) for mutable binary rows that are backed by raw memory outside JVM (instead of Java objects that are in JVM memory space and may lead to more frequent GCs if created in excess).
 
-`UnsafeRow` supports Java's [Externalizable](#Externalizable) and Kryo's [KryoSerializable](#KryoSerializable) serialization/deserialization protocols.
+`UnsafeRow` supports Java's [Externalizable](#Externalizable) and Kryo's [KryoSerializable](#KryoSerializable) serialization and deserialization protocols.
 
 ## Creating Instance
 
@@ -10,9 +10,9 @@
 
 * <span id="numFields"> Number of fields
 
-While being created, `UnsafeRow` calculates the [bitset width](#bitSetWidthInBytes) based on the [number of fields](#numFields).
+Whed created, `UnsafeRow` calculates the [bitset width](#bitSetWidthInBytes) based on the [number of fields](#numFields).
 
-`UnsafeRow` is created when:
+`UnsafeRow` is created when:
 
 * FIXME
 
@@ -104,6 +104,25 @@ Object baseObject
 
 `baseObject` is assigned in [pointTo](#pointTo), [copyFrom](#copyFrom), [readExternal](#readExternal) and [read](#read). In most cases, `baseObject` is `byte[]` (except a variant of [pointTo](#pointTo) that allows for `Object`s).
 
+### <span id="getBaseObject"> getBaseObject
+
+```java
+Object getBaseObject()
+```
+
+`getBaseObject` returns the [baseObject](#baseObject).
+
+`getBaseObject` is used when:
+
+* `UnsafeWriter` is requested to `write` an `UnsafeRow`
+* `UnsafeExternalRowSorter` is requested to `insertRow` an `UnsafeRow`
+* `UnsafeFixedWidthAggregationMap` is requested to [getAggregationBufferFromUnsafeRow](UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow)
+* `UnsafeKVExternalSorter` is requested to `insertKV`
+* `ExternalAppendOnlyUnsafeRowArray` is requested to [add an UnsafeRow](ExternalAppendOnlyUnsafeRowArray.md#add)
+* `UnsafeHashedRelation` is requested to [get](physical-operators/UnsafeHashedRelation.md#get), [getValue](physical-operators/UnsafeHashedRelation.md#getValue), [getWithKeyIndex](physical-operators/UnsafeHashedRelation.md#getWithKeyIndex), [getValueWithKeyIndex](physical-operators/UnsafeHashedRelation.md#getValueWithKeyIndex), [apply](physical-operators/UnsafeHashedRelation.md#apply)
+* `LongToUnsafeRowMap` is requested to `append`
+* `InMemoryRowQueue` is requested to `add` an `UnsafeRow`
+
 ## <span id="writeToStream"> writeToStream
 
 ```java
@@ -116,7 +135,7 @@ void writeToStream(
 
 `writeToStream`...FIXME
 
-`writeToStream` is used when:
+`writeToStream` is used when:
 
 * `SparkPlan` is requested to [compress RDD partitions (of UnsafeRows) to byte arrays](physical-operators/SparkPlan.md#getByteArrayRdd)
 * `UnsafeRowSerializerInstance` is requested to [serializeStream](tungsten/UnsafeRowSerializerInstance.md#serializeStream)
@@ -136,7 +155,12 @@ void pointTo(
 
 1. Uses `Platform.BYTE_ARRAY_OFFSET` as `baseOffset`
 
-`pointTo`...FIXME
+`pointTo` sets the [baseObject](#baseObject), the [baseOffset](#baseOffset) and the [sizeInBytes](#sizeInBytes) to the given values.
+
+`pointTo` asserts the following:
+
+1. [numFields](#numFields) is 0 or greater
+1. The given `sizeInBytes` is a multiple of 8
 
 ## <span id="copyFrom"> copyFrom
 
@@ -172,7 +196,7 @@ void read(
   Input in)
 ```
 
-`read` is part of the `KryoSerializable` ([Kryo](https://github.com/EsotericSoftware/kryo#kryoserializable)) abstraction.
+`read` is part of the `KryoSerializable` ([Kryo](https://github.com/EsotericSoftware/kryo#kryoserializable)) abstraction.
 
 ### <span id="readExternal"> Java
 
@@ -181,7 +205,7 @@ void readExternal(
   ObjectInput in)
 ```
 
-`readExternal` is part of the `Externalizable` ([Java]({{ java.api }}/java/io/Externalizable.html#readExternal(java.io.ObjectInput))) abstraction.
+`readExternal` is part of the `Externalizable` ([Java]({{ java.api }}/java/io/Externalizable.html#readExternal(java.io.ObjectInput))) abstraction.
 
 ## Demo
 
@@ -228,3 +252,7 @@ The following will certainly fail. Consider it a WIP.
 ```text
 assert(row.getLong(0) == id)
 ```
+
+## <span id="WORD_SIZE"> WORD_SIZE
+
+`UnsafeRow` uses `8` as the size of a word for `MapEntries` unary expression to `doGenCode` and `genCodeForPrimitiveElements`.

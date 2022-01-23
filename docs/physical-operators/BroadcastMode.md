@@ -16,7 +16,7 @@
 canonicalized: BroadcastMode
 ```
 
-### <span id="transform"> Transform Rows with Optional Size Hint
+### <span id="transform"> Transforming InternalRows into HashedRelation (with Optional Size Hint)
 
 ```scala
 transform(
@@ -24,7 +24,9 @@ transform(
   sizeHint: Option[Long]): Any
 ```
 
-Used when [BroadcastExchangeExec](BroadcastExchangeExec.md) physical operator is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
+Used when:
+
+* `BroadcastExchangeExec` physical operator is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
 
 ### <span id="transform-rows"> Transform Rows
 

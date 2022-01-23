@@ -523,6 +523,7 @@ nav:
       - SQLMetric: physical-operators/SQLMetric.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
+      - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - Distribution and Partitioning:

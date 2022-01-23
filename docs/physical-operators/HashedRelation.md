@@ -15,7 +15,9 @@ asReadOnlyCopy(): HashedRelation
 
 A read-only copy of this `HashedRelation` to be safely used in a separate thread
 
-Used when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is [executed](BroadcastHashJoinExec.md#doExecute)
+Used when:
+
+* `BroadcastHashJoinExec` physical operator is [executed](BroadcastHashJoinExec.md#doExecute)
 
 ### <span id="close"> close
 
@@ -23,7 +25,9 @@ Used when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is
 close(): Unit
 ```
 
-Used when [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operator is requested to [buildHashedRelation](ShuffledHashJoinExec.md#buildHashedRelation)
+Used when:
+
+* `ShuffledHashJoinExec` physical operator is requested to [buildHashedRelation](ShuffledHashJoinExec.md#buildHashedRelation)
 
 ### <span id="get"> get
 
@@ -52,7 +56,9 @@ getValue(
 
 Gives the value [internal row](../InternalRow.md) for the given key
 
-Used when `LongHashedRelation` is requested to [get a value for a key](LongHashedRelation.md#getValue)
+Used when:
+
+* `LongHashedRelation` is requested to [get a value for a key](LongHashedRelation.md#getValue)
 
 ### <span id="keyIsUnique"> keyIsUnique
 
@@ -60,7 +66,9 @@ Used when `LongHashedRelation` is requested to [get a value for a key](LongHashe
 keyIsUnique: Boolean
 ```
 
-Used when [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is requested to [multipleOutputForOneInput](BroadcastHashJoinExec.md#multipleOutputForOneInput), [codegenInner](BroadcastHashJoinExec.md#codegenInner), [codegenOuter](BroadcastHashJoinExec.md#codegenOuter), [codegenSemi](BroadcastHashJoinExec.md#codegenSemi), [codegenAnti](BroadcastHashJoinExec.md#codegenAnti), [codegenExistence](BroadcastHashJoinExec.md#codegenExistence)
+Used when:
+
+* `BroadcastHashJoinExec` physical operator is requested to [multipleOutputForOneInput](BroadcastHashJoinExec.md#multipleOutputForOneInput), [codegenInner](BroadcastHashJoinExec.md#codegenInner), [codegenOuter](BroadcastHashJoinExec.md#codegenOuter), [codegenSemi](BroadcastHashJoinExec.md#codegenSemi), [codegenAnti](BroadcastHashJoinExec.md#codegenAnti), [codegenExistence](BroadcastHashJoinExec.md#codegenExistence)
 
 ### <span id="keys"> keys
 
@@ -75,7 +83,7 @@ Used when:
 ## Implementations
 
 * [LongHashedRelation](LongHashedRelation.md)
-* `UnsafeHashedRelation`
+* [UnsafeHashedRelation](UnsafeHashedRelation.md)
 
 ## <span id="apply"> Creating HashedRelation
 
@@ -84,18 +92,27 @@ apply(
   input: Iterator[InternalRow],
   key: Seq[Expression],
   sizeEstimate: Int = 64,
-  taskMemoryManager: TaskMemoryManager = null): HashedRelation
+  taskMemoryManager: TaskMemoryManager = null,
+  isNullAware: Boolean = false,
+  allowsNullKey: Boolean = false): HashedRelation
 ```
 
-`apply` creates a [LongHashedRelation](LongHashedRelation.md#apply) when the input `key` collection has a single [expression](../expressions/Expression.md) of type `long` or a `UnsafeHashedRelation` otherwise.
+With no elements in the `input` iterator and with the `allowsNullKey` flag disabled, `apply` returns the `EmptyHashedRelation`.
 
-!!! note
-    The input `key` expressions are:
+For exactly one `key` expression of type `LongType` and with the `allowsNullKey` flag disabled, `apply` returns a [LongHashedRelation](LongHashedRelation.md).
 
-    * [Build join keys](HashJoin.md#buildKeys) of `ShuffledHashJoinExec` physical operator
-    * [Canonicalized build-side join keys](HashedRelationBroadcastMode.md#canonicalized) of `HashedRelationBroadcastMode` (of [BroadcastHashJoinExec](BroadcastHashJoinExec.md#requiredChildDistribution) physical operator)
+For all other cases, `apply` returns an [UnsafeHashedRelation](UnsafeHashedRelation.md).
+
+---
+
+The input `key` expressions can be the following:
+
+* [Build join keys](HashJoin.md#buildKeys) of `ShuffledHashJoinExec` physical operator
+* [Canonicalized build-side join keys](HashedRelationBroadcastMode.md#canonicalized) of `HashedRelationBroadcastMode` (of [BroadcastHashJoinExec](BroadcastHashJoinExec.md#requiredChildDistribution) physical operator)
+
+---
 
 `apply` is used when:
 
-* `ShuffledHashJoinExec` physical operator is requested to [build a HashedRelation for given internal rows](ShuffledHashJoinExec.md#buildHashedRelation)
-* `HashedRelationBroadcastMode` is requested to [transform](HashedRelationBroadcastMode.md#transform)
+* `ShuffledHashJoinExec` physical operator is requested to [build a HashedRelation from InternalRows](ShuffledHashJoinExec.md#buildHashedRelation)
+* `HashedRelationBroadcastMode` is requested to [transform InternalRows into a HashedRelation](HashedRelationBroadcastMode.md#transform)

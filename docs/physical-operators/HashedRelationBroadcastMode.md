@@ -1,10 +1,28 @@
 # HashedRelationBroadcastMode
 
-`HashedRelationBroadcastMode` is a [BroadcastMode](BroadcastMode.md) that `BroadcastHashJoinExec` uses for the BroadcastHashJoinExec.md#requiredChildDistribution[required output distribution of child operators].
+`HashedRelationBroadcastMode` is a [BroadcastMode](BroadcastMode.md).
 
-[[creating-instance]]
-[[key]]
-`HashedRelationBroadcastMode` takes build-side join keys (as expressions/Expression.md[Catalyst expressions]) when created.
+## Creating Instance
 
-[[canonicalized]]
-`HashedRelationBroadcastMode` gives a copy of itself with <<key, keys>> canonicalized when requested for a [canonicalized](BroadcastMode.md#canonicalized) version.
+`HashedRelationBroadcastMode` takes the following to be created:
+
+* <span id="key"> Key [Expression](../expressions/Expression.md)s
+* <span id="isNullAware"> `isNullAware` flag (default: `false`)
+
+`HashedRelationBroadcastMode` is created when:
+
+* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) (to optimize query plans with [DynamicPruningExpression](../expressions/DynamicPruningExpression.md))
+* `PlanDynamicPruningFilters` physical optimization is requested to [broadcastMode](../physical-optimizations/PlanDynamicPruningFilters.md#broadcastMode)
+* `BroadcastHashJoinExec` physical operator is requested for [requiredChildDistribution](BroadcastHashJoinExec.md#requiredChildDistribution)
+
+## <span id="transform"> Transforming InternalRows into HashedRelation
+
+```scala
+transform(
+  rows: Iterator[InternalRow],
+  sizeHint: Option[Long]): HashedRelation
+```
+
+`transform` creates a [HashedRelation](HashedRelation.md#apply) with or without `sizeEstimate` based on the given `sizeHint`.
+
+`transform` is part of the [BroadcastMode](BroadcastMode.md#transform) abstraction.
