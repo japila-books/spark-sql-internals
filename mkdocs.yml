@@ -511,21 +511,53 @@ nav:
       - Exchange: physical-operators/Exchange.md
       - ExecutedCommandExec: physical-operators/ExecutedCommandExec.md
       - ExternalRDDScanExec: physical-operators/ExternalRDDScanExec.md
+      - FileSourceScanExec: physical-operators/FileSourceScanExec.md
+      - FilterExec: physical-operators/FilterExec.md
+      - GenerateExec: physical-operators/GenerateExec.md
+      - HashAggregateExec: physical-operators/HashAggregateExec.md
       - HashedRelation: physical-operators/HashedRelation.md
       - HashJoin: physical-operators/HashJoin.md
+      - InMemoryTableScanExec: physical-operators/InMemoryTableScanExec.md
+      - InputAdapter: physical-operators/InputAdapter.md
+      - JoinCodegenSupport: physical-operators/JoinCodegenSupport.md
+      - LocalTableScanExec: physical-operators/LocalTableScanExec.md
       - LongHashedRelation: physical-operators/LongHashedRelation.md
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
       - ObjectProducerExec: physical-operators/ObjectProducerExec.md
+      - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+      - ProjectExec: physical-operators/ProjectExec.md
+      - RangeExec: physical-operators/RangeExec.md
+      - ReusedExchangeExec: physical-operators/ReusedExchangeExec.md
       - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
+      - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
+      - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
+      - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
+      - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
+      - ShowTablesExec: physical-operators/ShowTablesExec.md
+      - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
+      - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
+      - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
+      - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
       - ShuffledJoin: physical-operators/ShuffledJoin.md
       - ShuffleOrigin: physical-operators/ShuffleOrigin.md
+      - SortAggregateExec: physical-operators/SortAggregateExec.md
+      - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
+      - SortExec: physical-operators/SortExec.md
       - SparkPlan: physical-operators/SparkPlan.md
       - SQLMetric: physical-operators/SQLMetric.md
+      - SubqueryExec: physical-operators/SubqueryExec.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
+      - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
+      - WindowExec:
+        - WindowExec: physical-operators/WindowExec.md
+        - AggregateProcessor: physical-operators/AggregateProcessor.md
+        - WindowFunctionFrame: physical-operators/WindowFunctionFrame.md
+      - WriteToDataSourceV2Exec: physical-operators/WriteToDataSourceV2Exec.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
         - Partitioning: physical-operators/Partitioning.md
@@ -539,37 +571,6 @@ nav:
         - Broadcast Modes:
           - BroadcastMode: physical-operators/BroadcastMode.md
           - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
-      - FileSourceScanExec: physical-operators/FileSourceScanExec.md
-      - FilterExec: physical-operators/FilterExec.md
-      - GenerateExec: physical-operators/GenerateExec.md
-      - HashAggregateExec: physical-operators/HashAggregateExec.md
-      - InMemoryTableScanExec: physical-operators/InMemoryTableScanExec.md
-      - InputAdapter: physical-operators/InputAdapter.md
-      - LocalTableScanExec: physical-operators/LocalTableScanExec.md
-      - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
-      - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
-      - ProjectExec: physical-operators/ProjectExec.md
-      - RangeExec: physical-operators/RangeExec.md
-      - ReusedExchangeExec: physical-operators/ReusedExchangeExec.md
-      - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
-      - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
-      - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
-      - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
-      - ShowTablesExec: physical-operators/ShowTablesExec.md
-      - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
-      - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
-      - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
-      - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
-      - SortAggregateExec: physical-operators/SortAggregateExec.md
-      - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
-      - SortExec: physical-operators/SortExec.md
-      - SubqueryExec: physical-operators/SubqueryExec.md
-      - WindowExec:
-        - WindowExec: physical-operators/WindowExec.md
-        - AggregateProcessor: physical-operators/AggregateProcessor.md
-        - WindowFunctionFrame: physical-operators/WindowFunctionFrame.md
-      - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
-      - WriteToDataSourceV2Exec: physical-operators/WriteToDataSourceV2Exec.md
     - Logical Analysis Rules:
       - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
       - AliasViewChild: logical-analysis-rules/AliasViewChild.md

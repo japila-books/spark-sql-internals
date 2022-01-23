@@ -1,8 +1,6 @@
 # ShuffledHashJoinExec Physical Operator
 
-`ShuffledHashJoinExec` is a [hash-based join physical operator](HashJoin.md) for [shuffle hash join](#doExecute).
-
-`ShuffledHashJoinExec` is a [ShuffledJoin](ShuffledJoin.md) (and performs a hash join of two child relations by first shuffling the data using the join keys).
+`ShuffledHashJoinExec` is a [ShuffledJoin](#ShuffledJoin) and [HashJoin](#HashJoin) for [shuffle-hash join](#doExecute).
 
 `ShuffledHashJoinExec` supports [Java code generation](CodegenSupport.md) for [all the join types except FullOuter](#supportCodegen) ([variable prefix](CodegenSupport.md#variablePrefix): `shj`).
 
@@ -27,8 +25,9 @@ Key            | Name (in web UI)        | Description
 * <span id="condition"> Optional Join Condition [Expression](../expressions/Expression.md)
 * <span id="left"> Left Child [Physical Operator](SparkPlan.md)
 * <span id="right"> Right Child [Physical Operator](SparkPlan.md)
+* [isSkewJoin](#isSkewJoin) flag
 
-`ShuffledHashJoinExec` is created when:
+`ShuffledHashJoinExec` is created when:
 
 * [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed ([createShuffleHashJoin](../execution-planning-strategies/JoinSelection.md#createShuffleHashJoin))
 
@@ -79,7 +78,7 @@ buildHashedRelation(
 supportCodegen: Boolean
 ```
 
-`supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
+`supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
 
 `supportCodegen` is `true` for [all the join types except FullOuter](../joins.md#join-types).
 
@@ -89,7 +88,7 @@ supportCodegen: Boolean
 needCopyResult: Boolean
 ```
 
-`needCopyResult` is part of the [CodegenSupport](CodegenSupport.md#needCopyResult) abstraction.
+`needCopyResult` is part of the [CodegenSupport](CodegenSupport.md#needCopyResult) abstraction.
 
 `needCopyResult` is `true`.
 
@@ -167,3 +166,47 @@ scala> println(q.queryExecution.toRdd.toDebugString)
      |  MapPartitionsRDD[5] at toRdd at <console>:26 []
      |  ParallelCollectionRDD[4] at toRdd at <console>:26 []
 ```
+
+## <span id="HashJoin"> HashJoin
+
+`ShuffledHashJoinExec` is a [HashJoin](HashJoin.md).
+
+### <span id="buildSide"> BuildSide
+
+```scala
+buildSide: BuildSide
+```
+
+`ShuffledHashJoinExec` is given a `BuildSide` when [created](#creating-instance).
+
+`buildSide` is part of the [HashJoin](HashJoin.md#buildSide) abstraction.
+
+### <span id="prepareRelation"> prepareRelation
+
+```scala
+prepareRelation(
+  ctx: CodegenContext): HashedRelationInfo
+```
+
+`prepareRelation` requests the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md) for a [code to reference](../whole-stage-code-generation/CodegenContext.md#addReferenceObj) this `ShuffledHashJoinExec` (with `plan` name).
+
+`prepareRelation` requests the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md) for a [code with relationTerm mutable state](../whole-stage-code-generation/CodegenContext.md#addMutableState) (with the `HashedRelation` class name, `relation` variable name, etc.)
+
+In the end, `prepareRelation` creates a `HashedRelationInfo`.
+
+```text
+```
+
+`prepareRelation` is part of the [HashJoin](HashJoin.md#prepareRelation) abstraction.
+
+## <span id="ShuffledJoin"> ShuffledJoin
+
+`ShuffledHashJoinExec` is a [ShuffledJoin](ShuffledJoin.md) and performs a hash join of two child relations by first shuffling the data using the join keys.
+
+### <span id="isSkewJoin"> isSkewJoin Flag
+
+`ShuffledHashJoinExec` can be given `isSkewJoin` flag when [created](#creating-instance). It is assumed disabled (`false`) by default.
+
+`isSkewJoin` can only be enabled (`true`) when `OptimizeSkewedJoin` adaptive physical optimization is requested to [optimize a skew join](../adaptive-query-execution/OptimizeSkewedJoin.md#optimizeSkewJoin).
+
+`isSkewJoin` is part of the [ShuffledJoin](ShuffledJoin.md#isSkewJoin) abstraction.

@@ -167,6 +167,10 @@ createShuffleHashJoin(
 
 `createShuffleHashJoin` tries to [determine the BuildSide for a ShuffleHashJoinExec](#getShuffleHashJoinBuildSide) and, if successful, creates a [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md).
 
+`createShuffleHashJoin` is used when:
+
+* `JoinSelection` is requested to [createJoinWithoutHint](#createJoinWithoutHint) (with `onlyLookingAtHint` disabled) and [execute](#apply) (with `onlyLookingAtHint` enabled)
+
 ## <span id="createSortMergeJoin"> Creating SortMergeJoinExec
 
 ```scala

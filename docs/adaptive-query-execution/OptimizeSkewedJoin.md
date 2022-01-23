@@ -4,6 +4,22 @@
 
 `OptimizeSkewedJoin` is also called **skew join optimization**.
 
+## <span id="getSkewThreshold"> Skew Threshold
+
+```scala
+getSkewThreshold(
+  medianSize: Long): Long
+```
+
+`getSkewThreshold` is the maximum of the following:
+
+1. [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes)
+1. [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplied by the given `medianSize`
+
+`getSkewThreshold` is used when:
+
+* `OptimizeSkewedJoin` is requested to [tryOptimizeJoinChildren](#tryOptimizeJoinChildren)
+
 ## <span id="supportedJoinTypes"> Supported Join Types
 
 `OptimizeSkewedJoin` supports the following join types:
@@ -59,31 +75,12 @@ optimizeSkewJoin(
   plan: SparkPlan): SparkPlan
 ```
 
-`optimizeSkewJoin` transforms [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) physical operators (with the [supportedJoinTypes](#supportedJoinTypes)) of two [SortExec](../physical-operators/SortExec.md) operators with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) children.
+`optimizeSkewJoin` transforms the following physical operators:
 
-`optimizeSkewJoin` handles `SortMergeJoinExec` operators with the left and right operators of the same number of partitions.
+* [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) (of left and right [SortExec](../physical-operators/SortExec.md)s over [ShuffleStage](ShuffleStage.md) with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) disabled)
+* [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) (with left and right [ShuffleStage](ShuffleStage.md)s with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/ShuffledHashJoinExec.md#isSkewJoin) disabled)
 
-`optimizeSkewJoin` computes [median partition size](#medianSize) for the left and right operators.
-
-`optimizeSkewJoin` prints out the following DEBUG message to the logs:
-
-```text
-Optimizing skewed join.
-Left side partitions size info:
-[info]
-Right side partitions size info:
-[info]
-```
-
-`optimizeSkewJoin`...FIXME
-
-`optimizeSkewJoin` prints out the following DEBUG message to the logs:
-
-```text
-number of skewed partitions: left [numPartitions], right [numPartitions]
-```
-
-In the end, `optimizeSkewJoin` creates `CustomShuffleReaderExec` physical operators for the left and right children of the [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) operator if and only if the number of skewed partitions for either side is greater than `0`. `optimizeSkewJoin` turns on the [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) flag (of the `SortMergeJoinExec` operator). Otherwise, `optimizeSkewJoin` leaves the `SortMergeJoinExec` operator "untouched".
+`optimizeSkewJoin` [tryOptimizeJoinChildren](#tryOptimizeJoinChildren) and, if a new join left and right child operators are determined, replaces them in the physical operators (with the `isSkewJoin` flag enabled).
 
 ### <span id="tryOptimizeJoinChildren"> tryOptimizeJoinChildren
 
@@ -95,19 +92,6 @@ tryOptimizeJoinChildren(
 ```
 
 `tryOptimizeJoinChildren`...FIXME
-
-## <span id="isSkewed"> isSkewed Predicate
-
-```scala
-isSkewed(
-  size: Long,
-  medianSize: Long): Boolean
-```
-
-`isSkewed` is on (`true`) when the given `size` is greater than all of the following:
-
-* [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property multiplied by the given `medianSize`
-* [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes) configuration property
 
 ## <span id="targetSize"> Target Partition Size
 
@@ -132,6 +116,10 @@ medianSize(
 ```
 
 `medianSize`...FIXME
+
+`medianSize` is used when:
+
+* `OptimizeSkewedJoin` is requested to [tryOptimizeJoinChildren](#tryOptimizeJoinChildren)
 
 ## Logging
 
