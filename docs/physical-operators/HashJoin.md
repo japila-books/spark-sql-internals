@@ -1,6 +1,6 @@
 # HashJoin &mdash; Hash-Based Join Physical Operators
 
-`HashJoin` is an [extension](#contract) of the [BaseJoinExec](BaseJoinExec.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](CodegenSupport.md).
+`HashJoin` is an [extension](#contract) of the [JoinCodegenSupport](JoinCodegenSupport.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](CodegenSupport.md).
 
 ## Contract
 
@@ -25,6 +25,25 @@ Used when:
 
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md)
 * [ShuffledHashJoinExec](ShuffledHashJoinExec.md)
+
+## <span id="output"> Output Attributes
+
+```scala
+output: Seq[Attribute]
+```
+
+`output` is a collection of [Attribute](../expressions/Attribute.md)s based on the [joinType](BaseJoinExec.md#joinType).
+
+joinType | Output Schema
+---------|--------------
+ `InnerLike` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) followed by the [right](#right) operator's
+ `LeftOuter` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) followed by the [right](#right) operator's (with `nullability` on)
+ `RightOuter` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) (with `nullability` on) followed by the [right](#right) operator's
+ `ExistenceJoin` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) followed by the `exists` attribute
+ `LeftSemi` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) operator
+ `LeftAnti` | [output](../catalyst/QueryPlan.md#output) of the [left](#left) operator
+
+`output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
 
 ## <span id="join"> join
 
@@ -71,7 +90,7 @@ codegenAnti(
 
 `codegenAnti`...FIXME
 
-`codegenAnti` is used when:
+`codegenAnti` is used when:
 
 * `BroadcastHashJoinExec` physical operator is requested to [codegenAnti](BroadcastHashJoinExec.md#codegenAnti) (with the [isNullAwareAntiJoin](BroadcastHashJoinExec.md#isNullAwareAntiJoin) flag off)
 * `HashJoin` is requested to [doConsume](#doConsume)

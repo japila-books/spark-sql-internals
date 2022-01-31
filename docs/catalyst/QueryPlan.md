@@ -21,7 +21,7 @@ A `QueryPlan` is **unresolved** if the column names have not been verified and c
 output: Seq[Attribute]
 ```
 
-Output [attribute](../expressions/Attribute.md) expressions
+Output [Attribute](../expressions/Attribute.md)s
 
 ```text
 val q = spark.range(3)
