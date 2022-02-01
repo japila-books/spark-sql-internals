@@ -25,7 +25,8 @@
 ```scala
 doConsume(
   ctx: CodegenContext,
-  input: Seq[ExprCode], row: ExprCode): String
+  input: Seq[ExprCode],
+  row: ExprCode): String
 ```
 
 `doConsume`...FIXME
