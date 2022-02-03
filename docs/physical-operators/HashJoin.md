@@ -80,7 +80,7 @@ joinType | Output Schema
 
 `HashJoin` is a [CodegenSupport](CodegenSupport.md) (indirectly as a [JoinCodegenSupport](JoinCodegenSupport.md)).
 
-### <span id="doConsume"> Java Source Code for Consume Path
+### <span id="doConsume"> Consume Path
 
 ```scala
 doConsume(
@@ -102,7 +102,7 @@ joinType | doConsume
 
 `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
-### <span id="doProduce"> Java Source Code for Produce Path
+### <span id="doProduce"> Produce Path
 
 ```scala
 doProduce(
@@ -148,7 +148,68 @@ HashJoin should not take [joinType] as the JoinType
 
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operators are executed
 
-## <span id="codegenAnti"> Generating Java Code for Anti Join
+## Generating Java Code
+
+### <span id="codegenInner"> Inner Join
+
+```scala
+codegenInner(
+  ctx: CodegenContext,
+  input: Seq[ExprCode]): String
+```
+
+`codegenInner` [prepares a HashedRelation](#prepareRelation) (with the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md)).
+
+!!! note
+    [Preparing a HashedRelation](#prepareRelation) is implementation-specific.
+
+`codegenInner` [genStreamSideJoinKey](#genStreamSideJoinKey) and [getJoinCondition](#getJoinCondition).
+
+For `isEmptyHashedRelation`, `codegenInner` returns the following text (which is simply a comment with no executable code):
+
+```text
+// If HashedRelation is empty, hash inner join simply returns nothing.
+```
+
+For `keyIsUnique`, `codegenInner` returns the following code:
+
+```text
+// generate join key for stream side
+[keyEv.code]
+// find matches from HashedRelation
+UnsafeRow [matched] = [anyNull] ? null: (UnsafeRow)[relationTerm].getValue([keyEv.value]);
+if ([matched] != null) {
+  [checkCondition] {
+    [numOutput].add(1);
+    [consume(ctx, resultVars)]
+  }
+}
+```
+
+For all other cases, `codegenInner` returns the following code:
+
+```text
+// generate join key for stream side
+[keyEv.code]
+// find matches from HashRelation
+Iterator[UnsafeRow] [matches] = [anyNull] ?
+  null : (Iterator[UnsafeRow])[relationTerm].get([keyEv.value]);
+if ([matches] != null) {
+  while ([matches].hasNext()) {
+    UnsafeRow [matched] = (UnsafeRow) [matches].next();
+    [checkCondition] {
+      [numOutput].add(1);
+      [consume(ctx, resultVars)]
+    }
+  }
+}
+```
+
+`codegenInner` is used when:
+
+* `HashJoin` is requested to [doConsume](#doConsume) (for `INNER` or `CROSS` joins)
+
+### <span id="codegenAnti"> Anti Join
 
 ```scala
 codegenAnti(
