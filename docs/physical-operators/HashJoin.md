@@ -1,6 +1,6 @@
 # HashJoin &mdash; Hash-Based Join Physical Operators
 
-`HashJoin` is an [extension](#contract) of the [JoinCodegenSupport](JoinCodegenSupport.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](CodegenSupport.md).
+`HashJoin` is an [extension](#contract) of the [JoinCodegenSupport](JoinCodegenSupport.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](#CodegenSupport).
 
 ## Contract
 
@@ -76,9 +76,9 @@ joinType | Output Schema
 
 `output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
 
-## <span id="CodegenSupport"> CodegenSupport
+## <span id="CodegenSupport"> CodegenSupport &mdash; Generating Java Source Code
 
-`HashJoin` is a [CodegenSupport](CodegenSupport.md) (indirectly as a [JoinCodegenSupport](JoinCodegenSupport.md)).
+`HashJoin` is a [CodegenSupport](CodegenSupport.md) (indirectly as a [JoinCodegenSupport](JoinCodegenSupport.md)) and supports generating Java source code for [consume](#doConsume) and [produce](#doProduce) execution paths.
 
 ### <span id="doConsume"> Consume Path
 
@@ -89,7 +89,7 @@ doConsume(
   row: ExprCode): String
 ```
 
-`doConsume` generates a Java source code for "consume" path based on the [joinType](BaseJoinExec.md#joinType).
+`doConsume` generates a Java source code for "consume" execution path based on the given [join type](BaseJoinExec.md#joinType).
 
 joinType | doConsume
 ---------|--------------
@@ -102,55 +102,22 @@ joinType | doConsume
 
 `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
-### <span id="doProduce"> Produce Path
+#### <span id="codegenAnti"> Anti Join
 
 ```scala
-doProduce(
-  ctx: CodegenContext): String
+codegenAnti(
+  ctx: CodegenContext,
+  input: Seq[ExprCode]): String
 ```
 
-`doProduce` assumes that the [streamedPlan](#streamedPlan) is a [CodegenSupport](CodegenSupport.md) and requests it to [generate a Java source code for "produce" path](CodegenSupport.md#doProduce).
+`codegenAnti`...FIXME
 
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
+`codegenAnti` is used when:
 
-## <span id="join"> join
+* `BroadcastHashJoinExec` physical operator is requested to [codegenAnti](BroadcastHashJoinExec.md#codegenAnti) (with the [isNullAwareAntiJoin](BroadcastHashJoinExec.md#isNullAwareAntiJoin) flag off)
+* `HashJoin` is requested to [doConsume](#doConsume)
 
-```scala
-join(
-  streamedIter: Iterator[InternalRow],
-  hashed: HashedRelation,
-  numOutputRows: SQLMetric): Iterator[InternalRow]
-```
-
-`join` branches off per [JoinType](BaseJoinExec.md#joinType) to create an joined rows iterator (off the rows from the input `streamedIter` and `hashed`):
-
-* [innerJoin](#innerJoin) for a [InnerLike](../joins.md#InnerLike) join
-
-* [outerJoin](#outerJoin) for a [LeftOuter](../joins.md#LeftOuter) or a [RightOuter](../joins.md#RightOuter) join
-
-* [semiJoin](#semiJoin) for a [LeftSemi](../joins.md#LeftSemi) join
-
-* [antiJoin](#antiJoin) for a [LeftAnti](../joins.md#LeftAnti) join
-
-* [existenceJoin](#existenceJoin) for a [ExistenceJoin](../joins.md#ExistenceJoin) join
-
-`join` [creates a result projection](#createResultProjection).
-
-In the end, for every row in the joined rows iterator `join` increments the input `numOutputRows` SQL metric and applies the result projection.
-
-`join` reports an `IllegalArgumentException` for unsupported [JoinType](BaseJoinExec.md#joinType):
-
-```text
-HashJoin should not take [joinType] as the JoinType
-```
-
-`join` is used when:
-
-* [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operators are executed
-
-## Generating Java Code
-
-### <span id="codegenInner"> Inner Join
+#### <span id="codegenInner"> Inner Join
 
 ```scala
 codegenInner(
@@ -161,7 +128,7 @@ codegenInner(
 `codegenInner` [prepares a HashedRelation](#prepareRelation) (with the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md)).
 
 !!! note
-    [Preparing a HashedRelation](#prepareRelation) is implementation-specific.
+    [Preparing a HashedRelation](#prepareRelation) is [implementation](#implementations)-specific.
 
 `codegenInner` [genStreamSideJoinKey](#genStreamSideJoinKey) and [getJoinCondition](#getJoinCondition).
 
@@ -205,21 +172,48 @@ if ([matches] != null) {
 }
 ```
 
-`codegenInner` is used when:
-
-* `HashJoin` is requested to [doConsume](#doConsume) (for `INNER` or `CROSS` joins)
-
-### <span id="codegenAnti"> Anti Join
+### <span id="doProduce"> Produce Path
 
 ```scala
-codegenAnti(
-  ctx: CodegenContext,
-  input: Seq[ExprCode]): String
+doProduce(
+  ctx: CodegenContext): String
 ```
 
-`codegenAnti`...FIXME
+`doProduce` assumes that the [streamedPlan](#streamedPlan) is a [CodegenSupport](CodegenSupport.md) and requests it to [generate a Java source code for "produce" execution path](CodegenSupport.md#doProduce).
 
-`codegenAnti` is used when:
+`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
-* `BroadcastHashJoinExec` physical operator is requested to [codegenAnti](BroadcastHashJoinExec.md#codegenAnti) (with the [isNullAwareAntiJoin](BroadcastHashJoinExec.md#isNullAwareAntiJoin) flag off)
-* `HashJoin` is requested to [doConsume](#doConsume)
+## <span id="join"> join
+
+```scala
+join(
+  streamedIter: Iterator[InternalRow],
+  hashed: HashedRelation,
+  numOutputRows: SQLMetric): Iterator[InternalRow]
+```
+
+`join` branches off per [JoinType](BaseJoinExec.md#joinType) to create an joined rows iterator (off the rows from the input `streamedIter` and `hashed`):
+
+* [innerJoin](#innerJoin) for a [InnerLike](../joins.md#InnerLike) join
+
+* [outerJoin](#outerJoin) for a [LeftOuter](../joins.md#LeftOuter) or a [RightOuter](../joins.md#RightOuter) join
+
+* [semiJoin](#semiJoin) for a [LeftSemi](../joins.md#LeftSemi) join
+
+* [antiJoin](#antiJoin) for a [LeftAnti](../joins.md#LeftAnti) join
+
+* [existenceJoin](#existenceJoin) for a [ExistenceJoin](../joins.md#ExistenceJoin) join
+
+`join` [creates a result projection](#createResultProjection).
+
+In the end, for every row in the joined rows iterator `join` increments the input `numOutputRows` SQL metric and applies the result projection.
+
+`join` reports an `IllegalArgumentException` for unsupported [JoinType](BaseJoinExec.md#joinType):
+
+```text
+HashJoin should not take [joinType] as the JoinType
+```
+
+`join` is used when:
+
+* [BroadcastHashJoinExec](BroadcastHashJoinExec.md) and [ShuffledHashJoinExec](ShuffledHashJoinExec.md) physical operators are executed

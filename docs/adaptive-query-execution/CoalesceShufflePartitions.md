@@ -12,7 +12,7 @@
 
 `CoalesceShufflePartitions` is created when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [QueryStage Optimizer Rules](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [QueryStage Optimizer Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 

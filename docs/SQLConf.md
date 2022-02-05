@@ -92,7 +92,7 @@ Used when:
 
 The value of [spark.sql.adaptive.logLevel](configuration-properties.md#spark.sql.adaptive.logLevel) configuration property
 
-Used when [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is executed
+Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed
 
 ## <span id="ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD"> ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD
 
@@ -180,7 +180,7 @@ Used when:
 
 Used when:
 
-* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [costEvaluator](adaptive-query-execution/AdaptiveSparkPlanExec.md#costEvaluator)
+* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [costEvaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator)
 
 ## <span id="autoSizeUpdateEnabled"> autoSizeUpdateEnabled
 
@@ -407,7 +407,7 @@ Used when:
 
 Used when:
 
-* [AdaptiveSparkPlanExec](adaptive-query-execution/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](adaptive-query-execution/AdaptiveSparkPlanExec.md#createQueryStages)
+* [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](physical-operators/AdaptiveSparkPlanExec.md#createQueryStages)
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
 

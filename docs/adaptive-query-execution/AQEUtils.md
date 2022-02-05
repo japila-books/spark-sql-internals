@@ -17,6 +17,6 @@ getRequiredDistribution(
 
 * For all other operators, `getRequiredDistribution` returns the [UnspecifiedDistribution](../physical-operators/UnspecifiedDistribution.md)
 
-`getRequiredDistribution` is used when:
+`getRequiredDistribution` is used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [required distribution](AdaptiveSparkPlanExec.md#requiredDistribution)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [required distribution](../physical-operators/AdaptiveSparkPlanExec.md#requiredDistribution)

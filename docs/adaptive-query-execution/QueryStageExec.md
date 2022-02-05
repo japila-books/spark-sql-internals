@@ -14,7 +14,7 @@ Cancels the stage materialization if in progress; otherwise does nothing.
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [cleanUpAndThrowException](AdaptiveSparkPlanExec.md#cleanUpAndThrowException)
+* `AdaptiveSparkPlanExec` physical operator is requested to [cleanUpAndThrowException](../physical-operators/AdaptiveSparkPlanExec.md#cleanUpAndThrowException)
 
 ### <span id="doMaterialize"> Materializing
 
@@ -58,7 +58,7 @@ newReuseInstance(
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryStage](AdaptiveSparkPlanExec.md#reuseQueryStage)
+* `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryStage](../physical-operators/AdaptiveSparkPlanExec.md#reuseQueryStage)
 
 ### <span id="plan"> Physical Query Plan
 
@@ -86,7 +86,7 @@ _resultOption: AtomicReference[Option[Any]]
 
 As `AtomicReference` is mutable that is enough to change the value.
 
-`_resultOption` is set when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
+`_resultOption` is set when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
 
 `_resultOption` is available using [resultOption](#resultOption).
 
@@ -136,7 +136,7 @@ Materialize query stage [simpleName]: [id]
 
 `materialize` is used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
+* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
 
 ## <span id="generateTreeString"> Text Representation
 

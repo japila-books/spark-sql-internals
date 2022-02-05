@@ -25,7 +25,7 @@ Key             | Name (in web UI)        | Description
 * <span id="right"> Right Child [Physical Operator](SparkPlan.md)
 * [isNullAwareAntiJoin](#isNullAwareAntiJoin) flag
 
-`BroadcastHashJoinExec` is created when:
+`BroadcastHashJoinExec` is created when:
 
 * [JoinSelection](../execution-planning-strategies/JoinSelection.md) execution planning strategy is executed ([createBroadcastHashJoin](../execution-planning-strategies/JoinSelection.md#createBroadcastHashJoin) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/JoinSelection.md#ExtractSingleColumnNullAwareAntiJoin))
 * [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy is executed ([ExtractEquiJoinKeys](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractEquiJoinKeys) and [ExtractSingleColumnNullAwareAntiJoin](../execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractSingleColumnNullAwareAntiJoin))
@@ -61,7 +61,7 @@ If enabled, `BroadcastHashJoinExec` makes sure that the following all hold:
 requiredChildDistribution: Seq[Distribution]
 ```
 
-`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
+`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
 
 BuildSide | Left Child | Right Child
 ----------|------------|------------
@@ -74,7 +74,7 @@ BuildSide | Left Child | Right Child
 outputPartitioning: Partitioning
 ```
 
-`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
 
 `outputPartitioning`...FIXME
 
@@ -84,7 +84,7 @@ outputPartitioning: Partitioning
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the [buildPlan](HashJoin.md#buildPlan) to [executeBroadcast](SparkPlan.md#executeBroadcast) (that gives a broadcast variable with a [HashedRelation](HashedRelation.md)).
 
@@ -110,56 +110,156 @@ codegenAnti(
   input: Seq[ExprCode]): String
 ```
 
-`codegenAnti` is part of the [HashJoin](HashJoin.md#codegenAnti) abstraction.
+`codegenAnti` is part of the [HashJoin](HashJoin.md#codegenAnti) abstraction.
 
 `codegenAnti`...FIXME
 
 ## Demo
 
-```text
+```scala
 val tokens = Seq(
   (0, "playing"),
   (1, "with"),
   (2, "BroadcastHashJoinExec")
 ).toDF("id", "token")
-
-scala> spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
-res0: String = 10485760
-
-val q = tokens.join(tokens, Seq("id"), "inner")
-scala> q.explain
-== Physical Plan ==
-*Project [id#15, token#16, token#21]
-+- *BroadcastHashJoin [id#15], [id#20], Inner, BuildRight
-   :- LocalTableScan [id#15, token#16]
-   +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
-      +- LocalTableScan [id#20, token#21]
 ```
+
+```scala
+val q = tokens.join(tokens, Seq("id"), "inner")
+```
+
+```text
+scala> println(q.queryExecution.executedPlan.numberedTreeString)
+00 AdaptiveSparkPlan isFinalPlan=false
+01 +- Project [id#18, token#19, token#25]
+02    +- BroadcastHashJoin [id#18], [id#24], Inner, BuildRight, false
+03       :- LocalTableScan [id#18, token#19]
+04       +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [id=#16]
+05          +- LocalTableScan [id#24, token#25]
+```
+
+```scala
+import org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec
+val op = q
+  .queryExecution
+  .executedPlan
+  .collect { case op: AdaptiveSparkPlanExec => op }
+  .head
+```
+
+```text
+scala> println(op.treeString)
+AdaptiveSparkPlan isFinalPlan=false
++- Project [id#18, token#19, token#25]
+   +- BroadcastHashJoin [id#18], [id#24], Inner, BuildRight, false
+      :- LocalTableScan [id#18, token#19]
+      +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [id=#16]
+         +- LocalTableScan [id#24, token#25]
+```
+
+Execute the adaptive operator to generate the final execution plan.
+
+```scala
+op.executeTake(1)
+```
+
+Mind the [isFinalPlan](AdaptiveSparkPlanExec.md#isFinalPlan) flag that is now enabled.
+
+```text
+scala> println(op.treeString)
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(1) Project [id#18, token#19, token#25]
+   +- *(1) BroadcastHashJoin [id#18], [id#24], Inner, BuildRight, false
+      :- *(1) LocalTableScan [id#18, token#19]
+      +- BroadcastQueryStage 0
+         +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [id=#16]
+            +- LocalTableScan [id#24, token#25]
++- == Initial Plan ==
+   Project [id#18, token#19, token#25]
+   +- BroadcastHashJoin [id#18], [id#24], Inner, BuildRight, false
+      :- LocalTableScan [id#18, token#19]
+      +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [id=#16]
+         +- LocalTableScan [id#24, token#25]
+```
+
+With the [isFinalPlan](AdaptiveSparkPlanExec.md#isFinalPlan) flag enabled, it is possible to print out the [WholeStageCodegen](WholeStageCodegenExec.md) subtrees.
 
 ```text
 scala> q.queryExecution.debug.codegen
 Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*Project [id#15, token#16, token#21]
-+- *BroadcastHashJoin [id#15], [id#20], Inner, BuildRight
-   :- LocalTableScan [id#15, token#16]
-   +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
-      +- LocalTableScan [id#20, token#21]
+== Subtree 1 / 1 (maxMethodCodeSize:265; maxConstantPoolSize:146(0.22% used); numInnerClasses:0) ==
+*(1) Project [id#18, token#19, token#25]
++- *(1) BroadcastHashJoin [id#18], [id#24], Inner, BuildRight, false
+   :- *(1) LocalTableScan [id#18, token#19]
+   +- BroadcastQueryStage 0
+      +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)),false), [id=#16]
+         +- LocalTableScan [id#24, token#25]
 
 Generated code:
 /* 001 */ public Object generate(Object[] references) {
-/* 002 */   return new GeneratedIterator(references);
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
 /* 003 */ }
 /* 004 */
-/* 005 */ final class GeneratedIterator extends org.apache.spark.sql.execution.BufferedRowIterator {
-/* 006 */   private Object[] references;
-/* 007 */   private scala.collection.Iterator[] inputs;
-/* 008 */   private scala.collection.Iterator inputadapter_input;
-/* 009 */   private org.apache.spark.broadcast.TorrentBroadcast bhj_broadcast;
-/* 010 */   private org.apache.spark.sql.execution.joins.LongHashedRelation bhj_relation;
-/* 011 */   private org.apache.spark.sql.execution.metric.SQLMetric bhj_numOutputRows;
-/* 012 */   private UnsafeRow bhj_result;
-/* 013 */   private org.apache.spark.sql.catalyst.expressions.codegen.BufferHolder bhj_holder;
-/* 014 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter bhj_rowWriter;
+/* 005 */ // codegenStageId=1
+/* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+/* 007 */   private Object[] references;
+/* 008 */   private scala.collection.Iterator[] inputs;
+/* 009 */   private scala.collection.Iterator localtablescan_input_0;
+/* 010 */   private org.apache.spark.sql.execution.joins.LongHashedRelation bhj_relation_0;
+/* 011 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[] bhj_mutableStateArray_0 = new org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[2];
+/* 012 */
+/* 013 */   public GeneratedIteratorForCodegenStage1(Object[] references) {
+/* 014 */     this.references = references;
+/* 015 */   }
+/* 016 */
+/* 017 */   public void init(int index, scala.collection.Iterator[] inputs) {
+/* 018 */     partitionIndex = index;
+/* 019 */     this.inputs = inputs;
+/* 020 */     localtablescan_input_0 = inputs[0];
+/* 021 */
+/* 022 */     bhj_relation_0 = ((org.apache.spark.sql.execution.joins.LongHashedRelation) ((org.apache.spark.broadcast.TorrentBroadcast) references[1] /* broadcast */).value()).asReadOnlyCopy();
+/* 023 */     incPeakExecutionMemory(bhj_relation_0.estimatedSize());
+/* 024 */
+/* 025 */     bhj_mutableStateArray_0[0] = new org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter(4, 64);
+/* 026 */     bhj_mutableStateArray_0[1] = new org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter(3, 64);
+/* 027 */
+/* 028 */   }
+...
+```
+
+Let's access the generated source code via [WholeStageCodegenExec](WholeStageCodegenExec.md) physical operator.
+
+```scala
+val aqe = op
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = aqe.executedPlan
+  .collect { case op: WholeStageCodegenExec => op }
+  .head
+val (_, source) = wsce.doCodeGen
+```
+
+```text
+import org.apache.spark.sql.catalyst.expressions.codegen.CodeFormatter
+val formattedCode = CodeFormatter.format(source)
+```
+
+```text
+scala> println(formattedCode)
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ // codegenStageId=1
+/* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+/* 007 */   private Object[] references;
+/* 008 */   private scala.collection.Iterator[] inputs;
+/* 009 */   private scala.collection.Iterator localtablescan_input_0;
+/* 010 */   private org.apache.spark.sql.execution.joins.LongHashedRelation bhj_relation_0;
+/* 011 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[] bhj_mutableStateArray_0 = new org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[2];
+/* 012 */
+/* 013 */   public GeneratedIteratorForCodegenStage1(Object[] references) {
+/* 014 */     this.references = references;
+/* 015 */   }
 ...
 ```

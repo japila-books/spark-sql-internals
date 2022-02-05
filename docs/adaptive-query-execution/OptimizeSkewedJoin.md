@@ -48,7 +48,7 @@ getSkewThreshold(
 
 `OptimizeSkewedJoin` is created when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 

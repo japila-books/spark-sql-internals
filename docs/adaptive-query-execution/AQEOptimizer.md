@@ -8,9 +8,9 @@
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`AQEOptimizer` is created when:
+`AQEOptimizer` is created when:
 
-* `AdaptiveSparkPlanExec` physical operator is [created](AdaptiveSparkPlanExec.md#optimizer)
+* `AdaptiveSparkPlanExec` physical operator is [created](../physical-operators/AdaptiveSparkPlanExec.md#optimizer)
 
 ## <span id="defaultBatches"> Default Batches
 
@@ -30,7 +30,7 @@
 batches: Seq[Batch]
 ```
 
-`batches` is part of the [RuleExecutor](../catalyst/RuleExecutor.md#batches) abstraction.
+`batches` is part of the [RuleExecutor](../catalyst/RuleExecutor.md#batches) abstraction.
 
 `batches` uses the [spark.sql.adaptive.optimizer.excludedRules](../configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property for the rules to exclude from the [default rules](#defaultBatches).
 

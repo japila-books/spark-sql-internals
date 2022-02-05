@@ -8,11 +8,11 @@
 
 `PlanAdaptiveDynamicPruningFilters` takes the following to be created:
 
-* <span id="rootPlan"> [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md)
+* <span id="rootPlan"> [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md)
 
-`PlanAdaptiveDynamicPruningFilters` is created when:
+`PlanAdaptiveDynamicPruningFilters` is created when:
 
-* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 
@@ -25,8 +25,8 @@ apply(
 
 `apply` requests the given `SparkPlan` to [transformAllExpressionsWithPruning](../catalyst/QueryPlan.md#transformAllExpressionsWithPruning) in [QueryPlan](../catalyst/QueryPlan.md)s with the [DYNAMIC_PRUNING_EXPRESSION](../catalyst/TreePattern.md#DYNAMIC_PRUNING_EXPRESSION) and [IN_SUBQUERY_EXEC](../catalyst/TreePattern.md#IN_SUBQUERY_EXEC) tree patterns:
 
-* [DynamicPruningExpression](../expressions/DynamicPruningExpression.md)s with [InSubqueryExec](../expressions/InSubqueryExec.md) expressions with [SubqueryAdaptiveBroadcastExec](../physical-operators/BaseSubqueryExec.md#SubqueryAdaptiveBroadcastExec)s with [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) leaf physical operators
+* [DynamicPruningExpression](../expressions/DynamicPruningExpression.md)s with [InSubqueryExec](../expressions/InSubqueryExec.md) expressions with [SubqueryAdaptiveBroadcastExec](../physical-operators/BaseSubqueryExec.md#SubqueryAdaptiveBroadcastExec)s with [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) leaf physical operators
 
 In the end, `apply` creates a new [DynamicPruningExpression](../expressions/DynamicPruningExpression.md) unary expression (with a [InSubqueryExec](../expressions/InSubqueryExec.md) or [TrueLiteral](../expressions/Literal.md#TrueLiteral)).
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

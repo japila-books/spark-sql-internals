@@ -342,7 +342,7 @@ explainString(
 
 * `Dataset` is requested to [explain](Dataset.md#explain)
 * `SQLExecution` utility is used to [withNewExecutionId](SQLExecution.md#withNewExecutionId)
-* `AdaptiveSparkPlanExec` leaf physical operator is requested to [onUpdatePlan](adaptive-query-execution/AdaptiveSparkPlanExec.md#onUpdatePlan)
+* `AdaptiveSparkPlanExec` leaf physical operator is requested to [onUpdatePlan](physical-operators/AdaptiveSparkPlanExec.md#onUpdatePlan)
 * `ExplainCommand` logical command is [executed](logical-operators/ExplainCommand.md#run)
 * `debug` utility is used to `toFile`
 

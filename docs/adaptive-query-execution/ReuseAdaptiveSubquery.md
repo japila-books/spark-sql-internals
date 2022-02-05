@@ -12,7 +12,7 @@
 
 `ReuseAdaptiveSubquery` is created when:
 
-* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
 ## <span id="apply"> Executing Rule
 

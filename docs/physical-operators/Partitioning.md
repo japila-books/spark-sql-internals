@@ -165,7 +165,7 @@ satisfies(
 
 * [RemoveRedundantSorts](../physical-optimizations/RemoveRedundantSorts.md) physical optimization is executed
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
-* [AdaptiveSparkPlanExec](../adaptive-query-execution/AdaptiveSparkPlanExec.md) leaf physical operator is executed
+* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) leaf physical operator is executed
 
 ### <span id="satisfies0"> satisfies0
 

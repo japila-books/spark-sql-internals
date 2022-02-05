@@ -60,7 +60,7 @@ For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) ho
 
 ### Supported Query Plans
 
-`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
+`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 
@@ -68,7 +68,7 @@ For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) ho
 Adaptive execution enabled for plan: [plan]
 ```
 
-In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
+In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
 
 In case of `SubqueryAdaptiveNotSupportedException`, `applyInternal` prints out the WARN message and returns the given physical plan.
 
@@ -121,11 +121,10 @@ verifyAdaptivePlan(
   logicalPlan: LogicalPlan): Unit
 ```
 
-`verifyAdaptivePlan` throws a `SubqueryAdaptiveNotSupportedException` when the given [SparkPlan](../physical-operators/SparkPlan.md) is not a [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md).
+`verifyAdaptivePlan` throws a `SubqueryAdaptiveNotSupportedException` when the given [SparkPlan](../physical-operators/SparkPlan.md) is not a [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md).
 
-## supportAdaptive Predicate
+## <span id="supportAdaptive"> supportAdaptive Predicate
 
-<span id="supportAdaptive">
 ```scala
 supportAdaptive(
   plan: SparkPlan): Boolean

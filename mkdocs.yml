@@ -477,6 +477,7 @@ nav:
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - physical-operators/index.md
+      - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
       - AliasAwareOutputExpression: physical-operators/AliasAwareOutputExpression.md
       - AliasAwareOutputOrdering: physical-operators/AliasAwareOutputOrdering.md
       - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
@@ -700,7 +701,6 @@ nav:
       - ScalaReflection: ScalaReflection.md
   - AQE:
     - adaptive-query-execution/index.md
-    - AdaptiveSparkPlanExec: adaptive-query-execution/AdaptiveSparkPlanExec.md
     - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
     - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
     - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md

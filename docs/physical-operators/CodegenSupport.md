@@ -13,7 +13,7 @@ doConsume(
   row: ExprCode): String
 ```
 
-Generates a Java source code (as a text) for the physical operator for the ["consume" path](../whole-stage-code-generation/index.md#consume-path) in [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)
+Generates a Java source code (as a text) for this physical operator for the [consume execution path](../whole-stage-code-generation/index.md#consume-path) in [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)
 
 !!! note "UnsupportedOperationException"
     `doConsume` throws an `UnsupportedOperationException` by default.

@@ -6,11 +6,11 @@
 
 `PlanChangeLogger` takes no arguments to be created.
 
-`PlanChangeLogger` is created when:
+`PlanChangeLogger` is created when:
 
 * `RuleExecutor` is requested to [execute rules](RuleExecutor.md#execute)
 * `QueryExecution` is requested to [prepare for execution](../QueryExecution.md#prepareForExecution)
-* `AdaptiveSparkPlanExec` physical operator is [created](../adaptive-query-execution/AdaptiveSparkPlanExec.md#planChangeLogger)
+* `AdaptiveSparkPlanExec` physical operator is [created](../physical-operators/AdaptiveSparkPlanExec.md#planChangeLogger)
 
 ## <span id="TreeType"> TreeType
 
@@ -36,11 +36,11 @@ logRule(
 [oldPlan] [newPlan]
 ```
 
-`logRule` is used when:
+`logRule` is used when:
 
 * `RuleExecutor` is requested to [execute](RuleExecutor.md#execute)
 * `QueryExecution` is requested to [prepare for execution](../QueryExecution.md#prepareForExecution)
-* `AdaptiveSparkPlanExec` physical operator is requested to [applyPhysicalRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#applyPhysicalRules)
+* `AdaptiveSparkPlanExec` physical operator is requested to [applyPhysicalRules](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules)
 
 ## <span id="logBatch"> Logging Plan Changes by Batch
 
@@ -66,11 +66,11 @@ Otherwise, `logBatch` prints out the following message:
 Batch [batchName] has no effect.
 ```
 
-`logBatch` is used when:
+`logBatch` is used when:
 
 * `RuleExecutor` is requested to [execute](RuleExecutor.md#execute)
 * `QueryExecution` is requested to [prepare for execution](../QueryExecution.md#prepareForExecution)
-* `AdaptiveSparkPlanExec` physical operator is requested to [applyPhysicalRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#applyPhysicalRules)
+* `AdaptiveSparkPlanExec` physical operator is requested to [applyPhysicalRules](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules)
 
 ## <span id="logMetrics"> Logging Metrics
 
@@ -89,7 +89,7 @@ Total number of effective runs: [numEffectiveRuns]
 Total time of effective runs: [totalTimeEffective] seconds
 ```
 
-`logMetrics` is used when:
+`logMetrics` is used when:
 
 * `RuleExecutor` is requested to [execute](RuleExecutor.md#execute)
 

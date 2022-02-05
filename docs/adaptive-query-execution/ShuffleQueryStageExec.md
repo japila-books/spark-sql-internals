@@ -11,7 +11,7 @@
 
 `ShuffleQueryStageExec` is created when:
 
-* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md))
+* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](../physical-operators/AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md))
 
 * `ShuffleQueryStageExec` physical operator is requested to [newReuseInstance](#newReuseInstance)
 

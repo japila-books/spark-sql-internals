@@ -16,7 +16,7 @@ Used when `RuleExecutor` is [executed](#execute)
 
 ## Implementations
 
-* [Logical Adaptive Optimizer](../adaptive-query-execution/AdaptiveSparkPlanExec.md#optimizer)
+* [Logical Adaptive Optimizer](../physical-operators/AdaptiveSparkPlanExec.md#optimizer)
 * [Logical Analyzer](../Analyzer.md)
 * `ExpressionCanonicalizer`
 * [Logical Optimizers](Optimizer.md)

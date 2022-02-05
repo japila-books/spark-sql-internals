@@ -11,7 +11,7 @@
 
 `LogicalQueryStage` is created when:
 
-* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md#replaceWithQueryStagesInLogicalPlan) physical operator is executed
+* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#replaceWithQueryStagesInLogicalPlan) physical operator is executed
 
 ## Query Optimization
 

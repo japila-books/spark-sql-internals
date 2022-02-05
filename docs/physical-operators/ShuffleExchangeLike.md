@@ -69,7 +69,7 @@ shuffleOrigin: ShuffleOrigin
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested for the [finalStageOptimizerRules](../adaptive-query-execution/AdaptiveSparkPlanExec.md#finalStageOptimizerRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [finalStageOptimizerRules](../physical-operators/AdaptiveSparkPlanExec.md#finalStageOptimizerRules)
 * `CoalesceShufflePartitions` physical optimization is requested to [supportCoalesce](../adaptive-query-execution/CoalesceShufflePartitions.md#supportCoalesce)
 * `OptimizeShuffleWithLocalRead` physical optimization is requested to [supportLocalReader](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md#supportLocalReader)
 * `ShuffleStage` utility is used to [destructure a SparkPlan to a ShuffleStageInfo](../adaptive-query-execution/ShuffleStage.md#supportLocalReader)

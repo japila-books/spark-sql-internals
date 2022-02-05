@@ -11,7 +11,7 @@
 
 `BroadcastQueryStageExec` is created when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [newQueryStage](AdaptiveSparkPlanExec.md#newQueryStage) (for a [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md))
+* `AdaptiveSparkPlanExec` physical operator is requested to [newQueryStage](../physical-operators/AdaptiveSparkPlanExec.md#newQueryStage) (for a [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md))
 
 * `BroadcastQueryStageExec` physical operator is requested to [newReuseInstance](#newReuseInstance)
 
