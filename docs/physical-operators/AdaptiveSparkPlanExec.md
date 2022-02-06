@@ -1,6 +1,6 @@
 # AdaptiveSparkPlanExec Leaf Physical Operator
 
-`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](index.md).
+`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Creating Instance
 
