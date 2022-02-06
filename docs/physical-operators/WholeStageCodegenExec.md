@@ -24,13 +24,10 @@ Generated code:
 ...
 ```
 
-[TIP]
-====
-Consider using spark-sql-debugging-query-execution.md[Debugging Query Execution facility] to deep dive into the whole-stage code generation.
-====
+!!! tip "Debugging Query Execution"
+    Consider using [Debugging Query Execution facility](../debugging-query-execution.md) to deep dive into the whole-stage code generation
 
-[source, scala]
-----
+```text
 val q = spark.range(10).where('id === 4)
 import org.apache.spark.sql.execution.debug._
 scala> q.debugCodegen()
@@ -46,7 +43,7 @@ Generated code:
 /* 004 */
 /* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
 ...
-----
+```
 
 [TIP]
 ====
@@ -290,7 +287,7 @@ In the end, `doCodeGen` returns the [CodegenContext](../whole-stage-code-generat
 
 * `WholeStageCodegenExec` is <<doExecute, executed>>
 
-* Debugging Query Execution is requested to <<spark-sql-debugging-query-execution.md#debugCodegen, display a Java source code generated for a structured query in Whole-Stage Code Generation>>
+* Debugging Query Execution is requested to [display a Java source code generated for a structured query in Whole-Stage Code Generation](../debugging-query-execution.md#debugCodegen)
 
 ## <span id="doConsume"> Generating Java Source Code for Consume Path
 

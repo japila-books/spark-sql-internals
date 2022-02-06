@@ -353,34 +353,6 @@ nav:
         - CachedRDDBuilder: CachedRDDBuilder.md
       - RuntimeConfig: RuntimeConfig.md
       - UDFRegistration: UDFRegistration.md
-    - Hive Integration:
-      - hive/index.md
-      - Configuration Properties: hive/configuration-properties.md
-      - Hive Metastore: hive/spark-sql-hive-metastore.md
-      - DataSinks: hive/DataSinks.md
-      - HiveFileFormat: hive/HiveFileFormat.md
-      - HiveClient:
-        - hive/HiveClient.md
-        - hive/HiveClientImpl.md
-      - HiveUtils: hive/HiveUtils.md
-      - IsolatedClientLoader: hive/IsolatedClientLoader.md
-      - HiveTableRelation: hive/HiveTableRelation.md
-      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
-      - SaveAsHiveFile: hive/SaveAsHiveFile.md
-      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
-      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
-      - HiveTableScans: hive/HiveTableScans.md
-      - HiveTableScanExec: hive/HiveTableScanExec.md
-      - TableReader: hive/TableReader.md
-      - HadoopTableReader: hive/HadoopTableReader.md
-      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
-      - HiveExternalCatalog: hive/HiveExternalCatalog.md
-      - HiveSessionCatalog: hive/HiveSessionCatalog.md
-      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
-      - RelationConversions: hive/RelationConversions.md
-      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
-      - DetermineTableStats: hive/DetermineTableStats.md
-      - HiveAnalysis: hive/HiveAnalysis.md
     - Catalyst:
       - catalyst/index.md
       - GenericStrategy: catalyst/GenericStrategy.md
@@ -492,6 +464,7 @@ nav:
       - BroadcastExchangeLike: physical-operators/BroadcastExchangeLike.md
       - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
       - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
+      - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
       - CoalesceExec: physical-operators/CoalesceExec.md
       - CollectLimitExec: physical-operators/CollectLimitExec.md
       - CollectMetricsExec: physical-operators/CollectMetricsExec.md
@@ -722,7 +695,6 @@ nav:
     - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
     - QueryStageExecs:
       - QueryStageExec: adaptive-query-execution/QueryStageExec.md
-      - BroadcastQueryStageExec: adaptive-query-execution/BroadcastQueryStageExec.md
       - ShuffleQueryStageExec: adaptive-query-execution/ShuffleQueryStageExec.md
     - ShuffleStage: adaptive-query-execution/ShuffleStage.md
     - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
@@ -890,6 +862,7 @@ nav:
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
+    - ExplainUtils: ExplainUtils.md
     - SerializerBuildHelper: SerializerBuildHelper.md
     - SQLExecutionRDD: SQLExecutionRDD.md
     - DataSourceRDD: DataSourceRDD.md
@@ -968,9 +941,9 @@ nav:
         - BasicWriteJobStatsTracker: BasicWriteJobStatsTracker.md
       - Logging: spark-logging.md
     - Performance Tuning and Debugging:
+      - Debugging Query Execution: debugging-query-execution.md
       - Performance Tuning: spark-sql-performance-tuning.md
       - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
-      - Debugging Query Execution: spark-sql-debugging-query-execution.md
     - Spark Thrift Server:
       - thrift-server/spark-sql-thrift-server.md
       - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
@@ -993,3 +966,31 @@ nav:
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
     - SQLContext: SQLContext.md
+    - Hive Integration:
+      - hive/index.md
+      - Configuration Properties: hive/configuration-properties.md
+      - Hive Metastore: hive/spark-sql-hive-metastore.md
+      - DataSinks: hive/DataSinks.md
+      - HiveFileFormat: hive/HiveFileFormat.md
+      - HiveClient:
+        - hive/HiveClient.md
+        - hive/HiveClientImpl.md
+      - HiveUtils: hive/HiveUtils.md
+      - IsolatedClientLoader: hive/IsolatedClientLoader.md
+      - HiveTableRelation: hive/HiveTableRelation.md
+      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
+      - SaveAsHiveFile: hive/SaveAsHiveFile.md
+      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
+      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
+      - HiveTableScans: hive/HiveTableScans.md
+      - HiveTableScanExec: hive/HiveTableScanExec.md
+      - TableReader: hive/TableReader.md
+      - HadoopTableReader: hive/HadoopTableReader.md
+      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
+      - HiveExternalCatalog: hive/HiveExternalCatalog.md
+      - HiveSessionCatalog: hive/HiveSessionCatalog.md
+      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
+      - RelationConversions: hive/RelationConversions.md
+      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
+      - DetermineTableStats: hive/DetermineTableStats.md
+      - HiveAnalysis: hive/HiveAnalysis.md

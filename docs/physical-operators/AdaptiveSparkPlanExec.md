@@ -1,19 +1,33 @@
 # AdaptiveSparkPlanExec Leaf Physical Operator
 
-`AdaptiveSparkPlanExec` is a [leaf physical operator](../physical-operators/SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`AdaptiveSparkPlanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Creating Instance
 
 `AdaptiveSparkPlanExec` takes the following to be created:
 
-* <span id="inputPlan"> [SparkPlan](../physical-operators/SparkPlan.md)
+* [Input Physical Plan](#inputPlan)
 * <span id="context"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
-* <span id="preprocessingRules"> [Preprocessing physical rules](../catalyst/Rule.md)
+* <span id="preprocessingRules"> Preprocessing physical rules ([Rule](../catalyst/Rule.md)s of [SparkPlan](SparkPlan.md))
 * <span id="isSubquery"> `isSubquery` flag
+* <span id="supportsColumnar"> `supportsColumnar` flag (default: `false`)
 
 `AdaptiveSparkPlanExec` is created when:
 
 * [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimisation is executed
+
+### <span id="inputPlan"> Input Physical Plan
+
+`AdaptiveSparkPlanExec` is given a [SparkPlan](SparkPlan.md) when [created](#creating-instance).
+
+The `SparkPlan` is determined when [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) adaptive physical optimization is executed and can be one of the following:
+
+* [BroadcastExchangeExec](BroadcastExchangeExec.md) physical operator (with [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse) configuration property enabled)
+* Planned [Aggregate](../logical-operators/Aggregate.md) logical operator (otherwise)
+
+The `SparkPlan` is used for the following:
+
+* [requiredDistribution](#requiredDistribution), [initialPlan](#initialPlan), [output](#output), [doCanonicalize](#doCanonicalize), [getFinalPhysicalPlan](#getFinalPhysicalPlan), [hashCode](#hashCode) and [equals](#equals)
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -21,15 +35,37 @@
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` [getFinalPhysicalPlan](#getFinalPhysicalPlan) and requests it to [execute](../physical-operators/SparkPlan.md#execute) (that generates a `RDD[InternalRow]` that will be the return value).
+`doExecute` [takes the final physical plan](#getFinalPhysicalPlan) to [execute it](SparkPlan.md#execute) (that generates an `RDD[InternalRow]` that will be the return value).
 
 `doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
 
-`doExecute` returns the `RDD[InternalRow]`.
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`doExecute` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecute) abstraction.
+## <span id="doExecuteColumnar"> doExecuteColumnar
 
-## <span id="executeCollect"> Executing for Collect Operator
+```scala
+doExecuteColumnar(): RDD[ColumnarBatch]
+```
+
+`doExecuteColumnar` [withFinalPlanUpdate](#withFinalPlanUpdate) to [executeColumnar](SparkPlan.md#executeColumnar) (that generates a `RDD` of [ColumnarBatch](../ColumnarBatch.md)s to be returned at the end).
+
+`doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+
+## <span id="doExecuteBroadcast"> doExecuteBroadcast
+
+```scala
+doExecuteBroadcast[T](): broadcast.Broadcast[T]
+```
+
+`doExecuteBroadcast` [withFinalPlanUpdate](#withFinalPlanUpdate) to [doExecuteBroadcast](SparkPlan.md#doExecuteBroadcast) (that generates a `Broadcast` variable to be returned at the end).
+
+`doExecuteBroadcast` asserts that the final physical plan is a [BroadcastQueryStageExec](BroadcastQueryStageExec.md).
+
+`doExecuteBroadcast` is part of the [SparkPlan](SparkPlan.md#doExecuteBroadcast) abstraction.
+
+## Specialized Execution Paths
+
+### <span id="executeCollect"> collect
 
 ```scala
 executeCollect(): Array[InternalRow]
@@ -37,9 +73,9 @@ executeCollect(): Array[InternalRow]
 
 `executeCollect`...FIXME
 
-`executeCollect` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeCollect) abstraction.
+`executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
 
-## <span id="executeTail"> Executing for Tail Operator
+### <span id="executeTail"> tail
 
 ```scala
 executeTail(
@@ -48,9 +84,9 @@ executeTail(
 
 `executeTail`...FIXME
 
-`executeTail` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeTail) abstraction.
+`executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
 
-## <span id="executeTake"> Executing for Take Operator
+### <span id="executeTake"> take
 
 ```scala
 executeTake(
@@ -59,20 +95,7 @@ executeTake(
 
 `executeTake`...FIXME
 
-`executeTake` is part of the [SparkPlan](../physical-operators/SparkPlan.md#executeTake) abstraction.
-
-## <span id="withFinalPlanUpdate"> withFinalPlanUpdate
-
-```scala
-withFinalPlanUpdate[T](
-  fun: SparkPlan => T): T
-```
-
-`withFinalPlanUpdate` executes the given `fun` with the [final physical plan](#getFinalPhysicalPlan) and returns the result (of type `T`). In the end, `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
-
-`withFinalPlanUpdate` is used when:
-
-* `AdaptiveSparkPlanExec` is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail), [doExecute](#doExecute), [doExecuteColumnar](#doExecuteColumnar) and [doExecuteBroadcast](#doExecuteBroadcast)
+`executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
 
 ## <span id="getFinalPhysicalPlan"> Final Physical Query Plan
 
@@ -173,20 +196,20 @@ newQueryStage(
   e: Exchange): QueryStageExec
 ```
 
-`newQueryStage` creates a new [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator based on the type of the given [Exchange](../physical-operators/Exchange.md) physical operator.
+`newQueryStage` creates a new [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator based on the type of the given [Exchange](Exchange.md) physical operator.
 
 Exchange | QueryStageExec
 ---------|---------
- [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) | [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md)
- [BroadcastExchangeLike](../physical-operators/BroadcastExchangeLike.md) | [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md)
+ [ShuffleExchangeLike](ShuffleExchangeLike.md) | [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md)
+ [BroadcastExchangeLike](BroadcastExchangeLike.md) | [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 
 ---
 
-`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [child physical plan](../physical-operators/UnaryExecNode.md#child) of the given [Exchange](../physical-operators/Exchange.md). `newQueryStage` uses the [adaptive optimizations](#queryStageOptimizerRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Query Stage Optimization** batch name.
+`newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [child physical plan](UnaryExecNode.md#child) of the given [Exchange](Exchange.md). `newQueryStage` uses the [adaptive optimizations](#queryStageOptimizerRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Query Stage Optimization** batch name.
 
 `newQueryStage` creates a new [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator for the given `Exchange` operator (using the [currentStageId](#currentStageId) for the ID).
 
-After [applyPhysicalRules](#applyPhysicalRules) for the child operator, `newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [Exchange](../physical-operators/Exchange.md) itself (with the new optimized physical query plan for the child). `newQueryStage` uses the [post-stage-creation optimizations](#postStageCreationRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Post Stage Creation** batch name.
+After [applyPhysicalRules](#applyPhysicalRules) for the child operator, `newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [Exchange](Exchange.md) itself (with the new optimized physical query plan for the child). `newQueryStage` uses the [post-stage-creation optimizations](#postStageCreationRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Post Stage Creation** batch name.
 
 `newQueryStage` increments the [currentStageId](#currentStageId) counter.
 
@@ -196,7 +219,7 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
 ## <span id="currentPhysicalPlan"><span id="executedPlan"> Optimized Physical Query Plan
 
-`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](../physical-operators/SparkPlan.md) (that is available as `executedPlan` method).
+`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](SparkPlan.md) (that is available as `executedPlan` method).
 
 Initially, when `AdaptiveSparkPlanExec` operator is [created](#creating-instance), `currentPhysicalPlan` is the [initialPlan](#initialPlan).
 
@@ -246,7 +269,7 @@ postStageCreationRules: Seq[Rule[SparkPlan]]
 
 * `AdaptiveSparkPlanExec` is requested to [finalStageOptimizerRules](#finalStageOptimizerRules) and [newQueryStage](#newQueryStage)
 
-## <span id="generateTreeString"> generateTreeString
+## <span id="generateTreeString"> Text Representation
 
 ```scala
 generateTreeString(
@@ -323,7 +346,7 @@ executionContext: ExecutionContext
 
 * `AdaptiveSparkPlanExec` operator is requested for a [getFinalPhysicalPlan](#getFinalPhysicalPlan) (to [materialize QueryStageExec operators](../adaptive-query-execution/QueryStageExec.md#materialize) asynchronously)
 
-* [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md) operator is requested for [materializeWithTimeout](../adaptive-query-execution/BroadcastQueryStageExec.md#materializeWithTimeout)
+* [BroadcastQueryStageExec](BroadcastQueryStageExec.md) operator is requested for [materializeWithTimeout](BroadcastQueryStageExec.md#materializeWithTimeout)
 
 ## <span id="finalPlanUpdate"> finalPlanUpdate Lazy Value
 
@@ -358,23 +381,22 @@ isFinalPlan: Boolean
 
 * `AdaptiveSparkPlanExec` is requested for [stringArgs](#stringArgs) and [generateTreeString](#generateTreeString)
 
-## <span id="initialPlan"> Initial Physical Plan and AQE Preparations
+## <span id="initialPlan"> Initial Plan
 
 ```scala
 initialPlan: SparkPlan
 ```
 
-`AdaptiveSparkPlanExec` defines an `initialPlan` internal registry for a [physical query plan](../physical-operators/SparkPlan.md) when [created](#creating-instance).
+`AdaptiveSparkPlanExec` initializes `initialPlan` value when [created](#creating-instance).
 
-`initialPlan` is a [physical query plan](../physical-operators/SparkPlan.md) after [executing](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules) on the [inputPlan](#inputPlan) (with the [planChangeLogger](#planChangeLogger) and **AQE Preparations** name).
+`initialPlan` is a [SparkPlan](SparkPlan.md) after [applying](#applyPhysicalRules) the [queryStagePreparationRules](#queryStagePreparationRules) to the [inputPlan](#inputPlan) (with the [planChangeLogger](#planChangeLogger) and **AQE Preparations** batch name).
 
-`initialPlan` is an internal flag to avoid expensive [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and return the [current optimized physical query plan](#currentPhysicalPlan) immediately)
+`initialPlan` is the [currentPhysicalPlan](#currentPhysicalPlan) when `AdaptiveSparkPlanExec` is [created](#creating-instance).
 
-`initialPlan` is disabled by default and turned on at the end of [getFinalPhysicalPlan](#getFinalPhysicalPlan).
+`isFinalPlan` is used when:
 
-`initialPlan` is also used when:
-
-* `AdaptiveSparkPlanExec` is requested for [stringArgs](#stringArgs)
+* `AdaptiveSparkPlanExec` is requested for a [text representation](#generateTreeString)
+* `ExplainUtils` utility is used to [process a query plan](../ExplainUtils.md#processPlan)
 
 ## <span id="replaceWithQueryStagesInLogicalPlan"> replaceWithQueryStagesInLogicalPlan
 
@@ -397,7 +419,7 @@ applyPhysicalRules(
   loggerAndBatchName: Option[(PlanChangeLogger[SparkPlan], String)] = None): SparkPlan
 ```
 
-By default (with no `loggerAndBatchName` given) `applyPhysicalRules` applies (_executes_) the given rules to the given [physical query plan](../physical-operators/SparkPlan.md).
+By default (with no `loggerAndBatchName` given) `applyPhysicalRules` applies (_executes_) the given rules to the given [physical query plan](SparkPlan.md).
 
 With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and, for every rule, requests the [PlanChangeLogger](../catalyst/PlanChangeLogger.md) to [logRule](../catalyst/PlanChangeLogger.md#logRule). In the end, `applyPhysicalRules` requests the `PlanChangeLogger` to [logBatch](../catalyst/PlanChangeLogger.md#logBatch).
 
@@ -405,6 +427,19 @@ With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
 * [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
+
+## <span id="withFinalPlanUpdate"> withFinalPlanUpdate
+
+```scala
+withFinalPlanUpdate[T](
+  fun: SparkPlan => T): T
+```
+
+`withFinalPlanUpdate` executes the given `fun` with the [final physical plan](#getFinalPhysicalPlan) and returns the result (of type `T`). In the end, `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
+
+`withFinalPlanUpdate` is used when:
+
+* `AdaptiveSparkPlanExec` is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail), [doExecute](#doExecute), [doExecuteColumnar](#doExecuteColumnar) and [doExecuteBroadcast](#doExecuteBroadcast)
 
 ## Logging
 

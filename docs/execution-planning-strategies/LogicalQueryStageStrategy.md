@@ -2,7 +2,7 @@
 
 `LogicalQueryStageStrategy` is an [execution planning strategy](SparkStrategy.md) that [plans the following logical operators](#apply):
 
-* [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) with [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md) physical operator
+* [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) with [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md) physical operator
 * [Join](../logical-operators/Join.md) thereof
 
 `LogicalQueryStageStrategy` is part of the [strategies](../SparkPlanner.md#strategies) of the [SparkPlanner](../SparkPlanner.md).
@@ -29,4 +29,4 @@ isBroadcastStage(
   plan: LogicalPlan): Boolean
 ```
 
-`isBroadcastStage` is `true` when the given [LogicalPlan](../logical-operators/LogicalPlan.md) is a [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) leaf logical operator with a [BroadcastQueryStageExec](../adaptive-query-execution/BroadcastQueryStageExec.md) physical operator. Otherwise, `isBroadcastStage` is `false`.
+`isBroadcastStage` is `true` when the given [LogicalPlan](../logical-operators/LogicalPlan.md) is a [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md) leaf logical operator with a [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md) physical operator. Otherwise, `isBroadcastStage` is `false`.

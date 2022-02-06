@@ -316,10 +316,9 @@ In the end, `explain` goes over the `InternalRow` records and converts them to l
 !!! note
     `explain` "converts" an `InternalRow` record to a line using [getString](InternalRow.md#getString) at position `0`.
 
-TIP: If you are serious about query debugging you could also use the spark-sql-debugging-query-execution.md[Debugging Query Execution facility].
+TIP: If you are serious about query debugging you could also use the [Debugging Query Execution facility](debugging-query-execution.md).
 
-[source, scala]
-----
+```text
 scala> spark.range(10).explain(extended = true)
 == Parsed Logical Plan ==
 Range (0, 10, step=1, splits=Some(8))
@@ -333,7 +332,7 @@ Range (0, 10, step=1, splits=Some(8))
 
 == Physical Plan ==
 *Range (0, 10, step=1, splits=Some(8))
-----
+```
 
 ### <span id="hint"> Specifying Hint
 

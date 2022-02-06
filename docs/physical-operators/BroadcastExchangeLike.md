@@ -12,7 +12,7 @@ completionFuture: Future[Broadcast[Any]]
 
 Used when:
 
-* `BroadcastQueryStageExec` physical operator is requested to [materializeWithTimeout](../adaptive-query-execution/BroadcastQueryStageExec.md#materializeWithTimeout)
+* `BroadcastQueryStageExec` physical operator is requested to [materializeWithTimeout](BroadcastQueryStageExec.md#materializeWithTimeout)
 
 ### <span id="relationFuture"> relationFuture
 
@@ -23,7 +23,7 @@ relationFuture: Future[Broadcast[Any]]
 Used when:
 
 * `AQEPropagateEmptyRelation` adaptive logical optimization is [executed](../adaptive-query-execution/AQEPropagateEmptyRelation.md#isRelationWithAllNullKeys)
-* `BroadcastQueryStageExec` physical optimization is requested to [cancel](../adaptive-query-execution/BroadcastQueryStageExec.md#cancel)
+* `BroadcastQueryStageExec` physical optimization is requested to [cancel](BroadcastQueryStageExec.md#cancel)
 
 ### <span id="runId"> runId
 
@@ -35,7 +35,7 @@ Job group ID (for cancellation)
 
 Used when:
 
-* `BroadcastQueryStageExec` physical operator is requested to [cancel](../adaptive-query-execution/BroadcastQueryStageExec.md#cancel)
+* `BroadcastQueryStageExec` physical operator is requested to [cancel](BroadcastQueryStageExec.md#cancel)
 * `BroadcastExchangeExec` physical operator is requested for the [relationFuture](BroadcastExchangeExec.md#relationFuture) and [doExecuteBroadcast](BroadcastExchangeExec.md#doExecuteBroadcast)
 
 ### <span id="runtimeStatistics"> runtimeStatistics
@@ -46,7 +46,7 @@ runtimeStatistics: Statistics
 
 Used when:
 
-* `BroadcastQueryStageExec` physical operator is requested for [runtime statistics](../adaptive-query-execution/BroadcastQueryStageExec.md#getRuntimeStatistics)
+* `BroadcastQueryStageExec` physical operator is requested for [runtime statistics](BroadcastQueryStageExec.md#getRuntimeStatistics)
 
 ## Implementations
 

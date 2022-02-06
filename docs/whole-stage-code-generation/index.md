@@ -20,7 +20,7 @@ Before a query is executed, [CollapseCodegenStages](../physical-optimizations/Co
 
 ## debugCodegen
 
-[debugCodegen](../spark-sql-debugging-query-execution.md#debugCodegen) or [QueryExecution.debug.codegen](../QueryExecution.md#debug) methods allow to access the generated Java source code for a structured query.
+[debugCodegen](../debugging-query-execution.md#debugCodegen) or [QueryExecution.debug.codegen](../QueryExecution.md#debug) methods allow to access the generated Java source code for a structured query.
 
 As of [Spark 3.0.0](https://issues.apache.org/jira/browse/SPARK-29061), `debugCodegen` prints Java bytecode statistics of generated classes (and compiled by Janino).
 

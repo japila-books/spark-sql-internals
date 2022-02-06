@@ -70,7 +70,7 @@ The [sub-tree](../physical-operators/SparkPlan.md) of the main query plan of thi
 
 ## Implementations
 
-* <span id="BroadcastQueryStageExec"> [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
+* <span id="BroadcastQueryStageExec"> [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md)
 * <span id="ShuffleQueryStageExec"> [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
 
 ## <span id="resultOption"><span id="_resultOption"> Result
@@ -81,7 +81,7 @@ _resultOption: AtomicReference[Option[Any]]
 
 `QueryStageExec` uses a `_resultOption` transient volatile internal variable (of type [AtomicReference]({{ java.api }}/java/util/concurrent/atomic/AtomicReference.html)) for the result of a successful [materialization](#materialize) of the `QueryStageExec` operator (when preparing for query execution):
 
-* [Broadcast variable](BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
+* [Broadcast variable](../physical-operators/BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md)
 * [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) (_submitting map stages_) for [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
 
 As `AtomicReference` is mutable that is enough to change the value.
