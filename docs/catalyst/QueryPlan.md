@@ -255,6 +255,6 @@ transformAllExpressionsWithPruning(
 * `AnalysisHelper` is requested to `transformAllExpressionsWithPruning`
 * `PlanSubqueries` physical optimization is [executed](../physical-optimizations/PlanSubqueries.md#apply)
 * `PlanDynamicPruningFilters` physical optimization is [executed](../physical-optimizations/PlanDynamicPruningFilters.md#apply)
-* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md#apply)
+* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md#apply)
 * `PlanAdaptiveSubqueries` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveSubqueries.md#apply)
 * `ReuseAdaptiveSubquery` physical optimization is [executed](../adaptive-query-execution/ReuseAdaptiveSubquery.md#apply)

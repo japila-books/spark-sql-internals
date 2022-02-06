@@ -1,6 +1,6 @@
 # UnsafeRow
 
-`UnsafeRow` is an [InternalRow](InternalRow.md) for mutable binary rows that are backed by raw memory outside JVM (instead of Java objects that are in JVM memory space and may lead to more frequent GCs if created in excess).
+`UnsafeRow` is an [InternalRow](InternalRow.md) for mutable binary rows that are backed by raw memory outside the Java Vritual Machine (instead of Java objects that are in JVM memory space and may lead to more frequent GCs if created in excess).
 
 `UnsafeRow` supports Java's [Externalizable](#Externalizable) and Kryo's [KryoSerializable](#KryoSerializable) serialization and deserialization protocols.
 
@@ -14,7 +14,13 @@ Whed created, `UnsafeRow` calculates the [bitset width](#bitSetWidthInBytes) bas
 
 `UnsafeRow` is created when:
 
-* FIXME
+* `RowBasedKeyValueBatch` is created
+* `UnsafeArrayData` is requested for `getStruct`
+* `UnsafeRow` is requested to [getStruct](#getStruct), [copy](#copy), [createFromByteArray](#createFromByteArray)
+* `Collect` expression is requested for `row`
+* `Percentile` expression is requested to `deserialize`
+* `UnsafeRowWriter` is created
+* _many others_
 
 ## <span id="isMutable"> Mutable Data Types
 

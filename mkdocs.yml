@@ -652,6 +652,8 @@ nav:
       - DisableUnnecessaryBucketedScan: physical-optimizations/DisableUnnecessaryBucketedScan.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
+      - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
+      - PlanAdaptiveDynamicPruningFilters: physical-optimizations/PlanAdaptiveDynamicPruningFilters.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
       - RemoveRedundantProjects: physical-optimizations/RemoveRedundantProjects.md
@@ -679,7 +681,6 @@ nav:
     - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
     - AQEUtils: adaptive-query-execution/AQEUtils.md
     - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-    - InsertAdaptiveSparkPlan: adaptive-query-execution/InsertAdaptiveSparkPlan.md
     - Logical Optimizations:
       - AQEPropagateEmptyRelation: adaptive-query-execution/AQEPropagateEmptyRelation.md
       - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
@@ -690,7 +691,6 @@ nav:
       - OptimizeShuffleWithLocalRead: adaptive-query-execution/OptimizeShuffleWithLocalRead.md
       - OptimizeSkewInRebalancePartitions: adaptive-query-execution/OptimizeSkewInRebalancePartitions.md
       - OptimizeSkewedJoin: adaptive-query-execution/OptimizeSkewedJoin.md
-      - PlanAdaptiveDynamicPruningFilters: adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md
       - ReuseAdaptiveSubquery: adaptive-query-execution/ReuseAdaptiveSubquery.md
     - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
     - QueryStageExecs:

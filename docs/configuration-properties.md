@@ -163,7 +163,7 @@ Since: `3.2.0`
 
 ## <span id="spark.sql.adaptive.forceApply"> spark.sql.adaptive.forceApply
 
-**(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](adaptive-query-execution/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
+**(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](physical-optimizations/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
 
 Default: `false`
 

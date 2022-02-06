@@ -1,6 +1,6 @@
 # Subexpression Elimination In Code-Generated Expression Evaluation (Common Expression Reuse)
 
-**Subexpression Elimination** (aka **Common Expression Reuse**) is an optimisation of a [logical query plan](logical-operators/LogicalPlan.md) that [eliminates expressions in code-generated (non-interpreted) expression evaluation](whole-stage-code-generation/CodegenContext.md#subexpressionElimination).
+**Subexpression Elimination** (aka **Common Expression Reuse**) is an optimization of a [logical query plan](logical-operators/LogicalPlan.md) that [eliminates expressions in code-generated (non-interpreted) expression evaluation](whole-stage-code-generation/CodegenContext.md#subexpressionElimination).
 
 Subexpression Elimination is enabled by default. Use the internal <<spark.sql.subexpressionElimination.enabled, spark.sql.subexpressionElimination.enabled>> configuration property control whether the feature is enabled (`true`) or not (`false`).
 

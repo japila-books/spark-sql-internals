@@ -4,7 +4,7 @@ This demo shows [Adaptive Query Execution](index.md) in action.
 
 ## Before you begin
 
-Enable [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md#logging) logger.
+Enable [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md#logging) logger.
 
 ## Enable AQE
 

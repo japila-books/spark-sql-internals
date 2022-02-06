@@ -77,7 +77,7 @@ Used when:
 
 Used when:
 
-* [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
 
@@ -85,7 +85,7 @@ The value of [spark.sql.adaptive.enabled](configuration-properties.md#spark.sql.
 
 Used when:
 
-* [InsertAdaptiveSparkPlan](adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 * `SQLConf` is requested for the [numShufflePartitions](#numShufflePartitions)
 
 ## <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel

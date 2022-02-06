@@ -11,7 +11,7 @@
 
 `HashedRelationBroadcastMode` is created when:
 
-* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) (to optimize query plans with [DynamicPruningExpression](../expressions/DynamicPruningExpression.md))
+* `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) (to optimize query plans with [DynamicPruningExpression](../expressions/DynamicPruningExpression.md))
 * `PlanDynamicPruningFilters` physical optimization is requested to [broadcastMode](../physical-optimizations/PlanDynamicPruningFilters.md#broadcastMode)
 * `BroadcastHashJoinExec` physical operator is requested for [requiredChildDistribution](BroadcastHashJoinExec.md#requiredChildDistribution)
 

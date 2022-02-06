@@ -14,13 +14,13 @@
 
 `AdaptiveSparkPlanExec` is created when:
 
-* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimisation is executed
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ### <span id="inputPlan"> Input Physical Plan
 
 `AdaptiveSparkPlanExec` is given a [SparkPlan](SparkPlan.md) when [created](#creating-instance).
 
-The `SparkPlan` is determined when [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) adaptive physical optimization is executed and can be one of the following:
+The `SparkPlan` is determined when [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) adaptive physical optimization is executed and can be one of the following:
 
 * [BroadcastExchangeExec](BroadcastExchangeExec.md) physical operator (with [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse) configuration property enabled)
 * Planned [Aggregate](../logical-operators/Aggregate.md) logical operator (otherwise)
@@ -243,7 +243,7 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 
 `queryStageOptimizerRules` is the following adaptive optimizations (physical optimization rules):
 
-* [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md)
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
 * [ReuseAdaptiveSubquery](../adaptive-query-execution/ReuseAdaptiveSubquery.md)
 * [OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md)
 * [OptimizeSkewInRebalancePartitions](../adaptive-query-execution/OptimizeSkewInRebalancePartitions.md)
@@ -426,7 +426,7 @@ With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and
 `applyPhysicalRules` is used when:
 
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
-* [InsertAdaptiveSparkPlan](../adaptive-query-execution/InsertAdaptiveSparkPlan.md) physical optimization is executed
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
 ## <span id="withFinalPlanUpdate"> withFinalPlanUpdate
 

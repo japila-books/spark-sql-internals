@@ -9,7 +9,7 @@
 
 `AdaptiveExecutionContext` is created when:
 
-* `QueryExecution` is requested for the [physical preparations rules](../QueryExecution.md#preparations) (and creates a [InsertAdaptiveSparkPlan](InsertAdaptiveSparkPlan.md))
+* `QueryExecution` is requested for the [physical preparations rules](../QueryExecution.md#preparations) (and creates an [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md))
 
 ## <span id="subqueryCache"> Subquery Cache
 

@@ -133,6 +133,21 @@ Prepares a physical operator for execution
 
 Internally, `prepare` calls <<doPrepare, doPrepare>> of its [children](../catalyst/TreeNode.md#children) before <<prepareSubqueries, prepareSubqueries>> and <<doPrepare, doPrepare>>.
 
+## <span id="logicalLink"> logicalLink
+
+```scala
+logicalLink: Option[LogicalPlan]
+```
+
+`logicalLink` [gets the value](#getTagValue) of `logical_plan` node tag (if defined) or `logical_plan_inherited` node tag.
+
+In other words, `logicalLink` is the [LogicalPlan](../logical-operators/LogicalPlan.md) this `SparkPlan` was planned from.
+
+`logicalLink` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan), [setLogicalLinkForNewQueryStage](AdaptiveSparkPlanExec.md#setLogicalLinkForNewQueryStage) and [replaceWithQueryStagesInLogicalPlan](AdaptiveSparkPlanExec.md#replaceWithQueryStagesInLogicalPlan)
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md), [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) and [DisableUnnecessaryBucketedScan](../physical-optimizations/DisableUnnecessaryBucketedScan.md) physical optimizations are executed
+
 ## Extension Hooks
 
 ### doExecuteBroadcast

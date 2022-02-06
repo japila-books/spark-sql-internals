@@ -12,7 +12,7 @@
 
 `DynamicPruningExpression` is created when:
 
-* [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md) physical optimization is executed
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) physical optimization is executed
 * [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed
 * [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed
 
@@ -28,4 +28,4 @@ nodePatterns: Seq[TreePattern]
 
 ## Query Planning
 
-* [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md)
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)

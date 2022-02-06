@@ -1,6 +1,16 @@
 # InsertAdaptiveSparkPlan Physical Optimization
 
-`InsertAdaptiveSparkPlan` is a [physical query plan optimization](../catalyst/Rule.md) (`Rule[SparkPlan]`) that [re-optimizes a physical query plan](#apply) in the middle of query execution, based on accurate runtime statistics.
+`InsertAdaptiveSparkPlan` is a [physical query plan optimization](../catalyst/Rule.md) (`Rule[SparkPlan]`) that [re-optimizes a physical query plan](#apply) (in the middle of query execution, based on runtime statistics).
+
+## Creating Instance
+
+`InsertAdaptiveSparkPlan` takes the following to be created:
+
+* <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
+
+`InsertAdaptiveSparkPlan` is created when:
+
+* `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations)
 
 ## <span id="shouldApplyAQE"> Adaptive Requirements
 
@@ -10,24 +20,14 @@ shouldApplyAQE(
   isSubquery: Boolean): Boolean
 ```
 
-`shouldApplyAQE` is `true` when one of the following conditions holds:
+`shouldApplyAQE` returns `true` when one of the following conditions holds:
 
 1. [spark.sql.adaptive.forceApply](../configuration-properties.md#spark.sql.adaptive.forceApply) configuration property is enabled
-1. The given `isSubquery` flag is enabled (a shortcut to continue since the input plan is from a sub-query and it was already decided to apply AQE for the main query)
-1. The given [physical query plan](../physical-operators/SparkPlan.md) uses a physical operator that matches or is the following:
+1. The given `isSubquery` flag is `true` (a shortcut to continue since the input plan is from a sub-query and it was already decided to apply AQE for the main query)
+1. The given [SparkPlan](../physical-operators/SparkPlan.md) contains one of the following physical operators:
     1. [Exchange](../physical-operators/Exchange.md)
-    1. There is a [UnspecifiedDistribution](../physical-operators/Distribution.md#UnspecifiedDistribution) among the [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) of the operator (and the query may need to add exchanges)
-    1. Contains [SubqueryExpression](../expressions/SubqueryExpression.md)
-
-## Creating Instance
-
-`InsertAdaptiveSparkPlan` takes the following to be created:
-
-* <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](AdaptiveExecutionContext.md)
-
-`InsertAdaptiveSparkPlan` is created when:
-
-* `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations)
+    1. Operators with an [UnspecifiedDistribution](../physical-operators/Distribution.md#UnspecifiedDistribution) among the [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) (and the query may need to add exchanges)
+    1. Operators with [SubqueryExpression](../expressions/SubqueryExpression.md)
 
 ## <span id="apply"> Executing Rule
 
@@ -48,19 +48,23 @@ applyInternal(
   isSubquery: Boolean): SparkPlan
 ```
 
-`applyInternal` returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched" when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled.
+`applyInternal` returns the given [SparkPlan](../physical-operators/SparkPlan.md) unmodified when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled (`false`).
 
-`applyInternal` skips [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf operators (and simply returns the given [physical plan](../physical-operators/SparkPlan.md) "untouched").
+`applyInternal` skips processing the following leaf physical operators (and returns the given [SparkPlan](../physical-operators/SparkPlan.md) unmodified):
 
-For [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) unary operators, `applyInternal` handles the child recursively.
+* [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md)
+* `CommandResultExec`
 
-For [V2CommandExec](../physical-operators/V2CommandExec.md) operators, `applyInternal` handles the children recursively.
+`applyInternal` leaves the following parent physical operators unmodified and [handles](#apply) the children:
 
-For all other operators for which [shouldApplyAQE predicate](#shouldApplyAQE) holds, `applyInternal` branches off based on [whether the physical plan supports Adaptive Query Execution or not](#supportAdaptive).
+* [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md)
+* [V2CommandExec](../physical-operators/V2CommandExec.md)
 
-### Supported Query Plans
+For remaining operators for which [shouldApplyAQE predicate](#shouldApplyAQE) holds, `applyInternal` [checks out whether the physical plan supports Adaptive Query Execution or not](#supportAdaptive).
 
-`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the plan.
+### Physical Plans Supporting Adaptive Query Execution
+
+`applyInternal` creates a new [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the input `SparkPlan`.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 
@@ -76,7 +80,7 @@ In case of `SubqueryAdaptiveNotSupportedException`, `applyInternal` prints out t
 spark.sql.adaptive.enabled is enabled but is not supported for sub-query: [subquery].
 ```
 
-### Unsupported Query Plans
+### Unsupported Physical Plans
 
 `applyInternal` simply prints out the WARN message and returns the given physical plan.
 
@@ -123,16 +127,14 @@ verifyAdaptivePlan(
 
 `verifyAdaptivePlan` throws a `SubqueryAdaptiveNotSupportedException` when the given [SparkPlan](../physical-operators/SparkPlan.md) is not a [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md).
 
-## <span id="supportAdaptive"> supportAdaptive Predicate
+### <span id="supportAdaptive"> supportAdaptive Predicate
 
 ```scala
 supportAdaptive(
   plan: SparkPlan): Boolean
 ```
 
-`supportAdaptive` is `true` when the given [physical operator](../physical-operators/SparkPlan.md) (including its children) has a [logical operator linked](../physical-operators/SparkPlan.md#logicalLink) that is neither streaming nor has [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expressions.
-
-`supportAdaptive` is used when `InsertAdaptiveSparkPlan` physical optimization is [executed](#applyInternal).
+`supportAdaptive` returns `true` when the given [SparkPlan](../physical-operators/SparkPlan.md) and the children have all [logical operator linked](../physical-operators/SparkPlan.md#logicalLink) that [are not streaming](../logical-operators/LogicalPlan.md#isStreaming).
 
 ## Logging
 

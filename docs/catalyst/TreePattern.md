@@ -18,7 +18,7 @@ Used as a [node pattern](TreeNode.md#nodePatterns):
 
 Used to transform query plans in the following rules:
 
-* [PlanAdaptiveDynamicPruningFilters](../adaptive-query-execution/PlanAdaptiveDynamicPruningFilters.md)
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
 * [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md)
 
 ## <span id="EXCHANGE"> EXCHANGE
