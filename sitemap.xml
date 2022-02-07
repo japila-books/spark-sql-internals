@@ -66,6 +66,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/CatalogStatistics/</loc>
+         <lastmod>2022-02-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CatalogStorageFormat/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
@@ -97,6 +102,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/Column/</loc>
+         <lastmod>2022-02-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/ColumnStat/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -706,6 +716,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/cost-based-optimization/</loc>
+         <lastmod>2022-02-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/debugging-query-execution/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
@@ -752,16 +767,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-BytesToBytesMap/</loc>
-         <lastmod>2022-02-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-CatalogStatistics/</loc>
-         <lastmod>2022-02-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-ColumnStat/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -832,11 +837,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-column-operators/</loc>
-         <lastmod>2022-02-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-cost-based-optimization/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -921,11 +921,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-vectorized-query-execution/</loc>
-         <lastmod>2022-02-07</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-window-aggregation/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
@@ -942,6 +937,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/vectorized-parquet-reader/</loc>
+         <lastmod>2022-02-07</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-query-execution/</loc>
          <lastmod>2022-02-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
