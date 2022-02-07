@@ -90,9 +90,9 @@ NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to e
 
 NOTE: `run` uses the input `SparkSession` to access SparkSession.md#sessionState[SessionState] that in turn is used to access the SessionState.md#catalog[SessionCatalog].
 
-`run` takes the spark-sql-CatalogStatistics.md#colStats[column statistics] from the  [table statistics](../CatalogTable.md#stats) if available.
+`run` takes the CatalogStatistics.md#colStats[column statistics] from the  [table statistics](../CatalogTable.md#stats) if available.
 
-NOTE: spark-sql-CatalogStatistics.md#colStats[Column statistics] are available (in the [table statistics](../CatalogTable.md#stats)) only after AnalyzeColumnCommand.md[ANALYZE TABLE FOR COLUMNS] SQL command was run.
+NOTE: CatalogStatistics.md#colStats[Column statistics] are available (in the [table statistics](../CatalogTable.md#stats)) only after AnalyzeColumnCommand.md[ANALYZE TABLE FOR COLUMNS] SQL command was run.
 
 `run` adds `comment` metadata if available for the <<colNameParts, column>>.
 

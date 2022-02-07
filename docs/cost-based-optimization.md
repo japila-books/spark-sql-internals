@@ -306,7 +306,7 @@ we use a two-step method to generate an equi-height histogram:
 2. construct range values of buckets, e.g. [p(0), p(1/n)], [p(1/n), p(2/n)] ... [p((n-1)/n), p(1)], and use ApproxCountDistinctForIntervals to count ndv in each bucket. Each bucket is of the form: (lowerBound, higherBound, ndv).
 ____
 
-Spark SQL uses spark-sql-ColumnStat.md[column statistics] that may optionally hold the spark-sql-ColumnStat.md#histogram[histogram of values] (which is empty by default). With [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property turned on <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS>> SQL command generates column (equi-height) histograms.
+Spark SQL uses [column statistics](ColumnStat.md) that may optionally hold the [histogram of values](ColumnStat.md#histogram) (which is empty by default). With [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property turned on <<ANALYZE-TABLE, ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS>> SQL command generates column (equi-height) histograms.
 
 NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 

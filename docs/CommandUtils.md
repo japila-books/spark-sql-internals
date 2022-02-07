@@ -106,6 +106,6 @@ compareAndGetNewStats(
   newRowCount: Option[BigInt]): Option[CatalogStatistics]
 ----
 
-`compareAndGetNewStats` spark-sql-CatalogStatistics.md#creating-instance[creates] a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
+`compareAndGetNewStats` CatalogStatistics.md#creating-instance[creates] a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
 
 NOTE: `compareAndGetNewStats` is used when AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and AnalyzeTableCommand.md#run[AnalyzeTableCommand] are executed.

@@ -22,7 +22,7 @@ If there are no predicates (filter expressions) left for partition pruning, `app
 
 With predicates left for partition pruning, `apply` requests the CatalogFileIndex.md[CatalogFileIndex] for the CatalogFileIndex.md#filterPartitions[partitions by the predicate expressions] (that gives a PrunedInMemoryFileIndex.md[PrunedInMemoryFileIndex] for a partitioned table).
 
-`apply` replaces the [FileIndex](../HadoopFsRelation.md#location) in the [HadoopFsRelation](../HadoopFsRelation.md) with the `PrunedInMemoryFileIndex` and the spark-sql-CatalogStatistics.md#sizeInBytes[total size] statistic to the PartitioningAwareFileIndex.md#sizeInBytes[PrunedInMemoryFileIndex's].
+`apply` replaces the [FileIndex](../HadoopFsRelation.md#location) in the [HadoopFsRelation](../HadoopFsRelation.md) with the `PrunedInMemoryFileIndex` and the CatalogStatistics.md#sizeInBytes[total size] statistic to the PartitioningAwareFileIndex.md#sizeInBytes[PrunedInMemoryFileIndex's].
 
 In the end, `apply` creates a `Filter` logical operator (with the "pruned" `LogicalRelation` as a child operator and all the filter predicate expressions combined together with `And` expression) and makes it a child operator of a Project.md[Project] operator.
 

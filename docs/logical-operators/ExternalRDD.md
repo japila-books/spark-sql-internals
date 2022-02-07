@@ -40,17 +40,6 @@ newInstance(): LogicalRDD.this.type
 
 `newInstance`...FIXME
 
-=== [[computeStats]] Computing Statistics -- `computeStats` Method
-
-[source, scala]
-----
-computeStats(): Statistics
-----
-
-NOTE: `computeStats` is part of LeafNode.md#computeStats[LeafNode Contract] to compute statistics for spark-sql-cost-based-optimization.md[cost-based optimizer].
-
-`computeStats`...FIXME
-
 === [[creating-instance]] Creating ExternalRDD Instance
 
 `ExternalRDD` takes the following when created:

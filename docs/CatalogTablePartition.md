@@ -27,7 +27,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` is executed (w
 * [[spec]] Partition specification
 * [[storage]] [CatalogStorageFormat](CatalogStorageFormat.md)
 * [[parameters]] Parameters (default: an empty collection)
-* [[stats]] [Table statistics](spark-sql-CatalogStatistics.md) (default: `None`)
+* [[stats]] [Table statistics](CatalogStatistics.md) (default: `None`)
 
 === [[toLinkedHashMap]] Converting Partition Specification to LinkedHashMap -- `toLinkedHashMap` Method
 

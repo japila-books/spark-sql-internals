@@ -8,7 +8,7 @@
 
 1. [Join Type](../joins.md#JoinType)
 1. [Hints](../JoinHint.md)
-1. Size ([Cost-Based Optimization](../spark-sql-cost-based-optimization.md), [Statistics](../logical-operators/Statistics.md))
+1. Size ([Cost-Based Optimization](../cost-based-optimization.md), [Statistics](../logical-operators/Statistics.md))
 
 ## Join Selection Requirements
 

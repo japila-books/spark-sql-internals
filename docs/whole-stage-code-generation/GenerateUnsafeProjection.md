@@ -1,24 +1,54 @@
 # GenerateUnsafeProjection
 
-`GenerateUnsafeProjection` is a [CodeGenerator](CodeGenerator.md) that [generates the bytecode for a UnsafeProjection for given expressions](#create) (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
+`GenerateUnsafeProjection` is a [CodeGenerator](CodeGenerator.md) to [generate the bytecode for creating an UnsafeProjection from the given Expressions](#create) (i.e. `CodeGenerator[Seq[Expression], UnsafeProjection]`).
 
-[source, scala]
-----
+```scala
 GenerateUnsafeProjection: Seq[Expression] => UnsafeProjection
-----
+```
 
-[TIP]
-====
-Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection` logger to see what happens inside.
+## <span id="bind"> Binding Expressions to Schema
+
+```scala
+bind(
+  in: Seq[Expression],
+  inputSchema: Seq[Attribute]): Seq[Expression]
+```
+
+`bind` [binds](#bindReferences) the given `in` expressions to the given `inputSchema`.
+
+`bind` is part of the [CodeGenerator](CodeGenerator.md#bind) abstraction.
+
+## <span id="create"> Creating UnsafeProjection (for Expressions)
+
+```scala
+create(
+  references: Seq[Expression]): UnsafeProjection // (1)!
+create(
+  expressions: Seq[Expression],
+  subexpressionEliminationEnabled: Boolean): UnsafeProjection
+```
+
+1. `subexpressionEliminationEnabled` flag is `false`
+
+`create` [creates a new CodegenContext](CodeGenerator.md#newCodeGenContext).
+
+`create`...FIXME
+
+`create` is part of the [CodeGenerator](CodeGenerator.md#create) abstraction.
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
-```
-log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection=DEBUG
+```text
+log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.GenerateUnsafeProjection=ALL
 ```
 
-Refer to spark-logging.md[Logging].
-====
+Refer to [Logging](../spark-logging.md).
+
+## Review Me
 
 === [[generate]] Generating UnsafeProjection -- `generate` Method
 

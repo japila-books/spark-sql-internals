@@ -703,7 +703,7 @@ nav:
     - Common Table Expressions: common-table-expressions.md
     - Join Queries:
       - Joins: joins.md
-      - spark-sql-joins-broadcast.md
+      - Broadcast Joins: spark-sql-joins-broadcast.md
     - Statistics: new-and-noteworthy/statistics.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
@@ -719,7 +719,7 @@ nav:
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md
-    - spark-sql-hive-integration.md
+    - Hive Integration: spark-sql-hive-integration.md
     - Vectorized Parquet Decoding:
       - Vectorized Parquet Decoding: vectorized-parquet-reader.md
       - ColumnVectors:
@@ -727,8 +727,8 @@ nav:
         - WritableColumnVector: WritableColumnVector.md
         - OnHeapColumnVector: OnHeapColumnVector.md
         - OffHeapColumnVector: OffHeapColumnVector.md
-    - dynamic-partition-inserts.md
-    - bucketing.md
+    - Dynamic Partition Inserts: dynamic-partition-inserts.md
+    - Bucketing: bucketing.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md
       - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
@@ -746,13 +746,13 @@ nav:
         - Subexpression Elimination: subexpression-elimination.md
         - EquivalentExpressions: EquivalentExpressions.md
     - Vectorized Query Execution:
-      - spark-sql-vectorized-query-execution.md
+      - Vectorized Query Execution: vectorized-query-execution.md
       - ColumnarBatch: ColumnarBatch.md
-    - spark-sql-subqueries.md
+    - Subqueries: spark-sql-subqueries.md
     - Cost-Based Optimization:
-      - spark-sql-cost-based-optimization.md
-      - spark-sql-CatalogStatistics.md
-      - spark-sql-ColumnStat.md
+      - Cost-Based Optimization: cost-based-optimization.md
+      - CatalogStatistics: CatalogStatistics.md
+      - ColumnStat: ColumnStat.md
       - CommandUtils: CommandUtils.md
     - Catalyst DSL:
       - Catalyst DSL: catalyst-dsl/index.md

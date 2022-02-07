@@ -880,7 +880,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.cbo.enabled"> spark.sql.cbo.enabled
 
-Enables [Cost-Based Optimization](spark-sql-cost-based-optimization.md) (CBO) for estimation of plan statistics when `true`.
+Enables [Cost-Based Optimization](cost-based-optimization.md) (CBO) for estimation of plan statistics when `true`.
 
 Default: `false`
 
@@ -1116,7 +1116,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.inMemoryColumnarStorage.enableVectorizedReader"> spark.sql.inMemoryColumnarStorage.enableVectorizedReader
 
-Enables [vectorized reader](spark-sql-vectorized-query-execution.md) for columnar caching.
+Enables [vectorized reader](vectorized-query-execution.md) for columnar caching.
 
 Default: `true`
 

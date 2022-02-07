@@ -1,7 +1,7 @@
 # ColumnStat
 
 [[creating-instance]]
-`ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the spark-sql-CatalogStatistics.md[table statistics] in a metastore).
+`ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the [table statistics](CatalogStatistics.md) in a metastore).
 
 [[statistics]]
 .Column Statistics
@@ -32,7 +32,7 @@
 | Histogram of values (as `Histogram` which is empty by default)
 |===
 
-`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](cost-based-optimization.md#ANALYZE-TABLE) SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
 
 [source, scala]
 ----
@@ -45,9 +45,9 @@ spark.sql(analyzeTableSQL)
 
 NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 
-You can inspect the column statistics using spark-sql-cost-based-optimization.md#DESCRIBE-EXTENDED[DESCRIBE EXTENDED] SQL command.
+You can inspect the column statistics using [DESCRIBE EXTENDED](cost-based-optimization.md#DESCRIBE-EXTENDED) SQL command.
 
-```
+```text
 scala> sql("DESC EXTENDED t1 id").show
 +--------------+----------+
 |info_name     |info_value|
@@ -65,10 +65,9 @@ scala> sql("DESC EXTENDED t1 id").show
 +--------------+----------+
 ```
 
-`ColumnStat` is part of the spark-sql-CatalogStatistics.md#colStats[statistics of a table].
+`ColumnStat` is part of the [statistics of a table](CatalogStatistics.md#colStats).
 
-[source, scala]
-----
+```text
 // Make sure that you ran ANALYZE TABLE (as described above)
 val db = spark.catalog.currentDatabase
 val tableName = "t1"
@@ -81,7 +80,7 @@ org.apache.spark.sql.catalyst.catalog.CatalogStatistics
 val colStats = stats.colStats
 scala> :type colStats
 Map[String,org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
-----
+```
 
 `ColumnStat` is <<toMap, converted to properties>> (serialized) while persisting the table (statistics) to a metastore.
 

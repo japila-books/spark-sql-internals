@@ -4,8 +4,6 @@
 
 `JoinEstimation` is <<creating-instance, created>> exclusively for `BasicStatsPlanVisitor` to [estimate statistics of a Join logical operator](BasicStatsPlanVisitor.md#visitJoin).
 
-NOTE: `BasicStatsPlanVisitor` is used only when spark-sql-cost-based-optimization.md#spark.sql.cbo.enabled[cost-based optimization is enabled].
-
 [[creating-instance]]
 [[join]]
 `JoinEstimation` takes a Join.md[Join] logical operator when created.
@@ -266,13 +264,13 @@ estimateLeftSemiAntiJoin(): Option[Statistics]
 
 `estimateLeftSemiAntiJoin` estimates statistics of the <<join, Join>> logical operator only when estimated row count statistic is available. Otherwise, `estimateLeftSemiAntiJoin` simply returns `None` (i.e. no statistics estimated).
 
-NOTE: spark-sql-cost-based-optimization.md#rowCount[row count] statistic of a table is available only after spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
+NOTE: cost-based-optimization.md#rowCount[row count] statistic of a table is available only after cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command.
 
 If available, `estimateLeftSemiAntiJoin` takes the [estimated row count statistic](Statistics.md#rowCount) of the Join.md#left[left side] of the <<join, Join>> operator.
 
-NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute spark-sql-cost-based-optimization.md#rowCount[row count] statistics.
+NOTE: Use cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS] SQL command on the left logical plan to compute cost-based-optimization.md#rowCount[row count] statistics.
 
-NOTE: Use spark-sql-cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate [column (equi-height) histograms](Statistics.md#attributeStats) for more accurate estimations.
+NOTE: Use cost-based-optimization.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS] SQL command on the left logical plan to generate [column (equi-height) histograms](Statistics.md#attributeStats) for more accurate estimations.
 
 In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](Statistics.md) with the following estimates:
 

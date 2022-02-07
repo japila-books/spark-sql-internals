@@ -382,14 +382,14 @@ statsToProperties(
   schema: StructType): Map[String, String]
 ----
 
-`statsToProperties` converts the ../spark-sql-CatalogStatistics.md[table statistics] to properties (i.e. key-value pairs that will be persisted as properties in the table metadata to a Hive metastore using the <<client, Hive client>>).
+`statsToProperties` converts the ../CatalogStatistics.md[table statistics] to properties (i.e. key-value pairs that will be persisted as properties in the table metadata to a Hive metastore using the <<client, Hive client>>).
 
 `statsToProperties` adds the following properties to the properties:
 
-* *spark.sql.statistics.totalSize* with ../spark-sql-CatalogStatistics.md#sizeInBytes[total size (in bytes)]
-* (if defined) *spark.sql.statistics.numRows* with ../spark-sql-CatalogStatistics.md#rowCount[number of rows]
+* *spark.sql.statistics.totalSize* with ../CatalogStatistics.md#sizeInBytes[total size (in bytes)]
+* (if defined) *spark.sql.statistics.numRows* with ../CatalogStatistics.md#rowCount[number of rows]
 
-`statsToProperties` takes the ../spark-sql-CatalogStatistics.md#colStats[column statistics] and for every column (field) in `schema` ../spark-sql-ColumnStat.md#toMap[converts the column statistics to properties] and adds the properties (as <<columnStatKeyPropName, column statistic property>>) to the properties.
+`statsToProperties` takes the ../CatalogStatistics.md#colStats[column statistics] and for every column (field) in `schema` [converts the column statistics to properties](../ColumnStat.md#toMap) and adds the properties (as <<columnStatKeyPropName, column statistic property>>) to the properties.
 
 [NOTE]
 ====
@@ -414,15 +414,15 @@ statsFromProperties(
 
 `statsFromProperties` returns `None` if there are no keys with the `spark.sql.statistics` prefix in `properties`.
 
-If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` ../spark-sql-ColumnStat.md#creating-instance[creates] a `ColumnStat` that is the column statistics for every column in `schema`.
+If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` [creates](../ColumnStat.md#creating-instance) a `ColumnStat` that is the column statistics for every column in `schema`.
 
-For every column name in `schema` `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and ../spark-sql-ColumnStat.md#fromMap[converts] them to a `ColumnStat` (for the column name).
+For every column name in `schema` `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and [converts](../ColumnStat.md#fromMap) them to a `ColumnStat` (for the column name).
 
-In the end, `statsFromProperties` creates a ../spark-sql-CatalogStatistics.md#creating-instance[CatalogStatistics] with the following properties:
+In the end, `statsFromProperties` creates a ../CatalogStatistics.md#creating-instance[CatalogStatistics] with the following properties:
 
-* ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize* property
-* ../spark-sql-CatalogStatistics.md#rowCount[rowCount] as *spark.sql.statistics.numRows* property
-* ../spark-sql-CatalogStatistics.md#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
+* ../CatalogStatistics.md#sizeInBytes[sizeInBytes] as *spark.sql.statistics.totalSize* property
+* ../CatalogStatistics.md#rowCount[rowCount] as *spark.sql.statistics.numRows* property
+* ../CatalogStatistics.md#colStats[colStats] as the collection of the column names and their `ColumnStat` (calculated above)
 
 NOTE: `statsFromProperties` is used when `HiveExternalCatalog` is requested for restoring <<restoreTableMetadata, table>> and <<restorePartitionMetadata, partition>> metadata.
 

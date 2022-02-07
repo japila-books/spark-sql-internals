@@ -7,7 +7,7 @@ title: CatalogStatistics
 
 * [[sizeInBytes]] Physical *total size* (in bytes)
 * [[rowCount]] Estimated *number of rows* (aka _row count_)
-* [[colStats]] *Column statistics* (i.e. column names and their spark-sql-ColumnStat.md[statistics])
+* [[colStats]] *Column statistics* (i.e. column names and their [statistics](ColumnStat.md))
 
 [NOTE]
 ====
@@ -76,11 +76,11 @@ toPlanStats(
 
 `toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
 
-With spark-sql-cost-based-optimization.md[cost-based optimization] enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
+With [cost-based optimization](cost-based-optimization.md) enabled and <<rowCount, row count>> statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
 
 NOTE: Cost-based optimization is enabled when [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) configuration property is turned on, i.e. `true`, and is disabled by default.
 
-Otherwise, when spark-sql-cost-based-optimization.md[cost-based optimization] is disabled, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory <<sizeInBytes, sizeInBytes>>.
+Otherwise, when [cost-based optimization](cost-based-optimization.md) is disabled, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory <<sizeInBytes, sizeInBytes>>.
 
 CAUTION: FIXME Why does `toPlanStats` compute `sizeInBytes` differently per CBO?
 

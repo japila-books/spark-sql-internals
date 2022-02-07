@@ -1,89 +1,82 @@
 # CodeGenerator
 
-`CodeGenerator` is a base class for generators of JVM bytecode for expression evaluation.
+`CodeGenerator` is an [abstraction](#contract) of [JVM bytecode generators](#implementations) for expression evaluation.
 
-[[internal-properties]]
-.CodeGenerator's Internal Properties
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+The Scala definition of this abstract class is as follows:
 
-| [[cache]] `cache`
-| Guava's https://google.github.io/guava/releases/19.0/api/docs/com/google/common/cache/LoadingCache.html[LoadingCache] with at most 100 pairs of `CodeAndComment` and `GeneratedClass`.
-
-| [[genericMutableRowType]] `genericMutableRowType`
-|
-|===
-
-[[logging]]
-[TIP]
-====
-Enable `INFO` or `DEBUG` logging level for `org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator` logger to see what happens inside.
-
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.catalyst.expressions.codegen.CodeGenerator=DEBUG
+```scala
+CodeGenerator[InType <: AnyRef, OutType <: AnyRef]
 ```
 
-Refer to spark-logging.md[Logging].
-====
+## Contract
 
-=== [[contract]] CodeGenerator Contract
+### <span id="bind"> bind
 
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.expressions.codegen
+```scala
+bind(
+  in: InType,
+  inputSchema: Seq[Attribute]): InType
+```
 
-abstract class CodeGenerator[InType, OutType] {
-  def create(in: InType): OutType
-  def canonicalize(in: InType): InType
-  def bind(in: InType, inputSchema: Seq[Attribute]): InType
-  def generate(expressions: InType, inputSchema: Seq[Attribute]): OutType
-  def generate(expressions: InType): OutType
-}
-----
+Used when:
 
-.CodeGenerator Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+* `CodeGenerator` is requested to [generate](#generate)
 
-| [[generate]] `generate`
-a| Generates an evaluator for expression(s) that may (optionally) have expression(s) bound to a schema (i.e. a collection of spark-sql-Expression-Attribute.md[Attribute]).
+### <span id="canonicalize"> canonicalize
 
-Used in:
+```scala
+canonicalize(
+  in: InType): InType
+```
 
-* `ExpressionEncoder` for [UnsafeProjection](../ExpressionEncoder.md#extractProjection) (for serialization)
+Used when:
 
-|===
+* `CodeGenerator` is requested to [generate](#generate)
 
-=== [[doCompile]] Compiling Java Source Code using Janino -- `doCompile` Internal Method
+### <span id="create"> create
 
-CAUTION: FIXME
+```scala
+create(
+  in: InType): OutType
+```
 
-=== [[compile]] Finding or Compiling Java Source Code -- `compile` Method
+Used when:
 
-CAUTION: FIXME
+* `CodeGenerator` is requested to [generate](#generate)
 
-=== [[create]] `create` Method
+## Implementations
 
-[source, scala]
-----
-create(references: Seq[Expression]): UnsafeProjection
-----
+* [GenerateColumnAccessor](GenerateColumnAccessor.md)
+* [GenerateMutableProjection](GenerateMutableProjection.md)
+* [GenerateOrdering](GenerateOrdering.md)
+* [GeneratePredicate](GeneratePredicate.md)
+* [GenerateSafeProjection](GenerateSafeProjection.md)
+* [GenerateUnsafeProjection](GenerateUnsafeProjection.md)
+* `GenerateUnsafeRowJoiner`
 
-CAUTION: FIXME
+## <span id="generate"> generate
 
-[NOTE]
-====
-`create` is used when:
+```scala
+generate(
+  expressions: InType): OutType
+generate(
+  expressions: InType,
+  inputSchema: Seq[Attribute]): OutType // (1)!
+```
 
-* `CodeGenerator` <<generate, generates an expression evaluator>>
-* `GenerateOrdering` creates a code gen ordering for `SortOrder` expressions
-====
+1. [Binds](#bind) the input expressions to the given input schema
+
+`generate` [creates a class](#create) for the input `expressions` (after [canonicalization](#canonicalize)).
+
+`generate` is used when:
+
+* `Serializer` (of [ExpressionEncoder](../ExpressionEncoder.md)) is requested to `apply`
+* `RowOrdering` utility is used to [createCodeGeneratedObject](../expressions/RowOrdering.md#createCodeGeneratedObject)
+* `SafeProjection` utility is used to `createCodeGeneratedObject`
+* `LazilyGeneratedOrdering` is requested for `generatedOrdering`
+* `ObjectOperator` utility is used to `deserializeRowToObject` and `serializeObjectToRow`
+* `ComplexTypedAggregateExpression` is requested for `inputRowToObj` and `bufferRowToObject`
+* `DefaultCachedBatchSerializer` is requested to `convertCachedBatchToInternalRow`
 
 ## <span id="newCodeGenContext"> Creating CodegenContext
 
@@ -91,18 +84,17 @@ CAUTION: FIXME
 newCodeGenContext(): CodegenContext
 ```
 
-`newCodeGenContext` simply creates a new [CodegenContext](CodegenContext.md).
+`newCodeGenContext` creates a new [CodegenContext](CodegenContext.md).
 
 `newCodeGenContext` is used when:
 
 * `GenerateMutableProjection` is requested to [create a MutableProjection](GenerateMutableProjection.md#create)
-
 * `GenerateOrdering` is requested to [create a BaseOrdering](GenerateOrdering.md#create)
-
-* `GeneratePredicate` is requested to [create a Predicate](GeneratePredicate.md#create)
-
+* `GeneratePredicate` utility is used to [create a BasePredicate](GeneratePredicate.md#create)
 * `GenerateSafeProjection` is requested to [create a Projection](GenerateSafeProjection.md#create)
-
-* `GenerateUnsafeProjection` is requested to [create a UnsafeProjection](GenerateUnsafeProjection.md#create)
-
+* `GenerateUnsafeProjection` utility is used to [create an UnsafeProjection](GenerateUnsafeProjection.md#create)
 * `GenerateColumnAccessor` is requested to [create a ColumnarIterator](GenerateColumnAccessor.md#create)
+
+## Logging
+
+`CodeGenerator` is an abstract class and logging is configured using the logger of the [implementations](#implementations).

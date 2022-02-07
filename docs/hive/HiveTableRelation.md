@@ -84,9 +84,9 @@ The [metadata](../CatalogTable.md) of a `HiveTableRelation` (in a catalog) has t
 computeStats(): Statistics
 ----
 
-NOTE: `computeStats` is part of ../LeafNode.md#computeStats[LeafNode Contract] to compute statistics for ../spark-sql-cost-based-optimization.md[cost-based optimizer].
+NOTE: `computeStats` is part of ../LeafNode.md#computeStats[LeafNode Contract] to compute statistics for ../cost-based-optimization.md[cost-based optimizer].
 
-`computeStats` takes the [table statistics](../CatalogTable.md#stats) from the <<tableMeta, table metadata>> if defined and ../spark-sql-CatalogStatistics.md#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
+`computeStats` takes the [table statistics](../CatalogTable.md#stats) from the <<tableMeta, table metadata>> if defined and ../CatalogStatistics.md#toPlanStats[converts them to Spark statistics] (with <<output, output columns>>).
 
 If the table statistics are not available, `computeStats` reports an `IllegalStateException`.
 

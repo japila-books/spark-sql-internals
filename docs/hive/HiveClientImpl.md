@@ -144,7 +144,7 @@ NOTE: `getPartitionOption` is part of HiveClient.md#getPartitionOption[HiveClien
 readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
 ----
 
-`readHiveStats` creates a ../spark-sql-CatalogStatistics.md#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
+`readHiveStats` creates a ../CatalogStatistics.md#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
 
 .Table Statistics and Hive Parameters
 [cols="1,2",options="header",width="100%"]
@@ -153,16 +153,16 @@ readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
 | Table Statistics
 
 | `totalSize`
-| ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes]
+| ../CatalogStatistics.md#sizeInBytes[sizeInBytes]
 
 | `rawDataSize`
-| ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes]
+| ../CatalogStatistics.md#sizeInBytes[sizeInBytes]
 
 | `numRows`
-| ../spark-sql-CatalogStatistics.md#rowCount[rowCount]
+| ../CatalogStatistics.md#rowCount[rowCount]
 |===
 
-NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for ../spark-sql-CatalogStatistics.md#sizeInBytes[sizeInBytes] table statistic.
+NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for ../CatalogStatistics.md#sizeInBytes[sizeInBytes] table statistic.
 
 NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadata of a <<getTableOption, table>> or <<fromHivePartition, table partition>>.
 

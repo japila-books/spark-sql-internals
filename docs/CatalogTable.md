@@ -91,7 +91,7 @@ NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical comman
 * [[lastAccessTime]] Last access time
 * [[createVersion]] Create version
 * [[properties]] Properties
-* [[stats]] Optional [table statistics](spark-sql-CatalogStatistics.md)
+* [[stats]] Optional [table statistics](CatalogStatistics.md)
 * [[viewText]] Optional view text
 * [[comment]] Optional comment
 * [[unsupportedFeatures]] Unsupported features
@@ -111,7 +111,7 @@ The type of a table (`CatalogTableType`) can be one of the following:
 
 === [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
 
-You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for spark-sql-cost-based-optimization.md[cost-based query optimization]).
+You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization.md)).
 
 [source, scala]
 ----
