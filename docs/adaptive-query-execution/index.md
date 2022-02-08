@@ -1,8 +1,8 @@
 # Adaptive Query Execution (AQE)
 
-**Adaptive Query Execution** (aka **Adaptive Query Optimization**, **Adaptive Optimization**, or **AQE** in short) is an optimization of a [physical query execution plan](../physical-operators/SparkPlan.md) in the middle of query execution for alternative execution plans at runtime.
+**Adaptive Query Execution** (aka **Adaptive Query Optimization**, **Adaptive Optimization**, or **AQE** in short) is an optimization of a [physical query execution plan](../physical-operators/SparkPlan.md) in the middle of query execution (based on runtime statistics) for alternative execution plans at runtime.
 
-As of Spark 3.2 (cf. [SPARK-33679](https://issues.apache.org/jira/browse/SPARK-33679)), Adaptive Query Execution is enabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property.
+Adaptive Query Execution is enabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property (since Spark 3.2 and [SPARK-33679](https://issues.apache.org/jira/browse/SPARK-33679)).
 
 Adaptive Query Execution can only be used for queries with [exchanges](../physical-operators/Exchange.md) or [sub-queries](../expressions/SubqueryExpression.md).
 
@@ -14,11 +14,7 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 ## InsertAdaptiveSparkPlan Physical Optimization
 
-Adaptive Query Execution is applied to a physical query plan using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization.
-
-## AdaptiveSparkPlanExec Physical Operator
-
-Adaptive Query Execution is based on [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator (and the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)).
+Adaptive Query Execution is possible (and applied to a physical query plan) using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization that inserts [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operators.
 
 ## SparkListenerSQLAdaptiveExecutionUpdates
 

@@ -1,6 +1,8 @@
 # InsertAdaptiveSparkPlan Physical Optimization
 
-`InsertAdaptiveSparkPlan` is a [physical query plan optimization](../catalyst/Rule.md) (`Rule[SparkPlan]`) that [re-optimizes a physical query plan](#apply) (in the middle of query execution, based on runtime statistics).
+`InsertAdaptiveSparkPlan` is a physical query plan optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) that [inserts AdaptiveSparkPlanExec operators](#apply).
+
+`InsertAdaptiveSparkPlan` is a [Rule](../catalyst/Rule.md) to transform a [SparkPlan](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
 ## Creating Instance
 
@@ -48,23 +50,21 @@ applyInternal(
   isSubquery: Boolean): SparkPlan
 ```
 
-`applyInternal` returns the given [SparkPlan](../physical-operators/SparkPlan.md) unmodified when [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) is disabled (`false`).
+`applyInternal` returns the given [SparkPlan](../physical-operators/SparkPlan.md) unmodified when one of the following holds:
 
-`applyInternal` skips processing the following leaf physical operators (and returns the given [SparkPlan](../physical-operators/SparkPlan.md) unmodified):
+1. [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property is disabled (`false`)
+1. The given `SparkPlan` is either [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) or `CommandResultExec`
 
-* [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md)
-* `CommandResultExec`
-
-`applyInternal` leaves the following parent physical operators unmodified and [handles](#apply) the children:
+`applyInternal` skips processing the following parent physical operators and [handles](#apply) the children:
 
 * [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md)
 * [V2CommandExec](../physical-operators/V2CommandExec.md)
 
-For remaining operators for which [shouldApplyAQE predicate](#shouldApplyAQE) holds, `applyInternal` [checks out whether the physical plan supports Adaptive Query Execution or not](#supportAdaptive).
+For all the other `SparkPlan`s, `applyInternal` checks out [shouldApplyAQE condition](#shouldApplyAQE). If holds, `applyInternal` [checks out whether the physical plan supports Adaptive Query Execution or not](#supportAdaptive).
 
 ### Physical Plans Supporting Adaptive Query Execution
 
-`applyInternal` creates a new [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [applies](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it to the input `SparkPlan`.
+`applyInternal` creates a new [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [executes](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it on the given `SparkPlan`.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 
@@ -72,7 +72,7 @@ For remaining operators for which [shouldApplyAQE predicate](#shouldApplyAQE) ho
 Adaptive execution enabled for plan: [plan]
 ```
 
-In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new pre-processed physical query plan.
+In the end, `applyInternal` creates an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator with the new pre-processed `SparkPlan`.
 
 In case of `SubqueryAdaptiveNotSupportedException`, `applyInternal` prints out the WARN message and returns the given physical plan.
 
@@ -127,7 +127,7 @@ verifyAdaptivePlan(
 
 `verifyAdaptivePlan` throws a `SubqueryAdaptiveNotSupportedException` when the given [SparkPlan](../physical-operators/SparkPlan.md) is not a [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md).
 
-### <span id="supportAdaptive"> supportAdaptive Predicate
+### <span id="supportAdaptive"> supportAdaptive Condition
 
 ```scala
 supportAdaptive(

@@ -11,11 +11,11 @@ evaluateCost(
   plan: SparkPlan): Cost
 ```
 
-Evaluates the cost of [SparkPlan](../physical-operators/SparkPlan.md)
+Evaluates the cost of the given [SparkPlan](../physical-operators/SparkPlan.md)
 
 Used when:
 
-* FIXME
+* `AdaptiveSparkPlanExec` physical operator is requested for the [final physical query plan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
 
 ## Implementations
 
