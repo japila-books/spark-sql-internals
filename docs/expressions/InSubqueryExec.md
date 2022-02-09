@@ -14,7 +14,7 @@
 `InSubqueryExec` is created when:
 
 * [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization is executed (and plans `InSubquery` expressions)
-* [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed (and plans `InSubquery` expressions)
+* [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md) physical optimization is executed (and plans `InSubquery` expressions)
 * [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed (and plans [DynamicPruningSubquery](DynamicPruningSubquery.md) expressions)
 
 ## Broadcasted Result

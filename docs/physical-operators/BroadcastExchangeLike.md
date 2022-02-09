@@ -22,7 +22,7 @@ relationFuture: Future[Broadcast[Any]]
 
 Used when:
 
-* `AQEPropagateEmptyRelation` adaptive logical optimization is [executed](../adaptive-query-execution/AQEPropagateEmptyRelation.md#isRelationWithAllNullKeys)
+* `AQEPropagateEmptyRelation` adaptive logical optimization is [executed](../logical-optimizations/AQEPropagateEmptyRelation.md#isRelationWithAllNullKeys)
 * `BroadcastQueryStageExec` physical optimization is requested to [cancel](BroadcastQueryStageExec.md#cancel)
 
 ### <span id="runId"> runId

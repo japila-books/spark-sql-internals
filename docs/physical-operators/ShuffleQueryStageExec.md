@@ -1,18 +1,18 @@
 # ShuffleQueryStageExec Adaptive Leaf Physical Operator
 
-`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with either a [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) or a [ReusedExchangeExec](../physical-operators/ReusedExchangeExec.md) child operators.
+`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with either a [ShuffleExchangeExec](ShuffleExchangeExec.md) or a [ReusedExchangeExec](ReusedExchangeExec.md) child operators.
 
 ## Creating Instance
 
 `ShuffleQueryStageExec` takes the following to be created:
 
 * <span id="id"> ID
-* <span id="plan"> [Physical operator](../physical-operators/SparkPlan.md)
+* <span id="plan"> [SparkPlan](SparkPlan.md)
+* <span id="_canonicalized"> Canonicalized [SparkPlan](SparkPlan.md)
 
 `ShuffleQueryStageExec` is created when:
 
-* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](../physical-operators/AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md))
-
+* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator is requested to [newQueryStage](AdaptiveSparkPlanExec.md#newQueryStage) (for a [ShuffleExchangeExec](ShuffleExchangeExec.md))
 * `ShuffleQueryStageExec` physical operator is requested to [newReuseInstance](#newReuseInstance)
 
 ## <span id="shuffle"> ShuffleExchangeLike
@@ -23,7 +23,7 @@ shuffle: ShuffleExchangeLike
 
 `ShuffleQueryStageExec` initializes the `shuffle` internal registry when [created](#creating-instance).
 
-`ShuffleQueryStageExec` assumes that the given [physical operator](#plan) is either a [ShuffleExchangeLike](../physical-operators/ShuffleExchangeLike.md) or a [ReusedExchangeExec](../physical-operators/ReusedExchangeExec.md) and extracts the `ShuffleExchangeLike`.
+`ShuffleQueryStageExec` assumes that the given [physical operator](#plan) is either a [ShuffleExchangeLike](ShuffleExchangeLike.md) or a [ReusedExchangeExec](ReusedExchangeExec.md) and extracts the `ShuffleExchangeLike`.
 
 If not, `ShuffleQueryStageExec` throws an `IllegalStateException`:
 
@@ -35,10 +35,10 @@ wrong plan for shuffle stage:
 `shuffle` is used when:
 
 * `AQEShuffleReadExec` unary physical operator is requested for the [shuffleRDD](AQEShuffleReadExec.md#shuffleRDD)
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md) physical optimization is executed
-* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md) physical optimization is executed
-* [OptimizeSkewedJoin](OptimizeSkewedJoin.md) physical optimization is executed
-* [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md) physical optimization is executed
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) physical optimization is executed
+* [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md) physical optimization is executed
+* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+* [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md) physical optimization is executed
 * `ShuffleQueryStageExec` leaf physical operator is requested for the [shuffle MapOutputStatistics](#shuffleFuture), [newReuseInstance](#newReuseInstance) and [getRuntimeStatistics](#getRuntimeStatistics)
 
 ## <span id="shuffleFuture"> Shuffle MapOutputStatistics Future
@@ -47,7 +47,7 @@ wrong plan for shuffle stage:
 shuffleFuture: Future[MapOutputStatistics]
 ```
 
-`shuffleFuture` requests the [ShuffleExchangeLike](#shuffle) to [submit a shuffle job](../physical-operators/ShuffleExchangeLike.md#submitShuffleJob) (and eventually produce a `MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics))).
+`shuffleFuture` requests the [ShuffleExchangeLike](#shuffle) to [submit a shuffle job](ShuffleExchangeLike.md#submitShuffleJob) (and eventually produce a `MapOutputStatistics` ([Apache Spark]({{ book.spark_core }}/scheduler/MapOutputStatistics))).
 
 ??? note "Lazy Value"
     `shuffleFuture` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
@@ -107,6 +107,6 @@ assertion failed: ShuffleQueryStageExec should already be ready
 `mapStats` is used when:
 
 * `AQEShuffleReadExec` unary physical operator is requested for the [partitionDataSizes](AQEShuffleReadExec.md#partitionDataSizes)
-* [DynamicJoinSelection](DynamicJoinSelection.md) adaptive optimization is executed (and [selectJoinStrategy](DynamicJoinSelection.md#selectJoinStrategy))
-* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed (and [canUseLocalShuffleRead](OptimizeShuffleWithLocalRead.md#canUseLocalShuffleRead))
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md), [OptimizeSkewedJoin](OptimizeSkewedJoin.md) and [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md) adaptive physical optimizations are executed
+* [DynamicJoinSelection](../logical-optimizations/DynamicJoinSelection.md) adaptive optimization is executed (and [selectJoinStrategy](../logical-optimizations/DynamicJoinSelection.md#selectJoinStrategy))
+* [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed (and [canUseLocalShuffleRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md#canUseLocalShuffleRead))
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md), [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) and [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md) adaptive physical optimizations are executed

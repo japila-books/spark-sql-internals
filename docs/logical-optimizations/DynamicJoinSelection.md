@@ -1,6 +1,6 @@
 # DynamicJoinSelection Adaptive Logical Optimization
 
-`DynamicJoinSelection` is a logical optimization in [Adaptive Query Execution](index.md) to [transform Join logical operators](#apply) with [JoinHint](../JoinHint.md)s.
+`DynamicJoinSelection` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) to [transform Join logical operators](#apply) with [JoinHint](../JoinHint.md)s.
 
 `DynamicJoinSelection` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -10,7 +10,7 @@
 
 `DynamicJoinSelection` is created when:
 
-* `AQEOptimizer` is requested for the [default batches](AQEOptimizer.md#defaultBatches) (of adaptive optimizations)
+* `AQEOptimizer` is requested for the [default batches](../adaptive-query-execution/AQEOptimizer.md#defaultBatches) (of adaptive optimizations)
 
 ## <span id="apply"> Executing Rule
 
@@ -36,9 +36,9 @@ selectJoinStrategy(
   plan: LogicalPlan): Option[JoinStrategyHint]
 ```
 
-`selectJoinStrategy` works only with [LogicalQueryStage](LogicalQueryStage.md)s of [ShuffleQueryStageExec](ShuffleQueryStageExec.md)s that are [materialized](QueryStageExec.md#isMaterialized) and have [mapStats](ShuffleQueryStageExec.md#mapStats) defined (and returns `None` otherwise).
+`selectJoinStrategy` works only with [LogicalQueryStage](../logical-operators/LogicalQueryStage.md)s of [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md)s that are [materialized](../physical-operators/QueryStageExec.md#isMaterialized) and have [mapStats](../physical-operators/ShuffleQueryStageExec.md#mapStats) defined (and returns `None` otherwise).
 
-`selectJoinStrategy` selects a [JoinStrategyHint](../JoinStrategyHint.md) based on [shouldDemoteBroadcastHashJoin](#shouldDemoteBroadcastHashJoin) and [preferShuffledHashJoin](#preferShuffledHashJoin) with the [mapStats](ShuffleQueryStageExec.md#mapStats).
+`selectJoinStrategy` selects a [JoinStrategyHint](../JoinStrategyHint.md) based on [shouldDemoteBroadcastHashJoin](#shouldDemoteBroadcastHashJoin) and [preferShuffledHashJoin](#preferShuffledHashJoin) with the [mapStats](../physical-operators/ShuffleQueryStageExec.md#mapStats).
 
 demoteBroadcastHash | preferShuffleHash | JoinStrategyHint
 --------------------|-------------------|-----------------

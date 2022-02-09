@@ -15,7 +15,7 @@
 * [DataSourceV2Relation](DataSourceV2Relation.md), [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md), [ExternalRDD](ExternalRDD.md), [LocalRelation](LocalRelation.md), [LogicalRDD](LogicalRDD.md), [LogicalRelation](LogicalRelation.md), `Range`, `OneRowRelation` logical operators are requested to `computeStats`
 * `AggregateEstimation` and [JoinEstimation](JoinEstimation.md) utilities are requested to `estimate`
 * [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) is executed
-* [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator is requested to `computeStats`
+* [QueryStageExec](../physical-operators/QueryStageExec.md) physical operator is requested to `computeStats`
 * [DetermineTableStats](../hive/DetermineTableStats.md) logical resolution rule is executed
 
 ## <span id="rowCount"> Row Count

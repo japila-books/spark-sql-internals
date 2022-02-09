@@ -13,7 +13,7 @@
 `DynamicPruningExpression` is created when:
 
 * [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) physical optimization is executed
-* [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) physical optimization is executed
+* [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md) physical optimization is executed
 * [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed
 
 ## <span id="nodePatterns"> Node Patterns

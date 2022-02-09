@@ -1,3 +1,0 @@
-# ShuffleStage
-
-`ShuffleStage` is...FIXME

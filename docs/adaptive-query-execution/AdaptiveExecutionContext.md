@@ -21,4 +21,4 @@ subqueryCache: TrieMap[SparkPlan, BaseSubqueryExec]
 
 `subqueryCache` is used when:
 
-* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules) (and creates a [ReuseAdaptiveSubquery](ReuseAdaptiveSubquery.md))
+* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [adaptive optimizations](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules) (and creates a [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md))

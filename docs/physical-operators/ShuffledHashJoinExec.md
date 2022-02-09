@@ -207,6 +207,6 @@ In the end, `prepareRelation` creates a `HashedRelationInfo`.
 
 `ShuffledHashJoinExec` can be given `isSkewJoin` flag when [created](#creating-instance). It is assumed disabled (`false`) by default.
 
-`isSkewJoin` can only be enabled (`true`) when `OptimizeSkewedJoin` adaptive physical optimization is requested to [optimize a skew join](../adaptive-query-execution/OptimizeSkewedJoin.md#optimizeSkewJoin).
+`isSkewJoin` can only be enabled (`true`) when `OptimizeSkewedJoin` adaptive physical optimization is requested to [optimize a skew join](../physical-optimizations/OptimizeSkewedJoin.md#optimizeSkewJoin).
 
 `isSkewJoin` is part of the [ShuffledJoin](ShuffledJoin.md#isSkewJoin) abstraction.

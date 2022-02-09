@@ -2,7 +2,7 @@
 
 `ShuffledRowRDD` is an `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD)) of [InternalRow](InternalRow.md)s (`RDD[InternalRow]`) used for execution of the following physical operators:
 
-* [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md) ([Adaptive Query Execution](adaptive-query-execution/index.md))
+* [AQEShuffleReadExec](physical-operators/AQEShuffleReadExec.md) ([Adaptive Query Execution](adaptive-query-execution/index.md))
 * [CollectLimitExec](physical-operators/CollectLimitExec.md)
 * [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md)
 * `TakeOrderedAndProjectExec`
@@ -24,7 +24,7 @@ When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksIn
 `ShuffledRowRDD` is created when:
 
 * [CollectLimitExec](physical-operators/CollectLimitExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and `TakeOrderedAndProjectExec` physical operators are executed
-* `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [AQEShuffleReadExec](adaptive-query-execution/AQEShuffleReadExec.md))
+* `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [AQEShuffleReadExec](physical-operators/AQEShuffleReadExec.md))
 
 ## <span id="compute"> Computing Partition
 

@@ -1,6 +1,6 @@
 # AQEPropagateEmptyRelation Adaptive Logical Optimization
 
-`AQEPropagateEmptyRelation` is a logical optimization in [Adaptive Query Execution](index.md) to...FIXME
+`AQEPropagateEmptyRelation` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `AQEPropagateEmptyRelation` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -10,7 +10,7 @@
 
 `AQEPropagateEmptyRelation` is created when:
 
-* `AQEOptimizer` is requested for the [default batches](AQEOptimizer.md#defaultBatches) (of adaptive optimizations)
+* `AQEOptimizer` is requested for the [default batches](../adaptive-query-execution/AQEOptimizer.md#defaultBatches) (of adaptive optimizations)
 
 ## <span id="apply"> Executing Rule
 

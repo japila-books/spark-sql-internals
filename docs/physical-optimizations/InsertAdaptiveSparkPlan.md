@@ -64,7 +64,7 @@ For all the other `SparkPlan`s, `applyInternal` checks out [shouldApplyAQE condi
 
 ### Physical Plans Supporting Adaptive Query Execution
 
-`applyInternal` creates a new [PlanAdaptiveSubqueries](../adaptive-query-execution/PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [executes](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it on the given `SparkPlan`.
+`applyInternal` creates a new [PlanAdaptiveSubqueries](PlanAdaptiveSubqueries.md) optimization (with [subquery expressions](#buildSubqueryMap)) and [executes](../physical-operators/AdaptiveSparkPlanExec.md#applyPhysicalRules) it on the given `SparkPlan`.
 
 `applyInternal` prints out the following DEBUG message to the logs:
 

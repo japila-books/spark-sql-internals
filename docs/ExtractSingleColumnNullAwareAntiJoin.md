@@ -32,6 +32,6 @@ Or(EqualTo(a=b), IsNull(EqualTo(a=b)))
 
 `unapply` is used when:
 
-* `AQEPropagateEmptyRelation` adaptive logical optimization is [executed](adaptive-query-execution/AQEPropagateEmptyRelation.md#eliminateSingleColumnNullAwareAntiJoin)
+* `AQEPropagateEmptyRelation` adaptive logical optimization is [executed](logical-optimizations/AQEPropagateEmptyRelation.md#eliminateSingleColumnNullAwareAntiJoin)
 * `JoinSelection` execution planning strategy is [executed](execution-planning-strategies/JoinSelection.md#ExtractSingleColumnNullAwareAntiJoin)
 * `LogicalQueryStageStrategy` execution planning strategy is [executed](execution-planning-strategies/LogicalQueryStageStrategy.md#ExtractSingleColumnNullAwareAntiJoin)

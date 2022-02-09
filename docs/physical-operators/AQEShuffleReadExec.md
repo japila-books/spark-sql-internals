@@ -1,6 +1,6 @@
 # AQEShuffleReadExec Unary Physical Operator
 
-`AQEShuffleReadExec` is a [unary physical operator](../physical-operators/UnaryExecNode.md) in [Adaptive Query Execution](index.md).
+`AQEShuffleReadExec` is a [unary physical operator](UnaryExecNode.md) in [Adaptive Query Execution](index.md).
 
 ## Creating Instance
 
@@ -11,10 +11,10 @@
 
 `AQEShuffleReadExec` is created when the following adaptive physical optimizations are executed:
 
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md#updateShuffleReads)
-* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md#createLocalRead)
-* [OptimizeSkewedJoin](OptimizeSkewedJoin.md#tryOptimizeJoinChildren)
-* [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md#tryOptimizeSkewedPartitions)
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md#updateShuffleReads)
+* [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md#createLocalRead)
+* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md#tryOptimizeJoinChildren)
+* [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md#tryOptimizeSkewedPartitions)
 
 ## <span id="metrics"> Performance Metrics
 
@@ -31,7 +31,7 @@ Key                     | Name (in web UI)                  | Description
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-`metrics` is part of the [SparkPlan](../physical-operators/SparkPlan.md#metrics) abstraction.
+`metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
 
 ## <span id="child"><span id="shuffleStage"> Child ShuffleQueryStageExec
 
@@ -39,7 +39,7 @@ Key                     | Name (in web UI)                  | Description
 shuffleStage: Option[ShuffleQueryStageExec]
 ```
 
-`AQEShuffleReadExec` is given a child [physical operator](../physical-operators/SparkPlan.md) when [created](#creating-instance).
+`AQEShuffleReadExec` is given a child [physical operator](SparkPlan.md) when [created](#creating-instance).
 
 When requested for a [ShuffleQueryStageExec](ShuffleQueryStageExec), `AQEShuffleReadExec` returns the child physical operator (if that is its type or returns `None`).
 
@@ -53,7 +53,7 @@ When requested for a [ShuffleQueryStageExec](ShuffleQueryStageExec), `AQEShuffle
 shuffleRDD: RDD[_]
 ```
 
-`shuffleRDD` [updates the performance metrics](#sendDriverMetrics) and requests the [shuffleStage](#shuffleStage) for the [ShuffleExchangeLike](#shuffle) that in turn is requested for the [shuffle RDD](../physical-operators/ShuffleExchangeLike.md#getShuffleRDD) (with the [ShufflePartitionSpecs](#partitionSpecs)).
+`shuffleRDD` [updates the performance metrics](#sendDriverMetrics) and requests the [shuffleStage](#shuffleStage) for the [ShuffleExchangeLike](#shuffle) that in turn is requested for the [shuffle RDD](ShuffleExchangeLike.md#getShuffleRDD) (with the [ShufflePartitionSpecs](#partitionSpecs)).
 
 ??? note "Lazy Value"
     `shuffleRDD` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
@@ -93,7 +93,7 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` returns the [Shuffle RDD](#shuffleRDD).
 
-`doExecute` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecute) abstraction.
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 ## <span id="doExecuteColumnar"> Columnar Execution
 
@@ -103,7 +103,7 @@ doExecuteColumnar(): RDD[ColumnarBatch]
 
 `doExecuteColumnar` returns the [Shuffle RDD](#shuffleRDD).
 
-`doExecuteColumnar` is part of the [SparkPlan](../physical-operators/SparkPlan.md#doExecuteColumnar) abstraction.
+`doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
 
 ## <span id="stringArgs"> Node Arguments
 

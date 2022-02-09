@@ -11,7 +11,7 @@
 * [HiveTableRelation](../hive/HiveTableRelation.md)
 * [InMemoryRelation](InMemoryRelation.md)
 * [LocalRelation](LocalRelation.md)
-* [LogicalQueryStage](../adaptive-query-execution/LogicalQueryStage.md)
+* [LogicalQueryStage](../logical-operators/LogicalQueryStage.md)
 * [LogicalRDD](LogicalRDD.md)
 * [LogicalRelation](LogicalRelation.md)
 * _others_

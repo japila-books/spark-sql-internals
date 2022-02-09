@@ -196,18 +196,18 @@ newQueryStage(
   e: Exchange): QueryStageExec
 ```
 
-`newQueryStage` creates a new [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator based on the type of the given [Exchange](Exchange.md) physical operator.
+`newQueryStage` creates a new [QueryStageExec](QueryStageExec.md) physical operator based on the type of the given [Exchange](Exchange.md) physical operator.
 
 Exchange | QueryStageExec
 ---------|---------
- [ShuffleExchangeLike](ShuffleExchangeLike.md) | [ShuffleQueryStageExec](../adaptive-query-execution/ShuffleQueryStageExec.md)
+ [ShuffleExchangeLike](ShuffleExchangeLike.md) | [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
  [BroadcastExchangeLike](BroadcastExchangeLike.md) | [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 
 ---
 
 `newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [child physical plan](UnaryExecNode.md#child) of the given [Exchange](Exchange.md). `newQueryStage` uses the [adaptive optimizations](#queryStageOptimizerRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Query Stage Optimization** batch name.
 
-`newQueryStage` creates a new [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator for the given `Exchange` operator (using the [currentStageId](#currentStageId) for the ID).
+`newQueryStage` creates a new [QueryStageExec](QueryStageExec.md) physical operator for the given `Exchange` operator (using the [currentStageId](#currentStageId) for the ID).
 
 After [applyPhysicalRules](#applyPhysicalRules) for the child operator, `newQueryStage` [creates an optimized physical query plan](#applyPhysicalRules) for the [Exchange](Exchange.md) itself (with the new optimized physical query plan for the child). `newQueryStage` uses the [post-stage-creation optimizations](#postStageCreationRules), the [PlanChangeLogger](#planChangeLogger) and **AQE Post Stage Creation** batch name.
 
@@ -244,11 +244,11 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 `queryStageOptimizerRules` is the following adaptive optimizations (physical optimization rules):
 
 * [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
-* [ReuseAdaptiveSubquery](../adaptive-query-execution/ReuseAdaptiveSubquery.md)
-* [OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md)
-* [OptimizeSkewInRebalancePartitions](../adaptive-query-execution/OptimizeSkewInRebalancePartitions.md)
-* [CoalesceShufflePartitions](../adaptive-query-execution/CoalesceShufflePartitions.md)
-* [OptimizeShuffleWithLocalRead](../adaptive-query-execution/OptimizeShuffleWithLocalRead.md)
+* [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
+* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md)
+* [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md)
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
+* [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md)
 
 `queryStageOptimizerRules` is used when:
 
@@ -344,7 +344,7 @@ executionContext: ExecutionContext
 
 `executionContext` is an `ExecutionContext` that is used when:
 
-* `AdaptiveSparkPlanExec` operator is requested for a [getFinalPhysicalPlan](#getFinalPhysicalPlan) (to [materialize QueryStageExec operators](../adaptive-query-execution/QueryStageExec.md#materialize) asynchronously)
+* `AdaptiveSparkPlanExec` operator is requested for a [getFinalPhysicalPlan](#getFinalPhysicalPlan) (to [materialize QueryStageExec operators](QueryStageExec.md#materialize) asynchronously)
 
 * [BroadcastQueryStageExec](BroadcastQueryStageExec.md) operator is requested for [materializeWithTimeout](BroadcastQueryStageExec.md#materializeWithTimeout)
 

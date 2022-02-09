@@ -16,13 +16,13 @@
 
 ### Propagate Empty Relations
 
-* [AQEPropagateEmptyRelation](AQEPropagateEmptyRelation.md)
+* [AQEPropagateEmptyRelation](../logical-optimizations/AQEPropagateEmptyRelation.md)
 * [ConvertToLocalRelation](../logical-optimizations/ConvertToLocalRelation.md)
 * [UpdateAttributeNullability](../logical-optimizations/UpdateAttributeNullability.md)
 
 ### Dynamic Join Selection
 
-* [DynamicJoinSelection](DynamicJoinSelection.md)
+* [DynamicJoinSelection](../logical-optimizations/DynamicJoinSelection.md)
 
 ## <span id="batches"> Batches
 

@@ -61,7 +61,7 @@ requiredChildDistribution: Seq[Distribution]
 
 ### OptimizeSkewedJoin
 
-[OptimizeSkewedJoin](../adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is used to optimize skewed [SortMergeJoinExec](SortMergeJoinExec.md)s (with `SortExec` operators) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
+[OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) physical optimization is used to optimize skewed [SortMergeJoinExec](SortMergeJoinExec.md)s (with `SortExec` operators) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ### RemoveRedundantSorts
 

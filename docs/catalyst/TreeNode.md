@@ -175,7 +175,7 @@ generateTreeString(
 `generateTreeString` is used when:
 
 * `TreeNode` is requested for [text representation of all nodes in the tree](#treeString)
-* [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md#generateTreeString), [InputAdapter](../physical-operators/InputAdapter.md#generateTreeString), [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#generateTreeString), [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#generateTreeString), [QueryStageExec](../adaptive-query-execution/QueryStageExec.md#generateTreeString) physical operators are requested to `generateTreeString`
+* [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md#generateTreeString), [InputAdapter](../physical-operators/InputAdapter.md#generateTreeString), [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#generateTreeString), [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#generateTreeString), [QueryStageExec](../physical-operators/QueryStageExec.md#generateTreeString) physical operators are requested to `generateTreeString`
 
 ## <span id="innerChildren"> Inner Child Nodes
 

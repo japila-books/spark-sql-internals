@@ -100,7 +100,7 @@ Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) p
 
 Used when:
 
-* `DynamicJoinSelection` is requested to [preferShuffledHashJoin](adaptive-query-execution/DynamicJoinSelection.md#preferShuffledHashJoin)
+* `DynamicJoinSelection` is requested to [preferShuffledHashJoin](logical-optimizations/DynamicJoinSelection.md#preferShuffledHashJoin)
 
 ## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
@@ -116,7 +116,7 @@ Used when:
 
 Used when:
 
-* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimizations are executed
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimizations are executed
 
 ## <span id="autoBroadcastJoinThreshold"> autoBroadcastJoinThreshold
 
@@ -258,7 +258,7 @@ Used when:
 
 Used when:
 
-* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) physical optimization is executed
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) physical optimization is executed
 
 ## <span id="COALESCE_PARTITIONS_PARALLELISM_FIRST"> COALESCE_PARTITIONS_PARALLELISM_FIRST
 
@@ -266,7 +266,7 @@ Used when:
 
 Used when:
 
-* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) physical optimization is executed
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) physical optimization is executed
 
 ## <span id="coalesceShufflePartitionsEnabled"><span id="COALESCE_PARTITIONS_ENABLED"> coalesceShufflePartitionsEnabled
 
@@ -274,7 +274,7 @@ The value of [spark.sql.adaptive.coalescePartitions.enabled](configuration-prope
 
 Used when:
 
-* [CoalesceShufflePartitions](adaptive-query-execution/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
 
 ## <span id="COLUMN_BATCH_SIZE"><span id="columnBatchSize"> columnBatchSize
 
@@ -561,7 +561,7 @@ Used when a physical operator is requested [the first n rows as an array](physic
 
 Used when:
 
-* [OptimizeShuffleWithLocalRead](adaptive-query-execution/OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed
+* [OptimizeShuffleWithLocalRead](physical-optimizations/OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed
 
 ## <span id="manageFilesourcePartitions"><span id="HIVE_MANAGE_FILESOURCE_PARTITIONS"> manageFilesourcePartitions
 
@@ -640,7 +640,7 @@ The value of [spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin](configu
 
 Used when:
 
-* [DynamicJoinSelection](adaptive-query-execution/DynamicJoinSelection.md) adaptive logical optimization is executed (and [shouldDemoteBroadcastHashJoin](adaptive-query-execution/DynamicJoinSelection.md#shouldDemoteBroadcastHashJoin))
+* [DynamicJoinSelection](logical-optimizations/DynamicJoinSelection.md) adaptive logical optimization is executed (and [shouldDemoteBroadcastHashJoin](logical-optimizations/DynamicJoinSelection.md#shouldDemoteBroadcastHashJoin))
 
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 
@@ -668,7 +668,7 @@ Used when:
 
 Used when:
 
-* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
+* [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="SKEW_JOIN_SKEWED_PARTITION_THRESHOLD"> SKEW_JOIN_SKEWED_PARTITION_THRESHOLD
 
@@ -676,7 +676,7 @@ Used when:
 
 Used when:
 
-* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
+* [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="SKEW_JOIN_ENABLED"> SKEW_JOIN_ENABLED
 
@@ -684,7 +684,7 @@ Used when:
 
 Used when:
 
-* [OptimizeSkewedJoin](adaptive-query-execution/OptimizeSkewedJoin.md) physical optimization is executed
+* [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
 ## <span id="offHeapColumnVectorEnabled"> offHeapColumnVectorEnabled
 
@@ -898,7 +898,7 @@ Used when `SparkPlan` is requested for [subexpressionEliminationEnabled](physica
 
 Used when:
 
-* [ReuseAdaptiveSubquery](adaptive-query-execution/ReuseAdaptiveSubquery.md) adaptive physical optimization is executed
+* [ReuseAdaptiveSubquery](physical-optimizations/ReuseAdaptiveSubquery.md) adaptive physical optimization is executed
 * [ReuseExchangeAndSubquery](physical-optimizations/ReuseExchangeAndSubquery.md) physical optimization is executed
 
 ## <span id="supportQuotedRegexColumnName"> supportQuotedRegexColumnName

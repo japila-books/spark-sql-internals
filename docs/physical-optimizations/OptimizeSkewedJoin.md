@@ -1,6 +1,6 @@
 # OptimizeSkewedJoin Adaptive Physical Optimization
 
-`OptimizeSkewedJoin` is a [physical optimization](AQEShuffleReadRule.md) to [make data distribution more even](#apply) in [Adaptive Query Execution](index.md).
+`OptimizeSkewedJoin` is a [physical optimization](AQEShuffleReadRule.md) to [make data distribution more even](#apply) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `OptimizeSkewedJoin` is also called **skew join optimization**.
 
@@ -59,10 +59,10 @@ apply(
 
 `apply` uses [spark.sql.adaptive.skewJoin.enabled](../configuration-properties.md#spark.sql.adaptive.skewJoin.enabled) configuration property to determine whether to apply any optimizations or not.
 
-`apply` collects [ShuffleQueryStageExec](ShuffleQueryStageExec.md) physical operators.
+`apply` collects [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) physical operators.
 
 !!! note
-    `apply` does nothing and simply gives the query plan "untouched" when applied to a query plan with the number of [ShuffleQueryStageExec](ShuffleQueryStageExec.md) physical operators different than `2`.
+    `apply` does nothing and simply gives the query plan "untouched" when applied to a query plan with the number of [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) physical operators different than `2`.
 
 `apply`...FIXME
 
@@ -77,8 +77,8 @@ optimizeSkewJoin(
 
 `optimizeSkewJoin` transforms the following physical operators:
 
-* [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) (of left and right [SortExec](../physical-operators/SortExec.md)s over [ShuffleStage](ShuffleStage.md) with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) disabled)
-* [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) (with left and right [ShuffleStage](ShuffleStage.md)s with [ShuffleQueryStageExec](ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/ShuffledHashJoinExec.md#isSkewJoin) disabled)
+* [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) (of left and right [SortExec](../physical-operators/SortExec.md)s over `ShuffleStage` with [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/SortMergeJoinExec.md#isSkewJoin) disabled)
+* [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) (with left and right `ShuffleStage`s with [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) and [isSkewJoin](../physical-operators/ShuffledHashJoinExec.md#isSkewJoin) disabled)
 
 `optimizeSkewJoin` [tryOptimizeJoinChildren](#tryOptimizeJoinChildren) and, if a new join left and right child operators are determined, replaces them in the physical operators (with the `isSkewJoin` flag enabled).
 

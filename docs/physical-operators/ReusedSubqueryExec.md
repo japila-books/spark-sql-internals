@@ -12,5 +12,5 @@
 
 `ReusedSubqueryExec` is created when:
 
-* [ReuseAdaptiveSubquery](../adaptive-query-execution/ReuseAdaptiveSubquery.md) physical optimization is executed
+* [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md) physical optimization is executed
 * [ReuseExchangeAndSubquery](../physical-optimizations/ReuseExchangeAndSubquery.md) physical optimization is executed

@@ -1,6 +1,6 @@
 # QueryStageExec Leaf Physical Operators
 
-`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](../physical-operators/SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) for [Adaptive Query Execution](index.md).
+`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) for [Adaptive Query Execution](index.md).
 
 ## Contract
 
@@ -14,7 +14,7 @@ Cancels the stage materialization if in progress; otherwise does nothing.
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [cleanUpAndThrowException](../physical-operators/AdaptiveSparkPlanExec.md#cleanUpAndThrowException)
+* `AdaptiveSparkPlanExec` physical operator is requested to [cleanUpAndThrowException](AdaptiveSparkPlanExec.md#cleanUpAndThrowException)
 
 ### <span id="doMaterialize"> Materializing
 
@@ -46,7 +46,7 @@ id: Int
 
 Used when:
 
-* [CoalesceShufflePartitions](CoalesceShufflePartitions.md) adaptive physical optimization is executed
+* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
 
 ### <span id="newReuseInstance"> newReuseInstance
 
@@ -58,7 +58,7 @@ newReuseInstance(
 
 Used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryStage](../physical-operators/AdaptiveSparkPlanExec.md#reuseQueryStage)
+* `AdaptiveSparkPlanExec` physical operator is requested to [reuseQueryStage](AdaptiveSparkPlanExec.md#reuseQueryStage)
 
 ### <span id="plan"> Physical Query Plan
 
@@ -66,11 +66,11 @@ Used when:
 plan: SparkPlan
 ```
 
-The [sub-tree](../physical-operators/SparkPlan.md) of the main query plan of this query stage (that acts like a child operator, but `QueryStageExec` is a [LeafExecNode](../physical-operators/SparkPlan.md#LeafExecNode) and has no children)
+The [sub-tree](SparkPlan.md) of the main query plan of this query stage (that acts like a child operator, but `QueryStageExec` is a [LeafExecNode](SparkPlan.md#LeafExecNode) and has no children)
 
 ## Implementations
 
-* <span id="BroadcastQueryStageExec"> [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md)
+* <span id="BroadcastQueryStageExec"> [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 * <span id="ShuffleQueryStageExec"> [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
 
 ## <span id="resultOption"><span id="_resultOption"> Result
@@ -81,12 +81,12 @@ _resultOption: AtomicReference[Option[Any]]
 
 `QueryStageExec` uses a `_resultOption` transient volatile internal variable (of type [AtomicReference]({{ java.api }}/java/util/concurrent/atomic/AtomicReference.html)) for the result of a successful [materialization](#materialize) of the `QueryStageExec` operator (when preparing for query execution):
 
-* [Broadcast variable](../physical-operators/BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](../physical-operators/BroadcastQueryStageExec.md)
+* [Broadcast variable](BroadcastQueryStageExec.md#materializeWithTimeout) (_broadcasting data_) for [BroadcastQueryStageExec](BroadcastQueryStageExec.md)
 * [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) (_submitting map stages_) for [ShuffleQueryStageExec](ShuffleQueryStageExec.md)
 
 As `AtomicReference` is mutable that is enough to change the value.
 
-`_resultOption` is set when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
+`_resultOption` is set when `AdaptiveSparkPlanExec` physical operator is requested for the [final physical plan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan).
 
 `_resultOption` is available using [resultOption](#resultOption).
 
@@ -113,7 +113,7 @@ If this `QueryStageExec` has been [materialized](#isMaterialized), `computeStats
 
 `computeStats` is used when:
 
-* [LogicalQueryStage](LogicalQueryStage.md) logical operator is requested for the [Statistics](LogicalQueryStage.md#computeStats)
+* `LogicalQueryStage` logical operator is requested for the [Statistics](../logical-operators/LogicalQueryStage.md#computeStats)
 
 ## <span id="materialize"> Materializing Query Stage
 
@@ -136,7 +136,7 @@ Materialize query stage [simpleName]: [id]
 
 `materialize` is used when:
 
-* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](../physical-operators/AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
+* `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](AdaptiveSparkPlanExec.md#getFinalPhysicalPlan)
 
 ## <span id="generateTreeString"> Text Representation
 

@@ -1,6 +1,6 @@
 # ReuseAdaptiveSubquery Physical Optimization
 
-`ReuseAdaptiveSubquery` is a physical query plan optimization in [Adaptive Query Execution](index.md).
+`ReuseAdaptiveSubquery` is a physical query plan optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `ReuseAdaptiveSubquery` is a [Catalyst Rule](../catalyst/Rule.md) for transforming [physical plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
 
@@ -8,7 +8,7 @@
 
 `ReuseAdaptiveSubquery` takes the following to be created:
 
-* <span id="reuseMap"> [Subquery Cache](AdaptiveExecutionContext.md#subqueryCache)
+* <span id="reuseMap"> [Subquery Cache](../adaptive-query-execution/AdaptiveExecutionContext.md#subqueryCache)
 
 `ReuseAdaptiveSubquery` is created when:
 

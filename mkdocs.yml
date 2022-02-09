@@ -278,6 +278,7 @@ nav:
       - LeafNode: logical-operators/LeafNode.md
       - LocalRelation: logical-operators/LocalRelation.md
       - LogicalPlan: logical-operators/LogicalPlan.md
+      - LogicalQueryStage: logical-operators/LogicalQueryStage.md
       - LogicalRDD: logical-operators/LogicalRDD.md
       - LogicalRelation: logical-operators/LogicalRelation.md
       - MapPartitions: logical-operators/MapPartitions.md
@@ -454,6 +455,7 @@ nav:
       - AliasAwareOutputOrdering: physical-operators/AliasAwareOutputOrdering.md
       - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
       - AlterTableExec: physical-operators/AlterTableExec.md
+      - AQEShuffleReadExec: physical-operators/AQEShuffleReadExec.md
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BaseAggregateExec: physical-operators/BaseAggregateExec.md
       - BaseJoinExec: physical-operators/BaseJoinExec.md
@@ -501,6 +503,7 @@ nav:
       - ObjectProducerExec: physical-operators/ObjectProducerExec.md
       - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
       - ProjectExec: physical-operators/ProjectExec.md
+      - QueryStageExec: physical-operators/QueryStageExec.md
       - RangeExec: physical-operators/RangeExec.md
       - ReusedExchangeExec: physical-operators/ReusedExchangeExec.md
       - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
@@ -515,6 +518,7 @@ nav:
       - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
       - ShuffledJoin: physical-operators/ShuffledJoin.md
       - ShuffleOrigin: physical-operators/ShuffleOrigin.md
+      - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
       - SortAggregateExec: physical-operators/SortAggregateExec.md
       - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
       - SortExec: physical-operators/SortExec.md
@@ -588,6 +592,7 @@ nav:
       - WidenSetOperationTypes: logical-analysis-rules/WidenSetOperationTypes.md
       - WindowsSubstitution: logical-analysis-rules/WindowsSubstitution.md
     - Logical Optimizations:
+      - AQEPropagateEmptyRelation: logical-optimizations/AQEPropagateEmptyRelation.md
       - CleanupDynamicPruningFilters: logical-optimizations/CleanupDynamicPruningFilters.md
       - CollapseWindow: logical-optimizations/CollapseWindow.md
       - ColumnPruning: logical-optimizations/ColumnPruning.md
@@ -598,6 +603,7 @@ nav:
       - ConvertToLocalRelation: logical-optimizations/ConvertToLocalRelation.md
       - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
       - DecimalAggregates: logical-optimizations/DecimalAggregates.md
+      - DynamicJoinSelection: logical-optimizations/DynamicJoinSelection.md
       - EliminateResolvedHint: logical-optimizations/EliminateResolvedHint.md
       - EliminateSerialization: logical-optimizations/EliminateSerialization.md
       - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
@@ -647,17 +653,24 @@ nav:
       - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
+      - AQEShuffleReadRule: physical-optimizations/AQEShuffleReadRule.md
       - CoalesceBucketsInJoin: physical-optimizations/CoalesceBucketsInJoin.md
+      - CoalesceShufflePartitions: physical-optimizations/CoalesceShufflePartitions.md
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
       - DisableUnnecessaryBucketedScan: physical-optimizations/DisableUnnecessaryBucketedScan.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
       - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
       - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
+      - OptimizeShuffleWithLocalRead: physical-optimizations/OptimizeShuffleWithLocalRead.md
+      - OptimizeSkewedJoin: physical-optimizations/OptimizeSkewedJoin.md
+      - OptimizeSkewInRebalancePartitions: physical-optimizations/OptimizeSkewInRebalancePartitions.md
       - PlanAdaptiveDynamicPruningFilters: physical-optimizations/PlanAdaptiveDynamicPruningFilters.md
+      - PlanAdaptiveSubqueries: physical-optimizations/PlanAdaptiveSubqueries.md
       - PlanDynamicPruningFilters: physical-optimizations/PlanDynamicPruningFilters.md
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
       - RemoveRedundantProjects: physical-optimizations/RemoveRedundantProjects.md
       - RemoveRedundantSorts: physical-optimizations/RemoveRedundantSorts.md
+      - ReuseAdaptiveSubquery: physical-optimizations/ReuseAdaptiveSubquery.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
       - ReuseExchangeAndSubquery: physical-optimizations/ReuseExchangeAndSubquery.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
@@ -674,32 +687,16 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
-  - AQE:
-    - adaptive-query-execution/index.md
-    - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
-    - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-    - AQEShuffleReadExec: adaptive-query-execution/AQEShuffleReadExec.md
-    - AQEUtils: adaptive-query-execution/AQEUtils.md
-    - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-    - Logical Optimizations:
-      - AQEPropagateEmptyRelation: adaptive-query-execution/AQEPropagateEmptyRelation.md
-      - DynamicJoinSelection: adaptive-query-execution/DynamicJoinSelection.md
-    - LogicalQueryStage: adaptive-query-execution/LogicalQueryStage.md
-    - Physical Optimizations:
-      - AQEShuffleReadRule: adaptive-query-execution/AQEShuffleReadRule.md
-      - CoalesceShufflePartitions: adaptive-query-execution/CoalesceShufflePartitions.md
-      - OptimizeShuffleWithLocalRead: adaptive-query-execution/OptimizeShuffleWithLocalRead.md
-      - OptimizeSkewInRebalancePartitions: adaptive-query-execution/OptimizeSkewInRebalancePartitions.md
-      - OptimizeSkewedJoin: adaptive-query-execution/OptimizeSkewedJoin.md
-      - ReuseAdaptiveSubquery: adaptive-query-execution/ReuseAdaptiveSubquery.md
-    - PlanAdaptiveSubqueries: adaptive-query-execution/PlanAdaptiveSubqueries.md
-    - QueryStageExecs:
-      - QueryStageExec: adaptive-query-execution/QueryStageExec.md
-      - ShuffleQueryStageExec: adaptive-query-execution/ShuffleQueryStageExec.md
-    - ShuffleStage: adaptive-query-execution/ShuffleStage.md
-    - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-    - Demo: adaptive-query-execution/demo.md
   - Notable Features:
+    - Adaptive Query Execution:
+      - adaptive-query-execution/index.md
+      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
+      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
+      - AQEUtils: adaptive-query-execution/AQEUtils.md
+      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
+      - Demo: adaptive-query-execution/demo.md
+    - Bucketing: bucketing.md
     - Common Table Expressions: common-table-expressions.md
     - Join Queries:
       - Joins: joins.md
@@ -728,7 +725,6 @@ nav:
         - OnHeapColumnVector: OnHeapColumnVector.md
         - OffHeapColumnVector: OffHeapColumnVector.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
-    - Bucketing: bucketing.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md
       - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md

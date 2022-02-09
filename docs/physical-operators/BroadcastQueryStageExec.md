@@ -1,6 +1,6 @@
 # BroadcastQueryStageExec Physical Operator
 
-`BroadcastQueryStageExec` is a [QueryStageExec](../adaptive-query-execution/QueryStageExec.md).
+`BroadcastQueryStageExec` is a [QueryStageExec](QueryStageExec.md).
 
 ## Creating Instance
 
@@ -21,7 +21,7 @@
 getRuntimeStatistics: Statistics
 ```
 
-`getRuntimeStatistics` is part of the [QueryStageExec](../adaptive-query-execution/QueryStageExec.md#getRuntimeStatistics) abstraction.
+`getRuntimeStatistics` is part of the [QueryStageExec](QueryStageExec.md#getRuntimeStatistics) abstraction.
 
 `getRuntimeStatistics` requests the [BroadcastExchangeLike](#broadcast) operator for the [runtime statistics](BroadcastExchangeLike.md#runtimeStatistics).
 
@@ -51,4 +51,4 @@ newReuseInstance(
 
 `newReuseInstance` creates a new `BroadcastQueryStageExec` with the given `newStageId` and a new [ReusedExchangeExec](ReusedExchangeExec.md) (with the given `newOutput` and the [broadcast](#broadcast)).
 
-`newReuseInstance` is part of the [QueryStageExec](../adaptive-query-execution/QueryStageExec.md#newReuseInstance) abstraction.
+`newReuseInstance` is part of the [QueryStageExec](QueryStageExec.md#newReuseInstance) abstraction.

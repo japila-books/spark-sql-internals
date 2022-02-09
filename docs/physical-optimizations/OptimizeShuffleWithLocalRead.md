@@ -1,6 +1,6 @@
 # OptimizeShuffleWithLocalRead Adaptive Physical Optimization
 
-`OptimizeShuffleWithLocalRead` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](index.md).
+`OptimizeShuffleWithLocalRead` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `OptimizeShuffleWithLocalRead` can be turned on and off using [spark.sql.adaptive.localShuffleReader.enabled](../configuration-properties.md#spark.sql.adaptive.localShuffleReader.enabled) configuration property.
 
@@ -53,9 +53,9 @@ canUseLocalShuffleRead(
 
 `canUseLocalShuffleRead` is `true` when one of the following holds:
 
-1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) with the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) available and the [ShuffleExchangeLike](ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)
+1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) with the [MapOutputStatistics](../physical-operators/ShuffleQueryStageExec.md#mapStats) available and the [ShuffleExchangeLike](../physical-operators/ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)
 
-1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [AQEShuffleReadExec](AQEShuffleReadExec.md) with a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) with the above requirements met (the [MapOutputStatistics](ShuffleQueryStageExec.md#mapStats) is available and the [ShuffleExchangeLike](ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)) and the [shuffleOrigin](../physical-operators/ShuffleExchangeLike.md#shuffleOrigin) of the `ShuffleExchangeLike` is [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
+1. The given [SparkPlan](../physical-operators/SparkPlan.md) is a [AQEShuffleReadExec](../physical-operators/AQEShuffleReadExec.md) with a [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) with the above requirements met (the [MapOutputStatistics](../physical-operators/ShuffleQueryStageExec.md#mapStats) is available and the [ShuffleExchangeLike](../physical-operators/ShuffleQueryStageExec.md#shuffle) is [supported](#isSupported)) and the [shuffleOrigin](../physical-operators/ShuffleExchangeLike.md#shuffleOrigin) of the `ShuffleExchangeLike` is [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
 
 `canUseLocalShuffleRead` is `false` otherwise.
 
@@ -66,11 +66,11 @@ createLocalRead(
   plan: SparkPlan): AQEShuffleReadExec
 ```
 
-`createLocalRead` branches off based on the type of the given [physical operator](../physical-operators/SparkPlan.md) and creates a new [AQEShuffleReadExec](AQEShuffleReadExec.md) (with or without _advisory parallelism_ specified to [determine ShufflePartitionSpecs](#getPartitionSpecs)):
+`createLocalRead` branches off based on the type of the given [physical operator](../physical-operators/SparkPlan.md) and creates a new [AQEShuffleReadExec](../physical-operators/AQEShuffleReadExec.md) (with or without _advisory parallelism_ specified to [determine ShufflePartitionSpecs](#getPartitionSpecs)):
 
-* For [AQEShuffleReadExec](AQEShuffleReadExec.md)s with a [ShuffleQueryStageExec](ShuffleQueryStageExec.md) leaf physical operator, the [advisory parallelism](#getPartitionSpecs) is the size of the [ShufflePartitionSpec](AQEShuffleReadExec.md#partitionSpecs)
+* For [AQEShuffleReadExec](../physical-operators/AQEShuffleReadExec.md)s with a [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md) leaf physical operator, the [advisory parallelism](#getPartitionSpecs) is the size of the [ShufflePartitionSpec](../physical-operators/AQEShuffleReadExec.md#partitionSpecs)
 
-* For [ShuffleQueryStageExec](ShuffleQueryStageExec.md)s, the [advisory parallelism](#getPartitionSpecs) is undefined
+* For [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md)s, the [advisory parallelism](#getPartitionSpecs) is undefined
 
 ### <span id="createProbeSideLocalRead"> createProbeSideLocalRead
 

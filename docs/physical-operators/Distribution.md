@@ -55,7 +55,7 @@ The default `Distribution`s are [UnspecifiedDistribution](UnspecifiedDistributio
 
 Physical Operator | Required Child Distribution
 ------------------|----------------------------
- [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) | [UnspecifiedDistribution](UnspecifiedDistribution.md) or [AQEUtils.getRequiredDistribution](../adaptive-query-execution/AQEUtils.md#getRequiredDistribution)
+ [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) | [UnspecifiedDistribution](UnspecifiedDistribution.md) or [AQEUtils.getRequiredDistribution](../adaptive-query-execution/AQEUtils.md#getRequiredDistribution)
  [BaseAggregateExec](BaseAggregateExec.md) | One of [AllTuples](AllTuples.md), [ClusteredDistribution](ClusteredDistribution.md) and [UnspecifiedDistribution](UnspecifiedDistribution.md)
  [BroadcastHashJoinExec](BroadcastHashJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa
  [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md) | [BroadcastDistribution](BroadcastDistribution.md) with [UnspecifiedDistribution](UnspecifiedDistribution.md) or vice versa

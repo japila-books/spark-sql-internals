@@ -17,8 +17,8 @@
 
 `LogicalQueryStage` is a "target" of the following logical optimizations:
 
-* [AQEPropagateEmptyRelation](AQEPropagateEmptyRelation.md)
-* [DynamicJoinSelection](DynamicJoinSelection.md)
+* [AQEPropagateEmptyRelation](../logical-optimizations/AQEPropagateEmptyRelation.md)
+* [DynamicJoinSelection](../logical-optimizations/DynamicJoinSelection.md)
 
 ## Query Planning
 
@@ -30,7 +30,7 @@
 computeStats(): Statistics
 ```
 
-`computeStats` tries to find the first [QueryStageExec](QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](QueryStageExec.md#computeStats).
+`computeStats` tries to find the first [QueryStageExec](../physical-operators/QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](../physical-operators/QueryStageExec.md#computeStats).
 
 `computeStats` prints out the following DEBUG messages to the logs based on the availability of the statistics.
 

@@ -114,7 +114,7 @@ Executes the physical operator in a single RDD scope (all RDDs created during ex
   * [executeBroadcast](#executeBroadcast) (the input `query` is [doExecuteBroadcast](#doExecuteBroadcast))
   * [executeColumnar](#executeColumnar) (the input `query` is [doExecuteColumnar()](#doExecuteColumnar()))
 * `CodegenSupport` is requested to [produce a Java source code](CodegenSupport.md#produce) of a physical operator (with the input `query` being [doProduce](#doProduce))
-* `QueryStageExec` is requested to [materialize](../adaptive-query-execution/QueryStageExec.md#materialize) (with the input `query` being [doMaterialize](../adaptive-query-execution/QueryStageExec.md##doMaterialize))
+* `QueryStageExec` is requested to [materialize](QueryStageExec.md#materialize) (with the input `query` being [doMaterialize](QueryStageExec.md##doMaterialize))
 
 ### <span id="prepare"> prepare
 
@@ -359,7 +359,7 @@ Internally, `executeBroadcast` calls [doExecuteBroadcast](#doExecuteBroadcast) i
 `executeBroadcast` is used when:
 
 * `SubqueryBroadcastExec` physical operator is requested for `relationFuture`
-* [QueryStageExec](../adaptive-query-execution/QueryStageExec.md) physical operator is requested for [doExecuteBroadcast](../adaptive-query-execution/QueryStageExec.md#doExecuteBroadcast)
+* [QueryStageExec](QueryStageExec.md) physical operator is requested for [doExecuteBroadcast](QueryStageExec.md#doExecuteBroadcast)
 * [DebugExec](DebugExec.md) physical operator is requested for [doExecuteBroadcast](DebugExec.md#doExecuteBroadcast)
 * [ReusedExchangeExec](ReusedExchangeExec.md) physical operator is requested for [doExecuteBroadcast](ReusedExchangeExec.md#doExecuteBroadcast)
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md) physical operator is requested to [doExecute](BroadcastHashJoinExec.md#doExecute), [multipleOutputForOneInput](BroadcastHashJoinExec.md#multipleOutputForOneInput), [prepareBroadcast](BroadcastHashJoinExec.md#prepareBroadcast) and for [doExecuteBroadcast](BroadcastHashJoinExec.md#doExecuteBroadcast)
