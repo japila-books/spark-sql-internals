@@ -187,7 +187,27 @@ createQueryStages(
   plan: SparkPlan): CreateStageResult
 ```
 
-`createQueryStages`...FIXME
+`createQueryStages` checks if the given [SparkPlan](SparkPlan.md) is one of the following:
+
+1. [Exchange](Exchange.md) unary physical operator
+1. [QueryStageExec](QueryStageExec.md) leaf physical operator
+1. Others
+
+The most interesting case is when the given `SparkPlan` is an [Exchange](Exchange.md) unary physical operator.
+
+### <span id="reuseQueryStage"> reuseQueryStage
+
+```scala
+reuseQueryStage(
+  existing: QueryStageExec,
+  exchange: Exchange): QueryStageExec
+```
+
+`reuseQueryStage` requests the given [QueryStageExec](QueryStageExec.md) to [newReuseInstance](QueryStageExec.md#newReuseInstance) (with the [currentStageId](#currentStageId)).
+
+`reuseQueryStage` increments the [currentStageId](#currentStageId).
+
+`reuseQueryStage` [setLogicalLinkForNewQueryStage](#setLogicalLinkForNewQueryStage).
 
 ### <span id="newQueryStage"> Creating QueryStageExec for Exchange
 
@@ -286,18 +306,6 @@ generateTreeString(
 `generateTreeString`...FIXME
 
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
-
-## <span id="reuseQueryStage"> reuseQueryStage
-
-```scala
-reuseQueryStage(
-  existing: QueryStageExec,
-  exchange: Exchange): QueryStageExec
-```
-
-`reuseQueryStage`...FIXME
-
-`reuseQueryStage` is used when `AdaptiveSparkPlanExec` physical operator is requested to [createQueryStages](#createQueryStages).
 
 ## <span id="cleanUpAndThrowException"> cleanUpAndThrowException
 
