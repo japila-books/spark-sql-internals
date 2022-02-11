@@ -48,10 +48,9 @@ a|
 |
 |===
 
-For aggregate functions, you can use the existing spark-sql-basic-aggregation.md[aggregate functions] as window functions, e.g. `sum`, `avg`, `min`, `max` and `count`.
+For aggregate functions, you can use the existing [aggregate functions](basic-aggregation.md) as window functions, e.g. `sum`, `avg`, `min`, `max` and `count`.
 
-[source, scala]
-----
+```text
 // Borrowed from 3.5. Window Functions in PostgreSQL documentation
 // Example of window functions using Scala API
 //
@@ -88,17 +87,17 @@ scala> empsalary.withColumn("avg", avg('salary) over byDepName).show
 |personnel|    2|  3900|           3700.0|
 |personnel|    5|  3500|           3700.0|
 +---------+-----+------+-----------------+
-----
+```
 
 You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<WindowSpec.md#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
 
-After you describe a window you can apply <<functions, window aggregate functions>> like *ranking* functions (e.g. `RANK`), *analytic* functions (e.g. `LAG`), and the regular spark-sql-basic-aggregation.md[aggregate functions], e.g. `sum`, `avg`, `max`.
+After you describe a window you can apply <<functions, window aggregate functions>> like _ranking_ functions (e.g. `RANK`), _analytic_ functions (e.g. `LAG`), and the regular [aggregate functions](basic-aggregation.md), e.g. `sum`, `avg`, `max`.
 
 NOTE: Window functions are supported in structured queries using <<sql, SQL>> and [Column](Column.md)-based expressions.
 
-Although similar to spark-sql-basic-aggregation.md[aggregate functions], a window function does not group rows into a single output row and retains their separate identities. A window function can access rows that are linked to the current row.
+Although similar to [aggregate functions](basic-aggregation.md), a window function does not group rows into a single output row and retains their separate identities. A window function can access rows that are linked to the current row.
 
-NOTE: The main difference between window aggregate functions and spark-sql-functions.md#aggregate-functions[aggregate functions] with spark-sql-basic-aggregation.md[grouping operators] is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
+NOTE: The main difference between window aggregate functions and spark-sql-functions.md#aggregate-functions[aggregate functions] with [grouping operators](basic-aggregation.md) is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
 
 TIP: See <<examples, Examples>> section in this document.
 

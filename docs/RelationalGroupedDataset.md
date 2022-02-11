@@ -7,7 +7,7 @@
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
-* [groupBy](spark-sql-basic-aggregation.md#groupBy)
+* [groupBy](basic-aggregation.md#groupBy)
 * [rollup](multi-dimensional-aggregation.md#rollup)
 * [cube](multi-dimensional-aggregation.md#cube)
 * [pivot](#pivot)
@@ -164,7 +164,7 @@ NOTE: `aggregateNumericColumns` is used when the following `RelationalGroupedDat
 * [[groupingExprs]] Grouping expressions/Expression.md[expressions]
 * [[groupType]] Group type (to indicate the "source" operator)
 
-** `GroupByType` for spark-sql-basic-aggregation.md#groupBy[groupBy]
+** `GroupByType` for [groupBy](basic-aggregation.md#groupBy)
 
 ** `CubeType`
 
@@ -187,12 +187,11 @@ pivot(pivotColumn: Column, values: Seq[Any]): RelationalGroupedDataset // <3>
 
 `pivot` pivots on a `pivotColumn` column, i.e. adds new columns per distinct values in `pivotColumn`.
 
-NOTE: `pivot` is only supported after spark-sql-basic-aggregation.md#groupBy[groupBy] operation.
+NOTE: `pivot` is only supported after [groupBy](basic-aggregation.md#groupBy) operation.
 
 NOTE: Only one `pivot` operation is supported on a `RelationalGroupedDataset`.
 
-[source, scala]
-----
+```text
 val visits = Seq(
   (0, "Warsaw", 2015),
   (1, "Warsaw", 2016),
@@ -232,7 +231,7 @@ scala> visits
 |Warsaw|   1|
 |Boston|null|
 +------+----+
-----
+```
 
 IMPORTANT: Use `pivot` with a list of distinct values to pivot on so Spark does not have to compute the list itself (and run three extra "scanning" jobs).
 

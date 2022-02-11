@@ -5,14 +5,13 @@
 !!! note
     [RelationalGroupedDataset](RelationalGroupedDataset.md) is used for untyped ``Row``-based aggregates.
 
-`KeyValueGroupedDataset` is created using spark-sql-basic-aggregation.md#groupByKey[Dataset.groupByKey] operator.
+`KeyValueGroupedDataset` is created using [Dataset.groupByKey](basic-aggregation.md#groupByKey) operator.
 
-[source, scala]
-----
+```text
 val dataset: Dataset[Token] = ...
 scala> val tokensByName = dataset.groupByKey(_.name)
 tokensByName: org.apache.spark.sql.KeyValueGroupedDataset[String,Token] = org.apache.spark.sql.KeyValueGroupedDataset@1e3aad46
-----
+```
 
 [[operators]]
 .KeyValueGroupedDataset's Aggregate Operators (KeyValueGroupedDataset API)

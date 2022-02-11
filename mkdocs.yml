@@ -886,7 +886,7 @@ nav:
       - Column Operators: spark-sql-column-operators.md
       - TypedColumn: TypedColumn.md
     - Basic Aggregation:
-      - spark-sql-basic-aggregation.md
+      - Basic Aggregation: basic-aggregation.md
       - RelationalGroupedDataset: RelationalGroupedDataset.md
       - KeyValueGroupedDataset: KeyValueGroupedDataset.md
     - Window Aggregation:
