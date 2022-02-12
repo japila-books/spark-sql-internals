@@ -3836,27 +3836,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/sql/CatalogV2Implicits/</loc>
-         <lastmod>2022-02-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/sql/CatalystSqlParser/</loc>
-         <lastmod>2022-02-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/sql/Expressions/</loc>
-         <lastmod>2022-02-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/sql/FieldReference/</loc>
-         <lastmod>2022-02-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/sql/LogicalExpressions/</loc>
          <lastmod>2022-02-12</lastmod>
          <changefreq>daily</changefreq>
     </url>
