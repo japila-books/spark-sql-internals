@@ -1,14 +1,14 @@
 # AnalyzeTable
 
-`AnalyzeTable` is a [Command](Command.md) for [ANALYZE TABLE](../sql/AstBuilder.md#visitAnalyze) SQL statement.
+`AnalyzeTable` is a `UnaryCommand` (and a [Logical Command](Command.md)) for [ANALYZE TABLE](../sql/AstBuilder.md#visitAnalyze) SQL statement.
 
 ## Creating Instance
 
 `AnalyzeTable` takes the following to be created:
 
-* <span id="child"> Child [Logical Operator](LogicalPlan.md)
+* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
 * <span id="partitionSpec"> Partitions
-* <span id="noScan"> `noScan` Flag
+* <span id="noScan"> `noScan` flag
 
 `AnalyzeTable` is created when:
 

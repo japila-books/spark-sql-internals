@@ -16,12 +16,27 @@
 
 ### <span id="visitAnalyze"> visitAnalyze
 
-Creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) or [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) logical operator
+Creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) or [AnalyzeTable](../logical-operators/AnalyzeTable.md) logical operators
 
 ```text
 ANALYZE TABLE multipartIdentifier partitionSpec? COMPUTE STATISTICS
-  (identifier | FOR COLUMNS identifierSeq | FOR ALL COLUMNS)?
+  (NOSCAN | FOR COLUMNS identifierSeq | FOR ALL COLUMNS)?
+
+partitionSpec
+    : PARTITION '(' partitionVal (',' partitionVal)* ')'
+    ;
+
+partitionVal
+    : identifier (EQ constant)?
+    ;
+
+EQ  : '=' | '==';
 ```
+
+`visitAnalyze` creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) when one of the following is used:
+
+* `FOR COLUMNS identifierSeq`
+* `FOR ALL COLUMNS`
 
 ANTLR labeled alternative: `#analyze`
 

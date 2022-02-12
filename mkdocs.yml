@@ -206,18 +206,6 @@ nav:
       - SparkOptimizer: SparkOptimizer.md
       - QueryPlanningTracker: QueryPlanningTracker.md
     - SharedState: SharedState.md
-    - SQL Support:
-      - SQL Parsing Framework: sql/index.md
-      - ParserInterface: sql/ParserInterface.md
-      - AbstractSqlParser: sql/AbstractSqlParser.md
-      - AstBuilder: sql/AstBuilder.md
-      - CatalystSqlParser: sql/CatalystSqlParser.md
-      - SparkSqlParser: sql/SparkSqlParser.md
-      - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
-      - CatalogV2Implicits: sql/CatalogV2Implicits.md
-      - LogicalExpressions: sql/LogicalExpressions.md
-      - Expressions: sql/Expressions.md
-      - FieldReference: sql/FieldReference.md
     - Statistics and Hints:
       - Statistics: logical-operators/Statistics.md
       - LogicalPlanStats: logical-operators/LogicalPlanStats.md
@@ -276,6 +264,7 @@ nav:
       - InsertIntoTable: logical-operators/InsertIntoTable.md
       - Join: logical-operators/Join.md
       - LeafNode: logical-operators/LeafNode.md
+      - LeafRunnableCommand: logical-operators/LeafRunnableCommand.md
       - LocalRelation: logical-operators/LocalRelation.md
       - LogicalPlan: logical-operators/LogicalPlan.md
       - LogicalQueryStage: logical-operators/LogicalQueryStage.md
@@ -687,6 +676,18 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
+  - SQL:
+    - SQL Parsing Framework: sql/index.md
+    - ParserInterface: sql/ParserInterface.md
+    - AbstractSqlParser: sql/AbstractSqlParser.md
+    - AstBuilder: sql/AstBuilder.md
+    - CatalystSqlParser: sql/CatalystSqlParser.md
+    - SparkSqlParser: sql/SparkSqlParser.md
+    - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
+    - CatalogV2Implicits: sql/CatalogV2Implicits.md
+    - LogicalExpressions: sql/LogicalExpressions.md
+    - Expressions: sql/Expressions.md
+    - FieldReference: sql/FieldReference.md
   - Notable Features:
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
