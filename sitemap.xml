@@ -2691,6 +2691,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/LeafRunnableCommand/</loc>
+         <lastmod>2022-02-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/LocalRelation/</loc>
          <lastmod>2022-02-12</lastmod>
          <changefreq>daily</changefreq>
