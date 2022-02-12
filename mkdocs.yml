@@ -698,6 +698,11 @@ nav:
       - Demo: adaptive-query-execution/demo.md
     - Bucketing: bucketing.md
     - Common Table Expressions: common-table-expressions.md
+    - Cost-Based Optimization:
+      - Cost-Based Optimization: cost-based-optimization.md
+      - CatalogStatistics: CatalogStatistics.md
+      - ColumnStat: ColumnStat.md
+      - CommandUtils: CommandUtils.md
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
@@ -716,7 +721,7 @@ nav:
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md
-    - Hive Integration: spark-sql-hive-integration.md
+    - Hive Integration: hive-integration.md
     - Vectorized Parquet Decoding:
       - Vectorized Parquet Decoding: vectorized-parquet-reader.md
       - ColumnVectors:
@@ -745,11 +750,6 @@ nav:
       - Vectorized Query Execution: vectorized-query-execution.md
       - ColumnarBatch: ColumnarBatch.md
     - Subqueries: spark-sql-subqueries.md
-    - Cost-Based Optimization:
-      - Cost-Based Optimization: cost-based-optimization.md
-      - CatalogStatistics: CatalogStatistics.md
-      - ColumnStat: ColumnStat.md
-      - CommandUtils: CommandUtils.md
     - Catalyst DSL:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
@@ -842,7 +842,6 @@ nav:
   - High-Level APIs:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
-    - SparkSessionExtensions: SparkSessionExtensions.md
     - ExecutionListenerManager: ExecutionListenerManager.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
@@ -851,6 +850,9 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
+    - KeyValueGroupedDataset: KeyValueGroupedDataset.md
+    - RelationalGroupedDataset: RelationalGroupedDataset.md
+    - SparkSessionExtensions: SparkSessionExtensions.md
   - Demos:
     - demo/index.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
@@ -887,12 +889,10 @@ nav:
       - TypedColumn: TypedColumn.md
     - Basic Aggregation:
       - Basic Aggregation: basic-aggregation.md
-      - RelationalGroupedDataset: RelationalGroupedDataset.md
-      - KeyValueGroupedDataset: KeyValueGroupedDataset.md
     - Window Aggregation:
-      - spark-sql-window-aggregation.md
-      - WindowSpec.md
-      - spark-sql-WindowSpec-Window.md
+      - Window Aggregation: window-aggregation.md
+      - WindowSpec: WindowSpec.md
+      - Window: WindowSpec-Window.md
     - Standard Functions:
       - spark-sql-functions.md
       - spark-sql-aggregate-functions.md
@@ -909,8 +909,8 @@ nav:
       - StructField: types/StructField.md
       - StructType: types/StructType.md
     - Caching and Persistence:
-      - spark-sql-caching-and-persistence.md
-      - spark-sql-caching-webui-storage.md
+      - Caching and Persistence: caching-and-persistence.md
+      - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
     - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
     - AggregationIterators:
@@ -969,8 +969,8 @@ nav:
       - DataSinks: hive/DataSinks.md
       - HiveFileFormat: hive/HiveFileFormat.md
       - HiveClient:
-        - hive/HiveClient.md
-        - hive/HiveClientImpl.md
+        - HiveClient: hive/HiveClient.md
+        - HiveClientImpl: hive/HiveClientImpl.md
       - HiveUtils: hive/HiveUtils.md
       - IsolatedClientLoader: hive/IsolatedClientLoader.md
       - HiveTableRelation: hive/HiveTableRelation.md

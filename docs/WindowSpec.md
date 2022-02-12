@@ -13,7 +13,7 @@ title: WindowSpec
 
 * [[frame]] *Frame Specification* (`WindowFrame`) which defines the rows to be included in the frame for the current row, based on their relative position to the current row. For example, _"the three rows preceding the current row to the current row"_ describes a frame including the current input row and three rows appearing before the current row.
 
-You use [Window object](spark-sql-WindowSpec-Window.md) to create a `WindowSpec`.
+You use [Window object](WindowSpec-Window.md) to create a `WindowSpec`.
 
 ```text
 import org.apache.spark.sql.expressions.Window

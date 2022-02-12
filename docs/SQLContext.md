@@ -333,7 +333,7 @@ sql(sqlText: String): DataFrame
 
 `sql` executes the `sqlText` SQL query.
 
-NOTE: It supports Hive statements through spark-sql-hive-integration.md[HiveContext].
+NOTE: It supports Hive statements through [HiveContext](hive-integration.md).
 
 ```
 scala> sql("set spark.sql.hive.version").show(false)

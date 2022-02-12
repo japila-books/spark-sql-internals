@@ -1,6 +1,4 @@
-title: Window Utility
-
-# Window Utility Object -- Defining Window Specification
+# Window Utility -- Defining Window Specification
 
 `Window` utility object is a <<methods, set of static methods>> to define a <<WindowSpec.md#, window specification>>.
 

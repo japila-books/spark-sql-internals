@@ -13,7 +13,7 @@ spark.sharedState.cacheManager
 
 ## Dataset.cache and persist Operators
 
-A structured query (as [Dataset](Dataset.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](spark-sql-caching-and-persistence.md#cache) or [Dataset.persist](spark-sql-caching-and-persistence.md#persist) high-level operators.
+A structured query (as [Dataset](Dataset.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](caching-and-persistence.md#cache) or [Dataset.persist](caching-and-persistence.md#persist) high-level operators.
 
 ## <span id="cachedData"><span id="CachedData"> Cached Queries
 

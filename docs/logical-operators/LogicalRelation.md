@@ -84,6 +84,20 @@ scala> println(logicalPlan.simpleString)
 Relation[value#2] text
 ```
 
+## <span id="computeStats"> computeStats
+
+```scala
+computeStats(): Statistics
+```
+
+`computeStats` takes the optional [CatalogTable](#catalogTable).
+
+If available, `computeStats` requests the `CatalogTable` for the [CatalogStatistics](../CatalogTable.md#stats) that, if available, is requested to [toPlanStats](#toPlanStats) (with the `planStatsEnabled` flag enabled when either [spark.sql.cbo.enabled](../SQLConf.md#cboEnabled) or [spark.sql.cbo.planStats.enabled](../SQLConf.md#planStatsEnabled) is enabled).
+
+Otherwise, `computeStats` creates a [Statistics](Statistics.md) with the `sizeInBytes` only to be the [sizeInBytes](../BaseRelation.md#sizeInBytes) of the [BaseRelation](#relation).
+
+`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+
 ## Demo
 
 The following are two logically-equivalent batch queries described using different Spark APIs: Scala and SQL.

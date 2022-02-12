@@ -36,4 +36,5 @@ computeStats(): Statistics
 
 `computeStats` is used when:
 
+* `BasicStatsPlanVisitor` is requested for the [default size statistics](BasicStatsPlanVisitor.md#default) (for `LeafNode`s)
 * `SizeInBytesOnlyStatsPlanVisitor` is requested for the [default size statistics](SizeInBytesOnlyStatsPlanVisitor.md#default)

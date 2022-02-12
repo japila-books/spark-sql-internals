@@ -209,7 +209,7 @@ NOTE: SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) are 
 
 You can request the ["untyped" view](spark-sql-dataset-operators.md#toDF) of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
-The default storage level for `Datasets` is spark-rdd-caching.md[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however spark-sql-caching-and-persistence.md#persist[persist a `Dataset`].
+The default storage level for `Datasets` is spark-rdd-caching.md[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however [persist a `Dataset`](caching-and-persistence.md#persist).
 
 NOTE: Spark 2.0 has introduced a new query model called spark-structured-streaming.md[Structured Streaming] for continuous incremental execution of structured queries. That made possible to consider Datasets a static and bounded as well as streaming and unbounded data sets with a single unified API for different execution models.
 

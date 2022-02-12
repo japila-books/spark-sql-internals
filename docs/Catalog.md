@@ -23,7 +23,7 @@ cacheTable(
 
 Caches a given table
 
-Used for SQL's [CACHE TABLE](spark-sql-caching-and-persistence.md#cache-table) and `AlterTableRenameCommand` command.
+Used for SQL's [CACHE TABLE](caching-and-persistence.md#cache-table) and `AlterTableRenameCommand` command.
 
 ### Others
 
