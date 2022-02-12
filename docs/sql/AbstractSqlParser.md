@@ -1,8 +1,6 @@
-# AbstractSqlParser &mdash; Base SQL Parsing Infrastructure
+# AbstractSqlParser
 
 `AbstractSqlParser` is an [extension](#contract) of the [ParserInterface](ParserInterface.md) abstraction for [SQL parsers](#implementations) that delegate parsing to an [AstBuilder](#astBuilder).
-
-`AbstractSqlParser` is the foundation of the [SQL Parsing Framework](index.md).
 
 ## AstBuilder
 
@@ -12,11 +10,14 @@ astBuilder: AstBuilder
 
 [AstBuilder](AstBuilder.md) for parsing SQL statements
 
+Used when:
+
+* `AbstractSqlParser` is requested to [parseDataType](#parseDataType), [parseExpression](#parseExpression), [parseTableIdentifier](#parseTableIdentifier), [parseFunctionIdentifier](#parseFunctionIdentifier), [parseMultipartIdentifier](#parseMultipartIdentifier), [parseTableSchema](#parseTableSchema), [parsePlan](#parsePlan)
+
 ## Implementations
 
-* [CatalystSqlParser](CatalystSqlParser.md) for parsing canonical textual representation of [data types](../types/DataType.md) and [schema](../types/StructType.md)
-
-* [SparkSqlParser](SparkSqlParser.md) that is the default SQL parser in [SessionState](../SessionState.md#sqlParser)
+* [CatalystSqlParser](CatalystSqlParser.md)
+* [SparkSqlParser](SparkSqlParser.md)
 
 ## Setting Up SqlBaseLexer and SqlBaseParser for Parsing
 
@@ -44,3 +45,14 @@ Parsing command: [command]
 In case of parsing errors, `parse` reports a `ParseException`.
 
 `parse` is used in all the `parse` methods.
+
+## <span id="parsePlan"> parsePlan
+
+```scala
+parsePlan(
+  sqlText: String): LogicalPlan
+```
+
+`parsePlan` [parses](#parse) the given SQL text (that requests the [AstBuilder](#astBuilder) to [visitSingleStatement](AstBuilder.md#visitSingleStatement) to produce a [LogicalPlan](../logical-operators/LogicalPlan.md)).
+
+`parsePlan` is part of the [ParserInterface](ParserInterface.md#parsePlan) abstraction.

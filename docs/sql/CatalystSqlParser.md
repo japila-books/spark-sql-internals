@@ -1,6 +1,8 @@
-# CatalystSqlParser &mdash; Parser for DataTypes and StructTypes
+# CatalystSqlParser
 
-`CatalystSqlParser` is an [AbstractSqlParser](AbstractSqlParser.md) that uses [AstBuilder](AstBuilder.md) for parsing SQL statements.
+`CatalystSqlParser` is an [AbstractSqlParser](AbstractSqlParser.md) for [DataType](../types/DataType.md)s.
+
+`CatalystSqlParser` uses [AstBuilder](AstBuilder.md) for parsing SQL texts.
 
 ```text
 import org.apache.spark.sql.catalyst.parser.CatalystSqlParser
@@ -31,23 +33,13 @@ It is also used in `HiveClientImpl` (when converting columns from Hive to Spark)
 
 ## Creating Instance
 
-CatalystSqlParser takes the following to be created:
+`CatalystSqlParser` takes the following to be created:
 
 * [SQLConf](../SQLConf.md)
 
-CatalystSqlParser is created when:
+`CatalystSqlParser` is created when:
 
-* [SessionCatalog](../SessionCatalog.md) is created (as the [default ParserInterface](../SessionCatalog.md#parser))
-
-* CatalogV2Implicits utility is requested for a [SQL parser](CatalogV2Implicits.md#catalystSqlParser)
-
-* LogicalExpressions utility is requested for a [SQL parser](LogicalExpressions.md#parser)
-
-## Accessing CatalystSqlParser
-
-```scala
-// FIXME:
-```
+* [SessionCatalog](../SessionCatalog.md#parser) is created
 
 ## Logging
 
@@ -55,7 +47,7 @@ Enable `ALL` logging level for `org.apache.spark.sql.catalyst.parser.CatalystSql
 
 Add the following line to `conf/log4j.properties`:
 
-```
+```text
 log4j.logger.org.apache.spark.sql.catalyst.parser.CatalystSqlParser=ALL
 ```
 

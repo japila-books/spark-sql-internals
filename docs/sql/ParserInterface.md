@@ -1,6 +1,6 @@
-# ParserInterface &mdash; SQL Parsers
+# ParserInterface
 
-`ParserInterface` is the [abstraction](#contract) of [SQL parsers](#extensions) that can convert (_parse_) textual representation of SQL statements (_SQL text_) into Spark SQL's relational entities (e.g. [Catalyst expressions](#parseExpression), [logical operators](#parsePlan), [table](#parseTableIdentifier) and [function](#parseFunctionIdentifier) identifiers, [table schema](#parseTableSchema), and [data types](#parseDataType)).
+`ParserInterface` is the [abstraction](#contract) of [SQL parsers](#implementations) that can convert (_parse_) textual representation of SQL statements (_SQL text_) into Spark SQL's relational entities (e.g. [Catalyst expressions](#parseExpression), [logical operators](#parsePlan), [table](#parseTableIdentifier) and [function](#parseFunctionIdentifier) identifiers, [table schema](#parseTableSchema), and [data types](#parseDataType)).
 
 ## Accessing ParserInterface
 
@@ -23,25 +23,7 @@ parseDataType(
   sqlText: String): DataType
 ```
 
-Parses a SQL text to a [DataType](../types/DataType.md)
-
-Used when:
-
-* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
-
-* `StructType` is requested to [add a field](../types/StructType.md#add)
-
-* [Column.cast](../Column.md#cast)
-
-* `HiveClientImpl` utility is requested to [getSparkSQLDataType](../hive/HiveClientImpl.md#getSparkSQLDataType)
-
-* `OrcFileOperator` is requested to `readSchema`
-
-* `PythonSQLUtils` is requested to `parseDataType`
-
-* `SQLUtils` is requested to `createStructField`
-
-* `OrcUtils` is requested to `readSchema`
+Creates a [DataType](../types/DataType.md) from the given SQL text
 
 ### <span id="parseExpression"> parseExpression
 
@@ -50,13 +32,12 @@ parseExpression(
   sqlText: String): Expression
 ```
 
-Parses a SQL text to an [Expression](../expressions/Expression.md)
+Creates an [Expression](../expressions/Expression.md) from the given SQL text
 
-Used in the following:
+Used when:
 
-* Dataset operators: <<spark-sql-dataset-operators.md#selectExpr, Dataset.selectExpr>>, <<spark-sql-dataset-operators.md#filter, Dataset.filter>> and <<spark-sql-dataset-operators.md#where, Dataset.where>>
-
-* <<spark-sql-functions.md#expr, expr>> standard function
+* `Dataset` is requested to [selectExpr](../spark-sql-dataset-operators.md#selectExpr), [filter](../spark-sql-dataset-operators.md#filter), [where](../spark-sql-dataset-operators.md#where)
+* [expr](../spark-sql-functions.md#expr) standard function is used
 
 ### <span id="parseFunctionIdentifier"> parseFunctionIdentifier
 
@@ -65,7 +46,7 @@ parseFunctionIdentifier(
   sqlText: String): FunctionIdentifier
 ```
 
-Parses a SQL text to a `FunctionIdentifier`
+Creates a `FunctionIdentifier` from the given SQL text
 
 Used when:
 
@@ -80,14 +61,12 @@ parseMultipartIdentifier(
   sqlText: String): Seq[String]
 ```
 
-Parses a SQL text to a multi-part identifier
+Creates a multi-part identifier from the given SQL text
 
 Used when:
 
-* `CatalogV2Implicits` utility is requested to [parseColumnPath](CatalogV2Implicits.md#parseColumnPath)
-
-* `LogicalExpressions` utility is requested to [parseReference](LogicalExpressions.md#parseReference)
-
+* `CatalogV2Implicits` utility is requested to `parseColumnPath`
+* `LogicalExpressions` utility is requested to `parseReference`
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable)
 
 * [DataFrameWriterV2](../DataFrameWriterV2.md) is created (and requested for [tableName](../DataFrameWriterV2.md#tableName))
@@ -101,22 +80,12 @@ parsePlan(
   sqlText: String): LogicalPlan
 ```
 
-Parses a SQL text to a [LogicalPlan](../logical-operators/LogicalPlan.md)
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) from the given SQL text
 
 Used when:
 
-* `SessionCatalog` is requested to [look up a relation (table or view) in catalogs](../SessionCatalog.md#lookupRelation)
-
-* `SparkSession` is requested to <<SparkSession.md#sql, execute a SQL query (aka SQL Mode)>>
-
-### <span id="parseRawDataType"> parseRawDataType
-
-```scala
-parseRawDataType(
-  sqlText: String): DataType
-```
-
-Used when...FIXME
+* `SessionCatalog` is requested to [fromCatalogTable](../SessionCatalog.md#fromCatalogTable)
+* `SparkSession` is requested to [execute a SQL query](../SparkSession.md#sql)
 
 ### <span id="parseTableIdentifier"> parseTableIdentifier
 
@@ -125,7 +94,7 @@ parseTableIdentifier(
   sqlText: String): TableIdentifier
 ```
 
-Parses a SQL text to a `TableIdentifier`
+Creates a `TableIdentifier` from the given SQL text
 
 Used when:
 
@@ -146,16 +115,8 @@ parseTableSchema(
   sqlText: String): StructType
 ```
 
-Parses a SQL text to a [StructType](../types/StructType.md)
+Creates a [StructType](../types/StructType.md) from the given SQL text
 
-Used when:
+## Implementations
 
-* `DataType` utility is requested to [convert a DDL into a DataType (DataType.fromDDL)](../types/DataType.md#fromDDL)
-
-* `StructType` utility is requested to [create a StructType for a given DDL-formatted string (StructType.fromDDL)](../types/StructType.md#fromDDL)
-
-* `JdbcUtils` utility is requested to `parseUserSpecifiedCreateTableColumnTypes` and `getCustomSchema`
-
-## Extensions
-
-[AbstractSqlParser](AbstractSqlParser.md) is the base extension of the `ParserInterface` abstraction.
+* [AbstractSqlParser](AbstractSqlParser.md)

@@ -677,17 +677,13 @@ nav:
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
   - SQL:
-    - SQL Parsing Framework: sql/index.md
+    - sql/index.md
     - ParserInterface: sql/ParserInterface.md
     - AbstractSqlParser: sql/AbstractSqlParser.md
     - AstBuilder: sql/AstBuilder.md
     - CatalystSqlParser: sql/CatalystSqlParser.md
     - SparkSqlParser: sql/SparkSqlParser.md
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
-    - CatalogV2Implicits: sql/CatalogV2Implicits.md
-    - LogicalExpressions: sql/LogicalExpressions.md
-    - Expressions: sql/Expressions.md
-    - FieldReference: sql/FieldReference.md
   - Notable Features:
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
