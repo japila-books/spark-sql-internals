@@ -2,7 +2,7 @@
 
 **Window aggregate functions** (aka **window functions** or **windowed aggregates**) are functions that perform a calculation over a group of records called **window** that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
-In other words, when executed, a window function computes a value for each and every row in a window (per [window specification](WindowSpec.md)).
+In other words, when executed, a window function computes a value for each and every row in a window (per [window specification](window-functions/WindowSpec.md)).
 
 Window functions are also called **over functions** due to how they are applied using [over](Column.md#over) operator.
 
@@ -89,7 +89,7 @@ scala> empsalary.withColumn("avg", avg('salary) over byDepName).show
 +---------+-----+------+-----------------+
 ```
 
-You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<WindowSpec.md#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
+You describe a window using the convenient factory methods in <<Window-object, Window object>> that create a <<window-functions/WindowSpec.md#, window specification>> that you can further refine with *partitioning*, *ordering*, and *frame boundaries*.
 
 After you describe a window you can apply <<functions, window aggregate functions>> like _ranking_ functions (e.g. `RANK`), _analytic_ functions (e.g. `LAG`), and the regular [aggregate functions](basic-aggregation.md), e.g. `sum`, `avg`, `max`.
 
@@ -108,7 +108,7 @@ You can mark a function _window_ by `OVER` clause after a function in SQL, e.g. 
 
 === [[Window-object]] Window object
 
-`Window` object provides functions to define windows (as [WindowSpec](WindowSpec.md) instances).
+`Window` object provides functions to define windows (as [WindowSpec](window-functions/WindowSpec.md) instances).
 
 `Window` object lives in `org.apache.spark.sql.expressions` package. Import it to use `Window` functions.
 
@@ -116,7 +116,7 @@ You can mark a function _window_ by `OVER` clause after a function in SQL, e.g. 
 import org.apache.spark.sql.expressions.Window
 ```
 
-There are two families of the functions available in `Window` object that create [WindowSpec](WindowSpec.md) instance for one or many [Column](Column.md) instances:
+There are two families of the functions available in `Window` object that create [WindowSpec](window-functions/WindowSpec.md) instance for one or many [Column](Column.md) instances:
 
 * [partitionBy](#partitionBy)
 * [orderBy](#orderBy)
@@ -195,7 +195,7 @@ scala> empsalary.select('*, rankByDepname as 'rank).show
 rangeBetween(start: Long, end: Long): WindowSpec
 ----
 
-`rangeBetween` creates a <<WindowSpec.md#, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
+`rangeBetween` creates a <<window-functions/WindowSpec.md#, WindowSpec>> with the frame boundaries from `start` (inclusive) to `end` (inclusive).
 
 NOTE: It is recommended to use `Window.unboundedPreceding`, `Window.unboundedFollowing` and `Window.currentRow` to describe the frame boundaries when a frame is unbounded preceding, unbounded following and at current row, respectively.
 
@@ -229,12 +229,12 @@ Types of frames:
 * `ROW` - based on _physical offsets_ from the position of the current input row
 * `RANGE` - based on _logical offsets_ from the position of the current input row
 
-In the current implementation of <<WindowSpec.md#, WindowSpec>> you can use two methods to define a frame:
+In the current implementation of <<window-functions/WindowSpec.md#, WindowSpec>> you can use two methods to define a frame:
 
 * `rowsBetween`
 * `rangeBetween`
 
-See <<WindowSpec.md#, WindowSpec>> for their coverage.
+See <<window-functions/WindowSpec.md#, WindowSpec>> for their coverage.
 
 === [[sql]] Window Operators in SQL Queries
 

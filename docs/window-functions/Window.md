@@ -1,6 +1,8 @@
-# Window Utility -- Defining Window Specification
+# Window Utility
 
-`Window` utility object is a <<methods, set of static methods>> to define a <<WindowSpec.md#, window specification>>.
+`Window` utility allows to define a [WindowSpec](WindowSpec.md).
+
+## Review Me
 
 [[methods]]
 .Window API
@@ -83,18 +85,6 @@ unboundedPreceding: Long
 Value representing the first row in a partition (equivalent to "UNBOUNDED PRECEDING" in SQL) that is used to define <<WindowSpec.md#frame, frame boundaries>>.
 |===
 
-[source, scala]
-----
-import org.apache.spark.sql.expressions.Window
-import org.apache.spark.sql.functions.{currentRow, lit}
-val windowSpec = Window
-  .partitionBy($"orderId")
-  .orderBy($"time")
-  .rangeBetween(currentRow, lit(1))
-scala> :type windowSpec
-org.apache.spark.sql.expressions.WindowSpec
-----
-
 === [[spec]] Creating "Empty" WindowSpec -- `spec` Internal Method
 
 ```scala
@@ -105,5 +95,5 @@ spec: WindowSpec
 
 `spec` is used when:
 
-* [Column.over](Column.md#over) operator is used (with no `WindowSpec`)
+* [Column.over](../Column.md#over) operator is used (with no `WindowSpec`)
 * `Window` utility object is requested to [partitionBy](#partitionBy), [orderBy](#orderBy), [rowsBetween](#rowsBetween) and [rangeBetween](#rangeBetween)

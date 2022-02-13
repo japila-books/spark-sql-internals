@@ -4,7 +4,7 @@
 
 `WindowExpression` is [created](#creating-instance) when:
 
-* `WindowSpec` is requested to [withAggregate](../WindowSpec.md#withAggregate) (when [Column.over](../Column.md#over) operator is used)
+* `WindowSpec` is requested to [withAggregate](../window-functions/WindowSpec.md#withAggregate) (when [Column.over](../Column.md#over) operator is used)
 
 * [WindowsSubstitution](../logical-analysis-rules/WindowsSubstitution.md) logical evaluation rule is executed (with [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) logical operators with `UnresolvedWindowExpression` expressions)
 

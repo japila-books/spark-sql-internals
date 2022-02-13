@@ -850,6 +850,10 @@ nav:
     - KeyValueGroupedDataset: KeyValueGroupedDataset.md
     - RelationalGroupedDataset: RelationalGroupedDataset.md
     - SparkSessionExtensions: SparkSessionExtensions.md
+    - Window Functions:
+      - window-functions/index.md
+      - Window: window-functions/Window.md
+      - WindowSpec: window-functions/WindowSpec.md
   - Demos:
     - demo/index.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
@@ -886,10 +890,6 @@ nav:
       - TypedColumn: TypedColumn.md
     - Basic Aggregation:
       - Basic Aggregation: basic-aggregation.md
-    - Window Aggregation:
-      - Window Aggregation: window-aggregation.md
-      - WindowSpec: WindowSpec.md
-      - Window: WindowSpec-Window.md
     - Standard Functions:
       - spark-sql-functions.md
       - spark-sql-aggregate-functions.md
