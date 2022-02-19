@@ -639,6 +639,7 @@ nav:
       - LogicalQueryStageStrategy: execution-planning-strategies/LogicalQueryStageStrategy.md
       - SpecialLimits: execution-planning-strategies/SpecialLimits.md
       - SparkStrategies: execution-planning-strategies/SparkStrategies.md
+      - Window: execution-planning-strategies/Window.md
       - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
     - Physical Optimizations:
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
@@ -852,6 +853,7 @@ nav:
     - SparkSessionExtensions: SparkSessionExtensions.md
     - Window Functions:
       - window-functions/index.md
+      - RangeFrame: window-functions/RangeFrame.md
       - Window: window-functions/Window.md
       - WindowSpec: window-functions/WindowSpec.md
   - Demos:

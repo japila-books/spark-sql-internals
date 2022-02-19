@@ -27,6 +27,34 @@ The ordering could be ascending (`ASC` in SQL or `asc` in Scala) or descending (
 
 ### <span id="frame"> Frame Specification
 
-Frame specification is a `WindowFrame` that defines the rows to be included in the frame for the current row, based on their relative position to the current row.
+Frame specification is a `WindowFrame` that defines the rows to include in the frame for the current row, based on their relative position to the current row.
+
+Frame specification is defined using [rowsBetween](#rowsBetween) and [rangeBetween](#rangeBetween) operators.
 
 For example, _"the three rows preceding the current row to the current row"_ describes a frame including the current input row and three rows appearing before the current row.
+
+Special values:
+
+* `Long.MinValue` for `Window.unboundedPreceding`
+* `0` for `Window.currentRow`
+* `Long.MaxValue` for `Window.unboundedFollowing`
+
+## <span id="rowsBetween"> rowsBetween
+
+```scala
+rowsBetween(
+  start: Long,
+  end: Long): WindowSpec
+```
+
+`rowsBetween` creates a [WindowSpec](#creating-instance) with a `SpecifiedWindowFrame` boundary [frame](#frame) (of `RowFrame` type) from the given`start` and `end` (both inclusive).
+
+## <span id="rangeBetween"> rangeBetween
+
+```scala
+rangeBetween(
+  start: Long,
+  end: Long): WindowSpec
+```
+
+`rangeBetween` creates a [WindowSpec](#creating-instance) with a `SpecifiedWindowFrame` boundary [frame](#frame) (of [RangeFrame](RangeFrame.md) type) from the given`start` and `end` (both inclusive).

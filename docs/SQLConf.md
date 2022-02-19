@@ -978,14 +978,18 @@ Used when `CodegenSupport` is requested to [consume](physical-operators/CodegenS
 
 Used when `WholeStageCodegenExec` is requested to [generate the Java source code for the child physical plan subtree](physical-operators/WholeStageCodegenExec.md#doCodeGen) (when [created](physical-operators/WholeStageCodegenExec.md#creating-instance))
 
-## <span id="windowExecBufferInMemoryThreshold"> windowExecBufferInMemoryThreshold
+## <span id="windowExecBufferInMemoryThreshold"><span id="WINDOW_EXEC_BUFFER_IN_MEMORY_THRESHOLD"> windowExecBufferInMemoryThreshold
 
 [spark.sql.windowExec.buffer.in.memory.threshold](configuration-properties.md#spark.sql.windowExec.buffer.in.memory.threshold)
 
-Used when [WindowExec](physical-operators/WindowExec.md) unary physical operator is executed
+Used when:
 
-## <span id="windowExecBufferSpillThreshold"> windowExecBufferSpillThreshold
+* [WindowExec](physical-operators/WindowExec.md) unary physical operator is executed
+
+## <span id="windowExecBufferSpillThreshold"><span id="WINDOW_EXEC_BUFFER_SPILL_THRESHOLD"> windowExecBufferSpillThreshold
 
 [spark.sql.windowExec.buffer.spill.threshold](configuration-properties.md#spark.sql.windowExec.buffer.spill.threshold)
 
-Used when [WindowExec](physical-operators/WindowExec.md) unary physical operator is executed
+Used when:
+
+* [WindowExec](physical-operators/WindowExec.md) unary physical operator is executed
