@@ -3241,11 +3241,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AggregateProcessor/</loc>
-         <lastmod>2022-02-20</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AliasAwareOutputExpression/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
@@ -3967,6 +3962,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/window-functions/</loc>
+         <lastmod>2022-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/window-functions/AggregateProcessor/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
