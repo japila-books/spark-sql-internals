@@ -1,10 +1,19 @@
 # RangeFrame
 
-`RangeFrame` is a `FrameType` of a [WindowSpec](WindowSpec.md) with [rangeBetween](WindowSpec.md#rangeBetween) applied.
+`RangeFrame` is a `FrameType` of [WindowSpec](WindowSpec.md)s with the following:
 
-## <span id="ResolveWindowFrame"> ResolveWindowFrame
+1. [rangeBetween](WindowSpec.md#rangeBetween) operator or [RANGE BETWEEN](../sql/AstBuilder.md#visitWindowDef) SQL clause
+1. [Unspecified frame with an order specification](#ResolveWindowFrame)
 
-[ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md) logical resolution rule resolves [WindowExpression](../expressions/WindowExpression.md)s with [WindowSpecDefinition](../expressions/WindowSpecDefinition.md)s with `UnspecifiedFrame` to be a `RangeFrame` with `UnboundedPreceding` and `CurrentRow` for a non-empty [order specification](../expressions/WindowSpecDefinition.md#orderSpec).
+## <span id="CumeDist"> CumeDist Expression
+
+[CumeDist](../expressions/CumeDist.md) window function expression requires a `RangeFrame` with [UnboundedPreceding](Window.md#frame-boundaries) and [CurrentRow](Window.md#frame-boundaries).
+
+It is because `CUME_DIST` must return the same value for equal values in the partition.
+
+## <span id="ResolveWindowFrame"> UnspecifiedFrame with Order Specification and ResolveWindowFrame
+
+`RangeFrame` with [UnboundedPreceding](Window.md#frame-boundaries) and [CurrentRow](Window.md#frame-boundaries) is assumed (by [ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md) logical resolution rule) for ordered window specifications ([WindowSpecDefinition](../expressions/WindowSpecDefinition.md)s with `UnspecifiedFrame` but a non-empty [order specification](../expressions/WindowSpecDefinition.md#orderSpec)).
 
 ## <span id="inputType"> inputType
 

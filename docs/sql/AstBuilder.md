@@ -448,14 +448,29 @@ ANTLR labeled alternative: `#use`
 
 Creates a [WindowSpecDefinition](../expressions/WindowSpecDefinition.md)
 
-```text
-// CLUSTER BY with window frame
-'(' CLUSTER BY partition+=expression (',' partition+=expression)*) windowFrame? ')'
+```antlr
+windowSpec
+    : '('
+      ( CLUSTER BY partition (',' partition)*
+      | ((PARTITION | DISTRIBUTE) BY partition (',' partition)*)?
+        ((ORDER | SORT) BY sortItem (',' sortItem)*)?)
+      windowFrame?
+      ')'
+    ;
 
-// PARTITION BY and ORDER BY with window frame
-'(' ((PARTITION | DISTRIBUTE) BY partition+=expression (',' partition+=expression)*)?
-  ((ORDER | SORT) BY sortItem (',' sortItem)*)?)
-  windowFrame? ')'
+windowFrame
+    : RANGE start
+    | ROWS start
+    | RANGE BETWEEN start AND end
+    | ROWS BETWEEN start AND end
+    ;
+
+// start and end bounds of windowFrames
+frameBound
+    : UNBOUNDED (PRECEDING | FOLLOWING)
+    | CURRENT ROW
+    | literal (PRECEDING | FOLLOWING)
+    ;
 ```
 
 ANTLR rule: `windowDef`

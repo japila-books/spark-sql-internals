@@ -33,11 +33,7 @@ Frame specification is defined using [rowsBetween](#rowsBetween) and [rangeBetwe
 
 For example, _"the three rows preceding the current row to the current row"_ describes a frame including the current input row and three rows appearing before the current row.
 
-Special values:
-
-* `Long.MinValue` for `Window.unboundedPreceding`
-* `0` for `Window.currentRow`
-* `Long.MaxValue` for `Window.unboundedFollowing`
+`Window` utility defines special [Frame Boundaries](Window.md#frame-boundaries).
 
 ## <span id="rowsBetween"> rowsBetween
 

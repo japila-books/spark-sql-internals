@@ -1,10 +1,10 @@
 # WindowExec Unary Physical Operator
 
-`WindowExec` is a `WindowExecBase` [unary physical operator](UnaryExecNode.md) for [window function execution](../window-functions/index.md).
+`WindowExec` is a [WindowExecBase unary physical operator](WindowExecBase.md) for [window function execution](../window-functions/index.md).
 
 ![WindowExec in web UI (Details for Query)](../images/spark-sql-WindowExec-webui-query-details.png)
 
-`WindowExec` represents [Window](../logical-operators/Window.md) unary logical operator at execution time.
+`WindowExec` represents [Window](../logical-operators/Window.md) unary logical operator at execution.
 
 ## Creating Instance
 

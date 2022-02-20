@@ -38,3 +38,12 @@ rank.over(byHTokens)
 import org.apache.spark.sql.functions.first
 first.over(windowSpec)
 ```
+
+## Limitations
+
+`WindowSpecDefinition` expression enforces the following [requirements on WindowFrames](../expressions/WindowSpecDefinition.md#checkInputDataTypes):
+
+1. No `UnspecifiedFrame`s are allowed (and should be resolved during analysis)
+1. A [range window frame](RangeFrame.md) cannot be used in an unordered window specification.
+1. A [range window frame](RangeFrame.md) with value boundaries cannot be used in a window specification with multiple order by expressions
+1. The data type in the order specification ought to match the data type of the [range frame](RangeFrame.md)
