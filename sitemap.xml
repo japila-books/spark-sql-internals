@@ -1936,6 +1936,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/OffsetWindowFunction/</loc>
+         <lastmod>2022-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/ParseToDate/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
@@ -2077,6 +2082,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/WindowExpression/</loc>
+         <lastmod>2022-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/WindowFunction/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
