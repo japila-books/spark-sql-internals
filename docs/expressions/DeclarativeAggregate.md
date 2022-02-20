@@ -18,7 +18,7 @@ Used when:
 * `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
 * `AggregationIterator` is requested for the [generateResultProjection](../AggregationIterator.md#generateResultProjection)
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
-* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply)
+* `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
 ### <span id="initialValues"> initialValues
 
@@ -35,7 +35,7 @@ Used when:
 * `AggregationIterator` is [created](../AggregationIterator.md#expressionAggInitialProjection)
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys), [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap) and [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
 * `HashMapGenerator` is created
-* `AggregateProcessor` is [created](../physical-operators/AggregateProcessor.md#apply)
+* `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
 ### <span id="mergeExpressions"> mergeExpressions
 

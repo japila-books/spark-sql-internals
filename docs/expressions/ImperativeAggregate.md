@@ -18,7 +18,7 @@ Used when:
 * `AggregationIterator` is requested to [initializeBuffer](../AggregationIterator.md#initializeBuffer)
 * `ObjectAggregationIterator` is requested to [initAggregationBuffer](../ObjectAggregationIterator.md#initAggregationBuffer)
 * `TungstenAggregationIterator` is requested to [createNewAggregationBuffer](../TungstenAggregationIterator.md#createNewAggregationBuffer)
-* `AggregateProcessor` is requested to [initialize](../physical-operators/AggregateProcessor.md#initialize)
+* `AggregateProcessor` is requested to [initialize](../window-functions/AggregateProcessor.md#initialize)
 
 ### <span id="merge"> merge
 
@@ -45,7 +45,7 @@ Used when:
 
 * `AggregatingAccumulator` is requested to `add` an `InternalRow`
 * `AggregationIterator` is requested to [generateProcessRow](../AggregationIterator.md#generateProcessRow)
-* `AggregateProcessor` is requested to [update](../physical-operators/AggregateProcessor.md#update)
+* `AggregateProcessor` is requested to [update](../window-functions/AggregateProcessor.md#update)
 
 ## Implementations
 

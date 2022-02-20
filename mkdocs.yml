@@ -524,7 +524,6 @@ nav:
       - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
       - WindowExec:
         - WindowExec: physical-operators/WindowExec.md
-        - AggregateProcessor: physical-operators/AggregateProcessor.md
       - WindowExecBase: physical-operators/WindowExecBase.md
       - WriteToDataSourceV2Exec: physical-operators/WriteToDataSourceV2Exec.md
       - Distribution and Partitioning:
@@ -855,6 +854,7 @@ nav:
     - SparkSessionExtensions: SparkSessionExtensions.md
     - Window Functions:
       - window-functions/index.md
+      - AggregateProcessor: window-functions/AggregateProcessor.md
       - RangeFrame: window-functions/RangeFrame.md
       - Window: window-functions/Window.md
       - WindowFunctionFrame: window-functions/WindowFunctionFrame.md
