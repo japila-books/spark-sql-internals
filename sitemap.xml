@@ -3701,11 +3701,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WindowFunctionFrame/</loc>
-         <lastmod>2022-02-20</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WriteToDataSourceV2Exec/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
@@ -3982,6 +3977,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/window-functions/Window/</loc>
+         <lastmod>2022-02-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/window-functions/WindowFunctionFrame/</loc>
          <lastmod>2022-02-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
