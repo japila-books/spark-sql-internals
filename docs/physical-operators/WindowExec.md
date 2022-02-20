@@ -17,7 +17,7 @@
 
 `WindowExec` is created when:
 
-* [Window](../execution-planning-strategies/Window.md) execution planning strategy plans a [Window](../logical-operators/Window.md) unary logical operator with a `WindowFunction` or an [AggregateFunction](../expressions/AggregateFunction.md)
+* [Window](../execution-planning-strategies/Window.md) execution planning strategy plans a [Window](../logical-operators/Window.md) unary logical operator with a [WindowFunction](../expressions/WindowFunction.md) or an [AggregateFunction](../expressions/AggregateFunction.md)
 
 ## Configuration Properties
 

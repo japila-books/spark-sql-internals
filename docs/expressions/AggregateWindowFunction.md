@@ -1,6 +1,6 @@
 # AggregateWindowFunction Expressions
 
-`AggregateWindowFunction` is an extension of the [DeclarativeAggregate](DeclarativeAggregate.md) and `WindowFunction` abstractions for [aggregate window function expressions](#implementations).
+`AggregateWindowFunction` is an extension of the [DeclarativeAggregate](DeclarativeAggregate.md) and [WindowFunction](WindowFunction.md) abstractions for [aggregate window function expressions](#implementations).
 
 ## Implementations
 

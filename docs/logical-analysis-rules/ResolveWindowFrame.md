@@ -9,7 +9,7 @@
 [[transformations]]
 `ResolveWindowFrame` takes a spark-sql-LogicalPlan.md[logical plan] and does the following:
 
-. Makes sure that the window frame of a `WindowFunction` is unspecified or matches the `SpecifiedWindowFrame` of the spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition] expression.
+. Makes sure that the window frame of a [WindowFunction](../expressions/WindowFunction.md) is unspecified or matches the `SpecifiedWindowFrame` of the spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition] expression.
 +
 Reports a `AnalysisException` when the frames do not match:
 +
