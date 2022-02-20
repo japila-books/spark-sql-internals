@@ -525,7 +525,6 @@ nav:
       - WindowExec:
         - WindowExec: physical-operators/WindowExec.md
         - AggregateProcessor: physical-operators/AggregateProcessor.md
-        - WindowFunctionFrame: physical-operators/WindowFunctionFrame.md
       - WindowExecBase: physical-operators/WindowExecBase.md
       - WriteToDataSourceV2Exec: physical-operators/WriteToDataSourceV2Exec.md
       - Distribution and Partitioning:
@@ -858,6 +857,7 @@ nav:
       - window-functions/index.md
       - RangeFrame: window-functions/RangeFrame.md
       - Window: window-functions/Window.md
+      - WindowFunctionFrame: window-functions/WindowFunctionFrame.md
       - WindowSpec: window-functions/WindowSpec.md
   - Demos:
     - demo/index.md

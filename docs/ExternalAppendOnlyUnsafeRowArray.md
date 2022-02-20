@@ -1,5 +1,3 @@
-title: ExternalAppendOnlyUnsafeRowArray
-
 # ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)
 
 `ExternalAppendOnlyUnsafeRowArray` is an append-only array for UnsafeRow.md[UnsafeRows] that spills content to disk when a <<numRowsSpillThreshold, predefined spill threshold of rows>> is reached.
@@ -10,7 +8,7 @@ NOTE: Choosing a proper *spill threshold of rows* is a performance optimization.
 
 * `WindowExec` physical operator is WindowExec.md#doExecute[executed] (and creates an internal buffer for window frames)
 
-* `WindowFunctionFrame` is spark-sql-WindowFunctionFrame.md#prepare[prepared]
+* `WindowFunctionFrame` is requested to [prepare](window-functions/WindowFunctionFrame.md#prepare)
 
 * `SortMergeJoinExec` physical operator is SortMergeJoinExec.md#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
 
