@@ -10,7 +10,7 @@
 
 * `AstBuilder` is requested to [parse a function call](../sql/AstBuilder.md#visitFunctionCall) in a SQL statement
 
-`WindowExpression` can only be  with [AggregateExpression](AggregateExpression.md), [AggregateWindowFunction](AggregateWindowFunction.md) or `OffsetWindowFunction` expressions which is enforced at [analysis](../CheckAnalysis.md#WindowExpression).
+`WindowExpression` can only be with [AggregateExpression](AggregateExpression.md), [AggregateWindowFunction](AggregateWindowFunction.md) or [OffsetWindowFunction](OffsetWindowFunction.md) expressions which is enforced at [analysis](../CheckAnalysis.md#WindowExpression).
 
 ```scala
 // Using Catalyst DSL

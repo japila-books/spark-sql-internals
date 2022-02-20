@@ -404,6 +404,7 @@ nav:
       - Murmur3Hash: expressions/Murmur3Hash.md
       - NamedExpression: expressions/NamedExpression.md
       - Nondeterministic: expressions/Nondeterministic.md
+      - OffsetWindowFunction: expressions/OffsetWindowFunction.md
       - ParseToDate: expressions/ParseToDate.md
       - ParseToTimestamp: expressions/ParseToTimestamp.md
       - PlanExpression: expressions/PlanExpression.md
@@ -436,6 +437,7 @@ nav:
         - UserDefinedFunction: expressions/UserDefinedFunction.md
         - UDFs are Blackbox: spark-sql-udfs-blackbox.md
       - WindowExpression: expressions/WindowExpression.md
+      - WindowFunction: expressions/WindowFunction.md
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
     - Physical Operators:
       - physical-operators/index.md

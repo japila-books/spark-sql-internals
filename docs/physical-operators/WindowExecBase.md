@@ -55,7 +55,7 @@ windowFrameExpressionFactoryPairs: Seq[(ExpressionBuffer, InternalRow => WindowF
 
 1. [AggregateExpression](../expressions/AggregateExpression.md)
 1. `FrameLessOffsetWindowFunction`
-1. `OffsetWindowFunction`
+1. [OffsetWindowFunction](../expressions/OffsetWindowFunction.md)
 1. [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)
 1. `PythonUDF` ([PySpark]({{ book.pyspark }}/sql/PythonUDF))
 
