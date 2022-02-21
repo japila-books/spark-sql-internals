@@ -1,123 +1,88 @@
-# ExternalAppendOnlyUnsafeRowArray -- Append-Only Array for UnsafeRows (with Disk Spill Threshold)
+# ExternalAppendOnlyUnsafeRowArray
 
-`ExternalAppendOnlyUnsafeRowArray` is an append-only array for UnsafeRow.md[UnsafeRows] that spills content to disk when a <<numRowsSpillThreshold, predefined spill threshold of rows>> is reached.
+`ExternalAppendOnlyUnsafeRowArray` is an append-only array of [UnsafeRow](UnsafeRow.md)s.
 
-NOTE: Choosing a proper *spill threshold of rows* is a performance optimization.
+`ExternalAppendOnlyUnsafeRowArray` keeps rows in memory until the [spill threshold](#numRowsSpillThreshold) is reached that triggers disk spilling.
+
+## Creating Instance
+
+`ExternalAppendOnlyUnsafeRowArray` takes the following to be created:
+
+* <span id="taskMemoryManager"> `TaskMemoryManager` ([Apache Spark]({{ book.spark_core }}/memory/TaskMemoryManager))
+* <span id="blockManager"> `BlockManager` ([Apache Spark]({{ book.spark_core }}/storage/BlockManager))
+* <span id="serializerManager"> `SerializerManager` ([Apache Spark]({{ book.spark_core }}/serializer/SerializerManager))
+* <span id="taskContext"> `TaskContext` ([Apache Spark]({{ book.spark_core }}/scheduler/TaskContext))
+* <span id="initialSize"> Initial size (default: `1024`)
+* <span id="pageSizeBytes"> Page size (in bytes)
+* [numRowsInMemoryBufferThreshold](#numRowsInMemoryBufferThreshold)
+* [numRowsSpillThreshold](#numRowsSpillThreshold)
 
 `ExternalAppendOnlyUnsafeRowArray` is created when:
 
-* `WindowExec` physical operator is WindowExec.md#doExecute[executed] (and creates an internal buffer for window frames)
+* `SortMergeJoinScanner` is requested for [bufferedMatches](physical-operators/SortMergeJoinScanner.md#bufferedMatches)
+* `UnsafeCartesianRDD` is requested to `compute`
+* `UpdatingSessionsIterator` is requested to `startNewSession`
+* `WindowExec` physical operator is requested to [doExecute](physical-operators/WindowExec.md#doExecute) (and creates an internal buffer for window frames)
+* `WindowInPandasExec` ([PySpark]({{ book.pyspark }}/sql/WindowInPandasExec)) is requested to `doExecute`
 
-* `WindowFunctionFrame` is requested to [prepare](window-functions/WindowFunctionFrame.md#prepare)
+### <span id="numRowsInMemoryBufferThreshold"> numRowsInMemoryBufferThreshold
 
-* `SortMergeJoinExec` physical operator is SortMergeJoinExec.md#doExecute[executed] (and creates a `RowIterator` for INNER and CROSS joins) and for `getBufferedMatches`
+`numRowsInMemoryBufferThreshold` is used for the following:
 
-* `SortMergeJoinScanner` creates an internal `bufferedMatches`
+* [initialSizeOfInMemoryBuffer](#initialSizeOfInMemoryBuffer)
+* [add](#add)
 
-* `UnsafeCartesianRDD` is computed
+### <span id="numRowsSpillThreshold"> numRowsSpillThreshold
 
-[[internal-registries]]
-.ExternalAppendOnlyUnsafeRowArray's Internal Registries and Counters
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
+`numRowsSpillThreshold` is used for the following:
 
-| [[initialSizeOfInMemoryBuffer]] `initialSizeOfInMemoryBuffer`
-| FIXME
+* Create an [UnsafeExternalSorter](#spillableArray) (after the [numRowsInMemoryBufferThreshold](#numRowsInMemoryBufferThreshold) is reached)
 
-Used when...FIXME
+## <span id="numRows"> numRows Counter
 
-| [[inMemoryBuffer]] `inMemoryBuffer`
-| FIXME
+`ExternalAppendOnlyUnsafeRowArray` uses `numRows` internal counter for the number of [rows added](#add).
 
-Can grow up to <<numRowsSpillThreshold, numRowsSpillThreshold>> rows (i.e. new `UnsafeRows` are <<add, added>>)
+### <span id="length"> length
 
-Used when...FIXME
+```scala
+length: Int
+```
 
-| [[spillableArray]] `spillableArray`
-| `UnsafeExternalSorter`
+`length` returns the [numRows](#numRows).
 
-Used when...FIXME
+`length` is used when:
 
-| [[numRows]] `numRows`
-|
+* `SortMergeJoinExec` physical operator is requested to [doExecute](physical-operators/SortMergeJoinExec.md#doExecute) (for `LeftSemi`, `LeftAnti` and `ExistenceJoin` joins)
+* `FrameLessOffsetWindowFunctionFrame` is requested to `doWrite`
+* `OffsetWindowFunctionFrameBase` is requested to `findNextRowWithNonNullInput`
+* `SlidingWindowFunctionFrame` is requested to `write`
+* `UnboundedFollowingWindowFunctionFrame` is requested to `write` and `currentUpperBound`
+* `UnboundedOffsetWindowFunctionFrame` is requested to `prepare`
+* `UnboundedPrecedingWindowFunctionFrame` is requested to `prepare`
+* `UnboundedWindowFunctionFrame` is requested to `prepare`
 
-Used when...FIXME
+## <span id="inMemoryBuffer"> inMemoryBuffer
 
-| [[modificationsCount]] `modificationsCount`
-|
+`ExternalAppendOnlyUnsafeRowArray` creates an `inMemoryBuffer` internal array of [UnsafeRow](UnsafeRow.md)s when [created](#creating-instance) and the [initialSizeOfInMemoryBuffer](#initialSizeOfInMemoryBuffer) is greater than `0`.
 
-Used when...FIXME
+A new `UnsafeRow` can be added to `inMemoryBuffer` in [add](#add) (up to the [numRowsInMemoryBufferThreshold](#numRowsInMemoryBufferThreshold)).
 
-| [[numFieldsPerRow]] `numFieldsPerRow`
-|
+`inMemoryBuffer` is cleared in [clear](#clear) or [add](#add) (when the number of `UnsafeRow`s is above the [numRowsInMemoryBufferThreshold](#numRowsInMemoryBufferThreshold)).
 
-Used when...FIXME
-|===
+## <span id="initialSizeOfInMemoryBuffer"> initialSizeOfInMemoryBuffer
 
-[TIP]
-====
-Enable `INFO` logging level for `org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray` logger to see what happens inside.
+`ExternalAppendOnlyUnsafeRowArray` uses `initialSizeOfInMemoryBuffer` internal value as the number of [UnsafeRow](UnsafeRow.md)s in the [inMemoryBuffer](#inMemoryBuffer).
+
+`initialSizeOfInMemoryBuffer` is at most `128` and can be configured using the[numRowsInMemoryBufferThreshold](#numRowsInMemoryBufferThreshold) (if smaller).
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
+```text
+log4j.logger.org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray=ALL
 ```
-log4j.logger.org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray=INFO
-```
 
-Refer to spark-logging.md[Logging].
-====
-
-=== [[generateIterator]] `generateIterator` Method
-
-[source, scala]
-----
-generateIterator(): Iterator[UnsafeRow]
-generateIterator(startIndex: Int): Iterator[UnsafeRow]
-----
-
-CAUTION: FIXME
-
-=== [[add]] `add` Method
-
-[source, scala]
-----
-add(unsafeRow: UnsafeRow): Unit
-----
-
-CAUTION: FIXME
-
-[NOTE]
-====
-`add` is used when:
-
-* `WindowExec` is executed (and WindowExec.md#fetchNextPartition[fetches all rows in a partition for a group].
-
-* `SortMergeJoinScanner` buffers matching rows
-
-* `UnsafeCartesianRDD` is computed
-====
-
-=== [[clear]] `clear` Method
-
-[source, scala]
-----
-clear(): Unit
-----
-
-CAUTION: FIXME
-
-=== [[creating-instance]] Creating ExternalAppendOnlyUnsafeRowArray Instance
-
-`ExternalAppendOnlyUnsafeRowArray` takes the following when created:
-
-* [[taskMemoryManager]] spark-taskscheduler-taskmemorymanager.md[TaskMemoryManager]
-* [[blockManager]] spark-blockmanager.md[BlockManager]
-* [[serializerManager]] spark-SerializerManager.md[SerializerManager]
-* [[taskContext]] spark-taskscheduler-taskcontext.md[TaskContext]
-* [[initialSize]] Initial size
-* [[pageSizeBytes]] Page size (in bytes)
-* [[numRowsSpillThreshold]] Number of rows to hold before spilling them to disk
-
-`ExternalAppendOnlyUnsafeRowArray` initializes the <<internal-registries, internal registries and counters>>.
+Refer to [Logging](spark-logging.md)

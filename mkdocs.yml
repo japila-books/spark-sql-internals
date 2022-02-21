@@ -511,7 +511,9 @@ nav:
       - ShuffleOrigin: physical-operators/ShuffleOrigin.md
       - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
       - SortAggregateExec: physical-operators/SortAggregateExec.md
-      - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
+      - SortMergeJoinExec:
+        - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
+        - SortMergeJoinScanner: physical-operators/SortMergeJoinScanner.md
       - SortExec: physical-operators/SortExec.md
       - SparkPlan: physical-operators/SparkPlan.md
       - SQLMetric: physical-operators/SQLMetric.md
