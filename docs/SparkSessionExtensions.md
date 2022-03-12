@@ -6,6 +6,14 @@ Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withEx
 
 `SparkSessionExtensions` is an integral part of [SparkSession](SparkSession.md#extensions).
 
+## <span id="injectedFunctions"> injectedFunctions
+
+`SparkSessionExtensions` uses a collection of 3-element tuples with the following:
+
+1. `FunctionIdentifier`
+1. `ExpressionInfo`
+1. `Seq[Expression] => Expression`
+
 ## "Injection" API
 
 ### <span id="injectCheckRule"> injectCheckRule

@@ -1,34 +1,49 @@
 # CommandUtils &mdash; Utilities for Table Statistics
 
-`CommandUtils` is a helper class that logical commands, e.g. `InsertInto*`, `AlterTable*Command`, `LoadDataCommand`, and CBO's `Analyze*`, use to manage table statistics.
+`CommandUtils` is a helper class that logical commands use to manage table statistics.
 
-`CommandUtils` defines the following utilities:
+## <span id="analyzeTable"> analyzeTable
 
-* <<calculateTotalSize, Calculating Total Size of Table or Its Partitions>>
-* <<calculateLocationSize, Calculating Total File Size Under Path>>
-* <<compareAndGetNewStats, Creating CatalogStatistics with Current Statistics>>
-* <<updateTableStats, Updating Existing Table Statistics>>
+```scala
+analyzeTable(
+  sparkSession: SparkSession,
+  tableIdent: TableIdentifier,
+  noScan: Boolean): Unit
+```
 
-[[logging]]
-[TIP]
-====
-Enable `INFO` logging level for `org.apache.spark.sql.execution.command.CommandUtils` logger to see what happens inside.
+`analyzeTable` requests the [SessionCatalog](SessionState.md#catalog) for the [table metadata](SessionCatalog.md#getTableMetadata).
+
+`analyzeTable` branches off based on the type of the table: a view and the other types.
+
+For `CatalogTableType.VIEW`s, `analyzeTable` requests the [CacheManager](SharedState.md#cacheManager) to [lookupCachedData](CacheManager.md#lookupCachedData). If available and the given `noScan` flag is disabled, `analyzeTable` requests the table to `count` the number of rows (that materializes the underlying columnar RDD).
+
+For other types, `analyzeTable` [calculateTotalSize](CommandUtils.md#calculateTotalSize) for the table. With the given `noScan` flag disabled, `analyzeTable` creates a `DataFrame` for the table and `count`s the number of rows (that triggers a Spark job). In case the table stats have changed, `analyzeTable` requests the [SessionCatalog](SessionState.md#catalog) to [alterTableStats](SessionCatalog.md#alterTableStats).
+
+`analyzeTable` is used when:
+
+* [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md) and `AnalyzeTablesCommand` logical commands are executed
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.command.CommandUtils` logger to see what happens inside.
 
 Add the following line to `conf/log4j.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=INFO
+log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=ALL
 ```
 
-Refer to spark-logging.md[Logging].
-====
+Refer to [Logging](spark-logging.md).
 
-=== [[updateTableStats]] Updating Existing Table Statistics -- `updateTableStats` Method
+## Review Me
 
-[source, scala]
-----
-updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
-----
+## <span id="updateTableStats"> Updating Existing Table Statistics
+
+```scala
+updateTableStats(
+  sparkSession: SparkSession,
+  table: CatalogTable): Unit
+```
 
 `updateTableStats` updates the table statistics of the input [CatalogTable](CatalogTable.md) (only if the [statistics are available](CatalogTable.md#stats) in the metastore already).
 
@@ -40,14 +55,17 @@ updateTableStats(sparkSession: SparkSession, table: CatalogTable): Unit
 !!! note
     `updateTableStats` uses `SparkSession` to access the current SparkSession.md#sessionState[SessionState] that it then uses to access the session-scoped SessionState.md#catalog[SessionCatalog].
 
-`updateTableStats` is used when [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed.
+`updateTableStats` is used when:
 
-=== [[calculateTotalSize]] Calculating Total Size of Table (with Partitions) -- `calculateTotalSize` Method
+* [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed
 
-[source, scala]
-----
-calculateTotalSize(sessionState: SessionState, catalogTable: CatalogTable): BigInt
-----
+## <span id="calculateTotalSize"> Calculating Total Size of Table (with Partitions)
+
+```scala
+calculateTotalSize(
+  sessionState: SessionState,
+  catalogTable: CatalogTable): BigInt
+```
 
 `calculateTotalSize` <<calculateLocationSize, calculates total file size>> for the entire input [CatalogTable](CatalogTable.md) (when it has no partitions defined) or all its [partitions](SessionCatalog.md#listPartitions) (through the session-scoped [SessionCatalog](SessionCatalog.md)).
 
@@ -55,57 +73,40 @@ NOTE: `calculateTotalSize` uses the input `SessionState` to access the SessionSt
 
 `calculateTotalSize` is used when:
 
-* <<AnalyzeColumnCommand.md#, AnalyzeColumnCommand>> and <<AnalyzeTableCommand.md#, AnalyzeTableCommand>> commands are executed
+* [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md) and [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md) commands are executed
 
-* `CommandUtils` is requested to <<updateTableStats, update existing table statistics>> (when hive/InsertIntoHiveTable.md[InsertIntoHiveTable], [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
+* `CommandUtils` is requested to [update existing table statistics](#updateTableStats) (when [InsertIntoHiveTable](hive/InsertIntoHiveTable.md), [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md), `AlterTableDropPartitionCommand`, `AlterTableSetLocationCommand` and `LoadDataCommand` commands are executed)
 
-=== [[calculateLocationSize]] Calculating Total File Size Under Path -- `calculateLocationSize` Method
+## <span id="calculateLocationSize"> Calculating Total File Size Under Path
 
-[source, scala]
-----
+```scala
 calculateLocationSize(
   sessionState: SessionState,
   identifier: TableIdentifier,
   locationUri: Option[URI]): Long
-----
+```
 
 `calculateLocationSize` reads `hive.exec.stagingdir` configuration property for the staging directory (with `.hive-staging` being the default).
 
 You should see the following INFO message in the logs:
 
-```
-INFO CommandUtils: Starting to calculate the total file size under path [locationUri].
+```text
+Starting to calculate the total file size under path [locationUri].
 ```
 
 `calculateLocationSize` calculates the sum of the length of all the files under the input `locationUri`.
 
-NOTE: `calculateLocationSize` uses Hadoop's ++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileSystem.html#getFileStatus-org.apache.hadoop.fs.Path-++[FileSystem.getFileStatus] and ++https://hadoop.apache.org/docs/current/api/org/apache/hadoop/fs/FileStatus.html#getLen--++[FileStatus.getLen] to access a file and the length of the file (in bytes), respectively.
+!!! note
+    `calculateLocationSize` uses Hadoop's [FileSystem.getFileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileSystem.html#getFileStatus-org.apache.hadoop.fs.Path-) and [FileStatus.getLen]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html#getLen--) to access the file and the length of the file (in bytes), respectively.
 
 In the end, you should see the following INFO message in the logs:
 
-```
-INFO CommandUtils: It took [durationInMs] ms to calculate the total file size under path [locationUri].
+```text
+It took [durationInMs] ms to calculate the total file size under path [locationUri].
 ```
 
-[NOTE]
-====
 `calculateLocationSize` is used when:
 
-* AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and RunnableCommand.md#AlterTableAddPartitionCommand[AlterTableAddPartitionCommand] commands are executed
+* [AnalyzePartitionCommand](logical-operators/AnalyzePartitionCommand.md) and `AlterTableAddPartitionCommand` commands are executed
 
-* `CommandUtils` is requested for <<calculateTotalSize, total size of a table or its partitions>>
-====
-
-=== [[compareAndGetNewStats]] Creating CatalogStatistics with Current Statistics -- `compareAndGetNewStats` Method
-
-[source, scala]
-----
-compareAndGetNewStats(
-  oldStats: Option[CatalogStatistics],
-  newTotalSize: BigInt,
-  newRowCount: Option[BigInt]): Option[CatalogStatistics]
-----
-
-`compareAndGetNewStats` CatalogStatistics.md#creating-instance[creates] a new `CatalogStatistics` with the input `newTotalSize` and `newRowCount` only when they are different from the `oldStats`.
-
-NOTE: `compareAndGetNewStats` is used when AnalyzePartitionCommand.md#run[AnalyzePartitionCommand] and AnalyzeTableCommand.md#run[AnalyzeTableCommand] are executed.
+* `CommandUtils` is requested for [total size of a table or its partitions](#calculateTotalSize)

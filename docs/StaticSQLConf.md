@@ -73,7 +73,14 @@ Default: `Int.MaxValue`
 
 ## <span id="spark.sql.extensions"><span id="SPARK_SESSION_EXTENSIONS"> spark.sql.extensions
 
-A comma-separated list of **SQL extension configuration classes** that implement `Function1[SparkSessionExtensions, Unit]` used to configure Spark Session extensions. The classes must have a no-args constructor. If multiple extensions are specified, they are applied in the specified order. For the case of rules and planner strategies, they are applied in the specified order. For the case of parsers, the last parser is used and each parser can delegate to its predecessor. For the case of function name conflicts, the last registered function name is used.
+A comma-separated list of **SQL extension configuration classes** to configure [SparkSessionExtensions](SparkSessionExtensions.md):
+
+1. The classes must implement `SparkSessionExtensions => Unit`
+1. The classes must have a no-args constructor
+1. If multiple extensions are specified, they are applied in the specified order.
+1. For the case of rules and planner strategies, they are applied in the specified order.
+1. For the case of parsers, the last parser is used and each parser can delegate to its predecessor
+1. For the case of function name conflicts, the last registered function name is used
 
 Default: `(empty)`
 

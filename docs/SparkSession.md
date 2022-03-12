@@ -420,16 +420,24 @@ applyExtensions(
   extensions: SparkSessionExtensions): SparkSessionExtensions
 ```
 
-For every extension class name (in `extensionConfClassNames`) `applyExtensions` instantiates it and (since it's a function `SparkSessionExtensions => Unit`) passes the given [SparkSessionExtensions](SparkSessionExtensions.md) in.
+`applyExtensions` uses the given `extensionConfClassNames` as the names of the extension classes.
+
+For every extension class, `applyExtensions` instantiates one by one passing in the given [SparkSessionExtensions](SparkSessionExtensions.md).
 
 !!! note
-    The given [SparkSessionExtensions](SparkSessionExtensions.md) is mutated in-place.
+    The given `SparkSessionExtensions` is mutated in-place.
+
+In the end, `applyExtensions` returns the given `SparkSessionExtensions`.
+
+---
 
 In case of `ClassCastException`, `ClassNotFoundException` or `NoClassDefFoundError`, `applyExtensions` prints out the following WARN message to the logs:
 
 ```text
 Cannot use [extensionConfClassName] to configure session extensions.
 ```
+
+---
 
 `applyExtensions` is used when:
 
