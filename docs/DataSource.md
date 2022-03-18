@@ -269,7 +269,7 @@ val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
 `lookupDataSource` is used when:
 
 * `SparkSession` is requested to [executeCommand](SparkSession.md#executeCommand)
-* `CreateTableLikeCommand` and `AlterTableAddColumnsCommand` runnable commands are executed
+* `CreateTableLikeCommand` and [AlterTableAddColumnsCommand](logical-operators/AlterTableAddColumnsCommand.md) runnable commands are executed
 * `DataSource` is requested for [providingClass](#providingClass) and to [lookupDataSourceV2](#lookupDataSourceV2)
 * [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) posthoc logical resolution rule is executed
 * `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to `load`

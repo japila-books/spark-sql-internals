@@ -215,8 +215,10 @@ nav:
       - JoinEstimation: logical-operators/JoinEstimation.md
     - Logical Operators:
       - logical-operators/index.md
+      - AddColumns: logical-operators/AddColumns.md
       - Aggregate: logical-operators/Aggregate.md
       - AlterTable: logical-operators/AlterTable.md
+      - AlterTableAddColumnsCommand: logical-operators/AlterTableAddColumnsCommand.md
       - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
       - AnalyzeColumn: logical-operators/AnalyzeColumn.md
       - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md

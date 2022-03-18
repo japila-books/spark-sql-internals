@@ -14,6 +14,34 @@
 
 ## Visit Callbacks
 
+### <span id="visitAddTableColumns"> visitAddTableColumns
+
+Creates an [AddColumns](../logical-operators/AddColumns.md) logical operator
+
+```text
+ALTER TABLE multipartIdentifier
+  ADD (COLUMN | COLUMNS)
+  '(' columns=qualifiedColTypeWithPositionList ')'
+
+qualifiedColTypeWithPositionList
+    : qualifiedColTypeWithPosition (',' qualifiedColTypeWithPosition)*
+    ;
+
+qualifiedColTypeWithPosition
+    : name=multipartIdentifier dataType (NOT NULL)? commentSpec? colPosition?
+    ;
+
+commentSpec
+    : COMMENT text
+    ;
+
+colPosition
+    : position=FIRST | position=AFTER afterCol=errorCapturingIdentifier
+    ;
+```
+
+ANTLR labeled alternative: `#addTableColumns`
+
 ### <span id="visitAnalyze"> visitAnalyze
 
 Creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) or [AnalyzeTable](../logical-operators/AnalyzeTable.md) logical operators
