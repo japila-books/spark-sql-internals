@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="alterTable"> alterTable
+### <span id="alterTable"> Altering Table
 
 ```java
 Table alterTable(
@@ -17,6 +17,7 @@ Table alterTable(
 Used when:
 
 * [AlterTableExec](../../physical-operators/AlterTableExec.md) physical command is executed
+* `DelegatingCatalogExtension` is requested to [alterTable](DelegatingCatalogExtension.md#alterTable)
 
 ### <span id="createTable"> createTable
 

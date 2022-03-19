@@ -1,6 +1,6 @@
 # AlterTableAddColumnsCommand Logical Runnable Command
 
-`AlterTableAddColumnsCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md).
+`AlterTableAddColumnsCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents [AddColumns](AddColumns.md) logical operator.
 
 ## Creating Instance
 
@@ -11,7 +11,7 @@
 
 `AlterTableAddColumnsCommand` is created when:
 
-* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (and resolves an [AddColumns](AddColumns.md) logical operator)
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (and resolves [AddColumns](AddColumns.md) logical operator)
 
 ## <span id="run"> Executing Command
 
