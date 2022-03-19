@@ -15,7 +15,7 @@ val spark: SparkSession = SparkSession.builder
 
 You can also set a property using SQL `SET` command.
 
-```scala
+```text
 assert(spark.conf.getOption("spark.sql.hive.metastore.version").isEmpty)
 
 scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = false)
@@ -69,6 +69,16 @@ Default: `true`
 Use [SQLConf.ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED](SQLConf.md#ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED) method to access the property (in a type-safe way)
 
 Since: `3.2.0`
+
+## <span id="spark.sql.codegen.aggregate.map.twolevel.partialOnly"> spark.sql.codegen.aggregate.map.twolevel.partialOnly
+
+**(internal)** Enables two-level aggregate hash map for partial aggregate only, because final aggregate might get more distinct keys compared to partial aggregate. "Overhead of looking up 1st-level map might dominate when having a lot of distinct keys.
+
+Default: `true`
+
+Used when:
+
+* [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is requested to [checkIfFastHashMapSupported](physical-operators/HashAggregateExec.md#checkIfFastHashMapSupported)
 
 ## <span id="spark.sql.legacy.allowNonEmptyLocationInCTAS"> spark.sql.legacy.allowNonEmptyLocationInCTAS
 
@@ -870,11 +880,11 @@ It is highly discouraged to turn on case sensitive mode.
 
 Use [SQLConf.caseSensitiveAnalysis](SQLConf.md#caseSensitiveAnalysis) method to access the current value.
 
-## <span id="spark.sql.catalog.spark_catalog"> spark.sql.catalog.spark_catalog
+## <span id="spark.sql.catalog.spark_catalog"><span id="V2_SESSION_CATALOG_IMPLEMENTATION"> spark.sql.catalog.spark_catalog
 
-A catalog implementation that will be used as the v2 interface to Spark's built-in v1 catalog: `spark_catalog`. This catalog shares its identifier namespace with the `spark_catalog` and must be consistent with it; for example, if a table can be loaded by the `spark_catalog`, this catalog must also return the table metadata. To delegate operations to the `spark_catalog`, implementations can extend 'CatalogExtension'.
+The [CatalogPlugin](connector/catalog/CatalogPlugin.md) for `spark_catalog`
 
-Default: `(undefined)`
+Default: [defaultSessionCatalog](connector/catalog/CatalogManager.md#defaultSessionCatalog)
 
 Since: `3.0.0`
 
@@ -1146,15 +1156,13 @@ Default: `true`
 
 Since: `3.0.0`
 
-## <span id="spark.sql.leafNodeDefaultParallelism"> spark.sql.leafNodeDefaultParallelism
+## <span id="spark.sql.leafNodeDefaultParallelism"><span id="LEAF_NODE_DEFAULT_PARALLELISM"> spark.sql.leafNodeDefaultParallelism
 
-The default parallelism of leaf operators that produce data (e.g. the file scan node, the local data scan node, the range node).
+The [default parallelism of leaf operators](SparkSession.md#leafNodeDefaultParallelism) that produce data
 
 Must be positive
 
 Default: `SparkContext.defaultParallelism` ([Spark Core]({{ book.spark_core }}/SparkContext#defaultParallelism))
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.legacy.doLooseUpcast"> spark.sql.legacy.doLooseUpcast
 
