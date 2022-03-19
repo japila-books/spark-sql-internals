@@ -16,26 +16,12 @@ Executes the command for side effects (possibly giving [Row](../Row.md) back wit
 Used when:
 
 * [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md) leaf physical operator is executed (and [caches the result](../physical-operators/ExecutedCommandExec.md#sideEffectResult))
-* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) is executed
 
 ## Implementations
 
-* [AnalyzeColumnCommand](AnalyzeColumnCommand.md)
-* [AnalyzePartitionCommand](AnalyzePartitionCommand.md)
-* [AnalyzeTableCommand](AnalyzeTableCommand.md)
-* [CacheTableCommand](CacheTableCommand.md)
-* [ClearCacheCommand](ClearCacheCommand.md)
-* [CreateDataSourceTableCommand](CreateDataSourceTableCommand.md)
-* [CreateTempViewUsing](CreateTempViewUsing.md)
+* `AlterViewAsCommand`
 * [CreateViewCommand](CreateViewCommand.md)
-* [DescribeColumnCommand](DescribeColumnCommand.md)
-* [ExplainCommand](ExplainCommand.md)
-* [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
-* [SaveIntoDataSourceCommand](SaveIntoDataSourceCommand.md)
-* [ShowCreateTableCommand](ShowCreateTableCommand.md)
-* [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
-* [TruncateTableCommand](TruncateTableCommand.md)
-* _others_
+* [LeafRunnableCommand](LeafRunnableCommand.md)
 
 ## Query Planning
 
