@@ -43,4 +43,32 @@ verifyAlterTableAddColumn(
   table: TableIdentifier): CatalogTable
 ```
 
-`verifyAlterTableAddColumn`...FIXME
+`verifyAlterTableAddColumn` asserts that the table is as follows:
+
+1. The table is not a view
+1. The table is a Hive table or one of the supported [FileFormat](../datasources/FileFormat.md)s
+
+---
+
+`verifyAlterTableAddColumn` requests the given [SessionCatalog](../SessionCatalog.md) for the [getTempViewOrPermanentTableMetadata](../SessionCatalog.md#getTempViewOrPermanentTableMetadata).
+
+`verifyAlterTableAddColumn` throws an `AnalysisException` if the `table` is a `VIEW`:
+
+```text
+ALTER ADD COLUMNS does not support views.
+You must drop and re-create the views for adding the new columns. Views: [table]
+```
+
+For a Spark table (that is non-Hive), `verifyAlterTableAddColumn` [finds the implementation of the table provider](../DataSource.md#lookupDataSource) and makes sure that the table provider is one of the following supported file formats:
+
+* [CSVFileFormat](../datasources/csv/CSVFileFormat.md) or `CSVDataSourceV2`
+* [JsonFileFormat](../datasources/json/JsonFileFormat.md) or `JsonDataSourceV2`
+* [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) or `ParquetDataSourceV2`
+* [OrcFileFormat](../datasources/orc/OrcFileFormat.md) or `OrcDataSourceV2`
+
+Otherwise, `verifyAlterTableAddColumn` throws an `AnalysisException`:
+
+```text
+ALTER ADD COLUMNS does not support datasource table with type [tableType].
+You must drop and re-create the table for adding the new columns. Tables: [table]
+```
