@@ -225,13 +225,19 @@ Fallback Property: `spark.sql.adaptive.shuffle.targetPostShuffleInputSize`
 
 Use [SQLConf.ADVISORY_PARTITION_SIZE_IN_BYTES](SQLConf.md#ADVISORY_PARTITION_SIZE_IN_BYTES) to reference the name.
 
-## <span id="spark.sql.adaptive.coalescePartitions.minPartitionNum"> spark.sql.adaptive.coalescePartitions.minPartitionNum
+## <span id="spark.sql.adaptive.coalescePartitions.minPartitionSize"><span id="COALESCE_PARTITIONS_MIN_PARTITION_SIZE"><span id="COALESCE_PARTITIONS_MIN_PARTITION_NUM"> spark.sql.adaptive.coalescePartitions.minPartitionSize
 
-The minimum number of shuffle partitions after coalescing. If not set, the default value is the default parallelism of the Spark cluster. This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled.
+The minimum size (in bytes) of shuffle partitions after coalescing.
+
+Useful when the adaptively calculated target size is too small during partition coalescing.
 
 Default: `(undefined)`
 
-Since: `3.0.0`
+Must be positive
+
+Used when:
+
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
 
 ## <span id="spark.sql.adaptive.coalescePartitions.initialPartitionNum"> spark.sql.adaptive.coalescePartitions.initialPartitionNum
 

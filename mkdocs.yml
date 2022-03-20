@@ -697,6 +697,7 @@ nav:
       - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
       - AQEUtils: adaptive-query-execution/AQEUtils.md
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+      - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
       - Demo: adaptive-query-execution/demo.md
     - Bucketing: bucketing.md

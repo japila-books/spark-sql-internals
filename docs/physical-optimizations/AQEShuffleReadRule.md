@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="supportedShuffleOrigins"> supportedShuffleOrigins
+### <span id="supportedShuffleOrigins"> Supported ShuffleOrigins
 
 ```scala
 supportedShuffleOrigins: Seq[ShuffleOrigin]
