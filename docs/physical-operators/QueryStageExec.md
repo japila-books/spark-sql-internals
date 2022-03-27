@@ -1,6 +1,6 @@
 # QueryStageExec Leaf Physical Operators
 
-`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) for [Adaptive Query Execution](index.md).
+`QueryStageExec` is an [extension](#contract) of the [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) for [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Contract
 
