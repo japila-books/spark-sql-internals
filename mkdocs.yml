@@ -86,7 +86,7 @@ extra:
     kafka: https://books.japila.pl/kafka-internals
     pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
-    structured_streaming: https://jaceklaskowski.github.io/spark-structured-streaming-book
+    structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   hadoop:
     version: 3.3.1
     docs: https://hadoop.apache.org/docs/r3.3.1
