@@ -286,6 +286,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/FilePartition/</loc>
+         <lastmod>2022-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/FileRelation/</loc>
          <lastmod>2022-04-23</lastmod>
          <changefreq>daily</changefreq>
@@ -402,6 +407,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/PartitionedFile/</loc>
+         <lastmod>2022-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/PartitionedFileUtil/</loc>
          <lastmod>2022-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
