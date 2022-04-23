@@ -452,11 +452,21 @@ Used when:
 * `HadoopFsRelation` is requested for a [size](HadoopFsRelation.md#sizeInBytes)
 * `FileScan` is requested to [estimate statistics](FileScan.md#estimateStatistics)
 
-## <span id="filesMaxPartitionBytes"> filesMaxPartitionBytes
+## <span id="filesMaxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> filesMaxPartitionBytes
 
 [spark.sql.files.maxPartitionBytes](configuration-properties.md#spark.sql.files.maxPartitionBytes)
 
-Used when <<FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator is requested to <<FileSourceScanExec.md#createNonBucketedReadRDD, create an RDD for non-bucketed reads>>
+Used when:
+
+* `FilePartition` utility is requested for [maxSplitBytes](FilePartition.md#maxSplitBytes)
+
+## <span id="filesMinPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> filesMinPartitionNum
+
+[spark.sql.files.minPartitionNum](configuration-properties.md#spark.sql.files.minPartitionNum)
+
+Used when:
+
+* `FilePartition` utility is requested for [maxSplitBytes](FilePartition.md#maxSplitBytes)
 
 ## <span id="filesOpenCostInBytes"> filesOpenCostInBytes
 

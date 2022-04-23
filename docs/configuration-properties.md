@@ -1096,6 +1096,14 @@ Default: `128 * 1024 * 1024` (which corresponds to `parquet.block.size`)
 
 Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) method to access the current value.
 
+## <span id="spark.sql.files.minPartitionNum"> spark.sql.files.minPartitionNum
+
+The suggested (not guaranteed) minimum number of split file partitions for file-based data sources such as Parquet, JSON and ORC.
+
+Default: [spark.sql.leafNodeDefaultParallelism](#spark.sql.leafNodeDefaultParallelism)
+
+Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) method to access the current value.
+
 ## <span id="spark.sql.files.openCostInBytes"> spark.sql.files.openCostInBytes
 
 **(internal)** The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).

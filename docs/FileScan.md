@@ -26,16 +26,7 @@ Used when...FIXME
 
 ```scala
 getFileUnSplittableReason(
-    path: Path): String
-```
-
-Used when...FIXME
-
-### <span id="isSplitable"> isSplitable
-
-```scala
-isSplitable(
-    path: Path): Boolean
+  path: Path): String
 ```
 
 Used when...FIXME
@@ -68,7 +59,7 @@ Used when...FIXME
 
 ```scala
 seqToString(
-    seq: Seq[Any]): String
+  seq: Seq[Any]): String
 ```
 
 Used when...FIXME
@@ -85,8 +76,8 @@ Used when...FIXME
 
 ```scala
 withFilters(
-    partitionFilters: Seq[Expression],
-    dataFilters: Seq[Expression]): FileScan
+  partitionFilters: Seq[Expression],
+  dataFilters: Seq[Expression]): FileScan
 ```
 
 Used when...FIXME
@@ -95,7 +86,7 @@ Used when...FIXME
 
 * `AvroScan`
 * `OrcScan`
-* `ParquetScan`
+* [ParquetScan](datasources/parquet/ParquetScan.md)
 * `TextBasedFileScan`
 
 ## <span id="description"> description
@@ -108,25 +99,27 @@ description(): String
 
 `description` is part of the [Scan](connector/Scan.md#description) abstraction.
 
-## <span id="partitions"> partitions
-
-```scala
-partitions: Seq[FilePartition]
-```
-
-`partitions`...FIXME
-
-`partitions` is used when `FileScan` is requested to [planInputPartitions](#planInputPartitions).
-
 ## <span id="planInputPartitions"> planInputPartitions
 
 ```scala
 planInputPartitions(): Array[InputPartition]
 ```
 
-`planInputPartitions`...FIXME
+`planInputPartitions` is [partitions](#partitions).
 
 `planInputPartitions` is part of the [Batch](connector/Batch.md#planInputPartitions) abstraction.
+
+### <span id="partitions"> FilePartitions
+
+```scala
+partitions: Seq[FilePartition]
+```
+
+`partitions` requests the [PartitioningAwareFileIndex](#fileIndex) for the [partition directories](PartitioningAwareFileIndex.md#listFiles) (_selectedPartitions_).
+
+For every selected partition directory, `partitions` requests the Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es that are [split](PartitionedFileUtil.md#splitFiles) (if [isSplitable](#isSplitable)) to [maxSplitBytes](FilePartition.md#maxSplitBytes) and sorted by size (in reversed order).
+
+In the end, `partitions` returns the [FilePartition](FilePartition.md#getFilePartitions)s.
 
 ## <span id="estimateStatistics"> estimateStatistics
 
@@ -157,3 +150,16 @@ readSchema(): StructType
 `readSchema`...FIXME
 
 `readSchema` is part of the [Scan](connector/Scan.md#readSchema) abstraction.
+
+## <span id="isSplitable"> isSplitable
+
+```scala
+isSplitable(
+  path: Path): Boolean
+```
+
+`isSplitable` is `false`.
+
+Used when:
+
+* `FileScan` is requested to [getFileUnSplittableReason](#getFileUnSplittableReason) and [partitions](#partitions)
