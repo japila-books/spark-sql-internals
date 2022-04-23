@@ -5,3 +5,5 @@
 Spark SQL supports parquet-encoded data using [ParquetFileFormat](ParquetFileFormat.md).
 
 Parquet is the default data source format based on the [spark.sql.sources.default](../../configuration-properties.md#spark.sql.sources.default) configuration property.
+
+Parquet data source uses `spark.sql.parquet` prefix for [parquet-specific configuration properties](../../configuration-properties.md).

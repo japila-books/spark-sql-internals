@@ -835,9 +835,15 @@ nav:
     - Parquet:
       - datasources/parquet/index.md
       - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
+      - ParquetOptions: datasources/parquet/ParquetOptions.md
+      - ParquetPartitionReaderFactory: datasources/parquet/ParquetPartitionReaderFactory.md
       - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
       - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
       - ParquetTable: datasources/parquet/ParquetTable.md
+      - ParquetUtils: datasources/parquet/ParquetUtils.md
+      - ParquetWrite: datasources/parquet/ParquetWrite.md
+      - ParquetWriteSupport: datasources/parquet/ParquetWriteSupport.md
+      - SparkToParquetSchemaConverter: datasources/parquet/SparkToParquetSchemaConverter.md
       - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
       - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
       - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md

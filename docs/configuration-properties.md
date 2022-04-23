@@ -1496,13 +1496,24 @@ The number should be carefully chosen to minimize overhead and avoid OOMs while 
 
 Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) method to access the current value.
 
-## <span id="spark.sql.parquet.int96AsTimestamp"> spark.sql.parquet.int96AsTimestamp
+## <span id="spark.sql.parquet.compression.codec"> spark.sql.parquet.compression.codec
 
-Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
+Sets the compression codec used when writing Parquet files. If either `compression` or `parquet.compression` is specified in the table-specific options/properties, the precedence would be `compression`, `parquet.compression`, `spark.sql.parquet.compression.codec`.
 
-Default: `true`
+Acceptable values:
 
-Use [SQLConf.isParquetINT96AsTimestamp](SQLConf.md#isParquetINT96AsTimestamp) method to access the current value.
+* `brotli`
+* `gzip`
+* `lz4`
+* `lzo`
+* `none`
+* `snappy`
+* `uncompressed`
+* `zstd`
+
+Default: `snappy`
+
+Use [SQLConf.parquetCompressionCodec](SQLConf.md#parquetCompressionCodec) method to access the current value.
 
 ## <span id="spark.sql.parquet.enableVectorizedReader"> spark.sql.parquet.enableVectorizedReader
 
@@ -1522,11 +1533,75 @@ Use [SQLConf.parquetFilterPushDown](SQLConf.md#parquetFilterPushDown) method to 
 
 ## <span id="spark.sql.parquet.filterPushdown.date"> spark.sql.parquet.filterPushdown.date
 
-**(internal)** Enables parquet filter push-down optimization for Date (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled)
+**(internal)** Enables parquet filter push-down optimization for `Date` type (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled)
 
 Default: `true`
 
 Use [SQLConf.parquetFilterPushDownDate](SQLConf.md#parquetFilterPushDownDate) method to access the current value.
+
+## <span id="spark.sql.parquet.filterPushdown.decimal"> spark.sql.parquet.filterPushdown.decimal
+
+**(internal)** Enables parquet filter push-down optimization for `Decimal` type (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled)
+
+Default: `true`
+
+Use [SQLConf.parquetFilterPushDownDecimal](SQLConf.md#parquetFilterPushDownDecimal) method to access the current value.
+
+## <span id="spark.sql.parquet.int96RebaseModeInWrite"> spark.sql.parquet.int96RebaseModeInWrite
+
+**(internal)** Enables rebasing timestamps while writing Parquet files
+
+Formerly known as [spark.sql.legacy.parquet.int96RebaseModeInWrite](#spark.sql.legacy.parquet.int96RebaseModeInWrite)
+
+Acceptable values:
+
+* `EXCEPTION` - Fail writing parquet files if there are ancient timestamps that are ambiguous between the two calendars
+* `LEGACY` - Rebase `INT96` timestamps from Proleptic Gregorian calendar to the legacy hybrid (Julian + Gregorian) calendar (gives maximum interoperability)
+* `CORRECTED` - Write datetime values with no change (*rabase*). Only when you are 100% sure that the written files will only be read by Spark 3.0+ or other systems that use Proleptic Gregorian calendar
+
+Default: `EXCEPTION`
+
+Writing dates before `1582-10-15` or timestamps before `1900-01-01T00:00:00Z` can be dangerous, as the files may be read by Spark 2.x or legacy versions of Hive later, which uses a legacy hybrid calendar that is different from Spark 3.0+'s Proleptic Gregorian calendar.
+
+See more details in SPARK-31404.
+
+## <span id="spark.sql.parquet.pushdown.inFilterThreshold"> spark.sql.parquet.pushdown.inFilterThreshold
+
+**(internal)** For IN predicate, Parquet filter will push-down a set of OR clauses if its number of values not exceeds this threshold. Otherwise, Parquet filter will push-down a value greater than or equal to its minimum value and less than or equal to its maximum value (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled)
+
+Disabled when `0`
+
+Default: `10`
+
+Use [SQLConf.parquetFilterPushDownInFilterThreshold](SQLConf.md#parquetFilterPushDownInFilterThreshold) method to access the current value.
+
+## <span id="spark.sql.parquet.filterPushdown.string.startsWith"> spark.sql.parquet.filterPushdown.string.startsWith
+
+**(internal)** Enables parquet filter push-down optimization for `startsWith` function (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled)
+
+Default: `true`
+
+Use [SQLConf.parquetFilterPushDownStringStartWith](SQLConf.md#parquetFilterPushDownStringStartWith) method to access the current value.
+
+## <span id="spark.sql.parquet.filterPushdown.timestamp"> spark.sql.parquet.filterPushdown.timestamp
+
+**(internal)** Enables parquet filter push-down optimization for `Timestamp` type.
+It can only have an effect when the following hold:
+
+1. [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled
+1. `Timestamp` stored as `TIMESTAMP_MICROS` or `TIMESTAMP_MILLIS` type
+
+Default: `true`
+
+Use [SQLConf.parquetFilterPushDownTimestamp](SQLConf.md#parquetFilterPushDownTimestamp) method to access the current value.
+
+## <span id="spark.sql.parquet.int96AsTimestamp"> spark.sql.parquet.int96AsTimestamp
+
+Some Parquet-producing systems, in particular Impala, store Timestamp into INT96. Spark would also store Timestamp as INT96 because we need to avoid precision lost of the nanoseconds field. This flag tells Spark SQL to interpret INT96 data as a timestamp to provide compatibility with these systems.
+
+Default: `true`
+
+Use [SQLConf.isParquetINT96AsTimestamp](SQLConf.md#isParquetINT96AsTimestamp) method to access the current value.
 
 ## <span id="spark.sql.parquet.int96TimestampConversion"> spark.sql.parquet.int96TimestampConversion
 
@@ -1538,6 +1613,36 @@ This is necessary because Impala stores INT96 data with a different timezone off
 
 Use [SQLConf.isParquetINT96TimestampConversion](SQLConf.md#isParquetINT96TimestampConversion) method to access the current value.
 
+## <span id="spark.sql.parquet.mergeSchema"> spark.sql.parquet.mergeSchema
+
+Controls whether the Parquet data source merges schemas collected from all data files or not. If `false`, the schema is picked from the summary file or a random data file if no summary file is available.
+
+Default: `false`
+
+Use [SQLConf.isParquetSchemaMergingEnabled](SQLConf.md#isParquetSchemaMergingEnabled) method to access the current value.
+
+## <span id="spark.sql.parquet.output.committer.class"> spark.sql.parquet.output.committer.class
+
+**(internal)** The output committer class used by [parquet](datasources/parquet/index.md) data source. The specified class needs to be a subclass of `org.apache.hadoop.mapreduce.OutputCommitter`. Typically, it's also a subclass of `org.apache.parquet.hadoop.ParquetOutputCommitter`. If it is not, then metadata summaries will never be created, irrespective of the value of `parquet.summary.metadata.level`.
+
+Default: `org.apache.parquet.hadoop.ParquetOutputCommitter`
+
+Use [SQLConf.parquetOutputCommitterClass](SQLConf.md#parquetOutputCommitterClass) method to access the current value.
+
+## <span id="spark.sql.parquet.outputTimestampType"> spark.sql.parquet.outputTimestampType
+
+Sets which Parquet timestamp type to use when Spark writes data to Parquet files. INT96 is a non-standard but commonly used timestamp type in Parquet. TIMESTAMP_MICROS is a standard timestamp type in Parquet, which stores number of microseconds from the Unix epoch. TIMESTAMP_MILLIS is also standard, but with millisecond precision, which means Spark has to truncate the microsecond portion of its timestamp value.
+
+Acceptable values:
+
+* `INT96`
+* `TIMESTAMP_MICROS`
+* `TIMESTAMP_MILLIS`
+
+Default: `INT96`
+
+Use [SQLConf.parquetOutputTimestampType](SQLConf.md#parquetOutputTimestampType) method to access the current value.
+
 ## <span id="spark.sql.parquet.recordLevelFilter.enabled"> spark.sql.parquet.recordLevelFilter.enabled
 
 Enables Parquet's native record-level filtering using the pushed down filters (when [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) is enabled).
@@ -1545,6 +1650,14 @@ Enables Parquet's native record-level filtering using the pushed down filters (w
 Default: `false`
 
 Use [SQLConf.parquetRecordFilterEnabled](SQLConf.md#parquetRecordFilterEnabled) method to access the current value.
+
+## <span id="spark.sql.parquet.respectSummaryFiles"> spark.sql.parquet.respectSummaryFiles
+
+When true, we make assumption that all part-files of Parquet are consistent with summary files and we will ignore them when merging schema. Otherwise, if this is false, which is the default, we will merge all part-files. This should be considered as expert-only option, and shouldn't be enabled before knowing what it means exactly.
+
+Default: `false`
+
+Use [SQLConf.isParquetSchemaRespectSummaries](SQLConf.md#isParquetSchemaRespectSummaries) method to access the current value.
 
 ## <span id="spark.sql.parser.quotedRegexColumnNames"> spark.sql.parser.quotedRegexColumnNames
 

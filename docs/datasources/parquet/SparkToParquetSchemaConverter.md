@@ -1,0 +1,3 @@
+# SparkToParquetSchemaConverter
+
+`SparkToParquetSchemaConverter` is...FIXME

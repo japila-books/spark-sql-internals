@@ -533,6 +533,22 @@ Used when `InMemoryTableScanExec` physical operator is requested for [filtered c
 
 Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
+## <span id="isParquetSchemaMergingEnabled"><span id="PARQUET_SCHEMA_MERGING_ENABLED"> isParquetSchemaMergingEnabled
+
+[spark.sql.parquet.mergeSchema](configuration-properties.md#spark.sql.parquet.mergeSchema)
+
+Used when:
+
+* `ParquetOptions` is requested for [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema)
+
+## <span id="isParquetSchemaRespectSummaries"><span id="PARQUET_SCHEMA_RESPECT_SUMMARIES"> isParquetSchemaRespectSummaries
+
+[spark.sql.parquet.respectSummaryFiles](configuration-properties.md#spark.sql.parquet.respectSummaryFiles)
+
+Used when:
+
+* `ParquetUtils` is used to [inferSchema](datasources/parquet/ParquetUtils.md#inferSchema)
+
 ## <span id="joinReorderEnabled"> joinReorderEnabled
 
 [spark.sql.cbo.joinReorder.enabled](configuration-properties.md#spark.sql.cbo.joinReorder.enabled)
@@ -745,23 +761,96 @@ Supported values:
 
 Used when `CommandUtils` helper object is requested to [calculate the total size of a table (with partitions)](CommandUtils.md#calculateTotalSize) (for [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md) and [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md) commands)
 
-## <span id="parquetFilterPushDown"> parquetFilterPushDown
+## <span id="parquetCompressionCodec"><span id="PARQUET_COMPRESSION"> parquetCompressionCodec
+
+[spark.sql.parquet.compression.codec](configuration-properties.md#spark.sql.parquet.compression.codec)
+
+Used when:
+
+* `ParquetOptions` is requested for [compressionCodecClassName](datasources/parquet/ParquetOptions.md#compressionCodecClassName)
+
+## <span id="parquetFilterPushDown"><span id="PARQUET_FILTER_PUSHDOWN_ENABLED"> parquetFilterPushDown
 
 [spark.sql.parquet.filterPushdown](configuration-properties.md#spark.sql.parquet.filterPushdown)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when:
 
-## <span id="parquetFilterPushDownDate"> parquetFilterPushDownDate
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+
+## <span id="parquetFilterPushDownDate"><span id="PARQUET_FILTER_PUSHDOWN_DATE_ENABLED"> parquetFilterPushDownDate
 
 [spark.sql.parquet.filterPushdown.date](configuration-properties.md#spark.sql.parquet.filterPushdown.date)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when:
+
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+
+## <span id="parquetFilterPushDownDecimal"><span id="PARQUET_FILTER_PUSHDOWN_DECIMAL_ENABLED"> parquetFilterPushDownDecimal
+
+[spark.sql.parquet.filterPushdown.decimal](configuration-properties.md#spark.sql.parquet.filterPushdown.decimal)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+
+## <span id="parquetFilterPushDownInFilterThreshold"><span id="PARQUET_FILTER_PUSHDOWN_INFILTERTHRESHOLD"> parquetFilterPushDownInFilterThreshold
+
+[spark.sql.parquet.pushdown.inFilterThreshold](configuration-properties.md#spark.sql.parquet.pushdown.inFilterThreshold)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+
+## <span id="parquetFilterPushDownStringStartWith"><span id="PARQUET_FILTER_PUSHDOWN_STRING_STARTSWITH_ENABLED"> parquetFilterPushDownStringStartWith
+
+[spark.sql.parquet.filterPushdown.string.startsWith](configuration-properties.md#spark.sql.parquet.filterPushdown.string.startsWith)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+
+## <span id="parquetFilterPushDownTimestamp"><span id="PARQUET_FILTER_PUSHDOWN_TIMESTAMP_ENABLED"> parquetFilterPushDownTimestamp
+
+[spark.sql.parquet.filterPushdown.timestamp](configuration-properties.md#spark.sql.parquet.filterPushdown.timestamp)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+
+## <span id="parquetOutputCommitterClass"><span id="PARQUET_OUTPUT_COMMITTER_CLASS"> parquetOutputCommitterClass
+
+[spark.sql.parquet.output.committer.class](configuration-properties.md#spark.sql.parquet.output.committer.class)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
+* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
+
+## <span id="parquetOutputTimestampType"><span id="PARQUET_OUTPUT_TIMESTAMP_TYPE"> parquetOutputTimestampType
+
+[spark.sql.parquet.outputTimestampType](configuration-properties.md#spark.sql.parquet.outputTimestampType)
+
+Used when:
+
+* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
+* `SparkToParquetSchemaConverter` is [created](datasources/parquet/SparkToParquetSchemaConverter.md)
+* `ParquetWriteSupport` is requested to [init](datasources/parquet/ParquetWriteSupport.md#init)
+* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
 
 ## <span id="parquetRecordFilterEnabled"> parquetRecordFilterEnabled
 
 [spark.sql.parquet.recordLevelFilter.enabled](configuration-properties.md#spark.sql.parquet.recordLevelFilter.enabled)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="parquetVectorizedReaderBatchSize"> parquetVectorizedReaderBatchSize
 
