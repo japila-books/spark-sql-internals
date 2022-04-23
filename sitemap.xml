@@ -1576,6 +1576,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetDataSourceV2/</loc>
+         <lastmod>2022-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetFileFormat/</loc>
          <lastmod>2022-04-23</lastmod>
          <changefreq>daily</changefreq>
