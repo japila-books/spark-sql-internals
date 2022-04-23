@@ -834,6 +834,7 @@ nav:
       - OrcFileFormat: datasources/orc/OrcFileFormat.md
     - Parquet:
       - datasources/parquet/index.md
+      - ParquetDataSourceV2: datasources/parquet/ParquetDataSourceV2.md
       - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
       - ParquetOptions: datasources/parquet/ParquetOptions.md
       - ParquetPartitionReaderFactory: datasources/parquet/ParquetPartitionReaderFactory.md

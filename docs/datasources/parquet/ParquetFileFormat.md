@@ -1,6 +1,6 @@
 # ParquetFileFormat
 
-`ParquetFileFormat` is the [FileFormat](../FileFormat.md) of the [parquet](index.md) data source.
+`ParquetFileFormat` is the [FileFormat](../FileFormat.md) of [parquet](index.md) data source.
 
 `ParquetFileFormat` is `Serializable`.
 
