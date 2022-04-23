@@ -1586,6 +1586,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetFilters/</loc>
+         <lastmod>2022-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetOptions/</loc>
          <lastmod>2022-04-23</lastmod>
          <changefreq>daily</changefreq>
@@ -1597,6 +1602,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetReadSupport/</loc>
+         <lastmod>2022-04-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/parquet/ParquetScan/</loc>
          <lastmod>2022-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
