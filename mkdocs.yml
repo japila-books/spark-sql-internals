@@ -836,9 +836,11 @@ nav:
       - datasources/parquet/index.md
       - ParquetDataSourceV2: datasources/parquet/ParquetDataSourceV2.md
       - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
+      - ParquetFilters: datasources/parquet/ParquetFilters.md
       - ParquetOptions: datasources/parquet/ParquetOptions.md
       - ParquetPartitionReaderFactory: datasources/parquet/ParquetPartitionReaderFactory.md
       - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
+      - ParquetScan: datasources/parquet/ParquetScan.md
       - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
       - ParquetTable: datasources/parquet/ParquetTable.md
       - ParquetUtils: datasources/parquet/ParquetUtils.md
