@@ -11,13 +11,20 @@
 * <span id="sc"> `SparkContext`
 * <span id="inputPartitions"> [InputPartition](connector/InputPartition.md)s
 * <span id="partitionReaderFactory"> [PartitionReaderFactory](connector/PartitionReaderFactory.md)
-* <span id="columnarReads"> `columnarReads` flag
+* [columnarReads](#columnarReads) flag
 
 `DataSourceRDD` is created when:
 
 * `BatchScanExec` physical operator is requested for an [input RDD](physical-operators/BatchScanExec.md#inputRDD)
+* `MicroBatchScanExec` (Spark Structured Streaming) physical operator is requested for an `inputRDD`
 
-* `MicroBatchScanExec` physical operator is requested for an `inputRDD`
+### <span id="columnarReads"> columnarReads Flag
+
+`DataSourceRDD` is given `columnarReads` flag when [created](#creating-instance).
+
+`columnarReads` is used to determine the type of scan (row-based or columnar) when [computing a partition](#compute).
+
+`columnarReads` is enabled (using [supportsColumnar](physical-operators/DataSourceV2ScanExecBase.md#supportsColumnar)) when the [PartitionReaderFactory](physical-operators/DataSourceV2ScanExecBase.md#readerFactory) can [support columnar scans](connector/PartitionReaderFactory.md#supportColumnarReads).
 
 ## <span id="getPreferredLocations"> Preferred Locations For Partition
 

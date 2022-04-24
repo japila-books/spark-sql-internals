@@ -4,14 +4,14 @@
 
 ## Contract
 
-### <span id="createColumnarReader"> createColumnarReader
+### <span id="createColumnarReader"> Creating Columnar PartitionReader
 
 ```java
 PartitionReader<ColumnarBatch> createColumnarReader(
     InputPartition partition)
 ```
 
-Creates a columnar [partition reader](PartitionReader.md) to read data from the given [InputPartition](InputPartition.md).
+Creates a [PartitionReader](PartitionReader.md) for a columnar scan (to read data) from the given [InputPartition](InputPartition.md)
 
 By default, `createColumnarReader` throws an `UnsupportedOperationException`:
 
@@ -19,18 +19,23 @@ By default, `createColumnarReader` throws an `UnsupportedOperationException`:
 Cannot create columnar reader.
 ```
 
-Used when...FIXME
+Used when:
 
-### <span id="createReader"> createReader
+* `DataSourceRDD` is requested to [compute a partition](../DataSourceRDD.md#compute)
+
+### <span id="createReader"> Creating PartitionReader
 
 ```java
 PartitionReader<InternalRow> createReader(
     InputPartition partition)
 ```
 
-Creates a row-based [partition reader](PartitionReader.md) to read data from the given [InputPartition](InputPartition.md).
+Creates a [PartitionReader](PartitionReader.md) for a row-based scan (to read data) from the given [InputPartition](InputPartition.md)
 
-Used when...FIXME
+Used when:
+
+* `DataSourceRDD` is requested to [compute a partition](../DataSourceRDD.md#compute)
+* `ContinuousDataSourceRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
 ### <span id="supportColumnarReads"> supportColumnarReads
 
@@ -39,14 +44,18 @@ boolean supportColumnarReads(
     InputPartition partition)
 ```
 
-By default, `supportColumnarReads` indicates no support for columnar reads (and returns `false`).
+Controls whether columnar scan can be used (and hence [createColumnarReader](#createColumnarReader)) or not
 
-Used when...FIXME
+By default, `supportColumnarReads` indicates no support for columnar scans (and returns `false`).
+
+Used when:
+
+* `DataSourceV2ScanExecBase` is requested to [supportsColumnar](../physical-operators/DataSourceV2ScanExecBase.md#supportsColumnar)
 
 ## Implementations
 
 * `ContinuousPartitionReaderFactory`
-* `FilePartitionReaderFactory`
+* [FilePartitionReaderFactory](../FilePartitionReaderFactory.md)
 * `KafkaBatchReaderFactory`
 * `MemoryStreamReaderFactory`
 * `RateStreamMicroBatchReaderFactory`

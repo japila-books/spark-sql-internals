@@ -1,6 +1,85 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is...FIXME
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md).
+
+## Creating Instance
+
+`ParquetPartitionReaderFactory` takes the following to be created:
+
+* <span id="sqlConf"> [SQLConf](../../SQLConf.md)
+* <span id="broadcastedConf"> Broadcast variable with a Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)
+* <span id="dataSchema"> Data [schema](../../types/StructType.md)
+* <span id="readDataSchema"> Read data [schema](../../types/StructType.md)
+* <span id="partitionSchema"> Partition [schema](../../types/StructType.md)
+* <span id="filters"> [Filter](../../Filter.md)s
+* <span id="parquetOptions"> [ParquetOptions](ParquetOptions.md)
+
+`ParquetPartitionReaderFactory` is created when:
+
+* `ParquetScan` is requested to [create a PartitionReaderFactory](ParquetScan.md#createReaderFactory)
+
+## <span id="buildColumnarReader"> buildColumnarReader
+
+```scala
+buildColumnarReader(
+  file: PartitionedFile): PartitionReader[ColumnarBatch]
+```
+
+`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
+
+In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)s (when [requested for records](../../connector/PartitionReader.md#get)).
+
+---
+
+`buildColumnarReader` is part of the [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
+
+## <span id="buildReader"> Building PartitionReader
+
+```scala
+buildReader(
+  file: PartitionedFile): PartitionReader[InternalRow]
+```
+
+`buildReader` determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use based on the [enableVectorizedReader](#enableVectorizedReader) flag. When enabled, `buildReader` [createVectorizedReader](#createVectorizedReader) and [createRowBaseReader](#createRowBaseReader) otherwise.
+
+In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that is a [PartitionReader](../../connector/PartitionReader.md) with partition values appended).
+
+---
+
+`buildReader` is part of the [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md#buildReader) abstraction.
+
+### <span id="enableVectorizedReader"> enableVectorizedReader
+
+`ParquetPartitionReaderFactory` uses `enableVectorizedReader` flag to determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use when requested for a [PartitionReader](#buildReader).
+
+`enableVectorizedReader` is enabled (`true`) when the following hold:
+
+1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) is `true`
+1. All data types in the [resultSchema](#resultSchema) are [AtomicType](../../types/AtomicType.md)s
+
+### <span id="createRowBaseReader"> createRowBaseReader
+
+```scala
+createRowBaseReader(
+  file: PartitionedFile): RecordReader[Void, InternalRow]
+```
+
+`createRowBaseReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../../PartitionedFile.md) and [createRowBaseParquetReader](#createRowBaseParquetReader)).
+
+## <span id="createVectorizedReader"> createVectorizedReader
+
+```scala
+createVectorizedReader(
+  file: PartitionedFile): VectorizedParquetRecordReader
+```
+
+`createVectorizedReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../../PartitionedFile.md) and [createParquetVectorizedReader](#createParquetVectorizedReader)).
+
+In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../../PartitionedFile.md#partitionValues) of the given [PartitionedFile](../../PartitionedFile.md)) and returns it.
+
+`createVectorizedReader` is used when:
+
+* `ParquetPartitionReaderFactory` is requested to [buildReader](#buildReader) and [buildColumnarReader](#buildColumnarReader)
 
 ## <span id="buildReaderBase"> buildReaderBase
 
@@ -21,4 +100,4 @@ buildReaderBase[T](
 
 `buildReaderBase` is used when:
 
-* FIXME
+* `ParquetPartitionReaderFactory` is requested to [createRowBaseReader](#createRowBaseReader) and [createVectorizedReader](#createVectorizedReader)

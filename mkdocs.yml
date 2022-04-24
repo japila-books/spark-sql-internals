@@ -767,6 +767,7 @@ nav:
       - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
     - Files:
       - FileScan: FileScan.md
+      - FilePartitionReaderFactory: FilePartitionReaderFactory.md
       - FileScanBuilder: FileScanBuilder.md
       - FileDataSourceV2: FileDataSourceV2.md
       - HadoopFsRelation: HadoopFsRelation.md
