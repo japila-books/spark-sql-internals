@@ -18,6 +18,22 @@
 
 * `ParquetScan` is requested to [create a PartitionReaderFactory](ParquetScan.md#createReaderFactory)
 
+## <span id="supportColumnarReads"> supportColumnarReads
+
+```scala
+supportColumnarReads(
+  partition: InputPartition): Boolean
+```
+
+`supportColumnarReads` is enabled (`true`) when the following all hold:
+
+1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader)
+1. [spark.sql.codegen.wholeStage](../../configuration-properties.md#spark.sql.codegen.wholeStage)
+1. The number of the [resultSchema](#resultSchema) fields is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields)
+1. All the [resultSchema](#resultSchema) fields are [AtomicType](../../types/AtomicType.md)s
+
+`supportColumnarReads` is part of the [PartitionReaderFactory](../../connector/PartitionReaderFactory.md#supportColumnarReads) abstraction.
+
 ## <span id="buildColumnarReader"> buildColumnarReader
 
 ```scala
@@ -27,7 +43,7 @@ buildColumnarReader(
 
 `buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
 
-In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)s (when [requested for records](../../connector/PartitionReader.md#get)).
+In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
 ---
 
@@ -57,7 +73,7 @@ In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that i
 1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) is `true`
 1. All data types in the [resultSchema](#resultSchema) are [AtomicType](../../types/AtomicType.md)s
 
-### <span id="createRowBaseReader"> createRowBaseReader
+### <span id="createRowBaseReader"> Creating Row-Based RecordReader
 
 ```scala
 createRowBaseReader(
@@ -66,7 +82,7 @@ createRowBaseReader(
 
 `createRowBaseReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../../PartitionedFile.md) and [createRowBaseParquetReader](#createRowBaseParquetReader)).
 
-## <span id="createVectorizedReader"> createVectorizedReader
+## <span id="createVectorizedReader"> Creating Vectorized Parquet RecordReader
 
 ```scala
 createVectorizedReader(
