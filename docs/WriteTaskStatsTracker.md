@@ -17,7 +17,7 @@ a| [[getFinalStats]]
 getFinalStats(): WriteTaskStats
 ----
 
-The final <<spark-sql-WriteTaskStats.md#, WriteTaskStats>> statistics computed so far
+The final [WriteTaskStats](WriteTaskStats.md) statistics computed so far
 
 Used when `EmptyDirectoryWriteTask`, `SingleDirectoryWriteTask` and `DynamicPartitionWriteTask` are requested to execute
 
@@ -63,4 +63,4 @@ Used when...FIXME
 |===
 
 [[implementations]]
-NOTE: <<spark-sql-BasicWriteTaskStatsTracker.md#, BasicWriteTaskStatsTracker>> is the one and only known implementation of the <<contract, WriteTaskStatsTracker Contract>> in Apache Spark.
+NOTE: [BasicWriteTaskStatsTracker](BasicWriteTaskStatsTracker.md) is the one and only known implementation of the <<contract, WriteTaskStatsTracker Contract>> in Apache Spark.

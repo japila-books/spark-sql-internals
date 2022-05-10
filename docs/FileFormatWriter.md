@@ -4,7 +4,7 @@
 
 * Hive-related [InsertIntoHiveDirCommand](hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](hive/InsertIntoHiveTable.md) logical commands (via [SaveAsHiveFile.saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile))
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command
-* ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSink#addBatch)) `FileStreamSink` is requested to write out a micro-batch
+* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSink#addBatch)) is requested to write out a micro-batch
 
 ## <span id="write"> Writing Out Query Result
 
@@ -102,15 +102,16 @@ executeTask(
 
 `executeTask`...FIXME
 
-### <span id="processStats"> Processing WriteTaskStats
+### <span id="processStats"> Processing Write Job Statistics
 
 ```scala
 processStats(
   statsTrackers: Seq[WriteJobStatsTracker],
-  statsPerTask: Seq[Seq[WriteTaskStats]]): Unit
+  statsPerTask: Seq[Seq[WriteTaskStats]],
+  jobCommitDuration: Long): Unit
 ```
 
-`processStats`...FIXME
+`processStats` requests every [WriteJobStatsTracker](WriteJobStatsTracker.md) to [processStats](WriteJobStatsTracker.md#processStats) (for respective [WriteTaskStats](WriteTaskStats.md) in the given `statsPerTask`).
 
 ## Logging
 

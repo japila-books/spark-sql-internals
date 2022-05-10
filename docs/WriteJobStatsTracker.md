@@ -1,36 +1,35 @@
 # WriteJobStatsTracker
 
-`WriteJobStatsTracker` is the <<contract, abstraction>> of <<implementations, WriteJobStatsTrackers>> that can <<newTaskInstance, create a new WriteTaskStatsTracker>> and <<processStats, processStats>>.
+`WriteJobStatsTracker` is an [abstraction](#contract) of [write job statistics trackers](#implementations).
 
-[[contract]]
-.WriteJobStatsTracker Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Method
-| Description
+`WriteJobStatsTracker` is a `Serializable`.
 
-| newTaskInstance
-a| [[newTaskInstance]]
+## Contract
 
-[source, scala]
-----
+### <span id="newTaskInstance"> Creating WriteTaskStatsTracker
+
+```scala
 newTaskInstance(): WriteTaskStatsTracker
-----
+```
 
-Creates a new <<spark-sql-WriteTaskStatsTracker.md#, WriteTaskStatsTracker>>
+Creates a new `WriteTaskStatsTracker`
 
-Used when `EmptyDirectoryWriteTask`, `SingleDirectoryWriteTask` and `DynamicPartitionWriteTask` are requested for the `statsTrackers`
+Used when:
 
-| processStats
-a| [[processStats]]
+* `FileFormatDataWriter` is [created](FileFormatDataWriter.md#statsTrackers)
 
-[source, scala]
-----
-processStats(stats: Seq[WriteTaskStats]): Unit
-----
+### <span id="processStats"> Processing Write Job Statistics
 
-Used when...FIXME
-|===
+```scala
+processStats(
+  stats: Seq[WriteTaskStats],
+  jobCommitTime: Long): Unit
+```
 
-[[implementations]]
-NOTE: [BasicWriteJobStatsTracker](BasicWriteJobStatsTracker.md) is the one and only known implementation of the <<contract, WriteJobStatsTracker Contract>> in Apache Spark.
+Used when:
+
+* `FileFormatWriter` utility is used to [process the statistics (of a write job)](FileFormatWriter.md#processStats)
+
+## Implementations
+
+* [BasicWriteJobStatsTracker](BasicWriteJobStatsTracker.md)

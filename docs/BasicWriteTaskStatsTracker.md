@@ -1,6 +1,6 @@
 # BasicWriteTaskStatsTracker
 
-`BasicWriteTaskStatsTracker` is a concrete <<spark-sql-WriteTaskStatsTracker.md#, WriteTaskStatsTracker>>.
+`BasicWriteTaskStatsTracker` is a [WriteTaskStatsTracker](WriteTaskStatsTracker.md).
 
 `BasicWriteTaskStatsTracker` is <<creating-instance, created>> exclusively when `BasicWriteJobStatsTracker` is requested for [one](BasicWriteJobStatsTracker.md#newTaskInstance).
 
@@ -15,6 +15,6 @@
 getFinalStats(): WriteTaskStats
 ----
 
-NOTE: `getFinalStats` is part of the <<spark-sql-WriteTaskStatsTracker.md#getFinalStats, WriteTaskStatsTracker Contract>> to get the final <<spark-sql-WriteTaskStats.md#, WriteTaskStats>> statistics computed so far.
+NOTE: `getFinalStats` is part of the [WriteTaskStatsTracker](WriteTaskStatsTracker.md#getFinalStats) contract.
 
 `getFinalStats`...FIXME

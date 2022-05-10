@@ -882,6 +882,7 @@ nav:
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
     - ExplainUtils: ExplainUtils.md
+    - FileFormatDataWriter: FileFormatDataWriter.md
     - PartitionedFileUtil: PartitionedFileUtil.md
     - FilePartition: FilePartition.md
     - SerializerBuildHelper: SerializerBuildHelper.md
@@ -946,11 +947,11 @@ nav:
       - SQLAppStatusPlugin: SQLAppStatusPlugin.md
       - SQLAppStatusStore: SQLAppStatusStore.md
       - WriteTaskStats:
-        - WriteTaskStats: spark-sql-WriteTaskStats.md
-        - BasicWriteTaskStats: spark-sql-BasicWriteTaskStats.md
+        - WriteTaskStats: WriteTaskStats.md
+        - BasicWriteTaskStats: BasicWriteTaskStats.md
       - WriteTaskStatsTracker:
-        - WriteTaskStatsTracker: spark-sql-WriteTaskStatsTracker.md
-        - BasicWriteTaskStatsTracker: spark-sql-BasicWriteTaskStatsTracker.md
+        - WriteTaskStatsTracker: WriteTaskStatsTracker.md
+        - BasicWriteTaskStatsTracker: BasicWriteTaskStatsTracker.md
       - WriteJobStatsTracker:
         - WriteJobStatsTracker: WriteJobStatsTracker.md
         - BasicWriteJobStatsTracker: BasicWriteJobStatsTracker.md
