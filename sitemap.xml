@@ -3766,6 +3766,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/V2ExistingTableWriteExec/</loc>
+         <lastmod>2022-05-12</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/V2TableWriteExec/</loc>
          <lastmod>2022-05-12</lastmod>
          <changefreq>daily</changefreq>
