@@ -87,7 +87,7 @@ Aborting job [uuid].
 
 In the end, `write` throws a `SparkException`.
 
-### <span id="executeTask"> Executing Task
+### <span id="executeTask"> Writing Data Out In Single Spark Task
 
 ```scala
 executeTask(
