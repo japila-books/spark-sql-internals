@@ -882,6 +882,7 @@ nav:
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
     - ExplainUtils: ExplainUtils.md
+    - FileWrite: FileWrite.md
     - FileFormatDataWriter: FileFormatDataWriter.md
     - PartitionedFileUtil: PartitionedFileUtil.md
     - FilePartition: FilePartition.md
