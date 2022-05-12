@@ -11,14 +11,19 @@ run(
   writerFactory: DataWriterFactory,
   context: TaskContext,
   iter: Iterator[InternalRow],
-  useCommitCoordinator: Boolean): DataWritingSparkTaskResult
+  useCommitCoordinator: Boolean,
+  customMetrics: Map[String, SQLMetric]): DataWritingSparkTaskResult
 ```
 
 `run` requests the [DataWriterFactory](connector/DataWriterFactory.md) for a [DataWriter](connector/DataWriterFactory.md#createWriter) (for the partition and task of the `TaskContext`).
 
-`run` counts all the [InternalRow](InternalRow.md)s (in `iter`) and requests the `DataWriter` to [write it out](connector/DataWriter.md#write).
+For every [InternalRow](InternalRow.md) (in the given `iter` collection), `run` requests the `DataWriter` to [write out the InternalRow](connector/DataWriter.md#write). `run` counts all the `InternalRow`s.
 
 After all the rows have been written out successfully, `run` requests the `DataWriter` to [commit](connector/DataWriter.md#commit) ([with](#run-useCommitCoordinator-enabled) or [without](#run-useCommitCoordinator-disabled) requesting the `OutputCommitCoordinator` for authorization) that gives the final `WriterCommitMessage`.
+
+With `useCommitCoordinator` flag enabled, `run`...FIXME
+
+With `useCommitCoordinator` flag disabled, `run` prints out the following INFO message to the logs and requests the `DataWriter` to [commit](connector/DataWriter.md#commit).
 
 `run` prints out the following INFO message to the logs:
 

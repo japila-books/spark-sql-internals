@@ -524,6 +524,7 @@ nav:
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - V2CommandExec: physical-operators/V2CommandExec.md
+      - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
       - WindowExec:
