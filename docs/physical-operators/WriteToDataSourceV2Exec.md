@@ -56,7 +56,7 @@ Start processing data source writer: [writer]. The input RDD has [length] partit
 
 * The `RDD[InternalRow]` of the <<query, child physical plan>>
 
-* A partition processing function that requests the `DataWritingSparkTask` object to [run](../DataWritingSparkTask.md#run) the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
+* A partition processing function that requests the `DataWritingSparkTask` object to [run](../datasources/DataWritingSparkTask.md#run) the writing task (of the <<writer, DataSourceWriter>>) with or with no commit coordinator
 
 * A result handler function that records the result `WriterCommitMessage` from a successful data writer and requests FIXME
 

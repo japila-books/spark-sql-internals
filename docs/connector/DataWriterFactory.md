@@ -18,7 +18,7 @@ Creates a [DataWriter](DataWriter.md) (for the given `partitionId` and `taskId`)
 
 Used when:
 
-* `DataWritingSparkTask` is requested to [run](../DataWritingSparkTask.md#run)
+* `DataWritingSparkTask` is requested to [run](../datasources/DataWritingSparkTask.md#run)
 
 ## Implementations
 

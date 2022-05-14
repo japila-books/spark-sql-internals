@@ -67,7 +67,7 @@ scala> q.show
 
 The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely managed using `ScalaUDAF` expression container.
 
-![UserDefinedAggregateFunction and ScalaUDAF Expression Container](images/spark-sql-UserDefinedAggregateFunction.png)
+![UserDefinedAggregateFunction and ScalaUDAF Expression Container](../images/spark-sql-UserDefinedAggregateFunction.png)
 
 [NOTE]
 ====
@@ -140,7 +140,7 @@ apply(
   exprs: Column*): Column
 ```
 
-`apply` creates a [Column](Column.md) with `ScalaUDAF` (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`apply` creates a [Column](../Column.md) with `ScalaUDAF` (inside [AggregateExpression](AggregateExpression.md)).
 
 !!! NOTE
     `AggregateExpression` uses `Complete` mode and `isDistinct` flag is disabled.
@@ -174,7 +174,7 @@ distinct(
   exprs: Column*): Column
 ```
 
-`distinct` creates a [Column](Column.md) with `ScalaUDAF` (inside [AggregateExpression](expressions/AggregateExpression.md)).
+`distinct` creates a [Column](../Column.md) with `ScalaUDAF` (inside [AggregateExpression](AggregateExpression.md)).
 
 !!! NOTE
     `AggregateExpression` uses `Complete` mode and `isDistinct` flag is enabled.

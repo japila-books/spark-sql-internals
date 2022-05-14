@@ -16,7 +16,7 @@
 * [Catalyst DSL](../catalyst-dsl/index.md)'s `namedStruct` operator is used
 * `ExpressionEncoder` is [created](../ExpressionEncoder.md#serializer)
 * `RowEncoder` utility is used to [create a serializer for a StructType](../RowEncoder.md#serializerFor)
-* `CreateStruct` utility is used to [create a CreateNamedStruct](../CreateStruct.md#apply)
+* `CreateStruct` utility is used to [create a CreateNamedStruct](CreateStruct.md#apply)
 * `ObjectSerializerPruning` logical optimization is executed
 * _many many others_
 

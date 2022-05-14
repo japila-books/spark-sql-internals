@@ -373,6 +373,7 @@ nav:
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
       - CodegenFallback: expressions/CodegenFallback.md
       - CreateNamedStruct: expressions/CreateNamedStruct.md
+      - CreateStruct: expressions/CreateStruct.md
       - CumeDist: expressions/CumeDist.md
       - DeclarativeAggregate: expressions/DeclarativeAggregate.md
       - DecodeUsingSerializer: expressions/DecodeUsingSerializer.md
@@ -440,6 +441,7 @@ nav:
         - UserDefinedExpression: expressions/UserDefinedExpression.md
         - UserDefinedFunction: expressions/UserDefinedFunction.md
         - UDFs are Blackbox: spark-sql-udfs-blackbox.md
+      - UserDefinedAggregateFunction: expressions/UserDefinedAggregateFunction.md
       - WindowExpression: expressions/WindowExpression.md
       - WindowFunction: expressions/WindowFunction.md
       - WindowSpecDefinition: expressions/WindowSpecDefinition.md
@@ -761,14 +763,21 @@ nav:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - Data Sources:
+    - Avro:
+      - Avro Data Source: datasources/avro/index.md
+      - AvroOptions: datasources/avro/AvroOptions.md
+      - AvroFileFormat: datasources/avro/AvroFileFormat.md
+      - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
+      - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
     - BasicWriteTaskStatsTracker: datasources/BasicWriteTaskStatsTracker.md
-    - Noop:
-      - Noop Data Source: datasources/noop/index.md
-      - NoopDataSource: datasources/noop/NoopDataSource.md
-      - NoopTable: datasources/noop/NoopTable.md
-      - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
-      - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
-      - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
+    - Console:
+      - datasources/console/index.md
+      - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
+    - CSV:
+      - CSVFileFormat: datasources/csv/CSVFileFormat.md
+      - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
+    - DataWritingSparkTask: datasources/DataWritingSparkTask.md
+    - DataSourceV2Utils: datasources/DataSourceV2Utils.md
     - Files:
       - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md
       - BasicWriteTaskStats: datasources/BasicWriteTaskStats.md
@@ -798,6 +807,46 @@ nav:
       - TextBasedFileFormat: datasources/TextBasedFileFormat.md
       - WriteJobStatsTracker: datasources/WriteJobStatsTracker.md
       - WriteTaskStats: datasources/WriteTaskStats.md
+    - Hive:
+      - hive/index.md
+      - Configuration Properties: hive/configuration-properties.md
+      - Hive Metastore: hive/spark-sql-hive-metastore.md
+      - DataSinks: hive/DataSinks.md
+      - HiveFileFormat: hive/HiveFileFormat.md
+      - HiveClient:
+        - HiveClient: hive/HiveClient.md
+        - HiveClientImpl: hive/HiveClientImpl.md
+      - HiveUtils: hive/HiveUtils.md
+      - IsolatedClientLoader: hive/IsolatedClientLoader.md
+      - HiveTableRelation: hive/HiveTableRelation.md
+      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
+      - SaveAsHiveFile: hive/SaveAsHiveFile.md
+      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
+      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
+      - HiveTableScans: hive/HiveTableScans.md
+      - HiveTableScanExec: hive/HiveTableScanExec.md
+      - TableReader: hive/TableReader.md
+      - HadoopTableReader: hive/HadoopTableReader.md
+      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
+      - HiveExternalCatalog: hive/HiveExternalCatalog.md
+      - HiveSessionCatalog: hive/HiveSessionCatalog.md
+      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
+      - RelationConversions: hive/RelationConversions.md
+      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
+      - DetermineTableStats: hive/DetermineTableStats.md
+      - HiveAnalysis: hive/HiveAnalysis.md
+    - JDBC:
+      - JDBC Data Source: datasources/jdbc/index.md
+      - JDBCOptions: datasources/jdbc/JDBCOptions.md
+      - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
+      - JDBCRelation: datasources/jdbc/JDBCRelation.md
+      - JDBCScan: datasources/jdbc/JDBCScan.md
+      - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
+      - JDBCRDD: datasources/jdbc/JDBCRDD.md
+      - JdbcDialect: datasources/jdbc/JdbcDialect.md
+    - JSON:
+      - JsonFileFormat: datasources/json/JsonFileFormat.md
+      - JsonDataSource: datasources/json/JsonDataSource.md
     - Kafka:
       - Kafka Data Source: datasources/kafka/index.md
       - Configuration Properties: datasources/kafka/configuration-properties.md
@@ -820,30 +869,13 @@ nav:
       - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
       - JsonUtils: datasources/kafka/JsonUtils.md
       - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
-    - Avro:
-      - Avro Data Source: datasources/avro/index.md
-      - AvroOptions: datasources/avro/AvroOptions.md
-      - AvroFileFormat: datasources/avro/AvroFileFormat.md
-      - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
-      - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
-    - JDBC:
-      - JDBC Data Source: datasources/jdbc/index.md
-      - JDBCOptions: datasources/jdbc/JDBCOptions.md
-      - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
-      - JDBCRelation: datasources/jdbc/JDBCRelation.md
-      - JDBCScan: datasources/jdbc/JDBCScan.md
-      - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
-      - JDBCRDD: datasources/jdbc/JDBCRDD.md
-      - JdbcDialect: datasources/jdbc/JdbcDialect.md
-    - Console:
-      - datasources/console/index.md
-      - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
-    - CSV:
-      - CSVFileFormat: datasources/csv/CSVFileFormat.md
-      - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
-    - JSON:
-      - JsonFileFormat: datasources/json/JsonFileFormat.md
-      - JsonDataSource: datasources/json/JsonDataSource.md
+    - Noop:
+      - Noop Data Source: datasources/noop/index.md
+      - NoopDataSource: datasources/noop/NoopDataSource.md
+      - NoopTable: datasources/noop/NoopTable.md
+      - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
+      - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
+      - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
     - OutputWriter: datasources/OutputWriter.md
     - ORC:
       - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
@@ -903,10 +935,8 @@ nav:
     - SQLExecutionRDD: SQLExecutionRDD.md
     - DataSourceRDD: DataSourceRDD.md
     - DataSourceRDDPartition: DataSourceRDDPartition.md
-    - DataWritingSparkTask: DataWritingSparkTask.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
-    - DataSourceV2Utils: DataSourceV2Utils.md
     - Implicits: implicits.md
     - Row: Row.md
     - Data Source API:
@@ -946,7 +976,6 @@ nav:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
-    - UserDefinedAggregateFunction: UserDefinedAggregateFunction.md
     - AggregationIterators:
       - AggregationIterator: AggregationIterator.md
       - ObjectAggregationIterator: ObjectAggregationIterator.md
@@ -976,7 +1005,6 @@ nav:
     - SubExprUtils: SubExprUtils.md
     - PredicateHelper: PredicateHelper.md
     - AggUtils: AggUtils.md
-    - CreateStruct: CreateStruct.md
     - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
     - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
     - ExtractJoinWithBuckets: ExtractJoinWithBuckets.md
@@ -986,31 +1014,3 @@ nav:
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
     - SQLContext: SQLContext.md
-    - Hive Integration:
-      - hive/index.md
-      - Configuration Properties: hive/configuration-properties.md
-      - Hive Metastore: hive/spark-sql-hive-metastore.md
-      - DataSinks: hive/DataSinks.md
-      - HiveFileFormat: hive/HiveFileFormat.md
-      - HiveClient:
-        - HiveClient: hive/HiveClient.md
-        - HiveClientImpl: hive/HiveClientImpl.md
-      - HiveUtils: hive/HiveUtils.md
-      - IsolatedClientLoader: hive/IsolatedClientLoader.md
-      - HiveTableRelation: hive/HiveTableRelation.md
-      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
-      - SaveAsHiveFile: hive/SaveAsHiveFile.md
-      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
-      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
-      - HiveTableScans: hive/HiveTableScans.md
-      - HiveTableScanExec: hive/HiveTableScanExec.md
-      - TableReader: hive/TableReader.md
-      - HadoopTableReader: hive/HadoopTableReader.md
-      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
-      - HiveExternalCatalog: hive/HiveExternalCatalog.md
-      - HiveSessionCatalog: hive/HiveSessionCatalog.md
-      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
-      - RelationConversions: hive/RelationConversions.md
-      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
-      - DetermineTableStats: hive/DetermineTableStats.md
-      - HiveAnalysis: hive/HiveAnalysis.md

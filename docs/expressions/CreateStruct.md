@@ -1,6 +1,6 @@
 # CreateStruct Function Builder
 
-`CreateStruct` is a <<FunctionRegistry.md#expressions, function builder>> (e.g. `Seq[Expression] => Expression`) that can <<apply, create CreateNamedStruct expressions>> and is the <<registryEntry, metadata>> of the <<FunctionRegistry.md#struct, struct>> function.
+`CreateStruct` is a [function builder](../FunctionRegistry.md#expressions) (e.g. `Seq[Expression] => Expression`) that can <<apply, create CreateNamedStruct expressions>> and is the <<registryEntry, metadata>> of the <<FunctionRegistry.md#struct, struct>> function.
 
 === [[apply]] Creating CreateNamedStruct Expression -- `apply` Method
 
@@ -21,19 +21,19 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 `apply` is used when:
 
-* `ResolveReferences` logical resolution rule is requested to [expandStarExpression](logical-analysis-rules/ResolveReferences.md#expandStarExpression)
+* `ResolveReferences` logical resolution rule is requested to [expandStarExpression](../logical-analysis-rules/ResolveReferences.md#expandStarExpression)
 
 * `InConversion` type coercion rule is requested to `coerceTypes`
 
-* `ExpressionEncoder` is requested to [create an ExpressionEncoder for a tuple](ExpressionEncoder.md#tuple)
+* `ExpressionEncoder` is requested to [create an ExpressionEncoder for a tuple](../ExpressionEncoder.md#tuple)
 
 * `Stack` generator expression is requested to generate a Java source code
 
-* `AstBuilder` is requested to parse a <<sql/AstBuilder.md#visitStruct, struct>> and <<sql/AstBuilder.md#visitRowConstructor, row constructor>>
+* `AstBuilder` is requested to parse a [struct](../sql/AstBuilder.md#visitStruct) and [row constructor](../sql/AstBuilder.md#visitRowConstructor)
 
-* `ColumnStat` is requested to [statExprs](ColumnStat.md#statExprs)
+* `ColumnStat` is requested to [statExprs](../ColumnStat.md#statExprs)
 
-* `KeyValueGroupedDataset` is requested to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) typed operator is used)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operator is used)
 
 * <<spark-sql-dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
 

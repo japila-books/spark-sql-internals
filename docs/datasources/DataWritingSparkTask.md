@@ -1,6 +1,6 @@
 # DataWritingSparkTask Utility
 
-`DataWritingSparkTask` utility defines a [partition processing function](#run) that `V2TableWriteExec` unary physical commands use to [schedule a Spark job for writing data out](physical-operators/V2TableWriteExec.md#writeWithV2).
+`DataWritingSparkTask` utility defines a [partition processing function](#run) that `V2TableWriteExec` unary physical commands use to [schedule a Spark job for writing data out](../physical-operators/V2TableWriteExec.md#writeWithV2).
 
 `DataWritingSparkTask` is executed on executors.
 
@@ -15,15 +15,15 @@ run(
   customMetrics: Map[String, SQLMetric]): DataWritingSparkTaskResult
 ```
 
-`run` requests the [DataWriterFactory](connector/DataWriterFactory.md) for a [DataWriter](connector/DataWriterFactory.md#createWriter) (for the partition and task of the `TaskContext`).
+`run` requests the [DataWriterFactory](../connector/DataWriterFactory.md) for a [DataWriter](../connector/DataWriterFactory.md#createWriter) (for the partition and task of the `TaskContext`).
 
-For every [InternalRow](InternalRow.md) (in the given `iter` collection), `run` requests the `DataWriter` to [write out the InternalRow](connector/DataWriter.md#write). `run` counts all the `InternalRow`s.
+For every [InternalRow](../InternalRow.md) (in the given `iter` collection), `run` requests the `DataWriter` to [write out the InternalRow](../connector/DataWriter.md#write). `run` counts all the `InternalRow`s.
 
-After all the rows have been written out successfully, `run` requests the `DataWriter` to [commit](connector/DataWriter.md#commit) ([with](#run-useCommitCoordinator-enabled) or [without](#run-useCommitCoordinator-disabled) requesting the `OutputCommitCoordinator` for authorization) that gives the final `WriterCommitMessage`.
+After all the rows have been written out successfully, `run` requests the `DataWriter` to [commit](../connector/DataWriter.md#commit) ([with](#run-useCommitCoordinator-enabled) or [without](#run-useCommitCoordinator-disabled) requesting the `OutputCommitCoordinator` for authorization) that gives the final `WriterCommitMessage`.
 
 With `useCommitCoordinator` flag enabled, `run`...FIXME
 
-With `useCommitCoordinator` flag disabled, `run` prints out the following INFO message to the logs and requests the `DataWriter` to [commit](connector/DataWriter.md#commit).
+With `useCommitCoordinator` flag disabled, `run` prints out the following INFO message to the logs and requests the `DataWriter` to [commit](../connector/DataWriter.md#commit).
 
 `run` prints out the following INFO message to the logs:
 
@@ -37,7 +37,7 @@ In the end, `run` returns a `DataWritingSparkTaskResult` with the count (of the 
 
 `run` is used when:
 
-* `V2TableWriteExec` unary physical command is requested to [writeWithV2](physical-operators/V2TableWriteExec.md#writeWithV2)
+* `V2TableWriteExec` unary physical command is requested to [writeWithV2](../physical-operators/V2TableWriteExec.md#writeWithV2)
 
 ### <span id="run-useCommitCoordinator-enabled"> Using CommitCoordinator
 
@@ -77,4 +77,4 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataWritingSparkTask=ALL
 ```
 
-Refer to [Logging](spark-logging.md).
+Refer to [Logging](../spark-logging.md).

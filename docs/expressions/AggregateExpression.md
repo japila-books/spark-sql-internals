@@ -91,7 +91,7 @@ In the end, `toString` adds `FILTER (WHERE [predicate])` based on the optional [
 
 * `Analyzer` is requested to [resolve AggregateFunctions](../Analyzer.md#ResolveFunctions) (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
 
-* `UserDefinedAggregateFunction` is created with `isDistinct` flag [disabled](../UserDefinedAggregateFunction.md#apply) or [enabled](../UserDefinedAggregateFunction.md#distinct)
+* `UserDefinedAggregateFunction` is created with `isDistinct` flag [disabled](UserDefinedAggregateFunction.md#apply) or [enabled](UserDefinedAggregateFunction.md#distinct)
 
 * `AggUtils` is requested to [planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct) (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
 
