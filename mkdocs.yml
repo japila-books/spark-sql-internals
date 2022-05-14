@@ -887,6 +887,7 @@ nav:
     - ExplainUtils: ExplainUtils.md
     - FileWrite: FileWrite.md
     - FileBatchWrite: FileBatchWrite.md
+    - FileWriterFactory: FileWriterFactory.md
     - FileFormatDataWriter: FileFormatDataWriter.md
     - PartitionedFileUtil: PartitionedFileUtil.md
     - FilePartition: FilePartition.md

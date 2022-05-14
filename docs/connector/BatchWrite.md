@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="abort"> Aborting Write
+### <span id="abort"> Aborting Write Job
 
 ```java
 void abort(
@@ -15,7 +15,7 @@ Used when:
 
 * `V2TableWriteExec` physical command is requested to [writeWithV2](../physical-operators/V2TableWriteExec.md#writeWithV2)
 
-### <span id="commit"> Committing Write
+### <span id="commit"> Committing Write Job
 
 ```java
 void commit(
@@ -26,7 +26,7 @@ Used when:
 
 * `V2TableWriteExec` physical command is requested to [writeWithV2](../physical-operators/V2TableWriteExec.md#writeWithV2)
 
-### <span id="createBatchWriterFactory"> Creating DataWriterFactory
+### <span id="createBatchWriterFactory"> Creating Batch DataWriterFactory
 
 ```java
 DataWriterFactory createBatchWriterFactory(
@@ -44,6 +44,8 @@ void onDataWriterCommit(
   WriterCommitMessage message)
 ```
 
+`onDataWriterCommit` does nothing by default (_noop_).
+
 Used when:
 
 * `V2TableWriteExec` physical command is requested to [writeWithV2](../physical-operators/V2TableWriteExec.md#writeWithV2)
@@ -53,6 +55,8 @@ Used when:
 ```java
 boolean useCommitCoordinator()
 ```
+
+Controls whether this writer requires a Commit Coordinator to coordinate writing tasks (and ensure that at most one task for each partition commits).
 
 Default: `true`
 
