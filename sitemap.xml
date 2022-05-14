@@ -1381,6 +1381,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/OutputWriter/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/TextBasedFileFormat/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
