@@ -621,11 +621,12 @@ Used when:
 
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
 
-The value of [spark.sql.files.maxRecordsPerFile](configuration-properties.md#spark.sql.files.maxRecordsPerFile) configuration property
+[spark.sql.files.maxRecordsPerFile](configuration-properties.md#spark.sql.files.maxRecordsPerFile)
 
 Used when:
 
 * `FileFormatWriter` utility is used to [write out a query result](FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](FileWrite.md#toBatch)
 
 ## <span id="maxToStringFields"><span id="MAX_TO_STRING_FIELDS"> maxToStringFields
 

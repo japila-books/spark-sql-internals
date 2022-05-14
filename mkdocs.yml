@@ -856,6 +856,7 @@ nav:
       - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
     - Text:
       - TextFileFormat: datasources/text/TextFileFormat.md
+    - OutputWriter: datasources/OutputWriter.md
   - High-Level APIs:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md

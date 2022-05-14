@@ -25,7 +25,7 @@ createWriter(
 
 `createWriter` requests the [FileCommitProtocol](#committer) to `setupTask` (with the `TaskAttemptContext`).
 
-With no partition columns (in the [WriteJobDescription](#description)), `createWriter` creates a [SingleDirectoryDataWriter](SingleDirectoryDataWriter.md). Otherwise, `createWriter` creates a `DynamicPartitionDataSingleWriter`.
+For a non-partitioned write job (i.e., no partition columns in the [WriteJobDescription](#description)), `createWriter` creates a [SingleDirectoryDataWriter](SingleDirectoryDataWriter.md). Otherwise, `createWriter` creates a `DynamicPartitionDataSingleWriter`.
 
 ---
 

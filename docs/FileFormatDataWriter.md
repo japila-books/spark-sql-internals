@@ -19,7 +19,7 @@ Used when:
 
 * `BaseDynamicPartitionDataWriter`
 * `EmptyDirectoryDataWriter`
-* `SingleDirectoryDataWriter`
+* [SingleDirectoryDataWriter](SingleDirectoryDataWriter.md)
 
 ## Creating Instance
 
