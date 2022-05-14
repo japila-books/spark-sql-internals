@@ -135,7 +135,7 @@ checkSQLExecutionId(sparkSession: SparkSession): Unit
 
 `checkSQLExecutionId`...FIXME
 
-`checkSQLExecutionId` is used when `FileFormatWriter` is used to [write out a query result](FileFormatWriter.md#write).
+`checkSQLExecutionId` is used when `FileFormatWriter` is used to [write out a query result](datasources/FileFormatWriter.md#write).
 
 === [[withSQLConfPropagated]] `withSQLConfPropagated` Method
 

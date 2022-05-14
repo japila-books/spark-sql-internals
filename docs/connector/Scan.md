@@ -56,10 +56,10 @@ Used when...FIXME
 
 ## Implementations
 
-* [FileScan](../FileScan.md)
-* KafkaScan
-* MemoryStreamScanBuilder
-* SupportsReportPartitioning
-* SupportsReportStatistics
-* V1Scan
-* V1ScanWrapper
+* [FileScan](../datasources/FileScan.md)
+* [KafkaScan](../datasources/kafka/KafkaScan.md)
+* `MemoryStreamScanBuilder`
+* [SupportsReportPartitioning](SupportsReportPartitioning.md)
+* [SupportsReportStatistics](SupportsReportStatistics.md)
+* [V1Scan](V1Scan.md)
+* `V1ScanWrapper`

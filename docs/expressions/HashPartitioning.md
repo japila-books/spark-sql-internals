@@ -19,7 +19,7 @@
 * `HashClusteredDistribution` is requested to [create a Partitioning](../physical-operators/HashClusteredDistribution.md)
 * `FileSourceScanExec` physical operator is requested for the [output partitioning](../physical-operators/FileSourceScanExec.md#outputPartitioning)
 * `BucketingUtils` utility is used to `getBucketIdFromValue`
-* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write) (with a bucketing spec)
+* `FileFormatWriter` utility is used to [write out a query result](../datasources/FileFormatWriter.md#write) (with a bucketing spec)
 * `BroadcastHashJoinExec` physical operator is requested to [expandOutputPartitioning](../physical-operators/BroadcastHashJoinExec.md#expandOutputPartitioning)
 
 ## <span id="Unevaluable"> Unevaluable
@@ -56,7 +56,7 @@ partitionIdExpression: Expression
 `partitionIdExpression` is used when:
 
 * `BucketingUtils` utility is used to `getBucketIdFromValue`
-* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write) (with a bucketing spec)
+* `FileFormatWriter` utility is used to [write out a query result](../datasources/FileFormatWriter.md#write) (with a bucketing spec)
 * `ShuffleExchangeExec` utility is used to [prepare a ShuffleDependency](../physical-operators/ShuffleExchangeExec.md#prepareShuffleDependency)
 
 ## Demo

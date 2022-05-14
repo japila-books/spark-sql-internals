@@ -39,9 +39,9 @@ Used for a [partition schema](#partitionSchema), to [list the files matching fil
 
 `PartitioningAwareFileIndex` takes the following to be created:
 
-* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="sparkSession"> [SparkSession](../SparkSession.md)
 * <span id="parameters"> Options for partition discovery (`Map[String, String]`)
-* <span id="userSpecifiedSchema"> Optional User-Defined [Schema](types/StructType.md)
+* <span id="userSpecifiedSchema"> Optional User-Defined [Schema](../types/StructType.md)
 * <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
 
 ??? note "Abstract Class"
@@ -57,9 +57,9 @@ allFiles(): Seq[FileStatus]
 
 `allFiles` is used when:
 
-* `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](DataSource.md#resolveRelation)
+* `DataSource` is requested to [getOrInferFileFormatSchema](../DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](../DataSource.md#resolveRelation)
 * `PartitioningAwareFileIndex` is requested for [files matching filters](#listFiles), [input files](#inputFiles), and [size](#sizeInBytes)
-* `FileTable` is requested for a [data schema](connector/FileTable.md#dataSchema)
+* `FileTable` is requested for a [data schema](../connector/FileTable.md#dataSchema)
 
 ## <span id="listFiles"> Files Matching Filters
 

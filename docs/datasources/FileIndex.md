@@ -16,7 +16,7 @@ File names to read when scanning this relation
 
 Used when:
 
-* `Dataset` is requested for [inputFiles](Dataset.md#inputFiles)
+* `Dataset` is requested for [inputFiles](../Dataset.md#inputFiles)
 * `HadoopFsRelation` is requested for [input files](HadoopFsRelation.md#inputFiles)
 
 ### <span id="listFiles"> Listing Files
@@ -31,9 +31,9 @@ File names (grouped into partitions when the data is partitioned)
 
 Used when:
 
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](hive/HiveMetastoreCatalog.md#convert)
-* `FileSourceScanExec` physical operator is requested for [selectedPartitions](physical-operators/FileSourceScanExec.md#selectedPartitions)
-* [OptimizeMetadataOnlyQuery](logical-optimizations/OptimizeMetadataOnlyQuery.md) logical optimization is executed
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](../hive/HiveMetastoreCatalog.md#convert)
+* `FileSourceScanExec` physical operator is requested for [selectedPartitions](../physical-operators/FileSourceScanExec.md#selectedPartitions)
+* [OptimizeMetadataOnlyQuery](../logical-optimizations/OptimizeMetadataOnlyQuery.md) logical optimization is executed
 * `FileScan` is requested for [partitions](FileScan.md#partitions)
 
 ### <span id="metadataOpsTimeNs"> Metadata Duration
@@ -44,7 +44,7 @@ metadataOpsTimeNs: Option[Long] = None
 
 Metadata operation time for listing files (in nanoseconds)
 
-Used when `FileSourceScanExec` physical operator is requested for [partitions](physical-operators/FileSourceScanExec.md#selectedPartitions)
+Used when `FileSourceScanExec` physical operator is requested for [partitions](../physical-operators/FileSourceScanExec.md#selectedPartitions)
 
 ### <span id="partitionSchema"> Partitions
 
@@ -52,14 +52,14 @@ Used when `FileSourceScanExec` physical operator is requested for [partitions](p
 partitionSchema: StructType
 ```
 
-Partition schema ([StructType](types/StructType.md))
+Partition schema ([StructType](../types/StructType.md))
 
 Used when:
 
-* `DataSource` is requested to [getOrInferFileFormatSchema](DataSource.md#getOrInferFileFormatSchema) and [resolve a FileFormat-based relation](DataSource.md#resolveRelation)
+* `DataSource` is requested to [getOrInferFileFormatSchema](../DataSource.md#getOrInferFileFormatSchema) and [resolve a FileFormat-based relation](../DataSource.md#resolveRelation)
 * `FallBackFileSourceV2` logical resolution rule is executed
 * [FileScanBuilder](FileScanBuilder.md) is created
-* `FileTable` is requested for [dataSchema](connector/FileTable.md#dataSchema) and [partitioning](connector/FileTable.md#partitioning)
+* `FileTable` is requested for [dataSchema](../connector/FileTable.md#dataSchema) and [partitioning](../connector/FileTable.md#partitioning)
 
 ### <span id="refresh"> Refreshing Cached File Listings
 
@@ -71,9 +71,9 @@ Refreshes the file listings that may have been cached
 
 Used when:
 
-* `CacheManager` is requested to [recacheByPath](CacheManager.md#recacheByPath)
-* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) is executed
-* `LogicalRelation` logical operator is requested to [refresh](logical-operators/LogicalRelation.md#refresh) (for a [HadoopFsRelation](HadoopFsRelation.md))
+* `CacheManager` is requested to [recacheByPath](../CacheManager.md#recacheByPath)
+* [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) is executed
+* `LogicalRelation` logical operator is requested to [refresh](../logical-operators/LogicalRelation.md#refresh) (for a [HadoopFsRelation](HadoopFsRelation.md))
 
 ### <span id="rootPaths"> Root Paths
 
@@ -85,12 +85,12 @@ Root paths from which the catalog gets the files (as Hadoop `Path`s). There coul
 
 Used when:
 
-* `HiveMetastoreCatalog` is requested for a [cached LogicalRelation](hive/HiveMetastoreCatalog.md#getCached) (when requested to [convert a HiveTableRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation))
+* `HiveMetastoreCatalog` is requested for a [cached LogicalRelation](../hive/HiveMetastoreCatalog.md#getCached) (when requested to [convert a HiveTableRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation))
 * `OptimizedCreateHiveTableAsSelectCommand` is executed
-* `CacheManager` is requested to [recache by path](CacheManager.md#recacheByPath)
-* `FileSourceScanExec` physical operator is requested for the [metadata](physical-operators/FileSourceScanExec.md#metadata) and [verboseStringWithOperatorId](physical-operators/FileSourceScanExec.md#verboseStringWithOperatorId)
+* `CacheManager` is requested to [recache by path](../CacheManager.md#recacheByPath)
+* `FileSourceScanExec` physical operator is requested for the [metadata](../physical-operators/FileSourceScanExec.md#metadata) and [verboseStringWithOperatorId](../physical-operators/FileSourceScanExec.md#verboseStringWithOperatorId)
 * `DDLUtils` utility is used to `verifyNotReadPath`
-* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for an `InsertIntoStatement` over a [HadoopFsRelation](HadoopFsRelation.md))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for an `InsertIntoStatement` over a [HadoopFsRelation](HadoopFsRelation.md))
 * `FileScan` is requested for a [description](FileScan.md#description)
 
 ### <span id="sizeInBytes"> Estimated Size

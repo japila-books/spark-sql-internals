@@ -545,7 +545,7 @@ outputOrdering: Seq[SortOrder]
 
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
 
-* `FileFormatWriter` is used to [write out a query result](../FileFormatWriter.md#write)
+* `FileFormatWriter` is used to [write out a query result](../datasources/FileFormatWriter.md#write)
 
 ## <span id="supportsColumnar"> supportsColumnar
 

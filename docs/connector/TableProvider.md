@@ -58,7 +58,7 @@ Used when:
 
 ## Implementations
 
-* [FileDataSourceV2](../FileDataSourceV2.md)
+* [FileDataSourceV2](../datasources/FileDataSourceV2.md)
 * [SessionConfigSupport](SessionConfigSupport.md)
 * [SimpleTableProvider](SimpleTableProvider.md)
 * [SupportsCatalogOptions](catalog/SupportsCatalogOptions.md)

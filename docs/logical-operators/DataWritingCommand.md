@@ -84,7 +84,7 @@ When requested for the <<Command.md#children, child nodes>>, `DataWritingCommand
 basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
 ----
 
-`basicWriteJobStatsTracker` simply creates and returns a new [BasicWriteJobStatsTracker](../BasicWriteJobStatsTracker.md) (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
+`basicWriteJobStatsTracker` simply creates and returns a new [BasicWriteJobStatsTracker](../datasources/BasicWriteJobStatsTracker.md) (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
 
 [NOTE]
 ====

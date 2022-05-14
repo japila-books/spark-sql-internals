@@ -56,7 +56,7 @@ With [spark.sql.parquet.filterPushdown](../../configuration-properties.md#spark.
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
 
-In the end, `buildReaderWithPartitionValues` gives a function that takes a [PartitionedFile](../../PartitionedFile.md) and does the following:
+In the end, `buildReaderWithPartitionValues` gives a function that takes a [PartitionedFile](../PartitionedFile.md) and does the following:
 
 1. Creates a Hadoop `FileSplit` for the input `PartitionedFile`
 
@@ -74,7 +74,7 @@ The function then branches off on whether [Parquet vectorized reader](Vectorized
 
 With [Parquet vectorized reader](VectorizedParquetRecordReader.md) enabled, the function does the following:
 
-* Creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) and a [RecordReaderIterator](../../RecordReaderIterator.md)
+* Creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) and a [RecordReaderIterator](../RecordReaderIterator.md)
 
 * Requests `VectorizedParquetRecordReader` to [initialize](VectorizedParquetRecordReader.md#initialize) (with the Parquet `ParquetInputSplit` and the Hadoop `TaskAttemptContextImpl`)
 
@@ -88,7 +88,7 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) enabled, the 
 
 * (only with [supportBatch](#supportBatch) enabled) Requests `VectorizedParquetRecordReader` to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches)
 
-* In the end, the function gives the [RecordReaderIterator](../../RecordReaderIterator.md) (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
+* In the end, the function gives the [RecordReaderIterator](../RecordReaderIterator.md) (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
 
 With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the function does the following:
 

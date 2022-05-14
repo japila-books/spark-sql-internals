@@ -13,7 +13,7 @@
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (and resolves [RepairTableStatement](RepairTableStatement.md) and `AlterTableRecoverPartitionsStatement` parsed statements)
 
-* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed (for a partitioned [HadoopFsRelation](../HadoopFsRelation.md))
+* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed (for a partitioned [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
 * `CatalogImpl` is requested to [recoverPartitions](../CatalogImpl.md#recoverPartitions)
 

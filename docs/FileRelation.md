@@ -32,6 +32,6 @@ Used exclusively when `Dataset` is requested to Dataset.md#inputFiles[inputFiles
 | FileRelation
 | Description
 
-| [[HadoopFsRelation]] [HadoopFsRelation](HadoopFsRelation.md)
+| [[HadoopFsRelation]] [HadoopFsRelation](datasources/HadoopFsRelation.md)
 |
 |===

@@ -1,6 +1,6 @@
 # FileWriterFactory
 
-`FileWriterFactory` is a [DataWriterFactory](connector/DataWriterFactory.md) of [FileBatchWrite](FileBatchWrite.md)s.
+`FileWriterFactory` is a [DataWriterFactory](../connector/DataWriterFactory.md) of [FileBatchWrite](FileBatchWrite.md)s.
 
 ## Creating Instance
 
@@ -29,7 +29,7 @@ For a non-partitioned write job (i.e., no partition columns in the [WriteJobDesc
 
 ---
 
-`createWriter` is part of the [DataWriterFactory](connector/DataWriterFactory.md#createWriter) abstraction.
+`createWriter` is part of the [DataWriterFactory](../connector/DataWriterFactory.md#createWriter) abstraction.
 
 ### <span id="createTaskAttemptContext"> Creating Hadoop TaskAttemptContext
 

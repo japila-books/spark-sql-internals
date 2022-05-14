@@ -147,7 +147,7 @@ NOTE: `nextKeyValue` is part of Hadoop's https://hadoop.apache.org/docs/r2.7.4/a
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested to [check whether or not there are more internal rows](../../RecordReaderIterator.md#hasNext)
+* `RecordReaderIterator` is requested to [check whether or not there are more internal rows](../RecordReaderIterator.md#hasNext)
 
 ## <span id="resultBatch"> resultBatch
 
@@ -211,4 +211,4 @@ NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.
 
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
-* `RecordReaderIterator` is requested for the [next internal row](../../RecordReaderIterator.md#next)
+* `RecordReaderIterator` is requested for the [next internal row](../RecordReaderIterator.md#next)

@@ -16,14 +16,14 @@
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
 * <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)
 * <span id="catalogTable"> [CatalogTable](../CatalogTable.md) if available
-* <span id="fileIndex"> [FileIndex](../FileIndex.md) if defined
+* <span id="fileIndex"> [FileIndex](../datasources/FileIndex.md) if defined
 * <span id="outputColumnNames"> Names of the output columns
 
 `InsertIntoHadoopFsRelationCommand` is created when:
 
 * `OptimizedCreateHiveTableAsSelectCommand` logical command is executed
 * `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
-* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../HadoopFsRelation.md))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
 ## <span id="staticPartitions"> Static Partitions
 
@@ -34,7 +34,7 @@ staticPartitions: TablePartitionSpec
 
 `InsertIntoHadoopFsRelationCommand` is given a specification of a table partition (as a mapping of column names to column values) when [created](#creating-instance).
 
-Partitions can only be given when created for [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule when executed for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../HadoopFsRelation.md)
+Partitions can only be given when created for [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule when executed for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../datasources/HadoopFsRelation.md)
 
 There will be no partitions when created for the following:
 

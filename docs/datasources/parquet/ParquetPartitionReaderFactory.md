@@ -1,6 +1,6 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md).
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md).
 
 ## Creating Instance
 
@@ -41,13 +41,13 @@ buildColumnarReader(
   file: PartitionedFile): PartitionReader[ColumnarBatch]
 ```
 
-`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
+`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
 
 In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
 ---
 
-`buildColumnarReader` is part of the [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
+`buildColumnarReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
 
 ## <span id="buildReader"> Building PartitionReader
 
@@ -62,7 +62,7 @@ In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that i
 
 ---
 
-`buildReader` is part of the [FilePartitionReaderFactory](../../FilePartitionReaderFactory.md#buildReader) abstraction.
+`buildReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildReader) abstraction.
 
 ### <span id="enableVectorizedReader"> enableVectorizedReader
 
@@ -80,7 +80,7 @@ createRowBaseReader(
   file: PartitionedFile): RecordReader[Void, InternalRow]
 ```
 
-`createRowBaseReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../../PartitionedFile.md) and [createRowBaseParquetReader](#createRowBaseParquetReader)).
+`createRowBaseReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../PartitionedFile.md) and [createRowBaseParquetReader](#createRowBaseParquetReader)).
 
 ## <span id="createVectorizedReader"> Creating Vectorized Parquet RecordReader
 
@@ -89,9 +89,9 @@ createVectorizedReader(
   file: PartitionedFile): VectorizedParquetRecordReader
 ```
 
-`createVectorizedReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../../PartitionedFile.md) and [createParquetVectorizedReader](#createParquetVectorizedReader)).
+`createVectorizedReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../PartitionedFile.md) and [createParquetVectorizedReader](#createParquetVectorizedReader)).
 
-In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../../PartitionedFile.md#partitionValues) of the given [PartitionedFile](../../PartitionedFile.md)) and returns it.
+In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../PartitionedFile.md#partitionValues) of the given [PartitionedFile](../PartitionedFile.md)) and returns it.
 
 `createVectorizedReader` is used when:
 

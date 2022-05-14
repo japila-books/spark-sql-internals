@@ -1,6 +1,6 @@
 # FileBatchWrite
 
-`FileBatchWrite` is a [BatchWrite](connector/BatchWrite.md) that uses the given [FileCommitProtocol](#committer) to coordinate a [writing job](#job) ([abort](#abort) or [commit](#commit)).
+`FileBatchWrite` is a [BatchWrite](../connector/BatchWrite.md) that uses the given [FileCommitProtocol](#committer) to coordinate a [writing job](#job) ([abort](#abort) or [commit](#commit)).
 
 ## Creating Instance
 
@@ -23,7 +23,7 @@ abort(
 
 `abort` requests the [FileCommitProtocol](#committer) to abort the [Job](#job).
 
-`abort` is part of the [BatchWrite](connector/BatchWrite.md#abort) abstraction.
+`abort` is part of the [BatchWrite](../connector/BatchWrite.md#abort) abstraction.
 
 ## <span id="commit"> Committing Write Job
 
@@ -56,7 +56,7 @@ Finished processing stats for write job [uuid].
 
 ---
 
-`commit` is part of the [BatchWrite](connector/BatchWrite.md#commit) abstraction.
+`commit` is part of the [BatchWrite](../connector/BatchWrite.md#commit) abstraction.
 
 ## <span id="createBatchWriterFactory"> Creating Batch DataWriterFactory
 
@@ -67,7 +67,7 @@ createBatchWriterFactory(
 
 `createBatchWriterFactory` creates a new [FileWriterFactory](FileWriterFactory.md).
 
-`createBatchWriterFactory` is part of the [BatchWrite](connector/BatchWrite.md#createBatchWriterFactory) abstraction.
+`createBatchWriterFactory` is part of the [BatchWrite](../connector/BatchWrite.md#createBatchWriterFactory) abstraction.
 
 ## <span id="useCommitCoordinator"> useCommitCoordinator
 
@@ -77,7 +77,7 @@ useCommitCoordinator(): Boolean
 
 `FileBatchWrite` does not require a Commit Coordinator (and returns `false`).
 
-`useCommitCoordinator` is part of the [BatchWrite](connector/BatchWrite.md#useCommitCoordinator) abstraction.
+`useCommitCoordinator` is part of the [BatchWrite](../connector/BatchWrite.md#useCommitCoordinator) abstraction.
 
 ## Logging
 
@@ -89,4 +89,4 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.v2.FileBatchWrite=ALL
 ```
 
-Refer to [Logging](spark-logging.md).
+Refer to [Logging](../spark-logging.md).

@@ -14,7 +14,7 @@
 `SortExec` is created when:
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md#Sort) execution planning strategy is executed (with a [Sort](../logical-operators/Sort.md) logical operator)
-* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write)
+* `FileFormatWriter` utility is used to [write out a query result](../datasources/FileFormatWriter.md#write)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 ## <span id="metrics"> Performance Metrics
@@ -78,7 +78,7 @@ createSorter(): UnsafeExternalRowSorter
 `createSorter` is used when:
 
 * `SortExec` is requested to [execute](#doExecute)
-* `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write)
+* `FileFormatWriter` utility is used to [write out a query result](../datasources/FileFormatWriter.md#write)
 
 ## Demo
 

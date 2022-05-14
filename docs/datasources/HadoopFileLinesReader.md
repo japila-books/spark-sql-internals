@@ -1,6 +1,6 @@
 # HadoopFileLinesReader
 
-`HadoopFileLinesReader` is a Scala http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator[Iterator] of Apache Hadoop's https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/io/Text.html[org.apache.hadoop.io.Text].
+`HadoopFileLinesReader` is a Scala [Iterator](http://www.scala-lang.org/api/2.11.11/#scala.collection.Iterator) of Apache Hadoop's [org.apache.hadoop.io.Text]({{ hadoop.api }}/org/apache/hadoop/io/Text.html).
 
 `HadoopFileLinesReader` is <<creating-instance, created>> to access datasets in the following data sources:
 
@@ -8,7 +8,7 @@
 * `LibSVMFileFormat`
 * `TextInputCSVDataSource`
 * `TextInputJsonDataSource`
-* [TextFileFormat](datasources/text/TextFileFormat.md)
+* [TextFileFormat](text/TextFileFormat.md)
 
 `HadoopFileLinesReader` uses the internal <<iterator, iterator>> that handles accessing files using Hadoop's FileSystem API.
 

@@ -71,23 +71,23 @@ Used when:
 * `SimpleTableProvider` is requested to [inferSchema](SimpleTableProvider.md#inferSchema)
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
 * [DescribeTableExec](../physical-operators/DescribeTableExec.md) physical operator is executed
-* `FileDataSourceV2` is requested to [inferSchema](../FileDataSourceV2.md#inferSchema)
+* `FileDataSourceV2` is requested to [inferSchema](../datasources/FileDataSourceV2.md#inferSchema)
 * (Spark Structured Streaming) `TextSocketTable` is requested for a `ScanBuilder` with a read schema
 * (Spark Structured Streaming) `DataStreamReader` is requested to load data
 
 ## Implementations
 
-* ConsoleTable (Spark Structured Streaming)
+* `ConsoleTable` (Spark Structured Streaming)
 * [FileTable](FileTable.md)
-* ForeachWriterTable (Spark Structured Streaming)
+* `ForeachWriterTable` (Spark Structured Streaming)
 * [KafkaTable](../datasources/kafka/KafkaTable.md)
-* MemorySink (Spark Structured Streaming)
-* MemoryStreamTable (Spark Structured Streaming)
+* `MemorySink` (Spark Structured Streaming)
+* `MemoryStreamTable` (Spark Structured Streaming)
 * [NoopTable](../datasources/noop/NoopTable.md)
-* RateStreamTable (Spark Structured Streaming)
-* Sink (Spark Structured Streaming)
+* `RateStreamTable` (Spark Structured Streaming)
+* `Sink` (Spark Structured Streaming)
 * [StagedTable](StagedTable.md)
 * [SupportsRead](SupportsRead.md)
 * [SupportsWrite](SupportsWrite.md)
-* TextSocketTable (Spark Structured Streaming)
+* `TextSocketTable` (Spark Structured Streaming)
 * [V1Table](V1Table.md)

@@ -6,14 +6,14 @@
 
 `CatalogFileIndex` takes the following to be created:
 
-* <span id="sparkSession"> [SparkSession](SparkSession.md)
-* <span id="table"> [CatalogTable](CatalogTable.md)
+* <span id="sparkSession"> [SparkSession](../SparkSession.md)
+* <span id="table"> [CatalogTable](../CatalogTable.md)
 * <span id="sizeInBytes"> Estimated Size
 
 `CatalogFileIndex` is created when:
 
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
-* `DataSource` is requested to [create a BaseRelation for a FileFormat](DataSource.md#resolveRelation)
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* `DataSource` is requested to [create a BaseRelation for a FileFormat](../DataSource.md#resolveRelation)
 
 ## <span id="listFiles"> Listing Files
 
@@ -54,23 +54,23 @@ filterPartitions(
   filters: Seq[Expression]): InMemoryFileIndex
 ```
 
-`filterPartitions` requests the [CatalogTable](#table) for the [partition columns](CatalogTable.md#partitionColumnNames).
+`filterPartitions` requests the [CatalogTable](#table) for the [partition columns](../CatalogTable.md#partitionColumnNames).
 
-For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the [SessionCatalog](SessionState.md#catalog) for the [partitions by filter](SessionCatalog.md#listPartitionsByFilter) and creates a [PrunedInMemoryFileIndex](PrunedInMemoryFileIndex.md) (with the partition listing time).
+For a partitioned table, `filterPartitions` starts tracking time. `filterPartitions` requests the [SessionCatalog](../SessionState.md#catalog) for the [partitions by filter](../SessionCatalog.md#listPartitionsByFilter) and creates a [PrunedInMemoryFileIndex](PrunedInMemoryFileIndex.md) (with the partition listing time).
 
 For an unpartitioned table (no partition columns defined), `filterPartitions` simply returns a [InMemoryFileIndex](InMemoryFileIndex.md) (with the [base location](#rootPaths) and no user-specified schema).
 
 `filterPartitions` is used when:
 
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 * `CatalogFileIndex` is requested to [listFiles](#listFiles) and [inputFiles](#inputFiles)
-* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
+* [PruneFileSourcePartitions](../logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
 ## Internal Properties
 
 ### <span id="baseLocation"> Base Location
 
-Base location (as a Java [URI]({{ java.api }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](CatalogStorageFormat.md#locationUri) of the [storage](CatalogTable.md#storage))
+Base location (as a Java [URI]({{ java.api }}/java/net/URI.html)) as defined in the [CatalogTable](#table) metadata (under the [locationUri](../CatalogStorageFormat.md#locationUri) of the [storage](../CatalogTable.md#storage))
 
 Used when `CatalogFileIndex` is requested to [filter the partitions](#filterPartitions) and for the [root paths](#rootPaths)
 

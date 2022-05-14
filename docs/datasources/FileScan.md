@@ -1,6 +1,6 @@
 # FileScan
 
-`FileScan` is an [extension](#contract) of the [Scan](connector/Scan.md) abstraction for [scans](#implementations) in `Batch` queries.
+`FileScan` is an [extension](#contract) of the [Scan](../connector/Scan.md) abstraction for [scans](#implementations) in `Batch` queries.
 
 `FileScan` is with `SupportsReportStatistics`.
 
@@ -86,7 +86,7 @@ Used when...FIXME
 
 * `AvroScan`
 * `OrcScan`
-* [ParquetScan](datasources/parquet/ParquetScan.md)
+* [ParquetScan](parquet/ParquetScan.md)
 * `TextBasedFileScan`
 
 ## <span id="description"> description
@@ -97,7 +97,7 @@ description(): String
 
 `description`...FIXME
 
-`description` is part of the [Scan](connector/Scan.md#description) abstraction.
+`description` is part of the [Scan](../connector/Scan.md#description) abstraction.
 
 ## <span id="planInputPartitions"> planInputPartitions
 
@@ -107,7 +107,7 @@ planInputPartitions(): Array[InputPartition]
 
 `planInputPartitions` is [partitions](#partitions).
 
-`planInputPartitions` is part of the [Batch](connector/Batch.md#planInputPartitions) abstraction.
+`planInputPartitions` is part of the [Batch](../connector/Batch.md#planInputPartitions) abstraction.
 
 ### <span id="partitions"> FilePartitions
 
@@ -117,7 +117,7 @@ partitions: Seq[FilePartition]
 
 `partitions` requests the [PartitioningAwareFileIndex](#fileIndex) for the [partition directories](PartitioningAwareFileIndex.md#listFiles) (_selectedPartitions_).
 
-For every selected partition directory, `partitions` requests the Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es that are [split](PartitionedFileUtil.md#splitFiles) (if [isSplitable](#isSplitable)) to [maxSplitBytes](FilePartition.md#maxSplitBytes) and sorted by size (in reversed order).
+For every selected partition directory, `partitions` requests the Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es that are [split](../PartitionedFileUtil.md#splitFiles) (if [isSplitable](#isSplitable)) to [maxSplitBytes](FilePartition.md#maxSplitBytes) and sorted by size (in reversed order).
 
 In the end, `partitions` returns the [FilePartition](FilePartition.md#getFilePartitions)s.
 
@@ -129,7 +129,7 @@ estimateStatistics(): Statistics
 
 `estimateStatistics`...FIXME
 
-`estimateStatistics` is part of the [SupportsReportStatistics](connector/SupportsReportStatistics.md#estimateStatistics) abstraction.
+`estimateStatistics` is part of the [SupportsReportStatistics](../connector/SupportsReportStatistics.md#estimateStatistics) abstraction.
 
 ## <span id="toBatch"> toBatch
 
@@ -139,7 +139,7 @@ toBatch: Batch
 
 `toBatch` is enabled (`true`) by default.
 
-`toBatch` is part of the [Scan](connector/Scan.md#toBatch) abstraction.
+`toBatch` is part of the [Scan](../connector/Scan.md#toBatch) abstraction.
 
 ## <span id="readSchema"> readSchema
 
@@ -149,7 +149,7 @@ readSchema(): StructType
 
 `readSchema`...FIXME
 
-`readSchema` is part of the [Scan](connector/Scan.md#readSchema) abstraction.
+`readSchema` is part of the [Scan](../connector/Scan.md#readSchema) abstraction.
 
 ## <span id="isSplitable"> isSplitable
 

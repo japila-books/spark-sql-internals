@@ -1,6 +1,6 @@
 # ParquetDataSourceV2
 
-`ParquetDataSourceV2` is the [FileDataSourceV2](../../FileDataSourceV2.md) of [parquet](index.md) data source.
+`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of [parquet](index.md) data source.
 
 ## DataSourceRegister
 
@@ -32,7 +32,7 @@ getTable(
 
 In the end, `getTable` creates a [ParquetTable](ParquetTable.md).
 
-`getTable` is part of the [FileDataSourceV2](../../FileDataSourceV2.md#getTable) abstraction.
+`getTable` is part of the [FileDataSourceV2](../FileDataSourceV2.md#getTable) abstraction.
 
 ## <span id="shortName"> shortName
 
@@ -52,4 +52,4 @@ fallbackFileFormat: Class[_ <: FileFormat]
 
 `fallbackFileFormat` is [ParquetFileFormat](ParquetFileFormat.md).
 
-`fallbackFileFormat` is part of the [FileDataSourceV2](../../FileDataSourceV2.md#fallbackFileFormat) abstraction.
+`fallbackFileFormat` is part of the [FileDataSourceV2](../FileDataSourceV2.md#fallbackFileFormat) abstraction.

@@ -398,7 +398,7 @@ Used when:
 * `DetermineTableStats` logical resolution rule could not compute the table size or [spark.sql.statistics.fallBackToHdfs](#spark.sql.statistics.fallBackToHdfs) is disabled
 * [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
 *  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
-* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](CatalogFileIndex.md) when no table statistics are available)
+* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](datasources/CatalogFileIndex.md) when no table statistics are available)
 * `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
 ## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
@@ -439,7 +439,7 @@ Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
 Used when:
 
-* `FileWrite` is requested for a [BatchWrite](FileWrite.md#toBatch)
+* `FileWrite` is requested for a [BatchWrite](datasources/FileWrite.md#toBatch)
 * `InsertIntoHadoopFsRelationCommand` logical command is [executed](logical-operators/InsertIntoHadoopFsRelationCommand.md#run)
 * `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
 
@@ -449,8 +449,8 @@ The value of [spark.sql.sources.fileCompressionFactor](configuration-properties.
 
 Used when:
 
-* `HadoopFsRelation` is requested for a [size](HadoopFsRelation.md#sizeInBytes)
-* `FileScan` is requested to [estimate statistics](FileScan.md#estimateStatistics)
+* `HadoopFsRelation` is requested for a [size](datasources/HadoopFsRelation.md#sizeInBytes)
+* `FileScan` is requested to [estimate statistics](datasources/FileScan.md#estimateStatistics)
 
 ## <span id="filesMaxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> filesMaxPartitionBytes
 
@@ -458,7 +458,7 @@ Used when:
 
 Used when:
 
-* `FilePartition` utility is requested for [maxSplitBytes](FilePartition.md#maxSplitBytes)
+* `FilePartition` utility is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
 
 ## <span id="filesMinPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> filesMinPartitionNum
 
@@ -466,7 +466,7 @@ Used when:
 
 Used when:
 
-* `FilePartition` utility is requested for [maxSplitBytes](FilePartition.md#maxSplitBytes)
+* `FilePartition` utility is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
 
 ## <span id="filesOpenCostInBytes"> filesOpenCostInBytes
 
@@ -520,7 +520,7 @@ The value of [spark.sql.files.ignoreMissingFiles](configuration-properties.md#sp
 Used when:
 
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreMissingFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
-* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](InMemoryFileIndex.md#bulkListLeafFiles)
+* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](datasources/InMemoryFileIndex.md#bulkListLeafFiles)
 * `FilePartitionReader` is requested to `ignoreMissingFiles`
 
 ## <span id="inMemoryPartitionPruning"> inMemoryPartitionPruning
@@ -607,7 +607,7 @@ The value of [spark.sql.maxConcurrentOutputFileWriters](configuration-properties
 
 Used when:
 
-* `FileFormatWriter` is requested to [write out a query result](FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write out a query result](datasources/FileFormatWriter.md#write)
 
 ## <span id="maxMetadataStringLength"><span id="MAX_METADATA_STRING_LENGTH"> maxMetadataStringLength
 
@@ -617,7 +617,7 @@ Used when:
 
 * `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
 * `DataSourceScanExec` is requested for [simpleString](physical-operators/DataSourceScanExec.md#simpleString)
-* `FileScan` is requested for [description](FileScan.md#description) and [metadata](FileScan.md#getMetaData)
+* `FileScan` is requested for [description](datasources/FileScan.md#description) and [metadata](datasources/FileScan.md#getMetaData)
 
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
 
@@ -625,8 +625,8 @@ Used when:
 
 Used when:
 
-* `FileFormatWriter` utility is used to [write out a query result](FileFormatWriter.md#write)
-* `FileWrite` is requested for a [BatchWrite](FileWrite.md#toBatch)
+* `FileFormatWriter` utility is used to [write out a query result](datasources/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](datasources/FileWrite.md#toBatch)
 
 ## <span id="maxToStringFields"><span id="MAX_TO_STRING_FIELDS"> maxToStringFields
 
@@ -772,7 +772,7 @@ Supported values:
 
 Used when:
 
-* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
+* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](datasources/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
 * `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
 * `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
 

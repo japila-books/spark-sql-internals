@@ -1,13 +1,13 @@
 # ParquetScanBuilder
 
-`ParquetScanBuilder` is a [FileScanBuilder](../../FileScanBuilder.md) that [SupportsPushDownFilters](../../connector/SupportsPushDownFilters.md).
+`ParquetScanBuilder` is a [FileScanBuilder](../FileScanBuilder.md) that [SupportsPushDownFilters](../../connector/SupportsPushDownFilters.md).
 
 ## Creating Instance
 
 `ParquetScanBuilder` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../../SparkSession.md)
-* <span id="fileIndex"> [PartitioningAwareFileIndex](../../PartitioningAwareFileIndex.md)
+* <span id="fileIndex"> [PartitioningAwareFileIndex](../PartitioningAwareFileIndex.md)
 * <span id="schema"> [Schema](../../types/StructType.md)
 * <span id="dataSchema"> [Data Schema](../../types/StructType.md)
 * <span id="options"> Case-Insensitive Options
@@ -22,7 +22,7 @@
 build(): Scan
 ```
 
-`build` creates a [ParquetScan](ParquetScan.md) (with the [readDataSchema](../../FileScanBuilder.md#readDataSchema), the [readPartitionSchema](../../FileScanBuilder.md#readPartitionSchema) and the [pushedParquetFilters](#pushedParquetFilters)).
+`build` creates a [ParquetScan](ParquetScan.md) (with the [readDataSchema](../FileScanBuilder.md#readDataSchema), the [readPartitionSchema](../FileScanBuilder.md#readPartitionSchema) and the [pushedParquetFilters](#pushedParquetFilters)).
 
 `build` is part of the [ScanBuilder](../../connector/ScanBuilder.md#build) abstraction.
 
@@ -47,7 +47,7 @@ pushedParquetFilters: Array[Filter]
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-`pushedParquetFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../../FileScanBuilder.md#readDataSchema) ([converted](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
+`pushedParquetFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../FileScanBuilder.md#readDataSchema) ([converted](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
 
 * [spark.sql.parquet.filterPushdown.date](../../SQLConf.md#parquetFilterPushDownDate)
 * [spark.sql.parquet.filterPushdown.timestamp](../../SQLConf.md#parquetFilterPushDownTimestamp)
@@ -70,4 +70,4 @@ supportsNestedSchemaPruning: Boolean
 
 `supportsNestedSchemaPruning` is `true`.
 
-`supportsNestedSchemaPruning` is part of the [FileScanBuilder](../../FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.
+`supportsNestedSchemaPruning` is part of the [FileScanBuilder](../FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.

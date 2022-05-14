@@ -1,33 +1,33 @@
 # HadoopFsRelation
 
-`HadoopFsRelation` is a [BaseRelation](BaseRelation.md) and [FileRelation](FileRelation.md).
+`HadoopFsRelation` is a [BaseRelation](../BaseRelation.md) and [FileRelation](../FileRelation.md).
 
 ## Creating Instance
 
 `HadoopFsRelation` takes the following to be created:
 
 * <span id="location"> [FileIndex](FileIndex.md)
-* <span id="partitionSchema"> Partition Schema ([StructType](types/StructType.md))
-* <span id="dataSchema"> Data Schema ([StructType](types/StructType.md))
+* <span id="partitionSchema"> Partition Schema ([StructType](../types/StructType.md))
+* <span id="dataSchema"> Data Schema ([StructType](../types/StructType.md))
 * Optional [bucketing specification](#bucketSpec)
-* <span id="fileFormat"> [FileFormat](datasources/FileFormat.md)
+* <span id="fileFormat"> [FileFormat](FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
-* <span id="sparkSession"> [SparkSession](SparkSession.md)
+* <span id="sparkSession"> [SparkSession](../SparkSession.md)
 
 `HadoopFsRelation` is created when:
 
-* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) for [file-based data sources](datasources/FileFormat.md)
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation) (for [RelationConversions](hive/RelationConversions.md) logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
+* `DataSource` is requested to [resolve a relation](../DataSource.md#resolveRelation) for [file-based data sources](FileFormat.md)
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation) (for [RelationConversions](../hive/RelationConversions.md) logical post-hoc evaluation rule for `parquet` or `native` and `hive` ORC formats)
 
 ## <span id="bucketSpec"> Bucketing Specification
 
-`HadoopFsRelation` can be given a [bucketing specification](BucketSpec.md) when [created](#creating-instance).
+`HadoopFsRelation` can be given a [bucketing specification](../BucketSpec.md) when [created](#creating-instance).
 
-The bucketing specification is defined for [non-streaming file-based data sources](DataSource.md) and used for the following:
+The bucketing specification is defined for [non-streaming file-based data sources](../DataSource.md) and used for the following:
 
-* [Output partitioning scheme](physical-operators/FileSourceScanExec.md#outputPartitioning) and [output data ordering](physical-operators/FileSourceScanExec.md#outputOrdering) of the corresponding [FileSourceScanExec](physical-operators/FileSourceScanExec.md) physical operator
+* [Output partitioning scheme](../physical-operators/FileSourceScanExec.md#outputPartitioning) and [output data ordering](../physical-operators/FileSourceScanExec.md#outputOrdering) of the corresponding [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator
 
-* [DataSourceAnalysis](logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule (when executed on a [InsertIntoTable](logical-operators/InsertIntoTable.md) logical operator over a [LogicalRelation](logical-operators/LogicalRelation.md) with `HadoopFsRelation` relation)
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) post-hoc logical resolution rule (when executed on a [InsertIntoTable](../logical-operators/InsertIntoTable.md) logical operator over a [LogicalRelation](../logical-operators/LogicalRelation.md) with `HadoopFsRelation` relation)
 
 ## <span id="inputFiles"> Files to Scan (Input Files)
 
@@ -37,7 +37,7 @@ inputFiles: Array[String]
 
 `inputFiles` requests the [FileIndex](#location) for the [inputFiles](FileIndex.md#inputFiles).
 
-`inputFiles` is part of the [FileRelation](FileRelation.md#inputFiles) abstraction.
+`inputFiles` is part of the [FileRelation](../FileRelation.md#inputFiles) abstraction.
 
 ## <span id="sizeInBytes"> Estimated Size
 
@@ -45,9 +45,9 @@ inputFiles: Array[String]
 sizeInBytes: Long
 ```
 
-`sizeInBytes` requests the [FileIndex](#location) for the [size](FileIndex.md#sizeInBytes) and multiplies it by the value of [spark.sql.sources.fileCompressionFactor](configuration-properties.md#spark.sql.sources.fileCompressionFactor) configuration property.
+`sizeInBytes` requests the [FileIndex](#location) for the [size](FileIndex.md#sizeInBytes) and multiplies it by the value of [spark.sql.sources.fileCompressionFactor](../configuration-properties.md#spark.sql.sources.fileCompressionFactor) configuration property.
 
-`sizeInBytes` is part of the [BaseRelation](BaseRelation.md#sizeInBytes) abstraction.
+`sizeInBytes` is part of the [BaseRelation](../BaseRelation.md#sizeInBytes) abstraction.
 
 ## <span id="toString"> Human-Friendly Textual Representation
 
@@ -57,7 +57,7 @@ toString: String
 
 `toString` is the following text based on the [FileFormat](#fileFormat):
 
-* [shortName](DataSourceRegister.md#shortName) for [DataSourceRegister](DataSourceRegister.md) data sources
+* [shortName](../DataSourceRegister.md#shortName) for [DataSourceRegister](../DataSourceRegister.md) data sources
 
 * **HadoopFiles** otherwise
 

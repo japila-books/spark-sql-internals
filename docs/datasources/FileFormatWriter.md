@@ -2,9 +2,9 @@
 
 `FileFormatWriter` utility is used to [write out query result](#write) for the following:
 
-* Hive-related [InsertIntoHiveDirCommand](hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](hive/InsertIntoHiveTable.md) logical commands (via [SaveAsHiveFile.saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile))
-* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command
-* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSink#addBatch)) is requested to write out a micro-batch
+* Hive-related [InsertIntoHiveDirCommand](../hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](../hive/InsertIntoHiveTable.md) logical commands (via [SaveAsHiveFile.saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile))
+* [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command
+* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/file/FileStreamSink#addBatch)) is requested to write out a micro-batch
 
 ## <span id="write"> Writing Out Query Result
 
@@ -31,19 +31,19 @@ write(
 `write` sets the output directory (for the map-reduce job) to be the `outputPath` of the given `OutputSpec`.
 
 <span id="write-outputWriterFactory">
-`write` requests the given `FileFormat` to [prepareWrite](datasources/FileFormat.md#prepareWrite).
+`write` requests the given `FileFormat` to [prepareWrite](FileFormat.md#prepareWrite).
 
 <span id="write-description">
 `write` creates a `WriteJobDescription` with the following:
 
-* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or [spark.sql.files.maxRecordsPerFile](configuration-properties.md#spark.sql.files.maxRecordsPerFile)
+* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or [spark.sql.files.maxRecordsPerFile](../configuration-properties.md#spark.sql.files.maxRecordsPerFile)
 
-* `timeZoneId` based on the `timeZone` option (from the given options) if available or [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
+* `timeZoneId` based on the `timeZone` option (from the given options) if available or [spark.sql.session.timeZone](../configuration-properties.md#spark.sql.session.timeZone)
 
 `write` requests the given `FileCommitProtocol` committer to `setupJob`.
 
 <span id="write-rdd">
-`write` executes the given [SparkPlan](physical-operators/SparkPlan.md) (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses [SortExec](physical-operators/SortExec.md) physical operator (with `global` flag off).
+`write` executes the given [SparkPlan](../physical-operators/SparkPlan.md) (and generates an RDD). The execution can be directly on the given physical operator if ordering matches the requirements or uses [SortExec](../physical-operators/SortExec.md) physical operator (with `global` flag off).
 
 <span id="write-runJob">
 `write` runs a Spark job (action) on the [RDD](#write-rdd) with [executeTask](#executeTask) as the partition function. The result task handler simply requests the given `FileCommitProtocol` committer to `onTaskCommit` (with the `TaskCommitMessage` of a `WriteTaskResult`) and saves the `WriteTaskResult`.
@@ -70,9 +70,9 @@ In the end, `write` returns all the partition paths that were updated during thi
 
 `write` is used when:
 
-* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
-* `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile) (when [InsertIntoHiveDirCommand](hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](hive/InsertIntoHiveTable.md) logical commands are executed)
-* ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSink#addBatch)) `FileStreamSink` is requested to write out a micro-batch
+* [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* `SaveAsHiveFile` is requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile) (when [InsertIntoHiveDirCommand](../hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](../hive/InsertIntoHiveTable.md) logical commands are executed)
+* ([Spark Structured Streaming]({{ book.structured_streaming }}/file/FileStreamSink#addBatch)) `FileStreamSink` is requested to write out a micro-batch
 
 ### <span id="write-Throwable"> write And Throwables
 
@@ -123,4 +123,4 @@ Add the following line to `conf/log4j.properties`:
 log4j.logger.org.apache.spark.sql.execution.datasources.FileFormatWriter=ALL
 ```
 
-Refer to [Logging](spark-logging.md).
+Refer to [Logging](../spark-logging.md).

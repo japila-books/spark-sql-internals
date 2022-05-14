@@ -9,7 +9,7 @@
 * <span id="description"> `WriteJobDescription`
 * <span id="taskAttemptContext"> Hadoop [TaskAttemptContext]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html)
 * <span id="committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-* <span id="customMetrics"> Custom [SQLMetric](physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
+* <span id="customMetrics"> Custom [SQLMetric](../physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
 
 While being created, `SingleDirectoryDataWriter` [creates a new OutputWriter](#newOutputWriter).
 
@@ -33,7 +33,7 @@ write(
 
 `write` [creates a new OutputWriter](#newOutputWriter) for a positive `maxRecordsPerFile` (of the [WriteJobDescription](#description)) and the [recordsInFile](#recordsInFile) counter above the threshold.
 
-`write` requests the current [OutputWriter](#currentWriter) to [write the record](datasources/OutputWriter.md#write) and informs the [WriteTaskStatsTrackers](#statsTrackers) that there was a [new row](WriteTaskStatsTracker.md#newRow).
+`write` requests the current [OutputWriter](#currentWriter) to [write the record](OutputWriter.md#write) and informs the [WriteTaskStatsTrackers](#statsTrackers) that there was a [new row](WriteTaskStatsTracker.md#newRow).
 
 `write` increments the [recordsInFile](#recordsInFile).
 

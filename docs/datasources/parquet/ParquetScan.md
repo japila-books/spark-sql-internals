@@ -1,6 +1,6 @@
 # ParquetScan
 
-`ParquetScan` is a [FileScan](../../FileScan.md).
+`ParquetScan` is a [FileScan](../FileScan.md).
 
 ## Creating Instance
 
@@ -8,7 +8,7 @@
 
 * <span id="sparkSession"> [SparkSession](../../SparkSession.md)
 * <span id="hadoopConf"> Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)
-* <span id="fileIndex"> [PartitioningAwareFileIndex](../../PartitioningAwareFileIndex.md)
+* <span id="fileIndex"> [PartitioningAwareFileIndex](../PartitioningAwareFileIndex.md)
 * <span id="dataSchema"> Data [schema](../../types/StructType.md)
 * <span id="readDataSchema"> Read data [schema](../../types/StructType.md)
 * <span id="readPartitionSchema"> Read partition [schema](../../types/StructType.md)
@@ -49,4 +49,4 @@ isSplitable(
 
 `isSplitable` is `true`.
 
-`isSplitable` is part of the [FileScan](../../FileScan.md#isSplitable) abstraction.
+`isSplitable` is part of the [FileScan](../FileScan.md#isSplitable) abstraction.

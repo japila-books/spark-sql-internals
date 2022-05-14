@@ -22,7 +22,7 @@ Used when:
 
 ## Implementations
 
-* [FileWriterFactory](FileWriterFactory.md)
+* [FileWriterFactory](../datasources/FileWriterFactory.md)
 * `KafkaBatchWriterFactory`
 * `MemoryWriterFactory` (Spark Structured Streaming)
 * `MicroBatchWriterFactory` (Spark Structured Streaming)

@@ -201,7 +201,7 @@ lookupV2Provider(): Option[TableProvider]
 
 `lookupV2Provider` tries to [look up a TableProvider](DataSource.md#lookupDataSourceV2) for the [source](#source).
 
-`lookupV2Provider` explicitly excludes [FileDataSourceV2](FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
+`lookupV2Provider` explicitly excludes [FileDataSourceV2](datasources/FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
 
 `lookupV2Provider` is used when:
 

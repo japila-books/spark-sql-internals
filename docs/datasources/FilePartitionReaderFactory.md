@@ -1,6 +1,6 @@
 # FilePartitionReaderFactory
 
-`FilePartitionReaderFactory` is an [extension](#contract) of the [PartitionReaderFactory](connector/PartitionReaderFactory.md) abstraction for [file-based PartitionReader factories](#implementations).
+`FilePartitionReaderFactory` is an [extension](#contract) of the [PartitionReaderFactory](../connector/PartitionReaderFactory.md) abstraction for [file-based PartitionReader factories](#implementations).
 
 ## Implementations
 
@@ -8,7 +8,7 @@
 * `CSVPartitionReaderFactory`
 * `JsonPartitionReaderFactory`
 * `OrcPartitionReaderFactory`
-* [ParquetPartitionReaderFactory](datasources/parquet/ParquetPartitionReaderFactory.md)
+* [ParquetPartitionReaderFactory](parquet/ParquetPartitionReaderFactory.md)
 * `TextPartitionReaderFactory`
 
 ## <span id="createReader"> Creating PartitionReader
@@ -20,7 +20,7 @@ createReader(
 
 `createReader`...FIXME
 
-`createReader` is part of the [PartitionReaderFactory](connector/PartitionReaderFactory.md#createReader) abstraction.
+`createReader` is part of the [PartitionReaderFactory](../connector/PartitionReaderFactory.md#createReader) abstraction.
 
 ## <span id="createColumnarReader"> Creating Columnar PartitionReader
 
@@ -31,4 +31,4 @@ createColumnarReader(
 
 `createColumnarReader`...FIXME
 
-`createColumnarReader` is part of the [PartitionReaderFactory](connector/PartitionReaderFactory.md#createColumnarReader) abstraction.
+`createColumnarReader` is part of the [PartitionReaderFactory](../connector/PartitionReaderFactory.md#createColumnarReader) abstraction.

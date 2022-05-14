@@ -37,7 +37,7 @@ org.apache.spark.sql.execution.FileSourceScanExec
 ```
 
 [[shouldPruneBuckets]]
-`FileSourceScanExec` supports [Bucket Pruning](../bucketing.md#bucket-pruning) for [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../HadoopFsRelation.md) with the [bucketing specification](../HadoopFsRelation.md#bucketSpec) with the following:
+`FileSourceScanExec` supports [Bucket Pruning](../bucketing.md#bucket-pruning) for [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../datasources/HadoopFsRelation.md) with the [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) with the following:
 
 1. There is exactly one bucketing column
 1. The number of buckets is greater than 1
@@ -106,9 +106,9 @@ apply(plan: LogicalPlan): Seq[SparkPlan]
 
 `apply` PhysicalOperation.md#unapply[destructures the input logical plan] into a tuple of projection and filter expressions together with a leaf logical operator.
 
-`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and `Filter` logical operators).
+`apply` only works with spark-sql-LogicalPlan.md[logical plans] that are actually a LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../datasources/HadoopFsRelation.md) (possibly as a child of [Project](../logical-operators/Project.md) and `Filter` logical operators).
 
-`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the [partitionSchema](../HadoopFsRelation.md#partitionSchema) of the `HadoopFsRelation`.
+`apply` computes `partitionKeyFilters` expression set with the filter expressions that are a subset of the [partitionSchema](../datasources/HadoopFsRelation.md#partitionSchema) of the `HadoopFsRelation`.
 
 `apply` prints out the following INFO message to the logs:
 

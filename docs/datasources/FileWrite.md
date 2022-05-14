@@ -1,6 +1,6 @@
 # FileWrite
 
-`FileWrite` is an [extension](#contract) of the [Write](connector/Write.md) abstraction for [file writers](#implementations).
+`FileWrite` is an [extension](#contract) of the [Write](../connector/Write.md) abstraction for [file writers](#implementations).
 
 ## Contract
 
@@ -66,7 +66,7 @@ Used when:
 * `CSVWrite`
 * `JsonWrite`
 * `OrcWrite`
-* [ParquetWrite](datasources/parquet/ParquetWrite.md)
+* [ParquetWrite](parquet/ParquetWrite.md)
 * `TextWrite`
 
 ## <span id="toBatch"> Creating BatchWrite
@@ -81,7 +81,7 @@ toBatch: BatchWrite
 
 `toBatch` creates a `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol)) with the following:
 
-1. [spark.sql.sources.commitProtocolClass](configuration-properties.md#spark.sql.sources.commitProtocolClass)
+1. [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass)
 1. A random job ID
 1. The first of the [paths](#paths)
 
@@ -93,7 +93,7 @@ In the end, `toBatch` creates a [FileBatchWrite](FileBatchWrite.md) (for the Had
 
 ---
 
-`toBatch` is part of the [Write](connector/Write.md#toBatch) abstraction.
+`toBatch` is part of the [Write](../connector/Write.md#toBatch) abstraction.
 
 ### <span id="createWriteJobDescription"> Creating WriteJobDescription
 

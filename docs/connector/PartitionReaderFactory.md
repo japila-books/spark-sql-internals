@@ -55,7 +55,7 @@ Used when:
 ## Implementations
 
 * `ContinuousPartitionReaderFactory`
-* [FilePartitionReaderFactory](../FilePartitionReaderFactory.md)
+* [FilePartitionReaderFactory](../datasources/FilePartitionReaderFactory.md)
 * `KafkaBatchReaderFactory`
 * `MemoryStreamReaderFactory`
 * `RateStreamMicroBatchReaderFactory`

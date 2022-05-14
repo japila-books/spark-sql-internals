@@ -761,6 +761,7 @@ nav:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - Data Sources:
+    - BasicWriteTaskStatsTracker: datasources/BasicWriteTaskStatsTracker.md
     - Noop:
       - Noop Data Source: datasources/noop/index.md
       - NoopDataSource: datasources/noop/NoopDataSource.md
@@ -769,24 +770,34 @@ nav:
       - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
       - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
     - Files:
-      - FileScan: FileScan.md
-      - FilePartitionReaderFactory: FilePartitionReaderFactory.md
-      - FileScanBuilder: FileScanBuilder.md
-      - FileDataSourceV2: FileDataSourceV2.md
-      - HadoopFsRelation: HadoopFsRelation.md
-      - FileIndex:
-        - FileIndex.md
-        - CatalogFileIndex.md
-        - InMemoryFileIndex.md
-        - PartitioningAwareFileIndex.md
-        - PrunedInMemoryFileIndex.md
-      - FileFormatWriter: FileFormatWriter.md
-      - FileWriteBuilder: FileWriteBuilder.md
-      - SQLHadoopMapReduceCommitProtocol: SQLHadoopMapReduceCommitProtocol.md
-      - PartitionedFile: PartitionedFile.md
-      - RecordReaderIterator: RecordReaderIterator.md
+      - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md
+      - BasicWriteTaskStats: datasources/BasicWriteTaskStats.md
+      - FileBatchWrite: datasources/FileBatchWrite.md
+      - FileDataSourceV2: datasources/FileDataSourceV2.md
       - FileFormat: datasources/FileFormat.md
+      - FileFormatDataWriter: datasources/FileFormatDataWriter.md
+      - FileFormatWriter: datasources/FileFormatWriter.md
+      - FileIndex:
+        - datasources/FileIndex.md
+        - datasources/CatalogFileIndex.md
+        - datasources/InMemoryFileIndex.md
+        - datasources/PartitioningAwareFileIndex.md
+        - datasources/PrunedInMemoryFileIndex.md
+      - FilePartition: datasources/FilePartition.md
+      - FilePartitionReaderFactory: datasources/FilePartitionReaderFactory.md
+      - FileScan: datasources/FileScan.md
+      - FileScanBuilder: datasources/FileScanBuilder.md
+      - FileWrite: datasources/FileWrite.md
+      - FileWriterFactory: datasources/FileWriterFactory.md
+      - HadoopFileLinesReader: datasources/HadoopFileLinesReader.md
+      - HadoopFsRelation: datasources/HadoopFsRelation.md
+      - PartitionedFile: datasources/PartitionedFile.md
+      - RecordReaderIterator: datasources/RecordReaderIterator.md
+      - SingleDirectoryDataWriter: datasources/SingleDirectoryDataWriter.md
+      - SQLHadoopMapReduceCommitProtocol: datasources/SQLHadoopMapReduceCommitProtocol.md
       - TextBasedFileFormat: datasources/TextBasedFileFormat.md
+      - WriteJobStatsTracker: datasources/WriteJobStatsTracker.md
+      - WriteTaskStats: datasources/WriteTaskStats.md
     - Kafka:
       - Kafka Data Source: datasources/kafka/index.md
       - Configuration Properties: datasources/kafka/configuration-properties.md
@@ -833,6 +844,7 @@ nav:
     - JSON:
       - JsonFileFormat: datasources/json/JsonFileFormat.md
       - JsonDataSource: datasources/json/JsonDataSource.md
+    - OutputWriter: datasources/OutputWriter.md
     - ORC:
       - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
       - OrcFileFormat: datasources/orc/OrcFileFormat.md
@@ -856,7 +868,7 @@ nav:
       - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
     - Text:
       - TextFileFormat: datasources/text/TextFileFormat.md
-    - OutputWriter: datasources/OutputWriter.md
+    - WriteTaskStatsTracker: datasources/WriteTaskStatsTracker.md
   - High-Level APIs:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
@@ -886,13 +898,7 @@ nav:
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
     - ExplainUtils: ExplainUtils.md
-    - FileWrite: FileWrite.md
-    - FileBatchWrite: FileBatchWrite.md
-    - FileWriterFactory: FileWriterFactory.md
-    - SingleDirectoryDataWriter: SingleDirectoryDataWriter.md
-    - FileFormatDataWriter: FileFormatDataWriter.md
     - PartitionedFileUtil: PartitionedFileUtil.md
-    - FilePartition: FilePartition.md
     - SerializerBuildHelper: SerializerBuildHelper.md
     - SQLExecutionRDD: SQLExecutionRDD.md
     - DataSourceRDD: DataSourceRDD.md
@@ -954,15 +960,6 @@ nav:
       - SQLAppStatusListener: SQLAppStatusListener.md
       - SQLAppStatusPlugin: SQLAppStatusPlugin.md
       - SQLAppStatusStore: SQLAppStatusStore.md
-      - WriteTaskStats:
-        - WriteTaskStats: WriteTaskStats.md
-        - BasicWriteTaskStats: BasicWriteTaskStats.md
-      - WriteTaskStatsTracker:
-        - WriteTaskStatsTracker: WriteTaskStatsTracker.md
-        - BasicWriteTaskStatsTracker: BasicWriteTaskStatsTracker.md
-      - WriteJobStatsTracker:
-        - WriteJobStatsTracker: WriteJobStatsTracker.md
-        - BasicWriteJobStatsTracker: BasicWriteJobStatsTracker.md
       - Logging: spark-logging.md
     - Performance Tuning and Debugging:
       - Debugging Query Execution: debugging-query-execution.md
@@ -986,7 +983,6 @@ nav:
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
-    - HadoopFileLinesReader: HadoopFileLinesReader.md
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
     - SQLContext: SQLContext.md

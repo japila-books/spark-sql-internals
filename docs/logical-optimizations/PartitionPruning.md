@@ -36,7 +36,7 @@ prune(
 
 1. [EqualTo](../expressions/EqualTo.md) join conditions
 
-1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../HadoopFsRelation.md)
+1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../datasources/HadoopFsRelation.md)
 
 1. The join type is one of `Inner`, `LeftSemi`, `RightOuter`, `LeftOuter`
 

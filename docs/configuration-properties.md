@@ -534,7 +534,7 @@ Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to ac
 
 **(internal)** Fully-qualified class name of the `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
 
-Default: [SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md)
+Default: [SQLHadoopMapReduceCommitProtocol](datasources/SQLHadoopMapReduceCommitProtocol.md)
 
 Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
 
@@ -785,7 +785,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.maxConcurrentOutputFileWriters"> spark.sql.maxConcurrentOutputFileWriters
 
-**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
+**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](datasources/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
 
 Default: `0`
 

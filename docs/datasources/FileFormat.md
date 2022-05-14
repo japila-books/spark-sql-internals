@@ -17,7 +17,7 @@ buildReader(
   hadoopConf: Configuration): PartitionedFile => Iterator[InternalRow]
 ```
 
-Builds a Catalyst data reader (a function that reads a single [PartitionedFile](../PartitionedFile.md) file in to produce [InternalRow](../InternalRow.md)s).
+Builds a Catalyst data reader (a function that reads a single [PartitionedFile](PartitionedFile.md) file in to produce [InternalRow](../InternalRow.md)s).
 
 `buildReader` throws an `UnsupportedOperationException` by default (and should therefore be overriden to work):
 
@@ -70,7 +70,7 @@ prepareWrite(
 
 Prepares a write job and returns an `OutputWriterFactory`
 
-Used when `FileFormatWriter` utility is used to [write out a query result](../FileFormatWriter.md#write)
+Used when `FileFormatWriter` utility is used to [write out a query result](FileFormatWriter.md#write)
 
 ### <span id="supportBatch"> supportBatch
 
@@ -144,12 +144,12 @@ buildReaderWithPartitionValues(
 `buildReaderWithPartitionValues` builds a data reader with partition column values appended.
 
 !!! note
-    `buildReaderWithPartitionValues` is simply an enhanced [buildReader](#buildReader) that appends [partition column values](../PartitionedFile.md#partitionValues) to the internal rows produced by the reader function.
+    `buildReaderWithPartitionValues` is simply an enhanced [buildReader](#buildReader) that appends [partition column values](PartitionedFile.md#partitionValues) to the internal rows produced by the reader function.
 
-`buildReaderWithPartitionValues` [builds a data reader](#buildReader) with the input parameters and gives a **data reader function** (of a [PartitionedFile](../PartitionedFile.md) to an `Iterator[InternalRow]`) that does the following:
+`buildReaderWithPartitionValues` [builds a data reader](#buildReader) with the input parameters and gives a **data reader function** (of a [PartitionedFile](PartitionedFile.md) to an `Iterator[InternalRow]`) that does the following:
 
 1. Creates a converter by requesting `GenerateUnsafeProjection` to [generate an UnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md#generate) for the attributes of the input `requiredSchema` and `partitionSchema`
 
-1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](../PartitionedFile.md#partitionValues) appended.
+1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](PartitionedFile.md#partitionValues) appended.
 
 `buildReaderWithPartitionValues` is used when `FileSourceScanExec` physical operator is requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD).

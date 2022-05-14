@@ -1,3 +1,0 @@
-# FileWriteBuilder
-
-`FileWriteBuilder` is...FIXME

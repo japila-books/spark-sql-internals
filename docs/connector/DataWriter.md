@@ -12,7 +12,7 @@ void abort()
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../FileFormatWriter.md#executeTask)
+* `FileFormatWriter` utility is used to [executeTask](../datasources/FileFormatWriter.md#executeTask)
 * `DataWritingSparkTask` utility is used to [process a partition](../DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
@@ -35,7 +35,7 @@ CustomTaskMetric[] currentMetricsValues()
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../FileFormatWriter.md#executeTask)
+* `FileFormatWriter` utility is used to [executeTask](../datasources/FileFormatWriter.md#executeTask)
 * `DataWritingSparkTask` utility is used to [process a partition](../DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
@@ -53,7 +53,7 @@ Used when:
 
 ## Implementations
 
-* [FileFormatDataWriter](../FileFormatDataWriter.md)
+* [FileFormatDataWriter](../datasources/FileFormatDataWriter.md)
 * `ForeachDataWriter` (Spark Structured Streaming)
 * `KafkaDataWriter`
 * `MemoryDataWriter` (Spark Structured Streaming)
