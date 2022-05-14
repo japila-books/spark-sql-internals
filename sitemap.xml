@@ -131,11 +131,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/CreateStruct/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CreateTableWriter/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -177,16 +172,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/DataSourceRegister/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/DataSourceV2Utils/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/DataWritingSparkTask/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -587,11 +572,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/UnsafeRow/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/UserDefinedAggregateFunction/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1256,6 +1236,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/DataSourceV2Utils/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/DataWritingSparkTask/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/FileBatchWrite/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -1871,6 +1861,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/CreateStruct/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/CumeDist/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -2162,6 +2157,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/UnsafeProjection/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/UserDefinedAggregateFunction/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
