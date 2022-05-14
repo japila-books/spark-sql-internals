@@ -636,6 +636,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SingleDirectoryDataWriter/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/SortBasedAggregationIterator/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
