@@ -532,7 +532,7 @@ Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to ac
 
 ## <span id="spark.sql.sources.commitProtocolClass"> spark.sql.sources.commitProtocolClass
 
-**(internal)** Fully-qualified class name of the `FileCommitProtocol`
+**(internal)** Fully-qualified class name of the `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
 
 Default: [SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md)
 

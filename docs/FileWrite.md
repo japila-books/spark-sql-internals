@@ -69,7 +69,7 @@ Used when:
 * [ParquetWrite](datasources/parquet/ParquetWrite.md)
 * `TextWrite`
 
-## <span id="toBatch"> toBatch
+## <span id="toBatch"> Creating BatchWrite
 
 ```scala
 toBatch: BatchWrite
@@ -77,7 +77,7 @@ toBatch: BatchWrite
 
 `toBatch` [validateInputs](#validateInputs).
 
-`toBatch` creates a new `Job` ([Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/Job.html)) for just a single path out of the [paths](#paths).
+`toBatch` creates a new Hadoop [Job]({{ hadoop.api }}/org/apache/hadoop/mapreduce/Job.html) for just a single path out of the [paths](#paths).
 
 `toBatch` creates a `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol)) with the following:
 
@@ -87,15 +87,15 @@ toBatch: BatchWrite
 
 `toBatch` [creates a WriteJobDescription](#createWriteJobDescription).
 
-`toBatch` requests the `FileCommitProtocol` to `setupJob` (with the job instance).
+`toBatch` requests the `FileCommitProtocol` to `setupJob` (with the Hadoop `Job` instance).
 
-In the end, `toBatch` creates a [FileBatchWrite](FileBatchWrite.md) (for the job, the description and the committer).
+In the end, `toBatch` creates a [FileBatchWrite](FileBatchWrite.md) (for the Hadoop `Job`, the `WriteJobDescription` and the `FileCommitProtocol`).
 
 ---
 
 `toBatch` is part of the [Write](connector/Write.md#toBatch) abstraction.
 
-### <span id="createWriteJobDescription"> createWriteJobDescription
+### <span id="createWriteJobDescription"> Creating WriteJobDescription
 
 ```scala
 createWriteJobDescription(

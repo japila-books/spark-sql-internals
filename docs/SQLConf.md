@@ -437,11 +437,11 @@ Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
 [spark.sql.sources.commitProtocolClass](configuration-properties.md#spark.sql.sources.commitProtocolClass)
 
-Used (to instantiate a `FileCommitProtocol`) when:
+Used when:
 
-* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>>
-
-* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* `FileWrite` is requested for a [BatchWrite](FileWrite.md#toBatch)
+* `InsertIntoHadoopFsRelationCommand` logical command is [executed](logical-operators/InsertIntoHadoopFsRelationCommand.md#run)
+* `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
 
 ## <span id="fileCompressionFactor"><span id="FILE_COMPRESSION_FACTOR"> fileCompressionFactor
 

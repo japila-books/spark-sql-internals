@@ -888,6 +888,7 @@ nav:
     - FileWrite: FileWrite.md
     - FileBatchWrite: FileBatchWrite.md
     - FileWriterFactory: FileWriterFactory.md
+    - SingleDirectoryDataWriter: SingleDirectoryDataWriter.md
     - FileFormatDataWriter: FileFormatDataWriter.md
     - PartitionedFileUtil: PartitionedFileUtil.md
     - FilePartition: FilePartition.md
