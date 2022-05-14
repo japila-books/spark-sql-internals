@@ -546,6 +546,14 @@ Default: `false`
 
 Since: `3.0.0`
 
+## <span id="spark.sql.sources.outputCommitterClass"><span id="OUTPUT_COMMITTER_CLASS"> spark.sql.sources.outputCommitterClass
+
+**(internal)** The fully-qualified class name of the user-defined Hadoop [OutputCommitter]({{ hadoop.api }}/org/apache/hadoop/mapreduce/OutputCommitter.html) used by data sources
+
+Default: `undefined`
+
+Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to access the property
+
 ## <span id="spark.sql.sources.validatePartitionColumns"> spark.sql.sources.validatePartitionColumns
 
 **(internal)** When this option is set to true, partition column values will be validated with user-specified schema. If the validation fails, a runtime exception is thrown. When this option is set to false, the partition column value will be converted to null if it can not be casted to corresponding user-specified schema.

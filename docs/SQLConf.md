@@ -433,7 +433,7 @@ The value of [spark.sql.adaptive.fetchShuffleBlocksInBatch](configuration-proper
 
 Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
-## <span id="fileCommitProtocolClass"> fileCommitProtocolClass
+## <span id="fileCommitProtocolClass"><span id="FILE_COMMIT_PROTOCOL_CLASS"> fileCommitProtocolClass
 
 [spark.sql.sources.commitProtocolClass](configuration-properties.md#spark.sql.sources.commitProtocolClass)
 
@@ -764,6 +764,16 @@ Supported values:
 
 * `native` for [OrcFileFormat](datasources/orc/OrcFileFormat.md)
 * `hive` for `org.apache.spark.sql.hive.orc.OrcFileFormat`
+
+## <span id="OUTPUT_COMMITTER_CLASS"> OUTPUT_COMMITTER_CLASS
+
+[spark.sql.sources.outputCommitterClass](configuration-properties.md#spark.sql.sources.outputCommitterClass)
+
+Used when:
+
+* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
+* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
+* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
 
 ## <span id="parallelFileListingInStatsComputation"> parallelFileListingInStatsComputation
 
