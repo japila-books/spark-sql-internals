@@ -31,21 +31,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BasicWriteJobStatsTracker/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BasicWriteTaskStats/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BasicWriteTaskStatsTracker/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/BucketSpec/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -62,11 +47,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/Catalog/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/CatalogFileIndex/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -281,67 +261,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileBatchWrite/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileDataSourceV2/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileFormatDataWriter/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileFormatWriter/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileIndex/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FilePartition/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FilePartitionReaderFactory/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/FileRelation/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileScan/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileScanBuilder/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileWrite/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileWriteBuilder/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/FileWriterFactory/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -366,16 +286,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/HadoopFileLinesReader/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/HadoopFsRelation/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/HintErrorHandler/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -387,11 +297,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/InMemoryCatalog/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/InMemoryFileIndex/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -441,17 +346,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/PartitionedFile/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/PartitionedFileUtil/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/PartitioningAwareFileIndex/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -476,11 +371,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/PrunedInMemoryFileIndex/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/PrunedScan/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -497,11 +387,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/QueryPlanningTracker/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/RecordReaderIterator/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -562,11 +447,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/SQLExecutionRDD/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/SQLHadoopMapReduceCommitProtocol/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -632,11 +512,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/SimpleTableFunctionRegistry/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/SingleDirectoryDataWriter/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -732,21 +607,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/WriteConfigMethods/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/WriteJobStatsTracker/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/WriteTaskStats/</loc>
-         <lastmod>2022-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/WriteTaskStatsTracker/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1376,7 +1236,97 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/BasicWriteJobStatsTracker/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/BasicWriteTaskStats/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/BasicWriteTaskStatsTracker/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/CatalogFileIndex/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileBatchWrite/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileDataSourceV2/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/FileFormat/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileFormatDataWriter/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileFormatWriter/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileIndex/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FilePartition/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FilePartitionReaderFactory/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileScan/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileScanBuilder/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileWrite/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileWriterFactory/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/HadoopFileLinesReader/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/HadoopFsRelation/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/InMemoryFileIndex/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1386,7 +1336,52 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/PartitionedFile/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/PartitioningAwareFileIndex/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/PrunedInMemoryFileIndex/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/RecordReaderIterator/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/SQLHadoopMapReduceCommitProtocol/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/SingleDirectoryDataWriter/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/TextBasedFileFormat/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/WriteJobStatsTracker/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/WriteTaskStats/</loc>
+         <lastmod>2022-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/WriteTaskStatsTracker/</loc>
          <lastmod>2022-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
