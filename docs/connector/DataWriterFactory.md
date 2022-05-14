@@ -1,34 +1,29 @@
 # DataWriterFactory
 
-`DataWriterFactory` is a <<contract, contract>>...FIXME
+`DataWriterFactory` is an [abstraction](#contract) of [DataWriter factories](#implementations).
 
-[[contract]]
-[source, java]
-----
-package org.apache.spark.sql.sources.v2.writer;
+`DataWriterFactory` is `Serializable`.
 
-public interface DataWriterFactory<T> extends Serializable {
-  DataWriter<T> createDataWriter(int partitionId, int attemptNumber);
-}
-----
+## Contract
 
-[NOTE]
-====
-`DataWriterFactory` is an `Evolving` contract that is evolving towards becoming a stable API, but is not a stable API yet and can change from one feature release to another release.
+### <span id="createWriter"> Creating DataWriter
 
-In other words, using the contract is as treading on thin ice.
-====
+```java
+DataWriter<InternalRow> createWriter(
+  int partitionId,
+  long taskId)
+```
 
-.DataWriterFactory Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| [[createDataWriter]] `createDataWriter`
-a| Gives the [DataWriter](DataWriter.md) for a partition ID and attempt number
+Creates a [DataWriter](DataWriter.md) (for the given `partitionId` and `taskId`)
 
 Used when:
 
-* `DataWritingSparkTask` is requested to [run](../DataWritingSparkTask.md#run) and [runContinuous](../DataWritingSparkTask.md#runContinuous)
-|===
+* `DataWritingSparkTask` is requested to [run](../DataWritingSparkTask.md#run)
+
+## Implementations
+
+* [FileWriterFactory](FileWriterFactory.md)
+* `KafkaBatchWriterFactory`
+* `MemoryWriterFactory` (Spark Structured Streaming)
+* `MicroBatchWriterFactory` (Spark Structured Streaming)
+* `NoopWriterFactory`
