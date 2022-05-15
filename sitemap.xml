@@ -1221,6 +1221,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/BaseDynamicPartitionDataWriter/</loc>
+         <lastmod>2022-05-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/BasicWriteJobStatsTracker/</loc>
          <lastmod>2022-05-15</lastmod>
          <changefreq>daily</changefreq>
@@ -1247,6 +1252,16 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/DataWritingSparkTask/</loc>
+         <lastmod>2022-05-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/DynamicPartitionDataConcurrentWriter/</loc>
+         <lastmod>2022-05-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/DynamicPartitionDataSingleWriter/</loc>
          <lastmod>2022-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
