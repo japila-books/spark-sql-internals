@@ -16,7 +16,7 @@ Used when:
 * `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
-### <span id="commit"> Committing Write
+### <span id="commit"> Committing Successful Write
 
 ```java
 WriterCommitMessage commit()

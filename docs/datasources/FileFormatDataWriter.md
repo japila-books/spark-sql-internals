@@ -59,3 +59,21 @@ writeWithIterator(
 `writeWithIterator` is used when:
 
 * `FileFormatWriter` utility is used to [write data out in a single Spark task](FileFormatWriter.md#executeTask)
+
+## <span id="commit"> Committing Successful Write
+
+```scala
+commit(): WriteTaskResult
+```
+
+`commit` [releaseResources](#releaseResources).
+
+`commit` requests the [FileCommitProtocol](#committer) to `commitTask` (that gives a `TaskCommitMessage`).
+
+`commit` creates a new `ExecutedWriteSummary` with the [updatedPartitions](#updatedPartitions) and the [getFinalStats](WriteTaskStatsTracker.md#getFinalStats) of the [WriteTaskStatsTrackers](#statsTrackers).
+
+In the end, `commit` creates a `WriteTaskResult` (for the `TaskCommitMessage` and the `ExecutedWriteSummary`).
+
+---
+
+`commit` is part of the [DataWriter](../connector/DataWriter.md#commit) abstraction.

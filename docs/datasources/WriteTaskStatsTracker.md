@@ -1,66 +1,70 @@
 # WriteTaskStatsTracker
 
-`WriteTaskStatsTracker` is the <<contract, abstraction>> of <<implementations, WriteTaskStatsTrackers>> that collect the statistics of the number of <<newBucket, buckets>>, <<newFile, files>>, <<newPartition, partitions>> and <<newRow, rows>> processed.
+`WriteTaskStatsTracker` is an [abstraction](#contract) of [WriteTaskStatsTrackers](#implementations) that are notified about and can collect the [WriteTaskStats](#getFinalStats) about [files](#newFile), [partitions](#newPartition) and [rows](#newRow) processed.
 
-[[contract]]
-.WriteTaskStatsTracker Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Method
-| Description
+## Contract
 
-| getFinalStats
-a| [[getFinalStats]]
+### <span id="closeFile"> Closing File
 
-[source, scala]
-----
-getFinalStats(): WriteTaskStats
-----
+```scala
+closeFile(
+  filePath: String): Unit
+```
 
-The final [WriteTaskStats](WriteTaskStats.md) statistics computed so far
+Used when:
 
-Used when `EmptyDirectoryWriteTask`, `SingleDirectoryWriteTask` and `DynamicPartitionWriteTask` are requested to execute
+* `FileFormatDataWriter` is requested to [releaseCurrentWriter](FileFormatDataWriter.md#releaseCurrentWriter)
 
-| newBucket
-a| [[newBucket]]
+### <span id="getFinalStats"> WriteTaskStats
 
-[source, scala]
-----
-newBucket(bucketId: Int): Unit
-----
+```scala
+getFinalStats(
+  taskCommitTime: Long): WriteTaskStats
+```
 
-Used when...FIXME
+Creates a [WriteTaskStats](WriteTaskStats.md)
 
-| newFile
-a| [[newFile]]
+Used when:
 
-[source, scala]
-----
-newFile(filePath: String): Unit
-----
+* `FileFormatDataWriter` is requested to [commit a successful write](FileFormatDataWriter.md#commit)
 
-Used when...FIXME
+### <span id="newFile"> New File
 
-| newPartition
-a| [[newPartition]]
+```scala
+newFile(
+  filePath: String): Unit
+```
 
-[source, scala]
-----
-newPartition(partitionValues: InternalRow): Unit
-----
+Used when:
 
-Used when...FIXME
+* `SingleDirectoryDataWriter` is requested to [newOutputWriter](SingleDirectoryDataWriter.md#newOutputWriter)
+* `BaseDynamicPartitionDataWriter` is requested to [renewCurrentWriter](BaseDynamicPartitionDataWriter.md#renewCurrentWriter)
 
-| newRow
-a| [[newRow]]
+### <span id="newPartition"> New Partition
 
-[source, scala]
-----
-newRow(row: InternalRow): Unit
-----
+```scala
+newPartition(
+  partitionValues: InternalRow): Unit
+```
 
-Used when...FIXME
-|===
+Used when:
 
-[[implementations]]
-NOTE: [BasicWriteTaskStatsTracker](BasicWriteTaskStatsTracker.md) is the one and only known implementation of the <<contract, WriteTaskStatsTracker Contract>> in Apache Spark.
+* `DynamicPartitionDataSingleWriter` is requested to [write out a record](DynamicPartitionDataSingleWriter.md#write)
+* `DynamicPartitionDataConcurrentWriter` is requested to [write out a record](DynamicPartitionDataConcurrentWriter.md#write)
+
+### <span id="newRow"> New Row
+
+```scala
+newRow(
+  filePath: String,
+  row: InternalRow): Unit
+```
+
+Used when:
+
+* `SingleDirectoryDataWriter` is requested to [write out a record](SingleDirectoryDataWriter.md#write)
+* `BaseDynamicPartitionDataWriter` is requested to [write out a record](BaseDynamicPartitionDataWriter.md#writeRecord)
+
+## Implementations
+
+* [BasicWriteTaskStatsTracker](BasicWriteTaskStatsTracker.md)

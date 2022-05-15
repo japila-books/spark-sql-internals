@@ -12,7 +12,7 @@
 newTaskInstance(): WriteTaskStatsTracker
 ```
 
-Creates a new `WriteTaskStatsTracker`
+Creates a new [WriteTaskStatsTracker](WriteTaskStatsTracker.md)
 
 Used when:
 
