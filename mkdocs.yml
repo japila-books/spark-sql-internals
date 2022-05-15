@@ -763,6 +763,7 @@ nav:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
   - Data Sources:
+    - datasources/index.md
     - Avro:
       - Avro Data Source: datasources/avro/index.md
       - AvroOptions: datasources/avro/AvroOptions.md

@@ -1,37 +1,21 @@
 # FileRelation
 
-`FileRelation` is the <<contract, contract>> of relations that are backed by files.
+`FileRelation` is an [abstraction](#contract) of [relations](#implementations) that are backed by files.
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.execution
+## Contract
 
-trait FileRelation {
-  def inputFiles: Array[String]
-}
-----
+### <span id="inputFiles"> inputFiles
 
-.FileRelation Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
+```scala
+inputFiles: Array[String]
+```
 
-| [[inputFiles]] `inputFiles`
-|
-The list of files that will be read when scanning the relation.
+The files that this relation will read when scanning
 
-Used exclusively when `Dataset` is requested to Dataset.md#inputFiles[inputFiles]
-|===
+Used when:
 
-[[implementations]]
-.FileRelations
-[cols="1,2",options="header",width="100%"]
-|===
-| FileRelation
-| Description
+* `Dataset` is requested for the [inputFiles](Dataset.md#inputFiles)
 
-| [[HadoopFsRelation]] [HadoopFsRelation](datasources/HadoopFsRelation.md)
-|
-|===
+## Implementations
+
+* [HadoopFsRelation](datasources/HadoopFsRelation.md)
