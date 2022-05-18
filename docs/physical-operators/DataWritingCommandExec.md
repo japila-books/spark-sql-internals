@@ -1,72 +1,53 @@
 # DataWritingCommandExec Physical Operator
 
-`DataWritingCommandExec` is a <<SparkPlan.md#, physical operator>> that is the execution environment for a <<cmd, DataWritingCommand>> logical command at <<doExecute, execution time>>.
+`DataWritingCommandExec` is a [UnaryExecNode](UnaryExecNode.md) that is the execution environment for a [DataWritingCommand](#cmd) logical command at [execution time](#doExecute).
 
-`DataWritingCommandExec` is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is requested to plan a <<DataWritingCommand.md#, DataWritingCommand>> logical command.
+## Creating Instance
 
-[[metrics]]
-When requested for <<SparkPlan.md#metrics, performance metrics>>, `DataWritingCommandExec` simply requests the <<cmd, DataWritingCommand>> for <<DataWritingCommand.md#metrics, them>>.
+`DataWritingCommandExec` takes the following to be created:
 
-[[internal-registries]]
-.DataWritingCommandExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,2",options="header",width="100%"]
-|===
-| Name
-| Description
+* <span id="cmd"> [DataWritingCommand](../logical-operators/DataWritingCommand.md)
+* <span id="child"> Child [SparkPlan](SparkPlan.md)
 
-| sideEffectResult
-| [[sideEffectResult]] [InternalRow](../InternalRow.md)s (`Seq[InternalRow]`) that is the result of executing the [DataWritingCommand](#cmd) (with the [SparkPlan](#child))
+`DataWritingCommandExec` is created when:
 
-Used when `DataWritingCommandExec` is requested to <<executeCollect, executeCollect>>, <<executeToIterator, executeToIterator>>, <<executeTake, executeTake>> and <<doExecute, doExecute>>
-|===
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is requested to plan a [DataWritingCommand](../logical-operators/DataWritingCommand.md) logical command
 
-=== [[creating-instance]] Creating DataWritingCommandExec Instance
+## <span id="metrics"> Performance Metrics
 
-`DataWritingCommandExec` takes the following when created:
+```scala
+metrics: Map[String, SQLMetric]
+```
 
-* [[cmd]] <<DataWritingCommand.md#, DataWritingCommand>>
-* [[child]] Child <<SparkPlan.md#, physical plan>>
+`metrics` requests the [DataWritingCommand](#cmd) for the [metrics](../logical-operators/DataWritingCommand.md#metrics).
 
-=== [[executeCollect]] Executing Physical Operator and Collecting Results -- `executeCollect` Method
+`metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
 
-[source, scala]
-----
-executeCollect(): Array[InternalRow]
-----
+## <span id="sideEffectResult"> sideEffectResult
 
-NOTE: `executeCollect` is part of the <<SparkPlan.md#executeCollect, SparkPlan Contract>> to execute the physical operator and collect results.
+```scala
+sideEffectResult: Seq[InternalRow]
+```
 
-`executeCollect`...FIXME
+??? note "Lazy Value"
+    `sideEffectResult` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
 
-=== [[executeToIterator]] `executeToIterator` Method
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-[source, scala]
-----
-executeToIterator: Iterator[InternalRow]
-----
+`sideEffectResult` requests the [DataWritingCommand](#cmd) to [run](../logical-operators/DataWritingCommand.md#run) (with the [active SparkSession](SparkPlan.md#session) and the [child](#child) logical operator) that produces output [Row](../Row.md)s.
 
-NOTE: `executeToIterator` is part of the <<SparkPlan.md#executeToIterator, SparkPlan Contract>> to...FIXME.
+In the end, `sideEffectResult` [creates a Catalyst converter](../CatalystTypeConverters.md#createToCatalystConverter) (for the [schema](../catalyst/QueryPlan.md#schema)) to convert the output rows.
 
-`executeToIterator`...FIXME
+Used when:
 
-=== [[executeTake]] Taking First N UnsafeRows -- `executeTake` Method
+* `DataWritingCommandExec` is requested to [executeCollect](#executeCollect), [executeToIterator](#executeToIterator), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute)
 
-[source, scala]
-----
-executeTake(limit: Int): Array[InternalRow]
-----
+## <span id="doExecute"> Executing Physical Operator
 
-NOTE: `executeTake` is part of the <<SparkPlan.md#executeTake, SparkPlan Contract>> to take the first n `UnsafeRows`.
-
-`executeTake`...FIXME
-
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
+```scala
 doExecute(): RDD[InternalRow]
-----
+```
+
+`doExecute` requests the [SparkPlan](SparkPlan.md#sparkContext) to `parallelize` the [sideEffectResult](#sideEffectResult) (with `1` partition).
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-`doExecute` simply requests the <<SparkPlan.md#sqlContext, SQLContext>> for the [SparkContext](../SQLContext.md#sparkContext) that is then requested to distribute (`parallelize`) the <<sideEffectResult, sideEffectResult>> (over 1 partition).
