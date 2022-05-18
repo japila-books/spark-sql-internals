@@ -1,123 +1,79 @@
-# DataWritingCommand -- Logical Commands That Write Query Data
+# DataWritingCommand Logical Commands
 
-`DataWritingCommand` is an <<contract, extension>> of the <<Command.md#, Command contract>> for <<implementations, logical commands>> that write the result of executing <<query, query>> (_query data_) to a relation when <<run, executed>>.
-
-`DataWritingCommand` is resolved to a <<DataWritingCommandExec.md#, DataWritingCommandExec>> physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (i.e. plan a <<spark-sql-LogicalPlan.md#, logical plan>> to a <<SparkPlan.md#, physical plan>>).
-
-[[contract]]
-.DataWritingCommand Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Property
-| Description
-
-| outputColumnNames
-a| [[outputColumnNames]]
-
-[source, scala]
-----
-outputColumnNames: Seq[String]
-----
-
-The output column names of the <<query, analyzed input query plan>>
-
-Used when `DataWritingCommand` is requested for the <<outputColumns, outputColumns>>
-
-| query
-a| [[query]]
-
-[source, scala]
-----
-query: LogicalPlan
-----
-
-The analyzed <<spark-sql-LogicalPlan.md#, logical query plan>> representing the data to write (i.e. whose result will be inserted into a relation)
-
-Used when `DataWritingCommand` is requested for the <<children, child nodes>> and <<outputColumns, outputColumns>>.
-
-| run
-a| [[run]]
-
-[source, scala]
-----
-run(
-  sparkSession: SparkSession,
-  child: SparkPlan): Seq[Row]
-----
-
-Executes the command to write query data (the result of executing SparkPlan.md[structured query])
-
-Used when:
-
-* `DataWritingCommandExec` physical operator is requested for the [sideEffectResult](../physical-operators/DataWritingCommandExec.md#sideEffectResult)
-* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md) logical command is executed
-|===
-
-[[children]]
-When requested for the <<Command.md#children, child nodes>>, `DataWritingCommand` simply returns the <<query, logical query plan>>.
-
-[[extensions]]
-.DataWritingCommands (Direct Implementations and Extensions Only)
-[cols="1,2",options="header",width="100%"]
-|===
-| DataWritingCommand
-| Description
-
-| CreateDataSourceTableAsSelectCommand.md[CreateDataSourceTableAsSelectCommand]
-| [[CreateDataSourceTableAsSelectCommand]]
-
-| hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand]
-| [[CreateHiveTableAsSelectCommand]]
-
-| [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
-| [[InsertIntoHadoopFsRelationCommand]]
-
-| hive/SaveAsHiveFile.md[SaveAsHiveFile]
-| [[SaveAsHiveFile]] Commands that write query result as Hive files (i.e. hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and hive/InsertIntoHiveTable.md[InsertIntoHiveTable])
-
-|===
-
-=== [[basicWriteJobStatsTracker]] `basicWriteJobStatsTracker` Method
-
-[source, scala]
-----
-basicWriteJobStatsTracker(hadoopConf: Configuration): BasicWriteJobStatsTracker
-----
-
-`basicWriteJobStatsTracker` simply creates and returns a new [BasicWriteJobStatsTracker](../datasources/BasicWriteJobStatsTracker.md) (with the given Hadoop `Configuration` and the <<metrics, metrics>>).
-
-[NOTE]
-====
-`basicWriteJobStatsTracker` is used when:
-
-* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>> (when hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical commands are executed)
-
-* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical command is executed
-====
-
-=== [[outputColumns]] Output Columns -- `outputColumns` Method
-
-[source, scala]
-----
-outputColumns: Seq[Attribute]
-----
-
-`outputColumns`...FIXME
-
-[NOTE]
-====
-`outputColumns` is used when:
-
-* hive/CreateHiveTableAsSelectCommand.md[CreateHiveTableAsSelectCommand], hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] and [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical commands are executed
-
-* `SaveAsHiveFile` is requested to <<hive/SaveAsHiveFile.md#saveAsHiveFile, saveAsHiveFile>>
-====
+`DataWritingCommand` is an [extension](#contract) of the `UnaryCommand` abstraction for [logical commands](#implementations) that write the result of executing [query](#query) (_query data_) to a relation (when [executed](#run)).
 
 ## <span id="metrics"> Performance Metrics
 
 Key             | Name (in web UI)        | Description
 ----------------|-------------------------|---------
- numFiles   | number of written files   |
+ numFiles       | number of written files |
  numOutputBytes | bytes of written output |
- numOutputRows | number of output rows |
- numParts | number of dynamic part |
+ numOutputRows  | number of output rows   |
+ numParts       | number of dynamic part  |
+ taskCommitTime | task commit time        |
+ jobCommitTime  | job commit time         |
+
+## Contract
+
+### <span id="outputColumnNames"> Output Column Names
+
+```scala
+outputColumnNames: Seq[String]
+```
+
+The names of the output columns of the [analyzed input query plan](#query)
+
+Used when:
+
+* `DataWritingCommand` is requested for the [output columns](#outputColumns)
+
+### <span id="query"> Query
+
+```scala
+query: LogicalPlan
+```
+
+The analyzed [LogicalPlan](LogicalPlan.md) representing the data to write (i.e. whose result will be inserted into a relation)
+
+Used when:
+
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed
+* `DataWritingCommand` is requested for the [child logical operator](#child) and the [output columns](#outputColumns)
+
+### <span id="run"> Executing
+
+```scala
+run(
+  sparkSession: SparkSession,
+  child: SparkPlan): Seq[Row]
+```
+
+Used when:
+
+* `CreateHiveTableAsSelectBase` is requested to `run`
+* [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) physical operator is requested for the [sideEffectResult](../physical-operators/DataWritingCommandExec.md#sideEffectResult)
+
+## Implementations
+
+* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md)
+* `CreateHiveTableAsSelectBase`
+* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
+* [SaveAsHiveFile](../hive/SaveAsHiveFile.md)
+
+## Execution Planning
+
+`DataWritingCommand` is resolved to a [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) physical operator by [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
+
+## <span id="basicWriteJobStatsTracker"> BasicWriteJobStatsTracker
+
+```scala
+basicWriteJobStatsTracker(
+  hadoopConf: Configuration): BasicWriteJobStatsTracker
+```
+
+`basicWriteJobStatsTracker` creates a new [BasicWriteJobStatsTracker](../datasources/BasicWriteJobStatsTracker.md) (with the given Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html) and the [metrics](#metrics)).
+
+`basicWriteJobStatsTracker` is used when:
+
+* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* [SaveAsHiveFile](../hive/SaveAsHiveFile.md) logical command is executed (and requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile))
