@@ -15,7 +15,7 @@ Used when:
 
 * `FileFormatDataWriter` is requested to [releaseCurrentWriter](FileFormatDataWriter.md#releaseCurrentWriter)
 
-### <span id="getFinalStats"> WriteTaskStats
+### <span id="getFinalStats"> Final WriteTaskStats
 
 ```scala
 getFinalStats(

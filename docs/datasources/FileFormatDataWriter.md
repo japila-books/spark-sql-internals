@@ -70,7 +70,7 @@ commit(): WriteTaskResult
 
 `commit` requests the [FileCommitProtocol](#committer) to `commitTask` (that gives a `TaskCommitMessage`).
 
-`commit` creates a new `ExecutedWriteSummary` with the [updatedPartitions](#updatedPartitions) and the [getFinalStats](WriteTaskStatsTracker.md#getFinalStats) of the [WriteTaskStatsTrackers](#statsTrackers).
+`commit` creates a new `ExecutedWriteSummary` with the [updatedPartitions](#updatedPartitions) and the [WriteTaskStats](WriteTaskStatsTracker.md#getFinalStats) of the [WriteTaskStatsTrackers](#statsTrackers).
 
 In the end, `commit` creates a `WriteTaskResult` (for the `TaskCommitMessage` and the `ExecutedWriteSummary`).
 
