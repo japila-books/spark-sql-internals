@@ -19,7 +19,7 @@ numPartitions: Int
 ## Implementations
 
 * [Repartition](#Repartition)
-* [RepartitionByExpression](#RepartitionByExpression)
+* [RepartitionByExpression](RepartitionByExpression.md)
 
 ## Logical Optimizations
 
@@ -60,52 +60,6 @@ output: Seq[Attribute]
 
 * [coalesce](../catalyst-dsl/index.md#coalesce) (with [shuffle](#shuffle) disabled)
 * [repartition](../catalyst-dsl/index.md#repartition) (with [shuffle](#shuffle) enabled)
-
-## <span id="RepartitionByExpression"> RepartitionByExpression Logical Operator
-
-`RepartitionByExpression` is a concrete [RepartitionOperation](RepartitionOperation.md) that takes the following to be created:
-
-* <span id="RepartitionByExpression-partitionExpressions"> [Partition Expressions](../expressions/Expression.md)
-* <span id="RepartitionByExpression-child"> [Child Logical Plan](LogicalPlan.md)
-* <span id="RepartitionByExpression-numPartitions"> Number of Partitions (must be positive)
-
-`RepartitionByExpression` is also called **distribute** operator.
-
-`RepartitionByExpression` is created for the following:
-
-* [Dataset.repartition](../Dataset.md#repartition) and [Dataset.repartitionByRange](../Dataset.md#repartitionByRange) operators
-* `COALESCE`, `REPARTITION` and `REPARTITION_BY_RANGE` hints (via [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical analysis rule)
-* `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses (via [SparkSqlAstBuilder](../sql/SparkSqlAstBuilder.md#withRepartitionByExpression))
-
-`RepartitionByExpression` is planned to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operator.
-
-### <span id="RepartitionByExpression-catalyst-dsl"> Catalyst DSL
-
-[Catalyst DSL](../catalyst-dsl/index.md) defines [distribute](../catalyst-dsl/index.md#distribute) operator to create `RepartitionByExpression` logical operators.
-
-### <span id="RepartitionByExpression-partitioning"> Partitioning
-
-`RepartitionByExpression` determines a [Partitioning](../physical-operators/Partitioning.md) when created.
-
-### <span id="RepartitionByExpression-maxRows"> Maximum Number of Rows
-
-```scala
-maxRows: Option[Long]
-```
-
-`maxRows` simply requests the [child](LogicalPlan.md#UnaryNode) logical operator for the [maximum number of rows](LogicalPlan.md#maxRows).
-
-`maxRows` is part of the [LogicalPlan](LogicalPlan.md#maxRows) abstraction.
-
-### <span id="RepartitionByExpression-shuffle"> shuffle
-
-```scala
-shuffle: Boolean
-```
-
-`shuffle` is always `true`.
-
-`shuffle` is part of the [RepartitionOperation](RepartitionOperation.md#shuffle) abstraction.
 
 ## Demo
 

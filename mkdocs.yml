@@ -285,6 +285,7 @@ nav:
       - Project: logical-operators/Project.md
       - RebalancePartitions: logical-operators/RebalancePartitions.md
       - RepairTableStatement: logical-operators/RepairTableStatement.md
+      - RepartitionByExpression: logical-operators/RepartitionByExpression.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
       - ResolvedHint: logical-operators/ResolvedHint.md
       - ResolvedTable: logical-operators/ResolvedTable.md

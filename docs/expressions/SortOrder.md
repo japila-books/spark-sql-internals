@@ -15,7 +15,7 @@
 * <span id="nullOrdering"> [NullOrdering](#NullOrdering)
 * <span id="sameOrderExpressions"> "Same Order" [Expression](Expression.md)s
 
-## <span id="SortDirection"> SortDirection
+## <span id="SortDirection"><span id="Ascending"><span id="Descending"> SortDirection
 
 SortDirection | Default Null Ordering | SQL
 --------------|-----------------------|---------

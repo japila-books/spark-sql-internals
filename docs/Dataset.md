@@ -4,8 +4,6 @@
 
 `Dataset` is created using [SQL](sql/index.md) or [Dataset](spark-sql-dataset-operators.md) high-level declarative "languages".
 
-The following figure shows the relationship of low-level entities of Spark SQL that all together build up the `Dataset` data structure.
-
 ![Dataset's Internals](images/spark-sql-Dataset.png)
 
 It is fair to say that `Dataset` is a Spark SQL developer-friendly layer over the following two low-level entities:
@@ -43,6 +41,37 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
+
+## <span id="repartitionByRange"> repartitionByRange
+
+```scala
+repartitionByRange(
+  partitionExprs: Column*): Dataset[T]
+repartitionByRange(
+  numPartitions: Int,
+  partitionExprs: Column*): Dataset[T]
+repartitionByRange(
+    numPartitions: Option[Int],
+    partitionExprs: Seq[Column]): Dataset[T] // (1)!
+```
+
+1. A private method
+
+`repartitionByRange` creates [SortOrder](expressions/SortOrder.md)s with [Ascending](expressions/SortOrder.md#Ascending) sorting direction for the given `partitionExprs` with no sorting specified.
+
+In the end, `repartitionByRange` creates a [Dataset](#apply) with a [RepartitionByExpression](logical-operators//RepartitionByExpression.md) (with the `SortOrder`s, the [logicalPlan](#logicalPlan) and the given `numPartitions`).
+
+### <span id="repartitionByRange-example"> Example
+
+```scala
+val nums = spark.range(10).repartitionByRange($"id".asc)
+```
+
+```text
+scala> println(nums.queryExecution.logical.numberedTreeString)
+00 'RepartitionByExpression ['id ASC NULLS FIRST]
+01 +- Range (0, 10, step=1, splits=Some(16))
+```
 
 ## <span id="logicalPlan"> LogicalPlan
 
@@ -133,6 +162,44 @@ collectToPython(): Array[Any]
 `collectToPython` is used when:
 
 * `DataFrame` (PySpark) is requested to `collect`
+
+## <span id="withTypedPlan"> withTypedPlan
+
+```scala
+withTypedPlan[U : Encoder](
+  logicalPlan: LogicalPlan): Dataset[U]
+```
+
+??? note "Final Method"
+    `withTypedPlan` is annotated with [@inline](https://www.scala-lang.org/api/current/scala/inline.html) annotation that requests the Scala compiler to try especially hard to inline it
+
+`withTypedPlan`...FIXME
+
+## <span id="withSetOperator"> withSetOperator
+
+```scala
+withSetOperator[U: Encoder](
+  logicalPlan: LogicalPlan): Dataset[U]
+```
+
+??? note "Final Method"
+    `withSetOperator` is annotated with [@inline](https://www.scala-lang.org/api/current/scala/inline.html) annotation that requests the Scala compiler to try especially hard to inline it
+
+`withSetOperator`...FIXME
+
+## <span id="apply"> apply
+
+```scala
+apply[T: Encoder](
+  sparkSession: SparkSession,
+  logicalPlan: LogicalPlan): Dataset[T]
+```
+
+`apply`...FIXME
+
+`apply` is used when:
+
+* `Dataset` is requested to [withTypedPlan](#withTypedPlan) and [withSetOperator](#withSetOperator)
 
 ## Review Me
 
@@ -434,26 +501,6 @@ NOTE: `withAction` uses <<sparkSession, SparkSession>> to access SparkSession.md
 * Dataset operators: <<spark-sql-dataset-operators.md#collect, collect>>, <<spark-sql-dataset-operators.md#count, count>>, <<spark-sql-dataset-operators.md#head, head>> and <<spark-sql-dataset-operators.md#toLocalIterator, toLocalIterator>>
 ====
 
-=== [[apply]] Creating Dataset Instance (For LogicalPlan and SparkSession) -- `apply` Internal Factory Method
-
-[source, scala]
-----
-apply[T: Encoder](sparkSession: SparkSession, logicalPlan: LogicalPlan): Dataset[T]
-----
-
-NOTE: `apply` is part of `Dataset` Scala object that is marked as a `private[sql]` and so can only be accessed from code in `org.apache.spark.sql` package.
-
-`apply`...FIXME
-
-[NOTE]
-====
-`apply` is used when:
-
-* `Dataset` is requested to execute <<withTypedPlan, typed transformations>> and <<withSetOperator, set-based typed transformations>>
-
-* Spark Structured Streaming's `MemoryStream` is requested to `toDS`
-====
-
 === [[collectFromPlan]] Collecting All Rows From Spark Plan -- `collectFromPlan` Internal Method
 
 [source, scala]
@@ -475,33 +522,6 @@ selectUntyped(columns: TypedColumn[_, _]*): Dataset[_]
 `selectUntyped`...FIXME
 
 NOTE: `selectUntyped` is used exclusively when <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>> typed transformation is used.
-
-=== [[withTypedPlan]] Helper Method for Typed Transformations -- `withTypedPlan` Internal Method
-
-[source, scala]
-----
-withTypedPlan[U: Encoder](logicalPlan: LogicalPlan): Dataset[U]
-----
-
-`withTypedPlan`...FIXME
-
-NOTE: `withTypedPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
-
-NOTE: `withTypedPlan` is used in the `Dataset` <<spark-sql-Dataset-typed-transformations.md#, typed transformations>>, i.e. <<spark-sql-Dataset-typed-transformations.md#withWatermark, withWatermark>>, <<spark-sql-Dataset-typed-transformations.md#joinWith, joinWith>>, <<spark-sql-Dataset-typed-transformations.md#hint, hint>>, <<spark-sql-Dataset-typed-transformations.md#as, as>>, <<spark-sql-Dataset-typed-transformations.md#filter, filter>>, <<spark-sql-Dataset-typed-transformations.md#limit, limit>>, <<spark-sql-Dataset-typed-transformations.md#sample, sample>>, <<spark-sql-Dataset-typed-transformations.md#dropDuplicates, dropDuplicates>>, <<spark-sql-Dataset-typed-transformations.md#filter, filter>>, <<spark-sql-Dataset-typed-transformations.md#map, map>>, <<spark-sql-Dataset-typed-transformations.md#repartition, repartition>>, <<spark-sql-Dataset-typed-transformations.md#repartitionByRange, repartitionByRange>>, <<spark-sql-Dataset-typed-transformations.md#coalesce, coalesce>> and <<spark-sql-Dataset-typed-transformations.md#sort, sort>> with <<spark-sql-Dataset-typed-transformations.md#sortWithinPartitions, sortWithinPartitions>> (through the <<sortInternal, sortInternal>> internal method).
-
-=== [[withSetOperator]] Helper Method for Set-Based Typed Transformations -- `withSetOperator` Internal Method
-
-[source, scala]
-----
-withSetOperator[U: Encoder](
-  logicalPlan: LogicalPlan): Dataset[U]
-----
-
-`withSetOperator`...FIXME
-
-NOTE: `withSetOperator` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
-
-NOTE: `withSetOperator` is used for the spark-sql-Dataset-typed-transformations.md[Dataset's typed transformations] (i.e. spark-sql-Dataset-typed-transformations.md#union[union], spark-sql-Dataset-typed-transformations.md#unionByName[unionByName], spark-sql-Dataset-typed-transformations.md#intersect[intersect], spark-sql-Dataset-typed-transformations.md#intersectAll[intersectAll], spark-sql-Dataset-typed-transformations.md#except[except] and spark-sql-Dataset-typed-transformations.md#exceptAll[exceptAll]).
 
 === [[sortInternal]] `sortInternal` Internal Method
 
