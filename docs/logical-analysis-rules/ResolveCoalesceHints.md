@@ -7,7 +7,7 @@ Hint Name | Arguments | Logical Operator
  `COALESCE` | Number of partitions | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` off / `false`)
  `REBALANCE` | | [RebalancePartitions](../logical-operators/RebalancePartitions.md)
  `REPARTITION` | Number of partitions alone or like `REPARTITION_BY_RANGE` | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` on / `true`)
- `REPARTITION_BY_RANGE` | Column names with an optional number of partitions (default: [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property) | [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression)
+ `REPARTITION_BY_RANGE` | Column names with an optional number of partitions (default: [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property) | [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)
 
 `ResolveCoalesceHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -56,7 +56,7 @@ createRepartition(
   hint: UnresolvedHint): LogicalPlan
 ```
 
-`createRepartition` handles `COALESCE` and `REPARTITION` hints (and creates [Repartition](../logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators).
+`createRepartition` handles `COALESCE` and `REPARTITION` hints (and creates [Repartition](../logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) logical operators).
 
 ### <span id="createRepartitionByRange"> createRepartitionByRange
 
@@ -65,7 +65,7 @@ createRepartitionByRange(
   hint: UnresolvedHint): RepartitionByExpression
 ```
 
-`createRepartitionByRange` creates a [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
+`createRepartitionByRange` creates a [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) logical operator.
 
 ## Examples
 

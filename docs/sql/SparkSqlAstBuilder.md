@@ -215,7 +215,7 @@ TRUNCATE TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 
 ANTLR labeled alternative: `#truncateTable`
 
-## <span id="withRepartitionByExpression"> withRepartitionByExpression Method
+## <span id="withRepartitionByExpression"> withRepartitionByExpression
 
 ```scala
 withRepartitionByExpression(
@@ -224,6 +224,6 @@ withRepartitionByExpression(
   query: LogicalPlan): LogicalPlan
 ```
 
-`withRepartitionByExpression` creates a [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator (with the [number of partitions](../logical-operators/RepartitionOperation.md#RepartitionByExpression-numPartitions) based on [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property)
+`withRepartitionByExpression` creates a [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) logical operator (with undefined [number of partitions](../logical-operators/RepartitionByExpression.md#numPartitions)).
 
 `withRepartitionByExpression` is part of [AstBuilder](AstBuilder.md#withRepartitionByExpression) abstraction.

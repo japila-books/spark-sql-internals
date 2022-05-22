@@ -13,8 +13,8 @@
 `ShuffleExchangeExec` is created when:
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed and plans the following:
-    * [Repartition](../logical-operators/RepartitionOperation.md#Repartition) with the [shuffle](../logical-operators/RepartitionOperation.md#shuffle) flag enabled
-    * [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression)
+  * [Repartition](../logical-operators/Repartition.md) with the [shuffle](../logical-operators/Repartition.md#shuffle) flag enabled
+  * [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 ## <span id="nodeName"> Node Name

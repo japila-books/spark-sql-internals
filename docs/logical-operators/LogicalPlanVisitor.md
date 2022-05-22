@@ -77,7 +77,7 @@ The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per cost-based-
 | [[Repartition]] [Repartition](RepartitionOperation.md#Repartition)
 | `visitRepartition`
 
-| [[RepartitionByExpression]] [RepartitionByExpression](RepartitionOperation.md#RepartitionByExpression)
+| [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)
 | `visitRepartitionByExpr`
 
 | [[ResolvedHint]] ResolvedHint.md[ResolvedHint]

@@ -22,15 +22,15 @@
 
 `RepartitionByExpression` is planned to [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operator.
 
-### <span id="catalyst-dsl"> Catalyst DSL
+## <span id="catalyst-dsl"> Catalyst DSL
 
 [Catalyst DSL](../catalyst-dsl/index.md) defines [distribute](../catalyst-dsl/index.md#distribute) operator to create `RepartitionByExpression` logical operators.
 
-### <span id="partitioning"> Partitioning
+## <span id="partitioning"> Partitioning
 
 `RepartitionByExpression` determines a [Partitioning](../physical-operators/Partitioning.md) when [created](#creating-instance).
 
-### <span id="maxRows"> Maximum Number of Rows
+## <span id="maxRows"> Maximum Number of Rows
 
 ```scala
 maxRows: Option[Long]
@@ -40,7 +40,7 @@ maxRows: Option[Long]
 
 `maxRows` is part of the [LogicalPlan](LogicalPlan.md#maxRows) abstraction.
 
-### <span id="shuffle"> shuffle
+## <span id="shuffle"> shuffle
 
 ```scala
 shuffle: Boolean

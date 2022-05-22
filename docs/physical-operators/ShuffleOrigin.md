@@ -37,7 +37,7 @@ Used to create a [ShuffleExchangeExec](ShuffleExchangeExec.md) physical operator
 
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed to plan the following logical operators:
 
-    * [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) with the partition expressions defined
+  * [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) with the partition expressions defined
 
 * [WithCTEStrategy](../execution-planning-strategies/WithCTEStrategy.md) execution planning strategy is executed to plan the following logical operators:
 
@@ -56,4 +56,4 @@ Used to create a [ShuffleExchangeExec](ShuffleExchangeExec.md) physical operator
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed to plan the following logical operators:
 
     * [Repartition](../logical-operators/RepartitionOperation.md#Repartition) with `shuffle` enabled
-    * [RepartitionByExpression](../logical-operators/RepartitionOperation.md#RepartitionByExpression) with the number of partitions defined
+    * [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) with the number of partitions defined

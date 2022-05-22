@@ -42,6 +42,65 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
+## <span id="repartition"> repartition
+
+```scala
+repartition(
+  partitionExprs: Column*): Dataset[T] // (1)!
+repartition(
+  numPartitions: Int): Dataset[T] // (2)!
+repartition(
+  numPartitions: Int,
+  partitionExprs: Column*): Dataset[T]  // (3)!
+```
+
+1. An alias of [repartitionByExpression](#repartitionByExpression) with undefined `numPartitions`
+1. Creates a [Repartition](logical-operators/Repartition.md) logical operator with `shuffle` enabled
+1. An alias of [repartitionByExpression](#repartitionByExpression)
+
+### <span id="repartitionByExpression"> repartitionByExpression
+
+```scala
+repartitionByExpression(
+  numPartitions: Option[Int],
+  partitionExprs: Seq[Column]): Dataset[T]
+```
+
+`repartitionByExpression` [withTypedPlan](#withTypedPlan) with a new [RepartitionByExpression](logical-operators/RepartitionByExpression.md) (with the given `numPartitions` and `partitionExprs`, and the [logicalPlan](#logicalPlan)).
+
+### <span id="repartition-example"> Example: Number of Partitions Only
+
+```scala
+val numsRepd = nums.repartition(numPartitions = 4)
+```
+
+```scala
+assert(numsRepd.rdd.getNumPartitions == 4, "Number of partitions should be 4")
+```
+
+```text
+scala> numsRepd.explain(extended = true)
+== Parsed Logical Plan ==
+Repartition 4, true
++- RepartitionByExpression [id#4L ASC NULLS FIRST]
+   +- Range (0, 10, step=1, splits=Some(16))
+
+== Analyzed Logical Plan ==
+id: bigint
+Repartition 4, true
++- RepartitionByExpression [id#4L ASC NULLS FIRST]
+   +- Range (0, 10, step=1, splits=Some(16))
+
+== Optimized Logical Plan ==
+Repartition 4, true
++- Range (0, 10, step=1, splits=Some(16))
+
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- Exchange RoundRobinPartitioning(4), REPARTITION_BY_NUM, [id=#75]
+   +- Range (0, 10, step=1, splits=16)
+```
+
 ## <span id="repartitionByRange"> repartitionByRange
 
 ```scala
@@ -57,11 +116,11 @@ repartitionByRange(
 
 1. A private method
 
-`repartitionByRange` creates [SortOrder](expressions/SortOrder.md)s with [Ascending](expressions/SortOrder.md#Ascending) sorting direction for the given `partitionExprs` with no sorting specified.
+`repartitionByRange` creates a [SortOrder](expressions/SortOrder.md)s with [Ascending](expressions/SortOrder.md#Ascending) sorting direction (_ascending nulls first_) for the given `partitionExprs` with no sorting specified.
 
-In the end, `repartitionByRange` creates a [Dataset](#apply) with a [RepartitionByExpression](logical-operators//RepartitionByExpression.md) (with the `SortOrder`s, the [logicalPlan](#logicalPlan) and the given `numPartitions`).
+In the end, `repartitionByRange` creates a [Dataset](#apply) with a [RepartitionByExpression](logical-operators/RepartitionByExpression.md) (with the `SortOrder`s, the [logicalPlan](#logicalPlan) and the given `numPartitions`).
 
-### <span id="repartitionByRange-example"> Example
+### <span id="repartitionByRange-example"> Example: Partition Expressions Only
 
 ```scala
 val nums = spark.range(10).repartitionByRange($"id".asc)
@@ -71,6 +130,51 @@ val nums = spark.range(10).repartitionByRange($"id".asc)
 scala> println(nums.queryExecution.logical.numberedTreeString)
 00 'RepartitionByExpression ['id ASC NULLS FIRST]
 01 +- Range (0, 10, step=1, splits=Some(16))
+```
+
+!!! note
+    Adaptive Query Execution is enabled.
+
+```text
+scala> println(nums.queryExecution.toRdd.getNumPartitions)
+1
+```
+
+```text
+scala> println(nums.queryExecution.toRdd.toDebugString)
+(1) SQLExecutionRDD[17] at toRdd at <console>:24 []
+ |  ShuffledRowRDD[16] at toRdd at <console>:24 []
+ +-(16) MapPartitionsRDD[15] at toRdd at <console>:24 []
+    |   MapPartitionsRDD[11] at toRdd at <console>:24 []
+    |   MapPartitionsRDD[10] at toRdd at <console>:24 []
+    |   ParallelCollectionRDD[9] at toRdd at <console>:24 []
+```
+
+### <span id="repartitionByRange-example-numPartitions"> Example: Number of Partitions and Partition Expressions
+
+```text
+val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
+```
+
+```text
+scala> println(q.queryExecution.logical.numberedTreeString)
+00 'RepartitionByExpression ['id ASC NULLS FIRST], 5
+01 +- Range (0, 10, step=1, splits=Some(16))
+```
+
+```text
+scala> println(q.queryExecution.toRdd.getNumPartitions)
+5
+```
+
+```text
+scala> println(q.queryExecution.toRdd.toDebugString)
+(5) SQLExecutionRDD[8] at toRdd at <console>:24 []
+ |  ShuffledRowRDD[7] at toRdd at <console>:24 []
+ +-(16) MapPartitionsRDD[6] at toRdd at <console>:24 []
+    |   MapPartitionsRDD[2] at toRdd at <console>:24 []
+    |   MapPartitionsRDD[1] at toRdd at <console>:24 []
+    |   ParallelCollectionRDD[0] at toRdd at <console>:24 []
 ```
 
 ## <span id="logicalPlan"> LogicalPlan

@@ -145,7 +145,7 @@ repartition(numPartitions: Int, partitionExprs: Column*): Dataset[T]
 
 `repartition` operators repartition the `Dataset` to exactly `numPartitions` partitions or using `partitionExprs` expressions.
 
-`repartition` creates a [Repartition](logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
+`repartition` creates a [Repartition](logical-operators/RepartitionOperation.md#Repartition) or [RepartitionByExpression](logical-operators/RepartitionByExpression.md) logical operators with `shuffle` enabled (which is `true` in the below ``explain``'s output beside `Repartition`).
 
 ```text
 scala> spark.range(5).repartition(1).explain(extended = true)
@@ -168,45 +168,6 @@ Exchange RoundRobinPartitioning(1)
 ```
 
 NOTE: `repartition` methods correspond to SQL's spark-sql-SparkSqlAstBuilder.md#withRepartitionByExpression[DISTRIBUTE BY or CLUSTER BY clauses].
-
-=== [[repartitionByRange]] `repartitionByRange` Typed Transformation
-
-[source, scala]
-----
-repartitionByRange(partitionExprs: Column*): Dataset[T] // <1>
-repartitionByRange(numPartitions: Int, partitionExprs: Column*): Dataset[T]
-----
-<1> Uses [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property for the number of partitions to use
-
-`repartitionByRange` simply <<Dataset.md#withTypedPlan, creates a Dataset>> with a [RepartitionByExpression](logical-operators/RepartitionOperation.md#RepartitionByExpression) logical operator.
-
-```text
-val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
-scala> println(q.queryExecution.logical.numberedTreeString)
-00 'RepartitionByExpression ['id ASC NULLS FIRST], 5
-01 +- AnalysisBarrier
-02       +- Range (0, 10, step=1, splits=Some(8))
-
-scala> println(q.queryExecution.toRdd.getNumPartitions)
-5
-
-scala> println(q.queryExecution.toRdd.toDebugString)
-(5) ShuffledRowRDD[18] at toRdd at <console>:26 []
- +-(8) MapPartitionsRDD[17] at toRdd at <console>:26 []
-    |  MapPartitionsRDD[13] at toRdd at <console>:26 []
-    |  MapPartitionsRDD[12] at toRdd at <console>:26 []
-    |  ParallelCollectionRDD[11] at toRdd at <console>:26 []
-```
-
-`repartitionByRange` uses a `SortOrder` with the `Ascending` sort order, i.e. _ascending nulls first_, when no explicit sort order is specified.
-
----
-
-`repartitionByRange` throws a `IllegalArgumentException` when no `partitionExprs` partition-by expression is specified.
-
-```text
-requirement failed: At least one partition-by expression must be specified.
-```
 
 === [[sortWithinPartitions]] `sortWithinPartitions` Typed Transformation
 
