@@ -96,6 +96,7 @@ extra:
     api: https://hive.apache.org/javadocs/r2.3.9/api
   java:
     api: https://docs.oracle.com/en/java/javase/11/docs/api/java.base
+    spec: https://docs.oracle.com/javase/specs/jls/se11/html
   kafka:
     api: https://kafka.apache.org/28/javadoc
   scala:
@@ -221,6 +222,7 @@ nav:
       - Aggregate: logical-operators/Aggregate.md
       - AlterTable: logical-operators/AlterTable.md
       - AlterTableAddColumnsCommand: logical-operators/AlterTableAddColumnsCommand.md
+      - AlterTableCommand: logical-operators/AlterTableCommand.md
       - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
       - AnalyzeColumn: logical-operators/AnalyzeColumn.md
       - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md

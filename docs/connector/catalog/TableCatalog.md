@@ -12,7 +12,7 @@ Table alterTable(
   TableChange... changes)
 ```
 
-[TableChange](TableChange.md)s to alter a table
+Changes (_alters_) a table based on the given [TableChange](TableChange.md)s
 
 Used when:
 

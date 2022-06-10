@@ -347,6 +347,17 @@ Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause
 
 ANTLR rule: `relation`
 
+### <span id="visitRenameTableColumn"> visitRenameTableColumn
+
+Creates a [RenameColumn](../logical-operators/AlterTableCommand.md#RenameColumn) for the following SQL statement:
+
+```text
+ALTER TABLE table
+RENAME COLUMN from TO to
+```
+
+ANTLR labeled alternative: `#renameTableColumn`
+
 ### <span id="visitRepairTable"> visitRepairTable
 
 Creates a [RepairTableStatement](../logical-operators/RepairTableStatement.md) for the following SQL statement:
