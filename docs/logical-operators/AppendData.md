@@ -1,43 +1,63 @@
 # AppendData Logical Command
 
-`AppendData` is a <<spark-sql-LogicalPlan.md#, logical operator>> that represents appending data (the result of executing a <<query, structured query>>) to a <<table, table>> (with the <<isByName, columns matching>> by <<byName, name>> or <<byPosition, position>>) in [DataSource V2](../new-and-noteworthy/datasource-v2.md).
+`AppendData` is a [V2WriteCommand](V2WriteCommand.md) that represents appending data (the result of executing a [structured query](#query)) to a [table](#table) (with the [columns matching](#isByName) by [name](#byName) or [position](#byPosition)).
 
-`AppendData` is <<creating-instance, created>> (indirectly via <<byName, byName>> or <<byPosition, byPosition>> factory methods) only for tests.
+!!! note
+    `AppendData` has replaced the deprecated [WriteToDataSourceV2](WriteToDataSourceV2.md) logical operator.
 
-NOTE: `AppendData` has replaced the deprecated <<WriteToDataSourceV2.md#, WriteToDataSourceV2>> logical operator.
+## Creating Instance
 
-[[creating-instance]]
 `AppendData` takes the following to be created:
 
-* [[table]] `NamedRelation` for the table (to append data to)
-* [[query]] <<spark-sql-LogicalPlan.md#, Logical operator>> (for the query)
-* [[isByName]] `isByName` flag
+* <span id="table"> [NamedRelation](NamedRelation.md) for the table (to append data to)
+* <span id="query"> Query ([LogicalPlan](LogicalPlan.md))
+* <span id="writeOptions"> Write Options (`Map[String, String]`)
+* [isByName](#isByName) flag
+* <span id="write"> [Write](../connector/Write.md)
 
-[[children]]
-`AppendData` has a [single child logical operator](../catalyst/TreeNode.md#children) that is exactly the <<query, logical operator>>.
+`AppendData` is created using [byName](#byName) and [byPosition](#byPosition) operators.
 
-`AppendData` is resolved by [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical resolution rule.
+## <span id="isByName"> isByName flag
 
-`AppendData` is planned (_replaced_) to <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when the <<table, table>> is a <<DataSourceV2Relation.md#, DataSourceV2Relation>> logical operator).
+`AppendData` is given `isByName` flag when [created](#creating-instance).
 
-=== [[byName]] `byName` Factory Method
+`isByName` is part of the [V2WriteCommand](V2WriteCommand.md#isByName) abstraction.
 
-[source, scala]
-----
-byName(table: NamedRelation, df: LogicalPlan): AppendData
-----
+## <span id="byName"> byName
 
-`byName` simply creates a <<AppendData, AppendData>> logical operator with the <<isByName, isByName>> flag on (`true`).
+```scala
+byName(
+  table: NamedRelation,
+  df: LogicalPlan,
+  writeOptions: Map[String, String] = Map.empty): AppendData
+```
 
-NOTE: `byName` seems used only for tests.
+`byName` creates a [AppendData](#creating-instance) with the [isByName](#isByName) flag enabled (`true`).
 
-=== [[byPosition]] `byPosition` Factory Method
+`byName` is used when:
 
-[source, scala]
-----
-byPosition(table: NamedRelation, query: LogicalPlan): AppendData
-----
+* `DataFrameWriter` is requested to [saveInternal](../DataFrameWriter.md#saveInternal) (with `SaveMode.Append` mode) and [saveAsTable](../DataFrameWriter.md#saveAsTable) (with `SaveMode.Append` mode)
+* `DataFrameWriterV2` is requested to [append](../DataFrameWriterV2.md#append)
 
-`byPosition` simply creates a <<AppendData, AppendData>> logical operator with the <<isByName, isByName>> flag off (`false`).
+## <span id="byPosition"> byPosition
 
-NOTE: `byPosition` seems used only for tests.
+```scala
+byPosition(
+  table: NamedRelation,
+  query: LogicalPlan,
+  writeOptions: Map[String, String] = Map.empty): AppendData
+```
+
+`byPosition` creates a [AppendData](#creating-instance) with the [isByName](#isByName) flag disabled (`false`).
+
+`byPosition` is used when:
+
+* [ResolveInsertInto](../logical-analysis-rules/ResolveInsertInto.md) logical resolution rule is executed
+* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto)
+
+## Query Planning
+
+`AppendData` is planned to one of the physical operators in [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy:
+
+* `AppendDataExecV1`
+* `AppendDataExec`

@@ -1,6 +1,6 @@
 # ResolveInsertInto Logical Resolution Rule
 
-`ResolveInsertInto` is a logical rule (`Rule[LogicalPlan]`).
+`ResolveInsertInto` is a logical resolution rule (`Rule[LogicalPlan]`).
 
 `ResolveInsertInto` is part of [Resolution](../Analyzer.md#Resolution) batch of [Logical Analyzer](../Analyzer.md).
 
