@@ -8,7 +8,7 @@
 
 `ResolveInsertInto` takes no parameters to be created.
 
-`ResolveInsertInto` is created when `Analyzer` is requested for [batches](../Analyzer.md#batches).
+`ResolveInsertInto` is created when `Analyzer` is requested for the [batches](../Analyzer.md#batches).
 
 ## <span id="apply"> Executing Rule
 

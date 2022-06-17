@@ -17,9 +17,12 @@
 
 `AppendData` is created using [byName](#byName) and [byPosition](#byPosition) operators.
 
-## <span id="isByName"> isByName flag
+### <span id="isByName"> isByName flag
 
-`AppendData` is given `isByName` flag when [created](#creating-instance).
+`AppendData` is given `isByName` flag when [created](#creating-instance):
+
+* [byName](#byName) with the flag enabled (`true`)
+* [byPosition](#byPosition) with the flag disabled (`false`)
 
 `isByName` is part of the [V2WriteCommand](V2WriteCommand.md#isByName) abstraction.
 
@@ -55,9 +58,9 @@ byPosition(
 * [ResolveInsertInto](../logical-analysis-rules/ResolveInsertInto.md) logical resolution rule is executed
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto)
 
-## Query Planning
+## Execution Planning
 
-`AppendData` is planned to one of the physical operators in [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy:
+`AppendData` is planned as one of the physical operators by [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy:
 
 * `AppendDataExecV1`
 * `AppendDataExec`

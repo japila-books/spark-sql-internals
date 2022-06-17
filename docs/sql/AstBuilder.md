@@ -416,12 +416,29 @@ ANTLR rule: `singleExpression`
 
 ### <span id="visitSingleInsertQuery"> visitSingleInsertQuery
 
-Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) with a [InsertIntoTable](../logical-operators/InsertIntoTable.md)
+Calls [withInsertInto](#withInsertInto) (with an `InsertIntoContext`) for the following SQLs:
 
 ```sql
-INSERT INTO TABLE? tableIdentifier partitionSpec? #insertIntoTable
+INSERT OVERWRITE TABLE? multipartIdentifier
+(partitionSpec (IF NOT EXISTS)?)?
+identifierList?
+```
 
-INSERT OVERWRITE TABLE tableIdentifier (partitionSpec (IF NOT EXISTS)?)? #insertOverwriteTable
+```sql
+INSERT INTO TABLE? multipartIdentifier
+partitionSpec?
+(IF NOT EXISTS)?
+identifierList?
+```
+
+```sql
+INSERT OVERWRITE LOCAL? DIRECTORY path=STRING rowFormat? createFileFormat?
+```
+
+```sql
+INSERT OVERWRITE LOCAL? DIRECTORY (path=STRING)?
+tableProvider
+(OPTIONS options=tablePropertyList)?
 ```
 
 ANTLR labeled alternative: `#singleInsertQuery`
