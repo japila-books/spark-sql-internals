@@ -10,56 +10,103 @@
 String description()
 ```
 
-Used when `DataSourceV2ScanExecBase` physical operator is requested for a [simpleString](../physical-operators/DataSourceV2ScanExecBase.md#simpleString)
+Human-readable description of this scan (e.g. for logging purposes).
 
-### <span id="readSchema"> readSchema
+default: the fully-qualified class name
+
+Used when:
+
+* `BatchScanExec` physical operator is requested for the [simpleString](../physical-operators/BatchScanExec.md#simpleString)
+* `DataSourceV2ScanExecBase` physical operator is requested for the [simpleString](../physical-operators/DataSourceV2ScanExecBase.md#simpleString) and [verboseStringWithOperatorId](../physical-operators/DataSourceV2ScanExecBase.md#verboseStringWithOperatorId)
+
+### <span id="readSchema"> Read Schema
 
 ```java
 StructType readSchema()
 ```
 
-Used when...FIXME
+[Read schema](../types/StructType.md) of this scan
 
-### <span id="toBatch"> toBatch
+Used when:
+
+* `FileScan` is requested for the [partition and data filters](../datasources/FileScan.md#)
+* `GroupBasedRowLevelOperationScanPlanning` is executed
+* `PushDownUtils` utility is used to `pruneColumns`
+* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and requested to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
+
+### <span id="toBatch"> Converting to Batch
 
 ```java
 Batch toBatch()
 ```
 
-By default, `toBatch` throws an `UnsupportedOperationException` (with [description](#description)):
+By default, `toBatch` throws an `UnsupportedOperationException` (with the [description](#description)):
 
 ```text
 [description]: Batch scan are not supported
 ```
 
-Must be implemented (_overriden_), if the [Table](Table.md) that created this `Scan` has `BATCH_READ` capability (among the [capabilities](Table.md#capabilities)).
+---
 
-Used when `BatchScanExec` physical operator is requested for [batch](../physical-operators/BatchScanExec.md#batch).
+Must be implemented (_overriden_), if the [Table](Table.md) that created this `Scan` has [BATCH_READ](TableCapability.md#BATCH_READ) capability (among the [capabilities](Table.md#capabilities)).
 
-### <span id="toContinuousStream"> toContinuousStream
+---
+
+Used when:
+
+* `BatchScanExec` physical operator is requested for the [Batch](../physical-operators/BatchScanExec.md#batch) and the [filteredPartitions](../physical-operators/BatchScanExec.md#filteredPartitions)
+
+### <span id="toContinuousStream"> Converting to ContinuousStream
 
 ```java
 ContinuousStream toContinuousStream(
     String checkpointLocation)
 ```
 
-Used when...FIXME
+By default, `toContinuousStream` throws an `UnsupportedOperationException` (with the [description](#description)):
 
-### <span id="toMicroBatchStream"> toMicroBatchStream
+```text
+[description]: Continuous scan are not supported
+```
+
+---
+
+Must be implemented (_overriden_), if the [Table](Table.md) that created this `Scan` has [CONTINUOUS_READ](TableCapability.md#CONTINUOUS_READ) capability (among the [capabilities](Table.md#capabilities)).
+
+---
+
+Used when:
+
+* `ContinuousExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/continuous-execution/ContinuousExecution)) is requested for the logical plan ([WriteToContinuousDataSource]({{ book.structured_streaming }}/logical-operators/WriteToContinuousDataSource/))
+
+### <span id="toMicroBatchStream"> Converting to MicroBatchStream
 
 ```java
 MicroBatchStream toMicroBatchStream(
     String checkpointLocation)
 ```
 
-Used when...FIXME
+By default, `toMicroBatchStream` throws an `UnsupportedOperationException` (with the [description](#description)):
+
+```text
+[description]: Micro-batch scan are not supported
+```
+
+---
+
+Must be implemented (_overriden_), if the [Table](Table.md) that created this `Scan` has [MICRO_BATCH_READ](TableCapability.md#MICRO_BATCH_READ) capability (among the [capabilities](Table.md#capabilities)).
+
+---
+
+Used when:
+
+* `MicroBatchExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/micro-batch-execution/MicroBatchExecution)) is requested for the logical plan
 
 ## Implementations
 
 * [FileScan](../datasources/FileScan.md)
 * [KafkaScan](../datasources/kafka/KafkaScan.md)
-* `MemoryStreamScanBuilder`
 * [SupportsReportPartitioning](SupportsReportPartitioning.md)
 * [SupportsReportStatistics](SupportsReportStatistics.md)
 * [V1Scan](V1Scan.md)
-* `V1ScanWrapper`
+* _others_
