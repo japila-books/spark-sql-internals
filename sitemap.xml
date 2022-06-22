@@ -296,6 +296,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/IntervalUtils/</loc>
+         <lastmod>2022-06-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/JoinHint/</loc>
          <lastmod>2022-06-22</lastmod>
          <changefreq>daily</changefreq>
@@ -3347,6 +3352,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/hint-framework/</loc>
+         <lastmod>2022-06-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/intervals/</loc>
          <lastmod>2022-06-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
