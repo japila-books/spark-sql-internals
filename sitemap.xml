@@ -4046,6 +4046,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/types/CalendarInterval/</loc>
+         <lastmod>2022-06-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/types/DataType/</loc>
          <lastmod>2022-06-22</lastmod>
          <changefreq>daily</changefreq>
