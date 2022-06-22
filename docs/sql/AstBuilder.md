@@ -4,13 +4,18 @@
 
 `AstBuilder` is the only requirement of the [AbstractSqlParser](AbstractSqlParser.md#astBuilder) abstraction (and used by [CatalystSqlParser](CatalystSqlParser.md) directly while [SparkSqlParser](SparkSqlParser.md) uses [SparkSqlAstBuilder](SparkSqlAstBuilder.md) instead).
 
-## <span id="grammar"> SqlBase.g4 &mdash; ANTLR Grammar
+## <span id="grammar"><span id="SqlBaseParserBaseVisitor"> SqlBaseParser.g4 &mdash; ANTLR Grammar
 
-`AstBuilder` is a ANTLR `AbstractParseTreeVisitor` (as `SqlBaseBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
+`AstBuilder` is an ANTLR `AbstractParseTreeVisitor` (as `SqlBaseParserBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
 
-`SqlBaseBaseVisitor` is a ANTLR-specific base class that is generated at build time from the ANTLR grammar of Spark SQL is available in the Apache Spark repository at [SqlBase.g4]({{ spark.github }}/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBase.g4).
+`SqlBaseParserBaseVisitor` is a ANTLR-specific base class that is generated at build time from the ANTLR grammar of Spark SQL. The Spark SQL grammar is available in the Apache Spark repository at [SqlBaseParser.g4]({{ spark.github }}/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4).
 
-`SqlBaseBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
+`SqlBaseParserBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
+
+!!! note "Spark 3.3.0"
+    As of Spark 3.3.0 ([SPARK-38378]({{ spark.jira }}/SPARK-38378)) the ANTLR grammar is in two separate files for the parser and the lexer, `SqlBaseParser.g4` and `SqlBaseLexer.g4`, respectively:
+
+    > By separating the lexer and parser, we will be able to use the full power of ANTLR parser and lexer grammars. e.g. lexer mode. This will give us more flexibility when implementing new SQL features.
 
 ## Visit Callbacks
 

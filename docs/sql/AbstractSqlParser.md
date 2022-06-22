@@ -27,7 +27,7 @@ parse[T](
   toResult: SqlBaseParser => T): T
 ```
 
-`parse` sets up ANTLR parsing infrastructure with `SqlBaseLexer` and `SqlBaseParser` (which are the ANTLR-specific classes of Spark SQL that are auto-generated at build time from the [SqlBase.g4](AstBuilder.md#grammar) grammar).
+`parse` sets up ANTLR parsing infrastructure with `SqlBaseLexer` and `SqlBaseParser` (which are the ANTLR-specific classes of Spark SQL that are auto-generated at build time from the [SqlBaseParser.g4](AstBuilder.md#grammar) grammar).
 
 Internally, `parse` first prints out the following INFO message to the logs:
 
