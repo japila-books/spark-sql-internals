@@ -2,68 +2,43 @@
 
 `TimeWindow` is an [unevaluable](Unevaluable.md) and non-SQL unary expression that represents [window](../spark-sql-functions.md#window) function.
 
-```text
-import org.apache.spark.sql.functions.window
-scala> val timeColumn = window('time, "5 seconds")
-timeColumn: org.apache.spark.sql.Column = timewindow(time, 5000000, 5000000, 0) AS `window`
+## <span id="apply"> Creating TimeWindow
 
-scala> val timeWindowExpr = timeColumn.expr
-timeWindowExpr: org.apache.spark.sql.catalyst.expressions.Expression = timewindow('time, 5000000, 5000000, 0) AS window#3
-
-scala> println(timeWindowExpr.numberedTreeString)
-00 timewindow('time, 5000000, 5000000, 0) AS window#3
-01 +- timewindow('time, 5000000, 5000000, 0)
-02    +- 'time
-
-import org.apache.spark.sql.catalyst.expressions.TimeWindow
-scala> val timeWindow = timeColumn.expr.children.head.asInstanceOf[TimeWindow]
-timeWindow: org.apache.spark.sql.catalyst.expressions.TimeWindow = timewindow('time, 5000000, 5000000, 0)
+```scala
+apply(
+  timeColumn: Expression,
+  windowDuration: String,
+  slideDuration: String,
+  startTime: String): TimeWindow
 ```
 
-[[units]]
-`interval` can include the following units:
+`apply` creates a [TimeWindow](#creating-instance) (for the given `timeColumn` expression and the durations and start time [converted to seconds](#getIntervalInMicroSeconds)).
 
-* year(s)
-* month(s)
-* week(s)
-* day(s)
-* hour(s)
-* minute(s)
-* second(s)
-* millisecond(s)
-* microsecond(s)
+`apply` is used when:
 
-[source, scala]
-----
-// the most elaborate interval with all the units
-interval 0 years 0 months 1 week 0 days 0 hours 1 minute 20 seconds 0 milliseconds 0 microseconds
+* [window](../spark-sql-functions.md#window) standard function is used
 
-interval -5 seconds
-----
+## <span id="getIntervalInMicroSeconds"> Parsing Time Interval to Microseconds
 
-NOTE: The number of months greater than `0` <<getIntervalInMicroSeconds, are not supported>> for the interval.
+```scala
+getIntervalInMicroSeconds(
+  interval: String): Long
+```
 
-[[resolved]]
-`TimeWindow` can never be resolved as it is converted to `Filter` with `Expand` logical operators at <<analyzer, analysis phase>>.
+`getIntervalInMicroSeconds`...FIXME
 
-=== [[parseExpression]] `parseExpression` Internal Method
+`getIntervalInMicroSeconds` is used when:
 
-[source, scala]
-----
-parseExpression(expr: Expression): Long
-----
+* `TimeWindow` utility is used to [parseExpression](#parseExpression) and [apply](#apply)
 
-CAUTION: FIXME
+## Analysis Phase
 
-=== [[analyzer]] Analysis Phase
-
-`TimeWindow` is resolved to Expand.md[Expand] logical operator when `TimeWindowing` logical evaluation rule is executed.
+`TimeWindow` is resolved to [Expand](../logical-operators/Expand.md) unary logical operator (when `TimeWindowing` logical evaluation rule is executed).
 
 ```text
-// https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
 import java.time.LocalDateTime
-// https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html
 import java.sql.Timestamp
+
 val levels = Seq(
   // (year, month, dayOfMonth, hour, minute, second)
   ((2012, 12, 12, 12, 12, 12), 5),
@@ -102,40 +77,25 @@ scala> println(q.queryExecution.analyzed.numberedTreeString)
 04          +- LocalRelation [_1#6, _2#7]
 ```
 
-=== [[apply]] `apply` Factory Method
+## Demo
 
-[source, scala]
-----
-apply(
-  timeColumn: Expression,
-  windowDuration: String,
-  slideDuration: String,
-  startTime: String): TimeWindow
-----
+```scala
+import org.apache.spark.sql.functions.window
+val timeColumn = window('time, "5 seconds")
+```
 
-`apply` creates a <<TimeWindow, TimeWindow>> with `timeColumn` Expression.md[expression] and `windowDuration`, `slideDuration`, `startTime` <<getIntervalInMicroSeconds, microseconds>>.
+```scala
+val timeWindowExpr = timeColumn.expr
+println(timeWindowExpr.numberedTreeString)
+```
 
-NOTE: `apply` is used exclusively in spark-sql-functions-datetime.md#window[window] function.
+```text
+00 timewindow('time, 5000000, 5000000, 0) AS window#3
+01 +- timewindow('time, 5000000, 5000000, 0)
+02    +- 'time
+```
 
-=== [[getIntervalInMicroSeconds]] Parsing Time Interval to Microseconds -- `getIntervalInMicroSeconds` Internal Method
-
-[source, scala]
-----
-getIntervalInMicroSeconds(interval: String): Long
-----
-
-`getIntervalInMicroSeconds` parses `interval` string to microseconds.
-
-Internally, `getIntervalInMicroSeconds` adds *interval* prefix to the input `interval` unless it is already available.
-
-`getIntervalInMicroSeconds` creates `CalendarInterval` from the input `interval`.
-
-`getIntervalInMicroSeconds` reports `IllegalArgumentException` when the number of months is greater than `0`.
-
-[NOTE]
-====
-`getIntervalInMicroSeconds` is used when:
-
-* `TimeWindow` is <<apply, created>>
-* `TimeWindow` does <<parseExpression, parseExpression>>
-====
+```scala
+import org.apache.spark.sql.catalyst.expressions.TimeWindow
+val timeWindow = timeColumn.expr.children.head.asInstanceOf[TimeWindow]
+```
