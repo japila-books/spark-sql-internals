@@ -977,6 +977,7 @@ nav:
       - AbstractDataType: types/AbstractDataType.md
       - ArrayType: types/ArrayType.md
       - AtomicType: types/AtomicType.md
+      - CalendarInterval: types/CalendarInterval.md
       - DataType: types/DataType.md
       - StructField: types/StructField.md
       - StructType: types/StructType.md

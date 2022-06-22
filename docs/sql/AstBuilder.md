@@ -237,6 +237,43 @@ ANTLR labeled alternative: `#insertOverwriteTable`
 !!! note
     `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
 
+### <span id="visitInterval"> visitInterval
+
+Creates a [Literal](../expressions/Literal.md) expression to represent an interval type
+
+```antlr
+INTERVAL (MultiUnitsInterval | UnitToUnitInterval)?
+```
+
+ANTLR rule: `interval`
+
+---
+
+`visitInterval` [creates a CalendarInterval](#parseIntervalLiteral).
+
+`visitInterval` parses `UnitToUnitInterval` if specified first (and [spark.sql.legacy.interval.enabled](../configuration-properties.md#spark.sql.legacy.interval.enabled) configuration property turned off).
+
+```antlr
+unitToUnitInterval
+    : value from TO to
+    ;
+```
+
+`month` in `to` leads to a `YearMonthIntervalType` while other identifiers lead to a `DayTimeIntervalType`.
+
+```text
+INTERVAL '0-0' YEAR TO MONTH        // YearMonthIntervalType
+INTERVAL '0 00:00:00' DAY TO SECOND // DayTimeIntervalType
+```
+
+`visitInterval` parses `MultiUnitsInterval` if specified (and [spark.sql.legacy.interval.enabled](../configuration-properties.md#spark.sql.legacy.interval.enabled) configuration property turned off).
+
+```antlr
+multiUnitsInterval
+    : (intervalValue unit)+
+    ;
+```
+
 ### <span id="visitMergeIntoTable"> visitMergeIntoTable
 
 Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md) logical command
@@ -681,3 +718,17 @@ WINDOW identifier AS windowSpec
 ```
 
 Used in [withQueryResultClauses](#withQueryResultClauses) and [withQuerySpecification](#withQuerySpecification)
+
+## <span id="parseIntervalLiteral"> parseIntervalLiteral
+
+```scala
+parseIntervalLiteral(
+  ctx: IntervalContext): CalendarInterval
+```
+
+`parseIntervalLiteral` creates a [CalendarInterval](../types/CalendarInterval.md) (using [visitMultiUnitsInterval](#visitMultiUnitsInterval) and [visitUnitToUnitInterval](#visitUnitToUnitInterval)).
+
+`parseIntervalLiteral` is used when:
+
+* `AstBuilder` is requested to [visitInterval](#visitInterval)
+* `SparkSqlAstBuilder` is requested to [visitSetTimeZone](SparkSqlAstBuilder.md#visitSetTimeZone)
