@@ -1,6 +1,38 @@
 # TimeWindow
 
-`TimeWindow` is an [unevaluable](Unevaluable.md) and non-SQL unary expression that represents [window](../spark-sql-functions.md#window) function.
+`TimeWindow` is an [Unevaluable](Unevaluable.md), `NonSQLExpression` [UnaryExpression](UnaryExpression.md) that represents [window](../spark-sql-functions.md#window) function.
+
+```scala
+import org.apache.spark.sql.functions.window
+val w = window(
+  'timeColumn,
+  windowDuration = "10 seconds",
+  slideDuration = "5 seconds",
+  startTime = "0 seconds")
+```
+
+```text
+scala> println(w.expr.numberedTreeString)
+00 window('timeColumn, 10000000, 5000000, 0) AS window#1
+01 +- window('timeColumn, 10000000, 5000000, 0)
+02    +- 'timeColumn
+```
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.TimeWindow
+val tw = w.expr.children.head.asInstanceOf[TimeWindow]
+```
+
+## Creating Instance
+
+`TimeWindow` takes the following to be created:
+
+* <span id="timeColumn"> Time Column ([Expression](Expression.md))
+* <span id="windowDuration"> Window Duration
+* <span id="slideDuration"> Slide Duration
+* <span id="startTime"> Start Time
+
+`TimeWindow` is created using [apply](#apply) factory method.
 
 ## <span id="apply"> Creating TimeWindow
 
@@ -12,7 +44,7 @@ apply(
   startTime: String): TimeWindow
 ```
 
-`apply` creates a [TimeWindow](#creating-instance) (for the given `timeColumn` expression and the durations and start time [converted to seconds](#getIntervalInMicroSeconds)).
+`apply` creates a [TimeWindow](#creating-instance) (for the given `timeColumn` expression with the window and slide durations and start time [converted to seconds](#getIntervalInMicroSeconds)).
 
 `apply` is used when:
 
@@ -75,27 +107,4 @@ scala> println(q.queryExecution.analyzed.numberedTreeString)
 02    +- Expand [List(named_struct(start, ((((CEIL((cast((precisetimestamp(time#9) - 0) as double) / cast(5000000 as double))) + cast(0 as bigint)) - cast(1 as bigint)) * 5000000) + 0), end, (((((CEIL((cast((precisetimestamp(time#9) - 0) as double) / cast(5000000 as double))) + cast(0 as bigint)) - cast(1 as bigint)) * 5000000) + 0) + 5000000)), time#9, level#10), List(named_struct(start, ((((CEIL((cast((precisetimestamp(time#9) - 0) as double) / cast(5000000 as double))) + cast(1 as bigint)) - cast(1 as bigint)) * 5000000) + 0), end, (((((CEIL((cast((precisetimestamp(time#9) - 0) as double) / cast(5000000 as double))) + cast(1 as bigint)) - cast(1 as bigint)) * 5000000) + 0) + 5000000)), time#9, level#10)], [window#19, time#9, level#10]
 03       +- Project [_1#6 AS time#9, _2#7 AS level#10]
 04          +- LocalRelation [_1#6, _2#7]
-```
-
-## Demo
-
-```scala
-import org.apache.spark.sql.functions.window
-val timeColumn = window('time, "5 seconds")
-```
-
-```scala
-val timeWindowExpr = timeColumn.expr
-println(timeWindowExpr.numberedTreeString)
-```
-
-```text
-00 timewindow('time, 5000000, 5000000, 0) AS window#3
-01 +- timewindow('time, 5000000, 5000000, 0)
-02    +- 'time
-```
-
-```scala
-import org.apache.spark.sql.catalyst.expressions.TimeWindow
-val timeWindow = timeColumn.expr.children.head.asInstanceOf[TimeWindow]
 ```
