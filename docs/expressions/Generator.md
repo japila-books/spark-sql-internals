@@ -1,4 +1,4 @@
-# Generator &mdash; Expressions to Generate Zero Or More Rows (aka Lateral Views)
+# Generator Expressions
 
 `Generator` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that can <<eval, produce>> zero or more rows given a single input row.
 

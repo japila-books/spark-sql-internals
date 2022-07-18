@@ -3,14 +3,15 @@
 `Expression` is an [extension](#contract) of the [TreeNode](../catalyst/TreeNode.md) abstraction for [executable expressions](#implementations) (in the [Catalyst Tree Manipulation Framework](../catalyst/index.md)).
 
 ```scala
-abstract class Expression extends TreeNode[Expression]
+abstract class Expression
+extends TreeNode[Expression]
 ```
 
 `Expression` is an executable [TreeNode](../catalyst/TreeNode.md) that can be evaluated and produce a JVM object (for an [InternalRow](../InternalRow.md)) in the faster [code-generated](#genCode) or the slower [interpreted](#eval) modes.
 
 ## Contract
 
-### <span id="dataType"> dataType
+### <span id="dataType"> Evaluation Result DataType
 
 ```scala
 dataType: DataType
@@ -18,7 +19,7 @@ dataType: DataType
 
 The [DataType](../types/DataType.md) of the result of evaluating this expression
 
-### <span id="doGenCode"> doGenCode
+### <span id="doGenCode"> Generating Java Source Code
 
 ```scala
 doGenCode(
@@ -26,7 +27,7 @@ doGenCode(
   ev: ExprCode): ExprCode
 ```
 
-**Code-Generated Expression Evaluation** that generates a Java source code (that is used to evaluate the expression in a more optimized way and skipping [eval](#eval)).
+Generates a Java source code (for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md))
 
 Used when:
 
@@ -66,7 +67,7 @@ nullable: Boolean
 * [Predicate](Predicate.md)
 * [UnaryExpression](UnaryExpression.md)
 * [Unevaluable](Unevaluable.md)
-* _many others_
+* _others_
 
 ## <span id="genCode"> Code-Generated Expression Evaluation
 

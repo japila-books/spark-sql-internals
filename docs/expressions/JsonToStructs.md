@@ -2,6 +2,8 @@
 
 `JsonToStructs` is a [UnaryExpression](UnaryExpression.md) with [timezone](Expression.md#TimeZoneAwareExpression) support and [CodegenFallback](Expression.md#CodegenFallback).
 
+## <span id="ExpectsInputTypes"> ExpectsInputTypes
+
 `JsonToStructs` is an [ExpectsInputTypes](ExpectsInputTypes.md) expression.
 
 ## Creating Instance
