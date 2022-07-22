@@ -6,8 +6,8 @@
 `BucketSpec` includes the following:
 
 * [[numBuckets]] Number of buckets
-* [[bucketColumnNames]] Bucket column names - the names of the columns used for buckets (at least one)
-* [[sortColumnNames]] Sort column names - the names of the columns used to sort data in buckets
+* [[bucketColumnNames]] Bucket Columns - the names of the columns used for buckets (at least one)
+* [[sortColumnNames]] Sort Columns - the names of the columns used to sort data in buckets
 
 The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusive (or an `AnalysisException` is thrown).
 

@@ -339,10 +339,10 @@ nav:
       - GlobalTempViewManager: GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
-        - CatalogTable: CatalogTable.md
-        - CatalogStorageFormat: CatalogStorageFormat.md
-        - CatalogTablePartition: CatalogTablePartition.md
         - BucketSpec: BucketSpec.md
+        - CatalogStorageFormat: CatalogStorageFormat.md
+        - CatalogTable: CatalogTable.md
+        - CatalogTablePartition: CatalogTablePartition.md
       - V2SessionCatalog: V2SessionCatalog.md
       - SessionState:
         - SessionState: SessionState.md

@@ -1,128 +1,107 @@
 # CatalogTable
 
-`CatalogTable` is the **specification** (_metadata_) of a table.
-
-`CatalogTable` is stored in a [SessionCatalog](SessionCatalog.md) (session-scoped catalog of relational entities).
-
-```text
-scala> :type spark.sessionState.catalog
-org.apache.spark.sql.catalyst.catalog.SessionCatalog
-
-// Using high-level user-friendly catalog interface
-scala> spark.catalog.listTables.filter($"name" === "t1").show
-+----+--------+-----------+---------+-----------+
-|name|database|description|tableType|isTemporary|
-+----+--------+-----------+---------+-----------+
-|  t1| default|       null|  MANAGED|      false|
-+----+--------+-----------+---------+-----------+
-
-// Using low-level internal SessionCatalog interface to access CatalogTables
-val t1Tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
-val t1Metadata = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(t1Tid)
-scala> :type t1Metadata
-org.apache.spark.sql.catalyst.catalog.CatalogTable
-```
-
-`CatalogTable` is <<creating-instance, created>> when:
-
-* `SessionCatalog` is requested for a [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata)
-
-* `HiveClientImpl` is requested for hive/HiveClientImpl.md#getTableOption[looking up a table in a metastore]
-
-* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable)
-
-* hive/InsertIntoHiveDirCommand.md[InsertIntoHiveDirCommand] logical command is executed
-
-* `SparkSqlAstBuilder` does spark-sql-SparkSqlAstBuilder.md#visitCreateTable[visitCreateTable] and spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable[visitCreateHiveTable]
-
-* `CreateTableLikeCommand` logical command is executed
-
-* `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#prepareTable, prepareTable>>)
-
-* `CatalogImpl` is requested to [createTable](CatalogImpl.md#createTable)
-
-[[simpleString]]
-The *readable text representation* of a `CatalogTable` (aka `simpleString`) is...FIXME
-
-NOTE: `simpleString` is used exclusively when `ShowTablesCommand` logical command is executed (with a partition specification).
-
-[[toString]]
-`CatalogTable` uses the following *text representation* (i.e. `toString`)...FIXME
-
-`CatalogTable` is <<creating-instance, created>> with the optional <<bucketSpec, bucketing specification>> that is used for the following:
-
-* `CatalogImpl` is requested to [list the columns of a table](CatalogImpl.md#listColumns-internal)
-
-* `FindDataSourceTable` logical evaluation rule is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable) (when [executed](logical-analysis-rules/FindDataSourceTable.md) for data source tables)
-
-* `CreateTableLikeCommand` logical command is executed
-
-* `DescribeTableCommand` logical command is requested to <<DescribeTableCommand.md#run, describe detailed partition and storage information>> (when <<DescribeTableCommand.md#run, executed>>)
-
-* [ShowCreateTableCommand](logical-operators/ShowCreateTableCommand.md) logical command is executed
-
-* <<CreateDataSourceTableCommand.md#run, CreateDataSourceTableCommand>> and <<CreateDataSourceTableAsSelectCommand.md#run, CreateDataSourceTableAsSelectCommand>> logical commands are executed
-
-* `CatalogTable` is requested to <<toLinkedHashMap, convert itself to LinkedHashMap>>
-
-* `HiveExternalCatalog` is requested to [doCreateTable](hive/HiveExternalCatalog.md#doCreateTable), [tableMetaToTableProps](hive/HiveExternalCatalog.md#tableMetaToTableProps), [doAlterTable](hive/HiveExternalCatalog.md#doAlterTable), [restoreHiveSerdeTable](hive/HiveExternalCatalog.md#restoreHiveSerdeTable) and [restoreDataSourceTable](hive/HiveExternalCatalog.md#restoreDataSourceTable)
-
-* `HiveClientImpl` is requested to hive/HiveClientImpl.md#getTableOption[retrieve a table metadata if available]>> and hive/HiveClientImpl.md#toHiveTable[toHiveTable]
-
-* hive/InsertIntoHiveTable.md[InsertIntoHiveTable] logical command is executed
-
-* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable) (via [saveAsTable](DataFrameWriter.md#saveAsTable))
-
-* `SparkSqlAstBuilder` is requested to <<spark-sql-SparkSqlAstBuilder.md#visitCreateTable, visitCreateTable>> and <<spark-sql-SparkSqlAstBuilder.md#visitCreateHiveTable, visitCreateHiveTable>>
+`CatalogTable` is the specification (_metadata_) of a table managed by [SessionCatalog](SessionCatalog.md).
 
 ## Creating Instance
 
 `CatalogTable` takes the following to be created:
 
-* [[identifier]] `TableIdentifier`
-* [[tableType]] [Table type](#CatalogTableType)
-* [[storage]] [CatalogStorageFormat](CatalogStorageFormat.md)
-* [[schema]] [Schema](types/StructType.md)
-* [[provider]] Name of the table provider (optional)
-* [[partitionColumnNames]] Partition column names
-* [[bucketSpec]] Optional [Bucketing specification](BucketSpec.md) (default: `None`)
-* [[owner]] Owner
-* [[createTime]] Create time
-* [[lastAccessTime]] Last access time
-* [[createVersion]] Create version
-* [[properties]] Properties
-* [[stats]] Optional [table statistics](CatalogStatistics.md)
-* [[viewText]] Optional view text
-* [[comment]] Optional comment
-* [[unsupportedFeatures]] Unsupported features
-* [[tracksPartitionsInCatalog]] `tracksPartitionsInCatalog` flag
-* [[schemaPreservesCase]] `schemaPreservesCase` flag
-* [[ignoredProperties]] Ignored properties
+* <span id="identifier"> `TableIdentifier`
+* [Table type](#tableType)
+* <span id="storage"> [CatalogStorageFormat](CatalogStorageFormat.md)
+* <span id="schema"> Schema ([StructType](types/StructType.md))
+* <span id="provider"> Name of the table provider
+* <span id="partitionColumnNames"> Partition Columns
+* [Bucketing specification](#bucketSpec)
+* <span id="owner"> Owner
+* <span id="createTime"> Created Time
+* <span id="lastAccessTime"> Last access time
+* <span id="createVersion"> Created By version
+* <span id="properties"> Table Properties
+* [Table statistics](#stats)
+* <span id="viewText"> View Text
+* <span id="comment"> Comment
+* <span id="unsupportedFeatures"> Unsupported Features (`Seq[String]`)
+* <span id="tracksPartitionsInCatalog"> `tracksPartitionsInCatalog` flag (default: `false`)
+* <span id="schemaPreservesCase"> `schemaPreservesCase` flag (default: `true`)
+* <span id="ignoredProperties"> Ignored properties
+* <span id="viewOriginalText"> View Original Text
 
-=== [[CatalogTableType]] Table Type
+`CatalogTable` is created when:
 
-The type of a table (`CatalogTableType`) can be one of the following:
+* `HiveClientImpl` is requested to [convertHiveTableToCatalogTable](hive/HiveClientImpl.md#convertHiveTableToCatalogTable)
+* [InsertIntoHiveDirCommand](hive/InsertIntoHiveDirCommand.md) is executed
+* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable)
+* `ResolveSessionCatalog` logical resolution rule is requested to [buildCatalogTable](logical-analysis-rules/ResolveSessionCatalog.md#buildCatalogTable)
+* `CreateTableLikeCommand` is executed
+* `CreateViewCommand` is requested to [prepareTable](logical-operators/CreateViewCommand.md#prepareTable)
+* `ViewHelper` utility is used to `prepareTemporaryView` and `prepareTemporaryViewStoringAnalyzedPlan`
+* `V2SessionCatalog` is requested to [createTable](V2SessionCatalog.md#createTable)
+* `CatalogImpl` is requested to [createTable](CatalogImpl.md#createTable)
 
-* `EXTERNAL` for external tables (hive/HiveClientImpl.md#getTableOption[EXTERNAL_TABLE] in Hive)
-* `MANAGED` for managed tables (hive/HiveClientImpl.md#getTableOption[MANAGED_TABLE] in Hive)
-* `VIEW` for views (hive/HiveClientImpl.md#getTableOption[VIRTUAL_VIEW] in Hive)
+## <span id="bucketSpec"> Bucketing Specification
+
+```scala
+bucketSpec: Option[BucketSpec] = None
+```
+
+`CatalogTable` can be given a [BucketSpec](BucketSpec.md) when [created](#creating-instance). It is undefined (`None`) by default.
+
+`BucketSpec` is given (using [getBucketSpecFromTableProperties](hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties) from a Hive metastore) when:
+
+* `HiveExternalCatalog` is requested to [restoreHiveSerdeTable](hive/HiveExternalCatalog.md#restoreHiveSerdeTable) and [restoreDataSourceTable](hive/HiveExternalCatalog.md#restoreDataSourceTable)
+* `HiveClientImpl` is requested to [convertHiveTableToCatalogTable](hive/HiveClientImpl.md#convertHiveTableToCatalogTable)
+
+`BucketSpec` is given when:
+
+* `DataFrameWriter` is requested to [create a table](DataFrameWriter.md#createTable) (with [getBucketSpec](DataFrameWriter.md#getBucketSpec))
+* `ResolveSessionCatalog` logical resolution rule is requested to [buildCatalogTable](logical-analysis-rules/ResolveSessionCatalog.md#buildCatalogTable)
+* `CreateTableLikeCommand` is executed (with a bucketed table)
+* `PreprocessTableCreation` logical resolution rule is requested to [normalizeCatalogTable](logical-analysis-rules/PreprocessTableCreation.md#normalizeCatalogTable)
+* `V2SessionCatalog` is requested to [create a table](V2SessionCatalog.md#createTable)
+
+`BucketSpec` is used when:
+
+* `CatalogTable` is requested to [toLinkedHashMap](#toLinkedHashMap)
+* `V1Table` is requested for the [partitioning](connector/V1Table.md#partitioning)
+* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md) is executed
+* [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) is requested to [saveDataIntoTable](logical-operators/CreateDataSourceTableAsSelectCommand.md#saveDataIntoTable)
+* _others_
+
+!!! note
+    1. Use [DescribeTableCommand](logical-operators/DescribeTableCommand.md) to review `BucketSpec`
+    1. Use [ShowCreateTableCommand](logical-operators/ShowCreateTableCommand.md) to review the Spark DDL syntax
+    1. Use [Catalog.listColumns](CatalogImpl.md#listColumns) to list all columns (incl. bucketing columns)
+
+## <span id="tableType"><span id="CatalogTableType"> Table Type
+
+`CatalogTable` is given a `CatalogTableType` when [created](#creating-instance):
+
+* `EXTERNAL` for external tables ([EXTERNAL_TABLE](hive/HiveClientImpl.md#getTableOption) in Hive)
+* `MANAGED` for managed tables ([MANAGED_TABLE](hive/HiveClientImpl.md#getTableOption) in Hive)
+* `VIEW` for views ([VIRTUAL_VIEW](hive/HiveClientImpl.md#getTableOption) in Hive)
 
 `CatalogTableType` is included when a `TreeNode` is requested for a [JSON representation](catalyst/TreeNode.md#shouldConvertToJson) for...FIXME
 
-=== [[stats-metadata]] Table Statistics for Query Planning (Auto Broadcast Joins and Cost-Based Optimization)
+## <span id="stats"> Table Statistics
+
+```scala
+stats: Option[CatalogStatistics] = None
+```
+
+`CatalogTable` can be given a [CatalogStatistics](CatalogStatistics.md) when [created](#creating-instance). It is undefined (`None`) by default.
+
+### Review Me
 
 You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization.md)).
 
-[source, scala]
-----
+```text
 scala> t1Metadata.stats.foreach(println)
 CatalogStatistics(714,Some(2),Map(p1 -> ColumnStat(2,Some(0),Some(1),0,4,4,None), id -> ColumnStat(2,Some(0),Some(1),0,4,4,None)))
 
 scala> t1Metadata.stats.map(_.simpleString).foreach(println)
 714 bytes, 2 rows
-----
-
-NOTE: The <<stats, CatalogStatistics>> are optional when `CatalogTable` is <<creating-instance, created>>.
+```
 
 CAUTION: FIXME When are stats specified? What if there are not?
 
@@ -140,89 +119,37 @@ The table statistics can be [automatically updated](CommandUtils.md#updateTableS
 
 You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
 
-=== [[dataSchema]] `dataSchema` Method
+## Demo: Accessing Table Metadata
 
-[source, scala]
-----
-dataSchema: StructType
-----
+### Catalog
 
-`dataSchema`...FIXME
-
-NOTE: `dataSchema` is used when...FIXME
-
-=== [[partitionSchema]] `partitionSchema` Method
-
-[source, scala]
-----
-partitionSchema: StructType
-----
-
-`partitionSchema`...FIXME
-
-NOTE: `partitionSchema` is used when...FIXME
-
-=== [[toLinkedHashMap]] Converting Table Specification to LinkedHashMap -- `toLinkedHashMap` Method
-
-[source, scala]
-----
-toLinkedHashMap: mutable.LinkedHashMap[String, String]
-----
-
-`toLinkedHashMap` converts the table specification to a collection of pairs (`LinkedHashMap[String, String]`) with the following fields and their values:
-
-* *Database* with the database of the <<identifier, TableIdentifier>>
-
-* *Table* with the table of the <<identifier, TableIdentifier>>
-
-* *Owner* with the <<owner, owner>> (if defined)
-
-* *Created Time* with the <<createTime, createTime>>
-
-* *Created By* with `Spark` and the <<createVersion, createVersion>>
-
-* *Type* with the name of the <<tableType, CatalogTableType>>
-
-* *Provider* with the <<provider, provider>> (if defined)
-
-* [Bucket specification](BucketSpec.md#toLinkedHashMap) (of the [BucketSpec](#bucketSpec) if defined)
-
-* *Comment* with the <<comment, comment>> (if defined)
-
-* *View Text*, *View Default Database* and *View Query Output Columns* for <<tableType, VIEW table type>>
-
-* *Table Properties* with the <<tableProperties, tableProperties>> (if not empty)
-
-* *Statistics* with the <<stats, CatalogStatistics>> (if defined)
-
-* [Storage specification](CatalogStorageFormat.md#toLinkedHashMap) (of the <<storage, CatalogStorageFormat>> if defined)
-
-* *Partition Provider* with *Catalog* if the <<tracksPartitionsInCatalog, tracksPartitionsInCatalog>> flag is on
-
-* *Partition Columns* with the <<partitionColumns, partitionColumns>> (if not empty)
-
-* *Schema* with the <<schema, schema>> (if not empty)
-
-[NOTE]
-====
-`toLinkedHashMap` is used when:
-
-* `DescribeTableCommand` is requested to DescribeTableCommand.md#describeFormattedTableInfo[describeFormattedTableInfo] (when `DescribeTableCommand` is requested to DescribeTableCommand.md#run[run] for a non-temporary table and the DescribeTableCommand.md#isExtended[isExtended] flag on)
-
-* `CatalogTable` is requested for either a <<simpleString, simple>> or a <<toString, catalog>> text representation
-====
-
-=== [[database]] `database` Method
-
-[source, scala]
-----
-database: String
-----
-
-`database` simply returns the database (of the <<identifier, TableIdentifier>>) or throws an `AnalysisException`:
-
-```
-table [identifier] did not specify database
+```scala
+val q = spark.catalog.listTables.filter($"name" === "t1")
 ```
 
-NOTE: `database` is used when...FIXME
+```text
+scala> q.show
++----+--------+-----------+---------+-----------+
+|name|database|description|tableType|isTemporary|
++----+--------+-----------+---------+-----------+
+|  t1| default|       null|  MANAGED|      false|
++----+--------+-----------+---------+-----------+
+```
+
+### SessionCatalog
+
+```scala
+import org.apache.spark.sql.catalyst.catalog.SessionCatalog
+val sessionCatalog = spark.sessionState.catalog
+assert(sessionCatalog.isInstanceOf[SessionCatalog])
+```
+
+```scala
+val t1Tid = spark.sessionState.sqlParser.parseTableIdentifier("t1")
+val t1Metadata = sessionCatalog.getTempViewOrPermanentTableMetadata(t1Tid)
+```
+
+```scala
+import org.apache.spark.sql.catalyst.catalog.CatalogTable
+assert(t1Metadata.isInstanceOf[CatalogTable])
+```
