@@ -203,6 +203,7 @@ nav:
       - Utilities:
         - Catalogs: connector/catalog/Catalogs.md
         - CatalogV2Util: connector/catalog/CatalogV2Util.md
+      - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Query Execution:
       - QueryExecution: QueryExecution.md
       - Logical Analyzer: Analyzer.md
