@@ -695,12 +695,13 @@ nav:
       - ScalaReflection: ScalaReflection.md
   - SQL:
     - sql/index.md
-    - ParserInterface: sql/ParserInterface.md
     - AbstractSqlParser: sql/AbstractSqlParser.md
     - AstBuilder: sql/AstBuilder.md
     - CatalystSqlParser: sql/CatalystSqlParser.md
+    - ParserInterface: sql/ParserInterface.md
     - SparkSqlParser: sql/SparkSqlParser.md
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
+    - VariableSubstitution: sql/VariableSubstitution.md
   - Notable Features:
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
@@ -769,6 +770,7 @@ nav:
     - Catalyst DSL:
       - Catalyst DSL: catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
+    - Variable Substitution: variable-substitution.md
   - Data Sources:
     - datasources/index.md
     - Avro:

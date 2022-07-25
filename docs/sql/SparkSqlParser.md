@@ -24,6 +24,23 @@
 
 * [expr](../spark-sql-functions.md#expr) standard function is used
 
+## <span id="parse"> Parsing Command
+
+```scala
+parse[T](
+  command: String)(
+  toResult: SqlBaseParser => T): T
+```
+
+`parse` is part of the [AbstractSqlParser](AbstractSqlParser.md#parse) abstraction.
+
+---
+
+!!! note
+    The only reason for overriding `parse` method is to allow for [VariableSubstitution](#substitutor) to [substitute variables](VariableSubstitution.md#substitute).
+
+`parse` requests the [VariableSubstitution](#substitutor) to [substitute variables](VariableSubstitution.md#substitute) before requesting the default (parent) parser to [parse the command](AbstractSqlParser.md#parse).
+
 ## <span id="astBuilder"> SparkSqlAstBuilder
 
 `SparkSqlParser` uses [SparkSqlAstBuilder](SparkSqlAstBuilder.md) (as [AstBuilder](AbstractSqlParser.md#astBuilder)).
@@ -61,9 +78,11 @@ scala> expr("token = 'hello'")
 res0: org.apache.spark.sql.Column = (token = hello)
 ```
 
-## <span id="substitutor"> Variable Substitution
+## <span id="substitutor"><span id="VariableSubstitution"> Variable Substitution
 
-`SparkSqlParser` creates a `VariableSubstitution` when [created](#creating-instance)
+`SparkSqlParser` creates a [VariableSubstitution](VariableSubstitution.md) when [created](#creating-instance).
+
+The `VariableSubstitution` is used while [parsing a SQL command](#parse).
 
 ## Logging
 

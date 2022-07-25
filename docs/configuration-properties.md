@@ -1875,6 +1875,14 @@ Default: `1000`
 
 When a query execution finishes, the execution is removed from the internal `activeExecutions` registry and stored in `failedExecutions` or `completedExecutions` given the end execution status. It is when `SQLListener` makes sure that the number of `SQLExecutionUIData` entires does not exceed `spark.sql.ui.retainedExecutions` Spark property and removes the excess of entries.
 
+## <span id="spark.sql.variable.substitute"> spark.sql.variable.substitute
+
+Enables [Variable Substitution](variable-substitution.md)
+
+Default: `true`
+
+Use [SQLConf.variableSubstituteEnabled](SQLConf.md#variableSubstituteEnabled) method to access the current value.
+
 ## <span id="spark.sql.windowExec.buffer.in.memory.threshold"> spark.sql.windowExec.buffer.in.memory.threshold
 
 **(internal)** Threshold for number of rows guaranteed to be held in memory by [WindowExec](physical-operators/WindowExec.md) physical operator.

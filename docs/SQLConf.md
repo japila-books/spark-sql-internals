@@ -1052,6 +1052,14 @@ Used when `CacheManager` is requested to [cache a structured query](CacheManager
 
 Used when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (and uses `AggUtils` to [create an aggregation physical operator](AggUtils.md#createAggregate)).
 
+## <span id="VARIABLE_SUBSTITUTE_ENABLED"><span id="variableSubstituteEnabled"><span id="spark.sql.variable.substitute"> variableSubstituteEnabled
+
+[spark.sql.variable.substitute](configuration-properties.md#spark.sql.variable.substitute)
+
+Used when:
+
+* `VariableSubstitution` is requested to [substitute variables in a SQL command](sql/VariableSubstitution.md#substitute)
+
 ## <span id="wholeStageEnabled"> wholeStageEnabled
 
 [spark.sql.codegen.wholeStage](configuration-properties.md#spark.sql.codegen.wholeStage)
