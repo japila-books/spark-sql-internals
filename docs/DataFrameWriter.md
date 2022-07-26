@@ -193,6 +193,15 @@ Hive data source can only be used with tables, you can not write files of Hive d
 '[operation]' does not support bucketing right now
 ```
 
+### <span id="saveInternal"> saveInternal
+
+```scala
+saveInternal(
+  path: Option[String]): Unit
+```
+
+`saveInternal`...FIXME
+
 ## <span id="lookupV2Provider"> Looking up TableProvider
 
 ```scala

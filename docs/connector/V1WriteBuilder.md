@@ -18,4 +18,5 @@ Used when:
 
 ## Implementations
 
-No known built-in implementation.
+!!! note
+    No known native Spark SQL implementations.

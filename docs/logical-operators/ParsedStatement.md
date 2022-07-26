@@ -6,10 +6,6 @@
 
 ## Implementations
 
-* [AnalyzeColumn](AnalyzeColumn.md)
-* [CreateTableAsSelectStatement](CreateTableAsSelectStatement.md)
-* [CreateTableStatement](CreateTableStatement.md)
-* [RepairTableStatement](RepairTableStatement.md)
-* [ShowCurrentNamespaceStatement](ShowCurrentNamespaceStatement.md)
-* [UseStatement](UseStatement.md)
-* _others_
+* `LeafParsedStatement`
+* `UnaryParsedStatement`
+    * [InsertIntoStatement](InsertIntoStatement.md)

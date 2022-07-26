@@ -33,8 +33,10 @@ trait SchemaRelationProvider {
 Used exclusively when `DataSource` is requested for a [BaseRelation](DataSource.md#resolveRelation) for a given data source format
 |===
 
-[[implementations]]
-NOTE: There are no known direct implementation of <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+## Implementations
+
+!!! note
+    No known native Spark SQL implementations.
 
 !!! tip
     [RelationProvider](RelationProvider.md) is used for data source providers with schema inference.

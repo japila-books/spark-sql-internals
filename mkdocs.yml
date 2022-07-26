@@ -241,7 +241,6 @@ nav:
       - CreateDataSourceTableCommand: logical-operators/CreateDataSourceTableCommand.md
       - CreateTable: logical-operators/CreateTable.md
       - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
-      - CreateTableAsSelectStatement: logical-operators/CreateTableAsSelectStatement.md
       - CreateTableStatement: logical-operators/CreateTableStatement.md
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
       - CreateV2Table: logical-operators/CreateV2Table.md

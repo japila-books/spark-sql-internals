@@ -89,14 +89,29 @@ Used in [withTransformQuerySpecification](#withTransformQuerySpecification) and 
 
 ### <span id="visitCreateTable"> visitCreateTable
 
-Creates a [CreateTableAsSelectStatement](../logical-operators/CreateTableAsSelectStatement.md) or a [CreateTableStatement](../logical-operators/CreateTableStatement.md) logical command
+Creates a [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) (for CTAS queries with `AS` clause) or [CreateTable](../logical-operators/CreateTable.md) logical operator
 
 ```text
 CREATE TEMPORARY? EXTERNAL? TABLE (IF NOT EXISTS)? [multipartIdentifier]
   ('(' [colType] (',' [colType])* ')')?
-  (USING [multipartIdentifier])?
+  (USING [provider])?
   [createTableClauses]
   (AS? query)?
+
+colType
+  : colName dataType (NOT NULL)? (COMMENT [comment])?
+  ;
+
+createTableClauses:
+  ((OPTIONS options=propertyList) |
+  (PARTITIONED BY partitioning=partitionFieldList) |
+  skewSpec |
+  bucketSpec |
+  rowFormat |
+  createFileFormat |
+  locationSpec |
+  commentSpec |
+  (TBLPROPERTIES tableProps=propertyList))*
 ```
 
 ANTLR labeled alternative: `#createTable`
