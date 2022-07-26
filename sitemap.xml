@@ -2596,11 +2596,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/AlterTableRecoverPartitionsCommand/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/AnalyzeColumn/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
@@ -2691,17 +2686,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/CreateTableStatement/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/CreateTempViewUsing/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/CreateV2Table/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2926,11 +2911,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/RepairTableStatement/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Repartition/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
@@ -2972,16 +2952,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ShowCreateTableCommand/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ShowCurrentNamespace/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ShowCurrentNamespaceStatement/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3057,11 +3027,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/UpdateTable/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/UseStatement/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3737,11 +3702,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/SetCatalogAndNamespaceExec/</loc>
-         <lastmod>2022-07-26</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/ShowCurrentNamespaceExec/</loc>
          <lastmod>2022-07-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
