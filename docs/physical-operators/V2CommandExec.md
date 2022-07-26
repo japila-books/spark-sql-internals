@@ -22,7 +22,6 @@ Used when:
 * [DescribeTableExec](DescribeTableExec.md)
 * [DropNamespaceExec](DropNamespaceExec.md)
 * [SetCatalogAndNamespaceExec](SetCatalogAndNamespaceExec.md)
-* [ShowCurrentNamespaceExec](ShowCurrentNamespaceExec.md)
 * [ShowTablePropertiesExec](ShowTablePropertiesExec.md)
 * [ShowTablesExec](ShowTablesExec.md)
 * [V2TableWriteExec](V2TableWriteExec.md)

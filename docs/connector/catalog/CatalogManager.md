@@ -52,8 +52,6 @@ currentCatalog: CatalogPlugin
 
 * `CatalogManager` is requested for the [current namespace](#currentNamespace), [setCurrentNamespace](#setCurrentNamespace) or [setCurrentCatalog](#setCurrentCatalog)
 
-* `ShowCurrentNamespaceExec` physical command is executed
-
 * `LookupCatalog` is requested to `currentCatalog`
 
 * `ViewHelper` utility is requested to `generateViewProperties`
@@ -68,14 +66,9 @@ currentNamespace: Array[String]
 
 `currentNamespace` is used when:
 
-* `ShowCurrentNamespaceExec` physical command is executed
-
 * `ResolveNamespace` analysis rule is executed
-
 * `GetCurrentDatabase` analysis rule is executed
-
 * `CatalogAndIdentifier` extractor utility is requested to `unapply`
-
 * `ViewHelper` utility is requested to `generateViewProperties`
 
 ## <span id="setCurrentNamespace"> Setting Current Namespace

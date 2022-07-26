@@ -43,7 +43,7 @@ String name()
 ```
 
 !!! note "SHOW CURRENT NAMESPACE"
-    Use [ShowCurrentNamespaceExec](../../physical-operators/ShowCurrentNamespaceExec.md) physical command to display the name.
+    Use `SHOW CURRENT NAMESPACE` command to display the name.
 
 ## Implementations
 

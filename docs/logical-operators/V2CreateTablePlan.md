@@ -36,6 +36,5 @@ withPartitioning(
 ## Implementations
 
 * [CreateTableAsSelect](CreateTableAsSelect.md)
-* [CreateV2Table](CreateV2Table.md)
-* ReplaceTable
-* ReplaceTableAsSelect
+* `ReplaceTable`
+* `ReplaceTableAsSelect`

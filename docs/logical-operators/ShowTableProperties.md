@@ -27,7 +27,7 @@ sql("SHOW TBLPROPERTIES d1").show(truncate = false)
 
 * `AstBuilder` is requested to [parse SHOW TBLPROPERTIES SQL statement](../sql/AstBuilder.md#visitShowTblProperties)
 
-* [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical analyzer rule is executed (and resolves a [ShowCurrentNamespaceStatement](ShowCurrentNamespaceStatement.md) parsed statement)
+* [ResolveCatalogs](../logical-analysis-rules/ResolveCatalogs.md) logical analyzer rule is executed
 
 ## <span id="output"> Output Attributes
 

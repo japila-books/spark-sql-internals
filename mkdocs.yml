@@ -225,7 +225,6 @@ nav:
       - AlterTable: logical-operators/AlterTable.md
       - AlterTableAddColumnsCommand: logical-operators/AlterTableAddColumnsCommand.md
       - AlterTableCommand: logical-operators/AlterTableCommand.md
-      - AlterTableRecoverPartitionsCommand: logical-operators/AlterTableRecoverPartitionsCommand.md
       - AnalyzeColumn: logical-operators/AnalyzeColumn.md
       - AnalyzeColumnCommand: logical-operators/AnalyzeColumnCommand.md
       - AnalyzePartitionCommand: logical-operators/AnalyzePartitionCommand.md
@@ -241,9 +240,7 @@ nav:
       - CreateDataSourceTableCommand: logical-operators/CreateDataSourceTableCommand.md
       - CreateTable: logical-operators/CreateTable.md
       - CreateTableAsSelect: logical-operators/CreateTableAsSelect.md
-      - CreateTableStatement: logical-operators/CreateTableStatement.md
       - CreateTempViewUsing: logical-operators/CreateTempViewUsing.md
-      - CreateV2Table: logical-operators/CreateV2Table.md
       - CreateViewCommand: logical-operators/CreateViewCommand.md
       - CTERelationDef: logical-operators/CTERelationDef.md
       - CTERelationRef: logical-operators/CTERelationRef.md
@@ -287,7 +284,6 @@ nav:
       - Pivot: logical-operators/Pivot.md
       - Project: logical-operators/Project.md
       - RebalancePartitions: logical-operators/RebalancePartitions.md
-      - RepairTableStatement: logical-operators/RepairTableStatement.md
       - Repartition: logical-operators/Repartition.md
       - RepartitionByExpression: logical-operators/RepartitionByExpression.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
@@ -297,8 +293,6 @@ nav:
       - SaveIntoDataSourceCommand: logical-operators/SaveIntoDataSourceCommand.md
       - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
       - ShowCreateTableCommand: logical-operators/ShowCreateTableCommand.md
-      - ShowCurrentNamespace: logical-operators/ShowCurrentNamespace.md
-      - ShowCurrentNamespaceStatement: logical-operators/ShowCurrentNamespaceStatement.md
       - ShowTableProperties: logical-operators/ShowTableProperties.md
       - ShowTablePropertiesCommand: logical-operators/ShowTablePropertiesCommand.md
       - ShowTables: logical-operators/ShowTables.md
@@ -312,7 +306,6 @@ nav:
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedWith: logical-operators/UnresolvedWith.md
       - UpdateTable: logical-operators/UpdateTable.md
-      - UseStatement: logical-operators/UseStatement.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md
       - V2WriteCommand: logical-operators/V2WriteCommand.md
       - View: logical-operators/View.md
@@ -512,7 +505,6 @@ nav:
       - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
       - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
       - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
-      - ShowCurrentNamespaceExec: physical-operators/ShowCurrentNamespaceExec.md
       - ShowTablesExec: physical-operators/ShowTablesExec.md
       - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
       - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md

@@ -1,14 +1,10 @@
-title: CatalogTablePartition
-
-# CatalogTablePartition -- Partition Specification of Table
+# CatalogTablePartition
 
 `CatalogTablePartition` is the *partition specification* of a table, i.e. the metadata of the partitions of a table.
 
 `CatalogTablePartition` is <<creating-instance, created>> when:
 
 * `HiveClientImpl` is requested to hive/HiveClientImpl.md#fromHivePartition[retrieve a table partition metadata]
-
-* `AlterTableAddPartitionCommand` and [AlterTableRecoverPartitionsCommand](logical-operators/AlterTableRecoverPartitionsCommand.md) logical commands are executed
 
 `CatalogTablePartition` can hold the <<stats, table statistics>> that...FIXME
 

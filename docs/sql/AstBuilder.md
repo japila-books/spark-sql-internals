@@ -417,7 +417,7 @@ ANTLR labeled alternative: `#renameTableColumn`
 
 ### <span id="visitRepairTable"> visitRepairTable
 
-Creates a [RepairTableStatement](../logical-operators/RepairTableStatement.md) for the following SQL statement:
+Creates a `RepairTable` unary logical command for the following SQL statement:
 
 ```text
 MSCK REPAIR TABLE multipartIdentifier
@@ -427,7 +427,7 @@ ANTLR labeled alternative: `#repairTable`
 
 ### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
 
-Creates a [ShowCurrentNamespaceStatement](../logical-operators/ShowCurrentNamespaceStatement.md) for the following SQL statement:
+Creates a `ShowCurrentNamespaceCommand` logical command for the following SQL statement:
 
 ```text
 SHOW CURRENT NAMESPACE
@@ -549,7 +549,7 @@ ANTLR labeled alternative: `#updateTable`
 
 ### <span id="visitUse"> visitUse
 
-Creates a [UseStatement](../logical-operators/UseStatement.md)
+Creates a [SetCatalogAndNamespace](../logical-operators/SetCatalogAndNamespace.md)
 
 ```text
 USE NAMESPACE? multipartIdentifier

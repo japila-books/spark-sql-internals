@@ -8,7 +8,6 @@ Logical Operator | Physical Operator
  [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [BatchScanExec](../physical-operators/BatchScanExec.md)
  `StreamingDataSourceV2Relation` |
  [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) | [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md)
- [CreateV2Table](../logical-operators/CreateV2Table.md) | `CreateTableExec`
  [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) | `AtomicCreateTableAsSelectExec` or [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
  `RefreshTable` | `RefreshTableExec`
  `ReplaceTable` | `AtomicReplaceTableExec` or `ReplaceTableExec`
