@@ -1,16 +1,41 @@
 # ResolveRelations Logical Resolution Rule
 
-`ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to [resolve UnresolvedRelations](#apply) (in a logical query plan), i.e.
+`ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to [replace (_resolve_) UnresolvedRelations](#apply).
 
-* Resolves `UnresolvedRelation` logical operators (in `InsertIntoTable` operators)
-
-* Other uses of `UnresolvedRelation`
-
-`ResolveRelations` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
+`ResolveRelations` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
 `ResolveRelations` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
-## Example
+## Creating Instance
+
+`ResolveRelations` takes no arguments to be created.
+
+`ResolveRelations` is created when:
+
+* `Analyzer` is requested for the [batches](../Analyzer.md#batches)
+
+## <span id="apply"> Executing Rule
+
+```scala
+apply(
+  plan: LogicalPlan): LogicalPlan
+```
+
+`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+---
+
+`apply` resolves the following operators in the given [LogicalPlan](../logical-operators/LogicalPlan.md) (from bottom to the top of the tree):
+
+* [InsertIntoStatement](../logical-operators/InsertIntoStatement.md)s
+* [V2WriteCommand](../logical-operators/V2WriteCommand.md)s
+* `UnresolvedRelation`s
+* `RelationTimeTravel`s
+* [UnresolvedTable](../logical-operators/UnresolvedTable.md)s
+* `UnresolvedView`s
+* [UnresolvedTableOrView](../logical-operators/UnresolvedTableOrView.md)s
+
+## Demo
 
 ```text
 // Example: InsertIntoTable with UnresolvedRelation
@@ -70,57 +95,37 @@ scala> println(resolvedPlan.numberedTreeString)
 01 +- 'UnresolvedCatalogRelation `db1`.`t1`, org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
 ```
 
-## <span id="apply"> Executing Rule
+## <span id="lookupRelation"> lookupRelation
 
 ```scala
-apply(
+lookupRelation(
+  u: UnresolvedRelation,
+  timeTravelSpec: Option[TimeTravelSpec] = None): Option[LogicalPlan]
+```
+
+`lookupRelation`...FIXME
+
+## <span id="lookupTableOrView"> lookupTableOrView
+
+```scala
+lookupTableOrView(
+  identifier: Seq[String]): Option[LogicalPlan]
+```
+
+`lookupTableOrView`...FIXME
+
+## <span id="resolveViews"> resolveViews
+
+```scala
+resolveViews(
   plan: LogicalPlan): LogicalPlan
 ```
 
-For a `InsertIntoTable` logical operator with a `UnresolvedRelation` child operator, `apply` [lookupTableFromCatalog](#lookupTableFromCatalog) and executes the [EliminateSubqueryAliases](../logical-optimizations/EliminateSubqueryAliases.md) optimization rule.
+`resolveViews` resolves the [unresolved](../logical-operators/LogicalPlan.md#resolved) child of the given [LogicalPlan](../logical-operators/LogicalPlan.md) if it is one of the following:
 
-For a [View](../logical-operators/View.md) operator, `apply` substitutes the resolved table for the [InsertIntoTable](../logical-operators/InsertIntoTable.md) operator (that will be no longer a `UnresolvedRelation` next time the rule is executed). For [View](../logical-operators/View.md) operator, `apply` fail analysis with the exception:
+* [View](../logical-operators/View.md)
+* [SubqueryAlias](../logical-operators/SubqueryAlias.md) over a [View](../logical-operators/View.md)
 
-```text
-Inserting into a view is not allowed. View: [identifier].
-```
+Otherwise, `resolveViews` returns the given `plan` unmodified.
 
-For `UnresolvedRelation` logical operators, `apply` simply [resolveRelation](#resolveRelation).
-
-`apply` is part of [Rule Contract](../catalyst/Rule.md#apply) abstraction.
-
-=== [[isRunningDirectlyOnFiles]] `isRunningDirectlyOnFiles` Internal Method
-
-[source, scala]
-----
-isRunningDirectlyOnFiles(table: TableIdentifier): Boolean
-----
-
-`isRunningDirectlyOnFiles` is enabled (i.e. `true`) when all of the following conditions hold:
-
-* The database of the input `table` is defined
-
-* [spark.sql.runSQLOnFiles](../configuration-properties.md#spark.sql.runSQLOnFiles) internal configuration property is enabled
-
-* The `table` is not a [temporary table](../SessionCatalog.md#isTemporaryTable)
-
-* The [database](../SessionCatalog.md#databaseExists) or the [table](../SessionCatalog.md#tableExists) do not exist (in the [SessionCatalog](../Analyzer.md#catalog))
-
-NOTE: `isRunningDirectlyOnFiles` is used exclusively when `ResolveRelations` <<resolveRelation, resolves a relation>> (as a `UnresolvedRelation` leaf logical operator for a table reference).
-
-=== [[lookupTableFromCatalog]] Finding Table in Session-Scoped Catalog of Relational Entities -- `lookupTableFromCatalog` Internal Method
-
-[source, scala]
-----
-lookupTableFromCatalog(
-  u: UnresolvedRelation,
-  defaultDatabase: Option[String] = None): LogicalPlan
-----
-
-`lookupTableFromCatalog` simply requests `SessionCatalog` to [find the table in relational catalogs](../SessionCatalog.md#lookupRelation).
-
-NOTE: `lookupTableFromCatalog` requests `Analyzer` for the current [SessionCatalog](../Analyzer.md#catalog).
-
-`lookupTableFromCatalog` fails the analysis phase (by reporting a `AnalysisException`) when the table or the table's database cannot be found.
-
-NOTE: `lookupTableFromCatalog` is used when `ResolveRelations` is <<apply, executed>> (for InsertIntoTable.md[InsertIntoTable] with `UnresolvedRelation` operators) or <<resolveRelation, resolves a relation>> (for "standalone" `UnresolvedRelation`).
+`resolveViews` uses the [CatalogTable](../logical-operators/View.md#desc) (of the [View](../logical-operators/View.md)) to resolve the view (as the `CatalogTable` provides necessary information to resolve it).

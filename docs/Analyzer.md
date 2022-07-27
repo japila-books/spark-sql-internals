@@ -72,7 +72,7 @@ Rules:
 * ResolveNamespace
 * [ResolveCatalogs](logical-analysis-rules/ResolveCatalogs.md)
 * [ResolveInsertInto](logical-analysis-rules/ResolveInsertInto.md)
-* ResolveRelations
+* [ResolveRelations](logical-analysis-rules/ResolveRelations.md)
 * [ResolveTables](logical-analysis-rules/ResolveTables.md)
 * ResolveReferences
 * ResolveCreateNamedStruct

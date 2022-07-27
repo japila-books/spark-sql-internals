@@ -952,7 +952,6 @@ Used when [ReplaceExceptWithFilter](logical-optimizations/ReplaceExceptWithFilte
 
 Used when:
 
-* `ResolveRelations` is requested to [isRunningDirectlyOnFiles](logical-analysis-rules/ResolveRelations.md#isRunningDirectlyOnFiles)
 * `ResolveSQLOnFile` is requested to [maybeSQLFile](logical-analysis-rules/ResolveSQLOnFile.md#maybeSQLFile)
 
 ## <span id="sessionLocalTimeZone"><span id="SESSION_LOCAL_TIMEZONE"> sessionLocalTimeZone
