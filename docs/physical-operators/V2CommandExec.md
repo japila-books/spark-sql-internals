@@ -18,14 +18,12 @@ Used when:
 
 ## Implementations
 
-* [AlterTableExec](AlterTableExec.md)
-* [DescribeTableExec](DescribeTableExec.md)
-* [DropNamespaceExec](DropNamespaceExec.md)
-* [SetCatalogAndNamespaceExec](SetCatalogAndNamespaceExec.md)
-* [ShowTablePropertiesExec](ShowTablePropertiesExec.md)
+* `LeafV2CommandExec`
+* `ShowCreateTableExec`
+* `ShowNamespacesExec`
+* `ShowPartitionsExec`
 * [ShowTablesExec](ShowTablesExec.md)
 * [V2TableWriteExec](V2TableWriteExec.md)
-* _others_
 
 ## <span id="result"> result
 
