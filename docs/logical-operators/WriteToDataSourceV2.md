@@ -1,25 +1,23 @@
 # WriteToDataSourceV2 Logical Operator
 
-`WriteToDataSourceV2` is a [logical operator](LogicalPlan.md) that represents writing data.
+`WriteToDataSourceV2` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents writing data in Spark Structured Streaming (using [WriteToMicroBatchDataSource]({{ book.structured_streaming }}/logical-operators/WriteToMicroBatchDataSource) unary logical operator).
 
-NOTE: `WriteToDataSourceV2` is deprecated for <<AppendData.md#, AppendData>> logical operator since Spark SQL 2.4.0.
+!!! note "Deprecated"
+    `WriteToDataSourceV2` is deprecated since Spark SQL 2.4.0 (in favour of [AppendData](AppendData.md) logical operator).
 
-`WriteToDataSourceV2` is <<creating-instance, created>> when:
+## Creating Instance
 
-* `DataFrameWriter` is requested to [save a DataFrame to a data source](../DataFrameWriter.md#save)
-
-* Spark Structured Streaming's `MicroBatchExecution` is requested to run a streaming batch (with a streaming sink with `StreamWriteSupport`)
-
-[[creating-instance]]
 `WriteToDataSourceV2` takes the following to be created:
 
-* [[writer]] FIXME
-* [[query]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
+* <span id="relation"> [DataSourceV2Relation](DataSourceV2Relation.md)
+* <span id="batchWrite"> [BatchWrite](../connector/BatchWrite.md)
+* <span id="query"> Query [LogicalPlan](LogicalPlan.md)
+* <span id="customMetrics"> Write [CustomMetric](../connector/CustomMetric.md)s
 
-[[children]]
-When requested for the [child operators](../catalyst/TreeNode.md#children), `WriteToDataSourceV2` gives the one <<query, child logical plan>>.
+`WriteToDataSourceV2` is created when:
 
-[[output]]
-When requested for the <<catalyst/QueryPlan.md#output, output attributes>>, `WriteToDataSourceV2` gives no attributes (an empty collection).
+* [V2Writes](../logical-optimizations/V2Writes.md) logical optimization is requested to optimize a logical query (with a `WriteToMicroBatchDataSource` unary logical operator)
 
-`WriteToDataSourceV2` is planned (_translated_) to a <<WriteToDataSourceV2Exec.md#, WriteToDataSourceV2Exec>> physical operator (when <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#, DataSourceV2Strategy>> execution planning strategy is requested to <<execution-planning-strategies/DataSourceV2Strategy.mdadoc#apply-WriteToDataSourceV2, plan a logical query>>).
+## Query Planning
+
+`WriteToDataSourceV2` is planned as [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md) physical operator by [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy.

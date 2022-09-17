@@ -634,6 +634,7 @@ nav:
       - UpdateCTERelationStats: logical-optimizations/UpdateCTERelationStats.md
       - UpdateAttributeNullability: logical-optimizations/UpdateAttributeNullability.md
       - V2ScanRelationPushDown: logical-optimizations/V2ScanRelationPushDown.md
+      - V2Writes: logical-optimizations/V2Writes.md
     - Execution Planning Strategies:
       - SparkStrategy: execution-planning-strategies/SparkStrategy.md
       - Aggregation: execution-planning-strategies/Aggregation.md

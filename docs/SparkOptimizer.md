@@ -28,13 +28,18 @@
 earlyScanPushDownRules: Seq[Rule[LogicalPlan]]
 ```
 
-`earlyScanPushDownRules` defines the following rules:
-
-* `SchemaPruning`
-* `V2ScanRelationPushDown`
-* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md)
-
 `earlyScanPushDownRules` is part of the [Optimizer](catalyst/Optimizer.md) abstraction.
+
+---
+
+`earlyScanPushDownRules` is the following rules:
+
+* [SchemaPruning](logical-optimizations/SchemaPruning.md)
+* `GroupBasedRowLevelOperationScanPlanning`
+* `V2ScanRelationPushDown`
+* `V2ScanPartitioning`
+* [V2Writes](logical-optimizations/V2Writes.md)
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md)
 
 ## <span id="defaultBatches"><span id="batches"> Default Rule Batches
 

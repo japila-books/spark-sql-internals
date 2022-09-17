@@ -72,7 +72,7 @@ translateFilter(
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](#selectFilters)
 * `FileSourceStrategy` execution planning strategy is [executed](FileSourceStrategy.md#apply)
 * `DataSourceV2Strategy` execution planning strategy is [executed](DataSourceV2Strategy.md#apply)
-* `V2Writes` is requested to `apply`
+* [V2Writes](../logical-optimizations/V2Writes.md) logical optimization is requested to optimize a logical query
 
 ## <span id="translateFilterWithMapping"> translateFilterWithMapping
 
