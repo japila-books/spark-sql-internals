@@ -3296,6 +3296,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-optimizations/V2Writes/</loc>
+         <lastmod>2022-09-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support/</loc>
          <lastmod>2022-09-17</lastmod>
          <changefreq>daily</changefreq>
