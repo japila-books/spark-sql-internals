@@ -2,9 +2,6 @@
 
 `AppendData` is a [V2WriteCommand](V2WriteCommand.md) that represents appending data (the result of executing a [structured query](#query)) to a [table](#table) (with the [columns matching](#isByName) by [name](#byName) or [position](#byPosition)).
 
-!!! note
-    `AppendData` has replaced the deprecated [WriteToDataSourceV2](WriteToDataSourceV2.md) logical operator.
-
 ## Creating Instance
 
 `AppendData` takes the following to be created:

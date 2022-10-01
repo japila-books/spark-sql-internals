@@ -16,7 +16,7 @@ query: SparkPlan
 
 * [TableWriteExecHelper](TableWriteExecHelper.md)
 * [V2ExistingTableWriteExec](V2ExistingTableWriteExec.md)
-* [WriteToDataSourceV2Exec](WriteToDataSourceV2Exec.md)
+* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/WriteToDataSourceV2Exec))
 
 ## <span id="writeWithV2"> writeWithV2
 
@@ -25,9 +25,9 @@ writeWithV2(
   batchWrite: BatchWrite): Seq[InternalRow]
 ```
 
-`writeWithV2` requests the [physical query plan](#query) to [execute](SparkPlan.md#execute) (that gives a `RDD[InternalRow]`).
+`writeWithV2` requests the [physical query plan](#query) to [execute](SparkPlan.md#execute) (and produce a `RDD[InternalRow]`).
 
-`writeWithV2` requests the given `BatchWrite` for a [DataWriterFactory](../connector/BatchWrite.md#createBatchWriterFactory).
+`writeWithV2` requests the given [BatchWrite](../connector/BatchWrite.md) to [create a DataWriterFactory](../connector/BatchWrite.md#createBatchWriterFactory) (with the number of partitions of the `RDD`)
 
 `writeWithV2` prints out the following INFO message to the logs:
 
@@ -51,10 +51,16 @@ Data source write support [batchWrite] is committing.
 Data source write support [batchWrite] committed.
 ```
 
-In the end, `writeWithV2` returns no `InternalRow`s.
+In the end, `writeWithV2` returns an empty collection (of `InternalRow`s).
+
+---
 
 `writeWithV2` is used when:
 
-* `WriteToDataSourceV2Exec` is [executed](WriteToDataSourceV2Exec.md#run)
-* `V2ExistingTableWriteExec` is [executed](V2ExistingTableWriteExec.md#run)
 * `TableWriteExecHelper` is requested to [writeToTable](TableWriteExecHelper.md#writeToTable)
+* `V2ExistingTableWriteExec` is [executed](V2ExistingTableWriteExec.md#run)
+* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/WriteToDataSourceV2Exec)) is executed
+
+## Logging
+
+`V2TableWriteExec` is a Scala trait and logging is configured using the logger of the [implementations](#implementations).

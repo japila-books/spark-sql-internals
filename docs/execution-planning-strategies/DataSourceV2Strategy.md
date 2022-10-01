@@ -7,7 +7,7 @@ Logical Operator | Physical Operator
  [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) with [V1Scan](../connector/V1Scan.md) | [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md)
  [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) | [BatchScanExec](../physical-operators/BatchScanExec.md)
  `StreamingDataSourceV2Relation` |
- [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) | [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md)
+ `WriteToDataSourceV2` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/WriteToDataSourceV2)) | `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/WriteToDataSourceV2Exec))
  [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) | `AtomicCreateTableAsSelectExec` or [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
  `RefreshTable` | `RefreshTableExec`
  `ReplaceTable` | `AtomicReplaceTableExec` or `ReplaceTableExec`

@@ -24,13 +24,7 @@ When executed, `DataSourceV2ScanExec` physical operator creates a [DataSourceRDD
 
 ## Data Writing
 
-DataSource V2 uses [WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) and [AppendData](../logical-operators/AppendData.md) logical operators to represent data writing (over a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) logical operator). As of Spark SQL 2.4.0, `WriteToDataSourceV2` operator was deprecated for the more specific `AppendData` operator (compare _"data writing"_ to _"data append"_ which is certainly more specific).
-
-NOTE: One of the differences between `WriteToDataSourceV2` and `AppendData` logical operators is that the former (`WriteToDataSourceV2`) uses [DataSourceWriter](../logical-operators/WriteToDataSourceV2.md#writer) directly while the latter (`AppendData`) uses [DataSourceV2Relation](../logical-operators/AppendData.md#table) to [get the DataSourceWriter from](../logical-operators/DataSourceV2Relation.md#newWriter).
-
-[WriteToDataSourceV2](../logical-operators/WriteToDataSourceV2.md) and [AppendData](../logical-operators/AppendData.md) (with [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md)) logical operators are planned as (_translated to_) a [WriteToDataSourceV2Exec](../physical-operators/WriteToDataSourceV2Exec.md) physical operator.
-
-When executed, `WriteToDataSourceV2Exec` physical operator...FIXME
+DataSource V2 uses `WriteToDataSourceV2` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/WriteToDataSourceV2)) and [AppendData](../logical-operators/AppendData.md) logical operators to represent data writing (over a [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) logical operator). As of Spark SQL 2.4.0, `WriteToDataSourceV2` operator was deprecated for the more specific `AppendData` operator (compare _"data writing"_ to _"data append"_ which is certainly more specific).
 
 ## <span id="filter-pushdown"> Filter Pushdown Performance Optimization
 

@@ -27,13 +27,11 @@ Logical operators with a single [child](../catalyst/TreeNode.md#children) logica
 * [CreateTable](CreateTable.md)
 * [IgnoreCachedData](IgnoreCachedData.md)
 * [NamedRelation](NamedRelation.md)
-* `ObjectProducer`
 * [ParsedStatement](ParsedStatement.md)
 * [SupportsSubquery](SupportsSubquery.md)
-* `Union`
 * [V2CreateTablePlan](V2CreateTablePlan.md)
 * [View](View.md)
-* [WriteToDataSourceV2](WriteToDataSourceV2.md)
+* _others_
 
 ## <span id="statsCache"> Statistics Cache
 
