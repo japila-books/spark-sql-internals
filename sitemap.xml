@@ -11,11 +11,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/AggregationIterator/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/Analyzer/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -321,11 +316,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/ObjectAggregationIterator/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/OffHeapColumnVector/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -506,11 +496,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/SortBasedAggregationIterator/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/SparkOptimizer/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -556,22 +541,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/TungstenAggregationIterator/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/TypedColumn/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/UDFRegistration/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/UnsafeFixedWidthAggregationMap/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3366,6 +3341,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AggregationIterator/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AliasAwareOutputExpression/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -3631,6 +3611,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/ObjectAggregationIterator/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/ObjectAggregationMap/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/ObjectConsumerExec/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -3751,6 +3741,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/SortBasedAggregationIterator/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/SortExec/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -3781,7 +3776,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/TungstenAggregationIterator/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/UnaryExecNode/</loc>
+         <lastmod>2022-10-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/UnsafeFixedWidthAggregationMap/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
