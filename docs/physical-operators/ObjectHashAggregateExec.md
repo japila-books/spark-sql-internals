@@ -2,7 +2,7 @@
 
 `ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.
 
-`ObjectHashAggregateExec` uses [ObjectAggregationIterator](../ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
+`ObjectHashAggregateExec` uses [ObjectAggregationIterator](ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
 
 ![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
 
@@ -39,15 +39,15 @@ The time to [doExecute](#doExecute) of a single partition.
 ### <span id="numOutputRows"> number of output rows
 
 * `1` when there is no input rows in a partition and no [groupingExpressions](#groupingExpressions).
-* Used to create an [ObjectAggregationIterator](../ObjectAggregationIterator.md#numOutputRows).
+* Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numOutputRows).
 
 ### <span id="numTasksFallBacked"> number of sort fallback tasks
 
-Used to create a [ObjectAggregationIterator](../ObjectAggregationIterator.md#numTasksFallBacked).
+Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#numTasksFallBacked).
 
 ### <span id="spillSize"> spill size
 
-Used to create a [ObjectAggregationIterator](../ObjectAggregationIterator.md#spillSize).
+Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#spillSize).
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -66,9 +66,9 @@ doExecute(): RDD[InternalRow]
 
 For no input records (in a partition) and non-empty [groupingExpressions](#groupingExpressions), `doExecute` returns an empty `Iterator`.
 
-Otherwise, `doExecute` creates a [ObjectAggregationIterator](../ObjectAggregationIterator.md).
+Otherwise, `doExecute` creates a [ObjectAggregationIterator](ObjectAggregationIterator.md).
 
-For no input records (in a partition) and no [groupingExpressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (so it's just `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](../ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
+For no input records (in a partition) and no [groupingExpressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (so it's just `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
 
 Otherwise, `doExecute` returns the `ObjectAggregationIterator`.
 

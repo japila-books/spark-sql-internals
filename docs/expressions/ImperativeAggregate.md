@@ -15,9 +15,9 @@ Used when:
 
 * `EliminateAggregateFilter` logical optimization is executed
 * `AggregatingAccumulator` is requested to `createBuffer`
-* `AggregationIterator` is requested to [initializeBuffer](../AggregationIterator.md#initializeBuffer)
-* `ObjectAggregationIterator` is requested to [initAggregationBuffer](../ObjectAggregationIterator.md#initAggregationBuffer)
-* `TungstenAggregationIterator` is requested to [createNewAggregationBuffer](../TungstenAggregationIterator.md#createNewAggregationBuffer)
+* `AggregationIterator` is requested to [initializeBuffer](../physical-operators/AggregationIterator.md#initializeBuffer)
+* `ObjectAggregationIterator` is requested to [initAggregationBuffer](../physical-operators/ObjectAggregationIterator.md#initAggregationBuffer)
+* `TungstenAggregationIterator` is requested to [createNewAggregationBuffer](../physical-operators/TungstenAggregationIterator.md#createNewAggregationBuffer)
 * `AggregateProcessor` is requested to [initialize](../window-functions/AggregateProcessor.md#initialize)
 
 ### <span id="merge"> merge
@@ -31,7 +31,7 @@ merge(
 Used when:
 
 * `AggregatingAccumulator` is requested to `merge`
-* `AggregationIterator` is requested to [generateProcessRow](../AggregationIterator.md#generateProcessRow)
+* `AggregationIterator` is requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow)
 
 ### <span id="update"> update
 
@@ -44,7 +44,7 @@ update(
 Used when:
 
 * `AggregatingAccumulator` is requested to `add` an `InternalRow`
-* `AggregationIterator` is requested to [generateProcessRow](../AggregationIterator.md#generateProcessRow)
+* `AggregationIterator` is requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow)
 * `AggregateProcessor` is requested to [update](../window-functions/AggregateProcessor.md#update)
 
 ## Implementations

@@ -1,6 +1,6 @@
 # TungstenAggregationIterator
 
-`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator.
+`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](HashAggregateExec.md) physical operator.
 
 `TungstenAggregationIterator` prefers hash-based aggregation (before [switching to a sort-based aggregation](#switchToSortBasedAggregation)).
 
@@ -9,40 +9,40 @@
 `TungstenAggregationIterator` takes the following to be created:
 
 * <span id="partIndex"> Partition ID
-* <span id="groupingExpressions"> Grouping [NamedExpression](expressions/NamedExpression.md)s
-* <span id="aggregateExpressions"> [AggregateExpression](expressions/AggregateExpression.md)s
-* <span id="aggregateAttributes"> Aggregate [Attribute](expressions/Attribute.md)s
+* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
-* <span id="resultExpressions"> Result [NamedExpression](expressions/NamedExpression.md)s
+* <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
-* <span id="originalInputAttributes"> Original Input [Attribute](expressions/Attribute.md)s
-* <span id="inputIter"> Input Iterator of [InternalRow](InternalRow.md)s (from a single partition of the [child](physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator)
-* <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](physical-operators/HashAggregateExec.md#testFallbackStartsAt)
-* <span id="numOutputRows"> `numOutputRows` [SQLMetric](physical-operators/SQLMetric.md)
-* <span id="peakMemory"> `peakMemory` [SQLMetric](physical-operators/SQLMetric.md)
-* <span id="spillSize"> `spillSize` [SQLMetric](physical-operators/SQLMetric.md)
-* <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](physical-operators/SQLMetric.md)
+* <span id="originalInputAttributes"> Original Input [Attribute](../expressions/Attribute.md)s
+* <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](HashAggregateExec.md#child) of the [HashAggregateExec](HashAggregateExec.md) physical operator)
+* <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](HashAggregateExec.md#testFallbackStartsAt)
+* <span id="numOutputRows"> `numOutputRows` [SQLMetric](SQLMetric.md)
+* <span id="peakMemory"> `peakMemory` [SQLMetric](SQLMetric.md)
+* <span id="spillSize"> `spillSize` [SQLMetric](SQLMetric.md)
+* <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](SQLMetric.md)
 
 `TungstenAggregationIterator` is created when:
 
-* `HashAggregateExec` physical operator is requested to [doExecute](physical-operators/HashAggregateExec.md#doExecute)
+* `HashAggregateExec` physical operator is requested to [doExecute](HashAggregateExec.md#doExecute)
 
 !!! note
-    The SQL metrics ([numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe)) belong to the [HashAggregateExec](physical-operators/HashAggregateExec.md#metrics) physical operator that created the `TungstenAggregationIterator`.
+    The SQL metrics ([numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe)) belong to the [HashAggregateExec](HashAggregateExec.md#metrics) physical operator that created the `TungstenAggregationIterator`.
 
 `TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) if did not [switch to a sort-based aggregation](#sortBased).
 
 ## <span id="metrics"> Performance Metrics
 
-When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](physical-operators/SQLMetric.md)s from the [HashAggregateExec](physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
+When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](SQLMetric.md)s from the [HashAggregateExec](HashAggregateExec.md#metrics) aggregate physical operator being executed.
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 
 * [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) are used at the [end of every task](#TaskCompletionListener) (one per partition)
 
-The metrics are displayed as part of [HashAggregateExec](physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](SQLTab.md#ExecutionPage)).
+The metrics are displayed as part of [HashAggregateExec](HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../SQLTab.md#ExecutionPage)).
 
-![HashAggregateExec in web UI (Details for Query)](images/HashAggregateExec-webui-details-for-query.png)
+![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
 ## <span id="next"> Next UnsafeRow
 
@@ -90,7 +90,7 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 `outputForEmptyGroupingKeyWithoutInput` is used when:
 
-* `HashAggregateExec` physical operator is requested to [execute](physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
+* `HashAggregateExec` physical operator is requested to [execute](HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
 
 ## Demo
 

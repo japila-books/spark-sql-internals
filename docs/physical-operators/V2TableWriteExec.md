@@ -16,7 +16,7 @@ query: SparkPlan
 
 * [TableWriteExecHelper](TableWriteExecHelper.md)
 * [V2ExistingTableWriteExec](V2ExistingTableWriteExec.md)
-* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/WriteToDataSourceV2Exec))
+* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/WriteToDataSourceV2Exec))
 
 ## <span id="writeWithV2"> writeWithV2
 
@@ -59,7 +59,7 @@ In the end, `writeWithV2` returns an empty collection (of `InternalRow`s).
 
 * `TableWriteExecHelper` is requested to [writeToTable](TableWriteExecHelper.md#writeToTable)
 * `V2ExistingTableWriteExec` is [executed](V2ExistingTableWriteExec.md#run)
-* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/WriteToDataSourceV2Exec)) is executed
+* `WriteToDataSourceV2Exec` ([Spark Structured Streaming]({{ book.structured_streaming }}/WriteToDataSourceV2Exec)) is executed
 
 ## Logging
 

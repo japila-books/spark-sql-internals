@@ -31,7 +31,7 @@ Used when:
 * [Exchange](Exchange.md)
 * [FilterExec](FilterExec.md)
 * FlatMapGroupsInPandasExec ([PySpark]({{ book.pyspark }}/sql/FlatMapGroupsInPandasExec))
-* FlatMapGroupsWithStateExec ([Structured Streaming]({{ book.structured_streaming }}/physical-operators/FlatMapGroupsWithStateExec))
+* FlatMapGroupsWithStateExec ([Structured Streaming]({{ book.structured_streaming }}/FlatMapGroupsWithStateExec))
 * [GenerateExec](GenerateExec.md)
 * [InputAdapter](InputAdapter.md)
 * [ObjectConsumerExec](ObjectConsumerExec.md)

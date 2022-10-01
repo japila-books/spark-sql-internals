@@ -1,6 +1,6 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](UnsafeRow.md) keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](../UnsafeRow.md) keys and values.
 
 ## <span id="supportsAggregationBufferSchema"> supportsAggregationBufferSchema
 
@@ -9,7 +9,7 @@ boolean supportsAggregationBufferSchema(
   StructType schema)
 ```
 
-`supportsAggregationBufferSchema` is enabled (`true`) if all of the [top-level fields](types/StructType.md#fields) (of the given [schema](types/StructType.md)) are [mutable](UnsafeRow.md#isMutable).
+`supportsAggregationBufferSchema` is enabled (`true`) if all of the [top-level fields](../types/StructType.md#fields) (of the given [schema](../types/StructType.md)) are [mutable](../UnsafeRow.md#isMutable).
 
 ```scala
 import org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap
@@ -30,7 +30,7 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 
 `supportsAggregationBufferSchema` is used when:
 
-* `HashAggregateExec` utility is used for the [selection requirements](physical-operators/HashAggregateExec.md#supportsAggregate)
+* `HashAggregateExec` utility is used for the [selection requirements](HashAggregateExec.md#supportsAggregate)
 
 ## Review Me
 
@@ -38,9 +38,9 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 
 `UnsafeFixedWidthAggregationMap` is <<creating-instance, created>> when:
 
-* `HashAggregateExec` physical operator is requested to [create a new UnsafeFixedWidthAggregationMap](physical-operators/HashAggregateExec.md#createHashMap) (when `HashAggregateExec` physical operator is requested to [generate the Java source code for "produce" path in Whole-Stage Code Generation](physical-operators/HashAggregateExec.md#doProduceWithKeys))
+* `HashAggregateExec` physical operator is requested to [create a new UnsafeFixedWidthAggregationMap](HashAggregateExec.md#createHashMap) (when `HashAggregateExec` physical operator is requested to [generate the Java source code for "produce" path in Whole-Stage Code Generation](HashAggregateExec.md#doProduceWithKeys))
 
-* `TungstenAggregationIterator` is <<TungstenAggregationIterator.md#hashMap, created>> (when `HashAggregateExec` physical operator is requested to [execute](physical-operators/HashAggregateExec.md#doExecute) in traditional / non-Whole-Stage-Code-Generation execution path)
+* `TungstenAggregationIterator` is <<TungstenAggregationIterator.md#hashMap, created>> (when `HashAggregateExec` physical operator is requested to [execute](HashAggregateExec.md#doExecute) in traditional / non-Whole-Stage-Code-Generation execution path)
 
 [[internal-registries]]
 .UnsafeFixedWidthAggregationMap's Internal Properties (e.g. Registries, Counters and Flags)
@@ -55,10 +55,10 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggregationBufferFromUnsafeRow, getAggregationBufferFromUnsafeRow>>.
 
 | emptyAggregationBuffer
-| [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> ([encoded in UnsafeRow format](expressions/UnsafeProjection.md#create))
+| [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> ([encoded in UnsafeRow format](../expressions/UnsafeProjection.md#create))
 
 | groupingKeyProjection
-| [[groupingKeyProjection]] [UnsafeProjection](expressions/UnsafeProjection.md) for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
+| [[groupingKeyProjection]] [UnsafeProjection](../expressions/UnsafeProjection.md) for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
 
 | map
 a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled
@@ -68,14 +68,12 @@ a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemo
 
 `UnsafeFixedWidthAggregationMap` takes the following when created:
 
-* [[emptyAggregationBuffer]] Empty aggregation buffer (as an [InternalRow](InternalRow.md))
-* [[aggregationBufferSchema]] Aggregation buffer [schema](types/StructType.md)
-* [[groupingKeySchema]] Grouping key [schema](types/StructType.md)
+* [[emptyAggregationBuffer]] Empty aggregation buffer (as an [InternalRow](../InternalRow.md))
+* [[aggregationBufferSchema]] Aggregation buffer [schema](../types/StructType.md)
+* [[groupingKeySchema]] Grouping key [schema](../types/StructType.md)
 * [[taskMemoryManager]] Spark Core's `TaskMemoryManager`
 * [[initialCapacity]] Initial capacity
 * [[pageSizeBytes]] Page size (in bytes)
-
-`UnsafeFixedWidthAggregationMap` initializes the <<internal-registries, internal registries and counters>>.
 
 === [[getAggregationBufferFromUnsafeRow]] `getAggregationBufferFromUnsafeRow` Method
 
@@ -121,7 +119,7 @@ KVIterator<UnsafeRow, UnsafeRow> iterator()
 
 `iterator` is used when:
 
-* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
+* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
 
 * [TungstenAggregationIterator](TungstenAggregationIterator.md) is created (and pre-loads the first key-value pair from the map)
 
@@ -136,7 +134,7 @@ long getPeakMemoryUsedBytes()
 
 `getPeakMemoryUsedBytes` is used when:
 
-* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
+* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
 
 * `TungstenAggregationIterator` is [used in TaskCompletionListener](TungstenAggregationIterator.md#TaskCompletionListener)
 
@@ -151,7 +149,7 @@ double getAverageProbesPerLookup()
 
 `getAverageProbesPerLookup` is used when:
 
-* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
+* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
 
 * `TungstenAggregationIterator` is [used in TaskCompletionListener](TungstenAggregationIterator.md#TaskCompletionListener)
 
@@ -166,7 +164,7 @@ void free()
 
 `free` is used when:
 
-* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
+* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
 
 * `TungstenAggregationIterator` is requested to [processInputs](TungstenAggregationIterator.md#processInputs) (when [TungstenAggregationIterator](TungstenAggregationIterator.md) is created), [get the next UnsafeRow](TungstenAggregationIterator.md#next), [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) and is [created](TungstenAggregationIterator.md)
 
@@ -181,6 +179,6 @@ UnsafeKVExternalSorter destructAndCreateExternalSorter() throws IOException
 
 `destructAndCreateExternalSorter` is used when:
 
-* `HashAggregateExec` physical operator is requested to [finishAggregate](physical-operators/HashAggregateExec.md#finishAggregate)
+* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
 
 * [TungstenAggregationIterator](TungstenAggregationIterator.md) is created (and requested to [processInputs](TungstenAggregationIterator.md#processInputs))

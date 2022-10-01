@@ -16,7 +16,7 @@ Used when:
 
 * `EliminateAggregateFilter` logical optimization is executed
 * `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
-* `AggregationIterator` is requested for the [generateResultProjection](../AggregationIterator.md#generateResultProjection)
+* `AggregationIterator` is requested for the [generateResultProjection](../physical-operators/AggregationIterator.md#generateResultProjection)
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
@@ -32,7 +32,7 @@ Used when:
 
 * `EliminateAggregateFilter` logical optimization is executed
 * `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
-* `AggregationIterator` is [created](../AggregationIterator.md#expressionAggInitialProjection)
+* `AggregationIterator` is [created](../physical-operators/AggregationIterator.md#expressionAggInitialProjection)
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys), [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap) and [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
 * `HashMapGenerator` is created
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)

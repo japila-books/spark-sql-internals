@@ -1,6 +1,6 @@
 # AggregationIterators
 
-`AggregationIterator` is an [abstraction](#contract) of [aggregation iterators](#implementations) of [UnsafeRow](UnsafeRow.md)s.
+`AggregationIterator` is an [abstraction](#contract) of [aggregation iterators](#implementations) of [UnsafeRow](../UnsafeRow.md)s.
 
 ```scala
 abstract class AggregationIterator(...)
@@ -22,12 +22,12 @@ From [scala.collection.Iterator]({{ scala.api }}/scala/collection/Iterator.html)
 `AggregationIterator` takes the following to be created:
 
 * <span id="partIndex"> Partition ID
-* <span id="groupingExpressions"> Grouping [NamedExpression](expressions/NamedExpression.md)s
-* <span id="inputAttributes"> Input [Attribute](expressions/Attribute.md)s
-* <span id="aggregateExpressions"> [AggregateExpression](expressions/AggregateExpression.md)s
-* <span id="aggregateAttributes"> Aggregate [Attribute](expressions/Attribute.md)s
+* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="inputAttributes"> Input [Attribute](../expressions/Attribute.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
-* <span id="resultExpressions"> Result [NamedExpression](expressions/NamedExpression.md)s
+* <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 
 ??? note "Abstract Class"

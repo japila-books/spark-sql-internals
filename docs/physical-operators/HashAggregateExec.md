@@ -13,10 +13,10 @@
 
 `HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
-`HashAggregateExec` uses [TungstenAggregationIterator](../TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
+`HashAggregateExec` uses [TungstenAggregationIterator](TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
 
 !!! note
-    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../TungstenAggregationIterator.md#switchToSortBasedAggregation).
+    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](TungstenAggregationIterator.md#switchToSortBasedAggregation).
 
     See [testFallbackStartsAt](#testFallbackStartsAt) internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
 
@@ -33,7 +33,7 @@ supportsAggregate(
   aggregateBufferAttributes: Seq[Attribute]): Boolean
 ```
 
-`supportsAggregate` [checks support for aggregation](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) given the aggregation buffer [Attribute](../expressions/Attribute.md)s.
+`supportsAggregate` [checks support for aggregation](UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) given the aggregation buffer [Attribute](../expressions/Attribute.md)s.
 
 `supportsAggregate` is used when:
 
@@ -228,10 +228,10 @@ In the end, `doExecute` calculates the <<aggTime, aggTime>> metric and returns a
 
 * A single-element `Iterator[UnsafeRow]` with the <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
 
-* The [TungstenAggregationIterator](../TungstenAggregationIterator.md)
+* The [TungstenAggregationIterator](TungstenAggregationIterator.md)
 
 !!! note
-    The [numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) metrics are used exclusively to create the [TungstenAggregationIterator](../TungstenAggregationIterator.md).
+    The [numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) metrics are used exclusively to create the [TungstenAggregationIterator](TungstenAggregationIterator.md).
 
 !!! note
     `doExecute` (by `RDD.mapPartitionsWithIndex` transformation) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
@@ -352,7 +352,7 @@ finishAggregate(
 createHashMap(): UnsafeFixedWidthAggregationMap
 ```
 
-`createHashMap` creates a [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
+`createHashMap` creates a [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
 ## Internal Properties
 

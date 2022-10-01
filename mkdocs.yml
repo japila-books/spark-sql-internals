@@ -445,6 +445,12 @@ nav:
     - Physical Operators:
       - physical-operators/index.md
       - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
+      - AggregationIterators:
+        - AggregationIterator: physical-operators/AggregationIterator.md
+        - ObjectAggregationIterator: physical-operators/ObjectAggregationIterator.md
+        - ObjectAggregationMap: physical-operators/ObjectAggregationMap.md
+        - SortBasedAggregationIterator: physical-operators/SortBasedAggregationIterator.md
+        - TungstenAggregationIterator: physical-operators/TungstenAggregationIterator.md
       - AliasAwareOutputExpression: physical-operators/AliasAwareOutputExpression.md
       - AliasAwareOutputOrdering: physical-operators/AliasAwareOutputOrdering.md
       - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
@@ -677,7 +683,7 @@ nav:
       - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
-      - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
+      - UnsafeFixedWidthAggregationMap: physical-operators/UnsafeFixedWidthAggregationMap.md
     - Encoder:
       - Encoder: Encoder.md
       - ExpressionEncoder: ExpressionEncoder.md
@@ -981,11 +987,6 @@ nav:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
-    - AggregationIterators:
-      - AggregationIterator: AggregationIterator.md
-      - ObjectAggregationIterator: ObjectAggregationIterator.md
-      - SortBasedAggregationIterator: SortBasedAggregationIterator.md
-      - TungstenAggregationIterator: TungstenAggregationIterator.md
     - FileScanRDD: rdds/FileScanRDD.md
     - Monitoring:
       - SQLTab: SQLTab.md
