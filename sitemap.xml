@@ -3061,11 +3061,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/WriteToDataSourceV2/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-optimizations/AQEPropagateEmptyRelation/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
@@ -3827,11 +3822,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WindowExecBase/</loc>
-         <lastmod>2022-10-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WriteToDataSourceV2Exec/</loc>
          <lastmod>2022-10-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
