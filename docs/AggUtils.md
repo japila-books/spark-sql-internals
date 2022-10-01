@@ -60,6 +60,51 @@ createAggregate(
 
 1. [SortAggregateExec](physical-operators/SortAggregateExec.md)
 
+---
+
 `createAggregate` is used when:
 
-* `AggUtils` is used to [planAggregateWithoutDistinct](#planAggregateWithoutDistinct), [planAggregateWithOneDistinct](#planAggregateWithOneDistinct), and `planStreamingAggregation`
+* `AggUtils` is used to [createStreamingAggregate](#createStreamingAggregate), [planAggregateWithoutDistinct](#planAggregateWithoutDistinct), [planAggregateWithOneDistinct](#planAggregateWithOneDistinct)
+
+## <span id="planStreamingAggregation"> Planning Execution of Streaming Aggregation
+
+```scala
+planStreamingAggregation(
+  groupingExpressions: Seq[NamedExpression],
+  functionsWithoutDistinct: Seq[AggregateExpression],
+  resultExpressions: Seq[NamedExpression],
+  stateFormatVersion: Int,
+  child: SparkPlan): Seq[SparkPlan]
+```
+
+`planStreamingAggregation`...FIXME
+
+---
+
+`planStreamingAggregation` is used when:
+
+* `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/StatefulAggregationStrategy)) execution planning strategy is requested to plan a logical plan of a streaming aggregation (a streaming query with [Aggregate](logical-operators/Aggregate.md) operator)
+
+## <span id="createStreamingAggregate"> Creating Streaming Aggregate Physical Operator
+
+```scala
+createStreamingAggregate(
+  requiredChildDistributionExpressions: Option[Seq[Expression]] = None,
+  groupingExpressions: Seq[NamedExpression] = Nil,
+  aggregateExpressions: Seq[AggregateExpression] = Nil,
+  aggregateAttributes: Seq[Attribute] = Nil,
+  initialInputBufferOffset: Int = 0,
+  resultExpressions: Seq[NamedExpression] = Nil,
+  child: SparkPlan): SparkPlan
+```
+
+`createStreamingAggregate` [creates an aggregate physical operator](#createAggregate) (with `isStreaming` flag enabled).
+
+!!! note
+    `createStreamingAggregate` is exactly [createAggregate](#createAggregate) with `isStreaming` flag enabled.
+
+---
+
+`createStreamingAggregate` is used when:
+
+* `AggUtils` is requested to plan a [regular](#planStreamingAggregation) and [session-windowed](#planStreamingAggregationForSession) streaming aggregation

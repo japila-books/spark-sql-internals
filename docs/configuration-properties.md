@@ -50,6 +50,14 @@ Since: `3.2.0`
 
 Use [SQLConf.ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS](SQLConf.md#ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS) method to access the property (in a type-safe way).
 
+## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
+
+**(internal)** The number of rows of an in-memory hash map (to store aggregation buffer) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](ObjectAggregationIterator.md#processInputs) precisely) falls back to sort-based aggregation
+
+Default: `128`
+
+Use [SQLConf.objectAggSortBasedFallbackThreshold](SQLConf.md#objectAggSortBasedFallbackThreshold) for the current value
+
 ## <span id="spark.sql.optimizer.decorrelateInnerQuery.enabled"> spark.sql.optimizer.decorrelateInnerQuery.enabled
 
 **(internal)** Decorrelates inner queries by eliminating correlated references and build domain joins

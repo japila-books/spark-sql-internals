@@ -16,7 +16,7 @@
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 * <span id="originalInputAttributes"> Original Input [Attribute](expressions/Attribute.md)s
 * <span id="inputRows"> Input [InternalRow](InternalRow.md)s
-* <span id="fallbackCountThreshold"> `fallbackCountThreshold`
+* <span id="fallbackCountThreshold"> [spark.sql.objectHashAggregate.sortBased.fallbackThreshold](configuration-properties.md#spark.sql.objectHashAggregate.sortBased.fallbackThreshold)
 * <span id="numOutputRows"> `numOutputRows` [SQLMetric](physical-operators/SQLMetric.md)
 
 `ObjectAggregationIterator` is created when:

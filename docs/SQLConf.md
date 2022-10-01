@@ -713,6 +713,10 @@ Used when:
 
 * [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
+## <span id="objectAggSortBasedFallbackThreshold"><span id="OBJECT_AGG_SORT_BASED_FALLBACK_THRESHOLD"> objectAggSortBasedFallbackThreshold
+
+[spark.sql.objectHashAggregate.sortBased.fallbackThreshold](configuration-properties.md#spark.sql.objectHashAggregate.sortBased.fallbackThreshold)
+
 ## <span id="offHeapColumnVectorEnabled"> offHeapColumnVectorEnabled
 
 [spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled)

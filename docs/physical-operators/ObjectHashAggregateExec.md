@@ -2,7 +2,75 @@
 
 `ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.
 
+`ObjectHashAggregateExec` uses [ObjectAggregationIterator](../ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
+
 ![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
+
+## Creating Instance
+
+`ObjectHashAggregateExec` takes the following to be created:
+
+* <span id="requiredChildDistributionExpressions"> Required Child Distribution [Expression](../expressions/Expression.md)s
+* [isStreaming](#isStreaming) flag
+* <span id="numShufflePartitions"> Number of Shuffle Partitions (always `None`)
+* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
+* <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
+* <span id="initialInputBufferOffset"> Initial Input Buffer Offset
+* <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="child"> Child [Physical Operator](SparkPlan.md)
+
+`ObjectHashAggregateExec` is created when:
+
+* `AggUtils` is requested to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
+
+### <span id="isStreaming"> isStreaming Flag
+
+`ObjectHashAggregateExec` is given `isStreaming` flag when [created](#creating-instance).
+
+The `isStreaming` is always `false` but when `AggUtils` is requested to [create a streaming aggregate physical operator](../AggUtils.md#createStreamingAggregate).
+
+## <span id="metrics"> Performance Metrics
+
+### <span id="aggTime"> time in aggregation build
+
+The time to [doExecute](#doExecute) of a single partition.
+
+### <span id="numOutputRows"> number of output rows
+
+* `1` when there is no input rows in a partition and no [groupingExpressions](#groupingExpressions).
+* Used to create an [ObjectAggregationIterator](../ObjectAggregationIterator.md#numOutputRows).
+
+### <span id="numTasksFallBacked"> number of sort fallback tasks
+
+Used to create a [ObjectAggregationIterator](../ObjectAggregationIterator.md#numTasksFallBacked).
+
+### <span id="spillSize"> spill size
+
+Used to create a [ObjectAggregationIterator](../ObjectAggregationIterator.md#spillSize).
+
+## <span id="doExecute"> Executing Physical Operator
+
+```scala
+doExecute(): RDD[InternalRow]
+```
+
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+---
+
+`doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (and generate an `RDD[InternalRow]`) that is `mapPartitionsWithIndexInternal` to process partitions.
+
+!!! note
+    `doExecute` adds a new `MapPartitionsRDD` ([Spark Core]({{ book.spark_core }}/rdd/MapPartitionsRDD)) to the RDD lineage.
+
+For no input records (in a partition) and non-empty [groupingExpressions](#groupingExpressions), `doExecute` returns an empty `Iterator`.
+
+Otherwise, `doExecute` creates a [ObjectAggregationIterator](../ObjectAggregationIterator.md).
+
+For no input records (in a partition) and no [groupingExpressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (so it's just `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](../ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
+
+Otherwise, `doExecute` returns the `ObjectAggregationIterator`.
 
 ## <span id="supportsAggregate"> Selection Requirements
 
@@ -13,44 +81,11 @@ supportsAggregate(
 
 `supportsAggregate` is enabled (`true`) when there is a `TypedImperativeAggregate` aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
 
+---
+
 `supportsAggregate` is used when:
 
 * `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
-
-## Creating Instance
-
-`ObjectHashAggregateExec` takes the following to be created:
-
-* <span id="requiredChildDistributionExpressions"> (optional) Required Child Distribution [Expression](../expressions/Expression.md)s
-* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
-* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
-* <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
-* <span id="initialInputBufferOffset"> Initial Input Buffer Offset
-* <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
-* <span id="child"> Child [Physical Operator](SparkPlan.md)
-
-`ObjectHashAggregateExec` is created when:
-
-* `AggUtils` utility is used to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)
-----------------|--------------------------
-numOutputRows   | number of output rows
-aggTime         | time in aggregation build
-
-## <span id="doExecute"> Executing Physical Operator
-
-```scala
-doExecute(): RDD[InternalRow]
-```
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-`doExecute` uses [ObjectAggregationIterator](../ObjectAggregationIterator.md) for aggregation (one per partition).
-
-`doExecute`...FIXME
 
 ## Demo
 
