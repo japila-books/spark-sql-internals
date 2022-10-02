@@ -3,8 +3,8 @@
 `Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in a [logical query plan](LogicalPlan.md):
 
 * `AstBuilder` is requested to [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan) (`HAVING` clause without `GROUP BY`) and [parse GROUP BY clause](../sql/AstBuilder.md#withAggregationClause)
-* `KeyValueGroupedDataset` is requested to [agg](../KeyValueGroupedDataset.md#agg) (and [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped))
-* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+* `KeyValueGroupedDataset` is requested to [agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) (and [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped))
+* `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF)
 
 ## Creating Instance
 
@@ -18,8 +18,8 @@
 
 * `AstBuilder` is requested to [withSelectQuerySpecification](../sql/AstBuilder.md#withSelectQuerySpecification) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
 * `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
-* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped)
-* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped)
+* `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF)
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
 
 ## Query Planning

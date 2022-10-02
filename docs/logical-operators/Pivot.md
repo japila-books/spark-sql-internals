@@ -1,6 +1,6 @@
 # Pivot Unary Logical Operator
 
-`Pivot` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents [pivot](../RelationalGroupedDataset.md#pivot) operator.
+`Pivot` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents [pivot](../basic-aggregation/RelationalGroupedDataset.md#pivot) operator.
 
 ## Creating Instance
 
@@ -15,7 +15,7 @@
 `Pivot` is created when:
 
 * `AstBuilder` is requested to [parse PIVOT clause](../sql/AstBuilder.md#withPivot)
-* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF) (with `PivotType`)
+* `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF) (with `PivotType`)
 
 ## <span id="analyzer"> Analysis Phase
 

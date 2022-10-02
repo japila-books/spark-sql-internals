@@ -307,7 +307,7 @@ generateAlias(e: Expression): String
 `generateAlias` is used when:
 
 * `Column` is requested to <<named, named>>
-* `RelationalGroupedDataset` is requested to [alias](RelationalGroupedDataset.md#alias)
+* `RelationalGroupedDataset` is requested to [alias](basic-aggregation/RelationalGroupedDataset.md#alias)
 
 === [[named]] `named` Method
 
@@ -321,4 +321,4 @@ named: NamedExpression
 `named` is used when the following operators are used:
 
 * [Dataset.select](spark-sql-dataset-operators.md#select)
-* [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)
+* [KeyValueGroupedDataset.agg](basic-aggregation/KeyValueGroupedDataset.md#agg)

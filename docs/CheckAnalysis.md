@@ -69,7 +69,7 @@ In the end, `checkAnalysis` [marks the entire logical plan as analyzed](logical-
 * `CheckAnalysis` is requested to [checkSubqueryExpression](#checkSubqueryExpression)
 * Catalyst DSL's [analyze](catalyst-dsl/DslLogicalPlan.md#analyze) operator is used
 * `ExpressionEncoder` is requested to [resolveAndBind](ExpressionEncoder.md#resolveAndBind)
-* [RelationalGroupedDataset.as](RelationalGroupedDataset.md#as) operator is used
+* [RelationalGroupedDataset.as](basic-aggregation/RelationalGroupedDataset.md#as) operator is used
 
 ## <span id="checkShowPartitions"> checkShowPartitions
 

@@ -108,7 +108,7 @@ udaf[IN, BUF, OUT](
 toColumn: TypedColumn[IN, OUT]
 ```
 
-`toColumn` converts the `Aggregator` to a [TypedColumn](../TypedColumn.md) (that can be used with [Dataset.select](../spark-sql-dataset-operators.md#select) and [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operators).
+`toColumn` converts the `Aggregator` to a [TypedColumn](../TypedColumn.md) (that can be used with [Dataset.select](../spark-sql-dataset-operators.md#select) and [KeyValueGroupedDataset.agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) typed operators).
 
 ## Demo
 

@@ -6,7 +6,7 @@
 
 * [callUDF](../spark-sql-functions.md#callUDF) standard function
 
-* [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
+* [RelationalGroupedDataset.agg](../basic-aggregation/RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../basic-aggregation/RelationalGroupedDataset.md#strToExpr))
 
 * `AstBuilder` is requested to sql/AstBuilder.md#visitFunctionCall[visitFunctionCall] (in SQL queries)
 
@@ -37,7 +37,7 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 
 * [callUDF](../spark-sql-functions.md#callUDF) standard function is used
 
-* `RelationalGroupedDataset` is requested to [agg](../RelationalGroupedDataset.md#agg) with aggregation functions specified by name (and [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
+* `RelationalGroupedDataset` is requested to [agg](../basic-aggregation/RelationalGroupedDataset.md#agg) with aggregation functions specified by name (and [converts function names to UnresolvedFunction expressions](../basic-aggregation/RelationalGroupedDataset.md#strToExpr))
 
 ## Creating Instance
 

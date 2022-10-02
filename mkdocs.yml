@@ -256,6 +256,7 @@ nav:
       - Expand: logical-operators/Expand.md
       - ExplainCommand: logical-operators/ExplainCommand.md
       - ExternalRDD: logical-operators/ExternalRDD.md
+      - FlatMapGroupsWithState: logical-operators/FlatMapGroupsWithState.md
       - Generate: logical-operators/Generate.md
       - GlobalLimit: logical-operators/GlobalLimit.md
       - GroupingSets: logical-operators/GroupingSets.md
@@ -698,7 +699,7 @@ nav:
     - SparkSqlParser: sql/SparkSqlParser.md
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
     - VariableSubstitution: sql/VariableSubstitution.md
-  - Notable Features:
+  - Features:
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
       - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
@@ -911,6 +912,10 @@ nav:
     - OutputWriter: datasources/OutputWriter.md
     - WriteTaskStatsTracker: datasources/WriteTaskStatsTracker.md
   - High-Level APIs:
+    - Basic Aggregation:
+      - basic-aggregation/index.md
+      - KeyValueGroupedDataset: basic-aggregation/KeyValueGroupedDataset.md
+      - RelationalGroupedDataset: basic-aggregation/RelationalGroupedDataset.md
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
     - ExecutionListenerManager: ExecutionListenerManager.md
@@ -921,8 +926,6 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
-    - KeyValueGroupedDataset: KeyValueGroupedDataset.md
-    - RelationalGroupedDataset: RelationalGroupedDataset.md
     - SparkSessionExtensions: SparkSessionExtensions.md
     - Window Functions:
       - window-functions/index.md
@@ -965,8 +968,6 @@ nav:
       - Column: Column.md
       - Column Operators: spark-sql-column-operators.md
       - TypedColumn: TypedColumn.md
-    - Basic Aggregation:
-      - Basic Aggregation: basic-aggregation.md
     - Standard Functions:
       - spark-sql-functions.md
       - spark-sql-aggregate-functions.md

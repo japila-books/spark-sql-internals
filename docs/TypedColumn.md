@@ -38,9 +38,9 @@ withInputType(
 
 * [Dataset.select](spark-sql-dataset-operators.md#select)
 
-* [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)
+* [KeyValueGroupedDataset.agg](basic-aggregation/KeyValueGroupedDataset.md#agg)
 
-* [RelationalGroupedDataset.agg](RelationalGroupedDataset.md#agg)
+* [RelationalGroupedDataset.agg](basic-aggregation/RelationalGroupedDataset.md#agg)
 
 ## Creating Instance
 
