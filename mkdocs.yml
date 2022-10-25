@@ -365,6 +365,7 @@ nav:
       - Aggregator: expressions/Aggregator.md
       - AttributeSeq: expressions/AttributeSeq.md
       - Attribute: expressions/Attribute.md
+      - BasePredicate: expressions/BasePredicate.md
       - BinaryComparison: expressions/BinaryComparison.md
       - BinaryOperator: expressions/BinaryOperator.md
       - BoundReference: expressions/BoundReference.md
@@ -943,6 +944,7 @@ nav:
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
+    - BindReferences: BindReferences.md
     - IntervalUtils: IntervalUtils.md
     - ExplainUtils: ExplainUtils.md
     - PartitionedFileUtil: PartitionedFileUtil.md

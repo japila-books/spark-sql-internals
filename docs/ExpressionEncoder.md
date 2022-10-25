@@ -124,35 +124,41 @@ resolveAndBind(
 
 `resolveAndBind`...FIXME
 
+---
+
 `resolveAndBind` is used when:
 
-* `ResolveEncodersInUDF` analysis rule is executed
 * `Dataset` is requested for [resolvedEnc](Dataset.md#resolvedEnc)
-* `TypedAggregateExpression` is created
-* `ResolveEncodersInScalaAgg` extended resolution rule is executed
 * _others_
 
 ### Demo
 
-```text
+```scala
 case class Person(id: Long, name: String)
 import org.apache.spark.sql.Encoders
 val schema = Encoders.product[Person].schema
+```
 
+```scala
 import org.apache.spark.sql.catalyst.encoders.{RowEncoder, ExpressionEncoder}
 import org.apache.spark.sql.Row
 val encoder: ExpressionEncoder[Row] = RowEncoder.apply(schema).resolveAndBind()
-
-import org.apache.spark.sql.catalyst.InternalRow
-val row = InternalRow(1, "Jacek")
-
 val deserializer = encoder.deserializer
+```
 
-scala> deserializer.eval(row)
+```scala
+import org.apache.spark.sql.catalyst.InternalRow
+val input = InternalRow(1, "Jacek")
+```
+
+```text
+scala> deserializer.eval(input)
 java.lang.UnsupportedOperationException: Only code-generated evaluation is supported
   at org.apache.spark.sql.catalyst.expressions.objects.CreateExternalRow.eval(objects.scala:1105)
   ... 54 elided
+```
 
+```scala
 import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
 val ctx = new CodegenContext
 val code = deserializer.genCode(ctx).code
