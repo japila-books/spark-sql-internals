@@ -1,6 +1,17 @@
 # InMemoryTableScanExec Leaf Physical Operator
 
-`InMemoryTableScanExec` is a leaf physical operator that represents an [InMemoryRelation](#relation) logical operator at execution time.
+`InMemoryTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) that represents an [InMemoryRelation](#relation) logical operator at execution time.
+
+## <span id="metrics"> Performance Metrics
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![InMemoryTableScanExec in web UI (Details for Query)](../images/spark-sql-InMemoryTableScanExec-webui-query-details.png)
+
+<!---
+## Review Me
 
 `InMemoryTableScanExec` is <<creating-instance, created>> exclusively when [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed and finds an InMemoryRelation.md[InMemoryRelation] logical operator in a logical query plan.
 
@@ -145,17 +156,6 @@ filteredCachedBatches(): RDD[CachedBatch]
 
 `filteredCachedBatches` is used when `InMemoryTableScanExec` is requested for the [inputRDD](#inputRDD) internal property.
 
-=== [[statsFor]] `statsFor` Internal Method
-
-[source, scala]
-----
-statsFor(a: Attribute)
-----
-
-`statsFor`...FIXME
-
-NOTE: `statsFor` is used when...FIXME
-
 === [[createAndDecompressColumn]] `createAndDecompressColumn` Internal Method
 
 ```scala
@@ -270,79 +270,4 @@ With <<supportsBatch, supportsBatch>> flag on, `doExecute` creates a WholeStageC
 Otherwise, when <<supportsBatch, supportsBatch>> flag is off, `doExecute` simply gives the <<inputRDD, input RDD of internal rows>>.
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-=== [[buildFilter]] `buildFilter` Property
-
-[source, scala]
-----
-buildFilter: PartialFunction[Expression, Expression]
-----
-
-NOTE: `buildFilter` is a Scala lazy value which is computed once when accessed and cached afterwards.
-
-`buildFilter` is a Scala https://www.scala-lang.org/api/2.11.11/#scala.PartialFunction[PartialFunction] that accepts an expressions/Expression.md[Expression] and produces an expressions/Expression.md[Expression], i.e. `PartialFunction[Expression, Expression]`.
-
-[[buildFilter-expressions]]
-.buildFilter's Expressions
-[cols="1,2",options="header",width="100%"]
-|===
-| Input Expression
-| Description
-
-| `And`
-|
-
-| `Or`
-|
-
-| [EqualTo](../expressions/EqualTo.md)
-|
-
-| [EqualNullSafe](../expressions/EqualNullSafe.md)
-|
-
-| `LessThan`
-|
-
-| `LessThanOrEqual`
-|
-
-| `GreaterThan`
-|
-
-| `GreaterThanOrEqual`
-|
-
-| `IsNull`
-|
-
-| `IsNotNull`
-|
-
-| `In` with a non-empty spark-sql-Expression-In.md#list[list] of spark-sql-Expression-Literal.md[Literal] expressions
-|
-For every `Literal` expression in the expression list, `buildFilter` creates an `And` expression with the lower and upper bounds of the <<statsFor, partition statistics for the attribute>> and the `Literal`.
-
-In the end, `buildFilter` joins the `And` expressions with `Or` expressions.
-|===
-
-NOTE: `buildFilter` is used exclusively when `InMemoryTableScanExec` is requested for <<partitionFilters, partitionFilters>>.
-
-=== [[innerChildren]] `innerChildren` Method
-
-[source, scala]
-----
-innerChildren: Seq[QueryPlan[_]]
-----
-
-NOTE: `innerChildren` is part of catalyst/QueryPlan.md#innerChildren[QueryPlan Contract] to...FIXME.
-
-`innerChildren`...FIXME
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
-
-![InMemoryTableScanExec in web UI (Details for Query)](../images/spark-sql-InMemoryTableScanExec-webui-query-details.png)
+-->

@@ -22,7 +22,7 @@
 
 ## Catalyst DSL
 
-`DslLogicalPlan` comes with [join](../catalyst-dsl/DslLogicalPlan.md#join) operator to create a `Join`.
+`DslLogicalPlan` defines [join](../catalyst-dsl/DslLogicalPlan.md#join) operator to create a `Join`.
 
 ```scala
 import org.apache.spark.sql.catalyst.dsl.plans._

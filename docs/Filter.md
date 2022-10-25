@@ -48,59 +48,6 @@ Used when:
 * <<And, And>>, <<Or, Or>> and <<Not, Not>> filters are requested for the <<references, column references>>
 |===
 
-[[implementations]]
-.Filters
-[cols="1,2",options="header",width="100%"]
-|===
-| Filter
-| Description
-
-| `And`
-| [[And]]
-
-| `EqualNullSafe`
-| [[EqualNullSafe]]
-
-| `EqualTo`
-| [[EqualTo]]
-
-| `GreaterThan`
-| [[GreaterThan]]
-
-| `GreaterThanOrEqual`
-| [[GreaterThanOrEqual]]
-
-| `In`
-| [[In]]
-
-| `IsNotNull`
-| [[IsNotNull]]
-
-| `IsNull`
-| [[IsNull]]
-
-| `LessThan`
-| [[LessThan]]
-
-| `LessThanOrEqual`
-| [[LessThanOrEqual]]
-
-| `Not`
-| [[Not]]
-
-| `Or`
-| [[Or]]
-
-| `StringContains`
-| [[StringContains]]
-
-| `StringEndsWith`
-| [[StringEndsWith]]
-
-| `StringStartsWith`
-| [[StringStartsWith]]
-|===
-
 === [[findReferences]] Finding Column References in Any Value -- `findReferences` Method
 
 [source, scala]
@@ -109,15 +56,3 @@ findReferences(value: Any): Array[String]
 ----
 
 `findReferences` takes the <<references, references>> from the `value` filter is it is one or returns an empty array.
-
-NOTE: `findReferences` is used when <<EqualTo, EqualTo>>, <<EqualNullSafe, EqualNullSafe>>, <<GreaterThan, GreaterThan>>, <<GreaterThanOrEqual, GreaterThanOrEqual>>, <<LessThan, LessThan>>, <<LessThanOrEqual, LessThanOrEqual>> and <<In, In>> filters are requested for their <<references, column references>>.
-
-## v2references
-
-```
-v2references: Array[Array[String]]
-```
-
-v2references...FIXME
-
-v2references is used when...FIXME

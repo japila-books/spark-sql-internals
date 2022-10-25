@@ -366,6 +366,7 @@ nav:
       - AttributeSeq: expressions/AttributeSeq.md
       - Attribute: expressions/Attribute.md
       - BinaryComparison: expressions/BinaryComparison.md
+      - BinaryOperator: expressions/BinaryOperator.md
       - BoundReference: expressions/BoundReference.md
       - CallMethodViaReflection: expressions/CallMethodViaReflection.md
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
@@ -401,6 +402,7 @@ nav:
       - InSubqueryExec: expressions/InSubqueryExec.md
       - InterpretedProjection: expressions/InterpretedProjection.md
       - JsonToStructs: expressions/JsonToStructs.md
+      - LessThanOrEqual: expressions/LessThanOrEqual.md
       - ListQuery: expressions/ListQuery.md
       - Literal: expressions/Literal.md
       - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md

@@ -118,8 +118,8 @@ Catalyst Expression | Filter Predicate
  [EqualNullSafe](../expressions/EqualNullSafe.md) (with a "pushable" column and a `Literal`) | `EqualNullSafe`
  `GreaterThan` (with a "pushable" column and a `Literal`) | `GreaterThan` or `LessThan`
  `LessThan` (with a "pushable" column and a `Literal`) | `LessThan` or `GreaterThan`
- `GreaterThanOrEqual` (with a "pushable" column and a `Literal`) | `GreaterThanOrEqual` or `LessThanOrEqual`
- `LessThanOrEqual` (with a "pushable" column and a `Literal`) | `LessThanOrEqual` or `GreaterThanOrEqual`
+ `GreaterThanOrEqual` (with a "pushable" column and a `Literal`) | `GreaterThanOrEqual` or [LessThanOrEqual](../expressions/LessThanOrEqual.md)
+ [LessThanOrEqual](../expressions/LessThanOrEqual.md) (with a "pushable" column and a `Literal`) | [LessThanOrEqual](../expressions/LessThanOrEqual.md) or `GreaterThanOrEqual`
  [InSet](../expressions/InSet.md) (with a "pushable" column and values) | `In`
  [InSet](../expressions/In.md) (with a "pushable" column and expressions) | `In`
  `IsNull` (with a "pushable" column) | `IsNull`
