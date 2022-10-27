@@ -16,7 +16,7 @@
 `ShuffledRowRDD` takes the following to be created:
 
 * <span id="dependency"> `ShuffleDependency[Int, InternalRow, InternalRow]` ([Spark Core]({{ book.spark_core }}/rdd/ShuffleDependency))
-* <span id="metrics"> [SQLMetric](physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
+* [Write Metrics](#metrics)
 * [ShufflePartitionSpec](#partitionSpecs)s (default: `CoalescedPartitionSpec`s)
 
 When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksInBatch](configuration-properties.md#spark.sql.adaptive.fetchShuffleBlocksInBatch) configuration property to set the **__fetch_continuous_blocks_in_batch_enabled** local property to `true`.
@@ -25,6 +25,19 @@ When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksIn
 
 * [CollectLimitExec](physical-operators/CollectLimitExec.md), [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) and `TakeOrderedAndProjectExec` physical operators are executed
 * `ShuffleExchangeExec` is requested for a [shuffle RDD](physical-operators/ShuffleExchangeExec.md#getShuffleRDD) (for [AQEShuffleReadExec](physical-operators/AQEShuffleReadExec.md))
+
+### <span id="metrics"> Write Metrics
+
+```scala
+metrics: Map[String, SQLMetric]
+```
+
+`ShuffledRowRDD` is given a collection of [SQLMetric](physical-operators/SQLMetric.md)s by name.
+
+`metrics` is used to create a `SQLShuffleReadMetricsReporter` while [computing a partition](#compute) (to create a `ShuffleReader` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleReader))).
+
+!!! note
+    `SQLShuffleReadMetricsReporter` is a `ShuffleReadMetricsReporter` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleReadMetricsReporter)).
 
 ## <span id="compute"> Computing Partition
 

@@ -1,4 +1,4 @@
-# ShuffleExchangeExec Unary Physical Operator
+# ShuffleExchangeExec Physical Operator
 
 `ShuffleExchangeExec` is an [Exchange](Exchange.md) (indirectly as a [ShuffleExchangeLike](ShuffleExchangeLike.md)) unary physical operator that is used to [perform a shuffle](#doExecute).
 
@@ -25,25 +25,52 @@ nodeName: String
 
 `nodeName` is part of the [TreeNode](../catalyst/TreeNode.md) abstraction.
 
+---
+
 `nodeName` is **Exchange**.
 
-## <span id="metrics"><span id="writeMetrics"><span id="readMetrics"> Performance Metrics
-
-Key | Name (in web UI)
----------|----------
-dataSize | data size
-fetchWaitTime | fetch wait time
-localBlocksFetched | local blocks read
-localBytesRead | local bytes read
-recordsRead | records read
-remoteBlocksFetched | remote blocks read
-remoteBytesRead | remote bytes read
-remoteBytesReadToDisk | remote bytes read to disk
-shuffleBytesWritten | shuffle bytes written
-shuffleRecordsWritten | shuffle records written
-shuffleWriteTime | shuffle write time
+## <span id="metrics"> Performance Metrics
 
 ![ShuffleExchangeExec in web UI (Details for Query)](../images/ShuffleExchangeExec-webui.png)
+
+### <span id="dataSize"> data size
+
+### <span id="numPartitions"> number of partitions
+
+Number of partitions (of the `Partitioner` of this [ShuffleDependency](#prepareShuffleDependency))
+
+Posted as the only entry in `accumUpdates` of a `SparkListenerDriverAccumUpdates`
+
+### <span id="readMetrics"> Read Metrics
+
+Used to create a [ShuffledRowRDD](../ShuffledRowRDD.md#metrics) when:
+
+* [Executing](#doExecute)
+* [getShuffleRDD](#getShuffleRDD)
+
+#### <span id="fetchWaitTime"> fetch wait time
+
+#### <span id="localBlocksFetched"> local blocks read
+
+#### <span id="localBytesRead"> local bytes read
+
+#### <span id="recordsRead"> records read
+
+#### <span id="remoteBlocksFetched"> remote blocks read
+
+#### <span id="remoteBytesRead"> remote bytes read
+
+#### <span id="remoteBytesReadToDisk"> remote bytes read to disk
+
+### <span id="writeMetrics"> Write Metrics
+
+Used to [create a ShuffleDependency](#prepareShuffleDependency) (and [create a ShuffleWriteProcessor](#createShuffleWriteProcessor))
+
+#### <span id="shuffleBytesWritten"> shuffle bytes written
+
+#### <span id="shuffleRecordsWritten"> shuffle records written
+
+#### <span id="shuffleWriteTime"> shuffle write time
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -53,65 +80,11 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
+---
+
 `doExecute` gives a [ShuffledRowRDD](../ShuffledRowRDD.md) (with the [ShuffleDependency](#shuffleDependency) and [read performance metrics](#readMetrics)).
 
 `doExecute` uses [cachedShuffleRDD](#cachedShuffleRDD) to avoid multiple execution.
-
-## <span id="prepareShuffleDependency"> Creating ShuffleDependency
-
-```scala
-prepareShuffleDependency(
-  rdd: RDD[InternalRow],
-  outputAttributes: Seq[Attribute],
-  newPartitioning: Partitioning,
-  serializer: Serializer,
-  writeMetrics: Map[String, SQLMetric]): ShuffleDependency[Int, InternalRow, InternalRow]
-```
-
-`prepareShuffleDependency` creates a `ShuffleDependency` ([Apache Spark]({{ book.spark_core }}/rdd/ShuffleDependency)) with an `RDD[Product2[Int, InternalRow]]` (where `Ints` are partition IDs of the `InternalRows` values) and the given `Serializer` (e.g. the [Serializer](#serializer) of the `ShuffleExchangeExec` physical operator).
-
-### <span id="prepareShuffleDependency-part"> Partitioner
-
-`prepareShuffleDependency` determines a `Partitioner` based on the given `newPartitioning` [Partitioning](Partitioning.md):
-
-* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning), `prepareShuffleDependency` creates a `HashPartitioner` for the same number of partitions
-* For [HashPartitioning](Partitioning.md#HashPartitioning), `prepareShuffleDependency` creates a `Partitioner` for the same number of partitions and `getPartition` that is an "identity"
-* For `RangePartitioning`, `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](../configuration-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
-* For [SinglePartition](Partitioning.md#SinglePartition), `prepareShuffleDependency` creates a `Partitioner` with `1` for the number of partitions and `getPartition` that always gives `0`
-
-### <span id="prepareShuffleDependency-getPartitionKeyExtractor"> getPartitionKeyExtractor Internal Method
-
-`prepareShuffleDependency` defines a `getPartitionKeyExtractor` method.
-
-```scala
-getPartitionKeyExtractor(): InternalRow => Any
-```
-
-`getPartitionKeyExtractor` uses the given `newPartitioning` [Partitioning](Partitioning.md):
-
-* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning),...FIXME
-* For [HashPartitioning](Partitioning.md#HashPartitioning),...FIXME
-* For `RangePartitioning`,...FIXME
-* For [SinglePartition](Partitioning.md#SinglePartition),...FIXME
-
-### <span id="prepareShuffleDependency-isRoundRobin"> isRoundRobin Internal Flag
-
-`prepareShuffleDependency` determines whether "this" is `isRoundRobin` or not based on the given `newPartitioning` partitioning. It is `isRoundRobin` when the partitioning is a `RoundRobinPartitioning` with more than one partition.
-
-### <span id="prepareShuffleDependency-rddWithPartitionIds"> rddWithPartitionIds RDD
-
-`prepareShuffleDependency` creates a `rddWithPartitionIds`:
-
-1. Firstly, `prepareShuffleDependency` determines a `newRdd` based on `isRoundRobin` flag and [spark.sql.execution.sortBeforeRepartition](../configuration-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property. When both are enabled (`true`), `prepareShuffleDependency` sorts partitions (using a `UnsafeExternalRowSorter`) Otherwise, `prepareShuffleDependency` returns the given `RDD[InternalRow]` (unchanged).
-1. Secondly, `prepareShuffleDependency` determines whether this is `isOrderSensitive` or not. This is `isOrderSensitive` when `isRoundRobin` flag is enabled (`true`) while [spark.sql.execution.sortBeforeRepartition](../configuration-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property is not (`false`).
-
-`prepareShuffleDependency`...FIXME
-
-### Usage
-
-`prepareShuffleDependency` is used when:
-
-* [CollectLimitExec](CollectLimitExec.md), <<doExecute, ShuffleExchangeExec>> and TakeOrderedAndProjectExec physical operators are executed
 
 ## <span id="serializer"> UnsafeRowSerializer
 
@@ -160,6 +133,8 @@ shuffleDependency: ShuffleDependency[Int, InternalRow, InternalRow]
 * [UnsafeRowSerializer](#serializer)
 * [writeMetrics](#writeMetrics)
 
+---
+
 `shuffleDependency` is used when:
 
 * `CustomShuffleReaderExec` physical operator is executed
@@ -186,16 +161,103 @@ mapOutputStatisticsFuture: Future[MapOutputStatistics]
 
 `mapOutputStatisticsFuture` is part of the [ShuffleExchangeLike](ShuffleExchangeLike.md#mapOutputStatisticsFuture) abstraction.
 
-## <span id="createShuffleWriteProcessor"> createShuffleWriteProcessor
+## <span id="createShuffleWriteProcessor"> Creating ShuffleWriteProcessor
 
 ```scala
 createShuffleWriteProcessor(
   metrics: Map[String, SQLMetric]): ShuffleWriteProcessor
 ```
 
-`createShuffleWriteProcessor` creates a Spark Core `ShuffleWriteProcessor` for the only reason to plug in a custom `ShuffleWriteMetricsReporter` (`SQLShuffleWriteMetricsReporter`).
+`createShuffleWriteProcessor` creates a `ShuffleWriteProcessor` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleWriteProcessor)) to plug in `SQLShuffleWriteMetricsReporter` (as a `ShuffleWriteMetricsReporter` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleWriteMetricsReporter))) with the [write metrics](#writeMetrics).
 
-`createShuffleWriteProcessor` is used when `ShuffleExchangeExec` operator is [executed](#doExecute) (and requested to [prepareShuffleDependency](#prepareShuffleDependency)).
+---
+
+`createShuffleWriteProcessor` is used when:
+
+* `ShuffleExchangeExec` operator is [executed](#doExecute) (and requested for a [ShuffleDependency](#prepareShuffleDependency))
+
+## <span id="runtimeStatistics"> Runtime Statistics
+
+```scala
+runtimeStatistics: Statistics
+```
+
+`runtimeStatistics` is part of the [ShuffleExchangeLike](ShuffleExchangeLike.md#runtimeStatistics) abstraction.
+
+---
+
+`runtimeStatistics` creates a [Statistics](../logical-operators/Statistics.md) with the value of the following metrics.
+
+Statistics | Metric
+-----------|-------
+ [Output size](../logical-operators/Statistics.md#sizeInBytes) | [data size](#dataSize)
+ [Number of rows](../logical-operators/Statistics.md#rowCount) | [shuffle records written](#shuffleRecordsWritten)
+
+## <span id="prepareShuffleDependency"> Creating ShuffleDependency
+
+```scala
+prepareShuffleDependency(
+  rdd: RDD[InternalRow],
+  outputAttributes: Seq[Attribute],
+  newPartitioning: Partitioning,
+  serializer: Serializer,
+  writeMetrics: Map[String, SQLMetric]): ShuffleDependency[Int, InternalRow, InternalRow]
+```
+
+`prepareShuffleDependency` is used when:
+
+* [CollectLimitExec](CollectLimitExec.md), [ShuffleExchangeExec](#doExecute) and `TakeOrderedAndProjectExec` physical operators are executed
+
+---
+
+`prepareShuffleDependency` creates a `ShuffleDependency` ([Apache Spark]({{ book.spark_core }}/rdd/ShuffleDependency)) with the following:
+
+* [rddWithPartitionIds](#prepareShuffleDependency-rddWithPartitionIds)
+* `PartitionIdPassthrough` serializer (with the number of partitions as the [Partitioner](#prepareShuffleDependency-part))
+* The input `Serializer` (e.g., the [UnsafeRowSerializer](#serializer) for `ShuffleExchangeExec` physical operators)
+* [Write Metrics](#writeMetrics)
+
+??? note "Write Metrics for ShuffleExchangeExec"
+    For `ShuffleExchangeExec`s, the write metrics are the following:
+
+    * [shuffle bytes written](#shuffleBytesWritten)
+    * [shuffle records written](#shuffleRecordsWritten)
+    * [shuffle write time](#shuffleWriteTime)
+
+### <span id="prepareShuffleDependency-part"> Partitioner
+
+`prepareShuffleDependency` determines a `Partitioner` based on the given `newPartitioning` [Partitioning](Partitioning.md):
+
+* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning), `prepareShuffleDependency` creates a `HashPartitioner` for the same number of partitions
+* For [HashPartitioning](Partitioning.md#HashPartitioning), `prepareShuffleDependency` creates a `Partitioner` for the same number of partitions and `getPartition` that is an "identity"
+* For `RangePartitioning`, `prepareShuffleDependency` creates a `RangePartitioner` for the same number of partitions and `samplePointsPerPartitionHint` based on [spark.sql.execution.rangeExchange.sampleSizePerPartition](../configuration-properties.md#spark.sql.execution.rangeExchange.sampleSizePerPartition) configuration property
+* For [SinglePartition](Partitioning.md#SinglePartition), `prepareShuffleDependency` creates a `Partitioner` with `1` for the number of partitions and `getPartition` that always gives `0`
+
+### <span id="prepareShuffleDependency-getPartitionKeyExtractor"> getPartitionKeyExtractor
+
+```scala
+getPartitionKeyExtractor(): InternalRow => Any
+```
+
+`getPartitionKeyExtractor` uses the given `newPartitioning` [Partitioning](Partitioning.md):
+
+* For [RoundRobinPartitioning](Partitioning.md#RoundRobinPartitioning),...FIXME
+* For [HashPartitioning](Partitioning.md#HashPartitioning),...FIXME
+* For `RangePartitioning`,...FIXME
+* For [SinglePartition](Partitioning.md#SinglePartition),...FIXME
+
+### <span id="prepareShuffleDependency-isRoundRobin"> isRoundRobin Flag
+
+`prepareShuffleDependency` determines whether "this" is `isRoundRobin` or not based on the given `newPartitioning` partitioning. It is `isRoundRobin` when the partitioning is a `RoundRobinPartitioning` with more than one partition.
+
+### <span id="prepareShuffleDependency-rddWithPartitionIds"> rddWithPartitionIds RDD
+
+`prepareShuffleDependency` creates a `rddWithPartitionIds`:
+
+1. Firstly, `prepareShuffleDependency` determines a `newRdd` based on `isRoundRobin` flag and [spark.sql.execution.sortBeforeRepartition](../configuration-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property. When both are enabled (`true`), `prepareShuffleDependency` sorts partitions (using a `UnsafeExternalRowSorter`) Otherwise, `prepareShuffleDependency` returns the given `RDD[InternalRow]` (unchanged).
+1. Secondly, `prepareShuffleDependency` determines whether this is `isOrderSensitive` or not. This is `isOrderSensitive` when `isRoundRobin` flag is enabled (`true`) while [spark.sql.execution.sortBeforeRepartition](../configuration-properties.md#spark.sql.execution.sortBeforeRepartition) configuration property is not (`false`).
+
+`prepareShuffleDependency`...FIXME
 
 ## Demo
 
