@@ -15,7 +15,7 @@ A `QueryPlan` is **unresolved** if the column names have not been verified and c
 
 ## Contract
 
-### <span id="output"> Output Attributes
+### <span id="output"> Output Schema
 
 ```scala
 output: Seq[Attribute]
@@ -64,13 +64,26 @@ expressions: Seq[Expression]
 
 `expressions` is all of the [expressions](../expressions/Expression.md) present in this query plan operator.
 
-## <span id="references"> references AttributeSet
+## <span id="references"> Expression References
 
 ```scala
 references: AttributeSet
 ```
 
-`references` is a `AttributeSet` of all attributes that appear in [expressions](#expressions) of this operator.
+??? note "Lazy Value"
+    `references` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+`references` is an `AttributeSet` of all the [Attribute](../expressions/Attribute.md)s that are referenced by the [expressions](#expressions) of this operator (except the [produced attributes](#producedAttributes)).
+
+---
+
+`references` is used when:
+
+* `QueryPlan` is requested for the [missing input attributes](#missingInput), to [transformUpWithNewOutput](#transformUpWithNewOutput)
+* `CodegenSupport` is requested for the [used input attributes](../physical-operators/CodegenSupport.md#usedInputs)
+* _others_ (less interesting?)
 
 ## <span id="transformExpressions"> Transforming Expressions
 
@@ -249,6 +262,8 @@ transformAllExpressionsWithPruning(
 
 `transformAllExpressionsWithPruning`...FIXME
 
+---
+
 `transformAllExpressionsWithPruning` is used when:
 
 * `QueryPlan` is requested for [transformAllExpressions](#transformAllExpressions) and [normalizeExpressions](#normalizeExpressions)
@@ -258,3 +273,18 @@ transformAllExpressionsWithPruning(
 * `PlanAdaptiveDynamicPruningFilters` physical optimization is [executed](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md#apply)
 * `PlanAdaptiveSubqueries` physical optimization is [executed](../physical-optimizations/PlanAdaptiveSubqueries.md#apply)
 * `ReuseAdaptiveSubquery` physical optimization is [executed](../physical-optimizations/ReuseAdaptiveSubquery.md#apply)
+
+## <span id="producedAttributes"> Produced Attributes
+
+```scala
+producedAttributes: AttributeSet
+```
+
+`producedAttributes` is empty (and can be overriden by [implementations](#implementations)).
+
+---
+
+`producedAttributes` is used when:
+
+* `NestedColumnAliasing` is requested to `unapply` (destructure a logical operator)
+* `QueryPlan` is requested for the [references](#references)

@@ -275,7 +275,7 @@ constructDoConsumeFunction(
 
 `constructDoConsumeFunction` is used when `CodegenSupport` is requested to [consume](#consume).
 
-## <span id="usedInputs"> usedInputs Method
+## <span id="usedInputs"> Used Input Attributes
 
 ```scala
 usedInputs: AttributeSet
@@ -286,7 +286,11 @@ usedInputs: AttributeSet
 !!! note
     Physical operators can mark it as empty to defer evaluation of attribute expressions until they are actually used (in the [generated Java source code for consume path](#consume)).
 
-`usedInputs` is used when `CodegenSupport` is requested to [generate a Java source code for consume path](#consume).
+---
+
+`usedInputs` is used when:
+
+* `CodegenSupport` is requested to [generate a Java source code for consume path](#consume)
 
 ## <span id="parent"> parent Internal Variable Property
 

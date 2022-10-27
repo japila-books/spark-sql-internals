@@ -1,4 +1,4 @@
-# UnaryExecNode &mdash; Unary Physical Operators
+# UnaryExecNode Physical Operators
 
 `UnaryExecNode` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [unary physical operators](#implementations) (with one [child physical operator](#child) only).
 
