@@ -429,6 +429,7 @@ nav:
       - StaticInvoke: expressions/StaticInvoke.md
       - SubqueryExpression: expressions/SubqueryExpression.md
       - TimeWindow: expressions/TimeWindow.md
+      - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
       - UnaryExpression: expressions/UnaryExpression.md
       - Unevaluable: expressions/Unevaluable.md
       - UnixTimestamp: expressions/UnixTimestamp.md

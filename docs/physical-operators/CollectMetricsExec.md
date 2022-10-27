@@ -30,6 +30,6 @@ doExecute(): RDD[InternalRow]
 
 * A new per-partition `AggregatingAccumulator` (called `updater`) is requested to `copyAndReset`
 * The value of the accumulator is published only when a task is completed
-* For every row, the per-partition `AggregatingAccumulator` is requested to add it (that updates [ImperativeAggregate](../expressions/ImperativeAggregate.md)s and `TypedImperativeAggregate`s)
+* For every row, the per-partition `AggregatingAccumulator` is requested to add it (that updates [ImperativeAggregate](../expressions/ImperativeAggregate.md)s and [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md)s)
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.

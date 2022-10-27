@@ -1,4 +1,4 @@
-# ObjectHashAggregateExec Aggregate Physical Operator
+# ObjectHashAggregateExec Physical Operator
 
 `ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.
 
@@ -34,11 +34,11 @@ The `isStreaming` is always `false` but when `AggUtils` is requested to [create 
 
 ### <span id="aggTime"> time in aggregation build
 
-The time to [doExecute](#doExecute) of a single partition.
+Time to [execute a single partition](#doExecute-mapPartitionsWithIndexInternal)
 
 ### <span id="numOutputRows"> number of output rows
 
-* `1` when there is no input rows in a partition and no [groupingExpressions](#groupingExpressions).
+* `1` when there is neither input rows in a partition nor [grouping expressions](#groupingExpressions)
 * Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numOutputRows).
 
 ### <span id="numTasksFallBacked"> number of sort fallback tasks
@@ -59,16 +59,30 @@ doExecute(): RDD[InternalRow]
 
 ---
 
-`doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (and generate an `RDD[InternalRow]`) that is `mapPartitionsWithIndexInternal` to process partitions.
+`doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (and generate an `RDD[InternalRow]`) that is then [mapPartitionsWithIndexInternal](#doExecute-mapPartitionsWithIndexInternal) to process partitions.
 
 !!! note
     `doExecute` adds a new `MapPartitionsRDD` ([Spark Core]({{ book.spark_core }}/rdd/MapPartitionsRDD)) to the RDD lineage.
 
-For no input records (in a partition) and non-empty [groupingExpressions](#groupingExpressions), `doExecute` returns an empty `Iterator`.
+### <span id="doExecute-mapPartitionsWithIndexInternal"> Processing Partition
 
-Otherwise, `doExecute` creates a [ObjectAggregationIterator](ObjectAggregationIterator.md).
+While processing a partition, `mapPartitionsWithIndexInternal` branches off based on availability of input rows and the [grouping expressions](#groupingExpressions):
 
-For no input records (in a partition) and no [groupingExpressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (so it's just `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
+1. [No input rows but there are grouping expressions](#doExecute-mapPartitionsWithIndexInternal-no-input-rows-with-grouping-expression)
+1. [No input rows and no grouping expressions](#doExecute-mapPartitionsWithIndexInternal-no-input-rows-and-no-grouping-expression)
+1. [Input rows are available](#doExecute-mapPartitionsWithIndexInternal-input-rows-available) (regardless of the [grouping expressions](#groupingExpressions))
+
+### <span id="doExecute-mapPartitionsWithIndexInternal-no-input-rows-with-grouping-expression"> No Input Rows with Grouping Expression
+
+For no input records (in a partition) and non-empty [grouping expressions](#groupingExpressions), `doExecute` returns an empty `Iterator`.
+
+### <span id="doExecute-mapPartitionsWithIndexInternal-no-input-rows-and-no-grouping-expression"> No Input Rows and No Grouping Expression
+
+Otherwise, `doExecute` creates an [ObjectAggregationIterator](ObjectAggregationIterator.md).
+
+For no input records (in a partition) and no [grouping expressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (to be `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) (that is the only output row).
+
+### <span id="doExecute-mapPartitionsWithIndexInternal-input-rows-available"> Input Rows Available
 
 Otherwise, `doExecute` returns the `ObjectAggregationIterator`.
 
@@ -79,7 +93,7 @@ supportsAggregate(
   aggregateExpressions: Seq[AggregateExpression]): Boolean
 ```
 
-`supportsAggregate` is enabled (`true`) when there is a `TypedImperativeAggregate` aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
+`supportsAggregate` is enabled (`true`) when there is a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) aggregate function among the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s.
 
 ---
 
