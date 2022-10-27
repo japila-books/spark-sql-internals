@@ -2146,6 +2146,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/TypedImperativeAggregate/</loc>
+         <lastmod>2022-10-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/UnaryExpression/</loc>
          <lastmod>2022-10-27</lastmod>
          <changefreq>daily</changefreq>
