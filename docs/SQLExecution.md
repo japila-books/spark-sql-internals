@@ -10,11 +10,11 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ```
 
-Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's [SQL tab](SQLTab.md)).
+Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's [SQL tab](ui/SQLTab.md)).
 
 [TIP]
 ====
-Use `SparkListener` (Spark Core) to listen to [SparkListenerSQLExecutionStart](SQLListener.md#SparkListenerSQLExecutionStart) events and know the execution ids of structured queries that have been executed in a Spark SQL application.
+Use `SparkListener` (Spark Core) to listen to `SparkListenerSQLExecutionStart` events and know the execution ids of structured queries that have been executed in a Spark SQL application.
 
 [source, scala]
 ----
@@ -72,11 +72,11 @@ withNewExecutionId[T](
 
 `withNewExecutionId` executes `body` query action with a new <<spark.sql.execution.id, execution id>> (given as the input `executionId` or auto-generated) so that all Spark jobs that have been scheduled by the query action could be marked as parts of the same `Dataset` action execution.
 
-`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to [reporting them as one single structured query in web UI](SQLTab.md).
+`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to [reporting them as one single structured query in web UI](ui/SQLTab.md).
 
 NOTE: If there is another execution id already set, it is replaced for the course of the current action.
 
-In addition, the `QueryExecution` variant posts [SparkListenerSQLExecutionStart](SQLListener.md#SparkListenerSQLExecutionStart) and [SparkListenerSQLExecutionEnd](SQLListener.md#SparkListenerSQLExecutionEnd) events (to spark-LiveListenerBus.md[LiveListenerBus] event bus) before and after executing the `body` action, respectively. It is used to inform [`SQLListener` when a SQL query execution starts and ends](SQLListener.md#onOtherEvent).
+In addition, the `QueryExecution` variant posts `SparkListenerSQLExecutionStart` and [SparkListenerSQLExecutionEnd](ui/SparkListenerSQLExecutionEnd.md) events before and after executing the `body` action, respectively.
 
 NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
 

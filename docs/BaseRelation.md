@@ -19,7 +19,7 @@
 sqlContext: SQLContext
 ```
 
-[SQLContext](SQLContext.md)
+`SQLContext`
 
 ### <span id="schema"> Schema
 

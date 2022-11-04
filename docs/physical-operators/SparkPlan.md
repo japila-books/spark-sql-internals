@@ -251,7 +251,7 @@ In the end, `waitForSubqueries` clears up the [runningSubqueries](#runningSubque
 
 ## Naming Convention (Exec Suffix)
 
-The naming convention of physical operators in Spark's source code is to have their names end with the **Exec** prefix, e.g. `DebugExec` or [LocalTableScanExec](LocalTableScanExec.md) that is however removed when the operator is displayed, e.g. in [web UI](../SQLTab.md).
+The naming convention of physical operators in Spark's source code is to have their names end with the **Exec** prefix, e.g. `DebugExec` or [LocalTableScanExec](LocalTableScanExec.md) that is however removed when the operator is displayed, e.g. in [web UI](../ui/SQLTab.md).
 
 ## <span id="Physical-Operator-Execution-Pipeline"> Physical Operator Execution Pipeline
 

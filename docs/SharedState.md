@@ -84,15 +84,15 @@ In the end, `globalTempViewManager` creates a new [GlobalTempViewManager](Global
 statusStore: SQLAppStatusStore
 ```
 
-`SharedState` creates a [SQLAppStatusStore](SQLAppStatusStore.md) when [created](#creating-instance).
+`SharedState` creates a [SQLAppStatusStore](ui/SQLAppStatusStore.md) when [created](#creating-instance).
 
 When initialized, `statusStore` requests the [SparkContext](#sparkContext) for `AppStatusStore` that is then requested for the `KVStore` (which is assumed a `ElementTrackingStore`).
 
-`statusStore` creates a [SQLAppStatusListener](SQLAppStatusListener.md) (with the `live` flag on) and registers it with the `LiveListenerBus` to application status queue.
+`statusStore` creates a [SQLAppStatusListener](ui/SQLAppStatusListener.md) (with the `live` flag on) and registers it with the `LiveListenerBus` to application status queue.
 
-`statusStore` creates a [SQLAppStatusStore](SQLAppStatusStore.md) (with the `KVStore` and the `SQLAppStatusListener`).
+`statusStore` creates a [SQLAppStatusStore](ui/SQLAppStatusStore.md) (with the `KVStore` and the `SQLAppStatusListener`).
 
-In the end, `statusStore` creates a [SQLTab](SQLTab.md) (with the `SQLAppStatusStore` and the `SparkUI` if available).
+In the end, `statusStore` creates a [SQLTab](ui/SQLTab.md) (with the `SQLAppStatusStore` and the `SparkUI` if available).
 
 ## <span id="externalCatalogClassName"> externalCatalogClassName Internal Method
 

@@ -3,7 +3,7 @@
 `SQLMetric` is an `AccumulatorV2` ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)) for [performance metrics of physical operators](SparkPlan.md#metrics).
 
 !!! note
-    Use **Details for Query** page in [SQL tab](../SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
+    Use **Details for Query** page in [SQL tab](../ui/SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
 
 ## Creating Instance
 
@@ -89,7 +89,9 @@ postDriverMetricUpdates(
   metrics: Seq[SQLMetric]): Unit
 ```
 
-`postDriverMetricUpdates` posts a [SparkListenerDriverAccumUpdates](../SQLListener.md#SparkListenerDriverAccumUpdates) event to `LiveListenerBus` when `executionId` is specified.
+`postDriverMetricUpdates` posts a `SparkListenerDriverAccumUpdates` event to `LiveListenerBus` when `executionId` is specified.
+
+---
 
 `postDriverMetricUpdates` is used when:
 

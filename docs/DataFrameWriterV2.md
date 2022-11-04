@@ -40,7 +40,7 @@ When found, `append` creates an [AppendData](logical-operators/AppendData.md#byN
 In the end, `append` [runs the command](#runCommand) with **append** execution name.
 
 !!! tip
-    Execution is announced as a [SparkListenerSQLExecutionEnd](SQLListener.md#SparkListenerSQLExecutionEnd).
+    Execution is announced as a [SparkListenerSQLExecutionEnd](ui/SparkListenerSQLExecutionEnd.md).
 
 `append` throws a `NoSuchTableException` when the table could not be found.
 

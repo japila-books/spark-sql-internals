@@ -1104,19 +1104,19 @@ Default: `0`
 
 Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
 
-## <span id="spark.sql.files.maxPartitionBytes"> spark.sql.files.maxPartitionBytes
+## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> spark.sql.files.maxPartitionBytes
 
-The maximum number of bytes to pack into a single partition when reading files.
+Maximum number of bytes to pack into a single partition when reading files
 
-Default: `128 * 1024 * 1024` (which corresponds to `parquet.block.size`)
+Default: `128MB` (like `parquet.block.size`)
 
-Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) method to access the current value.
+Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
 
 ## <span id="spark.sql.files.minPartitionNum"> spark.sql.files.minPartitionNum
 
 The suggested (not guaranteed) minimum number of split file partitions for file-based data sources such as Parquet, JSON and ORC.
 
-Default: [spark.sql.leafNodeDefaultParallelism](#spark.sql.leafNodeDefaultParallelism)
+Default: (undefined)
 
 Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) method to access the current value.
 
@@ -1877,7 +1877,7 @@ Use [SQLConf.truncateTableIgnorePermissionAcl](SQLConf.md#truncateTableIgnorePer
 
 ## <span id="spark.sql.ui.retainedExecutions"> spark.sql.ui.retainedExecutions
 
-The number of [SQLExecutionUIData](SQLListener.md#SQLExecutionUIData) entries to keep in `failedExecutions` and `completedExecutions` internal registries.
+Number of `SQLExecutionUIData`s to keep in `failedExecutions` and `completedExecutions` internal registries.
 
 Default: `1000`
 

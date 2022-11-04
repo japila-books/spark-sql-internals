@@ -1,4 +1,7 @@
-# SQL Tab -- Monitoring Structured Queries in web UI
+# SQLTab
+
+<!---
+## Review Me
 
 *SQL* tab in spark-webui.md[web UI] shows spark-sql-SQLMetric.md[SQLMetrics] per SparkPlan.md[physical operator] in a structured query physical plan.
 
@@ -43,3 +46,4 @@ Internally, it uses [SQLListener](SQLListener.md) exclusively to get the SQL que
 image::images/spark-SQLTab-creating-instance.png[align="center"]
 
 NOTE: SharedState.md[SharedState] represents the shared state across `SparkSessions`.
+-->

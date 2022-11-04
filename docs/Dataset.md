@@ -467,10 +467,6 @@ NOTE: `rdd` uses <<sparkSession, SparkSession>> to SparkSession.md#sessionState[
 
 NOTE: `rdd` is at the "boundary" between the internal binary row format and the JVM type of the dataset. Avoid the extra deserialization step to lower JVM memory requirements of your Spark application.
 
-! [[sqlContext]] `sqlContext`
-! Lazily-created [SQLContext](SQLContext.md)
-
-Used when...FIXME
 !===
 
 === [[inputFiles]] Getting Input Files of Relations (in Structured Query) -- `inputFiles` Method

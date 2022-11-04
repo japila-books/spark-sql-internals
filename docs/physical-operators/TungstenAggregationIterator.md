@@ -40,7 +40,7 @@ When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetri
 
 * [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) are used at the [end of every task](#TaskCompletionListener) (one per partition)
 
-The metrics are displayed as part of [HashAggregateExec](HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../SQLTab.md#ExecutionPage)).
+The metrics are displayed as part of [HashAggregateExec](HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../ui/SQLTab.md#ExecutionPage)).
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 

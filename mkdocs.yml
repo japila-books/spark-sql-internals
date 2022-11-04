@@ -932,6 +932,7 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
+    - QueryExecutionListener: QueryExecutionListener.md
     - SparkSessionExtensions: SparkSessionExtensions.md
     - Window Functions:
       - window-functions/index.md
@@ -940,6 +941,14 @@ nav:
       - Window: window-functions/Window.md
       - WindowFunctionFrame: window-functions/WindowFunctionFrame.md
       - WindowSpec: window-functions/WindowSpec.md
+  - Web UI:
+    - ui/index.md
+    - AllExecutionsPage: ui/AllExecutionsPage.md
+    - ExecutionPage: ui/ExecutionPage.md
+    - SparkListenerSQLExecutionEnd: ui/SparkListenerSQLExecutionEnd.md
+    - SQLAppStatusListener: ui/SQLAppStatusListener.md
+    - SQLAppStatusStore: ui/SQLAppStatusStore.md
+    - SQLTab: ui/SQLTab.md
   - Demos:
     - demo/index.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
@@ -996,14 +1005,7 @@ nav:
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
     - FileScanRDD: rdds/FileScanRDD.md
-    - Monitoring:
-      - SQLTab: SQLTab.md
-      - SQLListener: SQLListener.md
-      - QueryExecutionListener: QueryExecutionListener.md
-      - SQLAppStatusListener: SQLAppStatusListener.md
-      - SQLAppStatusPlugin: SQLAppStatusPlugin.md
-      - SQLAppStatusStore: SQLAppStatusStore.md
-      - Logging: spark-logging.md
+    - Logging: spark-logging.md
     - Performance Tuning and Debugging:
       - Debugging Query Execution: debugging-query-execution.md
       - Performance Tuning: spark-sql-performance-tuning.md
@@ -1027,4 +1029,3 @@ nav:
     - KnownSizeEstimation: KnownSizeEstimation.md
     - CompressionCodecs: CompressionCodecs.md
     - JoinStrategyHint: JoinStrategyHint.md
-    - SQLContext: SQLContext.md
