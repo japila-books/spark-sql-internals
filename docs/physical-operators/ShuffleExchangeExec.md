@@ -64,7 +64,7 @@ Used to create a [ShuffledRowRDD](../ShuffledRowRDD.md#metrics) when:
 
 ### <span id="writeMetrics"> Write Metrics
 
-Used to [create a ShuffleDependency](#prepareShuffleDependency) (and [create a ShuffleWriteProcessor](#createShuffleWriteProcessor))
+The write metrics are used to (passed directly to) [create a ShuffleDependency](#shuffleDependency) (that in turn is used to [create a ShuffleWriteProcessor](#createShuffleWriteProcessor))
 
 #### <span id="shuffleBytesWritten"> shuffle bytes written
 

@@ -19,7 +19,7 @@ bufferEncoder: Encoder[BUF]
 Used when:
 
 * `Aggregator` is requested to [toColumn](#toColumn)
-* `UserDefinedAggregator` is requested to `scalaAggregator`
+* `UserDefinedAggregator` is requested to [scalaAggregator](UserDefinedAggregator.md#scalaAggregator)
 
 ### <span id="finish"> finish
 
@@ -31,7 +31,7 @@ finish(
 Used when:
 
 * `ComplexTypedAggregateExpression` is requested to `eval`
-* `ScalaAggregator` is requested to `eval`
+* `ScalaAggregator` is requested to [eval](ScalaAggregator.md#eval)
 
 ### <span id="merge"> merge
 
@@ -44,7 +44,7 @@ merge(
 Used when:
 
 * `ComplexTypedAggregateExpression` is requested to `merge`
-* `ScalaAggregator` is requested to `merge`
+* `ScalaAggregator` is requested to [merge](ScalaAggregator.md#merge)
 
 ### <span id="outputEncoder"> outputEncoder
 
@@ -54,8 +54,8 @@ outputEncoder: Encoder[OUT]
 
 Used when:
 
-* `ScalaAggregator` is requested for the `outputEncoder`
 * `Aggregator` is requested to [toColumn](#toColumn)
+* `ScalaAggregator` is requested for the [outputEncoder](ScalaAggregator.md#outputEncoder)
 
 ### <span id="reduce"> reduce
 
@@ -68,7 +68,7 @@ reduce(
 Used when:
 
 * `ComplexTypedAggregateExpression` is requested to `update`
-* `ScalaAggregator` is requested to `update`
+* `ScalaAggregator` is requested to [update](ScalaAggregator.md#update)
 
 ### <span id="zero"> zero
 
@@ -80,15 +80,15 @@ Used when:
 
 * `SimpleTypedAggregateExpression` is requested for `initialValues`
 * `ComplexTypedAggregateExpression` is requested to `createAggregationBuffer`
-* `ScalaAggregator` is requested to `createAggregationBuffer`
+* `ScalaAggregator` is requested to [createAggregationBuffer](ScalaAggregator.md#createAggregationBuffer)
 
 ## Implementations
 
-* ReduceAggregator
-* TypedAverage
-* TypedCount
-* TypedSumDouble
-* TypedSumLong
+* `ReduceAggregator`
+* `TypedAverage`
+* `TypedCount`
+* `TypedSumDouble`
+* `TypedSumLong`
 
 ## <span id="udaf"> udaf Standard Function
 
@@ -123,16 +123,10 @@ val recs = ratings
   .toDF("id", "recommendations")
 ```
 
-Use `org.apache.spark.sql.expressions.scalalang.typed` object to access the type-safe aggregate functions, i.e. `avg`, `count`, `sum` and `sumLong`.
+Use `org.apache.spark.sql.expressions.scalalang.typed` object to access the type-safe aggregate functions (i.e. `avg`, `count`, `sum` and `sumLong`).
 
 ```scala
 import org.apache.spark.sql.expressions.scalalang.typed
-```
-
-```scala
 ds.groupByKey(_._1).agg(typed.sum(_._2))
-```
-
-```scala
 ds.select(typed.sum((i: Int) => i))
 ```

@@ -1,4 +1,4 @@
-# TypedImperativeAggregate
+# TypedImperativeAggregate Expressions
 
 `TypedImperativeAggregate[T]` is an [extension](#contract) of the [ImperativeAggregate](ImperativeAggregate.md) abstraction for [typed ImperativeAggregates](#implementations).
 

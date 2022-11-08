@@ -316,6 +316,8 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
+---
+
 !!! danger
     Review Me
 
