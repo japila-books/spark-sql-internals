@@ -122,7 +122,25 @@ Strategy: [fixedPoint](catalyst/Optimizer.md#fixedPoint)
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
-`SparkOptimizer` considers `ExtractPythonUDFFromAggregate` optimization rule as [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
+```scala
+nonExcludableRules: Seq[String]
+```
+
+`nonExcludableRules` is part of the [Optimizer](catalyst/Optimizer.md#nonExcludableRules) abstraction.
+
+---
+
+`nonExcludableRules` adds the following optimization rules to the existing [nonExcludableRules](catalyst/Optimizer.md#nonExcludableRules):
+
+* `ExtractGroupingPythonUDFFromAggregate`
+* `ExtractPythonUDFFromAggregate`
+* `ExtractPythonUDFFromJoinCondition`
+* `ExtractPythonUDFs`
+* `GroupBasedRowLevelOperationScanPlanning`
+* `ReplaceCTERefWithRepartition`
+* `V2ScanPartitioning`
+* [V2ScanRelationPushDown](logical-optimizations/V2ScanRelationPushDown.md)
+* [V2Writes](logical-optimizations/V2Writes.md)
 
 ## Accessing SparkOptimizer
 

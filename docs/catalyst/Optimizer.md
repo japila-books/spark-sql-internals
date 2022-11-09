@@ -264,27 +264,25 @@ Strategy: `Once`
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
-`Optimizer` considers some optimization rules as **non-excludable** and necessary for correctness. They are considered so critical for query optimization that can never be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
+`Optimizer` considers some optimization rules as **non-excludable** and necessary for correctness.
 
-* EliminateDistinct
-* EliminateResolvedHint
-* EliminateSubqueryAliases
-* EliminateView
-* ReplaceExpressions
-* ComputeCurrentTime
-* GetCurrentDatabase
-* RewriteDistinctAggregates
-* ReplaceDeduplicateWithAggregate
-* ReplaceIntersectWithSemiJoin
-* ReplaceExceptWithFilter
-* ReplaceExceptWithAntiJoin
-* RewriteExceptAll
-* RewriteIntersectAll
-* ReplaceDistinctWithAggregate
-* PullupCorrelatedPredicates
-* RewriteCorrelatedScalarSubquery
-* RewritePredicateSubquery
-* NormalizeFloatingNumbers
+Non-Excludable Rules are critical for query optimization and can never be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
+
+* `FinishAnalysis`
+* `NormalizeFloatingNumbers`
+* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md)
+* `ReplaceDeduplicateWithAggregate`
+* `ReplaceDistinctWithAggregate`
+* [ReplaceExceptWithAntiJoin](../logical-optimizations/ReplaceExceptWithAntiJoin.md)
+* [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md)
+* `ReplaceIntersectWithSemiJoin`
+* `ReplaceUpdateFieldsExpression`
+* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md)
+* `RewriteDistinctAggregates`
+* [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md)
+* `RewriteIntersectAll`
+* `RewriteLateralSubquery`
+* [RewritePredicateSubquery](../logical-optimizations/RewritePredicateSubquery.md)
 
 ## Accessing Optimizer
 
