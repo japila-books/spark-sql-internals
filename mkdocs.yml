@@ -158,6 +158,7 @@ nav:
       - SupportsAtomicPartitionManagement: connector/SupportsAtomicPartitionManagement.md
       - SupportsDelete: connector/SupportsDelete.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
+      - SupportsMetadata: connector/SupportsMetadata.md
       - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
       - SupportsOverwrite: connector/SupportsOverwrite.md
       - SupportsPartitionManagement: connector/SupportsPartitionManagement.md

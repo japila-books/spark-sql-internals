@@ -1,0 +1,3 @@
+# SupportsMetadata
+
+`SupportsMetadata` is...FIXME

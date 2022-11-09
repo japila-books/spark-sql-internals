@@ -803,13 +803,13 @@ Since: `3.2.0`
 
 ## <span id="spark.sql.maxMetadataStringLength"> spark.sql.maxMetadataStringLength
 
-Maximum number of characters to output for a metadata string (e.g. file location in [DataSourceScanExec](physical-operators/DataSourceScanExec.md)), every value will be abbreviated if exceed length.
-
-Must be bigger than 3
+Maximum number of characters to output for a metadata string (e.g., `Location` in [FileScan](datasources/FileScan.md#getMetaData))
 
 Default: `100`
 
-Use [SQLConf.maxMetadataStringLength](SQLConf.md#maxMetadataStringLength) method to access the current value.
+Must be bigger than `3`
+
+Use [SQLConf.maxMetadataStringLength](SQLConf.md#maxMetadataStringLength) for the current value
 
 ## <span id="spark.sql.maven.additionalRemoteRepositories"> spark.sql.maven.additionalRemoteRepositories
 

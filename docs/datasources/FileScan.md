@@ -1,26 +1,32 @@
 # FileScan
 
-`FileScan` is an [extension](#contract) of the [Scan](../connector/Scan.md) abstraction for [scans](#implementations) in `Batch` queries.
+`FileScan` is an [extension](#contract) of the [Scan](../connector/Scan.md) abstraction for [scans](#implementations) in [Batch](../connector/Batch.md) queries.
 
-`FileScan` is with `SupportsReportStatistics`.
+## <span id="SupportsReportStatistics"> SupportsReportStatistics
+
+`FileScan` is a [SupportsReportStatistics](../connector/SupportsReportStatistics.md).
 
 ## Contract
 
-### <span id="dataFilters"> dataFilters
+### <span id="dataFilters"> DataFilters
 
 ```scala
 dataFilters: Seq[Expression]
 ```
 
-Used when...FIXME
+[Expression](../expressions/Expression.md)s
 
-### <span id="fileIndex"> fileIndex
+Used when:
+
+* `FileScan` is requested for [normalized DataFilters](#normalizedDataFilters), [metadata](#getMetaData), [partitions](#partitions)
+
+### <span id="fileIndex"> FileIndex
 
 ```scala
 fileIndex: PartitioningAwareFileIndex
 ```
 
-Used when...FIXME
+[PartitioningAwareFileIndex](PartitioningAwareFileIndex.md)
 
 ### <span id="getFileUnSplittableReason"> getFileUnSplittableReason
 
@@ -29,31 +35,33 @@ getFileUnSplittableReason(
   path: Path): String
 ```
 
-Used when...FIXME
-
-### <span id="partitionFilters"> partitionFilters
+### <span id="partitionFilters"> Partition Filters
 
 ```scala
 partitionFilters: Seq[Expression]
 ```
 
-Used when...FIXME
+[Expression](../expressions/Expression.md)s
 
-### <span id="readDataSchema"> readDataSchema
+### <span id="readDataSchema"> Read Data Schema
 
 ```scala
 readDataSchema: StructType
 ```
 
-Used when...FIXME
+[StructType](../types/StructType.md)
 
-### <span id="readPartitionSchema"> readPartitionSchema
+!!! note "Three Schemas"
+    Beside the read data schema of a `FileScan`, there are two others:
+
+    1. [readPartitionSchema](#readPartitionSchema)
+    1. [readSchema](#readSchema)
+
+### <span id="readPartitionSchema"> Read Partition Schema
 
 ```scala
 readPartitionSchema: StructType
 ```
-
-Used when...FIXME
 
 ### <span id="seqToString"> seqToString
 
@@ -62,15 +70,13 @@ seqToString(
   seq: Seq[Any]): String
 ```
 
-Used when...FIXME
-
 ### <span id="sparkSession"> sparkSession
 
 ```scala
 sparkSession: SparkSession
 ```
 
-Used when...FIXME
+[SparkSession](../SparkSession.md) associated with this `FileScan`
 
 ### <span id="withFilters"> withFilters
 
@@ -80,14 +86,10 @@ withFilters(
   dataFilters: Seq[Expression]): FileScan
 ```
 
-Used when...FIXME
-
 ## Implementations
 
-* `AvroScan`
-* `OrcScan`
 * [ParquetScan](parquet/ParquetScan.md)
-* `TextBasedFileScan`
+* _others_
 
 ## <span id="description"> description
 
@@ -95,9 +97,11 @@ Used when...FIXME
 description(): String
 ```
 
-`description`...FIXME
-
 `description` is part of the [Scan](../connector/Scan.md#description) abstraction.
+
+---
+
+`description`...FIXME
 
 ## <span id="planInputPartitions"> planInputPartitions
 
@@ -105,9 +109,11 @@ description(): String
 planInputPartitions(): Array[InputPartition]
 ```
 
-`planInputPartitions` is [partitions](#partitions).
-
 `planInputPartitions` is part of the [Batch](../connector/Batch.md#planInputPartitions) abstraction.
+
+---
+
+`planInputPartitions` is [partitions](#partitions).
 
 ### <span id="partitions"> FilePartitions
 
@@ -127,29 +133,35 @@ In the end, `partitions` returns the [FilePartition](FilePartition.md#getFilePar
 estimateStatistics(): Statistics
 ```
 
-`estimateStatistics`...FIXME
-
 `estimateStatistics` is part of the [SupportsReportStatistics](../connector/SupportsReportStatistics.md#estimateStatistics) abstraction.
 
-## <span id="toBatch"> toBatch
+---
+
+`estimateStatistics`...FIXME
+
+## <span id="toBatch"> Converting to Batch
 
 ```scala
 toBatch: Batch
 ```
 
-`toBatch` is enabled (`true`) by default.
-
 `toBatch` is part of the [Scan](../connector/Scan.md#toBatch) abstraction.
 
-## <span id="readSchema"> readSchema
+---
+
+`toBatch` is this [FileScan](#implementations).
+
+## <span id="readSchema"> Read Schema
 
 ```scala
 readSchema(): StructType
 ```
 
-`readSchema`...FIXME
-
 `readSchema` is part of the [Scan](../connector/Scan.md#readSchema) abstraction.
+
+---
+
+`readSchema` is the [readDataSchema](#readDataSchema) with the [readPartitionSchema](#readPartitionSchema).
 
 ## <span id="isSplitable"> isSplitable
 
@@ -160,6 +172,32 @@ isSplitable(
 
 `isSplitable` is `false`.
 
+---
+
 Used when:
 
 * `FileScan` is requested to [getFileUnSplittableReason](#getFileUnSplittableReason) and [partitions](#partitions)
+
+## <span id="SupportsMetadata"> SupportsMetadata
+
+`FileScan` is a [SupportsMetadata](../connector/SupportsMetadata.md).
+
+### <span id="getMetaData"> Metadata
+
+```scala
+getMetaData(): Map[String, String]
+```
+
+`getMetaData` is part of the [SupportsMetadata](../connector/SupportsMetadata.md#getMetaData) abstraction.
+
+---
+
+`getMetaData` returns the following metadata:
+
+Name | Description
+-----|------------
+ `Format` | The lower-case name of this [FileScan](#implementations) (with `Scan` removed)
+ `ReadSchema` | [catalogString](../types/StructType.md#catalogString) of the [Read Data Schema](#readDataSchema)
+ `PartitionFilters` | [Partition Filters](#partitionFilters)
+ `DataFilters` | [Data Filters](#dataFilters)
+ `Location` | [PartitioningAwareFileIndex](#fileIndex) followed by [root paths](FileIndex.md#rootPaths) (with their number in the file listing up to [spark.sql.maxMetadataStringLength](../configuration-properties.md#spark.sql.maxMetadataStringLength))

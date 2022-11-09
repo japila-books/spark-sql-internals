@@ -611,13 +611,13 @@ Used when:
 
 ## <span id="maxMetadataStringLength"><span id="MAX_METADATA_STRING_LENGTH"> maxMetadataStringLength
 
-The value of [spark.sql.maxMetadataStringLength](configuration-properties.md#spark.sql.maxMetadataStringLength) configuration property
+[spark.sql.maxMetadataStringLength](configuration-properties.md#spark.sql.maxMetadataStringLength)
 
 Used when:
 
-* `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
 * `DataSourceScanExec` is requested for [simpleString](physical-operators/DataSourceScanExec.md#simpleString)
 * `FileScan` is requested for [description](datasources/FileScan.md#description) and [metadata](datasources/FileScan.md#getMetaData)
+* `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
 
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
 
