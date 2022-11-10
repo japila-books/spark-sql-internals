@@ -100,7 +100,7 @@ translateFilterWithMapping(
 `translateFilterWithMapping` is used when:
 
 * `DataSourceStrategy` is requested to [translateFilter](#translateFilter)
-* `PushDownUtils` is requested to `pushFilters`
+* `PushDownUtils` is requested to [pushFilters](../PushDownUtils.md#pushFilters)
 
 ### <span id="translateLeafNodeFilter"> translateLeafNodeFilter
 

@@ -14,7 +14,7 @@ Builds [Scan](Scan.md)
 
 Used when:
 
-* `PushDownUtils` is requested to `pruneColumns`
+* `PushDownUtils` is requested to [pruneColumns](../PushDownUtils.md#pruneColumns)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
 
 ## Implementations

@@ -293,6 +293,7 @@ nav:
       - Repartition: logical-operators/Repartition.md
       - RepartitionByExpression: logical-operators/RepartitionByExpression.md
       - RepartitionOperation: logical-operators/RepartitionOperation.md
+      - ReplaceData: logical-operators/ReplaceData.md
       - ResolvedHint: logical-operators/ResolvedHint.md
       - ResolvedTable: logical-operators/ResolvedTable.md
       - RunnableCommand: logical-operators/RunnableCommand.md
@@ -620,6 +621,7 @@ nav:
       - EliminateView: logical-optimizations/EliminateView.md
       - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
       - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
+      - GroupBasedRowLevelOperationScanPlanning: logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md
       - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
       - InlineCTE: logical-optimizations/InlineCTE.md
       - LimitPushDown: logical-optimizations/LimitPushDown.md
@@ -959,6 +961,7 @@ nav:
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
+    - PushDownUtils: PushDownUtils.md
     - BindReferences: BindReferences.md
     - IntervalUtils: IntervalUtils.md
     - ExplainUtils: ExplainUtils.md

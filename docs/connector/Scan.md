@@ -31,7 +31,7 @@ Used when:
 
 * `FileScan` is requested for the [partition and data filters](../datasources/FileScan.md#)
 * `GroupBasedRowLevelOperationScanPlanning` is executed
-* `PushDownUtils` utility is used to `pruneColumns`
+* `PushDownUtils` utility is used to [pruneColumns](../PushDownUtils.md#pruneColumns)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and requested to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
 
 ### <span id="toBatch"> Converting to Batch

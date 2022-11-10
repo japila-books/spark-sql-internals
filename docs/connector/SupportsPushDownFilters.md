@@ -17,7 +17,7 @@ Filter[] pushedFilters()
 
 Used when:
 
-* `PushDownUtils` is requested to `pushFilters`
+* `PushDownUtils` is requested to [pushFilters](../PushDownUtils.md#pushFilters)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and [getWrappedScan](../logical-optimizations/V2ScanRelationPushDown.md#getWrappedScan) for [V1Scan](V1Scan.md)s)
 
 ### <span id="pushFilters"> pushFilters
@@ -31,7 +31,7 @@ Filter[] pushFilters(
 
 Used when:
 
-* `PushDownUtils` is requested to `pushFilters`
+* `PushDownUtils` is requested to [pushFilters](../PushDownUtils.md#pushFilters)
 
 ## Implementations
 
