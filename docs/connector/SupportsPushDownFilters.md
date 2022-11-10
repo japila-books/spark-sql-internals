@@ -2,6 +2,9 @@
 
 `SupportsPushDownFilters` is an [extension](#contract) of the [ScanBuilder](ScanBuilder.md) abstraction for [scan builders](#implementations) that can [pushFilters](#pushFilters) and [pushedFilters](#pushedFilters) (for filter pushdown performance optimization and thus reduce the size of the data to be read).
 
+!!! danger "Obsolete as of Spark 3.3.0"
+    [SupportsPushDownV2Filters](SupportsPushDownV2Filters.md) is preferred as it uses the modern [Predicate](Predicate.md) expression.
+
 ## Contract
 
 ### <span id="pushedFilters"> pushedFilters
@@ -12,7 +15,10 @@ Filter[] pushedFilters()
 
 [Data source filters](../Filter.md) that were pushed down to the data source (in [pushFilters](#pushFilters))
 
-Used when [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to `pushFilters`)
+Used when:
+
+* `PushDownUtils` is requested to `pushFilters`
+* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and [getWrappedScan](../logical-optimizations/V2ScanRelationPushDown.md#getWrappedScan) for [V1Scan](V1Scan.md)s)
 
 ### <span id="pushFilters"> pushFilters
 
@@ -25,12 +31,9 @@ Filter[] pushFilters(
 
 Used when:
 
-* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (that uses `PushDownUtils` utility to `pushFilters`)
-* `CSVScanBuilder` is requested for a [Scan](../datasources/csv/CSVScanBuilder.md#build)
-* `OrcScanBuilder` is requested for a [Scan](../datasources/orc/OrcScanBuilder.md#build)
+* `PushDownUtils` is requested to `pushFilters`
 
 ## Implementations
 
-* [CSVScanBuilder](../datasources/csv/CSVScanBuilder.md)
-* [OrcScanBuilder](../datasources/orc/OrcScanBuilder.md)
-* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md)
+!!! note
+    No built-in implementations available.

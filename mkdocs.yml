@@ -149,6 +149,7 @@ nav:
       - PartitionReader: connector/PartitionReader.md
       - PartitionReaderFactory: connector/PartitionReaderFactory.md
       - PartitionSpecsHelper: connector/PartitionSpecsHelper.md
+      - Predicate: connector/Predicate.md
       - RewritableTransform: connector/RewritableTransform.md
       - Scan: connector/Scan.md
       - ScanBuilder: connector/ScanBuilder.md
@@ -164,6 +165,7 @@ nav:
       - SupportsPartitionManagement: connector/SupportsPartitionManagement.md
       - SupportsPushDownFilters: connector/SupportsPushDownFilters.md
       - SupportsPushDownRequiredColumns: connector/SupportsPushDownRequiredColumns.md
+      - SupportsPushDownV2Filters: connector/SupportsPushDownV2Filters.md
       - SupportsRead: connector/SupportsRead.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - SupportsReportPartitioning: connector/SupportsReportPartitioning.md
