@@ -1071,6 +1071,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsRowLevelOperations/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsStreamingUpdate/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
@@ -1107,6 +1112,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/Transform/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/TruncatableTable/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2531,6 +2541,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/RewriteDeleteFromTable/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/RewriteRowLevelCommand/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/TableCapabilityCheck/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
@@ -2932,6 +2952,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ResolvedTable/</loc>
+         <lastmod>2022-11-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/RowLevelWrite/</loc>
          <lastmod>2022-11-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
