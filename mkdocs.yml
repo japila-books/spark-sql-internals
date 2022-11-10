@@ -169,6 +169,7 @@ nav:
       - SupportsRead: connector/SupportsRead.md
       - SupportsReportStatistics: connector/SupportsReportStatistics.md
       - SupportsReportPartitioning: connector/SupportsReportPartitioning.md
+      - SupportsRowLevelOperations: connector/SupportsRowLevelOperations.md
       - SupportsStreamingUpdate: connector/SupportsStreamingUpdate.md
       - SupportsTruncate: connector/SupportsTruncate.md
       - SupportsWrite: connector/SupportsWrite.md
@@ -177,6 +178,7 @@ nav:
       - TableHelper: connector/TableHelper.md
       - TableProvider: connector/TableProvider.md
       - Transform: connector/Transform.md
+      - TruncatableTable: connector/TruncatableTable.md
       - V1Scan: connector/V1Scan.md
       - V1Table: connector/V1Table.md
       - V1WriteBuilder: connector/V1WriteBuilder.md
@@ -296,6 +298,7 @@ nav:
       - ReplaceData: logical-operators/ReplaceData.md
       - ResolvedHint: logical-operators/ResolvedHint.md
       - ResolvedTable: logical-operators/ResolvedTable.md
+      - RowLevelWrite: logical-operators/RowLevelWrite.md
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SaveIntoDataSourceCommand: logical-operators/SaveIntoDataSourceCommand.md
       - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
@@ -597,6 +600,8 @@ nav:
       - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
       - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
       - ResolveWithCTE: logical-analysis-rules/ResolveWithCTE.md
+      - RewriteDeleteFromTable: logical-analysis-rules/RewriteDeleteFromTable.md
+      - RewriteRowLevelCommand: logical-analysis-rules/RewriteRowLevelCommand.md
       - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
       - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
       - WindowFrameCoercion: logical-analysis-rules/WindowFrameCoercion.md

@@ -1,0 +1,3 @@
+# TruncatableTable
+
+`TruncatableTable` is...FIXME
