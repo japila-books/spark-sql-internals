@@ -2,6 +2,9 @@
 
 `KafkaOffsetReader` is used to query a Kafka cluster for partition offsets.
 
+<!---
+## Review Me
+
 `KafkaOffsetReader` is <<creating-instance, created>> when:
 
 * `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../TableScan.md)) (to [get the initial partition offsets](KafkaRelation.md#getPartitionOffsets))
@@ -47,24 +50,6 @@ Used when `KafkaOffsetReader`:
 * <<fetchLatestOffsets, fetchLatestOffsets>>
 * <<resetConsumer, resetConsumer>>
 * <<close, is closed>>
-
-| `execContext`
-| [[execContext]]
-
-| `groupId`
-| [[groupId]]
-
-| `kafkaReaderThread`
-| [[kafkaReaderThread]]
-
-| `maxOffsetFetchAttempts`
-| [[maxOffsetFetchAttempts]]
-
-| `nextId`
-| [[nextId]]
-
-| `offsetFetchAttemptIntervalMs`
-| [[offsetFetchAttemptIntervalMs]]
 |===
 
 [TIP]
@@ -100,50 +85,6 @@ createConsumer(): Consumer[Array[Byte], Array[Byte]]
 * [[readerOptions]] Reader options (as `Map[String, String]`)
 * [[driverGroupIdPrefix]] Prefix for the group id
 
-=== [[close]] `close` Method
-
-[source, scala]
-----
-close(): Unit
-----
-
-`close`...FIXME
-
-NOTE: `close` is used when...FIXME
-
-=== [[fetchEarliestOffsets]] `fetchEarliestOffsets` Method
-
-[source, scala]
-----
-fetchEarliestOffsets(): Map[TopicPartition, Long]
-----
-
-`fetchEarliestOffsets`...FIXME
-
-NOTE: `fetchEarliestOffsets` is used when...FIXME
-
-=== [[fetchEarliestOffsets-newPartitions]] `fetchEarliestOffsets` Method
-
-[source, scala]
-----
-fetchEarliestOffsets(newPartitions: Seq[TopicPartition]): Map[TopicPartition, Long]
-----
-
-`fetchEarliestOffsets`...FIXME
-
-NOTE: `fetchEarliestOffsets` is used when...FIXME
-
-=== [[fetchLatestOffsets]] `fetchLatestOffsets` Method
-
-[source, scala]
-----
-fetchLatestOffsets(): Map[TopicPartition, Long]
-----
-
-`fetchLatestOffsets`...FIXME
-
-NOTE: `fetchLatestOffsets` is used when...FIXME
-
 === [[fetchTopicPartitions]] Fetching (and Pausing) Assigned Kafka TopicPartitions -- `fetchTopicPartitions` Method
 
 [source, scala]
@@ -162,47 +103,4 @@ fetchTopicPartitions(): Set[TopicPartition]
 In the end, `fetchTopicPartitions` returns the `TopicPartitions` assigned (and paused).
 
 `fetchTopicPartitions` is used when `KafkaRelation` is requested to [build a distributed data scan with column pruning](#buildScan) (as a [TableScan](../TableScan.md)) through [getPartitionOffsets](KafkaRelation.md#getPartitionOffsets).
-
-=== [[nextGroupId]] `nextGroupId` Internal Method
-
-[source, scala]
-----
-nextGroupId(): String
-----
-
-`nextGroupId`...FIXME
-
-NOTE: `nextGroupId` is used when...FIXME
-
-=== [[resetConsumer]] `resetConsumer` Internal Method
-
-[source, scala]
-----
-resetConsumer(): Unit
-----
-
-`resetConsumer`...FIXME
-
-NOTE: `resetConsumer` is used when...FIXME
-
-=== [[runUninterruptibly]] `runUninterruptibly` Internal Method
-
-[source, scala]
-----
-runUninterruptibly[T](body: => T): T
-----
-
-`runUninterruptibly`...FIXME
-
-NOTE: `runUninterruptibly` is used when...FIXME
-
-=== [[withRetriesWithoutInterrupt]] `withRetriesWithoutInterrupt` Internal Method
-
-[source, scala]
-----
-withRetriesWithoutInterrupt(body: => Map[TopicPartition, Long]): Map[TopicPartition, Long]
-----
-
-`withRetriesWithoutInterrupt`...FIXME
-
-NOTE: `withRetriesWithoutInterrupt` is used when...FIXME
+-->

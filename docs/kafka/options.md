@@ -4,10 +4,27 @@
 
 default: `false`
 
+## <span id="startingOffsets"><span id="STARTING_OFFSETS_OPTION_KEY"> startingOffsets
+
+Specifies where to start reading records
+
+Only applies to new streaming queries that start from scratch (resuming will always pick up from where a query left off)
+
+default: `false`
+
+Supported values:
+
+* `earliest`
+* `latest`
+
+Used when:
+
+* `KafkaSourceProvider` is requested to [createSource](KafkaSourceProvider.md#createSource) (to [getKafkaOffsetRangeLimit](KafkaSourceProvider.md#getKafkaOffsetRangeLimit)), [createRelation](KafkaSourceProvider.md#createRelation), [validateBatchOptions](KafkaSourceProvider.md#validateBatchOptions)
+* `KafkaScan` is requested to [toBatch](KafkaScan.md#toBatch), [toMicroBatchStream](KafkaScan.md#toMicroBatchStream), [toContinuousStream](KafkaScan.md#toContinuousStream)
+
 <!---
 ## Review Me
 
-[[options]]
 .Kafka Data Source Options
 [cols="1m,1,2",options="header",width="100%"]
 |===
@@ -21,21 +38,9 @@ default: `false`
 
 See [KafkaSourceProvider.strategy](KafkaSourceProvider.md#strategy)
 
-| endingoffsets
-|
-| [[endingoffsets]]
-
-| failondataloss
-|
-| [[failondataloss]]
-
 | kafkaConsumer.pollTimeoutMs
 |
 | [[kafkaConsumer.pollTimeoutMs]] See [kafkaConsumer.pollTimeoutMs](KafkaRelation.md#pollTimeoutMs)
-
-| startingoffsets
-|
-| [[startingoffsets]]
 
 | subscribe
 |
