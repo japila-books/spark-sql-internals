@@ -868,8 +868,9 @@ nav:
       - JsonFileFormat: datasources/json/JsonFileFormat.md
       - JsonDataSource: datasources/json/JsonDataSource.md
     - Kafka:
-      - Kafka Data Source: kafka/index.md
+      - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md
+      - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
       - KafkaSourceProvider: kafka/KafkaSourceProvider.md
       - KafkaTable: kafka/KafkaTable.md
       - Options: kafka/options.md

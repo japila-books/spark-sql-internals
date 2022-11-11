@@ -34,6 +34,18 @@ Used when:
 * `PushDownUtils` utility is used to [pruneColumns](../PushDownUtils.md#pruneColumns)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and requested to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
 
+### <span id="supportedCustomMetrics"> Supported Custom Metrics
+
+```java
+CustomMetric[] supportedCustomMetrics()
+```
+
+[CustomMetric](CustomMetric.md)s
+
+Used when:
+
+* `DataSourceV2ScanExecBase` physical operator is requested for the [custom metrics](../physical-operators/DataSourceV2ScanExecBase.md#customMetrics)
+
 ### <span id="toBatch"> Converting to Batch
 
 ```java

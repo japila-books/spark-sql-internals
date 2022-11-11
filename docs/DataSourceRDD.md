@@ -16,7 +16,7 @@
 `DataSourceRDD` is created when:
 
 * `BatchScanExec` physical operator is requested for an [input RDD](physical-operators/BatchScanExec.md#inputRDD)
-* `MicroBatchScanExec` (Spark Structured Streaming) physical operator is requested for an `inputRDD`
+* `MicroBatchScanExec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/MicroBatchScanExec)) physical operator is requested for an `inputRDD`
 
 ### <span id="columnarReads"> columnarReads Flag
 

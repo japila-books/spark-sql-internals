@@ -1,8 +1,11 @@
-# Kafka Data Source Options
+# Options
 
 ## <span id="includeHeaders"><span id="INCLUDE_HEADERS"> includeHeaders
 
 default: `false`
+
+<!---
+## Review Me
 
 [[options]]
 .Kafka Data Source Options
@@ -56,3 +59,4 @@ Used when:
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createStreamWriter` and `createSink`
 |===
+-->
