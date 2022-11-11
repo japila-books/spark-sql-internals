@@ -32,7 +32,7 @@ Used when:
 
 * ConsoleTable (Spark Structured Streaming)
 * ForeachWriterTable (Spark Structured Streaming)
-* [KafkaTable](../datasources/kafka/KafkaTable.md)
+* [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink (Spark Structured Streaming)
 * [NoopWriteBuilder](../datasources/noop/NoopWriteBuilder.md)
 * [SupportsDynamicOverwrite](SupportsDynamicOverwrite.md)

@@ -868,27 +868,26 @@ nav:
       - JsonFileFormat: datasources/json/JsonFileFormat.md
       - JsonDataSource: datasources/json/JsonDataSource.md
     - Kafka:
-      - Kafka Data Source: datasources/kafka/index.md
-      - Configuration Properties: datasources/kafka/configuration-properties.md
-      - KafkaSourceProvider: datasources/kafka/KafkaSourceProvider.md
-      - KafkaTable: datasources/kafka/KafkaTable.md
-      - Options: datasources/kafka/options.md
-      - KafkaScan: datasources/kafka/KafkaScan.md
-      - KafkaBatch: datasources/kafka/KafkaBatch.md
-      - KafkaBatchWrite: datasources/kafka/KafkaBatchWrite.md
-      - KafkaRelation: datasources/kafka/KafkaRelation.md
-      - KafkaSourceRDD:
-        - KafkaSourceRDD: datasources/kafka/KafkaSourceRDD.md
-        - KafkaSourceRDDPartition: datasources/kafka/KafkaSourceRDDPartition.md
-      - ConsumerStrategy: datasources/kafka/ConsumerStrategy.md
-      - KafkaOffsetReader: datasources/kafka/KafkaOffsetReader.md
-      - KafkaOffsetRangeLimit: datasources/kafka/KafkaOffsetRangeLimit.md
-      - KafkaDataConsumer: datasources/kafka/KafkaDataConsumer.md
-      - InternalKafkaConsumer: datasources/kafka/InternalKafkaConsumer.md
-      - KafkaWriter: datasources/kafka/KafkaWriter.md
-      - KafkaWriteTask: datasources/kafka/KafkaWriteTask.md
-      - JsonUtils: datasources/kafka/JsonUtils.md
-      - InternalKafkaProducerPool: datasources/kafka/InternalKafkaProducerPool.md
+      - Kafka Data Source: kafka/index.md
+      - Configuration Properties: kafka/configuration-properties.md
+      - KafkaSourceProvider: kafka/KafkaSourceProvider.md
+      - KafkaTable: kafka/KafkaTable.md
+      - Options: kafka/options.md
+      - KafkaScan: kafka/KafkaScan.md
+      - KafkaBatch: kafka/KafkaBatch.md
+      - KafkaBatchWrite: kafka/KafkaBatchWrite.md
+      - KafkaRelation: kafka/KafkaRelation.md
+      - KafkaSourceRDD: kafka/KafkaSourceRDD.md
+      - KafkaSourceRDDPartition: kafka/KafkaSourceRDDPartition.md
+      - ConsumerStrategy: kafka/ConsumerStrategy.md
+      - KafkaOffsetReader: kafka/KafkaOffsetReader.md
+      - KafkaOffsetRangeLimit: kafka/KafkaOffsetRangeLimit.md
+      - KafkaDataConsumer: kafka/KafkaDataConsumer.md
+      - InternalKafkaConsumer: kafka/InternalKafkaConsumer.md
+      - KafkaWriter: kafka/KafkaWriter.md
+      - KafkaWriteTask: kafka/KafkaWriteTask.md
+      - JsonUtils: kafka/JsonUtils.md
+      - InternalKafkaProducerPool: kafka/InternalKafkaProducerPool.md
     - Noop:
       - Noop Data Source: datasources/noop/index.md
       - NoopDataSource: datasources/noop/NoopDataSource.md

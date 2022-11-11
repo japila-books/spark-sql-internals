@@ -2,7 +2,7 @@
 
 `KafkaSourceProvider` is the entry point to the [kafka data source](index.md).
 
-`KafkaSourceProvider` is a [SimpleTableProvider](../../connector/SimpleTableProvider.md) (and does not support custom table schema and partitioning).
+`KafkaSourceProvider` is a [SimpleTableProvider](../connector/SimpleTableProvider.md) (and does not support custom table schema and partitioning).
 
 !!! note
     `KafkaSourceProvider` is also a `StreamSourceProvider` and a `StreamSinkProvider` to be used in Spark Structured Streaming.
@@ -11,7 +11,7 @@
 
 ## <span id="DataSourceRegister"><span id="shortName"> DataSourceRegister
 
-`KafkaSourceProvider` is a [DataSourceRegister](../../DataSourceRegister.md) and registers itself as **kafka** format.
+`KafkaSourceProvider` is a [DataSourceRegister](../DataSourceRegister.md) and registers itself as **kafka** format.
 
 `KafkaSourceProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for the registration (available in the [source code]({{ spark.github }}/external/kafka-0-10-sql/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister) of Apache Spark).
 
@@ -22,7 +22,7 @@ getTable(
   options: CaseInsensitiveStringMap): KafkaTable
 ```
 
-`getTable` is part of the [SimpleTableProvider](../../connector/SimpleTableProvider.md#getTable) abstraction.
+`getTable` is part of the [SimpleTableProvider](../connector/SimpleTableProvider.md#getTable) abstraction.
 
 `getTable` creates a [KafkaTable](KafkaTable.md) with the `includeHeaders` flag based on [includeHeaders](options.md#includeHeaders) option.
 
@@ -34,7 +34,7 @@ createRelation(
   parameters: Map[String, String]): BaseRelation
 ```
 
-`createRelation` is part of the [RelationProvider](../../RelationProvider.md#createRelation) abstraction.
+`createRelation` is part of the [RelationProvider](../RelationProvider.md#createRelation) abstraction.
 
 `createRelation` starts by <<validateBatchOptions, validating the Kafka options (for batch queries)>> in the input `parameters`.
 
@@ -60,7 +60,7 @@ createRelation(
   df: DataFrame): BaseRelation
 ```
 
-`createRelation` is part of the [CreatableRelationProvider](../../CreatableRelationProvider.md#createRelation) abstraction.
+`createRelation` is part of the [CreatableRelationProvider](../CreatableRelationProvider.md#createRelation) abstraction.
 
 `createRelation` gets the [topic](options.md#topic) option from the input `parameters`.
 
@@ -68,9 +68,9 @@ createRelation(
 
 `createRelation` then uses the `KafkaWriter` helper object to [write the rows of the DataFrame to the Kafka topic](KafkaWriter.md#write).
 
-In the end, `createRelation` creates a fake [BaseRelation](../../BaseRelation.md) that simply throws an `UnsupportedOperationException` for all its methods.
+In the end, `createRelation` creates a fake [BaseRelation](../BaseRelation.md) that simply throws an `UnsupportedOperationException` for all its methods.
 
-`createRelation` supports [Append](../../CreatableRelationProvider.md#Append) and [ErrorIfExists](../../CreatableRelationProvider.md#ErrorIfExists) only. `createRelation` throws an `AnalysisException` for the other save modes:
+`createRelation` supports [Append](../CreatableRelationProvider.md#Append) and [ErrorIfExists](../CreatableRelationProvider.md#ErrorIfExists) only. `createRelation` throws an `AnalysisException` for the other save modes:
 
 ```text
 Save mode [mode] not allowed for Kafka. Allowed save modes are [Append] and [ErrorIfExists] (default).
@@ -157,7 +157,7 @@ ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG
     log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=ALL
     ```
 
-    Refer to [Logging](../../spark-logging.md).
+    Refer to [Logging](../spark-logging.md).
 
 ## <span id="kafkaParamsForExecutors"> kafkaParamsForExecutors
 

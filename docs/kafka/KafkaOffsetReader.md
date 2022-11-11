@@ -4,7 +4,7 @@
 
 `KafkaOffsetReader` is <<creating-instance, created>> when:
 
-* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../../TableScan.md)) (to [get the initial partition offsets](KafkaRelation.md#getPartitionOffsets))
+* `KafkaRelation` is requested to [build a distributed data scan with column pruning](KafkaRelation.md#buildScan) (as a [TableScan](../TableScan.md)) (to [get the initial partition offsets](KafkaRelation.md#getPartitionOffsets))
 
 * (Spark Structured Streaming) `KafkaSourceProvider` is requested to `createSource` and `createContinuousReader`
 
@@ -161,7 +161,7 @@ fetchTopicPartitions(): Set[TopicPartition]
 
 In the end, `fetchTopicPartitions` returns the `TopicPartitions` assigned (and paused).
 
-`fetchTopicPartitions` is used when `KafkaRelation` is requested to [build a distributed data scan with column pruning](#buildScan) (as a [TableScan](../../TableScan.md)) through [getPartitionOffsets](KafkaRelation.md#getPartitionOffsets).
+`fetchTopicPartitions` is used when `KafkaRelation` is requested to [build a distributed data scan with column pruning](#buildScan) (as a [TableScan](../TableScan.md)) through [getPartitionOffsets](KafkaRelation.md#getPartitionOffsets).
 
 === [[nextGroupId]] `nextGroupId` Internal Method
 

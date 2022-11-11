@@ -9,7 +9,7 @@ Spark SQL is a relational framework for ingesting, querying and persisting (semi
 !!! note
     Semi- and structured data are collections of records that can be described using [schema](types/index.md) with column names, their types and whether a column can be null or not (_nullability_).
 
-Spark SQL comes with a uniform and pluggable interface for data access in distributed storage systems and formats (e.g. Hadoop DFS, [Hive](hive/index.md), [Parquet](datasources/parquet/index.md), [Avro](datasources/avro/index.md), [Apache Kafka](datasources/kafka/index.md)) using [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) APIs.
+Spark SQL comes with a uniform and pluggable interface for data access in distributed storage systems and formats (e.g. Hadoop DFS, [Hive](hive/index.md), [Parquet](datasources/parquet/index.md), [Avro](datasources/avro/index.md), [Apache Kafka](kafka/index.md)) using [DataFrameReader](DataFrameReader.md) and [DataFrameWriter](DataFrameWriter.md) APIs.
 
 Spark SQL allows you to execute SQL-like queries on large volume of data that can live in Hadoop HDFS or Hadoop-compatible file systems like S3. It can access data from different data sources - files or tables.
 

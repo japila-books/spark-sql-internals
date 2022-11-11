@@ -105,7 +105,7 @@ Used when:
 ## Implementations
 
 * [FileScan](../datasources/FileScan.md)
-* [KafkaScan](../datasources/kafka/KafkaScan.md)
+* [KafkaScan](../kafka/KafkaScan.md)
 * [SupportsReportPartitioning](SupportsReportPartitioning.md)
 * [SupportsReportStatistics](SupportsReportStatistics.md)
 * [V1Scan](V1Scan.md)

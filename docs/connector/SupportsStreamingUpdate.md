@@ -20,6 +20,6 @@ Used when:
 
 * ConsoleTable
 * ForeachWriterTable
-* [KafkaTable](../datasources/kafka/KafkaTable.md)
+* [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink
 * [NoopWriteBuilder](../datasources/noop/NoopWriteBuilder.md)

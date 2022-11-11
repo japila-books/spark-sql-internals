@@ -2,9 +2,9 @@
 
 `KafkaWriter` is a Scala object that is used to [write](#write) the rows of a batch (or a streaming) structured query to Apache Kafka.
 
-![KafkaWriter (write) in web UI](../../images/spark-sql-KafkaWriter-write-webui.png)
+![KafkaWriter (write) in web UI](../images/spark-sql-KafkaWriter-write-webui.png)
 
-`KafkaWriter` [validates the schema of a structured query](#validateQuery) that it contains the following columns ([output schema attributes](../../catalyst/QueryPlan.md#output)):
+`KafkaWriter` [validates the schema of a structured query](#validateQuery) that it contains the following columns ([output schema attributes](../catalyst/QueryPlan.md#output)):
 
 * Either **topic** of type `StringType` or the [topic](options.md#topic) option are defined
 
@@ -56,11 +56,11 @@ write(
   topic: Option[String] = None): Unit
 ```
 
-`write` gets the [output schema](../../catalyst/QueryPlan.md#output) of the [analyzed logical plan](../../QueryExecution.md#analyzed) of the input [QueryExecution](../../QueryExecution.md).
+`write` gets the [output schema](../catalyst/QueryPlan.md#output) of the [analyzed logical plan](../QueryExecution.md#analyzed) of the input [QueryExecution](../QueryExecution.md).
 
 `write` then [validates the schema of a structured query](#validateQuery).
 
-In the end, `write` requests the `QueryExecution` for [RDD[InternalRow]](../../QueryExecution.md#toRdd) (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
+In the end, `write` requests the `QueryExecution` for [RDD[InternalRow]](../QueryExecution.md#toRdd) (that represents the structured query as an RDD) and executes the following function on every partition of the RDD (using `RDD.foreachPartition` operation):
 
 1. Creates a [KafkaWriteTask](KafkaWriteTask.md) (for the input `kafkaParameters`, the schema and the input `topic`)
 

@@ -24,7 +24,7 @@ Used when:
 ## Implementations
 
 * [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
-* [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
+* [KafkaSourceProvider](kafka/KafkaSourceProvider.md)
 
 ## CreatableRelationProvider
 

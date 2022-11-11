@@ -4,7 +4,7 @@
 
 `KafkaWriteTask` is <<creating-instance, created>> exclusively when `KafkaWriter` is requested to [write the rows of a structured query to a Kafka topic](KafkaWriter.md#write).
 
-`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the [raw-memory unsafe row format](../../UnsafeRow.md) only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
+`KafkaWriteTask` <<execute, writes>> keys and values in their binary format (as JVM's bytes) and so uses the [raw-memory unsafe row format](../UnsafeRow.md) only (i.e. `UnsafeRow`). That is supposed to save time for reconstructing the rows to very tiny JVM objects (i.e. byte arrays).
 
 [[internal-properties]]
 .KafkaWriteTask's Internal Properties
@@ -20,7 +20,7 @@
 | [[failedWrite]]
 
 | projection
-| [[projection]] [UnsafeProjection](../../expressions/UnsafeProjection.md)
+| [[projection]] [UnsafeProjection](../expressions/UnsafeProjection.md)
 
 <<createProjection, Created>> once when `KafkaWriteTask` is created.
 |===
@@ -38,7 +38,7 @@ Internally, `execute` creates a `KafkaProducer` using `Array[Byte]` for the keys
 
 NOTE: `execute` creates a single `KafkaProducer` for all rows.
 
-For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) [InternalRow](../../InternalRow.md) to an [UnsafeRow](../../UnsafeRow.md) object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
+For every row in the `iterator`, `execute` uses the internal <<projection, UnsafeProjection>> to _project_ (aka _convert_) [InternalRow](../InternalRow.md) to an [UnsafeRow](../UnsafeRow.md) object and take 0th, 1st and 2nd fields for a topic, key and value, respectively.
 
 `execute` then creates a `ProducerRecord` and sends it to Kafka (using the `KafkaProducer`). `execute` registers a asynchronous `Callback` to monitor the writing.
 
@@ -56,7 +56,7 @@ From https://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/p
 createProjection: UnsafeProjection
 ----
 
-`createProjection` creates a [UnsafeProjection](../../expressions/UnsafeProjection.md) with `topic`, `key` and `value` expressions/Expression.md[expressions] and the `inputSchema`.
+`createProjection` creates a [UnsafeProjection](../expressions/UnsafeProjection.md) with `topic`, `key` and `value` expressions/Expression.md[expressions] and the `inputSchema`.
 
 `createProjection` makes sure that the following holds (and reports an `IllegalStateException` otherwise):
 
@@ -64,7 +64,7 @@ createProjection: UnsafeProjection
 * Optional `key` is of type `StringType` or `BinaryType` if defined
 * `value` was defined (in `inputSchema`) and is of type `StringType` or `BinaryType`
 
-`createProjection` casts `key` and `value` expressions to `BinaryType` in [UnsafeProjection](../../expressions/UnsafeProjection.md).
+`createProjection` casts `key` and `value` expressions to `BinaryType` in [UnsafeProjection](../expressions/UnsafeProjection.md).
 
 NOTE: `createProjection` is used exclusively when `KafkaWriteTask` is created (as <<projection, projection>>).
 

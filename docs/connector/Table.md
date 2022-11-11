@@ -80,7 +80,7 @@ Used when:
 * `ConsoleTable` (Spark Structured Streaming)
 * [FileTable](FileTable.md)
 * `ForeachWriterTable` (Spark Structured Streaming)
-* [KafkaTable](../datasources/kafka/KafkaTable.md)
+* [KafkaTable](../kafka/KafkaTable.md)
 * `MemorySink` (Spark Structured Streaming)
 * `MemoryStreamTable` (Spark Structured Streaming)
 * [NoopTable](../datasources/noop/NoopTable.md)

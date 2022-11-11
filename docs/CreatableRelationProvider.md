@@ -27,4 +27,4 @@ Used when:
 
 * [ConsoleSinkProvider](datasources/console/ConsoleSinkProvider.md)
 * [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
-* [KafkaSourceProvider](datasources/kafka/KafkaSourceProvider.md)
+* [KafkaSourceProvider](kafka/KafkaSourceProvider.md)

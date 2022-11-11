@@ -1,11 +1,11 @@
 # KafkaRelation
 
-`KafkaRelation` is a [BaseRelation](../../BaseRelation.md) with a [TableScan](../../TableScan.md).
+`KafkaRelation` is a [BaseRelation](../BaseRelation.md) with a [TableScan](../TableScan.md).
 
-`KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to [create a BaseRelation](KafkaSourceProvider.md#createRelation-RelationProvider) (as a [RelationProvider](../../RelationProvider.md#createRelation)).
+`KafkaRelation` is <<creating-instance, created>> exclusively when `KafkaSourceProvider` is requested to [create a BaseRelation](KafkaSourceProvider.md#createRelation-RelationProvider) (as a [RelationProvider](../RelationProvider.md#createRelation)).
 
 [[schema]]
-`KafkaRelation` uses the fixed [schema](../../BaseRelation.md#schema).
+`KafkaRelation` uses the fixed [schema](../BaseRelation.md#schema).
 
 [[schema]]
 .KafkaRelation's Schema (in the positional order)
@@ -84,7 +84,7 @@ Refer to spark-logging.md[Logging].
 
 * [[sqlContext]] `SQLContext`
 * [[strategy]] `ConsumerStrategy`
-* [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of [DataFrameReader](../../DataFrameReader.md#option)
+* [[sourceOptions]] Source options (as `Map[String, String]`) that directly correspond to the options of [DataFrameReader](../DataFrameReader.md#option)
 * [[specifiedKafkaParams]] User-defined Kafka parameters (as `Map[String, String]`)
 * [[failOnDataLoss]] `failOnDataLoss` flag
 * [[startingOffsets]] Starting offsets (as [KafkaOffsetRangeLimit](KafkaOffsetRangeLimit.md))
@@ -97,7 +97,7 @@ Refer to spark-logging.md[Logging].
 buildScan(): RDD[Row]
 ----
 
-`buildScan` is part of [TableScan](../../TableScan.md#buildScan) abstraction.
+`buildScan` is part of [TableScan](../TableScan.md#buildScan) abstraction.
 
 `buildScan` [kafkaParamsForDriver](KafkaSourceProvider.md#kafkaParamsForDriver) from the <<specifiedKafkaParams, user-defined Kafka parameters>> and uses it to create a [KafkaOffsetReader](KafkaOffsetReader.md) (together with the <<strategy, ConsumerStrategy>>, the <<sourceOptions, source options>> and a unique group ID of the format `spark-kafka-relation-[randomUUID]-driver`).
 
@@ -142,7 +142,7 @@ getPartitionOffsets(
 
 . For `SpecificOffsetRangeLimit`, `getPartitionOffsets` returns a map from <<validateTopicPartitions, validateTopicPartitions>>
 
-NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a [TableScan](../../TableScan.md)).
+NOTE: `getPartitionOffsets` is used exclusively when `KafkaRelation` is requested to <<buildScan, build a distributed data scan with column pruning>> (as a [TableScan](../TableScan.md)).
 
 ==== [[getPartitionOffsets-validateTopicPartitions]] Validating TopicPartitions (Against Partition Offsets) -- `validateTopicPartitions` Inner Method
 
