@@ -72,7 +72,7 @@ Used when:
 * [WriteBuilder](WriteBuilder.md)
 * [FileWrite](../datasources/FileWrite.md)
 * `ForeachWrite` (Spark Structured Streaming)
-* `KafkaWrite`
+* [KafkaWrite](../kafka/KafkaWrite.md)
 * `MemoryWrite` (Spark Structured Streaming)
 * `NoopWrite`
 * `RequiresDistributionAndOrdering`

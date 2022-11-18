@@ -885,6 +885,7 @@ nav:
       - KafkaOffsetRangeLimit: kafka/KafkaOffsetRangeLimit.md
       - KafkaDataConsumer: kafka/KafkaDataConsumer.md
       - InternalKafkaConsumer: kafka/InternalKafkaConsumer.md
+      - KafkaWrite: kafka/KafkaWrite.md
       - KafkaWriter: kafka/KafkaWriter.md
       - KafkaWriteTask: kafka/KafkaWriteTask.md
       - JsonUtils: kafka/JsonUtils.md
