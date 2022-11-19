@@ -10,6 +10,8 @@
 void abort()
 ```
 
+See [KafkaDataWriter](../kafka/KafkaDataWriter.md#abort)
+
 Used when:
 
 * `FileFormatWriter` utility is used to [executeTask](../datasources/FileFormatWriter.md#executeTask)
@@ -22,6 +24,8 @@ Used when:
 WriterCommitMessage commit()
 ```
 
+See [KafkaDataWriter](../kafka/KafkaDataWriter.md#commit)
+
 Used when:
 
 * `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
@@ -32,6 +36,8 @@ Used when:
 ```java
 CustomTaskMetric[] currentMetricsValues()
 ```
+
+See [KafkaDataWriter](../kafka/KafkaDataWriter.md#currentMetricsValues)
 
 Used when:
 
@@ -46,6 +52,8 @@ void write(
   T record)
 ```
 
+See [KafkaDataWriter](../kafka/KafkaDataWriter.md#write)
+
 Used when:
 
 * `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
@@ -54,8 +62,5 @@ Used when:
 ## Implementations
 
 * [FileFormatDataWriter](../datasources/FileFormatDataWriter.md)
-* `ForeachDataWriter` (Spark Structured Streaming)
-* `KafkaDataWriter`
-* `MemoryDataWriter` (Spark Structured Streaming)
-* `NoopWriter`
-* `PackedRowDataWriter` (Spark Structured Streaming)
+* [KafkaDataWriter](../kafka/KafkaDataWriter.md)
+* _others_

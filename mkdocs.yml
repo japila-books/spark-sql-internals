@@ -870,7 +870,10 @@ nav:
     - Kafka:
       - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md
+      - KafkaBatchWriterFactory: kafka/KafkaBatchWriterFactory.md
+      - KafkaDataWriter: kafka/KafkaDataWriter.md
       - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
+      - KafkaRowWriter: kafka/KafkaRowWriter.md
       - KafkaSourceProvider: kafka/KafkaSourceProvider.md
       - KafkaTable: kafka/KafkaTable.md
       - Options: kafka/options.md
