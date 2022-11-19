@@ -870,29 +870,30 @@ nav:
     - Kafka:
       - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md
-      - KafkaBatchWriterFactory: kafka/KafkaBatchWriterFactory.md
-      - KafkaDataWriter: kafka/KafkaDataWriter.md
-      - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
-      - KafkaRowWriter: kafka/KafkaRowWriter.md
-      - KafkaSourceProvider: kafka/KafkaSourceProvider.md
-      - KafkaTable: kafka/KafkaTable.md
-      - Options: kafka/options.md
-      - KafkaScan: kafka/KafkaScan.md
       - KafkaBatch: kafka/KafkaBatch.md
       - KafkaBatchWrite: kafka/KafkaBatchWrite.md
+      - KafkaBatchWriterFactory: kafka/KafkaBatchWriterFactory.md
+      - KafkaDataConsumer: kafka/KafkaDataConsumer.md
+      - KafkaDataWriter: kafka/KafkaDataWriter.md
+      - KafkaOffsetRangeLimit: kafka/KafkaOffsetRangeLimit.md
+      - KafkaOffsetReader: kafka/KafkaOffsetReader.md
       - KafkaRelation: kafka/KafkaRelation.md
+      - KafkaScan: kafka/KafkaScan.md
+      - KafkaSourceProvider: kafka/KafkaSourceProvider.md
       - KafkaSourceRDD: kafka/KafkaSourceRDD.md
       - KafkaSourceRDDPartition: kafka/KafkaSourceRDDPartition.md
-      - ConsumerStrategy: kafka/ConsumerStrategy.md
-      - KafkaOffsetReader: kafka/KafkaOffsetReader.md
-      - KafkaOffsetRangeLimit: kafka/KafkaOffsetRangeLimit.md
-      - KafkaDataConsumer: kafka/KafkaDataConsumer.md
-      - InternalKafkaConsumer: kafka/InternalKafkaConsumer.md
+      - KafkaTable: kafka/KafkaTable.md
       - KafkaWrite: kafka/KafkaWrite.md
       - KafkaWriter: kafka/KafkaWriter.md
       - KafkaWriteTask: kafka/KafkaWriteTask.md
-      - JsonUtils: kafka/JsonUtils.md
-      - InternalKafkaProducerPool: kafka/InternalKafkaProducerPool.md
+      - Misc:
+        - ConsumerStrategy: kafka/ConsumerStrategy.md
+        - InternalKafkaConsumer: kafka/InternalKafkaConsumer.md
+        - InternalKafkaProducerPool: kafka/InternalKafkaProducerPool.md
+        - JsonUtils: kafka/JsonUtils.md
+        - KafkaRowWriter: kafka/KafkaRowWriter.md
+        - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
+      - Options: kafka/options.md
     - Noop:
       - Noop Data Source: datasources/noop/index.md
       - NoopDataSource: datasources/noop/NoopDataSource.md
