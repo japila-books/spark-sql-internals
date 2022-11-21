@@ -2,7 +2,12 @@
 
 ## <span id="EXECUTION_ID_KEY"><span id=spark.sql.execution.id"> spark.sql.execution.id
 
-`SQLExecution` defines `spark.sql.execution.id` Spark property that is used to track multiple Spark jobs that should all together constitute a single execution of a structured query (and could be reported as a single execution unit).
+`SQLExecution` defines `spark.sql.execution.id` that is used as the key of the Spark local property in the following:
+
+* [withNewExecutionId](#withNewExecutionId)
+* [withExecutionId](#withExecutionId)
+
+`spark.sql.execution.id` is used to track multiple Spark jobs that should all together be considered part of a single execution of a structured query.
 
 ```scala
 import org.apache.spark.sql.execution.SQLExecution
@@ -10,149 +15,102 @@ scala> println(SQLExecution.EXECUTION_ID_KEY)
 spark.sql.execution.id
 ```
 
-Actions of a structured query are executed using <<withNewExecutionId, SQLExecution.withNewExecutionId>> static method that sets <<spark.sql.execution.id, spark.sql.execution.id>> as Spark Core's spark-sparkcontext-local-properties.md#setLocalProperty[local property] and "stitches" different Spark jobs as parts of one structured query action (that you can then see in web UI's [SQL tab](ui/SQLTab.md)).
+`spark.sql.execution.id` allows "stitching" different Spark jobs (esp. executed on separate threads) as part of one structured query (that you can then see in web UI's [SQL tab](ui/SQLTab.md)).
 
-[TIP]
-====
-Use `SparkListener` (Spark Core) to listen to `SparkListenerSQLExecutionStart` events and know the execution ids of structured queries that have been executed in a Spark SQL application.
+!!! tip
+    Use `SparkListener` ([Spark Core]({{ book.spark_core }}/SparkListener)) to listen to `SparkListenerSQLExecutionStart` events and know the execution IDs of structured queries that have been executed in a Spark SQL application.
 
-[source, scala]
-----
-// "SQLAppStatusListener" idea is borrowed from
-// Spark SQL's org.apache.spark.sql.execution.ui.SQLAppStatusListener
-import org.apache.spark.scheduler.{SparkListener, SparkListenerEvent}
-import org.apache.spark.sql.execution.ui.{SparkListenerDriverAccumUpdates, SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionStart}
-public class SQLAppStatusListener extends SparkListener {
-  override def onOtherEvent(event: SparkListenerEvent): Unit = event match {
-    case e: SparkListenerSQLExecutionStart => onExecutionStart(e)
-    case e: SparkListenerSQLExecutionEnd => onExecutionEnd(e)
-    case e: SparkListenerDriverAccumUpdates => onDriverAccumUpdates(e)
-    case _ => // Ignore
-  }
-  def onExecutionStart(event: SparkListenerSQLExecutionStart): Unit = {
-    // Find the QueryExecution for the Dataset action that triggered the event
-    // This is the SQL-specific way
-    import org.apache.spark.sql.execution.SQLExecution
-    queryExecution = SQLExecution.getQueryExecution(event.executionId)
-  }
-  def onJobStart(jobStart: SparkListenerJobStart): Unit = {
-    // Find the QueryExecution for the Dataset action that triggered the event
-    // This is a general Spark Core way using local properties
-    import org.apache.spark.sql.execution.SQLExecution
-    val executionIdStr = jobStart.properties.getProperty(SQLExecution.EXECUTION_ID_KEY)
-    // Note that the Spark job may or may not be a part of a structured query
-    if (executionIdStr != null) {
-      queryExecution = SQLExecution.getQueryExecution(executionIdStr.toLong)
+    ```scala
+    // "SQLAppStatusListener" idea is borrowed from
+    // Spark SQL's org.apache.spark.sql.execution.ui.SQLAppStatusListener
+    import org.apache.spark.scheduler.{SparkListener, SparkListenerEvent}
+    import org.apache.spark.sql.execution.ui.{SparkListenerDriverAccumUpdates, SparkListenerSQLExecutionEnd, SparkListenerSQLExecutionStart}
+    public class SQLAppStatusListener extends SparkListener {
+      override def onOtherEvent(event: SparkListenerEvent): Unit = event match {
+        case e: SparkListenerSQLExecutionStart => onExecutionStart(e)
+        case e: SparkListenerSQLExecutionEnd => onExecutionEnd(e)
+        case e: SparkListenerDriverAccumUpdates => onDriverAccumUpdates(e)
+        case _ => // Ignore
+      }
+      def onExecutionStart(event: SparkListenerSQLExecutionStart): Unit = {
+        // Find the QueryExecution for the Dataset action that triggered the event
+        // This is the SQL-specific way
+        import org.apache.spark.sql.execution.SQLExecution
+        queryExecution = SQLExecution.getQueryExecution(event.executionId)
+      }
+      def onJobStart(jobStart: SparkListenerJobStart): Unit = {
+        // Find the QueryExecution for the Dataset action that triggered the event
+        // This is a general Spark Core way using local properties
+        import org.apache.spark.sql.execution.SQLExecution
+        val executionIdStr = jobStart.properties.getProperty(SQLExecution.EXECUTION_ID_KEY)
+        // Note that the Spark job may or may not be a part of a structured query
+        if (executionIdStr != null) {
+          queryExecution = SQLExecution.getQueryExecution(executionIdStr.toLong)
+        }
+      }
+      def onExecutionEnd(event: SparkListenerSQLExecutionEnd): Unit = {}
+      def onDriverAccumUpdates(event: SparkListenerDriverAccumUpdates): Unit = {}
     }
-  }
-  def onExecutionEnd(event: SparkListenerSQLExecutionEnd): Unit = {}
-  def onDriverAccumUpdates(event: SparkListenerDriverAccumUpdates): Unit = {}
-}
 
-val sqlListener = new SQLAppStatusListener()
-spark.sparkContext.addSparkListener(sqlListener)
-----
-====
+    val sqlListener = new SQLAppStatusListener()
+    spark.sparkContext.addSparkListener(sqlListener)
+    ```
 
-NOTE: Jobs without <<spark.sql.execution.id, spark.sql.execution.id>> key are not considered to belong to SQL query executions.
+Spark jobs without `spark.sql.execution.id` local property can then be considered to belong to a SQL query execution.
 
-[[executionIdToQueryExecution]]
-`SQLExecution` keeps track of all execution ids and their [QueryExecutions](QueryExecution.md) in `executionIdToQueryExecution` internal registry.
+## <span id="withNewExecutionId"> withNewExecutionId
 
-TIP: Use <<getQueryExecution, SQLExecution.getQueryExecution>> to find the [QueryExecution](QueryExecution.md) for an execution id.
-
-=== [[withNewExecutionId]] Executing Dataset Action (with Zero or More Spark Jobs) Under New Execution Id -- `withNewExecutionId` Method
-
-[source, scala]
-----
+```scala
 withNewExecutionId[T](
-  sparkSession: SparkSession,
-  queryExecution: QueryExecution)(body: => T): T
-----
+  queryExecution: QueryExecution,
+  name: Option[String] = None)(
+  body: => T): T
+```
 
-`withNewExecutionId` executes `body` query action with a new <<spark.sql.execution.id, execution id>> (given as the input `executionId` or auto-generated) so that all Spark jobs that have been scheduled by the query action could be marked as parts of the same `Dataset` action execution.
+`withNewExecutionId` executes `body` query action with a next available [execution ID](#spark.sql.execution.id).
 
-`withNewExecutionId` allows for collecting all the Spark jobs (even executed on separate threads) together under a single SQL query execution for reporting purposes, e.g. to [reporting them as one single structured query in web UI](ui/SQLTab.md).
+`withNewExecutionId` replaces an existing execution ID, if defined, until the entire `body` finishes.
 
-NOTE: If there is another execution id already set, it is replaced for the course of the current action.
+`withNewExecutionId` posts `SparkListenerSQLExecutionStart` and [SparkListenerSQLExecutionEnd](ui/SparkListenerSQLExecutionEnd.md) events right before and right after executing the `body` action, respectively.
 
-In addition, the `QueryExecution` variant posts `SparkListenerSQLExecutionStart` and [SparkListenerSQLExecutionEnd](ui/SparkListenerSQLExecutionEnd.md) events before and after executing the `body` action, respectively.
-
-NOTE: Nested execution ids are not supported in the `QueryExecution` variant.
+---
 
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to [Dataset.withNewExecutionId](Dataset.md#withNewExecutionId) and [Dataset.withAction](Dataset.md#withAction)
+* `Dataset` is requested to [withNewExecutionId](Dataset.md#withNewExecutionId), [withNewRDDExecutionId](Dataset.md#withNewRDDExecutionId), [Dataset.withAction](Dataset.md#withAction)
+* `QueryExecution` is requested to [eagerlyExecuteCommands](QueryExecution.md#eagerlyExecuteCommands)
+* _others_ (in Spark Thrift Server and [Spark Structured Streaming]({{ book.structured_streaming }}))
 
-* `DataFrameWriter` is requested to [run a command](DataFrameWriter.md#runCommand)
+## <span id="withExecutionId"> withExecutionId
 
-* (Spark Structured Streaming) `StreamExecution` commits a batch to a streaming sink
-
-* (Spark Thrift Server) `SparkSQLDriver` runs a command
-
-=== [[getQueryExecution]] Finding QueryExecution for Execution ID -- `getQueryExecution` Method
-
-[source, scala]
-----
-getQueryExecution(executionId: Long): QueryExecution
-----
-
-`getQueryExecution` simply gives the [QueryExecution](QueryExecution.md) for the `executionId` or `null` if not found.
-
-=== [[withExecutionId]] Executing Action (with Zero or More Spark Jobs) Tracked Under Given Execution Id -- `withExecutionId` Method
-
-[source, scala]
-----
+```scala
 withExecutionId[T](
-  sc: SparkContext,
-  executionId: String)(body: => T): T
-----
+  sparkSession: SparkSession,
+  executionId: String)(
+  body: => T): T
+```
 
-`withExecutionId` executes the `body` action as part of executing multiple Spark jobs under `executionId` <<EXECUTION_ID_KEY, execution identifier>>.
+`withExecutionId` executes the `body` under the given `executionId` [execution identifier](#EXECUTION_ID_KEY).
 
-[source, scala]
-----
-def body = println("Hello World")
-scala> SQLExecution.withExecutionId(sc = spark.sparkContext, executionId = "Custom Name")(body)
-Hello World
-----
+```text
+val rdd = sc.parallelize(0 to 5, numSlices = 2)
 
-[NOTE]
-====
+import org.apache.spark.TaskContext
+def func(ctx: TaskContext, ns: Iterator[Int]): Int = {
+  ctx.partitionId
+}
+
+def runSparkJobs = {
+  sc.runJob(rdd, func _)
+}
+
+import org.apache.spark.sql.execution.SQLExecution
+SQLExecution.withExecutionId(spark, executionId = "100")(body = runSparkJobs)
+```
+
+---
+
 `withExecutionId` is used when:
 
-* `BroadcastExchangeExec` is requested to BroadcastExchangeExec.md#doPrepare[prepare for execution] (and initializes BroadcastExchangeExec.md#relationFuture[relationFuture] for the first time)
-
-* `SubqueryExec` is requested to SubqueryExec.md#doPrepare[prepare for execution] (and initializes SubqueryExec.md#relationFuture[relationFuture] for the first time)
-====
-
-=== [[checkSQLExecutionId]] `checkSQLExecutionId` Method
-
-[source, scala]
-----
-checkSQLExecutionId(sparkSession: SparkSession): Unit
-----
-
-`checkSQLExecutionId`...FIXME
-
-`checkSQLExecutionId` is used when `FileFormatWriter` is used to [write out a query result](datasources/FileFormatWriter.md#write).
-
-=== [[withSQLConfPropagated]] `withSQLConfPropagated` Method
-
-[source, scala]
-----
-withSQLConfPropagated[T](sparkSession: SparkSession)(body: => T): T
-----
-
-`withSQLConfPropagated`...FIXME
-
-[NOTE]
-====
-`withSQLConfPropagated` is used when:
-
-* `SQLExecution` is requested to <<withNewExecutionId, withNewExecutionId>> and <<withExecutionId, withExecutionId>>
-
-* `TextInputJsonDataSource` is requested to `inferFromDataset`
-
-* `MultiLineJsonDataSource` is requested to `infer`
-====
+* `BroadcastExchangeExec` physical operator is requested to [prepare for execution](physical-operators/BroadcastExchangeExec.md#doPrepare) (and initializes [relationFuture](physical-operators/BroadcastExchangeExec.md#relationFuture))
+* `SubqueryExec` physical operator is requested to [prepare for execution](physical-operators/SubqueryExec.md#doPrepare) (and initializes [relationFuture](physical-operators/SubqueryExec.md#relationFuture))
