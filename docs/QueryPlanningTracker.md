@@ -1,17 +1,19 @@
 # QueryPlanningTracker
 
-`QueryPlanningTracker` is used to track structured query execution phases:
+`QueryPlanningTracker` is used to track the execution phases of a structured query.
 
-* <span id="PARSING"> **parsing** (when `SparkSession` is requested to [execute a SQL query](SparkSession.md#sql))
-* <span id="ANALYSIS"> **analysis** (when `QueryExecution` is requested for an [analyzed query plan](QueryExecution.md#analyzed))
-* <span id="OPTIMIZATION"> **optimization** (when `QueryExecution` is requested for an [optimized query plan](QueryExecution.md#optimizedPlan))
-* <span id="PLANNING"> **planning** (when `QueryExecution` is requested for an [physical](QueryExecution.md#sparkPlan) and [executed](QueryExecution.md#executedPlan) query plans)
+Phase | Description
+------|------------
+ <span id="PARSING"> `parsing` | `SparkSession` is requested to [execute a SQL query](SparkSession.md#sql)
+ <span id="ANALYSIS"> `analysis` | `QueryExecution` is requested for an [analyzed query plan](QueryExecution.md#analyzed)
+ <span id="OPTIMIZATION"> `optimization` | `QueryExecution` is requested for an [optimized query plan](QueryExecution.md#optimizedPlan)
+ <span id="PLANNING"> `planning` | `QueryExecution` is requested for an [physical](QueryExecution.md#sparkPlan) and [executed](QueryExecution.md#executedPlan) query plans
 
 ## Accessing QueryPlanningTracker
 
 `QueryPlanningTracker` of a structured query is available using [QueryExecution](Dataset.md#queryExecution).
 
-```text
+```scala
 val df_ops = spark.range(1000).selectExpr("count(*)")
 val tracker = df_ops.queryExecution.tracker
 
@@ -19,7 +21,7 @@ val tracker = df_ops.queryExecution.tracker
 assert(tracker.phases.keySet == Set("analysis", "optimization", "planning"))
 ```
 
-```text
+```scala
 val df_sql = sql("SELECT * FROM range(1000)")
 val tracker = df_sql.queryExecution.tracker
 
@@ -52,37 +54,50 @@ scala> :type QueryPlanningTracker.get
 Option[org.apache.spark.sql.catalyst.QueryPlanningTracker]
 ```
 
-`get` is used when `RuleExecutor` is requested to [execute rules on a query plan](catalyst/RuleExecutor.md#execute)
+---
+
+`get` is used when:
+
+* `RuleExecutor` is requested to [execute rules on a query plan](catalyst/RuleExecutor.md#execute)
 
 ## <span id="measurePhase"> Measuring Execution Phase
 
 ```text
 measurePhase[T](
-  phase: String)(f: => T): T
+  phase: String)(
+  f: => T): T
 ```
 
-`measurePhase`...FIXME
+`measurePhase` executes the given `f` executable block and records the start and end times in the [phasesMap](#phasesMap) registry.
+
+If the given `phase` has already been recorded in the [phasesMap](#phasesMap) registry, `measurePhase` replaces the end time.
+
+---
 
 `measurePhase` is used when:
 
 * `SparkSession` is requested to [execute a SQL query](SparkSession.md#sql)
-
 * `QueryExecution` is requested to [executePhase](QueryExecution.md#executePhase)
 
-## <span id="phases"> Execution Phases Summaries
-
-```scala
-phases: Map[String, PhaseSummary]
-```
-
-`phases` gives [phasesMap](#phasesMap).
-
-## <span id="phasesMap"> phasesMap Internal Registry
+## <span id="phasesMap"> phasesMap Registry
 
 ```scala
 phasesMap: HashMap[String, PhaseSummary]
 ```
 
-`phasesMap` is used as a registry of execution phase summaries when `QueryPlanningTracker` is requested to [measure phase](#measurePhase).
+`QueryPlanningTracker` creates `phasesMap` registry of phases and their start and end times (`PhaseSummary`) when [created](#creating-instance).
+
+A phase with a `PhaseSummary` is added (_recorded_) in [measurePhase](#measurePhase).
 
 `phasesMap` is available using [phases](#phases) method.
+
+### <span id="phases"> Execution Phases Summaries
+
+```scala
+phases: Map[String, PhaseSummary]
+```
+
+`phases` gives the [phasesMap](#phasesMap) registry.
+
+!!! note
+    `phases` sees to be used in tests only.

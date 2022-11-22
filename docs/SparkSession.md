@@ -176,55 +176,22 @@ Internally, `createDataset` first looks up the implicit [ExpressionEncoder](Expr
 
 The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of [InternalRow](InternalRow.md)s. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a LocalRelation.md[`LocalRelation` logical query plan].
 
-## <span id="sql"> Executing SQL Queries (aka SQL Mode)
+## <span id="sql"> Executing SQL Queries (SQL Mode)
 
 ```scala
-sql(sqlText: String): DataFrame
+sql(
+  sqlText: String): DataFrame
 ```
 
-`sql` executes the `sqlText` SQL statement and creates a [DataFrame](DataFrame.md).
+`sql` creates a [QueryPlanningTracker](QueryPlanningTracker.md) to [measure](QueryPlanningTracker.md#measurePhase) executing the following in [parsing](QueryPlanningTracker.md#PARSING) phase:
 
-!!! note spark-shell
-    `sql` is imported in `spark-shell` so you can execute SQL statements as if `sql` were a part of the environment.
+* `sql` requests the [SessionState](#sessionState) for the [ParserInterface](SessionState.md#sqlParser) to [parse](sql/ParserInterface.md#parsePlan) the given `sqlText` SQL statement (that gives a [LogicalPlan](logical-operators/LogicalPlan.md))
 
-    ```text
-    scala> :imports
-    1) import spark.implicits._       (72 terms, 43 are implicit)
-    2) import spark.sql               (1 terms)
-    ```
+In the end, `sql` [creates a DataFrame](Dataset.md#ofRows) with the following:
 
-```
-scala> sql("SHOW TABLES")
-res0: org.apache.spark.sql.DataFrame = [tableName: string, isTemporary: boolean]
-
-scala> sql("DROP TABLE IF EXISTS testData")
-res1: org.apache.spark.sql.DataFrame = []
-
-// Let's create a table to SHOW it
-spark.range(10).write.option("path", "/tmp/test").saveAsTable("testData")
-
-scala> sql("SHOW TABLES").show
-+---------+-----------+
-|tableName|isTemporary|
-+---------+-----------+
-| testdata|      false|
-+---------+-----------+
-```
-
-Internally, `sql` requests the SessionState.md#sqlParser[current `ParserInterface`] to spark-sql-ParserInterface.md#parsePlan[execute a SQL query] that gives a spark-sql-LogicalPlan.md[LogicalPlan].
-
-NOTE: `sql` uses `SessionState` SessionState.md#sqlParser[to access the current `ParserInterface`].
-
-`sql` then creates a [DataFrame](DataFrame.md) using the current `SparkSession` (itself) and the [LogicalPlan](logical-operators/LogicalPlan.md).
-
-!!! tip "spark-sql Command-Line Tool"
-    Use `spark-sql` command-line tool to use SQL directly (not Scala as in `spark-shell`).
-
-    ```text
-    spark-sql> show databases;
-    default
-    Time taken: 0.028 seconds, Fetched 1 row(s)
-    ```
+* This `SparkSession`
+* The `LogicalPlan`
+* The `QueryPlanningTracker`
 
 ## <span id="udf"> Accessing UDFRegistration
 

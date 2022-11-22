@@ -212,11 +212,12 @@ nav:
         - CatalogV2Util: connector/catalog/CatalogV2Util.md
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Query Execution:
-      - QueryExecution: QueryExecution.md
+      - query-execution/index.md
       - Logical Analyzer: Analyzer.md
-      - SparkPlanner: SparkPlanner.md
-      - SparkOptimizer: SparkOptimizer.md
+      - QueryExecution: QueryExecution.md
       - QueryPlanningTracker: QueryPlanningTracker.md
+      - SparkOptimizer: SparkOptimizer.md
+      - SparkPlanner: SparkPlanner.md
     - SharedState: SharedState.md
     - Statistics and Hints:
       - Statistics: logical-operators/Statistics.md
