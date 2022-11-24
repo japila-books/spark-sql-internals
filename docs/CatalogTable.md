@@ -93,7 +93,7 @@ stats: Option[CatalogStatistics] = None
 
 ### Review Me
 
-You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization.md)).
+You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization/index.md)).
 
 ```text
 scala> t1Metadata.stats.foreach(println)

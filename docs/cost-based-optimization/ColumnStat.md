@@ -1,38 +1,52 @@
 # ColumnStat
 
+## Creating Instance
+
+`ColumnStat` takes the following to be created:
+
+* <span id="distinctCount"> Distinct Count (number of distinct values)
+* <span id="min"> Minimum Value
+* <span id="max"> Maximum Value
+* <span id="nullCount"> Null Count (number of `null` values)
+* <span id="avgLen"> Average length of the values (for fixed-length types, this should be a constant)
+* <span id="maxLen"> Maximum length of the values (for fixed-length types, this should be a constant)
+* <span id="histogram"> `Histogram`
+* <span id="version"> 2
+
+`ColumnStat` is created when:
+
+* `CatalogColumnStat` is requested to [toPlanStat](CatalogColumnStat.md#toPlanStat)
+* `Range` logical operator is requested to `computeStats`
+* `EstimationUtils` is requested to `nullColumnStat`
+* `JoinEstimation` is requested to [computeByNdv](../logical-operators/JoinEstimation.md#computeByNdv), [computeByHistogram](../logical-operators/JoinEstimation.md#computeByHistogram)
+* `UnionEstimation` is requested to `computeMinMaxStats`, `computeNullCountStats`
+* `CommandUtils` is requested to [rowToColumnStat](../CommandUtils.md#rowToColumnStat)
+
+## <span id="toCatalogColumnStat"> Converting to CatalogColumnStat
+
+```scala
+toCatalogColumnStat(
+  colName: String,
+  dataType: DataType): CatalogColumnStat
+```
+
+`toCatalogColumnStat` converts this `ColumnStat` to a [CatalogColumnStat](CatalogColumnStat.md).
+
+---
+
+`toCatalogColumnStat` is used when:
+
+* `PruneHiveTablePartitions` logical optimization is requested to `updateTableMeta`
+* `AnalyzeColumnCommand` logical command is requested to [analyzeColumnInCatalog](../logical-operators/AnalyzeColumnCommand.md#analyzeColumnInCatalog)
+* `PruneFileSourcePartitions` logical optimization is [executed](../logical-optimizations/PruneFileSourcePartitions.md#apply)
+
+<!---
+## Review Me
+
 [[creating-instance]]
 `ColumnStat` holds the <<statistics, statistics>> of a table column (as part of the [table statistics](CatalogStatistics.md) in a metastore).
 
-[[statistics]]
-.Column Statistics
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[distinctCount]] `distinctCount`
-| Number of distinct values
-
-| [[min]] `min`
-| Minimum value
-
-| [[max]] `max`
-| Maximum value
-
-| [[nullCount]] `nullCount`
-| Number of `null` values
-
-| [[avgLen]] `avgLen`
-| Average length of the values
-
-| [[maxLen]] `maxLen`
-| Maximum length of the values
-
-| [[histogram]] `histogram`
-| Histogram of values (as `Histogram` which is empty by default)
-|===
-
-`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](cost-based-optimization.md#ANALYZE-TABLE) SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
+`ColumnStat` is computed (and <<rowToColumnStat, created from the result row>>) using [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](cost-based-optimization/index.md#ANALYZE-TABLE) SQL command (that `SparkSqlAstBuilder` spark-sql-SparkSqlAstBuilder.md#ANALYZE-TABLE[translates] to AnalyzeColumnCommand.md[AnalyzeColumnCommand] logical command).
 
 [source, scala]
 ----
@@ -45,7 +59,7 @@ spark.sql(analyzeTableSQL)
 
 NOTE: `spark.sql.statistics.histogram.enabled` is off by default.
 
-You can inspect the column statistics using [DESCRIBE EXTENDED](cost-based-optimization.md#DESCRIBE-EXTENDED) SQL command.
+You can inspect the column statistics using [DESCRIBE EXTENDED](cost-based-optimization/index.md#DESCRIBE-EXTENDED) SQL command.
 
 ```text
 scala> sql("DESC EXTENDED t1 id").show
@@ -170,28 +184,6 @@ p2: ColumnStat(2,None,None,0,4,4,None)
 
 NOTE: `ColumnStat` does not support <<min, minimum>> and <<max, maximum>> metrics for binary (i.e. `Array[Byte]`) and string types.
 
-=== [[toExternalString]] Converting Value to External/Java Representation (per Catalyst Data Type) -- `toExternalString` Internal Method
-
-[source, scala]
-----
-toExternalString(v: Any, colName: String, dataType: DataType): String
-----
-
-`toExternalString`...FIXME
-
-NOTE: `toExternalString` is used exclusively when `ColumnStat` is requested for <<toMap, statistic properties>>.
-
-=== [[supportsHistogram]] `supportsHistogram` Method
-
-[source, scala]
-----
-supportsHistogram(dataType: DataType): Boolean
-----
-
-`supportsHistogram`...FIXME
-
-NOTE: `supportsHistogram` is used when...FIXME
-
 === [[toMap]] Converting ColumnStat to Properties (ColumnStat Serialization) -- `toMap` Method
 
 [source, scala]
@@ -282,17 +274,4 @@ rowToColumnStat(
 If the ``6``th field is not empty, `rowToColumnStat` uses it to create <<histogram, histogram>>.
 
 NOTE: `rowToColumnStat` is used exclusively when `AnalyzeColumnCommand` is AnalyzeColumnCommand.md#run[executed] (to AnalyzeColumnCommand.md#computeColumnStats[compute the statistics for specified columns]).
-
-=== [[statExprs]] `statExprs` Method
-
-[source, scala]
-----
-statExprs(
-  col: Attribute,
-  conf: SQLConf,
-  colPercentiles: AttributeMap[ArrayData]): CreateNamedStruct
-----
-
-`statExprs`...FIXME
-
-NOTE: `statExprs` is used when...FIXME
+-->

@@ -1,6 +1,6 @@
 # BasicStatsPlanVisitor &mdash; Computing Statistics for Cost-Based Optimization
 
-`BasicStatsPlanVisitor` is a [LogicalPlanVisitor](LogicalPlanVisitor.md) that computes the [statistics](Statistics.md) of a logical query plan for [cost-based optimization](../cost-based-optimization.md).
+`BasicStatsPlanVisitor` is a [LogicalPlanVisitor](LogicalPlanVisitor.md) that computes the [statistics](Statistics.md) of a logical query plan for [cost-based optimization](../cost-based-optimization/index.md).
 
 `BasicStatsPlanVisitor` is used exclusively when a [logical operator is requested for the statistics](LogicalPlanStats.md#stats) with [cost-based optimization enabled](LogicalPlanStats.md#stats-cbo-enabled).
 

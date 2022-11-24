@@ -7,7 +7,7 @@
 `AnalyzeTableCommand` takes the following to be created:
 
 * <span id="tableIdent"> Multi-part table identifier
-* <span id="noScan"> `noScan` flag (default: `true` that indicates whether [NOSCAN](../cost-based-optimization.md#NOSCAN) option was used or not)
+* <span id="noScan"> `noScan` flag (default: `true` that indicates whether [NOSCAN](../cost-based-optimization/index.md#NOSCAN) option was used or not)
 
 `AnalyzeTableCommand` is created when:
 

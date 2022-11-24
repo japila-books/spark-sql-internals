@@ -1,6 +1,6 @@
 # CostBasedJoinReorder Logical Optimization -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, reorders joins>> in [cost-based optimization](../cost-based-optimization.md).
+`CostBasedJoinReorder` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, reorders joins>> in [cost-based optimization](../cost-based-optimization/index.md).
 
 `ReorderJoin` is part of the [Join Reorder](../catalyst/Optimizer.md#Join_Reorder) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
@@ -17,7 +17,7 @@ scala> spark.sessionState.conf.joinReorderEnabled
 res1: Boolean = true
 ```
 
-`CostBasedJoinReorder` uses [row count](../cost-based-optimization.md#row-count-stat) statistic that is computed using [ANALYZE TABLE COMPUTE STATISTICS](../cost-based-optimization.md#ANALYZE-TABLE) SQL command with no `NOSCAN` option.
+`CostBasedJoinReorder` uses [row count](../cost-based-optimization/index.md#row-count-stat) statistic that is computed using [ANALYZE TABLE COMPUTE STATISTICS](../cost-based-optimization/index.md#ANALYZE-TABLE) SQL command with no `NOSCAN` option.
 
 ```text
 // Create tables and compute their row count statistics

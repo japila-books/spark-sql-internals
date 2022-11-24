@@ -4,7 +4,7 @@
 
 * <span id="sizeInBytes"> Total (output) size (in bytes)
 * [Estimated number of rows](#rowCount)
-* <span id="attributeStats"> [Column Statistics](../ColumnStat.md) (_column (equi-height) histograms_)
+* <span id="attributeStats"> [Column Statistics](../cost-based-optimization/ColumnStat.md) (_column (equi-height) histograms_)
 
 !!! note
     **Cost statistics**, **plan statistics** or **query statistics** are synonyms and used interchangeably.
@@ -20,7 +20,7 @@
 
 ## <span id="rowCount"> Row Count
 
-**Row Count** estimate is used in [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization for [Cost-Based Optimization](../cost-based-optimization.md).
+**Row Count** estimate is used in [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization for [Cost-Based Optimization](../cost-based-optimization/index.md).
 
 ## Statistics and CatalogStatistics
 
@@ -45,10 +45,10 @@ sizeInBytes=213.0 B, hints=none
 ```
 
 !!! note
-    Use [ANALYZE TABLE COMPUTE STATISTICS](../cost-based-optimization.md#ANALYZE-TABLE) SQL command to compute [total size](#sizeInBytes) and [row count](#rowCount) statistics of a table.
+    Use [ANALYZE TABLE COMPUTE STATISTICS](../cost-based-optimization/index.md#ANALYZE-TABLE) SQL command to compute [total size](#sizeInBytes) and [row count](#rowCount) statistics of a table.
 
 !!! note
-    Use [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](../cost-based-optimization.md#ANALYZE-TABLE) SQL Command to generate [column (equi-height) histograms](#attributeStats) of a table.
+    Use [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](../cost-based-optimization/index.md#ANALYZE-TABLE) SQL Command to generate [column (equi-height) histograms](#attributeStats) of a table.
 
 ## <span id="simpleString"><span id="toString"> Textual Representation
 

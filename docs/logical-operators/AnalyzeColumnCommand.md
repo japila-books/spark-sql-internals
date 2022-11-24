@@ -1,15 +1,15 @@
 # AnalyzeColumnCommand Logical Command
 
-`AnalyzeColumnCommand` is a [logical runnable command](RunnableCommand.md) for [AnalyzeColumn](AnalyzeColumn.md) logical operators.
+`AnalyzeColumnCommand` is a [logical command](RunnableCommand.md) to represent [AnalyzeColumn](AnalyzeColumn.md) logical operator.
 
-`AnalyzeColumnCommand` is not supported on views.
+`AnalyzeColumnCommand` is not supported on views (unless they are [cached](#analyzeColumnInCachedData)).
 
 ## Creating Instance
 
 `AnalyzeColumnCommand` takes the following to be created:
 
-* <span id="tableIdent"> `TableIdentifier`
-* <span id="columnNames"> Column Names (optional)
+* <span id="tableIdent"> Table
+* <span id="columnNames"> Column Names
 * <span id="allColumns"> `allColumns` Flag
 
 `AnalyzeColumnCommand` is created when:
@@ -51,6 +51,41 @@ computePercentiles(
 ```
 
 `computePercentiles`...FIXME
+
+### <span id="analyzeColumnInCatalog"> analyzeColumnInCatalog
+
+```scala
+analyzeColumnInCatalog(
+  sparkSession: SparkSession): Unit
+```
+
+`analyzeColumnInCatalog` requests the [SessionCatalog](../SessionState.md#catalog) for [getTableMetadata](../SessionCatalog.md#getTableMetadata) of the [table](#tableIdent).
+
+For `VIEW` catalog tables, `analyzeColumnInCatalog` analyzes the [columnNames](#columnNames) if it's [a cached view](#analyzeColumnInCachedData) (or [throws an AnalysisException](#analyzeColumnInCatalog-AnalysisException)).
+
+For `EXTERNAL` and `MANAGED` catalog tables, `analyzeColumnInCatalog` [getColumnsToAnalyze](#getColumnsToAnalyze) for the [columnNames](#columnNames).
+
+`analyzeColumnInCatalog` [computeColumnStats](../CommandUtils.md#computeColumnStats) for the [columnNames](#columnNames).
+
+`analyzeColumnInCatalog` [converts the column stats to CatalogColumnStat](../cost-based-optimization/ColumnStat.md#toCatalogColumnStat).
+
+`analyzeColumnInCatalog` creates a [CatalogStatistics](../CatalogStatistics.md) with the following:
+
+Property | Value
+---------|-------
+ `sizeInBytes` | [calculateTotalSize](../CommandUtils.md#calculateTotalSize)
+ `rowCount` | [computeColumnStats](../CommandUtils.md#computeColumnStats)
+ `colStats` | [CatalogStatistics](../CatalogTable.md#stats) with the new [CatalogColumnStat](../cost-based-optimization/CatalogColumnStat.md)s applied
+
+In the end, `analyzeColumnInCatalog` requests the [SessionCatalog](../SessionState.md#catalog) to [alter](../SessionCatalog.md#alterTableStats) the [table](#tableIdent) with the new [CatalogStatistics](../CatalogStatistics.md).
+
+#### <span id="analyzeColumnInCatalog-AnalysisException"> AnalysisException
+
+`analyzeColumnInCatalog` throws the following `AnalysisException` unless the catalog view is cached:
+
+```text
+ANALYZE TABLE is not supported on views.
+```
 
 ## Demo
 

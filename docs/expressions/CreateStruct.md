@@ -31,7 +31,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `AstBuilder` is requested to parse a [struct](../sql/AstBuilder.md#visitStruct) and [row constructor](../sql/AstBuilder.md#visitRowConstructor)
 
-* `ColumnStat` is requested to [statExprs](../ColumnStat.md#statExprs)
+* `ColumnStat` is requested to [statExprs](../cost-based-optimization/ColumnStat.md#statExprs)
 
 * `KeyValueGroupedDataset` is requested to [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) typed operator is used)
 

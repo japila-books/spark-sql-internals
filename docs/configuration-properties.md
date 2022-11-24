@@ -912,7 +912,7 @@ Since: `3.0.0`
 
 ## <span id="spark.sql.cbo.enabled"> spark.sql.cbo.enabled
 
-Enables [Cost-Based Optimization](cost-based-optimization.md) (CBO) for estimation of plan statistics when `true`.
+Enables [Cost-Based Optimization](cost-based-optimization/index.md) (CBO) for estimation of plan statistics when `true`.
 
 Default: `false`
 

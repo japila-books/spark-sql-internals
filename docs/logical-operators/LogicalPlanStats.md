@@ -1,6 +1,6 @@
 # LogicalPlanStats &mdash; Statistics Estimates and Query Hints of Logical Operators
 
-`LogicalPlanStats` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](../SparkPlanner.md) (with or without [cost-based optimization](../cost-based-optimization.md), e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
+`LogicalPlanStats` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](../SparkPlanner.md) (with or without [cost-based optimization](../cost-based-optimization/index.md), e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
 
 ## Scala Definition
 
@@ -21,7 +21,7 @@ trait LogicalPlanStats { self: LogicalPlan =>
 stats: Statistics
 ```
 
-`stats` gets the [statistics](Statistics.md) from [cache](#statsCache) if computed already. If not, `stats` branches off per whether [cost-based optimization](../cost-based-optimization.md) is enabled or not and requests [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md) or [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) for the statistics, respectively.
+`stats` gets the [statistics](Statistics.md) from [cache](#statsCache) if computed already. If not, `stats` branches off per whether [cost-based optimization](../cost-based-optimization/index.md) is enabled or not and requests [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md) or [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) for the statistics, respectively.
 
 `statsCache` caches the statistics for later use.
 

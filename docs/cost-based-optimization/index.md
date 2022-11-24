@@ -16,22 +16,22 @@ There is also support for [equi-height column histograms](#column-histograms).
 
 The table statistics can be computed for tables, partitions and columns and are as follows:
 
-1. <span id="total-size-stat"> **Total size** (in bytes) of an [table](logical-operators/AnalyzeTableCommand.md) or [table partitions](logical-operators/AnalyzePartitionCommand.md)
+1. <span id="total-size-stat"> **Total size** (in bytes) of an [table](../logical-operators/AnalyzeTableCommand.md) or [table partitions](../logical-operators/AnalyzePartitionCommand.md)
 
-1. <span id="row-count-stat"><span id="rowCount"> **Row count** of an [table](logical-operators/AnalyzeTableCommand.md) or [table partitions](logical-operators/AnalyzePartitionCommand.md)
+1. <span id="row-count-stat"><span id="rowCount"> **Row count** of an [table](../logical-operators/AnalyzeTableCommand.md) or [table partitions](../logical-operators/AnalyzePartitionCommand.md)
 
-1. <span id="column-stats"> [Column statistics](logical-operators/AnalyzeColumnCommand.md): `min`, `max`, `num_nulls`, `distinct_count`, `avg_col_len`, `max_col_len`, `histogram`
+1. <span id="column-stats"> [Column statistics](../logical-operators/AnalyzeColumnCommand.md): `min`, `max`, `num_nulls`, `distinct_count`, `avg_col_len`, `max_col_len`, `histogram`
 
 ## <span id="spark.sql.cbo.enabled"> spark.sql.cbo.enabled Configuration Property
 
-Cost-based optimization is enabled when [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) configuration property is enabled.
+Cost-based optimization is enabled when [spark.sql.cbo.enabled](../configuration-properties.md#spark.sql.cbo.enabled) configuration property is enabled.
 
 ```scala
 val sqlConf = spark.sessionState.conf
 assert(sqlConf.cboEnabled == false, "CBO is disabled by default)
 ```
 
-Create a new [SparkSession](SparkSession.md) with CBO enabled.
+Create a new [SparkSession](../SparkSession.md) with CBO enabled.
 
 ```text
 // You could spark-submit -c spark.sql.cbo.enabled=true
@@ -43,7 +43,7 @@ assert(sparkCboEnabled.conf.get(CBO_ENABLED.key))
 
 ## <span id="ANALYZE-TABLE"><span id="NOSCAN"> ANALYZE TABLE COMPUTE STATISTICS SQL Command
 
-Cost-Based Optimization uses the statistics stored in a metastore (_external catalog_) using [ANALYZE TABLE](sql/SparkSqlAstBuilder.md#ANALYZE-TABLE) SQL command.
+Cost-Based Optimization uses the statistics stored in a metastore (_external catalog_) using [ANALYZE TABLE](../sql/SparkSqlAstBuilder.md#ANALYZE-TABLE) SQL command.
 
 ```sql
 ANALYZE TABLE tableIdentifier partitionSpec?
@@ -59,15 +59,15 @@ Depending on the variant, `ANALYZE TABLE` computes different [statistics](#stati
 1. `ANALYZE TABLE` with `FOR COLUMNS` clause (but no `PARTITION` specification)
 
 !!! tip "spark.sql.statistics.histogram.enabled"
-    Use [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
+    Use [spark.sql.statistics.histogram.enabled](../configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property to enable column (equi-height) histograms that can provide better estimation accuracy but cause an extra table scan).
 
-When executed, the above `ANALYZE TABLE` variants are [translated](sql/SparkSqlAstBuilder.md#ANALYZE-TABLE) to the following logical commands (in a logical query plan), respectively:
+When executed, the above `ANALYZE TABLE` variants are [translated](../sql/SparkSqlAstBuilder.md#ANALYZE-TABLE) to the following logical commands (in a logical query plan), respectively:
 
-1. [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md)
+1. [AnalyzeTableCommand](../logical-operators/AnalyzeTableCommand.md)
 
-1. [AnalyzePartitionCommand](logical-operators/AnalyzePartitionCommand.md)
+1. [AnalyzePartitionCommand](../logical-operators/AnalyzePartitionCommand.md)
 
-1. [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md)
+1. [AnalyzeColumnCommand](../logical-operators/AnalyzeColumnCommand.md)
 
 ### ANALYZE TABLE PARTITION FOR COLUMNS Incorrect
 
@@ -86,7 +86,7 @@ WARN Partition specification is ignored when collecting column statistics: [part
 
 ## <span id="DESCRIBE-EXTENDED"> DESCRIBE EXTENDED SQL Command
 
-You can view the statistics of a table, partitions or a column (stored in a metastore) using [DESCRIBE EXTENDED](sql/SparkSqlAstBuilder.md#DESCRIBE) SQL command.
+You can view the statistics of a table, partitions or a column (stored in a metastore) using [DESCRIBE EXTENDED](../sql/SparkSqlAstBuilder.md#DESCRIBE) SQL command.
 
 ```text
 (DESC | DESCRIBE) TABLE? (EXTENDED | FORMATTED)?
@@ -227,19 +227,19 @@ scala> sql("DESC EXTENDED t1 p2").show
 
 ## <span id="optimizations"> Cost-Based Optimizations
 
-The [Catalyst Optimizer](catalyst/Optimizer.md) uses heuristics (rules) that are applied to a logical query plan for cost-based optimization.
+The [Catalyst Optimizer](../catalyst/Optimizer.md) uses heuristics (rules) that are applied to a logical query plan for cost-based optimization.
 
 Among the optimization rules are the following:
 
-1. [CostBasedJoinReorder](logical-optimizations/CostBasedJoinReorder.md) logical optimization rule for join reordering with two or more consecutive inner or cross joins (possibly separated by `Project` operators) when [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) and [spark.sql.cbo.joinReorder.enabled](configuration-properties.md#spark.sql.cbo.joinReorder.enabled) configuration properties are both enabled.
+1. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization rule for join reordering with two or more consecutive inner or cross joins (possibly separated by `Project` operators) when [spark.sql.cbo.enabled](../configuration-properties.md#spark.sql.cbo.enabled) and [spark.sql.cbo.joinReorder.enabled](../configuration-properties.md#spark.sql.cbo.joinReorder.enabled) configuration properties are both enabled.
 
 ## <span id="commands"> Logical Commands for Altering Table Statistics
 
-The following are the logical commands that [alter table statistics in a metastore](SessionCatalog.md#alterTableStats) (_external catalog_):
+The following are the logical commands that [alter table statistics in a metastore](../SessionCatalog.md#alterTableStats) (_external catalog_):
 
-1. [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md)
+1. [AnalyzeTableCommand](../logical-operators/AnalyzeTableCommand.md)
 
-1. [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md)
+1. [AnalyzeColumnCommand](../logical-operators/AnalyzeColumnCommand.md)
 
 1. `AlterTableAddPartitionCommand`
 
@@ -249,20 +249,20 @@ The following are the logical commands that [alter table statistics in a metasto
 
 1. `TruncateTableCommand`
 
-1. [InsertIntoHiveTable](hive/InsertIntoHiveTable.md)
+1. [InsertIntoHiveTable](../hive/InsertIntoHiveTable.md)
 
-1. [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md)
+1. [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md)
 
 1. `LoadDataCommand`
 
 ## <span id="EXPLAIN-COST"> EXPLAIN COST SQL Command
 
 !!! FIXME
-    See [LogicalPlanStats](logical-operators/LogicalPlanStats.md)
+    See [LogicalPlanStats](../logical-operators/LogicalPlanStats.md)
 
 ## <span id="LogicalPlanStats"> LogicalPlanStats &mdash; Statistics Estimates of Logical Operator
 
-[LogicalPlanStats](logical-operators/LogicalPlanStats.md) adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. [CostBasedJoinReorder](logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](execution-planning-strategies/JoinSelection.md), respectively).
+[LogicalPlanStats](../logical-operators/LogicalPlanStats.md) adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
 
 ## <span id="column-histograms"> Equi-Height Histograms for Columns
 
@@ -293,7 +293,7 @@ From [[SPARK-17074][SQL] Generate equi-height histogram in column statistics #19
 > and use ApproxCountDistinctForIntervals to count ndv in each bucket.
 > Each bucket is of the form: (lowerBound, higherBound, ndv).
 
-Spark SQL uses [column statistics](ColumnStat.md) that may optionally hold the [histogram of values](ColumnStat.md#histogram) (which is empty by default). With [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property turned on [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](#ANALYZE-TABLE) SQL command generates column (equi-height) histograms.
+Spark SQL uses [column statistics](ColumnStat.md) that may optionally hold the [histogram of values](ColumnStat.md#histogram) (which is empty by default). With [spark.sql.statistics.histogram.enabled](../configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property turned on [ANALYZE TABLE COMPUTE STATISTICS FOR COLUMNS](#ANALYZE-TABLE) SQL command generates column (equi-height) histograms.
 
 ```text
 // Computing column statistics with histogram

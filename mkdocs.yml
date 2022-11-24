@@ -125,10 +125,8 @@ nav:
   - Internals:
     - Overview: overview.md
     - Tags: tags.md
-    - Configuration Properties: 
-      - Configuration Properties: configuration-properties.md
-      - SQLConf: SQLConf.md
-      - StaticSQLConf: StaticSQLConf.md
+    - Configuration Properties: configuration-properties.md
+    - CatalogStatistics: CatalogStatistics.md
     - DataSource: DataSource.md
     - Connector API:
       - connector/index.md
@@ -219,6 +217,8 @@ nav:
       - SparkOptimizer: SparkOptimizer.md
       - SparkPlanner: SparkPlanner.md
     - SharedState: SharedState.md
+    - SQLConf: SQLConf.md
+    - StaticSQLConf: StaticSQLConf.md
     - Statistics and Hints:
       - Statistics: logical-operators/Statistics.md
       - LogicalPlanStats: logical-operators/LogicalPlanStats.md
@@ -730,10 +730,11 @@ nav:
     - Bucketing: bucketing.md
     - Common Table Expressions: common-table-expressions.md
     - Cost-Based Optimization:
-      - Cost-Based Optimization: cost-based-optimization.md
-      - CatalogStatistics: CatalogStatistics.md
-      - ColumnStat: ColumnStat.md
+      - cost-based-optimization/index.md
+      - CatalogColumnStat: cost-based-optimization/CatalogColumnStat.md
+      - ColumnStat: cost-based-optimization/ColumnStat.md
       - CommandUtils: CommandUtils.md
+      - EstimationUtils: cost-based-optimization/EstimationUtils.md
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md

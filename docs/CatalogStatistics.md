@@ -60,12 +60,14 @@ toPlanStats(
 
 `toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
 
-With [cost-based optimization](cost-based-optimization.md) enabled and [row count](#rowCount) statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
+With [cost-based optimization](cost-based-optimization/index.md) enabled and [row count](#rowCount) statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
 
-Otherwise, when [cost-based optimization](cost-based-optimization.md) is disabled, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory [sizeInBytes](#sizeInBytes).
+Otherwise (when [cost-based optimization](cost-based-optimization/index.md) is disabled), `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory [sizeInBytes](#sizeInBytes).
 
 !!! note
     `toPlanStats` does the reverse of [HiveExternalCatalog.statsToProperties](hive/HiveExternalCatalog.md#statsToProperties).
+
+---
 
 `toPlanStats` is used when:
 
