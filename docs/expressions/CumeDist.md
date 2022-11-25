@@ -2,7 +2,7 @@
 
 `CumeDist` is a `SizeBasedWindowFunction` and a `RowNumberLike` expression that is used for the following:
 
-* [cume_dist](../spark-sql-functions.md#cume_dist) standard function
+* [cume_dist](../functions.md#cume_dist) standard function
 
 * [cume_dist](../FunctionRegistry.md#expressions) SQL function
 

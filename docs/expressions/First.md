@@ -4,7 +4,7 @@
 
 * `AstBuilder` is requested to <<sql/AstBuilder.md#visitFirst, parse a FIRST statement>>
 
-* <<spark-sql-functions.md#first, first>> standard function is used
+* [first](../functions.md#first) standard function is used
 
 * `first` and `first_value` <<FunctionRegistry.md#, SQL functions>> are used
 

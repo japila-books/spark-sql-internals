@@ -17,7 +17,7 @@
 
 ## <span id="from_json"> from_json Standard Function
 
-`JsonToStructs` represents [from_json](../spark-sql-functions.md#from_json) function.
+`JsonToStructs` represents [from_json](../functions.md#from_json) function.
 
 ```text
 import org.apache.spark.sql.functions.from_json

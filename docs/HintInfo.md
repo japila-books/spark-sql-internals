@@ -11,7 +11,7 @@
 * [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](logical-analysis-rules/ResolveJoinStrategyHints.md#createHintInfo)
 * [ResolvedHint](logical-operators/ResolvedHint.md) logical operator is created
 * `HintInfo` is requested to [merge with another HintInfo](#merge)
-* [broadcast](spark-sql-functions.md#broadcast) standard function is used (on a `Dataset`)
+* [broadcast](functions.md#broadcast) standard function is used (on a `Dataset`)
 
 ## <span id="toString"> Text Representation
 

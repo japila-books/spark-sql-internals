@@ -37,7 +37,7 @@ Creates an [Expression](../expressions/Expression.md) from the given SQL text
 Used when:
 
 * `Dataset` is requested to [selectExpr](../spark-sql-dataset-operators.md#selectExpr), [filter](../spark-sql-dataset-operators.md#filter), [where](../spark-sql-dataset-operators.md#where)
-* [expr](../spark-sql-functions.md#expr) standard function is used
+* [expr](../functions.md#expr) standard function is used
 
 ### <span id="parseFunctionIdentifier"> parseFunctionIdentifier
 

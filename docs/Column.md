@@ -38,7 +38,7 @@ scala> val idCol: Column = $"id"
 idCol: org.apache.spark.sql.Column = id
 ----
 
-Beside using the `implicits` conversions, you can create columns using spark-sql-functions.md#col[col] and spark-sql-functions.md#column[column] functions.
+Beside using the `implicits` conversions, you can create columns using [col](functions.md#col) and [column](functions.md#column) functions.
 
 [source, scala]
 ----
@@ -236,7 +236,7 @@ over(): Column
 over(window: WindowSpec): Column
 ----
 
-`over` creates a _windowing column_ (_aka_ _analytic clause_) that allows to execute a spark-sql-functions.md[aggregate function] over a [window](window-functions/WindowSpec.md) (i.e. a group of records that are in _some_ relation to the current record).
+`over` creates a _windowing column_ (_aka_ _analytic clause_) that allows to execute an aggregate function over a [window](window-functions/WindowSpec.md) (i.e. a group of records that are in _some_ relation to the current record).
 
 TIP: Read up on windowed aggregation in Spark SQL in spark-sql-functions-windows.md[Window Aggregate Functions].
 

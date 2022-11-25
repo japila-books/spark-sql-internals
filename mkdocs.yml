@@ -1006,7 +1006,7 @@ nav:
       - Column Operators: spark-sql-column-operators.md
       - TypedColumn: TypedColumn.md
     - Standard Functions:
-      - spark-sql-functions.md
+      - Standard Functions: functions.md
       - spark-sql-aggregate-functions.md
       - spark-sql-functions-collection.md
       - spark-sql-functions-datetime.md

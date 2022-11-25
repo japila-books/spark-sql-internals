@@ -4,7 +4,7 @@ Spark SQL uses **broadcast join** (_broadcast hash join_) instead of hash join t
 
 Broadcast join can be very efficient for joins between a large table (fact) with relatively small tables (dimensions) that could then be used to perform a *star-schema join*. It can avoid sending all data of the large table over the network.
 
-You can use spark-sql-functions.md#broadcast[broadcast] function or SQL's [broadcast hints](new-and-noteworthy/hint-framework.md#broadcast-hints) to mark a dataset to be broadcast when used in a join query.
+You can use [broadcast](functions.md#broadcast) function or SQL's [broadcast hints](new-and-noteworthy/hint-framework.md#broadcast-hints) to mark a dataset to be broadcast when used in a join query.
 
 NOTE: According to the article http://dmtolpeko.com/2015/02/20/map-side-join-in-spark/[Map-Side Join in Spark], *broadcast join* is also called a *replicated join* (in the distributed system community) or a *map-side join* (in the Hadoop community).
 

@@ -1,4 +1,4 @@
-# Standard Functions &mdash; functions Object
+# Standard Functions
 
 `org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](Column.md).
 
@@ -7,6 +7,8 @@ You can access the standard functions using the following `import` statement in 
 ```scala
 import org.apache.spark.sql.functions._
 ```
+
+<!---
 
 [[standard-functions]]
 .(Subset of) Standard Functions in Spark SQL
@@ -1009,3 +1011,4 @@ res2: org.apache.spark.sql.catalyst.plans.logical.LogicalPlan =
     /* 104 */           project_value1 = UTF8String.fromString(java.lang.Long.toBinaryString(range_value));
 
     ```
+-->

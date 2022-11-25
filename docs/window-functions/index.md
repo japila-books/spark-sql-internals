@@ -27,7 +27,7 @@ val windowSpec = Window
   .orderBy($"time")
 ```
 
-With a `WindowSpec` defined, [Column.over](../Column.md#over) operator is used to associate the `WindowSpec` with [aggregate](../spark-sql-functions.md#aggregate-functions) or [window](../spark-sql-functions.md#window-functions) functions.
+With a `WindowSpec` defined, [Column.over](../Column.md#over) operator is used to associate the `WindowSpec` with [aggregate](../functions.md#aggregate-functions) or [window](../functions.md#window-functions) functions.
 
 ```scala
 import org.apache.spark.sql.functions.rank

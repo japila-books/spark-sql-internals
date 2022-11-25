@@ -4,7 +4,7 @@
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
-* [callUDF](../spark-sql-functions.md#callUDF) standard function
+* [callUDF](../functions.md#callUDF) standard function
 
 * [RelationalGroupedDataset.agg](../basic-aggregation/RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../basic-aggregation/RelationalGroupedDataset.md#strToExpr))
 
@@ -35,7 +35,7 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 
 `apply` is used when:
 
-* [callUDF](../spark-sql-functions.md#callUDF) standard function is used
+* [callUDF](../functions.md#callUDF) standard function is used
 
 * `RelationalGroupedDataset` is requested to [agg](../basic-aggregation/RelationalGroupedDataset.md#agg) with aggregation functions specified by name (and [converts function names to UnresolvedFunction expressions](../basic-aggregation/RelationalGroupedDataset.md#strToExpr))
 
