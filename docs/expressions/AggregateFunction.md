@@ -38,6 +38,8 @@ foldable: Boolean
 
 `foldable` is part of the [Expression](Expression.md#foldable) abstraction.
 
+---
+
 `foldable` is always `false`.
 
 ## <span id="toAggregateExpression"> Converting to AggregateExpression
@@ -64,6 +66,8 @@ scala> println(aggFn.numberedTreeString)
 00 collect_list('gid, 0, 0)
 01 +- 'gid
 ```
+
+---
 
 `toAggregateExpression` is used when:
 

@@ -9,10 +9,20 @@
 * <span id="aggregateFunction"> [AggregateFunction](AggregateFunction.md)
 * [AggregateMode](#mode)
 * <span id="isDistinct"> `isDistinct` flag
-* <span id="filter"> (optional) Filter [Expression](Expression.md)
+* [Aggregate Filter](#filter)
 * <span id="resultId"> Result `ExprId`
 
 `AggregateExpression` is created using [apply](#apply) utility.
+
+### <span id="filter"> Aggregate Filter
+
+`AggregateExpression` can be given an [Expression](Expression.md) for an aggregate filter.
+
+The filter is assumed undefined when `AggregateExpression` is [created](#apply).
+
+A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf. [AggUtils](../AggUtils.md#mayRemoveAggFilters)).
+
+`AggregationIterator` initializes predicates with `AggregateExpression`s with filters when requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow).
 
 ## <span id="mode"> AggregateMode
 
@@ -26,7 +36,17 @@
 
 ### <span id="Complete"> Complete
 
+No prefix (in [toString](#toString))
+
+Used when:
+
+* `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](../physical-operators/ObjectAggregationIterator.md#mergeAggregationBuffers)
+* `TungstenAggregationIterator` is requested for the [switchToSortBasedAggregation](../physical-operators/TungstenAggregationIterator.md#switchToSortBasedAggregation)
+* _others_
+
 ### <span id="Final"> Final
+
+No prefix (in [toString](#toString))
 
 ### <span id="Partial"> Partial
 
@@ -70,51 +90,16 @@ toString: String
 
 mode | prefix
 -----|----------
- `Partial` | `partial_`
- `PartialMerge` | `merge_`
- `Final` or `Complete` | (empty)
+ [Partial](#Partial) | `partial_`
+ [PartialMerge](#PartialMerge) | `merge_`
+ [Final](#Final) or [Complete](#Complete) | (empty)
 
 `toString` requests the [AggregateFunction](#aggregateFunction) for the [toAggString](AggregateFunction.md#toAggString) (with the [isDistinct](#isDistinct) flag).
 
 In the end, `toString` adds `FILTER (WHERE [predicate])` based on the optional [filter](#filter) expression.
 
+<!---
 ## Review Me
-
-`AggregateExpression` contains the following:
-
-* [[aggregateFunction]] [AggregateFunction](AggregateFunction.md)
-* [[mode]] `AggregateMode`
-* [[isDistinct]] `isDistinct` flag indicating whether this aggregation is distinct or not (e.g. whether SQL's `DISTINCT` keyword was used for the [aggregate function](#aggregateFunction))
-* [[resultId]] `ExprId`
-
-`AggregateExpression` is created when:
-
-* `Analyzer` is requested to [resolve AggregateFunctions](../Analyzer.md#ResolveFunctions) (and creates an `AggregateExpression` with `Complete` aggregate mode for the functions)
-
-* `UserDefinedAggregateFunction` is created with `isDistinct` flag [disabled](UserDefinedAggregateFunction.md#apply) or [enabled](UserDefinedAggregateFunction.md#distinct)
-
-* `AggUtils` is requested to [planAggregateWithOneDistinct](../AggUtils.md#planAggregateWithOneDistinct) (and creates `AggregateExpressions` with `Partial` and `Final` aggregate modes for the functions)
-
-* `Aggregator` is requested for a [TypedColumn](../TypedColumn.md) (using `Aggregator.toColumn`)
-
-* `AggregateFunction` is spark-sql-Expression-AggregateFunction.md#toAggregateExpression[wrapped in a AggregateExpression]
-
-[[toString-prefixes]]
-.toString's Prefixes per AggregateMode
-[cols="1,2",options="header",width="100%"]
-|===
-| Prefix
-| AggregateMode
-
-| `partial_`
-| `Partial`
-
-| `merge_`
-| `PartialMerge`
-
-| (empty)
-| `Final` or `Complete`
-|===
 
 [[properties]]
 .AggregateExpression's Properties
@@ -160,3 +145,4 @@ spark-sql-Expression-Attribute.md[Attribute] that is:
 | `toString`
 | <<toString-prefixes, Prefix per AggregateMode>> followed by <<aggregateFunction, AggregateFunction>>'s `toAggString` (with <<isDistinct, isDistinct>> flag).
 |===
+-->

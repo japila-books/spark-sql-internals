@@ -4,7 +4,7 @@
 
 ## Contract (Subset)
 
-### <span id="apply"> Creating Column for Execution
+### <span id="apply"> Creating Column (for Function Execution)
 
 ```scala
 apply(

@@ -1,6 +1,8 @@
 # SparkUserDefinedFunction
 
-`SparkUserDefinedFunction` is a [UserDefinedFunction](UserDefinedFunction.md).
+`SparkUserDefinedFunction` is a [UserDefinedFunction](UserDefinedFunction.md) that uses [ScalaUDF](ScalaUDF.md) for execution.
+
+`SparkUserDefinedFunction` is [created](#creating-instance) using [udf](../spark-sql-functions.md#udaf) standard function (among the other _less interesting_ means).
 
 ## Creating Instance
 
@@ -20,7 +22,20 @@
 * [udf](../spark-sql-functions.md#udf) standard function is used
 * `UDFRegistration` is requested to [register a named user-defined function](../UDFRegistration.md#register)
 
-## <span id="createScalaUDF"> createScalaUDF
+## <span id="apply"> Creating Column (for Function Execution)
+
+```scala
+apply(
+  exprs: Column*): Column
+```
+
+`apply` is part of the [UserDefinedFunction](UserDefinedFunction.md#apply) abstraction.
+
+---
+
+`apply` creates a [Column](../Column.md) with a [ScalaUDF](#createScalaUDF) (with the given `exprs`).
+
+## <span id="createScalaUDF"> Creating ScalaUDF
 
 ```scala
 createScalaUDF(
@@ -34,4 +49,4 @@ createScalaUDF(
 `createScalaUDF` is used when:
 
 * `UDFRegistration` is requested to [register a named user-defined function](../UDFRegistration.md#register)
-* `SparkUserDefinedFunction` is requested to [create a Column](#apply)
+* `SparkUserDefinedFunction` is requested to [create a Column (for function execution)](#apply)

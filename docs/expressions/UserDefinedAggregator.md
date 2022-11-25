@@ -1,6 +1,6 @@
 # UserDefinedAggregator
 
-`UserDefinedAggregator[IN, BUF, OUT]` is a [UserDefinedFunction](UserDefinedFunction.md).
+`UserDefinedAggregator[IN, BUF, OUT]` is a [UserDefinedFunction](UserDefinedFunction.md) that uses [ScalaAggregator](ScalaAggregator.md) for execution.
 
 `UserDefinedAggregator` is [created](#creating-instance) using [udaf](../spark-sql-functions.md#udaf) standard function.
 
@@ -16,7 +16,7 @@
 
 `UserDefinedAggregator` is created using [udaf](../spark-sql-functions.md#udaf) standard function.
 
-## <span id="apply"> Creating Column for UDAF Execution
+## <span id="apply"> Creating Column (for Function Execution)
 
 ```scala
 apply(
@@ -52,4 +52,4 @@ In the end, `scalaAggregator` creates a [ScalaAggregator](ScalaAggregator.md).
 `scalaAggregator` is used when:
 
 * `UDFRegistration` is requested to [register a UserDefinedAggregator](../UDFRegistration.md#register)
-* `UserDefinedAggregator` is requested to [create a Column (for UDAF execution)](#apply)
+* `UserDefinedAggregator` is requested to [create a Column (for execution)](#apply)
