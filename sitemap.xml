@@ -406,6 +406,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/SQLMetric/</loc>
+         <lastmod>2022-11-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/ScalaReflection/</loc>
          <lastmod>2022-11-25</lastmod>
          <changefreq>daily</changefreq>
@@ -3772,11 +3777,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/RowDataSourceScanExec/</loc>
-         <lastmod>2022-11-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/SQLMetric/</loc>
          <lastmod>2022-11-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
