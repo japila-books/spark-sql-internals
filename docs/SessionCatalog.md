@@ -161,3 +161,67 @@ When a database name is not specified, `getTempViewOrPermanentTableMetadata` [fi
 With the database name of the [GlobalTempViewManager](GlobalTempViewManager.md), `getTempViewOrPermanentTableMetadata` requests [GlobalTempViewManager](#globalTempViewManager) for the [global view definition](GlobalTempViewManager.md#get) and creates a [CatalogTable](CatalogTable.md) (with the [name](GlobalTempViewManager.md#database) of `GlobalTempViewManager` in [table identifier](CatalogTable.md#identifier), `VIEW` [table type](CatalogTable.md#tableType) and an undefined [storage](CatalogTable.md#storage)) or reports a `NoSuchTableException`.
 
 With the database name not of `GlobalTempViewManager`, `getTempViewOrPermanentTableMetadata` simply [retrieves the table metadata from an external catalog](#getTableMetadata).
+
+## <span id="lookupFunctionInfo"> lookupFunctionInfo
+
+```scala
+lookupFunctionInfo(
+  name: FunctionIdentifier): ExpressionInfo
+```
+
+`lookupFunctionInfo`...FIXME
+
+---
+
+`lookupFunctionInfo` is used when:
+
+* `SparkGetFunctionsOperation` (Spark Thrift Server) is requested to `runInternal`
+* `CatalogImpl` is requested to [makeFunction](CatalogImpl.md#makeFunction)
+
+## <span id="lookupBuiltinOrTempFunction"> lookupBuiltinOrTempFunction
+
+```scala
+lookupBuiltinOrTempFunction(
+  name: String): Option[ExpressionInfo]
+```
+
+`lookupBuiltinOrTempFunction`...FIXME
+
+---
+
+`lookupBuiltinOrTempFunction` is used when:
+
+* `ResolveFunctions` logical analysis is requested to [lookupBuiltinOrTempFunction](logical-analysis-rules/ResolveFunctions.md#lookupBuiltinOrTempFunction)
+* `SessionCatalog` is requested to [lookupFunctionInfo](#lookupFunctionInfo)
+
+## <span id="lookupBuiltinOrTempTableFunction"> lookupBuiltinOrTempTableFunction
+
+```scala
+lookupBuiltinOrTempTableFunction(
+  name: String): Option[ExpressionInfo]
+```
+
+`lookupBuiltinOrTempTableFunction`...FIXME
+
+---
+
+`lookupBuiltinOrTempTableFunction` is used when:
+
+* `ResolveFunctions` logical analysis is requested to [lookupBuiltinOrTempTableFunction](logical-analysis-rules/ResolveFunctions.md#lookupBuiltinOrTempTableFunction)
+* `SessionCatalog` is requested to [lookupFunctionInfo](#lookupFunctionInfo)
+
+## <span id="lookupPersistentFunction"> lookupPersistentFunction
+
+```scala
+lookupPersistentFunction(
+  name: FunctionIdentifier): ExpressionInfo
+```
+
+`lookupPersistentFunction`...FIXME
+
+---
+
+`lookupPersistentFunction` is used when:
+
+* `SessionCatalog` is requested to [lookupFunctionInfo](#lookupFunctionInfo)
+* `V2SessionCatalog` is requested to [load a function](V2SessionCatalog.md#loadFunction)

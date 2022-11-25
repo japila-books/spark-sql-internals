@@ -200,6 +200,7 @@ nav:
       - CatalogHelper: connector/catalog/CatalogHelper.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
+      - FunctionCatalog: connector/catalog/FunctionCatalog.md
       - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md

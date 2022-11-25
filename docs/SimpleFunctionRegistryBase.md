@@ -4,10 +4,42 @@
 
 ## Implementations
 
-* `SimpleFunctionRegistry`
-* `SimpleTableFunctionRegistry`
+* [SimpleFunctionRegistry](SimpleFunctionRegistry.md)
+* [SimpleTableFunctionRegistry](SimpleTableFunctionRegistry.md)
 
-## <span id="registerFunction"> registerFunction
+## <span id="functionBuilders"> functionBuilders
+
+```scala
+functionBuilders: HashMap[FunctionIdentifier, (ExpressionInfo, FunctionBuilder)]
+```
+
+`SimpleFunctionRegistryBase` defines `functionBuilders` registry of named user-defined functions.
+
+A new user-defined function is registered in [internalRegisterFunction](#internalRegisterFunction).
+
+`functionBuilders` is used when:
+
+* [lookupFunction](#lookupFunction)
+* [listFunction](#listFunction)
+* [lookupFunctionBuilder](#lookupFunctionBuilder)
+* [dropFunction](#dropFunction)
+* [clear](#clear)
+* [clone](#clone)
+
+## <span id="lookupFunction"> lookupFunction
+
+```scala
+lookupFunction(
+  name: FunctionIdentifier): Option[ExpressionInfo]
+```
+
+`lookupFunction` is part of the [FunctionRegistryBase](FunctionRegistryBase.md#lookupFunction) abstraction.
+
+---
+
+`lookupFunction` finds the given `name` in the [functionBuilders](#functionBuilders) registry.
+
+## <span id="registerFunction"> Registering Named User-Defined Function
 
 ```scala
 registerFunction(
@@ -16,9 +48,11 @@ registerFunction(
   builder: FunctionBuilder): Unit
 ```
 
-`registerFunction` [internalRegisterFunction](#internalRegisterFunction) with a normalized (lower-case) name.
-
 `registerFunction` is part of the [FunctionRegistryBase](FunctionRegistryBase.md#registerFunction) abstraction.
+
+---
+
+`registerFunction` [internalRegisterFunction](#internalRegisterFunction) with a normalized (lower-case) name.
 
 ## <span id="internalRegisterFunction"> internalRegisterFunction
 
@@ -30,6 +64,8 @@ internalRegisterFunction(
 ```
 
 `internalRegisterFunction` adds a new function to the [functionBuilders](#functionBuilders) registry.
+
+---
 
 `internalRegisterFunction` is used when;
 

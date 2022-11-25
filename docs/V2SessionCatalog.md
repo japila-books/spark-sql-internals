@@ -42,4 +42,19 @@ loadTable(
 
 `loadTable` is part of the [TableCatalog](connector/catalog/TableCatalog.md#loadTable) abstraction.
 
+---
+
 `loadTable` creates a [V1Table](connector/V1Table.md) for a [table metadata](SessionCatalog.md#getTableMetadata) (from the [SessionCatalog](#catalog)).
+
+## <span id="loadFunction"> Loading Function
+
+```scala
+loadFunction(
+  ident: Identifier): UnboundFunction
+```
+
+`loadFunction` is part of the [FunctionCatalog](connector/catalog/FunctionCatalog.md#loadFunction) abstraction.
+
+---
+
+`loadFunction`...FIXME

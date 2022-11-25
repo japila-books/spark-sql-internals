@@ -20,7 +20,7 @@ withName(
   name: String): UserDefinedFunction
 ```
 
-Associates the given name with this `UserDefinedFunction`
+Associates the given `name` with this `UserDefinedFunction`
 
 Used when:
 
@@ -28,7 +28,7 @@ Used when:
 
 ## Implementations
 
-* `SparkUserDefinedFunction`
+* [SparkUserDefinedFunction](SparkUserDefinedFunction.md)
 * [UserDefinedAggregator](UserDefinedAggregator.md)
 
 ## Demo
