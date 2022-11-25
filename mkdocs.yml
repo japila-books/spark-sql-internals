@@ -433,6 +433,7 @@ nav:
       - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
       - ScalaUDF: expressions/ScalaUDF.md
       - SortOrder: expressions/SortOrder.md
+      - SparkUserDefinedFunction: expressions/SparkUserDefinedFunction.md
       - Stateful: expressions/Stateful.md
       - StaticInvoke: expressions/StaticInvoke.md
       - SubqueryExpression: expressions/SubqueryExpression.md

@@ -15,17 +15,15 @@
 * <span id="children"> Child [Expression](Expression.md)s
 * <span id="inputEncoders"> Input [ExpressionEncoder](../ExpressionEncoder.md)s
 * <span id="outputEncoder"> Output [ExpressionEncoder](../ExpressionEncoder.md)
-* <span id="udfName"> Name (optional)
+* <span id="udfName"> Name
 * <span id="nullable"> `nullable` flag (default: `true`)
 * <span id="udfDeterministic"> `udfDeterministic` flag (default: `true`)
 
 `ScalaUDF` is created when:
 
 * `UDFRegistration` is requested to [register a UDF](../UDFRegistration.md#register)
-* `BaseDynamicPartitionDataWriter` is requested for `partitionPathExpression`
-* `SparkUserDefinedFunction` is requested to `createScalaUDF`
-* [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) and `ResolveEncodersInUDF` logical evaluation rules are executed
-* `ImplicitTypeCasts` utility is used for `transform` function
+* `BaseDynamicPartitionDataWriter` is requested for [partitionPathExpression](../datasources/BaseDynamicPartitionDataWriter.md#partitionPathExpression)
+* `SparkUserDefinedFunction` is requested to [createScalaUDF](SparkUserDefinedFunction.md#createScalaUDF)
 
 ## <span id="deterministic"> deterministic
 

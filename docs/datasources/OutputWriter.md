@@ -29,7 +29,7 @@ Used when:
 
 * `FileFormatDataWriter` is requested to [releaseCurrentWriter](FileFormatDataWriter.md#releaseCurrentWriter)
 * `SingleDirectoryDataWriter` is requested to [write](SingleDirectoryDataWriter.md#write)
-* `BaseDynamicPartitionDataWriter` is requested to `writeRecord`
+* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](BaseDynamicPartitionDataWriter.md#writeRecord)
 
 ### <span id="write"> Writing Row Out
 
@@ -43,7 +43,7 @@ Writes out a single [InternalRow](../InternalRow.md)
 Used when:
 
 * `SingleDirectoryDataWriter` is requested to [write](SingleDirectoryDataWriter.md#write)
-* `BaseDynamicPartitionDataWriter` is requested to `writeRecord`
+* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](BaseDynamicPartitionDataWriter.md#writeRecord)
 
 ## Implementations
 

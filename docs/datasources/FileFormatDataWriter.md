@@ -17,7 +17,7 @@ Used when:
 
 ## Implementations
 
-* `BaseDynamicPartitionDataWriter`
+* [BaseDynamicPartitionDataWriter](BaseDynamicPartitionDataWriter.md)
 * `EmptyDirectoryDataWriter`
 * [SingleDirectoryDataWriter](SingleDirectoryDataWriter.md)
 

@@ -63,7 +63,7 @@ newRow(
 Used when:
 
 * `SingleDirectoryDataWriter` is requested to [write out a record](SingleDirectoryDataWriter.md#write)
-* `BaseDynamicPartitionDataWriter` is requested to [write out a record](BaseDynamicPartitionDataWriter.md#writeRecord)
+* `BaseDynamicPartitionDataWriter` is requested to [write a record out](BaseDynamicPartitionDataWriter.md#writeRecord)
 
 ## Implementations
 
