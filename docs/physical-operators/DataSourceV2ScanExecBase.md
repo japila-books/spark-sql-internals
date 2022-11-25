@@ -88,7 +88,7 @@ metrics: Map[String, SQLMetric]
 
 ---
 
-`metrics` is the following [SQLMetric](SQLMetric.md)s with the [customMetrics](#customMetrics):
+`metrics` is the following [SQLMetric](../SQLMetric.md)s with the [customMetrics](#customMetrics):
 
 Metric Name | web UI
 ------------|--------
@@ -150,7 +150,7 @@ customMetrics: Map[String, SQLMetric]
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-`customMetrics` requests the [Scan](#scan) for [supportedCustomMetrics](../connector/Scan.md#supportedCustomMetrics) that are then converted to [SQLMetric](SQLMetric.md)s.
+`customMetrics` requests the [Scan](#scan) for [supportedCustomMetrics](../connector/Scan.md#supportedCustomMetrics) that are then converted to [SQLMetric](../SQLMetric.md)s.
 
 ---
 

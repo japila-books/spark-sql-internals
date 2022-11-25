@@ -9,7 +9,7 @@
 * <span id="description"> `WriteJobDescription`
 * <span id="taskAttemptContext"> Hadoop [TaskAttemptContext]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html)
 * <span id="committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-* <span id="customMetrics"> Custom [SQLMetric](../physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
+* <span id="customMetrics"> Custom [SQLMetric](../SQLMetric.md)s by name (`Map[String, SQLMetric]`)
 
 While being created, `SingleDirectoryDataWriter` [creates a new OutputWriter](#newOutputWriter).
 

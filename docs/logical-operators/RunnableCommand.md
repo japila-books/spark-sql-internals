@@ -33,7 +33,7 @@ Used when:
 metrics: Map[String, SQLMetric]
 ```
 
-[Performance metrics](../physical-operators/SQLMetric.md)
+[Performance metrics](../SQLMetric.md)
 
 `metrics` is empty by default.
 

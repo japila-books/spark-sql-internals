@@ -15,7 +15,7 @@
 * <span id="initialInputBufferOffset"> Initial input buffer offset
 * <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
-* <span id="numOutputRows"> `numOutputRows` [SQLMetric](SQLMetric.md)
+* <span id="numOutputRows"> `numOutputRows` [SQLMetric](../SQLMetric.md)
 
 `SortBasedAggregationIterator` is created when:
 

@@ -8,7 +8,7 @@
 
 * <span id="serializableHadoopConf"> Serializable Hadoop `Configuration` ([Hadoop]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html))
 * <span id="driverSideMetrics"> Driver-side metrics (`Map[String, SQLMetric]`)
-* <span id="taskCommitTimeMetric"> Task commit time [SQLMetric](../physical-operators/SQLMetric.md)
+* <span id="taskCommitTimeMetric"> Task commit time [SQLMetric](../SQLMetric.md)
 
 `BasicWriteJobStatsTracker` is created when:
 
@@ -44,7 +44,7 @@ processStats(
 
 `processStats` requests the active `SparkContext` for the [spark.sql.execution.id](../SQLExecution.md#EXECUTION_ID_KEY).
 
-In the end, `processStats` [posts the metric updates](../physical-operators/SQLMetric.md#postDriverMetricUpdates).
+In the end, `processStats` [posts the metric updates](../SQLMetric.md#postDriverMetricUpdates).
 
 ---
 

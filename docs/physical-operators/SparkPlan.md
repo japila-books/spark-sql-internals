@@ -316,7 +316,7 @@ In the end, the function returns the count of the rows written out and the byte 
 resetMetrics(): Unit
 ```
 
-`resetMetrics` takes <<metrics, metrics>> and request them to [reset](SQLMetric.md#reset).
+`resetMetrics` takes <<metrics, metrics>> and request them to [reset](../SQLMetric.md#reset).
 
 `resetMetrics` is used when...FIXME
 
@@ -371,7 +371,7 @@ Internally, `executeBroadcast` calls [doExecuteBroadcast](#doExecuteBroadcast) i
 metrics: Map[String, SQLMetric] = Map.empty
 ```
 
-`metrics` is the [SQLMetrics](SQLMetric.md) by their names.
+`metrics` is the [SQLMetrics](../SQLMetric.md) by their names.
 
 By default, `metrics` contains no `SQLMetrics` (i.e. `Map.empty`).
 

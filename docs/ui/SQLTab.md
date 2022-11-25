@@ -3,7 +3,7 @@
 <!---
 ## Review Me
 
-*SQL* tab in spark-webui.md[web UI] shows spark-sql-SQLMetric.md[SQLMetrics] per SparkPlan.md[physical operator] in a structured query physical plan.
+*SQL* tab in spark-webui.md[web UI] shows SQLMetric.md[SQLMetrics] per SparkPlan.md[physical operator] in a structured query physical plan.
 
 You can access the SQL tab under `/SQL` URL, e.g. http://localhost:4040/SQL/.
 

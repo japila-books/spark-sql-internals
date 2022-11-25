@@ -367,6 +367,11 @@ nav:
       - TreeNode: catalyst/TreeNode.md
       - TreePattern: catalyst/TreePattern.md
       - TreePatternBits: catalyst/TreePatternBits.md
+    - Encoder:
+      - Encoder: Encoder.md
+      - ExpressionEncoder: ExpressionEncoder.md
+      - RowEncoder: RowEncoder.md
+      - ScalaReflection: ScalaReflection.md
     - Expressions:
       - expressions/index.md
       - AggregateExpression: expressions/AggregateExpression.md
@@ -540,7 +545,6 @@ nav:
         - SortMergeJoinScanner: physical-operators/SortMergeJoinScanner.md
       - SortExec: physical-operators/SortExec.md
       - SparkPlan: physical-operators/SparkPlan.md
-      - SQLMetric: physical-operators/SQLMetric.md
       - SubqueryExec: physical-operators/SubqueryExec.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
@@ -695,6 +699,8 @@ nav:
       - ReuseExchange: physical-optimizations/ReuseExchange.md
       - ReuseExchangeAndSubquery: physical-optimizations/ReuseExchangeAndSubquery.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
+    - SQLExecution: SQLExecution.md
+    - SQLMetric: SQLMetric.md
     - Tungsten Execution Backend:
       - tungsten/index.md
       - InternalRow: InternalRow.md
@@ -703,12 +709,6 @@ nav:
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
       - UnsafeFixedWidthAggregationMap: physical-operators/UnsafeFixedWidthAggregationMap.md
-    - SQLExecution: SQLExecution.md
-    - Encoder:
-      - Encoder: Encoder.md
-      - ExpressionEncoder: ExpressionEncoder.md
-      - RowEncoder: RowEncoder.md
-      - ScalaReflection: ScalaReflection.md
   - SQL:
     - sql/index.md
     - AbstractSqlParser: sql/AbstractSqlParser.md

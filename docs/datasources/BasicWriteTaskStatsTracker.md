@@ -7,7 +7,7 @@
 `BasicWriteTaskStatsTracker` takes the following to be created:
 
 * <span id="hadoopConf"> Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)
-* <span id="taskCommitTimeMetric"> Task Commit Time [SQLMetric](../physical-operators/SQLMetric.md)
+* <span id="taskCommitTimeMetric"> Task Commit Time [SQLMetric](../SQLMetric.md)
 
 `BasicWriteTaskStatsTracker` is created when:
 

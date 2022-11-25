@@ -1,9 +1,9 @@
 # SQLMetric
 
-`SQLMetric` is an `AccumulatorV2` ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)) for [performance metrics of physical operators](SparkPlan.md#metrics).
+`SQLMetric` is an `AccumulatorV2` ([Spark Core]({{ book.spark_core }}/accumulators/AccumulatorV2/)) for [performance metrics of physical operators](physical-operators/SparkPlan.md#metrics).
 
 !!! note
-    Use **Details for Query** page in [SQL tab](../ui/SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
+    Use **Details for Query** page in [SQL tab](ui/SQLTab.md#ExecutionPage) in web UI to see the SQL execution metrics of a structured query.
 
 ## Creating Instance
 
@@ -89,14 +89,14 @@ postDriverMetricUpdates(
   metrics: Seq[SQLMetric]): Unit
 ```
 
-`postDriverMetricUpdates` posts a `SparkListenerDriverAccumUpdates` event to `LiveListenerBus` when `executionId` is specified.
+`postDriverMetricUpdates` posts a `SparkListenerDriverAccumUpdates` event to `LiveListenerBus` (only if `executionId` is specified).
 
 ---
 
 `postDriverMetricUpdates` is used when:
 
-* `BasicWriteJobStatsTracker` is requested for [processStats](../datasources/BasicWriteJobStatsTracker.md#processStats)
-* `BroadcastExchangeExec` is requested for [relationFuture](BroadcastExchangeExec.md#relationFuture)
-* `FileSourceScanExec` physical operator is requested for [sendDriverMetrics](FileSourceScanExec.md#sendDriverMetrics)
+* `BasicWriteJobStatsTracker` is requested for [processStats](datasources/BasicWriteJobStatsTracker.md#processStats)
+* `BroadcastExchangeExec` is requested for [relationFuture](physical-operators/BroadcastExchangeExec.md#relationFuture)
+* `FileSourceScanExec` physical operator is requested for [sendDriverMetrics](physical-operators/FileSourceScanExec.md#sendDriverMetrics)
 * `SubqueryBroadcastExec` physical operator is requested for `relationFuture`
-* `SubqueryExec` physical operator is requested for [relationFuture](SubqueryExec.md#relationFuture)
+* `SubqueryExec` physical operator is requested for [relationFuture](physical-operators/SubqueryExec.md#relationFuture)

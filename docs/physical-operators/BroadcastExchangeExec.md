@@ -62,9 +62,9 @@ NOTE: `relationFuture` accepts a relation with up to 512 millions rows and 8GB i
 
 `relationFuture` requests the SparkPlan.md#sparkContext[SparkContext] to `broadcast` the relation and records the time in <<broadcastTime, broadcastTime>> metrics.
 
-In the end, `relationFuture` requests `SQLMetrics` to spark-sql-SQLMetric.md#postDriverMetricUpdates[post a SparkListenerDriverAccumUpdates] (with the execution id and the SQL metrics) and returns the broadcast internal rows.
+In the end, `relationFuture` requests `SQLMetrics` to [post a SparkListenerDriverAccumUpdates](../SQLMetric.md#postDriverMetricUpdates) (with the execution id and the SQL metrics) and returns the broadcast internal rows.
 
-NOTE: Since initialization of `relationFuture` happens on the driver, spark-sql-SQLMetric.md#postDriverMetricUpdates[posting a SparkListenerDriverAccumUpdates] is the only way how all the SQL metrics could be accessible to other subsystems using `SparkListener` listeners (incl. web UI).
+NOTE: Since initialization of `relationFuture` happens on the driver, [posting a SparkListenerDriverAccumUpdates](../SQLMetric.md#postDriverMetricUpdates) is the only way how all the SQL metrics could be accessible to other subsystems using `SparkListener` listeners (incl. web UI).
 
 In case of `OutOfMemoryError`, `relationFuture` reports another `OutOfMemoryError` with the following message:
 

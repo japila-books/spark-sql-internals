@@ -48,7 +48,7 @@ NOTE: `relationFuture` uses Scala's https://docs.scala-lang.org/overviews/core/f
 
 The action tracks execution of the <<child, child physical operator>> to SparkPlan.md#executeCollect[executeCollect] and collects <<collectTime, collectTime>> and <<dataSize, dataSize>> SQL metrics.
 
-In the end, `relationFuture` spark-sql-SQLMetric.md#postDriverMetricUpdates[posts metric updates] and returns the internal rows.
+In the end, `relationFuture` [posts metric updates](../SQLMetric.md#postDriverMetricUpdates) and returns the internal rows.
 
 [[executionContext]]
 NOTE: `relationFuture` is executed on a separate thread from a custom https://www.scala-lang.org/api/2.11.8/index.html#scala.concurrent.ExecutionContext[scala.concurrent.ExecutionContext] (built from a cached https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ThreadPoolExecutor.html[java.util.concurrent.ThreadPoolExecutor] with the prefix *subquery* and up to 16 threads).

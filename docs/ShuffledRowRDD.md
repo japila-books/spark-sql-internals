@@ -32,7 +32,7 @@ When created, `ShuffledRowRDD` uses the [spark.sql.adaptive.fetchShuffleBlocksIn
 metrics: Map[String, SQLMetric]
 ```
 
-`ShuffledRowRDD` is given a collection of [SQLMetric](physical-operators/SQLMetric.md)s by name.
+`ShuffledRowRDD` is given a collection of [SQLMetric](SQLMetric.md)s by name.
 
 `metrics` is used to create a `SQLShuffleReadMetricsReporter` while [computing a partition](#compute) (to create a `ShuffleReader` ([Spark Core]({{ book.spark_core }}/shuffle/ShuffleReader))).
 

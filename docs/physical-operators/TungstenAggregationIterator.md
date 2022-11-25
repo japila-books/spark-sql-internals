@@ -18,10 +18,10 @@
 * <span id="originalInputAttributes"> Original Input [Attribute](../expressions/Attribute.md)s
 * <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](HashAggregateExec.md#child) of the [HashAggregateExec](HashAggregateExec.md) physical operator)
 * <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](HashAggregateExec.md#testFallbackStartsAt)
-* <span id="numOutputRows"> `numOutputRows` [SQLMetric](SQLMetric.md)
-* <span id="peakMemory"> `peakMemory` [SQLMetric](SQLMetric.md)
-* <span id="spillSize"> `spillSize` [SQLMetric](SQLMetric.md)
-* <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](SQLMetric.md)
+* <span id="numOutputRows"> `numOutputRows` [SQLMetric](../SQLMetric.md)
+* <span id="peakMemory"> `peakMemory` [SQLMetric](../SQLMetric.md)
+* <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
+* <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](../SQLMetric.md)
 
 `TungstenAggregationIterator` is created when:
 
@@ -34,7 +34,7 @@
 
 ## <span id="metrics"> Performance Metrics
 
-When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](SQLMetric.md)s from the [HashAggregateExec](HashAggregateExec.md#metrics) aggregate physical operator being executed.
+When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](../SQLMetric.md)s from the [HashAggregateExec](HashAggregateExec.md#metrics) aggregate physical operator being executed.
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 

@@ -28,7 +28,7 @@ Used when:
 * <span id=""description"> `WriteJobDescription`
 * <span id=""taskAttemptContext"> `TaskAttemptContext` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html))
 * <span id=""committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-* <span id=""customMetrics"> Custom [SQLMetric](../physical-operators/SQLMetric.md)s by name (`Map[String, SQLMetric]`)
+* <span id=""customMetrics"> Custom [SQLMetric](../SQLMetric.md)s by name (`Map[String, SQLMetric]`)
 
 !!! note "Abstract Class"
     `FileFormatDataWriter` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileFormatDataWriters](#implementations).
