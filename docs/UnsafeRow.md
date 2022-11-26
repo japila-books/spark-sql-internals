@@ -30,6 +30,7 @@ The following [DataType](types/DataType.md)s are considered **mutable data types
 * `ByteType`
 * `CalendarIntervalType`
 * `DateType`
+* `DayTimeIntervalType`
 * `DecimalType`
 * `DoubleType`
 * `FloatType`
@@ -37,10 +38,12 @@ The following [DataType](types/DataType.md)s are considered **mutable data types
 * `LongType`
 * `NullType`
 * `ShortType`
+* `TimestampNTZType`
 * `TimestampType`
 * `UserDefinedType` (over a mutable data type)
+* `YearMonthIntervalType`
 
-Mutable data types have fixed length and can be mutated in place.
+Mutable data types have fixed length and can be mutated in place in `UnsafeRow`s (using `set` methods).
 
 Examples (possibly all) of the data types that are not mutable:
 

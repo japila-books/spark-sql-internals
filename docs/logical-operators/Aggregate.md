@@ -22,6 +22,41 @@
 * `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF)
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
 
+## <span id="supportsHashAggregate"> Checking Requirements for HashAggregateExec
+
+```scala
+supportsHashAggregate(
+  aggregateBufferAttributes: Seq[Attribute]): Boolean
+```
+
+`supportsHashAggregate` [builds a StructType](../types/StructType.md#fromAttributes) for the given `aggregateBufferAttributes`.
+
+In the end, `supportsHashAggregate` [isAggregateBufferMutable](#isAggregateBufferMutable).
+
+---
+
+`supportsHashAggregate` is used when:
+
+* `MergeScalarSubqueries` is requested to `supportedAggregateMerge`
+* `AggUtils` is requested to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
+* `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](../physical-operators/HashAggregateExec.md#aggregateBufferAttributes) are supported)
+
+## <span id="isAggregateBufferMutable"> isAggregateBufferMutable
+
+```scala
+isAggregateBufferMutable(
+  schema: StructType): Boolean
+```
+
+`isAggregateBufferMutable` is enabled (`true`) when the [type](../types/StructField.md#dataType) of all the [fields](../types/StructField.md) (in the given `schema`) are [mutable](../UnsafeRow.md#isMutable).
+
+---
+
+`isAggregateBufferMutable` is used when:
+
+* `Aggregate` is requested to [check the requirements for HashAggregateExec](#supportsHashAggregate)
+* `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](../physical-operators/UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
+
 ## Query Planning
 
 `Aggregate` logical operator is planned to one of the physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (using [PhysicalAggregation](../PhysicalAggregation.md) utility):

@@ -26,20 +26,6 @@
     falling back to sort based aggregation.
     ```
 
-## <span id="supportsAggregate"> Selection Requirements
-
-```scala
-supportsAggregate(
-  aggregateBufferAttributes: Seq[Attribute]): Boolean
-```
-
-`supportsAggregate` [checks support for aggregation](UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema) given the aggregation buffer [Attribute](../expressions/Attribute.md)s.
-
-`supportsAggregate` is used when:
-
-* `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
-* `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](#aggregateBufferAttributes) are supported)
-
 ## Creating Instance
 
 `HashAggregateExec` takes the following to be created:

@@ -50,11 +50,11 @@ createAggregate(
   child: SparkPlan): SparkPlan
 ```
 
-`createAggregate` creates a [physical operator](physical-operators/SparkPlan.md) for the given [AggregateExpression](expressions/AggregateExpression.md)s in the following order:
+`createAggregate` creates one of the following [physical operator](physical-operators/SparkPlan.md)s based on the given [AggregateExpression](expressions/AggregateExpression.md)s (in the following order):
 
-1. Selects [HashAggregateExec](physical-operators/HashAggregateExec.md) for `AggregateExpression`s with [AggregateFunction](expressions/AggregateFunction.md)s with [aggBufferAttributes supported](physical-operators/HashAggregateExec.md#supportsAggregate)
+1. [HashAggregateExec](physical-operators/HashAggregateExec.md) when all the [aggBufferAttributes](expressions/AggregateFunction.md#aggBufferAttributes) (of the [AggregateFunction](expressions/AggregateFunction.md)s of the given [AggregateExpression](expressions/AggregateExpression.md)s) are [supported](logical-operators/Aggregate.md#supportsHashAggregate)
 
-1. Selects [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) when the following all hold:
+1. [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) when the following all hold:
     * [spark.sql.execution.useObjectHashAggregateExec](configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled
     * [Aggregate expression supported](physical-operators/ObjectHashAggregateExec.md#supportsAggregate)
 
