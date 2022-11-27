@@ -581,11 +581,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/</loc>
-         <lastmod>2022-11-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/hive-integration/</loc>
          <lastmod>2022-11-27</lastmod>
          <changefreq>daily</changefreq>
@@ -2152,6 +2147,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/WindowSpecDefinition/</loc>
+         <lastmod>2022-11-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/functions/</loc>
          <lastmod>2022-11-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
