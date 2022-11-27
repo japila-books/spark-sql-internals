@@ -10,6 +10,8 @@
 aggBufferAttributes: Seq[AttributeReference]
 ```
 
+See [TypedImperativeAggregate](TypedImperativeAggregate.md#aggBufferAttributes)
+
 ### <span id="aggBufferSchema"> aggBufferSchema
 
 ```scala

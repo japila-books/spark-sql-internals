@@ -29,10 +29,5 @@ Used when:
 
 * [ArrayType](ArrayType.md)
 * [AtomicType](AtomicType.md)
-* `CalendarIntervalType`
-* `HiveVoidType`
-* `MapType`
-* `NullType`
-* `ObjectType`
 * [StructType](StructType.md)
-* `UserDefinedType`
+* _others_

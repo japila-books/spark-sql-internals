@@ -53,3 +53,23 @@ getBufferObject(
 `getBufferObject` is used when:
 
 * `TypedImperativeAggregate` is requested to [mergeBuffersObjects](#mergeBuffersObjects), [update](#update), [merge](#merge), [eval](#eval-Expression), [serializeAggregateBufferInPlace](#serializeAggregateBufferInPlace)
+
+## <span id="anyObjectType"> anyObjectType
+
+```scala
+anyObjectType: ObjectType
+```
+
+`TypedImperativeAggregate` creates an `ObjectType` when created that is used in [getBufferObject](#getBufferObject).
+
+## <span id="aggBufferAttributes"> aggBufferAttributes
+
+```scala
+aggBufferAttributes: Seq[AttributeReference]
+```
+
+`aggBufferAttributes` is part of the [AggregateFunction](AggregateFunction.md#aggBufferAttributes) abstraction.
+
+---
+
+`aggBufferAttributes` is a single `buf` [AttributeReference](Attribute.md) of type [BinaryType](../types/DataType.md#BinaryType).

@@ -46,12 +46,20 @@ eval(
 
 ---
 
-`eval` requests the [agg](#agg) to [finish](Aggregator.md#finish) with the given (reduction) `buffer`.
+`eval` requests the [Aggregator](#agg) to [finish](Aggregator.md#finish) with the given (reduction) `buffer`.
 
 `eval` requests the [outputSerializer](#outputSerializer) to convert the result (of type `OUT` to an [InternalRow](../InternalRow.md)).
 
-In the end, `eval` returns the row if [isSerializedAsStruct](../ExpressionEncoder.md#isSerializedAsStruct) or the 0th element (that is expected to be of [dataType](#dataType)).
+In the end, `eval` returns the row if [isSerializedAsStruct](../ExpressionEncoder.md#isSerializedAsStruct) or the 0th element (that is expected to be of [DataType](#dataType)).
 
 ## Logical Analysis
 
 The [input](#inputEncoder) and [buffer](#bufferEncoder) encoders are [resolved and bound](../ExpressionEncoder.md#resolveAndBind) using `ResolveEncodersInScalaAgg` logical resolution rule.
+
+## Execution Planning
+
+`ScalaAggregator` (as a [TypedImperativeAggregate](TypedImperativeAggregate.md)) uses [aggBufferAttributes](TypedImperativeAggregate.md#aggBufferAttributes) with [BinaryType](../types/DataType.md#BinaryType).
+
+`BinaryType` is among [unsupported types of HashAggregateExec](../logical-operators/Aggregate.md#supportsHashAggregate) and makes the physical operator out of scope for [aggregation planning](../AggUtils.md#createAggregate).
+
+Because of this `BinaryType` (in an [aggregation buffer](TypedImperativeAggregate.md#aggBufferAttributes)) `ScalaAggregator` will always be planned as [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators.

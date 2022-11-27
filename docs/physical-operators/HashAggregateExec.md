@@ -40,7 +40,7 @@
 
 `HashAggregateExec` is created when (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
 
-* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator
+* [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator)
 
 * `StatefulAggregationStrategy` (Structured Streaming) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
 
