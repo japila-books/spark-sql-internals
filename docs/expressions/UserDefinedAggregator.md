@@ -53,3 +53,16 @@ In the end, `scalaAggregator` creates a [ScalaAggregator](ScalaAggregator.md).
 
 * `UDFRegistration` is requested to [register a UserDefinedAggregator](../UDFRegistration.md#register)
 * `UserDefinedAggregator` is requested to [create a Column (for execution)](#apply)
+
+## <span id="withName"> Creates Named UserDefinedAggregator
+
+```scala
+withName(
+  name: String): UserDefinedAggregator[IN, BUF, OUT]
+```
+
+`withName` is part of the [UserDefinedFunction](UserDefinedFunction.md#withName) abstraction.
+
+---
+
+`withName` creates a copy of this `UserDefinedAggregator` to use the given `name` as the [name](#name).
