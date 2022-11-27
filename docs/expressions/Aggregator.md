@@ -8,6 +8,8 @@ abstract class Aggregator[-IN, BUF, OUT]
 
 `Aggregator` is a `Serializable` ([Java]({{ java.api }}/java/lang/Serializable.html)).
 
+`Aggregator` is registered using [udaf](../functions/index.md#udaf) standard function.
+
 ## Contract
 
 ### <span id="bufferEncoder"> bufferEncoder
@@ -89,18 +91,6 @@ Used when:
 * `TypedCount`
 * `TypedSumDouble`
 * `TypedSumLong`
-
-## <span id="udaf"> udaf Standard Function
-
-`udaf` standard function is used to register an `Aggregator` (create an `UserDefinedFunction` that wraps the given `Aggregator` so that it may be used with untyped Data Frames).
-
-```scala
-udaf[IN: TypeTag, BUF, OUT](
-  agg: Aggregator[IN, BUF, OUT]): UserDefinedFunction
-udaf[IN, BUF, OUT](
-  agg: Aggregator[IN, BUF, OUT],
-  inputEncoder: Encoder[IN]): UserDefinedFunction
-```
 
 ## <span id="toColumn"> Converting to TypedColumn
 

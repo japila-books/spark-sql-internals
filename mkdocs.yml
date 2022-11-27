@@ -942,9 +942,6 @@ nav:
       - basic-aggregation/index.md
       - KeyValueGroupedDataset: basic-aggregation/KeyValueGroupedDataset.md
       - RelationalGroupedDataset: basic-aggregation/RelationalGroupedDataset.md
-    - SparkSession: SparkSession.md
-    - SparkSession.Builder: SparkSession-Builder.md
-    - ExecutionListenerManager: ExecutionListenerManager.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md
@@ -952,8 +949,18 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
+    - ExecutionListenerManager: ExecutionListenerManager.md
     - QueryExecutionListener: QueryExecutionListener.md
+    - SparkSession: SparkSession.md
+    - SparkSession.Builder: SparkSession-Builder.md
     - SparkSessionExtensions: SparkSessionExtensions.md
+    - Standard Functions:
+      - functions/index.md
+      - spark-sql-aggregate-functions.md
+      - spark-sql-functions-collection.md
+      - spark-sql-functions-datetime.md
+      - spark-sql-functions-regular-functions.md
+      - spark-sql-functions-windows.md
     - Window Functions:
       - window-functions/index.md
       - AggregateProcessor: window-functions/AggregateProcessor.md
@@ -1005,13 +1012,6 @@ nav:
       - Column: Column.md
       - Column Operators: spark-sql-column-operators.md
       - TypedColumn: TypedColumn.md
-    - Standard Functions:
-      - Standard Functions: functions.md
-      - spark-sql-aggregate-functions.md
-      - spark-sql-functions-collection.md
-      - spark-sql-functions-datetime.md
-      - spark-sql-functions-regular-functions.md
-      - spark-sql-functions-windows.md
     - Data Types:
       - types/index.md
       - AbstractDataType: types/AbstractDataType.md

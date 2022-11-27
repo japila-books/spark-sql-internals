@@ -57,7 +57,7 @@ Spark SQL 2.2 supports **BROADCAST** hints using [broadcast](#broadcast-function
 
 ### <span id="broadcast-function"> broadcast Standard Function
 
-While `hint` operator allows for attaching any hint to a logical plan [broadcast](../functions.md#broadcast) standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
+While `hint` operator allows for attaching any hint to a logical plan [broadcast](../functions/index.md#broadcast) standard function attaches the broadcast hint only (that actually makes it a special case of `hint` operator).
 
 `broadcast` standard function is used for [broadcast joins (aka map-side joins)](../spark-sql-joins-broadcast.md) (and to hint the Spark planner to broadcast a dataset regardless of the size).
 

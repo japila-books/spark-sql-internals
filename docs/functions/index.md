@@ -1,12 +1,26 @@
 # Standard Functions
 
-`org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](Column.md).
+`org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](../Column.md).
 
 You can access the standard functions using the following `import` statement in your Scala application:
 
 ```scala
 import org.apache.spark.sql.functions._
 ```
+
+## <span id="udaf"> udaf
+
+```scala
+udaf[IN: TypeTag, BUF, OUT](
+  agg: Aggregator[IN, BUF, OUT]): UserDefinedFunction // (1)!
+udaf[IN, BUF, OUT](
+  agg: Aggregator[IN, BUF, OUT],
+  inputEncoder: Encoder[IN]): UserDefinedFunction
+```
+
+1. Uses an [ExpressionEncoder](../ExpressionEncoder.md) of `IN` type
+
+`udaf` creates a [UserDefinedAggregator](../expressions/UserDefinedAggregator.md) with the given [Aggregator](../expressions/Aggregator.md) and [Encoder](../Encoder.md).
 
 <!---
 

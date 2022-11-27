@@ -1,6 +1,6 @@
 # Basic Aggregation
 
-**Basic Aggregation** calculates aggregates over a group of rows in a [Dataset](../Dataset.md) using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../functions.md#aggregate-functions)).
+**Basic Aggregation** calculates aggregates over a group of rows in a [Dataset](../Dataset.md) using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../functions/index.md#aggregate-functions)).
 
 ## Aggregate Operators
 

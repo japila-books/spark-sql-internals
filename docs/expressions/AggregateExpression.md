@@ -18,7 +18,7 @@
 
 `AggregateExpression` can be given an [Expression](Expression.md) for an aggregate filter.
 
-The filter is assumed undefined when `AggregateExpression` is [created](#apply).
+The filter is assumed undefined by default when `AggregateExpression` is [created](#apply).
 
 A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf. [AggUtils](../AggUtils.md#mayRemoveAggFilters)).
 

@@ -2,6 +2,7 @@ title: ExplodeBase
 
 # ExplodeBase Base Generator Expression
 
+<!---
 `ExplodeBase` is the base class for <<Explode, Explode>> and <<PosExplode, PosExplode>> generator expressions.
 
 `ExplodeBase` is a <<spark-sql-Expression-UnaryExpression.md#, unary expression>> and <<Generator, Generator>> with Expression.md#CodegenFallback[CodegenFallback].
@@ -10,7 +11,7 @@ title: ExplodeBase
 
 `Explode` is a unary expression that produces a sequence of records for each value in the array or map.
 
-`Explode` is a result of executing `explode` function (in SQL and [functions](../functions.md#explode))
+`Explode` is a result of executing `explode` function (in SQL and [functions](../functions/index.md#explode))
 
 [source, scala]
 ----
@@ -28,7 +29,4 @@ scala> arrayDF.withColumn("num", explode('array)).explain
 Generate explode(array#93), true, false, [array#93, num#102]
 +- LocalTableScan [array#93]
 ----
-
-=== [[PosExplode]] PosExplode
-
-CAUTION: FIXME
+-->

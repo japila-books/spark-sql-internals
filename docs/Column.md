@@ -1,5 +1,6 @@
 # Column
 
+<!---
 [[creating-instance]]
 [[expr]]
 `Column` represents a column in a Dataset.md[Dataset] that holds a Catalyst expressions/Expression.md[Expression] that produces a value per row.
@@ -38,7 +39,7 @@ scala> val idCol: Column = $"id"
 idCol: org.apache.spark.sql.Column = id
 ----
 
-Beside using the `implicits` conversions, you can create columns using [col](functions.md#col) and [column](functions.md#column) functions.
+Beside using the `implicits` conversions, you can create columns using [col](functions/index.md#col) and [column](functions/index.md#column) functions.
 
 [source, scala]
 ----
@@ -322,3 +323,4 @@ named: NamedExpression
 
 * [Dataset.select](spark-sql-dataset-operators.md#select)
 * [KeyValueGroupedDataset.agg](basic-aggregation/KeyValueGroupedDataset.md#agg)
+-->

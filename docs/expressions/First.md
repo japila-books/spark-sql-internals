@@ -1,10 +1,11 @@
 # First Aggregate Function Expression
 
+<!---
 `First` is a <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> function expression that is <<creating-instance, created>> when:
 
 * `AstBuilder` is requested to <<sql/AstBuilder.md#visitFirst, parse a FIRST statement>>
 
-* [first](../functions.md#first) standard function is used
+* [first](../functions/index.md#first) standard function is used
 
 * `first` and `first_value` <<FunctionRegistry.md#, SQL functions>> are used
 
@@ -64,3 +65,4 @@ first('orgName)()
 
 * [[child]] Child <<Expression.md#, expression>>
 * [[ignoreNullsExpr]] `ignoreNullsExpr` flag <<Expression.md#, expression>>
+-->

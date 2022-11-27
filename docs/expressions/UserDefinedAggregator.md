@@ -2,7 +2,7 @@
 
 `UserDefinedAggregator[IN, BUF, OUT]` is a [UserDefinedFunction](UserDefinedFunction.md) that uses [ScalaAggregator](ScalaAggregator.md) for execution.
 
-`UserDefinedAggregator` is [created](#creating-instance) using [udaf](../functions.md#udaf) standard function.
+`UserDefinedAggregator` is [created](#creating-instance) using [udaf](../functions/index.md#udaf) standard function.
 
 ## Creating Instance
 
@@ -14,7 +14,7 @@
 * <span id="nullable"> `nullable` flag (default: `true`)
 * <span id="deterministic"> `deterministic` flag (default: `true`)
 
-`UserDefinedAggregator` is created using [udaf](../functions.md#udaf) standard function.
+`UserDefinedAggregator` is created using [udaf](../functions/index.md#udaf) standard function.
 
 ## <span id="apply"> Creating Column (for Function Execution)
 
