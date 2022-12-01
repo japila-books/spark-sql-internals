@@ -1,6 +1,45 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) around Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](../UnsafeRow.md) keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](../UnsafeRow.md) keys and values.
+
+## Creating Instance
+
+`UnsafeFixedWidthAggregationMap` takes the following to be created:
+
+* <span id="emptyAggregationBuffer"> Empty aggregation buffer ([InternalRow](../InternalRow.md))
+* <span id="aggregationBufferSchema"> Aggregation Buffer Schema ([StructType](../types/StructType.md))
+* <span id="groupingKeySchema"> Grouping Key Schema ([StructType](../types/StructType.md))
+* <span id="taskContext"> `TaskContext` ([Spark Core]({{ book.spark_core }}/scheduler/TaskContext))
+* [Initial Capacity](#initialCapacity)
+* <span id="pageSizeBytes"> Page Size (in bytes)
+
+`UnsafeFixedWidthAggregationMap` is created when:
+
+* `HashAggregateExec` physical operator is requested to [create a HashMap](HashAggregateExec.md#createHashMap)
+* `TungstenAggregationIterator` is requested for the [hashMap](TungstenAggregationIterator.md#hashMap)
+
+### <span id="initialCapacity"> Initial Capacity
+
+`UnsafeFixedWidthAggregationMap` is given the initial capacity of the [BytesToBytesMap](#map) when [created](#creating-instance).
+
+The initial capacity is hard-coded to `1024 * 16` (when created for [HashAggregateExec](HashAggregateExec.md#createHashMap) and [TungstenAggregationIterator](TungstenAggregationIterator.md#hashMap)).
+
+## <span id="map"> BytesToBytesMap
+
+`UnsafeFixedWidthAggregationMap` creates a `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/memory/BytesToBytesMap)) with the following when [created](#creating-instance):
+
+* `TaskMemoryManager` ([Spark Core]({{ book.spark_core }}/memory/TaskMemoryManager)) of the [TaskContext](#taskContext)
+* [Initial Capacity](#initialCapacity)
+* [Page Size](#pageSizeBytes)
+
+The `BytesToBytesMap` is used when:
+
+* [getAggregationBufferFromUnsafeRow](#getAggregationBufferFromUnsafeRow) to look up
+* [iterator](#iterator)
+* [getPeakMemoryUsedBytes](#getPeakMemoryUsedBytes)
+* [free](#free)
+* [getAvgHashProbeBucketListIterations](#getAvgHashProbeBucketListIterations)
+* [destructAndCreateExternalSorter](#destructAndCreateExternalSorter)
 
 ## <span id="supportsAggregationBufferSchema"> supportsAggregationBufferSchema
 
@@ -32,6 +71,46 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 
 * `HashAggregateExec` utility is used for the [selection requirements](HashAggregateExec.md#supportsAggregate)
 
+## <span id="getAggregationBufferFromUnsafeRow"> getAggregationBufferFromUnsafeRow
+
+```java
+UnsafeRow getAggregationBufferFromUnsafeRow(
+  UnsafeRow key) // (1)!
+UnsafeRow getAggregationBufferFromUnsafeRow(
+  UnsafeRow key,
+  int hash)
+```
+
+1. Uses the hash code of the given key
+
+`getAggregationBufferFromUnsafeRow` returns the following:
+
+* `null` when the given `key` was not found and had to be inserted but failed
+* [currentAggregationBuffer](#currentAggregationBuffer) pointed to the value (object)
+
+---
+
+`getAggregationBufferFromUnsafeRow` uses the [BytesToBytesMap](#map) to look up `BytesToBytesMap.Location` of the given (grouping) `key`.
+
+If the key has not been found (is not defined at the key's position), `getAggregationBufferFromUnsafeRow` inserts a copy of the [emptyAggregationBuffer](#emptyAggregationBuffer) into the [map](#map). `getAggregationBufferFromUnsafeRow` returns `null` if insertion failed.
+
+`getAggregationBufferFromUnsafeRow` requests the [currentAggregationBuffer](#currentAggregationBuffer) to [pointTo](../UnsafeRow.md#pointTo) to an object at `BytesToBytesMap.Location`.
+
+---
+
+`getAggregationBufferFromUnsafeRow` is used when:
+
+* `TungstenAggregationIterator` is requested to [process the input rows](TungstenAggregationIterator.md#processInputs)
+
+## <span id="currentAggregationBuffer"> currentAggregationBuffer
+
+`UnsafeFixedWidthAggregationMap` creates a [UnsafeRow](../UnsafeRow.md) when [created](#creating-instance).
+
+The number of fields of this `UnsafeRow` is the length of the [aggregationBufferSchema](#aggregationBufferSchema).
+
+The `UnsafeRow` is (re)used to point to the value (that was stored or looked up) in [getAggregationBufferFromUnsafeRow](#getAggregationBufferFromUnsafeRow).
+
+<!---
 ## Review Me
 
 Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
@@ -49,136 +128,10 @@ Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, av
 | Name
 | Description
 
-| currentAggregationBuffer
-| [[currentAggregationBuffer]] Re-used pointer (as an <<UnsafeRow.md#, UnsafeRow>> with the number of fields to match the <<aggregationBufferSchema, aggregationBufferSchema>>) to the current aggregation buffer
-
-Used exclusively when `UnsafeFixedWidthAggregationMap` is requested to <<getAggregationBufferFromUnsafeRow, getAggregationBufferFromUnsafeRow>>.
-
 | emptyAggregationBuffer
 | [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> ([encoded in UnsafeRow format](../expressions/UnsafeProjection.md#create))
 
 | groupingKeyProjection
 | [[groupingKeyProjection]] [UnsafeProjection](../expressions/UnsafeProjection.md) for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
-
-| map
-a| [[map]] Spark Core's `BytesToBytesMap` with the <<taskMemoryManager, taskMemoryManager>>, <<initialCapacity, initialCapacity>>, <<pageSizeBytes, pageSizeBytes>> and performance metrics enabled
 |===
-
-## Creating Instance
-
-`UnsafeFixedWidthAggregationMap` takes the following when created:
-
-* [[emptyAggregationBuffer]] Empty aggregation buffer (as an [InternalRow](../InternalRow.md))
-* [[aggregationBufferSchema]] Aggregation buffer [schema](../types/StructType.md)
-* [[groupingKeySchema]] Grouping key [schema](../types/StructType.md)
-* [[taskMemoryManager]] Spark Core's `TaskMemoryManager`
-* [[initialCapacity]] Initial capacity
-* [[pageSizeBytes]] Page size (in bytes)
-
-=== [[getAggregationBufferFromUnsafeRow]] `getAggregationBufferFromUnsafeRow` Method
-
-[source, scala]
-----
-UnsafeRow getAggregationBufferFromUnsafeRow(UnsafeRow key) // <1>
-UnsafeRow getAggregationBufferFromUnsafeRow(UnsafeRow key, int hash)
-----
-<1> Uses the hash code of the key
-
-`getAggregationBufferFromUnsafeRow` requests the <<map, BytesToBytesMap>> to `lookup` the input `key` (to get a `BytesToBytesMap.Location`).
-
-`getAggregationBufferFromUnsafeRow`...FIXME
-
-[NOTE]
-====
-`getAggregationBufferFromUnsafeRow` is used when:
-
-* `TungstenAggregationIterator` is requested to <<TungstenAggregationIterator.md#processInputs, processInputs>> (exclusively when `TungstenAggregationIterator` is <<TungstenAggregationIterator.md#creating-instance, created>>)
-
-* (for testing only) `UnsafeFixedWidthAggregationMap` is requested to <<getAggregationBuffer, getAggregationBuffer>>
-====
-
-=== [[getAggregationBuffer]] `getAggregationBuffer` Method
-
-[source, java]
-----
-UnsafeRow getAggregationBuffer(InternalRow groupingKey)
-----
-
-`getAggregationBuffer`...FIXME
-
-NOTE: `getAggregationBuffer` seems to be used exclusively for testing.
-
-=== [[iterator]] Getting KVIterator -- `iterator` Method
-
-[source, java]
-----
-KVIterator<UnsafeRow, UnsafeRow> iterator()
-----
-
-`iterator`...FIXME
-
-`iterator` is used when:
-
-* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
-
-* [TungstenAggregationIterator](TungstenAggregationIterator.md) is created (and pre-loads the first key-value pair from the map)
-
-=== [[getPeakMemoryUsedBytes]] `getPeakMemoryUsedBytes` Method
-
-[source, java]
-----
-long getPeakMemoryUsedBytes()
-----
-
-`getPeakMemoryUsedBytes`...FIXME
-
-`getPeakMemoryUsedBytes` is used when:
-
-* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
-
-* `TungstenAggregationIterator` is [used in TaskCompletionListener](TungstenAggregationIterator.md#TaskCompletionListener)
-
-=== [[getAverageProbesPerLookup]] `getAverageProbesPerLookup` Method
-
-[source, java]
-----
-double getAverageProbesPerLookup()
-----
-
-`getAverageProbesPerLookup`...FIXME
-
-`getAverageProbesPerLookup` is used when:
-
-* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
-
-* `TungstenAggregationIterator` is [used in TaskCompletionListener](TungstenAggregationIterator.md#TaskCompletionListener)
-
-=== [[free]] `free` Method
-
-[source, java]
-----
-void free()
-----
-
-`free`...FIXME
-
-`free` is used when:
-
-* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
-
-* `TungstenAggregationIterator` is requested to [processInputs](TungstenAggregationIterator.md#processInputs) (when [TungstenAggregationIterator](TungstenAggregationIterator.md) is created), [get the next UnsafeRow](TungstenAggregationIterator.md#next), [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) and is [created](TungstenAggregationIterator.md)
-
-=== [[destructAndCreateExternalSorter]] `destructAndCreateExternalSorter` Method
-
-[source, java]
-----
-UnsafeKVExternalSorter destructAndCreateExternalSorter() throws IOException
-----
-
-`destructAndCreateExternalSorter`...FIXME
-
-`destructAndCreateExternalSorter` is used when:
-
-* `HashAggregateExec` physical operator is requested to [finishAggregate](HashAggregateExec.md#finishAggregate)
-
-* [TungstenAggregationIterator](TungstenAggregationIterator.md) is created (and requested to [processInputs](TungstenAggregationIterator.md#processInputs))
+-->

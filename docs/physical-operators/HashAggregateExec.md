@@ -259,6 +259,8 @@ doConsume(
 
 `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
+---
+
 `doConsume` [doConsumeWithoutKeys](#doConsumeWithoutKeys) when no [named expressions for the grouping keys](#groupingExpressions) were specified for the `HashAggregateExec` or [doConsumeWithKeys](#doConsumeWithKeys) otherwise.
 
 ### <span id="doConsumeWithKeys"> doConsumeWithKeys
@@ -289,6 +291,8 @@ doProduce(
 ```
 
 `doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
+
+---
 
 `doProduce` executes [doProduceWithoutKeys](#doProduceWithoutKeys) when no [named expressions for the grouping keys](#groupingExpressions) were specified for the `HashAggregateExec` or [doProduceWithKeys](#doProduceWithKeys) otherwise.
 
@@ -338,8 +342,9 @@ finishAggregate(
 createHashMap(): UnsafeFixedWidthAggregationMap
 ```
 
-`createHashMap` creates a [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
+`createHashMap` creates an [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
+<!---
 ## Internal Properties
 
 | aggregateBufferAttributes
@@ -359,3 +364,4 @@ createHashMap(): UnsafeFixedWidthAggregationMap
 
 | groupingAttributes
 | [[groupingAttributes]] <<expressions/NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
+-->

@@ -2,7 +2,7 @@
 
 `TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](HashAggregateExec.md) physical operator.
 
-`TungstenAggregationIterator` prefers hash-based aggregation (before [switching to a sort-based aggregation](#switchToSortBasedAggregation)).
+`TungstenAggregationIterator` prefers [hash-based aggregation before switching to sort-based one](#sortBased).
 
 ## Creating Instance
 
@@ -52,6 +52,8 @@ next(): UnsafeRow
 
 `next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
 
+---
+
 `next`...FIXME
 
 ### <span id="processCurrentSortedGroup"> processCurrentSortedGroup
@@ -64,11 +66,15 @@ processCurrentSortedGroup(): Unit
 
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 
-[UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md)
+`TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) with the following when [created](#creating-instance):
+
+* [initialAggregationBuffer](#initialAggregationBuffer)
+* [Schema](../types/StructType.md#fromAttributes) built from the [attributes of the aggregation buffers](../expressions/AggregateFunction.md#aggBufferAttributes) of all the [AggregateFunctions](AggregationIterator.md#aggregateFunctions)
+* [Schema](../types/StructType.md#fromAttributes) built from the [attributes](../expressions/NamedExpression.md#toAttribute) of all the [grouping expressions](#groupingExpressions)
 
 Used when:
 
-* `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next), to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput), [processInputs](#processInputs), to initialize the [aggregationBufferMapIterator](#aggregationBufferMapIterator) and [every time a partition has been processed](#TaskCompletionListener)
+* `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next), to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput), [process input rows](#processInputs), to initialize the [aggregationBufferMapIterator](#aggregationBufferMapIterator) and [every time a partition has been processed](#TaskCompletionListener)
 
 ## <span id="TaskCompletionListener"> TaskCompletionListener
 
@@ -88,9 +94,40 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 `outputForEmptyGroupingKeyWithoutInput`...FIXME
 
+---
+
 `outputForEmptyGroupingKeyWithoutInput` is used when:
 
 * `HashAggregateExec` physical operator is requested to [execute](HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
+
+## <span id="processInputs"> Processing Input Rows
+
+```scala
+processInputs(
+  fallbackStartsAt: (Int, Int)): Unit
+```
+
+`processInputs`...FIXME
+
+---
+
+`processInputs` is used when:
+
+* `TungstenAggregationIterator` is [created](#creating-instance)
+
+## <span id="sortBased"> Hash- vs Sort-Based Aggregations
+
+```scala
+sortBased: Boolean = false
+```
+
+`TungstenAggregationIterator` creates and initializes `sortBased` flag to `false` when [created](#creating-instance).
+
+The flag is used to indicate whether `TungstenAggregationIterator` has [switched (fall back) to sort-based aggregation](#switchToSortBasedAggregation) while [processing input rows](#processInputs).
+
+`sortBased` flag is turned on (`true`) while [switching to sort-based aggregation](#switchToSortBasedAggregation) (and the [numTasksFallBacked](#numTasksFallBacked) metric is incremented).
+
+Switching from hash-based to sort-based aggregation happens when the [external sorter](#externalSorter) is initialized (that is used for sort-based aggregation).
 
 ## Demo
 

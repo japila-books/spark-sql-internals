@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="aggBufferAttributes"> aggBufferAttributes
+### <span id="aggBufferAttributes"> Aggregation Buffer Attributes
 
 ```scala
 aggBufferAttributes: Seq[AttributeReference]
@@ -12,7 +12,7 @@ aggBufferAttributes: Seq[AttributeReference]
 
 See [TypedImperativeAggregate](TypedImperativeAggregate.md#aggBufferAttributes)
 
-### <span id="aggBufferSchema"> aggBufferSchema
+### <span id="aggBufferSchema"> Aggregation Buffer Schema
 
 ```scala
 aggBufferSchema: StructType

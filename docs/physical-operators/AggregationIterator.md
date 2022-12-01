@@ -112,8 +112,13 @@ initializeBuffer(
   buffer: InternalRow): Unit
 ```
 
-`initializeBuffer`...FIXME
+`initializeBuffer` requests the [expressionAggInitialProjection](#expressionAggInitialProjection) to [store an execution result](../expressions/MutableProjection.md#target) of an empty row in the given [InternalRow](../InternalRow.md) (`buffer`).
+
+`initializeBuffer` requests [all the ImperativeAggregate functions](#allImperativeAggregateFunctions) to [initialize](../expressions/ImperativeAggregate.md#initialize) with the `buffer` internal row.
+
+---
 
 `initializeBuffer` is used when:
 
+* `MergingSessionsIterator` is requested to `newBuffer`, `initialize`, `next`, `outputForEmptyGroupingKeyWithoutInput`
 * `SortBasedAggregationIterator` is requested to [newBuffer](SortBasedAggregationIterator.md#newBuffer), [initialize](SortBasedAggregationIterator.md#initialize), [next](SortBasedAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)

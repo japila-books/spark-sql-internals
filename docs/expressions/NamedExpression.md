@@ -30,7 +30,7 @@ qualifier: Seq[String]
 
 Optional qualifier parts (with the names of catalog, database, table, fields, incl. nested fields)
 
-### <span id="toAttribute"> toAttribute
+### <span id="toAttribute"> Converting to Attribute
 
 ```scala
 toAttribute: Attribute
@@ -47,6 +47,8 @@ toAttribute: Attribute
 foldable: Boolean
 ```
 
-`foldable` is always `false` (in order to not remove the alias).
-
 `foldable` is part of the [Expression](Expression.md#foldable) abstraction.
+
+---
+
+`foldable` is always `false` (in order to not remove the alias).

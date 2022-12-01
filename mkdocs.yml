@@ -424,6 +424,7 @@ nav:
       - Literal: expressions/Literal.md
       - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
       - Murmur3Hash: expressions/Murmur3Hash.md
+      - MutableProjection: expressions/MutableProjection.md
       - NamedExpression: expressions/NamedExpression.md
       - Nondeterministic: expressions/Nondeterministic.md
       - OffsetWindowFunction: expressions/OffsetWindowFunction.md
