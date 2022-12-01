@@ -1,12 +1,12 @@
 # Adaptive Query Execution (AQE)
 
-**Adaptive Query Execution** (aka **Adaptive Query Optimization**, **Adaptive Optimization**, or **AQE** in short) is an optimization of a [physical query execution plan](../physical-operators/SparkPlan.md) in the middle of query execution (based on runtime statistics) for alternative execution plans at runtime.
-
-Adaptive Query Execution is enabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property (since Spark 3.2 and [SPARK-33679](https://issues.apache.org/jira/browse/SPARK-33679)).
+**Adaptive Query Execution** (aka **Adaptive Query Optimization**, **Adaptive Optimization**, or **AQE** in short) is an optimization of a [physical query execution plan](../physical-operators/SparkPlan.md) in the middle of query execution for alternative execution plans at runtime.
 
 Adaptive Query Execution can only be used for queries with [exchanges](../physical-operators/Exchange.md) or [sub-queries](../expressions/SubqueryExpression.md).
 
 Adaptive Query Execution re-optimizes the query plan based on runtime statistics.
+
+Adaptive Query Execution is enabled by default based on [spark.sql.adaptive.enabled](../configuration-properties.md#spark.sql.adaptive.enabled) configuration property (since Spark 3.2 and [SPARK-33679](https://issues.apache.org/jira/browse/SPARK-33679)).
 
 Quoting the description of a [talk](#references) by the authors of Adaptive Query Execution:
 

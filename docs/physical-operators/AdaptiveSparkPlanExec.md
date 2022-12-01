@@ -7,7 +7,7 @@
 `AdaptiveSparkPlanExec` takes the following to be created:
 
 * [Input Physical Plan](#inputPlan)
-* <span id="context"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
+* [AdaptiveExecutionContext](#context)
 * <span id="preprocessingRules"> Preprocessing physical rules ([Rule](../catalyst/Rule.md)s of [SparkPlan](SparkPlan.md))
 * <span id="isSubquery"> `isSubquery` flag
 * <span id="supportsColumnar"> `supportsColumnar` flag (default: `false`)
@@ -29,17 +29,23 @@ The `SparkPlan` is used for the following:
 
 * [requiredDistribution](#requiredDistribution), [initialPlan](#initialPlan), [output](#output), [doCanonicalize](#doCanonicalize), [getFinalPhysicalPlan](#getFinalPhysicalPlan), [hashCode](#hashCode) and [equals](#equals)
 
+### <span id="context"> AdaptiveExecutionContext
+
+`AdaptiveSparkPlanExec` is given an [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md) when [created](#creating-instance).
+
 ## <span id="doExecute"> Executing Physical Operator
 
 ```scala
 doExecute(): RDD[InternalRow]
 ```
 
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+---
+
 `doExecute` [takes the final physical plan](#getFinalPhysicalPlan) to [execute it](SparkPlan.md#execute) (that generates an `RDD[InternalRow]` that will be the return value).
 
 `doExecute` triggers [finalPlanUpdate](#finalPlanUpdate) (unless done already).
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 ## <span id="doExecuteColumnar"> doExecuteColumnar
 
@@ -47,9 +53,11 @@ doExecute(): RDD[InternalRow]
 doExecuteColumnar(): RDD[ColumnarBatch]
 ```
 
-`doExecuteColumnar` [withFinalPlanUpdate](#withFinalPlanUpdate) to [executeColumnar](SparkPlan.md#executeColumnar) (that generates a `RDD` of [ColumnarBatch](../ColumnarBatch.md)s to be returned at the end).
-
 `doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+
+---
+
+`doExecuteColumnar` [withFinalPlanUpdate](#withFinalPlanUpdate) to [executeColumnar](SparkPlan.md#executeColumnar) (that generates a `RDD` of [ColumnarBatch](../ColumnarBatch.md)s to be returned at the end).
 
 ## <span id="doExecuteBroadcast"> doExecuteBroadcast
 
@@ -57,11 +65,13 @@ doExecuteColumnar(): RDD[ColumnarBatch]
 doExecuteBroadcast[T](): broadcast.Broadcast[T]
 ```
 
+`doExecuteBroadcast` is part of the [SparkPlan](SparkPlan.md#doExecuteBroadcast) abstraction.
+
+---
+
 `doExecuteBroadcast` [withFinalPlanUpdate](#withFinalPlanUpdate) to [doExecuteBroadcast](SparkPlan.md#doExecuteBroadcast) (that generates a `Broadcast` variable to be returned at the end).
 
 `doExecuteBroadcast` asserts that the final physical plan is a [BroadcastQueryStageExec](BroadcastQueryStageExec.md).
-
-`doExecuteBroadcast` is part of the [SparkPlan](SparkPlan.md#doExecuteBroadcast) abstraction.
 
 ## Specialized Execution Paths
 
@@ -71,9 +81,11 @@ doExecuteBroadcast[T](): broadcast.Broadcast[T]
 executeCollect(): Array[InternalRow]
 ```
 
-`executeCollect`...FIXME
-
 `executeCollect` is part of the [SparkPlan](SparkPlan.md#executeCollect) abstraction.
+
+---
+
+`executeCollect`...FIXME
 
 ### <span id="executeTail"> tail
 
@@ -82,9 +94,11 @@ executeTail(
   n: Int): Array[InternalRow]
 ```
 
-`executeTail`...FIXME
-
 `executeTail` is part of the [SparkPlan](SparkPlan.md#executeTail) abstraction.
+
+---
+
+`executeTail`...FIXME
 
 ### <span id="executeTake"> take
 
@@ -93,9 +107,11 @@ executeTake(
   n: Int): Array[InternalRow]
 ```
 
-`executeTake`...FIXME
-
 `executeTake` is part of the [SparkPlan](SparkPlan.md#executeTake) abstraction.
+
+---
+
+`executeTake`...FIXME
 
 ## <span id="getFinalPhysicalPlan"> Final Physical Query Plan
 
@@ -239,11 +255,50 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
 ## <span id="currentPhysicalPlan"><span id="executedPlan"> Optimized Physical Query Plan
 
-`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [physical query plan](SparkPlan.md) (that is available as `executedPlan` method).
+```scala
+var currentPhysicalPlan: SparkPlan
+```
 
-Initially, when `AdaptiveSparkPlanExec` operator is [created](#creating-instance), `currentPhysicalPlan` is the [initialPlan](#initialPlan).
+`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [SparkPlan](SparkPlan.md).
+
+`currentPhysicalPlan` is initialized to be the [initialPlan](#initialPlan) when `AdaptiveSparkPlanExec` operator is [created](#creating-instance),
 
 `currentPhysicalPlan` may change in [getFinalPhysicalPlan](#getFinalPhysicalPlan) until the [isFinalPlan](#isFinalPlan) internal flag is on.
+
+`currentPhysicalPlan` is available using [executedPlan](#executedPlan) method.
+
+### executedPlan
+
+```scala
+executedPlan: SparkPlan
+```
+
+`executedPlan` returns the [current physical query plan](#currentPhysicalPlan).
+
+---
+
+`executedPlan` is used when:
+
+* `ExplainUtils` is requested to [generateOperatorIDs](../ExplainUtils.md#generateOperatorIDs), [collectOperatorsWithID](../ExplainUtils.md#collectOperatorsWithID), [generateWholeStageCodegenIds](../ExplainUtils.md#generateWholeStageCodegenIds), [getSubqueries](../ExplainUtils.md#getSubqueries), [removeTags](../ExplainUtils.md#removeTags)
+* `SparkPlanInfo` is requested to `fromSparkPlan` (for `SparkListenerSQLExecutionStart` and `SparkListenerSQLAdaptiveExecutionUpdate` events)
+* `AdaptiveSparkPlanExec` is requested to [reset metrics](#resetMetrics)
+* `AdaptiveSparkPlanHelper` is requested to `allChildren` and `stripAQEPlan`
+* `PlanAdaptiveDynamicPruningFilters` is [executed](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md#apply)
+* `debug` package object is requested to `codegenStringSeq`
+
+## <span id="resetMetrics"> Resetting Metrics
+
+```scala
+resetMetrics(): Unit
+```
+
+`resetMetrics` is part of the [SparkPlan](SparkPlan.md#resetMetrics) abstraction.
+
+---
+
+`resetMetrics` requests [all the metrics](SparkPlan.md#metrics) to [reset](../SQLMetric.md#reset).
+
+In the end, `resetMetrics` requests the [executed query plan](#executedPlan) to [resetMetrics](SparkPlan.md#resetMetrics).
 
 ## <span id="queryStagePreparationRules"> QueryStage Preparation Rules
 

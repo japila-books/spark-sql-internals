@@ -8,11 +8,17 @@
 
 `InsertAdaptiveSparkPlan` takes the following to be created:
 
-* <span id="adaptiveExecutionContext"> [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md)
+* [AdaptiveExecutionContext](#adaptiveExecutionContext)
 
 `InsertAdaptiveSparkPlan` is created when:
 
 * `QueryExecution` is requested for [physical preparations rules](../QueryExecution.md#preparations)
+
+### <span id="adaptiveExecutionContext"> AdaptiveExecutionContext
+
+`InsertAdaptiveSparkPlan` is given an [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md) when [created](#creating-instance).
+
+The `AdaptiveExecutionContext` is used to create an [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#context) physical operator (for a plan) when [executed](#applyInternal).
 
 ## <span id="shouldApplyAQE"> Adaptive Requirements
 
