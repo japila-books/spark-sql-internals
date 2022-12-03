@@ -266,6 +266,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/HashMapGenerator/</loc>
+         <lastmod>2022-12-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/HintErrorHandler/</loc>
          <lastmod>2022-12-03</lastmod>
          <changefreq>daily</changefreq>
@@ -3452,6 +3457,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AdaptiveSparkPlanExec/</loc>
+         <lastmod>2022-12-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/AggregateCodegenSupport/</loc>
          <lastmod>2022-12-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
