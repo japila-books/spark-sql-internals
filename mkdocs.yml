@@ -550,7 +550,6 @@ nav:
       - SubqueryExec: physical-operators/SubqueryExec.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
-      - UnsafeHashedRelation: physical-operators/UnsafeHashedRelation.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
@@ -705,12 +704,13 @@ nav:
     - SQLMetric: SQLMetric.md
     - Tungsten Execution Backend:
       - tungsten/index.md
-      - InternalRow: InternalRow.md
-      - UnsafeRow: UnsafeRow.md
-      - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
-      - UnsafeFixedWidthAggregationMap: physical-operators/UnsafeFixedWidthAggregationMap.md
+      - InternalRow: InternalRow.md
+      - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
+      - UnsafeHashedRelation: UnsafeHashedRelation.md
+      - UnsafeRow: UnsafeRow.md
+      - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
   - SQL:
     - sql/index.md
     - AbstractSqlParser: sql/AbstractSqlParser.md
@@ -778,7 +778,6 @@ nav:
       - GenerateOrdering: whole-stage-code-generation/GenerateOrdering.md
       - GeneratePredicate: whole-stage-code-generation/GeneratePredicate.md
       - GenerateSafeProjection: whole-stage-code-generation/GenerateSafeProjection.md
-      - spark-sql-BytesToBytesMap.md
       - Subexpression Elimination:
         - Subexpression Elimination: subexpression-elimination.md
         - EquivalentExpressions: EquivalentExpressions.md

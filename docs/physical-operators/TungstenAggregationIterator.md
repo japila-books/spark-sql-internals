@@ -66,7 +66,7 @@ processCurrentSortedGroup(): Unit
 
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 
-`TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) with the following when [created](#creating-instance):
+`TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following when [created](#creating-instance):
 
 * [initialAggregationBuffer](#initialAggregationBuffer)
 * [Schema](../types/StructType.md#fromAttributes) built from the [attributes of the aggregation buffers](../expressions/AggregateFunction.md#aggBufferAttributes) of all the [AggregateFunctions](AggregationIterator.md#aggregateFunctions)

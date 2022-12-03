@@ -83,7 +83,7 @@ Used when:
 ## Implementations
 
 * [LongHashedRelation](LongHashedRelation.md)
-* [UnsafeHashedRelation](UnsafeHashedRelation.md)
+* [UnsafeHashedRelation](../UnsafeHashedRelation.md)
 
 ## <span id="apply"> Creating HashedRelation
 
@@ -101,7 +101,7 @@ With no elements in the `input` iterator and with the `allowsNullKey` flag disab
 
 For exactly one `key` expression of type `LongType` and with the `allowsNullKey` flag disabled, `apply` returns a [LongHashedRelation](LongHashedRelation.md).
 
-For all other cases, `apply` returns an [UnsafeHashedRelation](UnsafeHashedRelation.md).
+For all other cases, `apply` returns an [UnsafeHashedRelation](../UnsafeHashedRelation.md).
 
 ---
 

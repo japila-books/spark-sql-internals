@@ -114,7 +114,7 @@ Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
 Name (in web UI): avg hash probe bucket list iters
 
-`numProbes` and `numKeyLookups` are used in [BytesToBytesMap](../spark-sql-BytesToBytesMap.md) append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
+`numProbes` and `numKeyLookups` are used in `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/BytesToBytesMap)) append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
 
 ### <span id="numOutputRows"> numOutputRows
 
@@ -342,7 +342,7 @@ finishAggregate(
 createHashMap(): UnsafeFixedWidthAggregationMap
 ```
 
-`createHashMap` creates an [UnsafeFixedWidthAggregationMap](UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
+`createHashMap` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
 
 <!---
 ## Internal Properties
