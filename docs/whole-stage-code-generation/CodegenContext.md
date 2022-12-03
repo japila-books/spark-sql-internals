@@ -79,7 +79,7 @@ addReferenceObj(
 * `SortMergeJoinExec` physical operator is requested to [doProduce](../physical-operators/SortMergeJoinExec.md#doProduce)
 * `HashAggregateExec` physical operator is requested to [doProduceWithKeys](../physical-operators/HashAggregateExec.md#doProduceWithKeys)
 * `CodegenSupport` is requested to [metricTerm](../physical-operators/CodegenSupport.md#metricTerm)
-* `RowBasedHashMapGenerator` and `VectorizedHashMapGenerator` are requested to `initializeAggregateHashMap`
+* `HashMapGenerator` is requested to [initializeAggregateHashMap](../HashMapGenerator.md#initializeAggregateHashMap)
 
 ## <span id="generateExpressions"> generateExpressions
 

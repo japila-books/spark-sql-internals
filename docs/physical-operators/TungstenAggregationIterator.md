@@ -25,12 +25,9 @@
 
 `TungstenAggregationIterator` is created when:
 
-* `HashAggregateExec` physical operator is requested to [doExecute](HashAggregateExec.md#doExecute)
+* `HashAggregateExec` physical operator is [executed](HashAggregateExec.md#doExecute)
 
-!!! note
-    The SQL metrics ([numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe)) belong to the [HashAggregateExec](HashAggregateExec.md#metrics) physical operator that created the `TungstenAggregationIterator`.
-
-`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) if did not [switch to a sort-based aggregation](#sortBased).
+`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) unless [switched to a sort-based aggregation](#sortBased).
 
 ## <span id="metrics"> Performance Metrics
 
@@ -66,7 +63,7 @@ processCurrentSortedGroup(): Unit
 
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 
-`TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following when [created](#creating-instance):
+When [created](#creating-instance), `TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following:
 
 * [initialAggregationBuffer](#initialAggregationBuffer)
 * [Schema](../types/StructType.md#fromAttributes) built from the [attributes of the aggregation buffers](../expressions/AggregateFunction.md#aggBufferAttributes) of all the [AggregateFunctions](AggregationIterator.md#aggregateFunctions)

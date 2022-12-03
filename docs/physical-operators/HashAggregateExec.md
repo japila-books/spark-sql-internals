@@ -296,15 +296,6 @@ doProduce(
 
 `doProduce` executes [doProduceWithoutKeys](#doProduceWithoutKeys) when no [named expressions for the grouping keys](#groupingExpressions) were specified for the `HashAggregateExec` or [doProduceWithKeys](#doProduceWithKeys) otherwise.
 
-### <span id="doProduceWithKeys"> doProduceWithKeys
-
-```scala
-doProduceWithKeys(
-  ctx: CodegenContext): String
-```
-
-`doProduceWithKeys`...FIXME
-
 ### <span id="doProduceWithoutKeys"> doProduceWithoutKeys
 
 ```scala
@@ -336,13 +327,39 @@ finishAggregate(
 
 `finishAggregate`...FIXME
 
-### <span id="createHashMap"> createHashMap
+## <span id="doProduceWithKeys"> doProduceWithKeys
+
+```scala
+doProduceWithKeys(
+  ctx: CodegenContext): String
+```
+
+`doProduceWithKeys` is part of the [AggregateCodegenSupport](AggregateCodegenSupport.md#doProduceWithKeys) abstraction.
+
+---
+
+`doProduceWithKeys`...FIXME
+
+### <span id="createHashMap"> Creating HashMap
 
 ```scala
 createHashMap(): UnsafeFixedWidthAggregationMap
 ```
 
-`createHashMap` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) (with the <<getEmptyAggregationBuffer, empty aggregation buffer>>, the <<bufferSchema, bufferSchema>>, the <<groupingKeySchema, groupingKeySchema>>, the current `TaskMemoryManager`, `1024 * 16` initial capacity and the page size of the `TaskMemoryManager`)
+`createHashMap` requests all the [DeclarativeAggregate functions](#declFunctions) for the [Catalyst expressions to initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues).
+
+`createHashMap` [creates an UnsafeProjection](../expressions/UnsafeProjection.md#create) for the expressions and [executes it](../expressions/UnsafeProjection.md#apply) (with an "empty" `null` row).
+
+!!! note
+    [Executing an UnsafeProjection](../expressions/UnsafeProjection.md#apply) produces an [UnsafeRow](../UnsafeRow.md) that becomes an [empty aggregation buffer](../UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) of an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) to be created.
+
+In the end, `createHashMap` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following:
+
+UnsafeFixedWidthAggregationMap | Value
+-------------------------------|-------
+ [emptyAggregationBuffer](../UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) | The `UnsafeRow` after executing the `UnsafeProjection` to [initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues)
+ [aggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#aggregationBufferSchema) | [bufferSchema](#bufferSchema)
+ [groupingKeySchema](../UnsafeFixedWidthAggregationMap.md#groupingKeySchema) | [groupingKeySchema](#groupingKeySchema)
 
 <!---
 ## Internal Properties

@@ -1,6 +1,6 @@
-# DeclarativeAggregate &mdash; Unevaluable Aggregate Function Expressions
+# DeclarativeAggregate Expression-Based Functions
 
-`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [aggregate function expressions](#implementations) that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
+`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [expression-based aggregate functions](#implementations) that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
 
 ## Contract
 
@@ -20,21 +20,22 @@ Used when:
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
-### <span id="initialValues"> initialValues
+### <span id="initialValues"> Initialize Aggregation Buffers Expressions
 
 ```scala
 initialValues: Seq[Expression]
 ```
 
-[Expression](Expression.md) for initial values of this aggregate function
+Catalyst [Expression](Expression.md) to initialize aggregation buffers (for the initial values of this aggregate function)
 
 Used when:
 
 * `EliminateAggregateFilter` logical optimization is executed
 * `AggregatingAccumulator` utility is used to create an `AggregatingAccumulator`
+* `AggregateCodegenSupport` is requested to [doProduceWithoutKeys](../physical-operators/AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `AggregationIterator` is [created](../physical-operators/AggregationIterator.md#expressionAggInitialProjection)
-* `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys), [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap) and [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
-* `HashMapGenerator` is created
+* `HashAggregateExec` physical operator is requested to [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap), [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
+* `HashMapGenerator` is [created](../HashMapGenerator.md#buffVars)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
 ### <span id="mergeExpressions"> mergeExpressions
@@ -52,18 +53,6 @@ updateExpressions: Seq[Expression]
 ## Implementations
 
 * [AggregateWindowFunction](AggregateWindowFunction.md)
-* `Average`
-* `BitAggregate`
-* `CentralMomentAgg`
-* `Count`
-* `Covariance`
 * [First](First.md)
-* `Last`
-* `Max`
-* `MaxMinBy`
-* `Min`
-* `PearsonCorrelation`
-* `Product`
 * `SimpleTypedAggregateExpression`
-* `Sum`
-* `UnevaluableAggregate`
+* _others_

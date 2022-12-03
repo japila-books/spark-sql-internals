@@ -2,7 +2,10 @@
 
 `UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](UnsafeRow.md) keys and values.
 
-`UnsafeFixedWidthAggregationMap` is used in [HashAggregateExec](physical-operators/HashAggregateExec.md#createHashMap) physical operator.
+`UnsafeFixedWidthAggregationMap` is used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is executed:
+
+* Directly in [createHashMap](physical-operators/HashAggregateExec.md#createHashMap)
+* Indirectly using [TungstenAggregationIterator](physical-operators/TungstenAggregationIterator.md#hashMap) in [doExecute](physical-operators/HashAggregateExec.md#doExecute)
 
 ## Creating Instance
 
@@ -18,7 +21,7 @@
 `UnsafeFixedWidthAggregationMap` is created when:
 
 * `HashAggregateExec` physical operator is requested to [create a HashMap](physical-operators/HashAggregateExec.md#createHashMap)
-* `TungstenAggregationIterator` is requested for the [hashMap](physical-operators/TungstenAggregationIterator.md#hashMap)
+* `TungstenAggregationIterator` is [created](physical-operators/TungstenAggregationIterator.md#hashMap)
 
 ### <span id="initialCapacity"> Initial Capacity
 
@@ -28,7 +31,7 @@ The initial capacity is hard-coded to `1024 * 16` (when created for [HashAggrega
 
 ## <span id="map"> BytesToBytesMap
 
-`UnsafeFixedWidthAggregationMap` creates a `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/memory/BytesToBytesMap)) with the following when [created](#creating-instance):
+When [created](#creating-instance), `UnsafeFixedWidthAggregationMap` creates a `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/BytesToBytesMap)) with the following:
 
 * `TaskMemoryManager` ([Spark Core]({{ book.spark_core }}/memory/TaskMemoryManager)) of the [TaskContext](#taskContext)
 * [Initial Capacity](#initialCapacity)
@@ -106,7 +109,7 @@ If the key has not been found (is not defined at the key's position), `getAggreg
 
 ## <span id="currentAggregationBuffer"> currentAggregationBuffer
 
-`UnsafeFixedWidthAggregationMap` creates a [UnsafeRow](UnsafeRow.md) when [created](#creating-instance).
+`UnsafeFixedWidthAggregationMap` creates an [UnsafeRow](UnsafeRow.md) when [created](#creating-instance).
 
 The number of fields of this `UnsafeRow` is the length of the [aggregationBufferSchema](#aggregationBufferSchema).
 

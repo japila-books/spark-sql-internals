@@ -468,6 +468,7 @@ nav:
     - Physical Operators:
       - physical-operators/index.md
       - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
+      - AggregateCodegenSupport: physical-operators/AggregateCodegenSupport.md
       - AggregationIterators:
         - AggregationIterator: physical-operators/AggregationIterator.md
         - ObjectAggregationIterator: physical-operators/ObjectAggregationIterator.md
@@ -706,6 +707,7 @@ nav:
       - tungsten/index.md
       - CatalystSerde: CatalystSerde.md
       - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
+      - HashMapGenerator: HashMapGenerator.md
       - InternalRow: InternalRow.md
       - UnsafeFixedWidthAggregationMap: UnsafeFixedWidthAggregationMap.md
       - UnsafeHashedRelation: UnsafeHashedRelation.md
