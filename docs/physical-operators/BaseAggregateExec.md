@@ -14,7 +14,7 @@ Aggregate [Attribute](../expressions/Attribute.md)s
 
 Used when:
 
-* `AggregateCodegenSupport` is requested to `doProduceWithoutKeys`
+* `AggregateCodegenSupport` is requested to [doProduceWithoutKeys](AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `BaseAggregateExec` is requested to [verboseStringWithOperatorId](#verboseStringWithOperatorId), [producedAttributes](#producedAttributes), [toSortAggregate](#toSortAggregate)
 
 ### <span id="aggregateExpressions"> Aggregate Functions
@@ -161,5 +161,5 @@ aggregateBufferAttributes: Seq[AttributeReference]
 
 `aggregateBufferAttributes` is used when:
 
-* `AggregateCodegenSupport` is requested to `supportCodegen`, `doProduceWithoutKeys`
+* `AggregateCodegenSupport` is requested to [supportCodegen](AggregateCodegenSupport.md#supportCodegen), [doProduceWithoutKeys](AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `BaseAggregateExec` is requested for the [produced attributes](#producedAttributes)
