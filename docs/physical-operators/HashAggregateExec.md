@@ -31,7 +31,7 @@
 `HashAggregateExec` takes the following to be created:
 
 * <span id="requiredChildDistributionExpressions"> Required child distribution [expressions](../expressions/Expression.md)
-* <span id="groupingExpressions"> [Named expressions](../expressions/NamedExpression.md) for grouping keys
+* <span id="groupingExpressions"> Grouping Keys (as [NamedExpression](../expressions/NamedExpression.md)s)
 * <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
 * <span id="aggregateAttributes"> Aggregate [attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
@@ -42,7 +42,7 @@
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator)
 
-* `StatefulAggregationStrategy` (Structured Streaming) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
+* `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/execution-planning-strategies/StatefulAggregationStrategy)) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
 
 ## <span id="metrics"> Performance Metrics
 
@@ -130,59 +130,69 @@ doExecute(): RDD[InternalRow]
 
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`doExecute` requests the <<child, child>> physical operator to <<SparkPlan.md#execute, execute>> (that triggers physical query planning and generates an `RDD[InternalRow]`) and transforms it by executing the following function on internal rows per partition with index (using `RDD.mapPartitionsWithIndex` that creates another RDD):
+---
 
-1. Records the start execution time (`beforeAgg`)
+`doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (that triggers physical query planning and generates an `RDD[InternalRow]`).
 
-1. Requests the `Iterator[InternalRow]` (from executing the <<child, child>> physical operator) for the next element
+`doExecute` transforms the `RDD[InternalRow]` with a [transformation function](#doExecute-mapPartitionsWithIndex) for every partition.
 
-    * If there is no input (an empty partition), but there are <<groupingExpressions, grouping keys>> used, `doExecute` simply returns an empty iterator
+### <span id="doExecute-mapPartitionsWithIndex"> Processing Partition Rows
 
-    * Otherwise, `doExecute` creates a <<TungstenAggregationIterator.md#creating-instance, TungstenAggregationIterator>> and branches off per whether there are rows to process and the <<groupingExpressions, grouping keys>>.
+`doExecute` uses [RDD.mapPartitionsWithIndex](#mapPartitionsWithIndex) to process [InternalRow](../InternalRow.md)s per partition (with a partition ID).
 
-For empty partitions and no <<groupingExpressions, grouping keys>>, `doExecute` increments the <<numOutputRows, numOutputRows>> metric and requests the `TungstenAggregationIterator` to <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, create a single UnsafeRow>> as the only element of the result iterator.
+For every partition, `mapPartitionsWithIndex` records the start execution time (`beforeAgg`).
 
-For non-empty partitions or there are <<groupingExpressions, grouping keys>> used, `doExecute` returns the `TungstenAggregationIterator`.
+`mapPartitionsWithIndex` branches off based on whether there are input rows and [grouping keys](#groupingExpressions).
 
-In the end, `doExecute` calculates the <<aggTime, aggTime>> metric and returns an `Iterator[UnsafeRow]` that can be as follows:
+For a _grouped aggregate_ ([grouping keys](#groupingExpressions) defined) with no input rows (an empty partition), `doExecute` returns an empty iterator.
+
+Otherwise, `doExecute` creates a [TungstenAggregationIterator](TungstenAggregationIterator.md).
+
+With no [grouping keys](#groupingExpressions) defined and no input rows (an empty partition), `doExecute` increments the [numOutputRows](#numOutputRows) metric and returns a single-element `Iterator[UnsafeRow]` from the [TungstenAggregationIterator](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
+
+With input rows available (and regardless of [grouping keys](#groupingExpressions)), `doExecute` returns the `TungstenAggregationIterator`.
+
+In the end, `doExecute` calculates the [aggTime](#aggTime) metric and returns an `Iterator[UnsafeRow]` that can be as follows:
 
 * Empty
-
-* A single-element `Iterator[UnsafeRow]` with the <<TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput, single UnsafeRow>>
-
+* A single-element one
 * The [TungstenAggregationIterator](TungstenAggregationIterator.md)
 
-!!! note
-    The [numOutputRows](#numOutputRows), [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) metrics are used exclusively to create the [TungstenAggregationIterator](TungstenAggregationIterator.md).
+### mapPartitionsWithIndex
 
-!!! note
-    `doExecute` (by `RDD.mapPartitionsWithIndex` transformation) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
+```scala
+mapPartitionsWithIndex[U: ClassTag](
+  f: (Int, Iterator[T]) => Iterator[U],
+  preservesPartitioning: Boolean = false): RDD[U]
+```
 
-    ```text
-    val ids = spark.range(1)
-    scala> println(ids.queryExecution.toRdd.toDebugString)
-    (8) MapPartitionsRDD[12] at toRdd at <console>:29 []
-    |  MapPartitionsRDD[11] at toRdd at <console>:29 []
-    |  ParallelCollectionRDD[10] at toRdd at <console>:29 []
+`RDD.mapPartitionsWithIndex` adds a new `MapPartitionsRDD` to the RDD lineage.
 
-    // Use groupBy that gives HashAggregateExec operator
-    val q = ids.groupBy('id).count
-    scala> q.explain
-    == Physical Plan ==
-    *(2) HashAggregate(keys=[id#30L], functions=[count(1)])
-    +- Exchange hashpartitioning(id#30L, 200)
-      +- *(1) HashAggregate(keys=[id#30L], functions=[partial_count(1)])
-          +- *(1) Range (0, 1, step=1, splits=8)
+```text
+val ids = spark.range(1)
+scala> println(ids.queryExecution.toRdd.toDebugString)
+(8) MapPartitionsRDD[12] at toRdd at <console>:29 []
+|  MapPartitionsRDD[11] at toRdd at <console>:29 []
+|  ParallelCollectionRDD[10] at toRdd at <console>:29 []
 
-    val rdd = q.queryExecution.toRdd
-    scala> println(rdd.toDebugString)
-    (200) MapPartitionsRDD[18] at toRdd at <console>:28 []
-      |   ShuffledRowRDD[17] at toRdd at <console>:28 []
-      +-(8) MapPartitionsRDD[16] at toRdd at <console>:28 []
-        |  MapPartitionsRDD[15] at toRdd at <console>:28 []
-        |  MapPartitionsRDD[14] at toRdd at <console>:28 []
-        |  ParallelCollectionRDD[13] at toRdd at <console>:28 []
-    ```
+// Use groupBy that gives HashAggregateExec operator
+val q = ids.groupBy('id).count
+scala> q.explain
+== Physical Plan ==
+*(2) HashAggregate(keys=[id#30L], functions=[count(1)])
++- Exchange hashpartitioning(id#30L, 200)
+  +- *(1) HashAggregate(keys=[id#30L], functions=[partial_count(1)])
+      +- *(1) Range (0, 1, step=1, splits=8)
+
+val rdd = q.queryExecution.toRdd
+scala> println(rdd.toDebugString)
+(200) MapPartitionsRDD[18] at toRdd at <console>:28 []
+  |   ShuffledRowRDD[17] at toRdd at <console>:28 []
+  +-(8) MapPartitionsRDD[16] at toRdd at <console>:28 []
+    |  MapPartitionsRDD[15] at toRdd at <console>:28 []
+    |  MapPartitionsRDD[14] at toRdd at <console>:28 []
+    |  ParallelCollectionRDD[13] at toRdd at <console>:28 []
+```
 
 ## <span id="doConsume"> Generating Java Code for Consume Path
 
