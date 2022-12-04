@@ -1,4 +1,4 @@
-# HashAggregateExec Aggregate Physical Operator
+# HashAggregateExec Physical Operator
 
 `HashAggregateExec` is a [unary physical operator](BaseAggregateExec.md) for **hash-based aggregation**.
 
@@ -44,83 +44,17 @@
 
 * `StatefulAggregationStrategy` (Structured Streaming) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
 
-## Demo
-
-```text
-val q = spark.range(10).
-  groupBy('id % 2 as "group").
-  agg(sum("id") as "sum")
-
-// HashAggregateExec selected due to:
-// 1. sum uses mutable types for aggregate expression
-// 2. just a single id column reference of LongType data type
-scala> q.explain
-== Physical Plan ==
-*HashAggregate(keys=[(id#0L % 2)#12L], functions=[sum(id#0L)])
-+- Exchange hashpartitioning((id#0L % 2)#12L, 200)
-   +- *HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#12L], functions=[partial_sum(id#0L)])
-      +- *Range (0, 10, step=1, splits=8)
-
-val execPlan = q.queryExecution.sparkPlan
-scala> println(execPlan.numberedTreeString)
-00 HashAggregate(keys=[(id#0L % 2)#15L], functions=[sum(id#0L)], output=[group#3L, sum#7L])
-01 +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#15L], functions=[partial_sum(id#0L)], output=[(id#0L % 2)#15L, sum#17L])
-02    +- Range (0, 10, step=1, splits=8)
-```
-
-Going low level...watch your steps :)
-
-```scala
-import q.queryExecution.optimizedPlan
-import org.apache.spark.sql.catalyst.plans.logical.Aggregate
-val aggLog = optimizedPlan.asInstanceOf[Aggregate]
-import org.apache.spark.sql.catalyst.planning.PhysicalAggregation
-import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateExpression
-val (_, aggregateExpressions: Seq[AggregateExpression], _, _) = PhysicalAggregation.unapply(aggLog).get
-val aggregateBufferAttributes =
-  aggregateExpressions.flatMap(_.aggregateFunction.aggBufferAttributes)
-```
-
-```text
-import org.apache.spark.sql.execution.aggregate.HashAggregateExec
-// that's the exact reason why HashAggregateExec was selected
-// Aggregation execution planning strategy prefers HashAggregateExec
-scala> val useHash = HashAggregateExec.supportsAggregate(aggregateBufferAttributes)
-useHash: Boolean = true
-
-val hashAggExec = execPlan.asInstanceOf[HashAggregateExec]
-scala> println(execPlan.numberedTreeString)
-00 HashAggregate(keys=[(id#0L % 2)#15L], functions=[sum(id#0L)], output=[group#3L, sum#7L])
-01 +- HashAggregate(keys=[(id#0L % 2) AS (id#0L % 2)#15L], functions=[partial_sum(id#0L)], output=[(id#0L % 2)#15L, sum#17L])
-02    +- Range (0, 10, step=1, splits=8)
-
-val hashAggExecRDD = hashAggExec.execute // <-- calls doExecute
-scala> println(hashAggExecRDD.toDebugString)
-(8) MapPartitionsRDD[3] at execute at <console>:30 []
- |  MapPartitionsRDD[2] at execute at <console>:30 []
- |  MapPartitionsRDD[1] at execute at <console>:30 []
- |  ParallelCollectionRDD[0] at execute at <console>:30 []
-```
-
 ## <span id="metrics"> Performance Metrics
 
-### <span id="aggTime"> aggTime
-
-Name (in web UI): time in aggregation build
-
-### <span id="avgHashProbe"> avgHashProbe
+### <span id="avgHashProbe"> avg hash probe bucket list iters
 
 Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
-
-Name (in web UI): avg hash probe bucket list iters
 
 `numProbes` and `numKeyLookups` are used in `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/BytesToBytesMap)) append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
 
-### <span id="numOutputRows"> numOutputRows
+### <span id="numOutputRows"> number of output rows
 
 Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
-
-Name (in web UI): number of output rows
 
 Number of groups (per partition) that (depending on the number of partitions and the side of ShuffleExchangeExec.md[ShuffleExchangeExec] operator) is the number of groups
 
@@ -145,13 +79,15 @@ spark.
   show
 ```
 
-### <span id="peakMemory"> peakMemory
+### <span id="numTasksFallBacked"> number of sort fallback tasks
 
-Name (in web UI): peak memory
+### <span id="peakMemory"> peak memory
 
-### <span id="spillSize"> spillSize
+### <span id="spillSize"> spill size
 
-Name (in web UI): spill size
+Used to create a [TungstenAggregationIterator](TungstenAggregationIterator.md#spillSize) when [doExecute](#doExecute)
+
+### <span id="aggTime"> time in aggregation build
 
 ## <span id="requiredChildDistribution"> Required Child Distribution
 
@@ -338,7 +274,30 @@ doProduceWithKeys(
 
 ---
 
+`doProduceWithKeys` uses the following configuration properties:
+
+* [spark.sql.codegen.aggregate.map.twolevel.enabled](../configuration-properties.md#spark.sql.codegen.aggregate.map.twolevel.enabled)
+* [spark.sql.codegen.aggregate.map.vectorized.enable](../configuration-properties.md#spark.sql.codegen.aggregate.map.vectorized.enable)
+* [spark.sql.codegen.aggregate.fastHashMap.capacityBit](../configuration-properties.md#spark.sql.codegen.aggregate.fastHashMap.capacityBit)
+
 `doProduceWithKeys`...FIXME
+
+In the end, `doProduceWithKeys` generates the following Java code (with the `[]`-marked sections filled out):
+
+```text
+if (![initAgg]) {
+  [initAgg] = true;
+  [createFastHashMap]
+  [addHookToCloseFastHashMap]
+  [hashMapTerm] = [thisPlan].createHashMap();
+  long [beforeAgg] = System.nanoTime();
+  [doAggFuncName]();
+  [aggTime].add((System.nanoTime() - [beforeAgg]) / [NANOS_PER_MILLIS]);
+}
+// output the result
+[outputFromFastHashMap]
+[outputFromRegularHashMap]
+```
 
 ### <span id="createHashMap"> Creating HashMap
 
@@ -360,6 +319,233 @@ UnsafeFixedWidthAggregationMap | Value
  [emptyAggregationBuffer](../UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) | The `UnsafeRow` after executing the `UnsafeProjection` to [initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues)
  [aggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#aggregationBufferSchema) | [bufferSchema](#bufferSchema)
  [groupingKeySchema](../UnsafeFixedWidthAggregationMap.md#groupingKeySchema) | [groupingKeySchema](#groupingKeySchema)
+
+## Demo
+
+### Aggregation Query
+
+```scala
+val data = spark.range(10)
+val q = data
+  .groupBy('id % 2 as "group")
+  .agg(sum("id") as "sum")
+```
+
+`HashAggregateExec` operator should be selected due to:
+
+1. `sum` uses mutable types for aggregate expression
+1. just a single `id` column reference of `LongType` data type
+
+```scala
+scala> println(q.queryExecution.executedPlan.numberedTreeString)
+00 AdaptiveSparkPlan isFinalPlan=false
+01 +- HashAggregate(keys=[_groupingexpression#8L], functions=[sum(id#0L)], output=[group#2L, sum#5L])
+02    +- Exchange hashpartitioning(_groupingexpression#8L, 200), ENSURE_REQUIREMENTS, [plan_id=15]
+03       +- HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
+04          +- Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+05             +- Range (0, 10, step=1, splits=16)
+```
+
+### Generate Final Plan
+
+`isFinalPlan` flag is `false`. Let's execute it and access the final plan.
+
+```scala
+import org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec
+val op = q
+  .queryExecution
+  .executedPlan
+  .collect { case op: AdaptiveSparkPlanExec => op }
+  .head
+```
+
+Execute the adaptive operator to generate the final execution plan.
+
+```scala
+op.executeTake(1)
+```
+
+`isFinalPlan` flag should now be `true`.
+
+```scala
+scala> println(op.treeString)
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(2) HashAggregate(keys=[_groupingexpression#8L], functions=[sum(id#0L)], output=[group#2L, sum#5L])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 0
+         +- Exchange hashpartitioning(_groupingexpression#8L, 200), ENSURE_REQUIREMENTS, [plan_id=25]
+            +- *(1) HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
+               +- *(1) Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+                  +- *(1) Range (0, 10, step=1, splits=16)
++- == Initial Plan ==
+   HashAggregate(keys=[_groupingexpression#8L], functions=[sum(id#0L)], output=[group#2L, sum#5L])
+   +- Exchange hashpartitioning(_groupingexpression#8L, 200), ENSURE_REQUIREMENTS, [plan_id=15]
+      +- HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
+         +- Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+            +- Range (0, 10, step=1, splits=16)
+```
+
+With the `isFinalPlan` flag `true`, it is possible to print out the WholeStageCodegen subtrees.
+
+```scala
+scala> q.queryExecution.debug.codegen
+Found 2 WholeStageCodegen subtrees.
+== Subtree 1 / 2 (maxMethodCodeSize:284; maxConstantPoolSize:337(0.51% used); numInnerClasses:2) ==
+*(1) HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
++- *(1) Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+   +- *(1) Range (0, 10, step=1, splits=16)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ // codegenStageId=1
+/* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+/* 007 */   private Object[] references;
+/* 008 */   private scala.collection.Iterator[] inputs;
+/* 009 */   private boolean hashAgg_initAgg_0;
+/* 010 */   private org.apache.spark.unsafe.KVIterator hashAgg_mapIter_0;
+/* 011 */   private org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap hashAgg_hashMap_0;
+/* 012 */   private org.apache.spark.sql.execution.UnsafeKVExternalSorter hashAgg_sorter_0;
+/* 013 */   private scala.collection.Iterator inputadapter_input_0;
+/* 014 */   private boolean hashAgg_hashAgg_isNull_2_0;
+...
+```
+
+Let's access the generated source code via [WholeStageCodegenExec](WholeStageCodegenExec.md) physical operator.
+
+```scala
+val aqe = op
+import org.apache.spark.sql.execution.WholeStageCodegenExec
+val wsce = aqe.executedPlan
+  .collect { case op: WholeStageCodegenExec => op }
+  .head
+val (_, source) = wsce.doCodeGen
+```
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.codegen.CodeFormatter
+val formattedCode = CodeFormatter.format(source)
+```
+
+```scala
+scala> println(formattedCode)
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage2(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ // codegenStageId=2
+/* 006 */ final class GeneratedIteratorForCodegenStage2 extends org.apache.spark.sql.execution.BufferedRowIterator {
+/* 007 */   private Object[] references;
+/* 008 */   private scala.collection.Iterator[] inputs;
+/* 009 */   private boolean hashAgg_initAgg_0;
+/* 010 */   private org.apache.spark.unsafe.KVIterator hashAgg_mapIter_0;
+/* 011 */   private org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap hashAgg_hashMap_0;
+/* 012 */   private org.apache.spark.sql.execution.UnsafeKVExternalSorter hashAgg_sorter_0;
+/* 013 */   private scala.collection.Iterator inputadapter_input_0;
+/* 014 */   private boolean hashAgg_hashAgg_isNull_2_0;
+...
+```
+
+```scala
+val execPlan = q.queryExecution.sparkPlan
+```
+
+```scala
+scala> println(execPlan.numberedTreeString)
+00 HashAggregate(keys=[_groupingexpression#8L], functions=[sum(id#0L)], output=[group#2L, sum#5L])
+01 +- HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
+02    +- Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+03       +- Range (0, 10, step=1, splits=16)
+```
+
+Going low level. Watch your steps :)
+
+```scala
+import org.apache.spark.sql.catalyst.plans.logical.Aggregate
+val aggLog = q.queryExecution.optimizedPlan.asInstanceOf[Aggregate]
+
+import org.apache.spark.sql.catalyst.planning.PhysicalAggregation
+import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateExpression
+val (_, aggregateExpressions: Seq[AggregateExpression], _, _) = PhysicalAggregation.unapply(aggLog).get
+val aggregateBufferAttributes =
+  aggregateExpressions.flatMap(_.aggregateFunction.aggBufferAttributes)
+```
+
+Here comes the very reason why `HashAggregateExec` was selected. [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy prefers `HashAggregateExec` when `aggregateBufferAttributes` are supported.
+
+```scala
+import org.apache.spark.sql.catalyst.plans.logical.Aggregate
+assert(Aggregate.supportsHashAggregate(aggregateBufferAttributes))
+```
+
+```scala
+import org.apache.spark.sql.execution.aggregate.HashAggregateExec
+val hashAggExec = execPlan.asInstanceOf[HashAggregateExec]
+```
+
+```scala
+scala> println(execPlan.numberedTreeString)
+00 HashAggregate(keys=[_groupingexpression#8L], functions=[sum(id#0L)], output=[group#2L, sum#5L])
+01 +- HashAggregate(keys=[_groupingexpression#8L], functions=[partial_sum(id#0L)], output=[_groupingexpression#8L, sum#10L])
+02    +- Project [id#0L, (id#0L % 2) AS _groupingexpression#8L]
+03       +- Range (0, 10, step=1, splits=16)
+```
+
+### Execute HashAggregateExec
+
+```scala
+val hashAggExecRDD = hashAggExec.execute
+```
+
+```scala
+println(hashAggExecRDD.toDebugString)
+```
+
+```text
+(16) MapPartitionsRDD[4] at execute at <console>:1 []
+ |   MapPartitionsRDD[3] at execute at <console>:1 []
+ |   MapPartitionsRDD[2] at execute at <console>:1 []
+ |   MapPartitionsRDD[1] at execute at <console>:1 []
+ |   ParallelCollectionRDD[0] at execute at <console>:1 []
+```
+
+### Java Code for Produce Execution Path
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val parent = hashAggExec
+val doProduceWithKeysCode = hashAggExec.produce(ctx, parent)
+```
+
+```scala
+scala> println(doProduceWithKeysCode)
+if (!hashAgg_initAgg_0) {
+  hashAgg_initAgg_0 = true;
+
+
+  hashAgg_hashMap_0 = ((org.apache.spark.sql.execution.aggregate.HashAggregateExec) references[0] /* plan */).createHashMap();
+  long hashAgg_beforeAgg_1 = System.nanoTime();
+  hashAgg_doAggregateWithKeys_0();
+  ((org.apache.spark.sql.execution.metric.SQLMetric) references[16] /* aggTime */).add((System.nanoTime() - hashAgg_beforeAgg_1) / 1000000);
+}
+// output the result
+
+
+while ( hashAgg_mapIter_0.next()) {
+  UnsafeRow hashAgg_aggKey_1 = (UnsafeRow) hashAgg_mapIter_0.getKey();
+  UnsafeRow hashAgg_aggBuffer_1 = (UnsafeRow) hashAgg_mapIter_0.getValue();
+  hashAgg_doAggregateWithKeysOutput_1(hashAgg_aggKey_1, hashAgg_aggBuffer_1);
+  if (shouldStop()) return;
+}
+hashAgg_mapIter_0.close();
+if (hashAgg_sorter_0 == null) {
+  hashAgg_hashMap_0.free();
+}
+```
 
 <!---
 ## Internal Properties

@@ -14,6 +14,11 @@ doConsumeWithKeys(
   input: Seq[ExprCode]): String
 ```
 
+See:
+
+* [HashAggregateExec](HashAggregateExec.md#doConsumeWithKeys)
+* [SortAggregateExec](SortAggregateExec.md#doConsumeWithKeys)
+
 Used when:
 
 * `AggregateCodegenSupport` is requested to [doConsume](#doConsume)
@@ -24,6 +29,11 @@ Used when:
 doProduceWithKeys(
   ctx: CodegenContext): String
 ```
+
+See:
+
+* [HashAggregateExec](HashAggregateExec.md#doProduceWithKeys)
+* [SortAggregateExec](SortAggregateExec.md#doProduceWithKeys)
 
 Used when:
 

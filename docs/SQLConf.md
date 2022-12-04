@@ -1,6 +1,6 @@
-# SQLConf &mdash; Internal Configuration Store
+# SQLConf
 
-`SQLConf` is an internal **configuration store** for configuration properties and hints used in Spark SQL.
+`SQLConf` is an internal configuration store of the configuration properties and hints used in Spark SQL.
 
 !!! important
     `SQLConf` is an internal part of Spark SQL and is not supposed to be used directly. Spark SQL configuration is available through the developer-facing [RuntimeConfig](RuntimeConfig.md).
@@ -421,11 +421,23 @@ Used when:
 
 * `SortExec` physical operator is requested to [create an UnsafeExternalRowSorter](physical-operators/SortExec.md#createSorter).
 
+## <span id="enableTwoLevelAggMap"><span id="ENABLE_TWOLEVEL_AGG_MAP"> enableTwoLevelAggMap
+
+[spark.sql.codegen.aggregate.map.twolevel.enabled](configuration-properties.md#spark.sql.codegen.aggregate.map.twolevel.enabled)
+
+## <span id="enableVectorizedHashMap"><span id="ENABLE_VECTORIZED_HASH_MAP"> enableVectorizedHashMap
+
+[spark.sql.codegen.aggregate.map.vectorized.enable](configuration-properties.md#spark.sql.codegen.aggregate.map.vectorized.enable)
+
 ## <span id="fallBackToHdfsForStatsEnabled"> fallBackToHdfsForStatsEnabled
 
 [spark.sql.statistics.fallBackToHdfs](configuration-properties.md#spark.sql.statistics.fallBackToHdfs)
 
 Used when `DetermineTableStats` logical resolution rule is executed.
+
+## <span id="fastHashAggregateRowMaxCapacityBit"><span id="FAST_HASH_AGGREGATE_MAX_ROWS_CAPACITY_BIT"> fastHashAggregateRowMaxCapacityBit
+
+[spark.sql.codegen.aggregate.fastHashMap.capacityBit](configuration-properties.md#spark.sql.codegen.aggregate.fastHashMap.capacityBit)
 
 ## <span id="FETCH_SHUFFLE_BLOCKS_IN_BATCH"><span id="fetchShuffleBlocksInBatch"> fetchShuffleBlocksInBatch
 

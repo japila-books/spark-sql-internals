@@ -66,8 +66,6 @@ Default: `true`
 
 Use [SQLConf.decorrelateInnerQueryEnabled](SQLConf.md#decorrelateInnerQueryEnabled) for the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled"> spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled
 
 When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`, Spark SQL will optimize the skewed shuffle partitions in RebalancePartitions and split them to smaller ones according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid data skew
@@ -76,7 +74,46 @@ Default: `true`
 
 Use [SQLConf.ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED](SQLConf.md#ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED) method to access the property (in a type-safe way)
 
-Since: `3.2.0`
+## <span id="spark.sql.codegen.aggregate.fastHashMap.capacityBit"> spark.sql.codegen.aggregate.fastHashMap.capacityBit
+
+**(internal)** Capacity for the max number of rows to be held in memory by the fast hash aggregate product operator.
+The bit is not for actual value, but the actual `numBuckets` is determined by `loadFactor` (e.g., the default bit value `16`, the actual numBuckets is `((1 << 16) / 0.5`).
+
+Default: `16`
+
+Must be in the range of `[10, 30]` (inclusive)
+
+Use [SQLConf.fastHashAggregateRowMaxCapacityBit](SQLConf.md#fastHashAggregateRowMaxCapacityBit) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
+
+## <span id="spark.sql.codegen.aggregate.map.twolevel.enabled"> spark.sql.codegen.aggregate.map.twolevel.enabled
+
+**(internal)** Enable two-level aggregate hash map.
+When enabled, records will first be inserted/looked-up at a 1st-level, small, fast map, and then fallback to a 2nd-level, larger, slower map when 1st level is full or keys cannot be found.
+When disabled, records go directly to the 2nd level.
+
+Default: `true`
+
+Use [SQLConf.enableTwoLevelAggMap](SQLConf.md#enableTwoLevelAggMap) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
+
+## <span id="spark.sql.codegen.aggregate.map.vectorized.enable"> spark.sql.codegen.aggregate.map.vectorized.enable
+
+**(internal)** Enables vectorized aggregate hash map. For testing/benchmarking only.
+
+Default: `false`
+
+Use [SQLConf.enableVectorizedHashMap](SQLConf.md#enableVectorizedHashMap) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [enableTwoLevelHashMap](physical-operators/HashAggregateExec.md#enableTwoLevelHashMap), [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
 
 ## <span id="spark.sql.codegen.aggregate.map.twolevel.partialOnly"> spark.sql.codegen.aggregate.map.twolevel.partialOnly
 
