@@ -255,18 +255,6 @@ write: DataFrameWriter[T]
 
 `write` creates a [DataFrameWriter](DataFrameWriter.md) for this `Dataset`.
 
-## <span id="collectToPython"> collectToPython
-
-```scala
-collectToPython(): Array[Any]
-```
-
-`collectToPython`...FIXME
-
-`collectToPython` is used when:
-
-* `DataFrame` (PySpark) is requested to `collect`
-
 ## <span id="withTypedPlan"> withTypedPlan
 
 ```scala
@@ -305,6 +293,67 @@ apply[T: Encoder](
 
 * `Dataset` is requested to [withTypedPlan](#withTypedPlan) and [withSetOperator](#withSetOperator)
 
+## <span id="withAction"> Executing Action Under New Execution ID
+
+```scala
+withAction[U](
+  name: String,
+  qe: QueryExecution)(
+  action: SparkPlan => U)
+```
+
+`withAction` [creates a new execution ID](SQLExecution.md#withNewExecutionId) to execute the given `action` with the [optimized physical query plan](QueryExecution.md#executedPlan) (of the given [QueryExecution](QueryExecution.md)).
+
+`withAction` [resets the performance metrics](physical-operators/SparkPlan.md#resetMetrics).
+
+---
+
+`withAction` is used to execute the following `Dataset` actions:
+
+Action | Name
+-------|-----
+ [isEmpty](#isEmpty) | `isEmpty`
+ [checkpoint](#checkpoint) | `checkpoint` or `localCheckpoint`
+ [head](#head) | `head`
+ [tail](#tail) | `tail`
+ [collect](#collect) | `collect`
+ [collectAsList](#collectAsList) | `collectAsList`
+ [toLocalIterator](#toLocalIterator) | `toLocalIterator`
+ [count](#count) | `count`
+ [collectToPython](#collectToPython) | `collectToPython`
+ [tailToPython](#tailToPython) | `tailToPython`
+ [collectAsArrowToR](#collectAsArrowToR) | `collectAsArrowToR`
+ [collectAsArrowToPython](#collectAsArrowToPython) | `collectAsArrowToPython`
+
+## <span id="collectAsArrowToPython"> collectAsArrowToPython
+
+```scala
+collectAsArrowToPython: Array[Any]
+```
+
+`collectAsArrowToPython`...FIXME
+
+---
+
+`collectAsArrowToPython` is used when:
+
+* `PandasConversionMixin` ([PySpark]({{ book.pyspark }}/sql/PandasConversionMixin#_collect_as_arrow)) is requested to `_collect_as_arrow`
+
+## <span id="collectToPython"> collectToPython
+
+```scala
+collectToPython(): Array[Any]
+```
+
+`collectToPython`...FIXME
+
+---
+
+`collectToPython` is used when:
+
+* `DataFrame` ([PySpark]({{ book.pyspark }}/sql/DataFrame#collect)) is requested to `collect`
+
+<!---
 ## Review Me
 
 Datasets are _lazy_ and structured query operators and expressions are only triggered when an action is invoked.
@@ -577,30 +626,6 @@ withNewExecutionId[U](body: => U): U
 
 NOTE: `withNewExecutionId` sets a unique execution id so that all Spark jobs belong to the `Dataset` action execution.
 
-=== [[withAction]] Executing Action Under New Execution ID -- `withAction` Internal Method
-
-[source, scala]
-----
-withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U)
-----
-
-`withAction` requests `QueryExecution` for the [optimized physical query plan](QueryExecution.md#executedPlan) and SparkPlan.md[resets the metrics] of every physical operator (in the physical plan).
-
-`withAction` requests `SQLExecution` to [execute](SQLExecution.md#withNewExecutionId) the input `action` with the executable physical plan (tracked under a new execution id).
-
-In the end, `withAction` notifies `ExecutionListenerManager` that the `name` action has finished ExecutionListenerManager.md#onSuccess[successfully] or ExecutionListenerManager.md#onFailure[with an exception].
-
-NOTE: `withAction` uses <<sparkSession, SparkSession>> to access SparkSession.md#listenerManager[ExecutionListenerManager].
-
-[NOTE]
-====
-`withAction` is used when `Dataset` is requested for the following:
-
-* <<logicalPlan, Computing the logical plan>> (and executing a Command.md[logical command] or their `Union`)
-
-* Dataset operators: <<spark-sql-dataset-operators.md#collect, collect>>, <<spark-sql-dataset-operators.md#count, count>>, <<spark-sql-dataset-operators.md#head, head>> and <<spark-sql-dataset-operators.md#toLocalIterator, toLocalIterator>>
-====
-
 === [[collectFromPlan]] Collecting All Rows From Spark Plan -- `collectFromPlan` Internal Method
 
 [source, scala]
@@ -668,3 +693,4 @@ NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/curren
 === [[i-want-more]] Further Reading and Watching
 
 * (video) https://youtu.be/i7l3JQRx7Qw[Structuring Spark: DataFrames, Datasets, and Streaming]
+-->
