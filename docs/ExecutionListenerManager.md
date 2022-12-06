@@ -1,30 +1,35 @@
 # ExecutionListenerManager
 
-`ExecutionListenerManager` is the [management interface](#management-interface) for Spark developers to manage session-bound [QueryExecutionListener](QueryExecutionListener.md)s.
+`ExecutionListenerManager` is a frontend (_facade_) of [ExecutionListenerBus](#listenerBus) to manage [QueryExecutionListener](QueryExecutionListener.md)s (in a [SparkSession](#session)).
 
-## Management Interface
+## Creating Instance
 
-### <span id="clear"> Removing All QueryExecutionListeners
+`ExecutionListenerManager` takes the following to be created:
 
-```scala
-clear(): Unit
-```
+* <span id="session"> [SparkSession](SparkSession.md)
+* <span id="sqlConf"> [SQLConf](SQLConf.md)
+* [loadExtensions](#loadExtensions) flag
 
-### <span id="register"> Registering QueryExecutionListener
+`ExecutionListenerManager` is created when:
 
-```scala
-register(
-  listener: QueryExecutionListener): Unit
-```
+* `BaseSessionStateBuilder` is requested for the session [ExecutionListenerManager](BaseSessionStateBuilder.md#listenerManager) (while `SessionState` is [built](BaseSessionStateBuilder.md#build))
+* `ExecutionListenerManager` is requested to [clone](#clone)
 
-### <span id="unregister"> De-registering QueryExecutionListener
+## <span id="listenerBus"> ExecutionListenerBus
 
-```scala
-unregister(
-  listener: QueryExecutionListener): Unit
-```
+`ExecutionListenerManager` creates an [ExecutionListenerBus](ExecutionListenerBus.md) when [created](#creating-instance) with the following:
 
-## <span id="listenerManager"> SparkSession
+* This `ExecutionListenerManager`
+* [SparkSession](#session)
+
+The `ExecutionListenerBus` is used for the following:
+
+* [Register a QueryExecutionListener](#register)
+* [Unregister a QueryExecutionListener](#unregister)
+* [Unregister all QueryExecutionListeners](#clear)
+* [clone](#clone)
+
+## <span id="listenerManager"> Accessing ExecutionListenerManager
 
 `ExecutionListenerManager` is available as [SparkSession.listenerManager](SparkSession.md#listenerManager) (and [SessionState.listenerManager](SessionState.md#listenerManager)).
 
@@ -38,54 +43,40 @@ scala> :type spark.sessionState.listenerManager
 org.apache.spark.sql.util.ExecutionListenerManager
 ```
 
-## <span id="loadExtensions"><span id="spark.sql.queryExecutionListeners"> loadExtensions Flag and spark.sql.queryExecutionListeners
+## <span id="loadExtensions"><span id="spark.sql.queryExecutionListeners"> spark.sql.queryExecutionListeners
 
 `ExecutionListenerManager` is given `loadExtensions` flag when [created](#creating-instance).
 
 When enabled, `ExecutionListenerManager` [registers](#register) the [QueryExecutionListener](QueryExecutionListener.md)s that are configured using the [spark.sql.queryExecutionListeners](StaticSQLConf.md#spark.sql.queryExecutionListeners) configuration property.
 
-## Creating Instance
-
-`ExecutionListenerManager` takes the following to be created:
-
-* <span id="session"> [SparkSession](SparkSession.md)
-* [loadExtensions](#loadExtensions) flag
-
-`ExecutionListenerManager` is created when:
-
-* `BaseSessionStateBuilder` is requested for the session-bound [ExecutionListenerManager](BaseSessionStateBuilder.md#listenerManager) (while `SessionState` is [built](BaseSessionStateBuilder.md#build))
-
-## <span id="onSuccess"> onSuccess
+## <span id="clear"> Removing All QueryExecutionListeners
 
 ```scala
-onSuccess(
-  funcName: String,
-  qe: QueryExecution,
-  duration: Long): Unit
+clear(): Unit
 ```
 
-`onSuccess`...FIXME
-
-`onSuccess` is used when:
-
-* `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has finished with no exceptions)
-* `Dataset` is requested to [withAction](Dataset.md#withAction)
-
-## <span id="onFailure"> onFailure
+## <span id="register"> Registering QueryExecutionListener
 
 ```scala
-onFailure(
-  funcName: String,
-  qe: QueryExecution,
-  exception: Exception): Unit
+register(
+  listener: QueryExecutionListener): Unit
 ```
 
-`onFailure`...FIXME
+`register` requests the [ExecutionListenerBus](#listenerBus) to register the given [QueryExecutionListener](QueryExecutionListener.md).
 
-`onFailure` is used when:
+---
 
-* `DataFrameWriter` is requested to [run a logical command](DataFrameWriter.md#runCommand) (after it has reported an exception)
-* `Dataset` is requested to [withAction](Dataset.md#withAction)
+`register` is used when:
+
+* `Observation` is requested to [register](Observation.md#register)
+* `ExecutionListenerManager` is [created](#creating-instance) and [cloned](#clone)
+
+## <span id="unregister"> De-registering QueryExecutionListener
+
+```scala
+unregister(
+  listener: QueryExecutionListener): Unit
+```
 
 ## Logging
 

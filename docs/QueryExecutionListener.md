@@ -1,11 +1,35 @@
 # QueryExecutionListener
 
-`QueryExecutionListener` is...FIXME
+`QueryExecutionListener` is an [abstraction](#contract) of [query execution listeners](#implementations) that can intercept [onFailure](#onFailure) and [onSuccess](#onSuccess) events.
 
- that listen for execution metrics:
+## Contract
 
-* Name of the action (that triggered a query execution)
+### <span id="onFailure"> onFailure
 
-* [QueryExecution](QueryExecution.md)
+```scala
+onFailure(
+  funcName: String,
+  qe: QueryExecution,
+  exception: Exception): Unit
+```
 
-* Execution time of this query (in nanoseconds)
+Used when:
+
+* `ExecutionListenerBus` is requested to [doPostEvent](ExecutionListenerBus.md#doPostEvent)
+
+### <span id="onSuccess"> onSuccess
+
+```scala
+onSuccess(
+  funcName: String,
+  qe: QueryExecution,
+  durationNs: Long): Unit
+```
+
+Used when:
+
+* `ExecutionListenerBus` is requested to [doPostEvent](ExecutionListenerBus.md#doPostEvent)
+
+## Implementations
+
+* `ObservationListener`

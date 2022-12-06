@@ -40,4 +40,4 @@ The following `SparkListener`s intercepts `SparkListenerSQLExecutionEnd`s:
 
 ## QueryExecutionListeners
 
-`SparkListenerSQLExecutionEnd` is posted to [QueryExecutionListener](../QueryExecutionListener.md)s using `ExecutionListenerBus`.
+`SparkListenerSQLExecutionEnd` is posted to [QueryExecutionListener](../QueryExecutionListener.md)s using [ExecutionListenerBus](../ExecutionListenerBus.md).

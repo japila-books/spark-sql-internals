@@ -73,9 +73,6 @@ plugins:
       minify_html: true
   - awesome-pages
   - macros
-  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/
-  - tags:
-      tags_file: tags.md
 
 extra:
   analytics:
@@ -124,7 +121,6 @@ nav:
   - Home: index.md
   - Internals:
     - Overview: overview.md
-    - Tags: tags.md
     - Configuration Properties: configuration-properties.md
     - CatalogStatistics: CatalogStatistics.md
     - DataSource: DataSource.md
@@ -210,6 +206,9 @@ nav:
         - Catalogs: connector/catalog/Catalogs.md
         - CatalogV2Util: connector/catalog/CatalogV2Util.md
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
+    - ExecutionListenerBus: ExecutionListenerBus.md
+    - ExecutionListenerManager: ExecutionListenerManager.md
+    - Observation: Observation.md
     - Query Execution:
       - query-execution/index.md
       - Logical Analyzer: Analyzer.md
@@ -951,7 +950,6 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
-    - ExecutionListenerManager: ExecutionListenerManager.md
     - QueryExecutionListener: QueryExecutionListener.md
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
