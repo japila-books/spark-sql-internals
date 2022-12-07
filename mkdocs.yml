@@ -978,6 +978,7 @@ nav:
     - SQLTab: ui/SQLTab.md
   - Demos:
     - demo/index.md
+    - Spilling: demo/spilling.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
     - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
