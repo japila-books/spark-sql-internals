@@ -1,6 +1,6 @@
-# SortExec Unary Physical Operator
+# SortExec Physical Operator
 
-`SortExec` is a [unary physical operator](UnaryExecNode.md) (that, among other use cases, represents [Sort](../logical-operators/Sort.md) logical operators at execution).
+`SortExec` is a [unary physical operator](UnaryExecNode.md) that (most importantly) represents [Sort](../logical-operators/Sort.md) logical operator at execution.
 
 ## Creating Instance
 
@@ -9,7 +9,7 @@
 * <span id="sortOrder"> [SortOrder](../expressions/SortOrder.md) expressions
 * <span id="global"> `global` flag
 * <span id="child"> Child [physical operator](SparkPlan.md)
-* <span id="testSpillFrequency"> `testSpillFrequency` (default: `0`)
+* <span id="testSpillFrequency"> `testSpillFrequency`
 
 `SortExec` is created when:
 
@@ -19,11 +19,15 @@
 
 ## <span id="metrics"> Performance Metrics
 
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
- peakMemory     | peak memory             |
- sortTime       | sort time               |
- spillSize      | spill size              |
+### <span id="peakMemory"> peak memory
+
+### <span id="sortTime"> sort time
+
+### <span id="spillSize"> spill size
+
+Number of in-memory bytes spilled by this operator at [execution](#doExecute) (while an [UnsafeExternalRowSorter](#createSorter) was [sorting](../UnsafeExternalRowSorter.md#sort) the rows in a partition)
+
+The `spill size` metric is computed using `TaskMetrics` ([Spark Core]({{ book.spark_core }}/executor/TaskMetrics#memoryBytesSpilled)) and is a difference of the metric before and after [sorting](../UnsafeExternalRowSorter.md#sort).
 
 ## <span id="enableRadixSort"><span id="spark.sql.sort.enableRadixSort"> Radix Sort
 
@@ -73,11 +77,39 @@ requiredChildDistribution: Seq[Distribution]
 createSorter(): UnsafeExternalRowSorter
 ```
 
-`createSorter`...FIXME
+`createSorter` [creates a BaseOrdering](../expressions/RowOrdering.md#create) for the [sortOrders](#sortOrder) and the [output schema](#output).
+
+`createSorter` uses [spark.sql.sort.enableRadixSort](../configuration-properties.md#spark.sql.sort.enableRadixSort) configuration property to enable radix sort when possible.
+
+??? note "Radix Sort, Sort Order and Supported Data Types"
+    Radix sort can be used when there is exactly one [sortOrder](#sortOrder) that can be satisfied (based on the data type) with a radix sort on the prefix.
+
+    The following data types are supported:
+
+    * `AnsiIntervalType`
+    * `BooleanType`
+    * `ByteType`
+    * `DateType`
+    * `DecimalType` (up to `18` precision digits)
+    * `DoubleType`
+    * `FloatType`
+    * `IntegerType`
+    * `LongType`
+    * `ShortType`
+    * `TimestampNTZType`
+    * `TimestampType`
+
+`createSorter` [creates an UnsafeExternalRowSorter](../UnsafeExternalRowSorter.md#create) with the following:
+
+* `spark.buffer.pageSize` (default: `64MB`) for a page size
+* Whether radix sort can be used
+* _others_
+
+---
 
 `createSorter` is used when:
 
-* `SortExec` is requested to [execute](#doExecute)
+* `SortExec` is [executed](#doExecute) (one per partition)
 * `FileFormatWriter` utility is used to [write out a query result](../datasources/FileFormatWriter.md#write)
 
 ## Demo

@@ -984,6 +984,7 @@ nav:
     - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
   - Misc:
     - PushDownUtils: PushDownUtils.md
+    - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md
     - BindReferences: BindReferences.md
     - IntervalUtils: IntervalUtils.md
     - ExplainUtils: ExplainUtils.md
