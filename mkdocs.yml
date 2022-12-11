@@ -73,6 +73,8 @@ plugins:
       minify_html: true
   - awesome-pages
   - macros
+  # https://squidfunk.github.io/mkdocs-material/reference/#built-in-meta-plugin
+  - meta
 
 extra:
   analytics:
