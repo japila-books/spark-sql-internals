@@ -192,22 +192,6 @@ nav:
       - PrunedScan: PrunedScan.md
       - TableScan: TableScan.md
       - Filter: Filter.md
-    - Catalog Plugin API:
-      - CatalogManager: connector/catalog/CatalogManager.md
-      - CatalogPlugin: connector/catalog/CatalogPlugin.md
-      - CatalogHelper: connector/catalog/CatalogHelper.md
-      - CatalogExtension: connector/catalog/CatalogExtension.md
-      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
-      - FunctionCatalog: connector/catalog/FunctionCatalog.md
-      - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
-      - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
-      - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
-      - TableCatalog: connector/catalog/TableCatalog.md
-      - TableChange: connector/catalog/TableChange.md
-      - Utilities:
-        - Catalogs: connector/catalog/Catalogs.md
-        - CatalogV2Util: connector/catalog/CatalogV2Util.md
-      - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - ExecutionListenerBus: ExecutionListenerBus.md
     - ExecutionListenerManager: ExecutionListenerManager.md
     - Observation: Observation.md
@@ -734,6 +718,22 @@ nav:
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
       - Demo: adaptive-query-execution/demo.md
     - Bucketing: bucketing.md
+    - Catalog Plugin API:
+      - connector/catalog/index.md
+      - CatalogExtension: connector/catalog/CatalogExtension.md
+      - CatalogHelper: connector/catalog/CatalogHelper.md
+      - CatalogManager: connector/catalog/CatalogManager.md
+      - CatalogPlugin: connector/catalog/CatalogPlugin.md
+      - Catalogs: connector/catalog/Catalogs.md
+      - CatalogV2Util: connector/catalog/CatalogV2Util.md
+      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
+      - FunctionCatalog: connector/catalog/FunctionCatalog.md
+      - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
+      - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
+      - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
+      - TableCatalog: connector/catalog/TableCatalog.md
+      - TableChange: connector/catalog/TableChange.md
+      - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Common Table Expressions: common-table-expressions.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md

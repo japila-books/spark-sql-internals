@@ -105,7 +105,7 @@ If the key has not been found (is not defined at the key's position), `getAggreg
 
 `getAggregationBufferFromUnsafeRow` is used when:
 
-* `TungstenAggregationIterator` is requested to [process the input rows](physical-operators/TungstenAggregationIterator.md#processInputs)
+* `TungstenAggregationIterator` is requested to [process input rows](physical-operators/TungstenAggregationIterator.md#processInputs)
 
 ## <span id="currentAggregationBuffer"> currentAggregationBuffer
 

@@ -1,6 +1,6 @@
 # CatalogPlugin
 
-`CatalogPlugin` is an [abstraction](#contract) of [external table catalogs](#implementations).
+`CatalogPlugin` is an [abstraction](#contract) of [table catalogs](#implementations).
 
 !!! note "Demo: Developing CatalogPlugin"
     Learn more in [Demo: Developing CatalogPlugin](../../demo/developing-catalogplugin.md).
@@ -32,6 +32,11 @@ void initialize(
   CaseInsensitiveStringMap options)
 ```
 
+Initializes this `CatalogPlugin` with the following:
+
+* Name that was used in `spark.sql.catalog.[name]` configuration property
+* `spark.sql.catalog.[name].`-prefixed case-insensitive options
+
 Used when:
 
 * `Catalogs` utility is used to [load a catalog by name](Catalogs.md#load)
@@ -47,5 +52,6 @@ String name()
 
 ## Implementations
 
+* [FunctionCatalog](FunctionCatalog.md)
 * [SupportsNamespaces](SupportsNamespaces.md)
 * [TableCatalog](TableCatalog.md)
