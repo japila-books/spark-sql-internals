@@ -9,144 +9,54 @@ The demo shows the internals of [CatalogPlugin](../connector/catalog/CatalogPlug
 
 ## Demo CatalogPlugin
 
-### Project Configuration
+Find the sources of a demo `CatalogPlugin` in the [GitHub repo](https://github.com/jaceklaskowski/spark-examples).
 
-Use the following `build.sbt` for the necessary dependencies.
+Build the project using `sbt publishLocal` (so it's available on your local machine).
 
-```scala
-name := "spark-sql-demo-catalog-plugin"
-organization := "pl.japila.spark.sql"
+## Install Demo CatalogPlugin (Spark Shell)
 
-version := "0.1"
-
-scalaVersion := "2.12.12"
-
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.0.1" % Provided
+```console
+./bin/spark-shell \
+  --packages pl.japila.spark:spark-examples_2.13:1.0.0-SNAPSHOT \
+  --conf spark.sql.catalog.demo=pl.japila.spark.sql.DemoCatalog \
+  --conf spark.sql.catalog.demo.use-thing=true \
+  --conf spark.sql.catalog.demo.delete-supported=false
 ```
 
-### Code
+!!! tip "SET"
 
-!!! tip
-    Use `:paste -raw` in `spark-shell` to enter paste mode and paste the code (incl. the package declaration).
+    You could instead use the following at runtime:
 
-    ```text
-    :paste -raw
+    ```scala
+    sql("SET spark.sql.catalog.demo=pl.japila.spark.sql.DemoCatalog")
     ```
 
-```scala
-package pl.japila.spark.sql
-
-import org.apache.spark.sql.connector.catalog._
-import org.apache.spark.sql.connector.expressions.Transform
-import org.apache.spark.sql.types.StructType
-import org.apache.spark.sql.util.CaseInsensitiveStringMap
-
-import java.util.{Map => JMap}
-
-class DemoCatalog
-    extends CatalogPlugin
-    with TableCatalog
-    with SupportsNamespaces {
-
-  val Success = true
-
-  override def name(): String = DemoCatalog.NAME
-
-  override def defaultNamespace(): Array[String] = {
-    val ns = super.defaultNamespace()
-    println(s"defaultNamespace = ${ns.toSeq}")
-    ns
-  }
-
-  override def initialize(name: String, options: CaseInsensitiveStringMap): Unit = {
-    import scala.collection.JavaConverters._
-    println(s">>> initialize($name, ${options.asScala})")
-  }
-
-
-  override def listNamespaces(): Array[Array[String]] = {
-    println(">>> listNamespaces()")
-    Array.empty
-  }
-
-  override def listNamespaces(namespace: Array[String]): Array[Array[String]] = {
-    println(s">>> listNamespaces($namespace)")
-    Array.empty
-  }
-
-  override def loadNamespaceMetadata(namespace: Array[String]): JMap[String, String] = {
-    println(s">>> loadNamespaceMetadata(${namespace.toSeq})")
-    import scala.collection.JavaConverters._
-    Map.empty[String, String].asJava
-  }
-
-  override def createNamespace(namespace: Array[String], metadata: JMap[String, String]): Unit = {
-    import scala.collection.JavaConverters._
-    println(s">>> createNamespace($namespace, ${metadata.asScala})")
-  }
-
-  override def alterNamespace(namespace: Array[String], changes: NamespaceChange*): Unit = {
-    println(s">>> alterNamespace($namespace, $changes)")
-  }
-
-  override def dropNamespace(namespace: Array[String]): Boolean = {
-    println(s">>> dropNamespace($namespace)")
-    Success
-  }
-
-  override def listTables(namespace: Array[String]): Array[Identifier] = {
-    println(s">>> listTables(${namespace.toSeq})")
-    Array.empty
-  }
-
-  override def loadTable(ident: Identifier): Table = {
-    println(s">>> loadTable($ident)")
-    ???
-  }
-
-  override def createTable(
-      ident: Identifier,
-      schema: StructType,
-      partitions: Array[Transform],
-      properties: JMap[String, String]): Table = {
-    import scala.collection.JavaConverters._
-    println(s">>> createTable($ident, $schema, $partitions, ${properties.asScala})")
-    ???
-  }
-
-  override def alterTable(ident: Identifier, changes: TableChange*): Table = {
-    println(s">>> alterTable($ident, $changes)")
-    ???
-  }
-
-  override def dropTable(ident: Identifier): Boolean = {
-    println(s">>> dropTable($ident)")
-    Success
-  }
-
-  override def renameTable(oldIdent: Identifier, newIdent: Identifier): Unit = {
-    println(s">>> renameTable($oldIdent, $newIdent)")
-  }
-
-  override def toString = s"${this.getClass.getCanonicalName}($name)"
-}
-
-object DemoCatalog {
-  val NAME = "demo"
-}
-```
-
-## Configure SparkSession
-
-Let's "install" this custom `CatalogPlugin` in the current [SparkSession](../SparkSession.md).
-
-There are various ways to do it and `SET` SQL command is as fine as the others (for the demo at least).
-
-```scala
-sql("SET spark.sql.catalog.demo=pl.japila.spark.sql.DemoCatalog")
-```
-
 ## Show Time
+
+```scala
+sql("SHOW CATALOGS").show(truncate = false)
+```
+
+```text
+scala> sql("SET CATALOG demo")
+>>> initialize(demo, Map(use-thing -> true, delete-supported -> false))
+```
+
+```text
+scala> sql("SHOW NAMESPACES IN demo_db").show(false)
+defaultNamespace=<EMPTY>
+>>> listNamespaces(namespace=ArraySeq(demo_db))
+defaultNamespace=<EMPTY>
++---------+
+|namespace|
++---------+
++---------+
+```
+
+```sql
+-- FIXME Make it work
+SELECT * FROM demo_db.demo_schema.demo_table LIMIT 10
+```
 
 ### Access Demo Catalog using CatalogManager
 
@@ -159,35 +69,40 @@ val demo = spark.sessionState.catalogManager.catalog("demo")
 ```text
 scala> val demo = spark.sessionState.catalogManager.catalog("demo")
 >>> initialize(demo, Map())
-demo: org.apache.spark.sql.connector.catalog.CatalogPlugin = pl.japila.spark.sql.DemoCatalog(demo)
-```
-
-```scala
-demo.defaultNamespace
 ```
 
 ```text
-scala> demo.defaultNamespace
-defaultNamespace = WrappedArray()
-res1: Array[String] = Array()
+demo.defaultNamespace
 ```
 
 ### Show Tables
 
 Let's use `SHOW TABLES` SQL command to show the tables in the demo catalog.
 
+```text
+scala> sql("SHOW TABLES IN demo").show(truncate = false)
+defaultNamespace=<EMPTY>
+>>> listTables(ArraySeq())
+defaultNamespace=<EMPTY>
++---------+---------+-----------+
+|namespace|tableName|isTemporary|
++---------+---------+-----------+
++---------+---------+-----------+
+```
+
+### Create Namespace
+
 ```scala
-sql("SHOW TABLES IN demo").show(truncate = false)
+sql("CREATE NAMESPACE IF NOT EXISTS demo.hello").show(truncate = false)
 ```
 
 ```text
-scala> sql("SHOW TABLES IN demo").show(truncate = false)
->>> initialize(demo, Map())
->>> listTables(WrappedArray())
-+---------+---------+
-|namespace|tableName|
-+---------+---------+
-+---------+---------+
+scala> sql("CREATE NAMESPACE IF NOT EXISTS demo.hello").show(truncate = false)
+>>> loadNamespaceMetadata(WrappedArray(hello))
+++
+||
+++
+++
 ```
 
 ### Show Namespaces
@@ -205,21 +120,6 @@ scala> sql("SHOW NAMESPACES IN demo").show(truncate = false)
 |namespace|
 +---------+
 +---------+
-```
-
-### Create Namespace
-
-```scala
-sql("CREATE NAMESPACE IF NOT EXISTS demo.hello").show(truncate = false)
-```
-
-```text
-scala> sql("CREATE NAMESPACE IF NOT EXISTS demo.hello").show(truncate = false)
->>> loadNamespaceMetadata(WrappedArray(hello))
-++
-||
-++
-++
 ```
 
 ### Append Data to Table

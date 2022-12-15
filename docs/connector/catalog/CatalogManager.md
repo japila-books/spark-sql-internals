@@ -93,7 +93,12 @@ setCurrentCatalog(
 
 Only if the names are different, `setCurrentCatalog` makes it [_currentCatalogName](#_currentCatalogName) and "resets" [_currentNamespace](#_currentNamespace) (`None`). In the end, `setCurrentCatalog` requests the [SessionCatalog](#v1SessionCatalog) to [setCurrentDatabase](../../SessionCatalog.md#setCurrentDatabase) as [default](../../SessionCatalog.md#DEFAULT_DATABASE).
 
-`setCurrentCatalog` is used when [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed.
+---
+
+`setCurrentCatalog` is used when:
+
+* `SetCatalogCommand` logical command is executed
+* [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed
 
 ## <span id="catalog"> Finding CatalogPlugin by Name
 
