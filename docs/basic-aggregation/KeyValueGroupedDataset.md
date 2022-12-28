@@ -2,7 +2,17 @@
 
 `KeyValueGroupedDataset` is an interface for **Typed Grouping** to calculate aggregates over groups of objects in a typed [Dataset](../Dataset.md).
 
-!!! note
+`KeyValueGroupedDataset` represents a **grouped dataset** as a result of [Dataset.groupByKey](../Dataset.md#groupByKey) operator (that aggregates records by a grouping function).
+
+```text
+// Dataset[T]
+groupByKey(
+  func: T => K): KeyValueGroupedDataset[K, T]
+```
+
+`KeyValueGroupedDataset` works for batch and [streaming](#spark-structured-streaming) aggregations.
+
+??? note "RelationalGroupedDataset"
     [RelationalGroupedDataset](RelationalGroupedDataset.md) is used for untyped `Row`-based aggregates.
 
 ## Creating Instance
@@ -42,4 +52,26 @@ flatMapGroupsWithState[S: Encoder, U: Encoder](
 
 ```text
 The output mode of function should be append or update
+```
+
+## Spark Structured Streaming
+
+`KeyValueGroupedDataset` can be used in streaming queries in Spark Structured Streaming:
+
+* [Streaming Aggregation]({{ book.structured_streaming }}/streaming-aggregation)
+* [Arbitrary Stateful Streaming Aggregation]({{ book.structured_streaming }}/arbitrary-stateful-streaming-aggregation)
+
+## Demo
+
+```text
+import java.sql.Timestamp
+val numGroups = spark.
+  readStream.
+  format("rate").
+  load.
+  as[(Timestamp, Long)].
+  groupByKey { case (time, value) => value % 2 }
+
+scala> :type numGroups
+org.apache.spark.sql.KeyValueGroupedDataset[Long,(java.sql.Timestamp, Long)]
 ```
