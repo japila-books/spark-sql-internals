@@ -2,17 +2,6 @@
 
 `DataWritingCommand` is an [extension](#contract) of the `UnaryCommand` abstraction for [logical commands](#implementations) that write the result of executing [query](#query) (_query data_) to a relation (when [executed](#run)).
 
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
- numFiles       | number of written files |
- numOutputBytes | bytes of written output |
- numOutputRows  | number of output rows   |
- numParts       | number of dynamic part  |
- taskCommitTime | task commit time        |
- jobCommitTime  | job commit time         |
-
 ## Contract
 
 ### <span id="outputColumnNames"> Output Column Names
@@ -59,6 +48,26 @@ Used when:
 * `CreateHiveTableAsSelectBase`
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 * [SaveAsHiveFile](../hive/SaveAsHiveFile.md)
+
+## <span id="metrics"> Performance Metrics
+
+![DataWritingCommand's Performance Metrics](../images/DataWritingCommand-metrics.png)
+
+### <span id="jobCommitTime"> job commit time
+
+### <span id="numParts"> number of dynamic part
+
+[Number of partitions](../datasources/BasicWriteTaskStats.md#partitions) (when [processing write job statistics](../datasources/BasicWriteJobStatsTracker.md#processStats))
+
+Corresponds to the number of times when [newPartition](../datasources/BasicWriteTaskStatsTracker.md#newPartition) of [BasicWriteTaskStatsTracker](../datasources/BasicWriteTaskStatsTracker.md) was called (that is to announce the fact that a new partition is about to be written)
+
+### <span id="numOutputRows"> number of output rows
+
+### <span id="numFiles"> number of written files
+
+### <span id="taskCommitTime"> task commit time
+
+### <span id="numOutputBytes"> written output
 
 ## Execution Planning
 

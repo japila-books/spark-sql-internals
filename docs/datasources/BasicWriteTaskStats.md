@@ -1,11 +1,16 @@
 # BasicWriteTaskStats
 
-[[creating-instance]]
-`BasicWriteTaskStats` is a basic [WriteTaskStats](WriteTaskStats.md) that carries the following statistics:
+`BasicWriteTaskStats` is a [WriteTaskStats](WriteTaskStats.md).
 
-* [[numPartitions]] `numPartitions`
-* [[numFiles]] `numFiles`
-* [[numBytes]] `numBytes`
-* [[numRows]] `numRows`
+## Creating Instance
 
-`BasicWriteTaskStats` is <<creating-instance, created>> exclusively when `BasicWriteTaskStatsTracker` is requested for [getFinalStats](BasicWriteTaskStatsTracker.md#getFinalStats).
+`BasicWriteTaskStats` takes the following to be created:
+
+* <span id="partitions"> Partitions (`Seq[InternalRow]`)
+* <span id="numFiles"> Number of files
+* <span id="numBytes"> Number of bytes
+* <span id="numRows"> Number of rows
+
+`BasicWriteTaskStats` is created when:
+
+* `BasicWriteTaskStatsTracker` is requested for [getFinalStats](BasicWriteTaskStatsTracker.md#getFinalStats)
