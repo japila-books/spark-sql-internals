@@ -67,24 +67,39 @@ run(
   child: SparkPlan): Seq[Row]
 ```
 
-`run` uses the [spark.sql.hive.manageFilesourcePartitions](../SQLConf.md#manageFilesourcePartitions) configuration property to...FIXME
+`run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.
 
-CAUTION: FIXME When is the `catalogTable` defined?
+---
 
-CAUTION: FIXME When is `tracksPartitionsInCatalog` of `CatalogTable` enabled?
+`run` creates a new Hadoop `Configuration` with the [options](#options) and resolves the [outputPath](#outputPath).
 
-`run` gets the [partitionOverwriteMode](#partitionOverwriteMode) option...FIXME
+`run` uses the following to determine whether partitions are tracked by a catalog (`partitionsTrackedByCatalog`):
 
-`run` uses `FileCommitProtocol` utility to instantiate a committer based on the [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) and the [outputPath](#outputPath), the [dynamicPartitionOverwrite](#dynamicPartitionOverwrite), and random `jobId`.
+* [spark.sql.hive.manageFilesourcePartitions](../SQLConf.md#manageFilesourcePartitions) configuration property
+* [catalogTable](#catalogTable) is defined with the [partitionColumnNames](../CatalogTable.md#partitionColumnNames) and [tracksPartitionsInCatalog](../CatalogTable.md#tracksPartitionsInCatalog) flag enabled
 
-For insertion, `run` simply uses the `FileFormatWriter` utility to `write` and then...FIXME (does some table-specific "tasks").
+??? note "FIXME"
+    When is the [catalogTable](#catalogTable) defined?
 
-Otherwise (for non-insertion case), `run` simply prints out the following INFO message to the logs and finishes.
+??? note "FIXME"
+    When is [tracksPartitionsInCatalog](../CatalogTable.md#tracksPartitionsInCatalog) enabled?
+
+With partitions tracked by a catalog, `run`...FIXME
+
+`run` uses `FileCommitProtocol` utility to instantiate a `FileCommitProtocol` based on the [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) with the following:
+
+* Random job ID
+* [outputPath](#outputPath)
+* [dynamicPartitionOverwrite](#dynamicPartitionOverwrite)
+
+For insertion (`doInsertion`), `run`...FIXME
+
+Otherwise (for a non-insertion case), `run` does nothing but prints out the following INFO message to the logs and finishes.
 
 ```text
 Skipping insertion into a relation that already exists.
 ```
 
-`run` makes sure that there are no duplicates in the [outputColumnNames](#outputColumnNames).
+---
 
-`run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.
+`run` makes sure that there are no duplicates in the [outputColumnNames](#outputColumnNames).
