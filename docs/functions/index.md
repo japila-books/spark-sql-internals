@@ -34,7 +34,7 @@ udaf[IN, BUF, OUT](
 
 .26+^.^| [[aggregate-functions]][[agg_funcs]] *Aggregate functions*
 
-| <<spark-sql-aggregate-functions.md#approx_count_distinct, approx_count_distinct>>
+| <<aggregate-functions.md#approx_count_distinct, approx_count_distinct>>
 a| [[approx_count_distinct]]
 
 [source, scala]
@@ -45,7 +45,7 @@ approx_count_distinct(e: Column, rsd: Double): Column
 approx_count_distinct(columnName: String, rsd: Double): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#avg, avg>>
+| <<aggregate-functions.md#avg, avg>>
 a| [[avg]]
 
 [source, scala]
@@ -54,7 +54,7 @@ avg(e: Column): Column
 avg(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#collect_list, collect_list>>
+| <<aggregate-functions.md#collect_list, collect_list>>
 a| [[collect_list]]
 
 [source, scala]
@@ -63,7 +63,7 @@ collect_list(e: Column): Column
 collect_list(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#collect_set, collect_set>>
+| <<aggregate-functions.md#collect_set, collect_set>>
 a| [[collect_set]]
 
 [source, scala]
@@ -72,7 +72,7 @@ collect_set(e: Column): Column
 collect_set(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#corr, corr>>
+| <<aggregate-functions.md#corr, corr>>
 a| [[corr]]
 
 [source, scala]
@@ -81,7 +81,7 @@ corr(column1: Column, column2: Column): Column
 corr(columnName1: String, columnName2: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#count, count>>
+| <<aggregate-functions.md#count, count>>
 a| [[count]]
 
 [source, scala]
@@ -90,7 +90,7 @@ count(e: Column): Column
 count(columnName: String): TypedColumn[Any, Long]
 ----
 
-| <<spark-sql-aggregate-functions.md#countDistinct, countDistinct>>
+| <<aggregate-functions.md#countDistinct, countDistinct>>
 a| [[countDistinct]]
 
 [source, scala]
@@ -99,7 +99,7 @@ countDistinct(expr: Column, exprs: Column*): Column
 countDistinct(columnName: String, columnNames: String*): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#covar_pop, covar_pop>>
+| <<aggregate-functions.md#covar_pop, covar_pop>>
 a| [[covar_pop]]
 
 [source, scala]
@@ -108,7 +108,7 @@ covar_pop(column1: Column, column2: Column): Column
 covar_pop(columnName1: String, columnName2: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#covar_samp, covar_samp>>
+| <<aggregate-functions.md#covar_samp, covar_samp>>
 a| [[covar_samp]]
 
 [source, scala]
@@ -117,7 +117,7 @@ covar_samp(column1: Column, column2: Column): Column
 covar_samp(columnName1: String, columnName2: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#first, first>>
+| <<aggregate-functions.md#first, first>>
 a| [[first]]
 
 [source, scala]
@@ -130,7 +130,7 @@ first(columnName: String, ignoreNulls: Boolean): Column
 
 Returns the first value in a group. Returns the first non-null value when `ignoreNulls` flag on. If all values are null, then returns null.
 
-| <<spark-sql-aggregate-functions.md#grouping, grouping>>
+| <<aggregate-functions.md#grouping, grouping>>
 a| [[grouping]]
 
 [source, scala]
@@ -141,7 +141,7 @@ grouping(columnName: String): Column
 
 Indicates whether a given column is aggregated or not
 
-| <<spark-sql-aggregate-functions.md#grouping_id, grouping_id>>
+| <<aggregate-functions.md#grouping_id, grouping_id>>
 a| [[grouping_id]]
 
 [source, scala]
@@ -152,7 +152,7 @@ grouping_id(colName: String, colNames: String*): Column
 
 Computes the level of grouping
 
-| <<spark-sql-aggregate-functions.md#kurtosis, kurtosis>>
+| <<aggregate-functions.md#kurtosis, kurtosis>>
 a| [[kurtosis]]
 
 [source, scala]
@@ -161,7 +161,7 @@ kurtosis(e: Column): Column
 kurtosis(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#last, last>>
+| <<aggregate-functions.md#last, last>>
 a| [[last]]
 
 [source, scala]
@@ -172,7 +172,7 @@ last(e: Column): Column
 last(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#max, max>>
+| <<aggregate-functions.md#max, max>>
 a| [[max]]
 
 [source, scala]
@@ -181,7 +181,7 @@ max(e: Column): Column
 max(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#mean, mean>>
+| <<aggregate-functions.md#mean, mean>>
 a| [[mean]]
 
 [source, scala]
@@ -190,7 +190,7 @@ mean(e: Column): Column
 mean(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#min, min>>
+| <<aggregate-functions.md#min, min>>
 a| [[min]]
 
 [source, scala]
@@ -199,7 +199,7 @@ min(e: Column): Column
 min(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#skewness, skewness>>
+| <<aggregate-functions.md#skewness, skewness>>
 a| [[skewness]]
 
 [source, scala]
@@ -208,7 +208,7 @@ skewness(e: Column): Column
 skewness(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#stddev, stddev>>
+| <<aggregate-functions.md#stddev, stddev>>
 a| [[stddev]]
 
 [source, scala]
@@ -217,7 +217,7 @@ stddev(e: Column): Column
 stddev(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#stddev_pop, stddev_pop>>
+| <<aggregate-functions.md#stddev_pop, stddev_pop>>
 a| [[stddev_pop]]
 
 [source, scala]
@@ -226,7 +226,7 @@ stddev_pop(e: Column): Column
 stddev_pop(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#stddev_samp, stddev_samp>>
+| <<aggregate-functions.md#stddev_samp, stddev_samp>>
 a| [[stddev_samp]]
 
 [source, scala]
@@ -235,7 +235,7 @@ stddev_samp(e: Column): Column
 stddev_samp(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#sum, sum>>
+| <<aggregate-functions.md#sum, sum>>
 a| [[sum]]
 
 [source, scala]
@@ -244,7 +244,7 @@ sum(e: Column): Column
 sum(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#sumDistinct, sumDistinct>>
+| <<aggregate-functions.md#sumDistinct, sumDistinct>>
 a| [[sumDistinct]]
 
 [source, scala]
@@ -253,7 +253,7 @@ sumDistinct(e: Column): Column
 sumDistinct(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#variance, variance>>
+| <<aggregate-functions.md#variance, variance>>
 a| [[variance]]
 
 [source, scala]
@@ -262,7 +262,7 @@ variance(e: Column): Column
 variance(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#var_pop, var_pop>>
+| <<aggregate-functions.md#var_pop, var_pop>>
 a| [[var_pop]]
 
 [source, scala]
@@ -271,7 +271,7 @@ var_pop(e: Column): Column
 var_pop(columnName: String): Column
 ----
 
-| <<spark-sql-aggregate-functions.md#var_samp, var_samp>>
+| <<aggregate-functions.md#var_samp, var_samp>>
 a| [[var_samp]]
 
 [source, scala]

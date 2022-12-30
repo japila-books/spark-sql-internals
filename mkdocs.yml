@@ -373,6 +373,8 @@ nav:
       - CallMethodViaReflection: expressions/CallMethodViaReflection.md
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
       - CodegenFallback: expressions/CodegenFallback.md
+      - Collect: expressions/Collect.md
+      - CollectSet: expressions/CollectSet.md
       - CreateNamedStruct: expressions/CreateNamedStruct.md
       - CreateStruct: expressions/CreateStruct.md
       - CumeDist: expressions/CumeDist.md
@@ -958,7 +960,7 @@ nav:
     - SparkSessionExtensions: SparkSessionExtensions.md
     - Standard Functions:
       - functions/index.md
-      - spark-sql-aggregate-functions.md
+      - functions/aggregate-functions.md
       - spark-sql-functions-collection.md
       - spark-sql-functions-datetime.md
       - spark-sql-functions-regular-functions.md
