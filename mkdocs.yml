@@ -482,6 +482,7 @@ nav:
       - CollectLimitExec: physical-operators/CollectLimitExec.md
       - CollectMetricsExec: physical-operators/CollectMetricsExec.md
       - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
+      - ColumnarToRowTransition: physical-operators/ColumnarToRowTransition.md
       - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
       - CodegenSupport: physical-operators/CodegenSupport.md
       - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
