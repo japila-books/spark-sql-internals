@@ -963,7 +963,7 @@ nav:
     - Standard Functions:
       - functions/index.md
       - functions/aggregate-functions.md
-      - spark-sql-functions-collection.md
+      - functions/collection-functions.md
       - spark-sql-functions-datetime.md
       - spark-sql-functions-regular-functions.md
       - spark-sql-functions-windows.md

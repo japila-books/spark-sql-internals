@@ -1,39 +1,22 @@
-# Standard Functions for Collections (Collection Functions)
+# Standard Collection Functions
 
-[[functions]]
-.(Subset of) Standard Functions for Handling Collections
-[align="center",cols="1,2",width="100%",options="header"]
-|===
-| Name
-| Description
+## <span id="filter"> filter
 
-| <<array_contains, array_contains>>
-a|
+```scala
+filter(
+  column: Column,
+  f: (Column, Column) => Column): Column
+filter(
+  column: Column,
+  f: Column => Column): Column
+```
 
-[source, scala]
-----
-array_contains(column: Column, value: Any): Column
-----
+`filter` creates an [ArrayFilter](../expressions/ArrayFilter.md) expression (for the [expr](../Column.md#expr) of the given [Column](../Column.md) and a [LambdaFunction](#createLambda)).
 
-| <<explode, explode>>
-a|
+In the end, `collect_set` wraps the `ArrayFilter` up in a [Column](../Column.md).
 
-[source, scala]
-----
-explode(e: Column): Column
-----
-
-| <<explode_outer, explode_outer>>
-a|
-
-[source, scala]
-----
-explode_outer(e: Column): Column
-----
-
-Creates a new row for each element in the given array or map column.
-
-If the array/map is `null` or empty then `null` is produced.
+<!---
+## Review Me
 
 | <<from_json, from_json>>
 a|
@@ -48,38 +31,6 @@ from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 ----
 
 Extract data from arbitrary JSON-encoded values into a [StructType](types/StructType.md) or [ArrayType](types/ArrayType.md) of `StructType` elements with the specified schema
-
-| <<map_keys, map_keys>>
-a|
-
-[source, scala]
-----
-map_keys(e: Column): Column
-----
-
-| <<map_values, map_values>>
-a|
-
-[source, scala]
-----
-map_values(e: Column): Column
-----
-
-| <<posexplode, posexplode>>
-a|
-
-[source, scala]
-----
-posexplode(e: Column): Column
-----
-
-| <<posexplode_outer, posexplode_outer>>
-a|
-
-[source, scala]
-----
-posexplode_outer(e: Column): Column
-----
 
 | <<reverse-internals, reverse>>
 a| [[reverse]]
@@ -105,15 +56,6 @@ Returns the size of the given array or map. Returns -1 if `null`.
 
 |===
 
-=== [[reverse-internals]] `reverse` Collection Function
-
-[source, scala]
-----
-reverse(e: Column): Column
-----
-
-`reverse`...FIXME
-
 === [[size-internals]] `size` Collection Function
 
 [source, scala]
@@ -133,27 +75,7 @@ scala> println(c.expr.asCode)
 Size(UnresolvedAttribute(ArrayBuffer(id)))
 ----
 
-=== [[posexplode]] `posexplode` Collection Function
-
-[source, scala]
-----
-posexplode(e: Column): Column
-----
-
-`posexplode`...FIXME
-
-=== [[posexplode_outer]] `posexplode_outer` Collection Function
-
-[source, scala]
-----
-posexplode_outer(e: Column): Column
-----
-
-`posexplode_outer`...FIXME
-
 === [[explode]] `explode` Collection Function
-
-CAUTION: FIXME
 
 [source, scala]
 ----
@@ -477,21 +399,4 @@ scala> q.show
 |      [1]|  1|
 +---------+---+
 ```
-
-=== [[map_keys]] `map_keys` Collection Function
-
-[source, scala]
-----
-map_keys(e: Column): Column
-----
-
-`map_keys`...FIXME
-
-=== [[map_values]] `map_values` Collection Function
-
-[source, scala]
-----
-map_values(e: Column): Column
-----
-
-`map_values`...FIXME
+-->

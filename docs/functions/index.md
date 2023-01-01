@@ -282,7 +282,7 @@ var_samp(columnName: String): Column
 
 .31+^.^| [[collection_funcs]] *Collection functions*
 
-| <<spark-sql-functions-collection.md#array_contains, array_contains>>
+| <<collection-functions.md#array_contains, array_contains>>
 a| [[array_contains]]
 
 [source, scala]
@@ -290,7 +290,7 @@ a| [[array_contains]]
 array_contains(column: Column, value: Any): Column
 ----
 
-| <<spark-sql-functions-collection.md#array_distinct, array_distinct>>
+| <<collection-functions.md#array_distinct, array_distinct>>
 a| [[array_distinct]]
 
 [source, scala]
@@ -300,7 +300,7 @@ array_distinct(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_except, array_except>>
+| <<collection-functions.md#array_except, array_except>>
 a| [[array_except]]
 
 [source, scala]
@@ -310,7 +310,7 @@ array_except(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_intersect, array_intersect>>
+| <<collection-functions.md#array_intersect, array_intersect>>
 a| [[array_intersect]]
 
 [source, scala]
@@ -320,7 +320,7 @@ array_intersect(col1: Column, col2: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_join, array_join>>
+| <<collection-functions.md#array_join, array_join>>
 a| [[array_join]]
 
 [source, scala]
@@ -331,7 +331,7 @@ array_join(column: Column, delimiter: String, nullReplacement: String): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_max, array_max>>
+| <<collection-functions.md#array_max, array_max>>
 a| [[array_max]]
 
 [source, scala]
@@ -341,7 +341,7 @@ array_max(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_min, array_min>>
+| <<collection-functions.md#array_min, array_min>>
 a| [[array_min]]
 
 [source, scala]
@@ -351,7 +351,7 @@ array_min(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_position, array_position>>
+| <<collection-functions.md#array_position, array_position>>
 a| [[array_position]]
 
 [source, scala]
@@ -361,7 +361,7 @@ array_position(column: Column, value: Any): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_remove, array_remove>>
+| <<collection-functions.md#array_remove, array_remove>>
 a| [[array_remove]]
 
 [source, scala]
@@ -371,7 +371,7 @@ array_remove(column: Column, element: Any): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_repeat, array_repeat>>
+| <<collection-functions.md#array_repeat, array_repeat>>
 a| [[array_repeat]]
 
 [source, scala]
@@ -382,7 +382,7 @@ array_repeat(left: Column, right: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_sort, array_sort>>
+| <<collection-functions.md#array_sort, array_sort>>
 a| [[array_sort]]
 
 [source, scala]
@@ -392,7 +392,7 @@ array_sort(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#array_union, array_union>>
+| <<collection-functions.md#array_union, array_union>>
 a| [[array_union]]
 
 [source, scala]
@@ -402,7 +402,7 @@ array_union(col1: Column, col2: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#arrays_zip, arrays_zip>>
+| <<collection-functions.md#arrays_zip, arrays_zip>>
 a| [[arrays_zip]]
 
 [source, scala]
@@ -412,7 +412,7 @@ arrays_zip(e: Column*): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#arrays_overlap, arrays_overlap>>
+| <<collection-functions.md#arrays_overlap, arrays_overlap>>
 a| [[arrays_overlap]]
 
 [source, scala]
@@ -422,7 +422,7 @@ arrays_overlap(a1: Column, a2: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#element_at, element_at>>
+| <<collection-functions.md#element_at, element_at>>
 a| [[element_at]]
 
 [source, scala]
@@ -432,7 +432,7 @@ element_at(column: Column, value: Any): Column
 
 (*New in 2.4.0*)
 
-| spark-sql-functions-collection.md#explode[explode]
+| collection-functions.md#explode[explode]
 a| [[explode]]
 
 [source, scala]
@@ -440,7 +440,7 @@ a| [[explode]]
 explode(e: Column): Column
 ----
 
-| spark-sql-functions-collection.md#explode_outer[explode_outer]
+| collection-functions.md#explode_outer[explode_outer]
 a| [[explode_outer]]
 
 [source, scala]
@@ -450,7 +450,7 @@ explode_outer(e: Column): Column
 
 Creates a new row for each element in the given array or map column. If the array/map is `null` or empty then `null` is produced.
 
-| <<spark-sql-functions-collection.md#flatten, flatten>>
+| <<collection-functions.md#flatten, flatten>>
 a| [[flatten]]
 
 [source, scala]
@@ -460,7 +460,7 @@ flatten(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#from_json, from_json>>
+| <<collection-functions.md#from_json, from_json>>
 a| [[from_json]]
 
 [source, scala]
@@ -476,7 +476,7 @@ from_json(e: Column, schema: StructType, options: Map[String, String]): Column
 
 Parses a column with a JSON string into a [StructType](types/StructType.md) or [ArrayType](types/ArrayType.md) of `StructType` elements with the specified schema.
 
-| <<spark-sql-functions-collection.md#map_concat, map_concat>>
+| <<collection-functions.md#map_concat, map_concat>>
 a| [[map_concat]]
 
 [source, scala]
@@ -486,7 +486,7 @@ map_concat(cols: Column*): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#map_from_entries, map_from_entries>>
+| <<collection-functions.md#map_from_entries, map_from_entries>>
 a| [[map_from_entries]]
 
 [source, scala]
@@ -496,7 +496,7 @@ map_from_entries(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#map_keys, map_keys>>
+| <<collection-functions.md#map_keys, map_keys>>
 a| [[map_keys]]
 
 [source, scala]
@@ -504,7 +504,7 @@ a| [[map_keys]]
 map_keys(e: Column): Column
 ----
 
-| <<spark-sql-functions-collection.md#map_values, map_values>>
+| <<collection-functions.md#map_values, map_values>>
 a| [[map_values]]
 
 [source, scala]
@@ -512,7 +512,7 @@ a| [[map_values]]
 map_values(e: Column): Column
 ----
 
-| <<spark-sql-functions-collection.md#posexplode, posexplode>>
+| <<collection-functions.md#posexplode, posexplode>>
 a| [[posexplode]]
 
 [source, scala]
@@ -520,7 +520,7 @@ a| [[posexplode]]
 posexplode(e: Column): Column
 ----
 
-| <<spark-sql-functions-collection.md#posexplode_outer, posexplode_outer>>
+| <<collection-functions.md#posexplode_outer, posexplode_outer>>
 a| [[posexplode_outer]]
 
 [source, scala]
@@ -528,7 +528,7 @@ a| [[posexplode_outer]]
 posexplode_outer(e: Column): Column
 ----
 
-| <<spark-sql-functions-collection.md#reverse, reverse>>
+| <<collection-functions.md#reverse, reverse>>
 a| [[reverse]]
 
 [source, scala]
@@ -540,7 +540,7 @@ Returns a reversed string or an array with reverse order of elements
 
 NOTE: Support for reversing arrays is *new in 2.4.0*.
 
-| <<spark-sql-functions-collection.md#schema_of_json, schema_of_json>>
+| <<collection-functions.md#schema_of_json, schema_of_json>>
 a| [[schema_of_json]]
 
 [source, scala]
@@ -551,7 +551,7 @@ schema_of_json(json: String): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#sequence, sequence>>
+| <<collection-functions.md#sequence, sequence>>
 a| [[sequence]]
 
 [source, scala]
@@ -562,7 +562,7 @@ sequence(start: Column, stop: Column, step: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#shuffle, shuffle>>
+| <<collection-functions.md#shuffle, shuffle>>
 a| [[shuffle]]
 
 [source, scala]
@@ -572,7 +572,7 @@ shuffle(e: Column): Column
 
 (*New in 2.4.0*)
 
-| <<spark-sql-functions-collection.md#size, size>>
+| <<collection-functions.md#size, size>>
 a| [[size]]
 
 [source, scala]
@@ -582,7 +582,7 @@ size(e: Column): Column
 
 Returns the size of the given array or map. Returns -1 if `null`.
 
-| <<spark-sql-functions-collection.md#slice, slice>>
+| <<collection-functions.md#slice, slice>>
 a| [[slice]]
 
 [source, scala]
