@@ -696,11 +696,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-functions-collection/</loc>
-         <lastmod>2023-01-01</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-functions-datetime/</loc>
          <lastmod>2023-01-01</lastmod>
          <changefreq>daily</changefreq>
@@ -2202,6 +2197,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/functions/aggregate-functions/</loc>
+         <lastmod>2023-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/functions/collection-functions/</loc>
          <lastmod>2023-01-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
