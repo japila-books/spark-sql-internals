@@ -364,6 +364,7 @@ nav:
       - AggregateFunction: expressions/AggregateFunction.md
       - AggregateWindowFunction: expressions/AggregateWindowFunction.md
       - Aggregator: expressions/Aggregator.md
+      - ArrayFilter: expressions/ArrayFilter.md
       - AttributeSeq: expressions/AttributeSeq.md
       - Attribute: expressions/Attribute.md
       - BasePredicate: expressions/BasePredicate.md

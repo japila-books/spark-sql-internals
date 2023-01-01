@@ -10,6 +10,7 @@
 
 ## Implementations
 
+* [ArrayFilter](ArrayFilter.md)
 * [CallMethodViaReflection](CallMethodViaReflection.md)
 * [ImperativeAggregate](ImperativeAggregate.md)
 * [JsonToStructs](JsonToStructs.md)
