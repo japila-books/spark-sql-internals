@@ -28,9 +28,9 @@ A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf
 
 `AggregateExpression` is given an `AggregateMode` when [created](#creating-instance).
 
-* For `PartialMerge` or `Final` modes, the input to the [AggregateFunction](#aggregateFunction) is [immutable input aggregation buffers](AggregateFunction.md#inputAggBufferAttributes), and the actual children of the `AggregateFunction` is not used
+* For `PartialMerge` or `Final` modes, the input to the [AggregateFunction](#aggregateFunction) is [immutable input aggregation buffers](AggregateFunction.md#inputAggBufferAttributes), and the actual children of the `AggregateFunction` are not used
 
-* [AggregateExpression](../physical-operators/AggregationIterator.md#aggregateExpressions)s of a [AggregationIterator](../physical-operators/AggregationIterator.md) cannot have more than 2 distinct modes nor the modes be among `Partial` and `PartialMerge` or `Final` and `Complete` mode pairs
+* [AggregateExpression](../physical-operators/AggregationIterator.md#aggregateExpressions)s of an [AggregationIterator](../physical-operators/AggregationIterator.md) cannot have more than 2 distinct modes nor the modes be among `Partial` and `PartialMerge` or `Final` and `Complete` mode pairs
 
 * `Partial` and `Complete` or `PartialMerge` and `Final` pairs are supported
 

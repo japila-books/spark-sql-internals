@@ -11,8 +11,6 @@ The demo shows the internals of [CatalogPlugin](../connector/catalog/CatalogPlug
 
 Find the sources of a demo `CatalogPlugin` in the [GitHub repo](https://github.com/jaceklaskowski/spark-examples).
 
-Build the project using `sbt publishLocal` (so it's available on your local machine).
-
 ## Install Demo CatalogPlugin (Spark Shell)
 
 ```console

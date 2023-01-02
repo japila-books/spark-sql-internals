@@ -1,6 +1,6 @@
 # DeclarativeAggregate Expression-Based Functions
 
-`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [expression-based aggregate functions](#implementations) that are [unevaluable](Unevaluable.md) and use expressions for evaluation.
+`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [Catalyst Expression-based aggregate functions](#implementations) that use expressions for evaluation.
 
 ## Contract
 
@@ -20,13 +20,13 @@ Used when:
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
-### <span id="initialValues"> Initialize Aggregation Buffers Expressions
+### <span id="initialValues"> Expressions to Initialize Empty Aggregation Buffers
 
 ```scala
 initialValues: Seq[Expression]
 ```
 
-Catalyst [Expression](Expression.md) to initialize aggregation buffers (for the initial values of this aggregate function)
+Catalyst [Expression](Expression.md)s to initialize empty aggregation buffers (for the initial values of this aggregate function)
 
 Used when:
 
@@ -56,3 +56,7 @@ updateExpressions: Seq[Expression]
 * [First](First.md)
 * `SimpleTypedAggregateExpression`
 * _others_
+
+## <span id="Unevaluable"> Unevaluable
+
+`DeclarativeAggregate` is an [Unevaluable](Unevaluable.md).
