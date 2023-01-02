@@ -14,7 +14,7 @@ initialize(
 Used when:
 
 * `EliminateAggregateFilter` logical optimization is executed
-* `AggregatingAccumulator` is requested to `createBuffer`
+* `AggregatingAccumulator` is requested to [createBuffer](../AggregatingAccumulator.md#createBuffer)
 * `AggregationIterator` is requested to [initializeBuffer](../physical-operators/AggregationIterator.md#initializeBuffer)
 * `ObjectAggregationIterator` is requested to [initAggregationBuffer](../physical-operators/ObjectAggregationIterator.md#initAggregationBuffer)
 * `TungstenAggregationIterator` is requested to [createNewAggregationBuffer](../physical-operators/TungstenAggregationIterator.md#createNewAggregationBuffer)
@@ -30,7 +30,7 @@ merge(
 
 Used when:
 
-* `AggregatingAccumulator` is requested to `merge`
+* `AggregatingAccumulator` is requested to [merge](../AggregatingAccumulator.md#merge)
 * `AggregationIterator` is requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow)
 
 ### <span id="update"> update
@@ -43,7 +43,7 @@ update(
 
 Used when:
 
-* `AggregatingAccumulator` is requested to `add` an `InternalRow`
+* `AggregatingAccumulator` is requested to [add a value](../AggregatingAccumulator.md#add)
 * `AggregationIterator` is requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow)
 * `AggregateProcessor` is requested to [update](../window-functions/AggregateProcessor.md#update)
 

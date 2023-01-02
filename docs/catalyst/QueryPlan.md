@@ -15,7 +15,7 @@ A `QueryPlan` is **unresolved** if the column names have not been verified and c
 
 ## Contract
 
-### <span id="output"> Output Schema
+### <span id="output"> Output (Schema) Attributes
 
 ```scala
 output: Seq[Attribute]

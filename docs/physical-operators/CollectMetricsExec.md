@@ -14,9 +14,9 @@
 
 ## <span id="accumulator"> Collected metrics Accumulator
 
-`CollectMetricsExec` registers an `AggregatingAccumulator` accumulator under the name **Collected metrics**.
+`CollectMetricsExec` registers an [AggregatingAccumulator](../AggregatingAccumulator.md) under the name **Collected metrics**.
 
-`AggregatingAccumulator` is created for the [metric expressions](#metricExpressions) and the [child](#child) physical operator's [output attributes](../catalyst/QueryPlan.md#output).
+`AggregatingAccumulator` is created with the [metric expressions](#metricExpressions) and the [output attributes](../catalyst/QueryPlan.md#output) of the [child](#child) physical operator.
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -24,12 +24,14 @@
 doExecute(): RDD[InternalRow]
 ```
 
+`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+---
+
 `doExecute` resets the [Collected metrics Accumulator](#accumulator).
 
-`doExecute` requests the [child](#child) physical operator to [execute](SparkPlan.md#execute) and `RDD.mapPartitions` so that:
+`doExecute` requests the [child](#child) physical operator to [execute](SparkPlan.md#execute) and uses `RDD.mapPartitions` operator for the following:
 
-* A new per-partition `AggregatingAccumulator` (called `updater`) is requested to `copyAndReset`
+* A new per-partition [AggregatingAccumulator](#accumulator) (called `updater`) is requested to [copyAndReset](../AggregatingAccumulator.md#copyAndReset)
 * The value of the accumulator is published only when a task is completed
 * For every row, the per-partition `AggregatingAccumulator` is requested to add it (that updates [ImperativeAggregate](../expressions/ImperativeAggregate.md)s and [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md)s)
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.

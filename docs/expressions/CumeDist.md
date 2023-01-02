@@ -62,6 +62,8 @@ frame: WindowFrame
 evaluateExpression: Expression
 ```
 
-`evaluateExpression` uses the formula `rowNumber / n` where `rowNumber` is the row number in a window frame (the number of values before and including the current row) divided by the number of rows in the window frame.
-
 `evaluateExpression` is part of the [DeclarativeAggregate](DeclarativeAggregate.md#evaluateExpression) abstraction.
+
+---
+
+`evaluateExpression` uses the formula `rowNumber / n` where `rowNumber` is the row number in a window frame (the number of values before and including the current row) divided by the number of rows in the window frame.
