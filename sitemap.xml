@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/AggregatingAccumulator/</loc>
+         <lastmod>2023-01-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/Analyzer/</loc>
          <lastmod>2023-01-02</lastmod>
          <changefreq>daily</changefreq>
