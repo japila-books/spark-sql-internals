@@ -1,10 +1,6 @@
 # Avro Data Source
 
-Spark SQL supports structured queries over [Avro files](AvroFileFormat.md) as well as in <<functions, columns>> (in a `DataFrame`).
-
-[NOTE]
-====
-https://avro.apache.org/[Apache Avro] is a data serialization format and provides the following features:
+[Apache Avro](https://avro.apache.org/) is a data serialization format and provides the following features:
 
 * Language-independent (with language bindings for popular programming languages, e.g. Java, Python)
 * Rich data structures
@@ -12,7 +8,9 @@ https://avro.apache.org/[Apache Avro] is a data serialization format and provide
 * A container file for sequences of Avro data (aka _Avro data files_)
 * Remote procedure call (RPC)
 * Optional code generation (optimization) to read or write data files, and implement RPC protocols
-====
+
+<!---
+Spark SQL supports structured queries over [Avro files](AvroFileFormat.md) as well as in <<functions, columns>> (in a `DataFrame`).
 
 Avro data source is provided by the `spark-avro` external module. You should include it as a dependency in your Spark application (e.g. `spark-submit --packages` or in `build.sbt`).
 
@@ -142,3 +140,4 @@ val fromAvroExpr = analyzedPlan.expressions.head.children.head.asInstanceOf[Avro
 scala> println(fromAvroExpr.sql)
 from_avro(`to_avro_id`, bigint)
 ```
+-->

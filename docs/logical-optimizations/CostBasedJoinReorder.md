@@ -1,12 +1,12 @@
 # CostBasedJoinReorder Logical Optimization -- Join Reordering in Cost-Based Optimization
 
-`CostBasedJoinReorder` is a [base logical optimization](../catalyst/Optimizer.md#batches) that <<apply, reorders joins>> in [cost-based optimization](../cost-based-optimization/index.md).
+`CostBasedJoinReorder` is a [base logical optimization](../catalyst/Optimizer.md#batches) that [reorders joins](#apply) in [Cost-Based Optimization](../cost-based-optimization/index.md).
 
 `ReorderJoin` is part of the [Join Reorder](../catalyst/Optimizer.md#Join_Reorder) once-executed batch in the standard batches of the [Logical Optimizer](../catalyst/Optimizer.md).
 
-`ReorderJoin` is simply a <<catalyst/Rule.md#, Catalyst rule>> for transforming <<spark-sql-LogicalPlan.md#, logical plans>>, i.e. `Rule[LogicalPlan]`.
+`ReorderJoin` is simply a [Catalyst rule](../catalyst/Rule.md) for transforming [LogicalPlan](../logical-operators/LogicalPlan.md)s, i.e. `Rule[LogicalPlan]`.
 
-`CostBasedJoinReorder` <<apply, applies>> the join optimizations on a logical plan with 2 or more <<extractInnerJoins, consecutive inner or cross joins>> (possibly separated by `Project` operators) when [spark.sql.cbo.enabled](../configuration-properties.md#spark.sql.cbo.enabled) and [spark.sql.cbo.joinReorder.enabled](../configuration-properties.md#spark.sql.cbo.joinReorder.enabled) configuration properties are both enabled.
+`CostBasedJoinReorder` [applies](#apply) the join optimizations on a logical plan with 2 or more [consecutive inner or cross joins](#extractInnerJoins) (possibly separated by `Project` operators) when [spark.sql.cbo.enabled](../configuration-properties.md#spark.sql.cbo.enabled) and [spark.sql.cbo.joinReorder.enabled](../configuration-properties.md#spark.sql.cbo.joinReorder.enabled) configuration properties are both enabled.
 
 ```text
 // Use shortcuts to read the values of the properties
@@ -113,6 +113,7 @@ val q = t1.join(t2, Seq("id")).join(tiny, Seq("id"))
 q.collect.foreach(_ => ())
 ```
 
+<!---
 [CAUTION]
 ====
 FIXME Examples of other join queries
@@ -150,28 +151,6 @@ apply(plan: LogicalPlan): LogicalPlan
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-=== [[reorder]] Reordering Logical Plan with Join Operators -- `reorder` Internal Method
-
-[source, scala]
-----
-reorder(plan: LogicalPlan, output: Seq[Attribute]): LogicalPlan
-----
-
-`reorder`...FIXME
-
-NOTE: `reorder` is used exclusively when `CostBasedJoinReorder` is <<apply, applied>> to a logical plan.
-
-=== [[replaceWithOrderedJoin]] `replaceWithOrderedJoin` Internal Method
-
-[source, scala]
-----
-replaceWithOrderedJoin(plan: LogicalPlan): LogicalPlan
-----
-
-`replaceWithOrderedJoin`...FIXME
-
-NOTE: `replaceWithOrderedJoin` is used recursively and when `CostBasedJoinReorder` is <<reorder, reordering>>...FIXME
-
 === [[extractInnerJoins]] Extracting Consecutive Join Operators -- `extractInnerJoins` Internal Method
 
 [source, scala]
@@ -186,3 +165,4 @@ For `Project` operators `extractInnerJoins` calls itself recursively with the `J
 In the end, `extractInnerJoins` gives the collection of logical plans under the consecutive `Join` logical operators (possibly separated by `Project` operators only) and their join conditions (for which `And` expressions have been split).
 
 NOTE: `extractInnerJoins` is used recursively when `CostBasedJoinReorder` is <<reorder, reordering>> a logical plan.
+-->
