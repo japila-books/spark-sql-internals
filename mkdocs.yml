@@ -984,6 +984,7 @@ nav:
     - SQLTab: ui/SQLTab.md
   - Demos:
     - demo/index.md
+    - demo/objecthashaggregateexec-sort-based-fallback-tasks.md
     - Spilling: demo/spilling.md
     - Developing CatalogPlugin: demo/developing-catalogplugin.md
     - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md

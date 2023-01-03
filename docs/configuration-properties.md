@@ -52,11 +52,13 @@ Use [SQLConf.ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS](SQLConf.md#ADAPTIVE_CUSTOM_CO
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
-**(internal)** The number of rows of an in-memory hash map (to store aggregation buffer) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](physical-operators/ObjectAggregationIterator.md#processInputs) precisely) falls back to sort-based aggregation
+**(internal)** The number of entires in an in-memory hash map (to store aggregation buffers per grouping keys) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](physical-operators/ObjectAggregationIterator.md#processInputs), precisely) falls back to sort-based aggregation
 
-Default: `128`
+Default: `128` (entries)
 
 Use [SQLConf.objectAggSortBasedFallbackThreshold](SQLConf.md#objectAggSortBasedFallbackThreshold) for the current value
+
+Learn more in [Demo: ObjectHashAggregateExec and Sort-Based Fallback Tasks](demo/objecthashaggregateexec-sort-based-fallback-tasks.md)
 
 ## <span id="spark.sql.optimizer.decorrelateInnerQuery.enabled"> spark.sql.optimizer.decorrelateInnerQuery.enabled
 

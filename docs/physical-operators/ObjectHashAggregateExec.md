@@ -4,7 +4,9 @@
 
 `ObjectHashAggregateExec` uses [ObjectAggregationIterator](ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
 
-![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
+<figure markdown>
+  ![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
+</figure>
 
 ## Creating Instance
 
@@ -39,15 +41,18 @@ Time to [execute a single partition](#doExecute-mapPartitionsWithIndexInternal)
 ### <span id="numOutputRows"> number of output rows
 
 * `1` when there is neither input rows in a partition nor [grouping expressions](#groupingExpressions)
-* Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numOutputRows).
+
+Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numOutputRows)
 
 ### <span id="numTasksFallBacked"> number of sort fallback tasks
 
-Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#numTasksFallBacked).
+Number of tasks that crossed [spark.sql.objectHashAggregate.sortBased.fallbackThreshold](../configuration-properties.md#spark.sql.objectHashAggregate.sortBased.fallbackThreshold)
+
+Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numTasksFallBacked)
 
 ### <span id="spillSize"> spill size
 
-Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#spillSize).
+Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#spillSize)
 
 ## <span id="doExecute"> Executing Physical Operator
 
