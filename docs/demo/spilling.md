@@ -1,3 +1,9 @@
+---
+title: Spilling
+hide:
+  - navigation
+---
+
 # Demo: Spilling
 
 This demo shows in-memory data spilling while sorting (using [SortExec](../physical-operators/SortExec.md) physical operator).

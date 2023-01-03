@@ -982,14 +982,10 @@ nav:
     - SQLAppStatusListener: ui/SQLAppStatusListener.md
     - SQLAppStatusStore: ui/SQLAppStatusStore.md
     - SQLTab: ui/SQLTab.md
-  - Demos:
-    - demo/index.md
-    - demo/objecthashaggregateexec-sort-based-fallback-tasks.md
-    - Spilling: demo/spilling.md
-    - Developing CatalogPlugin: demo/developing-catalogplugin.md
-    - Connecting Spark SQL to Hive Metastore: demo/connecting-spark-sql-to-hive-metastore.md
-    - Hive Partitioned Parquet Table and Partition Pruning: demo/hive-partitioned-parquet-table-partition-pruning.md
-    - Using JDBC Data Source to Access PostgreSQL: demo/using-jdbc-data-source-to-access-postgresql.md
+  # Demo section uses awesome-pages plugin
+  # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
+  # Review demo/.pages for setup
+  - ...
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
     - PushDownUtils: PushDownUtils.md

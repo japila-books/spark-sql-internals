@@ -1,4 +1,5 @@
 ---
+title: Hive Partitioned Parquet Table and Partition Pruning
 hide:
   - navigation
 ---

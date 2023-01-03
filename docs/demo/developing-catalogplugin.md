@@ -1,4 +1,5 @@
 ---
+title: Developing CatalogPlugin
 hide:
   - navigation
 ---

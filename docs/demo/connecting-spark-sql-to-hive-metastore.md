@@ -1,4 +1,5 @@
 ---
+title: Connecting Spark SQL to Hive Metastore (with Remote Metastore Server)
 hide:
   - navigation
 ---
