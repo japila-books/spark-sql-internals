@@ -66,7 +66,7 @@ initializeAggregateFunctions(
 * `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](ObjectAggregationIterator.md#mergeAggregationBuffers)
 * `TungstenAggregationIterator` is requested to [switchToSortBasedAggregation](TungstenAggregationIterator.md#switchToSortBasedAggregation)
 
-## <span id="generateProcessRow"> generateProcessRow
+## <span id="generateProcessRow"> Generating Process Row Function
 
 ```scala
 generateProcessRow(
@@ -75,7 +75,31 @@ generateProcessRow(
   inputAttributes: Seq[Attribute]): (InternalRow, InternalRow) => Unit
 ```
 
-`generateProcessRow`...FIXME
+!!! note "`generateProcessRow` is a procedure"
+    `generateProcessRow` creates a Scala function (_procedure_) that takes two [InternalRow](../InternalRow.md)s and produces no output.
+
+    ```scala
+    def generateProcessRow(currentBuffer: InternalRow, row: InternalRow): Unit = {
+      ...
+    }
+    ```
+
+`generateProcessRow` creates a mutable `JoinedRow` (of two [InternalRow](../InternalRow.md)s).
+
+`generateProcessRow` branches off based on the given [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`).
+
+With no [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`), `generateProcessRow` creates a function that does nothing (and "swallows" the input).
+
+!!! note "`functions` Argument"
+    `generateProcessRow` works differently based on the type of the given [AggregateFunction](../expressions/AggregateFunction.md)s:
+
+    * [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)
+    * [AggregateFunction](../expressions/AggregateFunction.md)
+    * [ImperativeAggregate](../expressions/ImperativeAggregate.md)
+
+Otherwise, with some [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`), `generateProcessRow`...FIXME
+
+---
 
 `generateProcessRow` is used when:
 

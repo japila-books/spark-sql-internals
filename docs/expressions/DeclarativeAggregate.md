@@ -58,11 +58,11 @@ Catalyst [Expression](Expression.md)s to update the mutable aggregation buffer b
 
 Used when:
 
-* `AggregatingAccumulator` is [created](../AggregatingAccumulator.md#apply)
+* `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 * `AggregateCodegenSupport` is requested to [doConsumeWithoutKeys](../physical-operators/AggregateCodegenSupport.md#doConsumeWithoutKeys)
 * `AggregationIterator` is requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow)
+* `AggregatingAccumulator` is [created](../AggregatingAccumulator.md#apply)
 * `HashAggregateExec` is requested to [doConsumeWithKeys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys)
-* `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
 ## Implementations
 
