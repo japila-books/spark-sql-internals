@@ -28,6 +28,219 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
+
+**spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**
+
+**(internal)** Whether to forcibly enable some optimization rules that can change the output partitioning of a cached query when executing it for caching. If it is set to true, queries may need an extra shuffle to read the cached data. This configuration is disabled by default. Currently, the optimization rules enabled by this configuration are [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.sources.bucketing.autoBucketedScan.enabled](#spark.sql.sources.bucketing.autoBucketedScan.enabled).
+
+Default: `false`
+
+Use [SQLConf.CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING](SQLConf.md#CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING) to access the property
+
+## <span id="spark.sql.optimizer.decorrelateInnerQuery.enabled"> optimizer.decorrelateInnerQuery.enabled
+
+**spark.sql.optimizer.decorrelateInnerQuery.enabled**
+
+**(internal)** Decorrelates inner queries by eliminating correlated references and build domain joins
+
+Default: `true`
+
+Use [SQLConf.decorrelateInnerQueryEnabled](SQLConf.md#decorrelateInnerQueryEnabled) for the current value
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio"> optimizer.dynamicPartitionPruning.fallbackFilterRatio
+
+**spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio**
+
+**(internal)** When statistics are not available or configured not to be used, this config will be used as the fallback filter ratio for computing the data size of the partitioned table after dynamic partition pruning, in order to evaluate if it is worth adding an extra subquery as the pruning filter if broadcast reuse is not applicable.
+
+Default: `0.5`
+
+Use [SQLConf.dynamicPartitionPruningFallbackFilterRatio](SQLConf.md#dynamicPartitionPruningFallbackFilterRatio) method to access the current value.
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio"> optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio
+
+**spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio**
+
+**(internal)** When filtering side doesn't support broadcast by join type, and doing DPP means running an extra query that may have significant overhead. This config will be used as the extra filter ratio for computing the data size of the pruning side after DPP, in order to evaluate if it is worth adding an extra subquery as the pruning filter.
+
+Must be a double between `0.0` and `1.0`
+
+Default: `0.04`
+
+Use [SQLConf.dynamicPartitionPruningPruningSideExtraFilterRatio](SQLConf.md#dynamicPartitionPruningPruningSideExtraFilterRatio) to access the current value.
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.useStats"> optimizer.dynamicPartitionPruning.useStats
+
+**spark.sql.optimizer.dynamicPartitionPruning.useStats**
+
+**(internal)** When true, distinct count statistics will be used for computing the data size of the partitioned table after dynamic partition pruning, in order to evaluate if it is worth adding an extra subquery as the pruning filter if broadcast reuse is not applicable.
+
+Default: `true`
+
+Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruningUseStats) method to access the current value.
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.enabled"> optimizer.dynamicPartitionPruning.enabled
+
+**spark.sql.optimizer.dynamicPartitionPruning.enabled**
+
+When `true`, Spark SQL will generate predicate for partition column used as a join key.
+
+Default: `true`
+
+Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
+
+## <span id="spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly"> optimizer.dynamicPartitionPruning.reuseBroadcastOnly
+
+**spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly**
+
+**(internal)** When true, dynamic partition pruning will only apply when the broadcast exchange of a broadcast hash join operation can be reused as the dynamic pruning filter.
+
+Default: `true`
+
+Use [SQLConf.dynamicPartitionPruningReuseBroadcastOnly](SQLConf.md#dynamicPartitionPruningReuseBroadcastOnly) method to access the current value.
+
+## <span id="spark.sql.optimizer.enableCsvExpressionOptimization"> optimizer.enableCsvExpressionOptimization
+
+**spark.sql.optimizer.enableCsvExpressionOptimization**
+
+Whether to optimize CSV expressions in SQL optimizer. It includes pruning unnecessary columns from `from_csv`.
+
+Default: `true`
+
+Use [SQLConf.csvExpressionOptimization](SQLConf.md#csvExpressionOptimization) for the current value
+
+## <span id="spark.sql.optimizer.excludedRules"> optimizer.excludedRules
+
+**spark.sql.optimizer.excludedRules**
+
+Comma-separated list of fully-qualified class names of the optimization rules that should be disabled (excluded) from [logical query optimization](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules).
+
+Default: `(empty)`
+
+Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method to access the current value.
+
+!!! important
+    It is not guaranteed that all the rules to be excluded will eventually be excluded, as some rules are [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
+
+## <span id="spark.sql.optimizer.expression.nestedPruning.enabled"> optimizer.expression.nestedPruning.enabled
+
+**spark.sql.optimizer.expression.nestedPruning.enabled**
+
+**(internal)** Prune nested fields from expressions in an operator which are unnecessary in satisfying a query. Note that this optimization doesn't prune nested fields from physical data source scanning. For pruning nested fields from scanning, please use [spark.sql.optimizer.nestedSchemaPruning.enabled](#spark.sql.optimizer.nestedSchemaPruning.enabled) config.
+
+Default: `true`
+
+## <span id="spark.sql.optimizer.inSetConversionThreshold"> optimizer.inSetConversionThreshold
+
+**spark.sql.optimizer.inSetConversionThreshold**
+
+**(internal)** The threshold of set size for `InSet` conversion.
+
+Default: `10`
+
+Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConversionThreshold) method to access the current value.
+
+## <span id="spark.sql.optimizer.inSetSwitchThreshold"> optimizer.inSetSwitchThreshold
+
+**spark.sql.optimizer.inSetSwitchThreshold**
+
+**(internal)** Configures the max set size in InSet for which Spark will generate code with switch statements. This is applicable only to bytes, shorts, ints, dates.
+
+Must be non-negative and less than or equal to 600.
+
+Default: `400`
+
+## <span id="spark.sql.optimizer.maxIterations"> optimizer.maxIterations
+
+**spark.sql.optimizer.maxIterations**
+
+Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical Optimizer](catalyst/Optimizer.md#fixedPoint).
+
+Default: `100`
+
+## <span id="spark.sql.optimizer.nestedSchemaPruning.enabled"> optimizer.nestedSchemaPruning.enabled
+
+**spark.sql.optimizer.nestedSchemaPruning.enabled**
+
+**(internal)** Prune nested fields from the output of a logical relation that are not necessary in satisfying a query. This optimization allows columnar file format readers to avoid reading unnecessary nested column data.
+
+Default: `true`
+
+Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) method to access the current value.
+
+## <span id="spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources"> optimizer.nestedPredicatePushdown.supportedFileSources
+
+**spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources**
+
+**(internal)** A comma-separated list of data source short names or fully qualified data source implementation class names for which Spark tries to push down predicates for nested columns and/or names containing `dots` to data sources. This configuration is only effective with file-based data source in DSv1. Currently, Parquet implements both optimizations while ORC only supports predicates for names containing `dots`. The other data sources don't support this feature yet.
+
+Default: `parquet,orc`
+
+## <span id="spark.sql.optimizer.optimizeOneRowRelationSubquery"> optimizer.optimizeOneRowRelationSubquery
+
+**spark.sql.optimizer.optimizeOneRowRelationSubquery**
+
+**(internal)** When `true`, the optimizer will inline subqueries with `OneRowRelation` leaf nodes
+
+Default: `true`
+
+Use [SQLConf.OPTIMIZE_ONE_ROW_RELATION_SUBQUERY](SQLConf.md#OPTIMIZE_ONE_ROW_RELATION_SUBQUERY) method to access the property (in a type-safe way)
+
+## <span id="spark.sql.optimizer.planChangeLog.batches"> optimizer.planChangeLog.batches
+
+**spark.sql.optimizer.planChangeLog.batches**
+
+**(internal)** Configures a list of batches to be logged in the optimizer, in which the batches are specified by their batch names and separated by comma.
+
+Default: `(undefined)`
+
+## <span id="spark.sql.optimizer.planChangeLog.level"> optimizer.planChangeLog.level
+
+**spark.sql.optimizer.planChangeLog.level**
+
+**(internal)** Configures the log level for logging the change from the original plan to the new plan after a rule or batch is applied. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
+
+Default: `TRACE`
+
+## <span id="spark.sql.optimizer.planChangeLog.rules"> optimizer.planChangeLog.rules
+
+**spark.sql.optimizer.planChangeLog.rules**
+
+**(internal)** Configures a list of rules to be logged in the optimizer, in which the rules are specified by their rule names and separated by comma.
+
+Default: `(undefined)`
+
+## <span id="spark.sql.optimizer.replaceExceptWithFilter"> optimizer.replaceExceptWithFilter
+
+**spark.sql.optimizer.replaceExceptWithFilter**
+
+**(internal)** When `true`, the apply function of the rule verifies whether the right node of the except operation is of type Filter or Project followed by Filter. If yes, the rule further verifies 1) Excluding the filter operations from the right (as well as the left node, if any) on the top, whether both the nodes evaluates to a same result. 2) The left and right nodes don't contain any SubqueryExpressions. 3) The output column names of the left node are distinct. If all the conditions are met, the rule will replace the except operation with a Filter by flipping the filter condition(s) of the right node.
+
+Default: `true`
+
+## <span id="spark.sql.optimizer.runtime.bloomFilter.expectedNumItems"> optimizer.runtime.bloomFilter.expectedNumItems
+
+**spark.sql.optimizer.runtime.bloomFilter.expectedNumItems**
+
+The default number of expected items for the runtime bloomfilter
+
+Default: `1000000L`
+
+[SQLConf.RUNTIME_BLOOM_FILTER_EXPECTED_NUM_ITEMS](SQLConf.md#RUNTIME_BLOOM_FILTER_EXPECTED_NUM_ITEMS)
+
+Used when:
+
+* [BloomFilterAggregate](expressions/BloomFilterAggregate.md#estimatedNumItemsExpression) expression is created
+
+## <span id="spark.sql.optimizer.serializer.nestedSchemaPruning.enabled"> optimizer.serializer.nestedSchemaPruning.enabled
+
+**spark.sql.optimizer.serializer.nestedSchemaPruning.enabled**
+
+**(internal)** Prune nested fields from object serialization operator which are unnecessary in satisfying a query. This optimization allows object serializers to avoid executing unnecessary nested expressions.
+
+Default: `true`
+
 ## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> spark.sql.adaptive.autoBroadcastJoinThreshold
 
 The maximum size (in bytes) of a table to be broadcast when performing a join. `-1` turns broadcasting off. The default value is same as [spark.sql.autoBroadcastJoinThreshold](#spark.sql.autoBroadcastJoinThreshold).
@@ -38,15 +251,11 @@ Default: (undefined)
 
 Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.adaptive.customCostEvaluatorClass"> spark.sql.adaptive.customCostEvaluatorClass
 
 The fully-qualified class name of a custom [CostEvaluator](adaptive-query-execution/CostEvaluator.md) for [Adaptive Query Execution](adaptive-query-execution/index.md)
 
 Default: [SimpleCostEvaluator](adaptive-query-execution/SimpleCostEvaluator.md)
-
-Since: `3.2.0`
 
 Use [SQLConf.ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS](SQLConf.md#ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS) method to access the property (in a type-safe way).
 
@@ -59,14 +268,6 @@ Default: `128` (entries)
 Use [SQLConf.objectAggSortBasedFallbackThreshold](SQLConf.md#objectAggSortBasedFallbackThreshold) for the current value
 
 Learn more in [Demo: ObjectHashAggregateExec and Sort-Based Fallback Tasks](demo/objecthashaggregateexec-sort-based-fallback-tasks.md)
-
-## <span id="spark.sql.optimizer.decorrelateInnerQuery.enabled"> spark.sql.optimizer.decorrelateInnerQuery.enabled
-
-**(internal)** Decorrelates inner queries by eliminating correlated references and build domain joins
-
-Default: `true`
-
-Use [SQLConf.decorrelateInnerQueryEnabled](SQLConf.md#decorrelateInnerQueryEnabled) for the current value
 
 ## <span id="spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled"> spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled
 
@@ -135,8 +336,6 @@ Default: `false`
 
 Use [SQLConf.allowNonEmptyLocationInCTAS](SQLConf.md#allowNonEmptyLocationInCTAS) for the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.legacy.allowAutoGeneratedAliasForView"> spark.sql.legacy.allowAutoGeneratedAliasForView
 
 **(internal)** When `true`, it's allowed to use an input query without explicit alias when creating a permanent view.
@@ -145,8 +344,6 @@ Default: `false`
 
 Use [SQLConf.allowAutoGeneratedAliasForView](SQLConf.md#allowAutoGeneratedAliasForView) for the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.sessionWindow.buffer.spill.threshold"> spark.sql.sessionWindow.buffer.spill.threshold
 
 **(internal)** The threshold for number of rows to be spilled by window operator. Note that the buffer is used only for the query Spark SQL cannot apply aggregations on determining session window.
@@ -154,8 +351,6 @@ Since: `3.2.0`
 Default: [spark.shuffle.spill.numElementsForceSpillThreshold](#spark.shuffle.spill.numElementsForceSpillThreshold)
 
 Use [SQLConf.sessionWindowBufferSpillThreshold](SQLConf.md#sessionWindowBufferSpillThreshold) for the current value
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.execution.arrow.pyspark.selfDestruct.enabled"> spark.sql.execution.arrow.pyspark.selfDestruct.enabled
 
@@ -166,8 +361,6 @@ Default: `false`
 
 Use [SQLConf.arrowPySparkSelfDestructEnabled](SQLConf.md#arrowPySparkSelfDestructEnabled) for the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.legacy.allowStarWithSingleTableIdentifierInCount"> spark.sql.legacy.allowStarWithSingleTableIdentifierInCount
 
 **(internal)** When `true`, the SQL function `count` is allowed to take a single `tblName.*` as parameter
@@ -175,18 +368,6 @@ Since: `3.2.0`
 Default: `false`
 
 Use [SQLConf.allowStarWithSingleTableIdentifierInCount](SQLConf.md#allowStarWithSingleTableIdentifierInCount) for the current value
-
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.enableCsvExpressionOptimization"> spark.sql.optimizer.enableCsvExpressionOptimization
-
-Whether to optimize CSV expressions in SQL optimizer. It includes pruning unnecessary columns from `from_csv`.
-
-Default: `true`
-
-Use [SQLConf.csvExpressionOptimization](SQLConf.md#csvExpressionOptimization) for the current value
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.sessionWindow.buffer.in.memory.threshold"> spark.sql.sessionWindow.buffer.in.memory.threshold
 
@@ -196,8 +377,6 @@ Default: `4096`
 
 Use [SQLConf.sessionWindowBufferInMemoryThreshold](SQLConf.md#sessionWindowBufferInMemoryThreshold) for the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.orc.enableNestedColumnVectorizedReader"> spark.sql.orc.enableNestedColumnVectorizedReader
 
 Enables vectorized orc decoding for nested column
@@ -206,25 +385,11 @@ Default: `false`
 
 Use [SQLConf.orcVectorizedReaderNestedColumnEnabled](SQLConf.md#orcVectorizedReaderNestedColumnEnabled) for the current value
 
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.optimizeOneRowRelationSubquery"> spark.sql.optimizer.optimizeOneRowRelationSubquery
-
-**(internal)** When `true`, the optimizer will inline subqueries with `OneRowRelation` leaf nodes
-
-Default: `true`
-
-Use [SQLConf.OPTIMIZE_ONE_ROW_RELATION_SUBQUERY](SQLConf.md#OPTIMIZE_ONE_ROW_RELATION_SUBQUERY) method to access the property (in a type-safe way)
-
-Since: `3.2.0`
-
 ## <span id="spark.sql.adaptive.forceApply"> spark.sql.adaptive.forceApply
 
 **(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](physical-optimizations/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
 
 Default: `false`
-
-Since: `3.0.0`
 
 Use [SQLConf.ADAPTIVE_EXECUTION_FORCE_APPLY](SQLConf.md#ADAPTIVE_EXECUTION_FORCE_APPLY) method to access the property (in a type-safe way).
 
@@ -236,8 +401,6 @@ When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is ena
 
 Default: `true`
 
-Since: `3.0.0`
-
 Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
 
 ## <span id="spark.sql.adaptive.coalescePartitions.minPartitionSize"> spark.sql.adaptive.coalescePartitions.minPartitionSize
@@ -248,8 +411,6 @@ Default: `1MB`
 
 Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.adaptive.coalescePartitions.parallelismFirst"> spark.sql.adaptive.coalescePartitions.parallelismFirst
 
 When `true`, Spark does not respect the target size specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) when coalescing contiguous shuffle partitions, but adaptively calculate the target size according to the default parallelism of the Spark cluster. The calculated size is usually smaller than the configured target size. This is to maximize the parallelism and avoid performance regression when enabling adaptive query execution. It's recommended to set this config to `false` and respect the configured target size.
@@ -258,15 +419,11 @@ Default: `true`
 
 Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.adaptive.advisoryPartitionSizeInBytes"> spark.sql.adaptive.advisoryPartitionSizeInBytes
 
 The advisory size in bytes of the shuffle partition during adaptive optimization (when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled). It takes effect when Spark coalesces small shuffle partitions or splits skewed shuffle partition.
 
 Default: `64MB`
-
-Since: `3.0.0`
 
 Fallback Property: `spark.sql.adaptive.shuffle.targetPostShuffleInputSize`
 
@@ -296,8 +453,6 @@ This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.s
 
 Default: `(undefined)`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.adaptive.enabled"> spark.sql.adaptive.enabled
 
 Enables [Adaptive Query Execution](adaptive-query-execution/index.md)
@@ -312,8 +467,6 @@ Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) meth
 
 Default: `true`
 
-Since: `3.0.0`
-
 Use [SQLConf.fetchShuffleBlocksInBatch](SQLConf.md#fetchShuffleBlocksInBatch) method to access the current value.
 
 ## <span id="spark.sql.adaptive.localShuffleReader.enabled"> spark.sql.adaptive.localShuffleReader.enabled
@@ -324,8 +477,6 @@ Default: `true`
 
 Use [SQLConf.LOCAL_SHUFFLE_READER_ENABLED](SQLConf.md#LOCAL_SHUFFLE_READER_ENABLED) to access the property (in a type-safe way)
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
 
 **(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
@@ -334,8 +485,6 @@ Default: `DEBUG`
 
 Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) for the current value
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold"> spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold
 
 The maximum size (in bytes) per partition that can be allowed to build local hash map. If this value is not smaller than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) and all the partition size are not larger than this config, join selection prefer to use shuffled hash join instead of sort merge join regardless of the value of [spark.sql.join.preferSortMergeJoin](#spark.sql.join.preferSortMergeJoin).
@@ -343,8 +492,6 @@ The maximum size (in bytes) per partition that can be allowed to build local has
 Default: `0`
 
 Available as [SQLConf.ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD](SQLConf.md#ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD)
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> spark.sql.adaptive.optimizer.excludedRules
 
@@ -360,8 +507,6 @@ When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is ena
 
 Default: `true`
 
-Since: `3.0.0`
-
 Use [SQLConf.SKEW_JOIN_ENABLED](SQLConf.md#SKEW_JOIN_ENABLED) to reference the property.
 
 ## <span id="spark.sql.adaptive.skewJoin.skewedPartitionFactor"> spark.sql.adaptive.skewJoin.skewedPartitionFactor
@@ -370,15 +515,11 @@ A partition is considered skewed if its size is larger than this factor multiply
 
 Default: `5`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes"> spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes
 
 A partition is considered skewed if its size in bytes is larger than this threshold and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionFactor](#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplying the median partition size. Ideally this config should be set larger than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes).
 
 Default: `256MB`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin"> spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin
 
@@ -396,15 +537,11 @@ Use [SQLConf.nonEmptyPartitionRatioForBroadcastJoin](SQLConf.md#nonEmptyPartitio
 
 Default: `100`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.analyzer.failAmbiguousSelfJoin"> spark.sql.analyzer.failAmbiguousSelfJoin
 
 **(internal)** When `true`, fail the Dataset query if it contains ambiguous self-join.
 
 Default: `true`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.ansi.enabled"> spark.sql.ansi.enabled
 
@@ -415,8 +552,6 @@ When `true`, Spark tries to conform to the ANSI SQL specification:
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.cli.print.header"> spark.sql.cli.print.header
 
 When `true`, spark-sql CLI prints the names of the columns in query output
@@ -424,8 +559,6 @@ When `true`, spark-sql CLI prints the names of the columns in query output
 Default: `false`
 
 Use [SQLConf.cliPrintHeader](SQLConf.md#cliPrintHeader) for the current value
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.codegen.wholeStage"> spark.sql.codegen.wholeStage
 
@@ -443,15 +576,11 @@ Default: `1024`
 
 Use [SQLConf.methodSplitThreshold](SQLConf.md#methodSplitThreshold) for the current value
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.debug.maxToStringFields"> spark.sql.debug.maxToStringFields
 
 Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
 
 Default: `25`
-
-Since: `3.0.0`
 
 Use [SQLConf.maxToStringFields](SQLConf.md#maxToStringFields) method to access the current value.
 
@@ -463,8 +592,6 @@ Default: [spark_catalog](connector/catalog/CatalogManager.md#SESSION_CATALOG_NAM
 
 Use [SQLConf.DEFAULT_CATALOG](SQLConf.md#DEFAULT_CATALOG) to access the current value.
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.execution.arrow.pyspark.enabled"> spark.sql.execution.arrow.pyspark.enabled
 
 When true, make use of Apache Arrow for columnar data transfers in PySpark. This optimization applies to:
@@ -475,8 +602,6 @@ When true, make use of Apache Arrow for columnar data transfers in PySpark. This
 The following data types are unsupported: BinaryType, MapType, [ArrayType](types/ArrayType.md) of TimestampType, and nested StructType.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.execution.removeRedundantSorts"> spark.sql.execution.removeRedundantSorts
 
@@ -493,8 +618,6 @@ Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SOR
 Default: `true`
 
 Use [SQLConf.subqueryReuseEnabled](SQLConf.md#subqueryReuseEnabled) for the current value
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.execution.sortBeforeRepartition"> spark.sql.execution.sortBeforeRepartition
 
@@ -522,8 +645,6 @@ When true, optimizations enabled by [spark.sql.execution.arrow.pyspark.enabled](
 
 Default: `true`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.execution.arrow.sparkr.enabled"> spark.sql.execution.arrow.sparkr.enabled
 
 When true, make use of Apache Arrow for columnar data transfers in SparkR.
@@ -539,15 +660,11 @@ FloatType, BinaryType, [ArrayType](types/ArrayType.md), StructType and MapType.
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.execution.pandas.udf.buffer.size"> spark.sql.execution.pandas.udf.buffer.size
 
 Same as `${BUFFER_SIZE.key}` but only applies to Pandas UDF executions. If it is not set, the fallback is `${BUFFER_SIZE.key}`. Note that Pandas execution requires more than 4 bytes. Lowering this value could make small Pandas UDF batch iterated and pipelined; however, it might degrade performance. See SPARK-27870.
 
 Default: `65536`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.execution.pandas.convertToArrowArraySafely"> spark.sql.execution.pandas.convertToArrowArraySafely
 
@@ -555,8 +672,6 @@ Since: `3.0.0`
 Series to Arrow array during serialization. Arrow will raise errors when detecting unsafe type conversion like overflow. When false, disabling Arrow's type check and do type conversions anyway. This config only works for Arrow 0.11.0+.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.statistics.histogram.enabled"> spark.sql.statistics.histogram.enabled
 
@@ -591,8 +706,6 @@ Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.sources.outputCommitterClass"><span id="OUTPUT_COMMITTER_CLASS"> spark.sql.sources.outputCommitterClass
 
 **(internal)** The fully-qualified class name of the user-defined Hadoop [OutputCommitter]({{ hadoop.api }}/org/apache/hadoop/mapreduce/OutputCommitter.html) used by data sources
@@ -607,15 +720,11 @@ Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to acces
 
 Default: `true`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.sources.useV1SourceList"><span id="USE_V1_SOURCE_LIST"> spark.sql.sources.useV1SourceList
 
 **(internal)** A comma-separated list of data source short names ([DataSourceRegister](DataSourceRegister.md)s) or fully-qualified canonical class names of the data sources ([TableProvider](connector/TableProvider.md)s) for which DataSource V2 code path is disabled (and Data Source V1 code path used).
 
 Default: `avro,csv,json,kafka,orc,parquet,text`
-
-Since: `3.0.0`
 
 Used when:
 
@@ -629,8 +738,6 @@ Possible values: `ANSI`, `LEGACY`, `STRICT`
 
 Default: `ANSI`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.thriftServer.interruptOnCancel"> spark.sql.thriftServer.interruptOnCancel
 
 When `true`, all running tasks will be interrupted if one cancels a query.
@@ -639,52 +746,6 @@ When `false`, all running tasks will remain until finished.
 Default: `false`
 
 Use [SQLConf.THRIFTSERVER_FORCE_CANCEL](SQLConf.md#THRIFTSERVER_FORCE_CANCEL) to access the property
-
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.inSetSwitchThreshold"> spark.sql.optimizer.inSetSwitchThreshold
-
-**(internal)** Configures the max set size in InSet for which Spark will generate code with switch statements. This is applicable only to bytes, shorts, ints, dates.
-
-Must be non-negative and less than or equal to 600.
-
-Default: `400`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.planChangeLog.level"> spark.sql.optimizer.planChangeLog.level
-
-**(internal)** Configures the log level for logging the change from the original plan to the new plan after a rule or batch is applied. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
-
-Default: `TRACE`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.planChangeLog.rules"> spark.sql.optimizer.planChangeLog.rules
-
-**(internal)** Configures a list of rules to be logged in the optimizer, in which the rules are specified by their rule names and separated by comma.
-
-Default: `(undefined)`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.planChangeLog.batches"> spark.sql.optimizer.planChangeLog.batches
-
-**(internal)** Configures a list of batches to be logged in the optimizer, in which the batches are specified by their batch names and separated by comma.
-
-Default: `(undefined)`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.enabled"> spark.sql.optimizer.dynamicPartitionPruning.enabled
-
-When `true`, Spark SQL will generate predicate for partition column used as a join key.
-
-Default: `true`
-
-Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.hive.tablePropertyLengthThreshold"> spark.sql.hive.tablePropertyLengthThreshold
 
@@ -695,91 +756,11 @@ Default: (undefined)
 
 Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
 
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> spark.sql.optimizer.canChangeCachedPlanOutputPartitioning
-
-**(internal)** Whether to forcibly enable some optimization rules that can change the output partitioning of a cached query when executing it for caching. If it is set to true, queries may need an extra shuffle to read the cached data. This configuration is disabled by default. Currently, the optimization rules enabled by this configuration are [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.sources.bucketing.autoBucketedScan.enabled](#spark.sql.sources.bucketing.autoBucketedScan.enabled).
-
-Default: `false`
-
-Use [SQLConf.CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING](SQLConf.md#CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING) to access the property
-
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio"> spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio
-
-**(internal)** When filtering side doesn't support broadcast by join type, and doing DPP means running an extra query that may have significant overhead. This config will be used as the extra filter ratio for computing the data size of the pruning side after DPP, in order to evaluate if it is worth adding an extra subquery as the pruning filter.
-
-Must be a double between `0.0` and `1.0`
-
-Default: `0.04`
-
-Use [SQLConf.dynamicPartitionPruningPruningSideExtraFilterRatio](SQLConf.md#dynamicPartitionPruningPruningSideExtraFilterRatio) to access the current value.
-
-Since: `3.2.0`
-
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.useStats"> spark.sql.optimizer.dynamicPartitionPruning.useStats
-
-**(internal)** When true, distinct count statistics will be used for computing the data size of the partitioned table after dynamic partition pruning, in order to evaluate if it is worth adding an extra subquery as the pruning filter if broadcast reuse is not applicable.
-
-Default: `true`
-
-Since: `3.0.0`
-
-Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruningUseStats) method to access the current value.
-
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio"> spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio
-
-**(internal)** When statistics are not available or configured not to be used, this config will be used as the fallback filter ratio for computing the data size of the partitioned table after dynamic partition pruning, in order to evaluate if it is worth adding an extra subquery as the pruning filter if broadcast reuse is not applicable.
-
-Default: `0.5`
-
-Since: `3.0.0`
-
-Use [SQLConf.dynamicPartitionPruningFallbackFilterRatio](SQLConf.md#dynamicPartitionPruningFallbackFilterRatio) method to access the current value.
-
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly"> spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly
-
-**(internal)** When true, dynamic partition pruning will only apply when the broadcast exchange of a broadcast hash join operation can be reused as the dynamic pruning filter.
-
-Default: `true`
-
-Since: `3.0.0`
-
-Use [SQLConf.dynamicPartitionPruningReuseBroadcastOnly](SQLConf.md#dynamicPartitionPruningReuseBroadcastOnly) method to access the current value.
-
-## <span id="spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources"> spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources
-
-**(internal)** A comma-separated list of data source short names or fully qualified data source implementation class names for which Spark tries to push down predicates for nested columns and/or names containing `dots` to data sources. This configuration is only effective with file-based data source in DSv1. Currently, Parquet implements both optimizations while ORC only supports predicates for names containing `dots`. The other data sources don't support this feature yet.
-
-Default: `parquet,orc`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.serializer.nestedSchemaPruning.enabled"> spark.sql.optimizer.serializer.nestedSchemaPruning.enabled
-
-**(internal)** Prune nested fields from object serialization operator which are unnecessary in satisfying a query. This optimization allows object serializers to avoid executing unnecessary nested expressions.
-
-Default: `true`
-
-Since: `3.0.0`
-
-## <span id="spark.sql.optimizer.expression.nestedPruning.enabled"> spark.sql.optimizer.expression.nestedPruning.enabled
-
-**(internal)** Prune nested fields from expressions in an operator which are unnecessary in satisfying a query. Note that this optimization doesn't prune nested fields from physical data source scanning. For pruning nested fields from scanning, please use [spark.sql.optimizer.nestedSchemaPruning.enabled](#spark.sql.optimizer.nestedSchemaPruning.enabled) config.
-
-Default: `true`
-
-Since: `3.0.0`
-
 ## <span id="spark.sql.orc.mergeSchema"> spark.sql.orc.mergeSchema
 
 When true, the Orc data source merges schemas collected from all data files, otherwise the schema is picked from a random data file.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.sources.bucketing.autoBucketedScan.enabled"> spark.sql.sources.bucketing.autoBucketedScan.enabled
 
@@ -791,15 +772,11 @@ Default: `true`
 
 Use [SQLConf.autoBucketedScanEnabled](SQLConf.md#autoBucketedScanEnabled) to access the property
 
-Since: `3.1.0`
-
 ## <span id="spark.sql.datetime.java8API.enabled"> spark.sql.datetime.java8API.enabled
 
 When `true`, java.time.Instant and java.time.LocalDate classes of Java 8 API are used as external types for Catalyst's TimestampType and DateType. When `false`, java.sql.Timestamp and java.sql.Date are used for the same purpose.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.interval.enabled"> spark.sql.legacy.interval.enabled
 
@@ -810,15 +787,11 @@ Default: `false`
 
 Use [SQLConf.legacyIntervalEnabled](SQLConf.md#legacyIntervalEnabled) to access the current value
 
-Since: `3.2.0`
-
 ## <span id="spark.sql.sources.binaryFile.maxLength"> spark.sql.sources.binaryFile.maxLength
 
 **(internal)** The max length of a file that can be read by the binary file data source. Spark will fail fast and not attempt to read the file if its length exceeds this value. The theoretical max is Int.MaxValue, though VMs might implement a smaller max.
 
 Default: `Int.MaxValue`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.mapKeyDedupPolicy"> spark.sql.mapKeyDedupPolicy
 
@@ -828,8 +801,6 @@ Possible values: `EXCEPTION`, `LAST_WIN`
 
 Default: `EXCEPTION`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.maxConcurrentOutputFileWriters"> spark.sql.maxConcurrentOutputFileWriters
 
 **(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](datasources/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
@@ -837,8 +808,6 @@ Since: `3.0.0`
 Default: `0`
 
 Use [SQLConf.maxConcurrentOutputFileWriters](SQLConf.md#maxConcurrentOutputFileWriters) for the current value
-
-Since: `3.2.0`
 
 ## <span id="spark.sql.maxMetadataStringLength"> spark.sql.maxMetadataStringLength
 
@@ -856,8 +825,6 @@ A comma-delimited string config of the optional additional remote Maven mirror r
 
 Default: `https://maven-central.storage-download.googleapis.com/maven2/`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.maxPlanStringLength"> spark.sql.maxPlanStringLength
 
 Maximum number of characters to output for a plan string.  If the plan is longer, further output will be truncated.
@@ -866,23 +833,17 @@ Set this to a lower value such as 8k if plan strings are taking up too much memo
 
 Default: `Integer.MAX_VALUE - 15`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.addPartitionInBatch.size"> spark.sql.addPartitionInBatch.size
 
 **(internal)** The number of partitions to be handled in one turn when use `AlterTableAddPartitionCommand` to add partitions into table. The smaller batch size is, the less memory is required for the real handler, e.g. Hive Metastore.
 
 Default: `100`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.scriptTransformation.exitTimeoutInSeconds"> spark.sql.scriptTransformation.exitTimeoutInSeconds
 
 **(internal)** Timeout for executor to wait for the termination of transformation script when EOF.
 
 Default: `10` seconds
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> spark.sql.autoBroadcastJoinThreshold
 
@@ -947,8 +908,6 @@ The [CatalogPlugin](connector/catalog/CatalogPlugin.md) for `spark_catalog`
 
 Default: [defaultSessionCatalog](connector/catalog/CatalogManager.md#defaultSessionCatalog)
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.cbo.enabled"> spark.sql.cbo.enabled
 
 Enables [Cost-Based Optimization](cost-based-optimization/index.md) (CBO) for estimation of plan statistics when `true`.
@@ -971,8 +930,6 @@ When `true`, the logical plan will fetch row counts and column statistics from c
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.cbo.starSchemaDetection"> spark.sql.cbo.starSchemaDetection
 
 Enables *join reordering* based on star schema detection for cost-based optimization (CBO) in [ReorderJoin](logical-optimizations/ReorderJoin.md) logical plan optimization.
@@ -987,15 +944,11 @@ Use [SQLConf.starSchemaDetection](SQLConf.md#starSchemaDetection) method to acce
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.codegen.aggregate.splitAggregateFunc.enabled"> spark.sql.codegen.aggregate.splitAggregateFunc.enabled
 
 **(internal)** When true, the code generator would split aggregate code into individual methods instead of a single big method. This can be used to avoid oversized function that can miss the opportunity of JIT optimization.
 
 Default: `true`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.codegen.comments"> spark.sql.codegen.comments
 
@@ -1082,8 +1035,6 @@ Use [SQLConf.constraintPropagationEnabled](SQLConf.md#constraintPropagationEnabl
 **(internal)** When `true`, enable filter pushdown to CSV datasource.
 
 Default: `true`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.defaultSizeInBytes"> spark.sql.defaultSizeInBytes
 
@@ -1191,8 +1142,6 @@ Use [SQLConf.columnBatchSize](SQLConf.md#columnBatchSize) method to access the c
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.inMemoryColumnarStorage.enableVectorizedReader"> spark.sql.inMemoryColumnarStorage.enableVectorizedReader
 
 Enables [vectorized reader](vectorized-query-execution.md) for columnar caching.
@@ -1223,8 +1172,6 @@ Whether to ignore null fields when generating JSON objects in JSON data source a
 
 Default: `true`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.leafNodeDefaultParallelism"><span id="LEAF_NODE_DEFAULT_PARALLELISM"> spark.sql.leafNodeDefaultParallelism
 
 The [default parallelism of leaf operators](SparkSession.md#leafNodeDefaultParallelism) that produce data
@@ -1239,8 +1186,6 @@ Default: `SparkContext.defaultParallelism` ([Spark Core]({{ book.spark_core }}/S
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.ctePrecedencePolicy"> spark.sql.legacy.ctePrecedencePolicy
 
 **(internal)** This config will be removed in future versions and `CORRECTED` will be the only behavior.
@@ -1253,8 +1198,6 @@ Possible values:
 
 Default: `EXCEPTION`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.timeParserPolicy"> spark.sql.legacy.timeParserPolicy
 
 **(internal)** When LEGACY, java.text.SimpleDateFormat is used for formatting and parsing dates/timestamps in a locale-sensitive manner, which is the approach before Spark 3.0. When set to CORRECTED, classes from `java.time.*` packages are used for the same purpose. The default value is EXCEPTION, RuntimeException is thrown when we will get different results.
@@ -1263,15 +1206,11 @@ Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
 
 Default: `EXCEPTION`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.followThreeValuedLogicInArrayExists"> spark.sql.legacy.followThreeValuedLogicInArrayExists
 
 **(internal)** When true, the ArrayExists will follow the three-valued boolean logic.
 
 Default: `true`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.fromDayTimeString.enabled"> spark.sql.legacy.fromDayTimeString.enabled
 
@@ -1279,15 +1218,11 @@ Since: `3.0.0`
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.notReserveProperties"> spark.sql.legacy.notReserveProperties
 
 **(internal)** When `true`, all database and table properties are not reserved and available for create/alter syntaxes. But please be aware that the reserved properties will be silently removed.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.addSingleFileInAddFile"> spark.sql.legacy.addSingleFileInAddFile
 
@@ -1295,15 +1230,11 @@ Since: `3.0.0`
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.exponentLiteralAsDecimal.enabled"> spark.sql.legacy.exponentLiteralAsDecimal.enabled
 
 **(internal)** When `true`, a literal with an exponent (e.g. 1E-30) would be parsed as Decimal rather than Double.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.allowNegativeScaleOfDecimal"> spark.sql.legacy.allowNegativeScaleOfDecimal
 
@@ -1311,15 +1242,11 @@ Since: `3.0.0`
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.bucketedTableScan.outputOrdering"> spark.sql.legacy.bucketedTableScan.outputOrdering
 
 **(internal)** When `true`, the bucketed table scan will list files during planning to figure out the output ordering, which is expensive and may make the planning quite slow.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.json.allowEmptyString.enabled"> spark.sql.legacy.json.allowEmptyString.enabled
 
@@ -1327,15 +1254,11 @@ Since: `3.0.0`
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.createEmptyCollectionUsingStringType"> spark.sql.legacy.createEmptyCollectionUsingStringType
 
 **(internal)** When `true`, Spark returns an empty collection with `StringType` as element type if the `array`/`map` function is called without any parameters. Otherwise, Spark returns an empty collection with `NullType` as element type.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.allowUntypedScalaUDF"> spark.sql.legacy.allowUntypedScalaUDF
 
@@ -1343,15 +1266,11 @@ Since: `3.0.0`
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.dataset.nameNonStructGroupingKeyAsValue"> spark.sql.legacy.dataset.nameNonStructGroupingKeyAsValue
 
 **(internal)** When `true`, the key attribute resulted from running `Dataset.groupByKey` for non-struct key type, will be named as `value`, following the behavior of Spark version 2.4 and earlier.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.setCommandRejectsSparkCoreConfs"> spark.sql.legacy.setCommandRejectsSparkCoreConfs
 
@@ -1359,23 +1278,17 @@ Since: `3.0.0`
 
 Default: `true`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.typeCoercion.datetimeToString.enabled"> spark.sql.legacy.typeCoercion.datetimeToString.enabled
 
 **(internal)** When `true`, date/timestamp will cast to string in binary comparisons with String
 
 Default: `false`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.allowHashOnMapType"> spark.sql.legacy.allowHashOnMapType
 
 **(internal)** When `true`, hash expressions can be applied on elements of MapType. Otherwise, an analysis exception will be thrown.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.parquet.datetimeRebaseModeInWrite"> spark.sql.legacy.parquet.datetimeRebaseModeInWrite
 
@@ -1385,8 +1298,6 @@ Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
 
 Default: `EXCEPTION`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.parquet.datetimeRebaseModeInRead"> spark.sql.legacy.parquet.datetimeRebaseModeInRead
 
 **(internal)** When LEGACY, Spark will rebase dates/timestamps from the legacy hybrid (Julian + Gregorian) calendar to Proleptic Gregorian calendar when reading Parquet files. When CORRECTED, Spark will not do rebase and read the dates/timestamps as it is. When EXCEPTION, which is the default, Spark will fail the reading if it sees ancient dates/timestamps that are ambiguous between the two calendars. This config is only effective if the writer info (like Spark, Hive) of the Parquet files is unknown.
@@ -1394,8 +1305,6 @@ Since: `3.0.0`
 Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
 
 Default: `EXCEPTION`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.avro.datetimeRebaseModeInWrite"> spark.sql.legacy.avro.datetimeRebaseModeInWrite
 
@@ -1405,8 +1314,6 @@ Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
 
 Default: `EXCEPTION`
 
-Since: `3.0.0`
-
 ## <span id="spark.sql.legacy.avro.datetimeRebaseModeInRead"> spark.sql.legacy.avro.datetimeRebaseModeInRead
 
 **(internal)** When LEGACY, Spark will rebase dates/timestamps from the legacy hybrid (Julian + Gregorian) calendar to Proleptic Gregorian calendar when reading Avro files. When CORRECTED, Spark will not do rebase and read the dates/timestamps as it is. When EXCEPTION, which is the default, Spark will fail the reading if it sees ancient dates/timestamps that are ambiguous between the two calendars. This config is only effective if the writer info (like Spark, Hive) of the Avro files is unknown.
@@ -1414,8 +1321,6 @@ Since: `3.0.0`
 Possible values: `EXCEPTION`, `LEGACY`, `CORRECTED`
 
 Default: `EXCEPTION`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.legacy.rdd.applyConf"> spark.sql.legacy.rdd.applyConf
 
@@ -1450,45 +1355,6 @@ Use [SQLConf.limitScaleUpFactor](SQLConf.md#limitScaleUpFactor) method to access
 Default: `true`
 
 Use [SQLConf.optimizeNullAwareAntiJoin](SQLConf.md#optimizeNullAwareAntiJoin) method to access the current value.
-
-## <span id="spark.sql.optimizer.excludedRules"> spark.sql.optimizer.excludedRules
-
-Comma-separated list of fully-qualified class names of the optimization rules that should be disabled (excluded) from [logical query optimization](catalyst/Optimizer.md#spark.sql.optimizer.excludedRules).
-
-Default: `(empty)`
-
-Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method to access the current value.
-
-!!! important
-    It is not guaranteed that all the rules to be excluded will eventually be excluded, as some rules are [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
-
-## <span id="spark.sql.optimizer.inSetConversionThreshold"> spark.sql.optimizer.inSetConversionThreshold
-
-**(internal)** The threshold of set size for `InSet` conversion.
-
-Default: `10`
-
-Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConversionThreshold) method to access the current value.
-
-## <span id="spark.sql.optimizer.maxIterations"> spark.sql.optimizer.maxIterations
-
-Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical Optimizer](catalyst/Optimizer.md#fixedPoint).
-
-Default: `100`
-
-## <span id="spark.sql.optimizer.replaceExceptWithFilter"> spark.sql.optimizer.replaceExceptWithFilter
-
-**(internal)** When `true`, the apply function of the rule verifies whether the right node of the except operation is of type Filter or Project followed by Filter. If yes, the rule further verifies 1) Excluding the filter operations from the right (as well as the left node, if any) on the top, whether both the nodes evaluates to a same result. 2) The left and right nodes don't contain any SubqueryExpressions. 3) The output column names of the left node are distinct. If all the conditions are met, the rule will replace the except operation with a Filter by flipping the filter condition(s) of the right node.
-
-Default: `true`
-
-## <span id="spark.sql.optimizer.nestedSchemaPruning.enabled"> spark.sql.optimizer.nestedSchemaPruning.enabled
-
-**(internal)** Prune nested fields from the output of a logical relation that are not necessary in satisfying a query. This optimization allows columnar file format readers to avoid reading unnecessary nested column data.
-
-Default: `true`
-
-Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) method to access the current value.
 
 ## <span id="spark.sql.orc.impl"> spark.sql.orc.impl
 
@@ -1538,8 +1404,6 @@ Use [SQLConf.planChangeRules](SQLConf.md#planChangeRules) method to access the c
 When true, it shows the JVM stacktrace in the user-facing PySpark exception together with Python stacktrace. By default, it is disabled and hides JVM stacktrace and shows a Python-friendly exception only.
 
 Default: `false`
-
-Since: `3.0.0`
 
 ## <span id="spark.sql.parquet.binaryAsString"> spark.sql.parquet.binaryAsString
 

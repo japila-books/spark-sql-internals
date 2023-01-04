@@ -370,6 +370,7 @@ nav:
       - BasePredicate: expressions/BasePredicate.md
       - BinaryComparison: expressions/BinaryComparison.md
       - BinaryOperator: expressions/BinaryOperator.md
+      - BloomFilterAggregate: expressions/BloomFilterAggregate.md
       - BoundReference: expressions/BoundReference.md
       - CallMethodViaReflection: expressions/CallMethodViaReflection.md
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
@@ -625,6 +626,7 @@ nav:
       - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
       - GroupBasedRowLevelOperationScanPlanning: logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md
       - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
+      - InjectRuntimeFilter: logical-optimizations/InjectRuntimeFilter.md
       - InlineCTE: logical-optimizations/InlineCTE.md
       - LimitPushDown: logical-optimizations/LimitPushDown.md
       - NullPropagation: logical-optimizations/NullPropagation.md
@@ -988,6 +990,7 @@ nav:
   - ...
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
+    - BloomFilter: BloomFilter.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md
     - BindReferences: BindReferences.md

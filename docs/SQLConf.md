@@ -970,6 +970,10 @@ Used when:
 
 * `ResolveSQLOnFile` is requested to [maybeSQLFile](logical-analysis-rules/ResolveSQLOnFile.md#maybeSQLFile)
 
+## <span id="RUNTIME_BLOOM_FILTER_EXPECTED_NUM_ITEMS"> RUNTIME_BLOOM_FILTER_EXPECTED_NUM_ITEMS
+
+[spark.sql.optimizer.runtime.bloomFilter.expectedNumItems](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.expectedNumItems)
+
 ## <span id="sessionLocalTimeZone"><span id="SESSION_LOCAL_TIMEZONE"> sessionLocalTimeZone
 
 [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
