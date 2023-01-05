@@ -701,6 +701,10 @@ Used when:
 
 * [RemoveRedundantSorts](physical-optimizations/RemoveRedundantSorts.md) physical optimization is executed
 
+## <span id="RUNTIME_BLOOM_FILTER_MAX_NUM_BITS"> RUNTIME_BLOOM_FILTER_MAX_NUM_BITS
+
+[spark.sql.optimizer.runtime.bloomFilter.maxNumBits](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.maxNumBits)
+
 ## <span id="SKEW_JOIN_SKEWED_PARTITION_FACTOR"> SKEW_JOIN_SKEWED_PARTITION_FACTOR
 
 [spark.sql.adaptive.skewJoin.skewedPartitionFactor](configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) configuration property

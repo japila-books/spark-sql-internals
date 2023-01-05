@@ -233,6 +233,22 @@ Used when:
 
 * [BloomFilterAggregate](expressions/BloomFilterAggregate.md#estimatedNumItemsExpression) expression is created
 
+## <span id="spark.sql.optimizer.runtime.bloomFilter.maxNumBits"> optimizer.runtime.bloomFilter.maxNumBits
+
+**spark.sql.optimizer.runtime.bloomFilter.maxNumBits**
+
+Maximum number of bits for the runtime bloom filter
+
+Default: `67108864L` (8MB)
+
+Must be a [non-zero positive number](expressions/BloomFilterAggregate.md#checkInputDataTypes)
+
+[SQLConf.RUNTIME_BLOOM_FILTER_MAX_NUM_BITS](SQLConf.md#RUNTIME_BLOOM_FILTER_MAX_NUM_BITS)
+
+Used when:
+
+* `BloomFilterAggregate` is requested to [checkInputDataTypes](expressions/BloomFilterAggregate.md#checkInputDataTypes) and for the [numBits](expressions/BloomFilterAggregate.md#numBits)
+
 ## <span id="spark.sql.optimizer.serializer.nestedSchemaPruning.enabled"> optimizer.serializer.nestedSchemaPruning.enabled
 
 **spark.sql.optimizer.serializer.nestedSchemaPruning.enabled**
