@@ -34,7 +34,7 @@ createAggregationBuffer(): BloomFilter
 
 `createAggregationBuffer` [creates a BloomFilter](../BloomFilter.md#create) (with the [estimatedNumItems](#estimatedNumItems) and [numBits](#numBits)).
 
-## <span id="eval"> eval
+## <span id="eval"> Interpreted Execution
 
 ```scala
 eval(

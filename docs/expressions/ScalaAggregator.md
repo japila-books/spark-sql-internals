@@ -50,7 +50,10 @@ eval(
 
 `eval` requests the [outputSerializer](#outputSerializer) to convert the result (of type `OUT` to an [InternalRow](../InternalRow.md)).
 
-In the end, `eval` returns the row if [isSerializedAsStruct](../ExpressionEncoder.md#isSerializedAsStruct) or the 0th element (that is expected to be of [DataType](#dataType)).
+In the end, `eval` returns one of the following:
+
+* The row if [isSerializedAsStruct](../ExpressionEncoder.md#isSerializedAsStruct) (per the [outputEncoder](#outputEncoder))
+* The object at the 0th index (that is assumed to be of [DataType](#dataType))
 
 ## Logical Analysis
 
