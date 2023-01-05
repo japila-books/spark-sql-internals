@@ -371,6 +371,7 @@ nav:
       - BinaryComparison: expressions/BinaryComparison.md
       - BinaryOperator: expressions/BinaryOperator.md
       - BloomFilterAggregate: expressions/BloomFilterAggregate.md
+      - BloomFilterMightContain: expressions/BloomFilterMightContain.md
       - BoundReference: expressions/BoundReference.md
       - CallMethodViaReflection: expressions/CallMethodViaReflection.md
       - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
@@ -990,7 +991,9 @@ nav:
   - ...
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
-    - BloomFilter: BloomFilter.md
+    - Bloom Filter:
+      - BloomFilter: BloomFilter.md
+      - BloomFilterImpl: BloomFilterImpl.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md
     - BindReferences: BindReferences.md
@@ -1016,7 +1019,7 @@ nav:
       - spark-sql-Dataset-basic-actions.md
       - spark-sql-Dataset-actions.md
       - spark-sql-DataFrameNaFunctions.md
-      - spark-sql-DataFrameStatFunctions.md
+      - DataFrameStatFunctions.md
     - Column:
       - Column: Column.md
       - Column Operators: spark-sql-column-operators.md

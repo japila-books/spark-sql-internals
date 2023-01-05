@@ -1,171 +1,12 @@
 # Dataset API &mdash; Untyped Transformations
 
-**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md), a [DataFrameNaFunctions](spark-sql-DataFrameNaFunctions.md) or a [DataFrameStatFunctions](spark-sql-DataFrameStatFunctions.md) (and hence _untyped_).
+**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md), a [DataFrameNaFunctions](spark-sql-DataFrameNaFunctions.md) or a [DataFrameStatFunctions](DataFrameStatFunctions.md) (and hence _untyped_).
 
 !!! note
     Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.
 
-[[methods]]
-.Dataset API's Untyped Transformations
-[cols="1,2",options="header",width="100%"]
-|===
-| Transformation
-| Description
-
-| <<agg, agg>>
-a|
-
-[source, scala]
-----
-agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
-agg(expr: Column, exprs: Column*): DataFrame
-agg(exprs: Map[String, String]): DataFrame
-----
-
-| <<apply, apply>>
-a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
-
-[source, scala]
-----
-apply(colName: String): Column
-----
-
-| <<col, col>>
-a| Selects a column based on the column name (i.e. maps a `Dataset` onto a `Column`)
-
-[source, scala]
-----
-col(colName: String): Column
-----
-
-| <<colRegex, colRegex>>
-a|
-
-[source, scala]
-----
-colRegex(colName: String): Column
-----
-
-Selects a column based on the column name specified as a regex (i.e. maps a `Dataset` onto a `Column`)
-
-| <<crossJoin, crossJoin>>
-a|
-
-[source, scala]
-----
-crossJoin(right: Dataset[_]): DataFrame
-----
-
-| <<cube, cube>>
-a|
-
-[source, scala]
-----
-cube(cols: Column*): RelationalGroupedDataset
-cube(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-| <<drop, drop>>
-a|
-
-[source, scala]
-----
-drop(colName: String): DataFrame
-drop(colNames: String*): DataFrame
-drop(col: Column): DataFrame
-----
-
-| <<groupBy, groupBy>>
-a|
-
-[source, scala]
-----
-groupBy(cols: Column*): RelationalGroupedDataset
-groupBy(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-| <<join, join>>
-a|
-
-[source, scala]
-----
-join(right: Dataset[_]): DataFrame
-join(right: Dataset[_], usingColumn: String): DataFrame
-join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
-join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
-join(right: Dataset[_], joinExprs: Column): DataFrame
-join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
-----
-
-| <<na, na>>
-a|
-
-[source, scala]
-----
-na: DataFrameNaFunctions
-----
-
-| <<rollup, rollup>>
-a|
-
-[source, scala]
-----
-rollup(cols: Column*): RelationalGroupedDataset
-rollup(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-| <<select, select>>
-a|
-
-[source, scala]
-----
-select(cols: Column*): DataFrame
-select(col: String, cols: String*): DataFrame
-----
-
-| <<selectExpr, selectExpr>>
-a|
-
-[source, scala]
-----
-selectExpr(exprs: String*): DataFrame
-----
-
-| <<stat, stat>>
-a|
-
-[source, scala]
-----
-stat: DataFrameStatFunctions
-----
-
-| <<withColumn, withColumn>>
-a|
-
-[source, scala]
-----
-withColumn(colName: String, col: Column): DataFrame
-----
-
-| <<withColumnRenamed, withColumnRenamed>>
-a|
-
-[source, scala]
-----
-withColumnRenamed(existingName: String, newName: String): DataFrame
-----
-|===
-
-=== [[agg]] `agg` Untyped Transformation
-
-[source, scala]
-----
-agg(aggExpr: (String, String), aggExprs: (String, String)*): DataFrame
-agg(expr: Column, exprs: Column*): DataFrame
-agg(exprs: Map[String, String]): DataFrame
-----
-
-`agg`...FIXME
+<!---
+## Review Me
 
 === [[apply]] `apply` Untyped Transformation
 
@@ -213,60 +54,6 @@ Internally, `colRegex` matches the input column name to different regular expres
 
 1. For other column names, `colRegex` (behaves like [col](#col) and) creates a [Column](Column.md#apply) with the column name [resolved](Dataset.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md))
 
-=== [[crossJoin]] `crossJoin` Untyped Transformation
-
-[source, scala]
-----
-crossJoin(right: Dataset[_]): DataFrame
-----
-
-`crossJoin`...FIXME
-
-=== [[cube]] `cube` Untyped Transformation
-
-[source, scala]
-----
-cube(cols: Column*): RelationalGroupedDataset
-cube(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-`cube`...FIXME
-
-=== [[drop]] Dropping One or More Columns -- `drop` Untyped Transformation
-
-[source, scala]
-----
-drop(colName: String): DataFrame
-drop(colNames: String*): DataFrame
-drop(col: Column): DataFrame
-----
-
-`drop`...FIXME
-
-=== [[groupBy]] `groupBy` Untyped Transformation
-
-[source, scala]
-----
-groupBy(cols: Column*): RelationalGroupedDataset
-groupBy(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-`groupBy`...FIXME
-
-=== [[join]] `join` Untyped Transformation
-
-[source, scala]
-----
-join(right: Dataset[_]): DataFrame
-join(right: Dataset[_], usingColumn: String): DataFrame
-join(right: Dataset[_], usingColumns: Seq[String]): DataFrame
-join(right: Dataset[_], usingColumns: Seq[String], joinType: String): DataFrame
-join(right: Dataset[_], joinExprs: Column): DataFrame
-join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
-----
-
-`join`...FIXME
-
 === [[na]] `na` Untyped Transformation
 
 [source, scala]
@@ -274,27 +61,7 @@ join(right: Dataset[_], joinExprs: Column, joinType: String): DataFrame
 na: DataFrameNaFunctions
 ----
 
-`na` simply creates a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> to work with missing data.
-
-=== [[rollup]] `rollup` Untyped Transformation
-
-[source, scala]
-----
-rollup(cols: Column*): RelationalGroupedDataset
-rollup(col1: String, cols: String*): RelationalGroupedDataset
-----
-
-`rollup`...FIXME
-
-=== [[select]] `select` Untyped Transformation
-
-[source, scala]
-----
-select(cols: Column*): DataFrame
-select(col: String, cols: String*): DataFrame
-----
-
-`select`...FIXME
+`na` creates a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> to work with missing data.
 
 === [[selectExpr]] Projecting Columns using SQL Statements -- `selectExpr` Untyped Transformation
 
@@ -335,30 +102,4 @@ scala> ds.select(expr("rand() as random")).show
 |0.6223314406247136|
 +------------------+
 ```
-
-=== [[stat]] `stat` Untyped Transformation
-
-[source, scala]
-----
-stat: DataFrameStatFunctions
-----
-
-`stat` simply creates a <<spark-sql-DataFrameStatFunctions.md#, DataFrameStatFunctions>> to work with statistic functions.
-
-=== [[withColumn]] `withColumn` Untyped Transformation
-
-[source, scala]
-----
-withColumn(colName: String, col: Column): DataFrame
-----
-
-`withColumn`...FIXME
-
-=== [[withColumnRenamed]] `withColumnRenamed` Untyped Transformation
-
-[source, scala]
-----
-withColumnRenamed(existingName: String, newName: String): DataFrame
-----
-
-`withColumnRenamed`...FIXME
+-->
