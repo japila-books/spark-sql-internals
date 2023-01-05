@@ -41,6 +41,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/BloomFilterImpl/</loc>
+         <lastmod>2023-01-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/BucketSpec/</loc>
          <lastmod>2023-01-05</lastmod>
          <changefreq>daily</changefreq>
@@ -147,6 +152,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/DataFrameReader/</loc>
+         <lastmod>2023-01-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/DataFrameStatFunctions/</loc>
          <lastmod>2023-01-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -652,11 +662,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-DataFrameNaFunctions/</loc>
-         <lastmod>2023-01-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/spark-sql-DataFrameStatFunctions/</loc>
          <lastmod>2023-01-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1817,6 +1822,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/BloomFilterAggregate/</loc>
+         <lastmod>2023-01-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/BloomFilterMightContain/</loc>
          <lastmod>2023-01-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
