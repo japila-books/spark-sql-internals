@@ -701,9 +701,21 @@ Used when:
 
 * [RemoveRedundantSorts](physical-optimizations/RemoveRedundantSorts.md) physical optimization is executed
 
+## <span id="runtimeFilterBloomFilterEnabled"><span id="RUNTIME_BLOOM_FILTER_ENABLED"> runtimeFilterBloomFilterEnabled
+
+[spark.sql.optimizer.runtime.bloomFilter.enabled](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled)
+
 ## <span id="RUNTIME_BLOOM_FILTER_MAX_NUM_BITS"> RUNTIME_BLOOM_FILTER_MAX_NUM_BITS
 
 [spark.sql.optimizer.runtime.bloomFilter.maxNumBits](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.maxNumBits)
+
+## <span id="RUNTIME_FILTER_NUMBER_THRESHOLD"> RUNTIME_FILTER_NUMBER_THRESHOLD
+
+[spark.sql.optimizer.runtimeFilter.number.threshold](configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold)
+
+## <span id="runtimeFilterSemiJoinReductionEnabled"><span id="RUNTIME_FILTER_SEMI_JOIN_REDUCTION_ENABLED"> runtimeFilterSemiJoinReductionEnabled
+
+[spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled](configuration-properties.md#spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled)
 
 ## <span id="SKEW_JOIN_SKEWED_PARTITION_FACTOR"> SKEW_JOIN_SKEWED_PARTITION_FACTOR
 

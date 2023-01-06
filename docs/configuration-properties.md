@@ -219,6 +219,20 @@ Default: `(undefined)`
 
 Default: `true`
 
+## <span id="spark.sql.optimizer.runtime.bloomFilter.enabled"> optimizer.runtime.bloomFilter.enabled
+
+**spark.sql.optimizer.runtime.bloomFilter.enabled**
+
+Enables a bloom filter on one side of a shuffle join if the other side has a selective predicate (to reduce the amount of shuffle data)
+
+Default: `false`
+
+Use [SQLConf.runtimeFilterBloomFilterEnabled](SQLConf.md#runtimeFilterBloomFilterEnabled) for the current value
+
+Used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
+
 ## <span id="spark.sql.optimizer.runtime.bloomFilter.expectedNumItems"> optimizer.runtime.bloomFilter.expectedNumItems
 
 **spark.sql.optimizer.runtime.bloomFilter.expectedNumItems**
@@ -248,6 +262,36 @@ Must be a [non-zero positive number](expressions/BloomFilterAggregate.md#checkIn
 Used when:
 
 * `BloomFilterAggregate` is requested to [checkInputDataTypes](expressions/BloomFilterAggregate.md#checkInputDataTypes) and for the [numBits](expressions/BloomFilterAggregate.md#numBits)
+
+## <span id="spark.sql.optimizer.runtimeFilter.number.threshold"> optimizer.runtimeFilter.number.threshold
+
+**spark.sql.optimizer.runtimeFilter.number.threshold**
+
+The total number of injected runtime filters (non-DPP) for a single query. This is to prevent driver OOMs with too many Bloom filters.
+
+Default: `10`
+
+Must be a non-zero positive number
+
+[SQLConf.RUNTIME_FILTER_NUMBER_THRESHOLD](SQLConf.md#RUNTIME_FILTER_NUMBER_THRESHOLD)
+
+Used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
+
+## <span id="spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled"> optimizer.runtimeFilter.semiJoinReduction.enabled
+
+**spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled**
+
+Enables inserting a semi join on one side of a shuffle join if the other side has a selective predicate (to reduce the amount of shuffle data)
+
+Default: `false`
+
+Use [SQLConf.runtimeFilterSemiJoinReductionEnabled](SQLConf.md#runtimeFilterSemiJoinReductionEnabled) for the current value
+
+Used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
 
 ## <span id="spark.sql.optimizer.serializer.nestedSchemaPruning.enabled"> optimizer.serializer.nestedSchemaPruning.enabled
 
