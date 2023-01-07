@@ -1,29 +1,36 @@
-# PredicateHelper Scala Trait
+# PredicateHelper
+
+## <span id="isLikelySelective"> isLikelySelective
+
+```scala
+isLikelySelective(
+  e: Expression): Boolean
+```
+
+`isLikelySelective` is `true` (positive) for the following [Expression](expressions/Expression.md)s:
+
+* `Not` with an [Expression](expressions/Expression.md) that is selective
+* `And` with either [Expression](expressions/Expression.md) selective
+* `Or` with both [Expression](expressions/Expression.md)s selective
+* `StringRegexExpression`
+* `BinaryComparison`
+* [In](expressions/In.md)
+* [InSet](expressions/InSet.md)
+* `StringPredicate`
+* `BinaryPredicate`
+* `MultiLikeBase`
+
+---
+
+`isLikelySelective` is used when:
+
+* `InjectRuntimeFilter` logical optimization is requested to [isSelectiveFilterOverScan](logical-optimizations/InjectRuntimeFilter.md#isSelectiveFilterOverScan)
+* `PartitionPruning` logical optimization is requested to [hasSelectivePredicate](logical-optimizations/PartitionPruning.md#hasSelectivePredicate)
+
+<!---
+## Review Me
 
 `PredicateHelper` defines the <<methods, methods>> that are used to work with predicates (mainly).
-
-[[methods]]
-.PredicateHelper's Methods
-[cols="1,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| <<splitConjunctivePredicates, splitConjunctivePredicates>>
-|
-
-| <<splitDisjunctivePredicates, splitDisjunctivePredicates>>
-|
-
-| <<replaceAlias, replaceAlias>>
-|
-
-| <<canEvaluate, canEvaluate>>
-|
-
-| <<canEvaluateWithinJoin, canEvaluateWithinJoin>>
-|
-|===
 
 === [[splitConjunctivePredicates]] Splitting Conjunctive Predicates -- `splitConjunctivePredicates` Method
 
@@ -35,41 +42,6 @@ splitConjunctivePredicates(condition: Expression): Seq[Expression]
 `splitConjunctivePredicates` takes the input condition expressions/Expression.md[expression] and splits it to two expressions if they are children of a `And` binary expression.
 
 `splitConjunctivePredicates` splits the child expressions recursively down the child expressions until no conjunctive `And` binary expressions exist.
-
-=== [[splitDisjunctivePredicates]] `splitDisjunctivePredicates` Method
-
-[source, scala]
-----
-splitDisjunctivePredicates(condition: Expression): Seq[Expression]
-----
-
-`splitDisjunctivePredicates`...FIXME
-
-NOTE: `splitDisjunctivePredicates` is used when...FIXME
-
-=== [[replaceAlias]] `replaceAlias` Method
-
-[source, scala]
-----
-replaceAlias(
-  condition: Expression,
-  aliases: AttributeMap[Expression]): Expression
-----
-
-`replaceAlias`...FIXME
-
-NOTE: `replaceAlias` is used when...FIXME
-
-=== [[canEvaluate]] `canEvaluate` Method
-
-[source, scala]
-----
-canEvaluate(expr: Expression, plan: LogicalPlan): Boolean
-----
-
-`canEvaluate`...FIXME
-
-NOTE: `canEvaluate` is used when...FIXME
 
 === [[canEvaluateWithinJoin]] `canEvaluateWithinJoin` Method
 
@@ -98,3 +70,4 @@ canEvaluateWithinJoin(expr: Expression): Boolean
 
 * `ReorderJoin` logical optimization rule does ReorderJoin.md#createOrderedJoin[createOrderedJoin]
 ====
+-->

@@ -27,7 +27,7 @@ tryInjectRuntimeFilter(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`tryInjectRuntimeFilter` finds equi-joins in the given [LogicalPlan](../logical-operators/LogicalPlan.md).
+`tryInjectRuntimeFilter` [finds equi-joins](../ExtractEquiJoinKeys.md#unapply) in the given [LogicalPlan](../logical-operators/LogicalPlan.md).
 
 When _some_ requirements are met, `tryInjectRuntimeFilter` [injectFilter](#injectFilter) on the left side first and on the right side if on the left was not successful.
 

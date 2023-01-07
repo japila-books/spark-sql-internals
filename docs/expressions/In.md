@@ -2,6 +2,9 @@
 
 `In` is a [predicate expression](Expression.md#Predicate).
 
+<!---
+## Review Me
+
 `In` is <<creating-instance, created>> when:
 
 * [Column.isin](../spark-sql-column-operators.md#isin) operator is used
@@ -237,3 +240,4 @@ scala> println(CodeFormatter.format(code))
 // I thought I'd reuse ctx to have expression: id#14L evaluated
 inExpr.genCode(ctx)
 ```
+-->

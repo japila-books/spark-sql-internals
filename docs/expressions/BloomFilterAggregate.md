@@ -1,6 +1,6 @@
 # BloomFilterAggregate Expression
 
-`BloomFilterAggregate` is a [TypedImperativeAggregate](TypedImperativeAggregate.md) expression (of [BloomFilter](../BloomFilter.md)s).
+`BloomFilterAggregate` is a [TypedImperativeAggregate](TypedImperativeAggregate.md) expression that uses [BloomFilter](../BloomFilter.md) for an [aggregation buffer](#createAggregationBuffer).
 
 ## Creating Instance
 
@@ -14,7 +14,7 @@
 
 `BloomFilterAggregate` is created when:
 
-* `InjectRuntimeFilter` logical optimization is requested to [injectBloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter)
+* `InjectRuntimeFilter` logical optimization is requested to [inject a BloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter)
 
 ### <span id="estimatedNumItemsExpression"> Estimated Number of Items Expression
 
