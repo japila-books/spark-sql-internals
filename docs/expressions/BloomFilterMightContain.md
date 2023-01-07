@@ -1,6 +1,6 @@
 # BloomFilterMightContain Expression
 
-`BloomFilterMightContain` is a `BinaryExpression`.
+`BloomFilterMightContain` is a [BinaryExpression](Expression.md#BinaryExpression).
 
 ## Creating Instance
 
@@ -11,4 +11,4 @@
 
 `BloomFilterMightContain` is created when:
 
-* `InjectRuntimeFilter` logical optimization is requested to [injectBloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter)
+* [InjectRuntimeFilter](../logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed (and [injects a BloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter))

@@ -33,7 +33,7 @@ When _some_ requirements are met, `tryInjectRuntimeFilter` [injectFilter](#injec
 
 `tryInjectRuntimeFilter` uses [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) configuration property.
 
-## <span id="injectFilter"> injectFilter
+## <span id="injectFilter"> Injecting Filter Operator
 
 ```scala
 injectFilter(
@@ -45,7 +45,7 @@ injectFilter(
 
 `injectFilter`...FIXME
 
-## <span id="injectBloomFilter"> injectBloomFilter
+## <span id="injectBloomFilter"> Injecting BloomFilter
 
 ```scala
 injectBloomFilter(
@@ -58,7 +58,7 @@ injectBloomFilter(
 `injectBloomFilter`...FIXME
 
 !!! note
-    `injectBloomFilter` is used when `InjectRuntimeFilter` is requested to [injectFilter](#injectFilter) with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration properties enabled.
+    `injectBloomFilter` is used when `InjectRuntimeFilter` is requested to [inject a Filter](#injectFilter) with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration properties enabled.
 
 ## <span id="injectInSubqueryFilter"> injectInSubqueryFilter
 
