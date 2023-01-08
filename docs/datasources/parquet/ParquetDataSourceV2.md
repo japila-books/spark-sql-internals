@@ -24,6 +24,10 @@ getTable(
   schema: StructType): Table
 ```
 
+`getTable` is part of the [FileDataSourceV2](../FileDataSourceV2.md#getTable) abstraction.
+
+---
+
 `getTable` [getPaths](#getPaths) from the given `options`.
 
 `getTable` [getTableName](#getTableName) (from the given `options` and the paths).
@@ -31,8 +35,6 @@ getTable(
 `getTable` [getOptionsWithoutPaths](#getOptionsWithoutPaths).
 
 In the end, `getTable` creates a [ParquetTable](ParquetTable.md).
-
-`getTable` is part of the [FileDataSourceV2](../FileDataSourceV2.md#getTable) abstraction.
 
 ## <span id="shortName"> shortName
 

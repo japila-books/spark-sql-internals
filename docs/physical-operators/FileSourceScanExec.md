@@ -108,6 +108,8 @@ nodeNamePrefix: String
 
 `nodeNamePrefix` is part of the [DataSourceScanExec](DataSourceScanExec.md#nodeNamePrefix) abstraction.
 
+---
+
 `nodeNamePrefix` is always **File**.
 
 ```text
@@ -131,7 +133,7 @@ Key              | Name (in web UI)               | Description
 
 ### <span id="metrics-supportsColumnar"> Columnar Scan Metrics
 
-The following performance metrics are available only [supportsColumnar](#supportsColumnar) enabled.
+The following performance metrics are available only with [supportsColumnar](#supportsColumnar) enabled.
 
 Key              | Name (in web UI)               | Description
 -----------------|--------------------------------|---------
@@ -183,6 +185,16 @@ metadata: Map[String, String]
 
 * [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
+## <span id="inputRDDs"> inputRDDs
+
+```scala
+inputRDDs(): Seq[RDD[InternalRow]]
+```
+
+`inputRDDs` is part of the [DataSourceScanExec](DataSourceScanExec.md#inputRDDs) abstraction.
+
+`inputRDDs` is the single [input RDD](#inputRDD).
+
 ## <span id="inputRDD"> Input RDD
 
 ```scala
@@ -198,6 +210,39 @@ When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the under
 
 In case the `HadoopFsRelation` has [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
 
+### <span id="createReadRDD"> Creating RDD for Non-Bucketed Read
+
+```scala
+createReadRDD(
+  readFile: (PartitionedFile) => Iterator[InternalRow],
+  selectedPartitions: Array[PartitionDirectory],
+  fsRelation: HadoopFsRelation): RDD[InternalRow]
+```
+
+!!! note "FIXME: Review Me"
+
+`createReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
+
+* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
+
+* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
+
+`createReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
+
+The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
+
+`createReadRDD` prints out the following INFO message to the logs:
+
+```text
+Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
+```
+
+For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createReadRDD` [gets the HDFS block locations](#getBlockLocations) to create [PartitionedFiles](../datasources/PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../datasources/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+
+`createReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
+
+In the end, `createReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
+
 ### <span id="dynamicallySelectedPartitions"> Dynamically Selected Partitions
 
 ```scala
@@ -209,10 +254,6 @@ dynamicallySelectedPartitions: Array[PartitionDirectory]
 
 `dynamicallySelectedPartitions`...FIXME
 
-`dynamicallySelectedPartitions` is used when:
-
-* `FileSourceScanExec` is requested for the [input RDD](#inputRDD)
-
 ### <span id="selectedPartitions"> Selected Partitions
 
 ```scala
@@ -223,16 +264,6 @@ selectedPartitions: Seq[PartitionDirectory]
     `selectedPartitions` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
 `selectedPartitions`...FIXME
-
-## <span id="inputRDDs"> inputRDDs
-
-```scala
-inputRDDs(): Seq[RDD[InternalRow]]
-```
-
-`inputRDDs` is part of the [DataSourceScanExec](DataSourceScanExec.md#inputRDDs) abstraction.
-
-`inputRDDs` is the single [input RDD](#inputRDD).
 
 ## <span id="bucketedScan"> bucketedScan Flag
 
@@ -346,42 +377,6 @@ Otherwise, `doExecute` simply takes the [input RDD](#inputRDD) as the `unsafeRow
     Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the values of the [supportsBatch](#supportsBatch) and [needsUnsafeRowConversion](#needsUnsafeRowConversion) flags given the number of RDDs.
 
     With [supportsBatch](#supportsBatch) off and [needsUnsafeRowConversion](#needsUnsafeRowConversion) on you should see two more RDDs in the RDD lineage.
-
-## <span id="createNonBucketedReadRDD"> Creating RDD for Non-Bucketed Reads
-
-```scala
-createNonBucketedReadRDD(
-  readFile: (PartitionedFile) => Iterator[InternalRow],
-  selectedPartitions: Array[PartitionDirectory],
-  fsRelation: HadoopFsRelation): RDD[InternalRow]
-```
-
-!!! danger
-    Review Me
-
-`createNonBucketedReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
-
-* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
-
-* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
-
-`createNonBucketedReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
-
-The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
-
-`createNonBucketedReadRDD` prints out the following INFO message to the logs:
-
-```text
-Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
-```
-
-For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createNonBucketedReadRDD` [gets the HDFS block locations](#getBlockLocations) to create [PartitionedFiles](../datasources/PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../datasources/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
-
-`createNonBucketedReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
-
-In the end, `createNonBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
-
-`createNonBucketedReadRDD` is used when `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and neither the optional [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined nor [bucketing is enabled](../SQLConf.md#bucketingEnabled)).
 
 ## <span id="createBucketedReadRDD"> Creating FileScanRDD with Bucketing Support
 
