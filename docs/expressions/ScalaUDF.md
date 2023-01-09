@@ -1,4 +1,4 @@
-# ScalaUDF
+# ScalaUDF Expression
 
 `ScalaUDF` is an [Expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) (and hook it to Catalyst execution path).
 
@@ -31,12 +31,14 @@
 deterministic: Boolean
 ```
 
+`deterministic` is part of the [Expression](Expression.md#deterministic) abstraction.
+
+---
+
 `ScalaUDF` is `deterministic` when all the following hold:
 
 1. [udfDeterministic](#udfDeterministic) is enabled
 1. All the [children](#children) are [deterministic](Expression.md#deterministic)
-
-`deterministic` is part of the [Expression](Expression.md#deterministic) abstraction.
 
 ## <span id="toString"> Text Representation
 
@@ -44,13 +46,15 @@ deterministic: Boolean
 toString: String
 ```
 
+`toString` is part of the [TreeNode](../catalyst/TreeNode.md#toString) abstraction.
+
+---
+
 `toString` uses the [name](#name) and the [children] for the text representation:
 
 ```text
 [name]([comma-separated children])
 ```
-
-`toString` is part of the [TreeNode](../catalyst/TreeNode.md#toString) abstraction.
 
 ## <span id="name"> Name
 
@@ -58,9 +62,11 @@ toString: String
 name: String
 ```
 
-`name` is the [udfName](#udfName) (if defined) or `UDF`.
-
 `name` is part of the [UserDefinedExpression](UserDefinedExpression.md#name) abstraction.
+
+---
+
+`name` is the [udfName](#udfName) (if defined) or `UDF`.
 
 ## <span id="doGenCode"> Code-Generated Expression Evaluation
 
@@ -70,9 +76,11 @@ doGenCode(
   ev: ExprCode): ExprCode
 ```
 
-`doGenCode`...FIXME
-
 `doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+
+---
+
+`doGenCode`...FIXME
 
 ## <span id="eval"> Interpreted Expression Evaluation
 
@@ -81,9 +89,11 @@ eval(
   input: InternalRow): Any
 ```
 
-`eval`...FIXME
-
 `eval` is part of the [Expression](Expression.md#eval) abstraction.
+
+---
+
+`eval`...FIXME
 
 ## <span id="nodePatterns"> Node Patterns
 
@@ -91,9 +101,11 @@ eval(
 nodePatterns: Seq[TreePattern]
 ```
 
-`nodePatterns` is [SCALA_UDF](../catalyst/TreePattern.md#SCALA_UDF).
-
 `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+---
+
+`nodePatterns` is [SCALA_UDF](../catalyst/TreePattern.md#SCALA_UDF).
 
 ## Analysis
 

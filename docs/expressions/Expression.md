@@ -19,7 +19,7 @@ dataType: DataType
 
 The [DataType](../types/DataType.md) of the result of evaluating this expression
 
-### <span id="doGenCode"> Generating Java Source Code
+### <span id="doGenCode"> Generating Java Source Code for Code-Generated Expression Evaluation
 
 ```scala
 doGenCode(
@@ -27,7 +27,9 @@ doGenCode(
   ev: ExprCode): ExprCode
 ```
 
-Generates a Java source code (for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md))
+Generates a Java source code for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) execution
+
+See: [ScalaUDF](ScalaUDF.md#doGenCode)
 
 Used when:
 
@@ -76,11 +78,13 @@ genCode(
   ctx: CodegenContext): ExprCode
 ```
 
-`genCode` returns a `ExprCode` with a Java source code for expression evaluation (on an input [InternalRow](../InternalRow.md)).
+`genCode` returns an `ExprCode` with a Java source code for code-generated expression evaluation.
 
-Similar to [doGenCode](#doGenCode) but supports expression reuse using [Subexpression Elimination](../subexpression-elimination.md).
+`genCode` is [doGenCode](#doGenCode) but does [Subexpression Elimination](../subexpression-elimination.md).
 
 `genCode` is a faster "relative" of the [interpreted expression evaluation](#eval).
+
+---
 
 `genCode` is used when:
 
