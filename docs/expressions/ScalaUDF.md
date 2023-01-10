@@ -137,6 +137,34 @@ scala> scalaUDF.eval()
 res2: Any = Hello World
 ```
 
+### Whole-Stage Code Gen
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+val code = scalaUDF.genCode(ctx).code
+```
+
+```text
+scala> println(code)
+UTF8String result_1 = null;
+try {
+  result_1 = (UTF8String)((scala.Function1[]) references[2] /* converters */)[0].apply(((scala.Function0) references[3] /* udf */).apply());
+} catch (Throwable e) {
+  throw QueryExecutionErrors.failedExecuteUserDefinedFunctionError(
+    "$read$$iw$$Lambda$2020/0x000000080153ad78", "", "string", e);
+}
+
+
+boolean isNull_1 = result_1 == null;
+UTF8String value_1 = null;
+if (!isNull_1) {
+  value_1 = result_1;
+}
+```
+
+### One-Argument UDF
+
 Let's define a UDF of one argument.
 
 ```scala
