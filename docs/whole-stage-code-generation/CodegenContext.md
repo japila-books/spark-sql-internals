@@ -106,6 +106,32 @@ In the end, `generateExpressions` requests every [Expression](../expressions/Exp
 * `GenerateUnsafeProjection` is requested to [create](GenerateUnsafeProjection.md#create)
 * `HashAggregateExec` physical operator is requested for a [Java source code for whole-stage consume path with grouping keys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys)
 
+### <span id="subexpressionElimination"> subexpressionElimination
+
+```scala
+subexpressionElimination(
+  expressions: Seq[Expression]): Unit
+```
+
+`subexpressionElimination`...FIXME
+
+## <span id="subexpressionEliminationForWholeStageCodegen"> subexpressionEliminationForWholeStageCodegen
+
+```scala
+subexpressionEliminationForWholeStageCodegen(
+  expressions: Seq[Expression]): SubExprCodes
+```
+
+`subexpressionEliminationForWholeStageCodegen`...FIXME
+
+---
+
+`subexpressionEliminationForWholeStageCodegen` is used when:
+
+* `ProjectExec` is requested to [doConsume](../physical-operators/ProjectExec.md#doConsume)
+* `AggregateCodegenSupport` is requested to [doConsumeWithoutKeys](../physical-operators/AggregateCodegenSupport.md#doConsumeWithoutKeys)
+* `HashAggregateExec` is requested to [doConsumeWithKeys](../physical-operators/HashAggregateExec.md#doConsumeWithKeys)
+
 ## Demo
 
 ### Adding State

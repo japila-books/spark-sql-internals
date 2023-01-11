@@ -2,9 +2,9 @@
 
 `ScalaUDF` is an [Expression](Expression.md) to manage the lifecycle of a [user-defined function](#function) (and hook it to Catalyst execution path).
 
-`ScalaUDF` is a `NonSQLExpression` (i.e. has no representation in SQL).
+`ScalaUDF` is a `NonSQLExpression` (and so has no representation in SQL).
 
-`ScalaUDF` is a [UserDefinedExpression](UserDefinedExpression.md)
+`ScalaUDF` is a [UserDefinedExpression](UserDefinedExpression.md).
 
 ## Creating Instance
 
@@ -68,7 +68,7 @@ name: String
 
 `name` is the [udfName](#udfName) (if defined) or `UDF`.
 
-## <span id="doGenCode"> Code-Generated Expression Evaluation
+## <span id="doGenCode"> Generating Java Source Code for Code-Generated Expression Evaluation
 
 ```scala
 doGenCode(
@@ -80,7 +80,43 @@ doGenCode(
 
 ---
 
-`doGenCode`...FIXME
+`doGenCode` requests the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md) to [register a reference](../whole-stage-code-generation/CodegenContext.md#addReferenceObj) (that gives a `udf` reference):
+
+Input Argument | Value
+---------------|-------
+ `objName` | `udf`
+ `obj` | The given [function](#function)
+ `className` | `scala.FunctionN` (where `N` is the number of the given [children](#children))
+
+Since Scala functions are executed using `apply` method, `doGenCode` creates a string with the following source code:
+
+```text
+[udf].apply([comma-separated funcArgs])
+```
+
+!!! note
+    There is more in `doGenCode`.
+
+In the end, `doGenCode` generates a block of a Java code in the following format:
+
+```text
+[evalCode]
+[initArgs]
+[boxedType] [resultTerm] = null;
+try {
+  [funcInvocation];
+} catch (Throwable e) {
+  throw QueryExecutionErrors.failedExecuteUserDefinedFunctionError(
+    "[funcCls]", "[inputTypesString]", "[outputType]", e);
+}
+
+
+boolean [isNull] = [resultTerm] == null;
+[dataType] [value] = [defaultValue];
+if (![isNull]) {
+  [value] = [resultTerm];
+}
+```
 
 ## <span id="eval"> Interpreted Expression Evaluation
 
@@ -112,6 +148,8 @@ nodePatterns: Seq[TreePattern]
 [Logical Analyzer](../Analyzer.md) uses [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) and `ResolveEncodersInUDF` logical evaluation rules to analyze queries with `ScalaUDF` expressions.
 
 ## Demo
+
+### Zero-Argument UDF
 
 Let's define a zero-argument UDF.
 

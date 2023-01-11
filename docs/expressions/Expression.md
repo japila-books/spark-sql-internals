@@ -29,7 +29,7 @@ doGenCode(
 
 Generates a Java source code for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) execution
 
-See: [ScalaUDF](ScalaUDF.md#doGenCode)
+See [ScalaUDF](ScalaUDF.md#doGenCode)
 
 Used when:
 
@@ -88,7 +88,7 @@ genCode(
 
 `genCode` is used when:
 
-* `CodegenContext` is requested to [subexpressionEliminationForWholeStageCodegen](../whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen), [subexpressionElimination](../whole-stage-code-generation/CodegenContext.md#subexpressionElimination) and [generateExpressions](../whole-stage-code-generation/CodegenContext.md#generateExpressions)
+* `CodegenContext` is requested to [subexpressionEliminationForWholeStageCodegen](../whole-stage-code-generation/CodegenContext.md#subexpressionEliminationForWholeStageCodegen) and  [generateExpressions](../whole-stage-code-generation/CodegenContext.md#generateExpressions) (with [subexpressionElimination](../whole-stage-code-generation/CodegenContext.md#subexpressionElimination))
 * `GenerateSafeProjection` utility is used to [create a Projection](../whole-stage-code-generation/GenerateSafeProjection.md#create)
 * _others_
 
