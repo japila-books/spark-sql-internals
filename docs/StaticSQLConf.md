@@ -23,6 +23,20 @@ org.apache.spark.sql.AnalysisException: Cannot modify the value of a static conf
   ... 50 elided
 ```
 
+## <span id="spark.sql.codegen.cache.maxEntries"> codegen.cache.maxEntries
+
+**spark.sql.codegen.cache.maxEntries**
+
+**(internal)** When non-zero, enable caching of generated classes for operators and expressions. All jobs share the cache that can use up to the specified number for generated classes.
+
+Default: `100`
+
+Use [SQLConf.codegenCacheMaxEntries](StaticSQLConf.md#codegenCacheMaxEntries) to access the current value
+
+Used when:
+
+* `CodeGenerator` is loaded (and creates the [cache](whole-stage-code-generation/CodeGenerator.md#cache))
+
 ## <span id="spark.sql.broadcastExchange.maxThreadThreshold"><span id="BROADCAST_EXCHANGE_MAX_THREAD_THRESHOLD"> spark.sql.broadcastExchange.maxThreadThreshold
 
 **(internal)** The maximum degree of parallelism to fetch and broadcast the table. If we encounter memory issue like frequently full GC or OOM when broadcast table we can decrease this number in order to reduce memory usage. Notice the number should be carefully chosen since decreasing parallelism might cause longer waiting for other broadcasting. Also, increasing parallelism may cause memory problem.

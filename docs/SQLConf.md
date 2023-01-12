@@ -276,6 +276,10 @@ Used when:
 
 * [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) and [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimizations are executed
 
+## <span id="codegenCacheMaxEntries"><span id="CODEGEN_CACHE_MAX_ENTRIES"> codegenCacheMaxEntries
+
+[spark.sql.codegen.cache.maxEntries](StaticSQLConf.md#spark.sql.codegen.cache.maxEntries)
+
 ## <span id="COLUMN_BATCH_SIZE"><span id="columnBatchSize"> columnBatchSize
 
 The value of [spark.sql.inMemoryColumnarStorage.batchSize](configuration-properties.md#spark.sql.inMemoryColumnarStorage.batchSize) configuration property

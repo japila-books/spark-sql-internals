@@ -1,6 +1,6 @@
 # CodegenContext
 
-`CodegenContext` is a context with objects for [Whole-Stage Java Code Generation](index.md).
+`CodegenContext` is a context for [Whole-Stage Java Code Generation](index.md) to track objects (that could be passed into generated Java code).
 
 ## Creating Instance
 
