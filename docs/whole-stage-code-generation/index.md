@@ -19,6 +19,12 @@ Physical operators that support code generation extend [CodegenSupport](../physi
 
 Whole-Stage Java Code Generation does not support (_skips_) physical operators that produce a domain object (the [DataType](../expressions/Expression.md#dataType) of the [output expression](../catalyst/QueryPlan.md#output) is [ObjectType](../types/index.md#ObjectType)) as domain objects cannot be written into an [UnsafeRow](../UnsafeRow.md).
 
+## <span id="AggregateCodegenSupport"> AggregateCodegenSupport
+
+For aggregation, Whole-Stage Code Generation is supported by [AggregateCodegenSupport](../physical-operators/AggregateCodegenSupport.md) physical operators ([HashAggregateExec](../physical-operators/HashAggregateExec.md) and [SortAggregateExec](../physical-operators/SortAggregateExec.md)) and only when there are no [ImperativeAggregate](../expressions/ImperativeAggregate.md)s ([supportCodegen](../physical-operators/AggregateCodegenSupport.md#supportCodegen)).
+
+In other words, Whole-Stage Code Generation will only be used for aggreation for [DeclarativeAggregate](../expressions/DeclarativeAggregate.md) and `TypedAggregateExpression` expressions.
+
 ## Fast Driver-Local Collect/Take Paths
 
 The following physical operators cannot be a root of [WholeStageCodegen](../physical-operators/WholeStageCodegenExec.md#insertWholeStageCodegen) to support the fast driver-local collect/take paths:

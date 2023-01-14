@@ -1,6 +1,6 @@
 # AggregateCodegenSupport Physical Operators
 
-`AggregateCodegenSupport` is an [extension](#contract) of the [BaseAggregateExec](BaseAggregateExec.md) abstraction for [aggregate physical operators](#implementations) that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) ([produce](#doProduce) and [consume](#doConsume) code execution paths).
+`AggregateCodegenSupport` is an [extension](#contract) of the [BaseAggregateExec](BaseAggregateExec.md) abstraction for [aggregate physical operators](#implementations) that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) (with [produce](#doProduce) and [consume](#doConsume) code execution paths).
 
 `AggregateCodegenSupport` is a `BlockingOperatorWithCodegen`.
 
@@ -60,6 +60,21 @@ Used when:
 
 * [HashAggregateExec](HashAggregateExec.md)
 * [SortAggregateExec](SortAggregateExec.md)
+
+## <span id="supportCodegen"> supportCodegen Flag
+
+```scala
+supportCodegen: Boolean
+```
+
+`supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
+
+---
+
+`supportCodegen` is enabled (`true`) when all the following hold:
+
+* All `AttributeReference`s in the [aggregateBufferAttributes](#aggregateBufferAttributes) use [mutable data types](../UnsafeRow.md#isMutable)
+* There are no [ImperativeAggregate](../expressions/ImperativeAggregate.md)s (among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions))
 
 ## <span id="doProduce"> Generating Java Source Code for Produce Path
 
