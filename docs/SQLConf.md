@@ -405,6 +405,10 @@ Used when:
 * `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](datasources/CatalogFileIndex.md) when no table statistics are available)
 * `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
+## <span id="ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN"> ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN
+
+[spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled](configuration-properties.md#spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled)
+
 ## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
 
 [spark.sql.exchange.reuse](configuration-properties.md#spark.sql.exchange.reuse)

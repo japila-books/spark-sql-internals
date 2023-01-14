@@ -1,49 +1,44 @@
 # WholeStageCodegenExec Unary Physical Operator
 
-`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that is one of the two physical operators that lay the foundation for the [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) for a **Codegened Execution Pipeline** of a structured query.
+`WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that (alongside [InputAdapter](InputAdapter.md)) lays the foundation for the [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) for a **Codegened Execution Pipeline** of a structured query.
 
-!!! note
-    [InputAdapter](InputAdapter.md) is the other physical operator for Codegened Execution Pipeline of a structured query.
+## Creating Instance
 
-`WholeStageCodegenExec` itself supports the [Java code generation](CodegenSupport.md) and so when <<doExecute, executed>> triggers code generation for the entire child physical plan subtree of a structured query.
+`WholeStageCodegenExec` takes the following to be created:
+
+* <span id="child"> Child [SparkPlan](SparkPlan.md) (a physical subquery tree)
+* <span id="codegenStageId"> Codegen Stage Id
+
+`WholeStageCodegenExec` is created when:
+
+* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is [executed](../physical-optimizations/CollapseCodegenStages.md#insertWholeStageCodegen) (with [spark.sql.codegen.wholeStage](../configuration-properties.md#spark.sql.codegen.wholeStage) configuration property enabled)
+
+## <span id="CodegenSupport"> CodegenSupport
+
+`WholeStageCodegenExec` is a [CodegenSupport](CodegenSupport.md) and, when [executed](#doExecute), triggers code generation for the whole child physical plan subtree (_stage_) of a structured query.
+
+## <span id="metrics"> Performance Metrics
+
+### <span id="pipelineTime"> pipelineTime
+
+Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
+
+![WholeStageCodegenExec in web UI (Details for Query)](../images/spark-sql-WholeStageCodegenExec-webui.png)
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.WholeStageCodegenExec` logger to see what happens inside.
+
+Add the following line to `conf/log4j.properties`:
 
 ```text
-val q = spark.range(10).where('id === 4)
-scala> q.queryExecution.debug.codegen
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*(1) Filter (id#3L = 4)
-+- *(1) Range (0, 10, step=1, splits=8)
-
-Generated code:
-/* 001 */ public Object generate(Object[] references) {
-/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
-/* 003 */ }
-/* 004 */
-/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
-...
+log4j.logger.org.apache.spark.sql.execution.WholeStageCodegenExec=ALL
 ```
 
-!!! tip "Debugging Query Execution"
-    Consider using [Debugging Query Execution facility](../debugging-query-execution.md) to deep dive into the whole-stage code generation
+Refer to [Logging](../spark-logging.md).
 
-```text
-val q = spark.range(10).where('id === 4)
-import org.apache.spark.sql.execution.debug._
-scala> q.debugCodegen()
-Found 1 WholeStageCodegen subtrees.
-== Subtree 1 / 1 ==
-*(1) Filter (id#0L = 4)
-+- *(1) Range (0, 10, step=1, splits=8)
-
-Generated code:
-/* 001 */ public Object generate(Object[] references) {
-/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
-/* 003 */ }
-/* 004 */
-/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
-...
-```
+<!---
+## Review Me
 
 [TIP]
 ====
@@ -78,21 +73,6 @@ Generated code:
 /* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
 ...
 ----
-
-`WholeStageCodegenExec` is <<creating-instance, created>> when:
-
-* [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (with [spark.sql.codegen.wholeStage](../whole-stage-code-generation/index.md#spark.sql.codegen.wholeStage) configuration property enabled)
-
-* `FileSourceScanExec` leaf physical operator is <<FileSourceScanExec.md#doExecute, executed>> (with the <<FileSourceScanExec.md#supportsBatch, supportsBatch>> flag enabled)
-
-* `InMemoryTableScanExec` leaf physical operator is <<InMemoryTableScanExec.md#doExecute, executed>> (with the <<InMemoryTableScanExec.md#supportsBatch, supportsBatch>> flag enabled)
-
-* `DataSourceV2ScanExec` leaf physical operator is <<DataSourceV2ScanExec.md#doExecute, executed>> (with the <<DataSourceV2ScanExec.md#supportsBatch, supportsBatch>> flag enabled)
-
-[[creating-instance]]
-[[child]]
-[[codegenStageId]]
-`WholeStageCodegenExec` takes a single `child` SparkPlan.md[physical operator] (a physical subquery tree) and *codegen stage ID* when created.
 
 NOTE: `WholeStageCodegenExec` <<doCodeGen, requires>> that the single <<child, child>> physical operator [supports Java code generation](CodegenSupport.md).
 
@@ -170,22 +150,6 @@ scala> q.explain
 *Filter (id#0L = 4)
 +- *Range (0, 10, step=1, splits=8)
 ----
-
-NOTE: SparkPlan.md[Physical plans] that support code generation extend [CodegenSupport](CodegenSupport.md).
-
-[[logging]]
-[TIP]
-====
-Enable `DEBUG` logging level for `org.apache.spark.sql.execution.WholeStageCodegenExec` logger to see what happens inside.
-
-Add the following line to `conf/log4j.properties`:
-
-```
-log4j.logger.org.apache.spark.sql.execution.WholeStageCodegenExec=DEBUG
-```
-
-Refer to spark-logging.md[Logging].
-====
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -324,25 +288,6 @@ generatedClassName(): String
 
 `generatedClassName` is used when `WholeStageCodegenExec` unary physical operator is requested to [generate the Java source code for the child physical plan subtree](#doCodeGen).
 
-=== [[isTooManyFields]] `isTooManyFields` Object Method
-
-[source, scala]
-----
-isTooManyFields(conf: SQLConf, dataType: DataType): Boolean
-----
-
-`isTooManyFields`...FIXME
-
-NOTE: `isTooManyFields` is used when...FIXME
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-pipelineTime    | (empty)   | Time of how long the whole-stage codegend pipeline has been running (i.e. the elapsed time since the underlying [BufferedRowIterator](../whole-stage-code-generation/BufferedRowIterator.md) had been created and the internal rows were all consumed).
-
-![WholeStageCodegenExec in web UI (Details for Query)](../images/spark-sql-WholeStageCodegenExec-webui.png)
-
 ## Demo
 
 ```text
@@ -358,3 +303,4 @@ scala> println(consumeCode)
 my_code
 append(my_value);
 ```
+-->

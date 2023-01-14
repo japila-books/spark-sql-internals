@@ -4,17 +4,81 @@
 
 Whole-Stage Java Code Generation improves the execution performance of a query by collapsing a query tree into a single optimized function that eliminates virtual function calls and leverages CPU registers for intermediate data.
 
+The Whole-Stage Code Generation framework is row-based. If a physical operator supports [columnar execution](../physical-operators/SparkPlan.md#supportsColumnar), it can't at the same time support whole-stage-codegen.
+
 !!! note
     Whole-Stage Code Generation is used by some modern massively parallel processing (MPP) databases to achieve a better query execution performance.
 
     See [Efficiently Compiling Efficient Query Plans for Modern Hardware (PDF)](http://www.vldb.org/pvldb/vol4/p539-neumann.pdf).
 
-!!! note
-    [Janino](https://janino-compiler.github.io/janino/) is used to compile a Java source code into a Java class at runtime.
+## <span id="CodegenSupport"> CodegenSupport Physical Operators
 
-## CollapseCodegenStages Physical Preparation Rule
+Physical operators that support code generation extend [CodegenSupport](../physical-operators/CodegenSupport.md) (and keep [supportCodegen](../physical-operators/CodegenSupport.md#supportCodegen) flag enabled).
 
-Before a query is executed, [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as `WholeStageCodegen` (possibly with [InputAdapter](../physical-operators/InputAdapter.md) in-between for physical operators with no support for Java code generation).
+## <span id="ObjectType"> ObjectType
+
+Whole-Stage Java Code Generation does not support (_skips_) physical operators that produce a domain object (the [DataType](../expressions/Expression.md#dataType) of the [output expression](../catalyst/QueryPlan.md#output) is [ObjectType](../types/index.md#ObjectType)) as domain objects cannot be written into an [UnsafeRow](../UnsafeRow.md).
+
+## Fast Driver-Local Collect/Take Paths
+
+The following physical operators cannot be a root of [WholeStageCodegen](../physical-operators/WholeStageCodegenExec.md#insertWholeStageCodegen) to support the fast driver-local collect/take paths:
+
+* [LocalTableScanExec](../physical-operators/LocalTableScanExec.md)
+* `CommandResultExec`
+
+## <span id="WholeStageCodegenExec"> WholeStageCodegenExec Physical Operator
+
+[WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md) physical operator
+
+## <span id="Janino"> Janino
+
+[Janino](https://janino-compiler.github.io/janino/) is used to compile a Java source code into a Java class at runtime.
+
+## Debugging Query Execution
+
+[Debugging Query Execution facility](../debugging-query-execution.md) allows deep dive into the whole-stage code generation.
+
+```scala
+val q = spark.range(10).where('id === 4)
+```
+
+```text
+scala> q.queryExecution.debug.codegen
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*(1) Filter (id#3L = 4)
++- *(1) Range (0, 10, step=1, splits=8)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+...
+```
+
+```text
+val q = spark.range(10).where('id === 4)
+import org.apache.spark.sql.execution.debug._
+scala> q.debugCodegen()
+Found 1 WholeStageCodegen subtrees.
+== Subtree 1 / 1 ==
+*(1) Filter (id#0L = 4)
++- *(1) Range (0, 10, step=1, splits=8)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+...
+```
+
+## <span id="CollapseCodegenStages"> CollapseCodegenStages Physical Preparation Rule
+
+At query execution planning, [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical preparation rule finds the physical query plans that support codegen and collapses them together as a [WholeStageCodegen](#WholeStageCodegen) (possibly with [InputAdapter](../physical-operators/InputAdapter.md) in-between for physical operators with no support for Java code generation).
 
 `CollapseCodegenStages` is part of the sequence of physical preparation rules [QueryExecution.preparations](../QueryExecution.md#preparations) that will be applied in order to the physical plan before execution.
 

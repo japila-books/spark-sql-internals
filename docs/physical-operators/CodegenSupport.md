@@ -236,18 +236,20 @@ Found 2 WholeStageCodegen subtrees.
 supportCodegen: Boolean
 ```
 
-`supportCodegen` allows physical operators to disable Java code generation.
+`supportCodegen` flag allows [physical operators](#implementations) (that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)) to disable Java code generation temporarily under certain conditions.
 
-`supportCodegen` flag is to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
+`supportCodegen` is enabled (`true`) by default.
 
-`supportCodegen` flag is turned on by default.
+`supportCodegen` can be disabled (`false`) in the following physical operators:
 
-!!! note
-    `supportCodegen` is turned off in the following physical operators:
+* [AggregateCodegenSupport](AggregateCodegenSupport.md#supportCodegen)
+* [BroadcastNestedLoopJoinExec](BroadcastNestedLoopJoinExec.md#supportCodegen)
+* [GenerateExec](GenerateExec.md) (based on [supportCodegen](../expressions/Generator.md#supportCodegen) of a [Generator](GenerateExec.md#generator) expression)
+* [ShuffledHashJoinExec](ShuffledHashJoinExec.md#supportCodegen) (for all [join type](ShuffledHashJoinExec.md#joinType)s except `FullOuter` unless [spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled](../configuration-properties.md#spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled) is enabled)
+* [SortAggregateExec](SortAggregateExec.md#supportCodegen)
+* [SortMergeJoinExec](SortMergeJoinExec.md#supportCodegen)
 
-    * [GenerateExec](GenerateExec.md)
-    * [HashAggregateExec](HashAggregateExec.md) with [ImperativeAggregate](../expressions/ImperativeAggregate.md) expressions
-    * [SortMergeJoinExec](SortMergeJoinExec.md) for all [join types](../joins.md#join-types) except `INNER` and `CROSS`
+`supportCodegen` flag is used to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
 
 ## <span id="prepareRowVar"> prepareRowVar Internal Method
 

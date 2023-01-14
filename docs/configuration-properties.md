@@ -28,6 +28,16 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled"> codegen.join.fullOuterShuffledHashJoin.enabled
+
+**spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled**
+
+**(internal)** Enables [Whole-Stage Code Generation](whole-stage-code-generation/index.md) for FULL OUTER [shuffled hash join](physical-operators/ShuffledHashJoinExec.md#supportCodegen)
+
+Default: `true`
+
+Use [SQLConf.ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN](SQLConf.md#ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN) to access the property
+
 ## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
 
 **spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**
