@@ -121,7 +121,7 @@ In the end, `reduceCodeSize` sets the code of the input `ExprCode` to the follow
 
 The `funcFullName` is the [fresh term name](../whole-stage-code-generation/CodegenContext.md#freshName) for the [name of the current expression node](../catalyst/TreeNode.md#nodeName).
 
-## <span id="deterministic"> deterministic Flag
+## <span id="deterministic"> deterministic
 
 `Expression` is **deterministic** when evaluates to the same result for the same input(s). An expression is deterministic if all the [child expressions](../catalyst/TreeNode.md#children) are.
 
@@ -135,6 +135,20 @@ import org.apache.spark.sql.catalyst.expressions.Expression
 assert(e.isInstanceOf[Expression])
 assert(e.deterministic)
 ```
+
+## <span id="foldable"> foldable
+
+```scala
+foldable: Boolean
+```
+
+`foldable` is `false` (and is expected to be overriden by [implementations](#implementations)).
+
+`foldable` expression is a candidate for static evaluation before the query is executed.
+
+See:
+
+* [AggregateFunction](AggregateFunction.md#foldable)
 
 ## Demo
 

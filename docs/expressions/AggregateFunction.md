@@ -2,6 +2,8 @@
 
 `AggregateFunction` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [aggregate functions](#implementations).
 
+`AggregateFunction` can never be [foldable](#foldable).
+
 ## Contract
 
 ### <span id="aggBufferAttributes"> Aggregation Buffer Attributes
@@ -19,6 +21,10 @@ aggBufferSchema: StructType
 ```
 
 [Schema](../types/StructType.md) of an aggregation buffer with partial aggregate results
+
+Used when:
+
+* `AggregationIterator` is requested to [initializeAggregateFunctions](../physical-operators/AggregationIterator.md#initializeAggregateFunctions)
 
 ### <span id="inputAggBufferAttributes"> inputAggBufferAttributes
 
