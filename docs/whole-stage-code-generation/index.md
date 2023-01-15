@@ -4,12 +4,18 @@
 
 Whole-Stage Java Code Generation improves the execution performance of a query by collapsing a query tree into a single optimized function that eliminates virtual function calls and leverages CPU registers for intermediate data.
 
-The Whole-Stage Code Generation framework is row-based. If a physical operator supports [columnar execution](../physical-operators/SparkPlan.md#supportsColumnar), it can't at the same time support whole-stage-codegen.
-
 !!! note
     Whole-Stage Code Generation is used by some modern massively parallel processing (MPP) databases to achieve a better query execution performance.
 
     See [Efficiently Compiling Efficient Query Plans for Modern Hardware (PDF)](http://www.vldb.org/pvldb/vol4/p539-neumann.pdf).
+
+## <span id="ColumnarBatch"> Columnar Execution
+
+The Whole-Stage Code Generation framework is row-based.
+
+The [input RDDs](../physical-operators/CodegenSupport.md#inputRDDs) of the physical operators of a whole-stage pipeline are all `RDD[InternalRow]`s. The output RDD of a whole-stage pipeline is also an `RDD[InternalRow]`. However, the input to a whole-stage code gen stage can be columnar (`RDD[ColumnarBatch]`).
+
+If a physical operator supports [columnar execution](../physical-operators/SparkPlan.md#supportsColumnar), it can't at the same time support whole-stage-codegen.
 
 ## <span id="CodegenSupport"> CodegenSupport Physical Operators
 

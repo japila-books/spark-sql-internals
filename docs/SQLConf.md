@@ -518,8 +518,6 @@ Used when:
 
 [spark.sql.codegen.hugeMethodLimit](configuration-properties.md#spark.sql.codegen.hugeMethodLimit)
 
-Used when `WholeStageCodegenExec` unary physical operator is requested to <<WholeStageCodegenExec.md#doExecute, execute>> (and generate a `RDD[InternalRow]`), i.e. when the compiled function exceeds this threshold, the whole-stage codegen is deactivated for this subtree of the query plan.
-
 ## <span id="ignoreCorruptFiles"><span id="IGNORE_CORRUPT_FILES"> ignoreCorruptFiles
 
 The value of [spark.sql.files.ignoreCorruptFiles](configuration-properties.md#spark.sql.files.ignoreCorruptFiles) configuration property
@@ -1115,8 +1113,6 @@ Used in:
 ## <span id="wholeStageFallback"> wholeStageFallback
 
 [spark.sql.codegen.fallback](configuration-properties.md#spark.sql.codegen.fallback)
-
-Used when [WholeStageCodegenExec](physical-operators/WholeStageCodegenExec.md) physical operator is executed.
 
 ## <span id="wholeStageMaxNumFields"> wholeStageMaxNumFields
 
