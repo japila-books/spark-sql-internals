@@ -18,6 +18,8 @@ theme:
   features:
     # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-annotations
     - content.code.annotate
+    # https://squidfunk.github.io/mkdocs-material/upgrade/#contentcodecopy
+    - content.code.copy
     - navigation.indexes
     - navigation.instant
     - navigation.tabs
