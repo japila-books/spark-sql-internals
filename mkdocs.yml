@@ -196,7 +196,6 @@ nav:
       - Filter: Filter.md
     - ExecutionListenerBus: ExecutionListenerBus.md
     - ExecutionListenerManager: ExecutionListenerManager.md
-    - Observation: Observation.md
     - Query Execution:
       - query-execution/index.md
       - Logical Analyzer: Analyzer.md
@@ -961,6 +960,7 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
+    - Observation: Observation.md
     - QueryExecutionListener: QueryExecutionListener.md
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md

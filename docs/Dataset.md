@@ -42,6 +42,27 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
+## <span id="observe"> observe
+
+```scala
+observe(
+  observation: Observation,
+  expr: Column,
+  exprs: Column*): Dataset[T]
+observe(
+  name: String,
+  expr: Column,
+  exprs: Column*): Dataset[T]
+```
+
+When executed with `name` argument, `observe` creates a typed `Dataset` with a [CollectMetrics](logical-operators/CollectMetrics.md) logical operator.
+
+For an [Observation](Observation.md) argument, `observe` requests the `Observation` to [observe](Observation.md#on) this `Dataset` (that in turn uses the `name`-argument `observe`).
+
+!!! note "Requirements"
+    1. An `Observation` can be used with a `Dataset` only once
+    1. `Observation` does not support streaming `Dataset`s.
+
 ## <span id="repartition"> repartition
 
 ```scala
