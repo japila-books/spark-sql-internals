@@ -126,7 +126,6 @@ nav:
   - Internals:
     - Overview: overview.md
     - Configuration Properties: configuration-properties.md
-    - CatalogStatistics: CatalogStatistics.md
     - DataSource: DataSource.md
     - Connector API:
       - connector/index.md
@@ -225,6 +224,7 @@ nav:
       - AnalyzePartitionCommand: logical-operators/AnalyzePartitionCommand.md
       - AnalyzeTable: logical-operators/AnalyzeTable.md
       - AnalyzeTableCommand: logical-operators/AnalyzeTableCommand.md
+      - AnalyzeTablesCommand: logical-operators/AnalyzeTablesCommand.md
       - AppendData: logical-operators/AppendData.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - ClearCacheCommand: logical-operators/ClearCacheCommand.md
@@ -265,6 +265,7 @@ nav:
       - Join: logical-operators/Join.md
       - LeafNode: logical-operators/LeafNode.md
       - LeafRunnableCommand: logical-operators/LeafRunnableCommand.md
+      - LoadDataCommand: logical-operators/LoadDataCommand.md
       - LocalRelation: logical-operators/LocalRelation.md
       - LogicalPlan: logical-operators/LogicalPlan.md
       - LogicalQueryStage: logical-operators/LogicalQueryStage.md
@@ -314,6 +315,7 @@ nav:
       - Catalog:
         - Catalog: Catalog.md
         - CatalogImpl: CatalogImpl.md
+        - CatalogStatistics: CatalogStatistics.md
       - ExperimentalMethods: ExperimentalMethods.md
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md

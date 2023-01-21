@@ -1,6 +1,6 @@
 # CatalogStatistics
 
-`CatalogStatistics` are table and partition statistics that are stored in an [external catalog](ExternalCatalog.md).
+`CatalogStatistics` represents the table- and column-level statistics (that are stored in [SessionCatalog](SessionState.md#catalog)).
 
 ## Creating Instance
 
@@ -12,18 +12,44 @@
 
 `CatalogStatistics` is created when:
 
-* [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md#analyzeColumnInCatalog) and `AlterTableAddPartitionCommand` logical commands are executed (and store statistics in [ExternalCatalog](ExternalCatalog.md))
-* `CommandUtils` utility is used to [updating existing table statistics](CommandUtils.md#updateTableStats) and [current statistics (if changed)](CommandUtils.md#compareAndGetNewStats)
-* `HiveExternalCatalog` is requested to [convert properties to Spark statistics](hive/HiveExternalCatalog.md#statsFromProperties)
-* `HiveClientImpl` utility is used to [readHiveStats](hive/HiveClientImpl.md#readHiveStats)
+* [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md#analyzeColumnInCatalog) and `AlterTableAddPartitionCommand` logical commands are executed (and [alter table statistics](SessionCatalog.md#alterTableStats) in [SessionCatalog](SessionState.md#catalog))
+* `CommandUtils` is requested to [update existing table statistics](CommandUtils.md#updateTableStats) and [current statistics (if changed)](CommandUtils.md#compareAndGetNewStats)
+* `HiveExternalCatalog` is requested to [convert Hive properties to Spark statistics](hive/HiveExternalCatalog.md#statsFromProperties)
+* `HiveClientImpl` is requested to [readHiveStats](hive/HiveClientImpl.md#readHiveStats)
 * `PruneHiveTablePartitions` is requested to `updateTableMeta`
 * [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
+## Analyze Commands
+
+`CatalogStatistics` is created (with statistics from a catalog) when:
+
+* `HiveExternalCatalog` is requested to [statsFromProperties](hive/HiveExternalCatalog.md#statsFromProperties)
+* `HiveClientImpl` is requested to [readHiveStats](hive/HiveClientImpl.md#readHiveStats)
+* `PruneHiveTablePartitions` is requested to `updateTableMeta`
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
+
+`CatalogStatistics` is created (to [alter table statistics](SessionCatalog.md#alterTableStats) directly or indirectly using [CommandUtils](CommandUtils.md)) for the following logical commands:
+
+Logical Command | SQL Statement
+----------------|--------------
+ [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md) | [ANALYZE TABLE FOR COLUMNS](sql/AstBuilder.md#visitAnalyze)
+ [AnalyzePartitionCommand](logical-operators/AnalyzePartitionCommand.md) | [ANALYZE TABLE PARTITION](sql/AstBuilder.md#visitAnalyze)
+ [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md) | [ANALYZE TABLE](sql/AstBuilder.md#visitAnalyze)
+ [AnalyzeTablesCommand](logical-operators/AnalyzeTablesCommand.md) | `ANALYZE TABLES`
+ `AlterTableAddPartitionCommand` | `ALTER TABLE ADD PARTITION`
+ `AlterTableDropPartitionCommand` | `ALTER TABLE DROP PARTITION`
+ `AlterTableSetLocationCommand` | `ALTER TABLE SET LOCATION`
+ [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) |
+ [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) |
+ [InsertIntoHiveTable](hive/InsertIntoHiveTable.md) |
+ [LoadDataCommand](logical-operators/LoadDataCommand.md) |
+ [TruncateTableCommand](logical-operators/TruncateTableCommand.md) |
+
 ## CatalogStatistics and Statistics
 
-`CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hint](logical-operators/Statistics.md#hints) in metastore).
+`CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hints](logical-operators/Statistics.md#hints) in metastore).
 
-`CatalogStatistics` are often stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are the **Spark statistics**.
+`CatalogStatistics` are often stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are **Spark statistics**.
 
 ## <span id="simpleString"> Readable Textual Representation
 
@@ -37,13 +63,7 @@ simpleString: String
 [sizeInBytes] bytes, [rowCount] rows
 ```
 
-```text
-scala> :type stats
-Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
-
-scala> stats.map(_.simpleString).foreach(println)
-714 bytes, 2 rows
-```
+---
 
 `simpleString` is used when:
 
@@ -75,11 +95,6 @@ Otherwise (when [cost-based optimization](cost-based-optimization/index.md) is d
 
 ## Demo
 
-```text
-scala> :type spark.sessionState.catalog
-org.apache.spark.sql.catalyst.catalog.SessionCatalog
-```
-
 ```scala
 // Using higher-level interface to access CatalogStatistics
 // Make sure that you ran ANALYZE TABLE (as described above)
@@ -98,9 +113,10 @@ Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
 val tid = spark.sessionState.sqlParser.parseTableIdentifier(tableName)
 val metadata = spark.sessionState.catalog.getTempViewOrPermanentTableMetadata(tid)
 val stats = metadata.stats
+assert(stats.isInstanceOf[Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]])
 ```
 
-```text
-scala> :type stats
-Option[org.apache.spark.sql.catalyst.catalog.CatalogStatistics]
+```scala
+stats.map(_.simpleString).foreach(println)
+// 714 bytes, 2 rows
 ```

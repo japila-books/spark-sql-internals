@@ -1,11 +1,25 @@
 # AnalyzePartitionCommand Logical Command
 
-`AnalyzePartitionCommand` is a RunnableCommand.md[logical command] that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
+`AnalyzePartitionCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents [ANALYZE TABLE PARTITION COMPUTE STATISTICS](../sql/AstBuilder.md#visitAnalyze) ([AnalyzeTable](AnalyzeTable.md) logical command with [partition specification](#partitionSpec)) at analysis.
 
-`AnalyzePartitionCommand` is <<creating-instance, created>> exclusively for spark-sql-SparkSqlAstBuilder.md#AnalyzePartitionCommand[ANALYZE TABLE] with `PARTITION` specification only (i.e. no `FOR COLUMNS` clause).
+!!! note "AnalyzeTableCommand Logical Command"
+    [AnalyzeTable](AnalyzeTable.md) logical command without [partition specification](#partitionSpec) is resolved to [AnalyzeTableCommand](AnalyzeTableCommand.md) logical command.
 
-[source, scala]
-----
+## Creating Instance
+
+`AnalyzePartitionCommand` takes the following to be created:
+
+* <span id="tableIdent"> `TableIdentifier`
+* <span id="partitionSpec"> Partition Spec (`Map[String, Option[String]]`)
+* <span id="noscan"> `noscan` flag (default: `true`) that indicates whether [NOSCAN](../cost-based-optimization/index.md#NOSCAN) option was used or not
+
+`AnalyzePartitionCommand` is created when:
+
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve an [AnalyzeTable](AnalyzeTable.md) logical command)
+
+## Demo
+
+```text
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
 val analyzeTable = "ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS"
 val plan = spark.sql(analyzeTable).queryExecution.logical
@@ -13,7 +27,12 @@ import org.apache.spark.sql.execution.command.AnalyzePartitionCommand
 val cmd = plan.asInstanceOf[AnalyzePartitionCommand]
 scala> println(cmd)
 AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
-----
+```
+
+<!---
+## Review Me
+
+that <<run, computes statistics>> (i.e. <<total-size-stat, total size>> and <<row-count-stat, row count>>) for <<partitionSpec, table partitions>> and stores the stats in a metastore.
 
 === [[run]] Executing Logical Command (Computing Partition-Level Statistics and Altering Metastore) -- `run` Method
 
@@ -49,36 +68,4 @@ In the end, `run` [alters table partition metadata](../SessionCatalog.md#alterPa
 ```text
 ANALYZE TABLE is not supported on views.
 ```
-
-=== [[calculateRowCountsPerPartition]] Computing Row Count Statistics Per Partition -- `calculateRowCountsPerPartition` Internal Method
-
-[source, scala]
-----
-calculateRowCountsPerPartition(
-  sparkSession: SparkSession,
-  tableMeta: CatalogTable,
-  partitionValueSpec: Option[TablePartitionSpec]): Map[TablePartitionSpec, BigInt]
-----
-
-`calculateRowCountsPerPartition`...FIXME
-
-NOTE: `calculateRowCountsPerPartition` is used exclusively when `AnalyzePartitionCommand` is <<run, executed>>.
-
-=== [[getPartitionSpec]] `getPartitionSpec` Internal Method
-
-[source, scala]
-----
-getPartitionSpec(table: CatalogTable): Option[TablePartitionSpec]
-----
-
-`getPartitionSpec`...FIXME
-
-NOTE: `getPartitionSpec` is used exclusively when `AnalyzePartitionCommand` is <<run, executed>>.
-
-=== [[creating-instance]] Creating AnalyzePartitionCommand Instance
-
-`AnalyzePartitionCommand` takes the following when created:
-
-* [[tableIdent]] `TableIdentifier`
-* [[partitionSpec]] Partition specification
-* [[noscan]] `noscan` flag (enabled by default) that indicates whether [NOSCAN](../cost-based-optimization/index.md#NOSCAN) option was used or not
+-->
