@@ -1,6 +1,7 @@
 # HiveClient
 
-`HiveClient` is the <<contract, contract>> for retrieving metadata from a Hive metastore.
+<!---
+## Review Me
 
 NOTE: HiveClientImpl.md[HiveClientImpl] is the only available `HiveClient` in Spark SQL.
 
@@ -109,3 +110,4 @@ getTable(
 * `HiveClient` is requested for <<getPartitionOption, getPartitionOption>> or <<getPartitions, getPartitions>>
 
 * `HiveClientImpl` is requested for HiveClientImpl.md#renamePartitions[renamePartitions] or HiveClientImpl.md#alterPartitions[alterPartitions]
+-->

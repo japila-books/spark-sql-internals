@@ -641,6 +641,7 @@ nav:
       - PropagateEmptyRelation: logical-optimizations/PropagateEmptyRelation.md
       - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
       - PruneFilters: logical-optimizations/PruneFilters.md
+      - PruneHiveTablePartitions: logical-optimizations/PruneHiveTablePartitions.md
       - PullupCorrelatedPredicates: logical-optimizations/PullupCorrelatedPredicates.md
       - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
       - PushDownPredicate: logical-optimizations/PushDownPredicate.md

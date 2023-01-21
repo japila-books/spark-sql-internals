@@ -1,8 +1,90 @@
-title: ExternalCatalog
+# ExternalCatalog
 
-# ExternalCatalog -- External Catalog (Metastore) of Permanent Relational Entities
+`ExternalCatalog` is an [abstraction](#contract) of [external system catalogs](#implementations) (aka _metadata registry_ or _metastore_) of permanent relational entities (i.e., databases, tables, partitions, and functions).
 
-`ExternalCatalog` is the <<contract, contract>> of an *external system catalog* (aka _metadata registry_ or _metastore_) of permanent relational entities, i.e. databases, tables, partitions, and functions.
+`ExternalCatalog` is available as ephemeral ([in-memory](#in-memory)) or persistent ([hive-aware](#hive)).
+
+## Contract
+
+### <span id="getTable"> getTable
+
+```scala
+getTable(
+  db: String,
+  table: String): CatalogTable
+```
+
+[CatalogTable](CatalogTable.md) of a given table (in a database)
+
+See:
+
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md#getTable)
+
+Used when:
+
+* `ExternalCatalogWithListener` is requested to `getTable`
+* `SessionCatalog` is requested to [alterTableDataSchema](SessionCatalog.md#alterTableDataSchema), [getTableRawMetadata](SessionCatalog.md#getTableRawMetadata) and [lookupRelation](SessionCatalog.md#lookupRelation)
+
+### <span id="getTablesByName"> getTablesByName
+
+```scala
+getTablesByName(
+  db: String,
+  tables: Seq[String]): Seq[CatalogTable]
+```
+
+[CatalogTable](CatalogTable.md)s of the given tables (in a database)
+
+See:
+
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md#getTablesByName)
+
+Used when:
+
+* `ExternalCatalogWithListener` is requested to `getTablesByName`
+* `SessionCatalog` is requested to [getTablesByName](SessionCatalog.md#getTablesByName)
+
+### <span id="listPartitionsByFilter"> listPartitionsByFilter
+
+```scala
+listPartitionsByFilter(
+  db: String,
+  table: String,
+  predicates: Seq[Expression],
+  defaultTimeZoneId: String): Seq[CatalogTablePartition]
+```
+
+[CatalogTablePartition](CatalogTablePartition.md)s
+
+See:
+
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md#listPartitionsByFilter)
+
+Used when:
+
+* `ExternalCatalogWithListener` is requested to `getTablesByName`
+* `SessionCatalog` is requested to [listPartitionsByFilter](SessionCatalog.md#listPartitionsByFilter)
+
+## Implementations
+
+* `ExternalCatalogWithListener`
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md)
+* [InMemoryCatalog](InMemoryCatalog.md)
+
+## Accessing ExternalCatalog
+
+`ExternalCatalog` is available as [externalCatalog](SharedState.md#externalCatalog) of [SharedState](SparkSession.md#sharedState) (in `SparkSession`).
+
+```text
+scala> :type spark
+org.apache.spark.sql.SparkSession
+
+scala> :type spark.sharedState.externalCatalog
+org.apache.spark.sql.catalyst.catalog.ExternalCatalog
+```
+
+<!---
+## Review Me
 
 [[features]]
 .ExternalCatalog's Features per Relational Entity
@@ -68,361 +150,6 @@ title: ExternalCatalog
 |
 | <<setCurrentDatabase, setCurrentDatabase>>
 |===
-
-[[contract]]
-.ExternalCatalog Contract (incl. Protected Methods)
-[cols="1m,2",options="header",width="100%"]
-|===
-| Method
-| Description
-
-| alterPartitions
-a| [[alterPartitions]]
-
-[source, scala]
-----
-alterPartitions(
-  db: String,
-  table: String,
-  parts: Seq[CatalogTablePartition]): Unit
-----
-
-| createPartitions
-a| [[createPartitions]]
-
-[source, scala]
-----
-createPartitions(
-  db: String,
-  table: String,
-  parts: Seq[CatalogTablePartition],
-  ignoreIfExists: Boolean): Unit
-----
-
-| databaseExists
-a| [[databaseExists]]
-
-[source, scala]
-----
-databaseExists(db: String): Boolean
-----
-
-| doAlterDatabase
-a| [[doAlterDatabase]]
-
-[source, scala]
-----
-doAlterDatabase(dbDefinition: CatalogDatabase): Unit
-----
-
-| doAlterFunction
-a| [[doAlterFunction]]
-
-[source, scala]
-----
-doAlterFunction(db: String, funcDefinition: CatalogFunction): Unit
-----
-
-| doAlterTable
-a| [[doAlterTable]]
-
-[source, scala]
-----
-doAlterTable(tableDefinition: CatalogTable): Unit
-----
-
-| doAlterTableDataSchema
-a| [[doAlterTableDataSchema]]
-
-[source, scala]
-----
-doAlterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
-----
-
-| doAlterTableStats
-a| [[doAlterTableStats]]
-
-[source, scala]
-----
-doAlterTableStats(db: String, table: String, stats: Option[CatalogStatistics]): Unit
-----
-
-| doCreateDatabase
-a| [[doCreateDatabase]]
-
-[source, scala]
-----
-doCreateDatabase(dbDefinition: CatalogDatabase, ignoreIfExists: Boolean): Unit
-----
-
-| doCreateFunction
-a| [[doCreateFunction]]
-
-[source, scala]
-----
-doCreateFunction(db: String, funcDefinition: CatalogFunction): Unit
-----
-
-| doCreateTable
-a| [[doCreateTable]]
-
-[source, scala]
-----
-doCreateTable(tableDefinition: CatalogTable, ignoreIfExists: Boolean): Unit
-----
-
-| doDropDatabase
-a| [[doDropDatabase]]
-
-[source, scala]
-----
-doDropDatabase(db: String, ignoreIfNotExists: Boolean, cascade: Boolean): Unit
-----
-
-| doDropFunction
-a| [[doDropFunction]]
-
-[source, scala]
-----
-doDropFunction(db: String, funcName: String): Unit
-----
-
-| doDropTable
-a| [[doDropTable]]
-
-[source, scala]
-----
-doDropTable(
-  db: String,
-  table: String,
-  ignoreIfNotExists: Boolean,
-  purge: Boolean): Unit
-----
-
-| doRenameFunction
-a| [[doRenameFunction]]
-
-[source, scala]
-----
-doRenameFunction(db: String, oldName: String, newName: String): Unit
-----
-
-| doRenameTable
-a| [[doRenameTable]]
-
-[source, scala]
-----
-doRenameTable(db: String, oldName: String, newName: String): Unit
-----
-
-| dropPartitions
-a| [[dropPartitions]]
-
-[source, scala]
-----
-dropPartitions(
-  db: String,
-  table: String,
-  parts: Seq[TablePartitionSpec],
-  ignoreIfNotExists: Boolean,
-  purge: Boolean,
-  retainData: Boolean): Unit
-----
-
-| functionExists
-a| [[functionExists]]
-
-[source, scala]
-----
-functionExists(db: String, funcName: String): Boolean
-----
-
-| getDatabase
-a| [[getDatabase]]
-
-[source, scala]
-----
-getDatabase(db: String): CatalogDatabase
-----
-
-| getFunction
-a| [[getFunction]]
-
-[source, scala]
-----
-getFunction(db: String, funcName: String): CatalogFunction
-----
-
-| getPartition
-a| [[getPartition]]
-
-[source, scala]
-----
-getPartition(db: String, table: String, spec: TablePartitionSpec): CatalogTablePartition
-----
-
-| getPartitionOption
-a| [[getPartitionOption]]
-
-[source, scala]
-----
-getPartitionOption(
-  db: String,
-  table: String,
-  spec: TablePartitionSpec): Option[CatalogTablePartition]
-----
-
-| getTable
-a| [[getTable]]
-
-[source, scala]
-----
-getTable(db: String, table: String): CatalogTable
-----
-
-| listDatabases
-a| [[listDatabases]]
-
-[source, scala]
-----
-listDatabases(): Seq[String]
-listDatabases(pattern: String): Seq[String]
-----
-
-| listFunctions
-a| [[listFunctions]]
-
-[source, scala]
-----
-listFunctions(db: String, pattern: String): Seq[String]
-----
-
-| listPartitionNames
-a| [[listPartitionNames]]
-
-[source, scala]
-----
-listPartitionNames(
-  db: String,
-  table: String,
-  partialSpec: Option[TablePartitionSpec] = None): Seq[String]
-----
-
-| listPartitions
-a| [[listPartitions]]
-
-[source, scala]
-----
-listPartitions(
-  db: String,
-  table: String,
-  partialSpec: Option[TablePartitionSpec] = None): Seq[CatalogTablePartition]
-----
-
-| listPartitionsByFilter
-a| [[listPartitionsByFilter]]
-
-[source, scala]
-----
-listPartitionsByFilter(
-  db: String,
-  table: String,
-  predicates: Seq[Expression],
-  defaultTimeZoneId: String): Seq[CatalogTablePartition]
-----
-
-| listTables
-a| [[listTables]]
-
-[source, scala]
-----
-listTables(db: String): Seq[String]
-listTables(db: String, pattern: String): Seq[String]
-----
-
-| loadDynamicPartitions
-a| [[loadDynamicPartitions]]
-
-[source, scala]
-----
-loadDynamicPartitions(
-  db: String,
-  table: String,
-  loadPath: String,
-  partition: TablePartitionSpec,
-  replace: Boolean,
-  numDP: Int): Unit
-----
-
-| loadPartition
-a| [[loadPartition]]
-
-[source, scala]
-----
-loadPartition(
-  db: String,
-  table: String,
-  loadPath: String,
-  partition: TablePartitionSpec,
-  isOverwrite: Boolean,
-  inheritTableSpecs: Boolean,
-  isSrcLocal: Boolean): Unit
-----
-
-| loadTable
-a| [[loadTable]]
-
-[source, scala]
-----
-loadTable(
-  db: String,
-  table: String,
-  loadPath: String,
-  isOverwrite: Boolean,
-  isSrcLocal: Boolean): Unit
-----
-
-| renamePartitions
-a| [[renamePartitions]]
-
-[source, scala]
-----
-renamePartitions(
-  db: String,
-  table: String,
-  specs: Seq[TablePartitionSpec],
-  newSpecs: Seq[TablePartitionSpec]): Unit
-----
-
-| setCurrentDatabase
-a| [[setCurrentDatabase]]
-
-[source, scala]
-----
-setCurrentDatabase(db: String): Unit
-----
-
-| tableExists
-a| [[tableExists]]
-
-[source, scala]
-----
-tableExists(db: String, table: String): Boolean
-----
-|===
-
-`ExternalCatalog` is available as SharedState.md#externalCatalog[externalCatalog] of SparkSession.md#sharedState[SharedState] (in `SparkSession`).
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sharedState.externalCatalog
-org.apache.spark.sql.catalyst.catalog.ExternalCatalog
-----
-
-`ExternalCatalog` is available as ephemeral <<in-memory, in-memory>> or persistent <<hive, hive-aware>>.
 
 [[implementations]]
 .ExternalCatalogs
@@ -538,3 +265,4 @@ alterTableDataSchema(db: String, table: String, newDataSchema: StructType): Unit
 `alterTableDataSchema`...FIXME
 
 `alterTableDataSchema` is used when `SessionCatalog` is requested to [alterTableDataSchema](SessionCatalog.md#alterTableDataSchema).
+-->

@@ -1,11 +1,63 @@
 # HiveClientImpl
 
-:hive-version: 2.3.6
-:hadoop-version: 2.10.0
-:url-hive-javadoc: https://hive.apache.org/javadocs/r{hive-version}/api
-:url-hadoop-javadoc: https://hadoop.apache.org/docs/r{hadoop-version}/api
+`HiveClientImpl` is a [HiveClient](HiveClient.md) that uses a [Hive metastore client](#client) (for metadata/DDL operations using calls to a Hive metastore).
 
-`HiveClientImpl` is a HiveClient.md[HiveClient] that uses a <<client, Hive metastore client>> (for meta data/DDL operations using calls to a Hive metastore).
+## <span id="readHiveStats"> Creating CatalogStatistics
+
+```scala
+readHiveStats(
+  properties: Map[String, String]): Option[CatalogStatistics]
+```
+
+`readHiveStats` creates a [CatalogStatistics](../CatalogStatistics.md) from the input Hive (table or partition) parameters (if available and greater than 0).
+
+Hive Parameter | Table Statistics
+---------------|-----------------
+ `totalSize` | [sizeInBytes](../CatalogStatistics.md#sizeInBytes)
+ `rawDataSize` | [sizeInBytes](../CatalogStatistics.md#sizeInBytes)
+ `numRows` | [rowCount](../CatalogStatistics.md#rowCount)
+
+!!! note
+    `totalSize` Hive parameter has a higher precedence over `rawDataSize` for [sizeInBytes](../CatalogStatistics.md#sizeInBytes) table statistic.
+
+---
+
+`readHiveStats` is used when:
+
+* `HiveClientImpl` is requested for the metadata of a [table](#convertHiveTableToCatalogTable) or [table partition](#fromHivePartition)
+
+## <span id="convertHiveTableToCatalogTable"> convertHiveTableToCatalogTable
+
+```scala
+convertHiveTableToCatalogTable(
+  h: HiveTable): CatalogTable
+```
+
+`convertHiveTableToCatalogTable`...FIXME
+
+---
+
+`convertHiveTableToCatalogTable` is used when:
+
+* `HiveClientImpl` is requested to [getRawHiveTableOption](#getRawHiveTableOption) (and requests `RawHiveTableImpl` to `getRawHiveTableOption`), [getTablesByName](#getTablesByName), [getTableOption](#getTableOption)
+
+## <span id="fromHivePartition"> fromHivePartition
+
+```scala
+fromHivePartition(
+  hp: HivePartition): CatalogTablePartition
+```
+
+`fromHivePartition`...FIXME
+
+---
+
+`fromHivePartition` is used when:
+
+* `HiveClientImpl` is requested to [getPartitionOption](#getPartitionOption), [getPartitions](#getPartitions), [getPartitionsByFilter](#getPartitionsByFilter)
+
+<!---
+## Review Me
 
 `HiveClientImpl` is <<creating-instance, created>> exclusively when `IsolatedClientLoader` is requested to HiveUtils.md#newClientForMetadata[create a new Hive client]. When created, `HiveClientImpl` is given the location of the default database for the Hive metastore warehouse (i.e. <<warehouseDir, warehouseDir>> that is the value of ../spark-sql-hive-metastore.md#hive.metastore.warehouse.dir[hive.metastore.warehouse.dir] Hive-specific Hadoop configuration property).
 
@@ -137,35 +189,6 @@ NOTE: `getPartitionOption` is part of HiveClient.md#getPartitionOption[HiveClien
 
 `getPartitionOption`...FIXME
 
-=== [[readHiveStats]] Creating Table Statistics from Hive's Table or Partition Parameters -- `readHiveStats` Internal Method
-
-[source, scala]
-----
-readHiveStats(properties: Map[String, String]): Option[CatalogStatistics]
-----
-
-`readHiveStats` creates a ../CatalogStatistics.md#creating-instance[CatalogStatistics] from the input Hive table or partition parameters (if available and greater than 0).
-
-.Table Statistics and Hive Parameters
-[cols="1,2",options="header",width="100%"]
-|===
-| Hive Parameter
-| Table Statistics
-
-| `totalSize`
-| ../CatalogStatistics.md#sizeInBytes[sizeInBytes]
-
-| `rawDataSize`
-| ../CatalogStatistics.md#sizeInBytes[sizeInBytes]
-
-| `numRows`
-| ../CatalogStatistics.md#rowCount[rowCount]
-|===
-
-NOTE: `totalSize` Hive parameter has a higher precedence over `rawDataSize` for ../CatalogStatistics.md#sizeInBytes[sizeInBytes] table statistic.
-
-NOTE: `readHiveStats` is used when `HiveClientImpl` is requested for the metadata of a <<getTableOption, table>> or <<fromHivePartition, table partition>>.
-
 === [[fromHivePartition]] Retrieving Table Partition Metadata (Converting Table Partition Metadata from Hive Format to Spark SQL Format) -- `fromHivePartition` Method
 
 [source, scala]
@@ -257,3 +280,4 @@ getRawTableOption(
 `getRawTableOption` requests the <<client, Hive metastore client>> for the Hive's {url-hive-javadoc}/org/apache/hadoop/hive/ql/metadata/Table.html[metadata] of the input table.
 
 NOTE: `getRawTableOption` is used when `HiveClientImpl` is requested to <<tableExists, tableExists>> and <<getTableOption, getTableOption>>.
+-->

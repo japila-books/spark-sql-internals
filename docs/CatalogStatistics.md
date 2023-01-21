@@ -19,16 +19,19 @@
 * `PruneHiveTablePartitions` is requested to `updateTableMeta`
 * [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
-## Analyze Commands
+## Catalog Statistics
 
-`CatalogStatistics` is created (with statistics from a catalog) when:
+`CatalogStatistics` is created with table statistics when:
 
-* `HiveExternalCatalog` is requested to [statsFromProperties](hive/HiveExternalCatalog.md#statsFromProperties)
+* `HiveExternalCatalog` is requested for [table statistics (from a Hive metastore)](hive/HiveExternalCatalog.md#statsFromProperties)
 * `HiveClientImpl` is requested to [readHiveStats](hive/HiveClientImpl.md#readHiveStats)
-* `PruneHiveTablePartitions` is requested to `updateTableMeta`
-* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
-`CatalogStatistics` is created (to [alter table statistics](SessionCatalog.md#alterTableStats) directly or indirectly using [CommandUtils](CommandUtils.md)) for the following logical commands:
+`CatalogStatistics` is created to update table statistics for the following logical optimizations:
+
+* [PruneHiveTablePartitions](logical-optimizations/PruneHiveTablePartitions.md)
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md)
+
+`CatalogStatistics` is created to [alter table statistics](SessionCatalog.md#alterTableStats) (directly or indirectly using [CommandUtils](CommandUtils.md)) for the following logical commands:
 
 Logical Command | SQL Statement
 ----------------|--------------
@@ -47,7 +50,7 @@ Logical Command | SQL Statement
 
 ## CatalogStatistics and Statistics
 
-`CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hints](logical-operators/Statistics.md#hints) in metastore).
+`CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hints](logical-operators/Statistics.md#hints) in Hive metastore).
 
 `CatalogStatistics` are often stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are **Spark statistics**.
 
