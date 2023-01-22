@@ -27,27 +27,101 @@ statsFromProperties(
   table: String): Option[CatalogStatistics]
 ```
 
-`statsFromProperties` collects statistics-related `properties` (i.e., the properties with their keys with `spark.sql.statistics` prefix).
+`statsFromProperties` collects statistics-related `spark.sql.statistics`-prefixed properties.
 
----
+For no keys with the prefix, `statsFromProperties` returns `None`.
 
-`statsFromProperties` returns `None` if there are no keys with the prefix.
-
-If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` creates a [ColumnStat](../cost-based-optimization/ColumnStat.md) that is the column statistics for every column in the `schema`.
+If there are keys with `spark.sql.statistics` prefix, `statsFromProperties` creates a [CatalogColumnStat](../cost-based-optimization/CatalogColumnStat.md#fromMap) for every column in the `schema`.
 
 For every column name in `schema`, `statsFromProperties` collects all the keys that start with `spark.sql.statistics.colStats.[name]` prefix (after having checked that the key `spark.sql.statistics.colStats.[name].version` exists that is a marker that the column statistics exist in the statistics properties) and [converts](../cost-based-optimization/ColumnStat.md#fromMap) them to a `ColumnStat` (for the column name).
 
-In the end, `statsFromProperties` creates a [CatalogStatistics](../CatalogStatistics.md) with the following properties:
+In the end, `statsFromProperties` creates a [CatalogStatistics](../CatalogStatistics.md) as follows:
 
-* [sizeInBytes](../CatalogStatistics.md#sizeInBytes) as `spark.sql.statistics.totalSize` property
-* [rowCount](../CatalogStatistics.md#rowCount) as `spark.sql.statistics.numRows` property
-* [colStats](../CatalogStatistics.md#colStats) as the collection of the column names and their `ColumnStat` (calculated above)
+Catalog Statistic | Value
+------------------|------
+ [sizeInBytes](../CatalogStatistics.md#sizeInBytes) | `spark.sql.statistics.totalSize`
+ [rowCount](../CatalogStatistics.md#rowCount) | `spark.sql.statistics.numRows` property
+ [colStats](../CatalogStatistics.md#colStats) | Column Names and their [CatalogColumnStat](../cost-based-optimization/CatalogColumnStat.md)s
 
 ---
 
 `statsFromProperties` is used when:
 
-* `HiveExternalCatalog` is requested to restore [table](#restoreTableMetadata) and [partition](#restorePartitionMetadata) metadata
+* `HiveExternalCatalog` is requested to restore metadata of a [table](#restoreTableMetadata) or a [partition](#restorePartitionMetadata)
+
+## <span id="getTable"> getTable
+
+```scala
+getTable(
+  db: String,
+  table: String): CatalogTable
+```
+
+`getTable` is part of the [ExternalCatalog](../ExternalCatalog.md#getTable) abstraction.
+
+---
+
+`getTable`...FIXME
+
+## <span id="getTablesByName"> getTablesByName
+
+```scala
+getTablesByName(
+  db: String,
+  tables: Seq[String]): Seq[CatalogTable]
+```
+
+`getTablesByName` is part of the [ExternalCatalog](../ExternalCatalog.md#getTablesByName) abstraction.
+
+---
+
+`getTablesByName`...FIXME
+
+## <span id="listPartitionsByFilter"> listPartitionsByFilter
+
+```scala
+listPartitionsByFilter(
+  db: String,
+  table: String,
+  predicates: Seq[Expression],
+  defaultTimeZoneId: String): Seq[CatalogTablePartition]
+```
+
+`listPartitionsByFilter` is part of the [ExternalCatalog](../ExternalCatalog.md#listPartitionsByFilter) abstraction.
+
+---
+
+`listPartitionsByFilter`...FIXME
+
+## <span id="getPartition"> getPartition
+
+```scala
+getPartition(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): CatalogTablePartition
+```
+
+`getPartition` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartition) abstraction.
+
+---
+
+`getPartition`...FIXME
+
+## <span id="getPartitionOption"> getPartitionOption
+
+```scala
+getPartitionOption(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): Option[CatalogTablePartition]
+```
+
+`getPartitionOption` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartitionOption) abstraction.
+
+---
+
+`getPartitionOption`...FIXME
 
 ## <span id="restoreTableMetadata"> restoreTableMetadata
 
@@ -63,6 +137,22 @@ restoreTableMetadata(
 `restoreTableMetadata` is used when:
 
 * `HiveExternalCatalog` is requested to [getTable](#getTable), [getTablesByName](#getTablesByName) and [listPartitionsByFilter](#listPartitionsByFilter)
+
+## <span id="restorePartitionMetadata"> restorePartitionMetadata
+
+```scala
+restorePartitionMetadata(
+  partition: CatalogTablePartition,
+  table: CatalogTable): CatalogTablePartition
+```
+
+`restorePartitionMetadata`...FIXME
+
+---
+
+`restorePartitionMetadata` is used when:
+
+* `HiveExternalCatalog` is requested to [getPartition](#getPartition) and [getPartitionOption](#getPartitionOption)
 
 ## Demo
 

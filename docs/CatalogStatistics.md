@@ -8,7 +8,7 @@
 
 * <span id="sizeInBytes"> Physical **total size** (in bytes)
 * <span id="rowCount"> Estimated **number of rows** (_row count_)
-* <span id="colStats"> **Column statistics** (column names and their `CatalogColumnStat`s)
+* <span id="colStats"> **Column statistics** (column names and their [CatalogColumnStat](cost-based-optimization/CatalogColumnStat.md)s)
 
 `CatalogStatistics` is created when:
 
@@ -16,10 +16,10 @@
 * `CommandUtils` is requested to [update existing table statistics](CommandUtils.md#updateTableStats) and [current statistics (if changed)](CommandUtils.md#compareAndGetNewStats)
 * `HiveExternalCatalog` is requested to [convert Hive properties to Spark statistics](hive/HiveExternalCatalog.md#statsFromProperties)
 * `HiveClientImpl` is requested to [readHiveStats](hive/HiveClientImpl.md#readHiveStats)
-* `PruneHiveTablePartitions` is requested to `updateTableMeta`
+* [PruneHiveTablePartitions](logical-optimizations/PruneHiveTablePartitions.md) logical optimization is executed (and [updates the table metadata](logical-optimizations/PruneHiveTablePartitions.md#updateTableMeta))
 * [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
 
-## Catalog Statistics
+## Table Statistics
 
 `CatalogStatistics` is created with table statistics when:
 
@@ -52,7 +52,7 @@ Logical Command | SQL Statement
 
 `CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hints](logical-operators/Statistics.md#hints) in Hive metastore).
 
-`CatalogStatistics` are often stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are **Spark statistics**.
+`CatalogStatistics` are stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are **Spark statistics**.
 
 ## <span id="simpleString"> Readable Textual Representation
 

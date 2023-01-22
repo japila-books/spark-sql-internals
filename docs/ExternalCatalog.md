@@ -6,6 +6,46 @@
 
 ## Contract
 
+### <span id="getPartition"> getPartition
+
+```scala
+getPartition(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): CatalogTablePartition
+```
+
+[CatalogTablePartition](CatalogTablePartition.md) of a given table (in a database)
+
+See:
+
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md#getPartition)
+
+Used when:
+
+* `ExternalCatalogWithListener` is requested to `getPartition`
+* `SessionCatalog` is requested to [getPartition](SessionCatalog.md#getPartition)
+
+### <span id="getPartitionOption"> getPartitionOption
+
+```scala
+getPartitionOption(
+  db: String,
+  table: String,
+  spec: TablePartitionSpec): Option[CatalogTablePartition]
+```
+
+[CatalogTablePartition](CatalogTablePartition.md) of a given table (in a database)
+
+See:
+
+* [HiveExternalCatalog](hive/HiveExternalCatalog.md#getPartitionOption)
+
+Used when:
+
+* `ExternalCatalogWithListener` is requested to `getPartitionOption`
+* `InsertIntoHiveTable` is requested to [processInsert](hive/InsertIntoHiveTable.md#processInsert)
+
 ### <span id="getTable"> getTable
 
 ```scala
