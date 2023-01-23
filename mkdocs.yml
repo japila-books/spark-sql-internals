@@ -95,7 +95,7 @@ extra:
     api: https://hadoop.apache.org/docs/r3.3.2/api
   hive:
     version: 2.3.9
-    api: https://hive.apache.org/javadocs/r2.3.9/api
+    api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.9/api
   java:
     api: https://docs.oracle.com/en/java/javase/11/docs/api/java.base
     spec: https://docs.oracle.com/javase/specs/jls/se11/html
@@ -851,10 +851,9 @@ nav:
       - Configuration Properties: hive/configuration-properties.md
       - Hive Metastore: hive/spark-sql-hive-metastore.md
       - DataSinks: hive/DataSinks.md
+      - HiveClient: hive/HiveClient.md
+      - HiveClientImpl: hive/HiveClientImpl.md
       - HiveFileFormat: hive/HiveFileFormat.md
-      - HiveClient:
-        - HiveClient: hive/HiveClient.md
-        - HiveClientImpl: hive/HiveClientImpl.md
       - HiveUtils: hive/HiveUtils.md
       - IsolatedClientLoader: hive/IsolatedClientLoader.md
       - HiveTableRelation: hive/HiveTableRelation.md

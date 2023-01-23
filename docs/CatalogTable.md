@@ -1,6 +1,6 @@
 # CatalogTable
 
-`CatalogTable` is the specification (_metadata_) of a table managed by [SessionCatalog](SessionCatalog.md).
+`CatalogTable` is the specification (_metadata_) of a table in a [SessionCatalog](SessionCatalog.md).
 
 ## Creating Instance
 
@@ -91,6 +91,7 @@ stats: Option[CatalogStatistics] = None
 
 `CatalogTable` can be given a [CatalogStatistics](CatalogStatistics.md) when [created](#creating-instance). It is undefined (`None`) by default.
 
+<!---
 ### Review Me
 
 You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization/index.md)).
@@ -153,3 +154,4 @@ val t1Metadata = sessionCatalog.getTempViewOrPermanentTableMetadata(t1Tid)
 import org.apache.spark.sql.catalyst.catalog.CatalogTable
 assert(t1Metadata.isInstanceOf[CatalogTable])
 ```
+-->
