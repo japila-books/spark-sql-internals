@@ -1,8 +1,38 @@
 # DescribeTableCommand Logical Command
 
-`DescribeTableCommand` is a <<RunnableCommand.md#, logical command>> that <<run, executes>> a `DESCRIBE TABLE` SQL statement.
+`DescribeTableCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) (indirectly as `DescribeCommandBase`) that represents a [DescribeRelation](DescribeRelation.md) at execution (and hence [DESCRIBE TABLE](../sql/AstBuilder.md#visitDescribeRelation) SQL statement).
 
-`DescribeTableCommand` is <<creating-instance, created>> exclusively when `SparkSqlAstBuilder` is requested to parse <<spark-sql-SparkSqlAstBuilder.md#visitDescribeTable, DESCRIBE TABLE>> SQL statement (with no column specified).
+## Creating Instance
+
+`DescribeTableCommand` takes the following to be created:
+
+* <span id="table"> `TableIdentifier`
+* <span id="partitionSpec"> `TablePartitionSpec`
+* <span id="isExtended"> `isExtended` flag
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+
+`DescribeTableCommand` is created when:
+
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [DescribeRelation](DescribeRelation.md) logical operator)
+
+## <span id="describeFormattedTableInfo"> Detailed Table Information
+
+```scala
+describeFormattedTableInfo(
+  table: CatalogTable,
+  buffer: ArrayBuffer[Row]): Unit
+```
+
+`describeFormattedTableInfo`...FIXME
+
+---
+
+`describeFormattedTableInfo` is used when:
+
+* `DescribeTableCommand` is [executed](#run) (with a [table](../SessionCatalog.md#isTemporaryTable) and [isExtended](#isExtended) enabled)
+
+<!---
+## Review Me
 
 [[output]]
 `DescribeTableCommand` uses the following <<Command.md#output, output schema>>:
@@ -199,64 +229,4 @@ describeFormattedDetailedPartitionInfo(
 `describeFormattedDetailedPartitionInfo` is used when:
 
 * `DescribeTableCommand` is requested to [describeDetailedPartitionInfo](#describeDetailedPartitionInfo) with a non-empty [partitionSpec](#partitionSpec) and the [isExtended](#isExtended) flag on.
-
-=== [[describeFormattedTableInfo]] Describing Detailed Table Information -- `describeFormattedTableInfo` Internal Method
-
-[source, scala]
-----
-describeFormattedTableInfo(table: CatalogTable, buffer: ArrayBuffer[Row]): Unit
-----
-
-`describeFormattedTableInfo`...FIXME
-
-NOTE: `describeFormattedTableInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> for a [non-temporary table](../SessionCatalog.md#isTemporaryTable) and the <<isExtended, isExtended>> flag on.
-
-=== [[describeDetailedPartitionInfo]] `describeDetailedPartitionInfo` Internal Method
-
-[source, scala]
-----
-describeDetailedPartitionInfo(
-  tableIdentifier: TableIdentifier,
-  table: CatalogTable,
-  partition: CatalogTablePartition,
-  buffer: ArrayBuffer[Row]): Unit
-----
-
-`describeDetailedPartitionInfo`...FIXME
-
-NOTE: `describeDetailedPartitionInfo` is used exclusively when `DescribeTableCommand` is requested to <<run, run>> with a non-empty <<partitionSpec, partitionSpec>>.
-
-=== [[creating-instance]] Creating DescribeTableCommand Instance
-
-`DescribeTableCommand` takes the following when created:
-
-* [[table]] `TableIdentifier`
-* [[partitionSpec]] `TablePartitionSpec`
-* [[isExtended]] `isExtended` flag
-
-`DescribeTableCommand` initializes the <<internal-registries, internal registries and counters>>.
-
-=== [[describeSchema]] `describeSchema` Internal Method
-
-[source, scala]
-----
-describeSchema(
-  schema: StructType,
-  buffer: ArrayBuffer[Row],
-  header: Boolean): Unit
-----
-
-`describeSchema`...FIXME
-
-NOTE: `describeSchema` is used when...FIXME
-
-=== [[describePartitionInfo]] Describing Partition Information -- `describePartitionInfo` Internal Method
-
-[source, scala]
-----
-describePartitionInfo(table: CatalogTable, buffer: ArrayBuffer[Row]): Unit
-----
-
-`describePartitionInfo`...FIXME
-
-NOTE: `describePartitionInfo` is used when...FIXME
+-->

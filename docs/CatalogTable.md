@@ -18,7 +18,7 @@
 * <span id="lastAccessTime"> Last access time
 * <span id="createVersion"> Created By version
 * <span id="properties"> Table Properties
-* [Table statistics](#stats)
+* [Statistics](#stats)
 * <span id="viewText"> View Text
 * <span id="comment"> Comment
 * <span id="unsupportedFeatures"> Unsupported Features (`Seq[String]`)
@@ -83,7 +83,7 @@ bucketSpec: Option[BucketSpec] = None
 
 `CatalogTableType` is included when a `TreeNode` is requested for a [JSON representation](catalyst/TreeNode.md#shouldConvertToJson) for...FIXME
 
-## <span id="stats"> Table Statistics
+## <span id="stats"> Statistics
 
 ```scala
 stats: Option[CatalogStatistics] = None
@@ -91,34 +91,47 @@ stats: Option[CatalogStatistics] = None
 
 `CatalogTable` can be given a [CatalogStatistics](CatalogStatistics.md) when [created](#creating-instance). It is undefined (`None`) by default.
 
-<!---
-### Review Me
+`CatalogTable` can be displayed using the following commands (when executed with `EXTENDED` or `FORMATTED` clause):
 
-You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization/index.md)).
+* [DescribeTableCommand](logical-operators/DescribeTableCommand.md) (`DESCRIBE TABLE` SQL statement)
+* [DescribeColumnCommand](logical-operators/DescribeColumnCommand.md) (`DESCRIBE TABLE` with a column specified)
 
-```text
-scala> t1Metadata.stats.foreach(println)
-CatalogStatistics(714,Some(2),Map(p1 -> ColumnStat(2,Some(0),Some(1),0,4,4,None), id -> ColumnStat(2,Some(0),Some(1),0,4,4,None)))
+The `CatalogStatistics` can be defined when:
 
-scala> t1Metadata.stats.map(_.simpleString).foreach(println)
-714 bytes, 2 rows
+* `InMemoryCatalog` is requested to [alterTableStats](#alterTableStats)
+* `HiveExternalCatalog` is requested to [restore a table metadata](hive/HiveExternalCatalog.md#restoreTableMetadata)
+* `HiveClientImpl` is requested to [convertHiveTableToCatalogTable](hive/HiveClientImpl.md#convertHiveTableToCatalogTable)
+* [PruneHiveTablePartitions](logical-optimizations/PruneHiveTablePartitions.md) logical optimization is executed (and requested to [update a table metadata](logical-optimizations/PruneHiveTablePartitions.md#updateTableMeta))
+* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md) logical optimization is executed
+
+The `CatalogStatistics` is used when:
+
+* `DataSource` is requested to [resolve a Relation](DataSource.md#resolveRelation) (of type [FileFormat](datasources/FileFormat.md) that uses a [CatalogFileIndex](datasources/CatalogFileIndex.md))
+* `HiveTableRelation` is requested to [computeStats](hive/HiveTableRelation.md#computeStats) (with [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) or [spark.sql.cbo.planStats.enabled](configuration-properties.md#spark.sql.cbo.planStats.enabled) enabled)
+* `LogicalRelation` is requested to [computeStats](logical-operators//LogicalRelation.md#computeStats) (with [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) or [spark.sql.cbo.planStats.enabled](configuration-properties.md#spark.sql.cbo.planStats.enabled) enabled)
+
+The `CatalogStatistics` is updated (_altered_) when:
+
+* `AnalyzeColumnCommand` is requested to [analyzeColumnInCatalog](logical-operators/AnalyzeColumnCommand.md#analyzeColumnInCatalog)
+* `CommandUtils` is requested to [updateTableStats](CommandUtils.md#updateTableStats), [analyzeTable](CommandUtils.md#analyzeTable)
+* `AlterTableAddPartitionCommand` is executed
+
+`CatalogStatistics` is **Statistics** in [toLinkedHashMap](#toLinkedHashMap).
+
+## <span id="toLinkedHashMap"> toLinkedHashMap
+
+```scala
+toLinkedHashMap: LinkedHashMap[String, String]
 ```
 
-CAUTION: FIXME When are stats specified? What if there are not?
+`toLinkedHashMap`...FIXME
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](datasources/FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+---
 
-Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
+`toLinkedHashMap` is used when:
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if [spark.sql.statistics.fallBackToHdfs](configuration-properties.md#spark.sql.statistics.fallBackToHdfs) property is turned on) or assume [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) (that effectively disables table broadcasting).
-
-When requested to hive/HiveClientImpl.md#getTableOption[look up a table in a metastore], `HiveClientImpl` hive/HiveClientImpl.md#readHiveStats[reads table or partition statistics directly from a Hive metastore].
-
-You can use AnalyzeColumnCommand.md[AnalyzeColumnCommand], AnalyzePartitionCommand.md[AnalyzePartitionCommand], AnalyzeTableCommand.md[AnalyzeTableCommand] commands to record statistics in a catalog.
-
-The table statistics can be [automatically updated](CommandUtils.md#updateTableStats) (after executing commands like `AlterTableAddPartitionCommand`) when [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) property is turned on.
-
-You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
+* `CatalogTable` is requested to [toString](#toString) and [simpleString](#simpleString)
+* [DescribeTableCommand](logical-operators/DescribeTableCommand.md) is executed (and [describeFormattedTableInfo](logical-operators/DescribeTableCommand.md#describeFormattedTableInfo))
 
 ## Demo: Accessing Table Metadata
 
@@ -154,4 +167,32 @@ val t1Metadata = sessionCatalog.getTempViewOrPermanentTableMetadata(t1Tid)
 import org.apache.spark.sql.catalyst.catalog.CatalogTable
 assert(t1Metadata.isInstanceOf[CatalogTable])
 ```
+<!---
+### Review Me
+
+You manage a table metadata using the [Catalog](Catalog.md) interface. Among the management tasks is to get the <<stats, statistics>> of a table (that are used for [cost-based query optimization](cost-based-optimization/index.md)).
+
+```text
+scala> t1Metadata.stats.foreach(println)
+CatalogStatistics(714,Some(2),Map(p1 -> ColumnStat(2,Some(0),Some(1),0,4,4,None), id -> ColumnStat(2,Some(0),Some(1),0,4,4,None)))
+
+scala> t1Metadata.stats.map(_.simpleString).foreach(println)
+714 bytes, 2 rows
+```
+
+CAUTION: FIXME When are stats specified? What if there are not?
+
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](datasources/FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+
+Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
+
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for `HiveTableRelation` (and `hive` provider) `DetermineTableStats` logical resolution rule can compute the table size using HDFS (if [spark.sql.statistics.fallBackToHdfs](configuration-properties.md#spark.sql.statistics.fallBackToHdfs) property is turned on) or assume [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) (that effectively disables table broadcasting).
+
+When requested to hive/HiveClientImpl.md#getTableOption[look up a table in a metastore], `HiveClientImpl` hive/HiveClientImpl.md#readHiveStats[reads table or partition statistics directly from a Hive metastore].
+
+You can use AnalyzeColumnCommand.md[AnalyzeColumnCommand], AnalyzePartitionCommand.md[AnalyzePartitionCommand], AnalyzeTableCommand.md[AnalyzeTableCommand] commands to record statistics in a catalog.
+
+The table statistics can be [automatically updated](CommandUtils.md#updateTableStats) (after executing commands like `AlterTableAddPartitionCommand`) when [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) property is turned on.
+
+You can use `DESCRIBE` SQL command to show the histogram of a column if stored in a catalog.
 -->
