@@ -1,3 +1,36 @@
 # Batch
 
-`Batch` is...FIXME
+`Batch` is an [abstraction](#contract) of [data source scans](#implementations) for batch queries.
+
+## Contract
+
+### <span id="createReaderFactory"> createReaderFactory
+
+```java
+PartitionReaderFactory createReaderFactory()
+```
+
+[PartitionReaderFactory](PartitionReaderFactory.md) to create a [PartitionReader](PartitionReader.md) to read records from the [input partitions](#planInputPartitions)
+
+Used when:
+
+* `BatchScanExec` is requested for a [PartitionReaderFactory](../physical-operators/BatchScanExec.md#readerFactory)
+
+### <span id="planInputPartitions"> planInputPartitions
+
+```java
+InputPartition[] planInputPartitions()
+```
+
+See:
+
+* [FileScan](../datasources/FileScan.md#planInputPartitions)
+
+Used when:
+
+* `BatchScanExec` is requested for the [input partitions](../physical-operators/BatchScanExec.md#inputPartitions) and [filteredPartitions](../physical-operators/BatchScanExec.md#filteredPartitions)
+
+## Implementations
+
+* [FileScan](../datasources/FileScan.md)
+* [KafkaBatch](../kafka/KafkaBatch.md)

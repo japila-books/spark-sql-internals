@@ -476,10 +476,6 @@ Used when:
 
 [spark.sql.files.maxPartitionBytes](configuration-properties.md#spark.sql.files.maxPartitionBytes)
 
-Used when:
-
-* `FilePartition` utility is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
-
 ## <span id="filesMinPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> filesMinPartitionNum
 
 [spark.sql.files.minPartitionNum](configuration-properties.md#spark.sql.files.minPartitionNum)

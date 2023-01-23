@@ -71,6 +71,20 @@ Default: `true`
 
 Use [SQLConf.ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN](SQLConf.md#ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN) to access the property
 
+## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> files.maxPartitionBytes
+
+**spark.sql.files.maxPartitionBytes**
+
+Maximum number of bytes to pack into a single partition when reading files. Effective only for file-based sources (e.g., Parquet, JSON, ORC)
+
+Default: `128MB` (like `parquet.block.size`)
+
+Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
+
+Used when:
+
+* `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+
 ## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
 
 **spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**
@@ -1178,14 +1192,6 @@ Maximum number of records to write out to a single file. If this value is `0` or
 Default: `0`
 
 Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
-
-## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> spark.sql.files.maxPartitionBytes
-
-Maximum number of bytes to pack into a single partition when reading files
-
-Default: `128MB` (like `parquet.block.size`)
-
-Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
 
 ## <span id="spark.sql.files.minPartitionNum"> spark.sql.files.minPartitionNum
 

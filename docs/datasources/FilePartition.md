@@ -27,5 +27,5 @@ In the end, `maxSplitBytes` takes the minimum of the following:
 
 `maxSplitBytes` is used when:
 
-* `FileSourceScanExec` physical operator is requested to [createReadRDD](../physical-operators/FileSourceScanExec.md#createReadRDD)
+* `FileSourceScanExec` physical operator is requested to [createReadRDD](../physical-operators/FileSourceScanExec.md#createReadRDD) (and creates a [FileScanRDD](../rdds/FileScanRDD.md))
 * `FileScan` is requested for [partitions](FileScan.md#partitions)

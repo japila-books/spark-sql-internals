@@ -1,9 +1,9 @@
-# FileScanRDD &mdash; Input RDD of FileSourceScanExec Physical Operator
+# FileScanRDD
 
 `FileScanRDD` is the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) of [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) leaf physical operator (for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)).
 
 !!! note "The Internals of Apache Spark"
-    Find out more on `RDD` abstraction in [The Internals of Apache Spark](https://books.japila.pl/apache-spark-internals/apache-spark-internals/rdd/RDD.html).
+    Find out more on `RDD` abstraction in [The Internals of Apache Spark]({{ book.spark_core }}/rdd/RDD.html).
 
 ## Creating Instance
 
@@ -33,9 +33,11 @@ getPreferredLocations(
   split: RDDPartition): Seq[String]
 ```
 
-`getPreferredLocations` assumes that the given `RDDPartition` is actually a [FilePartition](#FilePartition) and requests it for `preferredLocations`.
-
 `getPreferredLocations` is part of Spark Core's `RDD` abstraction.
+
+---
+
+`getPreferredLocations` assumes that the given `RDDPartition` is actually a [FilePartition](#FilePartition) and requests it for `preferredLocations`.
 
 ## <span id="getPartitions"> RDD Partitions
 
@@ -43,9 +45,11 @@ getPreferredLocations(
 getPartitions: Array[RDDPartition]
 ```
 
-`getPartitions` simply returns the [FilePartitions](#filePartitions).
-
 `getPartitions` is part of Spark Core's `RDD` abstraction.
+
+---
+
+`getPartitions` simply returns the [FilePartitions](#filePartitions).
 
 ## <span id="compute"> Computing Partition
 
