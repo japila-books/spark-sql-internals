@@ -304,7 +304,7 @@ parent: CodegenSupport
 
 `parent` starts empty, (defaults to `null` value) and is assigned a physical operator (with `CodegenContext`) only when `CodegenContext` is requested to [generate a Java source code for produce code path](#produce). The physical operator is passed in as an input argument for the [produce](#produce) code path.
 
-## <span id="limitNotReachedChecks"> limitNotReachedChecks Method
+## <span id="limitNotReachedChecks"> limitNotReachedChecks
 
 ```scala
 limitNotReachedChecks: Seq[String]
@@ -314,21 +314,27 @@ limitNotReachedChecks: Seq[String]
 
 `limitNotReachedChecks` requests the [parent](#parent) physical operator for `limitNotReachedChecks`.
 
+---
+
 `limitNotReachedChecks` is used when:
 
 * `RangeExec` physical operator is requested to [doProduce](RangeExec.md#doProduce)
 * `BaseLimitExec` physical operator is requested to `limitNotReachedChecks`
 * `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond)
 
-## <span id="canCheckLimitNotReached"> canCheckLimitNotReached Method
+## <span id="canCheckLimitNotReached"> canCheckLimitNotReached
 
 ```scala
 canCheckLimitNotReached: Boolean
 ```
 
-`canCheckLimitNotReached`...FIXME
+`canCheckLimitNotReached` is `true` when there are no [children](../catalyst/TreeNode.md#children).
 
-`canCheckLimitNotReached` is used when `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).
+---
+
+`canCheckLimitNotReached` is used when:
+
+* `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).
 
 ## <span id="variablePrefix"> Variable Name Prefix
 

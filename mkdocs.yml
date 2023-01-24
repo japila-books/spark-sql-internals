@@ -745,6 +745,8 @@ nav:
       - TableCatalog: connector/catalog/TableCatalog.md
       - TableChange: connector/catalog/TableChange.md
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
+    - Columnar Processing:
+      - columnar-processing/index.md
     - Common Table Expressions: common-table-expressions.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md
@@ -769,7 +771,6 @@ nav:
       - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
       - HintErrorHandler: HintErrorHandler.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
-    - Columnar Processing: new-and-noteworthy/columnar-processing.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md
     - Hive Integration: hive-integration.md
     - Vectorized Parquet Decoding:

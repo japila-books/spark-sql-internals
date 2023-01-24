@@ -1,6 +1,6 @@
 # ColumnarToRowExec Physical Operator
 
-`ColumnarToRowExec` is a [ColumnarToRowTransition](ColumnarToRowTransition.md) unary physical operator to [translate an `RDD[ColumnarBatch]` into an `RDD[InternalRow]`](#doExecute) in [Columnar Processing](../new-and-noteworthy/columnar-processing.md).
+`ColumnarToRowExec` is a [ColumnarToRowTransition](ColumnarToRowTransition.md) unary physical operator to [translate an `RDD[ColumnarBatch]` into an `RDD[InternalRow]`](#doExecute) in [Columnar Processing](../columnar-processing/index.md).
 
 `ColumnarToRowExec` supports [Whole-Stage Java Code Generation](CodegenSupport.md).
 
@@ -20,7 +20,7 @@
 
 ### <span id="numInputBatches"> number of input batches
 
-Number of input batches across all partitions (of [executeColumnar](SparkPlan.md#executeColumnar) of the [child](#child) physical operator)
+Number of input [ColumnarBatch](../ColumnarBatch.md)s across all partitions (from [columnar execution](SparkPlan.md#executeColumnar) of the [child](#child) physical operator that produces `RDD[ColumnarBatch]` and hence RDD partitions with `ColumnarBatch`es)
 
 ### <span id="numOutputRows"> number of output rows
 
@@ -62,4 +62,4 @@ canCheckLimitNotReached: Boolean
 
 ---
 
-`canCheckLimitNotReached` is always `true`.
+`canCheckLimitNotReached` is `true`.

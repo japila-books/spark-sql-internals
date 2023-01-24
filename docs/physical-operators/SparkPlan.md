@@ -553,7 +553,7 @@ outputOrdering: Seq[SortOrder]
 supportsColumnar: Boolean
 ```
 
-`supportsColumnar` specifies whether the physical operator supports [Columnar Processing](../new-and-noteworthy/columnar-processing.md).
+`supportsColumnar` specifies whether the physical operator supports [Columnar Processing](../columnar-processing/index.md).
 
 `supportsColumnar` is `false` by default.
 
