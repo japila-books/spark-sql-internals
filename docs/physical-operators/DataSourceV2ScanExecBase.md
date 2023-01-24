@@ -10,6 +10,10 @@
 partitions: Seq[InputPartition]
 ```
 
+See:
+
+* [BatchScanExec](BatchScanExec.md#partitions)
+
 Used when:
 
 * `DataSourceV2ScanExecBase` is requested for the [partitions](#partitions), [groupedPartitions](#groupedPartitions), [supportsColumnar](#supportsColumnar)
@@ -19,6 +23,10 @@ Used when:
 ```scala
 inputRDD: RDD[InternalRow]
 ```
+
+See:
+
+* [BatchScanExec](BatchScanExec.md#inputRDD)
 
 ### <span id="keyGroupedPartitioning"> keyGroupedPartitioning
 
@@ -32,12 +40,16 @@ keyGroupedPartitioning: Option[Seq[Expression]]
 readerFactory: PartitionReaderFactory
 ```
 
-[PartitionReaderFactory](../connector/PartitionReaderFactory.md) for partition readers (of the [inputPartitions](#inputPartitions))
+[PartitionReaderFactory](../connector/PartitionReaderFactory.md) for partition readers (of the [input partitions](#inputPartitions))
+
+See:
+
+* [BatchScanExec](BatchScanExec.md#readerFactory)
 
 Used when:
 
 * `BatchScanExec` physical operator is requested for an [input RDD](BatchScanExec.md#inputRDD)
-* `ContinuousScanExec` and `MicroBatchScanExec` physical operators (from Spark Structured Streaming) are requested for an `inputRDD`
+* `ContinuousScanExec` and `MicroBatchScanExec` physical operators (Spark Structured Streaming) are requested for an `inputRDD`
 * `DataSourceV2ScanExecBase` physical operator is requested to [outputPartitioning](#outputPartitioning) or [supportsColumnar](#supportsColumnar)
 
 ### <span id="scan"> Scan
@@ -129,11 +141,11 @@ supportsColumnar: Boolean
 
 ---
 
-`supportsColumnar` is `true` if the [PartitionReaderFactory](#readerFactory) can [supportColumnarReads](../connector/PartitionReaderFactory.md#supportColumnarReads) for all the [inputPartitions](#inputPartitions). Otherwise, `supportsColumnar` is `false`.
+`supportsColumnar` is `true` if the [PartitionReaderFactory](#readerFactory) can [supportColumnarReads](../connector/PartitionReaderFactory.md#supportColumnarReads) for all the [input partitions](#inputPartitions). Otherwise, `supportsColumnar` is `false`.
 
 ---
 
-`supportsColumnar` makes sure that either all the [inputPartitions](#inputPartitions) are [supportColumnarReads](../connector/PartitionReaderFactory.md#supportColumnarReads) or none, or throws an `IllegalArgumentException`:
+`supportsColumnar` makes sure that either all the [input partitions](#inputPartitions) are [supportColumnarReads](../connector/PartitionReaderFactory.md#supportColumnarReads) or none, or throws an `IllegalArgumentException`:
 
 ```text
 Cannot mix row-based and columnar input partitions.

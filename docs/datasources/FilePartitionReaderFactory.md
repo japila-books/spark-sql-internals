@@ -29,6 +29,8 @@ createColumnarReader(
   partition: InputPartition): PartitionReader[ColumnarBatch]
 ```
 
-`createColumnarReader`...FIXME
-
 `createColumnarReader` is part of the [PartitionReaderFactory](../connector/PartitionReaderFactory.md#createColumnarReader) abstraction.
+
+---
+
+`createColumnarReader`...FIXME

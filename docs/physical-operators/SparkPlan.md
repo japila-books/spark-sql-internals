@@ -4,7 +4,7 @@
 
 `SparkPlan` can build a **physical query plan** (_query execution plan_).
 
-`SparkPlan` is a recursive data structure in Spark SQL's [Catalyst tree manipulation framework](../catalyst/index.md) and as such represents a single *physical operator* in a physical execution query plan as well as a *physical execution query plan* itself (i.e. a tree of physical operators in a query plan of a structured query).
+`SparkPlan` is a recursive data structure in Spark SQL's [Catalyst tree manipulation framework](../catalyst/index.md) and as such represents a single **physical operator** in a physical execution query plan as well as a **physical execution query plan** itself (i.e. a tree of physical operators in a query plan of a structured query).
 
 ![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/webui-physical-plan.png)
 
@@ -17,9 +17,6 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
     A structured query is basically a single `SparkPlan` physical operator with [child physical operators](../catalyst/TreeNode.md#children).
 
     Spark SQL uses [Catalyst](../catalyst/index.md) tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
-
-[[sparkContext]]
-`SparkPlan` has access to the owning `SparkContext` (from the Spark Core).
 
 ??? tip "explain Operator"
     Use [explain](../spark-sql-dataset-operators.md#explain) operator to see the execution plan of a structured query.
@@ -49,6 +46,14 @@ doExecute(): RDD[InternalRow]
 Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`) and thus _execute_.
 
 Part of [execute](#execute)
+
+## Implementations
+
+* [BaseSubqueryExec](BaseSubqueryExec.md)
+* [CodegenSupport](CodegenSupport.md)
+* [UnaryExecNode](UnaryExecNode.md)
+* [V2CommandExec](V2CommandExec.md)
+* _others_
 
 ## Final Methods
 
@@ -239,15 +244,9 @@ waitForSubqueries(): Unit
 
 In the end, `waitForSubqueries` clears up the [runningSubqueries](#runningSubqueries) registry.
 
-`waitForSubqueries` is used when a physical operator is requested to [executeQuery](#executeQuery).
+`waitForSubqueries` is used when:
 
-## Implementations
-
-* [BaseSubqueryExec](BaseSubqueryExec.md)
-* [CodegenSupport](CodegenSupport.md)
-* [UnaryExecNode](UnaryExecNode.md)
-* [V2CommandExec](V2CommandExec.md)
-* _others_
+* A physical operator is requested to [executeQuery](#executeQuery)
 
 ## Naming Convention (Exec Suffix)
 
@@ -279,6 +278,8 @@ decodeUnsafeRows(
 
 `decodeUnsafeRows`...FIXME
 
+---
+
 `decodeUnsafeRows` is used when:
 
 * `SparkPlan` is requested to [executeCollect](#executeCollect), [executeCollectIterator](#executeCollectIterator), [executeToIterator](#executeToIterator), and [executeTake](#executeTake)
@@ -296,6 +297,8 @@ getByteArrayRdd(
 !!! note
     `getByteArrayRdd` adds a `MapPartitionsRDD` ([Spark Core]({{ book.spark_core }}/rdd/MapPartitionsRDD)) to the RDD lineage.
 
+---
+
 `getByteArrayRdd` is used when:
 
 * `SparkPlan` is requested to [executeCollect](#executeCollect), [executeCollectIterator](#executeCollectIterator), [executeToIterator](#executeToIterator), and [executeTake](#executeTake)
@@ -310,34 +313,11 @@ Once all rows have been processed, the function writes out `-1` to the output, f
 
 In the end, the function returns the count of the rows written out and the byte array (with the rows).
 
-## resetMetrics
-
-```scala
-resetMetrics(): Unit
-```
-
-`resetMetrics` takes <<metrics, metrics>> and request them to [reset](../SQLMetric.md#reset).
-
-`resetMetrics` is used when...FIXME
-
-## executeToIterator
-
-CAUTION: FIXME
-
-## executeCollectIterator
-
-```scala
-executeCollectIterator(): (Long, Iterator[InternalRow])
-```
-
-`executeCollectIterator`...FIXME
-
-`executeCollectIterator` is used when...FIXME
-
 ## <span id="executeQuery"> Preparing SparkPlan for Query Execution
 
 ```scala
-executeQuery[T](query: => T): T
+executeQuery[T](
+  query: => T): T
 ```
 
 `executeQuery` executes the input `query` in a named scope (i.e. so that all RDDs created will have the same scope for visualization like web UI).
@@ -403,7 +383,7 @@ In the end, `executeTake` [decodes the unsafe rows](#decodeUnsafeRows).
 !!! note
     `executeTake` may take and decode more unsafe rows than really needed since all unsafe rows from a partition are read (if the partition is included in the scan).
 
-### Example
+### <span id="executeTake-demo"> Demo
 
 ```text
 import org.apache.spark.sql.internal.SQLConf.SHUFFLE_PARTITIONS
@@ -456,6 +436,8 @@ res38: Array[Long] = Array(4, 12, 7)
 // The number of Spark jobs = 2
 ```
 
+---
+
 `executeTake` is used when:
 
 * [CollectLimitExec](CollectLimitExec.md) physical operator is requested to [executeCollect](CollectLimitExec.md#executeCollect)
@@ -491,28 +473,6 @@ executeCollect(): Array[InternalRow]
 
 * `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
 
-## executeCollectPublic
-
-```scala
-executeCollectPublic(): Array[Row]
-```
-
-`executeCollectPublic`...FIXME
-
-`executeCollectPublic` is used when...FIXME
-
-## newPredicate
-
-```scala
-newPredicate(
-  expression: Expression,
-  inputSchema: Seq[Attribute]): GenPredicate
-```
-
-`newPredicate`...FIXME
-
-`newPredicate` is used when...FIXME
-
 ## <span id="outputPartitioning"> Output Data Partitioning Requirements
 
 ```scala
@@ -522,6 +482,8 @@ outputPartitioning: Partitioning
 `outputPartitioning` specifies the **output data partitioning requirements**, i.e. a hint for the Spark Physical Optimizer for the number of partitions the output of the physical operator should be split across.
 
 `outputPartitioning` defaults to a `UnknownPartitioning` (with `0` partitions).
+
+---
 
 `outputPartitioning` is used when:
 
@@ -539,6 +501,8 @@ outputOrdering: Seq[SortOrder]
 
 `outputOrdering` defaults to no ordering (`Nil`).
 
+---
+
 `outputOrdering` is used when:
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
@@ -547,7 +511,7 @@ outputOrdering: Seq[SortOrder]
 
 * `FileFormatWriter` is used to [write out a query result](../datasources/FileFormatWriter.md#write)
 
-## <span id="supportsColumnar"> supportsColumnar
+## <span id="supportsColumnar"> Checking Support for Columnar Processing
 
 ```scala
 supportsColumnar: Boolean
@@ -555,25 +519,24 @@ supportsColumnar: Boolean
 
 `supportsColumnar` specifies whether the physical operator supports [Columnar Processing](../columnar-processing/index.md).
 
-`supportsColumnar` is `false` by default.
+`supportsColumnar` is `false` by default (and is expected to be overriden by [implementations](#implementations)).
 
-!!! note
-    `supportsColumnar` is or could possibly be `true` for the following physical operators (that override `supportsColumnar`):
+See:
 
-    * `RowToColumnarExec`
-    * [FileSourceScanExec](FileSourceScanExec.md)
-    * [InMemoryTableScanExec](InMemoryTableScanExec.md)
-    * [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md)
+* [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md#supportsColumnar)
+* [FileSourceScanExec](FileSourceScanExec.md#supportsColumnar)
+* [InMemoryTableScanExec](InMemoryTableScanExec.md#supportsColumnar)
+* [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#supportsColumnar)
 
-    There are a few other physical operators that simply delegate to their child physical operators.
+---
 
 `supportsColumnar` is used when:
 
+* [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md) physical optimization is executed
 * [BatchScanExec](BatchScanExec.md) physical operator is requested for an [inputRDD](BatchScanExec.md#inputRDD)
 * [ColumnarToRowExec](ColumnarToRowExec.md) physical operator is created and executed
-* [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md) physical optimization is executed
-* [FileSourceScanExec](FileSourceScanExec.md) physical operator is requested for [metadata](FileSourceScanExec.md#metadata) and [metrics](FileSourceScanExec.md#metrics)
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
+* [FileSourceScanExec](FileSourceScanExec.md) physical operator is requested for [metadata](FileSourceScanExec.md#metadata) and [metrics](FileSourceScanExec.md#metrics)
 
 ## Internal Properties
 

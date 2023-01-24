@@ -2,103 +2,23 @@
 
 `FileSourceScanExec` is a leaf physical operator (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over files.
 
-## Demo
+## Creating Instance
 
-```text
-// Create a bucketed data source table
-// It is one of the most complex examples of a LogicalRelation with a HadoopFsRelation
-val tableName = "bucketed_4_id"
-spark
-  .range(100)
-  .withColumn("part", $"id" % 2)
-  .write
-  .partitionBy("part")
-  .bucketBy(4, "id")
-  .sortBy("id")
-  .mode("overwrite")
-  .saveAsTable(tableName)
-val q = spark.table(tableName)
+`FileSourceScanExec` takes the following to be created:
 
-val sparkPlan = q.queryExecution.executedPlan
-scala> :type sparkPlan
-org.apache.spark.sql.execution.SparkPlan
+* <span id="relation"> [HadoopFsRelation](../datasources/HadoopFsRelation.md)
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+* <span id="requiredSchema"> Required [Schema](../types/StructType.md)
+* <span id="partitionFilters"> Partition Filter [Expression](../expressions/Expression.md)s
+* <span id="optionalBucketSet"> `optionalBucketSet`
+* <span id="optionalNumCoalescedBuckets"> `optionalNumCoalescedBuckets`
+* <span id="dataFilters"> Data Filter [Expression](../expressions/Expression.md)s
+* <span id="tableIdentifier"> `TableIdentifier`
+* <span id="disableBucketedScan"> `disableBucketedScan` flag (default: `false`)
 
-scala> println(sparkPlan.numberedTreeString)
-00 *(1) FileScan parquet default.bucketed_4_id[id#7L,part#8L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 4 out of 4
+`FileSourceScanExec` is created when:
 
-import org.apache.spark.sql.execution.FileSourceScanExec
-val scan = sparkPlan.collectFirst { case exec: FileSourceScanExec => exec }.get
-
-scala> :type scan
-org.apache.spark.sql.execution.FileSourceScanExec
-
-scala> scan.metadata.toSeq.sortBy(_._1).map { case (k, v) => s"$k -> $v" }.foreach(println)
-Batched -> true
-Format -> Parquet
-Location -> CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id]
-PartitionCount -> 2
-PartitionFilters -> []
-PushedFilters -> []
-ReadSchema -> struct<id:bigint>
-SelectedBucketsCount -> 4 out of 4
-```
-
-As a [DataSourceScanExec](DataSourceScanExec.md), `FileSourceScanExec` uses **Scan** for the prefix of the [node name](DataSourceScanExec.md#nodeName).
-
-```scala
-val fileScanExec: FileSourceScanExec = ... // see the example earlier
-assert(fileScanExec.nodeName startsWith "Scan")
-```
-
-When [executed](#doExecute), `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for [bucketed](#createBucketedReadRDD) and [non-bucketed reads](#createNonBucketedReadRDD)).
-
-```text
-scala> :type scan
-org.apache.spark.sql.execution.FileSourceScanExec
-
-val rdd = scan.execute
-scala> println(rdd.toDebugString)
-(6) MapPartitionsRDD[7] at execute at <console>:28 []
- |  FileScanRDD[2] at execute at <console>:27 []
-
-import org.apache.spark.sql.execution.datasources.FileScanRDD
-assert(rdd.dependencies.head.rdd.isInstanceOf[FileScanRDD])
-```
-
-`FileSourceScanExec` supports [bucket pruning](../bucketing.md#bucket-pruning) so it only scans the bucket files required for a query.
-
-```text
-scala> :type scan
-org.apache.spark.sql.execution.FileSourceScanExec
-
-import org.apache.spark.sql.execution.datasources.FileScanRDD
-val rdd = scan.inputRDDs.head.asInstanceOf[FileScanRDD]
-
-import org.apache.spark.sql.execution.datasources.FilePartition
-val bucketFiles = for {
-  FilePartition(bucketId, files) <- rdd.filePartitions
-  f <- files
-} yield s"Bucket $bucketId => $f"
-
-scala> println(bucketFiles.size)
-51
-
-scala> bucketFiles.foreach(println)
-Bucket 0 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=0/part-00004-5301d371-01c3-47d4-bb6b-76c3c94f3699_00000.c000.snappy.parquet, range: 0-423, partition values: [0]
-Bucket 0 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=0/part-00001-5301d371-01c3-47d4-bb6b-76c3c94f3699_00000.c000.snappy.parquet, range: 0-423, partition values: [0]
-...
-Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00005-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
-Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00000-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-431, partition values: [1]
-Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00007-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
-```
-
-`FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the [output partitioning scheme](#outputPartitioning).
-
-`FileSourceScanExec` supports [data source filters](#pushedDownFilters) that are printed out to the console (at [INFO](#logging) logging level) and available as [metadata](#metadata) (e.g. in web UI or [explain](../spark-sql-dataset-operators.md#explain)).
-
-```text
-Pushed Filters: [pushedDownFilters]
-```
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
 ## <span id="nodeNamePrefix"> Node Name Prefix
 
@@ -166,24 +86,6 @@ metadata: Map[String, String]
 `metadata` is part of the [DataSourceScanExec](DataSourceScanExec.md#metadata) abstraction.
 
 `metadata`...FIXME
-
-## Creating Instance
-
-`FileSourceScanExec` takes the following to be created:
-
-* <span id="relation"> [HadoopFsRelation](../datasources/HadoopFsRelation.md)
-* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
-* <span id="requiredSchema"> Required [Schema](../types/StructType.md)
-* <span id="partitionFilters"> Partition Filter [Expression](../expressions/Expression.md)s
-* <span id="optionalBucketSet"> `optionalBucketSet`
-* <span id="optionalNumCoalescedBuckets"> `optionalNumCoalescedBuckets`
-* <span id="dataFilters"> Data Filter [Expression](../expressions/Expression.md)s
-* <span id="tableIdentifier"> Optional `TableIdentifier`
-* <span id="disableBucketedScan"> `disableBucketedScan` flag (default: `false`)
-
-`FileSourceScanExec` is created when:
-
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
 ## <span id="inputRDDs"> inputRDDs
 
@@ -464,6 +366,104 @@ supportsColumnar: Boolean
 `supportsColumnar` is part of the [SparkPlan](SparkPlan.md#supportsColumnar) abstraction.
 
 `supportsColumnar`...FIXME
+
+## Demo
+
+```text
+// Create a bucketed data source table
+// It is one of the most complex examples of a LogicalRelation with a HadoopFsRelation
+val tableName = "bucketed_4_id"
+spark
+  .range(100)
+  .withColumn("part", $"id" % 2)
+  .write
+  .partitionBy("part")
+  .bucketBy(4, "id")
+  .sortBy("id")
+  .mode("overwrite")
+  .saveAsTable(tableName)
+val q = spark.table(tableName)
+
+val sparkPlan = q.queryExecution.executedPlan
+scala> :type sparkPlan
+org.apache.spark.sql.execution.SparkPlan
+
+scala> println(sparkPlan.numberedTreeString)
+00 *(1) FileScan parquet default.bucketed_4_id[id#7L,part#8L] Batched: true, Format: Parquet, Location: CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionCount: 2, PartitionFilters: [], PushedFilters: [], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 4 out of 4
+
+import org.apache.spark.sql.execution.FileSourceScanExec
+val scan = sparkPlan.collectFirst { case exec: FileSourceScanExec => exec }.get
+
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
+
+scala> scan.metadata.toSeq.sortBy(_._1).map { case (k, v) => s"$k -> $v" }.foreach(println)
+Batched -> true
+Format -> Parquet
+Location -> CatalogFileIndex[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id]
+PartitionCount -> 2
+PartitionFilters -> []
+PushedFilters -> []
+ReadSchema -> struct<id:bigint>
+SelectedBucketsCount -> 4 out of 4
+```
+
+As a [DataSourceScanExec](DataSourceScanExec.md), `FileSourceScanExec` uses **Scan** for the prefix of the [node name](DataSourceScanExec.md#nodeName).
+
+```scala
+val fileScanExec: FileSourceScanExec = ... // see the example earlier
+assert(fileScanExec.nodeName startsWith "Scan")
+```
+
+When [executed](#doExecute), `FileSourceScanExec` operator creates a [FileScanRDD](../rdds/FileScanRDD.md) (for [bucketed](#createBucketedReadRDD) and [non-bucketed reads](#createNonBucketedReadRDD)).
+
+```text
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
+
+val rdd = scan.execute
+scala> println(rdd.toDebugString)
+(6) MapPartitionsRDD[7] at execute at <console>:28 []
+ |  FileScanRDD[2] at execute at <console>:27 []
+
+import org.apache.spark.sql.execution.datasources.FileScanRDD
+assert(rdd.dependencies.head.rdd.isInstanceOf[FileScanRDD])
+```
+
+`FileSourceScanExec` supports [bucket pruning](../bucketing.md#bucket-pruning) so it only scans the bucket files required for a query.
+
+```text
+scala> :type scan
+org.apache.spark.sql.execution.FileSourceScanExec
+
+import org.apache.spark.sql.execution.datasources.FileScanRDD
+val rdd = scan.inputRDDs.head.asInstanceOf[FileScanRDD]
+
+import org.apache.spark.sql.execution.datasources.FilePartition
+val bucketFiles = for {
+  FilePartition(bucketId, files) <- rdd.filePartitions
+  f <- files
+} yield s"Bucket $bucketId => $f"
+
+scala> println(bucketFiles.size)
+51
+
+scala> bucketFiles.foreach(println)
+Bucket 0 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=0/part-00004-5301d371-01c3-47d4-bb6b-76c3c94f3699_00000.c000.snappy.parquet, range: 0-423, partition values: [0]
+Bucket 0 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=0/part-00001-5301d371-01c3-47d4-bb6b-76c3c94f3699_00000.c000.snappy.parquet, range: 0-423, partition values: [0]
+...
+Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00005-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
+Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00000-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-431, partition values: [1]
+Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id/part=1/part-00007-5301d371-01c3-47d4-bb6b-76c3c94f3699_00003.c000.snappy.parquet, range: 0-423, partition values: [1]
+```
+
+`FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the [output partitioning scheme](#outputPartitioning).
+
+`FileSourceScanExec` supports [data source filters](#pushedDownFilters) that are printed out to the console (at [INFO](#logging) logging level) and available as [metadata](#metadata) (e.g. in web UI or [explain](../spark-sql-dataset-operators.md#explain)).
+
+```text
+Pushed Filters: [pushedDownFilters]
+```
 
 ## Logging
 

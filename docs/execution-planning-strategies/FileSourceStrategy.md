@@ -1,8 +1,13 @@
-# FileSourceStrategy Execution Planning Strategy for LogicalRelations with HadoopFsRelation
+# FileSourceStrategy Execution Planning Strategy
 
-`FileSourceStrategy` is an [execution planning strategy](SparkStrategy.md) that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
+`FileSourceStrategy` is an [execution planning strategy](SparkStrategy.md).
 
-`FileSourceStrategy` is part of [predefined strategies](../SparkPlanner.md#strategies) of the [Spark Planner](../SparkPlanner.md).
+`FileSourceStrategy` is part of the [predefined strategies](../SparkPlanner.md#strategies) of the [Spark Planner](../SparkPlanner.md) (and is executed after [DataSourceV2Strategy](DataSourceV2Strategy.md)).
+
+<!---
+## Review Me
+
+that <<apply, plans scans over collections of files>> (possibly partitioned or bucketed).
 
 ```text
 import org.apache.spark.sql.execution.datasources.FileSourceStrategy
@@ -139,3 +144,4 @@ If there are any `afterScanFilter` predicate expressions, `apply` creates a <<Fi
 If the <<FilterExec.md#output, output>> of the `FilterExec` physical operator is different from the `projects` expressions, `apply` creates a ProjectExec.md#creating-instance[ProjectExec] physical operator with them and the `FilterExec` or the `FileSourceScanExec` operators.
 
 `apply` is part of [GenericStrategy](../catalyst/GenericStrategy.md#apply) abstraction.
+-->

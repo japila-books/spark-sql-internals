@@ -19,6 +19,10 @@ By default, `createColumnarReader` throws an `UnsupportedOperationException`:
 Cannot create columnar reader.
 ```
 
+See:
+
+* [FilePartitionReaderFactory](../datasources/FilePartitionReaderFactory.md#createColumnarReader)
+
 Used when:
 
 * `DataSourceRDD` is requested to [compute a partition](../DataSourceRDD.md#compute)
@@ -47,6 +51,10 @@ boolean supportColumnarReads(
 Controls whether columnar scan can be used (and hence [createColumnarReader](#createColumnarReader)) or not
 
 By default, `supportColumnarReads` indicates no support for columnar scans (and returns `false`).
+
+See:
+
+* [ParquetPartitionReaderFactory](../datasources/parquet/ParquetPartitionReaderFactory.md#supportColumnarReads)
 
 Used when:
 

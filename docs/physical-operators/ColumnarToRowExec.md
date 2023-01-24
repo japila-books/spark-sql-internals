@@ -4,13 +4,13 @@
 
 `ColumnarToRowExec` supports [Whole-Stage Java Code Generation](CodegenSupport.md).
 
+`ColumnarToRowExec` requires that the [child](#child) physical operator [supports columnar processing](SparkPlan.md#supportsColumnar).
+
 ## Creating Instance
 
 `ColumnarToRowExec` takes the following to be created:
 
 * <span id="child"> Child [physical operator](SparkPlan.md)
-
-`ColumnarToRowExec` requires that the [child](#child) physical operator [supportsColumnar](SparkPlan.md#supportsColumnar).
 
 `ColumnarToRowExec` is created when:
 
@@ -36,9 +36,9 @@ doExecute(): RDD[InternalRow]
 
 ---
 
-`doExecute` requests the [child](#child) physical operator to [executeColumnar](SparkPlan.md#executeColumnar) (which is valid since it [supportsColumnar](SparkPlan.md#supportsColumnar)) and `RDD.mapPartitionsInternal` over partition [ColumnarBatch](../ColumnarBatch.md)es (`Iterator[ColumnarBatch]`) to "unpack" to [InternalRow](../InternalRow.md)s.
+`doExecute` requests the [child](#child) physical operator to [executeColumnar](SparkPlan.md#executeColumnar) (which is valid since it does [support columnar processing](SparkPlan.md#supportsColumnar)) and `RDD.mapPartitionsInternal` over partition [ColumnarBatch](../ColumnarBatch.md)es (`Iterator[ColumnarBatch]`) to "unpack" to [InternalRow](../InternalRow.md)s.
 
-While unpacking, `doExecute` counts the [number of input batches](#numInputBatches) and [number of output rows](#numOutputRows) performance metrics.
+While unpacking, `doExecute` updates the [number of input batches](#numInputBatches) and [number of output rows](#numOutputRows) performance metrics.
 
 ## <span id="inputRDDs"> Input RDDs
 

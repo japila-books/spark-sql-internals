@@ -42,11 +42,17 @@ CustomMetric[] supportedCustomMetrics()
 
 [CustomMetric](CustomMetric.md)s
 
+Empty by default and expected to be overriden by [implementations](#implementations)
+
+See:
+
+* [KafkaScan](../kafka/KafkaScan.md#supportedCustomMetrics)
+
 Used when:
 
 * `DataSourceV2ScanExecBase` physical operator is requested for the [custom metrics](../physical-operators/DataSourceV2ScanExecBase.md#customMetrics)
 
-### <span id="toBatch"> Converting to Batch
+### <span id="toBatch"> Physical Representation for Batch Query
 
 ```java
 Batch toBatch()
@@ -57,6 +63,10 @@ By default, `toBatch` throws an `UnsupportedOperationException` (with the [descr
 ```text
 [description]: Batch scan are not supported
 ```
+
+See:
+
+* [FileScan](../datasources/FileScan.md#toBatch)
 
 ---
 

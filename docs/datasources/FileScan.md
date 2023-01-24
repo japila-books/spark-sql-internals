@@ -103,7 +103,7 @@ description(): String
 
 `description`...FIXME
 
-## <span id="planInputPartitions"> planInputPartitions
+## <span id="planInputPartitions"> Planning Input Partitions
 
 ```scala
 planInputPartitions(): Array[InputPartition]
@@ -115,7 +115,7 @@ planInputPartitions(): Array[InputPartition]
 
 `planInputPartitions` is [partitions](#partitions).
 
-### <span id="partitions"> FilePartitions
+### <span id="partitions"> File Partitions
 
 ```scala
 partitions: Seq[FilePartition]

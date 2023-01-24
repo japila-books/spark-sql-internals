@@ -27,6 +27,10 @@
 createReaderFactory(): PartitionReaderFactory
 ```
 
+`createReaderFactory` is part of the [Batch](../../connector/Batch.md#createReaderFactory) abstraction.
+
+---
+
 `createReaderFactory` creates a [ParquetPartitionReaderFactory](ParquetPartitionReaderFactory.md) (with the [Hadoop Configuration](#hadoopConf) broadcast).
 
 `createReaderFactory` adds the following properties to the [Hadoop Configuration](#hadoopConf) before broadcasting it (to executors).
@@ -35,10 +39,6 @@ Name | Value
 -----|------
  `ParquetInputFormat.READ_SUPPORT_CLASS` | [ParquetReadSupport](ParquetReadSupport.md)
  _others_ |
-
----
-
-`createReaderFactory` is part of the [Batch](../../connector/Batch.md#createReaderFactory) abstraction.
 
 ## <span id="isSplitable"> isSplitable
 

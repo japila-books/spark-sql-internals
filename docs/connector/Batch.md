@@ -12,6 +12,10 @@ PartitionReaderFactory createReaderFactory()
 
 [PartitionReaderFactory](PartitionReaderFactory.md) to create a [PartitionReader](PartitionReader.md) to read records from the [input partitions](#planInputPartitions)
 
+See:
+
+* [ParquetScan](../datasources/parquet/ParquetScan.md#createReaderFactory)
+
 Used when:
 
 * `BatchScanExec` is requested for a [PartitionReaderFactory](../physical-operators/BatchScanExec.md#readerFactory)
@@ -22,13 +26,15 @@ Used when:
 InputPartition[] planInputPartitions()
 ```
 
+[InputPartition](InputPartition.md)s to scan this data source
+
 See:
 
 * [FileScan](../datasources/FileScan.md#planInputPartitions)
 
 Used when:
 
-* `BatchScanExec` is requested for the [input partitions](../physical-operators/BatchScanExec.md#inputPartitions) and [filteredPartitions](../physical-operators/BatchScanExec.md#filteredPartitions)
+* `BatchScanExec` is requested for the [input partitions](../physical-operators/BatchScanExec.md#inputPartitions) and [filtered input partitions](../physical-operators/BatchScanExec.md#filteredPartitions)
 
 ## Implementations
 

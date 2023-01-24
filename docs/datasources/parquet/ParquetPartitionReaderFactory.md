@@ -25,6 +25,10 @@ supportColumnarReads(
   partition: InputPartition): Boolean
 ```
 
+`supportColumnarReads` is part of the [PartitionReaderFactory](../../connector/PartitionReaderFactory.md#supportColumnarReads) abstraction.
+
+---
+
 `supportColumnarReads` is enabled (`true`) when the following all hold:
 
 1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader)
@@ -32,22 +36,20 @@ supportColumnarReads(
 1. The number of the [resultSchema](#resultSchema) fields is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields)
 1. All the [resultSchema](#resultSchema) fields are [AtomicType](../../types/AtomicType.md)s
 
-`supportColumnarReads` is part of the [PartitionReaderFactory](../../connector/PartitionReaderFactory.md#supportColumnarReads) abstraction.
-
-## <span id="buildColumnarReader"> buildColumnarReader
+## <span id="buildColumnarReader"> Building Columnar Reader
 
 ```scala
 buildColumnarReader(
   file: PartitionedFile): PartitionReader[ColumnarBatch]
 ```
 
-`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
-
-In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
+`buildColumnarReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
 
 ---
 
-`buildColumnarReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
+`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
+
+In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
 ## <span id="buildReader"> Building PartitionReader
 

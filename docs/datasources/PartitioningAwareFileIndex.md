@@ -55,6 +55,8 @@ allFiles(): Seq[FileStatus]
 
 `allFiles`...FIXME
 
+---
+
 `allFiles` is used when:
 
 * `DataSource` is requested to [getOrInferFileFormatSchema](../DataSource.md#getOrInferFileFormatSchema) and [resolveRelation](../DataSource.md#resolveRelation)
@@ -69,9 +71,11 @@ listFiles(
   dataFilters: Seq[Expression]): Seq[PartitionDirectory]
 ```
 
-`listFiles`...FIXME
-
 `listFiles` is part of the [FileIndex](FileIndex.md#listFiles) abstraction.
+
+---
+
+`listFiles`...FIXME
 
 ## <span id="partitionSchema"> Partition Schema
 
@@ -79,9 +83,11 @@ listFiles(
 partitionSchema: StructType
 ```
 
-`partitionSchema` gives the `partitionColumns` of the [partition specification](#partitionSpec).
-
 `partitionSchema` is part of the [FileIndex](FileIndex.md#partitionSchema) abstraction.
+
+---
+
+`partitionSchema` gives the `partitionColumns` of the [partition specification](#partitionSpec).
 
 ## <span id="inputFiles"> Input Files
 
@@ -89,9 +95,11 @@ partitionSchema: StructType
 inputFiles: Array[String]
 ```
 
-`inputFiles` requests [all the files](#allFiles) for their location (as Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html)s converted to `String`s).
-
 `inputFiles` is part of the [FileIndex](FileIndex.md#inputFiles) abstraction.
+
+---
+
+`inputFiles` requests [all the files](#allFiles) for their location (as Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html)s converted to `String`s).
 
 ## <span id="sizeInBytes"> Size
 
@@ -99,9 +107,11 @@ inputFiles: Array[String]
 sizeInBytes: Long
 ```
 
-`sizeInBytes` sums up the length (in bytes) of [all the files](#allFiles).
-
 `sizeInBytes` is part of the [FileIndex](FileIndex.md#sizeInBytes) abstraction.
+
+---
+
+`sizeInBytes` sums up the length (in bytes) of [all the files](#allFiles).
 
 ## <span id="inferPartitioning"> Inferring Partitioning
 
@@ -111,7 +121,9 @@ inferPartitioning(): PartitionSpec
 
 `inferPartitioning`...FIXME
 
-`inferPartitioning` is used by the [PartitioningAwareFileIndexes](#implementations).
+---
+
+`inferPartitioning` is used by the [PartitioningAwareFileIndices](#implementations).
 
 ## <span id="basePaths"> Base Locations
 
@@ -119,6 +131,6 @@ inferPartitioning(): PartitionSpec
 basePaths: Set[Path]
 ```
 
-`basePaths`...FIXME
-
 `basePaths` is used to [infer partitioning](#inferPartitioning).
+
+`basePaths`...FIXME
