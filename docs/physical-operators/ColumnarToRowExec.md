@@ -20,7 +20,9 @@
 
 ### <span id="numInputBatches"> number of input batches
 
-Number of input [ColumnarBatch](../ColumnarBatch.md)s across all partitions (from [columnar execution](SparkPlan.md#executeColumnar) of the [child](#child) physical operator that produces `RDD[ColumnarBatch]` and hence RDD partitions with `ColumnarBatch`es)
+Number of input [ColumnarBatch](../ColumnarBatch.md)es across all partitions (from [columnar execution](SparkPlan.md#executeColumnar) of the [child](#child) physical operator that produces `RDD[ColumnarBatch]` and hence RDD partitions with `ColumnarBatch`es)
+
+The number of input [ColumnarBatch](../ColumnarBatch.md)es is influenced by [spark.sql.parquet.columnarReaderBatchSize](../configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize) configuration property.
 
 ### <span id="numOutputRows"> number of output rows
 

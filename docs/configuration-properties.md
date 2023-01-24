@@ -358,6 +358,24 @@ Used when:
 
 Default: `true`
 
+## <span id="spark.sql.parquet.columnarReaderBatchSize"> parquet.columnarReaderBatchSize
+
+**spark.sql.parquet.columnarReaderBatchSize**
+
+The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md))
+
+Default: `4096` (4k)
+
+The number should be carefully chosen to minimize overhead and avoid OOMs while reading data.
+
+Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) method to access the current value.
+
+Used when:
+
+* `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-parquet-reader.md))
+* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
+* `WritableColumnVector` is requested to `reserve` required capacity (and fails)
+
 ## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> spark.sql.adaptive.autoBroadcastJoinThreshold
 
 The maximum size (in bytes) of a table to be broadcast when performing a join. `-1` turns broadcasting off. The default value is same as [spark.sql.autoBroadcastJoinThreshold](#spark.sql.autoBroadcastJoinThreshold).
@@ -1503,16 +1521,6 @@ Some other Parquet-producing systems, in particular Impala and older versions of
 Default: `false`
 
 Use [SQLConf.isParquetBinaryAsString](SQLConf.md#isParquetBinaryAsString) method to access the current value.
-
-## <span id="spark.sql.parquet.columnarReaderBatchSize"> spark.sql.parquet.columnarReaderBatchSize
-
-The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md)).
-
-Default: `4096` (4k)
-
-The number should be carefully chosen to minimize overhead and avoid OOMs while reading data.
-
-Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) method to access the current value.
 
 ## <span id="spark.sql.parquet.compression.codec"> spark.sql.parquet.compression.codec
 

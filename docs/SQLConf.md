@@ -911,8 +911,6 @@ Used when `ParquetFileFormat` is requested to [build a data reader (with partiti
 
 [spark.sql.parquet.columnarReaderBatchSize](configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize)
 
-Used when `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-parquet-reader.md))
-
 ## <span id="parquetVectorizedReaderEnabled"> parquetVectorizedReaderEnabled
 
 [spark.sql.parquet.enableVectorizedReader](configuration-properties.md#spark.sql.parquet.enableVectorizedReader)
