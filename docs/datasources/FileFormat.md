@@ -80,7 +80,7 @@ supportBatch(
   dataSchema: StructType): Boolean
 ```
 
-Controls whether the format supports [vectorized decoding](../vectorized-parquet-reader.md) (aka _columnar batch_) or not
+Whether this format supports [vectorized decoding](../vectorized-decoding/index.md) or not
 
 Default: `false`
 

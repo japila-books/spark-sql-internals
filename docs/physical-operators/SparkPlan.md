@@ -517,7 +517,7 @@ outputOrdering: Seq[SortOrder]
 supportsColumnar: Boolean
 ```
 
-`supportsColumnar` specifies whether the physical operator supports [Columnar Processing](../columnar-processing/index.md).
+`supportsColumnar` specifies whether the physical operator supports [Columnar Execution](../columnar-execution/index.md).
 
 `supportsColumnar` is `false` by default (and is expected to be overriden by [implementations](#implementations)).
 

@@ -2,7 +2,7 @@
 
 `ParquetReadSupport` is a concrete `ReadSupport` (from Apache Parquet) of [UnsafeRows](../../UnsafeRow.md).
 
-`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with no support for [Vectorized Parquet Decoding](../../vectorized-parquet-reader.md) and so falling back to parquet-mr).
+`ParquetReadSupport` is <<creating-instance, created>> exclusively when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues) (with no support for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md) and so falling back to parquet-mr).
 
 [[parquet.read.support.class]]
 `ParquetReadSupport` is registered as the fully-qualified class name for [parquet.read.support.class](ParquetFileFormat.md#parquet.read.support.class) Hadoop configuration when `ParquetFileFormat` is requested for a [data reader](ParquetFileFormat.md#buildReaderWithPartitionValues).

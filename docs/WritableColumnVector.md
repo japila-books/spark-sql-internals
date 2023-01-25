@@ -1,494 +1,111 @@
 # WritableColumnVector
 
-`WritableColumnVector` is the <<contract, extension>> of the [ColumnVector](ColumnVector.md) contract for <<implementations, writable column vectors>>.
+`WritableColumnVector` is an [extension](#contract) of the [ColumnVector](ColumnVector.md) abstraction for [writable in-memory columnar vectors](#implementations).
 
-[[contract]]
-.WritableColumnVector Contract (Abstract Methods Only)
-[cols="1m,3",options="header",width="100%"]
-|===
-| Method
-| Description
+## Contract (Subset)
 
-| getArrayLength
-a| [[getArrayLength]]
+### <span id="reserveInternal"> reserveInternal
 
-[source, java]
-----
-int getArrayLength(int rowId)
-----
-
-Used when...FIXME
-
-| getArrayOffset
-a| [[getArrayOffset]]
-
-[source, java]
-----
-int getArrayOffset(int rowId)
-----
-
-Used when...FIXME
-
-| getBytesAsUTF8String
-a| [[getBytesAsUTF8String]]
-
-[source, java]
-----
-UTF8String getBytesAsUTF8String(
-  int rowId,
-  int count)
-----
-
-Used when...FIXME
-
-| getDictId
-a| [[getDictId]]
-
-[source, java]
-----
-int getDictId(int rowId)
-----
-
-Used when...FIXME
-
-| putArray
-a| [[putArray]]
-
-[source, java]
-----
-void putArray(
-  int rowId,
-  int offset,
-  int length)
-----
-
-Used when...FIXME
-
-| putBoolean
-a| [[putBoolean]]
-
-[source, java]
-----
-void putBoolean(
-  int rowId,
-  boolean value)
-----
-
-Used when...FIXME
-
-| putBooleans
-a| [[putBooleans]]
-
-[source, java]
-----
-void putBooleans(
-  int rowId,
-  int count,
-  boolean value)
-----
-
-Used when...FIXME
-
-| putByte
-a| [[putByte]]
-
-[source, java]
-----
-void putByte(
-  int rowId,
-  byte value)
-----
-
-Used when...FIXME
-
-| putByteArray
-a| [[putByteArray]]
-
-[source, java]
-----
-int putByteArray(
-  int rowId,
-  byte[] value,
-  int offset,
-  int count)
-----
-
-Used when...FIXME
-
-| putBytes
-a| [[putBytes]]
-
-[source, java]
-----
-void putBytes(
-  int rowId,
-  int count,
-  byte value)
-void putBytes(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putDouble
-a| [[putDouble]]
-
-[source, java]
-----
-void putDouble(
-  int rowId,
-  double value)
-----
-
-Used when...FIXME
-
-| putDoubles
-a| [[putDoubles]]
-
-[source, java]
-----
-void putDoubles(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-void putDoubles(
-  int rowId,
-  int count,
-  double value)
-void putDoubles(
-  int rowId,
-  int count,
-  double[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putFloat
-a| [[putFloat]]
-
-[source, java]
-----
-void putFloat(
-  int rowId,
-  float value)
-----
-
-Used when...FIXME
-
-| putFloats
-a| [[putFloats]]
-
-[source, java]
-----
-void putFloats(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-void putFloats(
-  int rowId,
-  int count,
-  float value)
-void putFloats(
-  int rowId,
-  int count,
-  float[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putInt
-a| [[putInt]]
-
-[source, java]
-----
-void putInt(
-  int rowId,
-  int value)
-----
-
-Used when...FIXME
-
-| putInts
-a| [[putInts]]
-
-[source, java]
-----
-void putInts(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-void putInts(
-  int rowId,
-  int count,
-  int value)
-void putInts(
-  int rowId,
-  int count,
-  int[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putIntsLittleEndian
-a| [[putIntsLittleEndian]]
-
-[source, java]
-----
-void putIntsLittleEndian(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putLong
-a| [[putLong]]
-
-[source, java]
-----
-void putLong(
-  int rowId,
-  long value)
-----
-
-Used when...FIXME
-
-| putLongs
-a| [[putLongs]]
-
-[source, java]
-----
-void putLongs(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-void putLongs(
-  int rowId,
-  int count,
-  long value)
-void putLongs(
-  int rowId,
-  int count,
-  long[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putLongsLittleEndian
-a| [[putLongsLittleEndian]]
-
-[source, java]
-----
-void putLongsLittleEndian(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| putNotNull
-a| [[putNotNull]]
-
-[source, java]
-----
-void putNotNull(int rowId)
-----
-
-Used when `WritableColumnVector` is requested to <<reset, reset>> and <<appendNotNulls, appendNotNulls>>
-
-| putNotNulls
-a| [[putNotNulls]]
-
-[source, java]
-----
-void putNotNulls(
-  int rowId,
-  int count)
-----
-
-Used when...FIXME
-
-| putNull
-a| [[putNull]]
-
-[source, java]
-----
-void putNull(int rowId)
-----
-
-Used when...FIXME
-
-| putNulls
-a| [[putNulls]]
-
-[source, java]
-----
-void putNulls(
-  int rowId,
-  int count)
-----
-
-Used when...FIXME
-
-| putShort
-a| [[putShort]]
-
-[source, java]
-----
-void putShort(
-  int rowId,
-  short value)
-----
-
-Used when...FIXME
-
-| putShorts
-a| [[putShorts]]
-
-[source, java]
-----
-void putShorts(
-  int rowId,
-  int count,
-  byte[] src,
-  int srcIndex)
-void putShorts(
-  int rowId,
-  int count,
-  short value)
-void putShorts(
-  int rowId,
-  int count,
-  short[] src,
-  int srcIndex)
-----
-
-Used when...FIXME
-
-| reserveInternal
-a| [[reserveInternal]]
-
-[source, java]
-----
-void reserveInternal(int capacity)
-----
+```java
+void reserveInternal(
+  int capacity)
+```
 
 Used when:
 
 * [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
+* `WritableColumnVector` is requested to [reserve](#reserve)
 
-* `WritableColumnVector` is requested to <<reserve, reserve memory of a given required capacity>>
+### <span id="reserveNewColumn"> reserveNewColumn
 
-| reserveNewColumn
-a| [[reserveNewColumn]]
-
-[source, java]
-----
+```java
 WritableColumnVector reserveNewColumn(
   int capacity,
   DataType type)
-----
+```
 
-Used when...FIXME
+Used when:
 
-|===
+* `WritableColumnVector` is [created](#creating-instance) or requested to [reserveDictionaryIds](#reserveDictionaryIds)
 
-[[implementations]]
-.WritableColumnVectors
-[cols="1,3",options="header",width="100%"]
-|===
-| WritableColumnVector
-| Description
+## Implementations
 
-| [OffHeapColumnVector](OffHeapColumnVector.md)
-| [[OffHeapColumnVector]]
+* [OffHeapColumnVector](OffHeapColumnVector.md)
+* [OnHeapColumnVector](OnHeapColumnVector.md)
 
-| [OnHeapColumnVector](OnHeapColumnVector.md)
-| [[OnHeapColumnVector]]
+## Creating Instance
 
-|===
-
-[[creating-instance]]
 `WritableColumnVector` takes the following to be created:
 
-* [[capacity]] Number of rows to hold in a vector (aka `capacity`)
-* [[type]] [Data type](types/DataType.md) of the rows stored
+* <span id="capacity"> Number of rows to hold in a vector (`capacity`)
+* <span id="type"> [Data type](types/DataType.md) of the rows stored
 
-NOTE: `WritableColumnVector` is a Java abstract class and cannot be <<creating-instance, created>> directly. It is created indirectly for the <<implementations, concrete WritableColumnVectors>>.
+!!! note "Abstract Class"
+    `WritableColumnVector` is an abstract class and cannot be created directly. It is created indirectly for the [concrete WritableColumnVectors](#implementations).
 
-=== [[reset]] `reset` Method
+## <span id="reserveAdditional"> reserveAdditional
 
-[source, java]
-----
-void reset()
-----
+```java
+void reserveAdditional(
+  int additionalCapacity)
+```
 
-`reset`...FIXME
+`reserveAdditional`...FIXME
 
-[NOTE]
-====
-`reset` is used when:
+---
 
-* `OrcColumnarBatchReader` is requested to `nextBatch`
+`reserveAdditional` is used when:
 
-* `VectorizedParquetRecordReader` is requested to [read next rows into a columnar batch](datasources/parquet/VectorizedParquetRecordReader.md#nextBatch)
+* `VectorizedRleValuesReader` is requested to `readValues`
 
-* [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
+## <span id="reserveDictionaryIds"> reserveDictionaryIds
 
-* `WritableColumnVector` is requested to <<reserveDictionaryIds, reserveDictionaryIds>>
-====
-
-=== [[reserve]] Reserving Memory Of Required Capacity -- `reserve` Method
-
-[source, java]
-----
-void reserve(int requiredCapacity)
-----
-
-`reserve`...FIXME
-
-[NOTE]
-====
-`reserve` is used when:
-
-* `OrcColumnarBatchReader` is requested to `putRepeatingValues`, `putNonNullValues`, `putValues`, and `putDecimalWritables`
-
-* `WritableColumnVector` is requested to _append values_
-====
-
-=== [[reserveDictionaryIds]] `reserveDictionaryIds` Method
-
-[source, java]
-----
-WritableColumnVector reserveDictionaryIds(int capacity)
-----
+```java
+WritableColumnVector reserveDictionaryIds(
+  int capacity)
+```
 
 `reserveDictionaryIds`...FIXME
 
-NOTE: `reserveDictionaryIds` is used when...FIXME
+---
 
-=== [[appendNotNulls]] `appendNotNulls` Final Method
+`reserveDictionaryIds` is used when:
 
-[source, java]
-----
-int appendNotNulls(int count)
-----
+* `VectorizedColumnReader` is requested to [readBatch](datasources/parquet/VectorizedColumnReader.md#readBatch)
+* `DictionaryEncoding.Decoder` is requested to `decompress`
 
-`appendNotNulls`...FIXME
+## <span id="reserve"> reserve
 
-NOTE: `appendNotNulls` is used for testing purposes only.
+```java
+void reserve(
+  int requiredCapacity)
+```
+
+`reserve`...FIXME
+
+---
+
+`reserve` is used when:
+
+* `ParquetColumnVector` is requested to `assembleCollection` and `assembleStruct`
+* `WritableColumnVector` is requested to [reserveAdditional](#reserveAdditional), [reserveDictionaryIds](#reserveDictionaryIds) and all the `append`s
+
+## <span id="reset"> reset
+
+```java
+void reset()
+```
+
+`reset` does nothing (_noop_) when either [isConstant](#isConstant) or [isAllNull](#isAllNull) is enabled.
+
+`reset`...FIXME
+
+---
+
+`reset` is used when:
+
+* `ParquetColumnVector` is requested to `reset`
+* `VectorizedDeltaByteArrayReader` is requested to `skipBinary`
+* [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
+* `WritableColumnVector` is requested to [reserveDictionaryIds](#reserveDictionaryIds)
+* `RowToColumnarExec` is requested to `doExecuteColumnar`

@@ -372,7 +372,7 @@ Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReade
 
 Used when:
 
-* `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-parquet-reader.md))
+* `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-decoding/index.md))
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
@@ -1543,7 +1543,7 @@ Use [SQLConf.parquetCompressionCodec](SQLConf.md#parquetCompressionCodec) method
 
 ## <span id="spark.sql.parquet.enableVectorizedReader"> spark.sql.parquet.enableVectorizedReader
 
-Enables [vectorized parquet decoding](vectorized-parquet-reader.md).
+Enables [vectorized parquet decoding](vectorized-decoding/index.md).
 
 Default: `true`
 

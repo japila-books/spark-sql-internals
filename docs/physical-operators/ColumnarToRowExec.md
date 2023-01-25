@@ -1,6 +1,6 @@
 # ColumnarToRowExec Physical Operator
 
-`ColumnarToRowExec` is a [ColumnarToRowTransition](ColumnarToRowTransition.md) unary physical operator to [translate an `RDD[ColumnarBatch]` into an `RDD[InternalRow]`](#doExecute) in [Columnar Processing](../columnar-processing/index.md).
+`ColumnarToRowExec` is a [ColumnarToRowTransition](ColumnarToRowTransition.md) unary physical operator to [translate an `RDD[ColumnarBatch]` into an `RDD[InternalRow]`](#doExecute) in [Columnar Processing](../columnar-execution/index.md).
 
 `ColumnarToRowExec` supports [Whole-Stage Java Code Generation](CodegenSupport.md).
 

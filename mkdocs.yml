@@ -755,8 +755,8 @@ nav:
       - TableCatalog: connector/catalog/TableCatalog.md
       - TableChange: connector/catalog/TableChange.md
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
-    - Columnar Processing:
-      - columnar-processing/index.md
+    - Columnar Execution:
+      - columnar-execution/index.md
     - Common Table Expressions: common-table-expressions.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md
@@ -768,6 +768,12 @@ nav:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Statistics: new-and-noteworthy/statistics.md
+    - Vectorized Decoding:
+      - vectorized-decoding/index.md
+      - ColumnVector: ColumnVector.md
+      - OffHeapColumnVector: OffHeapColumnVector.md
+      - OnHeapColumnVector: OnHeapColumnVector.md
+      - WritableColumnVector: WritableColumnVector.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - ANSI Intervals: new-and-noteworthy/intervals.md
@@ -783,12 +789,6 @@ nav:
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - DataSource V2: new-and-noteworthy/datasource-v2.md
     - Hive Integration: hive-integration.md
-    - Vectorized Parquet Decoding:
-      - Vectorized Parquet Decoding: vectorized-parquet-reader.md
-      - ColumnVector: ColumnVector.md
-      - OffHeapColumnVector: OffHeapColumnVector.md
-      - OnHeapColumnVector: OnHeapColumnVector.md
-      - WritableColumnVector: WritableColumnVector.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md

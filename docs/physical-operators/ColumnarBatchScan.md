@@ -1,4 +1,4 @@
-# ColumnarBatchScan &mdash; Physical Operators With Vectorized Reader
+# ColumnarBatchScan
 
 `ColumnarBatchScan` is an <<contract, extension>> of [CodegenSupport](CodegenSupport.md) abstraction for <<implementations, physical operators>> that <<supportsBatch, support columnar batch scan>> (aka *vectorized reader*).
 
@@ -128,7 +128,7 @@ NOTE: `produceBatches` is used exclusively when `ColumnarBatchScan` is requested
 supportsBatch: Boolean = true
 ----
 
-`supportsBatch` flag controls whether a [FileFormat](../datasources/FileFormat.md) supports [vectorized decoding](../vectorized-parquet-reader.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
+`supportsBatch` flag controls whether a [FileFormat](../datasources/FileFormat.md) supports [vectorized decoding](../vectorized-decoding/index.md) or not. `supportsBatch` is enabled (i.e. `true`) by default.
 
 `supportsBatch` is used when:
 
