@@ -785,11 +785,10 @@ nav:
     - Hive Integration: hive-integration.md
     - Vectorized Parquet Decoding:
       - Vectorized Parquet Decoding: vectorized-parquet-reader.md
-      - ColumnVectors:
-        - ColumnVector: ColumnVector.md
-        - WritableColumnVector: WritableColumnVector.md
-        - OnHeapColumnVector: OnHeapColumnVector.md
-        - OffHeapColumnVector: OffHeapColumnVector.md
+      - ColumnVector: ColumnVector.md
+      - OffHeapColumnVector: OffHeapColumnVector.md
+      - OnHeapColumnVector: OnHeapColumnVector.md
+      - WritableColumnVector: WritableColumnVector.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md

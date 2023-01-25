@@ -13,10 +13,10 @@ tags:
 
 `ColumnarBatch` takes the following to be created:
 
-* <span id="columns"> [ColumnVectors](ColumnVector.md)
+* <span id="columns"> [ColumnVector](ColumnVector.md)s
 * <span id="numRows"> Number of Rows
 
-`ColumnarBatch` immediately creates the internal `MutableColumnarRow`.
+`ColumnarBatch` immediately creates an internal [ColumnarBatchRow](#row).
 
 `ColumnarBatch` is created when:
 
@@ -26,6 +26,10 @@ tags:
 * `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
 * `PandasGroupUtils` utility is requested to `executePython`
 * `ArrowConverters` utility is requested to `fromBatchIterator`
+
+## <span id="row"> ColumnarBatchRow
+
+`ColumnarBatch` creates a `ColumnarBatchRow` when [created](#creating-instance).
 
 ## Demo
 
