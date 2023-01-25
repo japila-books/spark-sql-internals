@@ -77,6 +77,12 @@ plugins:
   - macros
   # https://squidfunk.github.io/mkdocs-material/reference/#built-in-meta-plugin
   - meta
+  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/
+  - tags:
+      enabled: !ENV [CI, false]
+      tags_extra_files:
+        developer-api.md:
+          - DeveloperApi
 
 extra:
   analytics:
@@ -120,6 +126,9 @@ extra:
     version: 3.3.1
     github: https://github.com/apache/spark/tree/v3.3.1
     jira: https://issues.apache.org/jira/browse
+  # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/#tag-icons-and-identifiers
+  tags:
+    DeveloperApi: developerapi
 
 nav:
   - Home: index.md
@@ -127,6 +136,7 @@ nav:
     - Overview: overview.md
     - Configuration Properties: configuration-properties.md
     - DataSource: DataSource.md
+    - developer-api.md
     - Connector API:
       - connector/index.md
       - ApplyTransform: connector/ApplyTransform.md

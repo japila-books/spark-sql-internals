@@ -1,8 +1,33 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # ColumnarBatch
 
 `ColumnarBatch` allows to work with multiple [ColumnVectors](#columns) as a row-wise table.
 
-## Example
+`ColumnarBatch` is a `DeveloperApi`.
+
+## Creating Instance
+
+`ColumnarBatch` takes the following to be created:
+
+* <span id="columns"> [ColumnVectors](ColumnVector.md)
+* <span id="numRows"> Number of Rows
+
+`ColumnarBatch` immediately creates the internal `MutableColumnarRow`.
+
+`ColumnarBatch` is created when:
+
+* `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
+* [InMemoryTableScanExec](physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
+* `MapInPandasExec` unary physical operator is requested to `doExecute`
+* `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
+* `PandasGroupUtils` utility is requested to `executePython`
+* `ArrowConverters` utility is requested to `fromBatchIterator`
+
+## Demo
 
 ```text
 import org.apache.spark.sql.types._
@@ -32,24 +57,8 @@ batch.setNumRows(1)
 assert(batch.getRow(0).numFields == 4)
 ```
 
-## Creating Instance
-
-`ColumnarBatch` takes the following to be created:
-
-* <span id="columns"> [ColumnVectors](ColumnVector.md)
-* <span id="numRows"> Number of Rows
-
-`ColumnarBatch` immediately creates the internal `MutableColumnarRow`.
-
-`ColumnarBatch` is created when:
-
-* `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
-* [InMemoryTableScanExec](physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
-* `MapInPandasExec` unary physical operator is requested to `doExecute`
-* `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
-* `PandasGroupUtils` utility is requested to `executePython`
-* `ArrowConverters` utility is requested to `fromBatchIterator`
-
+<!---
+## Review Me
 === [[rowIterator]] Iterator Over InternalRows (in Batch) -- `rowIterator` Method
 
 [source, java]
@@ -94,3 +103,4 @@ Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numR
 * `InMemoryTableScanExec` physical operator is requested to [createAndDecompressColumn](physical-operators/InMemoryTableScanExec.md#createAndDecompressColumn)
 
 * `ArrowPythonRunner` is requested for a `ReaderIterator` (`newReaderIterator`)
+-->
