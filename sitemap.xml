@@ -771,11 +771,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/vectorized-parquet-reader/</loc>
-         <lastmod>2023-01-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/vectorized-query-execution/</loc>
          <lastmod>2023-01-25</lastmod>
          <changefreq>daily</changefreq>
@@ -901,7 +896,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/columnar-processing/</loc>
+         <loc>https://books.japila.pl/spark-sql-internals/columnar-execution/</loc>
          <lastmod>2023-01-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4287,6 +4282,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/ui/SparkListenerSQLExecutionEnd/</loc>
+         <lastmod>2023-01-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/</loc>
          <lastmod>2023-01-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
