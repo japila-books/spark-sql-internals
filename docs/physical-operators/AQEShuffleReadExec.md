@@ -1,6 +1,6 @@
-# AQEShuffleReadExec Unary Physical Operator
+# AQEShuffleReadExec Physical Operator
 
-`AQEShuffleReadExec` is a [unary physical operator](UnaryExecNode.md) in [Adaptive Query Execution](index.md).
+`AQEShuffleReadExec` is a [unary physical operator](UnaryExecNode.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ## Creating Instance
 
@@ -18,20 +18,34 @@
 
 ## <span id="metrics"> Performance Metrics
 
-Key                     | Name (in web UI)                  | Description
-------------------------|-----------------------------------|---------
- numPartitions          | number of partitions              |
- partitionDataSize      | partition data size               |
- numSkewedPartitions    | number of skewed partitions       |
- numSkewedSplits        | number of skewed partition splits |
- numCoalescedPartitions | number of coalesced partitions    |
+`metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
+
+---
+
+`metrics` is defined only when the [shuffleStage](#shuffleStage) is defined.
 
 ??? note "Lazy Value"
     `metrics` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-`metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
+### <span id="numCoalescedPartitions"> number of coalesced partitions
+
+Only when [hasCoalescedPartition](#hasCoalescedPartition)
+
+### <span id="numPartitions"> number of partitions
+
+### <span id="numSkewedSplits"> number of skewed partition splits
+
+Only when [hasSkewedPartition](#hasSkewedPartition)
+
+### <span id="numSkewedPartitions"> number of skewed partitions
+
+Only when [hasSkewedPartition](#hasSkewedPartition)
+
+### <span id="partitionDataSize"> partition data size
+
+Only when non-[isLocalRead](#isLocalRead)
 
 ## <span id="child"><span id="shuffleStage"> Child ShuffleQueryStageExec
 
@@ -91,9 +105,11 @@ partitionDataSizes: Option[Seq[Long]]
 doExecute(): RDD[InternalRow]
 ```
 
-`doExecute` returns the [Shuffle RDD](#shuffleRDD).
-
 `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+---
+
+`doExecute` returns the [Shuffle RDD](#shuffleRDD).
 
 ## <span id="doExecuteColumnar"> Columnar Execution
 
@@ -101,15 +117,21 @@ doExecute(): RDD[InternalRow]
 doExecuteColumnar(): RDD[ColumnarBatch]
 ```
 
-`doExecuteColumnar` returns the [Shuffle RDD](#shuffleRDD).
-
 `doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+
+---
+
+`doExecuteColumnar` returns the [Shuffle RDD](#shuffleRDD).
 
 ## <span id="stringArgs"> Node Arguments
 
 ```scala
 stringArgs: Iterator[Any]
 ```
+
+`stringArgs` is part of the [TreeNode](../catalyst/TreeNode.md#stringArgs) abstraction.
+
+---
 
 `stringArgs` is one of the following:
 
@@ -118,8 +140,6 @@ stringArgs: Iterator[Any]
 * `coalesced` when [hasCoalescedPartition](#hasCoalescedPartition)
 * `skewed` when [hasSkewedPartition](#hasSkewedPartition)
 
-`stringArgs` is part of the [TreeNode](../catalyst/TreeNode.md#stringArgs) abstraction.
-
 ## <span id="isLocalRead"> isLocalRead
 
 ```scala
@@ -127,6 +147,8 @@ isLocalRead: Boolean
 ```
 
 `isLocalRead` indicates whether either `PartialMapperPartitionSpec` or `CoalescedMapperPartitionSpec` are among the [partition specs](#partitionSpecs) or not.
+
+---
 
 `isLocalRead` is used when:
 
@@ -140,6 +162,42 @@ isCoalescedRead: Boolean
 
 `isCoalescedRead` indicates **coalesced shuffle read** and is whether the [partition specs](#partitionSpecs) are all `CoalescedPartitionSpec`s pair-wise (with the `endReducerIndex` and `startReducerIndex` being adjacent) or not.
 
+---
+
 `isCoalescedRead` is used when:
 
 * `AQEShuffleReadExec` is requested for the [outputPartitioning](#outputPartitioning)
+
+## <span id="hasCoalescedPartition"> hasCoalescedPartition
+
+```scala
+hasCoalescedPartition: Boolean
+```
+
+`hasCoalescedPartition` is `true` when there is a [CoalescedSpec](#isCoalescedSpec) among the [ShufflePartitionSpecs](#partitionSpecs).
+
+---
+
+`hasCoalescedPartition` is used when:
+
+* `AQEShuffleReadExec` is requested for the [stringArgs](#stringArgs), [sendDriverMetrics](#sendDriverMetrics), and [metrics](#metrics)
+
+## <span id="isCoalescedSpec"> isCoalescedSpec
+
+```scala
+isCoalescedSpec(
+  spec: ShufflePartitionSpec)
+```
+
+`isCoalescedSpec` is `true` when the given `ShufflePartitionSpec` is one of the following:
+
+* `CoalescedPartitionSpec` (with both `startReducerIndex` and `endReducerIndex` as `0`s)
+* `CoalescedPartitionSpec` with `endReducerIndex` larger than `startReducerIndex`
+
+Otherwise, `isCoalescedSpec` is `false`.
+
+---
+
+`isCoalescedSpec` is used when:
+
+* `AQEShuffleReadExec` is requested to [hasCoalescedPartition](#hasCoalescedPartition) and [sendDriverMetrics](#sendDriverMetrics)
