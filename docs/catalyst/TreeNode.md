@@ -53,15 +53,17 @@ Internally, `simpleString` is the <<nodeName, nodeName>> followed by <<argString
 
 `simpleString` is used when `TreeNode` is requested for <<argString, argString>> (of child nodes) and <<generateTreeString, tree text representation>> (with `verbose` flag off).
 
-## <span id="numberedTreeString"> Numbered Text Representation
+## <span id="numberedTreeString"> Numbered String Representation
 
 ```scala
 numberedTreeString: String
 ```
 
-`numberedTreeString` adds numbers to the <<treeString, text representation of all the nodes>>.
+`numberedTreeString` adds numbers to the [string representation](#treeString) of this node tree.
 
-`numberedTreeString` is used primarily for interactive debugging using <<apply, apply>> and <<p, p>> methods.
+---
+
+`numberedTreeString` is used primarily for interactive debugging (using [apply](#apply) and [p](#p) methods).
 
 ## <span id="apply"> Getting n-th TreeNode in Tree (for Interactive Debugging)
 
@@ -96,17 +98,19 @@ p(
 
 * [Expression](../expressions/Expression.md) for expression trees
 
-## <span id="toString"> Text Representation
+## <span id="toString"> String Representation
 
 ```scala
 toString: String
 ```
 
-`toString` simply returns the <<treeString, text representation of all nodes in the tree>>.
-
 `toString` is part of Java's [java.lang.Object](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) for the string representation of an object, e.g. `TreeNode`.
 
-## <span id="treeString"> Text Representation of All Nodes in Tree
+---
+
+`toString` is a synonym of [treeString](#treeString).
+
+## <span id="treeString"> String Representation of All Nodes in Tree
 
 ```scala
 treeString: String // (1)
@@ -125,11 +129,19 @@ treeString(
 
 1. `verbose` flag is enabled (`true`)
 
-`treeString` gives the string representation of all the nodes in the `TreeNode`.
+!!! note "printOperatorId"
+    `printOperatorId` argument is `false` by default and seems turned on only when:
 
-`printOperatorId` argument is `false` by default and seems turned on only when:
+    * `ExplainUtils` utility is used to `processPlanSkippingSubqueries`
 
-* `ExplainUtils` utility is used to `processPlanSkippingSubqueries`
+`treeString` returns the string representation of all the nodes in the `TreeNode`.
+
+---
+
+`treeString` is used when:
+
+* `QueryPlan` is requested to [append](QueryPlan.md#append)
+* `TreeNode`is requested for a [string representation](#toString) and [numbered string representation](#numberedTreeString)
 
 ### <span id="treeString-demo"> Demo
 
@@ -155,7 +167,7 @@ verboseStringWithSuffix: String
 
 `verboseStringWithSuffix` is used when `TreeNode` is requested to <<generateTreeString, generateTreeString>> (with `verbose` and `addSuffix` flags enabled).
 
-## <span id="generateTreeString"> Text Representation
+## <span id="generateTreeString"> Generating Text Representation
 
 ```scala
 generateTreeString(
@@ -172,10 +184,11 @@ generateTreeString(
 
 `generateTreeString`...FIXME
 
+---
+
 `generateTreeString` is used when:
 
-* `TreeNode` is requested for [text representation of all nodes in the tree](#treeString)
-* [BaseSubqueryExec](../physical-operators/BaseSubqueryExec.md#generateTreeString), [InputAdapter](../physical-operators/InputAdapter.md#generateTreeString), [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md#generateTreeString), [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#generateTreeString), [QueryStageExec](../physical-operators/QueryStageExec.md#generateTreeString) physical operators are requested to `generateTreeString`
+* `TreeNode` is requested for the [text representation of all nodes in the tree](#treeString)
 
 ## <span id="innerChildren"> Inner Child Nodes
 
@@ -354,13 +367,15 @@ argString(
 * `TreeNode` is requested for the [simple description](#simpleString)
 * `QueryPlan` is requested for the [detailed description (with operator id)](QueryPlan.md#verboseStringWithOperatorId)
 
-### <span id="stringArgs"> stringArgs
+### <span id="stringArgs"> String Arguments
 
 ```scala
 stringArgs: Iterator[Any]
 ```
 
-`stringArgs` gives all the elements of this node (using Scala's [Product.productIterator]({{ scala.api }}/scala/Product.html#productIterator:Iterator[Any]) by default).
+`stringArgs` returns all the elements of this node (using Scala's [Product.productIterator]({{ scala.api }}/scala/Product.html#productIterator:Iterator[Any]) by default).
+
+---
 
 `stringArgs` is used when:
 

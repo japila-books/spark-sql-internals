@@ -33,6 +33,14 @@ The `SparkPlan` is used for the following:
 
 `AdaptiveSparkPlanExec` is given an [AdaptiveExecutionContext](../adaptive-query-execution/AdaptiveExecutionContext.md) when [created](#creating-instance).
 
+### <span id="optimizer"> Adaptive Logical Optimizer
+
+```scala
+optimizer: AQEOptimizer
+```
+
+`AdaptiveSparkPlanExec` creates an [AQEOptimizer](../adaptive-query-execution/AQEOptimizer.md) (when [created](#creating-instance)) that is used when requested to [re-optimize a logical query plan](#reOptimize).
+
 ## <span id="doExecute"> Executing Physical Operator
 
 ```scala
@@ -113,7 +121,7 @@ executeTake(
 
 `executeTake`...FIXME
 
-## <span id="getFinalPhysicalPlan"> Final Physical Query Plan
+## <span id="getFinalPhysicalPlan"> Adaptively-Optimized Physical Query Plan
 
 ```scala
 getFinalPhysicalPlan(): SparkPlan
@@ -310,6 +318,38 @@ queryStagePreparationRules: Seq[Rule[SparkPlan]]
 
 `queryStagePreparationRules` is used when `AdaptiveSparkPlanExec` operator is requested for the [current physical plan](#currentPhysicalPlan) and [reOptimize](#reOptimize).
 
+## <span id="optimizeQueryStage"> optimizeQueryStage
+
+```scala
+optimizeQueryStage(
+  plan: SparkPlan,
+  isFinalStage: Boolean): SparkPlan
+```
+
+!!! note "isFinalStage"
+    The given `isFinalStage` can be as follows:
+
+    * `true` when requested for an [adaptively-optimized physical query plan](#getFinalPhysicalPlan)
+    * `false` when requested to [create a new QueryStageExec for an Exchange](#newQueryStage)
+
+`optimizeQueryStage` executes (_applies_) the [queryStageOptimizerRules](#queryStageOptimizerRules) to the given [SparkPlan](SparkPlan.md).
+While applying optimizations (_executing rules_), `optimizeQueryStage` requests the [PlanChangeLogger](#planChangeLogger) to [log plan changes (by a rule)](../catalyst/PlanChangeLogger.md#logRule) with the [name](../catalyst/Rule.md#ruleName) of the rule that has just been executed.
+
+!!! note "AQEShuffleReadRule"
+    `optimizeQueryStage` is _sensitive_ to [AQEShuffleReadRule](../physical-optimizations/AQEShuffleReadRule.md) physical optimization and does a validation so it does not break distribution requirement of the query plan.
+
+`optimizeQueryStage` requests the [PlanChangeLogger](#planChangeLogger) to [log plan changes by the entire rule batch](../catalyst/PlanChangeLogger.md#logBatch) with the following batch name:
+
+```text
+AQE Query Stage Optimization
+```
+
+---
+
+`optimizeQueryStage` is used when:
+
+* `AdaptiveSparkPlanExec` is requested for an [adaptively-optimized physical query plan](#getFinalPhysicalPlan) and to [create a new QueryStageExec for an Exchange](#newQueryStage)
+
 ## <span id="queryStageOptimizerRules"> Adaptive Optimizations
 
 ```scala
@@ -320,14 +360,15 @@ queryStageOptimizerRules: Seq[Rule[SparkPlan]]
 
 * [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
 * [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
-* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md)
 * [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md)
 * [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
 * [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md)
 
+---
+
 `queryStageOptimizerRules` is used when:
 
-* `AdaptiveSparkPlanExec` is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) and [newQueryStage](#newQueryStage)
+* `AdaptiveSparkPlanExec` is requested to [optimizeQueryStage](#optimizeQueryStage)
 
 ## <span id="postStageCreationRules"> Post-Stage-Creation Adaptive Optimizations
 
@@ -344,7 +385,7 @@ postStageCreationRules: Seq[Rule[SparkPlan]]
 
 * `AdaptiveSparkPlanExec` is requested to [finalStageOptimizerRules](#finalStageOptimizerRules) and [newQueryStage](#newQueryStage)
 
-## <span id="generateTreeString"> Text Representation
+## <span id="generateTreeString"> Generating Text Representation
 
 ```scala
 generateTreeString(
@@ -358,9 +399,11 @@ generateTreeString(
   printNodeId: Boolean): Unit
 ```
 
-`generateTreeString`...FIXME
-
 `generateTreeString` is part of the [TreeNode](../catalyst/TreeNode.md#generateTreeString) abstraction.
+
+---
+
+`generateTreeString`...FIXME
 
 ## <span id="cleanUpAndThrowException"> cleanUpAndThrowException
 
@@ -381,23 +424,23 @@ reOptimize(
   logicalPlan: LogicalPlan): (SparkPlan, LogicalPlan)
 ```
 
-`reOptimize` gives optimized physical and logical query plans for the given [logical query plan](../logical-operators/LogicalPlan.md).
+`reOptimize` returns a newly-optimized physical query plan with a newly-optimized logical query plan for the given [logical query plan](../logical-operators/LogicalPlan.md).
 
-Internally, `reOptimize` requests the given [logical query plan](../logical-operators/LogicalPlan.md) to [invalidateStatsCache](../logical-operators/LogicalPlanStats.md#invalidateStatsCache) and requests the [local logical optimizer](#optimizer) to generate an optimized logical query plan.
+---
 
-`reOptimize` requests the [query planner](../SparkPlanner.md) (bound to the [AdaptiveExecutionContext](#context)) to [plan the optimized logical query plan](../execution-planning-strategies/SparkStrategies.md#plan) (and generate a physical query plan).
+`reOptimize` requests the given [LogicalPlan](../logical-operators/LogicalPlan.md) to [invalidate statistics cache](../logical-operators/LogicalPlanStats.md#invalidateStatsCache).
 
-`reOptimize` [creates an optimized physical query plan](#applyPhysicalRules) using [preprocessing](#preprocessingRules) and [preparation](#queryStagePreparationRules) rules.
+`reOptimize` requests the [Adaptive Logical Optimizer](#optimizer) to [execute](../catalyst/RuleExecutor.md#execute) (and generate an optimized logical query plan).
 
-`reOptimize` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
+`reOptimize` requests the [Spark Query Planner](../SparkPlanner.md) (bound to the [AdaptiveExecutionContext](#context)) to [plan the optimized logical query plan](../execution-planning-strategies/SparkStrategies.md#plan) (and generate a physical query plan).
 
-## <span id="optimizer"> Adaptive Logical Optimizer
+`reOptimize` [executes physical optimizations](#applyPhysicalRules) using [preprocessing](#preprocessingRules) and [preparation](#queryStagePreparationRules) rules (and generates an optimized physical query plan).
 
-```scala
-optimizer: AQEOptimizer
-```
+---
 
-`AdaptiveSparkPlanExec` creates an [AQEOptimizer](../adaptive-query-execution/AQEOptimizer.md) (while [created](#creating-instance)) for [re-optimizing a logical query plan](#reOptimize).
+`reOptimize` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for an [adaptively-optimized physical query plan](#getFinalPhysicalPlan)
 
 ## <span id="executionContext"> QueryStageCreator Thread Pool
 
@@ -430,19 +473,36 @@ Final plan: [currentPhysicalPlan]
 
 `finalPlanUpdate` is used when `AdaptiveSparkPlanExec` physical operator is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail) and [doExecute](#doExecute).
 
-## <span id="isFinalPlan"> isFinalPlan Flag
+## <span id="isFinalPlan"> isFinalPlan (Available Already)
 
 ```scala
 isFinalPlan: Boolean
 ```
 
-`isFinalPlan` is an internal flag to avoid expensive [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and return the [current optimized physical query plan](#currentPhysicalPlan) immediately).
+`isFinalPlan` is an internal flag that is used to skip (_short-circuit_) the [expensive process of producing an adaptively-optimized physical query plan](#getFinalPhysicalPlan) (and immediately return the [one that has already been prepared](#currentPhysicalPlan)).
 
-`isFinalPlan` is off (`false`) by default. It is turned on at the end of [getFinalPhysicalPlan](#getFinalPhysicalPlan).
+`isFinalPlan` is disabled (`false`) when `AdaptiveSparkPlanExec` is [created](#creating-instance). It is enabled right after an [adaptively-optimized physical query plan has once been prepared](#getFinalPhysicalPlan).
 
-`isFinalPlan` is also used when:
+`isFinalPlan` is also used for reporting when `AdaptiveSparkPlanExec` is requested for the following:
 
-* `AdaptiveSparkPlanExec` is requested for [stringArgs](#stringArgs) and [generateTreeString](#generateTreeString)
+* [String arguments](#stringArgs)
+* [Generate a text representation](#generateTreeString)
+
+## <span id="stringArgs"> String Arguments
+
+```scala
+stringArgs: Iterator[Any]
+```
+
+`stringArgs` is part of the [TreeNode](../catalyst/TreeNode.md#stringArgs) abstraction.
+
+---
+
+`stringArgs` is the following (with the [isFinalPlan](#isFinalPlan) flag):
+
+```text
+isFinalPlan=[isFinalPlan]
+```
 
 ## <span id="initialPlan"> Initial Plan
 

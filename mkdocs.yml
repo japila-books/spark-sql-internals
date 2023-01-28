@@ -737,7 +737,6 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-      - Demo: adaptive-query-execution/demo.md
     - Bucketing: bucketing.md
     - Catalog Plugin API:
       - connector/catalog/index.md

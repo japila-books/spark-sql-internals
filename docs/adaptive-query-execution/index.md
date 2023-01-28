@@ -24,6 +24,10 @@ Adaptive Query Execution notifies Spark listeners about a physical plan change u
 
 Adaptive Query Execution uses [logOnLevel](../physical-operators/AdaptiveSparkPlanExec.md#logOnLevel) to print out diagnostic messages to the log.
 
+## Demo
+
+[Demo: Adaptive Query Execution](../demo/adaptive-query-execution.md)
+
 ## Unsupported
 
 ### CacheManager

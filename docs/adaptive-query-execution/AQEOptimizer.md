@@ -2,15 +2,17 @@
 
 `AQEOptimizer` is a logical optimizer (a [RuleExecutor](../catalyst/RuleExecutor.md) of the logical rules) for re-optimizing logical plans in [Adaptive Query Execution](index.md).
 
+<figure markdown>
+  ![AQEOptimizer](../images/AQEOptimizer.png)
+</figure>
+
 ## Creating Instance
 
 `AQEOptimizer` takes the following to be created:
 
 * <span id="conf"> [SQLConf](../SQLConf.md)
 
-`AQEOptimizer` is created when:
-
-* `AdaptiveSparkPlanExec` physical operator is [created](../physical-operators/AdaptiveSparkPlanExec.md#optimizer)
+`AQEOptimizer` is created alongside [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#optimizer) physical operator.
 
 ## <span id="defaultBatches"> Default Batches
 
