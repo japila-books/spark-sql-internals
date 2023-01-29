@@ -9,6 +9,8 @@ evaluateCost(
   plan: SparkPlan): Cost
 ```
 
-`evaluateCost` counts the [shuffle exchanges](../physical-operators/ShuffleExchangeLike.md) unary physical operators in the given [SparkPlan](../physical-operators/SparkPlan.md).
-
 `evaluateCost` is part of the [CostEvaluator](CostEvaluator.md#evaluateCost) abstraction.
+
+---
+
+`evaluateCost` counts the [shuffle exchanges](../physical-operators/ShuffleExchangeLike.md) unary physical operators in the given [SparkPlan](../physical-operators/SparkPlan.md).

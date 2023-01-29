@@ -178,10 +178,6 @@ Used when:
 
 [spark.sql.adaptive.customCostEvaluatorClass](configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass)
 
-Used when:
-
-* `AdaptiveSparkPlanExec` leaf physical operator is requested for the [costEvaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator)
-
 ## <span id="autoSizeUpdateEnabled"> autoSizeUpdateEnabled
 
 The value of [spark.sql.statistics.size.autoUpdate.enabled](configuration-properties.md#spark.sql.statistics.size.autoUpdate.enabled) configuration property

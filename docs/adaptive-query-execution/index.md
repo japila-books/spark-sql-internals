@@ -16,6 +16,18 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 Adaptive Query Execution is possible (and applied to a physical query plan) using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization that inserts [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operators.
 
+## AQE Cost Evaluator
+
+Adaptive Query Execution ([AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md), precisely) uses [CostEvaluator](CostEvaluator.md) to [evaluate cost](CostEvaluator.md#evaluateCost) when considering a candidate for an [Adaptively-Optimized Physical Query Plan](../physical-operators/AdaptiveSparkPlanExec.md#executedPlan).
+
+If a `SparkPlan` change happens, `AdaptiveSparkPlanExec` prints out the following message to the logs:
+
+```text
+Plan changed from [currentPhysicalPlan] to [newPhysicalPlan]
+```
+
+Adaptive Query Execution uses [spark.sql.adaptive.customCostEvaluatorClass](../configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass) configuration property or defaults to [SimpleCostEvaluator](SimpleCostEvaluator.md).
+
 ## SparkListenerSQLAdaptiveExecutionUpdates
 
 Adaptive Query Execution notifies Spark listeners about a physical plan change using `SparkListenerSQLAdaptiveExecutionUpdate` and `SparkListenerSQLAdaptiveSQLMetricUpdates` events.

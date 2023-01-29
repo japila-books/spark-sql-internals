@@ -30,6 +30,37 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.adaptive.customCostEvaluatorClass"> adaptive.customCostEvaluatorClass
+
+**spark.sql.adaptive.customCostEvaluatorClass**
+
+The fully-qualified class name of the [CostEvaluator](adaptive-query-execution/CostEvaluator.md) in [Adaptive Query Execution](adaptive-query-execution/index.md)
+
+Default: [SimpleCostEvaluator](adaptive-query-execution/SimpleCostEvaluator.md)
+
+Use [SQLConf.ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS](SQLConf.md#ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS) method to access the property (in a type-safe way).
+
+Used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [AQE cost evaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator)
+
+## <span id="spark.sql.adaptive.forceOptimizeSkewedJoin"> adaptive.forceOptimizeSkewedJoin
+
+**spark.sql.adaptive.forceOptimizeSkewedJoin**
+
+Enables [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization to be executed even if it introduces extra shuffle
+
+Default: `false`
+
+Requires [spark.sql.adaptive.skewJoin.enabled](#spark.sql.adaptive.skewJoin.enabled) to be enabled
+
+Use [SQLConf.ADAPTIVE_FORCE_OPTIMIZE_SKEWED_JOIN](SQLConf.md#ADAPTIVE_FORCE_OPTIMIZE_SKEWED_JOIN) to access the property (in a type-safe way).
+
+Used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [AQE cost evaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator) (and creates a [SimpleCostEvaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator))
+* [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
+
 ## <span id="spark.sql.codegen.hugeMethodLimit"> codegen.hugeMethodLimit
 
 **spark.sql.codegen.hugeMethodLimit**
@@ -385,14 +416,6 @@ Used only in [Adaptive Query Execution](adaptive-query-execution/index.md)
 Default: (undefined)
 
 Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
-
-## <span id="spark.sql.adaptive.customCostEvaluatorClass"> spark.sql.adaptive.customCostEvaluatorClass
-
-The fully-qualified class name of a custom [CostEvaluator](adaptive-query-execution/CostEvaluator.md) for [Adaptive Query Execution](adaptive-query-execution/index.md)
-
-Default: [SimpleCostEvaluator](adaptive-query-execution/SimpleCostEvaluator.md)
-
-Use [SQLConf.ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS](SQLConf.md#ADAPTIVE_CUSTOM_COST_EVALUATOR_CLASS) method to access the property (in a type-safe way).
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 

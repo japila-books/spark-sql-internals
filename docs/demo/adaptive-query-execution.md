@@ -6,7 +6,7 @@ hide:
 
 # Demo: Adaptive Query Execution
 
-This demo shows [Adaptive Query Execution](index.md) in action.
+This demo shows [Adaptive Query Execution](../adaptive-query-execution/index.md) in action.
 
 ## Before you begin
 

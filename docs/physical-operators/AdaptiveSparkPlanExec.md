@@ -41,6 +41,18 @@ optimizer: AQEOptimizer
 
 `AdaptiveSparkPlanExec` creates an [AQEOptimizer](../adaptive-query-execution/AQEOptimizer.md) (when [created](#creating-instance)) that is used when requested to [re-optimize a logical query plan](#reOptimize).
 
+### <span id="costEvaluator"> AQE Cost Evaluator
+
+```scala
+costEvaluator: CostEvaluator
+```
+
+`AdaptiveSparkPlanExec` creates a [CostEvaluator](../adaptive-query-execution/CostEvaluator.md) (when [created](#creating-instance)) based on [spark.sql.adaptive.customCostEvaluatorClass](../configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass) configuration property.
+
+Unless configured, `AdaptiveSparkPlanExec` uses [SimpleCostEvaluator](../adaptive-query-execution/SimpleCostEvaluator.md) (with [spark.sql.adaptive.forceOptimizeSkewedJoin](../configuration-properties.md#spark.sql.adaptive.forceOptimizeSkewedJoin) configuration property).
+
+`AdaptiveSparkPlanExec` uses the `CostEvaluator` to [evaluate cost](../adaptive-query-execution/CostEvaluator.md#evaluateCost) (of a candidate for a new `SparkPlan`) when requested for the [adaptively-optimized physical query plan](#getFinalPhysicalPlan).
+
 ## <span id="doExecute"> Executing Physical Operator
 
 ```scala
@@ -65,7 +77,7 @@ doExecuteColumnar(): RDD[ColumnarBatch]
 
 ---
 
-`doExecuteColumnar` [withFinalPlanUpdate](#withFinalPlanUpdate) to [executeColumnar](SparkPlan.md#executeColumnar) (that generates a `RDD` of [ColumnarBatch](../ColumnarBatch.md)s to be returned at the end).
+`doExecuteColumnar` [withFinalPlanUpdate](#withFinalPlanUpdate) to [executeColumnar](SparkPlan.md#executeColumnar).
 
 ## <span id="doExecuteBroadcast"> doExecuteBroadcast
 
@@ -77,7 +89,7 @@ doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 ---
 
-`doExecuteBroadcast` [withFinalPlanUpdate](#withFinalPlanUpdate) to [doExecuteBroadcast](SparkPlan.md#doExecuteBroadcast) (that generates a `Broadcast` variable to be returned at the end).
+`doExecuteBroadcast` [withFinalPlanUpdate](#withFinalPlanUpdate) to [doExecuteBroadcast](SparkPlan.md#doExecuteBroadcast).
 
 `doExecuteBroadcast` asserts that the final physical plan is a [BroadcastQueryStageExec](BroadcastQueryStageExec.md).
 
@@ -261,19 +273,32 @@ After [applyPhysicalRules](#applyPhysicalRules) for the child operator, `newQuer
 
 In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 
-## <span id="currentPhysicalPlan"><span id="executedPlan"> Optimized Physical Query Plan
+## <span id="currentPhysicalPlan"><span id="executedPlan"> Adaptively-Optimized Physical Query Plan
 
 ```scala
 var currentPhysicalPlan: SparkPlan
 ```
 
-`AdaptiveSparkPlanExec` uses `currentPhysicalPlan` internal registry for an optimized [SparkPlan](SparkPlan.md).
+`AdaptiveSparkPlanExec` defines `currentPhysicalPlan` variable for an adaptively-optimized [SparkPlan](SparkPlan.md).
 
-`currentPhysicalPlan` is initialized to be the [initialPlan](#initialPlan) when `AdaptiveSparkPlanExec` operator is [created](#creating-instance),
+`currentPhysicalPlan` is the [initialPlan](#initialPlan) when `AdaptiveSparkPlanExec` is [created](#creating-instance).
 
-`currentPhysicalPlan` may change in [getFinalPhysicalPlan](#getFinalPhysicalPlan) until the [isFinalPlan](#isFinalPlan) internal flag is on.
+`currentPhysicalPlan` can only change in [getFinalPhysicalPlan](#getFinalPhysicalPlan) and only until the [isFinalPlan](#isFinalPlan) internal flag is enabled.
 
-`currentPhysicalPlan` is available using [executedPlan](#executedPlan) method.
+While [getFinalPhysicalPlan](#getFinalPhysicalPlan), `AdaptiveSparkPlanExec` uses `currentPhysicalPlan` as an input argument for [createQueryStages](#createQueryStages) that gives a candidate for a new `currentPhysicalPlan`. `AdaptiveSparkPlanExec` replaces `currentPhysicalPlan` when the [costEvaluator](#costEvaluator) determines the following:
+
+* A smaller [Cost](../adaptive-query-execution/CostEvaluator.md#evaluateCost)
+* A different [SparkPlan](SparkPlan.md) (than the `currentPhysicalPlan`)
+
+If a `SparkPlan` switch happens, `AdaptiveSparkPlanExec` prints out the following message to the logs:
+
+```text
+Plan changed from [currentPhysicalPlan] to [newPhysicalPlan]
+```
+
+`AdaptiveSparkPlanExec` [applyPhysicalRules](#applyPhysicalRules) to optimize the new `SparkPlan`.
+
+`currentPhysicalPlan` is available using [executedPlan](#executedPlan).
 
 ### executedPlan
 
@@ -558,11 +583,18 @@ withFinalPlanUpdate[T](
   fun: SparkPlan => T): T
 ```
 
-`withFinalPlanUpdate` executes the given `fun` with the [final physical plan](#getFinalPhysicalPlan) and returns the result (of type `T`). In the end, `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
+`withFinalPlanUpdate` executes the given `fun` with the [adaptively-optimized physical query plan](#getFinalPhysicalPlan) and returns the result (of type `T`). `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
 
-`withFinalPlanUpdate` is used when:
+---
 
-* `AdaptiveSparkPlanExec` is requested to [executeCollect](#executeCollect), [executeTake](#executeTake), [executeTail](#executeTail), [doExecute](#doExecute), [doExecuteColumnar](#doExecuteColumnar) and [doExecuteBroadcast](#doExecuteBroadcast)
+`withFinalPlanUpdate` is a helper method for `AdaptiveSparkPlanExec` when requested for the following:
+
+* [executeCollect](#executeCollect)
+* [executeTake](#executeTake)
+* [executeTail](#executeTail)
+* [doExecute](#doExecute)
+* [doExecuteColumnar](#doExecuteColumnar)
+* [doExecuteBroadcast](#doExecuteBroadcast)
 
 ## Logging
 
