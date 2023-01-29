@@ -104,11 +104,7 @@ Used when:
 
 ## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
-The value of [spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property
-
-Used when:
-
-* `AQEOptimizer` is requested for the [optimization batches](adaptive-query-execution/AQEOptimizer.md#batches)
+[spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules)
 
 ## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 

@@ -61,6 +61,20 @@ Used when:
 * `AdaptiveSparkPlanExec` physical operator is requested for the [AQE cost evaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator) (and creates a [SimpleCostEvaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator))
 * [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
+## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> adaptive.optimizer.excludedRules
+
+**spark.sql.adaptive.optimizer.excludedRules**
+
+A comma-separated list of rules (names) to be disabled (_excluded_) in the [AQE Logical Optimizer](adaptive-query-execution/AQEOptimizer.md)
+
+Default: undefined
+
+Use [SQLConf.ADAPTIVE_OPTIMIZER_EXCLUDED_RULES](SQLConf.md#ADAPTIVE_OPTIMIZER_EXCLUDED_RULES) to reference the property.
+
+Used when:
+
+* `AQEOptimizer` is requested for the [batches](adaptive-query-execution/AQEOptimizer.md#batches)
+
 ## <span id="spark.sql.codegen.hugeMethodLimit"> codegen.hugeMethodLimit
 
 **spark.sql.codegen.hugeMethodLimit**
@@ -650,14 +664,6 @@ The maximum size (in bytes) per partition that can be allowed to build local has
 Default: `0`
 
 Available as [SQLConf.ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD](SQLConf.md#ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD)
-
-## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> spark.sql.adaptive.optimizer.excludedRules
-
-A comma-separated list of rules (names) to be disabled in the [adaptive optimizer](adaptive-query-execution/AQEOptimizer.md)
-
-Default: undefined
-
-Use [SQLConf.ADAPTIVE_OPTIMIZER_EXCLUDED_RULES](SQLConf.md#ADAPTIVE_OPTIMIZER_EXCLUDED_RULES) to reference the property.
 
 ## <span id="spark.sql.adaptive.skewJoin.enabled"> spark.sql.adaptive.skewJoin.enabled
 

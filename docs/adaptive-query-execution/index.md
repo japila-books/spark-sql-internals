@@ -16,6 +16,10 @@ Quoting the description of a [talk](#references) by the authors of Adaptive Quer
 
 Adaptive Query Execution is possible (and applied to a physical query plan) using the [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization that inserts [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operators.
 
+## AQE Logical Optimizer
+
+Adaptive Query Execution ([AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#optimizer) physical operator) uses [AQEOptimizer](AQEOptimizer.md) logical optimizer to [re-optimize logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
+
 ## AQE Cost Evaluator
 
 Adaptive Query Execution ([AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md), precisely) uses [CostEvaluator](CostEvaluator.md) to [evaluate cost](CostEvaluator.md#evaluateCost) when considering a candidate for an [Adaptively-Optimized Physical Query Plan](../physical-operators/AdaptiveSparkPlanExec.md#executedPlan).
