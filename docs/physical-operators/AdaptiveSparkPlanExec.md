@@ -8,7 +8,7 @@
 
 * [Input Physical Plan](#inputPlan)
 * [AdaptiveExecutionContext](#context)
-* <span id="preprocessingRules"> Preprocessing physical rules ([Rule](../catalyst/Rule.md)s of [SparkPlan](SparkPlan.md))
+* [Preprocessing Physical Optimizations](#preprocessingRules)
 * <span id="isSubquery"> `isSubquery` flag
 * <span id="supportsColumnar"> `supportsColumnar` flag (default: `false`)
 
@@ -52,6 +52,18 @@ costEvaluator: CostEvaluator
 Unless configured, `AdaptiveSparkPlanExec` uses [SimpleCostEvaluator](../adaptive-query-execution/SimpleCostEvaluator.md) (with [spark.sql.adaptive.forceOptimizeSkewedJoin](../configuration-properties.md#spark.sql.adaptive.forceOptimizeSkewedJoin) configuration property).
 
 `AdaptiveSparkPlanExec` uses the `CostEvaluator` to [evaluate cost](../adaptive-query-execution/CostEvaluator.md#evaluateCost) (of a candidate for a new `SparkPlan`) when requested for the [adaptively-optimized physical query plan](#getFinalPhysicalPlan).
+
+### <span id="preprocessingRules"> Preprocessing Physical Optimizations
+
+```scala
+preprocessingRules: Seq[Rule[SparkPlan]]
+```
+
+`AdaptiveSparkPlanExec` is given a collection of [Rule](../catalyst/Rule.md)s to pre-process [SparkPlan](SparkPlan.md)s (before the [QueryStage Preparation Rules](#queryStagePreparationRules)) when [executing physical optimizations](#applyPhysicalRules) to [reOptimize a logical query plan](#reOptimize).
+
+The rules is just the single physical optimization:
+
+* [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md)
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -558,7 +570,7 @@ replaceWithQueryStagesInLogicalPlan(
 
 `replaceWithQueryStagesInLogicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested for a [final physical plan](#getFinalPhysicalPlan).
 
-## <span id="applyPhysicalRules"> Executing Physical Rules
+## <span id="applyPhysicalRules"> Executing Physical Optimizations
 
 ```scala
 applyPhysicalRules(
@@ -570,6 +582,8 @@ applyPhysicalRules(
 By default (with no `loggerAndBatchName` given) `applyPhysicalRules` applies (_executes_) the given rules to the given [physical query plan](SparkPlan.md).
 
 With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and, for every rule, requests the [PlanChangeLogger](../catalyst/PlanChangeLogger.md) to [logRule](../catalyst/PlanChangeLogger.md#logRule). In the end, `applyPhysicalRules` requests the `PlanChangeLogger` to [logBatch](../catalyst/PlanChangeLogger.md#logBatch).
+
+---
 
 `applyPhysicalRules` is used when:
 
