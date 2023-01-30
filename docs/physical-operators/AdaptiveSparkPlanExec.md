@@ -59,19 +59,19 @@ Unless configured, `AdaptiveSparkPlanExec` uses [SimpleCostEvaluator](../adaptiv
 preprocessingRules: Seq[Rule[SparkPlan]]
 ```
 
-`AdaptiveSparkPlanExec` is given a collection of [Rule](../catalyst/Rule.md)s to pre-process [SparkPlan](SparkPlan.md)s (before the [QueryStage Preparation Rules](#queryStagePreparationRules)) when [executing physical optimizations](#applyPhysicalRules) to [reOptimize a logical query plan](#reOptimize).
+`AdaptiveSparkPlanExec` is given a collection of [Rule](../catalyst/Rule.md)s to pre-process [SparkPlan](SparkPlan.md)s (before the [QueryStage Physical Preparation Rules](#queryStagePreparationRules)) when [executing physical optimizations](#applyPhysicalRules) to [reOptimize a logical query plan](#reOptimize).
 
 The rules is just the single physical optimization:
 
 * [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md)
 
-### <span id="queryStagePreparationRules"> QueryStage Preparation Rules
+### <span id="queryStagePreparationRules"> QueryStage Physical Preparation Rules
 
 ```scala
 queryStagePreparationRules: Seq[Rule[SparkPlan]]
 ```
 
-`AdaptiveSparkPlanExec` creates a collection of physical optimizations (`Rule[SparkPlan]`s) when [created](#creating-instance) (in the order):
+`AdaptiveSparkPlanExec` creates a collection of physical preparation rules (`Rule[SparkPlan]`s) when [created](#creating-instance) (in the order):
 
 1. [RemoveRedundantProjects](../physical-optimizations/RemoveRedundantProjects.md)
 1. [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) (based on the [requiredDistribution](#requiredDistribution))
@@ -84,6 +84,38 @@ queryStagePreparationRules: Seq[Rule[SparkPlan]]
 1. [queryStagePrepRules](../SessionState.md#queryStagePrepRules)
 
 `queryStagePreparationRules` is used for the [initial plan](#initialPlan) and [reOptimize](#reOptimize).
+
+### <span id="requiredDistribution"> Distribution Requirement
+
+```scala
+requiredDistribution: Option[Distribution]
+```
+
+`AdaptiveSparkPlanExec` creates `requiredDistribution` value when [created](#creating-instance):
+
+* `UnspecifiedDistribution` for a [subquery](#isSubquery) (as a subquery output does not need a specific output partitioning)
+* [AQEUtils.getRequiredDistribution](../adaptive-query-execution/AQEUtils.md#getRequiredDistribution) for the [inputPlan](#inputPlan) otherwise
+
+`requiredDistribution` is used for the following:
+
+* [queryStagePreparationRules](#queryStagePreparationRules) (to create [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization)
+* [optimizeQueryStage](#optimizeQueryStage)
+
+### <span id="queryStageOptimizerRules"> Adaptive Query Stage Physical Optimizations
+
+```scala
+queryStageOptimizerRules: Seq[Rule[SparkPlan]]
+```
+
+`AdaptiveSparkPlanExec` creates a collection of physical optimization rules (`Rule[SparkPlan]`s) when [created](#creating-instance) (in the order):
+
+1. [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
+1. [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
+1. [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md)
+1. [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
+1. [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md)
+
+`queryStageOptimizerRules` is used to [optimizeQueryStage](#optimizeQueryStage).
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -308,7 +340,7 @@ In the end, `newQueryStage` returns the `QueryStageExec` physical operator.
 ## <span id="currentPhysicalPlan"><span id="executedPlan"> Adaptively-Optimized Physical Query Plan
 
 ```scala
-var currentPhysicalPlan: SparkPlan
+currentPhysicalPlan: SparkPlan
 ```
 
 `AdaptiveSparkPlanExec` defines `currentPhysicalPlan` variable for an adaptively-optimized [SparkPlan](SparkPlan.md).
@@ -396,26 +428,6 @@ AQE Query Stage Optimization
 `optimizeQueryStage` is used when:
 
 * `AdaptiveSparkPlanExec` is requested for an [adaptively-optimized physical query plan](#getFinalPhysicalPlan) and to [create a new QueryStageExec for an Exchange](#newQueryStage)
-
-## <span id="queryStageOptimizerRules"> Adaptive Optimizations
-
-```scala
-queryStageOptimizerRules: Seq[Rule[SparkPlan]]
-```
-
-`queryStageOptimizerRules` is the following adaptive optimizations (physical optimization rules):
-
-* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
-* [ReuseAdaptiveSubquery](../physical-optimizations/ReuseAdaptiveSubquery.md)
-* [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md)
-* [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md)
-* [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md)
-
----
-
-`queryStageOptimizerRules` is used when:
-
-* `AdaptiveSparkPlanExec` is requested to [optimizeQueryStage](#optimizeQueryStage)
 
 ## <span id="postStageCreationRules"> Post-Stage-Creation Adaptive Optimizations
 

@@ -32,9 +32,9 @@ Plan changed from [currentPhysicalPlan] to [newPhysicalPlan]
 
 Adaptive Query Execution uses [spark.sql.adaptive.customCostEvaluatorClass](../configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass) configuration property or defaults to [SimpleCostEvaluator](SimpleCostEvaluator.md).
 
-## AQE QueryStage Preparation Rules
+## AQE QueryStage Physical Preparation Rules
 
-Adaptive Query Execution uses [QueryStage Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) that can be extended using [SparkSessionExtensions](../SparkSessionExtensions.md#buildQueryStagePrepRules).
+Adaptive Query Execution uses [QueryStage Physical Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) that can be extended using [SparkSessionExtensions](../SparkSessionExtensions.md#buildQueryStagePrepRules).
 
 ## SparkListenerSQLAdaptiveExecutionUpdates
 

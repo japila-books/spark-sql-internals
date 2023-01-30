@@ -7,7 +7,7 @@
 `DisableUnnecessaryBucketedScan` is used when:
 
 * `QueryExecution` utility is used for [preparations rules](../QueryExecution.md#preparations)
-* `AdaptiveSparkPlanExec` physical operator is requested for [preparation rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)
+* `AdaptiveSparkPlanExec` physical operator is requested for the [physical preparation rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)
 
 ## Creating Instance
 

@@ -111,7 +111,7 @@ udfRegistration: UDFRegistration
 
 `SessionState` is given an [UDFRegistration](UDFRegistration.md) when [created](#creating-instance).
 
-### <span id="queryStagePrepRules"> AQE QueryStage Preparation Rules
+### <span id="queryStagePrepRules"> AQE QueryStage Physical Preparation Rules
 
 ```scala
 queryStagePrepRules: Seq[Rule[SparkPlan]]
@@ -121,7 +121,7 @@ queryStagePrepRules: Seq[Rule[SparkPlan]]
 
 `queryStagePrepRules` is given when `BaseSessionStateBuilder` is requested to [build a SessionState](BaseSessionStateBuilder.md#build) based on [queryStagePrepRules](BaseSessionStateBuilder.md#queryStagePrepRules) (from a [SparkSessionExtensions](SparkSessionExtensions.md#buildQueryStagePrepRules)).
 
-`queryStagePrepRules` is used to extend the built-in [QueryStage Preparation Rules](physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) in [Adaptive Query Execution](adaptive-query-execution/index.md).
+`queryStagePrepRules` is used to extend the built-in [QueryStage Physical Preparation Rules](physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) in [Adaptive Query Execution](adaptive-query-execution/index.md).
 
 ## Creating Instance
 

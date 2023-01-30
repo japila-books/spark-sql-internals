@@ -5,7 +5,7 @@ tags:
 
 # SparkSessionExtensions
 
-`SparkSessionExtensions` is an ["injection" API](#injection-api) for Spark SQL developers to extend the capabilities of a [SparkSession](SparkSession.md).
+`SparkSessionExtensions` is an [Injection API](#injection-api) for Spark SQL developers to extend the capabilities of a [SparkSession](SparkSession.md).
 
 Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withExtensions) method or register custom extensions using [spark.sql.extensions](StaticSQLConf.md#spark.sql.extensions) configuration property.
 
@@ -19,7 +19,7 @@ Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withEx
 1. `ExpressionInfo`
 1. `Seq[Expression] => Expression`
 
-## "Injection" API
+## Injection API
 
 ### <span id="injectCheckRule"> injectCheckRule
 

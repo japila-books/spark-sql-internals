@@ -149,7 +149,8 @@ Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.InsertAd
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.adaptive.InsertAdaptiveSparkPlan=ALL
+logger.InsertAdaptiveSparkPlan.name = org.apache.spark.sql.execution.adaptive.InsertAdaptiveSparkPlan
+logger.InsertAdaptiveSparkPlan.level = all
 ```
 
 Refer to [Logging](../spark-logging.md).
