@@ -181,7 +181,7 @@ Starting Hive Metastore Server
 <span class=w>    </span><span class=nt>&lt;value&gt;</span>thrift://localhost:9083<span class=nt>&lt;/value&gt;</span>
 <span class=w>  </span><span class=nt>&lt;/property&gt;</span>
 <span class=nt>&lt;/configuration&gt;</span>
-</code></pre></div> <p>Optionally, you may want to add the following to <code>conf/log4j.properties</code> for a more low-level logging:</p> <div class=highlight><pre><span></span><code>log4j.logger.org.apache.spark.sql.hive.HiveUtils$=ALL
+</code></pre></div> <p>Optionally, you may want to add the following to <code>conf/log4j2.properties</code> for a more low-level logging:</p> <div class=highlight><pre><span></span><code>log4j.logger.org.apache.spark.sql.hive.HiveUtils$=ALL
 log4j.logger.org.apache.spark.sql.internal.SharedState=ALL
 log4j.logger.org.apache.spark.sql.hive.client.HiveClientImpl=ALL
 </code></pre></div> <p>Start <code>spark-shell</code>.</p> <div class=highlight><pre><span></span><code>$SPARK_HOME/bin/spark-shell \
