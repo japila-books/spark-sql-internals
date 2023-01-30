@@ -65,6 +65,26 @@ The rules is just the single physical optimization:
 
 * [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md)
 
+### <span id="queryStagePreparationRules"> QueryStage Preparation Rules
+
+```scala
+queryStagePreparationRules: Seq[Rule[SparkPlan]]
+```
+
+`AdaptiveSparkPlanExec` creates a collection of physical optimizations (`Rule[SparkPlan]`s) when [created](#creating-instance) (in the order):
+
+1. [RemoveRedundantProjects](../physical-optimizations/RemoveRedundantProjects.md)
+1. [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) (based on the [requiredDistribution](#requiredDistribution))
+1. [AdjustShuffleExchangePosition](../physical-optimizations/AdjustShuffleExchangePosition.md)
+1. [ValidateSparkPlan](../physical-optimizations/ValidateSparkPlan.md)
+1. [ReplaceHashWithSortAgg](../physical-optimizations/ReplaceHashWithSortAgg.md)
+1. [RemoveRedundantSorts](../physical-optimizations/RemoveRedundantSorts.md)
+1. [DisableUnnecessaryBucketedScan](../physical-optimizations/DisableUnnecessaryBucketedScan.md)
+1. [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) (with the [EnsureRequirements](../physical-optimizations/EnsureRequirements.md))
+1. [queryStagePrepRules](../SessionState.md#queryStagePrepRules)
+
+`queryStagePreparationRules` is used for the [initial plan](#initialPlan) and [reOptimize](#reOptimize).
+
 ## <span id="doExecute"> Executing Physical Operator
 
 ```scala
@@ -344,16 +364,6 @@ resetMetrics(): Unit
 `resetMetrics` requests [all the metrics](SparkPlan.md#metrics) to [reset](../SQLMetric.md#reset).
 
 In the end, `resetMetrics` requests the [executed query plan](#executedPlan) to [resetMetrics](SparkPlan.md#resetMetrics).
-
-## <span id="queryStagePreparationRules"> QueryStage Preparation Rules
-
-```scala
-queryStagePreparationRules: Seq[Rule[SparkPlan]]
-```
-
-`queryStagePreparationRules` is a single-rule collection of [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization.
-
-`queryStagePreparationRules` is used when `AdaptiveSparkPlanExec` operator is requested for the [current physical plan](#currentPhysicalPlan) and [reOptimize](#reOptimize).
 
 ## <span id="optimizeQueryStage"> optimizeQueryStage
 

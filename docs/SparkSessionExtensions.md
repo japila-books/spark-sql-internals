@@ -1,6 +1,11 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # SparkSessionExtensions
 
-`SparkSessionExtensions` is an ["injection" API](#injection-api) for Spark SQL developers to extend the features of a [SparkSession](SparkSession.md).
+`SparkSessionExtensions` is an ["injection" API](#injection-api) for Spark SQL developers to extend the capabilities of a [SparkSession](SparkSession.md).
 
 Spark SQL developers use [Builder.withExtensions](SparkSession-Builder.md#withExtensions) method or register custom extensions using [spark.sql.extensions](StaticSQLConf.md#spark.sql.extensions) configuration property.
 
@@ -88,7 +93,7 @@ injectPostHocResolutionRule(
 
 `injectPostHocResolutionRule`...FIXME
 
-### <span id="injectQueryStagePrepRule"> injectQueryStagePrepRule
+### <span id="injectQueryStagePrepRule"><span id="queryStagePrepRuleBuilders"> injectQueryStagePrepRule
 
 ```scala
 type QueryStagePrepRuleBuilder = SparkSession => Rule[SparkPlan]
@@ -96,7 +101,7 @@ injectQueryStagePrepRule(
   builder: QueryStagePrepRuleBuilder): Unit
 ```
 
-`injectQueryStagePrepRule`...FIXME
+`injectQueryStagePrepRule` registers a `QueryStagePrepRuleBuilder` (that can [build a query stage preparation rule](#buildQueryStagePrepRules)).
 
 ### <span id="injectResolutionRule"> injectResolutionRule
 
@@ -150,3 +155,18 @@ buildCheckRules(
 `buildCheckRules`...FIXME
 
 `buildCheckRules` is used when `BaseSessionStateBuilder` is requested to [customCheckRules](BaseSessionStateBuilder.md#customCheckRules).
+
+## <span id="buildQueryStagePrepRules"> Building Query Stage Preparation Rules
+
+```scala
+buildQueryStagePrepRules(
+  session: SparkSession): Seq[Rule[SparkPlan]]
+```
+
+`buildQueryStagePrepRules` executes the [queryStagePrepRuleBuilders](#queryStagePrepRuleBuilders) (to build query stage preparation rules).
+
+---
+
+`buildQueryStagePrepRules` is used when:
+
+* `BaseSessionStateBuilder` is requested for the [query stage preparation rules](BaseSessionStateBuilder.md#queryStagePrepRules)

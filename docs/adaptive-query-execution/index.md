@@ -18,11 +18,11 @@ Adaptive Query Execution is possible (and applied to a physical query plan) usin
 
 ## AQE Logical Optimizer
 
-Adaptive Query Execution ([AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#optimizer) physical operator) uses [AQEOptimizer](AQEOptimizer.md) logical optimizer to [re-optimize logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
+Adaptive Query Execution uses [AQEOptimizer](AQEOptimizer.md) logical optimizer to [re-optimize logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize).
 
 ## AQE Cost Evaluator
 
-Adaptive Query Execution ([AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md), precisely) uses [CostEvaluator](CostEvaluator.md) to [evaluate cost](CostEvaluator.md#evaluateCost) when considering a candidate for an [Adaptively-Optimized Physical Query Plan](../physical-operators/AdaptiveSparkPlanExec.md#executedPlan).
+Adaptive Query Execution uses [CostEvaluator](CostEvaluator.md) to [evaluate cost](CostEvaluator.md#evaluateCost) when considering a candidate for an [Adaptively-Optimized Physical Query Plan](../physical-operators/AdaptiveSparkPlanExec.md#executedPlan).
 
 If a `SparkPlan` change happens, `AdaptiveSparkPlanExec` prints out the following message to the logs:
 
@@ -31,6 +31,10 @@ Plan changed from [currentPhysicalPlan] to [newPhysicalPlan]
 ```
 
 Adaptive Query Execution uses [spark.sql.adaptive.customCostEvaluatorClass](../configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass) configuration property or defaults to [SimpleCostEvaluator](SimpleCostEvaluator.md).
+
+## AQE QueryStage Preparation Rules
+
+Adaptive Query Execution uses [QueryStage Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) that can be extended using [SparkSessionExtensions](../SparkSessionExtensions.md#buildQueryStagePrepRules).
 
 ## SparkListenerSQLAdaptiveExecutionUpdates
 

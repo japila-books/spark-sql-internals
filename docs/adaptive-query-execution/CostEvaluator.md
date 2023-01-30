@@ -2,6 +2,8 @@
 
 `CostEvaluator` is an [abstraction](#contract) of [cost evaluators](#implementations) in [Adaptive Query Execution](index.md).
 
+`CostEvaluator` is used in [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#costEvaluator) physical operator based on [spark.sql.adaptive.customCostEvaluatorClass](../configuration-properties.md#spark.sql.adaptive.customCostEvaluatorClass) configuration property.
+
 ## Contract
 
 ### <span id="evaluateCost"> Evaluating Cost

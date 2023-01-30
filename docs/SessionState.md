@@ -111,6 +111,18 @@ udfRegistration: UDFRegistration
 
 `SessionState` is given an [UDFRegistration](UDFRegistration.md) when [created](#creating-instance).
 
+### <span id="queryStagePrepRules"> AQE QueryStage Preparation Rules
+
+```scala
+queryStagePrepRules: Seq[Rule[SparkPlan]]
+```
+
+`SessionState` can be given a collection of physical optimizations (`Rule[SparkPlan]`s) when [created](#creating-instance).
+
+`queryStagePrepRules` is given when `BaseSessionStateBuilder` is requested to [build a SessionState](BaseSessionStateBuilder.md#build) based on [queryStagePrepRules](BaseSessionStateBuilder.md#queryStagePrepRules) (from a [SparkSessionExtensions](SparkSessionExtensions.md#buildQueryStagePrepRules)).
+
+`queryStagePrepRules` is used to extend the built-in [QueryStage Preparation Rules](physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules) in [Adaptive Query Execution](adaptive-query-execution/index.md).
+
 ## Creating Instance
 
 `SessionState` takes the following to be created:
@@ -131,8 +143,11 @@ udfRegistration: UDFRegistration
 * <span id="createQueryExecution"> Function to build a [QueryExecution](QueryExecution.md) (`LogicalPlan => QueryExecution`)
 * <span id="createClone"> `SessionState` Clone Function (`(SparkSession, SessionState) => SessionState`)
 * [ColumnarRules](#columnarRules)
+* [AQE QueryStage Preparation Rules](#queryStagePrepRules)
 
-`SessionState` is created when `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState) (when requested for the [SessionState](SparkSession.md#sessionState) per [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
+`SessionState` is created when:
+
+* `SparkSession` is requested to [instantiateSessionState](SparkSession.md#instantiateSessionState) (when requested for the [SessionState](SparkSession.md#sessionState) per [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property)
 
 ![Creating SessionState](images/spark-sql-SessionState.png)
 
@@ -184,10 +199,12 @@ newHadoopConfWithOptions(
 
 `SessionState` is available using [SparkSession.sessionState](SparkSession.md#sessionState).
 
-```text
+```scala
 import org.apache.spark.sql.SparkSession
 assert(spark.isInstanceOf[SparkSession])
+```
 
+```text
 // object SessionState in package org.apache.spark.sql.internal cannot be accessed directly
 scala> :type spark.sessionState
 org.apache.spark.sql.internal.SessionState

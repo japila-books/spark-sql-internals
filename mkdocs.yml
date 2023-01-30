@@ -685,6 +685,7 @@ nav:
       - Window: execution-planning-strategies/Window.md
       - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
     - Physical Optimizations:
+      - AdjustShuffleExchangePosition: physical-optimizations/AdjustShuffleExchangePosition.md
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
       - AQEShuffleReadRule: physical-optimizations/AQEShuffleReadRule.md
       - CoalesceBucketsInJoin: physical-optimizations/CoalesceBucketsInJoin.md
@@ -703,10 +704,12 @@ nav:
       - PlanSubqueries: physical-optimizations/PlanSubqueries.md
       - RemoveRedundantProjects: physical-optimizations/RemoveRedundantProjects.md
       - RemoveRedundantSorts: physical-optimizations/RemoveRedundantSorts.md
+      - ReplaceHashWithSortAgg: physical-optimizations/ReplaceHashWithSortAgg.md
       - ReuseAdaptiveSubquery: physical-optimizations/ReuseAdaptiveSubquery.md
       - ReuseExchange: physical-optimizations/ReuseExchange.md
       - ReuseExchangeAndSubquery: physical-optimizations/ReuseExchangeAndSubquery.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
+      - ValidateSparkPlan: physical-optimizations/ValidateSparkPlan.md
     - SQLExecution: SQLExecution.md
     - SQLMetric: SQLMetric.md
     - Tungsten Execution Backend:
