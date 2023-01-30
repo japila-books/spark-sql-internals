@@ -1,12 +1,12 @@
 # ShuffleQueryStageExec Adaptive Leaf Physical Operator
 
-`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with either a [ShuffleExchangeExec](ShuffleExchangeExec.md) or a [ReusedExchangeExec](ReusedExchangeExec.md) child operators.
+`ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with either [ShuffleExchangeExec](ShuffleExchangeExec.md) or [ReusedExchangeExec](ReusedExchangeExec.md) child operators.
 
 ## Creating Instance
 
 `ShuffleQueryStageExec` takes the following to be created:
 
-* <span id="id"> ID
+* <span id="id"> Query Stage ID
 * <span id="plan"> [SparkPlan](SparkPlan.md)
 * <span id="_canonicalized"> Canonicalized [SparkPlan](SparkPlan.md)
 
@@ -64,9 +64,11 @@ shuffleFuture: Future[MapOutputStatistics]
 doMaterialize(): Future[Any]
 ```
 
-`doMaterialize` returns the [Shuffle MapOutputStatistics Future](#shuffleFuture).
-
 `doMaterialize` is part of the [QueryStageExec](QueryStageExec.md#doMaterialize) abstraction.
+
+---
+
+`doMaterialize` returns the [Shuffle MapOutputStatistics Future](#shuffleFuture).
 
 ## <span id="cancel"> Cancelling
 
@@ -74,11 +76,13 @@ doMaterialize(): Future[Any]
 cancel(): Unit
 ```
 
-`cancel` cancels the [Shuffle MapOutputStatistics Future](#shuffleFuture) (unless already completed).
-
 `cancel` is part of the [QueryStageExec](QueryStageExec.md#cancel) abstraction.
 
-## <span id="newReuseInstance"> newReuseInstance
+---
+
+`cancel` cancels the [Shuffle MapOutputStatistics Future](#shuffleFuture) (unless already completed).
+
+## <span id="newReuseInstance"> New ShuffleQueryStageExec Instance for Reuse
 
 ```scala
 newReuseInstance(
@@ -86,9 +90,18 @@ newReuseInstance(
   newOutput: Seq[Attribute]): QueryStageExec
 ```
 
-`newReuseInstance` is...FIXME
-
 `newReuseInstance` is part of the [QueryStageExec](QueryStageExec.md#newReuseInstance) abstraction.
+
+---
+
+`newReuseInstance` creates a new `ShuffleQueryStageExec` with the following:
+
+Attribute | Value
+----------|-------
+ [Query Stage ID](#id) | The given `newStageId`
+ [SparkPlan](#plan) | A new [ReusedExchangeExec](ReusedExchangeExec.md) with the given `newOutput` and the [ShuffleExchangeLike](#shuffle)
+
+`newReuseInstance` requests the new `ShuffleQueryStageExec` to use the [_resultOption](QueryStageExec.md#_resultOption).
 
 ## <span id="mapStats"> MapOutputStatistics
 
@@ -104,9 +117,36 @@ assertion failed: ShuffleQueryStageExec should already be ready
 
 `mapStats` returns the [MapOutputStatistics](QueryStageExec.md#resultOption).
 
+---
+
 `mapStats` is used when:
 
 * `AQEShuffleReadExec` unary physical operator is requested for the [partitionDataSizes](AQEShuffleReadExec.md#partitionDataSizes)
 * [DynamicJoinSelection](../logical-optimizations/DynamicJoinSelection.md) adaptive optimization is executed (and [selectJoinStrategy](../logical-optimizations/DynamicJoinSelection.md#selectJoinStrategy))
 * [OptimizeShuffleWithLocalRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md) adaptive physical optimization is executed (and [canUseLocalShuffleRead](../physical-optimizations/OptimizeShuffleWithLocalRead.md#canUseLocalShuffleRead))
 * [CoalesceShufflePartitions](../physical-optimizations/CoalesceShufflePartitions.md), [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) and [OptimizeSkewInRebalancePartitions](../physical-optimizations/OptimizeSkewInRebalancePartitions.md) adaptive physical optimizations are executed
+
+## <span id="getRuntimeStatistics"> Runtime Statistics
+
+```scala
+getRuntimeStatistics: Statistics
+```
+
+`getRuntimeStatistics` is part of the [QueryStageExec](QueryStageExec.md#getRuntimeStatistics) abstraction.
+
+---
+
+`getRuntimeStatistics` requests the [ShuffleExchangeLike](#shuffle) for the [runtime statistics](ShuffleExchangeLike.md#runtimeStatistics).
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.ShuffleQueryStageExec` logger to see what happens inside.
+
+Add the following line to `conf/log4j2.properties`:
+
+```text
+logger.ShuffleQueryStageExec.name = org.apache.spark.sql.execution.adaptive.ShuffleQueryStageExec
+logger.ShuffleQueryStageExec.level = all
+```
+
+Refer to [Logging](../spark-logging.md).

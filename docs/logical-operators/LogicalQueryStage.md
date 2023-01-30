@@ -24,11 +24,15 @@
 
 `LogicalQueryStage` is planned by [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy.
 
-## <span id="computeStats"> Statistics
+## <span id="computeStats"> Computing Runtime Statistics
 
 ```scala
 computeStats(): Statistics
 ```
+
+`computeStats` is part of the [LeafNode](../logical-operators/LeafNode.md#computeStats) abstraction.
+
+---
 
 `computeStats` tries to find the first [QueryStageExec](../physical-operators/QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](../physical-operators/QueryStageExec.md#computeStats).
 
@@ -44,8 +48,6 @@ Physical stats not available for plan: [physicalPlan]
 
 In the end, `computeStats` gives the statistics of the physical operator or requests the [logical plan](#logicalPlan) for [them](../logical-operators/LogicalPlanStats.md#stats).
 
-`computeStats` is part of the [LeafNode](../logical-operators/LeafNode.md#computeStats) abstraction.
-
 ## Logging
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.LogicalQueryStage` logger to see what happens inside.
@@ -53,7 +55,8 @@ Enable `ALL` logging level for `org.apache.spark.sql.execution.adaptive.LogicalQ
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.adaptive.LogicalQueryStage=ALL
+logger.LogicalQueryStage.name = org.apache.spark.sql.execution.adaptive.LogicalQueryStage
+logger.LogicalQueryStage.level = all
 ```
 
 Refer to [Logging](../spark-logging.md).

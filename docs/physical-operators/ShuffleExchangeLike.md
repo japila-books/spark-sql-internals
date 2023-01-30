@@ -55,9 +55,15 @@ Used when:
 runtimeStatistics: Statistics
 ```
 
+[Statistics](../logical-operators/Statistics.md) with data size and row count
+
+See:
+
+* [ShuffleExchangeExec](ShuffleExchangeExec.md#runtimeStatistics)
+
 Used when:
 
-* `ShuffleQueryStageExec` physical operator is requested for [runtime statistics](ShuffleQueryStageExec.md)
+* `ShuffleQueryStageExec` physical operator is requested for the [runtime statistics](ShuffleQueryStageExec.md#getRuntimeStatistics)
 
 ### <span id="shuffleOrigin"> ShuffleOrigin
 
@@ -84,12 +90,14 @@ Used when:
 submitShuffleJob: Future[MapOutputStatistics]
 ```
 
-`submitShuffleJob` [executes a query](SparkPlan.md#executeQuery) with the [mapOutputStatisticsFuture](#mapOutputStatisticsFuture).
+`submitShuffleJob` [executes a query](SparkPlan.md#executeQuery) to materialize the [mapOutputStatisticsFuture](#mapOutputStatisticsFuture).
 
 ??? note "Final Method"
     `submitShuffleJob` is a Scala **final method** and may not be overridden in [subclasses](#implementations).
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#final).
+
+---
 
 `submitShuffleJob` is used when:
 

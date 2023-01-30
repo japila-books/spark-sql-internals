@@ -16,6 +16,8 @@ getSkewThreshold(
 1. [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes)
 1. [spark.sql.adaptive.skewJoin.skewedPartitionFactor](../configuration-properties.md#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplied by the given `medianSize`
 
+---
+
 `getSkewThreshold` is used when:
 
 * `OptimizeSkewedJoin` is requested to [tryOptimizeJoinChildren](#tryOptimizeJoinChildren)
@@ -24,12 +26,12 @@ getSkewThreshold(
 
 `OptimizeSkewedJoin` supports the following join types:
 
-* Inner
-* Cross
-* LeftSemi
-* LeftAnti
-* LeftOuter
-* RightOuter
+* `Inner`
+* `Cross`
+* `LeftSemi`
+* `LeftAnti`
+* `LeftOuter`
+* `RightOuter`
 
 ## Configuration Properties
 

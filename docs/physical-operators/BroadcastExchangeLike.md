@@ -38,11 +38,17 @@ Used when:
 * `BroadcastQueryStageExec` physical operator is requested to [cancel](BroadcastQueryStageExec.md#cancel)
 * `BroadcastExchangeExec` physical operator is requested for the [relationFuture](BroadcastExchangeExec.md#relationFuture) and [doExecuteBroadcast](BroadcastExchangeExec.md#doExecuteBroadcast)
 
-### <span id="runtimeStatistics"> runtimeStatistics
+### <span id="runtimeStatistics"> Runtime Statistics
 
 ```scala
 runtimeStatistics: Statistics
 ```
+
+[Statistics](../logical-operators/Statistics.md) with data size and row count
+
+See:
+
+* [BroadcastExchangeExec](BroadcastExchangeExec.md#runtimeStatistics)
 
 Used when:
 

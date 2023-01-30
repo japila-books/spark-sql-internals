@@ -23,6 +23,8 @@ getRuntimeStatistics: Statistics
 
 `getRuntimeStatistics` is part of the [QueryStageExec](QueryStageExec.md#getRuntimeStatistics) abstraction.
 
+---
+
 `getRuntimeStatistics` requests the [BroadcastExchangeLike](#broadcast) operator for the [runtime statistics](BroadcastExchangeLike.md#runtimeStatistics).
 
 ## <span id="materializeWithTimeout"> materializeWithTimeout
