@@ -1,12 +1,16 @@
 # AQEOptimizer &mdash; AQE Logical Optimizer
 
-`AQEOptimizer` is a logical optimizer (a [RuleExecutor](../catalyst/RuleExecutor.md) of the logical rules) for [re-optimizing logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize) in [Adaptive Query Execution](index.md).
+`AQEOptimizer` is the logical optimizer for [optimizing logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize) in [Adaptive Query Execution](index.md).
 
 <figure markdown>
   ![AQEOptimizer](../images/AQEOptimizer.png)
 </figure>
 
-`AQEOptimizer` uses [spark.sql.adaptive.optimizer.excludedRules](../configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property to exclude [logical optimizations](#batches).
+`AQEOptimizer` is used in [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md#optimizer) physical operator.
+
+`AQEOptimizer` uses [spark.sql.adaptive.optimizer.excludedRules](../configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property to exclude logical optimizations from the [batches](#batches) of logical optimization rules.
+
+`AQEOptimizer` is a Catalyst [RuleExecutor](../catalyst/RuleExecutor.md) of the logical (optimization) rules (`RuleExecutor[LogicalPlan]`).
 
 ## Creating Instance
 
@@ -80,7 +84,7 @@ batches: Seq[Batch]
 
 ---
 
-`batches` uses the [spark.sql.adaptive.optimizer.excludedRules](../configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property for the rules to exclude from the [default rules](#defaultBatches).
+`batches` returns the [default rules](#defaultBatches) excluding the ones specified in the [spark.sql.adaptive.optimizer.excludedRules](../configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules) configuration property.
 
 For excluded rules, `batches` prints out the following INFO message to the logs:
 
