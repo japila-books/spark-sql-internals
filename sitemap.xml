@@ -4036,6 +4036,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/AdjustShuffleExchangePosition/</loc>
+         <lastmod>2023-01-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/ApplyColumnarRulesAndInsertTransitions/</loc>
          <lastmod>2023-01-30</lastmod>
          <changefreq>daily</changefreq>
@@ -4121,6 +4126,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/ReplaceHashWithSortAgg/</loc>
+         <lastmod>2023-01-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/ReuseAdaptiveSubquery/</loc>
          <lastmod>2023-01-30</lastmod>
          <changefreq>daily</changefreq>
@@ -4137,6 +4147,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/ReuseSubquery/</loc>
+         <lastmod>2023-01-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/ValidateSparkPlan/</loc>
          <lastmod>2023-01-30</lastmod>
          <changefreq>daily</changefreq>
     </url>
