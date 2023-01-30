@@ -56,7 +56,7 @@ Used when `KafkaOffsetReader`:
 ====
 Enable `INFO` or `DEBUG` logging levels for `org.apache.spark.sql.kafka010.KafkaOffsetReader` to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```
 log4j.logger.org.apache.spark.sql.kafka010.KafkaOffsetReader=DEBUG

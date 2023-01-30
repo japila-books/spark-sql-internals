@@ -41,7 +41,7 @@ A RDD can be recovered from a checkpoint files using <<sparkcontext-checkpointFi
 ====
 Enable `INFO` logging level for `org.apache.spark.rdd.ReliableRDDCheckpointData` logger to see what happens while an RDD is checkpointed.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```
 log4j.logger.org.apache.spark.rdd.ReliableRDDCheckpointData=INFO

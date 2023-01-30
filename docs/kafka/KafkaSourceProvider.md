@@ -151,7 +151,7 @@ ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG
 !!! tip
     Enable `ALL` logging level for `org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater` logger to see updates of Kafka configuration parameters.
 
-    Add the following line to `conf/log4j.properties`:
+    Add the following line to `conf/log4j2.properties`:
 
     ```
     log4j.logger.org.apache.spark.sql.kafka010.KafkaSourceProvider.ConfigUpdater=ALL

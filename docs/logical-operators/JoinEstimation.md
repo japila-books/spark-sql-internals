@@ -189,7 +189,7 @@ val stats = JoinEstimation(join).estimate
 ====
 Enable `DEBUG` logging level for `org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```
 log4j.logger.org.apache.spark.sql.catalyst.plans.logical.statsEstimation.JoinEstimation=DEBUG

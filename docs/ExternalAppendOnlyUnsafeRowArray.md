@@ -79,7 +79,7 @@ A new `UnsafeRow` can be added to `inMemoryBuffer` in [add](#add) (up to the [nu
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```text
 log4j.logger.org.apache.spark.sql.execution.ExternalAppendOnlyUnsafeRowArray=ALL

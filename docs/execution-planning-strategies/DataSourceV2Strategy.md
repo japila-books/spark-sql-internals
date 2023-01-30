@@ -49,7 +49,7 @@ apply(
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```text
 log4j.logger.org.apache.spark.sql.execution.datasources.v2.DataSourceV2Strategy=ALL

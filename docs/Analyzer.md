@@ -259,7 +259,7 @@ Enable `ALL` logging level for the respective session-specific loggers to see wh
 
 * `org.apache.spark.sql.hive.HiveSessionStateBuilder$$anon$1` for [Hive support](SparkSession.md#enableHiveSupport)
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```text
 # with no Hive support

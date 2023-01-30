@@ -387,7 +387,7 @@ Create `$SPARK_HOME/conf/hive-site.xml` and define `hive.metastore.uris` configu
 </configuration>
 ```
 
-Optionally, you may want to add the following to `conf/log4j.properties` for a more low-level logging:
+Optionally, you may want to add the following to `conf/log4j2.properties` for a more low-level logging:
 
 ```text
 log4j.logger.org.apache.spark.sql.hive.HiveUtils$=ALL

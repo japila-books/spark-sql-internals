@@ -45,7 +45,7 @@ It is also used in `HiveClientImpl` (when converting columns from Hive to Spark)
 
 Enable `ALL` logging level for `org.apache.spark.sql.catalyst.parser.CatalystSqlParser` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```text
 log4j.logger.org.apache.spark.sql.catalyst.parser.CatalystSqlParser=ALL

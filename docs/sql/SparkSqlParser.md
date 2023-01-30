@@ -88,7 +88,7 @@ The `VariableSubstitution` is used while [parsing a SQL command](#parse).
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.SparkSqlParser` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```text
 log4j.logger.org.apache.spark.sql.execution.SparkSqlParser=ALL

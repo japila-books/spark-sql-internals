@@ -69,7 +69,7 @@ Used exclusively when `KafkaRelation` is requested to <<buildScan, build a distr
 ====
 Enable `INFO` or `DEBUG` logging level for `org.apache.spark.sql.kafka010.KafkaRelation` logger to see what happens inside.
 
-Add the following line to `conf/log4j.properties`:
+Add the following line to `conf/log4j2.properties`:
 
 ```
 log4j.logger.org.apache.spark.sql.kafka010.KafkaRelation=DEBUG

@@ -138,7 +138,7 @@ Default: `APP`
 
 `HiveConf` loads and prints out the location of `hive-site.xml` configuration file (when on the classpath, in `$HIVE_CONF_DIR` or `$HIVE_HOME/conf` directories, or in the directory with the jar file with `HiveConf` class).
 
-Enable ALL logging level in `conf/log4j.properties`:
+Enable ALL logging level in `conf/log4j2.properties`:
 
 ```
 log4j.logger.org.apache.hadoop.hive=ALL
