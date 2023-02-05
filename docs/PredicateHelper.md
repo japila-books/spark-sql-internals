@@ -7,11 +7,11 @@ isLikelySelective(
   e: Expression): Boolean
 ```
 
-`isLikelySelective` is `true` (positive) for the following [Expression](expressions/Expression.md)s:
+`isLikelySelective` is `true` (enabled) for the following [Expression](expressions/Expression.md)s:
 
-* `Not` with an [Expression](expressions/Expression.md) that is selective
-* `And` with either [Expression](expressions/Expression.md) selective
-* `Or` with both [Expression](expressions/Expression.md)s selective
+* `Not` with an [Expression](expressions/Expression.md) that is likely to be selective
+* `And` with either [Expression](expressions/Expression.md) likely to be selective
+* `Or` with both [Expression](expressions/Expression.md)s likely to be selective
 * `StringRegexExpression`
 * `BinaryComparison`
 * [In](expressions/In.md)

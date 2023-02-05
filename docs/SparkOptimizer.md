@@ -87,6 +87,7 @@ Strategy: [fixedPoint](catalyst/Optimizer.md#fixedPoint)
 Rules:
 
 * [CleanupDynamicPruningFilters](logical-optimizations/CleanupDynamicPruningFilters.md)
+* `BooleanSimplification`
 * [PruneFilters](logical-optimizations/PruneFilters.md)
 
 Strategy: `Once`

@@ -347,15 +347,7 @@ Used when:
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
 
-The value of [spark.sql.optimizer.dynamicPartitionPruning.enabled](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property
-
-Used when:
-
-* [CleanupDynamicPruningFilters](logical-optimizations/CleanupDynamicPruningFilters.md) logical optimization rule is executed
-
-* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
-
-* [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) preparation physical rule is executed
+[spark.sql.optimizer.dynamicPartitionPruning.enabled](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_FALLBACK_FILTER_RATIO"><span id="dynamicPartitionPruningFallbackFilterRatio"> dynamicPartitionPruningFallbackFilterRatio
 

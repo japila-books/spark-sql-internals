@@ -186,11 +186,18 @@ Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruning
 
 **spark.sql.optimizer.dynamicPartitionPruning.enabled**
 
-When `true`, Spark SQL will generate predicate for partition column used as a join key.
+Enables generating predicates for partition columns used as join keys
 
 Default: `true`
 
-Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) to access the current value.
+Use [SQLConf.dynamicPartitionPruningEnabled](SQLConf.md#dynamicPartitionPruningEnabled) for the current value
+
+Used to control whether to execute the following optimizations or skip them altogether:
+
+* [CleanupDynamicPruningFilters](logical-optimizations/CleanupDynamicPruningFilters.md) logical optimization
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization
+* [PlanAdaptiveDynamicPruningFilters](physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) physical optimization
+* [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) physical optimization
 
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly"> optimizer.dynamicPartitionPruning.reuseBroadcastOnly
 

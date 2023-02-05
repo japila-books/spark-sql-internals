@@ -2,7 +2,7 @@
 
 `PartitionPruning` is a logical optimization for [Dynamic Partition Pruning](../new-and-noteworthy/dynamic-partition-pruning.md).
 
-`PartitionPruning` is a `Rule[LogicalPlan]` (a [rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
+`PartitionPruning` is a `Rule[LogicalPlan]` (a [Catalyst Rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
 
 `PartitionPruning` is part of the [PartitionPruning](../SparkOptimizer.md#PartitionPruning) batch of the [SparkOptimizer](../SparkOptimizer.md#defaultBatches).
 
@@ -13,15 +13,19 @@ apply(
   plan: LogicalPlan): LogicalPlan
 ```
 
-For `Subquery` operators that are `correlated`, `apply` simply does nothing and gives it back unmodified.
-
-`apply` does nothing when the [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled (`false`).
-
-For all other cases, `apply` applies [prune](#prune) optimization.
-
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-## <span id="prune"> prune Internal Method
+---
+
+!!! note "A no-op"
+    `apply` is a _noop_ (does nothing and returns the given [LogicalPlan](../logical-operators/LogicalPlan.md)) when executed with one of the following:
+
+    * `Subquery` operators that are `correlated`
+    * [spark.sql.optimizer.dynamicPartitionPruning.enabled](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.enabled) configuration property is disabled
+
+`apply` [prunes](#prune) the given [LogicalPlan](../logical-operators/LogicalPlan.md).
+
+## <span id="prune"> prune
 
 ```scala
 prune(
@@ -44,3 +48,37 @@ prune(
     `prune` needs more love and would benefit from more insight on how it works.
 
 `prune` is used when `PartitionPruning` is [executed](#apply).
+
+## <span id="getFilterableTableScan"> getFilterableTableScan
+
+```scala
+getFilterableTableScan(
+  a: Expression,
+  plan: LogicalPlan): Option[LogicalPlan]
+```
+
+`getFilterableTableScan`...FIXME
+
+## <span id="hasPartitionPruningFilter"> hasPartitionPruningFilter
+
+```scala
+hasPartitionPruningFilter(
+  plan: LogicalPlan): Boolean
+```
+
+!!! note
+    `hasPartitionPruningFilter` is [hasSelectivePredicate](#hasSelectivePredicate) with a [streaming check](../logical-operators/LogicalPlan.md#isStreaming) to make sure it disregards streaming queries.
+
+`hasPartitionPruningFilter` is `true` when all of the following hold true:
+
+1. The given [LogicalPlan](../logical-operators/LogicalPlan.md) is not [streaming](../logical-operators/LogicalPlan.md#isStreaming)
+1. [hasSelectivePredicate](#hasSelectivePredicate)
+
+## <span id="hasSelectivePredicate"> hasSelectivePredicate
+
+```scala
+hasSelectivePredicate(
+  plan: LogicalPlan): Boolean
+```
+
+`hasSelectivePredicate` is `true` when there is a `Filter` logical operator with a [likely-selective](../PredicateHelper.md#isLikelySelective) filter condition.
