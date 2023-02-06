@@ -180,7 +180,11 @@ Use [SQLConf.dynamicPartitionPruningPruningSideExtraFilterRatio](SQLConf.md#dyna
 
 Default: `true`
 
-Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruningUseStats) method to access the current value.
+Use [SQLConf.dynamicPartitionPruningUseStats](SQLConf.md#dynamicPartitionPruningUseStats) for the current value
+
+Used when:
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is [executed](logical-optimizations/PartitionPruning.md#pruningHasBenefit)
 
 ## <span id="spark.sql.optimizer.dynamicPartitionPruning.enabled"> optimizer.dynamicPartitionPruning.enabled
 

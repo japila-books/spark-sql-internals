@@ -1,10 +1,14 @@
-# DynamicPruningSubquery Unevaluable Subquery Expression
+# DynamicPruningSubquery Unevaluable Subquery Unary Expression
 
 `DynamicPruningSubquery` is a [SubqueryExpression](SubqueryExpression.md) and a `DynamicPruning` predicate expression.
 
-`DynamicPruningSubquery` is an [unevaluable expression](Unevaluable.md).
+`DynamicPruningSubquery` is an [Unevaluable](Unevaluable.md) expression.
 
-`DynamicPruningSubquery` is used by `PlanDynamicPruningFilters` physical optimization.
+`DynamicPruningSubquery` is used in the following logical and physical optimizations:
+
+* [InjectRuntimeFilter](../logical-optimizations/InjectRuntimeFilter.md#hasDynamicPruningSubquery) logical optimization
+* [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md#buildSubqueryMap) physical optimization
+* [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md#buildSubqueryMap) physical optimization
 
 ## Creating Instance
 
@@ -19,7 +23,11 @@
 
 `DynamicPruningSubquery` is created when:
 
-* [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is executed
+* [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is [executed](../logical-optimizations/PartitionPruning.md#insertPredicate)
+
+## Adaptive Query Planning
+
+`DynamicPruningSubquery` is planned as [DynamicPruningExpression](DynamicPruningExpression.md) (with [InSubqueryExec](InSubqueryExec.md) child expression) in [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md) physical optimization.
 
 ## <span id="toString"> Textual Representation
 

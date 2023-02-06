@@ -13,12 +13,27 @@ isLikelySelective(
 * `And` with either [Expression](expressions/Expression.md) likely to be selective
 * `Or` with both [Expression](expressions/Expression.md)s likely to be selective
 * `StringRegexExpression`
+    * `Like`
+    * `RLike`
 * `BinaryComparison`
+    * `EqualNullSafe`
+    * `EqualTo`
+    * `GreaterThan`
+    * `GreaterThanOrEqual`
+    * `LessThan`
+    * `LessThanOrEqual`
 * [In](expressions/In.md)
 * [InSet](expressions/InSet.md)
 * `StringPredicate`
+    * `Contains`
+    * `EndsWith`
+    * `StartsWith`
 * `BinaryPredicate`
 * `MultiLikeBase`
+    * `LikeAll`
+    * `NotLikeAll`
+    * `LikeAny`
+    * `NotLikeAny`
 
 ---
 

@@ -1,6 +1,6 @@
 # PartitionPruning Logical Optimization
 
-`PartitionPruning` is a logical optimization for [Dynamic Partition Pruning](../new-and-noteworthy/dynamic-partition-pruning.md).
+`PartitionPruning` is a logical optimization for [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md).
 
 `PartitionPruning` is a `Rule[LogicalPlan]` (a [Catalyst Rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
 
@@ -34,20 +34,12 @@ prune(
 
 `prune` transforms up all logical operators in the given [logical query plan](../logical-operators/LogicalPlan.md).
 
-`prune` leaves [Join](../logical-operators/Join.md) operators unmodified when either operators are `Filter`s with [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) condition.
+`prune` skips [Join](../logical-operators/Join.md) logical operators (leaves unmodified) when either left or right child operators are `Filter`s with [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) condition.
 
-`prune` transforms [Join](../logical-operators/Join.md) operators of the following "shape":
+`prune` transforms [Join](../logical-operators/Join.md) operators with [EqualTo](../expressions/EqualTo.md) join conditions.
 
-1. [EqualTo](../expressions/EqualTo.md) join conditions
-
-1. Any expressions are attributes of a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../datasources/HadoopFsRelation.md)
-
-1. The join type is one of `Inner`, `LeftSemi`, `RightOuter`, `LeftOuter`
-
-??? note "More Work Needed"
+??? note "FIXME More Work Needed"
     `prune` needs more love and would benefit from more insight on how it works.
-
-`prune` is used when `PartitionPruning` is [executed](#apply).
 
 ## <span id="getFilterableTableScan"> getFilterableTableScan
 
@@ -57,7 +49,22 @@ getFilterableTableScan(
   plan: LogicalPlan): Option[LogicalPlan]
 ```
 
+`getFilterableTableScan` [findExpressionAndTrackLineageDown](#findExpressionAndTrackLineageDown) (that finds a [LeafNode](../logical-operators/LeafNode.md) with the [output](../catalyst/QueryPlan.md#output) schema that includes all the [Attribute](../expressions/Attribute.md) references of the given [Expression](../expressions/Expression.md)).
+
+!!! note "Leaf Nodes"
+    `getFilterableTableScan` is only interested in the following [leaf logical operators](../logical-operators/LeafNode.md):
+
+    * [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) over `SupportsRuntimeFiltering` scans
+    * [HiveTableRelation](../hive/HiveTableRelation.md)
+    * [LogicalRelation](../logical-operators/LogicalRelation.md) over [HadoopFsRelation](../datasources/HadoopFsRelation.md)
+
 `getFilterableTableScan`...FIXME
+
+### <span id="getFilterableTableScan-LogicalRelation"> LogicalRelation over (Partitioned) HadoopFsRelation
+
+For [LogicalRelation](../logical-operators/LogicalRelation.md) with (the [relation](../logical-operators/LogicalRelation.md#relation) that is) a partitioned [HadoopFsRelation](../datasources/HadoopFsRelation.md), `getFilterableTableScan` checks if the [references](../expressions/Expression.md#references) (of the given [Expression](../expressions/Expression.md)) are all among the [partition columns](../datasources/HadoopFsRelation.md#partitionSchema).
+
+If so, `getFilterableTableScan` returns the `LogicalRelation` with the partitioned `HadoopFsRelation`.
 
 ## <span id="hasPartitionPruningFilter"> hasPartitionPruningFilter
 
@@ -82,3 +89,32 @@ hasSelectivePredicate(
 ```
 
 `hasSelectivePredicate` is `true` when there is a `Filter` logical operator with a [likely-selective](../PredicateHelper.md#isLikelySelective) filter condition.
+
+## <span id="insertPredicate"> insertPredicate
+
+```scala
+insertPredicate(
+  pruningKey: Expression,
+  pruningPlan: LogicalPlan,
+  filteringKey: Expression,
+  filteringPlan: LogicalPlan,
+  joinKeys: Seq[Expression],
+  partScan: LogicalPlan): LogicalPlan
+```
+
+`insertPredicate`...FIXME
+
+## <span id="pruningHasBenefit"> pruningHasBenefit
+
+```scala
+pruningHasBenefit(
+  partExpr: Expression,
+  partPlan: LogicalPlan,
+  otherExpr: Expression,
+  otherPlan: LogicalPlan): Boolean
+```
+
+!!! note
+    `pruningHasBenefit` uses [Column Statistics](../logical-operators/Statistics.md#attributeStats) (for the [number of distinct values](../cost-based-optimization/ColumnStat.md#distinctCount)), if available and [spark.sql.optimizer.dynamicPartitionPruning.useStats](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) is enabled.
+
+`pruningHasBenefit`...FIXME

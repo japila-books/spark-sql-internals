@@ -367,9 +367,7 @@ Used when:
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_USE_STATS"><span id="dynamicPartitionPruningUseStats"> dynamicPartitionPruningUseStats
 
-The value of [spark.sql.optimizer.dynamicPartitionPruning.useStats](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) configuration property
-
-Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+[spark.sql.optimizer.dynamicPartitionPruning.useStats](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY"><span id="dynamicPartitionPruningReuseBroadcastOnly"> dynamicPartitionPruningReuseBroadcastOnly
 

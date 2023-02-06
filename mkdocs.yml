@@ -768,6 +768,8 @@ nav:
       - ColumnStat: cost-based-optimization/ColumnStat.md
       - CommandUtils: CommandUtils.md
       - EstimationUtils: cost-based-optimization/EstimationUtils.md
+    - Dynamic Partition Pruning:
+      - dynamic-partition-pruning/index.md
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
@@ -782,7 +784,6 @@ nav:
     - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - ANSI Intervals: new-and-noteworthy/intervals.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
-    - Dynamic Partition Pruning: new-and-noteworthy/dynamic-partition-pruning.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
     - Hints:
       - Hint Framework: new-and-noteworthy/hint-framework.md

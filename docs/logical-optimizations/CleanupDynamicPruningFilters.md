@@ -1,6 +1,6 @@
 # CleanupDynamicPruningFilters Logical Optimization
 
-`CleanupDynamicPruningFilters` is a logical optimization for [Dynamic Partition Pruning](../new-and-noteworthy/dynamic-partition-pruning.md).
+`CleanupDynamicPruningFilters` is a logical optimization for [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md).
 
 `CleanupDynamicPruningFilters` is a `Rule[LogicalPlan]` (a [Catalyst Rule](../catalyst/Rule.md) for [logical operators](../logical-operators/LogicalPlan.md)).
 
