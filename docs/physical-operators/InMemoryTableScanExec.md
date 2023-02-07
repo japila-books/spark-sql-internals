@@ -167,9 +167,9 @@ createAndDecompressColumn(
 
 `createAndDecompressColumn` requests [OffHeapColumnVector](../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../OnHeapColumnVector.md#allocateColumns) to allocate column vectors (with the number of rows and [columnarBatchSchema](#columnarBatchSchema)) per the [spark.sql.columnVector.offheap.enabled](../configuration-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration flag.
 
-`createAndDecompressColumn` creates a [ColumnarBatch](../ColumnarBatch.md) for the allocated column vectors (as an array of `ColumnVector`).
+`createAndDecompressColumn` creates a [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md) for the allocated column vectors (as an array of `ColumnVector`).
 
-`createAndDecompressColumn` [sets the number of rows in the columnar batch](../ColumnarBatch.md#numRows).
+`createAndDecompressColumn` [sets the number of rows in the columnar batch](../vectorized-query-execution/ColumnarBatch.md#numRows).
 
 For every <<attributes, Attribute>> `createAndDecompressColumn` requests `ColumnAccessor` to `decompress` the column.
 

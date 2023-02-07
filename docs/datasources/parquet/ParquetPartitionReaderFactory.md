@@ -49,7 +49,7 @@ buildColumnarReader(
 
 `buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
 
-In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
+In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../vectorized-query-execution/ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
 ## <span id="buildReader"> Building PartitionReader
 

@@ -20,13 +20,13 @@
 
 ### <span id="numInputBatches"> number of input batches
 
-Number of input [ColumnarBatch](../ColumnarBatch.md)es across all partitions (from [columnar execution](SparkPlan.md#executeColumnar) of the [child](#child) physical operator that produces `RDD[ColumnarBatch]` and hence RDD partitions with `ColumnarBatch`es)
+Number of input [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md)es across all partitions (from [columnar execution](SparkPlan.md#executeColumnar) of the [child](#child) physical operator that produces `RDD[ColumnarBatch]` and hence RDD partitions with `ColumnarBatch`es)
 
-The number of input [ColumnarBatch](../ColumnarBatch.md)es is influenced by [spark.sql.parquet.columnarReaderBatchSize](../configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize) configuration property.
+The number of input [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md)es is influenced by [spark.sql.parquet.columnarReaderBatchSize](../configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize) configuration property.
 
 ### <span id="numOutputRows"> number of output rows
 
-Total of the [number of rows](../ColumnarBatch.md#numRows) in every [ColumnarBatch](../ColumnarBatch.md) across all partitions (of [executeColumnar](SparkPlan.md#executeColumnar) of the [child](#child) physical operator)
+Total of the [number of rows](../vectorized-query-execution/ColumnarBatch.md#numRows) in every [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md) across all partitions (of [executeColumnar](SparkPlan.md#executeColumnar) of the [child](#child) physical operator)
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -38,7 +38,7 @@ doExecute(): RDD[InternalRow]
 
 ---
 
-`doExecute` requests the [child](#child) physical operator to [executeColumnar](SparkPlan.md#executeColumnar) (which is valid since it does [support columnar processing](SparkPlan.md#supportsColumnar)) and `RDD.mapPartitionsInternal` over partition [ColumnarBatch](../ColumnarBatch.md)es (`Iterator[ColumnarBatch]`) to "unpack" to [InternalRow](../InternalRow.md)s.
+`doExecute` requests the [child](#child) physical operator to [executeColumnar](SparkPlan.md#executeColumnar) (which is valid since it does [support columnar processing](SparkPlan.md#supportsColumnar)) and `RDD.mapPartitionsInternal` over partition [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md)es (`Iterator[ColumnarBatch]`) to "unpack" to [InternalRow](../InternalRow.md)s.
 
 While unpacking, `doExecute` updates the [number of input batches](#numInputBatches) and [number of output rows](#numOutputRows) performance metrics.
 

@@ -13,7 +13,7 @@ tags:
 
 `ColumnarBatch` takes the following to be created:
 
-* <span id="columns"> [ColumnVector](ColumnVector.md)s
+* <span id="columns"> [ColumnVector](../ColumnVector.md)s
 * <span id="numRows"> Number of Rows
 
 `ColumnarBatch` immediately creates an internal [ColumnarBatchRow](#row).
@@ -21,7 +21,7 @@ tags:
 `ColumnarBatch` is created when:
 
 * `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
-* [InMemoryTableScanExec](physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
+* [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
 * `MapInPandasExec` unary physical operator is requested to `doExecute`
 * `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
 * `PandasGroupUtils` utility is requested to `executePython`

@@ -795,6 +795,9 @@ nav:
     - DataSource V2: new-and-noteworthy/datasource-v2.md
     - Hive Integration: hive-integration.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
+    - Vectorized Query Execution:
+      - vectorized-query-execution/index.md
+      - ColumnarBatch: vectorized-query-execution/ColumnarBatch.md
     - Whole-Stage CodeGen:
       - Whole-Stage CodeGen: whole-stage-code-generation/index.md
       - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
@@ -810,12 +813,9 @@ nav:
       - Subexpression Elimination:
         - Subexpression Elimination: subexpression-elimination.md
         - EquivalentExpressions: EquivalentExpressions.md
-    - Vectorized Query Execution:
-      - Vectorized Query Execution: vectorized-query-execution.md
-      - ColumnarBatch: ColumnarBatch.md
     - Subqueries: spark-sql-subqueries.md
     - Catalyst DSL:
-      - Catalyst DSL: catalyst-dsl/index.md
+      - catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
     - Variable Substitution: variable-substitution.md
   - Data Sources:

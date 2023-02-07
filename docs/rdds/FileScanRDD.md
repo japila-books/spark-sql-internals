@@ -72,7 +72,7 @@ next(): Object
 
 `next` takes the next element of the current iterator over elements of a file block ([PartitionedFile](../datasources/PartitionedFile.md)).
 
-`next` increments the metrics of bytes and number of rows read (that could be the number of rows in a [ColumnarBatch](../ColumnarBatch.md) for vectorized reads).
+`next` increments the metrics of bytes and number of rows read (that could be the number of rows in a [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md) for vectorized reads).
 
 `next` is part of Scala's [Iterator](https://www.scala-lang.org/api/2.12.x/scala/collection/Iterator.html#next) abstraction.
 

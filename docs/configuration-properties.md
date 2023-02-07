@@ -1171,7 +1171,7 @@ Use [SQLConf.wholeStageSplitConsumeFuncByOperator](SQLConf.md#wholeStageSplitCon
 
 ## <span id="spark.sql.columnVector.offheap.enabled"> spark.sql.columnVector.offheap.enabled
 
-**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) in [ColumnarBatch](ColumnarBatch.md) (`true`) or not (`false`). When `false`, [OnHeapColumnVector](OnHeapColumnVector.md) is used instead.
+**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) in [ColumnarBatch](vectorized-query-execution/ColumnarBatch.md) (`true`) or not (`false`). When `false`, [OnHeapColumnVector](OnHeapColumnVector.md) is used instead.
 
 Default: `false`
 
@@ -1293,7 +1293,7 @@ Default: `false`
 
 ## <span id="spark.sql.inMemoryColumnarStorage.enableVectorizedReader"> spark.sql.inMemoryColumnarStorage.enableVectorizedReader
 
-Enables [vectorized reader](vectorized-query-execution.md) for columnar caching.
+Enables [vectorized reader](vectorized-query-execution/index.md) for columnar caching
 
 Default: `true`
 

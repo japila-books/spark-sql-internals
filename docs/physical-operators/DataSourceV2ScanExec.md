@@ -38,7 +38,7 @@ doExecute(): RDD[InternalRow]
 | Description
 
 | batchPartitions
-a| [[batchPartitions]] Input partitions of [ColumnarBatches](../ColumnarBatch.md) (`Seq[InputPartition[ColumnarBatch]]`)
+a| [[batchPartitions]] Input partitions of [ColumnarBatches](../vectorized-query-execution/ColumnarBatch.md) (`Seq[InputPartition[ColumnarBatch]]`)
 
 | partitions
 a| [[partitions]] Input partitions of [InternalRow](../InternalRow.md)s (`Seq[InputPartition[InternalRow]]`)
