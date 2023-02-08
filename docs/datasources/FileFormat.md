@@ -52,11 +52,30 @@ isSplitable(
   path: Path): Boolean
 ```
 
-Controls whether the format (under the given path as Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html)) is splittable or not
+Controls whether this format (under the given Hadoop [Path]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html) and the `options`) is splittable or not
 
 Default: `false`
 
-Used when `FileSourceScanExec` physical operator is requested to [create an RDD for non-bucketed reads](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD))
+Always splitable:
+
+* [AvroFileFormat](avro/AvroFileFormat.md#isSplitable)
+* [OrcFileFormat](orc/OrcFileFormat.md#isSplitable)
+* [ParquetFileFormat](parquet/ParquetFileFormat.md#isSplitable)
+
+Never splitable:
+
+* `BinaryFileFormat`
+
+See:
+
+* [CSVFileFormat](csv/CSVFileFormat.md#isSplitable)
+* [JsonFileFormat](json/JsonFileFormat.md#isSplitable)
+* [TextBasedFileFormat](TextBasedFileFormat.md#isSplitable)
+* [TextFileFormat](text/TextFileFormat.md#isSplitable)
+
+Used when:
+
+* `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD))
 
 ### <span id="prepareWrite"> Preparing Write
 

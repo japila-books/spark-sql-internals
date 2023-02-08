@@ -2,6 +2,8 @@
 
 `ParquetFileFormat` is the [FileFormat](../FileFormat.md) of [parquet](index.md) data source.
 
+`ParquetFileFormat` is [splitable](#isSplitable).
+
 `ParquetFileFormat` is `Serializable`.
 
 ## <span id="DataSourceRegister"><span id="shortName"> Short Name
@@ -15,6 +17,21 @@ shortName(): String
 ```text
 parquet
 ```
+
+## <span id="isSplitable"> Is Splitable
+
+```scala
+isSplitable(
+  sparkSession: SparkSession,
+  options: Map[String, String],
+  path: Path): Boolean
+```
+
+`isSplitable` is part of the [FileFormat](../FileFormat.md#isSplitable) abstraction.
+
+---
+
+`ParquetFileFormat` is splitable (always `true`).
 
 ## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values
 
@@ -106,19 +123,6 @@ inferSchema(
 `inferSchema` is part of the [FileFormat](../FileFormat.md#inferSchema) abstraction.
 
 `inferSchema`...FIXME
-
-## <span id="isSplitable"> Splitable
-
-```scala
-isSplitable(
-  sparkSession: SparkSession,
-  options: Map[String, String],
-  path: Path): Boolean
-```
-
-`isSplitable` is part of the [FileFormat](../FileFormat.md#isSplitable) abstraction.
-
-`ParquetFileFormat` is splitable (`isSplitable` is always `true`).
 
 ## <span id="prepareWrite"> Preparing Write Job
 
