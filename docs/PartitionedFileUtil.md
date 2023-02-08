@@ -1,3 +1,0 @@
-# PartitionedFileUtil
-
-`PartitionedFileUtil` is...FIXME

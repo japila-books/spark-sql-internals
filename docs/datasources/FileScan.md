@@ -123,7 +123,7 @@ partitions: Seq[FilePartition]
 
 `partitions` requests the [PartitioningAwareFileIndex](#fileIndex) for the [partition directories](PartitioningAwareFileIndex.md#listFiles) (_selectedPartitions_).
 
-For every selected partition directory, `partitions` requests the Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es that are [split](../PartitionedFileUtil.md#splitFiles) (if [isSplitable](#isSplitable)) to [maxSplitBytes](FilePartition.md#maxSplitBytes) and sorted by size (in reversed order).
+For every selected partition directory, `partitions` requests the Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es that are [split](PartitionedFileUtil.md#splitFiles) (if [isSplitable](#isSplitable)) to [maxSplitBytes](FilePartition.md#maxSplitBytes) and sorted by size (in reversed order).
 
 In the end, `partitions` returns the [FilePartition](FilePartition.md#getFilePartitions)s.
 

@@ -1,42 +1,72 @@
 # PartitionedFile
 
-`PartitionedFile` is a part (_block_) of a file that is in a sense similar to a Pqruet block or a HDFS split.
+`PartitionedFile` is a part (_block_) of a file (similarly to a Parquet block or a HDFS split).
 
-`PartitionedFile` represents a chunk of a file that will be read, along with <<partitionValues, partition column values>> appended to each row, in a partition.
+`PartitionedFile` represents a chunk of a file that will be read, along with [partition column values](#partitionValues) appended to each row, in a partition.
 
-NOTE: *Partition column values* are values of the columns that are column partitions and therefore part of the directory structure not the partitioned files themselves (that together are the partitioned dataset).
+## Creating Instance
 
-`PartitionedFile` is <<creating-instance, created>> exclusively when `FileSourceScanExec` is requested to create the input RDD for FileSourceScanExec.md#createBucketedReadRDD[bucketed] or FileSourceScanExec.md#createNonBucketedReadRDD[non-bucketed] reads.
-
-[[creating-instance]]
 `PartitionedFile` takes the following to be created:
 
-* [[partitionValues]] Partition column values to be appended to each row (as an [internal row](../InternalRow.md))
-* [[filePath]] Path of the file to read
-* [[start]] Beginning offset (in bytes)
-* [[length]] Number of bytes to read (aka `length`)
-* [[locations]] Locality information that is a list of nodes (by their host names) that have the data (`Array[String]`). Default: empty
+* [Partition Column Values](#partitionValues)
+* <span id="filePath"> Path of the file to read
+* <span id="start"> Beginning offset (in bytes)
+* <span id="length"> Length of this file part (number of bytes to read)
+* [Block Hosts](#locations)
+* <span id="modificationTime"> Modification time
+* <span id="fileSize"> File size
 
-[source, scala]
-----
+`PartitionedFile` is created when:
+
+* `PartitionedFileUtil` is requested for [split files](PartitionedFileUtil.md#splitFiles) and [getPartitionedFile](PartitionedFileUtil.md#getPartitionedFile)
+
+### <span id="partitionValues"> Partition Column Values
+
+```scala
+partitionValues: InternalRow
+```
+
+`PartitionedFile` is given an [InternalRow](../InternalRow.md) with the **partition column values** to be appended to each row.
+
+The partition column values are the values of the partition columns and therefore part of the directory structure not the partitioned files themselves (that together are the partitioned dataset).
+
+### <span id="locations"> Block Hosts
+
+```scala
+locations: Array[String]
+```
+
+`PartitionedFile` is given a collection of nodes (host names) with data blocks.
+
+Default: (empty)
+
+## <span id="toString"> String Representation
+
+```scala
+toString: String
+```
+
+`toString` is part of the `Object` ([Java]({{ java.api }}/java/lang/Object.html#toString())) abstraction.
+
+---
+
+`toString` is the following text:
+
+```text
+path: [filePath], range: [start]-[start+length], partition values: [partitionValues]
+```
+
+## Demo
+
+```scala
 import org.apache.spark.sql.execution.datasources.PartitionedFile
 import org.apache.spark.sql.catalyst.InternalRow
 
 val partFile = PartitionedFile(InternalRow.empty, "fakePath0", 0, 10, Array("host0", "host1"))
-----
 
-[[toString]]
-`PartitionedFile` uses the following *text representation* (`toString`):
-
-```
-path: [filePath], range: [start]-[end], partition values: [partitionValues]
+println(partFile)
 ```
 
-[source, scala]
-----
-scala> :type partFile
-org.apache.spark.sql.execution.datasources.PartitionedFile
-
-scala> println(partFile)
+```text
 path: fakePath0, range: 0-10, partition values: [empty row]
-----
+```
