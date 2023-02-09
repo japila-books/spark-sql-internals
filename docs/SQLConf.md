@@ -470,8 +470,6 @@ Used when:
 
 [spark.sql.files.openCostInBytes](configuration-properties.md#spark.sql.files.openCostInBytes)
 
-Used when <<FileSourceScanExec.md#, FileSourceScanExec>> leaf physical operator is requested to <<FileSourceScanExec.md#createNonBucketedReadRDD, create an RDD for non-bucketed reads>>
-
 ## <span id="histogramEnabled"><span id="MAX_TO_STRING_FIELDS"> histogramEnabled
 
 The value of [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property

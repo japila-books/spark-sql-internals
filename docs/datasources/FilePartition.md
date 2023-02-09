@@ -18,10 +18,8 @@ maxSplitBytes(
 
 `maxSplitBytes` calculates `bytesPerCore` to be `totalBytes` divided by [filesMinPartitionNum](../SQLConf.md#filesMinPartitionNum).
 
-In the end, `maxSplitBytes` takes the minimum of the following:
-
-* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
-* Maximum of [filesOpenCostInBytes](../SQLConf.md#filesOpenCostInBytes) and `bytesPerCore`
+In the end, `maxSplitBytes` is [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) unless
+the maximum of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and `bytesPerCore` is even smaller.
 
 ---
 

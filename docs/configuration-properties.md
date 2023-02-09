@@ -130,6 +130,24 @@ Used when:
 
 * `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
 
+## <span id="spark.sql.files.openCostInBytes"><span id="FILES_OPEN_COST_IN_BYTES"> files.openCostInBytes
+
+**spark.sql.files.openCostInBytes**
+
+**(internal)** The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).
+Effective only for file-based sources such as Parquet, JSON and ORC.
+
+Default: `4MB`
+
+It's better to over-estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
+
+Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) for the current value
+
+Used when:
+
+* `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
+* `FilePartition` is requested to [getFilePartitions](datasources/FilePartition.md#getFilePartitions) and [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+
 ## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
 
 **spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**
@@ -1258,16 +1276,6 @@ The suggested (not guaranteed) minimum number of split file partitions for file-
 Default: (undefined)
 
 Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) method to access the current value.
-
-## <span id="spark.sql.files.openCostInBytes"> spark.sql.files.openCostInBytes
-
-**(internal)** The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).
-
-Default: `4 * 1024 * 1024`
-
-It's better to over estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
-
-Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) method to access the current value.
 
 ## <span id="spark.sql.inMemoryColumnarStorage.compressed"> spark.sql.inMemoryColumnarStorage.compressed
 
