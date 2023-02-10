@@ -1,10 +1,6 @@
 # ParquetDataSourceV2
 
-`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of [parquet](index.md) data source.
-
-## DataSourceRegister
-
-`ParquetDataSourceV2` is registered in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` (for `DataSource` utility to [look up a data source](../../DataSource.md#lookupDataSource) for [parquet](#shortName) alias).
+`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of the [Parquet Data Source](index.md).
 
 ## Creating Instance
 
@@ -12,7 +8,7 @@
 
 `ParquetDataSourceV2` is created when:
 
-* `DataSource` utility is used to [look up a DataSource](../../DataSource.md#lookupDataSource) (for `parquet` alias)
+* `DataSource` utility is used to [look up a DataSource](../../DataSource.md#lookupDataSource) for `parquet` alias
 
 ## <span id="getTable"> getTable
 
@@ -42,9 +38,11 @@ In the end, `getTable` creates a [ParquetTable](ParquetTable.md).
 shortName(): String
 ```
 
-`shortName` is `parquet`.
-
 `shortName` is part of the [DataSourceRegister](../../DataSourceRegister.md#shortName) abstraction.
+
+---
+
+`shortName` is `parquet`.
 
 ## <span id="fallbackFileFormat"> fallbackFileFormat
 
@@ -52,6 +50,8 @@ shortName(): String
 fallbackFileFormat: Class[_ <: FileFormat]
 ```
 
-`fallbackFileFormat` is [ParquetFileFormat](ParquetFileFormat.md).
-
 `fallbackFileFormat` is part of the [FileDataSourceV2](../FileDataSourceV2.md#fallbackFileFormat) abstraction.
+
+---
+
+`fallbackFileFormat` is [ParquetFileFormat](ParquetFileFormat.md).
