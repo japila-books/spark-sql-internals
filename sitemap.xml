@@ -921,11 +921,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/connector/FileTable/</loc>
-         <lastmod>2023-02-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/InputPartition/</loc>
          <lastmod>2023-02-10</lastmod>
          <changefreq>daily</changefreq>
@@ -1337,6 +1332,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/FileScanBuilder/</loc>
+         <lastmod>2023-02-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/FileTable/</loc>
          <lastmod>2023-02-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
