@@ -27,9 +27,12 @@ Used when:
 ```scala
 getTable(
   options: CaseInsensitiveStringMap): Table
+getTable(
+  options: CaseInsensitiveStringMap,
+  schema: StructType): Table
 ```
 
-[Table](../connector/Table.md)
+A [Table](../connector/Table.md) of this table provider
 
 See:
 
@@ -37,7 +40,7 @@ See:
 
 Used when:
 
-* `FileDataSourceV2` is requested to [inferSchema](#inferSchema)
+* `FileDataSourceV2` is requested to [getTable](#getTable-TableProvider) and [inferSchema](#inferSchema)
 
 ## Implementations
 
@@ -51,3 +54,56 @@ Used when:
 ## <span id="DataSourceRegister"> DataSourceRegister
 
 `FileDataSourceV2` is a [DataSourceRegister](../DataSourceRegister.md).
+
+## <span id="getTable-TableProvider"> getTable (TableProvider)
+
+```scala
+getTable(
+  schema: StructType,
+  partitioning: Array[Transform],
+  properties: util.Map[String, String]): Table
+```
+
+`getTable` is part of the [TableProvider](../connector/TableProvider.md#getTable) abstraction.
+
+---
+
+`getTable` [creates a Table](#getTable) (with the given `properties` and `schema`) unless the [table](#t) has already been loaded during [schema inference](#inferSchema).
+
+## <span id="inferSchema"> Schema Inference
+
+```scala
+inferSchema(
+  options: CaseInsensitiveStringMap): StructType
+```
+
+`inferSchema` is part of the [TableProvider](../connector/TableProvider.md#inferSchema) abstraction.
+
+---
+
+`inferSchema` requests the [Table](#t) for the [schema](../connector/Table.md#schema).
+
+If not available, `inferSchema` [creates a Table](#getTable) and "saves" it for later (in [t](#t) registry).
+
+## <span id="getTableName"> Table Name
+
+```scala
+getTableName(
+  map: CaseInsensitiveStringMap,
+  paths: Seq[String]): String
+```
+
+`getTableName` uses [short name](../DataSourceRegister.md#shortName) and the given `paths` to create the following table name (possibly redacting sensitive parts per [spark.sql.redaction.string.regex](../configuration-properties.md#spark.sql.redaction.string.regex)):
+
+```text
+[short name] [comma-separated paths]
+```
+
+## <span id="getPaths"> Paths
+
+```scala
+getPaths(
+  map: CaseInsensitiveStringMap): Seq[String]
+```
+
+`getPaths` concatenates the values of the `paths` and `path` keys (from the given `map`).

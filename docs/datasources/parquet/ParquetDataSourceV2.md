@@ -1,6 +1,6 @@
 # ParquetDataSourceV2
 
-`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of the [Parquet Data Source](index.md).
+`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of [Parquet Data Source](index.md).
 
 ## Creating Instance
 
@@ -10,7 +10,7 @@
 
 * `DataSource` utility is used to [look up a DataSource](../../DataSource.md#lookupDataSource) for `parquet` alias
 
-## <span id="getTable"> getTable
+## <span id="getTable"> Creating Table
 
 ```scala
 getTable(
@@ -24,13 +24,14 @@ getTable(
 
 ---
 
-`getTable` [getPaths](#getPaths) from the given `options`.
+`getTable` creates a [ParquetTable](ParquetTable.md) with the following:
 
-`getTable` [getTableName](#getTableName) (from the given `options` and the paths).
-
-`getTable` [getOptionsWithoutPaths](#getOptionsWithoutPaths).
-
-In the end, `getTable` creates a [ParquetTable](ParquetTable.md).
+Property | Value
+---------|------
+[name](ParquetTable.md#name) | [Table name](../FileDataSourceV2.md#getTableName) from the [paths](#getPaths) (and based on the given `options`)
+[paths](ParquetTable.md#paths) | [Paths](../FileDataSourceV2.md#getPaths) (in the given `options`)
+[userSpecifiedSchema](ParquetTable.md#userSpecifiedSchema) | The given `schema`
+[fallbackFileFormat](ParquetTable.md#fallbackFileFormat) | [ParquetFileFormat](#fallbackFileFormat)
 
 ## <span id="shortName"> shortName
 
@@ -42,7 +43,11 @@ shortName(): String
 
 ---
 
-`shortName` is `parquet`.
+`shortName` is the following text:
+
+```text
+parquet
+```
 
 ## <span id="fallbackFileFormat"> fallbackFileFormat
 
