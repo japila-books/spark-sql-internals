@@ -59,7 +59,7 @@ Used when:
 * `DataSource` is requested to [getOrInferFileFormatSchema](../DataSource.md#getOrInferFileFormatSchema) and [resolve a FileFormat-based relation](../DataSource.md#resolveRelation)
 * `FallBackFileSourceV2` logical resolution rule is executed
 * [FileScanBuilder](FileScanBuilder.md) is created
-* `FileTable` is requested for [dataSchema](../connector/FileTable.md#dataSchema) and [partitioning](../connector/FileTable.md#partitioning)
+* `FileTable` is requested for [dataSchema](FileTable.md#dataSchema) and [partitioning](FileTable.md#partitioning)
 
 ### <span id="refresh"> Refreshing Cached File Listings
 

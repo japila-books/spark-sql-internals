@@ -21,7 +21,7 @@ While being created, `InMemoryFileIndex` [refresh0](#refresh0).
 * `HiveMetastoreCatalog` is requested to [inferIfNeeded](../hive/HiveMetastoreCatalog.md#inferIfNeeded)
 * `CatalogFileIndex` is requested for the [partitions by the given predicate expressions](CatalogFileIndex.md#filterPartitions) for a non-partitioned Hive table
 * `DataSource` is requested to [createInMemoryFileIndex](../DataSource.md#createInMemoryFileIndex)
-* `FileTable` is requested for a [PartitioningAwareFileIndex](../connector/FileTable.md#fileIndex)
+* `FileTable` is requested for a [PartitioningAwareFileIndex](FileTable.md#fileIndex)
 
 ## <span id="refresh"> Refreshing Cached File Listings
 

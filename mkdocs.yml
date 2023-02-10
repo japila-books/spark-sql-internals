@@ -149,7 +149,6 @@ nav:
       - DataWriter: connector/DataWriter.md
       - DataWriterFactory: connector/DataWriterFactory.md
       - InputPartition: connector/InputPartition.md
-      - FileTable: connector/FileTable.md
       - MetadataColumn: connector/MetadataColumn.md
       - MetadataColumnHelper: connector/MetadataColumnHelper.md
       - MetadataColumnsHelper: connector/MetadataColumnsHelper.md
@@ -832,7 +831,7 @@ nav:
     - CSV:
       - CSVFileFormat: datasources/csv/CSVFileFormat.md
       - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
-    - Files:
+    - File-Based:
       - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md
       - BasicWriteTaskStats: datasources/BasicWriteTaskStats.md
       - FileBatchWrite: datasources/FileBatchWrite.md
@@ -850,6 +849,7 @@ nav:
       - FilePartitionReaderFactory: datasources/FilePartitionReaderFactory.md
       - FileScan: datasources/FileScan.md
       - FileScanBuilder: datasources/FileScanBuilder.md
+      - FileTable: datasources/FileTable.md
       - FileWrite: datasources/FileWrite.md
       - FileWriterFactory: datasources/FileWriterFactory.md
       - HadoopFileLinesReader: datasources/HadoopFileLinesReader.md

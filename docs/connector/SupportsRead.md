@@ -23,7 +23,7 @@ Used when:
 
 ## Implementations
 
-* [FileTable](FileTable.md)
+* [FileTable](../datasources/FileTable.md)
 * `JDBCTable`
 * [KafkaTable](../kafka/KafkaTable.md)
 * `MemoryStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory))

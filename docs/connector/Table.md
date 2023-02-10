@@ -78,7 +78,7 @@ Used when:
 ## Implementations
 
 * `ConsoleTable` (Spark Structured Streaming)
-* [FileTable](FileTable.md)
+* [FileTable](../datasources/FileTable.md)
 * `ForeachWriterTable` (Spark Structured Streaming)
 * [KafkaTable](../kafka/KafkaTable.md)
 * `MemorySink` (Spark Structured Streaming)
