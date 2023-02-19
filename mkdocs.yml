@@ -136,6 +136,92 @@ extra:
 
 nav:
   - Home: index.md
+  - Features:
+    - features/index.md
+    - Adaptive Query Execution:
+      - adaptive-query-execution/index.md
+      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
+      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
+      - AQEUtils: adaptive-query-execution/AQEUtils.md
+      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
+      - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
+      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
+    - Bucketing: bucketing.md
+    - Catalog Plugin API:
+      - connector/catalog/index.md
+      - CatalogExtension: connector/catalog/CatalogExtension.md
+      - CatalogHelper: connector/catalog/CatalogHelper.md
+      - CatalogManager: connector/catalog/CatalogManager.md
+      - CatalogPlugin: connector/catalog/CatalogPlugin.md
+      - Catalogs: connector/catalog/Catalogs.md
+      - CatalogV2Util: connector/catalog/CatalogV2Util.md
+      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
+      - FunctionCatalog: connector/catalog/FunctionCatalog.md
+      - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
+      - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
+      - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
+      - TableCatalog: connector/catalog/TableCatalog.md
+      - TableChange: connector/catalog/TableChange.md
+      - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
+    - Columnar Execution:
+      - columnar-execution/index.md
+    - Common Table Expressions: common-table-expressions.md
+    - Cost-Based Optimization:
+      - cost-based-optimization/index.md
+      - CatalogColumnStat: cost-based-optimization/CatalogColumnStat.md
+      - ColumnStat: cost-based-optimization/ColumnStat.md
+      - CommandUtils: CommandUtils.md
+      - EstimationUtils: cost-based-optimization/EstimationUtils.md
+    - Dynamic Partition Pruning:
+      - dynamic-partition-pruning/index.md
+    - Join Queries:
+      - Joins: joins.md
+      - Broadcast Joins: spark-sql-joins-broadcast.md
+    - Statistics: new-and-noteworthy/statistics.md
+    - Vectorized Decoding:
+      - vectorized-decoding/index.md
+      - ColumnVector: ColumnVector.md
+      - OffHeapColumnVector: OffHeapColumnVector.md
+      - OnHeapColumnVector: OnHeapColumnVector.md
+      - WritableColumnVector: WritableColumnVector.md
+    - Metadata Columns: new-and-noteworthy/metadata-columns.md
+    - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
+    - ANSI Intervals: new-and-noteworthy/intervals.md
+    - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
+    - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
+    - Hints:
+      - Hint Framework: new-and-noteworthy/hint-framework.md
+      - JoinHint: JoinHint.md
+      - HintInfo: HintInfo.md
+      - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
+      - HintErrorHandler: HintErrorHandler.md
+    - Observable Metrics: new-and-noteworthy/observable-metrics.md
+    - DataSource V2: new-and-noteworthy/datasource-v2.md
+    - Hive Integration: hive-integration.md
+    - Dynamic Partition Inserts: dynamic-partition-inserts.md
+    - Vectorized Query Execution:
+      - vectorized-query-execution/index.md
+      - ColumnarBatch: vectorized-query-execution/ColumnarBatch.md
+    - Whole-Stage Code Generation:
+      - whole-stage-code-generation/index.md
+      - Block: whole-stage-code-generation/Block.md
+      - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
+      - CodegenContext: whole-stage-code-generation/CodegenContext.md
+      - CodeGenerator: whole-stage-code-generation/CodeGenerator.md
+      - GenerateUnsafeProjection: whole-stage-code-generation/GenerateUnsafeProjection.md
+      - GenerateMutableProjection: whole-stage-code-generation/GenerateMutableProjection.md
+      - GenerateColumnAccessor: whole-stage-code-generation/GenerateColumnAccessor.md
+      - GenerateOrdering: whole-stage-code-generation/GenerateOrdering.md
+      - GeneratePredicate: whole-stage-code-generation/GeneratePredicate.md
+      - GenerateSafeProjection: whole-stage-code-generation/GenerateSafeProjection.md
+      - Subexpression Elimination:
+        - Subexpression Elimination: subexpression-elimination.md
+        - EquivalentExpressions: EquivalentExpressions.md
+    - Subqueries: spark-sql-subqueries.md
+    - Catalyst DSL:
+      - catalyst-dsl/index.md
+      - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
+    - Variable Substitution: variable-substitution.md
   - Internals:
     - Overview: overview.md
     - Configuration Properties: configuration-properties.md
@@ -734,91 +820,6 @@ nav:
     - SparkSqlParser: sql/SparkSqlParser.md
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
     - VariableSubstitution: sql/VariableSubstitution.md
-  - Features:
-    - Adaptive Query Execution:
-      - adaptive-query-execution/index.md
-      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
-      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-      - AQEUtils: adaptive-query-execution/AQEUtils.md
-      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-      - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
-      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-    - Bucketing: bucketing.md
-    - Catalog Plugin API:
-      - connector/catalog/index.md
-      - CatalogExtension: connector/catalog/CatalogExtension.md
-      - CatalogHelper: connector/catalog/CatalogHelper.md
-      - CatalogManager: connector/catalog/CatalogManager.md
-      - CatalogPlugin: connector/catalog/CatalogPlugin.md
-      - Catalogs: connector/catalog/Catalogs.md
-      - CatalogV2Util: connector/catalog/CatalogV2Util.md
-      - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
-      - FunctionCatalog: connector/catalog/FunctionCatalog.md
-      - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
-      - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
-      - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
-      - TableCatalog: connector/catalog/TableCatalog.md
-      - TableChange: connector/catalog/TableChange.md
-      - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
-    - Columnar Execution:
-      - columnar-execution/index.md
-    - Common Table Expressions: common-table-expressions.md
-    - Cost-Based Optimization:
-      - cost-based-optimization/index.md
-      - CatalogColumnStat: cost-based-optimization/CatalogColumnStat.md
-      - ColumnStat: cost-based-optimization/ColumnStat.md
-      - CommandUtils: CommandUtils.md
-      - EstimationUtils: cost-based-optimization/EstimationUtils.md
-    - Dynamic Partition Pruning:
-      - dynamic-partition-pruning/index.md
-    - Join Queries:
-      - Joins: joins.md
-      - Broadcast Joins: spark-sql-joins-broadcast.md
-    - Statistics: new-and-noteworthy/statistics.md
-    - Vectorized Decoding:
-      - vectorized-decoding/index.md
-      - ColumnVector: ColumnVector.md
-      - OffHeapColumnVector: OffHeapColumnVector.md
-      - OnHeapColumnVector: OnHeapColumnVector.md
-      - WritableColumnVector: WritableColumnVector.md
-    - Metadata Columns: new-and-noteworthy/metadata-columns.md
-    - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
-    - ANSI Intervals: new-and-noteworthy/intervals.md
-    - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
-    - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
-    - Hints:
-      - Hint Framework: new-and-noteworthy/hint-framework.md
-      - JoinHint: JoinHint.md
-      - HintInfo: HintInfo.md
-      - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
-      - HintErrorHandler: HintErrorHandler.md
-    - Observable Metrics: new-and-noteworthy/observable-metrics.md
-    - DataSource V2: new-and-noteworthy/datasource-v2.md
-    - Hive Integration: hive-integration.md
-    - Dynamic Partition Inserts: dynamic-partition-inserts.md
-    - Vectorized Query Execution:
-      - vectorized-query-execution/index.md
-      - ColumnarBatch: vectorized-query-execution/ColumnarBatch.md
-    - Whole-Stage CodeGen:
-      - Whole-Stage CodeGen: whole-stage-code-generation/index.md
-      - BufferedRowIterator: whole-stage-code-generation/BufferedRowIterator.md
-      - CodegenContext: whole-stage-code-generation/CodegenContext.md
-      - CodeGenerator: whole-stage-code-generation/CodeGenerator.md
-      - Block: whole-stage-code-generation/Block.md
-      - GenerateUnsafeProjection: whole-stage-code-generation/GenerateUnsafeProjection.md
-      - GenerateMutableProjection: whole-stage-code-generation/GenerateMutableProjection.md
-      - GenerateColumnAccessor: whole-stage-code-generation/GenerateColumnAccessor.md
-      - GenerateOrdering: whole-stage-code-generation/GenerateOrdering.md
-      - GeneratePredicate: whole-stage-code-generation/GeneratePredicate.md
-      - GenerateSafeProjection: whole-stage-code-generation/GenerateSafeProjection.md
-      - Subexpression Elimination:
-        - Subexpression Elimination: subexpression-elimination.md
-        - EquivalentExpressions: EquivalentExpressions.md
-    - Subqueries: spark-sql-subqueries.md
-    - Catalyst DSL:
-      - catalyst-dsl/index.md
-      - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
-    - Variable Substitution: variable-substitution.md
   - Data Sources:
     - datasources/index.md
     - Avro:
