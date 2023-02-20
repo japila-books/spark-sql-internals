@@ -8,4 +8,4 @@ Quoting [SPARK-12854 Vectorize Parquet reader](https://issues.apache.org/jira/br
 
 Vectorized Parquet Decoding is used exclusively when `ParquetFileFormat` is requested for a [data reader](../datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) when [spark.sql.parquet.enableVectorizedReader](../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) property is enabled (`true`) and the read schema uses [AtomicTypes](../types/AtomicType.md) data types only.
 
-Vectorized Parquet Decoding uses [VectorizedParquetRecordReader](../datasources/parquet/VectorizedParquetRecordReader.md) for vectorized decoding.
+Vectorized Parquet Decoding uses [VectorizedParquetRecordReader](../datasources/parquet/VectorizedParquetRecordReader.md) for vectorized decoding (and [ParquetReadSupport](../datasources/parquet/ParquetReadSupport.md) otherwise).

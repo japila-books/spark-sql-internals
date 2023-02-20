@@ -89,7 +89,30 @@ createRowBaseReader(
   file: PartitionedFile): RecordReader[Void, InternalRow]
 ```
 
-`createRowBaseReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../PartitionedFile.md) and [createRowBaseParquetReader](#createRowBaseParquetReader)).
+`createRowBaseReader` [buildReaderBase](#buildReaderBase) for the given [PartitionedFile](../PartitionedFile.md) and with [createRowBaseParquetReader](#createRowBaseParquetReader) factory.
+
+### <span id="createRowBaseParquetReader"> createRowBaseParquetReader
+
+```scala
+createRowBaseParquetReader(
+  partitionValues: InternalRow,
+  pushed: Option[FilterPredicate],
+  convertTz: Option[ZoneId],
+  datetimeRebaseSpec: RebaseSpec,
+  int96RebaseSpec: RebaseSpec): RecordReader[Void, InternalRow]
+```
+
+`createRowBaseParquetReader` prints out the following DEBUG message to the logs:
+
+```text
+Falling back to parquet-mr
+```
+
+`createRowBaseParquetReader` creates a [ParquetReadSupport](ParquetReadSupport.md) (with [enableVectorizedReader](ParquetReadSupport.md#enableVectorizedReader) flag disabled).
+
+`createRowBaseParquetReader` creates a [RecordReaderIterator](../RecordReaderIterator.md) with a new `ParquetRecordReader`.
+
+In the end, `createRowBaseParquetReader` returns the `ParquetRecordReader`.
 
 ## <span id="createVectorizedReader"> Creating Vectorized Parquet RecordReader
 
@@ -157,3 +180,16 @@ buildReaderBase[T](
 `buildReaderBase` is used when:
 
 * `ParquetPartitionReaderFactory` is requested to [createRowBaseReader](#createRowBaseReader) and [createVectorizedReader](#createVectorizedReader)
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.v2.parquet.ParquetPartitionReaderFactory` logger to see what happens inside.
+
+Add the following line to `conf/log4j2.properties`:
+
+```text
+logger.ParquetPartitionReaderFactory.name = org.apache.spark.sql.execution.datasources.v2.parquet.ParquetPartitionReaderFactory
+logger.ParquetPartitionReaderFactory.level = all
+```
+
+Refer to [Logging](../../spark-logging.md).

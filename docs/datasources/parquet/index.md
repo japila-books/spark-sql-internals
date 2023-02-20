@@ -11,6 +11,10 @@ Parquet is the default data source format based on the [spark.sql.sources.defaul
 
 Parquet data source uses `spark.sql.parquet` prefix for [parquet-specific configuration properties](../../configuration-properties.md).
 
+## Vectorized Parquet Decoding
+
+Parquet Data Source uses [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md) (and [ParquetReadSupport](ParquetReadSupport.md) otherwise).
+
 ## Demo
 
 ```scala

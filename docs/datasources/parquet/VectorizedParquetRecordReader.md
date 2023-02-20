@@ -1,6 +1,6 @@
 # VectorizedParquetRecordReader
 
-`VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](SpecificParquetRecordReaderBase.md) for [parquet](index.md) data source for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md).
+`VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](SpecificParquetRecordReaderBase.md) for [Parquet Data Source](index.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md).
 
 ## Creating Instance
 
