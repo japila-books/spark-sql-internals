@@ -1,6 +1,6 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md).
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md) for [ParquetScan](ParquetScan.md#createReaderFactory) for batch queries.
 
 ## Creating Instance
 
@@ -17,6 +17,13 @@
 `ParquetPartitionReaderFactory` is created when:
 
 * `ParquetScan` is requested to [create a PartitionReaderFactory](ParquetScan.md#createReaderFactory)
+
+## <span id="enableOffHeapColumnVector"><span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled
+
+`ParquetPartitionReaderFactory` uses [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property when requested for the following:
+
+* [Create a Vectorized Reader](#createParquetVectorizedReader) (and create a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md#useOffHeap))
+* [Build a Columnar Reader](#buildColumnarReader) (and `convertAggregatesRowToBatch`)
 
 ## <span id="supportColumnarReads"> supportColumnarReads
 
@@ -51,7 +58,7 @@ buildColumnarReader(
 
 In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../vectorized-query-execution/ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
-## <span id="buildReader"> Building PartitionReader
+## <span id="buildReader"> Building Partition Reader
 
 ```scala
 buildReader(
@@ -95,9 +102,38 @@ createVectorizedReader(
 
 In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../PartitionedFile.md#partitionValues) of the given [PartitionedFile](../PartitionedFile.md)) and returns it.
 
-`createVectorizedReader` is used when:
+---
 
-* `ParquetPartitionReaderFactory` is requested to [buildReader](#buildReader) and [buildColumnarReader](#buildColumnarReader)
+`createVectorizedReader` is used when `ParquetPartitionReaderFactory` is requested for the following:
+
+* [Build a partition reader (for a file)](#buildReader) (with [enableVectorizedReader](#enableVectorizedReader) enabled)
+* [Build a columnar partition reader (for a file)](#buildColumnarReader)
+
+### <span id="createParquetVectorizedReader"> createParquetVectorizedReader
+
+```scala
+createParquetVectorizedReader(
+  partitionValues: InternalRow,
+  pushed: Option[FilterPredicate],
+  convertTz: Option[ZoneId],
+  datetimeRebaseSpec: RebaseSpec,
+  int96RebaseSpec: RebaseSpec): VectorizedParquetRecordReader
+```
+
+`createParquetVectorizedReader` creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) (with [capacity](#capacity)).
+
+`createParquetVectorizedReader` creates a [RecordReaderIterator](../RecordReaderIterator.md) (for the `VectorizedParquetRecordReader`).
+
+`createParquetVectorizedReader` prints out the following DEBUG message to the logs (with the [partitionSchema](#partitionSchema) and the given `partitionValues`):
+
+```text
+Appending [partitionSchema] [partitionValues]
+```
+
+In the end, `createParquetVectorizedReader` returns the `VectorizedParquetRecordReader`.
+
+??? note "Unused RecordReaderIterator?"
+    It appears that the `RecordReaderIterator` is created but not used. _Feeling confused_.
 
 ## <span id="buildReaderBase"> buildReaderBase
 
@@ -115,6 +151,8 @@ buildReaderBase[T](
 ```
 
 `buildReaderBase`...FIXME
+
+---
 
 `buildReaderBase` is used when:
 

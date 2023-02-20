@@ -20,12 +20,13 @@ tags:
 
 `ColumnarBatch` is created when:
 
+* `ArrowConverters` utility is requested to `fromBatchIterator`
 * `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
 * [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
 * `MapInPandasExec` unary physical operator is requested to `doExecute`
-* `OrcColumnarBatchReader` and `VectorizedParquetRecordReader` are requested to `initBatch`
+* `OrcColumnarBatchReader` is requested to `initBatch`
 * `PandasGroupUtils` utility is requested to `executePython`
-* `ArrowConverters` utility is requested to `fromBatchIterator`
+* `VectorizedParquetRecordReader` is requested to [init a batch](../datasources/parquet/VectorizedParquetRecordReader.md#initBatch)
 
 ## <span id="row"> ColumnarBatchRow
 

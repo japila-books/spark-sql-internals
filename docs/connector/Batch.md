@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="createReaderFactory"> createReaderFactory
+### <span id="createReaderFactory"> Creating PartitionReaderFactory
 
 ```java
 PartitionReaderFactory createReaderFactory()

@@ -21,7 +21,7 @@
 
 * `ParquetScanBuilder` is requested to [build a Scan](ParquetScanBuilder.md#build)
 
-## <span id="createReaderFactory"> createReaderFactory
+## <span id="createReaderFactory"> Creating PartitionReaderFactory
 
 ```scala
 createReaderFactory(): PartitionReaderFactory

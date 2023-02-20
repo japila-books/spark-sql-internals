@@ -665,7 +665,11 @@ Used when:
 
 ## <span id="numShufflePartitions"><span id="SHUFFLE_PARTITIONS"> numShufflePartitions
 
-The value of [spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions) configuration property or...FIXME
+[spark.sql.shuffle.partitions](configuration-properties.md#spark.sql.shuffle.partitions)
+
+## <span id="COLUMN_VECTOR_OFFHEAP_ENABLED"><span id="offHeapColumnVectorEnabled"> offHeapColumnVectorEnabled
+
+[spark.sql.columnVector.offheap.enabled](configuration-properties.md#spark.sql.columnVector.offheap.enabled)
 
 ## <span id="rangeExchangeSampleSizePerPartition"><span id="RANGE_EXCHANGE_SAMPLE_SIZE_PER_PARTITION"> rangeExchangeSampleSizePerPartition
 

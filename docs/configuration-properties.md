@@ -116,6 +116,23 @@ Default: `true`
 
 Use [SQLConf.ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN](SQLConf.md#ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN) to access the property
 
+## <span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled
+
+**spark.sql.columnVector.offheap.enabled**
+
+**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) (`true`) or [OnHeapColumnVector](OnHeapColumnVector.md) (`false`) in [ColumnarBatch](vectorized-query-execution/ColumnarBatch.md)
+
+Default: `false`
+
+Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) for the current value
+
+Used when:
+
+* `RowToColumnarExec` is requested to `doExecuteColumnar`
+* `DefaultCachedBatchSerializer` is requested to `vectorTypes` and `convertCachedBatchToColumnarBatch`
+* `ParquetFileFormat` is requested to [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)
+
 ## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> files.maxPartitionBytes
 
 **spark.sql.files.maxPartitionBytes**
@@ -1186,14 +1203,6 @@ Use [SQLConf.wholeStageMaxNumFields](SQLConf.md#wholeStageMaxNumFields) method t
 Default: `true`
 
 Use [SQLConf.wholeStageSplitConsumeFuncByOperator](SQLConf.md#wholeStageSplitConsumeFuncByOperator) method to access the current value.
-
-## <span id="spark.sql.columnVector.offheap.enabled"> spark.sql.columnVector.offheap.enabled
-
-**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) in [ColumnarBatch](vectorized-query-execution/ColumnarBatch.md) (`true`) or not (`false`). When `false`, [OnHeapColumnVector](OnHeapColumnVector.md) is used instead.
-
-Default: `false`
-
-Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) method to access the current value.
 
 ## <span id="spark.sql.columnNameOfCorruptRecord"> spark.sql.columnNameOfCorruptRecord
 

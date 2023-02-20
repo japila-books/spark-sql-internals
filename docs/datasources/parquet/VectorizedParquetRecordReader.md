@@ -62,14 +62,16 @@ void initBatch(
 
 `initBatch` creates a [batch schema](../../types/index.md) that is [sparkSchema](SpecificParquetRecordReaderBase.md#sparkSchema) and the input `partitionColumns` schema (if available).
 
-`initBatch` requests [OffHeapColumnVector](../../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../../OnHeapColumnVector.md#allocateColumns) to allocate column vectors per the input `memMode`, i.e. [OFF_HEAP](#OFF_HEAP) or [ON_HEAP](#ON_HEAP) memory modes, respectively. `initBatch` records the allocated column vectors as the internal [WritableColumnVectors](#columnVectors).
+`initBatch` requests [OffHeapColumnVector](../../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../../OnHeapColumnVector.md#allocateColumns) to allocate column vectors per the input `memMode` (i.e., [OFF_HEAP](#OFF_HEAP) or [ON_HEAP](#ON_HEAP) memory modes, respectively). `initBatch` records the allocated column vectors as the internal [WritableColumnVectors](#columnVectors).
 
-!!! note
+!!! note "spark.sql.columnVector.offheap.enabled"
     [OnHeapColumnVector](../../OnHeapColumnVector.md) is used based on [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property.
 
-`initBatch` creates a [ColumnarBatch](../../vectorized-query-execution/ColumnarBatch.md) (with the [allocated WritableColumnVectors](#columnVectors)) and records it as the internal [ColumnarBatch](#columnarBatch).
+`initBatch` creates a [ColumnarBatch](#columnarBatch) (with the [allocated WritableColumnVectors](#columnVectors)).
 
-`initBatch` does some additional maintenance to the [columnVectors](#columnVectors).
+`initBatch` does some additional maintenance to the [WritableColumnVectors](#columnVectors).
+
+---
 
 `initBatch` is used when:
 
@@ -77,6 +79,7 @@ void initBatch(
 * `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](ParquetFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetPartitionReaderFactory` is requested to [createVectorizedReader](ParquetPartitionReaderFactory.md#createVectorizedReader)
 
+<!---
 ## Review Me
 
 `VectorizedParquetRecordReader` uses <<OFF_HEAP, OFF_HEAP>> memory mode when [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) internal configuration property is enabled (`true`).
@@ -212,3 +215,4 @@ NOTE: `getCurrentValue` is part of the Hadoop https://hadoop.apache.org/docs/r2.
 * `NewHadoopRDD` is requested to compute a partition (`compute`)
 
 * `RecordReaderIterator` is requested for the [next internal row](../RecordReaderIterator.md#next)
+-->
