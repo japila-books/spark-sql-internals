@@ -462,10 +462,6 @@ Used when:
 
 [spark.sql.files.minPartitionNum](configuration-properties.md#spark.sql.files.minPartitionNum)
 
-Used when:
-
-* `FilePartition` utility is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
-
 ## <span id="filesOpenCostInBytes"> filesOpenCostInBytes
 
 [spark.sql.files.openCostInBytes](configuration-properties.md#spark.sql.files.openCostInBytes)

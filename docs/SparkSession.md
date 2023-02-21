@@ -419,10 +419,12 @@ leafNodeDefaultParallelism: Int
 
 `leafNodeDefaultParallelism` is the value of [spark.sql.leafNodeDefaultParallelism](configuration-properties.md#spark.sql.leafNodeDefaultParallelism) if defined or `SparkContext.defaultParallelism` ([Spark Core]({{ book.spark_core }}/SparkContext#defaultParallelism)).
 
+---
+
 `leafNodeDefaultParallelism` is used when:
 
-* `SparkSession` is requested to [range](SparkSession.md#range)
+* [SparkSession.range](SparkSession.md#range) operator is used
 * `RangeExec` leaf physical operator is [created](physical-operators/RangeExec.md#numSlices)
 * `CommandResultExec` physical operator is requested for the `RDD[InternalRow]`
 * `LocalTableScanExec` physical operator is requested for the [RDD](physical-operators/LocalTableScanExec.md#rdd)
-* `FilePartition` utility is used to `maxSplitBytes`
+* `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)

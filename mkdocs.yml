@@ -174,6 +174,8 @@ nav:
       - EstimationUtils: cost-based-optimization/EstimationUtils.md
     - Dynamic Partition Pruning:
       - dynamic-partition-pruning/index.md
+    - File-Based Data Scanning:
+      - file-based-data-scanning/index.md
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
@@ -811,6 +813,8 @@ nav:
       - UnsafeHashedRelation: UnsafeHashedRelation.md
       - UnsafeRow: UnsafeRow.md
       - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
+    - RDDs:
+      - FileScanRDD: rdds/FileScanRDD.md
   - SQL:
     - sql/index.md
     - AbstractSqlParser: sql/AbstractSqlParser.md
@@ -1059,7 +1063,6 @@ nav:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
-    - FileScanRDD: rdds/FileScanRDD.md
     - Logging: spark-logging.md
     - Performance Tuning and Debugging:
       - Debugging Query Execution: debugging-query-execution.md

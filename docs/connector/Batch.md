@@ -20,13 +20,13 @@ Used when:
 
 * `BatchScanExec` is requested for a [PartitionReaderFactory](../physical-operators/BatchScanExec.md#readerFactory)
 
-### <span id="planInputPartitions"> planInputPartitions
+### <span id="planInputPartitions"> Planning Input Partitions
 
 ```java
 InputPartition[] planInputPartitions()
 ```
 
-[InputPartition](InputPartition.md)s to scan this data source
+[InputPartition](InputPartition.md)s to scan this data source with
 
 See:
 

@@ -121,29 +121,35 @@ createReadRDD(
   fsRelation: HadoopFsRelation): RDD[InternalRow]
 ```
 
-!!! note "FIXME: Review Me"
-
-`createReadRDD` calculates the maximum size of partitions (`maxSplitBytes`) based on the following properties:
-
-* [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes)
-
-* [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)
-
-`createReadRDD` sums up the size of all the files (with the extra [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)) for the given `selectedPartitions` and divides the sum by the "default parallelism" (i.e. number of CPU cores assigned to a Spark application) that gives `bytesPerCore`.
-
-The maximum size of partitions is then the minimum of [spark.sql.files.maxPartitionBytes](../configuration-properties.md#spark.sql.files.maxPartitionBytes) and the bigger of [spark.sql.files.openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes) and the `bytesPerCore`.
-
-`createReadRDD` prints out the following INFO message to the logs:
+`createReadRDD` prints out the following INFO message to the logs (with [maxSplitBytes](../datasources/FilePartition.md#maxSplitBytes) hint and [openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)):
 
 ```text
-Planning scan with bin packing, max size: [maxSplitBytes] bytes, open cost is considered as scanning [openCostInBytes] bytes.
+Planning scan with bin packing, max size: [maxSplitBytes] bytes,
+open cost is considered as scanning [openCostInBytes] bytes.
 ```
 
-For every file (as Hadoop's `FileStatus`) in every partition (as `PartitionDirectory` in the given `selectedPartitions`), `createReadRDD` [gets the HDFS block locations](#getBlockLocations) to create [PartitionedFiles](../datasources/PartitionedFile.md) (possibly split per the maximum size of partitions if the [FileFormat](../datasources/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#fsRelation) is [splittable](../datasources/FileFormat.md#isSplitable)). The partitioned files are then sorted by number of bytes to read (aka _split size_) in decreasing order (from the largest to the smallest).
+`createReadRDD` determines whether [Bucketing](../bucketing.md) is enabled or not (based on [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled)) for bucket pruning.
 
-`createReadRDD` "compresses" multiple splits per partition if together they are smaller than the `maxSplitBytes` ("Next Fit Decreasing") that gives the necessary partitions (file blocks as [FilePartitions](../rdds/FileScanRDD.md#FilePartition)).
+??? note "Bucket Pruning"
+    **Bucket Pruning** is an optimization to filter out data files from scanning (based on [optionalBucketSet](#optionalBucketSet)).
 
-In the end, `createReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.md) (with the given `(PartitionedFile) => Iterator[InternalRow]` read function and the partitions).
+    With [Bucketing](../bucketing.md) disabled or [optionalBucketSet](#optionalBucketSet) undefined, all files are included in scanning.
+
+`createReadRDD` [splits files](../datasources/PartitionedFileUtil.md#splitFiles) to be scanned (in the given `selectedPartitions`), possibly applying bucket pruning (with [Bucketing](../bucketing.md) enabled). `createReadRDD` uses the following:
+
+* [isSplitable](../datasources/FileFormat.md#isSplitable) property of the [FileFormat](../datasources/FileFormat.md) of the [HadoopFsRelation](#relation)
+* [maxSplitBytes](../datasources/FilePartition.md#maxSplitBytes) hint
+
+`createReadRDD` sorts the split files (by length in reverse order).
+
+In the end, creates a [FileScanRDD](../rdds/FileScanRDD.md) with the following:
+
+Property | Value
+---------|------
+[readFunction](../rdds/FileScanRDD.md#readFunction) | Input `readFile` function
+[filePartitions](../rdds/FileScanRDD.md#filePartitions) | [Partitions](../datasources/FilePartition.md#getFilePartitions)
+[readSchema](../rdds/FileScanRDD.md#readSchema) | [requiredSchema](#requiredSchema) with [partitionSchema](../datasources/HadoopFsRelation.md#partitionSchema) of the input [HadoopFsRelation](../datasources/HadoopFsRelation.md)
+[metadataColumns](../rdds/FileScanRDD.md#metadataColumns) | [metadataColumns](#metadataColumns)
 
 ### <span id="dynamicallySelectedPartitions"> Dynamically Selected Partitions
 

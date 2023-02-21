@@ -137,11 +137,25 @@ Used when:
 
 **spark.sql.files.maxPartitionBytes**
 
-Maximum number of bytes to pack into a single partition when reading files. Effective only for file-based sources (e.g., Parquet, JSON, ORC)
+Maximum number of bytes to pack into a single partition when reading files for file-based data sources (e.g., [Parquet](datasources/parquet/index.md))
 
 Default: `128MB` (like `parquet.block.size`)
 
 Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
+
+Used when:
+
+* `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+
+## <span id="spark.sql.files.minPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> files.minPartitionNum
+
+**spark.sql.files.minPartitionNum**
+
+Hint about the minimum number of partitions for file-based data sources (e.g., [Parquet](datasources/parquet/index.md))
+
+Default: [spark.sql.leafNodeDefaultParallelism](SparkSession.md#leafNodeDefaultParallelism)
+
+Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) for the current value
 
 Used when:
 
@@ -1277,14 +1291,6 @@ Maximum number of records to write out to a single file. If this value is `0` or
 Default: `0`
 
 Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
-
-## <span id="spark.sql.files.minPartitionNum"> spark.sql.files.minPartitionNum
-
-The suggested (not guaranteed) minimum number of split file partitions for file-based data sources such as Parquet, JSON and ORC.
-
-Default: (undefined)
-
-Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) method to access the current value.
 
 ## <span id="spark.sql.inMemoryColumnarStorage.compressed"> spark.sql.inMemoryColumnarStorage.compressed
 

@@ -2,18 +2,22 @@
 
 `FileScanRDD` is the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) of [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) leaf physical operator (for [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md)).
 
-!!! note "The Internals of Apache Spark"
-    Find out more on `RDD` abstraction in [The Internals of Apache Spark]({{ book.spark_core }}/rdd/RDD.html).
+??? note "RDD"
+    Find out more on `RDD` abstraction in [The Internals of Apache Spark]({{ book.spark_core }}/rdd/RDD).
 
 ## Creating Instance
 
 `FileScanRDD` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
-* <span id="readFunction"> Read Function that takes a [PartitionedFile](../datasources/PartitionedFile.md) and gives [internal binary rows](../InternalRow.md) back (`(PartitionedFile) => Iterator[InternalRow]`)
-* <span id="filePartitions"> File Blocks as `FilePartition`s (`Seq[FilePartition]`)
+* <span id="readFunction"> Read Function of [PartitionedFile](../datasources/PartitionedFile.md)s to [InternalRow](../InternalRow.md)s (`(PartitionedFile) => Iterator[InternalRow]`)
+* <span id="filePartitions"> [FilePartition](../datasources/FilePartition.md)s
+* <span id="readSchema"> Read [Schema](../types/StructType.md)
+* <span id="metadataColumns"> Metadata Columns
 
-`FileScanRDD` is created when [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator is requested to [createBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createBucketedReadRDD) and [createNonBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when `FileSourceScanExec` operator is requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) when [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md) physical operator is executed).
+`FileScanRDD` is created when:
+
+* [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator is requested to [createBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createBucketedReadRDD) and [createNonBucketedReadRDD](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when `FileSourceScanExec` operator is requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) when [WholeStageCodegenExec](../physical-operators/WholeStageCodegenExec.md) physical operator is executed)
 
 ## Configuration Properties
 
