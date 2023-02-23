@@ -537,10 +537,6 @@ Used when `ParquetFileFormat` is requested to [build a data reader with partitio
 
 [spark.sql.parquet.mergeSchema](configuration-properties.md#spark.sql.parquet.mergeSchema)
 
-Used when:
-
-* `ParquetOptions` is requested for [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema)
-
 ## <span id="isParquetSchemaRespectSummaries"><span id="PARQUET_SCHEMA_RESPECT_SUMMARIES"> isParquetSchemaRespectSummaries
 
 [spark.sql.parquet.respectSummaryFiles](configuration-properties.md#spark.sql.parquet.respectSummaryFiles)

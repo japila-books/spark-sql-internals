@@ -473,13 +473,29 @@ Default: `4096` (4k)
 
 The number should be carefully chosen to minimize overhead and avoid OOMs while reading data.
 
-Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) method to access the current value.
+Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReaderBatchSize) for the current value
 
 Used when:
 
 * `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-decoding/index.md))
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
+
+## <span id="spark.sql.parquet.mergeSchema"> parquet.mergeSchema
+
+**spark.sql.parquet.mergeSchema**
+
+Controls whether the Parquet data source merges schemas collected from all data files or not. If `false`, the schema is picked from the summary file or a random data file if no summary file is available.
+
+Default: `false`
+
+Use [SQLConf.isParquetSchemaMergingEnabled](SQLConf.md#isParquetSchemaMergingEnabled) for the current value
+
+Parquet option (of higher priority): [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema)
+
+Used when:
+
+* `ParquetOptions` is created (and initializes [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema) option)
 
 ## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> spark.sql.adaptive.autoBroadcastJoinThreshold
 
@@ -1701,14 +1717,6 @@ Default: `false`
 This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
 
 Use [SQLConf.isParquetINT96TimestampConversion](SQLConf.md#isParquetINT96TimestampConversion) method to access the current value.
-
-## <span id="spark.sql.parquet.mergeSchema"> spark.sql.parquet.mergeSchema
-
-Controls whether the Parquet data source merges schemas collected from all data files or not. If `false`, the schema is picked from the summary file or a random data file if no summary file is available.
-
-Default: `false`
-
-Use [SQLConf.isParquetSchemaMergingEnabled](SQLConf.md#isParquetSchemaMergingEnabled) method to access the current value.
 
 ## <span id="spark.sql.parquet.output.committer.class"> spark.sql.parquet.output.committer.class
 
