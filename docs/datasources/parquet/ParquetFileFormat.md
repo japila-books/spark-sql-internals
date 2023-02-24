@@ -190,6 +190,32 @@ vectorTypes(
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
+## <span id="mergeSchemasInParallel"> mergeSchemasInParallel
+
+```scala
+mergeSchemasInParallel(
+  parameters: Map[String, String],
+  filesToTouch: Seq[FileStatus],
+  sparkSession: SparkSession): Option[StructType]
+```
+
+`mergeSchemasInParallel` [mergeSchemasInParallel](../SchemaMergeUtils.md#mergeSchemasInParallel) with the given `filesToTouch` and a multi-threaded parquet footer reader.
+
+!!! note "FIXME"
+    Describe the multi-threaded parquet footer reader.
+
+!!! note
+    With the multi-threaded parquet footer reader, the whole `mergeSchemasInParallel` is distributed (using `RDD` while [mergeSchemasInParallel](../SchemaMergeUtils.md#mergeSchemasInParallel)) and multithreaded (per RDD partition).
+
+---
+
+`mergeSchemasInParallel` is used when:
+
+* `ParquetUtils` is requested to [infer schema](ParquetUtils.md#inferSchema)
+
+!!! note "Refactoring Needed?"
+    `mergeSchemasInParallel` should be moved to `ParquetUtils` _if_ that's the only place it's called from, _huh?!_
+
 ## Logging
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat` logger to see what happens inside.
@@ -197,7 +223,8 @@ Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.parqu
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat=ALL
+logger.ParquetFileFormat.name = org.apache.spark.sql.execution.datasources.parquet.ParquetFileFormat
+logger.ParquetFileFormat.level = all
 ```
 
 Refer to [Logging](../../spark-logging.md).
