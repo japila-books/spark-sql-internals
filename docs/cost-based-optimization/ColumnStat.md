@@ -18,7 +18,7 @@
 * `CatalogColumnStat` is requested to [toPlanStat](CatalogColumnStat.md#toPlanStat)
 * `Range` logical operator is requested to `computeStats`
 * `EstimationUtils` is requested to `nullColumnStat`
-* `JoinEstimation` is requested to [computeByNdv](../logical-operators/JoinEstimation.md#computeByNdv), [computeByHistogram](../logical-operators/JoinEstimation.md#computeByHistogram)
+* `JoinEstimation` is requested to [computeByNdv](JoinEstimation.md#computeByNdv), [computeByHistogram](JoinEstimation.md#computeByHistogram)
 * `UnionEstimation` is requested to `computeMinMaxStats`, `computeNullCountStats`
 * `CommandUtils` is requested to [rowToColumnStat](../CommandUtils.md#rowToColumnStat)
 
@@ -135,7 +135,7 @@ scala> :type colStatsOpt
 Option[org.apache.spark.sql.catalyst.plans.logical.ColumnStat]
 ----
 
-`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to [estimateInnerOuterJoin](logical-operators/JoinEstimation.md#estimateInnerOuterJoin) for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
+`ColumnStat` is also <<creating-instance, created>> when `JoinEstimation` is requested to [estimateInnerOuterJoin](cost-based-optimization/JoinEstimation.md#estimateInnerOuterJoin) for `Inner`, `Cross`, `LeftOuter`, `RightOuter` and `FullOuter` joins.
 
 [source, scala]
 ----

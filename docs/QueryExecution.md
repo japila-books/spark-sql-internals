@@ -247,7 +247,7 @@ toStringWithStats: String
 
 `toStringWithStats` is a mere alias for [completeString](#completeString) with `appendStats` flag enabled.
 
-`toStringWithStats` is a custom [toString](#toString) with [cost statistics](logical-operators/Statistics.md).
+`toStringWithStats` is a custom [toString](#toString) with [cost statistics](cost-based-optimization/Statistics.md).
 
 ```text
 val dataset = spark.range(20).limit(2)

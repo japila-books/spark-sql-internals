@@ -339,11 +339,19 @@ Used when `CatalogManager` is requested for the [current CatalogPlugin](connecto
 
 ## <span id="defaultDataSourceName"><span id="DEFAULT_DATA_SOURCE_NAME"> defaultDataSourceName
 
-The value of [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property
+[spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default)
+
+## <span id="defaultSizeInBytes"> defaultSizeInBytes
+
+[spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes)
 
 Used when:
 
-* FIXME
+* `DetermineTableStats` logical resolution rule could not compute the table size or [spark.sql.statistics.fallBackToHdfs](#spark.sql.statistics.fallBackToHdfs) is disabled
+* [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
+* (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
+* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](datasources/CatalogFileIndex.md) when no table statistics are available)
+* `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
 
@@ -365,43 +373,17 @@ Used when:
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed
 
+## <span id="DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY"><span id="dynamicPartitionPruningReuseBroadcastOnly"> dynamicPartitionPruningReuseBroadcastOnly
+
+[spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly)
+
 ## <span id="DYNAMIC_PARTITION_PRUNING_USE_STATS"><span id="dynamicPartitionPruningUseStats"> dynamicPartitionPruningUseStats
 
 [spark.sql.optimizer.dynamicPartitionPruning.useStats](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats)
 
-## <span id="DYNAMIC_PARTITION_PRUNING_REUSE_BROADCAST_ONLY"><span id="dynamicPartitionPruningReuseBroadcastOnly"> dynamicPartitionPruningReuseBroadcastOnly
-
-The value of [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly) configuration property
-
-Used when [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed
-
-## <span id="defaultSizeInBytes"> defaultSizeInBytes
-
-The value of [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) configuration property
-
-Used when:
-
-* `DetermineTableStats` logical resolution rule could not compute the table size or [spark.sql.statistics.fallBackToHdfs](#spark.sql.statistics.fallBackToHdfs) is disabled
-* [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
-*  (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
-* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](datasources/CatalogFileIndex.md) when no table statistics are available)
-* `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
-
 ## <span id="ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN"> ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN
 
 [spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled](configuration-properties.md#spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled)
-
-## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
-
-[spark.sql.exchange.reuse](configuration-properties.md#spark.sql.exchange.reuse)
-
-Used when:
-
-* [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](physical-operators/AdaptiveSparkPlanExec.md#createQueryStages)
-
-* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
-
-* `PlanDynamicPruningFilters` and [ReuseExchange](physical-optimizations/ReuseExchange.md) physical optimizations are executed
 
 ## <span id="enableRadixSort"> enableRadixSort
 
@@ -418,6 +400,18 @@ Used when:
 ## <span id="enableVectorizedHashMap"><span id="ENABLE_VECTORIZED_HASH_MAP"> enableVectorizedHashMap
 
 [spark.sql.codegen.aggregate.map.vectorized.enable](configuration-properties.md#spark.sql.codegen.aggregate.map.vectorized.enable)
+
+## <span id="EXCHANGE_REUSE_ENABLED"><span id="exchangeReuseEnabled"> exchangeReuseEnabled
+
+[spark.sql.exchange.reuse](configuration-properties.md#spark.sql.exchange.reuse)
+
+Used when:
+
+* [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested to [createQueryStages](physical-operators/AdaptiveSparkPlanExec.md#createQueryStages)
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is executed.
+
+* `PlanDynamicPruningFilters` and [ReuseExchange](physical-optimizations/ReuseExchange.md) physical optimizations are executed
 
 ## <span id="fallBackToHdfsForStatsEnabled"> fallBackToHdfsForStatsEnabled
 

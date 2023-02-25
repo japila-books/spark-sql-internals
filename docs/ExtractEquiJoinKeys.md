@@ -98,7 +98,7 @@ leftKeys:[leftKeys] | rightKeys:[rightKeys]
 
 `unapply` is used when:
 
-* `JoinEstimation` is requested to [estimateInnerOuterJoin](logical-operators/JoinEstimation.md#estimateInnerOuterJoin)
+* `JoinEstimation` is requested to [estimateInnerOuterJoin](cost-based-optimization/JoinEstimation.md#estimateInnerOuterJoin)
 * [JoinSelection](execution-planning-strategies/JoinSelection.md) and [LogicalQueryStageStrategy](execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategies are executed
 * `NormalizeFloatingNumbers` and [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimizations are executed
 

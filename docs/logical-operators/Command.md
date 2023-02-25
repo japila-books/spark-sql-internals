@@ -46,6 +46,8 @@ children: Seq[LogicalPlan]
 stats: Statistics
 ```
 
-`Command` has no [Statistics](Statistics.md) by default.
+`stats` is part of the [LogicalPlanStats](../cost-based-optimization/LogicalPlanStats.md#stats) abstraction.
 
-`stats` is part of the [LogicalPlanStats](LogicalPlanStats.md#stats) abstraction.
+---
+
+`Command` has no [Statistics](../cost-based-optimization/Statistics.md) by default.

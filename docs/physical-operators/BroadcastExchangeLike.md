@@ -44,7 +44,7 @@ Used when:
 runtimeStatistics: Statistics
 ```
 
-[Statistics](../logical-operators/Statistics.md) with data size and row count
+[Statistics](../cost-based-optimization/Statistics.md) with data size and row count
 
 See:
 

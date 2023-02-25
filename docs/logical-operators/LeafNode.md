@@ -34,7 +34,9 @@ computeStats(): Statistics
 
 `computeStats` throws an `UnsupportedOperationException`.
 
+---
+
 `computeStats` is used when:
 
-* `BasicStatsPlanVisitor` is requested for the [default size statistics](BasicStatsPlanVisitor.md#default) (for `LeafNode`s)
-* `SizeInBytesOnlyStatsPlanVisitor` is requested for the [default size statistics](SizeInBytesOnlyStatsPlanVisitor.md#default)
+* `BasicStatsPlanVisitor` is requested for the [default size statistics](../cost-based-optimization/BasicStatsPlanVisitor.md#default) (for `LeafNode`s)
+* `SizeInBytesOnlyStatsPlanVisitor` is requested for the [default size statistics](../cost-based-optimization/SizeInBytesOnlyStatsPlanVisitor.md#default)

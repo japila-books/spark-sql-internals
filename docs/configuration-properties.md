@@ -133,6 +133,18 @@ Used when:
 * `ParquetFileFormat` is requested to [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)
 
+## <span id="spark.sql.exchange.reuse"> exchange.reuse
+
+**spark.sql.exchange.reuse**
+
+**(internal)** When enabled (`true`), the [Spark planner](SparkPlanner.md) will find duplicated exchanges and subqueries and re-use them.
+
+When disabled (`false`), [ReuseExchange](physical-optimizations/ReuseExchange.md) and [ReuseSubquery](physical-optimizations/ReuseSubquery.md) physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
+
+Default: `true`
+
+Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) for the current value
+
 ## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> files.maxPartitionBytes
 
 **spark.sql.files.maxPartitionBytes**
@@ -256,11 +268,15 @@ Used to control whether to execute the following optimizations or skip them alto
 
 **spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly**
 
-**(internal)** When true, dynamic partition pruning will only apply when the broadcast exchange of a broadcast hash join operation can be reused as the dynamic pruning filter.
+**(internal)** When `true`, dynamic partition pruning will only apply when the broadcast exchange of a broadcast hash join operation can be reused as the dynamic pruning filter.
 
 Default: `true`
 
-Use [SQLConf.dynamicPartitionPruningReuseBroadcastOnly](SQLConf.md#dynamicPartitionPruningReuseBroadcastOnly) method to access the current value.
+Use [SQLConf.dynamicPartitionPruningReuseBroadcastOnly](SQLConf.md#dynamicPartitionPruningReuseBroadcastOnly) for the current value
+
+Used when:
+
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed (and requested to [insertPredicate](logical-optimizations/PartitionPruning.md#insertPredicate))
 
 ## <span id="spark.sql.optimizer.enableCsvExpressionOptimization"> optimizer.enableCsvExpressionOptimization
 
@@ -1263,16 +1279,6 @@ Used by the planner to decide when it is safe to broadcast a relation. By defaul
 Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access the current value.
 
 ## <span id="spark.sql.dialect"> spark.sql.dialect
-
-## <span id="spark.sql.exchange.reuse"> spark.sql.exchange.reuse
-
-**(internal)** When enabled (`true`), the [Spark planner](SparkPlanner.md) will find duplicated exchanges and subqueries and re-use them.
-
-When disabled (`false`), [ReuseExchange](physical-optimizations/ReuseExchange.md) and [ReuseSubquery](physical-optimizations/ReuseSubquery.md) physical optimizations (that the Spark planner uses for physical query plan optimization) do nothing.
-
-Default: `true`
-
-Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) method to access the current value.
 
 ## <span id="spark.sql.execution.useObjectHashAggregateExec"> execution.useObjectHashAggregateExec
 

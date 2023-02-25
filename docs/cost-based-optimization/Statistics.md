@@ -12,15 +12,15 @@
 `Statistics` is created when:
 
 * `CatalogStatistics` is requested to [convert metastore statistics](../CatalogStatistics.md#toPlanStats)
-* [DataSourceV2Relation](DataSourceV2Relation.md), [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md), [ExternalRDD](ExternalRDD.md), [LocalRelation](LocalRelation.md), [LogicalRDD](LogicalRDD.md), [LogicalRelation](LogicalRelation.md), `Range`, `OneRowRelation` logical operators are requested to `computeStats`
-* `AggregateEstimation` and [JoinEstimation](JoinEstimation.md) utilities are requested to `estimate`
+* [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md), [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md), [ExternalRDD](../logical-operators/ExternalRDD.md), [LocalRelation](../logical-operators/LocalRelation.md), [LogicalRDD](../logical-operators/LogicalRDD.md), [LogicalRelation](../logical-operators/LogicalRelation.md), `Range`, `OneRowRelation` logical operators are requested to `computeStats`
+* `AggregateEstimation` and [JoinEstimation](../cost-based-optimization/JoinEstimation.md) are requested to `estimate`
 * [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md) is executed
 * [QueryStageExec](../physical-operators/QueryStageExec.md) physical operator is requested to `computeStats`
 * [DetermineTableStats](../hive/DetermineTableStats.md) logical resolution rule is executed
 
 ## <span id="rowCount"> Row Count
 
-**Row Count** estimate is used in [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization for [Cost-Based Optimization](../cost-based-optimization/index.md).
+**Row Count** estimate is used in [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) logical optimization for [Cost-Based Optimization](index.md).
 
 ## Statistics and CatalogStatistics
 
@@ -30,7 +30,7 @@
 
 ## Accessing Statistics of Logical Operator
 
-Statistics of a logical plan are available using [stats](LogicalPlanStats.md#stats) property.
+Statistics of a logical plan are available using [stats](../cost-based-optimization/LogicalPlanStats.md#stats) property.
 
 ```text
 val q = spark.range(5).hint("broadcast").join(spark.range(1), "id")

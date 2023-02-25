@@ -1,6 +1,6 @@
 # LogicalPlanStats &mdash; Statistics Estimates and Query Hints of Logical Operators
 
-`LogicalPlanStats` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](../SparkPlanner.md) (with or without [cost-based optimization](../cost-based-optimization/index.md), e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
+`LogicalPlanStats` is an extension of the [LogicalPlan](../logical-operators/LogicalPlan.md) abstraction to add [Statistics](#stats) for [query planning](../SparkPlanner.md) (with or without [cost-based optimization](../cost-based-optimization/index.md), e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
 
 ## Scala Definition
 

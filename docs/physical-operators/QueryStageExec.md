@@ -32,7 +32,7 @@ Used when:
 getRuntimeStatistics: Statistics
 ```
 
-[Statistics](../logical-operators/Statistics.md) after stage materialization
+[Statistics](../cost-based-optimization/Statistics.md) after stage materialization
 
 See:
 
@@ -118,7 +118,7 @@ resultOption: AtomicReference[Option[Any]]
 computeStats(): Option[Statistics]
 ```
 
-Only when this `QueryStageExec` has been [materialized](#isMaterialized), `computeStats` gives a new [Statistics](../logical-operators/Statistics.md) based on the [runtime statistics](#getRuntimeStatistics) (and flips the [isRuntime](../logical-operators/Statistics.md#isRuntime) flag to `true`).
+Only when this `QueryStageExec` has been [materialized](#isMaterialized), `computeStats` gives a new [Statistics](../cost-based-optimization/Statistics.md) based on the [runtime statistics](#getRuntimeStatistics) (and flips the [isRuntime](../cost-based-optimization/Statistics.md#isRuntime) flag to `true`).
 
 Otherwise, `computeStats` returns no statistics (`None`).
 

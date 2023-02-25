@@ -186,12 +186,12 @@ runtimeStatistics: Statistics
 
 ---
 
-`runtimeStatistics` creates a [Statistics](../logical-operators/Statistics.md) with the value of the following metrics.
+`runtimeStatistics` creates a [Statistics](../cost-based-optimization/Statistics.md) with the value of the following metrics.
 
 Statistics | Metric
 -----------|-------
- [Output size](../logical-operators/Statistics.md#sizeInBytes) | [data size](#dataSize)
- [Number of rows](../logical-operators/Statistics.md#rowCount) | [shuffle records written](#shuffleRecordsWritten)
+ [Output size](../cost-based-optimization/Statistics.md#sizeInBytes) | [data size](#dataSize)
+ [Number of rows](../cost-based-optimization/Statistics.md#rowCount) | [shuffle records written](#shuffleRecordsWritten)
 
 ## <span id="prepareShuffleDependency"> Creating ShuffleDependency
 

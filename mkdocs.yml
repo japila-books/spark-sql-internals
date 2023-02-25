@@ -168,10 +168,16 @@ nav:
     - Common Table Expressions: common-table-expressions.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md
+      - BasicStatsPlanVisitor: cost-based-optimization/BasicStatsPlanVisitor.md
       - CatalogColumnStat: cost-based-optimization/CatalogColumnStat.md
       - ColumnStat: cost-based-optimization/ColumnStat.md
       - CommandUtils: CommandUtils.md
       - EstimationUtils: cost-based-optimization/EstimationUtils.md
+      - JoinEstimation: cost-based-optimization/JoinEstimation.md
+      - LogicalPlanStats: cost-based-optimization/LogicalPlanStats.md
+      - LogicalPlanVisitor: cost-based-optimization/LogicalPlanVisitor.md
+      - SizeInBytesOnlyStatsPlanVisitor: cost-based-optimization/SizeInBytesOnlyStatsPlanVisitor.md
+      - Statistics: cost-based-optimization/Statistics.md
     - Dynamic Partition Pruning:
       - dynamic-partition-pruning/index.md
     - File-Based Data Scanning:
@@ -306,13 +312,6 @@ nav:
     - SharedState: SharedState.md
     - SQLConf: SQLConf.md
     - StaticSQLConf: StaticSQLConf.md
-    - Statistics and Hints:
-      - Statistics: logical-operators/Statistics.md
-      - LogicalPlanStats: logical-operators/LogicalPlanStats.md
-      - LogicalPlanVisitor: logical-operators/LogicalPlanVisitor.md
-      - SizeInBytesOnlyStatsPlanVisitor: logical-operators/SizeInBytesOnlyStatsPlanVisitor.md
-      - BasicStatsPlanVisitor: logical-operators/BasicStatsPlanVisitor.md
-      - JoinEstimation: logical-operators/JoinEstimation.md
     - Logical Operators:
       - logical-operators/index.md
       - AddColumns: logical-operators/AddColumns.md

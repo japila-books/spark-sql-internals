@@ -8,7 +8,7 @@
 
 1. [Join Type](../joins.md#JoinType)
 1. [Hints](../JoinHint.md)
-1. Size ([Cost-Based Optimization](../cost-based-optimization/index.md), [Statistics](../logical-operators/Statistics.md))
+1. Size ([Cost-Based Optimization](../cost-based-optimization/index.md), [Statistics](../cost-based-optimization/Statistics.md))
 
 ## Join Selection Requirements
 
@@ -118,7 +118,7 @@ canBroadcastBySize(
   conf: SQLConf): Boolean
 ```
 
-`canBroadcastBySize` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a broadcast join (between `0` and the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property inclusive).
+`canBroadcastBySize` is enabled (`true`) when the [size](../cost-based-optimization/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a broadcast join (between `0` and the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property inclusive).
 
 ## <span id="canBuildBroadcastLeft"> canBuildBroadcastLeft
 
@@ -137,7 +137,7 @@ canBuildLocalHashMapBySize(
   conf: SQLConf): Boolean
 ```
 
-`canBuildLocalHashMapBySize` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a shuffle hash join (below the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property multiplied by the configured [number of shuffle partitions](../SQLConf.md#numShufflePartitions)).
+`canBuildLocalHashMapBySize` is enabled (`true`) when the [size](../cost-based-optimization/Statistics.md#sizeInBytes) of the table (the given [LogicalPlan](../logical-operators/LogicalPlan.md)) is small for a shuffle hash join (below the [spark.sql.autoBroadcastJoinThreshold](../configuration-properties.md#spark.sql.autoBroadcastJoinThreshold) configuration property multiplied by the configured [number of shuffle partitions](../SQLConf.md#numShufflePartitions)).
 
 ## <span id="createBroadcastHashJoin"> Creating BroadcastHashJoinExec
 
@@ -272,7 +272,7 @@ getSmallerSide(
   right: LogicalPlan): BuildSide
 ```
 
-`getSmallerSide` is `BuildLeft` unless the [size](../logical-operators/Statistics.md#sizeInBytes) of the right table (the given `right` [LogicalPlan](../logical-operators/LogicalPlan.md)) is not larger than the size of the left table (the given `left` [LogicalPlan](../logical-operators/LogicalPlan.md)). Otherwise, `getSmallerSide` is `BuildRight`.
+`getSmallerSide` is `BuildLeft` unless the [size](../cost-based-optimization/Statistics.md#sizeInBytes) of the right table (the given `right` [LogicalPlan](../logical-operators/LogicalPlan.md)) is not larger than the size of the left table (the given `left` [LogicalPlan](../logical-operators/LogicalPlan.md)). Otherwise, `getSmallerSide` is `BuildRight`.
 
 ## <span id="hintToBroadcastLeft"> hintToBroadcastLeft
 
@@ -354,7 +354,7 @@ muchSmaller(
   b: LogicalPlan): Boolean
 ```
 
-`muchSmaller` is enabled (`true`) when the [size](../logical-operators/Statistics.md#sizeInBytes) of the left table (the given `a` [LogicalPlan](../logical-operators/LogicalPlan.md)) is at least 3 times smaller than the size of the right table (the given `b` [LogicalPlan](../logical-operators/LogicalPlan.md)).
+`muchSmaller` is enabled (`true`) when the [size](../cost-based-optimization/Statistics.md#sizeInBytes) of the left table (the given `a` [LogicalPlan](../logical-operators/LogicalPlan.md)) is at least 3 times smaller than the size of the right table (the given `b` [LogicalPlan](../logical-operators/LogicalPlan.md)).
 
 ## <span id="canBuildShuffledHashJoinLeft"> Checking Left BuildSide for ShuffledHashJoin
 

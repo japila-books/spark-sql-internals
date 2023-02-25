@@ -56,7 +56,7 @@ The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per cost-based-
 | [[Generate]] Generate.md[Generate]
 | `visitGenerate`
 
-| [[GlobalLimit]] [GlobalLimit](GlobalLimit.md)
+| [[GlobalLimit]] [GlobalLimit](../logical-operators/GlobalLimit.md)
 | `visitGlobalLimit`
 
 | [[Intersect]] `Intersect`
@@ -74,7 +74,7 @@ The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per cost-based-
 | [[Project]] Project.md[Project]
 | [[visitProject]] `visitProject`
 
-| [[Repartition]] [Repartition](RepartitionOperation.md#Repartition)
+| [[Repartition]] [Repartition](../logical-operators/RepartitionOperation.md#Repartition)
 | `visitRepartition`
 
 | [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)

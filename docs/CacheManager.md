@@ -135,7 +135,7 @@ Internally, `cacheQuery` requests the `Dataset` for the [analyzed logical plan](
 * Input `storageLevel` storage level
 * [Optimized physical query plan](QueryExecution.md#executedPlan) (after requesting `SessionState` to [execute](SessionState.md#executePlan) the analyzed logical plan)
 * Input `tableName`
-* [Statistics](logical-operators/LogicalPlanStats.md#stats) of the analyzed query plan
+* [Statistics](cost-based-optimization/LogicalPlanStats.md#stats) of the analyzed query plan
 
 `cacheQuery` then creates a `CachedData` (for the analyzed query plan and the `InMemoryRelation`) and adds it to the [cachedData](#cachedData) internal registry.
 

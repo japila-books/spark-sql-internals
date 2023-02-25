@@ -50,7 +50,7 @@ Logical Command | SQL Statement
 
 ## CatalogStatistics and Statistics
 
-`CatalogStatistics` are a "subset" of the statistics in [Statistics](logical-operators/Statistics.md) (as there are no concepts of [attributes](logical-operators/Statistics.md#attributeStats) and [broadcast hints](logical-operators/Statistics.md#hints) in Hive metastore).
+`CatalogStatistics` are a "subset" of the statistics in [Statistics](cost-based-optimization/Statistics.md) (as there are no concepts of [attributes](cost-based-optimization/Statistics.md#attributeStats) and [broadcast hints](cost-based-optimization/Statistics.md#hints) in Hive metastore).
 
 `CatalogStatistics` are stored in a Hive metastore and are referred as **Hive statistics** while `Statistics` are **Spark statistics**.
 
@@ -81,11 +81,11 @@ toPlanStats(
   cboEnabled: Boolean): Statistics
 ```
 
-`toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](logical-operators/Statistics.md).
+`toPlanStats` converts the table statistics (from an external metastore) to [Spark statistics](cost-based-optimization/Statistics.md).
 
-With [cost-based optimization](cost-based-optimization/index.md) enabled and [row count](#rowCount) statistics available, `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
+With [cost-based optimization](cost-based-optimization/index.md) enabled and [row count](#rowCount) statistics available, `toPlanStats` creates a [Statistics](cost-based-optimization/Statistics.md) with the estimated total (output) size, [row count](#rowCount) and column statistics.
 
-Otherwise (when [cost-based optimization](cost-based-optimization/index.md) is disabled), `toPlanStats` creates a [Statistics](logical-operators/Statistics.md) with just the mandatory [sizeInBytes](#sizeInBytes).
+Otherwise (when [cost-based optimization](cost-based-optimization/index.md) is disabled), `toPlanStats` creates a [Statistics](cost-based-optimization/Statistics.md) with just the mandatory [sizeInBytes](#sizeInBytes).
 
 !!! note
     `toPlanStats` does the reverse of [HiveExternalCatalog.statsToProperties](hive/HiveExternalCatalog.md#statsToProperties).

@@ -1,4 +1,4 @@
-# Cost-Based Optimization
+# Cost-Based Optimization (CBO)
 
 **Cost-Based Optimization** (**Cost-Based Query Optimization**, **CBO Optimizer**, **CBO**) is an optimization technique in Spark SQL that uses [table statistics](#statistics) to determine the most efficient query execution plan of a structured query (given the logical query plan).
 
@@ -258,11 +258,11 @@ The following are the logical commands that [alter table statistics in a metasto
 ## <span id="EXPLAIN-COST"> EXPLAIN COST SQL Command
 
 !!! FIXME
-    See [LogicalPlanStats](../logical-operators/LogicalPlanStats.md)
+    See [LogicalPlanStats](LogicalPlanStats.md)
 
 ## <span id="LogicalPlanStats"> LogicalPlanStats &mdash; Statistics Estimates of Logical Operator
 
-[LogicalPlanStats](../logical-operators/LogicalPlanStats.md) adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
+[LogicalPlanStats](LogicalPlanStats.md) adds statistics support to logical operators and is used for query planning (with or without cost-based optimization, e.g. [CostBasedJoinReorder](../logical-optimizations/CostBasedJoinReorder.md) or [JoinSelection](../execution-planning-strategies/JoinSelection.md), respectively).
 
 ## <span id="column-histograms"> Equi-Height Histograms for Columns
 

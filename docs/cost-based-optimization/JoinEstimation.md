@@ -274,7 +274,7 @@ NOTE: Use cost-based-optimization/index.md#ANALYZE-TABLE[ANALYZE TABLE COMPUTE S
 
 In the end, `estimateLeftSemiAntiJoin` creates a new [Statistics](Statistics.md) with the following estimates:
 
-. [Total size (in bytes)](Statistics.md#sizeInBytes) is the output size for the [output schema](Join.md#output) of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
+. [Total size (in bytes)](Statistics.md#sizeInBytes) is the output size for the [output schema](../logical-operators/Join.md#output) of the join, the row count statistic (aka _output rows_) and [column histograms](Statistics.md#attributeStats).
 
 . [Row count](Statistics.md#rowCount) is exactly the row count of the left side
 

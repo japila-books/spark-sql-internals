@@ -9,7 +9,7 @@
 * <span id="cteId"> CTE Id
 * <span id="_resolved"> `_resolved` flag
 * <span id="output"> Output [Attribute](../expressions/Attribute.md)s
-* <span id="statsOpt"> Optional [Statistics](Statistics.md) (default: `None`)
+* <span id="statsOpt"> Optional [Statistics](../cost-based-optimization/Statistics.md) (default: `None`)
 
 `CTERelationRef` is created when:
 

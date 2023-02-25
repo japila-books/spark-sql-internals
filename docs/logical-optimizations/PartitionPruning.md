@@ -90,7 +90,7 @@ hasSelectivePredicate(
 
 `hasSelectivePredicate` is `true` when there is a `Filter` logical operator with a [likely-selective](../PredicateHelper.md#isLikelySelective) filter condition.
 
-## <span id="insertPredicate"> insertPredicate
+## <span id="insertPredicate"> Inserting Predicate with DynamicPruningSubquery Expression
 
 ```scala
 insertPredicate(
@@ -102,7 +102,15 @@ insertPredicate(
   partScan: LogicalPlan): LogicalPlan
 ```
 
-`insertPredicate`...FIXME
+With [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse) enabled and [pruningHasBenefit](#pruningHasBenefit), `insertPredicate` creates (_inserts into the given pruning plan_) a `Filter` logical operator with a [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expression (with [onlyInBroadcast](../expressions/DynamicPruningSubquery.md#onlyInBroadcast) flag based on [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly) and [pruningHasBenefit](#pruningHasBenefit)).
+
+Otherwise, `insertPredicate` returns the given `pruningPlan` logical query plan unchanged.
+
+!!! note "Configuration Properties"
+    `insertPredicate` is configured using the following:
+
+    * [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse)
+    * [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly)
 
 ## <span id="pruningHasBenefit"> pruningHasBenefit
 
@@ -114,7 +122,24 @@ pruningHasBenefit(
   otherPlan: LogicalPlan): Boolean
 ```
 
-!!! note
-    `pruningHasBenefit` uses [Column Statistics](../logical-operators/Statistics.md#attributeStats) (for the [number of distinct values](../cost-based-optimization/ColumnStat.md#distinctCount)), if available and [spark.sql.optimizer.dynamicPartitionPruning.useStats](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) is enabled.
+!!! note "Column Statistics"
+    `pruningHasBenefit` uses [Column Statistics](../cost-based-optimization/Statistics.md#attributeStats) (for the [number of distinct values](../cost-based-optimization/ColumnStat.md#distinctCount)), if available and [spark.sql.optimizer.dynamicPartitionPruning.useStats](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) is enabled.
 
-`pruningHasBenefit`...FIXME
+`pruningHasBenefit` computes a filtering ratio based on the columns (references) in the given `partExpr` and `otherExpr` expressions.
+
+!!! note "One Column Reference Only"
+    `pruningHasBenefit` supports one column reference only in the given `partExpr` and `otherExpr` expressions.
+
+With [spark.sql.optimizer.dynamicPartitionPruning.useStats](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.useStats) enabled, `pruningHasBenefit` uses the [Distinct Count](../cost-based-optimization/ColumnStat.md#distinctCount) statistic ([CBO stats](../cost-based-optimization/Statistics.md)) for each attribute (in the join condition).
+
+The filtering ratio is the ratio of [Distinct Count](../cost-based-optimization/ColumnStat.md#distinctCount) of `rightAttr` to [Distinct Count](../cost-based-optimization/ColumnStat.md#distinctCount) of `leftAttr` (_remaining of 1_) unless:
+
+1. [Distinct Count](../cost-based-optimization/ColumnStat.md#distinctCount) are not available or `leftAttr`'s `Distinct Count` is `0` or negative
+1. [Distinct Count](../cost-based-optimization/ColumnStat.md#distinctCount) of `leftAttr` is the same or lower than of `otherDistinctCount`
+1. There are more than one attribute in `partExpr` or `otherExpr` expressions
+
+For such cases, the filtering ratio is [spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio).
+
+`pruningHasBenefit` calculates `estimatePruningSideSize` as the filtering ratio of [sizeInBytes](../cost-based-optimization/Statistics.md#sizeInBytes) statistic of the given `partPlan`.
+
+`pruningHasBenefit` is enabled (`true`) when `estimatePruningSideSize` is greater than [calculatePlanOverhead](#calculatePlanOverhead) of the given `otherPlan` logical plan.

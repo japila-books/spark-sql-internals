@@ -90,13 +90,15 @@ Relation[value#2] text
 computeStats(): Statistics
 ```
 
+`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+
+---
+
 `computeStats` takes the optional [CatalogTable](#catalogTable).
 
 If available, `computeStats` requests the `CatalogTable` for the [CatalogStatistics](../CatalogTable.md#stats) that, if available, is requested to [toPlanStats](#toPlanStats) (with the `planStatsEnabled` flag enabled when either [spark.sql.cbo.enabled](../SQLConf.md#cboEnabled) or [spark.sql.cbo.planStats.enabled](../SQLConf.md#planStatsEnabled) is enabled).
 
-Otherwise, `computeStats` creates a [Statistics](Statistics.md) with the `sizeInBytes` only to be the [sizeInBytes](../BaseRelation.md#sizeInBytes) of the [BaseRelation](#relation).
-
-`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+Otherwise, `computeStats` creates a [Statistics](../cost-based-optimization/Statistics.md) with the `sizeInBytes` only to be the [sizeInBytes](../BaseRelation.md#sizeInBytes) of the [BaseRelation](#relation).
 
 ## Demo
 

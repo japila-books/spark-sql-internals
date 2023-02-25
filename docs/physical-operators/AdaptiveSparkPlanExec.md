@@ -487,7 +487,7 @@ reOptimize(
 
 ---
 
-`reOptimize` requests the given [LogicalPlan](../logical-operators/LogicalPlan.md) to [invalidate statistics cache](../logical-operators/LogicalPlanStats.md#invalidateStatsCache).
+`reOptimize` requests the given [LogicalPlan](../logical-operators/LogicalPlan.md) to [invalidate statistics cache](../cost-based-optimization/LogicalPlanStats.md#invalidateStatsCache).
 
 `reOptimize` requests the [Adaptive Logical Optimizer](#optimizer) to [execute](../catalyst/RuleExecutor.md#execute) (and generate an optimized logical query plan).
 
