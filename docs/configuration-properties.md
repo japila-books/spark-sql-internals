@@ -30,6 +30,18 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
+## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> adaptive.autoBroadcastJoinThreshold
+
+**spark.sql.adaptive.autoBroadcastJoinThreshold**
+
+The maximum size (in bytes) of a table to be broadcast when performing a join. `-1` turns broadcasting off. The default value is same as [spark.sql.autoBroadcastJoinThreshold](#spark.sql.autoBroadcastJoinThreshold).
+
+Used only in [Adaptive Query Execution](adaptive-query-execution/index.md)
+
+Default: (undefined)
+
+Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
+
 ## <span id="spark.sql.adaptive.customCostEvaluatorClass"> adaptive.customCostEvaluatorClass
 
 **spark.sql.adaptive.customCostEvaluatorClass**
@@ -74,6 +86,18 @@ Use [SQLConf.ADAPTIVE_OPTIMIZER_EXCLUDED_RULES](SQLConf.md#ADAPTIVE_OPTIMIZER_EX
 Used when:
 
 * `AQEOptimizer` is requested for the [batches](adaptive-query-execution/AQEOptimizer.md#batches)
+
+## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> autoBroadcastJoinThreshold
+
+**spark.sql.autoBroadcastJoinThreshold**
+
+Maximum size (in bytes) for a table that can be broadcast (to all worker nodes) in a join
+
+Default: `10M`
+
+`-1` (or any negative value) disables broadcasting
+
+Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) method to access the current value.
 
 ## <span id="spark.sql.codegen.hugeMethodLimit"> codegen.hugeMethodLimit
 
@@ -512,16 +536,6 @@ Parquet option (of higher priority): [mergeSchema](datasources/parquet/ParquetOp
 Used when:
 
 * `ParquetOptions` is created (and initializes [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema) option)
-
-## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> spark.sql.adaptive.autoBroadcastJoinThreshold
-
-The maximum size (in bytes) of a table to be broadcast when performing a join. `-1` turns broadcasting off. The default value is same as [spark.sql.autoBroadcastJoinThreshold](#spark.sql.autoBroadcastJoinThreshold).
-
-Used only in [Adaptive Query Execution](adaptive-query-execution/index.md)
-
-Default: (undefined)
-
-Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
@@ -1100,16 +1114,6 @@ Default: `100`
 **(internal)** Timeout for executor to wait for the termination of transformation script when EOF.
 
 Default: `10` seconds
-
-## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> spark.sql.autoBroadcastJoinThreshold
-
-Maximum size (in bytes) for a table that can be broadcast (to all worker nodes) in a join
-
-Default: `10M`
-
-`-1` (or any negative value) disables broadcasting
-
-Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) method to access the current value.
 
 ## <span id="spark.sql.avro.compression.codec"> spark.sql.avro.compression.codec
 

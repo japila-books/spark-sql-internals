@@ -166,6 +166,7 @@ nav:
     - Columnar Execution:
       - columnar-execution/index.md
     - Common Table Expressions: common-table-expressions.md
+    - Configuration Properties: configuration-properties.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md
       - BasicStatsPlanVisitor: cost-based-optimization/BasicStatsPlanVisitor.md
@@ -232,7 +233,6 @@ nav:
     - Variable Substitution: variable-substitution.md
   - Internals:
     - Overview: overview.md
-    - Configuration Properties: configuration-properties.md
     - DataSource: DataSource.md
     - developer-api.md
     - Connector API:
