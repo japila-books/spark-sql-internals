@@ -1,6 +1,6 @@
 # FileSourceScanExec Physical Operator
 
-`FileSourceScanExec` is a leaf physical operator (as a [DataSourceScanExec](DataSourceScanExec.md)) that represents a scan over files.
+`FileSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) that represents a scan over a [HadoopFsRelation](#relation).
 
 ## Creating Instance
 
@@ -9,10 +9,10 @@
 * <span id="relation"> [HadoopFsRelation](../datasources/HadoopFsRelation.md)
 * <span id="output"> Output [Attribute](../expressions/Attribute.md)s
 * <span id="requiredSchema"> Required [Schema](../types/StructType.md)
-* <span id="partitionFilters"> Partition Filter [Expression](../expressions/Expression.md)s
+* [Partition Filters](#partitionFilters)
 * <span id="optionalBucketSet"> `optionalBucketSet`
 * <span id="optionalNumCoalescedBuckets"> `optionalNumCoalescedBuckets`
-* <span id="dataFilters"> Data Filter [Expression](../expressions/Expression.md)s
+* [Data Filters](#dataFilters)
 * <span id="tableIdentifier"> `TableIdentifier`
 * <span id="disableBucketedScan"> `disableBucketedScan` flag (default: `false`)
 
@@ -20,15 +20,27 @@
 
 * [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
 
+### <span id="dataFilters"> Data Filters
+
+`FileSourceScanExec` is given Data Filters ([Expression](../expressions/Expression.md)s) when [created](#creating-instance).
+
+The Data Filters are [data columns](../datasources/HadoopFsRelation.md#dataSchema) of the [HadoopFsRelation](#relation) (that are not [partition columns](../datasources/HadoopFsRelation.md#partitionSchema) that are part of [Partition Filters](#partitionFilters)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
+
+### <span id="partitionFilters"> Partition Filters
+
+`FileSourceScanExec` is given Partition Filters ([Expression](../expressions/Expression.md)s) when [created](#creating-instance).
+
+The Partition Filters are the [PushedDownFilters](../execution-planning-strategies/DataSourceStrategy.md#getPushedDownFilters) (based on the [partition columns](../datasources/HadoopFsRelation.md#partitionSchema) of the [HadoopFsRelation](#relation)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
+
 ## <span id="nodeNamePrefix"> Node Name Prefix
 
-```scala
-nodeNamePrefix: String
-```
+??? note "Signature"
 
-`nodeNamePrefix` is part of the [DataSourceScanExec](DataSourceScanExec.md#nodeNamePrefix) abstraction.
+    ```scala
+    nodeNamePrefix: String
+    ```
 
----
+    `nodeNamePrefix` is part of the [DataSourceScanExec](DataSourceScanExec.md#nodeNamePrefix) abstraction.
 
 `nodeNamePrefix` is always **File**.
 

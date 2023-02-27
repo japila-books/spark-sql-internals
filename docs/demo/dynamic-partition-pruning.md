@@ -19,6 +19,12 @@ Welcome to
 Using Scala version 2.13.8 (OpenJDK 64-Bit Server VM, Java 17.0.6)
 ```
 
+## Before you begin
+
+Enable the following loggers:
+
+* [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md#logging)
+
 ## Create Partitioned Tables
 
 ```scala
@@ -87,6 +93,13 @@ Execute the query (using [Noop Data Source](../datasources/noop/index.md)).
 
 ```scala
 q.write.format("noop").mode("overwrite").save
+```
+
+[DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) should print out the following INFO messages to the logs:
+
+```text
+Pruning directories with: part_id#2L IN (0,1),isnotnull(part_id#2L),dynamicpruning#22 [part_id#2L]
+Pruning directories with: part_id#2L IN (0,1),isnotnull(part_id#2L),dynamicpruning#22 [part_id#2L]
 ```
 
 === "Scala"

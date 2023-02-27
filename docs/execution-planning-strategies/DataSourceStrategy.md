@@ -174,6 +174,31 @@ Internally, `pruneFilterProjectRaw` splits the input `filterPredicates` expressi
 
 `pruneFilterProjectRaw` creates a [RowDataSourceScanExec](../physical-operators/RowDataSourceScanExec.md) leaf physical operator.
 
+## <span id="getPushedDownFilters"> getPushedDownFilters
+
+```scala
+getPushedDownFilters(
+  partitionColumns: Seq[Expression],
+  normalizedFilters: Seq[Expression]): ExpressionSet
+```
+
+For an empty `partitionColumns`, `getPushedDownFilters` an empty `ExpressionSet`.
+
+Otherwise, `getPushedDownFilters`...FIXME
+
+`getPushedDownFilters` prints out the following INFO message to the logs:
+
+```text
+Pruning directories with: [predicates]
+```
+
+---
+
+`getPushedDownFilters` is used when executing the following execution planning strategies:
+
+* [HiveTableScans](../hive/HiveTableScans.md)
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md)
+
 ## Demo
 
 ```text
@@ -185,3 +210,16 @@ val plan: LogicalPlan = ???
 
 val sparkPlan = strategy(plan).head
 ```
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.DataSourceStrategy` logger to see what happens inside.
+
+Add the following line to `conf/log4j2.properties`:
+
+```text
+logger.DataSourceStrategy.name = org.apache.spark.sql.execution.datasources.DataSourceStrategy
+logger.DataSourceStrategy.level = all
+```
+
+Refer to [Logging](../spark-logging.md).
