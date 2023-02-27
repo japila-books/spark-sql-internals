@@ -1706,6 +1706,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/demo/dynamic-partition-pruning/</loc>
+         <lastmod>2023-02-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/demo/hive-partitioned-parquet-table-partition-pruning/</loc>
          <lastmod>2023-02-27</lastmod>
          <changefreq>daily</changefreq>
