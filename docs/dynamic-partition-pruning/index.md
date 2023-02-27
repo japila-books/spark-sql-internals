@@ -12,6 +12,10 @@ Dynamic Partition Pruning optimization is controlled by [spark.sql.optimizer.dyn
 !!! note "Streaming Queries"
     Dynamic Partition Pruning is [not applied to streaming queries](../logical-optimizations/PartitionPruning.md#hasPartitionPruningFilter).
 
+## Demo
+
+[Demo: Dynamic Partition Pruning](../demo/dynamic-partition-pruning.md)
+
 ## References
 
 ### Articles
