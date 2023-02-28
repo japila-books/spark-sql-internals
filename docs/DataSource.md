@@ -274,3 +274,26 @@ val cls = DataSource.lookupDataSource(source, spark.sessionState.conf)
 * [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) posthoc logical resolution rule is executed
 * `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to `load`
 * `DataStreamWriter` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamWriter)) is requested to `start` a streaming query
+
+## <span id="createInMemoryFileIndex"> Creating InMemoryFileIndex
+
+```scala
+createInMemoryFileIndex(
+  globbedPaths: Seq[Path]): InMemoryFileIndex
+```
+
+`createInMemoryFileIndex` creates an [InMemoryFileIndex](datasources/InMemoryFileIndex.md) with the following:
+
+Property | Value
+---------|------
+ [Root Paths](datasources/InMemoryFileIndex.md#rootPathsSpecified) | The given `globbedPaths`
+ [Parameters](datasources/InMemoryFileIndex.md#parameters) | [Options](#options)
+ [User-defined schema](datasources/InMemoryFileIndex.md#userSpecifiedSchema) | [User-specified schema](#userSpecifiedSchema)
+ [FileStatusCache](datasources/InMemoryFileIndex.md#fileStatusCache) | [FileStatusCache](datasources/FileStatusCache.md#getOrCreate)
+
+---
+
+`createInMemoryFileIndex` is used when `DataSource` is requested for the following:
+
+* [Resolve a BaseRelation](#resolveRelation) (for non-streaming [FileFormat](datasources/FileFormat.md)-based data sources)
+* [Source Schema](#sourceSchema) (for [FileFormat](datasources/FileFormat.md)-based data sources)

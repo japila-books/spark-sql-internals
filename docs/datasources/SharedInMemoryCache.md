@@ -1,0 +1,3 @@
+# SharedInMemoryCache
+
+`SharedInMemoryCache` is...FIXME

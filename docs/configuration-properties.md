@@ -215,6 +215,44 @@ Used when:
 * `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
 * `FilePartition` is requested to [getFilePartitions](datasources/FilePartition.md#getFilePartitions) and [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
 
+## <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> hive.filesourcePartitionFileCacheSize
+
+**spark.sql.hive.filesourcePartitionFileCacheSize**
+
+When greater than `0`, enables caching of partition file metadata in memory (using [SharedInMemoryCache](datasources/SharedInMemoryCache.md)).
+All tables share a cache that can use up to specified num bytes for file metadata.
+
+Requires [spark.sql.hive.manageFilesourcePartitions](#spark.sql.hive.manageFilesourcePartitions) to be enabled
+
+Default: `250 * 1024 * 1024`
+
+Use [SQLConf.filesourcePartitionFileCacheSize](SQLConf.md#filesourcePartitionFileCacheSize) for the current value
+
+Used when:
+
+* `FileStatusCache` is requested to [look up the system-wide FileStatusCache](datasources/FileStatusCache.md#getOrCreate)
+
+## <span id="spark.sql.hive.manageFilesourcePartitions"> hive.manageFilesourcePartitions
+
+**spark.sql.hive.manageFilesourcePartitions**
+
+Enables metastore partition management for file source tables.
+
+This includes both datasource and Hive tables. When partition management is enabled, datasource tables store partition in the Hive metastore, and use the metastore to prune partitions during query planning when [spark.sql.hive.metastorePartitionPruning](#spark.sql.hive.metastorePartitionPruning) is enabled
+
+Default: `true`
+
+Use [SQLConf.manageFilesourcePartitions](SQLConf.md#manageFilesourcePartitions) for the current value
+
+Used when:
+
+* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
+* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
+* `DDLUtils` utility is used to `verifyPartitionProviderIsHive`
+* `DataSource` is requested to [resolve a BaseRelation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
+* `FileStatusCache` is [created](datasources/FileStatusCache.md#getOrCreate)
+* `V2SessionCatalog` is requested to [create a table](V2SessionCatalog.md#createTable) (_deprecated_)
+
 ## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
 
 **spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**

@@ -10,7 +10,7 @@
 * <span id="rootPathsSpecified"> Root Paths (as Hadoop [Paths]({{ hadoop.api }}/org/apache/hadoop/fs/Path.html))
 * <span id="parameters"> Parameters (`Map[String, String]`)
 * <span id="userSpecifiedSchema"> User-Defined Schema (`Option[StructType]`)
-* <span id="fileStatusCache"> `FileStatusCache` (default: `NoopCache`)
+* [FileStatusCache](#fileStatusCache)
 * <span id="userSpecifiedPartitionSpec"> User-Defined Partition Spec (default: `undefined`)
 * <span id="metadataOpsTimeNs"> `metadataOpsTimeNs` (`Option[Long]`, default: `undefined`)
 
@@ -22,6 +22,16 @@ While being created, `InMemoryFileIndex` [refresh0](#refresh0).
 * `CatalogFileIndex` is requested for the [partitions by the given predicate expressions](CatalogFileIndex.md#filterPartitions) for a non-partitioned Hive table
 * `DataSource` is requested to [createInMemoryFileIndex](../DataSource.md#createInMemoryFileIndex)
 * `FileTable` is requested for a [PartitioningAwareFileIndex](FileTable.md#fileIndex)
+
+### <span id="fileStatusCache"> FileStatusCache
+
+`InMemoryFileIndex` can be given a [FileStatusCache](FileStatusCache.md). Unless given, `InMemoryFileIndex` uses the `NoopCache`.
+
+`FileStatusCache` is given (based on the [configuration properties](FileStatusCache.md#getOrCreate)) when:
+
+* `CatalogFileIndex` is requested to [filter the partitions](CatalogFileIndex.md#filterPartitions)
+* `DataSource` is requested to [create an InMemoryFileIndex](../DataSource.md#createInMemoryFileIndex)
+* `FileTable` is requested for the [PartitioningAwareFileIndex](../datasources/FileTable.md#fileIndex)
 
 ## <span id="refresh"> Refreshing Cached File Listings
 

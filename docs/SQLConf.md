@@ -460,6 +460,10 @@ Used when:
 
 [spark.sql.files.openCostInBytes](configuration-properties.md#spark.sql.files.openCostInBytes)
 
+## <span id="filesourcePartitionFileCacheSize"><span id="HIVE_FILESOURCE_PARTITION_FILE_CACHE_SIZE"> filesourcePartitionFileCacheSize
+
+[spark.sql.hive.filesourcePartitionFileCacheSize](configuration-properties.md#spark.sql.hive.filesourcePartitionFileCacheSize)
+
 ## <span id="histogramEnabled"><span id="MAX_TO_STRING_FIELDS"> histogramEnabled
 
 The value of [spark.sql.statistics.histogram.enabled](configuration-properties.md#spark.sql.statistics.histogram.enabled) configuration property
@@ -571,15 +575,7 @@ Used when:
 
 ## <span id="manageFilesourcePartitions"><span id="HIVE_MANAGE_FILESOURCE_PARTITIONS"> manageFilesourcePartitions
 
-[spark.sql.hive.manageFilesourcePartitions](hive/configuration-properties.md#spark.sql.hive.manageFilesourcePartitions)
-
-Used when:
-
-* `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
-* [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
-* `DDLUtils` utility is used to `verifyPartitionProviderIsHive`
-* `DataSource` is requested to [resolve a relation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
-* `FileStatusCache` is requested to `getOrCreate`
+[spark.sql.hive.manageFilesourcePartitions](configuration-properties.md#spark.sql.hive.manageFilesourcePartitions)
 
 ## <span id="maxConcurrentOutputFileWriters"><span id="MAX_CONCURRENT_OUTPUT_FILE_WRITERS"> maxConcurrentOutputFileWriters
 

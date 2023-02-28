@@ -186,6 +186,8 @@ nav:
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
+    - Partition File Metadata Caching:
+      - partition-file-metadata-caching/index.md
     - Statistics: new-and-noteworthy/statistics.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
@@ -855,6 +857,7 @@ nav:
       - FilePartitionReaderFactory: datasources/FilePartitionReaderFactory.md
       - FileScan: datasources/FileScan.md
       - FileScanBuilder: datasources/FileScanBuilder.md
+      - FileStatusCache: datasources/FileStatusCache.md
       - FileTable: datasources/FileTable.md
       - FileWrite: datasources/FileWrite.md
       - FileWriterFactory: datasources/FileWriterFactory.md
@@ -863,6 +866,7 @@ nav:
       - PartitionedFile: datasources/PartitionedFile.md
       - PartitionedFileUtil: datasources/PartitionedFileUtil.md
       - RecordReaderIterator: datasources/RecordReaderIterator.md
+      - SharedInMemoryCache: datasources/SharedInMemoryCache.md
       - SchemaMergeUtils: datasources/SchemaMergeUtils.md
       - SingleDirectoryDataWriter: datasources/SingleDirectoryDataWriter.md
       - SQLHadoopMapReduceCommitProtocol: datasources/SQLHadoopMapReduceCommitProtocol.md

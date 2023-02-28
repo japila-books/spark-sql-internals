@@ -150,7 +150,7 @@ fileIndex: PartitioningAwareFileIndex
 
 `fileIndex` creates one of the following [PartitioningAwareFileIndex](PartitioningAwareFileIndex.md)s:
 
-* `MetadataLogFileIndex` when reading from the results of a streaming query
+* `MetadataLogFileIndex` when reading from the results of a streaming query (and loading files from the metadata log instead of listing them using HDFS APIs)
 * [InMemoryFileIndex](InMemoryFileIndex.md)
 
 ---

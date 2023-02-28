@@ -15,6 +15,15 @@
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 * `DataSource` is requested to [create a BaseRelation for a FileFormat](../DataSource.md#resolveRelation)
 
+### <span id="fileStatusCache"> FileStatusCache
+
+`CatalogFileIndex` creates a [FileStatusCache](FileStatusCache.md#getOrCreate) when [created](#creating-instance).
+
+The `FileStatusCache` is used when:
+
+* [filterPartitions](#filterPartitions) (and create a [InMemoryFileIndex](InMemoryFileIndex.md))
+* [refresh](#refresh) (and [invalidateAll](FileStatusCache.md#invalidateAll))
+
 ## <span id="listFiles"> Listing Files
 
 ```scala
