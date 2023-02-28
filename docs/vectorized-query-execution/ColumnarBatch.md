@@ -13,7 +13,7 @@ tags:
 
 `ColumnarBatch` takes the following to be created:
 
-* <span id="columns"> [ColumnVector](../ColumnVector.md)s
+* <span id="columns"> [ColumnVector](../vectorized-decoding/ColumnVector.md)s
 * <span id="numRows"> Number of Rows
 
 `ColumnarBatch` immediately creates an internal [ColumnarBatchRow](#row).

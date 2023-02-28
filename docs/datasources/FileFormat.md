@@ -131,18 +131,20 @@ vectorTypes(
   sqlConf: SQLConf): Option[Seq[String]]
 ```
 
-Defines the fully-qualified class names (_types_) of the concrete [ColumnVector](../ColumnVector.md)s for every column in the input `requiredSchema` and `partitionSchema` schemas (to use in columnar processing mode)
+Defines the fully-qualified class names (_types_) of the concrete [ColumnVector](../vectorized-decoding/ColumnVector.md)s for every column in the input `requiredSchema` and `partitionSchema` schemas (to use in columnar processing mode)
 
 Default: `None` (undefined)
 
-Used when `FileSourceScanExec` physical operator is requested for the [vectorTypes](../physical-operators/FileSourceScanExec.md#vectorTypes)
+Used when:
+
+* `FileSourceScanExec` physical operator is requested for the [vectorTypes](../physical-operators/FileSourceScanExec.md#vectorTypes)
 
 ## Implementations
 
 * [AvroFileFormat](avro/AvroFileFormat.md)
-* BinaryFileFormat
+* `BinaryFileFormat`
 * [HiveFileFormat](../hive/HiveFileFormat.md)
-* ImageFileFormat
+* `ImageFileFormat`
 * [OrcFileFormat](orc/OrcFileFormat.md)
 * [ParquetFileFormat](parquet/ParquetFileFormat.md)
 * [TextBasedFileFormat](TextBasedFileFormat.md)

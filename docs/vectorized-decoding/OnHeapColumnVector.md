@@ -2,6 +2,8 @@
 
 `OnHeapColumnVector` is a concrete [WritableColumnVector](WritableColumnVector.md).
 
+<!---
+## Review Me
 `OnHeapColumnVector` is <<creating-instance, created>> when:
 
 * `OnHeapColumnVector` is requested to <<allocateColumns, allocate column vectors>> and <<reserveNewColumn, reserveNewColumn>>
@@ -39,27 +41,4 @@ OnHeapColumnVector[] allocateColumns(int capacity, StructField[] fields)
 * [[type]] [Data type](types/DataType.md) of the elements stored
 
 When created, `OnHeapColumnVector` <<reserveInternal, reserveInternal>> (for the given <<capacity, capacity>>) and [reset](WritableColumnVector.md#reset).
-
-=== [[reserveInternal]] `reserveInternal` Method
-
-[source, java]
-----
-void reserveInternal(int newCapacity)
-----
-
-`reserveInternal` is part of the [WritableColumnVector](WritableColumnVector.md#reserveInternal) abstraction.
-
-`reserveInternal`...FIXME
-
-=== [[reserveNewColumn]] `reserveNewColumn` Method
-
-[source, java]
-----
-OnHeapColumnVector reserveNewColumn(
-    int capacity,
-    DataType type)
-----
-
-`reserveNewColumn` is part of the [WritableColumnVector](WritableColumnVector.md#reserveNewColumn) abstraction.
-
-`reserveNewColumn`...FIXME
+-->

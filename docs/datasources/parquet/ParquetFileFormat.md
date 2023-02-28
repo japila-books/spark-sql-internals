@@ -186,7 +186,7 @@ vectorTypes(
 !!! FIXME
     Review Me
 
-`vectorTypes` creates a collection of the names of [OffHeapColumnVector](../../OffHeapColumnVector.md) or [OnHeapColumnVector](../../OnHeapColumnVector.md) when [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) property is enabled or disabled, respectively.
+`vectorTypes` creates a collection of the names of [OffHeapColumnVector](../../vectorized-decoding/OffHeapColumnVector.md) or [OnHeapColumnVector](../../vectorized-decoding/OnHeapColumnVector.md) when [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) property is enabled or disabled, respectively.
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 

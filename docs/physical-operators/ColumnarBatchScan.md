@@ -292,7 +292,7 @@ NOTE: `produceRows` is used exclusively when `ColumnarBatchScan` is requested to
 vectorTypes: Option[Seq[String]] = None
 ----
 
-`vectorTypes` defines the fully-qualified class names (_types_) of the concrete [ColumnVector](../ColumnVector.md)s for every column used in a columnar batch.
+`vectorTypes` defines the fully-qualified class names (_types_) of the concrete [ColumnVector](../vectorized-decoding/ColumnVector.md)s for every column used in a columnar batch.
 
 `vectorTypes` gives no vector types by default (`None`).
 

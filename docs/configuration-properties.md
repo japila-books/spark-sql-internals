@@ -144,7 +144,7 @@ Use [SQLConf.ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN](SQLConf.md#ENABLE_FUL
 
 **spark.sql.columnVector.offheap.enabled**
 
-**(internal)** Enables [OffHeapColumnVector](OffHeapColumnVector.md) (`true`) or [OnHeapColumnVector](OnHeapColumnVector.md) (`false`) in [ColumnarBatch](vectorized-query-execution/ColumnarBatch.md)
+**(internal)** Enables [OffHeapColumnVector](vectorized-decoding/OffHeapColumnVector.md) (`true`) or [OnHeapColumnVector](vectorized-decoding/OnHeapColumnVector.md) (`false`) in [ColumnarBatch](vectorized-query-execution/ColumnarBatch.md)
 
 Default: `false`
 

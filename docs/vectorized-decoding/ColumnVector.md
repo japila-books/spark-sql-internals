@@ -17,7 +17,7 @@
 
 `ColumnVector` takes the following to be created:
 
-* <span id="type"> [DataType](types/DataType.md)
+* <span id="type"> [DataType](../types/DataType.md)
 
 !!! note "Abstract Class"
     `ColumnVector` is an abstract class and cannot be created directly. It is created indirectly for the [concrete ColumnVectors](#implementations).

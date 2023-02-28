@@ -2,6 +2,8 @@
 
 `WritableColumnVector` is an [extension](#contract) of the [ColumnVector](ColumnVector.md) abstraction for [writable in-memory columnar vectors](#implementations).
 
+`WritableColumnVector` is used to [allocate ColumnVectors](../datasources/parquet/VectorizedParquetRecordReader.md#allocateColumns) for [VectorizedParquetRecordReader](../datasources/parquet/VectorizedParquetRecordReader.md).
+
 ## Contract (Subset)
 
 ### <span id="reserveInternal"> reserveInternal
@@ -37,8 +39,8 @@ Used when:
 
 `WritableColumnVector` takes the following to be created:
 
-* <span id="capacity"> Number of rows to hold in a vector (`capacity`)
-* <span id="type"> [Data type](types/DataType.md) of the rows stored
+* <span id="capacity"> Capacity (number of rows to hold in a vector)
+* <span id="type"> [Data type](../types/DataType.md) of the rows stored
 
 !!! note "Abstract Class"
     `WritableColumnVector` is an abstract class and cannot be created directly. It is created indirectly for the [concrete WritableColumnVectors](#implementations).
@@ -71,7 +73,7 @@ WritableColumnVector reserveDictionaryIds(
 
 `reserveDictionaryIds` is used when:
 
-* `VectorizedColumnReader` is requested to [readBatch](datasources/parquet/VectorizedColumnReader.md#readBatch)
+* `VectorizedColumnReader` is requested to [readBatch](../datasources/parquet/VectorizedColumnReader.md#readBatch)
 * `DictionaryEncoding.Decoder` is requested to `decompress`
 
 ## <span id="reserve"> reserve

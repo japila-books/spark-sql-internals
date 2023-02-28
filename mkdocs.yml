@@ -191,10 +191,10 @@ nav:
     - Statistics: new-and-noteworthy/statistics.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
-      - ColumnVector: ColumnVector.md
-      - OffHeapColumnVector: OffHeapColumnVector.md
-      - OnHeapColumnVector: OnHeapColumnVector.md
-      - WritableColumnVector: WritableColumnVector.md
+      - ColumnVector: vectorized-decoding/ColumnVector.md
+      - OffHeapColumnVector: vectorized-decoding/OffHeapColumnVector.md
+      - OnHeapColumnVector: vectorized-decoding/OnHeapColumnVector.md
+      - WritableColumnVector: vectorized-decoding/WritableColumnVector.md
     - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - ANSI Intervals: new-and-noteworthy/intervals.md

@@ -1,6 +1,6 @@
 # VectorizedParquetRecordReader
 
-`VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](SpecificParquetRecordReaderBase.md) for [Parquet Data Source](index.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md).
+`VectorizedParquetRecordReader` is a [SpecificParquetRecordReaderBase](SpecificParquetRecordReaderBase.md) for [Parquet Data Source](index.md) for [Vectorized Decoding](../../vectorized-decoding/index.md).
 
 ## Creating Instance
 
@@ -11,19 +11,44 @@
 * <span id="datetimeRebaseTz"> Datetime Rebase Timezone
 * <span id="int96RebaseMode"> int96 Rebase Mode
 * <span id="int96RebaseTz"> int96 Rebase Timezone
-* <span id="useOffHeap"> `useOffHeap` flag
-* <span id="capacity"> Capacity
+* [useOffHeap](#useOffHeap)
+* [Capacity](#capacity)
 
 `VectorizedParquetRecordReader` is created when:
 
 * `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](ParquetFileFormat.md#buildReaderWithPartitionValues) (with [enableVectorizedReader](ParquetFileFormat.md#enableVectorizedReader) flag enabled)
 * `ParquetPartitionReaderFactory` is requested to [createParquetVectorizedReader](ParquetPartitionReaderFactory.md#createParquetVectorizedReader)
 
+### <span id="capacity"> Capacity
+
+`VectorizedParquetRecordReader` is given capacity when [created](#creating-instance).
+
+The capacity is configured using [spark.sql.parquet.columnarReaderBatchSize](../../configuration-properties.md#spark.sql.parquet.columnarReaderBatchSize) configuration property.
+
+### <span id="MEMORY_MODE"><span id="useOffHeap"> Memory Mode
+
+`VectorizedParquetRecordReader` uses the given [useOffHeap](#useOffHeap) to initialize the internal `MEMORY_MODE` registry when [created](#creating-instance):
+
+useOffHeap | MEMORY_MODE | WritableColumnVector
+-----------|-------------|---------------------
+ `true`  | `OFF_HEAP` | [OffHeapColumnVector](../../vectorized-decoding/OffHeapColumnVector.md)
+ `false` | `ON_HEAP`  | [OnHeapColumnVector](../../vectorized-decoding/OnHeapColumnVector.md)
+
+The `MEMORY_MODE` is used to [initBatch](#initBatch) (to choose the correct implementation of [WritableColumnVector](../../vectorized-decoding/WritableColumnVector.md)).
+
+!!! note "useOffHeap"
+    `useOffHeap` is the value of [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property when the following are executed with [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) enabled and [supported schema for columnar read](ParquetUtils.md#isBatchReadSupportedForSchema):
+    
+    * `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](ParquetFileFormat.md#buildReaderWithPartitionValues)
+    * `ParquetPartitionReaderFactory` is requested to [createVectorizedReader](ParquetPartitionReaderFactory.md#createVectorizedReader)
+
 ## <span id="columnVectors"> WritableColumnVectors
 
-`VectorizedParquetRecordReader` defines an array of allocated [WritableColumnVector](../../WritableColumnVector.md)s.
+`VectorizedParquetRecordReader` defines an array of allocated [WritableColumnVector](../../vectorized-decoding/WritableColumnVector.md)s.
 
 `columnVectors` is allocated when [initBatch](#initBatch).
+
+---
 
 `columnVectors` is used when:
 
@@ -37,6 +62,8 @@ void enableReturningBatches()
 ```
 
 `enableReturningBatches` simply turns the [returnColumnarBatch](#returnColumnarBatch) flag on.
+
+---
 
 `enableReturningBatches` is used when:
 
@@ -60,12 +87,15 @@ void initBatch(
 2. Uses the [MEMORY_MODE](#MEMORY_MODE)
 3. A private helper method
 
+!!! note "MemoryMode"
+    The given `MemoryMode` is the value of [MEMORY_MODE](#MEMORY_MODE).
+
 `initBatch` creates a [batch schema](../../types/index.md) that is [sparkSchema](SpecificParquetRecordReaderBase.md#sparkSchema) and the input `partitionColumns` schema (if available).
 
-`initBatch` requests [OffHeapColumnVector](../../OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../../OnHeapColumnVector.md#allocateColumns) to allocate column vectors per the input `memMode` (i.e., [OFF_HEAP](#OFF_HEAP) or [ON_HEAP](#ON_HEAP) memory modes, respectively). `initBatch` records the allocated column vectors as the internal [WritableColumnVectors](#columnVectors).
+`initBatch` requests [OffHeapColumnVector](../../vectorized-decoding/OffHeapColumnVector.md#allocateColumns) or [OnHeapColumnVector](../../vectorized-decoding/OnHeapColumnVector.md#allocateColumns) to allocate column vectors per the input `memMode` (i.e., [OFF_HEAP](#OFF_HEAP) or [ON_HEAP](#ON_HEAP) memory modes, respectively). `initBatch` records the allocated column vectors as the internal [WritableColumnVectors](#columnVectors).
 
 !!! note "spark.sql.columnVector.offheap.enabled"
-    [OnHeapColumnVector](../../OnHeapColumnVector.md) is used based on [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property.
+    [OnHeapColumnVector](../../vectorized-decoding/OnHeapColumnVector.md) is used based on [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property.
 
 `initBatch` creates a [ColumnarBatch](#columnarBatch) (with the [allocated WritableColumnVectors](#columnVectors)).
 
@@ -75,9 +105,56 @@ void initBatch(
 
 `initBatch` is used when:
 
-* `VectorizedParquetRecordReader` is requested to [resultBatch](#resultBatch)
 * `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](ParquetFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetPartitionReaderFactory` is requested to [createVectorizedReader](ParquetPartitionReaderFactory.md#createVectorizedReader)
+* `VectorizedParquetRecordReader` is requested for a [result ColumnarBatch](#resultBatch)
+
+### <span id="allocateColumns"> Allocating ColumnVectors
+
+```java
+ColumnVector[] allocateColumns(
+  int capacity,
+  StructType schema,
+  boolean useOffHeap,
+  int constantColumnLength)
+```
+
+`allocateColumns` creates [ColumnVector](../../vectorized-decoding/ColumnVector.md)s (one per every field in the given [StructType](../../types/StructType.md)).
+
+For the given `useOffHeap` enabled, `allocateColumns` creates [OffHeapColumnVector](../../vectorized-decoding/OffHeapColumnVector.md)s. Otherwise, `allocateColumns` creates [OnHeapColumnVector](../../vectorized-decoding/OnHeapColumnVector.md)s.
+
+!!! note "useOffHeap"
+    `useOffHeap` flag is enabled when `memMode` of [initBatch](#initBatch) is `MemoryMode.OFF_HEAP`.
+
+## <span id="nextKeyValue"> nextKeyValue
+
+??? note "Signature"
+
+    ```java
+    boolean nextKeyValue()
+    ```
+
+    `nextKeyValue` is part of the `RecordReader` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/RecordReader.html#nextKeyValue--)) abstraction.
+
+`nextKeyValue` [resultBatch](#resultBatch).
+
+With [returnColumnarBatch](#returnColumnarBatch) enabled, `nextKeyValue` returns [nextBatch](#nextBatch).
+
+Otherwise, `nextKeyValue`...FIXME
+
+---
+
+`nextKeyValue` is used when:
+
+* `ParquetPartitionReaderFactory` is requested to [build a PartitionReader](ParquetPartitionReaderFactory.md#buildReader) and [buildColumnarReader](ParquetPartitionReaderFactory.md#buildColumnarReader)
+
+### <span id="resultBatch"> resultBatch
+
+```java
+ColumnarBatch resultBatch()
+```
+
+`resultBatch` returns the [columnarBatch](#columnarBatch) if available. Otherwise, `resultBatch` [initBatch](#initBatch) first.
 
 <!---
 ## Review Me
@@ -108,14 +185,6 @@ Reset to `0` when <<nextBatch, reading next rows into a columnar batch>>
 
 Intialized when <<checkEndOfRowGroup, checkEndOfRowGroup>> (when requested to <<nextBatch, read next rows into a columnar batch>>)
 
-| MEMORY_MODE
-a| [[MEMORY_MODE]] Memory mode of the <<columnarBatch, ColumnarBatch>>
-
-* [[OFF_HEAP]] `OFF_HEAP` (when <<useOffHeap, useOffHeap>> is on as based on [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property)
-* [[ON_HEAP]] `ON_HEAP`
-
-Used exclusively when `VectorizedParquetRecordReader` is requested to <<initBatch, initBatch>>.
-
 | missingColumns
 | [[missingColumns]] Bitmap of columns (per index) that are missing (or simply the ones that the reader should not read)
 
@@ -135,32 +204,6 @@ Used in <<nextKeyValue, nextKeyValue>> (to <<nextBatch, read next rows into a co
 | [[totalRowCount]] Total number of rows to be read
 
 |===
-
-## <span id="nextKeyValue"> nextKeyValue
-
-```java
-boolean nextKeyValue()
-```
-
-NOTE: `nextKeyValue` is part of Hadoop's https://hadoop.apache.org/docs/r2.7.4/api/org/apache/hadoop/mapred/RecordReader.html[RecordReader] to read (key, value) pairs from a Hadoop https://hadoop.apache.org/docs/r2.7.4/api/org/apache/hadoop/mapred/InputSplit.html[InputSplit] to present a record-oriented view.
-
-`nextKeyValue`...FIXME
-
-`nextKeyValue` is used when:
-
-* `NewHadoopRDD` is requested to compute a partition (`compute`)
-
-* `RecordReaderIterator` is requested to [check whether or not there are more internal rows](../RecordReaderIterator.md#hasNext)
-
-## <span id="resultBatch"> resultBatch
-
-```java
-ColumnarBatch resultBatch()
-```
-
-`resultBatch` gives <<columnarBatch, columnarBatch>> if available or does <<initBatch, initBatch>>.
-
-NOTE: `resultBatch` is used exclusively when `VectorizedParquetRecordReader` is requested to <<nextKeyValue, nextKeyValue>>.
 
 ## <span id="nextBatch"> Reading Next Rows Into Columnar Batch
 

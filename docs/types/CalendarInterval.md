@@ -13,7 +13,7 @@
 `CalendarInterval` is created when:
 
 * `CALENDAR_INTERVAL` utility is used to `extract` a `CalendarInterval` from a `ByteBuffer`
-* `ColumnVector` is requested to [getInterval](../ColumnVector.md#getInterval)
+* `ColumnVector` is requested to [getInterval](../vectorized-decoding/ColumnVector.md#getInterval)
 * `IntervalUtils` utilities are used
 * `DateTimeUtils` utility is used to `subtractDates`
 * `UnsafeRow` is requested to [getInterval](../UnsafeRow.md#getInterval)
