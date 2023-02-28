@@ -111,11 +111,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/ColumnVector/</loc>
-         <lastmod>2023-02-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/ColumnarRule/</loc>
          <lastmod>2023-02-28</lastmod>
          <changefreq>daily</changefreq>
@@ -341,16 +336,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/OffHeapColumnVector/</loc>
-         <lastmod>2023-02-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/OnHeapColumnVector/</loc>
-         <lastmod>2023-02-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/PhysicalAggregation/</loc>
          <lastmod>2023-02-28</lastmod>
          <changefreq>daily</changefreq>
@@ -567,11 +552,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/V2SessionCatalog/</loc>
-         <lastmod>2023-02-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/WritableColumnVector/</loc>
          <lastmod>2023-02-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4327,6 +4307,26 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/</loc>
+         <lastmod>2023-02-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/ColumnVector/</loc>
+         <lastmod>2023-02-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/OffHeapColumnVector/</loc>
+         <lastmod>2023-02-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/OnHeapColumnVector/</loc>
+         <lastmod>2023-02-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/vectorized-decoding/WritableColumnVector/</loc>
          <lastmod>2023-02-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
