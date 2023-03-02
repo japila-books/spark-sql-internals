@@ -249,8 +249,6 @@ vectorTypes: Option[Seq[String]]
 
 `vectorTypes` simply requests the [FileFormat](../datasources/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../datasources/FileFormat.md#vectorTypes).
 
-`vectorTypes` is part of the [ColumnarBatchScan](ColumnarBatchScan.md#vectorTypes) abstraction.
-
 ## <span id="doExecuteColumnar"> doExecuteColumnar
 
 ```scala
@@ -291,7 +289,7 @@ If [needsUnsafeRowConversion](#needsUnsafeRowConversion) flag is on, `doExecute`
 
 Otherwise, `doExecute` simply takes the [input RDD](#inputRDD) as the `unsafeRows` RDD (with no changes).
 
-`doExecute` takes the [numOutputRows](ColumnarBatchScan.md#numOutputRows) metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
+`doExecute` takes the `numOutputRows` metric and creates a new RDD by mapping every element in the `unsafeRows` and incrementing the `numOutputRows` metric.
 
 !!! tip
     Use `RDD.toDebugString` to review the RDD lineage and "reverse-engineer" the values of the [supportsBatch](#supportsBatch) and [needsUnsafeRowConversion](#needsUnsafeRowConversion) flags given the number of RDDs.

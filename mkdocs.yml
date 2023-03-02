@@ -593,9 +593,7 @@ nav:
       - ColumnarToRowTransition: physical-operators/ColumnarToRowTransition.md
       - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
       - CodegenSupport: physical-operators/CodegenSupport.md
-      - ColumnarBatchScan: physical-operators/ColumnarBatchScan.md
       - DataSourceScanExec: physical-operators/DataSourceScanExec.md
-      - DataSourceV2ScanExec: physical-operators/DataSourceV2ScanExec.md
       - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
       - DataWritingCommandExec: physical-operators/DataWritingCommandExec.md
       - DebugExec: physical-operators/DebugExec.md

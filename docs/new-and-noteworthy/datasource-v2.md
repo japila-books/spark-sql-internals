@@ -14,11 +14,13 @@ DataSource V2 relies on the [DataSourceV2Strategy](../execution-planning-strateg
 
 ## Data Reading
 
+!!! note "FIXME"
+
 DataSource V2 uses [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md) logical operator to represent data reading (aka _data scan_).
 
-`DataSourceV2Relation` is planned (_translated_) to a [ProjectExec](../physical-operators/ProjectExec.md) with a [DataSourceV2ScanExec](../physical-operators/DataSourceV2ScanExec.md) physical operator (possibly under the [FilterExec](../physical-operators/FilterExec.md) operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed.
+`DataSourceV2Relation` is planned (_translated_) to a [ProjectExec](../physical-operators/ProjectExec.md) with a `FIXME` physical operator (possibly under the [FilterExec](../physical-operators/FilterExec.md) operator) when [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed.
 
-When executed, `DataSourceV2ScanExec` physical operator creates a [DataSourceRDD](../DataSourceRDD.md) (or a `ContinuousReader` for Spark Structured Streaming).
+When executed, `FIXME` physical operator creates a [DataSourceRDD](../DataSourceRDD.md) (or a `ContinuousReader` for Spark Structured Streaming).
 
 `DataSourceRDD` uses [InputPartitions](../connector/InputPartition.md) for [partitions](../DataSourceRDD.md#getPartitions), [preferred locations](../DataSourceRDD.md#getPreferredLocations), and [computing partitions](../DataSourceRDD.md#compute).
 
