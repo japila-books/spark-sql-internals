@@ -1,0 +1,3 @@
+# GeneratedColumn
+
+`GeneratedColumn` is...FIXME
