@@ -1,68 +1,65 @@
 # CatalogImpl
 
-`CatalogImpl` is the [Catalog](Catalog.md) in Spark SQL that...FIXME
+`CatalogImpl` is a [Catalog](Catalog.md).
 
-.CatalogImpl uses SessionCatalog (through SparkSession)
-image::images/spark-sql-CatalogImpl.png[align="center"]
+![CatalogImpl uses SessionCatalog (through SparkSession)](images/spark-sql-CatalogImpl.png)
 
-NOTE: `CatalogImpl` is in `org.apache.spark.sql.internal` package.
+## Creating Instance
 
-=== [[createTable]] Creating Table -- `createTable` Method
+`CatalogImpl` takes the following to be created:
 
-[source, scala]
-----
-createTable(
-  tableName: String,
-  source: String,
-  schema: StructType,
-  options: Map[String, String]): DataFrame
-----
+* <span id="sparkSession"> [SparkSession](SparkSession.md)
 
-`createTable`...FIXME
+`CatalogImpl` is created when:
 
-`createTable` is part of [Catalog Contract](Catalog.md#createTable) to...FIXME.
+* `SparkSession` is requested for the [Catalog](SparkSession.md#catalog)
 
-=== [[getTable]] `getTable` Method
+## <span id="getTable"> getTable
 
-[source, scala]
-----
-getTable(tableName: String): Table
-getTable(dbName: String, tableName: String): Table
-----
+??? note "Signature"
 
-NOTE: `getTable` is part of [Catalog Contract](Catalog.md#getTable) to...FIXME.
+    ```scala
+    getTable(
+      tableName: String): Table
+    getTable(
+      dbName: String,
+      tableName: String): Table
+    ```
+
+    `getTable` is part of the [Catalog](Catalog.md#getTable) abstraction.
+
+---
 
 `getTable`...FIXME
 
-=== [[getFunction]] `getFunction` Method
+## <span id="makeTable"> Looking Up Table
 
-[source, scala]
-----
-getFunction(
-  functionName: String): Function
-getFunction(
-  dbName: String,
-  functionName: String): Function
-----
+```scala
+makeTable(
+  catalog: TableCatalog,
+  ident: Identifier): Option[Table]
+```
 
-NOTE: `getFunction` is part of [Catalog Contract](Catalog.md#getFunction) to...FIXME.
+`makeTable`...FIXME
 
-`getFunction`...FIXME
+---
 
-=== [[functionExists]] `functionExists` Method
+`makeTable` is used when:
 
-[source, scala]
-----
-functionExists(
-  functionName: String): Boolean
-functionExists(
-  dbName: String,
-  functionName: String): Boolean
-----
+* `CatalogImpl` is requested to [listTables](#listTables) and [getTable](#getTable)
 
-NOTE: `functionExists` is part of [Catalog Contract](Catalog.md#functionExists) to...FIXME.
+### <span id="loadTable"> loadTable
 
-`functionExists`...FIXME
+```scala
+loadTable(
+  catalog: TableCatalog,
+  ident: Identifier): Option[Table]
+```
+
+`loadTable`...FIXME
+
+<!---
+## Review Me
 
 === [[cacheTable]] Caching Table or View In-Memory -- `cacheTable` Method
 
@@ -173,19 +170,6 @@ NOTE: `listColumns` is part of [Catalog Contract](Catalog.md#listColumns).
 
 In the end, `listColumns` <<makeDataset, creates a Dataset>> with the columns.
 
-=== [[makeTable]] Converting TableIdentifier to Table -- `makeTable` Internal Method
-
-[source, scala]
-----
-makeTable(tableIdent: TableIdentifier): Table
-----
-
-`makeTable` creates a `Table` using the input `TableIdentifier` and the [table metadata](SessionCatalog.md#getTempViewOrPermanentTableMetadata) (from the current [SessionCatalog](SessionCatalog.md)) if available.
-
-NOTE: `makeTable` uses <<sparkSession, SparkSession>> to access SessionState.md#sessionState[SessionState] that is then used to access SessionState.md#catalog[SessionCatalog].
-
-NOTE: `makeTable` is used when `CatalogImpl` is requested to <<listTables, listTables>> or <<getTable, getTable>>.
-
 === [[makeDataset]] Creating Dataset from DefinedByConstructorParams Data -- `makeDataset` Method
 
 [source, scala]
@@ -225,37 +209,4 @@ If the table <<isCached, has been cached>>, `refreshTable` requests `CacheManage
 NOTE: `refreshTable` uses <<sparkSession, SparkSession>> to access the SparkSession.md#sharedState[SharedState] that is used to access [CacheManager](SharedState.md#cacheManager).
 
 `refreshTable` is part of the [Catalog](Catalog.md#refreshTable) abstraction.
-
-=== [[refreshByPath]] `refreshByPath` Method
-
-[source, scala]
-----
-refreshByPath(resourcePath: String): Unit
-----
-
-`refreshByPath`...FIXME
-
-`refreshByPath` is part of the [Catalog](Catalog.md#refreshByPath) abstraction.
-
-=== [[dropGlobalTempView]] `dropGlobalTempView` Method
-
-[source, scala]
-----
-dropGlobalTempView(
-  viewName: String): Boolean
-----
-
-`dropGlobalTempView`...FIXME
-
-`dropGlobalTempView` is part of the [Catalog](Catalog.md#dropGlobalTempView) abstraction.
-
-=== [[listColumns-internal]] `listColumns` Internal Method
-
-[source, scala]
-----
-listColumns(tableIdentifier: TableIdentifier): Dataset[Column]
-----
-
-`listColumns`...FIXME
-
-NOTE: `listColumns` is used exclusively when `CatalogImpl` is requested to <<listColumns, listColumns>>.
+-->

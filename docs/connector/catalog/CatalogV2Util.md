@@ -1,5 +1,42 @@
 # CatalogV2Util Utility
 
+## <span id="loadTable"> Loading Table
+
+```scala
+loadTable(
+  catalog: CatalogPlugin,
+  ident: Identifier,
+  timeTravelSpec: Option[TimeTravelSpec] = None): Option[Table]
+```
+
+`loadTable` [getTable](#getTable).
+
+---
+
+`loadTable` is used when:
+
+* [ResolveRelations](../../logical-analysis-rules/ResolveRelations.md) logical analysis rule is executed (and [lookupTableOrView](../../logical-analysis-rules/ResolveRelations.md#lookupTableOrView) and [resolveRelation](../../logical-analysis-rules/ResolveRelations.md#resolveRelation))
+* `CatalogV2Util` is requested to [loadRelation](#loadRelation)
+* `CatalogImpl` is requested to [load a table](../../CatalogImpl.md#loadTable)
+
+## <span id="getTable"> getTable
+
+```scala
+getTable(
+  catalog: CatalogPlugin,
+  ident: Identifier,
+  timeTravelSpec: Option[TimeTravelSpec] = None): Table
+```
+
+`getTable` requests the given [CatalogPlugin](CatalogPlugin.md) for the [TableCatalog](CatalogHelper.md#asTableCatalog) to [loadTable](TableCatalog.md#loadTable).
+
+---
+
+`getTable` is used when:
+
+* `CatalogV2Util` is requested to [loadTable](#loadTable)
+* `DataSourceV2Utils` is requested to [loadV2Source](../../datasources/DataSourceV2Utils.md#loadV2Source)
+
 ## <span id="getTableProviderCatalog"> getTableProviderCatalog
 
 ```scala
@@ -16,20 +53,6 @@ getTableProviderCatalog(
 * `DataFrameReader` is requested to [load](../../DataFrameReader.md#load) (for a data source that is a [SupportsCatalogOptions])
 
 * `DataFrameWriter` is requested to [save](../../DataFrameWriter.md#save) (for a data source that is a [SupportsCatalogOptions])
-
-## <span id="loadTable"> Loading Table
-
-```scala
-loadTable(
-  catalog: CatalogPlugin,
-  ident: Identifier): Option[Table]
-```
-
-`loadTable` requests the given [CatalogPlugin](CatalogPlugin.md) (as a [TableCatalog](TableCatalog.md)) to [load the table](TableCatalog.md#loadTable) by the `Identifier`.
-
-`loadTable` returns the [Table](../Table.md) if available or `None`.
-
-`loadTable` is used when...FIXME
 
 ## <span id="createAlterTable"> Creating AlterTable Logical Command
 

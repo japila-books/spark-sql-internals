@@ -5,17 +5,30 @@
 * a directory or files on a file system
 * a topic of Apache Kafka
 * a table in a catalog
-* _others_
+
+`Table` can be loaded using [TableCatalog](catalog/TableCatalog.md#loadTable).
 
 ## Contract
 
-### <span id="capabilities"> Table Capabilities
+### <span id="capabilities"> Capabilities
 
 ```java
 Set<TableCapability> capabilities()
 ```
 
 [TableCapabilities](TableCapability.md) of the table
+
+Used when `Table` is asked whether or not it [supports a given capability](TableHelper.md#supports)
+
+### <span id="columns"> Columns
+
+```java
+Column[] columns()
+```
+
+[Column](catalog/Column.md)s of this table
+
+Default: [structTypeToV2Columns](catalog/CatalogV2Util.md#structTypeToV2Columns) based on the [schema](#schema)
 
 Used when `Table` is asked whether or not it [supports a given capability](TableHelper.md#supports)
 
@@ -63,6 +76,9 @@ Used when:
 StructType schema()
 ```
 
+!!! note "Deprecated"
+    Use [columns](#columns) instead.
+
 [StructType](../types/StructType.md) of the table
 
 Used when:
@@ -77,17 +93,11 @@ Used when:
 
 ## Implementations
 
-* `ConsoleTable` (Spark Structured Streaming)
 * [FileTable](../datasources/FileTable.md)
-* `ForeachWriterTable` (Spark Structured Streaming)
 * [KafkaTable](../kafka/KafkaTable.md)
-* `MemorySink` (Spark Structured Streaming)
-* `MemoryStreamTable` (Spark Structured Streaming)
 * [NoopTable](../datasources/noop/NoopTable.md)
-* `RateStreamTable` (Spark Structured Streaming)
-* `Sink` (Spark Structured Streaming)
 * [StagedTable](StagedTable.md)
 * [SupportsRead](SupportsRead.md)
 * [SupportsWrite](SupportsWrite.md)
-* `TextSocketTable` (Spark Structured Streaming)
 * [V1Table](V1Table.md)
+* _others_

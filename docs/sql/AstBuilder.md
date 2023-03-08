@@ -425,6 +425,16 @@ MSCK REPAIR TABLE multipartIdentifier
 
 ANTLR labeled alternative: `#repairTable`
 
+### <span id="visitShowCreateTable"> visitShowCreateTable
+
+Creates a [ShowCreateTable](../logical-operators/ShowCreateTable.md) logical command for the following SQL statement:
+
+```text
+SHOW CREATE TABLE multipartIdentifier (AS SERDE)?
+```
+
+ANTLR labeled alternative: `#showCreateTable`
+
 ### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
 
 Creates a `ShowCurrentNamespaceCommand` logical command for the following SQL statement:

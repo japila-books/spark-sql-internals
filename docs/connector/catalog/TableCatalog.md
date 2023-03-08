@@ -67,11 +67,17 @@ Used when the following commands are executed:
 ```java
 Table loadTable(
   Identifier ident)
+Table loadTable(
+  Identifier ident,
+  long timestamp)
+Table loadTable(
+  Identifier ident,
+  String version)
 ```
 
 Used when:
 
-* `CatalogV2Util` is requested to [load a table](CatalogV2Util.md#loadTable)
+* `CatalogV2Util` is requested to [load a table](CatalogV2Util.md#getTable)
 * `DataFrameReader` is requested to [load](../../DataFrameReader.md#load) (for [SupportsCatalogOptions](SupportsCatalogOptions.md) providers)
 * `DataFrameWriter` is requested to [save](../../DataFrameWriter.md#save), [insertInto](../../DataFrameWriter.md#insertInto) and [saveAsTable](../../DataFrameWriter.md#saveAsTable)
 * `DelegatingCatalogExtension` is requested to [loadTable](DelegatingCatalogExtension.md#loadTable)

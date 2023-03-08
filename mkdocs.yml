@@ -155,6 +155,7 @@ nav:
       - CatalogPlugin: connector/catalog/CatalogPlugin.md
       - Catalogs: connector/catalog/Catalogs.md
       - CatalogV2Util: connector/catalog/CatalogV2Util.md
+      - Column: connector/catalog/Column.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
       - FunctionCatalog: connector/catalog/FunctionCatalog.md
       - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
@@ -396,6 +397,7 @@ nav:
       - RunnableCommand: logical-operators/RunnableCommand.md
       - SaveIntoDataSourceCommand: logical-operators/SaveIntoDataSourceCommand.md
       - SetCatalogAndNamespace: logical-operators/SetCatalogAndNamespace.md
+      - ShowCreateTable: logical-operators/ShowCreateTable.md
       - ShowCreateTableCommand: logical-operators/ShowCreateTableCommand.md
       - ShowTableProperties: logical-operators/ShowTableProperties.md
       - ShowTablePropertiesCommand: logical-operators/ShowTablePropertiesCommand.md
@@ -631,6 +633,7 @@ nav:
       - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
       - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
       - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
+      - ShowCreateTableExec: physical-operators/ShowCreateTableExec.md
       - ShowTablesExec: physical-operators/ShowTablesExec.md
       - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
       - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md

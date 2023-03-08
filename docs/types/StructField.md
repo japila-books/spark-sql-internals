@@ -23,6 +23,8 @@ toDDL: String
 [name] [sql][comment]
 ```
 
+---
+
 `toDDL` is used when:
 
 * `StructType` is requested to [toDDL](StructType.md#toDDL)
