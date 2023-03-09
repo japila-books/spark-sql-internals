@@ -6,11 +6,29 @@
 
 `InMemoryRelation` takes the following to be created:
 
-* <span id="output"> Output Schema [Attributes](../expressions/Attribute.md) (`Seq[Attribute]`)
-* <span id="cacheBuilder"> [CachedRDDBuilder](../CachedRDDBuilder.md)
+* <span id="output"> Output ([Attribute](../expressions/Attribute.md)s)
+* [CachedRDDBuilder](#cacheBuilder)
 * <span id="outputOrdering"> Output [Ordering](../expressions/SortOrder.md) (`Seq[SortOrder]`)
 
 `InMemoryRelation` is created using [apply](#apply) factory methods.
+
+### <span id="cacheBuilder"> CachedRDDBuilder
+
+`InMemoryRelation` can be given a [CachedRDDBuilder](../columnar-execution/CachedRDDBuilder.md) when [created](#creating-instance) (using [apply](#apply)).
+
+`InMemoryRelation` is `@transient` (so it won't be preseved when this operator has been serialized).
+
+The `CachedRDDBuilder` is used by the following:
+
+* [CacheManager](../CacheManager.md)
+* [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) physical operator
+
+The `CachedRDDBuilder` is used to access [storageLevel](../columnar-execution/CachedRDDBuilder.md#storageLevel) when (when the `Dataset` is [cached](../CacheManager.md#lookupCachedData)):
+
+* [Dataset.storageLevel](../Dataset.md#storageLevel) operator is used
+* `AlterTableRenameCommand` is executed
+* `DataSourceV2Strategy` execution planning strategy is requested to [invalidateTableCache](../execution-planning-strategies/DataSourceV2Strategy.md#invalidateTableCache) (to plan a `RenameTable` unary logical command)
+* [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is executed (and [calculatePlanOverhead](../logical-optimizations/PartitionPruning.md#calculatePlanOverhead))
 
 ## Demo
 
@@ -98,25 +116,60 @@ InMemoryRelation [id#40L], StorageLevel(disk, memory, deserialized, 1 replicas)
 
 ```scala
 apply(
-  useCompression: Boolean,
-  batchSize: Int,
+  serializer: CachedBatchSerializer,
   storageLevel: StorageLevel,
   child: SparkPlan,
   tableName: Option[String],
-  optimizedPlan: LogicalPlan): InMemoryRelation
+  optimizedPlan: LogicalPlan): InMemoryRelation // (1)!
 apply(
   cacheBuilder: CachedRDDBuilder,
-  optimizedPlan: LogicalPlan): InMemoryRelation
+  qe: QueryExecution): InMemoryRelation
 apply(
   output: Seq[Attribute],
   cacheBuilder: CachedRDDBuilder,
   outputOrdering: Seq[SortOrder],
   statsOfPlanToCache: Statistics): InMemoryRelation
+apply(
+  storageLevel: StorageLevel,
+  qe: QueryExecution,
+  tableName: Option[String]): InMemoryRelation
 ```
 
-`apply` creates an `InMemoryRelation` logical operator.
+1. Intended and used only in tests
 
-`apply` is used when `CacheManager` is requested to [cache](../CacheManager.md#cacheQuery) and [re-cache](../CacheManager.md#recacheByCondition) a structured query, and [useCachedData](../CacheManager.md#useCachedData).
+`apply` creates an [InMemoryRelation](#creating-instance) logical operator with the following:
+
+Property | Value
+---------|------
+ [output](#output) | The [output](../catalyst/QueryPlan.md#output) of the [executedPlan physical query plan](../QueryExecution.md#executedPlan) (possibly [convertToColumnarIfPossible](#convertToColumnarIfPossible) if the `CachedBatchSerializer` [supportsColumnarInput](#supportsColumnarInput))
+ [CachedRDDBuilder](#cacheBuilder) | A new [CachedRDDBuilder](../columnar-execution/CachedRDDBuilder.md)
+ [outputOrdering](#outputOrdering) | The [outputOrdering](../catalyst/QueryPlan.md#outputOrdering) of the [optimized logical query plan](../QueryExecution.md#optimizedPlan)
+ [statsOfPlanToCache](#statsOfPlanToCache) | The [Statistics](../cost-based-optimization/LogicalPlanStats.md#statsOfPlanToCache) of the [optimized logical query plan](../QueryExecution.md#optimizedPlan)
+
+---
+
+`apply` is used when:
+
+* `CacheManager` is requested to [cache](../CacheManager.md#cacheQuery) and [re-cache](../CacheManager.md#recacheByCondition) a structured query, and [useCachedData](../CacheManager.md#useCachedData)
+* `InMemoryRelation` is requested to [withOutput](#withOutput) and [newInstance](#newInstance)
+
+### <span id="getSerializer"> Looking Up CachedBatchSerializer
+
+```scala
+getSerializer(
+  sqlConf: SQLConf): CachedBatchSerializer
+```
+
+`getSerializer` uses [spark.sql.cache.serializer](../configuration-properties.md#spark.sql.cache.serializer) configuration property to create a [CachedBatchSerializer](../columnar-execution/CachedBatchSerializer.md).
+
+### <span id="convertToColumnarIfPossible"> convertToColumnarIfPossible
+
+```scala
+convertToColumnarIfPossible(
+  plan: SparkPlan): SparkPlan
+```
+
+`convertToColumnarIfPossible`...FIXME
 
 ## <span id="partitionStatistics"> PartitionStatistics
 

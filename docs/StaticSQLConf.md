@@ -23,6 +23,10 @@ org.apache.spark.sql.AnalysisException: Cannot modify the value of a static conf
   ... 50 elided
 ```
 
+## <span id="spark.sql.cache.serializer"><span id="SPARK_CACHE_SERIALIZER"> cache.serializer
+
+[spark.sql.cache.serializer](configuration-properties.md#spark.sql.cache.serializer)
+
 ## <span id="spark.sql.codegen.cache.maxEntries"> codegen.cache.maxEntries
 
 **spark.sql.codegen.cache.maxEntries**

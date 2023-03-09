@@ -1,0 +1,3 @@
+# SimpleMetricsCachedBatch
+
+`SimpleMetricsCachedBatch` is...FIXME

@@ -166,6 +166,12 @@ nav:
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Columnar Execution:
       - columnar-execution/index.md
+      - columnar-execution/CachedBatch.md
+      - columnar-execution/CachedBatchSerializer.md
+      - columnar-execution/CachedRDDBuilder.md
+      - columnar-execution/DefaultCachedBatchSerializer.md
+      - columnar-execution/SimpleMetricsCachedBatch.md
+      - columnar-execution/SimpleMetricsCachedBatchSerializer.md
     - Common Table Expressions: common-table-expressions.md
     - Configuration Properties: configuration-properties.md
     - Cost-Based Optimization:
@@ -448,7 +454,6 @@ nav:
         - SessionStateBuilder: SessionStateBuilder.md
       - CacheManager:
         - CacheManager: CacheManager.md
-        - CachedRDDBuilder: CachedRDDBuilder.md
       - RuntimeConfig: RuntimeConfig.md
       - UDFRegistration: UDFRegistration.md
     - Catalyst:

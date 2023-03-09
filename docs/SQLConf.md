@@ -515,8 +515,6 @@ Used when:
 
 [spark.sql.inMemoryColumnarStorage.partitionPruning](configuration-properties.md#spark.sql.inMemoryColumnarStorage.partitionPruning)
 
-Used when `InMemoryTableScanExec` physical operator is requested for [filtered cached column batches](physical-operators/InMemoryTableScanExec.md#filteredCachedBatches) (as a `RDD[CachedBatch]`).
-
 ## <span id="isParquetBinaryAsString"> isParquetBinaryAsString
 
 [spark.sql.parquet.binaryAsString](configuration-properties.md#spark.sql.parquet.binaryAsString)

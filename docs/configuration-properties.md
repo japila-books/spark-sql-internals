@@ -99,6 +99,22 @@ Default: `10M`
 
 Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) method to access the current value.
 
+## <span id="spark.sql.cache.serializer"><span id="SPARK_CACHE_SERIALIZER"> cache.serializer
+
+**spark.sql.cache.serializer**
+
+The name of [CachedBatchSerializer](columnar-execution/CachedBatchSerializer.md) implementation to translate SQL data into a format that can more efficiently be cached.
+
+Default: [org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer](columnar-execution/DefaultCachedBatchSerializer.md)
+
+`spark.sql.cache.serializer` is a [StaticSQLConf](StaticSQLConf.md#SPARK_CACHE_SERIALIZER)
+
+Use [SQLConf.SPARK_CACHE_SERIALIZER](StaticSQLConf.md#SPARK_CACHE_SERIALIZER) for the name
+
+Used when:
+
+* `InMemoryRelation` is requested for the [CachedBatchSerializer](logical-operators/InMemoryRelation.md#getSerializer)
+
 ## <span id="spark.sql.codegen.hugeMethodLimit"> codegen.hugeMethodLimit
 
 **spark.sql.codegen.hugeMethodLimit**
@@ -252,6 +268,20 @@ Used when:
 * `DataSource` is requested to [resolve a BaseRelation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
 * `FileStatusCache` is [created](datasources/FileStatusCache.md#getOrCreate)
 * `V2SessionCatalog` is requested to [create a table](V2SessionCatalog.md#createTable) (_deprecated_)
+
+## <span id="spark.sql.inMemoryColumnarStorage.partitionPruning"> inMemoryColumnarStorage.partitionPruning
+
+**spark.sql.inMemoryColumnarStorage.partitionPruning**
+
+**(internal)** Enables partition pruning for in-memory columnar tables
+
+Default: `true`
+
+Use [SQLConf.inMemoryPartitionPruning](SQLConf.md#inMemoryPartitionPruning) for the current value
+
+Used when:
+
+* `InMemoryTableScanExec` physical operator is requested to [filter cached column batches](physical-operators/InMemoryTableScanExec.md#filteredCachedBatches)
 
 ## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
 
@@ -1385,14 +1415,6 @@ Enables [vectorized reader](vectorized-query-execution/index.md) for columnar ca
 Default: `true`
 
 Use [SQLConf.cacheVectorizedReaderEnabled](SQLConf.md#cacheVectorizedReaderEnabled) method to access the current value.
-
-## <span id="spark.sql.inMemoryColumnarStorage.partitionPruning"> spark.sql.inMemoryColumnarStorage.partitionPruning
-
-**(internal)** Enables partition pruning for in-memory columnar tables
-
-Default: `true`
-
-Use [SQLConf.inMemoryPartitionPruning](SQLConf.md#inMemoryPartitionPruning) method to access the current value.
 
 ## <span id="spark.sql.join.preferSortMergeJoin"> spark.sql.join.preferSortMergeJoin
 

@@ -156,7 +156,7 @@ Asked to cache already cached data.
 clearCache(): Unit
 ```
 
-`clearCache` takes every `CachedData` from the [cachedData](#cachedData) internal registry and requests it for the [InMemoryRelation](#cachedRepresentation) to access the [CachedRDDBuilder](logical-operators/InMemoryRelation.md#cacheBuilder). `clearCache` requests the `CachedRDDBuilder` to [clearCache](CachedRDDBuilder.md#clearCache).
+`clearCache` takes every `CachedData` from the [cachedData](#cachedData) internal registry and requests it for the [InMemoryRelation](#cachedRepresentation) to access the [CachedRDDBuilder](logical-operators/InMemoryRelation.md#cacheBuilder). `clearCache` requests the `CachedRDDBuilder` to [clearCache](columnar-execution/CachedRDDBuilder.md#clearCache).
 
 In the end, `clearCache` removes all `CachedData` entries from the [cachedData](#cachedData) internal registry.
 
