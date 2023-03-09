@@ -110,4 +110,4 @@ void reset()
 * `VectorizedDeltaByteArrayReader` is requested to `skipBinary`
 * [OffHeapColumnVector](OffHeapColumnVector.md) and [OnHeapColumnVector](OnHeapColumnVector.md) are created
 * `WritableColumnVector` is requested to [reserveDictionaryIds](#reserveDictionaryIds)
-* `RowToColumnarExec` is requested to `doExecuteColumnar`
+* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](../physical-operators/RowToColumnarExec.md#doExecuteColumnar)

@@ -152,7 +152,7 @@ Use [SQLConf.offHeapColumnVectorEnabled](SQLConf.md#offHeapColumnVectorEnabled) 
 
 Used when:
 
-* `RowToColumnarExec` is requested to `doExecuteColumnar`
+* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](physical-operators/RowToColumnarExec.md#doExecuteColumnar)
 * `DefaultCachedBatchSerializer` is requested to `vectorTypes` and `convertCachedBatchToColumnarBatch`
 * `ParquetFileFormat` is requested to [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)

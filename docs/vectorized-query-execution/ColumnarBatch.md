@@ -5,32 +5,99 @@ tags:
 
 # ColumnarBatch
 
-`ColumnarBatch` allows to work with multiple [ColumnVectors](#columns) as a row-wise table.
-
-`ColumnarBatch` is a `DeveloperApi`.
+`ColumnarBatch` allows to work with multiple [ColumnVectors](#columns) as a row-wise table for [Columnar Scan](../vectorized-decoding/index.md) and [Vectorized Query Execution](index.md).
 
 ## Creating Instance
 
 `ColumnarBatch` takes the following to be created:
 
 * <span id="columns"> [ColumnVector](../vectorized-decoding/ColumnVector.md)s
-* <span id="numRows"> Number of Rows
+* [Number of Rows](#numRows)
 
 `ColumnarBatch` immediately creates an internal [ColumnarBatchRow](#row).
 
 `ColumnarBatch` is created when:
 
-* `ArrowConverters` utility is requested to `fromBatchIterator`
-* `RowToColumnarExec` unary physical operator is requested to `doExecuteColumnar`
+* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](../physical-operators/RowToColumnarExec.md#doExecuteColumnar)
 * [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
-* `MapInPandasExec` unary physical operator is requested to `doExecute`
 * `OrcColumnarBatchReader` is requested to `initBatch`
-* `PandasGroupUtils` utility is requested to `executePython`
 * `VectorizedParquetRecordReader` is requested to [init a batch](../datasources/parquet/VectorizedParquetRecordReader.md#initBatch)
+* _others_ (PySpark and SparkR)
 
-## <span id="row"> ColumnarBatchRow
+### <span id="row"> ColumnarBatchRow
 
 `ColumnarBatch` creates a `ColumnarBatchRow` when [created](#creating-instance).
+
+### <span id="numRows"> Number of Rows
+
+```java
+int numRows
+```
+
+`ColumnarBatch` is given the number of rows (`numRows`) when [created](#creating-instance).
+
+`numRows` can also be (re)set using [setNumRows](#setNumRows) (and is often used to reset a `ColumnarBatch` to `0` before the end value is set).
+
+`numRows` is available using [numRows](#numRows-accessor) accessor.
+
+Used when:
+
+* [rowIterator](#rowIterator)
+* [getRow](#getRow)
+
+#### <span id="numRows-accessor"> numRows
+
+```java
+int numRows()
+```
+
+`numRows` returns the [number of rows](#numRows).
+
+---
+
+`numRows` is used when:
+
+* `FileScanRDD` is requested to [compute a partition](../rdds/FileScanRDD.md#compute)
+* `ColumnarToRowExec` physical operator is requested to [execute](../physical-operators/ColumnarToRowExec.md#doExecute)
+* `InMemoryTableScanExec` physical operator is requested for the [columnarInputRDD](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
+* `MetricsBatchIterator` is requested for `next` (ColumnarBatch)
+* [DataSourceV2ScanExecBase](../physical-operators/DataSourceV2ScanExecBase.md#doExecuteColumnar) and [FileSourceScanExec](../physical-operators/FileSourceScanExec.md#doExecuteColumnar) physical operators are requested to `doExecuteColumnar`
+* _others_ (PySpark)
+
+#### <span id="setNumRows"> setNumRows
+
+```java
+void setNumRows(
+  int numRows)
+```
+
+`setNumRows` sets the [setNumRows](#setNumRows) registry to the given `numRows`.
+
+---
+
+`setNumRows` is used when:
+
+* `OrcColumnarBatchReader` is requested to `nextBatch`
+* `VectorizedParquetRecordReader` is requested to [nextBatch](../datasources/parquet/VectorizedParquetRecordReader.md#nextBatch)
+* `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](../physical-operators/RowToColumnarExec.md#doExecuteColumnar)
+* `InMemoryTableScanExec` physical operator is requested for the [columnarInputRDD](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD) (and uses `DefaultCachedBatchSerializer` to `convertCachedBatchToColumnarBatch`)
+* _others_ (PySpark and SparkR)
+
+## <span id="rowIterator"> rowIterator
+
+```java
+Iterator<InternalRow> rowIterator()
+```
+
+`rowIterator`...FIXME
+
+---
+
+`rowIterator` is used when:
+
+* `SparkResult` is requested for `iterator`
+* [ColumnarToRowExec](../physical-operators/ColumnarToRowExec.md) physical operator is [executed](../physical-operators/ColumnarToRowExec.md#doExecute)
+* _others_ (SparkR and PySpark)
 
 ## Demo
 
@@ -61,51 +128,3 @@ batch.setNumRows(1)
 
 assert(batch.getRow(0).numFields == 4)
 ```
-
-<!---
-## Review Me
-=== [[rowIterator]] Iterator Over InternalRows (in Batch) -- `rowIterator` Method
-
-[source, java]
-----
-Iterator<InternalRow> rowIterator()
-----
-
-`rowIterator`...FIXME
-
-[NOTE]
-====
-`rowIterator` is used when:
-
-* `ArrowConverters` is requested to `fromBatchIterator`
-
-* `AggregateInPandasExec`, `WindowInPandasExec`, and `FlatMapGroupsInPandasExec` physical operators are requested to execute (`doExecute`)
-
-* `ArrowEvalPythonExec` physical operator is requested to `evaluate`
-====
-
-=== [[setNumRows]] Specifying Number of Rows (in Batch) -- `setNumRows` Method
-
-[source, java]
-----
-void setNumRows(int numRows)
-----
-
-In essence, `setNumRows` resets the batch and makes it available for reuse.
-
-Internally, `setNumRows` simply sets the <<numRows, numRows>> to the given `numRows`.
-
-`setNumRows` is used when:
-
-* `OrcColumnarBatchReader` is requested to `nextBatch`
-
-* `VectorizedParquetRecordReader` is requested to [nextBatch](datasources/parquet/VectorizedParquetRecordReader.md#nextBatch) (when `VectorizedParquetRecordReader` is requested to [nextKeyValue](datasources/parquet/VectorizedParquetRecordReader.md#nextKeyValue))
-
-* `ColumnVectorUtils` is requested to `toBatch` (for testing only)
-
-* `ArrowConverters` is requested to `fromBatchIterator`
-
-* `InMemoryTableScanExec` physical operator is requested to [createAndDecompressColumn](physical-operators/InMemoryTableScanExec.md#createAndDecompressColumn)
-
-* `ArrowPythonRunner` is requested for a `ReaderIterator` (`newReaderIterator`)
--->

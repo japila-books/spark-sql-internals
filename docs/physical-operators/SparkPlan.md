@@ -169,8 +169,6 @@ doExecuteBroadcast[T](): broadcast.Broadcast[T]
 
 Part of [executeBroadcast](#executeBroadcast)
 
-`doExecuteBroadcast` is used when `RowToColumnarExec` and [InputAdapter](InputAdapter.md#doExecuteBroadcast) physical operators are requested to `doExecuteBroadcast`
-
 ### <span id="doExecuteColumnar"> doExecuteColumnar
 
 ```scala

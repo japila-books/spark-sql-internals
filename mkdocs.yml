@@ -631,6 +631,7 @@ nav:
       - ReusedExchangeExec: physical-operators/ReusedExchangeExec.md
       - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
       - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
+      - RowToColumnarExec: physical-operators/RowToColumnarExec.md
       - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
       - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
       - ShowCreateTableExec: physical-operators/ShowCreateTableExec.md
