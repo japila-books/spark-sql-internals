@@ -1,3 +1,5 @@
 # Vectorized Query Execution
 
-*Vectorized Query Execution* (_Vectorized Decoding_ or _Batch Decoding_) is...FIXME
+**Vectorized Query Execution** is...FIXME
+
+Vectorized Query Execution starts with [Columnar Scan](../vectorized-decoding/index.md).

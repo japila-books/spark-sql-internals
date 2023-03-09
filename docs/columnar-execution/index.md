@@ -1,10 +1,10 @@
 # Columnar Execution
 
-**Columnar Execution** (_Columnar Processing_) is based on the following:
+**Columnar Execution** (_Columnar Processing_) uses the following:
 
 * [ColumnarRule](../ColumnarRule.md)
 * [ApplyColumnarRulesAndInsertTransitions](../physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md) physical optimization
-* [ColumnarToRowExec](../physical-operators/ColumnarToRowExec.md) physical operator
+* [ColumnarToRowExec](../physical-operators/ColumnarToRowExec.md) and [ColumnarToRowExec](../physical-operators/ColumnarToRowExec.md) physical operators
 
 Physical operators that want to participate in Columnar Execution are expected to override [supportsColumnar](../physical-operators/SparkPlan.md#supportsColumnar) method.
 
