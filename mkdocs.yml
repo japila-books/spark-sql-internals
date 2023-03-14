@@ -20,6 +20,7 @@ theme:
     - content.code.annotate
     # https://squidfunk.github.io/mkdocs-material/upgrade/#contentcodecopy
     - content.code.copy
+    - content.tooltips
     - navigation.indexes
     - navigation.instant
     # https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-path
@@ -47,6 +48,7 @@ theme:
 
 markdown_extensions:
   - admonition
+  - attr_list
   - footnotes
   - md_in_html
   - toc:
@@ -85,6 +87,8 @@ plugins:
       tags_extra_files:
         developer-api.md:
           - DeveloperApi
+  # https://squidfunk.github.io/mkdocs-material/reference/#built-in-typeset-plugin
+  - typeset
 
 extra:
   analytics:
@@ -199,6 +203,8 @@ nav:
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
     - Statistics: new-and-noteworthy/statistics.md
+    - Table-Valued Functions:
+      - table-valued-functions/index.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
       - ColumnVector: vectorized-decoding/ColumnVector.md
@@ -323,6 +329,7 @@ nav:
       - SparkPlanner: SparkPlanner.md
     - SharedState: SharedState.md
     - SQLConf: SQLConf.md
+    - SQLConfHelper: SQLConfHelper.md
     - StaticSQLConf: StaticSQLConf.md
     - Logical Operators:
       - logical-operators/index.md
@@ -416,6 +423,7 @@ nav:
       - UnresolvedHint: logical-operators/UnresolvedHint.md
       - UnresolvedTable: logical-operators/UnresolvedTable.md
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
+      - UnresolvedTableValuedFunction: logical-operators/UnresolvedTableValuedFunction.md
       - UnresolvedWith: logical-operators/UnresolvedWith.md
       - UpdateTable: logical-operators/UpdateTable.md
       - V2CreateTablePlan: logical-operators/V2CreateTablePlan.md

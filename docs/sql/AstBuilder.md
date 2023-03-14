@@ -547,6 +547,24 @@ Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)
 
 ANTLR labeled alternative: `#subqueryExpression`
 
+### <span id="visitTableValuedFunction"> visitTableValuedFunction
+
+Creates a [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md)
+
+```antlr
+relationPrimary
+  :
+  ...
+  | functionTable                                         #tableValuedFunction
+  ;
+
+functionTable
+  : funcName '(' (expression (',' expression)*)? ')' tableAlias
+  ;
+```
+
+ANTLR labeled alternative: `#tableValuedFunction`
+
 ### <span id="visitUpdateTable"> visitUpdateTable
 
 Creates an [UpdateTable](../logical-operators/UpdateTable.md) logical operator

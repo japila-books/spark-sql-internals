@@ -1,10 +1,66 @@
 # ResolveFunctions Logical Resolution Rule
 
-`ResolveFunctions` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveFunctions) uses to <<apply, resolve grouping__id UnresolvedAttribute, UnresolvedGenerator and UnresolvedFunction expressions>> in an entire logical query plan.
+`ResolveFunctions` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveFunctions) uses to [resolve the following logical operators and expressions](#apply) in a logical query plan:
 
-Technically, `ResolveReferences` is just a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md), i.e. `Rule[LogicalPlan]`.
+Logical Operator | Expression
+-----------------|-----------
+ `UnresolvedFunctionName` | [UnresolvedFunction](../expressions/UnresolvedFunction.md)
+ [UnresolvedTableValuedFunction](#UnresolvedTableValuedFunction) | [UnresolvedGenerator](../expressions/UnresolvedGenerator.md)
+ `UnresolvedTVFAliases`
+
+`ResolveReferences` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
 `ResolveFunctions` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
+
+## <span id="apply"> Executing Rule
+
+??? note "Signature"
+
+    ```scala
+    apply(
+      plan: LogicalPlan): LogicalPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+---
+
+`apply` resolves logical operators up (post-order, bottom-up) in trees with the following [TreePattern](../catalyst/TreePattern.md)s:
+
+* `GENERATOR`
+* `UNRESOLVED_FUNC`
+* `UNRESOLVED_FUNCTION`
+* `UNRESOLVED_TABLE_VALUED_FUNCTION`
+* `UNRESOLVED_TVF_ALIASES`
+
+### <span id="apply-UnresolvedFunctionName"> UnresolvedFunctionName
+
+For an `UnresolvedFunctionName`, `apply`...FIXME
+
+### <span id="apply-UnresolvedTableValuedFunction"> UnresolvedTableValuedFunction
+
+For an [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md), `apply` first attempts to [resolveBuiltinOrTempTableFunction](#resolveBuiltinOrTempTableFunction), if available.
+
+Otherwise, `apply` attempts to resolve a [CatalogPlugin](../connector/catalog/CatalogPlugin.md) and, for the [spark_catalog](../connector/catalog/CatalogV2Util.md#isSessionCatalog) only, requests the [SessionCatalog](../Analyzer.md#v1SessionCatalog) to [resolvePersistentTableFunction](../SessionCatalog.md#resolvePersistentTableFunction).
+
+### <span id="apply-others"> Others
+
+`apply`...FIXME
+
+## <span id="resolveBuiltinOrTempTableFunction"> resolveBuiltinOrTempTableFunction
+
+```scala
+resolveBuiltinOrTempTableFunction(
+  name: Seq[String],
+  arguments: Seq[Expression]): Option[LogicalPlan]
+```
+
+Only for a one-element `name`, `resolveBuiltinOrTempTableFunction` requests the [SessionCatalog](../Analyzer.md#v1SessionCatalog) to [resolveBuiltinOrTempTableFunction](../SessionCatalog.md#resolveBuiltinOrTempTableFunction).
+
+Otherwise, `resolveBuiltinOrTempTableFunction` returns `None` (_an undefined value_).
+
+<!---
+## Review Me
 
 [[example]]
 [source, scala]
@@ -110,3 +166,4 @@ If some other non-generator function is found for the name, `apply` fails the an
 ```
 
 `apply` skips expressions/Expression.md#childrenResolved[unresolved expressions].
+-->

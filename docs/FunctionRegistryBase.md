@@ -27,16 +27,25 @@ registerFunction(
   name: FunctionIdentifier,
   info: ExpressionInfo,
   builder: Seq[Expression] => T): Unit
+registerFunction(
+  name: FunctionIdentifier,
+  builder: Seq[Expression] => T,
+  source: String): Unit // (1)!
 ```
+
+1. A final method that relays to the abstract `registerFunction`
 
 Registers a user-defined function (written in Python, Scala or Java) under the given `name`
 
-See [SimpleFunctionRegistryBase](SimpleFunctionRegistryBase.md#registerFunction)
+See:
+
+* [SimpleFunctionRegistryBase](SimpleFunctionRegistryBase.md#registerFunction)
 
 Used when:
 
-* `SessionCatalog` is requested to [register a catalog function](SessionCatalog.md#registerFunction) and [reset](SessionCatalog.md#reset)
-* `SparkSessionExtensions` is requested to [registerFunctions](SparkSessionExtensions.md#registerFunctions) and [registerTableFunctions](SparkSessionExtensions.md#registerTableFunctions)
+* `FunctionRegistryBase` is requested to [createOrReplaceTempFunction](#createOrReplaceTempFunction)
+* `SessionCatalog` is requested to [registerFunction](SessionCatalog.md#registerFunction), [reset](SessionCatalog.md#reset)
+* `SparkSessionExtensions` is requested to [registerFunctions](SparkSessionExtensions.md#registerFunctions), [registerTableFunctions](SparkSessionExtensions.md#registerTableFunctions)
 
 ## Implementations
 
@@ -50,7 +59,7 @@ Used when:
 ```scala
 createOrReplaceTempFunction(
   name: String,
-  builder: FunctionBuilder,
+  builder: Seq[Expression] => T,
   source: String): Unit
 ```
 
@@ -60,9 +69,9 @@ createOrReplaceTempFunction(
 
     source | Call Site
     -------|-----------
+    `java_udf` | [UDFRegistration.register](UDFRegistration.md#register)
     `python_udf` | [UDFRegistration.registerPython](UDFRegistration.md#registerPython)
     `scala_udf` | [UDFRegistration.register](UDFRegistration.md#register)
-    `java_udf` | [UDFRegistration.register](UDFRegistration.md#register)
 
     `source` is used to create an `ExpressionInfo` for [registering a named function](#registerFunction).
 

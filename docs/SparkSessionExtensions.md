@@ -170,3 +170,18 @@ buildQueryStagePrepRules(
 `buildQueryStagePrepRules` is used when:
 
 * `BaseSessionStateBuilder` is requested for the [query stage preparation rules](BaseSessionStateBuilder.md#queryStagePrepRules)
+
+## <span id="registerTableFunctions"> registerTableFunctions
+
+```scala
+registerTableFunctions(
+  tableFunctionRegistry: TableFunctionRegistry): TableFunctionRegistry
+```
+
+`registerTableFunctions`...FIXME
+
+---
+
+`registerTableFunctions` is used when:
+
+* `BaseSessionStateBuilder` is requested for the [TableFunctionRegistry](#tableFunctionRegistry)

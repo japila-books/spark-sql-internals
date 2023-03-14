@@ -1,11 +1,11 @@
 # SimpleFunctionRegistryBase
 
-`SimpleFunctionRegistryBase` is an extension of the [FunctionRegistryBase](FunctionRegistryBase.md) abstraction for [function registries](#implementations).
+`SimpleFunctionRegistryBase[T]` is an extension of the [FunctionRegistryBase](FunctionRegistryBase.md) abstraction for [function registries](#implementations) (of type `T`).
 
 ## Implementations
 
-* [SimpleFunctionRegistry](SimpleFunctionRegistry.md)
-* [SimpleTableFunctionRegistry](SimpleTableFunctionRegistry.md)
+* [SimpleFunctionRegistry](SimpleFunctionRegistry.md) (for scalar functions using [Expression](expressions/Expression.md)s)
+* [SimpleTableFunctionRegistry](SimpleTableFunctionRegistry.md) (for table-valued functions using [LogicalPlan](logical-operators/LogicalPlan.md)s)
 
 ## <span id="functionBuilders"> functionBuilders
 

@@ -2,17 +2,23 @@
 
 `SessionCatalog` is a catalog of relational entities in [SparkSession](SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).
 
+`SessionCatalog` is a [SQLConfHelper](SQLConfHelper.md).
+
 ## Creating Instance
 
 `SessionCatalog` takes the following to be created:
 
-* <span id="externalCatalogBuilder"> Function to create an [ExternalCatalog](ExternalCatalog.md)
-* <span id="globalTempViewManagerBuilder"> Function to create a [GlobalTempViewManager](GlobalTempViewManager.md)
+* <span id="externalCatalogBuilder"> [ExternalCatalog](ExternalCatalog.md)
+* <span id="globalTempViewManagerBuilder"> [GlobalTempViewManager](GlobalTempViewManager.md)
 * <span id="functionRegistry"> [FunctionRegistry](FunctionRegistry.md)
-* <span id="conf"> [SQLConf](SQLConf.md)
-* <span id="hadoopConf"> Hadoop Configuration
+* <span id="tableFunctionRegistry"> [TableFunctionRegistry](TableFunctionRegistry.md)
+* <span id="hadoopConf"> `Configuration` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html))
 * <span id="parser"> [ParserInterface](sql/ParserInterface.md)
-* <span id="functionResourceLoader"> `FunctionResourceLoader`
+* <span id="functionResourceLoader"> FunctionResourceLoader
+* <span id="functionExpressionBuilder"> `FunctionExpressionBuilder`
+* <span id="cacheSize"> Cache Size (default: [spark.sql.filesourceTableRelationCacheSize](configuration-properties.md#spark.sql.filesourceTableRelationCacheSize))
+* <span id="cacheTTL"> Cache TTL (default: [spark.sql.metadataCacheTTLSeconds](configuration-properties.md#spark.sql.metadataCacheTTLSeconds))
+* <span id="defaultDatabase"> Default database name (default: [spark.sql.catalog.spark_catalog.defaultDatabase](configuration-properties.md#spark.sql.catalog.spark_catalog.defaultDatabase))
 
 ![SessionCatalog and Spark SQL Services](images/spark-sql-SessionCatalog.png)
 
@@ -225,3 +231,67 @@ lookupPersistentFunction(
 
 * `SessionCatalog` is requested to [lookupFunctionInfo](#lookupFunctionInfo)
 * `V2SessionCatalog` is requested to [load a function](V2SessionCatalog.md#loadFunction)
+
+## <span id="resolveBuiltinOrTempTableFunction"> resolveBuiltinOrTempTableFunction
+
+```scala
+resolveBuiltinOrTempTableFunction(
+  name: String,
+  arguments: Seq[Expression]): Option[LogicalPlan]
+```
+
+`resolveBuiltinOrTempTableFunction` [resolveBuiltinOrTempFunctionInternal](#resolveBuiltinOrTempFunctionInternal) with the [TableFunctionRegistry](#tableFunctionRegistry).
+
+---
+
+`resolveBuiltinOrTempTableFunction` is used when:
+
+* [ResolveFunctions](logical-analysis-rules/ResolveFunctions.md) logical analysis rule is [executed](logical-analysis-rules/ResolveFunctions.md#resolveBuiltinOrTempTableFunction) (to resolve a [UnresolvedTableValuedFunction](logical-operators/UnresolvedTableValuedFunction.md) logical operator)
+* `SessionCatalog` is requested to [lookupTableFunction](#lookupTableFunction)
+
+## <span id="resolveBuiltinOrTempFunctionInternal"> resolveBuiltinOrTempFunctionInternal
+
+```scala
+resolveBuiltinOrTempFunctionInternal[T](
+  name: String,
+  arguments: Seq[Expression],
+  isBuiltin: FunctionIdentifier => Boolean,
+  registry: FunctionRegistryBase[T]): Option[T]
+```
+
+`resolveBuiltinOrTempFunctionInternal` creates a `FunctionIdentifier` (for the given `name`).
+
+`resolveBuiltinOrTempFunctionInternal`...FIXME
+
+!!! note
+    `resolveBuiltinOrTempFunctionInternal` is fairly simple yet I got confused what it does actually so I marked it `FIXME`.
+
+---
+
+`resolveBuiltinOrTempFunctionInternal` is used when:
+
+* `SessionCatalog` is requested to [resolveBuiltinOrTempFunction](#resolveBuiltinOrTempFunction), [resolveBuiltinOrTempTableFunction](#resolveBuiltinOrTempTableFunction)
+
+## <span id="registerFunction"> registerFunction
+
+```scala
+registerFunction(
+  funcDefinition: CatalogFunction,
+  overrideIfExists: Boolean,
+  functionBuilder: Option[Seq[Expression] => Expression] = None): Unit
+registerFunction[T](
+  funcDefinition: CatalogFunction,
+  overrideIfExists: Boolean,
+  registry: FunctionRegistryBase[T],
+  functionBuilder: Seq[Expression] => T): Unit
+```
+
+`registerFunction`...FIXME
+
+---
+
+`registerFunction` is used when:
+
+* `CreateFunctionCommand` is executed
+* `RefreshFunctionCommand` is executed
+* `SessionCatalog` is requested to [resolvePersistentFunctionInternal](#resolvePersistentFunctionInternal)
