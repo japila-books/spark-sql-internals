@@ -113,6 +113,21 @@ injectResolutionRule(
 
 `injectResolutionRule`...FIXME
 
+### <span id="injectTableFunction"> injectTableFunction
+
+```scala
+type TableFunctionBuilder = Seq[Expression] => LogicalPlan
+type TableFunctionDescription = (FunctionIdentifier, ExpressionInfo, TableFunctionBuilder)
+injectTableFunction(
+  functionDescription: TableFunctionDescription): Unit
+```
+
+`injectTableFunction` registers a new [Table-Valued Functions](table-valued-functions/index.md).
+
+---
+
+`injectTableFunction` adds the given `TableFunctionDescription` to the [injectedTableFunctions](#injectedTableFunctions) internal registry.
+
 ## <span id="buildOptimizerRules"> Registering Custom Logical Optimization Rules
 
 ```scala
@@ -178,10 +193,27 @@ registerTableFunctions(
   tableFunctionRegistry: TableFunctionRegistry): TableFunctionRegistry
 ```
 
-`registerTableFunctions`...FIXME
+`registerTableFunctions` requests the given [TableFunctionRegistry](TableFunctionRegistry.md) to [register](FunctionRegistryBase.md#registerFunction) all the [injected table functions](#injectedTableFunctions).
 
 ---
 
 `registerTableFunctions` is used when:
 
 * `BaseSessionStateBuilder` is requested for the [TableFunctionRegistry](#tableFunctionRegistry)
+
+## <span id="injectedTableFunctions"> injectedTableFunctions
+
+```scala
+injectedTableFunctions: Buffer[TableFunctionDescription]
+```
+
+`SparkSessionExtensions` creates an empty `injectedTableFunctions` mutable collection of `TableFunctionDescription`s:
+
+```scala
+type TableFunctionBuilder = Seq[Expression] => LogicalPlan
+type TableFunctionDescription = (FunctionIdentifier, ExpressionInfo, TableFunctionBuilder)
+```
+
+A new `TableFunctionDescription` tuple is added using [injectTableFunction](#injectTableFunction) injector.
+
+`TableFunctionDescription`s are registered when `SparkSessionExtensions` is requested to [registerTableFunctions](#registerTableFunctions).

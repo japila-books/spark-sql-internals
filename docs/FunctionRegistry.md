@@ -1,5 +1,21 @@
 # FunctionRegistry
 
+`FunctionRegistry` is an [extension](#contract) of the [FunctionRegistryBase](FunctionRegistryBase.md) abstraction for [function registries](#implementations) with functions that produce a result of [Expression](expressions/Expression.md) type.
+
+## Implementations
+
+* `EmptyFunctionRegistry`
+* [SimpleFunctionRegistry](SimpleFunctionRegistry.md)
+
+## Accessing FunctionRegistry
+
+`FunctionRegistry` is available using [SessionState.functionRegistry](SessionState.md#functionRegistry).
+
+```scala
+import org.apache.spark.sql.catalyst.analysis.FunctionRegistry
+assert(spark.sessionState.functionRegistry.isInstanceOf[FunctionRegistry])
+```
+
 ## <span id="builtin"> Built-In Functions
 
 ```scala
@@ -8,6 +24,8 @@ builtin: SimpleFunctionRegistry
 
 `builtin` creates a new [SimpleFunctionRegistry](SimpleFunctionRegistry.md) and [registers](SimpleFunctionRegistryBase.md#internalRegisterFunction) all the [built-in function expressions](#expressions).
 
+---
+
 `builtin` is used when:
 
 * `FunctionRegistry` utility is used for [functionSet](#functionSet)
@@ -15,165 +33,39 @@ builtin: SimpleFunctionRegistry
 * `DropFunctionCommand` and `RefreshFunctionCommand` commands are executed
 * `BaseSessionStateBuilder` is requested for a [FunctionRegistry](BaseSessionStateBuilder.md#functionRegistry)
 
-## Review Me
+## <span id="logicalPlan"> logicalPlan
 
-`FunctionRegistry` is the <<contract, contract>> of <<implementations, function registries>> (_catalogs_) of native and user-defined functions.
+```scala
+type TableFunctionBuilder = Seq[Expression] => LogicalPlan
+logicalPlan[T <: LogicalPlan : ClassTag](
+  name: String): (String, (ExpressionInfo, TableFunctionBuilder))
+```
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.catalyst.analysis
+`logicalPlan` [builds info and builder](FunctionRegistryBase.md#build) for the given `name` table function and returns a tuple of the following:
 
-trait FunctionRegistry {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def clear(): Unit
-  def dropFunction(name: FunctionIdentifier): Boolean
-  def listFunction(): Seq[FunctionIdentifier]
-  def lookupFunction(name: FunctionIdentifier): Option[ExpressionInfo]
-  def lookupFunction(name: FunctionIdentifier, children: Seq[Expression]): Expression
-  def lookupFunctionBuilder(name: FunctionIdentifier): Option[FunctionBuilder]
-  def registerFunction(
-    name: FunctionIdentifier,
-    info: ExpressionInfo,
-    builder: FunctionBuilder): Unit
-}
-----
+* The given name
+* The info
+* A function that uses the builder to build a [LogicalPlan](logical-operators/LogicalPlan.md) for a given [Expression](expressions/Expression.md)s
 
-.FunctionRegistry Contract
-[cols="1m,2",options="header",width="100%"]
-|===
-| Property
-| Description
+---
 
-| clear
-| [[clear]] Used exclusively when `SessionCatalog` is requested to [reset](SessionCatalog.md#reset)
+`logicalPlan` is used when:
 
-| dropFunction
-| [[dropFunction]] Used when...FIXME
+* [TableFunctionRegistry](TableFunctionRegistry.md) is created (and [registers range table function](TableFunctionRegistry.md#logicalPlans))
 
-| listFunction
-| [[listFunction]] Used when...FIXME
+## <span id="generator"> generator
 
-| lookupFunction
-a| [[lookupFunction]]
+```scala
+type TableFunctionBuilder = Seq[Expression] => LogicalPlan
+generator[T <: Generator : ClassTag](
+  name: String,
+  outer: Boolean = false): (String, (ExpressionInfo, TableFunctionBuilder))
+```
 
-Used when:
+`generator`...FIXME
 
-* `FunctionRegistry` is requested to <<functionExists, functionExists>>
+---
 
-* `SessionCatalog` is requested to [find a function by name](SessionCatalog.md#lookupFunction), [lookupFunctionInfo](SessionCatalog.md#lookupFunctionInfo) or [reset](SessionCatalog.md#reset)
+`generator` is used when:
 
-* `HiveSessionCatalog` is requested to [lookupFunction0](hive/HiveSessionCatalog.md#lookupFunction0)
-
-| lookupFunctionBuilder
-| [[lookupFunctionBuilder]] Used when...FIXME
-
-| registerFunction
-a| [[registerFunction]]
-
-Used when:
-
-* `SessionCatalog` is requested to [registerFunction](SessionCatalog.md#registerFunction) or [reset](SessionCatalog.md#reset)
-
-* `FunctionRegistry` is requested for a <<builtin, SimpleFunctionRegistry with the built-in functions registered>> or <<createOrReplaceTempFunction, createOrReplaceTempFunction>>
-
-* `SimpleFunctionRegistry` is requested to `clone`
-|===
-
-[[implementations]]
-NOTE: The one and only `FunctionRegistry` available in Spark SQL is <<SimpleFunctionRegistry, SimpleFunctionRegistry>>.
-
-`FunctionRegistry` is available through SessionState.md#functionRegistry[functionRegistry] property of a `SessionState` (that is available as <<SparkSession.md#sessionState, sessionState>> property of a `SparkSession`).
-
-[source, scala]
-----
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sessionState.functionRegistry
-org.apache.spark.sql.catalyst.analysis.FunctionRegistry
-----
-
-NOTE: You can register a new user-defined function using UDFRegistration.md[UDFRegistration].
-
-[[expressions]]
-`FunctionRegistry` manages *function expression registry* of <<expressions/Expression.md#, Catalyst expressions>> and the corresponding built-in/native SQL functions (that can be used in SQL statements).
-
-.(Subset of) FunctionRegistry's Catalyst Expression to SQL Function Mapping
-[cols="1,1m",options="header",width="100%"]
-|===
-| Catalyst Expression
-| SQL Function
-
-| <<spark-sql-Expression-CumeDist.md#, CumeDist>>
-| [[cume_dist]] cume_dist
-
-| `IfNull`
-| [[ifnull]] ifnull
-
-| `Left`
-| [[left]] left
-
-| <<expressions/MonotonicallyIncreasingID.md#, MonotonicallyIncreasingID>>
-| [[monotonically_increasing_id]] monotonically_increasing_id
-
-| `NullIf`
-| [[nullif]] nullif
-
-| `Nvl`
-| [[nvl]] nvl
-
-| `Nvl2`
-| [[nvl2]] nvl2
-
-| <<spark-sql-Expression-ParseToDate.md#, ParseToDate>>
-| [[to_date]] to_date
-
-| <<expressions/ParseToTimestamp.md#, ParseToTimestamp>>
-| [[to_timestamp]] to_timestamp
-
-| `Right`
-| [[right]] right
-
-| <<CreateStruct.md#registryEntry, CreateNamedStruct>>
-| [[struct]] struct
-|===
-
-=== [[expression]] `expression` Internal Method
-
-[source, scala]
-----
-expression[T <: Expression](name: String)
-  (implicit tag: ClassTag[T]): (String, (ExpressionInfo, FunctionBuilder))
-----
-
-`expression`...FIXME
-
-NOTE: `expression` is used when...FIXME
-
-=== [[SimpleFunctionRegistry]] SimpleFunctionRegistry
-
-`SimpleFunctionRegistry` is the default <<FunctionRegistry, FunctionRegistry>> that is backed by a hash map (with optional case sensitivity).
-
-=== [[createOrReplaceTempFunction]] `createOrReplaceTempFunction` Final Method
-
-[source, scala]
-----
-createOrReplaceTempFunction(name: String, builder: FunctionBuilder): Unit
-----
-
-`createOrReplaceTempFunction`...FIXME
-
-NOTE: `createOrReplaceTempFunction` is used exclusively when `UDFRegistration` is requested to register an <<UDFRegistration.md#register, user-defined function>>, <<UDFRegistration.md#register-UserDefinedAggregateFunction, user-defined aggregate function>>, <<UDFRegistration.md#register-UserDefinedFunction, user-defined function (as UserDefinedFunction)>> or `registerPython`.
-
-=== [[functionExists]] `functionExists` Method
-
-[source, scala]
-----
-functionExists(name: FunctionIdentifier): Boolean
-----
-
-`functionExists`...FIXME
-
-NOTE: `functionExists` is used when...FIXME
+* [TableFunctionRegistry](TableFunctionRegistry.md) is created (and [registers generate table functions](TableFunctionRegistry.md#logicalPlans))

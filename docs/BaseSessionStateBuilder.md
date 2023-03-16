@@ -6,11 +6,7 @@
     `BaseSessionStateBuilder` and [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property allow for Hive and non-Hive Spark deployments.
 
 ```text
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sessionState
-org.apache.spark.sql.internal.SessionState
+assert(spark.sessionState.isInstanceOf[org.apache.spark.sql.internal.SessionState])
 ```
 
 `BaseSessionStateBuilder` holds [properties](#properties) that (together with [newBuilder](#newBuilder)) are used to create a [SessionState](SessionState.md).

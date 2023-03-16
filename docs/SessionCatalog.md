@@ -11,7 +11,7 @@
 * <span id="externalCatalogBuilder"> [ExternalCatalog](ExternalCatalog.md)
 * <span id="globalTempViewManagerBuilder"> [GlobalTempViewManager](GlobalTempViewManager.md)
 * <span id="functionRegistry"> [FunctionRegistry](FunctionRegistry.md)
-* <span id="tableFunctionRegistry"> [TableFunctionRegistry](TableFunctionRegistry.md)
+* [TableFunctionRegistry](#tableFunctionRegistry)
 * <span id="hadoopConf"> `Configuration` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html))
 * <span id="parser"> [ParserInterface](sql/ParserInterface.md)
 * <span id="functionResourceLoader"> FunctionResourceLoader
@@ -24,16 +24,30 @@
 
 `SessionCatalog` is created (and cached for later usage) when `BaseSessionStateBuilder` is requested for [one](BaseSessionStateBuilder.md#catalog).
 
+### <span id="tableFunctionRegistry"> TableFunctionRegistry
+
+`SessionCatalog` is given a [TableFunctionRegistry](TableFunctionRegistry.md) when [created](#creating-instance).
+
+The `TableFunctionRegistry` is used in the following:
+
+* [dropTempFunction](#dropTempFunction)
+* [isRegisteredFunction](#isRegisteredFunction)
+* [listBuiltinAndTempFunctions](#listBuiltinAndTempFunctions)
+* [listTemporaryFunctions](#listTemporaryFunctions)
+* [lookupBuiltinOrTempTableFunction](#lookupBuiltinOrTempTableFunction)
+* [lookupPersistentFunction](#lookupPersistentFunction)
+* [resolveBuiltinOrTempTableFunction](#resolveBuiltinOrTempTableFunction)
+* [resolvePersistentTableFunction](#resolvePersistentTableFunction)
+* [reset](#reset)
+* [unregisterFunction](#unregisterFunction)
+
 ## Accessing SessionCatalog
 
 `SessionCatalog` is available through [SessionState](SessionState.md#catalog) (of the owning [SparkSession](SparkSession.md#sessionState)).
 
-```text
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
-scala> :type spark.sessionState.catalog
-org.apache.spark.sql.catalyst.catalog.SessionCatalog
+```scala
+val catalog = spark.sessionState.catalog
+assert(catalog.isInstanceOf[org.apache.spark.sql.catalyst.catalog.SessionCatalog])
 ```
 
 ## <span id="DEFAULT_DATABASE"> Default Database Name
