@@ -2,6 +2,8 @@
 
 `InMemoryRelation` is a [leaf logical operator](LeafNode.md) that represents a structured query that is cached in memory (when `CacheManager` is requested to [cache it](../CacheManager.md#cacheQuery)).
 
+`InMemoryRelation` uses [spark.sql.cache.serializer](../configuration-properties.md#spark.sql.cache.serializer) configuration property to [create a CachedBatchSerializer](#getSerializer).
+
 ## Creating Instance
 
 `InMemoryRelation` takes the following to be created:

@@ -202,6 +202,8 @@ nav:
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
+    - Cache Serialization:
+      - cache-serialization/index.md
     - Statistics: new-and-noteworthy/statistics.md
     - Table-Valued Functions:
       - table-valued-functions/index.md
