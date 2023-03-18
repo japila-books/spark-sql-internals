@@ -81,6 +81,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/CatalogUtils/</loc>
+         <lastmod>2023-03-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CatalystSerde/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
@@ -936,6 +941,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/Expression/</loc>
+         <lastmod>2023-03-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/InputPartition/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
@@ -1122,6 +1132,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/Transform/</loc>
+         <lastmod>2023-03-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/TransformHelper/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
