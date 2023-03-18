@@ -442,6 +442,7 @@ nav:
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md
         - InMemoryCatalog: InMemoryCatalog.md
+        - ExternalCatalogWithListener.md
       - FunctionRegistry:
         - FunctionRegistry: FunctionRegistry.md
         - FunctionRegistryBase: FunctionRegistryBase.md

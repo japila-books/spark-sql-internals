@@ -16,4 +16,4 @@ normalizeBucketSpec(
 
 `normalizeBucketSpec` is used when:
 
-* [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) logical analysis rule is executed (on a bucketed table while appending data to [CreateTable](logical-operators/CreateTable.md))
+* [PreprocessTableCreation](logical-analysis-rules/PreprocessTableCreation.md) logical analysis rule is executed (on a bucketed table while appending data to a [CreateTable](logical-operators/CreateTable.md))

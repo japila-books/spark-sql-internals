@@ -14,6 +14,26 @@
 
 * `SparkSession` is requested for the [Catalog](SparkSession.md#catalog)
 
+## <span id="listColumns"> listColumns
+
+??? note "Signature"
+
+    ```scala
+    listColumns(
+      ident: Seq[String]): Dataset[Column]
+    listColumns(
+      tableName: String): Dataset[Column]
+    listColumns(
+      dbName: String,
+      tableName: String): Dataset[Column]
+    ```
+
+    `listColumns` is part of the [Catalog](Catalog.md#listColumns) abstraction.
+
+`listColumns`...FIXME
+
+In the end, `listColumns` [makeDataset](#makeDataset) with the columns.
+
 ## <span id="getTable"> getTable
 
 ??? note "Signature"
@@ -27,8 +47,6 @@
     ```
 
     `getTable` is part of the [Catalog](Catalog.md#getTable) abstraction.
-
----
 
 `getTable`...FIXME
 

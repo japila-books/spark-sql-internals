@@ -24,10 +24,14 @@ Used when:
 ```java
 Table createTable(
   Identifier ident,
-  StructType schema,
+  Column[] columns,
   Transform[] partitions,
   Map<String, String> properties)
 ```
+
+See:
+
+* [V2SessionCatalog](../../V2SessionCatalog.md#createTable)
 
 Used when the following commands are executed:
 

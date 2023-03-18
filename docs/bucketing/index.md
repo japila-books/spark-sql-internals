@@ -7,10 +7,9 @@ The motivation is to optimize performance of a join query by avoiding shuffles (
 !!! note
     Bucketing can show the biggest benefit when **pre-shuffled bucketed tables** are used more than once as bucketing itself takes time (that you will offset executing multiple join queries later).
 
-Bucketing is supported for tables in the following catalogs (_metastores_):
+Bucketing is supported for permanent tables in the following catalogs (_metastores_):
 
-* [HiveExternalCatalog](../hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties) (`spark.sql.sources.schema.numBuckets` metadata property)
-* [CatalogUtils](../CatalogUtils.md#normalizeBucketSpec)
+* [HiveExternalCatalog](../hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties)
 * [TransformHelper](../connector/TransformHelper.md#convertTransforms)
 
 Bucketing is configured using [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled) configuration property.
@@ -25,8 +24,12 @@ Bucketing is used exclusively in [FileSourceScanExec](../physical-operators/File
 
 Bucketed tables can be created using the following higher-level operators:
 
-* [DataFrameWriter](../DataFrameWriter.md#numBuckets)
 * [AstBuilder](../sql/AstBuilder.md#visitBucketSpec)
+* [CreateTableAsSelectExec](../physical-operators/CreateTableAsSelectExec.md)
+* `CreateTableExec`
+* [DataFrameWriter](../DataFrameWriter.md#numBuckets)
+* `ReplaceTableAsSelectExec`
+* `ReplaceTableExec`
 
 ## SHOW CREATE TABLE
 

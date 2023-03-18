@@ -73,6 +73,20 @@ EQ  : '=' | '==';
 
 ANTLR labeled alternative: `#analyze`
 
+### <span id="visitBucketSpec"> visitBucketSpec
+
+Creates a [BucketSpec](../bucketing/BucketSpec.md)
+
+```antlr
+bucketSpec
+  : CLUSTERED BY '(' identifierList ')'
+    (SORTED BY '(' orderedIdentifierList ')' )?
+    INTO digit BUCKETS
+  ;
+```
+
+Column ordering must be `ASC`
+
 ### <span id="visitCommentTable"> visitCommentTable
 
 Creates a [CommentOnTable](../logical-operators/CommentOnTable.md) logical command

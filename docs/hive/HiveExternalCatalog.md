@@ -1,8 +1,6 @@
 # HiveExternalCatalog
 
-`HiveExternalCatalog` is an [ExternalCatalog](../ExternalCatalog.md) of permanent relational entities.
-
-`HiveExternalCatalog` is used for `SparkSession` with [Hive support enabled](../SparkSession-Builder.md#enableHiveSupport).
+`HiveExternalCatalog` is an [ExternalCatalog](../ExternalCatalog.md) for `SparkSession` with [Hive support enabled](../SparkSession-Builder.md#enableHiveSupport).
 
 ![HiveExternalCatalog and SharedState](../images/spark-sql-HiveExternalCatalog.png)
 
@@ -18,6 +16,73 @@
 `HiveExternalCatalog` is created when:
 
 * `SharedState` is requested for the [ExternalCatalog](../SharedState.md#externalCatalog) (and [spark.sql.catalogImplementation](../StaticSQLConf.md#spark.sql.catalogImplementation) is `hive`).
+
+## <span id="restoreTableMetadata"> restoreTableMetadata
+
+```scala
+restoreTableMetadata(
+  inputTable: CatalogTable): CatalogTable
+```
+
+`restoreTableMetadata`...FIXME
+
+---
+
+`restoreTableMetadata` is used when:
+
+* `HiveExternalCatalog` is requested for [table metadata](#getTable), the [metadata of tables](#getTablesByName) and [listPartitionsByFilter](#listPartitionsByFilter)
+
+### <span id="restoreHiveSerdeTable"> restoreHiveSerdeTable
+
+```scala
+restoreHiveSerdeTable(
+  table: CatalogTable): CatalogTable
+```
+
+`restoreHiveSerdeTable`...FIXME
+
+### <span id="restoreDataSourceTable"> restoreDataSourceTable
+
+```scala
+restoreDataSourceTable(
+  table: CatalogTable,
+  provider: String): CatalogTable
+```
+
+`restoreDataSourceTable`...FIXME
+
+### <span id="getBucketSpecFromTableProperties"> Looking Up BucketSpec in Table Properties
+
+```scala
+getBucketSpecFromTableProperties(
+  metadata: CatalogTable): Option[BucketSpec]
+```
+
+`getBucketSpecFromTableProperties` looks up the value of `spark.sql.sources.schema.numBuckets` property (among the [properties](../CatalogTable.md#properties)) in the given [CatalogTable](../CatalogTable.md) metadata.
+
+If found, `getBucketSpecFromTableProperties` creates a [BucketSpec](../bucketing/BucketSpec.md) with the following:
+
+BucketSpec | Metadata Property
+-----------|------------------
+ [numBuckets](../bucketing/BucketSpec.md#numBuckets) | `spark.sql.sources.schema.numBuckets`
+ [bucketColumnNames](../bucketing/BucketSpec.md#bucketColumnNames) | `spark.sql.sources.schema.numBucketCols`<br>`spark.sql.sources.schema.bucketCol.N`
+ [sortColumnNames](../bucketing/BucketSpec.md#sortColumnNames) | `spark.sql.sources.schema.numSortCols`<br>`spark.sql.sources.schema.sortCol.N`
+
+## <span id="restorePartitionMetadata"> restorePartitionMetadata
+
+```scala
+restorePartitionMetadata(
+  partition: CatalogTablePartition,
+  table: CatalogTable): CatalogTablePartition
+```
+
+`restorePartitionMetadata`...FIXME
+
+---
+
+`restorePartitionMetadata` is used when:
+
+* `HiveExternalCatalog` is requested to [getPartition](#getPartition) and [getPartitionOption](#getPartitionOption)
 
 ## <span id="statsFromProperties"> Restoring Table Statistics from Table Properties (from Hive Metastore)
 
@@ -47,136 +112,36 @@ Catalog Statistic | Value
 
 `statsFromProperties` is used when:
 
-* `HiveExternalCatalog` is requested to restore metadata of a [table](#restoreTableMetadata) or a [partition](#restorePartitionMetadata)
-
-## <span id="getTable"> getTable
-
-```scala
-getTable(
-  db: String,
-  table: String): CatalogTable
-```
-
-`getTable` is part of the [ExternalCatalog](../ExternalCatalog.md#getTable) abstraction.
-
----
-
-`getTable`...FIXME
-
-## <span id="getTablesByName"> getTablesByName
-
-```scala
-getTablesByName(
-  db: String,
-  tables: Seq[String]): Seq[CatalogTable]
-```
-
-`getTablesByName` is part of the [ExternalCatalog](../ExternalCatalog.md#getTablesByName) abstraction.
-
----
-
-`getTablesByName`...FIXME
-
-## <span id="listPartitionsByFilter"> listPartitionsByFilter
-
-```scala
-listPartitionsByFilter(
-  db: String,
-  table: String,
-  predicates: Seq[Expression],
-  defaultTimeZoneId: String): Seq[CatalogTablePartition]
-```
-
-`listPartitionsByFilter` is part of the [ExternalCatalog](../ExternalCatalog.md#listPartitionsByFilter) abstraction.
-
----
-
-`listPartitionsByFilter`...FIXME
-
-## <span id="getPartition"> getPartition
-
-```scala
-getPartition(
-  db: String,
-  table: String,
-  spec: TablePartitionSpec): CatalogTablePartition
-```
-
-`getPartition` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartition) abstraction.
-
----
-
-`getPartition`...FIXME
-
-## <span id="getPartitionOption"> getPartitionOption
-
-```scala
-getPartitionOption(
-  db: String,
-  table: String,
-  spec: TablePartitionSpec): Option[CatalogTablePartition]
-```
-
-`getPartitionOption` is part of the [ExternalCatalog](../ExternalCatalog.md#getPartitionOption) abstraction.
-
----
-
-`getPartitionOption`...FIXME
-
-## <span id="restoreTableMetadata"> restoreTableMetadata
-
-```scala
-restoreTableMetadata(
-  inputTable: CatalogTable): CatalogTable
-```
-
-`restoreTableMetadata`...FIXME
-
----
-
-`restoreTableMetadata` is used when:
-
-* `HiveExternalCatalog` is requested to [getTable](#getTable), [getTablesByName](#getTablesByName) and [listPartitionsByFilter](#listPartitionsByFilter)
-
-## <span id="restorePartitionMetadata"> restorePartitionMetadata
-
-```scala
-restorePartitionMetadata(
-  partition: CatalogTablePartition,
-  table: CatalogTable): CatalogTablePartition
-```
-
-`restorePartitionMetadata`...FIXME
-
----
-
-`restorePartitionMetadata` is used when:
-
-* `HiveExternalCatalog` is requested to [getPartition](#getPartition) and [getPartitionOption](#getPartitionOption)
+* `HiveExternalCatalog` is requested to [restore metadata of a table](#restoreTableMetadata) or a [partition](#restorePartitionMetadata)
 
 ## Demo
 
-```text
+```scala
 import org.apache.spark.sql.internal.StaticSQLConf
 val catalogType = spark.conf.get(StaticSQLConf.CATALOG_IMPLEMENTATION.key)
-scala> println(catalogType)
-hive
+assert(catalogType == "hive")
+```
 
-// Alternatively...
-scala> spark.sessionState.conf.getConf(StaticSQLConf.CATALOG_IMPLEMENTATION)
-res1: String = hive
+```scala
+assert(spark.sessionState.conf.getConf(StaticSQLConf.CATALOG_IMPLEMENTATION) == "hive")
+```
 
-// Or you could use the property key by name
-scala> spark.conf.get("spark.sql.catalogImplementation")
-res1: String = hive
+```scala
+assert(spark.conf.get("spark.sql.catalogImplementation") == "hive")
+```
 
+```scala
 val metastore = spark.sharedState.externalCatalog
-scala> :type metastore
-org.apache.spark.sql.catalyst.catalog.ExternalCatalog
+import org.apache.spark.sql.catalyst.catalog.ExternalCatalog
+assert(metastore.isInstanceOf[ExternalCatalog])
+```
 
-// Since Hive is enabled HiveExternalCatalog is the metastore
+```text
 scala> println(metastore)
-org.apache.spark.sql.hive.HiveExternalCatalog@25e95d04
+org.apache.spark.sql.catalyst.catalog.ExternalCatalogWithListener@277ffb17
+
+scala> println(metastore.unwrapped)
+org.apache.spark.sql.hive.HiveExternalCatalog@4eda3af9
 ```
 
 ## Logging
@@ -186,10 +151,11 @@ Enable `ALL` logging level for `org.apache.spark.sql.hive.HiveExternalCatalog` l
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.hive.HiveExternalCatalog=ALL
+logger.HiveExternalCatalog.name = org.apache.spark.sql.hive.HiveExternalCatalog
+logger.HiveExternalCatalog.level = all
 ```
 
-Refer to [Logging](../spark-logging.md)
+Refer to [Logging](../spark-logging.md).
 
 <!---
 ## Review Me

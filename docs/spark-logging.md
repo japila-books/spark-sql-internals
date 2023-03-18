@@ -5,7 +5,7 @@ hide:
 
 # Logging
 
-Spark uses [log4j](http://logging.apache.org/log4j) for logging.
+Apache Spark uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/index.html) for logging.
 
 !!! note
-    Learn more on [Spark Logging]({{ book.spark_core }}/spark-logging/) in [The Internals of Apache Spark]({{ book.spark_core }}) online book.
+    Learn more in [The Internals of Apache Spark]({{ book.spark_core }}/spark-logging/) online book.
