@@ -7,6 +7,12 @@ The motivation is to optimize performance of a join query by avoiding shuffles (
 !!! note
     Bucketing can show the biggest benefit when **pre-shuffled bucketed tables** are used more than once as bucketing itself takes time (that you will offset executing multiple join queries later).
 
+Bucketing is supported for tables in the following catalogs (_metastores_):
+
+* [HiveExternalCatalog](../hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties) (`spark.sql.sources.schema.numBuckets` metadata property)
+* [CatalogUtils](../CatalogUtils.md#normalizeBucketSpec)
+* [TransformHelper](../connector/TransformHelper.md#convertTransforms)
+
 Bucketing is configured using [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled) configuration property.
 
 ```scala
@@ -14,6 +20,17 @@ assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 ```
 
 Bucketing is used exclusively in [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator (when requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) and to determine the [partitioning](../physical-operators/FileSourceScanExec.md#outputPartitioning) and [ordering](../physical-operators/FileSourceScanExec.md#outputOrdering) of the output).
+
+## Create Bucketed Tables
+
+Bucketed tables can be created using the following higher-level operators:
+
+* [DataFrameWriter](../DataFrameWriter.md#numBuckets)
+* [AstBuilder](../sql/AstBuilder.md#visitBucketSpec)
+
+## SHOW CREATE TABLE
+
+[ShowCreateTableExec](../physical-operators/ShowCreateTableExec.md) physical operator can display bucketing specification of a bucketed table.
 
 ## Demo: SortMergeJoin of Two FileScans
 

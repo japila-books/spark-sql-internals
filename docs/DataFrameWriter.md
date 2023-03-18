@@ -240,13 +240,14 @@ Name     | Behaviour
 getBucketSpec: Option[BucketSpec]
 ```
 
-`getBucketSpec` returns a new [BucketSpec](bucketing/BucketSpec.md) if [numBuckets](#numBuckets) was defined (with [bucketColumnNames](#bucketColumnNames) and [sortColumnNames](#sortColumnNames)).
+`getBucketSpec` creates a new [BucketSpec](bucketing/BucketSpec.md) for [numBuckets](#numBuckets) if defined (with [bucketColumnNames](#bucketColumnNames) and [sortColumnNames](#sortColumnNames)).
 
-`getBucketSpec` throws an `IllegalArgumentException` when [numBuckets](#numBuckets) are not defined but [sortColumnNames](#sortColumnNames) are.
+??? note "IllegalArgumentException"
+    `getBucketSpec` throws an `IllegalArgumentException` when [numBuckets](#numBuckets) are not defined but [sortColumnNames](#sortColumnNames) are.
 
-```text
-sortBy must be used together with bucketBy
-```
+    ```text
+    sortBy must be used together with bucketBy
+    ```
 
 ## <span id="saveToV1Source"> Executing Logical Command for Writing to Data Source V1
 

@@ -260,6 +260,7 @@ nav:
       - DataSourceV2Implicits: connector/DataSourceV2Implicits.md
       - DataWriter: connector/DataWriter.md
       - DataWriterFactory: connector/DataWriterFactory.md
+      - Expression: connector/Expression.md
       - InputPartition: connector/InputPartition.md
       - MetadataColumn: connector/MetadataColumn.md
       - MetadataColumnHelper: connector/MetadataColumnHelper.md
@@ -298,6 +299,7 @@ nav:
       - TableHelper: connector/TableHelper.md
       - TableProvider: connector/TableProvider.md
       - Transform: connector/Transform.md
+      - TransformHelper: connector/TransformHelper.md
       - TruncatableTable: connector/TruncatableTable.md
       - V1Scan: connector/V1Scan.md
       - V1Table: connector/V1Table.md
@@ -435,6 +437,7 @@ nav:
         - Catalog: Catalog.md
         - CatalogImpl: CatalogImpl.md
         - CatalogStatistics: CatalogStatistics.md
+        - CatalogUtils: CatalogUtils.md
       - ExperimentalMethods: ExperimentalMethods.md
       - ExternalCatalog:
         - ExternalCatalog: ExternalCatalog.md

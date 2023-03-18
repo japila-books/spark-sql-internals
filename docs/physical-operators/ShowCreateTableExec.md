@@ -62,3 +62,31 @@ showTableDataColumns(
 ```
 
 `showTableDataColumns` requests the given [Table](../connector/Table.md) for the [columns](../connector/Table.md#columns) that are [converted to DDL format](../types/StructField.md#toDDL).
+
+### <span id="showTablePartitioning"> showTablePartitioning
+
+```scala
+showTablePartitioning(
+  table: Table,
+  builder: StringBuilder): Unit
+```
+
+??? note "Noop for a non-partitioned table"
+    `showTablePartitioning` does nothing (_noop_) when the given [table](../connector/Table.md) has no [partitioning](../connector/Table.md#partitioning).
+
+For a `BucketTransform` (among [partitioning transforms](../connector/Table.md#partitioning)), `showTablePartitioning` creates a [BucketSpec](../bucketing/BucketSpec.md) to add the following (to the given `StringBuilder`):
+
+```text
+CLUSTERED BY [bucketColumnNames]
+SORTED BY [sortColumnNames]
+INTO [numBuckets] BUCKETS
+```
+
+??? note "One BucketTransform Supported"
+    In case there are more `BucketTransform`s, the last wins.
+
+For all other [Transform](../connector/Transform.md)s, `showTablePartitioning` requests them to [describe](../connector/Expression.md#describe) and adds the following (to the given `StringBuilder`):
+
+```text
+PARTITIONED BY [transforms]
+```

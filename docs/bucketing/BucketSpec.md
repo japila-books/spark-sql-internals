@@ -2,18 +2,38 @@
 
 `BucketSpec` is the [bucketing specification](index.md) of a table (the metadata of a [bucketed table](index.md)).
 
+`BucketSpec` is a [SQLConfHelper](../SQLConfHelper.md)
+
+## Creating Instance
+
+`BucketSpec` takes the following to be created:
+
+* [Number of buckets](#numBuckets)
+* <span id="bucketColumnNames"> Bucketing Columns
+* <span id="sortColumnNames"> Sorting Columns
+
+`BucketSpec` is created when:
+
+* `CatalogUtils` is requested to `normalizeBucketSpec`
+* `AstBuilder` is requested to [parse bucketing specification](../sql/AstBuilder.md#visitBucketSpec)
+* `TransformHelper` is requested to `convertTransforms`
+* `HiveExternalCatalog` is requested to [getBucketSpecFromTableProperties](../hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties)
+* `HiveClientImpl` is requested to [convertHiveTableToCatalogTable](../hive/HiveClientImpl.md#convertHiveTableToCatalogTable)
+* `DataFrameWriter` is requested to [getBucketSpec](../DataFrameWriter.md#getBucketSpec)
+* `ShowCreateTableExec` is requested to [showTablePartitioning](../physical-operators/ShowCreateTableExec.md#showTablePartitioning)
+
+### <span id="numBuckets"> Number of Buckets
+
+`BucketSpec` is given the number of buckets when [created](#creating-instance).
+
+The number of buckets has to be between `0` and [spark.sql.sources.bucketing.maxBuckets](../configuration-properties.md#spark.sql.sources.bucketing.maxBuckets) (inclusive) or an `AnalysisException` is reported:
+
+```text
+Number of buckets should be greater than 0 but less than or equal to bucketing.maxBuckets (`[bucketingMaxBuckets]`). Got `[numBuckets]`.
+```
+
 <!---
 ## Review Me
-
-[[creating-instance]]
-
-`BucketSpec` includes the following:
-
-* [[numBuckets]] Number of buckets
-* [[bucketColumnNames]] Bucket Columns - the names of the columns used for buckets (at least one)
-* [[sortColumnNames]] Sort Columns - the names of the columns used to sort data in buckets
-
-The <<numBuckets, number of buckets>> has to be between `0` and `100000` exclusive (or an `AnalysisException` is thrown).
 
 `BucketSpec` is <<creating-instance, created>> when:
 
