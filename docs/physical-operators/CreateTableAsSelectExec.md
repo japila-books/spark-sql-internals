@@ -1,6 +1,6 @@
 # CreateTableAsSelectExec Physical Command
 
-`CreateTableAsSelectExec` is a [TableWriteExecHelper](TableWriteExecHelper.md).
+`CreateTableAsSelectExec` is a [TableWriteExecHelper](TableWriteExecHelper.md) that represents [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) logical operator at execution time.
 
 ## Creating Instance
 
@@ -21,10 +21,12 @@
 
 ## <span id="run"> Executing Command
 
-```scala
-run(): Seq[InternalRow]
-```
+??? note "Signature"
 
-`run` is part of the [V2CommandExec](V2CommandExec.md#run) abstraction.
+    ```scala
+    run(): Seq[InternalRow]
+    ```
+
+    `run` is part of the [V2CommandExec](V2CommandExec.md#run) abstraction.
 
 `run`...FIXME

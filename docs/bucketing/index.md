@@ -33,7 +33,7 @@ Bucketed tables can be created using the following higher-level operators:
 
 ## SHOW CREATE TABLE
 
-[ShowCreateTableExec](../physical-operators/ShowCreateTableExec.md) physical operator can display bucketing specification of a bucketed table.
+[SHOW CREATE TABLE](../sql/AstBuilder.md#visitShowCreateTable) SQL statement is used to display bucketing specification of a table.
 
 ## Demo: SortMergeJoin of Two FileScans
 

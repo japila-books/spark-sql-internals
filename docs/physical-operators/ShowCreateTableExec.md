@@ -1,6 +1,6 @@
 # ShowCreateTableExec Physical Command
 
-`ShowCreateTableExec` is a [V2CommandExec](V2CommandExec.md) physical command.
+`ShowCreateTableExec` is a [V2CommandExec](V2CommandExec.md) physical command that represents [ShowCreateTable](../logical-operators/ShowCreateTable.md) logical operator at execution.
 
 `ShowCreateTableExec` is a `LeafExecNode`.
 

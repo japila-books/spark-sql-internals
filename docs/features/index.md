@@ -3,6 +3,7 @@
 The following are the features of Spark SQL that help place it in the top of the modern distributed SQL query processing engines:
 
 * [Adaptive Query Execution](../adaptive-query-execution/index.md)
+* [Bucketing](../bucketing/index.md)
 * [Catalog Plugin API](../connector/catalog/index.md)
 * [Columnar Execution](../columnar-execution/index.md)
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
