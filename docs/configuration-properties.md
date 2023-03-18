@@ -103,9 +103,9 @@ Use [SQLConf.autoBroadcastJoinThreshold](SQLConf.md#autoBroadcastJoinThreshold) 
 
 **spark.sql.cache.serializer**
 
-The name of [CachedBatchSerializer](columnar-execution/CachedBatchSerializer.md) implementation to translate SQL data into a format that can more efficiently be cached.
+The name of [CachedBatchSerializer](cache-serialization/CachedBatchSerializer.md) implementation to translate SQL data into a format that can more efficiently be cached.
 
-Default: [org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer](columnar-execution/DefaultCachedBatchSerializer.md)
+Default: [org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer](cache-serialization/DefaultCachedBatchSerializer.md)
 
 `spark.sql.cache.serializer` is a [StaticSQLConf](StaticSQLConf.md#SPARK_CACHE_SERIALIZER)
 

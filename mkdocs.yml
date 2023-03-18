@@ -151,6 +151,10 @@ nav:
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
     - Bucketing: bucketing.md
+    # "Cache Serialization" section uses awesome-pages plugin
+    # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
+    # Review cache-serialization/.pages for setup
+    - ... | cache-serialization/**.md
     - Catalog Plugin API:
       - connector/catalog/index.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
@@ -170,12 +174,6 @@ nav:
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Columnar Execution:
       - columnar-execution/index.md
-      - columnar-execution/CachedBatch.md
-      - columnar-execution/CachedBatchSerializer.md
-      - columnar-execution/CachedRDDBuilder.md
-      - columnar-execution/DefaultCachedBatchSerializer.md
-      - columnar-execution/SimpleMetricsCachedBatch.md
-      - columnar-execution/SimpleMetricsCachedBatchSerializer.md
     - Common Table Expressions: common-table-expressions.md
     - Configuration Properties: configuration-properties.md
     - Cost-Based Optimization:
@@ -202,8 +200,6 @@ nav:
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
-    - Cache Serialization:
-      - cache-serialization/index.md
     - Statistics: new-and-noteworthy/statistics.md
     - Table-Valued Functions:
       - table-valued-functions/index.md

@@ -5,7 +5,7 @@ tags:
 
 # CachedBatchSerializer
 
-`CachedBatchSerializer` is an [abstraction](#contract) of [serializers](#implementations).
+`CachedBatchSerializer` is an [abstraction](#contract) of [serializers](#implementations) of [CachedBatch](CachedBatch.md)es.
 
 `CachedBatchSerializer` is configured using [spark.sql.cache.serializer](../configuration-properties.md#spark.sql.cache.serializer) configuration property (for [InMemoryRelation](../logical-operators/InMemoryRelation.md#getSerializer)).
 

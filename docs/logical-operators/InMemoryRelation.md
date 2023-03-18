@@ -16,7 +16,7 @@
 
 ### <span id="cacheBuilder"> CachedRDDBuilder
 
-`InMemoryRelation` can be given a [CachedRDDBuilder](../columnar-execution/CachedRDDBuilder.md) when [created](#creating-instance) (using [apply](#apply)).
+`InMemoryRelation` can be given a [CachedRDDBuilder](../cache-serialization/CachedRDDBuilder.md) when [created](#creating-instance) (using [apply](#apply)).
 
 `InMemoryRelation` is `@transient` (so it won't be preseved when this operator has been serialized).
 
@@ -25,7 +25,7 @@ The `CachedRDDBuilder` is used by the following:
 * [CacheManager](../CacheManager.md)
 * [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) physical operator
 
-The `CachedRDDBuilder` is used to access [storageLevel](../columnar-execution/CachedRDDBuilder.md#storageLevel) when (when the `Dataset` is [cached](../CacheManager.md#lookupCachedData)):
+The `CachedRDDBuilder` is used to access [storageLevel](../cache-serialization/CachedRDDBuilder.md#storageLevel) when (when the `Dataset` is [cached](../CacheManager.md#lookupCachedData)):
 
 * [Dataset.storageLevel](../Dataset.md#storageLevel) operator is used
 * `AlterTableRenameCommand` is executed
@@ -144,7 +144,7 @@ apply(
 Property | Value
 ---------|------
  [output](#output) | The [output](../catalyst/QueryPlan.md#output) of the [executedPlan physical query plan](../QueryExecution.md#executedPlan) (possibly [convertToColumnarIfPossible](#convertToColumnarIfPossible) if the `CachedBatchSerializer` [supportsColumnarInput](#supportsColumnarInput))
- [CachedRDDBuilder](#cacheBuilder) | A new [CachedRDDBuilder](../columnar-execution/CachedRDDBuilder.md)
+ [CachedRDDBuilder](#cacheBuilder) | A new [CachedRDDBuilder](../cache-serialization/CachedRDDBuilder.md)
  [outputOrdering](#outputOrdering) | The [outputOrdering](../catalyst/QueryPlan.md#outputOrdering) of the [optimized logical query plan](../QueryExecution.md#optimizedPlan)
  [statsOfPlanToCache](#statsOfPlanToCache) | The [Statistics](../cost-based-optimization/LogicalPlanStats.md#statsOfPlanToCache) of the [optimized logical query plan](../QueryExecution.md#optimizedPlan)
 
@@ -162,7 +162,7 @@ getSerializer(
   sqlConf: SQLConf): CachedBatchSerializer
 ```
 
-`getSerializer` uses [spark.sql.cache.serializer](../configuration-properties.md#spark.sql.cache.serializer) configuration property to create a [CachedBatchSerializer](../columnar-execution/CachedBatchSerializer.md).
+`getSerializer` uses [spark.sql.cache.serializer](../configuration-properties.md#spark.sql.cache.serializer) configuration property to create a [CachedBatchSerializer](../cache-serialization/CachedBatchSerializer.md).
 
 ### <span id="convertToColumnarIfPossible"> convertToColumnarIfPossible
 
