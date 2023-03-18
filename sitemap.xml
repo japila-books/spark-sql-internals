@@ -46,11 +46,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BucketSpec/</loc>
-         <lastmod>2023-03-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CacheManager/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
@@ -561,11 +556,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/bucketing/</loc>
-         <lastmod>2023-03-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/caching-and-persistence/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
@@ -787,6 +777,16 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/basic-aggregation/RelationalGroupedDataset/</loc>
+         <lastmod>2023-03-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/bucketing/</loc>
+         <lastmod>2023-03-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/bucketing/BucketSpec/</loc>
          <lastmod>2023-03-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
