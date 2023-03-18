@@ -10,7 +10,7 @@
 * [Static Partitions](#staticPartitions)
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
-* <span id="bucketSpec"> [BucketSpec](../BucketSpec.md) if defined
+* <span id="bucketSpec"> [BucketSpec](../bucketing/BucketSpec.md) if defined
 * <span id="fileFormat"> [FileFormat](../datasources/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)

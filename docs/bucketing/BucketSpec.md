@@ -1,7 +1,11 @@
 # BucketSpec
 
+`BucketSpec` is the [bucketing specification](index.md) of a table (the metadata of a [bucketed table](index.md)).
+
+<!---
+## Review Me
+
 [[creating-instance]]
-`BucketSpec` is the **bucketing specification** of a table, i.e. the metadata of the [bucketing](bucketing.md) of a table.
 
 `BucketSpec` includes the following:
 
@@ -65,3 +69,4 @@ Map(Num Buckets -> 8, Bucket Columns -> [`col1`], Sort Columns -> [`col2`])
 * `CatalogTable` is requested for [toLinkedHashMap](CatalogTable.md#toLinkedHashMap)
 
 * `DescribeTableCommand` logical command is <<DescribeTableCommand.md#run, executed>> with a non-empty <<partitionSpec, partitionSpec>> and the <<DescribeTableCommand.md#isExtended, isExtended>> flag on (that uses <<DescribeTableCommand.md#describeFormattedDetailedPartitionInfo, describeFormattedDetailedPartitionInfo>>).
+-->

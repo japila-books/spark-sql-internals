@@ -605,6 +605,18 @@ Used when:
 
 * `ParquetOptions` is created (and initializes [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema) option)
 
+## <span id="spark.sql.sources.bucketing.enabled"> sources.bucketing.enabled
+
+**spark.sql.sources.bucketing.enabled**
+
+Enables [Bucketing](bucketing/index.md)
+
+Default: `true`
+
+When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
+
+Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method for the current value
+
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
 **(internal)** The number of entires in an in-memory hash map (to store aggregation buffers per grouping keys) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](physical-operators/ObjectAggregationIterator.md#processInputs), precisely) falls back to sort-based aggregation
@@ -1897,14 +1909,6 @@ Default: `true`
 Radix sort is much faster but requires additional memory to be reserved up-front. The memory overhead may be significant when sorting very small rows (up to 50% more).
 
 Use [SQLConf.enableRadixSort](SQLConf.md#enableRadixSort) method to access the current value.
-
-## <span id="spark.sql.sources.bucketing.enabled"> spark.sql.sources.bucketing.enabled
-
-Enables [bucketing](bucketing.md) support. When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
-
-Default: `true`
-
-Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method to access the current value.
 
 ## <span id="spark.sql.sources.default"><span id="DEFAULT_DATA_SOURCE_NAME"> spark.sql.sources.default
 

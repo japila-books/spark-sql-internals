@@ -42,7 +42,7 @@ val messages = spark
 * <span id="paths"> Data Paths (default: empty)
 * <span id="userSpecifiedSchema"> User-specified [schema](types/StructType.md) (default: undefined)
 * <span id="partitionColumns"> Names of the partition columns (default: empty)
-* <span id="bucketSpec"> [Bucketing specification](BucketSpec.md) (default: undefined)
+* <span id="bucketSpec"> [Bucketing specification](bucketing/BucketSpec.md) (default: undefined)
 * <span id="options"> Options (default: empty)
 * <span id="catalogTable"> [CatalogTable](CatalogTable.md) (default: undefined)
 

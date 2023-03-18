@@ -7,13 +7,13 @@ The motivation is to optimize performance of a join query by avoiding shuffles (
 !!! note
     Bucketing can show the biggest benefit when **pre-shuffled bucketed tables** are used more than once as bucketing itself takes time (that you will offset executing multiple join queries later).
 
-Bucketing is configured using [spark.sql.sources.bucketing.enabled](configuration-properties.md#spark.sql.sources.bucketing.enabled) configuration property.
+Bucketing is configured using [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled) configuration property.
 
 ```scala
 assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 ```
 
-Bucketing is used exclusively in [FileSourceScanExec](physical-operators/FileSourceScanExec.md) physical operator (when requested for the [input RDD](physical-operators/FileSourceScanExec.md#inputRDD) and to determine the [partitioning](physical-operators/FileSourceScanExec.md#outputPartitioning) and [ordering](physical-operators/FileSourceScanExec.md#outputOrdering) of the output).
+Bucketing is used exclusively in [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator (when requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) and to determine the [partitioning](../physical-operators/FileSourceScanExec.md#outputPartitioning) and [ordering](../physical-operators/FileSourceScanExec.md#outputOrdering) of the output).
 
 ## Demo: SortMergeJoin of Two FileScans
 
@@ -29,7 +29,7 @@ Bucketing is enabled by default. Let's check it out, anyway.
 assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 ```
 
-Make sure that you don't end up with a [BroadcastHashJoinExec](physical-operators/BroadcastHashJoinExec.md) and a [BroadcastExchangeExec](physical-operators/BroadcastExchangeExec.md). Disable auto broadcasting.
+Make sure that you don't end up with a [BroadcastHashJoinExec](../physical-operators/BroadcastHashJoinExec.md) and a [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md). Disable auto broadcasting.
 
 ```scala
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)
@@ -60,20 +60,20 @@ assert(t6.count == 10e6)
 t4.join(t6, "id").foreach(_ => ())
 ```
 
-The above join query is a fine example of a [SortMergeJoinExec](physical-operators/SortMergeJoinExec.md) (_SortMergeJoin_) of two [FileSourceScanExec](physical-operators/FileSourceScanExec.md)s (the two _Scans_ at the top). The join query uses [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operators (_Exchange_) to shuffle the tables for the `SortMergeJoin`.
+The above join query is a fine example of a [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) (_SortMergeJoin_) of two [FileSourceScanExec](../physical-operators/FileSourceScanExec.md)s (the two _Scans_ at the top). The join query uses [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operators (_Exchange_) to shuffle the tables for the `SortMergeJoin`.
 
-![SortMergeJoin of FileScans (Details for Query)](images/spark-sql-bucketing-sortmergejoin-filescans.png)
+![SortMergeJoin of FileScans (Details for Query)](../images/spark-sql-bucketing-sortmergejoin-filescans.png)
 
 ## Creating Bucketed Tables
 
-One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources (e.g. Parquet, ORC, JSON, CSV) that are saved as a table using [DataFrameWrite.saveAsTable](DataFrameWriter.md#saveAsTable) or simply available in a [catalog](Catalog.md) by [SparkSession.table](SparkSession.md#table).
+One way to avoid the exchanges (and so optimize the join query) is to use table bucketing that is applicable for all file-based data sources (e.g. Parquet, ORC, JSON, CSV) that are saved as a table using [DataFrameWrite.saveAsTable](../DataFrameWriter.md#saveAsTable) or simply available in a [catalog](../Catalog.md) by [SparkSession.table](../SparkSession.md#table).
 
 !!! note
-    [Bucketing is not supported](DataFrameWriter.md#assertNotBucketed) for [DataFrameWriter.save](DataFrameWriter.md#save), [DataFrameWriter.insertInto](DataFrameWriter.md#insertInto) and [DataFrameWriter.jdbc](DataFrameWriter.md#jdbc) methods.
+    [Bucketing is not supported](../DataFrameWriter.md#assertNotBucketed) for [DataFrameWriter.save](../DataFrameWriter.md#save), [DataFrameWriter.insertInto](../DataFrameWriter.md#insertInto) and [DataFrameWriter.jdbc](../DataFrameWriter.md#jdbc) methods.
 
-[DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) method is used to specify the number of buckets and the bucketing columns.
+[DataFrameWriter.bucketBy](../DataFrameWriter.md#bucketBy) method is used to specify the number of buckets and the bucketing columns.
 
-You can optionally sort the output rows in buckets using [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) method.
+You can optionally sort the output rows in buckets using [DataFrameWriter.sortBy](../DataFrameWriter.md#sortBy) method.
 
 ```scala
 val large = spark.range(10e6.toLong)
@@ -86,7 +86,7 @@ large.write
 ```
 
 !!! note
-    [DataFrameWriter.bucketBy](DataFrameWriter.md#bucketBy) and [DataFrameWriter.sortBy](DataFrameWriter.md#sortBy) are used to define a [bucketing specification](BucketSpec.md).
+    [DataFrameWriter.bucketBy](../DataFrameWriter.md#bucketBy) and [DataFrameWriter.sortBy](../DataFrameWriter.md#sortBy) are used to define a [bucketing specification](BucketSpec.md).
 
 Unlike bucketing in Apache Hive, Spark SQL creates the bucket files per the number of buckets and partitions. In other words, the number of bucketing files is the number of buckets multiplied by the number of task writers (one per partition).
 
@@ -133,9 +133,9 @@ val bucketed_4_10e6 = spark.table("bucketed_4_10e6")
 bucketed_4_10e4.join(bucketed_4_10e6, "id").foreach(_ => ())
 ```
 
-The above join query of the bucketed tables shows no [ShuffleExchangeExec](physical-operators/ShuffleExchangeExec.md) physical operators (_Exchanges_) as the shuffling has already been executed (before the query was run).
+The above join query of the bucketed tables shows no [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) physical operators (_Exchanges_) as the shuffling has already been executed (before the query was run).
 
-![SortMergeJoin of Bucketed Tables (Details for Query)](images/spark-sql-bucketing-sortmergejoin-bucketed-tables-no-exchanges.png)
+![SortMergeJoin of Bucketed Tables (Details for Query)](../images/spark-sql-bucketing-sortmergejoin-bucketed-tables-no-exchanges.png)
 
 The number of partitions of a bucketed table is exactly the number of buckets.
 
@@ -147,7 +147,7 @@ assert(numPartitions == 16)
 
 ## DESCRIBE EXTENDED
 
-Use [SessionCatalog](SessionCatalog.md#getTableMetadata) or `DESCRIBE EXTENDED` SQL command to find the bucketing information.
+Use [SessionCatalog](../SessionCatalog.md#getTableMetadata) or `DESCRIBE EXTENDED` SQL command to find the bucketing information.
 
 ```scala
 val bucketed_tables = spark
@@ -219,10 +219,10 @@ The [number of buckets](BucketSpec.md#numBuckets) has to be between `0` and `100
 Number of buckets should be greater than 0 but less than 100000. Got `[numBuckets]`
 ```
 
-There are however requirements that have to be met before [SparkOptimizer](SparkOptimizer.md) gives a no-Exchange query plan:
+There are however requirements that have to be met before [SparkOptimizer](../SparkOptimizer.md) gives a no-Exchange query plan:
 
 1. The number of partitions on both sides of a join has to be exactly the same
-1. Both join operators have to use [HashPartitioning](expressions/HashPartitioning.md) partitioning scheme
+1. Both join operators have to use [HashPartitioning](../expressions/HashPartitioning.md) partitioning scheme
 
 It is acceptable to use bucketing for one side of a join.
 
@@ -266,7 +266,7 @@ AdaptiveSparkPlan isFinalPlan=false
 q.foreach(_ => ())
 ```
 
-![SortMergeJoin of One Bucketed Table (Details for Query)](images/spark-sql-bucketing-sortmergejoin-one-bucketed-table.png)
+![SortMergeJoin of One Bucketed Table (Details for Query)](../images/spark-sql-bucketing-sortmergejoin-one-bucketed-table.png)
 
 ## Bucket Pruning
 
@@ -274,20 +274,20 @@ As of [Spark 2.4.0](https://issues.apache.org/jira/browse/SPARK-23803), Spark SQ
 
 Bucket pruning supports the following predicate expressions:
 
-* [EqualTo](expressions/EqualTo.md)
-* [EqualNullSafe](expressions/EqualNullSafe.md)
-* [In](expressions/In.md)
-* [InSet](expressions/InSet.md)
+* [EqualTo](../expressions/EqualTo.md)
+* [EqualNullSafe](../expressions/EqualNullSafe.md)
+* [In](../expressions/In.md)
+* [InSet](../expressions/InSet.md)
 * `And` and `Or` of the above
 
-[FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only [LogicalRelation](logical-operators/LogicalRelation.md)s over [HadoopFsRelation](datasources/HadoopFsRelation.md) with the [bucketing specification](datasources/HadoopFsRelation.md#bucketSpec) with the following:
+[FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../datasources/HadoopFsRelation.md) with the [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) with the following:
 
 1. There is exactly one bucketing column
 1. The number of buckets is greater than 1
 
 ### Demo
 
-Enable `INFO` logging level of [FileSourceStrategy](execution-planning-strategies/FileSourceStrategy.md) logger to look under the covers.
+Enable `INFO` logging level of [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) logger to look under the covers.
 
 ```scala
 import org.apache.spark.sql.execution.datasources.FileSourceStrategy
@@ -320,7 +320,7 @@ scala> println(sparkPlan57.numberedTreeString)
 09             +- FileScan parquet default.bucketed_4_id[id#149L] Batched: true, DataFilters: [id#149L IN (50,70), isnotnull(id#149L)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_id], PartitionFilters: [], PushedFilters: [In(id, [50,70]), IsNotNull(id)], ReadSchema: struct<id:bigint>, SelectedBucketsCount: 2 out of 4
 ```
 
-Execute the query to trigger [Adaptive Query Execution](adaptive-query-execution/index.md).
+Execute the query to trigger [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 ```scala
 sparkPlan57.executeTake(0)
@@ -417,4 +417,4 @@ q.foreach(_ => ())
 !!! warn
     There are two exchanges and sorts which makes the above use case almost unusable. I filed an issue at [SPARK-24025 Join of bucketed and non-bucketed tables can give two exchanges and sorts for non-bucketed side](https://issues.apache.org/jira/browse/SPARK-24025).
 
-![SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)](images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png)
+![SortMergeJoin of Sorted Dataset and Bucketed Table (Details for Query)](../images/spark-sql-bucketing-sortmergejoin-sorted-dataset-and-bucketed-table.png)

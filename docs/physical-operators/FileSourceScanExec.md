@@ -122,7 +122,7 @@ inputRDD: RDD[InternalRow]
 
 When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../datasources/HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../datasources/FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
 
-In case the `HadoopFsRelation` has [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
+In case the `HadoopFsRelation` has [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing/index.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
 
 ### <span id="createReadRDD"> Creating RDD for Non-Bucketed Read
 
@@ -140,14 +140,14 @@ Planning scan with bin packing, max size: [maxSplitBytes] bytes,
 open cost is considered as scanning [openCostInBytes] bytes.
 ```
 
-`createReadRDD` determines whether [Bucketing](../bucketing.md) is enabled or not (based on [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled)) for bucket pruning.
+`createReadRDD` determines whether [Bucketing](../bucketing/index.md) is enabled or not (based on [spark.sql.sources.bucketing.enabled](../configuration-properties.md#spark.sql.sources.bucketing.enabled)) for bucket pruning.
 
 ??? note "Bucket Pruning"
     **Bucket Pruning** is an optimization to filter out data files from scanning (based on [optionalBucketSet](#optionalBucketSet)).
 
-    With [Bucketing](../bucketing.md) disabled or [optionalBucketSet](#optionalBucketSet) undefined, all files are included in scanning.
+    With [Bucketing](../bucketing/index.md) disabled or [optionalBucketSet](#optionalBucketSet) undefined, all files are included in scanning.
 
-`createReadRDD` [splits files](../datasources/PartitionedFileUtil.md#splitFiles) to be scanned (in the given `selectedPartitions`), possibly applying bucket pruning (with [Bucketing](../bucketing.md) enabled). `createReadRDD` uses the following:
+`createReadRDD` [splits files](../datasources/PartitionedFileUtil.md#splitFiles) to be scanned (in the given `selectedPartitions`), possibly applying bucket pruning (with [Bucketing](../bucketing/index.md) enabled). `createReadRDD` uses the following:
 
 * [isSplitable](../datasources/FileFormat.md#isSplitable) property of the [FileFormat](../datasources/FileFormat.md) of the [HadoopFsRelation](#relation)
 * [maxSplitBytes](../datasources/FilePartition.md#maxSplitBytes) hint
@@ -211,7 +211,7 @@ outputOrdering: Seq[SortOrder]
 !!! danger
     Review Me
 
-`outputOrdering` is a [SortOrder](../expressions/SortOrder.md) expression for every [sort column](../BucketSpec.md#sortColumnNames) in `Ascending` order only when the following all hold:
+`outputOrdering` is a [SortOrder](../expressions/SortOrder.md) expression for every [sort column](../bucketing/BucketSpec.md#sortColumnNames) in `Ascending` order only when the following all hold:
 
 * [bucketing is enabled](../SQLConf.md#bucketingEnabled)
 * [HadoopFsRelation](#relation) has a [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) defined
@@ -232,7 +232,7 @@ outputPartitioning: Partitioning
 
 `outputPartitioning` can be one of the following:
 
-* [HashPartitioning](Partitioning.md#HashPartitioning) (with the [bucket column names](../BucketSpec.md#bucketColumnNames) and the [number of buckets](../BucketSpec.md#numBuckets) of the [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation)) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the [HadoopFsRelation](#relation) has a [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) defined
+* [HashPartitioning](Partitioning.md#HashPartitioning) (with the [bucket column names](../bucketing/BucketSpec.md#bucketColumnNames) and the [number of buckets](../bucketing/BucketSpec.md#numBuckets) of the [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation)) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the [HadoopFsRelation](#relation) has a [bucketing specification](../datasources/HadoopFsRelation.md#bucketSpec) defined
 
 * [UnknownPartitioning](Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
 
@@ -446,7 +446,7 @@ import org.apache.spark.sql.execution.datasources.FileScanRDD
 assert(rdd.dependencies.head.rdd.isInstanceOf[FileScanRDD])
 ```
 
-`FileSourceScanExec` supports [bucket pruning](../bucketing.md#bucket-pruning) so it only scans the bucket files required for a query.
+`FileSourceScanExec` supports [bucket pruning](../bucketing/index.md#bucket-pruning) so it only scans the bucket files required for a query.
 
 ```text
 scala> :type scan

@@ -150,10 +150,10 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-    - Bucketing: bucketing.md
-    # "Cache Serialization" section uses awesome-pages plugin
+    # "Bucketing" and "Cache Serialization" sections use awesome-pages plugin
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
-    # Review cache-serialization/.pages for setup
+    # Review bucketing/.pages for setup
+    - ... | bucketing/**.md
     - ... | cache-serialization/**.md
     - Catalog Plugin API:
       - connector/catalog/index.md
@@ -449,7 +449,6 @@ nav:
       - GlobalTempViewManager: GlobalTempViewManager.md
       - SessionCatalog:
         - SessionCatalog: SessionCatalog.md
-        - BucketSpec: BucketSpec.md
         - CatalogStorageFormat: CatalogStorageFormat.md
         - CatalogTable: CatalogTable.md
         - CatalogTablePartition: CatalogTablePartition.md

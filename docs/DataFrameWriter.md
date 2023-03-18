@@ -240,7 +240,7 @@ Name     | Behaviour
 getBucketSpec: Option[BucketSpec]
 ```
 
-`getBucketSpec` returns a new [BucketSpec](BucketSpec.md) if [numBuckets](#numBuckets) was defined (with [bucketColumnNames](#bucketColumnNames) and [sortColumnNames](#sortColumnNames)).
+`getBucketSpec` returns a new [BucketSpec](bucketing/BucketSpec.md) if [numBuckets](#numBuckets) was defined (with [bucketColumnNames](#bucketColumnNames) and [sortColumnNames](#sortColumnNames)).
 
 `getBucketSpec` throws an `IllegalArgumentException` when [numBuckets](#numBuckets) are not defined but [sortColumnNames](#sortColumnNames) are.
 

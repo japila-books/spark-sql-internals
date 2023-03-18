@@ -45,7 +45,7 @@
 bucketSpec: Option[BucketSpec] = None
 ```
 
-`CatalogTable` can be given a [BucketSpec](BucketSpec.md) when [created](#creating-instance). It is undefined (`None`) by default.
+`CatalogTable` can be given a [BucketSpec](bucketing/BucketSpec.md) when [created](#creating-instance). It is undefined (`None`) by default.
 
 `BucketSpec` is given (using [getBucketSpecFromTableProperties](hive/HiveExternalCatalog.md#getBucketSpecFromTableProperties) from a Hive metastore) when:
 
