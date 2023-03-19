@@ -1041,6 +1041,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsDeleteV2/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsDynamicOverwrite/</loc>
          <lastmod>2023-03-19</lastmod>
          <changefreq>daily</changefreq>
@@ -4067,6 +4072,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/TableWriteExecHelper/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/TruncateTableExec/</loc>
          <lastmod>2023-03-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
