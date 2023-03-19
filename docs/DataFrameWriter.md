@@ -234,7 +234,7 @@ Name     | Behaviour
  <span id="Ignore"> Ignore | Do not save the records and not change the existing data in any way
  <span id="Overwrite"> Overwrite | Existing data is overwritten by new records
 
-### <span id="getBucketSpec"> getBucketSpec
+## <span id="getBucketSpec"> Creating BucketSpec
 
 ```scala
 getBucketSpec: Option[BucketSpec]
@@ -248,6 +248,26 @@ getBucketSpec: Option[BucketSpec]
     ```text
     sortBy must be used together with bucketBy
     ```
+
+---
+
+`getBucketSpec` is used when:
+
+* `DataFrameWriter` is requested to [assertNotBucketed](#assertNotBucketed), [createTable](#createTable), [partitioningAsV2](#partitioningAsV2)
+
+## <span id="partitioningAsV2"> partitioningAsV2
+
+```scala
+partitioningAsV2: Seq[Transform]
+```
+
+`partitioningAsV2` creates [Transform](connector/Transform.md)s based on the [partitioningColumns](#partitioningColumns) (`IdentityTransform`s) and [getBucketSpec](#getBucketSpec) (a `BucketTransform`), if defined.
+
+---
+
+`partitioningAsV2` is used when:
+
+* `DataFrameWriter` is requested to [saveInternal](#saveInternal), [saveAsTable](#saveAsTable), [checkPartitioningMatchesV2Table](#checkPartitioningMatchesV2Table)
 
 ## <span id="saveToV1Source"> Executing Logical Command for Writing to Data Source V1
 

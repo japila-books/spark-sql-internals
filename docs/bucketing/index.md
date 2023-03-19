@@ -20,6 +20,10 @@ assert(spark.sessionState.conf.bucketingEnabled, "Bucketing disabled?!")
 
 Bucketing is used exclusively in [FileSourceScanExec](../physical-operators/FileSourceScanExec.md) physical operator (when requested for the [input RDD](../physical-operators/FileSourceScanExec.md#inputRDD) and to determine the [partitioning](../physical-operators/FileSourceScanExec.md#outputPartitioning) and [ordering](../physical-operators/FileSourceScanExec.md#outputOrdering) of the output).
 
+## Delta Lake
+
+Bucketing is not supported by Delta Lake (so it's not really true to say that _"all file-based data sources_ are supported, unfortunatelly).
+
 ## Create Bucketed Tables
 
 Bucketed tables can be created using the following higher-level operators:
