@@ -279,6 +279,7 @@ nav:
       - StagedTable: connector/StagedTable.md
       - SupportsAtomicPartitionManagement: connector/SupportsAtomicPartitionManagement.md
       - SupportsDelete: connector/SupportsDelete.md
+      - SupportsDeleteV2: connector/SupportsDeleteV2.md
       - SupportsDynamicOverwrite: connector/SupportsDynamicOverwrite.md
       - SupportsMetadata: connector/SupportsMetadata.md
       - SupportsMetadataColumns: connector/SupportsMetadataColumns.md
@@ -665,6 +666,7 @@ nav:
       - SparkPlan: physical-operators/SparkPlan.md
       - SubqueryExec: physical-operators/SubqueryExec.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
+      - TruncateTableExec: physical-operators/TruncateTableExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
