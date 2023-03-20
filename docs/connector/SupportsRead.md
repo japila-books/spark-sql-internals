@@ -1,3 +1,7 @@
+---
+title: SupportsRead
+---
+
 # SupportsRead Tables
 
 `SupportsRead` is an [extension](#contract) of the [Table](Table.md) abstraction for [readable tables](#implementations).

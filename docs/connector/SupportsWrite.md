@@ -1,3 +1,7 @@
+---
+title: SupportsWrite
+---
+
 # SupportsWrite Tables
 
 `SupportsWrite` is an [extension](#contract) of the [Table](Table.md) abstraction for [writable tables](#implementations).

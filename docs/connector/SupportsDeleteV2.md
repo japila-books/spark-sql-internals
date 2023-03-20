@@ -1,3 +1,7 @@
+---
+title: SupportsDeleteV2
+---
+
 # SupportsDeleteV2 Tables
 
 `SupportsDeleteV2` is an [extension](#contract) of the [TruncatableTable](TruncatableTable.md) abstraction for [truncatable tables](#implementations) that can [deleteWhere](#deleteWhere).

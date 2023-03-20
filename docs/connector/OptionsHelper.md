@@ -1,3 +1,7 @@
+---
+title: OptionsHelper
+---
+
 # OptionsHelper Implicit Class
 
 `OptionsHelper` is a Scala implicit class for [Map[String, String]](#options).

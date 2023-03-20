@@ -1,3 +1,7 @@
+---
+title: MetadataColumnHelper
+---
+
 # MetadataColumnHelper Implicit Class
 
 `MetadataColumnHelper` is a Scala implicit class for [Attribute](#attr).

@@ -1,3 +1,7 @@
+---
+title: TableHelper
+---
+
 # TableHelper Implicit Class
 
 `TableHelper` is a Scala implicit class for [Table](#table).

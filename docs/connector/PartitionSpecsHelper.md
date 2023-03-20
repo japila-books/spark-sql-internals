@@ -1,3 +1,7 @@
+---
+title: PartitionSpecsHelper
+---
+
 # PartitionSpecsHelper Implicit Class
 
 `PartitionSpecsHelper` is a Scala implicit class for [Seq[PartitionSpec]](#partSpecs).

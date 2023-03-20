@@ -1,4 +1,8 @@
-# Connector Partitioning
+---
+title: Partitioning
+---
+
+# Partitioning
 
 `Partitioning` is an [abstraction](#contract) of output data partitioning requirements (_data distribution_) of a Spark SQL Connector.
 

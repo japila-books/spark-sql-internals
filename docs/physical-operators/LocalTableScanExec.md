@@ -1,13 +1,40 @@
 # LocalTableScanExec Leaf Physical Operator
 
-`LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) and `producedAttributes` being `outputSet`.
+`LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) that represents the following at execution:
 
-`LocalTableScanExec` is <<creating-instance, created>> when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy resolves LocalRelation.md[LocalRelation] and Spark Structured Streaming's `MemoryPlan` logical operators.
+* [LocalRelation](../logical-operators/LocalRelation.md) logical operator
+* `LocalScan` (under [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md))
+* `MemoryPlan` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory/MemoryPlan))
+* `NoopCommand`
 
-TIP: Read on `MemoryPlan` logical operator in the https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-MemoryPlan.html[Spark Structured Streaming] gitbook.
+![LocalTableScanExec in web UI (Details for Query)](../images/spark-sql-LocalTableScanExec-webui-query-details.png)
 
-[source, scala]
-----
+## Creating Instance
+
+`LocalTableScanExec` takes the following to be created:
+
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+* <span id="rows"> Rows ([InternalRow](../InternalRow.md)s)
+
+`LocalTableScanExec` is created when:
+
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (to plan a `MemoryPlan`, a [LocalRelation](../logical-operators/LocalRelation.md), [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) and `NoopCommand` logical operators)
+
+## Performance Metrics
+
+### <span id="numOutputRows"> number of output rows
+
+## <span id="InputRDDCodegen"> InputRDDCodegen
+
+`LocalTableScanExec` is a `InputRDDCodegen`.
+
+## <span id="CollapseCodegenStages"> CollapseCodegenStages
+
+[CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization considers `LocalTableScanExec` special when [insertWholeStageCodegen](../physical-optimizations/CollapseCodegenStages.md#insertWholeStageCodegen) (so it won't be the root of [WholeStageCodegen](../whole-stage-code-generation/index.md) to support the fast driver-local collect/take paths).
+
+## Demo
+
+```text
 val names = Seq("Jacek", "Agata").toDF("name")
 val optimizedPlan = names.queryExecution.optimizedPlan
 
@@ -51,69 +78,4 @@ scala> names.show
 |Jacek|
 |Agata|
 +-----+
-----
-
-[[internal-registries]]
-.LocalTableScanExec's Internal Properties
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| [[unsafeRows]] `unsafeRows`
-| [InternalRow](../InternalRow.md)s
-
-| [[numParallelism]] `numParallelism`
-|
-
-| [[rdd]] `rdd`
-|
-|===
-
-## Creating Instance
-
-`LocalTableScanExec` takes the following when created:
-
-* [[output]] Output schema [attributes](../expressions/Attribute.md)
-* [[rows]] [InternalRow](../InternalRow.md)s
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
-
-!!! note
-    It _appears_ that when no Spark job is used to execute a `LocalTableScanExec` the <<numOutputRows, numOutputRows>> metric is not displayed in the web UI.
-
-    ```text
-    val names = Seq("Jacek", "Agata").toDF("name")
-
-    // The following query gives no numOutputRows metric in web UI's Details for Query (SQL tab)
-    scala> names.show
-    +-----+
-    | name|
-    +-----+
-    |Jacek|
-    |Agata|
-    +-----+
-
-    // The query gives numOutputRows metric in web UI's Details for Query (SQL tab)
-    scala> names.groupBy(length($"name")).count.show
-    +------------+-----+
-    |length(name)|count|
-    +------------+-----+
-    |           5|    2|
-    +------------+-----+
-
-    // The (type-preserving) query does also give numOutputRows metric in web UI's Details for Query (SQL tab)
-    scala> names.as[String].map(_.toUpperCase).show
-    +-----+
-    |value|
-    +-----+
-    |JACEK|
-    |AGATA|
-    +-----+
-    ```
-
-![LocalTableScanExec in web UI (Details for Query)](../images/spark-sql-LocalTableScanExec-webui-query-details.png)
+```

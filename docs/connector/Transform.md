@@ -1,3 +1,7 @@
+---
+title: Transform
+---
+
 # Transform Function Expressions
 
 `Transform` is an [extension](#contract) of the [Expression](../expressions/Expression.md) abstraction for [transform functions](#implementations).
