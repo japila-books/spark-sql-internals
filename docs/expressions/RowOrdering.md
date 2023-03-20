@@ -15,7 +15,7 @@ isOrderable(
 * [AtomicType](../types/AtomicType.md)
 * [StructType](../types/StructType.md) with all [fields](../types/StructType.md#fields) orderable (recursive)
 * [ArrayType](../types/ArrayType.md) with orderable type of the elements
-* `UserDefinedType`
+* [UserDefinedType](../types/UserDefinedType.md)
 
 `isOrderable` is used when:
 

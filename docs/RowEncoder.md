@@ -39,7 +39,7 @@ For [native types](ScalaReflection.md#isNativeType), `serializerFor` returns the
 `serializerFor` handles the following [DataType](types/DataType.md)s in a custom way (and the given order):
 
 1. `PythonUserDefinedType`
-1. `UserDefinedType`
+1. [UserDefinedType](types/UserDefinedType.md)
 1. `TimestampType`
 1. `DateType`
 1. `DayTimeIntervalType`

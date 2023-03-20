@@ -93,4 +93,4 @@ supportsDataType(
 * [StructType](../../types/StructType.md)
 * [ArrayType](../../types/ArrayType.md)
 * `MapType`
-* `UserDefinedType`
+* [UserDefinedType](../../types/UserDefinedType.md)

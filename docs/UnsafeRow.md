@@ -40,7 +40,7 @@ The following [DataType](types/DataType.md)s are considered **mutable data types
 * `ShortType`
 * `TimestampNTZType`
 * `TimestampType`
-* `UserDefinedType` (over a mutable data type)
+* [UserDefinedType](types/UserDefinedType.md) (over a mutable data type)
 * `YearMonthIntervalType`
 
 Mutable data types have fixed length and can be mutated in place in `UnsafeRow`s (using `set` methods).

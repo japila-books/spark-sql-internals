@@ -1032,6 +1032,7 @@ nav:
       - DataType: types/DataType.md
       - StructField: types/StructField.md
       - StructType: types/StructType.md
+      - UserDefinedType: types/UserDefinedType.md
     - Caching and Persistence:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
