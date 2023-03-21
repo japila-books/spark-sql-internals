@@ -185,6 +185,18 @@ Default: `true`
 
 Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) for the current value
 
+## <span id="spark.sql.execution.replaceHashWithSortAgg"> execution.replaceHashWithSortAgg
+
+**spark.sql.execution.replaceHashWithSortAgg**
+
+**internal** Enables replacing hash aggregate operators with sort aggregate based on children's ordering
+
+Default: `false`
+
+Used when:
+
+* [ReplaceHashWithSortAgg](physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization is executed
+
 ## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> files.maxPartitionBytes
 
 **spark.sql.files.maxPartitionBytes**

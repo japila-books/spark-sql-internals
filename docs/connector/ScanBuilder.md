@@ -22,7 +22,7 @@ Used when:
 * [FileScanBuilder](../datasources/FileScanBuilder.md)
 * [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md)
 * `MemoryStreamScanBuilder` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory/MemoryStreamScanBuilder))
-* `SupportsPushDownAggregates`
+* [SupportsPushDownAggregates](SupportsPushDownAggregates.md)
 * [SupportsPushDownFilters](SupportsPushDownFilters.md)
 * `SupportsPushDownLimit`
 * [SupportsPushDownRequiredColumns](SupportsPushDownRequiredColumns.md)

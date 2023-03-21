@@ -667,6 +667,10 @@ Used when:
 
 * [RemoveRedundantSorts](physical-optimizations/RemoveRedundantSorts.md) physical optimization is executed
 
+## <span id="REPLACE_HASH_WITH_SORT_AGG_ENABLED"> REPLACE_HASH_WITH_SORT_AGG_ENABLED
+
+[spark.sql.execution.replaceHashWithSortAgg](configuration-properties.md#spark.sql.execution.replaceHashWithSortAgg)
+
 ## <span id="runtimeFilterBloomFilterEnabled"><span id="RUNTIME_BLOOM_FILTER_ENABLED"> runtimeFilterBloomFilterEnabled
 
 [spark.sql.optimizer.runtime.bloomFilter.enabled](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled)
