@@ -7,6 +7,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Catalog Plugin API](../connector/catalog/index.md)
 * [Columnar Execution](../columnar-execution/index.md)
 * [Connector API](../connector/index.md)
+* [Default Columns](../default-columns/index.md) :material-new-box:{ title="New in 3.4.0" }
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
 * [File-Based Data Scanning](../file-based-data-scanning/index.md)
 * [Table-Valued Functions](../table-valued-functions/index.md) :material-new-box:{ title="New in 3.4.0" }

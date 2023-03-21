@@ -192,6 +192,7 @@ nav:
       - LogicalPlanVisitor: cost-based-optimization/LogicalPlanVisitor.md
       - SizeInBytesOnlyStatsPlanVisitor: cost-based-optimization/SizeInBytesOnlyStatsPlanVisitor.md
       - Statistics: cost-based-optimization/Statistics.md
+    - ... | default-columns/**.md
     - Dynamic Partition Pruning:
       - dynamic-partition-pruning/index.md
     - File-Based Data Scanning:
@@ -654,6 +655,7 @@ nav:
       - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
       - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
       - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
+      - ResolveDefaultColumns: logical-analysis-rules/ResolveDefaultColumns.md
       - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
       - ResolveGroupingAnalytics: logical-analysis-rules/ResolveGroupingAnalytics.md
       - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md

@@ -173,6 +173,22 @@ Used when:
 * `ParquetFileFormat` is requested to [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)
 
+## <span id="spark.sql.defaultColumn.enabled"> defaultColumn.enabled
+
+**spark.sql.defaultColumn.enabled**
+
+**(internal)** When true, allows CREATE TABLE, REPLACE TABLE, and ALTER COLUMN statements to set or update default values for specific columns.
+Following INSERT, MERGE, and UPDATE statements may then omit these values and their values will be injected automatically instead.
+
+Default: `true`
+
+Use [SQLConf.enableDefaultColumns](SQLConf.md#enableDefaultColumns) for the current value
+
+Used when:
+
+* `AstBuilder` is requested to [visitCreateOrReplaceTableColType](sql/AstBuilder.md#visitCreateOrReplaceTableColType), [visitQualifiedColTypeWithPosition](sql/AstBuilder.md#visitQualifiedColTypeWithPosition), [visitAlterTableAlterColumn](sql/AstBuilder.md#visitAlterTableAlterColumn)
+* [ResolveDefaultColumns](logical-analysis-rules/ResolveDefaultColumns.md) logical resolution rule is executed, [constantFoldCurrentDefaultsToExistDefaults](logical-analysis-rules/ResolveDefaultColumns.md#constantFoldCurrentDefaultsToExistDefaults), [validateCatalogForDefaultValue](logical-analysis-rules/ResolveDefaultColumns.md#validateCatalogForDefaultValue), [validateTableProviderForDefaultValue](logical-analysis-rules/ResolveDefaultColumns.md#validateTableProviderForDefaultValue)
+
 ## <span id="spark.sql.exchange.reuse"> exchange.reuse
 
 **spark.sql.exchange.reuse**

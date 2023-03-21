@@ -385,6 +385,10 @@ Used when:
 
 [spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled](configuration-properties.md#spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled)
 
+## <span id="enableDefaultColumns"><span id="ENABLE_DEFAULT_COLUMNS"> enableDefaultColumns
+
+[spark.sql.defaultColumn.enabled](configuration-properties.md#spark.sql.defaultColumn.enabled)
+
 ## <span id="enableRadixSort"> enableRadixSort
 
 [spark.sql.sort.enableRadixSort](configuration-properties.md#spark.sql.sort.enableRadixSort)
