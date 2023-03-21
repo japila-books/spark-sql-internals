@@ -1751,6 +1751,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/default-columns/</loc>
+         <lastmod>2023-03-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/demo/</loc>
          <lastmod>2023-03-21</lastmod>
          <changefreq>daily</changefreq>
@@ -2697,6 +2702,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveCreateNamedStruct/</loc>
+         <lastmod>2023-03-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveDefaultColumns/</loc>
          <lastmod>2023-03-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
