@@ -4,7 +4,7 @@ title: Partitioning
 
 # Partitioning
 
-`Partitioning` is an [abstraction](#contract) of output data partitioning requirements (_data distribution_) of a Spark SQL Connector.
+`Partitioning` is an [abstraction](#contract) of [output data partitioning requirements](#implementations) (_data distribution_) of a Spark SQL connector.
 
 !!! note
     This `Partitioning` interface for Spark SQL developers mimics the internal Catalyst [Partitioning](../physical-operators/Partitioning.md) that is converted into with the help of [DataSourcePartitioning](../physical-operators/Partitioning.md#DataSourcePartitioning).
@@ -31,3 +31,8 @@ boolean satisfy(
 Used when:
 
 * [DataSourcePartitioning](../physical-operators/Partitioning.md#DataSourcePartitioning) is asked whether it [satisfies a given data distribution](../physical-operators/Partitioning.md#satisfies0)
+
+## Implementations
+
+* `KeyGroupedPartitioning`
+* `UnknownPartitioning`
