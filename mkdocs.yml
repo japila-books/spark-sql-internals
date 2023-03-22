@@ -87,8 +87,9 @@ plugins:
       tags_extra_files:
         developer-api.md:
           - DeveloperApi
-  # https://squidfunk.github.io/mkdocs-material/reference/#built-in-typeset-plugin
-  - typeset
+  # https://github.com/squidfunk/mkdocs-material/issues/5241
+  # # https://squidfunk.github.io/mkdocs-material/reference/#built-in-typeset-plugin
+  # - typeset
 
 extra:
   analytics:
@@ -178,6 +179,11 @@ nav:
     # "Connector API" section uses awesome-pages plugin
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
     # Review connector/.pages for setup
+    # FIXME No idea how to include a subdirectory (connector/expressions)
+    #       to be under Connector API using awesome-pages
+    - Connector Expressions:
+      - connector/expressions/index.md
+      - SortOrder: connector/expressions/SortOrder.md
     - ... | connector/**.md
     - Configuration Properties: configuration-properties.md
     - Cost-Based Optimization:
@@ -432,7 +438,7 @@ nav:
       - ExpressionEncoder: ExpressionEncoder.md
       - RowEncoder: RowEncoder.md
       - ScalaReflection: ScalaReflection.md
-    - Expressions:
+    - Catalyst Expressions:
       - expressions/index.md
       - AggregateExpression: expressions/AggregateExpression.md
       - AggregateFunction: expressions/AggregateFunction.md

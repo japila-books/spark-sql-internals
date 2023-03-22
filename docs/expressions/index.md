@@ -1,4 +1,4 @@
-# Expressions
+# Catalyst Expressions
 
 The [Catalyst Tree Manipulation Framework](../catalyst/index.md) defines [Expression](Expression.md) abstraction for expression nodes in (the trees of) [logical](../logical-operators/) and [physical](../physical-operators/) query plans.
 
