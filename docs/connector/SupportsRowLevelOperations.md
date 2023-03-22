@@ -4,7 +4,7 @@ title: SupportsRowLevelOperations
 
 # SupportsRowLevelOperations Tables
 
-`SupportsRowLevelOperations` is an [extension](#contract) of the [Table](Table.md) abstraction for [tables](#implementations) that [newRowLevelOperationBuilder](#newRowLevelOperationBuilder).
+`SupportsRowLevelOperations` is an [extension](#contract) of the [Table](Table.md) abstraction for [tables](#implementations) that can [create a new RowLevelOperationBuilder](#newRowLevelOperationBuilder).
 
 ## Contract
 
@@ -14,6 +14,8 @@ title: SupportsRowLevelOperations
 RowLevelOperationBuilder newRowLevelOperationBuilder(
   RowLevelOperationInfo info)
 ```
+
+`RowLevelOperationBuilder` for the `RowLevelOperationInfo`
 
 Used when:
 

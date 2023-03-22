@@ -24,22 +24,25 @@
 
 ## <span id="earlyScanPushDownRules"> earlyScanPushDownRules
 
-```scala
-earlyScanPushDownRules: Seq[Rule[LogicalPlan]]
-```
+??? note "Signature"
 
-`earlyScanPushDownRules` is part of the [Optimizer](catalyst/Optimizer.md) abstraction.
+    ```scala
+    earlyScanPushDownRules: Seq[Rule[LogicalPlan]]
+    ```
 
----
+    `earlyScanPushDownRules` is part of the [Optimizer](catalyst/Optimizer.md) abstraction.
 
-`earlyScanPushDownRules` is the following rules:
+`earlyScanPushDownRules` adds the following rules to the default [nonExcludableRules](catalyst/Optimizer.md#nonExcludableRules):
 
-* [SchemaPruning](logical-optimizations/SchemaPruning.md)
-* `GroupBasedRowLevelOperationScanPlanning`
-* `V2ScanRelationPushDown`
-* `V2ScanPartitioning`
+* `ExtractPythonUDFFromJoinCondition`
+* `ExtractPythonUDFFromAggregate`
+* `ExtractGroupingPythonUDFFromAggregate`
+* `ExtractPythonUDFs`
+* [GroupBasedRowLevelOperationScanPlanning](logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md)
+* [V2ScanRelationPushDown](logical-optimizations/V2ScanRelationPushDown.md)
+* `V2ScanPartitioningAndOrdering`
 * [V2Writes](logical-optimizations/V2Writes.md)
-* [PruneFileSourcePartitions](logical-optimizations/PruneFileSourcePartitions.md)
+* `ReplaceCTERefWithRepartition`
 
 ## <span id="defaultBatches"><span id="batches"> Default Rule Batches
 

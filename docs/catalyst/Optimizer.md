@@ -16,7 +16,8 @@ Optimizer: Analyzed Logical Plan ==> Optimized Logical Plan
 
 * <span id="catalogManager"> [CatalogManager](../connector/catalog/CatalogManager.md)
 
-`Optimizer` is an abstract class and cannot be created directly. It is created indirectly for the [concrete Optimizers](#implementations).
+!!! note "Abstract Class"
+    `Optimizer` is an abstract class and cannot be created directly. It is created indirectly for the [concrete Optimizers](#implementations).
 
 ## <span id="defaultBatches"> Default Batches
 
@@ -264,34 +265,36 @@ Strategy: `Once`
 
 ## <span id="nonExcludableRules"> Non-Excludable Rules
 
-`Optimizer` considers some optimization rules as **non-excludable** and necessary for correctness.
+```scala
+nonExcludableRules: Seq[String]
+```
 
-Non-Excludable Rules are critical for query optimization and can never be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
+`nonExcludableRules` is a collection of **non-excludable** optimization rules.
+
+Non-Excludable Rules are so critical for query optimization that they can never be excluded (even using [spark.sql.optimizer.excludedRules](#spark.sql.optimizer.excludedRules) configuration property).
 
 * `FinishAnalysis`
-* `NormalizeFloatingNumbers`
-* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md)
-* `ReplaceDeduplicateWithAggregate`
-* `ReplaceDistinctWithAggregate`
-* [ReplaceExceptWithAntiJoin](../logical-optimizations/ReplaceExceptWithAntiJoin.md)
-* [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md)
-* `ReplaceIntersectWithSemiJoin`
-* `ReplaceUpdateFieldsExpression`
-* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md)
 * `RewriteDistinctAggregates`
+* `ReplaceDeduplicateWithAggregate`
+* `ReplaceIntersectWithSemiJoin`
+* [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md)
+* [ReplaceExceptWithAntiJoin](../logical-optimizations/ReplaceExceptWithAntiJoin.md)
 * [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md)
 * `RewriteIntersectAll`
-* `RewriteLateralSubquery`
+* `ReplaceDistinctWithAggregate`
+* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md)
+* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md)
 * [RewritePredicateSubquery](../logical-optimizations/RewritePredicateSubquery.md)
+* `NormalizeFloatingNumbers`
+* `ReplaceUpdateFieldsExpression`
+* `RewriteLateralSubquery`
+* [OptimizeSubqueries](../logical-optimizations/OptimizeSubqueries.md)
 
 ## Accessing Optimizer
 
 `Optimizer` is available as the [optimizer](../SessionState.md#optimizer) property of a session-specific `SessionState`.
 
 ```text
-scala> :type spark
-org.apache.spark.sql.SparkSession
-
 scala> :type spark.sessionState.optimizer
 org.apache.spark.sql.catalyst.optimizer.Optimizer
 ```
@@ -348,8 +351,6 @@ extendedOperatorOptimizationRules: Seq[Rule[LogicalPlan]] = Nil
 
 `extendedOperatorOptimizationRules` rules are executed right after [Operator Optimization before Inferring Filters](#Operator-Optimization-before-Inferring-Filters) and [Operator Optimization after Inferring Filters](#Operator-Optimization-after-Inferring-Filters).
 
-`extendedOperatorOptimizationRules` is used when...FIXME
-
 ## <span id="earlyScanPushDownRules"> earlyScanPushDownRules (Extension Point)
 
 ```scala
@@ -357,8 +358,6 @@ earlyScanPushDownRules: Seq[Rule[LogicalPlan]] = Nil
 ```
 
 `earlyScanPushDownRules` extension point...FIXME
-
-`earlyScanPushDownRules` is used when...FIXME
 
 ## <span id="blacklistedOnceBatches"> blacklistedOnceBatches
 
@@ -368,13 +367,15 @@ blacklistedOnceBatches: Set[String]
 
 `blacklistedOnceBatches`...FIXME
 
-`blacklistedOnceBatches` is used when...FIXME
-
 ## Batches
 
-```scala
-batches: Seq[Batch]
-```
+??? note "Signature"
+
+    ```scala
+    batches: Seq[Batch]
+    ```
+
+    `batches` is part of the [RuleExecutor](RuleExecutor.md#batches) abstraction.
 
 `batches` uses [spark.sql.optimizer.excludedRules](../configuration-properties.md#spark.sql.optimizer.excludedRules) configuration property for the rules to be excluded.
 
@@ -389,5 +390,3 @@ Optimization rule '[ruleName]' was not excluded from the optimizer because this 
 ```text
 Optimization batch '[name]' is excluded from the optimizer as all enclosed rules have been excluded.
 ```
-
-`batches` is part of the [RuleExecutor](RuleExecutor.md#batches) abstraction.

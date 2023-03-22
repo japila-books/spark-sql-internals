@@ -209,6 +209,7 @@ nav:
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
+    - Logging: spark-logging.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
     - Statistics: new-and-noteworthy/statistics.md
@@ -1046,7 +1047,6 @@ nav:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
     - Checkpointing: checkpointing.md
-    - Logging: spark-logging.md
     - Performance Tuning and Debugging:
       - Debugging Query Execution: debugging-query-execution.md
       - Performance Tuning: spark-sql-performance-tuning.md
