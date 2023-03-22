@@ -40,30 +40,6 @@ Created when:
 * `BroadcastDistribution` is requested to [create a Partitioning](BroadcastDistribution.md#createPartitioning)
 * `BroadcastExchangeExec` physical operator is requested for the [outputPartitioning](BroadcastExchangeExec.md#outputPartitioning)
 
-### <span id="DataSourcePartitioning"> DataSourcePartitioning
-
-An adapter for the [Connector Partitioning](../connector/Partitioning.md) to this Catalyst `Partitioning`
-
-Created with:
-
-* [Connector Partitioning](../connector/Partitioning.md)
-* A lookup table of column names ([Attribute](../expressions/Attribute.md)s and their names by `ExprId`)
-
-[numPartitions](#numPartitions):
-
-* The [numPartitions](../connector/Partitioning.md#numPartitions) of the given Connector `Partitioning`
-
-[satisfies](#satisfies):
-
-One of the following:
-
-1. [satisfies0](#satisfies0)
-1. FIXME
-
-Created when:
-
-* `DataSourceV2ScanExecBase` leaf physical operators are requested for the [outputPartitioning](DataSourceV2ScanExecBase.md#outputPartitioning) (for [SupportsReportPartitioning](../connector/SupportsReportPartitioning.md) scans)
-
 ### <span id="HashPartitioning"> HashPartitioning
 
 [HashPartitioning](../expressions/HashPartitioning.md)
@@ -74,6 +50,21 @@ Created when:
 
 * [UnspecifiedDistribution](UnspecifiedDistribution.md)
 * [ClusteredDistribution](ClusteredDistribution.md) with all the hashing [expressions](../expressions/Expression.md) included in `clustering` expressions
+
+[createShuffleSpec](#createShuffleSpec): `HashShuffleSpec`
+
+### <span id="KeyGroupedPartitioning"> KeyGroupedPartitioning
+
+```scala
+KeyGroupedPartitioning(
+  expressions: Seq[Expression],
+  numPartitions: Int,
+  partitionValues: Seq[InternalRow] = Seq.empty)
+```
+
+[satisfies0](#satisfies0): [ClusteredDistribution](ClusteredDistribution.md)
+
+[createShuffleSpec](#createShuffleSpec): `KeyGroupedShuffleSpec`
 
 ### <span id="PartitioningCollection"> PartitioningCollection
 
@@ -90,6 +81,8 @@ guarantees: Any `Partitioning` that is guaranteed by any of the input `partition
 
 [satisfies](#satisfies): Any `Distribution` that is satisfied by any of the input `partitionings`
 
+[createShuffleSpec](#createShuffleSpec): `ShuffleSpecCollection`
+
 ### <span id="RangePartitioning"> RangePartitioning
 
 compatibleWith: `RangePartitioning` when semantically equal (i.e. underlying expressions are deterministic and canonically equal)
@@ -103,6 +96,8 @@ guarantees: `RangePartitioning` when semantically equal (i.e. underlying express
 * [UnspecifiedDistribution](UnspecifiedDistribution.md)
 * [OrderedDistribution](OrderedDistribution.md) with `requiredOrdering` that matches the input `ordering`
 * [ClusteredDistribution](ClusteredDistribution.md) with all the children of the input `ordering` semantically equal to one of the `clustering` expressions
+
+[createShuffleSpec](#createShuffleSpec): `RangeShuffleSpec`
 
 ### <span id="RoundRobinPartitioning"> RoundRobinPartitioning
 
@@ -128,6 +123,8 @@ guarantees: Any `Partitioning` with one partition
 [numPartitions](#numPartitions): `1`
 
 [satisfies](#satisfies): Any `Distribution` except [BroadcastDistribution](BroadcastDistribution.md)
+
+[createShuffleSpec](#createShuffleSpec): `SinglePartitionShuffleSpec`
 
 ### <span id="UnknownPartitioning"> UnknownPartitioning
 
@@ -181,3 +178,25 @@ satisfies0(
 
 !!! note
     `satisfies0` can be overriden by [subclasses](#implementations) if needed (to influence the final [satisfies](#satisfies)).
+
+## <span id="createShuffleSpec"> createShuffleSpec
+
+```scala
+createShuffleSpec(
+  distribution: ClusteredDistribution): ShuffleSpec
+```
+
+`createShuffleSpec` gives a [ShuffleSpec](ShuffleSpec.md).
+
+`createShuffleSpec` throws an `IllegalStateException` by default (and is supposed to be overriden by [subclasses](#implementations) if needed):
+
+```text
+Unexpected partitioning: [className]
+```
+
+---
+
+`createShuffleSpec` is used when:
+
+* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is [executed](../physical-optimizations/EnsureRequirements.md#ensureDistributionAndOrdering)
+* `ValidateRequirements` is requested to `validate` (for [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) physical optimization and [AdaptiveSparkPlanExec](AdaptiveSparkPlanExec.md) physical operator)

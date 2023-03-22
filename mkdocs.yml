@@ -637,6 +637,7 @@ nav:
         - Broadcast Modes:
           - BroadcastMode: physical-operators/BroadcastMode.md
           - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
+        - ShuffleSpec: physical-operators/ShuffleSpec.md
     - Logical Analysis Rules:
       - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
       - AliasViewChild: logical-analysis-rules/AliasViewChild.md
