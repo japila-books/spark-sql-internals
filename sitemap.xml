@@ -1101,6 +1101,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsReportOrdering/</loc>
+         <lastmod>2023-03-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsReportPartitioning/</loc>
          <lastmod>2023-03-22</lastmod>
          <changefreq>daily</changefreq>
@@ -1267,6 +1272,16 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/catalog/V2TableWithV1Fallback/</loc>
+         <lastmod>2023-03-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/expressions/</loc>
+         <lastmod>2023-03-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/expressions/SortOrder/</loc>
          <lastmod>2023-03-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
