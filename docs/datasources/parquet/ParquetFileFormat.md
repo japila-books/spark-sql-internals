@@ -1,6 +1,6 @@
 # ParquetFileFormat
 
-`ParquetFileFormat` is the [FileFormat](../FileFormat.md) of [parquet](index.md) data source.
+`ParquetFileFormat` is the [FileFormat](../FileFormat.md) of [Parquet Data Source](index.md).
 
 `ParquetFileFormat` is [splitable](#isSplitable).
 
@@ -18,35 +18,37 @@ shortName(): String
 parquet
 ```
 
-## <span id="isSplitable"> Is Splitable
+## <span id="isSplitable"> isSplitable
 
-```scala
-isSplitable(
-  sparkSession: SparkSession,
-  options: Map[String, String],
-  path: Path): Boolean
-```
+??? note "Signature"
 
-`isSplitable` is part of the [FileFormat](../FileFormat.md#isSplitable) abstraction.
+    ```scala
+    isSplitable(
+      sparkSession: SparkSession,
+      options: Map[String, String],
+      path: Path): Boolean
+    ```
 
----
+    `isSplitable` is part of the [FileFormat](../FileFormat.md#isSplitable) abstraction.
 
-`ParquetFileFormat` is splitable (always `true`).
+`ParquetFileFormat` is splitable (`true`).
 
 ## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values
 
-```scala
-buildReaderWithPartitionValues(
-  sparkSession: SparkSession,
-  dataSchema: StructType,
-  partitionSchema: StructType,
-  requiredSchema: StructType,
-  filters: Seq[Filter],
-  options: Map[String, String],
-  hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
-```
+??? note "Signature"
 
-`buildReaderWithPartitionValues` is part of the [FileFormat](../FileFormat.md#buildReaderWithPartitionValues) abstraction.
+    ```scala
+    buildReaderWithPartitionValues(
+      sparkSession: SparkSession,
+      dataSchema: StructType,
+      partitionSchema: StructType,
+      requiredSchema: StructType,
+      filters: Seq[Filter],
+      options: Map[String, String],
+      hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
+    ```
+
+    `buildReaderWithPartitionValues` is part of the [FileFormat](../FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 !!! FIXME
     Review Me
@@ -113,40 +115,46 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 
 ## <span id="inferSchema"> Schema Inference
 
-```scala
-inferSchema(
-  sparkSession: SparkSession,
-  parameters: Map[String, String],
-  files: Seq[FileStatus]): Option[StructType]
-```
+??? note "Signature"
 
-`inferSchema` is part of the [FileFormat](../FileFormat.md#inferSchema) abstraction.
+    ```scala
+    inferSchema(
+      sparkSession: SparkSession,
+      parameters: Map[String, String],
+      files: Seq[FileStatus]): Option[StructType]
+    ```
+
+    `inferSchema` is part of the [FileFormat](../FileFormat.md#inferSchema) abstraction.
 
 `inferSchema`...FIXME
 
 ## <span id="prepareWrite"> Preparing Write Job
 
-```scala
-prepareWrite(
-  sparkSession: SparkSession,
-  job: Job,
-  options: Map[String, String],
-  dataSchema: StructType): OutputWriterFactory
-```
+??? note "Signature"
 
-`prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.
+    ```scala
+    prepareWrite(
+      sparkSession: SparkSession,
+      job: Job,
+      options: Map[String, String],
+      dataSchema: StructType): OutputWriterFactory
+    ```
+
+    `prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.
 
 `prepareWrite`...FIXME
 
 ## <span id="supportBatch"> supportBatch
 
-```scala
-supportBatch(
-  sparkSession: SparkSession,
-  schema: StructType): Boolean
-```
+??? note "Signature"
 
-`supportBatch` is part of the [FileFormat](../FileFormat.md#supportBatch) abstraction.
+    ```scala
+    supportBatch(
+      sparkSession: SparkSession,
+      schema: StructType): Boolean
+    ```
+
+    `supportBatch` is part of the [FileFormat](../FileFormat.md#supportBatch) abstraction.
 
 !!! FIXME
     Review Me
@@ -163,25 +171,29 @@ supportBatch(
 
 ## <span id="supportDataType"> supportDataType
 
-```scala
-supportDataType(
-  dataType: DataType): Boolean
-```
+??? note "Signature"
 
-`supportDataType` is part of the [FileFormat](../FileFormat.md#supportDataType) abstraction.
+    ```scala
+    supportDataType(
+      dataType: DataType): Boolean
+    ```
+
+    `supportDataType` is part of the [FileFormat](../FileFormat.md#supportDataType) abstraction.
 
 `supportDataType`...FIXME
 
 ## <span id="vectorTypes"> Vector Types
 
-```scala
-vectorTypes(
-  requiredSchema: StructType,
-  partitionSchema: StructType,
-  sqlConf: SQLConf): Option[Seq[String]]
-```
+??? note "Signature"
 
-`vectorTypes` is part of the [FileFormat](../FileFormat.md#vectorTypes) abstraction.
+    ```scala
+    vectorTypes(
+      requiredSchema: StructType,
+      partitionSchema: StructType,
+      sqlConf: SQLConf): Option[Seq[String]]
+    ```
+
+    `vectorTypes` is part of the [FileFormat](../FileFormat.md#vectorTypes) abstraction.
 
 !!! FIXME
     Review Me

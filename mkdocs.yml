@@ -183,6 +183,7 @@ nav:
     #       to be under Connector API using awesome-pages
     - Connector Expressions:
       - connector/expressions/index.md
+      - Aggregation: connector/expressions/Aggregation.md
       - SortOrder: connector/expressions/SortOrder.md
     - ... | connector/**.md
     - Configuration Properties: configuration-properties.md

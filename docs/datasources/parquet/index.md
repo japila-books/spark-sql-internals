@@ -15,6 +15,14 @@ Parquet data source uses `spark.sql.parquet` prefix for [parquet-specific config
 
 [ParquetOptions](ParquetOptions.md)
 
+## Configuration Properties
+
+### Reading
+
+* [spark.sql.files.maxPartitionBytes](../../configuration-properties.md#spark.sql.files.maxPartitionBytes)
+* [spark.sql.files.minPartitionNum](../../configuration-properties.md#spark.sql.files.minPartitionNum)
+* [spark.sql.files.openCostInBytes](../../configuration-properties.md#spark.sql.files.openCostInBytes)
+
 ## Schema Discovery
 
 Parquet Data Source uses distributed and multi-threaded (_concurrent_) process for [schema discovery](ParquetUtils.md#inferSchema).
@@ -27,6 +35,53 @@ Schema discovery can be configured using the following:
 ## Vectorized Parquet Decoding
 
 Parquet Data Source uses [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md) (and [ParquetReadSupport](ParquetReadSupport.md) otherwise).
+
+## Parquet CLI
+
+[parquet-cli](https://formulae.brew.sh/formula/parquet-cli) is Apache Parquet's command-line tools and utilities
+
+```console
+brew install parquet-cli
+```
+
+### Print Parquet Metadata
+
+```console
+$ parquet help meta
+
+Usage: parquet [general options] meta <parquet path> [command options]
+
+  Description:
+
+    Print a Parquet file's metadata
+```
+
+```scala
+spark.range(0, 5, 1, numPartitions = 1)
+  .write
+  .mode("overwrite")
+  .parquet("demo.parquet")
+```
+
+```console
+$ parquet meta demo.parquet/part-00000-9cb6054e-9986-4f04-8ae7-730aac93e7db-c000.snappy.parquet
+
+File path:  demo.parquet/part-00000-9cb6054e-9986-4f04-8ae7-730aac93e7db-c000.snappy.parquet
+Created by: parquet-mr version 1.12.3 (build f8dced182c4c1fbdec6ccb3185537b5a01e6ed6b)
+Properties:
+                   org.apache.spark.version: 3.4.0
+  org.apache.spark.sql.parquet.row.metadata: {"type":"struct","fields":[{"name":"id","type":"long","nullable":false,"metadata":{}}]}
+Schema:
+message spark_schema {
+  required int64 id;
+}
+
+
+Row group 0:  count: 5  10.60 B records  start: 4  total(compressed): 53 B total(uncompressed):63 B
+--------------------------------------------------------------------------------
+    type      encodings count     avg size   nulls   min / max
+id  INT64     S   _     5         10.60 B    0       "0" / "4"
+```
 
 ## Demo
 

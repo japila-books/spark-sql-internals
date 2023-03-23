@@ -172,3 +172,26 @@ customMetrics: Map[String, SQLMetric]
 * `BatchScanExec` is requested for the [inputRDD](BatchScanExec.md#inputRDD)
 * `ContinuousScanExec` is requested for the `inputRDD`
 * `MicroBatchScanExec` is requested for the `inputRDD` (that creates a [DataSourceRDD](../DataSourceRDD.md))
+
+## <span id="verboseStringWithOperatorId"> verboseStringWithOperatorId
+
+??? note "Signature"
+
+    ```scala
+    verboseStringWithOperatorId(): String
+    ```
+
+    `verboseStringWithOperatorId` is part of the [QueryPlan](../catalyst/QueryPlan.md#verboseStringWithOperatorId) abstraction.
+
+`verboseStringWithOperatorId` requests the [Scan](#scan) for one of the following (`metaDataStr`):
+
+* [Metadata](#getMetaData) when [SupportsMetadata](../connector/SupportsMetadata.md)
+* [Description](../connector/Scan.md#description), otherwise
+
+In the end, `verboseStringWithOperatorId` is as follows (based on [formattedNodeName](../catalyst/QueryPlan.md#formattedNodeName) and [output](../catalyst/QueryPlan.md#output)):
+
+```text
+[formattedNodeName]
+Output: [output]
+[metaDataStr]
+```

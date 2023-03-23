@@ -170,7 +170,12 @@ isSplitable(
   path: Path): Boolean
 ```
 
-`isSplitable` is `false`.
+`isSplitable` is disabled by default (`false`).
+
+FileScan | isSplitable
+---------|------------
+ `AvroScan` | `true`
+ [ParquetScan](parquet/ParquetScan.md) | [isSplitable](parquet/ParquetScan.md#isSplitable)
 
 ---
 

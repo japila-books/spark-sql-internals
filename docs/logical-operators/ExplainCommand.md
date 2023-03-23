@@ -1,6 +1,6 @@
 # ExplainCommand Logical Command
 
-`ExplainCommand` is a [logical command](RunnableCommand.md) to display logical and physical query plans with optional details about codegen and cost statistics.
+`ExplainCommand` is a [logical command](RunnableCommand.md) to [display logical and physical query plans](#run) (with optional details about codegen and cost statistics) that represents [EXPLAIN](../sql/SparkSqlAstBuilder.md#visitExplain) SQL statement at execution.
 
 ## Creating Instance
 
@@ -9,7 +9,9 @@
 * <span id="logicalPlan"> [LogicalPlan](LogicalPlan.md)
 * <span id="mode"> `ExplainMode`
 
-`ExplainCommand` is created for `EXPLAIN` SQL statements (when `SparkSqlAstBuilder` is requested to [visitExplain](../sql/SparkSqlAstBuilder.md#visitExplain)).
+`ExplainCommand` is created when:
+
+* `SparkSqlAstBuilder` is requested to [parse EXPLAIN statement](../sql/SparkSqlAstBuilder.md#visitExplain)
 
 ## <span id="output"> Output Attributes
 
