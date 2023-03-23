@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="getTable"> Creating Table
+### <span id="getTable"> Table
 
 ```java
 Table getTable(

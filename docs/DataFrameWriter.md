@@ -159,7 +159,7 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ```
 
-## <span id="save"> save
+## <span id="save"> Writing Out Data (save)
 
 ```scala
 save(): Unit

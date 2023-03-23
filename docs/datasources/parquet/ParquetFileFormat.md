@@ -1,5 +1,8 @@
 # ParquetFileFormat
 
+!!! important "Obsolete"
+    `ParquetFileFormat` is a mere [fallbackFileFormat](ParquetDataSourceV2.md#fallbackFileFormat) of [ParquetDataSourceV2](ParquetDataSourceV2.md).
+
 `ParquetFileFormat` is the [FileFormat](../FileFormat.md) of [Parquet Data Source](index.md).
 
 `ParquetFileFormat` is [splitable](#isSplitable).
@@ -113,37 +116,6 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 
 * FIXME (since Parquet vectorized reader is enabled by default it's of less interest)
 
-## <span id="inferSchema"> Schema Inference
-
-??? note "Signature"
-
-    ```scala
-    inferSchema(
-      sparkSession: SparkSession,
-      parameters: Map[String, String],
-      files: Seq[FileStatus]): Option[StructType]
-    ```
-
-    `inferSchema` is part of the [FileFormat](../FileFormat.md#inferSchema) abstraction.
-
-`inferSchema`...FIXME
-
-## <span id="prepareWrite"> Preparing Write Job
-
-??? note "Signature"
-
-    ```scala
-    prepareWrite(
-      sparkSession: SparkSession,
-      job: Job,
-      options: Map[String, String],
-      dataSchema: StructType): OutputWriterFactory
-    ```
-
-    `prepareWrite` is part of the [FileFormat](../FileFormat.md#prepareWrite) abstraction.
-
-`prepareWrite`...FIXME
-
 ## <span id="supportBatch"> supportBatch
 
 ??? note "Signature"
@@ -168,19 +140,6 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 1. The number of fields in the schema is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields) internal configuration property
 
 1. All the fields in the output schema are of [AtomicType](../../types/AtomicType.md)
-
-## <span id="supportDataType"> supportDataType
-
-??? note "Signature"
-
-    ```scala
-    supportDataType(
-      dataType: DataType): Boolean
-    ```
-
-    `supportDataType` is part of the [FileFormat](../FileFormat.md#supportDataType) abstraction.
-
-`supportDataType`...FIXME
 
 ## <span id="vectorTypes"> Vector Types
 

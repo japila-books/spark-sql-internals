@@ -1,6 +1,10 @@
 # ParquetDataSourceV2
 
-`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) of [Parquet Data Source](index.md).
+`ParquetDataSourceV2` is the [FileDataSourceV2](../FileDataSourceV2.md) (and hence indirectly a [DataSourceRegister](../../DataSourceRegister.md)) of [Parquet Data Source](index.md).
+
+`ParquetDataSourceV2` uses [ParquetTable](ParquetTable.md) for scanning and writing.
+
+`ParquetDataSourceV2` is registered in `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister`.
 
 ## Creating Instance
 
@@ -12,17 +16,17 @@
 
 ## <span id="getTable"> Creating Table
 
-```scala
-getTable(
-  options: CaseInsensitiveStringMap): Table
-getTable(
-  options: CaseInsensitiveStringMap,
-  schema: StructType): Table
-```
+??? note "Signature"
 
-`getTable` is part of the [FileDataSourceV2](../FileDataSourceV2.md#getTable) abstraction.
+    ```scala
+    getTable(
+      options: CaseInsensitiveStringMap): Table
+    getTable(
+      options: CaseInsensitiveStringMap,
+      schema: StructType): Table
+    ```
 
----
+    `getTable` is part of the [FileDataSourceV2](../FileDataSourceV2.md#getTable) abstraction.
 
 `getTable` creates a [ParquetTable](ParquetTable.md) with the following:
 
@@ -30,18 +34,18 @@ Property | Value
 ---------|------
 [name](ParquetTable.md#name) | [Table name](../FileDataSourceV2.md#getTableName) from the [paths](#getPaths) (and based on the given `options`)
 [paths](ParquetTable.md#paths) | [Paths](../FileDataSourceV2.md#getPaths) (in the given `options`)
-[userSpecifiedSchema](ParquetTable.md#userSpecifiedSchema) | The given `schema`
+[userSpecifiedSchema](ParquetTable.md#userSpecifiedSchema) | The given `schema`, if given
 [fallbackFileFormat](ParquetTable.md#fallbackFileFormat) | [ParquetFileFormat](#fallbackFileFormat)
 
 ## <span id="shortName"> shortName
 
-```scala
-shortName(): String
-```
+??? note "Signature"
 
-`shortName` is part of the [DataSourceRegister](../../DataSourceRegister.md#shortName) abstraction.
+    ```scala
+    shortName(): String
+    ```
 
----
+    `shortName` is part of the [DataSourceRegister](../../DataSourceRegister.md#shortName) abstraction.
 
 `shortName` is the following text:
 
@@ -51,12 +55,12 @@ parquet
 
 ## <span id="fallbackFileFormat"> fallbackFileFormat
 
-```scala
-fallbackFileFormat: Class[_ <: FileFormat]
-```
+??? note "Signature"
 
-`fallbackFileFormat` is part of the [FileDataSourceV2](../FileDataSourceV2.md#fallbackFileFormat) abstraction.
+    ```scala
+    fallbackFileFormat: Class[_ <: FileFormat]
+    ```
 
----
+    `fallbackFileFormat` is part of the [FileDataSourceV2](../FileDataSourceV2.md#fallbackFileFormat) abstraction.
 
 `fallbackFileFormat` is [ParquetFileFormat](ParquetFileFormat.md).

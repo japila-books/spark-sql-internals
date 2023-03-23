@@ -24,7 +24,7 @@ extractSessionConfigs(
 * (Spark Structured Streaming) `DataStreamReader` is requested to load data from a streaming data source
 * (Spark Structured Streaming) `DataStreamWriter` is requested to start a streaming query
 
-## <span id="getTableFromProvider"> getTableFromProvider
+## <span id="getTableFromProvider"> Creating Table (using TableProvider)
 
 ```scala
 getTableFromProvider(
@@ -35,9 +35,32 @@ getTableFromProvider(
 
 `getTableFromProvider` creates a [Table](../connector/Table.md) for the given [TableProvider](../connector/TableProvider.md), options and user-defined schema.
 
+---
+
 `getTableFromProvider` is used when:
 
-* `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
 * `DataFrameWriter` is requested to [save data](../DataFrameWriter.md#save)
-* (Spark Structured Streaming) `DataStreamReader` is requested to load data from a streaming data source
-* (Spark Structured Streaming) `DataStreamWriter` is requested to start a streaming query
+* `DataSourceV2Utils` is requested to [loadV2Source](#loadV2Source)
+* `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to load data from a streaming data source
+* `DataStreamWriter` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamWriter)) is requested to start a streaming query
+
+## <span id="loadV2Source"> loadV2Source
+
+```scala
+loadV2Source(
+  sparkSession: SparkSession,
+  provider: TableProvider,
+  userSpecifiedSchema: Option[StructType],
+  extraOptions: CaseInsensitiveMap[String],
+  source: String,
+  paths: String*): Option[DataFrame]
+```
+
+`loadV2Source` creates a [DataFrame](../DataFrame.md).
+
+---
+
+`loadV2Source` is used when:
+
+* `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
+* [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator is executed

@@ -22,7 +22,7 @@ Used when:
 * `DataSource` is requested for the [providingClass](../DataSource.md#providingClass) (for resolving data source relation for catalog tables)
 * `PreprocessTableCreation` logical analysis rule is [executed](../logical-analysis-rules/PreprocessTableCreation.md#fallBackV2ToV1)
 
-### <span id="getTable"> getTable
+### <span id="getTable"> Table
 
 ```scala
 getTable(
@@ -30,7 +30,13 @@ getTable(
 getTable(
   options: CaseInsensitiveStringMap,
   schema: StructType): Table
+getTable(
+  schema: StructType,
+  partitioning: Array[Transform],
+  properties: Map[String, String]): Table // (1)!
 ```
+
+1. Part of the [TableProvider](../connector/TableProvider.md#getTable) abstraction
 
 A [Table](../connector/Table.md) of this table provider
 
@@ -40,7 +46,7 @@ See:
 
 Used when:
 
-* `FileDataSourceV2` is requested to [getTable](#getTable-TableProvider) and [inferSchema](#inferSchema)
+* `FileDataSourceV2` is requested for a table (as a [TableProvider](../connector/TableProvider.md#getTable)) and [inferSchema](#inferSchema)
 
 ## Implementations
 
@@ -54,21 +60,6 @@ Used when:
 ## <span id="DataSourceRegister"> DataSourceRegister
 
 `FileDataSourceV2` is a [DataSourceRegister](../DataSourceRegister.md).
-
-## <span id="getTable-TableProvider"> getTable (TableProvider)
-
-```scala
-getTable(
-  schema: StructType,
-  partitioning: Array[Transform],
-  properties: util.Map[String, String]): Table
-```
-
-`getTable` is part of the [TableProvider](../connector/TableProvider.md#getTable) abstraction.
-
----
-
-`getTable` [creates a Table](#getTable) (with the given `properties` and `schema`) unless the [table](#t) has already been loaded during [schema inference](#inferSchema).
 
 ## <span id="inferSchema"> Schema Inference
 
