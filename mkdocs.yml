@@ -176,17 +176,17 @@ nav:
     - Columnar Execution:
       - columnar-execution/index.md
     - Common Table Expressions: common-table-expressions.md
+    - Configuration Properties: configuration-properties.md
     # "Connector API" section uses awesome-pages plugin
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
     # Review connector/.pages for setup
+    - ... | connector/**.md
     # FIXME No idea how to include a subdirectory (connector/expressions)
     #       to be under Connector API using awesome-pages
     - Connector Expressions:
       - connector/expressions/index.md
       - Aggregation: connector/expressions/Aggregation.md
       - SortOrder: connector/expressions/SortOrder.md
-    - ... | connector/**.md
-    - Configuration Properties: configuration-properties.md
     - Cost-Based Optimization:
       - cost-based-optimization/index.md
       - BasicStatsPlanVisitor: cost-based-optimization/BasicStatsPlanVisitor.md
@@ -820,6 +820,7 @@ nav:
       - CSVFileFormat: datasources/csv/CSVFileFormat.md
       - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
     - File-Based:
+      - AggregatePushDownUtils: datasources/AggregatePushDownUtils.md
       - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md
       - BasicWriteTaskStats: datasources/BasicWriteTaskStats.md
       - FileBatchWrite: datasources/FileBatchWrite.md

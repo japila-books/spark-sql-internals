@@ -44,6 +44,20 @@ ParquetScan | Value
  [partitionFilters](ParquetScan.md#partitionFilters) | [partitionFilters](../FileScanBuilder.md#partitionFilters)
  [dataFilters](ParquetScan.md#dataFilters) | [dataFilters](../FileScanBuilder.md#dataFilters)
 
+## <span id="pushedAggregations"> pushedAggregations
+
+```scala
+pushedAggregations: Option[Aggregation]
+```
+
+`ParquetScanBuilder` defines `pushedAggregations` registry for an [Aggregation](../../connector/expressions/Aggregation.md).
+
+The `pushedAggregations` is undefined when `ParquetScanBuilder` is [created](#creating-instance) and can only be assigned when [pushAggregation](#pushAggregation).
+
+`pushedAggregations` controls the [finalSchema](#finalSchema). When undefined, the [finalSchema](#finalSchema) is [readDataSchema](../FileScanBuilder.md#readDataSchema) when [building a ParquetScan](#build).
+
+`pushedAggregations` is used to create a [ParquetScan](ParquetScan.md#pushedAggregate).
+
 ## <span id="pushAggregation"> pushAggregation
 
 ??? note "Signature"
@@ -55,7 +69,13 @@ ParquetScan | Value
 
     `pushAggregation` is part of the [SupportsPushDownAggregates](../../connector/SupportsPushDownAggregates.md#pushAggregation) abstraction.
 
-`pushAggregation`...FIXME
+`pushAggregation` does nothing and returns `false` for [spark.sql.parquet.aggregatePushdown](../../configuration-properties.md#spark.sql.parquet.aggregatePushdown) disabled.
+
+`pushAggregation` [determines the data schema for aggregate to be pushed down](../AggregatePushDownUtils.md#getSchemaForPushedAggregation).
+
+With the schema determined, `pushAggregation` registers it as [finalSchema](#finalSchema) and the given [Aggregation](../../connector/expressions/Aggregation.md) as [pushedAggregations](#pushedAggregations). `pushAggregation` returns `true`.
+
+Otherwise, `pushAggregation` returns `false`.
 
 ## <span id="pushDataFilters"> pushDataFilters
 

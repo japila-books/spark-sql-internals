@@ -11,6 +11,11 @@ boolean pushAggregation(
   Aggregation aggregation)
 ```
 
+See:
+
+* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md#pushAggregation)
+* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md#pushAggregation)
+
 Used when:
 
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (to [rewriteAggregate](../logical-optimizations/V2ScanRelationPushDown.md#rewriteAggregate))
@@ -23,6 +28,10 @@ boolean supportCompletePushDown(
 ```
 
 Default: `false`
+
+See:
+
+* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md#supportCompletePushDown)
 
 Used when:
 

@@ -1,7 +1,7 @@
-# Data Sources
+# Connectors
 
-Spark SQL comes with the following built-in data sources to read data from or write data to:
+Spark SQL comes with the following built-in connectors (_data sources_) based on [Connector API](../connector/index.md) for the following data "formats":
 
 * [kafka](../kafka/index.md)
 * [parquet](parquet/index.md)
-* _others_
+* _others_ (see the menu on the left)

@@ -1,6 +1,6 @@
 # ParquetScan
 
-`ParquetScan` is a [FileScan](../FileScan.md) in [Parquet Data Source](index.md).
+`ParquetScan` is a [FileScan](../FileScan.md) in [Parquet Connector](index.md).
 
 ## Creating Instance
 
@@ -15,7 +15,6 @@
 * <span id="pushedFilters"> Pushed [Filter](../../Filter.md)s
 * <span id="options"> Case-insensitive options
 * [Pushed Aggregation](#pushedAggregate)
-* <span id="pushedAggregate"> Option[] = None
 * <span id="partitionFilters"> Partition filter [expression](../../expressions/Expression.md)s (optional)
 * <span id="dataFilters"> Data filter [expression](../../expressions/Expression.md)s (optional)
 
@@ -25,13 +24,20 @@
 
 ### <span id="pushedAggregate"> Pushed Aggregation
 
-`ParquetScan` can be given an [Aggregation](../../connector/expressions/Aggregation.md) expression when [created](#creating-instance).
-The `Aggregation` is optional and undefined by default.
+```scala
+pushedAggregate: Option[Aggregation] = None
+```
+
+`ParquetScan` can be given an [Aggregation](../../connector/expressions/Aggregation.md) expression (`pushedAggregate`) when [created](#creating-instance).
+The `Aggregation` is optional and undefined by default (`None`).
+
+The `pushedAggregate` is [pushedAggregations](ParquetScanBuilder.md#pushedAggregations) when `ParquetScanBuilder` is requested to [build a ParquetScan](ParquetScanBuilder.md#build).
+
+When defined, `ParquetScan` is no longer [isSplitable](#isSplitable) (since with aggregate pushed down, only the file footer will be read once, so file should not be split across multiple tasks).
 
 The `Aggregation` is used in the following:
 
 * [getMetaData](#getMetaData) (as [pushedAggregationsStr](#pushedAggregationsStr) and [pushedGroupByStr](#pushedGroupByStr))
-* [isSplitable](#isSplitable)
 * [readSchema](#readSchema)
 * [createReaderFactory](#createReaderFactory) (to create a [ParquetPartitionReaderFactory](ParquetPartitionReaderFactory.md#aggregation))
 

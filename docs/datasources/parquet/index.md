@@ -1,15 +1,15 @@
-# Parquet Data Source
+# Parquet Connector
 
 [Apache Parquet](http://parquet.apache.org/) is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 
-Parquet Data Source uses [ParquetDataSourceV2](ParquetDataSourceV2.md) for `parquet` datasets and tables with [ParquetScan](ParquetScan.md) for table scanning (_reading_) and [ParquetWrite](ParquetWrite.md) for data writing.
+Parquet Connector uses [ParquetDataSourceV2](ParquetDataSourceV2.md) for `parquet` datasets and tables with [ParquetScan](ParquetScan.md) for table scanning (_reading_) and [ParquetWrite](ParquetWrite.md) for data writing.
 
 ??? note "ParquetFileFormat is Fallback FileFormat"
     The older [ParquetFileFormat](ParquetFileFormat.md) is used as a [fallbackFileFormat](ParquetDataSourceV2.md#fallbackFileFormat) for backward-compatibility and [Hive](../../hive/HiveMetastoreCatalog.md#convert) (_to name a few use cases_).
 
-Parquet is the default data source format based on the [spark.sql.sources.default](../../configuration-properties.md#spark.sql.sources.default) configuration property.
+Parquet is the default connector format based on the [spark.sql.sources.default](../../configuration-properties.md#spark.sql.sources.default) configuration property.
 
-Parquet data source uses `spark.sql.parquet` prefix for [parquet-specific configuration properties](../../configuration-properties.md).
+Parquet connector uses `spark.sql.parquet` prefix for [parquet-specific configuration properties](../../configuration-properties.md).
 
 ## Options
 
@@ -23,9 +23,9 @@ Parquet data source uses `spark.sql.parquet` prefix for [parquet-specific config
 * [spark.sql.files.minPartitionNum](../../configuration-properties.md#spark.sql.files.minPartitionNum)
 * [spark.sql.files.openCostInBytes](../../configuration-properties.md#spark.sql.files.openCostInBytes)
 
-## Schema Discovery
+## Schema Discovery (Inference)
 
-Parquet Data Source uses distributed and multi-threaded (_concurrent_) process for [schema discovery](ParquetUtils.md#inferSchema).
+Parquet Connector uses distributed and multi-threaded (_concurrent_) process for [schema discovery](ParquetUtils.md#inferSchema).
 
 Schema discovery can be configured using the following:
 
@@ -34,7 +34,7 @@ Schema discovery can be configured using the following:
 
 ## Vectorized Parquet Decoding
 
-Parquet Data Source uses [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md) (and [ParquetReadSupport](ParquetReadSupport.md) otherwise).
+Parquet Connector uses [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](../../vectorized-decoding/index.md) (and [ParquetReadSupport](ParquetReadSupport.md) otherwise).
 
 ## Parquet CLI
 

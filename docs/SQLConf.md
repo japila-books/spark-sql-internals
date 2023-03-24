@@ -788,6 +788,10 @@ Used when:
 
 Used when `CommandUtils` helper object is requested to [calculate the total size of a table (with partitions)](CommandUtils.md#calculateTotalSize) (for [AnalyzeColumnCommand](logical-operators/AnalyzeColumnCommand.md) and [AnalyzeTableCommand](logical-operators/AnalyzeTableCommand.md) commands)
 
+## <span id="parquetAggregatePushDown"><span id="PARQUET_AGGREGATE_PUSHDOWN_ENABLED"> parquetAggregatePushDown
+
+[spark.sql.parquet.aggregatePushdown](configuration-properties.md#spark.sql.parquet.aggregatePushdown)
+
 ## <span id="parquetCompressionCodec"><span id="PARQUET_COMPRESSION"> parquetCompressionCodec
 
 [spark.sql.parquet.compression.codec](configuration-properties.md#spark.sql.parquet.compression.codec)

@@ -599,7 +599,30 @@ Used when:
 
 Default: `true`
 
-## <span id="spark.sql.parquet.columnarReaderBatchSize"> parquet.columnarReaderBatchSize
+## spark.sql.parquet
+
+### <span id="spark.sql.parquet.aggregatePushdown"> aggregatePushdown
+
+**spark.sql.parquet.aggregatePushdown**
+
+Controls [aggregate pushdown](datasources/parquet/ParquetScanBuilder.md#pushAggregation) in [parquet connector](datasources/parquet/index.md)
+
+Supports MIN, MAX and COUNT as aggregate expression:
+
+* For MIN/MAX, support boolean, integer, float and date types.
+* For COUNT, support all data types.
+
+If statistics is missing from any Parquet file footer, exception would be thrown.
+
+Default: `false`
+
+Use [SQLConf.parquetAggregatePushDown](SQLConf.md#parquetAggregatePushDown) for the current value
+
+Used when:
+
+* `ParquetScanBuilder` is requested to [pushAggregation](datasources/parquet/ParquetScanBuilder.md#pushAggregation)
+
+### <span id="spark.sql.parquet.columnarReaderBatchSize"> columnarReaderBatchSize
 
 **spark.sql.parquet.columnarReaderBatchSize**
 
@@ -617,11 +640,11 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
-## <span id="spark.sql.parquet.filterPushdown"> parquet.filterPushdown
+### <span id="spark.sql.parquet.filterPushdown"> filterPushdown
 
 **spark.sql.parquet.filterPushdown**
 
-Controls filter predicate push-down optimization for [parquet data source](datasources/parquet/index.md)
+Controls filter predicate push-down optimization for [parquet connector](datasources/parquet/index.md)
 
 Default: `true`
 
@@ -633,7 +656,7 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableParquetFilterPushDown)
 * `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
 
-## <span id="spark.sql.parquet.filterPushdown.stringPredicate"> parquet.filterPushdown.stringPredicate
+### <span id="spark.sql.parquet.filterPushdown.stringPredicate"> filterPushdown.stringPredicate
 
 **spark.sql.parquet.filterPushdown.stringPredicate**
 
@@ -650,7 +673,7 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#pushDownStringPredicate)
 * `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
 
-## <span id="spark.sql.parquet.mergeSchema"> parquet.mergeSchema
+### <span id="spark.sql.parquet.mergeSchema"> mergeSchema
 
 **spark.sql.parquet.mergeSchema**
 
