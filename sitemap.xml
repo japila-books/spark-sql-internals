@@ -1346,6 +1346,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/datasources/AggregatePushDownUtils/</loc>
+         <lastmod>2023-03-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/BaseDynamicPartitionDataWriter/</loc>
          <lastmod>2023-03-24</lastmod>
          <changefreq>daily</changefreq>
