@@ -617,6 +617,39 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
+## <span id="spark.sql.parquet.filterPushdown"> parquet.filterPushdown
+
+**spark.sql.parquet.filterPushdown**
+
+Controls filter predicate push-down optimization for [parquet data source](datasources/parquet/index.md)
+
+Default: `true`
+
+Use [SQLConf.parquetFilterPushDown](SQLConf.md#parquetFilterPushDown) for the current value
+
+Used when:
+
+* `ParquetFileFormat` is [created](datasources/parquet/ParquetFileFormat.md#enableParquetFilterPushDown)
+* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableParquetFilterPushDown)
+* `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
+
+## <span id="spark.sql.parquet.filterPushdown.stringPredicate"> parquet.filterPushdown.stringPredicate
+
+**spark.sql.parquet.filterPushdown.stringPredicate**
+
+**(internal)** Controls Parquet filter push-down optimization for string predicate such as startsWith/endsWith/contains functions.
+Effective only with [spark.sql.parquet.filterPushdown](#spark.sql.parquet.filterPushdown) enabled.
+
+Default: [spark.sql.parquet.filterPushdown.string.startsWith](#spark.sql.parquet.filterPushdown.string.startsWith)
+
+Use [SQLConf.parquetFilterPushDownStringPredicate](SQLConf.md#parquetFilterPushDownStringPredicate) for the current value
+
+Used when:
+
+* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#pushDownStringPredicate)
+* `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
+
 ## <span id="spark.sql.parquet.mergeSchema"> parquet.mergeSchema
 
 **spark.sql.parquet.mergeSchema**
@@ -1737,14 +1770,6 @@ Enables [vectorized parquet decoding](vectorized-decoding/index.md).
 Default: `true`
 
 Use [SQLConf.parquetVectorizedReaderEnabled](SQLConf.md#parquetVectorizedReaderEnabled) method to access the current value.
-
-## <span id="spark.sql.parquet.filterPushdown"> spark.sql.parquet.filterPushdown
-
-Controls the [filter predicate push-down optimization](logical-optimizations/PushDownPredicate.md) for data sources using [parquet](datasources/parquet/ParquetFileFormat.md) file format
-
-Default: `true`
-
-Use [SQLConf.parquetFilterPushDown](SQLConf.md#parquetFilterPushDown) method to access the current value.
 
 ## <span id="spark.sql.parquet.filterPushdown.date"> spark.sql.parquet.filterPushdown.date
 

@@ -10,12 +10,20 @@
 Scan build()
 ```
 
-Builds [Scan](Scan.md)
+Builds a [Scan](Scan.md)
+
+See:
+
+* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md#build)
 
 Used when:
 
+* `DataSourceV2Relation` logical operator is requested to [computeStats](../logical-operators/DataSourceV2Relation.md#computeStats)
+* `DescribeColumnExec` physical command is executed
 * `PushDownUtils` is requested to [pruneColumns](../PushDownUtils.md#pruneColumns)
-* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
+* [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (to [buildScanWithPushedAggregate](../logical-optimizations/V2ScanRelationPushDown.md#buildScanWithPushedAggregate))
+* `MicroBatchExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/micro-batch-execution/MicroBatchExecution)) is requested for the `logicalPlan`
+* `ContinuousExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/continuous-execution/ContinuousExecution)) is requested for the `logicalPlan`
 
 ## Implementations
 

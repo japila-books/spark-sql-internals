@@ -805,7 +805,7 @@ nav:
     - SparkSqlParser: sql/SparkSqlParser.md
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
     - VariableSubstitution: sql/VariableSubstitution.md
-  - Data Sources:
+  - Connectors:
     - datasources/index.md
     - Avro:
       - Avro Data Source: datasources/avro/index.md

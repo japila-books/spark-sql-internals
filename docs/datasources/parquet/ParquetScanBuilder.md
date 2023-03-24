@@ -1,6 +1,10 @@
 # ParquetScanBuilder
 
-`ParquetScanBuilder` is a [FileScanBuilder](../FileScanBuilder.md) that [SupportsPushDownFilters](../../connector/SupportsPushDownFilters.md).
+`ParquetScanBuilder` is a [FileScanBuilder](../FileScanBuilder.md) (of [ParquetTable](ParquetTable.md#newScanBuilder)) that [SupportsPushDownFilters](../../connector/SupportsPushDownFilters.md).
+
+`ParquetScanBuilder` [builds ParquetScans](#build).
+
+`ParquetScanBuilder` [supportsNestedSchemaPruning](#supportsNestedSchemaPruning).
 
 ## Creating Instance
 
@@ -18,56 +22,74 @@
 
 ## <span id="build"> Building Scan
 
-```scala
-build(): Scan
-```
+??? note "Signature"
 
-`build` creates a [ParquetScan](ParquetScan.md) (with the [readDataSchema](../FileScanBuilder.md#readDataSchema), the [readPartitionSchema](../FileScanBuilder.md#readPartitionSchema) and the [pushedParquetFilters](#pushedParquetFilters)).
+    ```scala
+    build(): Scan
+    ```
 
-`build` is part of the [ScanBuilder](../../connector/ScanBuilder.md#build) abstraction.
+    `build` is part of the [ScanBuilder](../../connector/ScanBuilder.md#build) abstraction.
 
-## <span id="pushedFilters"> Pushed Filters
+`build` creates a [ParquetScan](ParquetScan.md) with the following:
 
-```scala
-pushedFilters(): Array[Filter]
-```
+ParquetScan | Value
+------------|------
+ [fileIndex](ParquetScan.md#fileIndex) | the given [fileIndex](#fileIndex)
+ [dataSchema](ParquetScan.md#dataSchema) | the given [dataSchema](#dataSchema)
+ [readDataSchema](ParquetScan.md#readDataSchema) | [finalSchema](#finalSchema)
+ [readPartitionSchema](ParquetScan.md#readPartitionSchema) | [readPartitionSchema](../FileScanBuilder.md#readPartitionSchema)
+ [pushedFilters](ParquetScan.md#pushedFilters) | [pushedDataFilters](../FileScanBuilder.md#pushedDataFilters)
+ [options](ParquetScan.md#options) | the given [options](#options)
+ [pushedAggregate](ParquetScan.md#pushedAggregate) | [pushedAggregations](#pushedAggregations)
+ [partitionFilters](ParquetScan.md#partitionFilters) | [partitionFilters](../FileScanBuilder.md#partitionFilters)
+ [dataFilters](ParquetScan.md#dataFilters) | [dataFilters](../FileScanBuilder.md#dataFilters)
 
-`pushedFilters` is the [pushedParquetFilters](#pushedParquetFilters).
+## <span id="pushAggregation"> pushAggregation
 
-`pushedFilters` is part of the [SupportsPushDownFilters](../../connector/SupportsPushDownFilters.md#pushedFilters) abstraction.
+??? note "Signature"
 
-## <span id="pushedParquetFilters"> pushedParquetFilters
+    ```scala
+    pushAggregation(
+      aggregation: Aggregation): Boolean
+    ```
 
-```scala
-pushedParquetFilters: Array[Filter]
-```
+    `pushAggregation` is part of the [SupportsPushDownAggregates](../../connector/SupportsPushDownAggregates.md#pushAggregation) abstraction.
 
-??? note "Lazy Value"
-    `pushedParquetFilters` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+`pushAggregation`...FIXME
 
-    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+## <span id="pushDataFilters"> pushDataFilters
 
-`pushedParquetFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../FileScanBuilder.md#readDataSchema) ([converted](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
+??? note "Signature"
+
+    ```scala
+    pushDataFilters(
+      dataFilters: Array[Filter]): Array[Filter]
+    ```
+
+    `pushDataFilters` is part of the [FileScanBuilder](../FileScanBuilder.md#pushDataFilters) abstraction.
+
+!!! note "spark.sql.parquet.filterPushdown"
+    `pushDataFilters` does nothing and returns no [Catalyst Filter](../../Filter.md)s with [spark.sql.parquet.filterPushdown](../../configuration-properties.md#spark.sql.parquet.filterPushdown) disabled.
+
+`pushDataFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../FileScanBuilder.md#readDataSchema) ([converted into the corresponding parquet schema](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
 
 * [spark.sql.parquet.filterPushdown.date](../../SQLConf.md#parquetFilterPushDownDate)
-* [spark.sql.parquet.filterPushdown.timestamp](../../SQLConf.md#parquetFilterPushDownTimestamp)
 * [spark.sql.parquet.filterPushdown.decimal](../../SQLConf.md#parquetFilterPushDownDecimal)
-* [spark.sql.parquet.filterPushdown.string.startsWith](../../SQLConf.md#parquetFilterPushDownStringStartWith)
+* [spark.sql.parquet.filterPushdown.string.startsWith](../../SQLConf.md#parquetFilterPushDownStringPredicate)
+* [spark.sql.parquet.filterPushdown.timestamp](../../SQLConf.md#parquetFilterPushDownTimestamp)
 * [spark.sql.parquet.pushdown.inFilterThreshold](../../SQLConf.md#parquetFilterPushDownInFilterThreshold)
 * [spark.sql.caseSensitive](../../SQLConf.md#caseSensitiveAnalysis)
 
-`pushedParquetFilters` requests the `ParquetFilters` for the [convertibleFilters](ParquetFilters.md#convertibleFilters).
-
-`pushedParquetFilters` is used when:
-
-* `ParquetScanBuilder` is requested for the [pushedFilters](#pushedFilters) and to [build](#build)
+In the end, `pushedParquetFilters` requests the `ParquetFilters` for the [convertibleFilters](ParquetFilters.md#convertibleFilters) for the given `dataFilters`.
 
 ## <span id="supportsNestedSchemaPruning"> supportsNestedSchemaPruning
 
-```scala
-supportsNestedSchemaPruning: Boolean
-```
+??? note "Signature"
 
-`supportsNestedSchemaPruning` is `true`.
+    ```scala
+    supportsNestedSchemaPruning: Boolean
+    ```
 
-`supportsNestedSchemaPruning` is part of the [FileScanBuilder](../FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.
+    `supportsNestedSchemaPruning` is part of the [FileScanBuilder](../FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.
+
+`supportsNestedSchemaPruning` is enabled (`true`).

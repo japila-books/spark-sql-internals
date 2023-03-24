@@ -800,11 +800,6 @@ Used when:
 
 [spark.sql.parquet.filterPushdown](configuration-properties.md#spark.sql.parquet.filterPushdown)
 
-Used when:
-
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
-
 ## <span id="parquetFilterPushDownDate"><span id="PARQUET_FILTER_PUSHDOWN_DATE_ENABLED"> parquetFilterPushDownDate
 
 [spark.sql.parquet.filterPushdown.date](configuration-properties.md#spark.sql.parquet.filterPushdown.date)
@@ -833,15 +828,13 @@ Used when:
 * `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
 * `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
 
+## <span id="parquetFilterPushDownStringPredicate"><span id="PARQUET_FILTER_PUSHDOWN_STRING_PREDICATE_ENABLED"> parquetFilterPushDownStringPredicate
+
+[spark.sql.parquet.filterPushdown.stringPredicate](configuration-properties.md#spark.sql.parquet.filterPushdown.stringPredicate)
+
 ## <span id="parquetFilterPushDownStringStartWith"><span id="PARQUET_FILTER_PUSHDOWN_STRING_STARTSWITH_ENABLED"> parquetFilterPushDownStringStartWith
 
 [spark.sql.parquet.filterPushdown.string.startsWith](configuration-properties.md#spark.sql.parquet.filterPushdown.string.startsWith)
-
-Used when:
-
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
-* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
 
 ## <span id="parquetFilterPushDownTimestamp"><span id="PARQUET_FILTER_PUSHDOWN_TIMESTAMP_ENABLED"> parquetFilterPushDownTimestamp
 

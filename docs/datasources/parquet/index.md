@@ -2,7 +2,7 @@
 
 [Apache Parquet](http://parquet.apache.org/) is a columnar storage format for the Apache Hadoop ecosystem with support for efficient storage and encoding of data.
 
-Parquet Data Source uses [ParquetDataSourceV2](ParquetDataSourceV2.md) for `parquet`-encoded datasets and tables.
+Parquet Data Source uses [ParquetDataSourceV2](ParquetDataSourceV2.md) for `parquet` datasets and tables with [ParquetScan](ParquetScan.md) for table scanning (_reading_) and [ParquetWrite](ParquetWrite.md) for data writing.
 
 ??? note "ParquetFileFormat is Fallback FileFormat"
     The older [ParquetFileFormat](ParquetFileFormat.md) is used as a [fallbackFileFormat](ParquetDataSourceV2.md#fallbackFileFormat) for backward-compatibility and [Hive](../../hive/HiveMetastoreCatalog.md#convert) (_to name a few use cases_).
