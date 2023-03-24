@@ -17,6 +17,10 @@ ScanBuilder newScanBuilder(
 
 Creates a [ScanBuilder](ScanBuilder.md)
 
+See:
+
+* [ParquetTable](../datasources/parquet/ParquetTable.md#newScanBuilder)
+
 Used when:
 
 * `DataSourceV2Relation` logical operator is requested to [computeStats](../logical-operators/DataSourceV2Relation.md#computeStats)

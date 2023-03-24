@@ -22,6 +22,15 @@ formatName: String
 
 Name of the file table (_format_)
 
+FileTable | Format Name
+----------|------------
+ `AvroTable` | `AVRO`
+ `CSVTable` | `CSV`
+ `JsonTable` | `JSON`
+ `OrcTable` | `ORC`
+ [ParquetTable](parquet/ParquetTable.md) | [Parquet](parquet/ParquetTable.md#formatName)
+ `TextTable` | `Text`
+
 ### <span id="inferSchema"> Schema Inference
 
 ```scala
@@ -31,7 +40,13 @@ inferSchema(
 
 Infers schema of the given `files` (as Hadoop [FileStatus]({{ hadoop.api }}/org/apache/hadoop/fs/FileStatus.html)es)
 
-Used when `FileTable` is requested for a [data schema](#dataSchema)
+See:
+
+* [ParquetTable](parquet/ParquetTable.md#inferSchema)
+
+Used when:
+
+* `FileTable` is requested for the [data schema](#dataSchema)
 
 ### <span id="supportsDataType"> supportsDataType
 
@@ -40,12 +55,17 @@ supportsDataType(
     dataType: DataType): Boolean = true
 ```
 
-`supportsDataType` indicates whether a given [DataType](../types/DataType.md) is supported in read/write path or not.
+Controls whether the given [DataType](../types/DataType.md) is supported by the file-backed table
 
-Default: All [DataType](../types/DataType.md)s are supported by default
+Default: All [DataType](../types/DataType.md)s are supported
 
-* `FileTable` is requested for a [schema](#schema)
-* _others_ (in [FileTables](#implementations))
+See:
+
+* [ParquetTable](parquet/ParquetTable.md#supportsDataType)
+
+Used when:
+
+* `FileTable` is requested for the [schema](#schema)
 
 ## Implementations
 
@@ -89,17 +109,18 @@ capabilities: java.util.Set[TableCapability]
 dataSchema: StructType
 ```
 
-`dataSchema` is a [schema](../types/StructType.md) of the data of the file-backed table
+`dataSchema` is the [schema](../types/StructType.md) of the data of the file-backed table
 
 ??? note "Lazy Value"
-    `dataSchema` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and cached afterwards.
+    `dataSchema` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
 ---
 
 `dataSchema` is used when:
 
-* `FileTable` is requested for a [schema](#schema)
-* _others_ (in [FileTables](#implementations))
+* `FileTable` is requested for the [schema](#schema)
 
 ## <span id="partitioning"> Partitioning
 
@@ -127,15 +148,21 @@ properties: util.Map[String, String]
 
 ## <span id="schema"> Table Schema
 
-```scala
-schema: StructType
-```
+??? note "Signature"
 
-`schema` is part of the [Table](../connector/Table.md#schema) abstraction.
+    ```scala
+    schema: StructType
+    ```
 
----
+    `schema` is part of the [Table](../connector/Table.md#schema) abstraction.
 
-`schema`...FIXME
+`schema` checks the [dataSchema](#dataSchema) for column name duplication.
+
+`schema` makes sure that all field types in the [dataSchema](#dataSchema) are [supported](#supportsDataType).
+
+`schema` requests the [PartitioningAwareFileIndex](#fileIndex) for the [partitionSchema](PartitioningAwareFileIndex.md#partitionSchema) to checks for column name duplication.
+
+In the end, `schema` is the [dataSchema](#dataSchema) followed by (the fields of) the [partitionSchema](#partitionSchema).
 
 ## <span id="fileIndex"> PartitioningAwareFileIndex
 

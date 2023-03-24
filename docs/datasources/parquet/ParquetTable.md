@@ -1,6 +1,8 @@
 # ParquetTable
 
-`ParquetTable` is a [FileTable](../FileTable.md).
+`ParquetTable` is a [FileTable](../FileTable.md) of [ParquetDataSourceV2](ParquetDataSourceV2.md) in [Parquet Data Source](index.md).
+
+`ParquetTable` uses [ParquetScanBuilder](#newScanBuilder) for scanning and [ParquetWrite](#newWriteBuilder) for writing.
 
 ## Creating Instance
 
@@ -19,13 +21,13 @@
 
 ## <span id="formatName"> Format Name
 
-```scala
-formatName: String
-```
+??? note "Signature"
 
-`formatName` is part of the [FileTable](../FileTable.md#formatName) abstraction.
+    ```scala
+    formatName: String
+    ```
 
----
+    `formatName` is part of the [FileTable](../FileTable.md#formatName) abstraction.
 
 `formatName` is the following text:
 
@@ -35,27 +37,27 @@ Parquet
 
 ## <span id="inferSchema"> Schema Inference
 
-```scala
-inferSchema(
-  files: Seq[FileStatus]): Option[StructType]
-```
+??? note "Signature"
 
-`inferSchema` is part of the [FileTable](../FileTable.md#inferSchema) abstraction.
+    ```scala
+    inferSchema(
+      files: Seq[FileStatus]): Option[StructType]
+    ```
 
----
+    `inferSchema` is part of the [FileTable](../FileTable.md#inferSchema) abstraction.
 
 `inferSchema` [infers the schema](ParquetUtils.md#inferSchema) (with the [options](#options) and the input Hadoop `FileStatus`es).
 
-## <span id="newScanBuilder"> newScanBuilder
+## <span id="newScanBuilder"> Creating ScanBuilder
 
-```scala
-newScanBuilder(
-  options: CaseInsensitiveStringMap): ParquetScanBuilder
-```
+??? note "Signature"
 
-`newScanBuilder` is part of the [FileTable](../FileTable.md#newScanBuilder) abstraction.
+    ```scala
+    newScanBuilder(
+      options: CaseInsensitiveStringMap): ParquetScanBuilder
+    ```
 
----
+    `newScanBuilder` is part of the [SupportsRead](../../connector/SupportsRead.md#newScanBuilder) abstraction.
 
 `newScanBuilder` creates a [ParquetScanBuilder](ParquetScanBuilder.md) with the following:
 
@@ -64,33 +66,33 @@ newScanBuilder(
 * [dataSchema](../FileTable.md#dataSchema)
 * [options](#options)
 
-## <span id="newWriteBuilder"> newWriteBuilder
+## <span id="newWriteBuilder"> Creating WriteBuilder
 
-```scala
-newWriteBuilder(
-  info: LogicalWriteInfo): WriteBuilder
-```
+??? note "Signature"
 
-`newWriteBuilder` is part of the [FileTable](../FileTable.md#newWriteBuilder) abstraction.
+    ```scala
+    newWriteBuilder(
+      info: LogicalWriteInfo): WriteBuilder
+    ```
 
----
+    `newWriteBuilder` is part of the [SupportsWrite](../../connector/SupportsWrite.md#newWriteBuilder) abstraction.
 
 `newWriteBuilder` creates a [WriteBuilder](../../connector/WriteBuilder.md) that creates a [ParquetWrite](ParquetWrite.md) (when requested to [build a Write](../../connector/WriteBuilder.md#build)).
 
 ## <span id="supportsDataType"> supportsDataType
 
-```scala
-supportsDataType(
-  dataType: DataType): Boolean
-```
+??? note "Signature"
 
-`supportsDataType` is part of the [FileTable](../FileTable.md#supportsDataType) abstraction.
+    ```scala
+    supportsDataType(
+      dataType: DataType): Boolean
+    ```
 
----
+    `supportsDataType` is part of the [FileTable](../FileTable.md#supportsDataType) abstraction.
 
 `supportsDataType` supports all [AtomicType](../../types/AtomicType.md)s and the following complex [DataType](../../types/DataType.md)s with `AtomicType`s:
 
-* [StructType](../../types/StructType.md)
 * [ArrayType](../../types/ArrayType.md)
 * `MapType`
+* [StructType](../../types/StructType.md)
 * [UserDefinedType](../../types/UserDefinedType.md)

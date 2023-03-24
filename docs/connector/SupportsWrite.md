@@ -8,7 +8,7 @@ title: SupportsWrite
 
 ## Contract
 
-### <span id="newWriteBuilder"> newWriteBuilder
+### <span id="newWriteBuilder"> Creating WriteBuilder
 
 ```java
 WriteBuilder newWriteBuilder(
@@ -16,6 +16,10 @@ WriteBuilder newWriteBuilder(
 ```
 
 Creates a [WriteBuilder](WriteBuilder.md) for writing (batch and streaming)
+
+See:
+
+* [ParquetTable](../datasources/parquet/ParquetTable.md#newWriteBuilder)
 
 Used when:
 
