@@ -1,17 +1,14 @@
 # DataSourceRDDPartition
 
-`DataSourceRDDPartition` is a Spark Core `Partition` of spark-sql-DataSourceRDD.md[DataSourceRDD] and Spark Structured Streaming's `ContinuousDataSourceRDD` RDDs.
+`DataSourceRDDPartition` is a `Partition` ([Apache Spark]({{ book.spark_core }}/rdd/Partition)) of [DataSourceRDD](DataSourceRDD.md).
 
-`DataSourceRDDPartition` is <<creating-instance, created>> when:
+## Creating Instance
 
-* spark-sql-DataSourceRDD.md#getPartitions[DataSourceRDD] and Spark Structured Streaming's `ContinuousDataSourceRDD` are requested for partitions
+`DataSourceRDDPartition` takes the following to be created:
 
-* spark-sql-DataSourceRDD.md#compute[DataSourceRDD] and Spark Structured Streaming's `ContinuousDataSourceRDD` are requested to compute a partition
+* <span id="index"> Partition Index
+* <span id="inputPartitions"> [InputPartition](connector/InputPartition.md)s
 
-* spark-sql-DataSourceRDD.md#getPreferredLocations[DataSourceRDD] and Spark Structured Streaming's `ContinuousDataSourceRDD` are requested for preferred locations
+`DataSourceRDDPartition` is created when:
 
-[[creating-instance]]
-`DataSourceRDDPartition` takes the following when created:
-
-* [[index]] Partition index
-* [[inputPartition]] [InputPartition](connector/InputPartition.md)
+* `DataSourceRDD` is requested for the [partitions](DataSourceRDD.md#getPartitions)

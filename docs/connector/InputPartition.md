@@ -1,8 +1,8 @@
 # InputPartition
 
-`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [DataSource V2](../new-and-noteworthy/datasource-v2.md) with optional [location preferences](#preferredLocations).
+`InputPartition` is an [abstraction](#contract) of [input partitions](#implementations) in [Connector API](index.md) with optional [location preferences](#preferredLocations).
 
-`InputPartition` is a Java [Serializable](https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html).
+`InputPartition` is a Java [Serializable]({{ java.api }}/java/io/Serializable.html).
 
 ## Contract
 
@@ -16,21 +16,25 @@ Specifies **preferred locations** (executor hosts)
 
 By default, `preferredLocations` defines no location preferences (is simply empty).
 
+See:
+
+* [FilePartition](../datasources/FilePartition.md#preferredLocations)
+
 Used when:
 
 * `FileScanRDD` is requested for [preferred locations](../rdds/FileScanRDD.md#getPreferredLocations)
-
 * `DataSourceRDD` is requested for [preferred locations](../DataSourceRDD.md#getPreferredLocations)
-
-* `ContinuousDataSourceRDD` (Spark Structured Streaming) is requested for preferred locations
+* `ContinuousDataSourceRDD` ([Spark Structured Streaming]({{ book.structured_streaming }}/ContinuousDataSourceRDD)) is requested for preferred locations
 
 ## Implementations
 
 * `ContinuousMemoryStreamInputPartition`
-* `FilePartition`
+* [FilePartition](../datasources/FilePartition.md)
+* `HasPartitionKey`
 * `KafkaBatchInputPartition`
 * `KafkaContinuousInputPartition`
 * `MemoryStreamInputPartition`
+* `RatePerMicroBatchStreamInputPartition`
 * `RateStreamContinuousInputPartition`
 * `RateStreamMicroBatchInputPartition`
 * `TextSocketContinuousInputPartition`

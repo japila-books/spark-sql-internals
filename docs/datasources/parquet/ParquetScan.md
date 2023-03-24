@@ -1,6 +1,6 @@
 # ParquetScan
 
-`ParquetScan` is a [FileScan](../FileScan.md) in [Parquet Connector](index.md).
+`ParquetScan` is the [FileScan](../FileScan.md) of [Parquet Connector](index.md) that uses [ParquetPartitionReaderFactory](ParquetPartitionReaderFactory.md) with [ParquetReadSupport](ParquetReadSupport.md).
 
 ## Creating Instance
 
@@ -71,10 +71,22 @@ Name | Value
 
     `isSplitable` is part of the [FileScan](../FileScan.md#isSplitable) abstraction.
 
-`isSplitable` is `true` when all the following hold:
+`isSplitable` is enabled (`true`) when all the following hold:
 
 1. [pushedAggregate](#pushedAggregate) is not specified
 1. `RowIndexUtil.isNeededForSchema` is `false` for the [readSchema](#readSchema)
+
+## <span id="readSchema"> readSchema
+
+??? note "Signature"
+
+    ```scala
+    readSchema(): StructType
+    ```
+
+    `readSchema` is part of the [Scan](../../connector/Scan.md#readSchema) abstraction.
+
+`readSchema` is [readDataSchema](#readDataSchema) with [aggregate pushed down](#pushedAggregate). Otherwise, `readSchema` is the default [readSchema](../FileScan.md#readSchema).
 
 ## <span id="getMetaData"> Custom Metadata
 

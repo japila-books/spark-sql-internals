@@ -1,6 +1,6 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md) for [ParquetScan](ParquetScan.md#createReaderFactory) for batch queries.
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md) of [ParquetScan](ParquetScan.md#createReaderFactory) for batch queries in [Parquet Connector](index.md).
 
 ## Creating Instance
 
@@ -12,68 +12,68 @@
 * <span id="readDataSchema"> Read data [schema](../../types/StructType.md)
 * <span id="partitionSchema"> Partition [schema](../../types/StructType.md)
 * <span id="filters"> [Filter](../../Filter.md)s
-* <span id="parquetOptions"> [ParquetOptions](ParquetOptions.md)
+* <span id="aggregation"> [Aggregation](../../connector/expressions/Aggregation.md)
+* <span id="options"> [ParquetOptions](ParquetOptions.md)
 
 `ParquetPartitionReaderFactory` is created when:
 
-* `ParquetScan` is requested to [create a PartitionReaderFactory](ParquetScan.md#createReaderFactory)
+* `ParquetScan` is requested for a [PartitionReaderFactory](ParquetScan.md#createReaderFactory)
 
-## <span id="enableOffHeapColumnVector"><span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled
+## <span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled { #enableOffHeapColumnVector }
 
 `ParquetPartitionReaderFactory` uses [spark.sql.columnVector.offheap.enabled](../../configuration-properties.md#spark.sql.columnVector.offheap.enabled) configuration property when requested for the following:
 
 * [Create a Vectorized Reader](#createParquetVectorizedReader) (and create a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md#useOffHeap))
 * [Build a Columnar Reader](#buildColumnarReader) (and `convertAggregatesRowToBatch`)
 
-## <span id="supportColumnarReads"> supportColumnarReads
+## <span id="supportsColumnar"> supportColumnarReads { #supportColumnarReads }
 
-```scala
-supportColumnarReads(
-  partition: InputPartition): Boolean
-```
+??? note "Signature"
 
-`supportColumnarReads` is part of the [PartitionReaderFactory](../../connector/PartitionReaderFactory.md#supportColumnarReads) abstraction.
+    ```scala
+    supportColumnarReads(
+      partition: InputPartition): Boolean
+    ```
 
----
+    `supportColumnarReads` is part of the [PartitionReaderFactory](../../connector/PartitionReaderFactory.md#supportColumnarReads) abstraction.
 
-`supportColumnarReads` is enabled (`true`) when the following all hold:
+`ParquetPartitionReaderFactory` supports columnar reads when the following all hold:
 
-1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader)
-1. [spark.sql.codegen.wholeStage](../../configuration-properties.md#spark.sql.codegen.wholeStage)
+1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) is enabled
+1. [spark.sql.codegen.wholeStage](../../configuration-properties.md#spark.sql.codegen.wholeStage) is enabled
 1. The number of the [resultSchema](#resultSchema) fields is at most [spark.sql.codegen.maxFields](../../configuration-properties.md#spark.sql.codegen.maxFields)
-1. All the [resultSchema](#resultSchema) fields are [AtomicType](../../types/AtomicType.md)s
 
-## <span id="buildColumnarReader"> Building Columnar Reader
+## Building Columnar PartitionReader { #buildColumnarReader }
 
-```scala
-buildColumnarReader(
-  file: PartitionedFile): PartitionReader[ColumnarBatch]
-```
+??? note "Signature"
 
-`buildColumnarReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
+    ```scala
+    buildColumnarReader(
+      file: PartitionedFile): PartitionReader[ColumnarBatch]
+    ```
 
----
+    `buildColumnarReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
 
 `buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
 
 In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/PartitionReader.md) that returns [ColumnarBatch](../../vectorized-query-execution/ColumnarBatch.md)es (when [requested for records](../../connector/PartitionReader.md#get)).
 
-## <span id="buildReader"> Building Partition Reader
+## Building PartitionReader { #buildReader }
 
-```scala
-buildReader(
-  file: PartitionedFile): PartitionReader[InternalRow]
-```
+??? note "Signature"
+
+    ```scala
+    buildReader(
+      file: PartitionedFile): PartitionReader[InternalRow]
+    ```
+
+    `buildReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildReader) abstraction.
 
 `buildReader` determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use based on the [enableVectorizedReader](#enableVectorizedReader) flag. When enabled, `buildReader` [createVectorizedReader](#createVectorizedReader) and [createRowBaseReader](#createRowBaseReader) otherwise.
 
 In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that is a [PartitionReader](../../connector/PartitionReader.md) with partition values appended).
 
----
-
-`buildReader` is part of the [FilePartitionReaderFactory](../FilePartitionReaderFactory.md#buildReader) abstraction.
-
-### <span id="enableVectorizedReader"> enableVectorizedReader
+### enableVectorizedReader { #enableVectorizedReader }
 
 `ParquetPartitionReaderFactory` uses `enableVectorizedReader` flag to determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use when requested for a [PartitionReader](#buildReader).
 
@@ -82,7 +82,7 @@ In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that i
 1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) is `true`
 1. All data types in the [resultSchema](#resultSchema) are [AtomicType](../../types/AtomicType.md)s
 
-### <span id="createRowBaseReader"> Creating Row-Based RecordReader
+### Creating Row-Based RecordReader { #createRowBaseReader }
 
 ```scala
 createRowBaseReader(
@@ -91,7 +91,7 @@ createRowBaseReader(
 
 `createRowBaseReader` [buildReaderBase](#buildReaderBase) for the given [PartitionedFile](../PartitionedFile.md) and with [createRowBaseParquetReader](#createRowBaseParquetReader) factory.
 
-### <span id="createRowBaseParquetReader"> createRowBaseParquetReader
+### createRowBaseParquetReader { #createRowBaseParquetReader }
 
 ```scala
 createRowBaseParquetReader(
@@ -114,7 +114,7 @@ Falling back to parquet-mr
 
 In the end, `createRowBaseParquetReader` returns the `ParquetRecordReader`.
 
-## <span id="createVectorizedReader"> Creating Vectorized Parquet RecordReader
+## Creating Vectorized Parquet RecordReader { #createVectorizedReader }
 
 ```scala
 createVectorizedReader(
@@ -132,7 +132,7 @@ In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader
 * [Build a partition reader (for a file)](#buildReader) (with [enableVectorizedReader](#enableVectorizedReader) enabled)
 * [Build a columnar partition reader (for a file)](#buildColumnarReader)
 
-### <span id="createParquetVectorizedReader"> createParquetVectorizedReader
+### createParquetVectorizedReader { #createParquetVectorizedReader }
 
 ```scala
 createParquetVectorizedReader(
@@ -158,7 +158,7 @@ In the end, `createParquetVectorizedReader` returns the `VectorizedParquetRecord
 ??? note "Unused RecordReaderIterator?"
     It appears that the `RecordReaderIterator` is created but not used. _Feeling confused_.
 
-## <span id="buildReaderBase"> buildReaderBase
+## buildReaderBase { #buildReaderBase }
 
 ```scala
 buildReaderBase[T](

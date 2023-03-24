@@ -25,7 +25,7 @@ See:
 
 Used when:
 
-* `DataSourceRDD` is requested to [compute a partition](../DataSourceRDD.md#compute)
+* `DataSourceRDD` is requested to [compute a partition](../DataSourceRDD.md#compute) (with [columnarReads](../DataSourceRDD.md#columnarReads) enabled)
 
 ### <span id="createReader"> Creating PartitionReader
 

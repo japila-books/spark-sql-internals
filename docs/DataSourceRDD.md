@@ -24,7 +24,7 @@
 * `BatchScanExec` physical operator is requested for an [input RDD](physical-operators/BatchScanExec.md#inputRDD)
 * `MicroBatchScanExec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/MicroBatchScanExec)) physical operator is requested for an `inputRDD`
 
-### <span id="inputPartitions"> InputPartitions
+### InputPartitions { #inputPartitions }
 
 ```scala
 inputPartitions: Seq[Seq[InputPartition]]
@@ -32,14 +32,14 @@ inputPartitions: Seq[Seq[InputPartition]]
 
 `DataSourceRDD` is given a collection of [InputPartition](connector/InputPartition.md)s when [created](#creating-instance).
 
-The `InputPartition`s are used to [create RDD partitions](#getPartitions) (one for every element in the `inputPartitions` collection)
+The `InputPartition`s are used to [create RDD partitions](#getPartitions) (one for every collection of [InputPartition](connector/InputPartition.md)s in the `inputPartitions` collection)
 
 !!! note
     Number of RDD partitions is exactly the number of elements in the `inputPartitions` collection.
 
 The `InputPartition`s are the [filtered partitions](physical-operators/BatchScanExec.md#filteredPartitions) in [BatchScanExec](physical-operators/BatchScanExec.md).
 
-### <span id="columnarReads"> columnarReads
+### columnarReads { #columnarReads }
 
 `DataSourceRDD` is given `columnarReads` flag when [created](#creating-instance).
 
@@ -47,43 +47,48 @@ The `InputPartition`s are the [filtered partitions](physical-operators/BatchScan
 
 `columnarReads` is enabled (using [supportsColumnar](physical-operators/DataSourceV2ScanExecBase.md#supportsColumnar)) when the [PartitionReaderFactory](physical-operators/DataSourceV2ScanExecBase.md#readerFactory) can [support columnar scans](connector/PartitionReaderFactory.md#supportColumnarReads).
 
-## <span id="getPartitions"> RDD Partitions
+## RDD Partitions { #getPartitions }
 
-```scala
-getPartitions: Array[Partition]
-```
+??? note "Signature"
 
-`getPartitions` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#getPartitions)) abstraction.
+    ```scala
+    getPartitions: Array[Partition]
+    ```
 
----
+    `getPartitions` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#getPartitions)) abstraction.
 
-`getPartitions` creates a [DataSourceRDDPartition](DataSourceRDDPartition.md) for every [InputPartition](#inputPartitions).
+`getPartitions` creates one [DataSourceRDDPartition](DataSourceRDDPartition.md) for every collection of [InputPartition](connector/InputPartition.md)s in the given [inputPartitions](#inputPartitions).
 
-## <span id="getPreferredLocations"> Preferred Locations For Partition
+## Preferred Locations For Partition { #getPreferredLocations }
 
-```scala
-getPreferredLocations(
-    split: Partition): Seq[String]
-```
+??? note "Signature"
 
-`getPreferredLocations` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#getPreferredLocations)) abstraction.
+    ```scala
+    getPreferredLocations(
+        split: Partition): Seq[String]
+    ```
 
----
+    `getPreferredLocations` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#getPreferredLocations)) abstraction.
 
 `getPreferredLocations` assumes that the given `split` partition is a [DataSourceRDDPartition](DataSourceRDDPartition.md).
 
 `getPreferredLocations` requests the given [DataSourceRDDPartition](DataSourceRDDPartition.md) for the [InputPartition](DataSourceRDDPartition.md#inputPartition) that is then requested for the [preferred locations](connector/InputPartition.md#preferredLocations).
 
-## <span id="compute"> Computing Partition
+## Computing Partition { #compute }
 
-```scala
-compute(
-  split: Partition,
-  context: TaskContext): Iterator[T]
-```
+??? note "Signature"
 
-`compute` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#compute)) abstraction.
+    ```scala
+    compute(
+      split: Partition,
+      context: TaskContext): Iterator[T]
+    ```
 
----
+    `compute` is part of `RDD` ([Spark Core]({{ book.spark_core }}/rdd/RDD#compute)) abstraction.
 
-`compute`...FIXME
+`compute` assumes that the given `Partition` is a [DataSourceRDDPartition](DataSourceRDDPartition.md) (or throws a `SparkException`).
+
+!!! note "DataSourceRDDPartition and InputPartitions"
+    `DataSourceRDDPartition` can have many [inputPartitions](DataSourceRDDPartition.md#inputPartitions).
+
+`compute` requests the [PartitionReaderFactory](#partitionReaderFactory) to [createColumnarReader](connector/PartitionReaderFactory.md#createColumnarReader) or [createReader](connector/PartitionReaderFactory.md#createReader) based on [columnarReads](#columnarReads) flag.

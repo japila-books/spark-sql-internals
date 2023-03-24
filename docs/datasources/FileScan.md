@@ -103,19 +103,19 @@ description(): String
 
 `description`...FIXME
 
-## <span id="planInputPartitions"> Planning Input Partitions
+## Planning Input Partitions { #planInputPartitions }
 
-```scala
-planInputPartitions(): Array[InputPartition]
-```
+??? note "Signature"
 
-`planInputPartitions` is part of the [Batch](../connector/Batch.md#planInputPartitions) abstraction.
+    ```scala
+    planInputPartitions(): Array[InputPartition]
+    ```
 
----
+    `planInputPartitions` is part of the [Batch](../connector/Batch.md#planInputPartitions) abstraction.
 
-`planInputPartitions` is [partitions](#partitions).
+`planInputPartitions` is the [file partitions](#partitions).
 
-### <span id="partitions"> File Partitions
+### File Partitions { #partitions }
 
 ```scala
 partitions: Seq[FilePartition]
