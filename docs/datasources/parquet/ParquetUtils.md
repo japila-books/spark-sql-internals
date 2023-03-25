@@ -56,3 +56,30 @@ splitFiles(
 * Data files (i.e., files that are not summary files so neither `_common_metadata` nor `_metadata`)
 * Metadata files (`_metadata`)
 * Common metadata files (`_common_metadata`)
+
+## <span id="isBatchReadSupportedForSchema"> isBatchReadSupportedForSchema
+
+```scala
+isBatchReadSupportedForSchema(
+  sqlConf: SQLConf,
+  schema: StructType): Boolean
+```
+
+`isBatchReadSupportedForSchema`...FIXME
+
+---
+
+`isBatchReadSupportedForSchema` is used when:
+
+* `ParquetFileFormat` is requested to [supportBatch](ParquetFileFormat.md#supportBatch) and [buildReaderWithPartitionValues](ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is [created](ParquetPartitionReaderFactory.md#enableVectorizedReader)
+
+### <span id="isBatchReadSupported"> isBatchReadSupported
+
+```scala
+isBatchReadSupported(
+  sqlConf: SQLConf,
+  dt: DataType): Boolean
+```
+
+`isBatchReadSupported`...FIXME

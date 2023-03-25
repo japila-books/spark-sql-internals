@@ -1,6 +1,6 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md) of [ParquetScan](ParquetScan.md#createReaderFactory) for batch queries in [Parquet Connector](index.md).
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../FilePartitionReaderFactory.md) (of [ParquetScan](ParquetScan.md#createReaderFactory)) for batch queries in [Parquet Connector](index.md).
 
 ## Creating Instance
 
@@ -18,6 +18,17 @@
 `ParquetPartitionReaderFactory` is created when:
 
 * `ParquetScan` is requested for a [PartitionReaderFactory](ParquetScan.md#createReaderFactory)
+
+### enableVectorizedReader { #enableVectorizedReader }
+
+`ParquetPartitionReaderFactory` defines `enableVectorizedReader` internal flag to indicate whether [isBatchReadSupported](ParquetUtils.md#isBatchReadSupportedForSchema) for the [resultSchema](#resultSchema) or not.
+
+`enableVectorizedReader` internal flag is used for the following:
+
+* Indicate whether `ParquetPartitionReaderFactory` [supportsColumnar](#supportsColumnar)
+* [Creating a vectorized parquet RecordReader](#createVectorizedReader) when requested for a [PartitionReader](#buildReader)
+
+`ParquetPartitionReaderFactory` uses `enableVectorizedReader` flag to determine a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use when requested for a [PartitionReader](#buildReader).
 
 ## <span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled { #enableOffHeapColumnVector }
 
@@ -72,15 +83,6 @@ In the end, `buildColumnarReader` returns a [PartitionReader](../../connector/Pa
 `buildReader` determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use based on the [enableVectorizedReader](#enableVectorizedReader) flag. When enabled, `buildReader` [createVectorizedReader](#createVectorizedReader) and [createRowBaseReader](#createRowBaseReader) otherwise.
 
 In the end, `buildReader` creates a `PartitionReaderWithPartitionValues` (that is a [PartitionReader](../../connector/PartitionReader.md) with partition values appended).
-
-### enableVectorizedReader { #enableVectorizedReader }
-
-`ParquetPartitionReaderFactory` uses `enableVectorizedReader` flag to determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use when requested for a [PartitionReader](#buildReader).
-
-`enableVectorizedReader` is enabled (`true`) when the following hold:
-
-1. [spark.sql.parquet.enableVectorizedReader](../../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) is `true`
-1. All data types in the [resultSchema](#resultSchema) are [AtomicType](../../types/AtomicType.md)s
 
 ### Creating Row-Based RecordReader { #createRowBaseReader }
 

@@ -640,6 +640,21 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
+### <span id="spark.sql.parquet.enableNestedColumnVectorizedReader"> enableNestedColumnVectorizedReader
+
+**spark.sql.parquet.enableNestedColumnVectorizedReader**
+
+Enables [vectorized parquet decoding](vectorized-decoding/index.md) for nested columns (e.g., [array](types/ArrayType.md)s, [struct](types/StructType.md)s and maps).
+Requires [spark.sql.parquet.enableVectorizedReader](#spark.sql.parquet.enableVectorizedReader) to be enabled
+
+Default: `true`
+
+Use [SQLConf.parquetVectorizedReaderNestedColumnEnabled](SQLConf.md#parquetVectorizedReaderNestedColumnEnabled) for the current value
+
+Used when:
+
+* `ParquetUtils` is requested to [isBatchReadSupported](datasources/parquet/ParquetUtils.md#isBatchReadSupported)
+
 ### <span id="spark.sql.parquet.filterPushdown"> filterPushdown
 
 **spark.sql.parquet.filterPushdown**

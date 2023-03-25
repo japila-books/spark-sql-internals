@@ -889,6 +889,10 @@ Used when:
 * `FileSourceScanExec` is requested for [needsUnsafeRowConversion](physical-operators/FileSourceScanExec.md#needsUnsafeRowConversion) flag
 * `ParquetFileFormat` is requested for [supportBatch](datasources/parquet/ParquetFileFormat.md#supportBatch) flag and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
+## <span id="parquetVectorizedReaderNestedColumnEnabled"><span id="PARQUET_VECTORIZED_READER_NESTED_COLUMN_ENABLED"> parquetVectorizedReaderNestedColumnEnabled
+
+[spark.sql.parquet.enableNestedColumnVectorizedReader](configuration-properties.md#spark.sql.parquet.enableNestedColumnVectorizedReader)
+
 ## <span id="partitionOverwriteMode"><span id="PARTITION_OVERWRITE_MODE"> partitionOverwriteMode
 
 The value of [spark.sql.sources.partitionOverwriteMode](configuration-properties.md#spark.sql.sources.partitionOverwriteMode) configuration property
