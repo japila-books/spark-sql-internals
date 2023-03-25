@@ -8,7 +8,7 @@
 
 * (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
 
-* `FileFormat` is requested to [buildReader](datasources/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, [TextFileFormat](datasources/text/TextFileFormat.md#buildReader) and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to [buildReader](datasources/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, `TextFileFormat` and Spark MLlib's `LibSVMFileFormat`)
 
 * `FileFormat` is requested to [build a Data Reader with partition column values appended](datasources/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
 

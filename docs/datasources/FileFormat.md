@@ -66,11 +66,6 @@ Never splitable:
 
 * `BinaryFileFormat`
 
-See:
-
-* [TextBasedFileFormat](TextBasedFileFormat.md#isSplitable)
-* [TextFileFormat](text/TextFileFormat.md#isSplitable)
-
 Used when:
 
 * `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](../physical-operators/FileSourceScanExec.md#createNonBucketedReadRDD) (when requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD))
@@ -145,7 +140,7 @@ Used when:
 * `ImageFileFormat`
 * `OrcFileFormat`
 * [ParquetFileFormat](parquet/ParquetFileFormat.md)
-* [TextBasedFileFormat](TextBasedFileFormat.md)
+* `TextBasedFileFormat`
 
 ## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values
 

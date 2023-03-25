@@ -8,7 +8,7 @@
 * `LibSVMFileFormat`
 * `TextInputCSVDataSource`
 * `TextInputJsonDataSource`
-* [TextFileFormat](text/TextFileFormat.md)
+* `TextFileFormat`
 
 `HadoopFileLinesReader` uses the internal <<iterator, iterator>> that handles accessing files using Hadoop's FileSystem API.
 

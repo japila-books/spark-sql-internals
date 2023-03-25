@@ -845,7 +845,6 @@ nav:
       - SchemaMergeUtils: datasources/SchemaMergeUtils.md
       - SingleDirectoryDataWriter: datasources/SingleDirectoryDataWriter.md
       - SQLHadoopMapReduceCommitProtocol: datasources/SQLHadoopMapReduceCommitProtocol.md
-      - TextBasedFileFormat: datasources/TextBasedFileFormat.md
       - WriteJobStatsTracker: datasources/WriteJobStatsTracker.md
       - WriteTaskStats: datasources/WriteTaskStats.md
     - Hive:
@@ -936,8 +935,6 @@ nav:
       - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
       - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
       - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
-    - Text:
-      - TextFileFormat: datasources/text/TextFileFormat.md
     - BaseDynamicPartitionDataWriter: datasources/BaseDynamicPartitionDataWriter.md
     - BasicWriteTaskStatsTracker: datasources/BasicWriteTaskStatsTracker.md
     - DataWritingSparkTask: datasources/DataWritingSparkTask.md
