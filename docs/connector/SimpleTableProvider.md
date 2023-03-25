@@ -17,12 +17,12 @@ Used for [getOrLoadTable](#getOrLoadTable)
 
 ## Implementations
 
-* ConsoleSinkProvider (Spark Structured Streaming)
+* `ConsoleSinkProvider` (Spark Structured Streaming)
 * [KafkaSourceProvider](../kafka/KafkaSourceProvider.md)
-* MemoryStreamTableProvider (Spark Structured Streaming)
+* `MemoryStreamTableProvider` (Spark Structured Streaming)
 * [NoopDataSource](../datasources/noop/NoopDataSource.md)
-* RateStreamProvider (Spark Structured Streaming)
-* TextSocketSourceProvider (Spark Structured Streaming)
+* `RateStreamProvider` (Spark Structured Streaming)
+* `TextSocketSourceProvider` (Spark Structured Streaming)
 
 ## <span id="inferSchema"> Inferring Schema
 

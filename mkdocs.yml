@@ -813,9 +813,6 @@ nav:
       - AvroFileFormat: datasources/avro/AvroFileFormat.md
       - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
       - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
-    - Console:
-      - datasources/console/index.md
-      - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
     - File-Based:
       - AggregatePushDownUtils: datasources/AggregatePushDownUtils.md
       - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md

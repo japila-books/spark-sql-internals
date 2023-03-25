@@ -25,6 +25,6 @@ Used when:
 
 ## Implementations
 
-* [ConsoleSinkProvider](datasources/console/ConsoleSinkProvider.md)
+* `ConsoleSinkProvider`
 * [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
 * [KafkaSourceProvider](kafka/KafkaSourceProvider.md)
