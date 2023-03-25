@@ -3451,11 +3451,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/datasource-v2/</loc>
-         <lastmod>2023-03-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/explain-command-improved/</loc>
          <lastmod>2023-03-25</lastmod>
          <changefreq>daily</changefreq>
