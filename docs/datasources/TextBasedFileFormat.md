@@ -9,9 +9,6 @@
 | TextBasedFileFormat
 | Description
 
-| [JsonFileFormat](json/JsonFileFormat.md)
-| [[JsonFileFormat]]
-
 | `LibSVMFileFormat`
 | [[LibSVMFileFormat]] Used in Spark MLlib
 

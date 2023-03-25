@@ -884,9 +884,6 @@ nav:
       - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
       - JDBCRDD: datasources/jdbc/JDBCRDD.md
       - JdbcDialect: datasources/jdbc/JdbcDialect.md
-    - JSON:
-      - JsonFileFormat: datasources/json/JsonFileFormat.md
-      - JsonDataSource: datasources/json/JsonDataSource.md
     - Kafka:
       - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md

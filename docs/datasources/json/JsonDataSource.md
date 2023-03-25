@@ -1,3 +1,0 @@
-# JsonDataSource
-
-CAUTION: FIXME

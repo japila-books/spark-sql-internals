@@ -84,4 +84,4 @@ If the input `codec` is not defined (i.e. `null`), `setCodecConfiguration` sets 
 | `false`
 |===
 
-`setCodecConfiguration` is used when `CSVFileFormat`, [JsonFileFormat](datasources/json/JsonFileFormat.md#prepareWrite) and [TextFileFormat](datasources/text/TextFileFormat.md#prepareWrite) are requested to `prepareWrite`.
+`setCodecConfiguration` is used when `CSVFileFormat`, `JsonFileFormat` and [TextFileFormat](datasources/text/TextFileFormat.md#prepareWrite) are requested to `prepareWrite`.
