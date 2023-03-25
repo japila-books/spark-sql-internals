@@ -1,3 +1,3 @@
-# Noop Data Source
+# Noop Connector
 
-**Noop Data Source** is available as [noop](NoopDataSource.md#shortName) format.
+**Noop Connector** is available as [noop](NoopDataSource.md#shortName) format.

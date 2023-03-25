@@ -234,7 +234,6 @@ nav:
       - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
       - HintErrorHandler: HintErrorHandler.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
-    - DataSource V2: new-and-noteworthy/datasource-v2.md
     - Hive Integration: hive-integration.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
     - Vectorized Query Execution:

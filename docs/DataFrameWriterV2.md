@@ -1,6 +1,6 @@
 # DataFrameWriterV2
 
-`DataFrameWriterV2` is an API for Spark SQL developers to describe how to write a [Dataset](Dataset.md) to an external storage using the [DataSource V2](new-and-noteworthy/datasource-v2.md).
+`DataFrameWriterV2` is an API for Spark SQL developers to describe how to write a [Dataset](Dataset.md) to an external storage using the DataSource V2.
 
 `DataFrameWriterV2` is a [CreateTableWriter](CreateTableWriter.md) (and thus a [WriteConfigMethods](WriteConfigMethods.md)).
 

@@ -1,4 +1,4 @@
-# JDBC Data Source
+# JDBC Connector
 
 Spark SQL supports loading data from tables using JDBC.
 

@@ -1,6 +1,6 @@
 # DataSourceRDD
 
-`DataSourceRDD` is an RDD of [InternalRow](InternalRow.md)s (`RDD[InternalRow]`) that acts as a thin adapter between Spark SQL's [DataSource V2](new-and-noteworthy/datasource-v2.md) and Spark Core's RDD API.
+`DataSourceRDD` is an RDD of [InternalRow](InternalRow.md)s (`RDD[InternalRow]`) that acts as a thin adapter between Spark SQL's DataSource V2 and Spark Core's RDD API.
 
 `DataSourceRDD` is used as an [input RDD](physical-operators/DataSourceV2ScanExecBase.md#inputRDD) of the following physical operators:
 

@@ -1,4 +1,4 @@
-# Hive Data Source
+# Hive Connector
 
 Spark SQL supports Apache Hive using *Hive data source*. Spark SQL allows executing structured queries on Hive tables, a persistent Hive metastore, support for Hive serdes and user-defined functions.
 

@@ -1,4 +1,4 @@
-# Avro Data Source
+# Avro Connector
 
 [Apache Avro](https://avro.apache.org/) is a data serialization format and provides the following features:
 
