@@ -22,6 +22,6 @@ In the end, `mergeSchemasInParallel` collects the RDD result that are [merged sc
 
 `mergeSchemasInParallel` is used when:
 
-* `OrcFileFormat` is requested to [infer schema](orc/OrcFileFormat.md#inferSchema)
+* `OrcFileFormat` is requested to `inferSchema`
 * `OrcUtils` is requested to infer schema
 * `ParquetFileFormat` is requested to [infer schema](parquet/ParquetFileFormat.md#inferSchema)

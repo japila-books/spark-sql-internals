@@ -927,9 +927,6 @@ nav:
       - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
       - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
       - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
-    - ORC:
-      - OrcScanBuilder: datasources/orc/OrcScanBuilder.md
-      - OrcFileFormat: datasources/orc/OrcFileFormat.md
     - Parquet:
       - datasources/parquet/index.md
       - ParquetDataSourceV2: datasources/parquet/ParquetDataSourceV2.md

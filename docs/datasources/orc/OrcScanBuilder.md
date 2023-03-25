@@ -1,3 +1,0 @@
-# OrcScanBuilder
-
-`OrcScanBuilder` is...FIXME

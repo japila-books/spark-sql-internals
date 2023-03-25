@@ -273,7 +273,7 @@ doExecute(): RDD[InternalRow]
 `doExecute` branches off per [supportsBatch](#supportsBatch) flag.
 
 !!! note
-    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and [OrcFileFormat](../datasources/orc/OrcFileFormat.md) built-in file formats (under certain conditions).
+    [supportsBatch](#supportsBatch) flag can be enabled for [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) and `OrcFileFormat` built-in file formats (under certain conditions).
 
 With [supportsBatch](#supportsBatch) flag enabled, `doExecute` creates a [WholeStageCodegenExec](WholeStageCodegenExec.md) physical operator (with the `FileSourceScanExec` as the [child physical operator](WholeStageCodegenExec.md#child) and [codegenStageId](WholeStageCodegenExec.md#codegenStageId) as `0`) and [executes](SparkPlan.md#execute) it right after.
 

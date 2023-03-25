@@ -64,7 +64,7 @@ For a Spark table (that is non-Hive), `verifyAlterTableAddColumn` [finds the imp
 * [CSVFileFormat](../datasources/csv/CSVFileFormat.md) or `CSVDataSourceV2`
 * [JsonFileFormat](../datasources/json/JsonFileFormat.md) or `JsonDataSourceV2`
 * [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) or `ParquetDataSourceV2`
-* [OrcFileFormat](../datasources/orc/OrcFileFormat.md) or `OrcDataSourceV2`
+* `OrcFileFormat` or `OrcDataSourceV2`
 
 Otherwise, `verifyAlterTableAddColumn` throws an `AnalysisException`:
 

@@ -69,7 +69,7 @@ generate(
 
 * `FileFormat` is requested to [build a data reader with partition column values appended](../datasources/FileFormat.md#buildReaderWithPartitionValues)
 
-* `OrcFileFormat` is requested to [build a data reader with partition column values appended](../datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
 
 * `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 

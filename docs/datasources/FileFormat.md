@@ -59,7 +59,7 @@ Default: `false`
 Always splitable:
 
 * [AvroFileFormat](avro/AvroFileFormat.md#isSplitable)
-* [OrcFileFormat](orc/OrcFileFormat.md#isSplitable)
+* `OrcFileFormat`
 * [ParquetFileFormat](parquet/ParquetFileFormat.md#isSplitable)
 
 Never splitable:
@@ -106,7 +106,7 @@ Default: `false`
 Used when:
 
 * `FileSourceScanExec` physical operator is requested for the [supportsBatch](../physical-operators/FileSourceScanExec.md#supportsBatch) flag
-* `OrcFileFormat` is requested to [buildReaderWithPartitionValues](orc/OrcFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
 * `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ### <span id="supportDataType"> supportDataType
@@ -145,7 +145,7 @@ Used when:
 * `BinaryFileFormat`
 * [HiveFileFormat](../hive/HiveFileFormat.md)
 * `ImageFileFormat`
-* [OrcFileFormat](orc/OrcFileFormat.md)
+* `OrcFileFormat`
 * [ParquetFileFormat](parquet/ParquetFileFormat.md)
 * [TextBasedFileFormat](TextBasedFileFormat.md)
 

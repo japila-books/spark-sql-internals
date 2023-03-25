@@ -16,5 +16,5 @@ getSchemaForPushedAggregation(
 
 `getSchemaForPushedAggregation` is used when:
 
-* `OrcScanBuilder` is requested to [pushAggregation](orc/OrcScanBuilder.md#pushAggregation)
+* `OrcScanBuilder` is requested to `pushAggregation`
 * `ParquetScanBuilder` is requested to [pushAggregation](parquet/ParquetScanBuilder.md#pushAggregation)

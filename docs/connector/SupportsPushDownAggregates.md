@@ -40,5 +40,5 @@ Used when:
 ## Implementations
 
 * [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md)
-* [OrcScanBuilder](../datasources/orc/OrcScanBuilder.md)
+* `OrcScanBuilder`
 * [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md)

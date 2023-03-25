@@ -241,7 +241,7 @@ lookupDataSource(
 
 `lookupDataSource` then uses the given [SQLConf](SQLConf.md) to decide on the class name of the provider for ORC and Avro data sources as follows:
 
-* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses the new ORC file format [OrcFileFormat](datasources/orc/OrcFileFormat.md) (based on Apache ORC)
+* For `orc` provider and [native](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses...FIXME
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 

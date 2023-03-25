@@ -499,7 +499,7 @@ The value of [spark.sql.files.ignoreCorruptFiles](configuration-properties.md#sp
 Used when:
 
 * `AvroUtils` utility is requested to `inferSchema`
-* `OrcFileFormat` is requested to [inferSchema](datasources/orc/OrcFileFormat.md#inferSchema) and [buildReader](datasources/orc/OrcFileFormat.md#buildReader)
+* `OrcFileFormat` is requested to `inferSchema` and `buildReader`
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreCorruptFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
 * `SchemaMergeUtils` utility is requested to `mergeSchemasInParallel`
 * `OrcUtils` utility is requested to `readSchema`
@@ -726,7 +726,7 @@ Used when:
 Used when:
 
 * `InMemoryTableScanExec` is requested for the [vectorTypes](physical-operators/InMemoryTableScanExec.md#vectorTypes) and the [input RDD](physical-operators/InMemoryTableScanExec.md#inputRDD)
-* `OrcFileFormat` is requested to [build a data reader with partition column values appended](datasources/orc/OrcFileFormat.md#buildReaderWithPartitionValues)
+* `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
 * `ParquetFileFormat` is requested for [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="OPTIMIZE_ONE_ROW_RELATION_SUBQUERY"> OPTIMIZE_ONE_ROW_RELATION_SUBQUERY
@@ -763,14 +763,7 @@ Used when [OptimizeIn](logical-optimizations/OptimizeIn.md) logical query optimi
 
 Used when:
 
-* `OrcFileFormat` is requested to [supportBatchForNestedColumn](datasources/orc/OrcFileFormat.md#supportBatchForNestedColumn)
-
-## <span id="ORC_IMPLEMENTATION"> ORC_IMPLEMENTATION
-
-Supported values:
-
-* `native` for [OrcFileFormat](datasources/orc/OrcFileFormat.md)
-* `hive` for `org.apache.spark.sql.hive.orc.OrcFileFormat`
+* `OrcFileFormat` is requested to `supportBatchForNestedColumn`
 
 ## <span id="OUTPUT_COMMITTER_CLASS"> OUTPUT_COMMITTER_CLASS
 
