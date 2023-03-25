@@ -70,7 +70,7 @@ Used when:
 
 * `ConsoleTable` (Spark Structured Streaming)
 * [WriteBuilder](WriteBuilder.md)
-* [FileWrite](../datasources/FileWrite.md)
+* [FileWrite](../connectors/FileWrite.md)
 * `ForeachWrite` (Spark Structured Streaming)
 * [KafkaWrite](../kafka/KafkaWrite.md)
 * `MemoryWrite` (Spark Structured Streaming)

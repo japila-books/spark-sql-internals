@@ -35,7 +35,7 @@ getTable(
 `getTable` is used when:
 
 * `CatalogV2Util` is requested to [loadTable](#loadTable)
-* `DataSourceV2Utils` is requested to [loadV2Source](../../datasources/DataSourceV2Utils.md#loadV2Source)
+* `DataSourceV2Utils` is requested to [loadV2Source](../../connectors/DataSourceV2Utils.md#loadV2Source)
 
 ## <span id="getTableProviderCatalog"> getTableProviderCatalog
 

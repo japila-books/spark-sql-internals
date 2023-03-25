@@ -18,11 +18,11 @@ Creates a [DataWriter](DataWriter.md) (for the given `partitionId` and `taskId`)
 
 Used when:
 
-* `DataWritingSparkTask` is requested to [run](../datasources/DataWritingSparkTask.md#run)
+* `DataWritingSparkTask` is requested to [run](../connectors/DataWritingSparkTask.md#run)
 
 ## Implementations
 
-* [FileWriterFactory](../datasources/FileWriterFactory.md)
+* [FileWriterFactory](../connectors/FileWriterFactory.md)
 * `KafkaBatchWriterFactory`
 * `MemoryWriterFactory` (Spark Structured Streaming)
 * `MicroBatchWriterFactory` (Spark Structured Streaming)

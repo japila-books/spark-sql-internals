@@ -34,7 +34,7 @@ Used when:
 * ForeachWriterTable (Spark Structured Streaming)
 * [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink (Spark Structured Streaming)
-* [NoopWriteBuilder](../datasources/noop/NoopWriteBuilder.md)
+* [NoopWriteBuilder](../noop/NoopWriteBuilder.md)
 * [SupportsDynamicOverwrite](SupportsDynamicOverwrite.md)
 * [SupportsOverwrite](SupportsOverwrite.md)
 * [SupportsStreamingUpdate](SupportsStreamingUpdate.md)

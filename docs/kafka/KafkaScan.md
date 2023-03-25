@@ -71,7 +71,7 @@ Argument | Value
  `readerOptions` | [options](#options)
  `driverGroupIdPrefix` | [streamingUniqueGroupId](KafkaSourceProvider.md#streamingUniqueGroupId) with `-driver` suffix
 
-In the end, `toMicroBatchStream` creates a `KafkaMicroBatchStream` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/kafka/KafkaMicroBatchStream)) with the following:
+In the end, `toMicroBatchStream` creates a `KafkaMicroBatchStream` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/kafka/KafkaMicroBatchStream)) with the following:
 
 * [KafkaOffsetReader](KafkaOffsetReader.md)
 * [kafkaParamsForExecutors](KafkaSourceProvider.md#kafkaParamsForExecutors)

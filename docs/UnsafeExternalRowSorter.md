@@ -59,6 +59,6 @@ Iterator<InternalRow> sort(
 
 `sort` is used when:
 
-* `DynamicPartitionDataConcurrentWriter` is requested to [writeWithIterator](datasources/DynamicPartitionDataConcurrentWriter.md#writeWithIterator)
+* `DynamicPartitionDataConcurrentWriter` is requested to [writeWithIterator](connectors/DynamicPartitionDataConcurrentWriter.md#writeWithIterator)
 * `ShuffleExchangeExec` physical operator is requested to [prepareShuffleDependency](physical-operators/ShuffleExchangeExec.md#prepareShuffleDependency)
 * `SortExec` physical operator is [executed](physical-operators/SortExec.md#doExecute)

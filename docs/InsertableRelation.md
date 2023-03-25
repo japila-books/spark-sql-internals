@@ -21,4 +21,4 @@ Used when:
 
 ## Implementations
 
-* [JDBCRelation](datasources/jdbc/JDBCRelation.md)
+* [JDBCRelation](jdbc/JDBCRelation.md)

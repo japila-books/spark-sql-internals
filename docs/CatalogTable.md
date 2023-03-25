@@ -106,7 +106,7 @@ The `CatalogStatistics` can be defined when:
 
 The `CatalogStatistics` is used when:
 
-* `DataSource` is requested to [resolve a Relation](DataSource.md#resolveRelation) (of type [FileFormat](datasources/FileFormat.md) that uses a [CatalogFileIndex](datasources/CatalogFileIndex.md))
+* `DataSource` is requested to [resolve a Relation](DataSource.md#resolveRelation) (of type [FileFormat](connectors/FileFormat.md) that uses a [CatalogFileIndex](connectors/CatalogFileIndex.md))
 * `HiveTableRelation` is requested to [computeStats](hive/HiveTableRelation.md#computeStats) (with [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) or [spark.sql.cbo.planStats.enabled](configuration-properties.md#spark.sql.cbo.planStats.enabled) enabled)
 * `LogicalRelation` is requested to [computeStats](logical-operators//LogicalRelation.md#computeStats) (with [spark.sql.cbo.enabled](configuration-properties.md#spark.sql.cbo.enabled) or [spark.sql.cbo.planStats.enabled](configuration-properties.md#spark.sql.cbo.planStats.enabled) enabled)
 
@@ -182,7 +182,7 @@ scala> t1Metadata.stats.map(_.simpleString).foreach(println)
 
 CAUTION: FIXME When are stats specified? What if there are not?
 
-Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](datasources/FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
+Unless <<stats, CatalogStatistics>> are available in a table metadata (in a catalog) for a non-streaming [file data source table](connectors/FileFormat.md), `DataSource` [creates](DataSource.md#resolveRelation) a `HadoopFsRelation` with the table size specified by [spark.sql.defaultSizeInBytes](configuration-properties.md#spark.sql.defaultSizeInBytes) internal property (default: `Long.MaxValue`) for query planning of joins (and possibly to auto broadcast the table).
 
 Internally, Spark alters table statistics using [ExternalCatalog.doAlterTableStats](ExternalCatalog.md#doAlterTableStats).
 

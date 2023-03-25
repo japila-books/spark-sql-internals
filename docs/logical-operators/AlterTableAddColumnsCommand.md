@@ -46,7 +46,7 @@ verifyAlterTableAddColumn(
 `verifyAlterTableAddColumn` asserts that the table is as follows:
 
 1. The table is not a view
-1. The table is a Hive table or one of the supported [FileFormat](../datasources/FileFormat.md)s
+1. The table is a Hive table or one of the supported [FileFormat](../connectors/FileFormat.md)s
 
 ---
 
@@ -63,7 +63,7 @@ For a Spark table (that is non-Hive), `verifyAlterTableAddColumn` [finds the imp
 
 * `CSVFileFormat` or `CSVDataSourceV2`
 * `JsonFileFormat` or `JsonDataSourceV2`
-* [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) or `ParquetDataSourceV2`
+* [ParquetFileFormat](../parquet/ParquetFileFormat.md) or `ParquetDataSourceV2`
 * `OrcFileFormat` or `OrcDataSourceV2`
 
 Otherwise, `verifyAlterTableAddColumn` throws an `AnalysisException`:

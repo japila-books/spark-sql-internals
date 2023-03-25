@@ -68,8 +68,8 @@ addReferenceObj(
 
 `addReferenceObj` is used when:
 
-* `AvroDataToCatalyst` is requested to [doGenCode](../datasources/avro/AvroDataToCatalyst.md#doGenCode)
-* `CatalystDataToAvro` is requested to [doGenCode](../datasources/avro/CatalystDataToAvro.md#doGenCode)
+* `AvroDataToCatalyst` is requested to [doGenCode](../avro/AvroDataToCatalyst.md#doGenCode)
+* `CatalystDataToAvro` is requested to [doGenCode](../avro/CatalystDataToAvro.md#doGenCode)
 * `CastBase` is requested to `castToStringCode`, `castToDateCode`, `castToTimestampCode` and `castToTimestampNTZCode`
 * Catalyst `Expression`s are requested to [doGenCode](../expressions/Expression.md#doGenCode)
 * `BroadcastHashJoinExec` physical operator is requested to [prepareBroadcast](../physical-operators/BroadcastHashJoinExec.md#prepareBroadcast)

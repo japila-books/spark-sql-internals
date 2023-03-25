@@ -10,8 +10,8 @@
 `FileScanRDD` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
-* <span id="readFunction"> Read Function of [PartitionedFile](../datasources/PartitionedFile.md)s to [InternalRow](../InternalRow.md)s (`(PartitionedFile) => Iterator[InternalRow]`)
-* <span id="filePartitions"> [FilePartition](../datasources/FilePartition.md)s
+* <span id="readFunction"> Read Function of [PartitionedFile](../connectors/PartitionedFile.md)s to [InternalRow](../InternalRow.md)s (`(PartitionedFile) => Iterator[InternalRow]`)
+* <span id="filePartitions"> [FilePartition](../connectors/FilePartition.md)s
 * <span id="readSchema"> Read [Schema](../types/StructType.md)
 * <span id="metadataColumns"> Metadata Columns
 
@@ -28,7 +28,7 @@
 
 ## <span id="FilePartition"><span id="files"><span id="index"> FilePartition
 
-`FileScanRDD` is given [FilePartitions](#filePartitions) when [created](#creating-instance) that are custom RDD partitions with [PartitionedFiles](../datasources/PartitionedFile.md) (_file blocks_).
+`FileScanRDD` is given [FilePartitions](#filePartitions) when [created](#creating-instance) that are custom RDD partitions with [PartitionedFiles](../connectors/PartitionedFile.md) (_file blocks_).
 
 ## <span id="getPreferredLocations"> Placement Preferences of Partition (Preferred Locations)
 
@@ -64,7 +64,7 @@ compute(
 ```
 
 !!! note
-    The `RDDPartition` given is actually a [FilePartition](#FilePartition) with one or more [PartitionedFiles](../datasources/PartitionedFile.md) (that [getPartitions](#getPartitions) returned).
+    The `RDDPartition` given is actually a [FilePartition](#FilePartition) with one or more [PartitionedFiles](../connectors/PartitionedFile.md) (that [getPartitions](#getPartitions) returned).
 
 `compute` is part of Spark Core's `RDD` abstraction.
 
@@ -74,7 +74,7 @@ compute(
 next(): Object
 ```
 
-`next` takes the next element of the current iterator over elements of a file block ([PartitionedFile](../datasources/PartitionedFile.md)).
+`next` takes the next element of the current iterator over elements of a file block ([PartitionedFile](../connectors/PartitionedFile.md)).
 
 `next` increments the metrics of bytes and number of rows read (that could be the number of rows in a [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md) for vectorized reads).
 

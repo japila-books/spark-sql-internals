@@ -1,6 +1,6 @@
 # Partition File Metadata Caching
 
-**Partition File Metadata Caching** uses [FileStatusCache](../datasources/FileStatusCache.md) to speed up partition file listing.
+**Partition File Metadata Caching** uses [FileStatusCache](../connectors/FileStatusCache.md) to speed up partition file listing.
 
 ## Configuration Properties
 

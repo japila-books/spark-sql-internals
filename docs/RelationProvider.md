@@ -23,7 +23,7 @@ Used when:
 
 ## Implementations
 
-* [JdbcRelationProvider](datasources/jdbc/JdbcRelationProvider.md)
+* [JdbcRelationProvider](jdbc/JdbcRelationProvider.md)
 * [KafkaSourceProvider](kafka/KafkaSourceProvider.md)
 
 ## CreatableRelationProvider

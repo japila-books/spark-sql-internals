@@ -7,7 +7,7 @@ Together with the [provider interfaces](#provider-interfaces), `DataSource` allo
 ## Provider Interfaces
 
 * [CreatableRelationProvider](CreatableRelationProvider.md)
-* [FileFormat](datasources/FileFormat.md)
+* [FileFormat](connectors/FileFormat.md)
 * [RelationProvider](RelationProvider.md)
 * [SchemaRelationProvider](SchemaRelationProvider.md)
 * StreamSinkProvider ([Spark Structured Streaming]({{ book.structured_streaming}}/StreamSinkProvider))
@@ -82,11 +82,11 @@ Provider | Behaviour
 ---------|---------
  [SchemaRelationProvider](SchemaRelationProvider.md) | Executes [SchemaRelationProvider.createRelation](SchemaRelationProvider.md#createRelation) with the provided schema
  [RelationProvider](RelationProvider.md) | Executes [RelationProvider.createRelation](RelationProvider.md#createRelation)
- [FileFormat](datasources/FileFormat.md) | Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
+ [FileFormat](connectors/FileFormat.md) | Creates a [HadoopFsRelation](BaseRelation.md#HadoopFsRelation)
 
 `resolveRelation` is used when:
 
-* `DataSource` is requested to [write and read](#writeAndRead) the result of a structured query (only when the [class](#providingClass) is a [FileFormat](datasources/FileFormat.md))
+* `DataSource` is requested to [write and read](#writeAndRead) the result of a structured query (only when the [class](#providingClass) is a [FileFormat](connectors/FileFormat.md))
 
 * `DataFrameReader` is requested to [load data from a data source that supports multiple paths](DataFrameReader.md#load)
 
@@ -98,7 +98,7 @@ Provider | Behaviour
 
 * `FindDataSourceTable` is requested to [readDataSourceTable](logical-analysis-rules/FindDataSourceTable.md#readDataSourceTable)
 
-* `ResolveSQLOnFile` is requested to convert a logical plan (when the [class](#providingClass) is a [FileFormat](datasources/FileFormat.md))
+* `ResolveSQLOnFile` is requested to convert a logical plan (when the [class](#providingClass) is a [FileFormat](connectors/FileFormat.md))
 
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation to a LogicalRelation over a HadoopFsRelation](hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
 
@@ -114,7 +114,7 @@ planForWriting(
 
 * For a [CreatableRelationProvider](CreatableRelationProvider.md), `planForWriting` creates a [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) (with the input `data` and `mode` and the `CreatableRelationProvider` data source)
 
-* For a [FileFormat](datasources/FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
+* For a [FileFormat](connectors/FileFormat.md), `planForWriting` [planForWritingFileFormat](#planForWritingFileFormat) (with the `FileFormat` format and the input `mode` and `data`)
 
 * For other types, `planForWriting` simply throws a `RuntimeException`:
 
@@ -184,8 +184,8 @@ providingClass: Class[_]
 
 `providingClass` is used when:
 
-* `InsertIntoDataSourceDirCommand` logical command is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
-* [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed (to ensure working with a [FileFormat](datasources/FileFormat.md)-based data source)
+* `InsertIntoDataSourceDirCommand` logical command is executed (to ensure working with a [FileFormat](connectors/FileFormat.md)-based data source)
+* [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical evaluation rule is executed (to ensure working with a [FileFormat](connectors/FileFormat.md)-based data source)
 * `DataSource` is requested for [providingInstance](#providingInstance)
 
 ## <span id="providingInstance"> Data Source Instance
@@ -245,7 +245,7 @@ lookupDataSource(
 
 * For `orc` provider and [hive](SQLConf.md#ORC_IMPLEMENTATION), `lookupDataSource` uses `org.apache.spark.sql.hive.orc.OrcFileFormat`
 
-* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](datasources/avro/AvroFileFormat.md) module
+* For `com.databricks.spark.avro` and [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](SQLConf.md#replaceDatabricksSparkAvroEnabled) configuration enabled (default), `lookupDataSource` uses the built-in (but external) [Avro data source](avro/AvroFileFormat.md) module
 
 `lookupDataSource` uses `DefaultSource` as the class name as another provider name variant (i.e. `[provider1].DefaultSource`).
 
@@ -282,18 +282,18 @@ createInMemoryFileIndex(
   globbedPaths: Seq[Path]): InMemoryFileIndex
 ```
 
-`createInMemoryFileIndex` creates an [InMemoryFileIndex](datasources/InMemoryFileIndex.md) with the following:
+`createInMemoryFileIndex` creates an [InMemoryFileIndex](connectors/InMemoryFileIndex.md) with the following:
 
 Property | Value
 ---------|------
- [Root Paths](datasources/InMemoryFileIndex.md#rootPathsSpecified) | The given `globbedPaths`
- [Parameters](datasources/InMemoryFileIndex.md#parameters) | [Options](#options)
- [User-defined schema](datasources/InMemoryFileIndex.md#userSpecifiedSchema) | [User-specified schema](#userSpecifiedSchema)
- [FileStatusCache](datasources/InMemoryFileIndex.md#fileStatusCache) | [FileStatusCache](datasources/FileStatusCache.md#getOrCreate)
+ [Root Paths](connectors/InMemoryFileIndex.md#rootPathsSpecified) | The given `globbedPaths`
+ [Parameters](connectors/InMemoryFileIndex.md#parameters) | [Options](#options)
+ [User-defined schema](connectors/InMemoryFileIndex.md#userSpecifiedSchema) | [User-specified schema](#userSpecifiedSchema)
+ [FileStatusCache](connectors/InMemoryFileIndex.md#fileStatusCache) | [FileStatusCache](connectors/FileStatusCache.md#getOrCreate)
 
 ---
 
 `createInMemoryFileIndex` is used when `DataSource` is requested for the following:
 
-* [Resolve a BaseRelation](#resolveRelation) (for non-streaming [FileFormat](datasources/FileFormat.md)-based data sources)
-* [Source Schema](#sourceSchema) (for [FileFormat](datasources/FileFormat.md)-based data sources)
+* [Resolve a BaseRelation](#resolveRelation) (for non-streaming [FileFormat](connectors/FileFormat.md)-based data sources)
+* [Source Schema](#sourceSchema) (for [FileFormat](connectors/FileFormat.md)-based data sources)

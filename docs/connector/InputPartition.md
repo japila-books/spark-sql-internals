@@ -18,7 +18,7 @@ By default, `preferredLocations` defines no location preferences (is simply empt
 
 See:
 
-* [FilePartition](../datasources/FilePartition.md#preferredLocations)
+* [FilePartition](../connectors/FilePartition.md#preferredLocations)
 
 Used when:
 
@@ -29,7 +29,7 @@ Used when:
 ## Implementations
 
 * `ContinuousMemoryStreamInputPartition`
-* [FilePartition](../datasources/FilePartition.md)
+* [FilePartition](../connectors/FilePartition.md)
 * `HasPartitionKey`
 * `KafkaBatchInputPartition`
 * `KafkaContinuousInputPartition`

@@ -4,13 +4,13 @@
 
 `Filter` is used when:
 
-* (Data Source API V1) `BaseRelation` is requested for [unhandled filter predicates](BaseRelation.md#unhandledFilters) (and hence `BaseRelation` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#unhandledFilters))
+* (Data Source API V1) `BaseRelation` is requested for [unhandled filter predicates](BaseRelation.md#unhandledFilters) (and hence `BaseRelation` implementations, i.e. [JDBCRelation](jdbc/JDBCRelation.md#unhandledFilters))
 
-* (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](datasources/jdbc/JDBCRelation.md#buildScan))
+* (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](jdbc/JDBCRelation.md#buildScan))
 
-* `FileFormat` is requested to [buildReader](datasources/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, `TextFileFormat` and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to [buildReader](connectors/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, `TextFileFormat` and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to [build a Data Reader with partition column values appended](datasources/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
+* `FileFormat` is requested to [build a Data Reader with partition column values appended](connectors/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, [ParquetFileFormat](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
 
 * `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 
@@ -18,7 +18,7 @@
 
 * `DataSourceStrategy` execution planning strategy is requested to [selectFilters](execution-planning-strategies/DataSourceStrategy.md#selectFilters)
 
-* `JDBCRDD` is [created](datasources/jdbc/JDBCRDD.md#filters) and requested to [scanTable](datasources/jdbc/JDBCRDD.md#scanTable)
+* `JDBCRDD` is [created](jdbc/JDBCRDD.md#filters) and requested to [scanTable](jdbc/JDBCRDD.md#scanTable)
 
 [[contract]]
 [source, scala]

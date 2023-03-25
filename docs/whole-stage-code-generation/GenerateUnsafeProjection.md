@@ -67,11 +67,11 @@ generate(
 
 * `ExpressionEncoder` is requested to [initialize the internal UnsafeProjection](../ExpressionEncoder.md#extractProjection)
 
-* `FileFormat` is requested to [build a data reader with partition column values appended](../datasources/FileFormat.md#buildReaderWithPartitionValues)
+* `FileFormat` is requested to [build a data reader with partition column values appended](../connectors/FileFormat.md#buildReaderWithPartitionValues)
 
 * `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
 
-* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [build a data reader with partition column values appended](../parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 * `GroupedIterator` is requested for `keyProjection`
 

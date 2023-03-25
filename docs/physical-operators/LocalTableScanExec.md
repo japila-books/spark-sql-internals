@@ -4,7 +4,7 @@
 
 * [LocalRelation](../logical-operators/LocalRelation.md) logical operator
 * `LocalScan` (under [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md))
-* `MemoryPlan` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory/MemoryPlan))
+* `MemoryPlan` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/memory/MemoryPlan))
 * `NoopCommand`
 
 ![LocalTableScanExec in web UI (Details for Query)](../images/spark-sql-LocalTableScanExec-webui-query-details.png)

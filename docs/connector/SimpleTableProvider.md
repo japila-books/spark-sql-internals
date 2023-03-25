@@ -20,7 +20,7 @@ Used for [getOrLoadTable](#getOrLoadTable)
 * `ConsoleSinkProvider` (Spark Structured Streaming)
 * [KafkaSourceProvider](../kafka/KafkaSourceProvider.md)
 * `MemoryStreamTableProvider` (Spark Structured Streaming)
-* [NoopDataSource](../datasources/noop/NoopDataSource.md)
+* [NoopDataSource](../noop/NoopDataSource.md)
 * `RateStreamProvider` (Spark Structured Streaming)
 * `TextSocketSourceProvider` (Spark Structured Streaming)
 

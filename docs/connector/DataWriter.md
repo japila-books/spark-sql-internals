@@ -14,8 +14,8 @@ See [KafkaDataWriter](../kafka/KafkaDataWriter.md#abort)
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../datasources/FileFormatWriter.md#executeTask)
-* `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
+* `FileFormatWriter` utility is used to [executeTask](../connectors/FileFormatWriter.md#executeTask)
+* `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
 ### <span id="commit"> Committing Successful Write
@@ -28,7 +28,7 @@ See [KafkaDataWriter](../kafka/KafkaDataWriter.md#commit)
 
 Used when:
 
-* `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
+* `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
 ### <span id="currentMetricsValues"> currentMetricsValues
@@ -41,8 +41,8 @@ See [KafkaDataWriter](../kafka/KafkaDataWriter.md#currentMetricsValues)
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../datasources/FileFormatWriter.md#executeTask)
-* `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
+* `FileFormatWriter` utility is used to [executeTask](../connectors/FileFormatWriter.md#executeTask)
+* `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
 ### <span id="write"> Writing Out Record
@@ -56,11 +56,11 @@ See [KafkaDataWriter](../kafka/KafkaDataWriter.md#write)
 
 Used when:
 
-* `DataWritingSparkTask` utility is used to [process a partition](../datasources/DataWritingSparkTask.md#run)
+* `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` ([Spark Structured Streaming]({{ book.structured_streaming }}/ContinuousWriteRDD)) is requested to `compute` a partition
 
 ## Implementations
 
-* [FileFormatDataWriter](../datasources/FileFormatDataWriter.md)
+* [FileFormatDataWriter](../connectors/FileFormatDataWriter.md)
 * [KafkaDataWriter](../kafka/KafkaDataWriter.md)
 * _others_

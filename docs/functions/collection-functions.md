@@ -286,7 +286,7 @@ scala> people.show
 ```
 
 !!! note
-    `options` controls how a JSON is parsed and contains the same options as the [json](datasources/json/JsonDataSource.md) format.
+    `options` controls how a JSON is parsed and contains the same options as the [json](connectors/json/JsonDataSource.md) format.
 
 Internally, `from_json` creates a [Column](Column.md) with [JsonToStructs](expressions/JsonToStructs.md) unary expression.
 

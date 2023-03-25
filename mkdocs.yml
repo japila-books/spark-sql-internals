@@ -806,47 +806,47 @@ nav:
     - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
     - VariableSubstitution: sql/VariableSubstitution.md
   - Connectors:
-    - datasources/index.md
+    - connectors/index.md
     - Avro:
-      - Avro Data Source: datasources/avro/index.md
-      - AvroOptions: datasources/avro/AvroOptions.md
-      - AvroFileFormat: datasources/avro/AvroFileFormat.md
-      - CatalystDataToAvro: datasources/avro/CatalystDataToAvro.md
-      - AvroDataToCatalyst: datasources/avro/AvroDataToCatalyst.md
+      - avro/index.md
+      - AvroOptions: avro/AvroOptions.md
+      - AvroFileFormat: avro/AvroFileFormat.md
+      - CatalystDataToAvro: avro/CatalystDataToAvro.md
+      - AvroDataToCatalyst: avro/AvroDataToCatalyst.md
     - File-Based:
-      - AggregatePushDownUtils: datasources/AggregatePushDownUtils.md
-      - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md
-      - BasicWriteTaskStats: datasources/BasicWriteTaskStats.md
-      - FileBatchWrite: datasources/FileBatchWrite.md
-      - FileDataSourceV2: datasources/FileDataSourceV2.md
-      - FileFormat: datasources/FileFormat.md
-      - FileFormatDataWriter: datasources/FileFormatDataWriter.md
-      - FileFormatWriter: datasources/FileFormatWriter.md
+      - AggregatePushDownUtils: connectors/AggregatePushDownUtils.md
+      - BasicWriteJobStatsTracker: connectors/BasicWriteJobStatsTracker.md
+      - BasicWriteTaskStats: connectors/BasicWriteTaskStats.md
+      - FileBatchWrite: connectors/FileBatchWrite.md
+      - FileDataSourceV2: connectors/FileDataSourceV2.md
+      - FileFormat: connectors/FileFormat.md
+      - FileFormatDataWriter: connectors/FileFormatDataWriter.md
+      - FileFormatWriter: connectors/FileFormatWriter.md
       - FileIndex:
-        - datasources/FileIndex.md
-        - datasources/CatalogFileIndex.md
-        - datasources/InMemoryFileIndex.md
-        - datasources/PartitioningAwareFileIndex.md
-        - datasources/PrunedInMemoryFileIndex.md
-      - FilePartition: datasources/FilePartition.md
-      - FilePartitionReaderFactory: datasources/FilePartitionReaderFactory.md
-      - FileScan: datasources/FileScan.md
-      - FileScanBuilder: datasources/FileScanBuilder.md
-      - FileStatusCache: datasources/FileStatusCache.md
-      - FileTable: datasources/FileTable.md
-      - FileWrite: datasources/FileWrite.md
-      - FileWriterFactory: datasources/FileWriterFactory.md
-      - HadoopFileLinesReader: datasources/HadoopFileLinesReader.md
-      - HadoopFsRelation: datasources/HadoopFsRelation.md
-      - PartitionedFile: datasources/PartitionedFile.md
-      - PartitionedFileUtil: datasources/PartitionedFileUtil.md
-      - RecordReaderIterator: datasources/RecordReaderIterator.md
-      - SharedInMemoryCache: datasources/SharedInMemoryCache.md
-      - SchemaMergeUtils: datasources/SchemaMergeUtils.md
-      - SingleDirectoryDataWriter: datasources/SingleDirectoryDataWriter.md
-      - SQLHadoopMapReduceCommitProtocol: datasources/SQLHadoopMapReduceCommitProtocol.md
-      - WriteJobStatsTracker: datasources/WriteJobStatsTracker.md
-      - WriteTaskStats: datasources/WriteTaskStats.md
+        - connectors/FileIndex.md
+        - connectors/CatalogFileIndex.md
+        - connectors/InMemoryFileIndex.md
+        - connectors/PartitioningAwareFileIndex.md
+        - connectors/PrunedInMemoryFileIndex.md
+      - FilePartition: connectors/FilePartition.md
+      - FilePartitionReaderFactory: connectors/FilePartitionReaderFactory.md
+      - FileScan: connectors/FileScan.md
+      - FileScanBuilder: connectors/FileScanBuilder.md
+      - FileStatusCache: connectors/FileStatusCache.md
+      - FileTable: connectors/FileTable.md
+      - FileWrite: connectors/FileWrite.md
+      - FileWriterFactory: connectors/FileWriterFactory.md
+      - HadoopFileLinesReader: connectors/HadoopFileLinesReader.md
+      - HadoopFsRelation: connectors/HadoopFsRelation.md
+      - PartitionedFile: connectors/PartitionedFile.md
+      - PartitionedFileUtil: connectors/PartitionedFileUtil.md
+      - RecordReaderIterator: connectors/RecordReaderIterator.md
+      - SharedInMemoryCache: connectors/SharedInMemoryCache.md
+      - SchemaMergeUtils: connectors/SchemaMergeUtils.md
+      - SingleDirectoryDataWriter: connectors/SingleDirectoryDataWriter.md
+      - SQLHadoopMapReduceCommitProtocol: connectors/SQLHadoopMapReduceCommitProtocol.md
+      - WriteJobStatsTracker: connectors/WriteJobStatsTracker.md
+      - WriteTaskStats: connectors/WriteTaskStats.md
     - Hive:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
@@ -875,14 +875,14 @@ nav:
       - DetermineTableStats: hive/DetermineTableStats.md
       - HiveAnalysis: hive/HiveAnalysis.md
     - JDBC:
-      - JDBC Data Source: datasources/jdbc/index.md
-      - JDBCOptions: datasources/jdbc/JDBCOptions.md
-      - JdbcRelationProvider: datasources/jdbc/JdbcRelationProvider.md
-      - JDBCRelation: datasources/jdbc/JDBCRelation.md
-      - JDBCScan: datasources/jdbc/JDBCScan.md
-      - JDBCScanBuilder: datasources/jdbc/JDBCScanBuilder.md
-      - JDBCRDD: datasources/jdbc/JDBCRDD.md
-      - JdbcDialect: datasources/jdbc/JdbcDialect.md
+      - jdbc/index.md
+      - JDBCOptions: jdbc/JDBCOptions.md
+      - JdbcRelationProvider: jdbc/JdbcRelationProvider.md
+      - JDBCRelation: jdbc/JDBCRelation.md
+      - JDBCScan: jdbc/JDBCScan.md
+      - JDBCScanBuilder: jdbc/JDBCScanBuilder.md
+      - JDBCRDD: jdbc/JDBCRDD.md
+      - JdbcDialect: jdbc/JdbcDialect.md
     - Kafka:
       - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md
@@ -911,38 +911,38 @@ nav:
         - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
       - Options: kafka/options.md
     - Noop:
-      - Noop Data Source: datasources/noop/index.md
-      - NoopDataSource: datasources/noop/NoopDataSource.md
-      - NoopTable: datasources/noop/NoopTable.md
-      - NoopWriteBuilder: datasources/noop/NoopWriteBuilder.md
-      - NoopBatchWrite: datasources/noop/NoopBatchWrite.md
-      - NoopStreamingWrite: datasources/noop/NoopStreamingWrite.md
+      - noop/index.md
+      - NoopDataSource: noop/NoopDataSource.md
+      - NoopTable: noop/NoopTable.md
+      - NoopWriteBuilder: noop/NoopWriteBuilder.md
+      - NoopBatchWrite: noop/NoopBatchWrite.md
+      - NoopStreamingWrite: noop/NoopStreamingWrite.md
     - Parquet:
-      - datasources/parquet/index.md
-      - ParquetDataSourceV2: datasources/parquet/ParquetDataSourceV2.md
-      - ParquetFileFormat: datasources/parquet/ParquetFileFormat.md
-      - ParquetFilters: datasources/parquet/ParquetFilters.md
-      - ParquetOptions: datasources/parquet/ParquetOptions.md
-      - ParquetPartitionReaderFactory: datasources/parquet/ParquetPartitionReaderFactory.md
-      - ParquetReadSupport: datasources/parquet/ParquetReadSupport.md
-      - ParquetScan: datasources/parquet/ParquetScan.md
-      - ParquetScanBuilder: datasources/parquet/ParquetScanBuilder.md
-      - ParquetTable: datasources/parquet/ParquetTable.md
-      - ParquetUtils: datasources/parquet/ParquetUtils.md
-      - ParquetWrite: datasources/parquet/ParquetWrite.md
-      - ParquetWriteSupport: datasources/parquet/ParquetWriteSupport.md
-      - SparkToParquetSchemaConverter: datasources/parquet/SparkToParquetSchemaConverter.md
-      - SpecificParquetRecordReaderBase: datasources/parquet/SpecificParquetRecordReaderBase.md
-      - VectorizedColumnReader: datasources/parquet/VectorizedColumnReader.md
-      - VectorizedParquetRecordReader: datasources/parquet/VectorizedParquetRecordReader.md
-    - BaseDynamicPartitionDataWriter: datasources/BaseDynamicPartitionDataWriter.md
-    - BasicWriteTaskStatsTracker: datasources/BasicWriteTaskStatsTracker.md
-    - DataWritingSparkTask: datasources/DataWritingSparkTask.md
-    - DataSourceV2Utils: datasources/DataSourceV2Utils.md
-    - DynamicPartitionDataConcurrentWriter: datasources/DynamicPartitionDataConcurrentWriter.md
-    - DynamicPartitionDataSingleWriter: datasources/DynamicPartitionDataSingleWriter.md
-    - OutputWriter: datasources/OutputWriter.md
-    - WriteTaskStatsTracker: datasources/WriteTaskStatsTracker.md
+      - parquet/index.md
+      - ParquetDataSourceV2: parquet/ParquetDataSourceV2.md
+      - ParquetFileFormat: parquet/ParquetFileFormat.md
+      - ParquetFilters: parquet/ParquetFilters.md
+      - ParquetOptions: parquet/ParquetOptions.md
+      - ParquetPartitionReaderFactory: parquet/ParquetPartitionReaderFactory.md
+      - ParquetReadSupport: parquet/ParquetReadSupport.md
+      - ParquetScan: parquet/ParquetScan.md
+      - ParquetScanBuilder: parquet/ParquetScanBuilder.md
+      - ParquetTable: parquet/ParquetTable.md
+      - ParquetUtils: parquet/ParquetUtils.md
+      - ParquetWrite: parquet/ParquetWrite.md
+      - ParquetWriteSupport: parquet/ParquetWriteSupport.md
+      - SparkToParquetSchemaConverter: parquet/SparkToParquetSchemaConverter.md
+      - SpecificParquetRecordReaderBase: parquet/SpecificParquetRecordReaderBase.md
+      - VectorizedColumnReader: parquet/VectorizedColumnReader.md
+      - VectorizedParquetRecordReader: parquet/VectorizedParquetRecordReader.md
+    - BaseDynamicPartitionDataWriter: connectors/BaseDynamicPartitionDataWriter.md
+    - BasicWriteTaskStatsTracker: connectors/BasicWriteTaskStatsTracker.md
+    - DataWritingSparkTask: connectors/DataWritingSparkTask.md
+    - DataSourceV2Utils: connectors/DataSourceV2Utils.md
+    - DynamicPartitionDataConcurrentWriter: connectors/DynamicPartitionDataConcurrentWriter.md
+    - DynamicPartitionDataSingleWriter: connectors/DynamicPartitionDataSingleWriter.md
+    - OutputWriter: connectors/OutputWriter.md
+    - WriteTaskStatsTracker: connectors/WriteTaskStatsTracker.md
   - High-Level APIs:
     - Basic Aggregation:
       - basic-aggregation/index.md
@@ -1005,7 +1005,6 @@ nav:
     - Implicits: implicits.md
     - Row: Row.md
     - Data Source API:
-      - DataSource API: spark-sql-datasource-api.md
       - CreateTableWriter: CreateTableWriter.md
       - WriteConfigMethods: WriteConfigMethods.md
     - Dataset API:

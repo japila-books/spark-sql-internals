@@ -1,6 +1,6 @@
 # TableProvider
 
-`TableProvider` is an [abstraction](#contract) of [table providers](#implementations) (for `DataSourceV2Utils` utility when requested for a [Table](../datasources/DataSourceV2Utils.md#getTableFromProvider)).
+`TableProvider` is an [abstraction](#contract) of [table providers](#implementations) (for `DataSourceV2Utils` utility when requested for a [Table](../connectors/DataSourceV2Utils.md#getTableFromProvider)).
 
 ## Contract
 
@@ -18,7 +18,7 @@ Creates a [Table](Table.md) for the given `schema`, partitioning (as [Transform]
 Used when:
 
 * `DataFrameWriter` is requested to [save data](../DataFrameWriter.md#save)
-* `DataSourceV2Utils` utility is used to [getTableFromProvider](../datasources/DataSourceV2Utils.md#getTableFromProvider)
+* `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
 ### <span id="inferPartitioning"> Inferring Partitioning
 
@@ -31,7 +31,7 @@ Default: No partitions (as [Transform](Transform.md)s)
 
 Used when:
 
-* `DataSourceV2Utils` utility is used to [getTableFromProvider](../datasources/DataSourceV2Utils.md#getTableFromProvider)
+* `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
 ### <span id="inferSchema"> Inferring Schema
 
@@ -42,7 +42,7 @@ StructType inferSchema(
 
 Used when:
 
-* `DataSourceV2Utils` utility is used to [getTableFromProvider](../datasources/DataSourceV2Utils.md#getTableFromProvider)
+* `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
 ### <span id="supportsExternalMetadata"> supportsExternalMetadata
 
@@ -54,11 +54,11 @@ Default: `false`
 
 Used when:
 
-* `DataSourceV2Utils` utility is used to [getTableFromProvider](../datasources/DataSourceV2Utils.md#getTableFromProvider)
+* `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
 ## Implementations
 
-* [FileDataSourceV2](../datasources/FileDataSourceV2.md)
+* [FileDataSourceV2](../connectors/FileDataSourceV2.md)
 * [SessionConfigSupport](SessionConfigSupport.md)
 * [SimpleTableProvider](SimpleTableProvider.md)
 * [SupportsCatalogOptions](catalog/SupportsCatalogOptions.md)

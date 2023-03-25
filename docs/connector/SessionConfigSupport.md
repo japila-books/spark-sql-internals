@@ -11,7 +11,7 @@ With `SessionConfigSupport`, a data source can be configured by additional (sess
 String keyPrefix()
 ----
 
-`keyPrefix` is used when `DataSourceV2Utils` object is requested to [extract session configuration options](../datasources/DataSourceV2Utils.md#extractSessionConfigs).
+`keyPrefix` is used when `DataSourceV2Utils` object is requested to [extract session configuration options](../connectors/DataSourceV2Utils.md#extractSessionConfigs).
 
 `keyPrefix` must not be `null` or an `IllegalArgumentException` is thrown:
 

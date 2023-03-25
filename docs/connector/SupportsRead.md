@@ -19,7 +19,7 @@ Creates a [ScanBuilder](ScanBuilder.md)
 
 See:
 
-* [ParquetTable](../datasources/parquet/ParquetTable.md#newScanBuilder)
+* [ParquetTable](../parquet/ParquetTable.md#newScanBuilder)
 
 Used when:
 
@@ -31,11 +31,11 @@ Used when:
 
 ## Implementations
 
-* [FileTable](../datasources/FileTable.md)
+* [FileTable](../connectors/FileTable.md)
 * `JDBCTable`
 * [KafkaTable](../kafka/KafkaTable.md)
-* `MemoryStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory))
-* `RatePerMicroBatchTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/rate-per-microbatch))
-* `RateStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/rate))
+* `MemoryStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/memory))
+* `RatePerMicroBatchTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/rate-per-microbatch))
+* `RateStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/rate))
 * `RowLevelOperationTable`
-* `TextSocketTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/socket))
+* `TextSocketTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/socket))

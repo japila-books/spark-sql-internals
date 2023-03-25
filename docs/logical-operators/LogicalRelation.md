@@ -44,7 +44,7 @@ val data = spark.baseRelationToDataFrame(baseRelation)
 * `FallBackFileSourceV2` logical resolution rule is executed
 * [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
-* `FileStreamSource` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSource/)) is requested to `getBatch`
+* `FileStreamSource` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/file/FileStreamSource/)) is requested to `getBatch`
 
 ## <span id="refresh"> refresh
 
@@ -54,10 +54,10 @@ refresh(): Unit
 
 `refresh` is part of [LogicalPlan](LogicalPlan.md#refresh) abstraction.
 
-`refresh` requests the [FileIndex](../datasources/HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
+`refresh` requests the [FileIndex](../connectors/HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
 
 !!! note
-    `refresh` does the work for [HadoopFsRelation](../datasources/HadoopFsRelation.md) relations only.
+    `refresh` does the work for [HadoopFsRelation](../connectors/HadoopFsRelation.md) relations only.
 
 ## <span id="simpleString"> Simple Text Representation
 

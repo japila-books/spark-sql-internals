@@ -22,4 +22,4 @@ Used when:
 * ForeachWriterTable
 * [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink
-* [NoopWriteBuilder](../datasources/noop/NoopWriteBuilder.md)
+* [NoopWriteBuilder](../noop/NoopWriteBuilder.md)

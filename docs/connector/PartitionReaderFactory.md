@@ -21,7 +21,7 @@ Cannot create columnar reader.
 
 See:
 
-* [FilePartitionReaderFactory](../datasources/FilePartitionReaderFactory.md#createColumnarReader)
+* [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md#createColumnarReader)
 
 Used when:
 
@@ -54,7 +54,7 @@ By default, `supportColumnarReads` indicates no support for columnar scans (and 
 
 See:
 
-* [ParquetPartitionReaderFactory](../datasources/parquet/ParquetPartitionReaderFactory.md#supportColumnarReads)
+* [ParquetPartitionReaderFactory](../parquet/ParquetPartitionReaderFactory.md#supportColumnarReads)
 
 Used when:
 
@@ -63,7 +63,7 @@ Used when:
 ## Implementations
 
 * `ContinuousPartitionReaderFactory`
-* [FilePartitionReaderFactory](../datasources/FilePartitionReaderFactory.md)
+* [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md)
 * `KafkaBatchReaderFactory`
 * `MemoryStreamReaderFactory`
 * `RateStreamMicroBatchReaderFactory`

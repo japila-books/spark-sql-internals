@@ -1,6 +1,6 @@
 # HiveFileFormat
 
-`HiveFileFormat` is a [FileFormat](../datasources/FileFormat.md) for [writing Hive tables](#prepareWrite).
+`HiveFileFormat` is a [FileFormat](../connectors/FileFormat.md) for [writing Hive tables](#prepareWrite).
 
 [[shortName]]
 `HiveFileFormat` is a [DataSourceRegister](../DataSourceRegister.md) and [registers](../DataSourceRegister.md#shortName) itself as **hive** data source.
@@ -13,7 +13,7 @@ NOTE: Hive data source can only be used with tables and you cannot read or write
 `HiveFileFormat` takes a `FileSinkDesc` when created.
 
 [[inferSchema]]
-`HiveFileFormat` throws a `UnsupportedOperationException` when requested to [inferSchema](../datasources/FileFormat.md#inferSchema).
+`HiveFileFormat` throws a `UnsupportedOperationException` when requested to [inferSchema](../connectors/FileFormat.md#inferSchema).
 
 ```text
 inferSchema is not supported for hive data source.
@@ -38,4 +38,4 @@ prepareWrite(
 
 In the end, `prepareWrite` creates a new `OutputWriterFactory` that creates a new `HiveOutputWriter` when requested for a new `OutputWriter` instance.
 
-`prepareWrite` is part of the [FileFormat](../datasources/FileFormat.md#prepareWrite) abstraction.
+`prepareWrite` is part of the [FileFormat](../connectors/FileFormat.md#prepareWrite) abstraction.

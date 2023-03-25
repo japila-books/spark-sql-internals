@@ -26,7 +26,7 @@
 | InsertIntoDataSourceDirCommand
 | [[InsertIntoDir]]
 
-| [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../datasources/HadoopFsRelation.md)
+| [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../connectors/HadoopFsRelation.md)
 | [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md)
 | [[InsertIntoTable-HadoopFsRelation]]
 |===

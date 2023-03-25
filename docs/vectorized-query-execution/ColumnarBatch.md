@@ -21,7 +21,7 @@ tags:
 * `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](../physical-operators/RowToColumnarExec.md#doExecuteColumnar)
 * [InMemoryTableScanExec](../physical-operators/InMemoryTableScanExec.md) leaf physical operator is requested for a [RDD[ColumnarBatch]](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD)
 * `OrcColumnarBatchReader` is requested to `initBatch`
-* `VectorizedParquetRecordReader` is requested to [init a batch](../datasources/parquet/VectorizedParquetRecordReader.md#initBatch)
+* `VectorizedParquetRecordReader` is requested to [init a batch](../parquet/VectorizedParquetRecordReader.md#initBatch)
 * _others_ (PySpark and SparkR)
 
 ### <span id="row"> ColumnarBatchRow
@@ -78,7 +78,7 @@ void setNumRows(
 `setNumRows` is used when:
 
 * `OrcColumnarBatchReader` is requested to `nextBatch`
-* `VectorizedParquetRecordReader` is requested to [nextBatch](../datasources/parquet/VectorizedParquetRecordReader.md#nextBatch)
+* `VectorizedParquetRecordReader` is requested to [nextBatch](../parquet/VectorizedParquetRecordReader.md#nextBatch)
 * `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](../physical-operators/RowToColumnarExec.md#doExecuteColumnar)
 * `InMemoryTableScanExec` physical operator is requested for the [columnarInputRDD](../physical-operators/InMemoryTableScanExec.md#columnarInputRDD) (and uses `DefaultCachedBatchSerializer` to `convertCachedBatchToColumnarBatch`)
 * _others_ (PySpark and SparkR)

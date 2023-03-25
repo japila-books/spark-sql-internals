@@ -22,7 +22,7 @@
 `ScalaUDF` is created when:
 
 * `UDFRegistration` is requested to [register a UDF](../UDFRegistration.md#register)
-* `BaseDynamicPartitionDataWriter` is requested for [partitionPathExpression](../datasources/BaseDynamicPartitionDataWriter.md#partitionPathExpression)
+* `BaseDynamicPartitionDataWriter` is requested for [partitionPathExpression](../connectors/BaseDynamicPartitionDataWriter.md#partitionPathExpression)
 * `SparkUserDefinedFunction` is requested to [createScalaUDF](SparkUserDefinedFunction.md#createScalaUDF)
 
 ## <span id="deterministic"> deterministic

@@ -20,7 +20,7 @@
 
 * `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<LogicalRelation.md#, LogicalRelations>> with a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<LogicalRelation.md#, LogicalRelations>> with a [HadoopFsRelation](../connectors/HadoopFsRelation.md))
 
 * [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 

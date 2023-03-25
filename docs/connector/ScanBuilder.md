@@ -14,7 +14,7 @@ Builds a [Scan](Scan.md)
 
 See:
 
-* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md#build)
+* [ParquetScanBuilder](../parquet/ParquetScanBuilder.md#build)
 
 Used when:
 
@@ -27,9 +27,9 @@ Used when:
 
 ## Implementations
 
-* [FileScanBuilder](../datasources/FileScanBuilder.md)
-* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md)
-* `MemoryStreamScanBuilder` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory/MemoryStreamScanBuilder))
+* [FileScanBuilder](../connectors/FileScanBuilder.md)
+* [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md)
+* `MemoryStreamScanBuilder` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/memory/MemoryStreamScanBuilder))
 * [SupportsPushDownAggregates](SupportsPushDownAggregates.md)
 * [SupportsPushDownFilters](SupportsPushDownFilters.md)
 * `SupportsPushDownLimit`

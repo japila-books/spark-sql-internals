@@ -6,7 +6,7 @@ hide:
 
 # Demo: Using JDBC Data Source to Access PostgreSQL
 
-This demo shows how to use [JDBC Data Source](../datasources/jdbc/index.md) to load data from PostgreSQL. These steps should be equally applicable to any relational database that allows access using a JDBC driver.
+This demo shows how to use [JDBC Data Source](../jdbc/index.md) to load data from PostgreSQL. These steps should be equally applicable to any relational database that allows access using a JDBC driver.
 
 ## Start Postgres Instance
 

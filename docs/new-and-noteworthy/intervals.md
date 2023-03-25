@@ -9,7 +9,7 @@ Intervals can be positive and negative.
 
 ## Parquet
 
-ANSI intervals are supported by [parquet data source](../datasources/parquet/ParquetFileFormat.md) as follows:
+ANSI intervals are supported by [parquet data source](../parquet/ParquetFileFormat.md) as follows:
 
 * `DayTimeIntervalType` is the same as `LongType` (`INT64`)
 * `YearMonthIntervalType` is the same as `IntegerType` (`INT32`)

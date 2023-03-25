@@ -29,7 +29,7 @@ StructType readSchema()
 
 Used when:
 
-* `FileScan` is requested for the [partition and data filters](../datasources/FileScan.md#)
+* `FileScan` is requested for the [partition and data filters](../connectors/FileScan.md#)
 * `GroupBasedRowLevelOperationScanPlanning` is executed
 * `PushDownUtils` utility is used to [pruneColumns](../PushDownUtils.md#pruneColumns)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and requested to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
@@ -66,7 +66,7 @@ By default, `toBatch` throws an `UnsupportedOperationException` (with the [descr
 
 See:
 
-* [FileScan](../datasources/FileScan.md#toBatch)
+* [FileScan](../connectors/FileScan.md#toBatch)
 
 ---
 
@@ -126,7 +126,7 @@ Used when:
 
 ## Implementations
 
-* [FileScan](../datasources/FileScan.md)
+* [FileScan](../connectors/FileScan.md)
 * [KafkaScan](../kafka/KafkaScan.md)
 * [SupportsReportPartitioning](SupportsReportPartitioning.md)
 * [SupportsReportStatistics](SupportsReportStatistics.md)

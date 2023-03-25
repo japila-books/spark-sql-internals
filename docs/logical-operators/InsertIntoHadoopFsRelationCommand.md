@@ -11,19 +11,19 @@
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
 * <span id="bucketSpec"> [BucketSpec](../bucketing/BucketSpec.md) if defined
-* <span id="fileFormat"> [FileFormat](../datasources/FileFormat.md)
+* <span id="fileFormat"> [FileFormat](../connectors/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
 * <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)
 * <span id="catalogTable"> [CatalogTable](../CatalogTable.md) if available
-* <span id="fileIndex"> [FileIndex](../datasources/FileIndex.md) if defined
+* <span id="fileIndex"> [FileIndex](../connectors/FileIndex.md) if defined
 * <span id="outputColumnNames"> Names of the output columns
 
 `InsertIntoHadoopFsRelationCommand` is created when:
 
 * `OptimizedCreateHiveTableAsSelectCommand` logical command is executed
 * `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
-* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../datasources/HadoopFsRelation.md))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../connectors/HadoopFsRelation.md))
 
 ## <span id="staticPartitions"> Static Partitions
 
@@ -34,7 +34,7 @@ staticPartitions: TablePartitionSpec
 
 `InsertIntoHadoopFsRelationCommand` is given a specification of a table partition (as a mapping of column names to column values) when [created](#creating-instance).
 
-Partitions can only be given when created for [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule when executed for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../datasources/HadoopFsRelation.md)
+Partitions can only be given when created for [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule when executed for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../connectors/HadoopFsRelation.md)
 
 There will be no partitions when created for the following:
 

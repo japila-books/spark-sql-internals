@@ -170,8 +170,8 @@ Used when:
 
 * `RowToColumnarExec` physical operator is requested to [doExecuteColumnar](physical-operators/RowToColumnarExec.md#doExecuteColumnar)
 * `DefaultCachedBatchSerializer` is requested to `vectorTypes` and `convertCachedBatchToColumnarBatch`
-* `ParquetFileFormat` is requested to [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)
+* `ParquetFileFormat` is requested to [vectorTypes](parquet/ParquetFileFormat.md#vectorTypes) and [buildReaderWithPartitionValues](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#enableOffHeapColumnVector)
 
 ## <span id="spark.sql.defaultColumn.enabled"> defaultColumn.enabled
 
@@ -217,7 +217,7 @@ Used when:
 
 **spark.sql.files.maxPartitionBytes**
 
-Maximum number of bytes to pack into a single partition when reading files for file-based data sources (e.g., [Parquet](datasources/parquet/index.md))
+Maximum number of bytes to pack into a single partition when reading files for file-based data sources (e.g., [Parquet](parquet/index.md))
 
 Default: `128MB` (like `parquet.block.size`)
 
@@ -225,13 +225,13 @@ Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the 
 
 Used when:
 
-* `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
 
 ## <span id="spark.sql.files.minPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> files.minPartitionNum
 
 **spark.sql.files.minPartitionNum**
 
-Hint about the minimum number of partitions for file-based data sources (e.g., [Parquet](datasources/parquet/index.md))
+Hint about the minimum number of partitions for file-based data sources (e.g., [Parquet](parquet/index.md))
 
 Default: [spark.sql.leafNodeDefaultParallelism](SparkSession.md#leafNodeDefaultParallelism)
 
@@ -239,7 +239,7 @@ Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) for the curr
 
 Used when:
 
-* `FilePartition` is requested for [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
 
 ## <span id="spark.sql.files.openCostInBytes"><span id="FILES_OPEN_COST_IN_BYTES"> files.openCostInBytes
 
@@ -257,13 +257,13 @@ Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) for the curr
 Used when:
 
 * `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
-* `FilePartition` is requested to [getFilePartitions](datasources/FilePartition.md#getFilePartitions) and [maxSplitBytes](datasources/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested to [getFilePartitions](connectors/FilePartition.md#getFilePartitions) and [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
 
 ## <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> hive.filesourcePartitionFileCacheSize
 
 **spark.sql.hive.filesourcePartitionFileCacheSize**
 
-When greater than `0`, enables caching of partition file metadata in memory (using [SharedInMemoryCache](datasources/SharedInMemoryCache.md)).
+When greater than `0`, enables caching of partition file metadata in memory (using [SharedInMemoryCache](connectors/SharedInMemoryCache.md)).
 All tables share a cache that can use up to specified num bytes for file metadata.
 
 Requires [spark.sql.hive.manageFilesourcePartitions](#spark.sql.hive.manageFilesourcePartitions) to be enabled
@@ -274,7 +274,7 @@ Use [SQLConf.filesourcePartitionFileCacheSize](SQLConf.md#filesourcePartitionFil
 
 Used when:
 
-* `FileStatusCache` is requested to [look up the system-wide FileStatusCache](datasources/FileStatusCache.md#getOrCreate)
+* `FileStatusCache` is requested to [look up the system-wide FileStatusCache](connectors/FileStatusCache.md#getOrCreate)
 
 ## <span id="spark.sql.hive.manageFilesourcePartitions"> hive.manageFilesourcePartitions
 
@@ -294,7 +294,7 @@ Used when:
 * [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
 * `DDLUtils` utility is used to `verifyPartitionProviderIsHive`
 * `DataSource` is requested to [resolve a BaseRelation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
-* `FileStatusCache` is [created](datasources/FileStatusCache.md#getOrCreate)
+* `FileStatusCache` is [created](connectors/FileStatusCache.md#getOrCreate)
 * `V2SessionCatalog` is requested to [create a table](V2SessionCatalog.md#createTable) (_deprecated_)
 
 ## <span id="spark.sql.inMemoryColumnarStorage.partitionPruning"> inMemoryColumnarStorage.partitionPruning
@@ -605,7 +605,7 @@ Default: `true`
 
 **spark.sql.parquet.aggregatePushdown**
 
-Controls [aggregate pushdown](datasources/parquet/ParquetScanBuilder.md#pushAggregation) in [parquet connector](datasources/parquet/index.md)
+Controls [aggregate pushdown](parquet/ParquetScanBuilder.md#pushAggregation) in [parquet connector](parquet/index.md)
 
 Supports MIN, MAX and COUNT as aggregate expression:
 
@@ -620,13 +620,13 @@ Use [SQLConf.parquetAggregatePushDown](SQLConf.md#parquetAggregatePushDown) for 
 
 Used when:
 
-* `ParquetScanBuilder` is requested to [pushAggregation](datasources/parquet/ParquetScanBuilder.md#pushAggregation)
+* `ParquetScanBuilder` is requested to [pushAggregation](parquet/ParquetScanBuilder.md#pushAggregation)
 
 ### <span id="spark.sql.parquet.columnarReaderBatchSize"> columnarReaderBatchSize
 
 **spark.sql.parquet.columnarReaderBatchSize**
 
-The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md))
+The number of rows to include in a parquet vectorized reader batch (the capacity of [VectorizedParquetRecordReader](parquet/VectorizedParquetRecordReader.md))
 
 Default: `4096` (4k)
 
@@ -636,8 +636,8 @@ Use [SQLConf.parquetVectorizedReaderBatchSize](SQLConf.md#parquetVectorizedReade
 
 Used when:
 
-* `ParquetFileFormat` is requested for a [data reader](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](datasources/parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-decoding/index.md))
-* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#capacity)
+* `ParquetFileFormat` is requested for a [data reader](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues) (and creates a [VectorizedParquetRecordReader](parquet/VectorizedParquetRecordReader.md) for [Vectorized Parquet Decoding](vectorized-decoding/index.md))
+* `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
 ### <span id="spark.sql.parquet.enableNestedColumnVectorizedReader"> enableNestedColumnVectorizedReader
@@ -653,13 +653,13 @@ Use [SQLConf.parquetVectorizedReaderNestedColumnEnabled](SQLConf.md#parquetVecto
 
 Used when:
 
-* `ParquetUtils` is requested to [isBatchReadSupported](datasources/parquet/ParquetUtils.md#isBatchReadSupported)
+* `ParquetUtils` is requested to [isBatchReadSupported](parquet/ParquetUtils.md#isBatchReadSupported)
 
 ### <span id="spark.sql.parquet.filterPushdown"> filterPushdown
 
 **spark.sql.parquet.filterPushdown**
 
-Controls filter predicate push-down optimization for [parquet connector](datasources/parquet/index.md)
+Controls filter predicate push-down optimization for [parquet connector](parquet/index.md)
 
 Default: `true`
 
@@ -667,9 +667,9 @@ Use [SQLConf.parquetFilterPushDown](SQLConf.md#parquetFilterPushDown) for the cu
 
 Used when:
 
-* `ParquetFileFormat` is [created](datasources/parquet/ParquetFileFormat.md#enableParquetFilterPushDown)
-* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#enableParquetFilterPushDown)
-* `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
+* `ParquetFileFormat` is [created](parquet/ParquetFileFormat.md#enableParquetFilterPushDown)
+* `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#enableParquetFilterPushDown)
+* `ParquetScanBuilder` is requested to [pushDataFilters](parquet/ParquetScanBuilder.md#pushDataFilters)
 
 ### <span id="spark.sql.parquet.filterPushdown.stringPredicate"> filterPushdown.stringPredicate
 
@@ -684,9 +684,9 @@ Use [SQLConf.parquetFilterPushDownStringPredicate](SQLConf.md#parquetFilterPushD
 
 Used when:
 
-* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is [created](datasources/parquet/ParquetPartitionReaderFactory.md#pushDownStringPredicate)
-* `ParquetScanBuilder` is requested to [pushDataFilters](datasources/parquet/ParquetScanBuilder.md#pushDataFilters)
+* `ParquetFileFormat` is requested to [buildReaderWithPartitionValues](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#pushDownStringPredicate)
+* `ParquetScanBuilder` is requested to [pushDataFilters](parquet/ParquetScanBuilder.md#pushDataFilters)
 
 ### <span id="spark.sql.parquet.mergeSchema"> mergeSchema
 
@@ -698,11 +698,11 @@ Default: `false`
 
 Use [SQLConf.isParquetSchemaMergingEnabled](SQLConf.md#isParquetSchemaMergingEnabled) for the current value
 
-Parquet option (of higher priority): [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema)
+Parquet option (of higher priority): [mergeSchema](parquet/ParquetOptions.md#mergeSchema)
 
 Used when:
 
-* `ParquetOptions` is created (and initializes [mergeSchema](datasources/parquet/ParquetOptions.md#mergeSchema) option)
+* `ParquetOptions` is created (and initializes [mergeSchema](parquet/ParquetOptions.md#mergeSchema) option)
 
 ## <span id="spark.sql.sources.bucketing.enabled"> sources.bucketing.enabled
 
@@ -1145,7 +1145,7 @@ Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to ac
 
 **(internal)** Fully-qualified class name of the `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
 
-Default: [SQLHadoopMapReduceCommitProtocol](datasources/SQLHadoopMapReduceCommitProtocol.md)
+Default: [SQLHadoopMapReduceCommitProtocol](connectors/SQLHadoopMapReduceCommitProtocol.md)
 
 Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
 
@@ -1252,7 +1252,7 @@ Default: `EXCEPTION`
 
 ## <span id="spark.sql.maxConcurrentOutputFileWriters"> spark.sql.maxConcurrentOutputFileWriters
 
-**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](datasources/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
+**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](connectors/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
 
 Default: `0`
 
@@ -1260,7 +1260,7 @@ Use [SQLConf.maxConcurrentOutputFileWriters](SQLConf.md#maxConcurrentOutputFileW
 
 ## <span id="spark.sql.maxMetadataStringLength"> spark.sql.maxMetadataStringLength
 
-Maximum number of characters to output for a metadata string (e.g., `Location` in [FileScan](datasources/FileScan.md#getMetaData))
+Maximum number of characters to output for a metadata string (e.g., `Location` in [FileScan](connectors/FileScan.md#getMetaData))
 
 Default: `100`
 
@@ -1893,7 +1893,7 @@ Use [SQLConf.isParquetINT96TimestampConversion](SQLConf.md#isParquetINT96Timesta
 
 ## <span id="spark.sql.parquet.output.committer.class"> spark.sql.parquet.output.committer.class
 
-**(internal)** The output committer class used by [parquet](datasources/parquet/index.md) data source. The specified class needs to be a subclass of `org.apache.hadoop.mapreduce.OutputCommitter`. Typically, it's also a subclass of `org.apache.parquet.hadoop.ParquetOutputCommitter`. If it is not, then metadata summaries will never be created, irrespective of the value of `parquet.summary.metadata.level`.
+**(internal)** The output committer class used by [parquet](parquet/index.md) data source. The specified class needs to be a subclass of `org.apache.hadoop.mapreduce.OutputCommitter`. Typically, it's also a subclass of `org.apache.parquet.hadoop.ParquetOutputCommitter`. If it is not, then metadata summaries will never be created, irrespective of the value of `parquet.summary.metadata.level`.
 
 Default: `org.apache.parquet.hadoop.ParquetOutputCommitter`
 
@@ -2005,7 +2005,7 @@ Use [SQLConf.enableRadixSort](SQLConf.md#enableRadixSort) method to access the c
 
 Default data source to use for loading or saving data
 
-Default: [parquet](datasources/parquet/index.md)
+Default: [parquet](parquet/index.md)
 
 Use [SQLConf.defaultDataSourceName](SQLConf.md#defaultDataSourceName) method to access the current value.
 

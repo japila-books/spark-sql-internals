@@ -187,7 +187,7 @@ Used when:
 
 The value of [spark.sql.avro.compression.codec](configuration-properties.md#spark.sql.avro.compression.codec) configuration property
 
-Used when `AvroOptions` is requested for the [compression](datasources/avro/AvroOptions.md#compression) configuration property (and it was not set explicitly)
+Used when `AvroOptions` is requested for the [compression](avro/AvroOptions.md#compression) configuration property (and it was not set explicitly)
 
 ## <span id="broadcastTimeout"> broadcastTimeout
 
@@ -350,7 +350,7 @@ Used when:
 * `DetermineTableStats` logical resolution rule could not compute the table size or [spark.sql.statistics.fallBackToHdfs](#spark.sql.statistics.fallBackToHdfs) is disabled
 * [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
 * (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
-* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](datasources/CatalogFileIndex.md) when no table statistics are available)
+* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](connectors/CatalogFileIndex.md) when no table statistics are available)
 * `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
@@ -439,7 +439,7 @@ Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
 Used when:
 
-* `FileWrite` is requested for a [BatchWrite](datasources/FileWrite.md#toBatch)
+* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
 * `InsertIntoHadoopFsRelationCommand` logical command is [executed](logical-operators/InsertIntoHadoopFsRelationCommand.md#run)
 * `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
 
@@ -449,8 +449,8 @@ The value of [spark.sql.sources.fileCompressionFactor](configuration-properties.
 
 Used when:
 
-* `HadoopFsRelation` is requested for a [size](datasources/HadoopFsRelation.md#sizeInBytes)
-* `FileScan` is requested to [estimate statistics](datasources/FileScan.md#estimateStatistics)
+* `HadoopFsRelation` is requested for a [size](connectors/HadoopFsRelation.md#sizeInBytes)
+* `FileScan` is requested to [estimate statistics](connectors/FileScan.md#estimateStatistics)
 
 ## <span id="filesMaxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> filesMaxPartitionBytes
 
@@ -512,7 +512,7 @@ The value of [spark.sql.files.ignoreMissingFiles](configuration-properties.md#sp
 Used when:
 
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreMissingFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
-* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](datasources/InMemoryFileIndex.md#bulkListLeafFiles)
+* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](connectors/InMemoryFileIndex.md#bulkListLeafFiles)
 * `FilePartitionReader` is requested to `ignoreMissingFiles`
 
 ## <span id="inMemoryPartitionPruning"> inMemoryPartitionPruning
@@ -531,7 +531,7 @@ Used when:
 
 [spark.sql.parquet.int96TimestampConversion](configuration-properties.md#spark.sql.parquet.int96TimestampConversion)
 
-Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader with partition column values appended](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="isParquetSchemaMergingEnabled"><span id="PARQUET_SCHEMA_MERGING_ENABLED"> isParquetSchemaMergingEnabled
 
@@ -543,7 +543,7 @@ Used when `ParquetFileFormat` is requested to [build a data reader with partitio
 
 Used when:
 
-* `ParquetUtils` is used to [inferSchema](datasources/parquet/ParquetUtils.md#inferSchema)
+* `ParquetUtils` is used to [inferSchema](parquet/ParquetUtils.md#inferSchema)
 
 ## <span id="joinReorderEnabled"> joinReorderEnabled
 
@@ -585,7 +585,7 @@ The value of [spark.sql.maxConcurrentOutputFileWriters](configuration-properties
 
 Used when:
 
-* `FileFormatWriter` is requested to [write out a query result](datasources/FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write out a query result](connectors/FileFormatWriter.md#write)
 
 ## <span id="maxMetadataStringLength"><span id="MAX_METADATA_STRING_LENGTH"> maxMetadataStringLength
 
@@ -594,7 +594,7 @@ Used when:
 Used when:
 
 * `DataSourceScanExec` is requested for [simpleString](physical-operators/DataSourceScanExec.md#simpleString)
-* `FileScan` is requested for [description](datasources/FileScan.md#description) and [metadata](datasources/FileScan.md#getMetaData)
+* `FileScan` is requested for [description](connectors/FileScan.md#description) and [metadata](connectors/FileScan.md#getMetaData)
 * `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
 
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
@@ -603,8 +603,8 @@ Used when:
 
 Used when:
 
-* `FileFormatWriter` utility is used to [write out a query result](datasources/FileFormatWriter.md#write)
-* `FileWrite` is requested for a [BatchWrite](datasources/FileWrite.md#toBatch)
+* `FileFormatWriter` utility is used to [write out a query result](connectors/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
 
 ## <span id="maxToStringFields"><span id="MAX_TO_STRING_FIELDS"> maxToStringFields
 
@@ -727,7 +727,7 @@ Used when:
 
 * `InMemoryTableScanExec` is requested for the [vectorTypes](physical-operators/InMemoryTableScanExec.md#vectorTypes) and the [input RDD](physical-operators/InMemoryTableScanExec.md#inputRDD)
 * `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
-* `ParquetFileFormat` is requested for [vectorTypes](datasources/parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested for [vectorTypes](parquet/ParquetFileFormat.md#vectorTypes) and [build a data reader with partition column values appended](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="OPTIMIZE_ONE_ROW_RELATION_SUBQUERY"> OPTIMIZE_ONE_ROW_RELATION_SUBQUERY
 
@@ -771,9 +771,9 @@ Used when:
 
 Used when:
 
-* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](datasources/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
-* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
-* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
+* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](connectors/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
+* `ParquetFileFormat` is requested to [prepareWrite](parquet/ParquetFileFormat.md#prepareWrite)
+* `ParquetWrite` is requested to [prepareWrite](parquet/ParquetWrite.md#prepareWrite)
 
 ## <span id="parallelFileListingInStatsComputation"> parallelFileListingInStatsComputation
 
@@ -791,7 +791,7 @@ Used when `CommandUtils` helper object is requested to [calculate the total size
 
 Used when:
 
-* `ParquetOptions` is requested for [compressionCodecClassName](datasources/parquet/ParquetOptions.md#compressionCodecClassName)
+* `ParquetOptions` is requested for [compressionCodecClassName](parquet/ParquetOptions.md#compressionCodecClassName)
 
 ## <span id="parquetFilterPushDown"><span id="PARQUET_FILTER_PUSHDOWN_ENABLED"> parquetFilterPushDown
 
@@ -803,7 +803,7 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="parquetFilterPushDownDecimal"><span id="PARQUET_FILTER_PUSHDOWN_DECIMAL_ENABLED"> parquetFilterPushDownDecimal
 
@@ -811,9 +811,9 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
-* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](parquet/ParquetScanBuilder.md#pushedParquetFilters)
 
 ## <span id="parquetFilterPushDownInFilterThreshold"><span id="PARQUET_FILTER_PUSHDOWN_INFILTERTHRESHOLD"> parquetFilterPushDownInFilterThreshold
 
@@ -821,9 +821,9 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
-* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](parquet/ParquetScanBuilder.md#pushedParquetFilters)
 
 ## <span id="parquetFilterPushDownStringPredicate"><span id="PARQUET_FILTER_PUSHDOWN_STRING_PREDICATE_ENABLED"> parquetFilterPushDownStringPredicate
 
@@ -839,9 +839,9 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
-* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](datasources/parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
-* `ParquetScanBuilder` is requested for [pushedParquetFilters](datasources/parquet/ParquetScanBuilder.md#pushedParquetFilters)
+* `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetPartitionReaderFactory` is requested to [buildReaderBase](parquet/ParquetPartitionReaderFactory.md#buildReaderBase)
+* `ParquetScanBuilder` is requested for [pushedParquetFilters](parquet/ParquetScanBuilder.md#pushedParquetFilters)
 
 ## <span id="parquetOutputCommitterClass"><span id="PARQUET_OUTPUT_COMMITTER_CLASS"> parquetOutputCommitterClass
 
@@ -849,8 +849,8 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
-* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
+* `ParquetFileFormat` is requested to [prepareWrite](parquet/ParquetFileFormat.md#prepareWrite)
+* `ParquetWrite` is requested to [prepareWrite](parquet/ParquetWrite.md#prepareWrite)
 
 ## <span id="parquetOutputTimestampType"><span id="PARQUET_OUTPUT_TIMESTAMP_TYPE"> parquetOutputTimestampType
 
@@ -858,16 +858,16 @@ Used when:
 
 Used when:
 
-* `ParquetFileFormat` is requested to [prepareWrite](datasources/parquet/ParquetFileFormat.md#prepareWrite)
-* `SparkToParquetSchemaConverter` is [created](datasources/parquet/SparkToParquetSchemaConverter.md)
-* `ParquetWriteSupport` is requested to [init](datasources/parquet/ParquetWriteSupport.md#init)
-* `ParquetWrite` is requested to [prepareWrite](datasources/parquet/ParquetWrite.md#prepareWrite)
+* `ParquetFileFormat` is requested to [prepareWrite](parquet/ParquetFileFormat.md#prepareWrite)
+* `SparkToParquetSchemaConverter` is [created](parquet/SparkToParquetSchemaConverter.md)
+* `ParquetWriteSupport` is requested to [init](parquet/ParquetWriteSupport.md#init)
+* `ParquetWrite` is requested to [prepareWrite](parquet/ParquetWrite.md#prepareWrite)
 
 ## <span id="parquetRecordFilterEnabled"> parquetRecordFilterEnabled
 
 [spark.sql.parquet.recordLevelFilter.enabled](configuration-properties.md#spark.sql.parquet.recordLevelFilter.enabled)
 
-Used when `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
+Used when `ParquetFileFormat` is requested to [build a data reader (with partition column values appended)](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues).
 
 ## <span id="parquetVectorizedReaderBatchSize"> parquetVectorizedReaderBatchSize
 
@@ -880,7 +880,7 @@ Used when `ParquetFileFormat` is requested to [build a data reader (with partiti
 Used when:
 
 * `FileSourceScanExec` is requested for [needsUnsafeRowConversion](physical-operators/FileSourceScanExec.md#needsUnsafeRowConversion) flag
-* `ParquetFileFormat` is requested for [supportBatch](datasources/parquet/ParquetFileFormat.md#supportBatch) flag and [build a data reader with partition column values appended](datasources/parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
+* `ParquetFileFormat` is requested for [supportBatch](parquet/ParquetFileFormat.md#supportBatch) flag and [build a data reader with partition column values appended](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues)
 
 ## <span id="parquetVectorizedReaderNestedColumnEnabled"><span id="PARQUET_VECTORIZED_READER_NESTED_COLUMN_ENABLED"> parquetVectorizedReaderNestedColumnEnabled
 
@@ -1068,7 +1068,7 @@ Used when:
 Used in:
 
 * [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
-* [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md) to control row batch reading
+* [ParquetFileFormat](parquet/ParquetFileFormat.md) to control row batch reading
 
 ## <span id="wholeStageFallback"> wholeStageFallback
 
@@ -1081,7 +1081,7 @@ Used in:
 Used in:
 
 * [CollapseCodegenStages](physical-optimizations/CollapseCodegenStages.md) to control codegen
-* [ParquetFileFormat](datasources/parquet/ParquetFileFormat.md) to control row batch reading
+* [ParquetFileFormat](parquet/ParquetFileFormat.md) to control row batch reading
 
 ## <span id="wholeStageSplitConsumeFuncByOperator"> wholeStageSplitConsumeFuncByOperator
 

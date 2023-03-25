@@ -19,4 +19,4 @@ Used when:
 
 ## Implementations
 
-* [JDBCScan](../datasources/jdbc/JDBCScan.md)
+* [JDBCScan](../jdbc/JDBCScan.md)

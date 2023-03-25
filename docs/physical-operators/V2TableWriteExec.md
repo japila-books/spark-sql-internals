@@ -35,7 +35,7 @@ writeWithV2(
 Start processing data source write support: [batchWrite]. The input RDD has [n] partitions.
 ```
 
-`writeWithV2` runs a Spark job ([Spark Core]({{ book.spark_core }}/SparkContext#runJob)) with the [DataWritingSparkTask](../datasources/DataWritingSparkTask.md#run) for every partition. `writeWithV2` requests the `BatchWrite` to [onDataWriterCommit](../connector/BatchWrite.md#onDataWriterCommit) (with the result `WriterCommitMessage`) after every partition has been processed successfully.
+`writeWithV2` runs a Spark job ([Spark Core]({{ book.spark_core }}/SparkContext#runJob)) with the [DataWritingSparkTask](../connectors/DataWritingSparkTask.md#run) for every partition. `writeWithV2` requests the `BatchWrite` to [onDataWriterCommit](../connector/BatchWrite.md#onDataWriterCommit) (with the result `WriterCommitMessage`) after every partition has been processed successfully.
 
 `writeWithV2` prints out the following INFO message to the logs:
 

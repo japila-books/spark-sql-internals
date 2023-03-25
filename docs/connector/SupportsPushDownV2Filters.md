@@ -27,4 +27,4 @@ Used when:
 
 ## Implementations
 
-* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md)
+* [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md)

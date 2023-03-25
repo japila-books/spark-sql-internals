@@ -210,7 +210,7 @@ lookupV2Provider(): Option[TableProvider]
 
 `lookupV2Provider` tries to [look up a TableProvider](DataSource.md#lookupDataSourceV2) for the [source](#source).
 
-`lookupV2Provider` explicitly excludes [FileDataSourceV2](datasources/FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
+`lookupV2Provider` explicitly excludes [FileDataSourceV2](connectors/FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
 
 `lookupV2Provider` is used when:
 
@@ -287,7 +287,7 @@ In the end, `saveToV1Source` [runs the logical command for writing](#runCommand)
 
     * A [SaveIntoDataSourceCommand](logical-operators/SaveIntoDataSourceCommand.md) for [CreatableRelationProviders](CreatableRelationProvider.md)
 
-    * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](datasources/FileFormat.md)
+    * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](connectors/FileFormat.md)
 
 `saveToV1Source` is used when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save).
 

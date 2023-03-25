@@ -62,4 +62,4 @@ getBucketSpec(
   plan: SparkPlan): Option[BucketSpec]
 ```
 
-`getBucketSpec` finds the [FileSourceScanExec](physical-operators/FileSourceScanExec.md) operator (in the given [SparkPlan](physical-operators/SparkPlan.md)) with a non-empty [bucket spec](datasources/HadoopFsRelation.md#bucketSpec) but an empty [optionalNumCoalescedBuckets](physical-operators/FileSourceScanExec.md#optionalNumCoalescedBuckets). When found, `getBucketSpec` returns the non-empty [bucket spec](datasources/HadoopFsRelation.md#bucketSpec).
+`getBucketSpec` finds the [FileSourceScanExec](physical-operators/FileSourceScanExec.md) operator (in the given [SparkPlan](physical-operators/SparkPlan.md)) with a non-empty [bucket spec](connectors/HadoopFsRelation.md#bucketSpec) but an empty [optionalNumCoalescedBuckets](physical-operators/FileSourceScanExec.md#optionalNumCoalescedBuckets). When found, `getBucketSpec` returns the non-empty [bucket spec](connectors/HadoopFsRelation.md#bucketSpec).

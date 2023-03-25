@@ -89,7 +89,7 @@ val q = facts.join(dims)
   .where(dims("id") isin (0, 1))
 ```
 
-Execute the query (using [Noop Data Source](../datasources/noop/index.md)).
+Execute the query (using [Noop Data Source](../noop/index.md)).
 
 ```scala
 q.write.format("noop").mode("overwrite").save

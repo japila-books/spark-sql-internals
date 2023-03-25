@@ -2,7 +2,7 @@
 
 `WritableColumnVector` is an [extension](#contract) of the [ColumnVector](ColumnVector.md) abstraction for [writable in-memory columnar vectors](#implementations).
 
-`WritableColumnVector` is used to [allocate ColumnVectors](../datasources/parquet/VectorizedParquetRecordReader.md#allocateColumns) for [VectorizedParquetRecordReader](../datasources/parquet/VectorizedParquetRecordReader.md).
+`WritableColumnVector` is used to [allocate ColumnVectors](../parquet/VectorizedParquetRecordReader.md#allocateColumns) for [VectorizedParquetRecordReader](../parquet/VectorizedParquetRecordReader.md).
 
 ## Contract (Subset)
 
@@ -73,7 +73,7 @@ WritableColumnVector reserveDictionaryIds(
 
 `reserveDictionaryIds` is used when:
 
-* `VectorizedColumnReader` is requested to [readBatch](../datasources/parquet/VectorizedColumnReader.md#readBatch)
+* `VectorizedColumnReader` is requested to [readBatch](../parquet/VectorizedColumnReader.md#readBatch)
 * `DictionaryEncoding.Decoder` is requested to `decompress`
 
 ## <span id="reserve"> reserve

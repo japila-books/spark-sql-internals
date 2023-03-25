@@ -14,7 +14,7 @@ PartitionReaderFactory createReaderFactory()
 
 See:
 
-* [ParquetScan](../datasources/parquet/ParquetScan.md#createReaderFactory)
+* [ParquetScan](../parquet/ParquetScan.md#createReaderFactory)
 
 Used when:
 
@@ -30,7 +30,7 @@ InputPartition[] planInputPartitions()
 
 See:
 
-* [FileScan](../datasources/FileScan.md#planInputPartitions)
+* [FileScan](../connectors/FileScan.md#planInputPartitions)
 
 Used when:
 
@@ -38,5 +38,5 @@ Used when:
 
 ## Implementations
 
-* [FileScan](../datasources/FileScan.md)
+* [FileScan](../connectors/FileScan.md)
 * [KafkaBatch](../kafka/KafkaBatch.md)

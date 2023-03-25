@@ -13,8 +13,8 @@ boolean pushAggregation(
 
 See:
 
-* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md#pushAggregation)
-* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md#pushAggregation)
+* [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md#pushAggregation)
+* [ParquetScanBuilder](../parquet/ParquetScanBuilder.md#pushAggregation)
 
 Used when:
 
@@ -31,7 +31,7 @@ Default: `false`
 
 See:
 
-* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md#supportCompletePushDown)
+* [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md#supportCompletePushDown)
 
 Used when:
 
@@ -39,6 +39,6 @@ Used when:
 
 ## Implementations
 
-* [JDBCScanBuilder](../datasources/jdbc/JDBCScanBuilder.md)
+* [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md)
 * `OrcScanBuilder`
-* [ParquetScanBuilder](../datasources/parquet/ParquetScanBuilder.md)
+* [ParquetScanBuilder](../parquet/ParquetScanBuilder.md)

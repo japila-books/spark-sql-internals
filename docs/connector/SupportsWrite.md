@@ -19,7 +19,7 @@ Creates a [WriteBuilder](WriteBuilder.md) for writing (batch and streaming)
 
 See:
 
-* [ParquetTable](../datasources/parquet/ParquetTable.md#newWriteBuilder)
+* [ParquetTable](../parquet/ParquetTable.md#newWriteBuilder)
 
 Used when:
 
@@ -32,8 +32,8 @@ Used when:
 ## Implementations
 
 * ConsoleTable (Spark Structured Streaming)
-* [FileTable](../datasources/FileTable.md)
+* [FileTable](../connectors/FileTable.md)
 * ForeachWriterTable (Spark Structured Streaming)
 * [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink (Spark Structured Streaming)
-* [NoopTable](../datasources/noop/NoopTable.md)
+* [NoopTable](../noop/NoopTable.md)
