@@ -1576,16 +1576,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/datasources/console/</loc>
-         <lastmod>2023-03-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/datasources/console/ConsoleSinkProvider/</loc>
-         <lastmod>2023-03-25</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/datasources/jdbc/</loc>
          <lastmod>2023-03-25</lastmod>
          <changefreq>daily</changefreq>
