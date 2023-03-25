@@ -1,20 +1,30 @@
 # SessionConfigSupport
 
-`SessionConfigSupport` is the <<contract, contract>> of <<implementations, DataSourceV2 data sources>> in DataSource V2 that use <<keyPrefix, custom key prefix for configuration options>> (i.e. options with *spark.datasource* prefix for the keys in [SQLConf](../SQLConf.md)).
+`SessionConfigSupport` is an [extension](#contract) of the [TableProvider](TableProvider.md) abstraction for [table providers](#implementations) that use [custom key prefix for spark.datasource configuration options](#keyPrefix).
 
-With `SessionConfigSupport`, a data source can be configured by additional (session-scoped) configuration options that are specified in <<SparkSession.md#, SparkSession>> that extend user-defined options.
+`SessionConfigSupport` connectors can be configured by additional (session-scoped) configuration options that are specified in [SparkSession](../SparkSession.md) to extend user-defined options.
 
-[[contract]]
-[[keyPrefix]]
-[source, java]
-----
+## Contract
+
+### <span id="keyPrefix"> Configuration Key Prefix
+
+```java
 String keyPrefix()
-----
+```
 
-`keyPrefix` is used when `DataSourceV2Utils` object is requested to [extract session configuration options](../connectors/DataSourceV2Utils.md#extractSessionConfigs).
-
-`keyPrefix` must not be `null` or an `IllegalArgumentException` is thrown:
+The prefix of the configuration keys of this connector that is added to `spark.datasource` prefix
 
 ```text
-The data source config key prefix can't be null.
+spark.datasource.[keyPrefix]
 ```
+
+Must not be `null`
+
+Used when:
+
+* `DataSourceV2Utils` is requested to [extract session configuration options](../connectors/DataSourceV2Utils.md#extractSessionConfigs)
+
+## Implementations
+
+!!! note
+    No built-in implementations available.
