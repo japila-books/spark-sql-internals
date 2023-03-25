@@ -61,7 +61,7 @@ You must drop and re-create the views for adding the new columns. Views: [table]
 
 For a Spark table (that is non-Hive), `verifyAlterTableAddColumn` [finds the implementation of the table provider](../DataSource.md#lookupDataSource) and makes sure that the table provider is one of the following supported file formats:
 
-* [CSVFileFormat](../datasources/csv/CSVFileFormat.md) or `CSVDataSourceV2`
+* `CSVFileFormat` or `CSVDataSourceV2`
 * [JsonFileFormat](../datasources/json/JsonFileFormat.md) or `JsonDataSourceV2`
 * [ParquetFileFormat](../datasources/parquet/ParquetFileFormat.md) or `ParquetDataSourceV2`
 * `OrcFileFormat` or `OrcDataSourceV2`

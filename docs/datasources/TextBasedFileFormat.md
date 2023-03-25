@@ -9,9 +9,6 @@
 | TextBasedFileFormat
 | Description
 
-| [CSVFileFormat](csv/CSVFileFormat.md)
-| [[CSVFileFormat]]
-
 | [JsonFileFormat](json/JsonFileFormat.md)
 | [[JsonFileFormat]]
 

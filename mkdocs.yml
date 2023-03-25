@@ -816,9 +816,6 @@ nav:
     - Console:
       - datasources/console/index.md
       - ConsoleSinkProvider: datasources/console/ConsoleSinkProvider.md
-    - CSV:
-      - CSVFileFormat: datasources/csv/CSVFileFormat.md
-      - CSVScanBuilder: datasources/csv/CSVScanBuilder.md
     - File-Based:
       - AggregatePushDownUtils: datasources/AggregatePushDownUtils.md
       - BasicWriteJobStatsTracker: datasources/BasicWriteJobStatsTracker.md

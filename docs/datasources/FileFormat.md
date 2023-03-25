@@ -68,7 +68,6 @@ Never splitable:
 
 See:
 
-* [CSVFileFormat](csv/CSVFileFormat.md#isSplitable)
 * [JsonFileFormat](json/JsonFileFormat.md#isSplitable)
 * [TextBasedFileFormat](TextBasedFileFormat.md#isSplitable)
 * [TextFileFormat](text/TextFileFormat.md#isSplitable)
