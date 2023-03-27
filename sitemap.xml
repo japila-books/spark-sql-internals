@@ -3461,6 +3461,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
@@ -3482,11 +3487,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/join-strategy-hints/</loc>
-         <lastmod>2023-03-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/metadata-columns/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
