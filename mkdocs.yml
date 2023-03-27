@@ -74,6 +74,10 @@ markdown_extensions:
   - pymdownx.tilde
 
 plugins:
+  # https://github.com/mkdocs/mkdocs-redirects
+  - redirects:
+      redirect_maps:
+          'datasources/index.md': 'connectors/index.md'
   - search
   - minify:
       minify_html: true
