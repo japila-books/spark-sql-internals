@@ -2881,6 +2881,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ExposesMetadataColumns/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/ExternalRDD/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
@@ -3141,6 +3146,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/UnresolvedRelation/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/UnresolvedTable/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
@@ -3192,6 +3202,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/WithWindowDefinition/</loc>
+         <lastmod>2023-03-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/WriteDelta/</loc>
          <lastmod>2023-03-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
