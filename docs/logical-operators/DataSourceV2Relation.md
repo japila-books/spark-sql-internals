@@ -1,6 +1,10 @@
 # DataSourceV2Relation Leaf Logical Operator
 
-`DataSourceV2Relation` is a [leaf logical operator](LeafNode.md) that represents a data scan over [tables with support for BATCH_READ](#TableCapabilityCheck) ([at the very least](#TableCapabilityCheck)).
+`DataSourceV2Relation` is a [leaf logical operator](LeafNode.md) that represents a scan over [tables with support for BATCH_READ](#TableCapabilityCheck) ([at the very least](#TableCapabilityCheck)).
+
+`DataSourceV2Relation` is a [NamedRelation](NamedRelation.md).
+
+`DataSourceV2Relation` is an [ExposesMetadataColumns](ExposesMetadataColumns.md).
 
 ## Creating Instance
 
@@ -8,11 +12,21 @@
 
 * <span id="table"> [Table](../connector/Table.md)
 * <span id="output"> Output `AttributeReference`s
-* <span id="catalog"> (optional) [CatalogPlugin](../connector/catalog/CatalogPlugin.md)
+* [CatalogPlugin](#catalog)
 * <span id="identifier"> (optional) `Identifier`
 * <span id="options"> Case-Insensitive Options
 
 `DataSourceV2Relation` is created (indirectly) using [create](#create) utility and [withMetadataColumns](#withMetadataColumns).
+
+### CatalogPlugin { #catalog }
+
+`DataSourceV2Relation` can be given a [CatalogPlugin](../connector/catalog/CatalogPlugin.md) when [created](#creating-instance).
+
+The `CatalogPlugin` can be as follows:
+
+* [Current Catalog](../connector/catalog/CatalogManager.md#currentCatalog) for a single-part table reference
+* [v2SessionCatalog](../connector/catalog/CatalogManager.md#v2SessionCatalog) for global temp views
+* [Custom Catalog by name](../connector/catalog/CatalogManager.md#catalog)
 
 ## <span id="create"> Creating DataSourceV2Relation
 
@@ -32,6 +46,8 @@ create(
 
 In the end, `create` uses the new schema to [create a DataSourceV2Relation](#creating-instance).
 
+---
+
 `create` is used when:
 
 * `CatalogV2Util` utility is used to [loadRelation](../connector/catalog/CatalogV2Util.md#loadRelation)
@@ -48,11 +64,13 @@ In the end, `create` uses the new schema to [create a DataSourceV2Relation](#cre
 
 ## <span id="metadataOutput"> Metadata Columns
 
-```scala
-metadataOutput: Seq[AttributeReference]
-```
+??? note "Signature"
 
-`metadataOutput` is part of the [LogicalPlan](LogicalPlan.md#metadataOutput) abstraction.
+    ```scala
+    metadataOutput: Seq[AttributeReference]
+    ```
+
+    `metadataOutput` is part of the [LogicalPlan](LogicalPlan.md#metadataOutput) abstraction.
 
 `metadataOutput` requests the [Table](#table) for the [metadata columns](../connector/SupportsMetadataColumns.md#metadataColumns) (if it is a [SupportsMetadataColumns](../connector/SupportsMetadataColumns.md)).
 
@@ -81,25 +99,41 @@ withMetadataColumns(): DataSourceV2Relation
 
 ## <span id="name"> Name
 
-```scala
-name: String
-```
+??? note "Signature"
 
-`name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
+    ```scala
+    name: String
+    ```
+
+    `name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
 
 `name` requests the [Table](#table) for the [name](../connector/Table.md#name)
 
 ## <span id="simpleString"> Simple Node Description
 
-```scala
-simpleString(
-  maxFields: Int): String
-```
+??? note "Signature"
 
-`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+    ```scala
+    simpleString(
+      maxFields: Int): String
+    ```
+
+    `simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
 
 `simpleString` gives the following (with the [output](#output) and the [name](#name)):
 
 ```text
 RelationV2[output] [name]
 ```
+
+## <span id="skipSchemaResolution"> skipSchemaResolution
+
+??? note "Signature"
+
+    ```scala
+    skipSchemaResolution: Boolean
+    ```
+
+    `skipSchemaResolution` is part of the [NamedRelation](NamedRelation.md#skipSchemaResolution) abstraction.
+
+`skipSchemaResolution` is enabled (`true`) when the [Table](#table) supports [ACCEPT_ANY_SCHEMA](../connector/TableCapability.md#ACCEPT_ANY_SCHEMA) capability.

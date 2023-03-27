@@ -1,8 +1,16 @@
 # TableCapability
 
-`TableCapability` represents capabilities that can be provided by a [Table](Table.md#capabilities).
+`TableCapability` represents capabilities that can be provided (_supported_) by a [Table](Table.md#capabilities).
 
 ## <span id="ACCEPT_ANY_SCHEMA"> ACCEPT_ANY_SCHEMA
+
+Indicates that a table accepts input of any schema in a write operation
+
+Used when:
+
+* `DataSourceV2Relation` is requested to [skipSchemaResolution](../logical-operators/DataSourceV2Relation.md#skipSchemaResolution)
+* `KafkaTable` is requested for the [capabilities](../kafka/KafkaTable.md#capabilities)
+* `NoopTable` is requested for the [capabilities](../noop/NoopTable.md#capabilities)
 
 ## <span id="BATCH_READ"> BATCH_READ
 

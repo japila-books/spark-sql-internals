@@ -1,0 +1,3 @@
+# ExposesMetadataColumns
+
+`ExposesMetadataColumns` is...FIXME

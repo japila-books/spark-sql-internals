@@ -1,14 +1,19 @@
 # V2WriteCommand Logical Commands
 
-`V2WriteCommand` is an [extension](#contract) of the [Command](Command.md) abstraction for [logical commands](#implementations) that write [data](#query) to [tables](#table).
+`V2WriteCommand` is an [extension](#contract) of the [UnaryCommand](Command.md) abstraction for [unary logical commands](#implementations) that write [data](#query) out to [tables](#table).
 
 ## Contract
 
-### <span id="isByName"> isByName Flag
+### <span id="isByName"> isByName
 
 ```scala
 isByName: Boolean
 ```
+
+Always disabled (`false`):
+
+* [ReplaceData](ReplaceData.md#isByName)
+* [WriteDelta](WriteDelta.md#isByName)
 
 Used when:
 
@@ -20,7 +25,7 @@ Used when:
 query: LogicalPlan
 ```
 
-[LogicalPlan](LogicalPlan.md) for the data to write out
+[LogicalPlan](LogicalPlan.md) of the data to be written out
 
 ### <span id="table"> Table
 
@@ -28,7 +33,7 @@ query: LogicalPlan
 table: NamedRelation
 ```
 
-[NamedRelation](NamedRelation.md) of the table
+[NamedRelation](NamedRelation.md) of the table to write data to
 
 ### <span id="withNewQuery"> withNewQuery
 
@@ -37,15 +42,25 @@ withNewQuery(
   newQuery: LogicalPlan): V2WriteCommand
 ```
 
-### <span id="withNewQuery"> withNewQuery
+Used when:
+
+* [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical analysis rule is executed
+
+### <span id="withNewTable"> withNewTable
 
 ```scala
 withNewTable(
   newTable: NamedRelation): V2WriteCommand
 ```
 
+Used when:
+
+* [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical analysis rule is executed
+* [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical analysis rule is executed
+
 ## Implementations
 
 * [AppendData](AppendData.md)
 * [OverwriteByExpression](OverwriteByExpression.md)
 * [OverwritePartitionsDynamic](OverwritePartitionsDynamic.md)
+* [RowLevelWrite](RowLevelWrite.md)

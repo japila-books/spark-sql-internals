@@ -326,6 +326,7 @@ nav:
       - Except: logical-operators/Except.md
       - Expand: logical-operators/Expand.md
       - ExplainCommand: logical-operators/ExplainCommand.md
+      - ExposesMetadataColumns: logical-operators/ExposesMetadataColumns.md
       - ExternalRDD: logical-operators/ExternalRDD.md
       - FlatMapGroupsWithState: logical-operators/FlatMapGroupsWithState.md
       - Generate: logical-operators/Generate.md
@@ -378,6 +379,7 @@ nav:
       - TruncateTableCommand: logical-operators/TruncateTableCommand.md
       - UnresolvedHaving: logical-operators/UnresolvedHaving.md
       - UnresolvedHint: logical-operators/UnresolvedHint.md
+      - UnresolvedRelation: logical-operators/UnresolvedRelation.md
       - UnresolvedTable: logical-operators/UnresolvedTable.md
       - UnresolvedTableOrView: logical-operators/UnresolvedTableOrView.md
       - UnresolvedTableValuedFunction: logical-operators/UnresolvedTableValuedFunction.md
@@ -389,6 +391,7 @@ nav:
       - Window: logical-operators/Window.md
       - WithCTE: logical-operators/WithCTE.md
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md
+      - WriteDelta: logical-operators/WriteDelta.md
     - SparkSession Registries:
       - Catalog:
         - Catalog: Catalog.md
