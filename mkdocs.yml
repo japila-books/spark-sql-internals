@@ -211,6 +211,8 @@ nav:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Logging: spark-logging.md
+    - Metadata Columns:
+      - metadata-columns/index.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
     - Statistics: new-and-noteworthy/statistics.md
@@ -222,7 +224,6 @@ nav:
       - OffHeapColumnVector: vectorized-decoding/OffHeapColumnVector.md
       - OnHeapColumnVector: vectorized-decoding/OnHeapColumnVector.md
       - WritableColumnVector: vectorized-decoding/WritableColumnVector.md
-    - Metadata Columns: new-and-noteworthy/metadata-columns.md
     - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - ANSI Intervals: new-and-noteworthy/intervals.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
@@ -326,7 +327,7 @@ nav:
       - Except: logical-operators/Except.md
       - Expand: logical-operators/Expand.md
       - ExplainCommand: logical-operators/ExplainCommand.md
-      - ExposesMetadataColumns: logical-operators/ExposesMetadataColumns.md
+      - logical-operators/ExposesMetadataColumns.md
       - ExternalRDD: logical-operators/ExternalRDD.md
       - FlatMapGroupsWithState: logical-operators/FlatMapGroupsWithState.md
       - Generate: logical-operators/Generate.md

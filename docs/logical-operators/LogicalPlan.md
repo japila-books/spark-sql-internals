@@ -181,16 +181,67 @@ resolved: Boolean
 ??? note "Lazy Value"
     `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
 
-## <span id="metadataOutput"> Metadata Output Attributes
+## Metadata Output Attributes { #metadataOutput }
 
 ```scala
 metadataOutput: Seq[Attribute]
 ```
 
-`metadataOutput` requests the [children](#children) for the `metadataOutput` (recursively).
+`metadataOutput` requests the [children](#children) for the metadata output attributes (recursively).
 
-is used when:
+!!! note
+    `metadataOutput` should be overridden if this operators does not propagate its children's output.
 
-* `SubqueryAlias` is requested for the [metadataOutput](SubqueryAlias.md#metadataOutput)
-* `LogicalPlan` is requested for the [childAttributes](#childAttributes)
-* `DataSourceV2Relation` is requested to [include metadata columns](DataSourceV2Relation.md#withMetadataColumns)
+See:
+
+* [DataSourceV2Relation](DataSourceV2Relation.md#metadataOutput)
+* [Join](Join.md#metadataOutput)
+* [LogicalRelation](LogicalRelation.md#metadataOutput)
+* [Project](Project.md#metadataOutput)
+* [SubqueryAlias](SubqueryAlias.md#metadataOutput)
+
+---
+
+`metadataOutput` is used when:
+
+* [AddMetadataColumns](../logical-analysis-rules/AddMetadataColumns.md) logical resolution rule is executed
+* `UnresolvedStar` expression is requested to [expand](../expressions/UnresolvedStar.md#expand)
+* `LogicalPlan` is requested for the [child metadata output attributes](#childMetadataAttributes) and [outputMetadataAttributes](#outputMetadataAttributes)
+
+### childMetadataAttributes { #childMetadataAttributes }
+
+```scala
+childMetadataAttributes: AttributeSeq
+```
+
+`childMetadataAttributes` is an [AttributeSeq](../expressions/AttributeSeq.md) of the (non-empty) [metadataOutput](#metadataOutput)s of the [children](../catalyst/TreeNode.md#children) of this operator.
+
+??? note "Lazy Value"
+    `childMetadataAttributes` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+---
+
+`childMetadataAttributes` is used when:
+
+* `LogicalPlan` is requested to [resolveChildren](#resolveChildren)
+
+### outputMetadataAttributes { #outputMetadataAttributes }
+
+```scala
+outputMetadataAttributes: AttributeSeq
+```
+
+`outputMetadataAttributes` is an [AttributeSeq](../expressions/AttributeSeq.md) of the [metadataOutput](#metadataOutput) of this operator.
+
+??? note "Lazy Value"
+    `outputMetadataAttributes` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+---
+
+`outputMetadataAttributes` is used when:
+
+* `LogicalPlan` is requested to [resolve](#resolve)

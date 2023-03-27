@@ -1,6 +1,6 @@
 # MetadataColumn
 
-`MetadataColumn` is an [abstraction](#contract) of [metadata columns](../new-and-noteworthy/metadata-columns.md) that can expose additional metadata about a row.
+`MetadataColumn` is an [abstraction](#contract) of [metadata columns](../metadata-columns/index.md) that can expose additional metadata about a row.
 
 ## Contract
 
