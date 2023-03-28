@@ -106,6 +106,10 @@ extra:
     pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
+  grpc:
+    version: 1.47.0
+    docs: https://grpc.io/docs/languages/java/
+    api: https://grpc.github.io/grpc-java/javadoc
   hadoop:
     version: 3.3.4
     docs: https://hadoop.apache.org/docs/r3.3.4

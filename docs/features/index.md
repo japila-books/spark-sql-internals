@@ -11,6 +11,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
 * [File-Based Data Scanning](../file-based-data-scanning/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
+* [Spark Connect](../connect/index.md) :material-new-box:{ title="New in 3.4.0" }
 * [Table-Valued Functions](../table-valued-functions/index.md) :material-new-box:{ title="New in 3.4.0" }
 * [Variable Substitution](../variable-substitution.md)
 * [Vectorized Parquet Decoding (Reader)](../vectorized-decoding/index.md)

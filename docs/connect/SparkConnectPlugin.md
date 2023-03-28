@@ -1,0 +1,3 @@
+# SparkConnectPlugin
+
+`SparkConnectPlugin` is...FIXME
