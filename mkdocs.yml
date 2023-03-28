@@ -219,6 +219,9 @@ nav:
       - metadata-columns/index.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
+    # Spark Connect section uses awesome-pages plugin
+    # Review connect/.pages for setup
+    - ... | connect/**.md
     - Statistics: new-and-noteworthy/statistics.md
     - Table-Valued Functions:
       - table-valued-functions/index.md

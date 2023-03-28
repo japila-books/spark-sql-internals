@@ -14,6 +14,7 @@
 * [LogicalQueryStage](../logical-operators/LogicalQueryStage.md)
 * [LogicalRDD](LogicalRDD.md)
 * [LogicalRelation](LogicalRelation.md)
+* [UnresolvedRelation](UnresolvedRelation.md)
 * _others_
 
 ## <span id="children"> Children

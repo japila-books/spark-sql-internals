@@ -12,6 +12,12 @@ name: String
 
 Name of this relation
 
+See:
+
+* [DataSourceV2Relation](DataSourceV2Relation.md#name)
+* [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md#name)
+* [UnresolvedRelation](UnresolvedRelation.md#name)
+
 ### <span id="skipSchemaResolution"> skipSchemaResolution
 
 ```scala
