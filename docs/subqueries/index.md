@@ -14,7 +14,7 @@ There are the following kinds of subqueries:
 Every subquery can also be *correlated* or *uncorrelated*.
 
 [[scalar-subquery]]
-A *scalar subquery* is a structured query that returns a single row and a single column only. Spark SQL uses [ScalarSubquery (SubqueryExpression)](expressions/ScalarSubquery.md) expression to represent scalar subqueries (while sql/AstBuilder.md#visitSubqueryExpression[parsing a SQL statement]).
+A *scalar subquery* is a structured query that returns a single row and a single column only. Spark SQL uses [ScalarSubquery (SubqueryExpression)](../expressions/ScalarSubquery.md) expression to represent scalar subqueries (while sql/AstBuilder.md#visitSubqueryExpression[parsing a SQL statement]).
 
 [source, scala]
 ----
@@ -30,12 +30,12 @@ A `ScalarSubquery` expression appears as *scalar-subquery#[exprId] [conditionStr
 
 It is said that scalar subqueries should be used very rarely if at all and you should join instead.
 
-Spark Analyzer uses [ResolveSubquery](logical-analysis-rules/ResolveSubquery.md) resolution rule to [resolve subqueries](logical-analysis-rules/ResolveSubquery.md#resolveSubQueries) and at the end CheckAnalysis.md#checkSubqueryExpression[makes sure that they are valid].
+Spark Analyzer uses [ResolveSubquery](../logical-analysis-rules/ResolveSubquery.md) resolution rule to [resolve subqueries](../logical-analysis-rules/ResolveSubquery.md#resolveSubQueries) and at the end CheckAnalysis.md#checkSubqueryExpression[makes sure that they are valid].
 
 Catalyst Optimizer uses the following optimizations for subqueries:
 
 * PullupCorrelatedPredicates.md[PullupCorrelatedPredicates] optimization to PullupCorrelatedPredicates.md#rewriteSubQueries[rewrite subqueries] and pull up correlated predicates
 
-* [RewriteCorrelatedScalarSubquery](logical-optimizations/RewriteCorrelatedScalarSubquery.md) optimization (to [constructLeftJoins](logical-optimizations/RewriteCorrelatedScalarSubquery.md#constructLeftJoins))
+* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md) optimization (to [constructLeftJoins](../logical-optimizations/RewriteCorrelatedScalarSubquery.md#constructLeftJoins))
 
-Spark Physical Optimizer uses [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization to plan queries with scalar subqueries.
+Spark Physical Optimizer uses [PlanSubqueries](../physical-optimizations/PlanSubqueries.md) physical optimization to plan queries with scalar subqueries.

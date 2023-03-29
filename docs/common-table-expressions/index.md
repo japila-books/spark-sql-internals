@@ -1,6 +1,6 @@
 # Common Table Expressions
 
-**Common Table Expressions** (_CTEs_) are defined using the [WITH](sql/AstBuilder.md#withCTE) clause:
+**Common Table Expressions** (_CTEs_) are defined using the [WITH](../sql/AstBuilder.md#withCTE) clause:
 
 ```text
 WITH namedQuery (',' namedQuery)*

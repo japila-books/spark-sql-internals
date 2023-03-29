@@ -642,7 +642,7 @@ Creates one of the following logical operators:
 
 ### <span id="withCTE"> withCTE
 
-Creates an [UnresolvedWith](../logical-operators/UnresolvedWith.md) logical operator for [Common Table Expressions](../common-table-expressions.md) (in [visitQuery](#visitQuery) and [visitDmlStatement](#visitDmlStatement))
+Creates an [UnresolvedWith](../logical-operators/UnresolvedWith.md) logical operator for [Common Table Expressions](../common-table-expressions/index.md) (in [visitQuery](#visitQuery) and [visitDmlStatement](#visitDmlStatement))
 
 ```text
 WITH namedQuery (',' namedQuery)*

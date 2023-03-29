@@ -183,11 +183,8 @@ nav:
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Columnar Execution:
       - columnar-execution/index.md
-    - Common Table Expressions: common-table-expressions.md
+    - ... | common-table-expressions/**.md
     - Configuration Properties: configuration-properties.md
-    # "Connector API" section uses awesome-pages plugin
-    # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
-    # Review connector/.pages for setup
     - ... | connector/**.md
     # FIXME No idea how to include a subdirectory (connector/expressions)
     #       to be under Connector API using awesome-pages
@@ -212,9 +209,8 @@ nav:
       - dynamic-partition-pruning/index.md
     - File-Based Data Scanning:
       - file-based-data-scanning/index.md
-    - Generated Columns:
-      - generated-columns/index.md
-      - generated-columns/GeneratedColumn.md
+    - ... | generated-columns/**.md
+    - ... | hints/**.md
     - Join Queries:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
@@ -226,8 +222,8 @@ nav:
     - ... | connect/**.md
     - ... | thrift-server/**.md
     - Statistics: new-and-noteworthy/statistics.md
-    - Table-Valued Functions:
-      - table-valued-functions/index.md
+    - ... | subqueries/**.md
+    - ... | table-valued-functions/**.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
       - ColumnVector: vectorized-decoding/ColumnVector.md
@@ -238,7 +234,6 @@ nav:
     - ANSI Intervals: new-and-noteworthy/intervals.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
-    - ... | hints/**.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Hive Integration: hive-integration.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
@@ -260,7 +255,6 @@ nav:
       - Subexpression Elimination:
         - Subexpression Elimination: subexpression-elimination.md
         - EquivalentExpressions: EquivalentExpressions.md
-    - Subqueries: spark-sql-subqueries.md
     - Catalyst DSL:
       - catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
@@ -804,7 +798,11 @@ nav:
       - UnsafeRow: UnsafeRow.md
       - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
     - RDDs:
+      - DataSourceRDD: DataSourceRDD.md
+      - DataSourceRDDPartition: DataSourceRDDPartition.md
       - FileScanRDD: rdds/FileScanRDD.md
+      - ShuffledRowRDD: ShuffledRowRDD.md
+      - SQLExecutionRDD: SQLExecutionRDD.md
   - SQL:
     - sql/index.md
     - AbstractSqlParser: sql/AbstractSqlParser.md
@@ -1007,9 +1005,6 @@ nav:
     - IntervalUtils: IntervalUtils.md
     - ExplainUtils: ExplainUtils.md
     - SerializerBuildHelper: SerializerBuildHelper.md
-    - SQLExecutionRDD: SQLExecutionRDD.md
-    - DataSourceRDD: DataSourceRDD.md
-    - DataSourceRDDPartition: DataSourceRDDPartition.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
     - Implicits: implicits.md
@@ -1047,7 +1042,6 @@ nav:
       - Debugging Query Execution: debugging-query-execution.md
       - Performance Tuning: spark-sql-performance-tuning.md
       - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
-    - ShuffledRowRDD: ShuffledRowRDD.md
     - CheckAnalysis: CheckAnalysis.md
     - CatalystTypeConverters: CatalystTypeConverters.md
     - SubExprUtils: SubExprUtils.md
