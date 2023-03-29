@@ -52,10 +52,6 @@ Quoting [Apache Drill](https://drill.apache.org/) which applies to Spark SQL per
 
 Spark SQL supports [predicate pushdown](logical-optimizations/PushDownPredicate.md) to optimize query performance and can also [generate optimized code at runtime](catalyst/Optimizer.md).
 
-## Hint Framework
-
-As of Spark SQL 2.2, structured queries can be further optimized using [Hint Framework](new-and-noteworthy/hint-framework.md).
-
 ## Spark SQL Paper
 
 Quoting [Spark SQL: Relational Data Processing in Spark](http://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf) paper on Spark SQL:

@@ -8,10 +8,10 @@
 
 `HintInfo` is created when:
 
-* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](logical-analysis-rules/ResolveJoinStrategyHints.md#createHintInfo)
-* [ResolvedHint](logical-operators/ResolvedHint.md) logical operator is created
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](../logical-analysis-rules/ResolveJoinStrategyHints.md#createHintInfo)
+* [ResolvedHint](../logical-operators/ResolvedHint.md) logical operator is created
 * `HintInfo` is requested to [merge with another HintInfo](#merge)
-* [broadcast](functions/index.md#broadcast) standard function is used (on a `Dataset`)
+* [broadcast](../functions/index.md#broadcast) standard function is used (on a `Dataset`)
 
 ## <span id="toString"> Text Representation
 
@@ -39,5 +39,5 @@ merge(
 
 `merge` is used when:
 
-* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](logical-analysis-rules/ResolveJoinStrategyHints.md#applyJoinStrategyHint)
-* [EliminateResolvedHint](logical-optimizations/EliminateResolvedHint.md) logical optimization is [executed](logical-optimizations/EliminateResolvedHint.md#mergeHints)
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](../logical-analysis-rules/ResolveJoinStrategyHints.md#applyJoinStrategyHint)
+* [EliminateResolvedHint](../logical-optimizations/EliminateResolvedHint.md) logical optimization is [executed](../logical-optimizations/EliminateResolvedHint.md#mergeHints)

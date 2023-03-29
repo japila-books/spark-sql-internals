@@ -7,7 +7,7 @@
 `ResolvedHint` takes the following to be created:
 
 * <span id="child"> Child [LogicalPlan](LogicalPlan.md)
-* <span id="hints"> [HintInfo](../HintInfo.md)
+* <span id="hints"> [HintInfo](../hints/HintInfo.md)
 
 `ResolvedHint` is created when:
 

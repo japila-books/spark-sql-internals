@@ -44,7 +44,7 @@ builtinHiveVersion: String = "1.2.1"
 
 * [spark.sql.hive.metastore.version](configuration-properties.md#spark.sql.hive.metastore.version) configuration property is used
 * `HiveUtils` utility is used to [newClientForExecution](#newClientForExecution) and [newClientForMetadata](#newClientForMetadata)
-* [Spark Thrift Server](../thrift-server/spark-sql-thrift-server.md) is used
+* [Spark Thrift Server](../thrift-server/index.md) is used
 
 === [[newClientForMetadata]] Creating HiveClientImpl -- `newClientForMetadata` Method
 
@@ -95,7 +95,7 @@ newClientForExecution(
 
 `newClientForExecution`...FIXME
 
-`newClientForExecution` is used for [HiveThriftServer2](../thrift-server/spark-sql-thrift-server.md).
+`newClientForExecution` is used for [HiveThriftServer2](../thrift-server/index.md).
 
 === [[inferSchema]] `inferSchema` Method
 

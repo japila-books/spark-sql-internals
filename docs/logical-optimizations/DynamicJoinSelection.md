@@ -1,6 +1,6 @@
 # DynamicJoinSelection Adaptive Logical Optimization
 
-`DynamicJoinSelection` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) to [transform Join logical operators](#apply) with [JoinHint](../JoinHint.md)s.
+`DynamicJoinSelection` is a logical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) to [transform Join logical operators](#apply) with [JoinHint](../hints/JoinHint.md)s.
 
 `DynamicJoinSelection` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -21,11 +21,11 @@ apply(
 
 `apply` traverses the given [LogicalPlan](../logical-operators/LogicalPlan.md) down (the tree) and rewrites [Join](../logical-operators/Join.md) logical operators as follows:
 
-1. If there is no [JoinStrategyHint](../JoinStrategyHint.md) defined for the [left side](../JoinHint.md#leftHint), `apply` [selects the JoinStrategy](#selectJoinStrategy) for the left operator.
+1. If there is no [JoinStrategyHint](../hints/JoinStrategyHint.md) defined for the [left side](../hints/JoinHint.md#leftHint), `apply` [selects the JoinStrategy](#selectJoinStrategy) for the left operator.
 
-1. If there is no [JoinStrategyHint](../JoinStrategyHint.md) defined for the [right side](../JoinHint.md#rightHint), `apply` [selects the JoinStrategy](#selectJoinStrategy) for the right operator.
+1. If there is no [JoinStrategyHint](../hints/JoinStrategyHint.md) defined for the [right side](../hints/JoinHint.md#rightHint), `apply` [selects the JoinStrategy](#selectJoinStrategy) for the right operator.
 
-1. `apply` associates the new [JoinHint](../JoinHint.md) with the `Join` logical operator
+1. `apply` associates the new [JoinHint](../hints/JoinHint.md) with the `Join` logical operator
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
@@ -38,13 +38,13 @@ selectJoinStrategy(
 
 `selectJoinStrategy` works only with [LogicalQueryStage](../logical-operators/LogicalQueryStage.md)s of [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md)s that are [materialized](../physical-operators/QueryStageExec.md#isMaterialized) and have [mapStats](../physical-operators/ShuffleQueryStageExec.md#mapStats) defined (and returns `None` otherwise).
 
-`selectJoinStrategy` selects a [JoinStrategyHint](../JoinStrategyHint.md) based on [shouldDemoteBroadcastHashJoin](#shouldDemoteBroadcastHashJoin) and [preferShuffledHashJoin](#preferShuffledHashJoin) with the [mapStats](../physical-operators/ShuffleQueryStageExec.md#mapStats).
+`selectJoinStrategy` selects a [JoinStrategyHint](../hints/JoinStrategyHint.md) based on [shouldDemoteBroadcastHashJoin](#shouldDemoteBroadcastHashJoin) and [preferShuffledHashJoin](#preferShuffledHashJoin) with the [mapStats](../physical-operators/ShuffleQueryStageExec.md#mapStats).
 
 demoteBroadcastHash | preferShuffleHash | JoinStrategyHint
 --------------------|-------------------|-----------------
- `true`             | `true`            | [SHUFFLE_HASH](../JoinStrategyHint.md#SHUFFLE_HASH)
- `true`             | `false`           | [NO_BROADCAST_HASH](../JoinStrategyHint.md#NO_BROADCAST_HASH)
- `false`            | `true`            | [PREFER_SHUFFLE_HASH](../JoinStrategyHint.md#PREFER_SHUFFLE_HASH)
+ `true`             | `true`            | [SHUFFLE_HASH](../hints/JoinStrategyHint.md#SHUFFLE_HASH)
+ `true`             | `false`           | [NO_BROADCAST_HASH](../hints/JoinStrategyHint.md#NO_BROADCAST_HASH)
+ `false`            | `true`            | [PREFER_SHUFFLE_HASH](../hints/JoinStrategyHint.md#PREFER_SHUFFLE_HASH)
  `false`            | `false`           | `None` (undefined)
 
 ### <span id="preferShuffledHashJoin"> preferShuffledHashJoin

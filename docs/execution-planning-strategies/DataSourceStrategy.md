@@ -147,8 +147,6 @@ toCatalystRDD(
 
 `toCatalystRDD` branches off per the [needConversion](../BaseRelation.md#needConversion) flag of the [BaseRelation](../logical-operators/LogicalRelation.md#relation) of the input [LogicalRelation](../logical-operators/LogicalRelation.md):
 
-* when `true`, `toCatalystRDD` [converts the objects inside Rows to Catalyst types](../spark-sql-RDDConversions.md#rowToRowRdd).
-
 * otherwise, `toCatalystRDD` casts the input `RDD[Row]` to an `RDD[InternalRow]` (using Java's `asInstanceOf` operator)
 
 `toCatalystRDD` is used when `DataSourceStrategy` execution planning strategy is [executed](#apply) (for all kinds of [BaseRelations](#selection-requirements)).

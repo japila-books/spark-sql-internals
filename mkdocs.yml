@@ -223,9 +223,8 @@ nav:
       - metadata-columns/index.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
-    # Spark Connect section uses awesome-pages plugin
-    # Review connect/.pages for setup
     - ... | connect/**.md
+    - ... | thrift-server/**.md
     - Statistics: new-and-noteworthy/statistics.md
     - Table-Valued Functions:
       - table-valued-functions/index.md
@@ -239,12 +238,7 @@ nav:
     - ANSI Intervals: new-and-noteworthy/intervals.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
-    - Hints:
-      - Hint Framework: new-and-noteworthy/hint-framework.md
-      - JoinHint: JoinHint.md
-      - HintInfo: HintInfo.md
-      - Join Strategy Hints: new-and-noteworthy/join-strategy-hints.md
-      - HintErrorHandler: HintErrorHandler.md
+    - ... | hints/**.md
     - Observable Metrics: new-and-noteworthy/observable-metrics.md
     - Hive Integration: hive-integration.md
     - Dynamic Partition Inserts: dynamic-partition-inserts.md
@@ -739,6 +733,7 @@ nav:
       - PruneFilters: logical-optimizations/PruneFilters.md
       - PruneHiveTablePartitions: logical-optimizations/PruneHiveTablePartitions.md
       - PullupCorrelatedPredicates: logical-optimizations/PullupCorrelatedPredicates.md
+      - logical-optimizations/PushDownLeftSemiAntiJoin.md
       - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
       - PushDownPredicate: logical-optimizations/PushDownPredicate.md
       - PushDownPredicates: logical-optimizations/PushDownPredicates.md
@@ -1005,6 +1000,7 @@ nav:
     - Bloom Filter:
       - BloomFilter: BloomFilter.md
       - BloomFilterImpl: BloomFilterImpl.md
+    - JoinSelectionHelper.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md
     - BindReferences: BindReferences.md
@@ -1051,10 +1047,6 @@ nav:
       - Debugging Query Execution: debugging-query-execution.md
       - Performance Tuning: spark-sql-performance-tuning.md
       - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
-    - Spark Thrift Server:
-      - thrift-server/spark-sql-thrift-server.md
-      - thrift-server/spark-sql-thriftserver-SparkSQLEnv.md
-    - RDDConversions: spark-sql-RDDConversions.md
     - ShuffledRowRDD: ShuffledRowRDD.md
     - CheckAnalysis: CheckAnalysis.md
     - CatalystTypeConverters: CatalystTypeConverters.md
@@ -1068,4 +1060,3 @@ nav:
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
     - CompressionCodecs: CompressionCodecs.md
-    - JoinStrategyHint: JoinStrategyHint.md

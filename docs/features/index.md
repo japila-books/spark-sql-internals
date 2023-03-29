@@ -10,6 +10,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Default Columns](../default-columns/index.md) :material-new-box:{ title="New in 3.4.0" }
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
 * [File-Based Data Scanning](../file-based-data-scanning/index.md)
+* [Hints](../hints/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
 * [Spark Connect](../connect/index.md) :material-new-box:{ title="New in 3.4.0" }
 * [Table-Valued Functions](../table-valued-functions/index.md) :material-new-box:{ title="New in 3.4.0" }

@@ -17,13 +17,13 @@ apply(
 
 `apply` transforms [Join](../logical-operators/Join.md) logical operators with no hints defined in the given [LogicalPlan](../logical-operators/LogicalPlan.md):
 
-1. [Extracts hints](#extractHintsFromPlan) from the [left](../logical-operators/Join.md#left) and [right](../logical-operators/Join.md#right) sides of the join (that gives new operators and [JoinHint](../JoinHint.md)s for either side)
+1. [Extracts hints](#extractHintsFromPlan) from the [left](../logical-operators/Join.md#left) and [right](../logical-operators/Join.md#right) sides of the join (that gives new operators and [JoinHint](../hints/JoinHint.md)s for either side)
 
-1. Creates a new [JoinHint](../JoinHint.md) with the [hints merged](#mergeHints) for the left and right sides
+1. Creates a new [JoinHint](../hints/JoinHint.md) with the [hints merged](#mergeHints) for the left and right sides
 
 1. Creates a new [Join](../logical-operators/Join.md) logical operator with the new left and right operators and the new `JoinHint`
 
-In the end, `apply` finds [ResolvedHint](../logical-operators/ResolvedHint.md)s and, if found, requests the [HintErrorHandler](#hintErrorHandler) to [joinNotFoundForJoinHint](../HintErrorHandler.md#joinNotFoundForJoinHint) and ignores the hint (returns the child of the `ResolvedHint`).
+In the end, `apply` finds [ResolvedHint](../logical-operators/ResolvedHint.md)s and, if found, requests the [HintErrorHandler](#hintErrorHandler) to [joinNotFoundForJoinHint](../hints/HintErrorHandler.md#joinNotFoundForJoinHint) and ignores the hint (returns the child of the `ResolvedHint`).
 
 ## <span id="hintErrorHandler"> HintErrorHandler
 
@@ -31,7 +31,7 @@ In the end, `apply` finds [ResolvedHint](../logical-operators/ResolvedHint.md)s 
 hintErrorHandler: HintErrorHandler
 ```
 
-`hintErrorHandler` is the default `HintErrorHandler`.
+`hintErrorHandler` is the default [HintErrorHandler](../hints/HintErrorHandler.md).
 
 ## <span id="extractHintsFromPlan"> Extracting Hints from Logical Plan
 
@@ -42,7 +42,7 @@ extractHintsFromPlan(
 
 `extractHintsFromPlan` collects (_extracts_) [HintInfo](../logical-operators/ResolvedHint.md#hints)s from the [ResolvedHint](../logical-operators/ResolvedHint.md) unary logical operators in the given [LogicalPlan](../logical-operators/LogicalPlan.md) and gives:
 
-* [HintInfo](../HintInfo.md)s
+* [HintInfo](../hints/HintInfo.md)s
 * Transformed plan with [ResolvedHint](../logical-operators/ResolvedHint.md) nodes removed
 
 While collecting, `extractHintsFromPlan` removes the [ResolvedHint](../logical-operators/ResolvedHint.md) unary logical operators.
@@ -65,6 +65,8 @@ mergeHints(
 `mergeHints`...FIXME
 
 ## Demo
+
+### Logical Query Plan
 
 Create a logical plan using [Catalyst DSL](../catalyst-dsl/index.md).
 
@@ -89,7 +91,7 @@ scala> println(logical.numberedTreeString)
 04    +- LocalRelation <empty>, [id#2L, age#3]
 ```
 
-Analyze the plan.
+### Analyze Plan
 
 ```scala
 val analyzed = logical.analyze
@@ -103,6 +105,8 @@ scala> println(analyzed.numberedTreeString)
 03 +- ResolvedHint (strategy=merge)
 04    +- LocalRelation <empty>, [id#2L, age#3]
 ```
+
+### Optimize Plan
 
 Optimize the plan (using `EliminateResolvedHint` only).
 

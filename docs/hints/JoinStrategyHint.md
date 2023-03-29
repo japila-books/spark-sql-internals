@@ -11,7 +11,7 @@ JoinStrategyHint     | displayName          | hintAliases
 <span id="SHUFFLE_MERGE"> SHUFFLE_MERGE               | merge                | <ul><li>SHUFFLE_MERGE</li><li>MERGE</li><li>MERGEJOIN</li></ul>
 <span id="SHUFFLE_REPLICATE_NL"> SHUFFLE_REPLICATE_NL | shuffle_replicate_nl | <ul><li>SHUFFLE_REPLICATE_NL</li></ul>
 
-`JoinStrategyHint` is resolved using [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule.
+`JoinStrategyHint` is resolved using [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule.
 
 ??? note "sealed abstract class"
     `JoinStrategyHint` is a Scala sealed abstract class which means that all possible implementations (`JoinStrategyHint`s) are all in the same compilation unit (file).
@@ -32,11 +32,11 @@ hintAliases: Set[String]
 
 Used when:
 
-* [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is executed
+* [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is executed
 
 ## <span id="strategies"> JoinStrategyHints
 
-`JoinStrategyHint` defines `strategies` collection of `JoinStrategyHint`s for [ResolveJoinStrategyHints](logical-analysis-rules/ResolveJoinStrategyHints.md#STRATEGY_HINT_NAMES) logical resolution rule:
+`JoinStrategyHint` defines `strategies` collection of `JoinStrategyHint`s for [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md#STRATEGY_HINT_NAMES) logical resolution rule:
 
 * [BROADCAST](#BROADCAST)
 * [SHUFFLE_MERGE](#SHUFFLE_MERGE)

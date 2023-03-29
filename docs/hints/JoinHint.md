@@ -1,6 +1,6 @@
 # JoinHint
 
-`JoinHint` holds the [hints](HintInfo.md) of the [left](#leftHint) and [right](#rightHint) sides of a [Join](logical-operators/Join.md#hint) logical operator.
+`JoinHint` holds the [hints](HintInfo.md) of the [left](#leftHint) and [right](#rightHint) sides of a [Join](../logical-operators/Join.md#hint) logical operator.
 
 ## Creating Instance
 
@@ -11,7 +11,7 @@
 
 `JoinHint` is created when:
 
-* [EliminateResolvedHint](logical-optimizations/EliminateResolvedHint.md) logical optimization is executed (on [Join](logical-operators/Join.md) logical operators with no hint associated explicitly)
+* [EliminateResolvedHint](../logical-optimizations/EliminateResolvedHint.md) logical optimization is executed (on [Join](../logical-operators/Join.md) logical operators with no hint associated explicitly)
 
 ## <span id="toString"> Text Representation
 

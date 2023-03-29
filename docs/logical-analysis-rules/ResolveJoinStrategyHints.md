@@ -1,6 +1,6 @@
 # ResolveJoinStrategyHints Logical Resolution Rule
 
-`ResolveJoinStrategyHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with [JoinStrategyHint](../JoinStrategyHint.md)s.
+`ResolveJoinStrategyHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with [JoinStrategyHint](../hints/JoinStrategyHint.md)s.
 
 `ResolveJoinStrategyHints` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -18,7 +18,7 @@
 
 ## <span id="STRATEGY_HINT_NAMES"> Hint Names
 
-`ResolveJoinStrategyHints` takes the [hintAliases](../JoinStrategyHint.md#hintAliases) of the [strategies](../JoinStrategyHint.md#strategies) when [created](#creating-instance).
+`ResolveJoinStrategyHints` takes the [hintAliases](../hints/JoinStrategyHint.md#hintAliases) of the [strategies](../hints/JoinStrategyHint.md#strategies) when [created](#creating-instance).
 
 The hint aliases are the only hints (of [UnresolvedHint](../logical-operators/UnresolvedHint.md)s) that are going to be resolved when `ResolveJoinStrategyHints` is [executed](#apply).
 
@@ -35,7 +35,7 @@ apply(
 
 `apply` traverses the given [logical query plan](../logical-operators/LogicalPlan.md) to find [UnresolvedHint](../logical-operators/UnresolvedHint.md)s with names that are among the supported [hint names](#STRATEGY_HINT_NAMES).
 
-For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with a [HintInfo](../HintInfo.md) with the corresponding [JoinStrategyHint](../JoinStrategyHint.md)).
+For `UnresolvedHint`s with no parameters, `apply` creates a [ResolvedHint](../logical-operators/ResolvedHint.md) (with a [HintInfo](../hints/HintInfo.md) with the corresponding [JoinStrategyHint](../hints/JoinStrategyHint.md)).
 
 For `UnresolvedHint`s with parameters, `apply` accepts two types of parameters:
 

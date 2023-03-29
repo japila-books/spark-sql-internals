@@ -7,7 +7,7 @@
 ## Join Selection Priorities
 
 1. [Join Type](../joins.md#JoinType)
-1. [Hints](../JoinHint.md)
+1. [Hints](../hints/JoinHint.md)
 1. Size ([Cost-Based Optimization](../cost-based-optimization/index.md), [Statistics](../cost-based-optimization/Statistics.md))
 
 ## Join Selection Requirements

@@ -342,7 +342,7 @@ hint(
   parameters: Any*): Dataset[T]
 ```
 
-`hint` operator is part of [Hint Framework](new-and-noteworthy/hint-framework.md) to specify a **hint** (by `name` and `parameters`) for a `Dataset`.
+`hint` operator is part of [Hint Framework](hints/index.md) to specify a **hint** (by `name` and `parameters`) for a `Dataset`.
 
 Internally, `hint` simply attaches UnresolvedHint.md[UnresolvedHint] unary logical operator to an "analyzed" `Dataset` (i.e. the Dataset.md#logicalPlan[analyzed logical plan] of a `Dataset`).
 
