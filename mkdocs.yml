@@ -224,6 +224,7 @@ nav:
     - Statistics: new-and-noteworthy/statistics.md
     - ... | subqueries/**.md
     - ... | table-valued-functions/**.md
+    - ... | transactional-writes/**.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
       - ColumnVector: vectorized-decoding/ColumnVector.md
@@ -822,7 +823,8 @@ nav:
       - AvroFileFormat: avro/AvroFileFormat.md
       - CatalystDataToAvro: avro/CatalystDataToAvro.md
       - AvroDataToCatalyst: avro/AvroDataToCatalyst.md
-    - File-Based:
+    - Files:
+      - files/index.md
       - AggregatePushDownUtils: connectors/AggregatePushDownUtils.md
       - BasicWriteJobStatsTracker: connectors/BasicWriteJobStatsTracker.md
       - BasicWriteTaskStats: connectors/BasicWriteTaskStats.md
@@ -853,7 +855,6 @@ nav:
       - SharedInMemoryCache: connectors/SharedInMemoryCache.md
       - SchemaMergeUtils: connectors/SchemaMergeUtils.md
       - SingleDirectoryDataWriter: connectors/SingleDirectoryDataWriter.md
-      - SQLHadoopMapReduceCommitProtocol: connectors/SQLHadoopMapReduceCommitProtocol.md
       - WriteJobStatsTracker: connectors/WriteJobStatsTracker.md
       - WriteTaskStats: connectors/WriteTaskStats.md
     - Hive:

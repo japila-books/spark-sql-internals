@@ -599,7 +599,7 @@ Used when:
 
 Default: `true`
 
-## spark.sql.parquet
+## spark.sql.parquet { #spark.sql.parquet }
 
 ### <span id="spark.sql.parquet.aggregatePushdown"> aggregatePushdown
 
@@ -704,7 +704,9 @@ Used when:
 
 * `ParquetOptions` is created (and initializes [mergeSchema](parquet/ParquetOptions.md#mergeSchema) option)
 
-## <span id="spark.sql.sources.bucketing.enabled"> sources.bucketing.enabled
+## spark.sql.sources { #spark.sql.sources }
+
+### <span id="spark.sql.sources.bucketing.enabled"> bucketing.enabled
 
 **spark.sql.sources.bucketing.enabled**
 
@@ -715,6 +717,35 @@ Default: `true`
 When disabled (i.e. `false`), bucketed tables are considered regular (non-bucketed) tables.
 
 Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method for the current value
+
+### <span id="spark.sql.sources.commitProtocolClass"> commitProtocolClass
+
+**spark.sql.sources.commitProtocolClass**
+
+**(internal)** Fully-qualified class name of a `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol)) for [Transactional Writes](transactional-writes/index.md)
+
+Default: [SQLHadoopMapReduceCommitProtocol](transactional-writes/SQLHadoopMapReduceCommitProtocol.md)
+
+Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method for the current value
+
+Used when:
+
+* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
+* [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
+
+### <span id="spark.sql.sources.outputCommitterClass"><span id="OUTPUT_COMMITTER_CLASS"> outputCommitterClass
+
+**spark.sql.sources.outputCommitterClass**
+
+**(internal)** The fully-qualified class name of the user-defined Hadoop [OutputCommitter]({{ hadoop.api }}/org/apache/hadoop/mapreduce/OutputCommitter.html) for [SQLHadoopMapReduceCommitProtocol](transactional-writes/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
+
+Default: (undefined)
+
+Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to access the property
+
+!!! note
+    `ParquetUtils` uses [spark.sql.parquet.output.committer.class](#spark.sql.parquet.output.committer.class) or the default `ParquetOutputCommitter` instead.
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
@@ -1141,27 +1172,11 @@ Default: Java's `TimeZone.getDefault.getID`
 
 Use [SQLConf.sessionLocalTimeZone](SQLConf.md#sessionLocalTimeZone) method to access the current value.
 
-## <span id="spark.sql.sources.commitProtocolClass"> spark.sql.sources.commitProtocolClass
-
-**(internal)** Fully-qualified class name of the `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-
-Default: [SQLHadoopMapReduceCommitProtocol](connectors/SQLHadoopMapReduceCommitProtocol.md)
-
-Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method to access the current value.
-
 ## <span id="spark.sql.sources.ignoreDataLocality"> spark.sql.sources.ignoreDataLocality
 
 **(internal)** When `true`, Spark will not fetch the block locations for each file on listing files. This speeds up file listing, but the scheduler cannot schedule tasks to take advantage of data locality. It can be particularly useful if data is read from a remote cluster so the scheduler could never take advantage of locality anyway.
 
 Default: `false`
-
-## <span id="spark.sql.sources.outputCommitterClass"><span id="OUTPUT_COMMITTER_CLASS"> spark.sql.sources.outputCommitterClass
-
-**(internal)** The fully-qualified class name of the user-defined Hadoop [OutputCommitter]({{ hadoop.api }}/org/apache/hadoop/mapreduce/OutputCommitter.html) used by data sources
-
-Default: `undefined`
-
-Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to access the property
 
 ## <span id="spark.sql.sources.validatePartitionColumns"> spark.sql.sources.validatePartitionColumns
 

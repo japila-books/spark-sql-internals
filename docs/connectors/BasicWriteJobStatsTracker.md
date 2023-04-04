@@ -14,25 +14,31 @@
 
 * `DataWritingCommand` is requested for a [BasicWriteJobStatsTracker](../logical-operators/DataWritingCommand.md#basicWriteJobStatsTracker)
 * `FileWrite` is requested to [createWriteJobDescription](FileWrite.md#createWriteJobDescription)
-* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/file/FileStreamSink)) is requested for a `BasicWriteJobStatsTracker`
+* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSink)) is requested for a `BasicWriteJobStatsTracker`
 
 ## <span id="newTaskInstance"> Creating WriteTaskStatsTracker
 
-```scala
-newTaskInstance(): WriteTaskStatsTracker
-```
+??? note "WriteJobStatsTracker"
+
+    ```scala
+    newTaskInstance(): WriteTaskStatsTracker
+    ```
+
+    `newTaskInstance` is part of the [WriteJobStatsTracker](WriteJobStatsTracker.md#newTaskInstance) abstraction.
 
 `newTaskInstance` creates a new [BasicWriteTaskStatsTracker](#creating-instance) (with the [serializable Hadoop Configuration](#serializableHadoopConf) and the [taskCommitTimeMetric](#taskCommitTimeMetric)).
 
-`newTaskInstance` is part of the [WriteJobStatsTracker](WriteJobStatsTracker.md#newTaskInstance) abstraction.
-
 ## <span id="processStats"> Processing Write Job Statistics
 
-```scala
-processStats(
-  stats: Seq[WriteTaskStats],
-  jobCommitTime: Long): Unit
-```
+??? note "WriteJobStatsTracker"
+
+    ```scala
+    processStats(
+      stats: Seq[WriteTaskStats],
+      jobCommitTime: Long): Unit
+    ```
+
+    `processStats` is part of the [WriteJobStatsTracker](WriteJobStatsTracker.md#processStats) abstraction.
 
 `processStats` uses the given [BasicWriteTaskStats](BasicWriteTaskStats.md)es to set the following [driverSideMetrics](#driverSideMetrics):
 
@@ -45,7 +51,3 @@ processStats(
 `processStats` requests the active `SparkContext` for the [spark.sql.execution.id](../SQLExecution.md#EXECUTION_ID_KEY).
 
 In the end, `processStats` [posts the metric updates](../SQLMetric.md#postDriverMetricUpdates).
-
----
-
-`processStats` is part of the [WriteJobStatsTracker](WriteJobStatsTracker.md#processStats) abstraction.

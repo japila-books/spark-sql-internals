@@ -73,16 +73,24 @@ Corresponds to the number of times when [newPartition](../connectors/BasicWriteT
 
 `DataWritingCommand` is resolved to a [DataWritingCommandExec](../physical-operators/DataWritingCommandExec.md) physical operator by [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
 
-## <span id="basicWriteJobStatsTracker"> BasicWriteJobStatsTracker
+## BasicWriteJobStatsTracker { #basicWriteJobStatsTracker }
 
 ```scala
 basicWriteJobStatsTracker(
+  hadoopConf: Configuration): BasicWriteJobStatsTracker // (1)!
+basicWriteJobStatsTracker(
+  metrics: Map[String, SQLMetric],
   hadoopConf: Configuration): BasicWriteJobStatsTracker
 ```
 
+1. Uses the [metrics](#metrics)
+
 `basicWriteJobStatsTracker` creates a new [BasicWriteJobStatsTracker](../connectors/BasicWriteJobStatsTracker.md) (with the given Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html) and the [metrics](#metrics)).
+
+---
 
 `basicWriteJobStatsTracker` is used when:
 
+* `FileFormatWriter` is requested to [write data out](../connectors/FileFormatWriter.md#write)
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical command is executed
 * [SaveAsHiveFile](../hive/SaveAsHiveFile.md) logical command is executed (and requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile))

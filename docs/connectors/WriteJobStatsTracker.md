@@ -6,7 +6,7 @@
 
 ## Contract
 
-### <span id="newTaskInstance"> Creating WriteTaskStatsTracker
+### Creating WriteTaskStatsTracker { #newTaskInstance }
 
 ```scala
 newTaskInstance(): WriteTaskStatsTracker
@@ -14,17 +14,25 @@ newTaskInstance(): WriteTaskStatsTracker
 
 Creates a new [WriteTaskStatsTracker](WriteTaskStatsTracker.md)
 
+See:
+
+* [BasicWriteJobStatsTracker](BasicWriteJobStatsTracker.md#newTaskInstance)
+
 Used when:
 
 * `FileFormatDataWriter` is [created](FileFormatDataWriter.md#statsTrackers)
 
-### <span id="processStats"> Processing Write Job Statistics
+### Processing Write Job Statistics { #processStats }
 
 ```scala
 processStats(
   stats: Seq[WriteTaskStats],
   jobCommitTime: Long): Unit
 ```
+
+See:
+
+* [BasicWriteJobStatsTracker](BasicWriteJobStatsTracker.md#processStats)
 
 Used when:
 

@@ -437,12 +437,6 @@ Used when [ShuffledRowRDD](ShuffledRowRDD.md) is created
 
 [spark.sql.sources.commitProtocolClass](configuration-properties.md#spark.sql.sources.commitProtocolClass)
 
-Used when:
-
-* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
-* `InsertIntoHadoopFsRelationCommand` logical command is [executed](logical-operators/InsertIntoHadoopFsRelationCommand.md#run)
-* `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
-
 ## <span id="fileCompressionFactor"><span id="FILE_COMPRESSION_FACTOR"> fileCompressionFactor
 
 The value of [spark.sql.sources.fileCompressionFactor](configuration-properties.md#spark.sql.sources.fileCompressionFactor) configuration property
@@ -771,7 +765,7 @@ Used when:
 
 Used when:
 
-* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](connectors/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
+* `SQLHadoopMapReduceCommitProtocol` is requested to [setupCommitter](transactional-writes/SQLHadoopMapReduceCommitProtocol.md#setupCommitter)
 * `ParquetFileFormat` is requested to [prepareWrite](parquet/ParquetFileFormat.md#prepareWrite)
 * `ParquetWrite` is requested to [prepareWrite](parquet/ParquetWrite.md#prepareWrite)
 
