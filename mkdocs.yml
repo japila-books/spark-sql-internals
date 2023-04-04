@@ -140,8 +140,8 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 3.4.0-rc4
-    github: https://github.com/apache/spark/tree/v3.4.0-rc4
+    version: 3.4.0-rc5
+    github: https://github.com/apache/spark/tree/v3.4.0-rc5
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/#tag-icons-and-identifiers
   tags:
