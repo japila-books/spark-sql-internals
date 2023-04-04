@@ -83,3 +83,16 @@ isBatchReadSupported(
 ```
 
 `isBatchReadSupported`...FIXME
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetUtils` logger to see what happens inside.
+
+Add the following line to `conf/log4j2.properties`:
+
+```text
+logger.ParquetUtils.name = org.apache.spark.sql.execution.datasources.parquet.ParquetUtils
+logger.ParquetUtils.level = all
+```
+
+Refer to [Logging](../spark-logging.md).

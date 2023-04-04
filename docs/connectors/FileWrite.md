@@ -4,37 +4,49 @@
 
 ## Contract
 
-### <span id="formatName"> Format Name
+### Format Name { #formatName }
 
 ```scala
 formatName: String
 ```
 
+See:
+
+* [ParquetWrite](../parquet/ParquetWrite.md#formatName)
+
 Used when:
 
 * `FileWrite` is requested for the [description](#description) and [validateInputs](#validateInputs)
 
-### <span id="info"> LogicalWriteInfo
+### LogicalWriteInfo { #info }
 
 ```scala
 info: LogicalWriteInfo
 ```
 
+See:
+
+* [ParquetWrite](../parquet/ParquetWrite.md#info)
+
 Used when:
 
 * `FileWrite` is requested for the [schema](#schema), the [queryId](#queryId) and the [options](#options)
 
-### <span id="paths"> paths
+### paths { #paths }
 
 ```scala
 paths: Seq[String]
 ```
 
+See:
+
+* [ParquetWrite](../parquet/ParquetWrite.md#paths)
+
 Used when:
 
 * `FileWrite` is requested for a [BatchWrite](#toBatch) and to [validateInputs](#validateInputs)
 
-### <span id="prepareWrite"> Preparing Write Job
+### Preparing Write Job { #prepareWrite }
 
 ```scala
 prepareWrite(
@@ -46,15 +58,23 @@ prepareWrite(
 
 Prepares a write job and returns an `OutputWriterFactory`
 
+See:
+
+* [ParquetWrite](../parquet/ParquetWrite.md#prepareWrite)
+
 Used when:
 
 * `FileWrite` is requested to [createWriteJobDescription](#createWriteJobDescription)
 
-### <span id="supportsDataType"> supportsDataType
+### supportsDataType { #supportsDataType }
 
 ```scala
 supportsDataType: DataType => Boolean
 ```
+
+See:
+
+* [ParquetWrite](../parquet/ParquetWrite.md#supportsDataType)
 
 Used when:
 
@@ -69,11 +89,15 @@ Used when:
 * [ParquetWrite](../parquet/ParquetWrite.md)
 * `TextWrite`
 
-## <span id="toBatch"> Creating BatchWrite
+## Creating BatchWrite { #toBatch }
 
-```scala
-toBatch: BatchWrite
-```
+??? note "Write"
+
+    ```scala
+    toBatch: BatchWrite
+    ```
+
+    `toBatch` is part of the [Write](../connector/Write.md#toBatch) abstraction.
 
 `toBatch` [validateInputs](#validateInputs).
 
@@ -91,11 +115,7 @@ toBatch: BatchWrite
 
 In the end, `toBatch` creates a [FileBatchWrite](FileBatchWrite.md) (for the Hadoop `Job`, the `WriteJobDescription` and the `FileCommitProtocol`).
 
----
-
-`toBatch` is part of the [Write](../connector/Write.md#toBatch) abstraction.
-
-### <span id="createWriteJobDescription"> Creating WriteJobDescription
+### Creating WriteJobDescription { #createWriteJobDescription }
 
 ```scala
 createWriteJobDescription(

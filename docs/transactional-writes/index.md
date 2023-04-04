@@ -1,13 +1,14 @@
-# Transactional Writes
+# Transactional Writes in File-Based Connectors
 
-Spark SQL uses [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) configuration property for the class that is responsible for transactional writes in [file-based connectors](../files/index.md).
+[File-based connectors](../files/index.md) use [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) configuration property for the class that is responsible for transactional writes.
 
 ## Logging
 
 Enable the following loggers:
 
-* [org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md#logging)
-* [org.apache.spark.sql.execution.datasources.FileFormatWriter](../connectors/FileFormatWriter.md#logging)
+* [FileFormatWriter](../connectors/FileFormatWriter.md#logging)
+* [ParquetUtils](../parquet/ParquetUtils.md#logging)
+* [SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md#logging)
 
 ## Learn More
 

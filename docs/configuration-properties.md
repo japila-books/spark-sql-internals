@@ -213,7 +213,9 @@ Used when:
 
 * [ReplaceHashWithSortAgg](physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization is executed
 
-## <span id="spark.sql.files.maxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> files.maxPartitionBytes
+## spark.sql.files { #spark.sql.files }
+
+### <span id="FILES_MAX_PARTITION_BYTES"> maxPartitionBytes { #spark.sql.files.maxPartitionBytes }
 
 **spark.sql.files.maxPartitionBytes**
 
@@ -227,7 +229,22 @@ Used when:
 
 * `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
 
-## <span id="spark.sql.files.minPartitionNum"><span id="FILES_MIN_PARTITION_NUM"> files.minPartitionNum
+### <span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile { #spark.sql.files.maxRecordsPerFile }
+
+**spark.sql.files.maxRecordsPerFile**
+
+Maximum number of records to write out to a single file. If `0` or negative, there is no limit.
+
+Default: `0`
+
+Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method for the current value
+
+Used when:
+
+* `FileFormatWriter` is requested to [write data out](connectors/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch) (and [creates a WriteJobDescription](connectors/FileWrite.md#createWriteJobDescription))
+
+### <span id="FILES_MIN_PARTITION_NUM"> minPartitionNum { #spark.sql.files.minPartitionNum }
 
 **spark.sql.files.minPartitionNum**
 
@@ -241,7 +258,7 @@ Used when:
 
 * `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
 
-## <span id="spark.sql.files.openCostInBytes"><span id="FILES_OPEN_COST_IN_BYTES"> files.openCostInBytes
+### <span id="FILES_OPEN_COST_IN_BYTES"> openCostInBytes { #spark.sql.files.openCostInBytes }
 
 **spark.sql.files.openCostInBytes**
 
@@ -704,9 +721,23 @@ Used when:
 
 * `ParquetOptions` is created (and initializes [mergeSchema](parquet/ParquetOptions.md#mergeSchema) option)
 
+## <span id="PARQUET_OUTPUT_COMMITTER_CLASS"> output.committer.class { #spark.sql.parquet.output.committer.class }
+
+**spark.sql.parquet.output.committer.class**
+
+**(internal)** The output committer class used by [parquet](parquet/index.md) data source. The specified class needs to be a subclass of `org.apache.hadoop.mapreduce.OutputCommitter`. Typically, it's also a subclass of `org.apache.parquet.hadoop.ParquetOutputCommitter`. If it is not, then metadata summaries will never be created, irrespective of the value of `parquet.summary.metadata.level`.
+
+Default: `org.apache.parquet.hadoop.ParquetOutputCommitter`
+
+Use [SQLConf.parquetOutputCommitterClass](SQLConf.md#parquetOutputCommitterClass) for the current value
+
+Used when:
+
+* `ParquetUtils` is requested to [prepareWrite](parquet/ParquetUtils.md#prepareWrite)
+
 ## spark.sql.sources { #spark.sql.sources }
 
-### <span id="spark.sql.sources.bucketing.enabled"> bucketing.enabled
+### bucketing.enabled { #spark.sql.sources.bucketing.enabled }
 
 **spark.sql.sources.bucketing.enabled**
 
@@ -718,7 +749,7 @@ When disabled (i.e. `false`), bucketed tables are considered regular (non-bucket
 
 Use [SQLConf.bucketingEnabled](SQLConf.md#bucketingEnabled) method for the current value
 
-### <span id="spark.sql.sources.commitProtocolClass"> commitProtocolClass
+### commitProtocolClass { #spark.sql.sources.commitProtocolClass }
 
 **spark.sql.sources.commitProtocolClass**
 
@@ -734,7 +765,7 @@ Used when:
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 * `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
 
-### <span id="spark.sql.sources.outputCommitterClass"><span id="OUTPUT_COMMITTER_CLASS"> outputCommitterClass
+### <span id="OUTPUT_COMMITTER_CLASS"> outputCommitterClass { #spark.sql.sources.outputCommitterClass }
 
 **spark.sql.sources.outputCommitterClass**
 
@@ -1504,14 +1535,6 @@ Default: `false`
 
 Use [SQLConf.ignoreMissingFiles](SQLConf.md#ignoreMissingFiles) method to access the current value.
 
-## <span id="spark.sql.files.maxRecordsPerFile"> spark.sql.files.maxRecordsPerFile
-
-Maximum number of records to write out to a single file. If this value is `0` or negative, there is no limit.
-
-Default: `0`
-
-Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method to access the current value.
-
 ## <span id="spark.sql.inMemoryColumnarStorage.compressed"> spark.sql.inMemoryColumnarStorage.compressed
 
 When enabled, Spark SQL will automatically select a compression codec for each column based on statistics of the data.
@@ -1905,14 +1928,6 @@ Default: `false`
 This is necessary because Impala stores INT96 data with a different timezone offset than Hive and Spark.
 
 Use [SQLConf.isParquetINT96TimestampConversion](SQLConf.md#isParquetINT96TimestampConversion) method to access the current value.
-
-## <span id="spark.sql.parquet.output.committer.class"> spark.sql.parquet.output.committer.class
-
-**(internal)** The output committer class used by [parquet](parquet/index.md) data source. The specified class needs to be a subclass of `org.apache.hadoop.mapreduce.OutputCommitter`. Typically, it's also a subclass of `org.apache.parquet.hadoop.ParquetOutputCommitter`. If it is not, then metadata summaries will never be created, irrespective of the value of `parquet.summary.metadata.level`.
-
-Default: `org.apache.parquet.hadoop.ParquetOutputCommitter`
-
-Use [SQLConf.parquetOutputCommitterClass](SQLConf.md#parquetOutputCommitterClass) method to access the current value.
 
 ## <span id="spark.sql.parquet.outputTimestampType"> spark.sql.parquet.outputTimestampType
 
