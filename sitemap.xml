@@ -1016,21 +1016,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/connector/MetadataColumn/</loc>
-         <lastmod>2023-04-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/connector/MetadataColumnHelper/</loc>
-         <lastmod>2023-04-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/connector/MetadataColumnsHelper/</loc>
-         <lastmod>2023-04-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/OptionsHelper/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
@@ -1297,6 +1282,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/catalog/FunctionCatalog/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/catalog/MetadataColumn/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3537,6 +3527,36 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/FileSourceConstantMetadataAttribute/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/FileSourceGeneratedMetadataAttribute/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/FileSourceMetadataAttribute/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/MetadataAttribute/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/MetadataColumnHelper/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metadata-columns/MetadataColumnsHelper/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
