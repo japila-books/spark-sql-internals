@@ -167,3 +167,19 @@ buildReaderWithPartitionValues(
 1. Applies the data reader to a `PartitionedFile` and converts the result using the converter on the joined row with the [partition column values](PartitionedFile.md#partitionValues) appended.
 
 `buildReaderWithPartitionValues` is used when `FileSourceScanExec` physical operator is requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD).
+
+## createFileMetadataCol { #createFileMetadataCol }
+
+```scala
+createFileMetadataCol(
+  fileFormat: FileFormat): AttributeReference
+```
+
+`createFileMetadataCol`...FIXME
+
+---
+
+`createFileMetadataCol` is used when:
+
+* `LogicalRelation` logical operator is requested for the [metadataOutput](../logical-operators/LogicalRelation.md#metadataOutput)
+* `StreamingRelation` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/StreamingRelation)) logical operator is requested for the `metadataOutput`

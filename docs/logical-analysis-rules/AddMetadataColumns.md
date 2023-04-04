@@ -38,5 +38,5 @@ hasMetadataCol(
 
 `hasMetadataCol` is positive (`true`) when there is at least one [Attribute](../expressions/Attribute.md) expression (among the [Expressions](../catalyst/QueryPlan.md#expressions) of the given [LogicalPlan](../logical-operators/LogicalPlan.md)) for which either holds true:
 
-* It is a [metadata column](../connector/MetadataColumnHelper.md#isMetadataCol)
+* It is a [metadata column](../metadata-columns/MetadataColumnHelper.md#isMetadataCol)
 * [ExprId](../expressions/NamedExpression.md#exprId) of this `Attribute` is among the [metadata output attributes](../logical-operators/LogicalPlan.md#metadataOutput) of any of the [children](../catalyst/TreeNode.md#children) of the given [LogicalPlan](../logical-operators/LogicalPlan.md)

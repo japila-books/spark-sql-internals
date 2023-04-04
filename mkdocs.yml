@@ -175,6 +175,7 @@ nav:
       - Column: connector/catalog/Column.md
       - DelegatingCatalogExtension: connector/catalog/DelegatingCatalogExtension.md
       - FunctionCatalog: connector/catalog/FunctionCatalog.md
+      - MetadataColumn: connector/catalog/MetadataColumn.md
       - StagingTableCatalog: connector/catalog/StagingTableCatalog.md
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
@@ -215,8 +216,7 @@ nav:
       - Joins: joins.md
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Logging: spark-logging.md
-    - Metadata Columns:
-      - metadata-columns/index.md
+    - ... | metadata-columns/**.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
     - ... | connect/**.md

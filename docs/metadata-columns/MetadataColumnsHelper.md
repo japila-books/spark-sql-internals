@@ -10,7 +10,7 @@ title: MetadataColumnsHelper
 
 `MetadataColumnsHelper` takes the following to be created:
 
-* <span id="metadata"> [MetadataColumn](MetadataColumn.md)s
+* <span id="metadata"> [MetadataColumn](../connector/catalog/MetadataColumn.md)s
 
 ## <span id="asStruct"> asStruct
 

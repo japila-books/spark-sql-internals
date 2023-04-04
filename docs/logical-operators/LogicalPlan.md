@@ -190,7 +190,7 @@ metadataOutput: Seq[Attribute]
 `metadataOutput` requests the [children](#children) for the metadata output attributes (recursively).
 
 !!! note
-    `metadataOutput` should be overridden if this operators does not propagate its children's output.
+    `metadataOutput` should be overridden by operators that do not propagate its children's output.
 
 See:
 
