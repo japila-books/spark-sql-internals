@@ -1516,11 +1516,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/connectors/SQLHadoopMapReduceCommitProtocol/</loc>
-         <lastmod>2023-04-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connectors/SchemaMergeUtils/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
@@ -2187,6 +2182,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/file-based-data-scanning/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/files/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4392,6 +4392,16 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/thrift-server/SparkSQLEnv/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/transactional-writes/</loc>
+         <lastmod>2023-04-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/transactional-writes/SQLHadoopMapReduceCommitProtocol/</loc>
          <lastmod>2023-04-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
