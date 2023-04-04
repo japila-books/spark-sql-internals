@@ -84,6 +84,25 @@ isBatchReadSupported(
 
 `isBatchReadSupported`...FIXME
 
+## prepareWrite { #prepareWrite }
+
+```scala
+prepareWrite(
+  sqlConf: SQLConf,
+  job: Job,
+  dataSchema: StructType,
+  parquetOptions: ParquetOptions): OutputWriterFactory
+```
+
+`prepareWrite`...FIXME
+
+---
+
+`prepareWrite` is used when:
+
+* `ParquetFileFormat` is requested to [prepareWrite](ParquetFileFormat.md#prepareWrite)
+* `ParquetWrite` is requested to [prepareWrite](ParquetWrite.md#prepareWrite)
+
 ## Logging
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.parquet.ParquetUtils` logger to see what happens inside.

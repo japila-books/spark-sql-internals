@@ -29,23 +29,32 @@ Used when:
 * `V2ExistingTableWriteExec` is requested for [customMetrics](../physical-operators/V2ExistingTableWriteExec.md#customMetrics)
 * `StreamExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/StreamExecution)) is requested for a `StreamingWrite`
 
-### <span id="toBatch"> Creating BatchWrite
+### Creating BatchWrite { #toBatch }
 
 ```java
 BatchWrite toBatch()
 ```
 
-`toBatch` throws an `UnsupportedOperationException` by default:
+[BatchWrite](BatchWrite.md) of this connector
 
-```text
-[description]: Batch write is not supported
-```
+??? note "UnsupportedOperationException by default"
+
+    `toBatch` throws an `UnsupportedOperationException` by default and is expected to be overriden by [implementations](#implementations).
+
+    ```text
+    [description]: Batch write is not supported
+    ```
 
 `toBatch` should be implemented for [Table](Table.md)s that create `Write`s that reports [BATCH_WRITE](TableCapability.md#BATCH_WRITE) support in their [capabilities](Table.md#capabilities).
 
+See:
+
+* [KafkaWrite](../kafka/KafkaWrite.md#toBatch)
+* [FileWrite](../connectors/FileWrite.md#toBatch)
+
 Used when:
 
-* `V2ExistingTableWriteExec` is requested to [run](../physical-operators/V2ExistingTableWriteExec.md#run)
+* `V2ExistingTableWriteExec` physical command is [executed](../physical-operators/V2ExistingTableWriteExec.md#run)
 * `TableWriteExecHelper` is requested to [writeToTable](../physical-operators/TableWriteExecHelper.md#writeToTable)
 
 ### <span id="toStreaming"> Creating StreamingWrite

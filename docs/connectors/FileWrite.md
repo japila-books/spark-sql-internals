@@ -64,7 +64,7 @@ See:
 
 Used when:
 
-* `FileWrite` is requested to [createWriteJobDescription](#createWriteJobDescription)
+* `FileWrite` is requested for a [BatchWrite](#toBatch) (and [creates a WriteJobDescription](#createWriteJobDescription))
 
 ### supportsDataType { #supportsDataType }
 
