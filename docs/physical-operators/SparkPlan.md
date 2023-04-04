@@ -1,3 +1,7 @@
+---
+title: SparkPlan
+---
+
 # SparkPlan &mdash; Physical Operators of Structured Query
 
 `SparkPlan` is an [extension](#contract) of the [QueryPlan](../catalyst/QueryPlan.md) abstraction for [physical operators](#implementations) that can be [executed](#doExecute) (to generate `RDD[InternalRow]` that Spark can execute).
@@ -86,7 +90,7 @@ executeBroadcast[T](): broadcast.Broadcast[T]
 
 Calls [doExecuteBroadcast](#doExecuteBroadcast).
 
-### <span id="executeColumnar"> Columnar Execution
+### <span id="executeColumnar"> executeColumnar
 
 ```scala
 executeColumnar(): RDD[ColumnarBatch]
@@ -120,6 +124,19 @@ Executes the physical operator in a single RDD scope (all RDDs created during ex
   * [executeColumnar](#executeColumnar) (the input `query` is [doExecuteColumnar()](#doExecuteColumnar()))
 * `CodegenSupport` is requested to [produce a Java source code](CodegenSupport.md#produce) of a physical operator (with the input `query` being [doProduce](#doProduce))
 * `QueryStageExec` is requested to [materialize](QueryStageExec.md#materialize) (with the input `query` being [doMaterialize](QueryStageExec.md##doMaterialize))
+
+### executeWrite { #executeWrite }
+
+```scala
+executeWrite(
+  writeFilesSpec: WriteFilesSpec): RDD[WriterCommitMessage]
+```
+
+`executeWrite` [executeQuery](#executeQuery) followed by [doExecuteWrite](#doExecuteWrite).
+
+Used when:
+
+* `FileFormatWriter` is requested to [executeWrite](../connectors/FileFormatWriter.md#executeWrite)
 
 ### <span id="prepare"> prepare
 
@@ -183,6 +200,28 @@ Internal Error [class] has column support mismatch:
 ```
 
 Part of [Columnar Execution](#executeColumnar)
+
+### doExecuteWrite { #doExecuteWrite }
+
+```scala
+doExecuteWrite(
+  writeFilesSpec: WriteFilesSpec): RDD[WriterCommitMessage]
+```
+
+!!! note "Throws SparkException by Default"
+
+    `doExecuteColumnar` throws an `SparkException` by default and is supposed to be overriden by the [implementations](#implementations).
+
+    ```text
+    Internal Error [class] has write support mismatch:
+    [this]
+    ```
+
+Used by [executeWrite](#executeWrite)
+
+See:
+
+* [WriteFilesExec](WriteFilesExec.md#doExecuteWrite)
 
 ### <span id="doPrepare"> doPrepare
 

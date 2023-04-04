@@ -1,4 +1,4 @@
-# FileFormatWriter Utility
+# FileFormatWriter
 
 `FileFormatWriter` utility is used to [write out query result](#write) for the following:
 
@@ -6,7 +6,7 @@
 * [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command
 * `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/file/FileStreamSink#addBatch)) is requested to write out a micro-batch
 
-## <span id="write"> Writing Out Query Result
+## Writing Out Query Result { #write }
 
 ```scala
 write(
@@ -19,26 +19,115 @@ write(
   partitionColumns: Seq[Attribute],
   bucketSpec: Option[BucketSpec],
   statsTrackers: Seq[WriteJobStatsTracker],
-  options: Map[String, String]): Set[String]
+  options: Map[String, String],
+  numStaticPartitionCols: Int = 0): Set[String]
 ```
 
 `write` creates a Hadoop [Job]({{ hadoop.api }}/org/apache/hadoop/mapreduce/Job.html) instance (with the given Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)) and uses the following job output classes:
 
-* `Void` for keys
+Job Output Property | Class
+--------------------|------
+ Key | `Void`
+ Value | `InternalRow`
 
-* `InternalRow` for values
-
-`write` sets the output directory (for the map-reduce job) to be the `outputPath` of the given `OutputSpec`.
+`write` sets the output directory (`mapreduce.output.fileoutputformat.outputdir` property of the map-reduce job) to be the `outputPath` of the given `OutputSpec`.
 
 <span id="write-outputWriterFactory">
 `write` requests the given `FileFormat` to [prepareWrite](FileFormat.md#prepareWrite).
 
 <span id="write-description">
-`write` creates a `WriteJobDescription` with the following:
+`write` creates a `WriteJobDescription` with the following options (if available):
 
-* `maxRecordsPerFile` based on the `maxRecordsPerFile` option (from the given options) if available or [spark.sql.files.maxRecordsPerFile](../configuration-properties.md#spark.sql.files.maxRecordsPerFile)
+Option | Fallback Configuration Property
+-------|--------------------------------
+ `maxRecordsPerFile` | [spark.sql.files.maxRecordsPerFile](../configuration-properties.md#spark.sql.files.maxRecordsPerFile)
+ `timeZone` | [spark.sql.session.timeZone](../configuration-properties.md#spark.sql.session.timeZone)
 
-* `timeZoneId` based on the `timeZone` option (from the given options) if available or [spark.sql.session.timeZone](../configuration-properties.md#spark.sql.session.timeZone)
+`write` sets `spark.sql.sources.writeJobUUID` configuration in the map-reduce Job instance.
+
+In the end, `write` [executeWrite](#executeWrite).
+
+### executeWrite { #executeWrite }
+
+```scala
+executeWrite(
+  session: SparkSession,
+  planForWrites: SparkPlan,
+  writeFilesSpec: WriteFilesSpec,
+  job: Job): Set[String]
+executeWrite(
+  sparkSession: SparkSession,
+  plan: SparkPlan,
+  job: Job,
+  description: WriteJobDescription,
+  committer: FileCommitProtocol,
+  outputSpec: OutputSpec,
+  requiredOrdering: Seq[Expression],
+  partitionColumns: Seq[Attribute],
+  sortColumns: Seq[Attribute],
+  orderingMatched: Boolean): Set[String]
+```
+
+`executeWrite` [writeAndCommit](#writeAndCommit) (with the given Hadoop `Job`, `WriteJobDescription`, and `FileCommitProtocol`) and a function that does the following:
+
+1. Prepares an `RDD[WriterCommitMessage]` (by executing the given `WriteFilesSpec` or the `SparkPlan`)
+1. Runs a Spark job for the `RDD[WriterCommitMessage]` that "collects" `WriteTaskResult`s (from executing write tasks)
+
+### writeAndCommit { #writeAndCommit }
+
+```scala
+writeAndCommit(
+  job: Job,
+  description: WriteJobDescription,
+  committer: FileCommitProtocol)(
+  f: => Array[WriteTaskResult]): Set[String]
+```
+
+`writeAndCommit`...FIXME
+
+`writeAndCommit` prints out the following INFO message to the logs:
+
+```text
+Start to commit write Job [uuid].
+```
+
+`writeAndCommit` requests the given `FileCommitProtocol` to `commitJob`.
+
+`writeAndCommit` prints out the following INFO message to the logs:
+
+```text
+Write Job [uuid] committed. Elapsed time: [duration] ms.
+```
+
+`writeAndCommit` [processStats](#processStats).
+
+`writeAndCommit` prints out the following INFO message to the logs:
+
+```text
+Finished processing stats for write job [uuid].
+```
+
+`writeAndCommit` returns the updated partitions.
+
+---
+
+In case of any `Throwable`, `writeAndCommit` prints out the following ERROR message to the logs:
+
+```text
+Aborting job [uuid].
+```
+
+`writeAndCommit` requests the given `FileCommitProtocol` to `abortJob`.
+
+### Usage { #write-usage }
+
+`write` is used when:
+
+* `SaveAsHiveFile` is requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile)
+* [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
+* `FileStreamSink` ([Spark Structured Streaming]({{ book.structured_streaming }}/file/FileStreamSink#addBatch)) is requested to `addBatch`
+
+### Review Me
 
 `write` requests the given `FileCommitProtocol` committer to `setupJob`.
 
@@ -67,12 +156,6 @@ Finished processing stats for write job [uuid].
 ```
 
 In the end, `write` returns all the partition paths that were updated during this write job.
-
-`write` is used when:
-
-* [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
-* `SaveAsHiveFile` is requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile) (when [InsertIntoHiveDirCommand](../hive/InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](../hive/InsertIntoHiveTable.md) logical commands are executed)
-* ([Spark Structured Streaming]({{ book.structured_streaming }}/file/FileStreamSink#addBatch)) `FileStreamSink` is requested to write out a micro-batch
 
 ### <span id="write-Throwable"> write And Throwables
 
@@ -120,7 +203,8 @@ Enable `ALL` logging level for `org.apache.spark.sql.execution.datasources.FileF
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.datasources.FileFormatWriter=ALL
+logger.FileFormatWriter.name = org.apache.spark.sql.execution.datasources.FileFormatWriter
+logger.FileFormatWriter.level = all
 ```
 
 Refer to [Logging](../spark-logging.md).

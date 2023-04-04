@@ -392,6 +392,7 @@ nav:
       - WithCTE: logical-operators/WithCTE.md
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md
       - WriteDelta: logical-operators/WriteDelta.md
+      - WriteFiles: logical-operators/WriteFiles.md
     - SparkSession Registries:
       - Catalog:
         - Catalog: Catalog.md
@@ -634,6 +635,7 @@ nav:
       - WindowExec:
         - WindowExec: physical-operators/WindowExec.md
       - WindowExecBase: physical-operators/WindowExecBase.md
+      - WriteFilesExec: physical-operators/WriteFilesExec.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
         - Partitioning: physical-operators/Partitioning.md
