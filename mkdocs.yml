@@ -151,6 +151,7 @@ nav:
   - Home: index.md
   - Features:
     - features/index.md
+    - ... | aggregations/**.md
     - Adaptive Query Execution:
       - adaptive-query-execution/index.md
       - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md

@@ -1,6 +1,6 @@
 # Aggregate Logical Operator
 
-`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in a [logical query plan](LogicalPlan.md):
+`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode) for [Aggregation Queries](../aggregations/index.md) and represents the following high-level operators in a [logical query plan](LogicalPlan.md):
 
 * `AstBuilder` is requested to [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan) (`HAVING` clause without `GROUP BY`) and [parse GROUP BY clause](../sql/AstBuilder.md#withAggregationClause)
 * `KeyValueGroupedDataset` is requested to [agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) (and [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped))
@@ -17,10 +17,58 @@
 `Aggregate` is created when:
 
 * `AstBuilder` is requested to [withSelectQuerySpecification](../sql/AstBuilder.md#withSelectQuerySpecification) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
+* `DecorrelateInnerQuery` is requested to `rewriteDomainJoins`
 * `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
+* `InjectRuntimeFilter` logical optimization is requested to [injectBloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter) and [injectInSubqueryFilter](../logical-optimizations/InjectRuntimeFilter.md#injectInSubqueryFilter)
 * `KeyValueGroupedDataset` is requested to [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped)
+* `MergeScalarSubqueries` is requested to `tryMergePlans`
+* `PullOutGroupingExpressions` logical optimization is executed
+* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md) logical optimization is executed
 * `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF)
+* `ReplaceDistinctWithAggregate` logical optimization is executed
+* `ReplaceDeduplicateWithAggregate` logical optimization is executed
+* `RewriteAsOfJoin` logical optimization is executed
+* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md) logical optimization is executed
+* `RewriteDistinctAggregates` logical optimization is executed
+* [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization is executed
+* `RewriteIntersectAll` logical optimization is executed
 * [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
+
+## Output Schema { #output }
+
+??? note "QueryPlan"
+
+    ```scala
+    output: Seq[Attribute]
+    ```
+
+    `output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
+
+`output` is the [Attribute](../expressions/NamedExpression.md#toAttribute)s of the [aggregate expressions](#aggregateExpressions).
+
+## Metadata Output Schema { #metadataOutput }
+
+??? note "LogicalPlan"
+
+    ```scala
+    metadataOutput: Seq[Attribute]
+    ```
+
+    `metadataOutput` is part of the [LogicalPlan](LogicalPlan.md#metadataOutput) abstraction.
+
+`metadataOutput` is empty (`Nil`).
+
+## Node Patterns { #nodePatterns }
+
+??? note "TreeNode"
+
+    ```scala
+    nodePatterns : Seq[TreePattern]
+    ```
+
+    `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+`nodePatterns` is [AGGREGATE](../catalyst/TreePattern.md#AGGREGATE).
 
 ## <span id="supportsHashAggregate"> Checking Requirements for HashAggregateExec
 
@@ -56,43 +104,3 @@ isAggregateBufferMutable(
 
 * `Aggregate` is requested to [check the requirements for HashAggregateExec](#supportsHashAggregate)
 * `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
-
-## Query Planning
-
-`Aggregate` logical operator is planned to one of the physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (using [PhysicalAggregation](../PhysicalAggregation.md) utility):
-
-* [HashAggregateExec](../physical-operators/HashAggregateExec.md)
-* [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
-* [SortAggregateExec](../physical-operators/SortAggregateExec.md)
-
-## Logical Optimization
-
-[PushDownPredicate](../logical-optimizations/PushDownPredicate.md) logical plan optimization applies so-called **filter pushdown** to a [Pivot](Pivot.md) operator when under `Filter` operator and with all expressions deterministic.
-
-```text
-import org.apache.spark.sql.catalyst.optimizer.PushDownPredicate
-
-val q = visits
-  .groupBy("city")
-  .pivot("year")
-  .count()
-  .where($"city" === "Boston")
-
-val pivotPlanAnalyzed = q.queryExecution.analyzed
-scala> println(pivotPlanAnalyzed.numberedTreeString)
-00 Filter (city#8 = Boston)
-01 +- Project [city#8, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[0] AS 2015#143L, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[1] AS 2016#144L, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[2] AS 2017#145L]
-02    +- Aggregate [city#8], [city#8, pivotfirst(year#9, count(1) AS `count`#134L, 2015, 2016, 2017, 0, 0) AS __pivot_count(1) AS `count` AS `count(1) AS ``count```#142]
-03       +- Aggregate [city#8, year#9], [city#8, year#9, count(1) AS count(1) AS `count`#134L]
-04          +- Project [_1#3 AS id#7, _2#4 AS city#8, _3#5 AS year#9]
-05             +- LocalRelation [_1#3, _2#4, _3#5]
-
-val afterPushDown = PushDownPredicate(pivotPlanAnalyzed)
-scala> println(afterPushDown.numberedTreeString)
-00 Project [city#8, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[0] AS 2015#143L, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[1] AS 2016#144L, __pivot_count(1) AS `count` AS `count(1) AS ``count```#142[2] AS 2017#145L]
-01 +- Aggregate [city#8], [city#8, pivotfirst(year#9, count(1) AS `count`#134L, 2015, 2016, 2017, 0, 0) AS __pivot_count(1) AS `count` AS `count(1) AS ``count```#142]
-02    +- Aggregate [city#8, year#9], [city#8, year#9, count(1) AS count(1) AS `count`#134L]
-03       +- Project [_1#3 AS id#7, _2#4 AS city#8, _3#5 AS year#9]
-04          +- Filter (_2#4 = Boston)
-05             +- LocalRelation [_1#3, _2#4, _3#5]
-```
