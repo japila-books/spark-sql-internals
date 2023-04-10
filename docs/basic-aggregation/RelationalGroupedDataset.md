@@ -1,6 +1,6 @@
 # RelationalGroupedDataset
 
-`RelationalGroupedDataset` is an interface for **Untyped (Row-based) Grouping** to calculate aggregates over groups of rows in a [DataFrame](../DataFrame.md).
+`RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** (part of [Basic Aggregation](index.md)) to calculate aggregates over groups of rows in a [DataFrame](../DataFrame.md).
 
 !!! note
     [KeyValueGroupedDataset](../basic-aggregation/KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Row](../Row.md)s).
@@ -11,6 +11,9 @@
 * [rollup](../multi-dimensional-aggregation.md#rollup)
 * [cube](../multi-dimensional-aggregation.md#cube)
 * [pivot](#pivot)
+
+<!---
+## Review Me
 
 [[operators]]
 .RelationalGroupedDataset's Aggregate Operators
@@ -205,3 +208,4 @@ Internally, `pivot` creates a `RelationalGroupedDataset` with `PivotType` group 
     +- Project [_1#3 AS id#7, _2#4 AS city#8, _3#5 AS year#9]
       +- LocalRelation [_1#3, _2#4, _3#5]
     ```
+-->

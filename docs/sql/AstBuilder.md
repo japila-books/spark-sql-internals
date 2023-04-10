@@ -97,9 +97,12 @@ COMMENT ON TABLE tableIdentifier IS ('text' | NULL)
 
 ANTLR labeled alternative: `#commentTable`
 
-### <span id="visitCommonSelectQueryClausePlan"> visitCommonSelectQueryClausePlan
+### visitCommonSelectQueryClausePlan { #visitCommonSelectQueryClausePlan }
 
-Used in [withTransformQuerySpecification](#withTransformQuerySpecification) and [withSelectQuerySpecification](#withSelectQuerySpecification)
+Used when:
+
+* [withSelectQuerySpecification](#withSelectQuerySpecification)
+* [withTransformQuerySpecification](#withTransformQuerySpecification)
 
 ### <span id="visitCreateTable"> visitCreateTable
 
@@ -190,6 +193,31 @@ A relation can be one of the following or a combination thereof:
 * Table-valued function (currently only `range` is supported)
 
 ANTLR rule: `fromClause`
+
+### visitFromStatement { #visitFromStatement }
+
+```antlr
+fromStatement
+    : fromClause fromStatementBody+
+    ;
+
+fromClause
+    : FROM relation (COMMA relation)* lateralView* pivotClause? unpivotClause?
+    ;
+
+fromStatementBody
+    : transformClause
+      whereClause?
+      queryOrganization
+    | selectClause
+      lateralView*
+      whereClause?
+      aggregationClause?
+      havingClause?
+      windowClause?
+      queryOrganization
+    ;
+```
 
 ### <span id="visitFunctionCall"> visitFunctionCall
 
@@ -339,7 +367,7 @@ Requirements:
 
 ANTLR labeled alternative: `#mergeIntoTable`
 
-### <span id="visitMultiInsertQuery"> visitMultiInsertQuery
+### visitMultiInsertQuery { #visitMultiInsertQuery }
 
 Creates a logical operator with a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (and `UnresolvedRelation` leaf operator)
 
@@ -411,6 +439,39 @@ Creates `OneRowRelation` or [LogicalPlan](../logical-operators/LogicalPlan.md)
     ```
 
 ANTLR rule: `querySpecification`
+
+### visitRegularQuerySpecification { #visitRegularQuerySpecification }
+
+[withSelectQuerySpecification](#withSelectQuerySpecification) with a [from](#visitFromClause) relation
+
+```antlr
+querySpecification
+    : ...                        #transformQuerySpecification
+    | selectClause
+      fromClause?
+      lateralView*
+      whereClause?
+      aggregationClause?
+      havingClause?
+      windowClause?              #regularQuerySpecification
+    ;
+
+havingClause
+    : HAVING booleanExpression
+    ;
+
+windowClause
+    : WINDOW namedWindow (COMMA namedWindow)*
+    ;
+```
+
+ANTLR rule: `regularQuerySpecification`
+
+!!! note "aggregationClause"
+    `aggregationClause` is handled by [withAggregationClause](#withAggregationClause).
+
+??? note "transformQuerySpecification"
+    The other rule `transformQuerySpecification` is handled by [withTransformQuerySpecification](#withTransformQuerySpecification).
 
 ### <span id="visitRelation"> visitRelation
 
@@ -632,13 +693,47 @@ ANTLR rule: `windowDef`
 
 ## Parsing Handlers
 
-### <span id="withAggregationClause"> withAggregationClause
+### withAggregationClause { #withAggregationClause }
 
-Creates one of the following logical operators:
+Creates an [Aggregate](../logical-operators/Aggregate.md) logical operator with one of the following [grouping expressions](../logical-operators/Aggregate.md#groupingExpressions) (to indicate the aggregation kind):
 
-* [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY ... GROUPING SETS (...)`
+* [GroupingSets](../logical-operators/GroupingSets.md) for `GROUP BY ... GROUPING SETS`
+* `Cube` for `GROUP BY ... WITH CUBE`
+* `Rollup` for `GROUP BY ... WITH ROLLUP`
+* `GROUP BY ...`
 
-* [Aggregate](../logical-operators/Aggregate.md) for `GROUP BY ... (WITH CUBE | WITH ROLLUP)?`
+```antlr
+aggregationClause
+    : GROUP BY groupingExpressionsWithGroupingAnalytics+=groupByClause
+        (COMMA groupingExpressionsWithGroupingAnalytics+=groupByClause)*
+    | GROUP BY groupingExpressions+=expression (COMMA groupingExpressions+=expression)* (
+      WITH kind=ROLLUP
+    | WITH kind=CUBE
+    | kind=GROUPING SETS LEFT_PAREN groupingSet (COMMA groupingSet)* RIGHT_PAREN)?
+    ;
+
+groupByClause
+    : groupingAnalytics
+    | expression
+    ;
+
+groupingAnalytics
+    : (ROLLUP | CUBE) LEFT_PAREN groupingSet (COMMA groupingSet)* RIGHT_PAREN
+    | GROUPING SETS LEFT_PAREN groupingElement (COMMA groupingElement)* RIGHT_PAREN
+    ;
+
+groupingElement
+    : groupingAnalytics
+    | groupingSet
+    ;
+
+groupingSet
+    : LEFT_PAREN (expression (COMMA expression)*)? RIGHT_PAREN
+    | expression
+    ;
+```
+
+Used in [visitCommonSelectQueryClausePlan](#visitCommonSelectQueryClausePlan)
 
 ### <span id="withCTE"> withCTE
 
@@ -652,7 +747,7 @@ namedQuery
     ;
 ```
 
-### <span id="withFromStatementBody"> withFromStatementBody
+### withFromStatementBody { #withFromStatementBody }
 
 Used in [visitFromStatement](#visitFromStatement) and [visitMultiInsertQuery](#visitMultiInsertQuery)
 
@@ -757,13 +852,41 @@ DISTRIBUTE BY is not supported
 
 Used in [withQueryResultClauses](#withQueryResultClauses)
 
-### <span id="withSelectQuerySpecification"> withSelectQuerySpecification
+### withSelectQuerySpecification { #withSelectQuerySpecification }
 
-Used in [withFromStatementBody](#withFromStatementBody) and [visitRegularQuerySpecification](#visitRegularQuerySpecification)
+[visitCommonSelectQueryClausePlan](#visitCommonSelectQueryClausePlan) followed by [withHints](#withHints) if there are hints
 
-### <span id="withTransformQuerySpecification"> withTransformQuerySpecification
+Used when:
 
-Used in [withFromStatementBody](#withFromStatementBody) and [visitTransformQuerySpecification](#visitTransformQuerySpecification)
+* [visitRegularQuerySpecification](#visitRegularQuerySpecification)
+* [withFromStatementBody](#withFromStatementBody)
+
+### withTransformQuerySpecification { #withTransformQuerySpecification }
+
+!!! warning "Skip it and pay attention to `regularQuerySpecification` rule"
+    `transformQuerySpecification` is one of the two ANTLR rules of `querySpecification` (beside `regularQuerySpecification`) and, as a Hive-style transform, of less importance IMHO 😎
+
+    Pay more attention to the other [regularQuerySpecification](#visitRegularQuerySpecification) rule.
+
+Creates `ScriptTransformation` unary logical operator for a Hive-style transform (`SELECT TRANSFORM/MAP/REDUCE`) query specification
+
+```antlr
+querySpecification
+    : transformClause
+      fromClause?
+      lateralView*
+      whereClause?
+      aggregationClause?
+      havingClause?
+      windowClause?                                 #transformQuerySpecification
+    | ...                                           #regularQuerySpecification
+    ;
+```
+
+Used when:
+
+* [visitTransformQuerySpecification](#visitTransformQuerySpecification)
+* [withFromStatementBody](#withFromStatementBody)
 
 ### <span id="withWindows"> withWindows
 

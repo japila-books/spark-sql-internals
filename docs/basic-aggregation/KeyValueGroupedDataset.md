@@ -1,6 +1,6 @@
 # KeyValueGroupedDataset
 
-`KeyValueGroupedDataset` is an interface for **Typed Grouping** to calculate aggregates over groups of objects in a typed [Dataset](../Dataset.md).
+`KeyValueGroupedDataset` is a high-level API for **Typed Grouping** (part of [Basic Aggregation](index.md)) to calculate aggregates over groups of objects in a typed [Dataset](../Dataset.md).
 
 `KeyValueGroupedDataset` represents a **grouped dataset** as a result of [Dataset.groupByKey](../Dataset.md#groupByKey) operator (that aggregates records by a grouping function).
 
@@ -31,6 +31,37 @@ groupByKey(
 * [KeyValueGroupedDataset.keyAs](#keyAs)
 * [KeyValueGroupedDataset.mapValues](#mapValues)
 * [RelationalGroupedDataset.as](RelationalGroupedDataset.md#as)
+
+## agg { #agg }
+
+```scala
+agg[U1](
+  col1: TypedColumn[V, U1]): Dataset[(K, U1)]
+agg[U1, U2](
+  col1: TypedColumn[V, U1],
+  col2: TypedColumn[V, U2]): Dataset[(K, U1, U2)]
+...
+agg[U1, U2, U3, U4, U5, U6, U7, U8](
+  col1: TypedColumn[V, U1],
+  col2: TypedColumn[V, U2],
+  col3: TypedColumn[V, U3],
+  col4: TypedColumn[V, U4],
+  col5: TypedColumn[V, U5],
+  col6: TypedColumn[V, U6],
+  col7: TypedColumn[V, U7],
+  col8: TypedColumn[V, U8]): Dataset[(K, U1, U2, U3, U4, U5, U6, U7, U8)]
+```
+
+`agg` [aggUntyped](#aggUntyped).
+
+### aggUntyped { #aggUntyped }
+
+```scala
+aggUntyped(
+  columns: TypedColumn[_, _]*): Dataset[_]
+```
+
+`aggUntyped` creates a [Dataset](../Dataset.md) with an [Aggregate](../logical-operators/Aggregate.md) logical operator (with the [grouping attributes](#groupingAttributes)).
 
 ## <span id="flatMapGroupsWithState"> flatMapGroupsWithState
 

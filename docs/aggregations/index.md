@@ -4,18 +4,20 @@
 
 `Aggregate` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles).
 
-## SQL
+## High-Level Operators
 
-`AstBuilder` is requested for the following:
+### SQL
 
+`Aggregate` represents the following SQL clauses:
+
+* [GROUP BY](../sql/AstBuilder.md#withAggregationClause) (incl. `GROUPING SETS`, `WITH CUBE`, `WITH ROLLUP`)
 * [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan)
-* [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
 
-## KeyValueGroupedDataset
+### KeyValueGroupedDataset
 
-`KeyValueGroupedDataset` is requested to [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped).
+[KeyValueGroupedDataset.agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) operator is used
 
-## RelationalGroupedDataset
+### RelationalGroupedDataset
 
 `RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF).
 
