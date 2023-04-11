@@ -25,11 +25,11 @@ GROUP BY expressions WITH CUBE
 GROUP BY CUBE(expressions)
 ```
 
-`cube` multi-dimensional aggregate operator returns a [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md) to calculate subtotals and a grand total for every permutation of the columns specified.
+`cube` multi-dimensional aggregate operator returns a [RelationalGroupedDataset](RelationalGroupedDataset.md) to calculate subtotals and a grand total for every permutation of the columns specified.
 
 `cube` is an extension of [groupBy](basic-aggregation/index.md#groupBy) operator that allows calculating subtotals and a grand total across all combinations of specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
 
-`cube` returns [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md) that you can use to execute aggregate function or operator.
+`cube` returns [RelationalGroupedDataset](RelationalGroupedDataset.md) that you can use to execute aggregate function or operator.
 
 !!! note "cube vs rollup"
     `cube` is more than [rollup](#rollup) operator, i.e. `cube` does `rollup` with aggregation over all the missing combinations given the columns.
@@ -49,7 +49,7 @@ GROUP BY expressions WITH ROLLUP
 GROUP BY ROLLUP(expressions)
 ```
 
-`rollup` gives a [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md) to calculate subtotals and a grand total over (ordered) combination of groups.
+`rollup` gives a [RelationalGroupedDataset](RelationalGroupedDataset.md) to calculate subtotals and a grand total over (ordered) combination of groups.
 
 `rollup` is an extension of [groupBy](basic-aggregation/index.md#groupBy) operator that calculates subtotals and a grand total across specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
 
@@ -203,7 +203,7 @@ scala> inventory.rollup(expr("(item, color)") as "(item, color)").sum().show
 +-------------+-------------+
 ```
 
-Internally, `rollup` [converts the Dataset into a DataFrame](spark-sql-dataset-operators.md#toDF) and then creates a [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md) (with `RollupType` group type).
+Internally, `rollup` [converts the Dataset into a DataFrame](spark-sql-dataset-operators.md#toDF) and then creates a [RelationalGroupedDataset](RelationalGroupedDataset.md) (with `RollupType` group type).
 
 !!! tip
     Read up on `rollup` in [Deeper into Postgres 9.5 - New Group By Options for Aggregation](https://www.compose.com/articles/deeper-into-postgres-9-5-new-group-by-options-for-aggregation/).

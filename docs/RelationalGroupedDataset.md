@@ -1,62 +1,24 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # RelationalGroupedDataset
 
-`RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** (part of [Basic Aggregation](index.md)) to calculate aggregates over groups of rows in a [DataFrame](../DataFrame.md).
+`RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** (part of [Basic Aggregation](aggregations/index.md)) to calculate aggregates over groups of rows in a [DataFrame](DataFrame.md).
 
 !!! note
-    [KeyValueGroupedDataset](../basic-aggregation/KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Row](../Row.md)s).
+    [KeyValueGroupedDataset](KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Row](Row.md)s).
 
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
-* [groupBy](index.md#groupBy)
-* [rollup](../multi-dimensional-aggregation.md#rollup)
-* [cube](../multi-dimensional-aggregation.md#cube)
+* [groupBy](aggregations/index.md#groupBy)
+* [rollup](multi-dimensional-aggregation.md#rollup)
+* [cube](multi-dimensional-aggregation.md#cube)
 * [pivot](#pivot)
 
 <!---
 ## Review Me
-
-[[operators]]
-.RelationalGroupedDataset's Aggregate Operators
-[cols="1,3",options="header",width="100%"]
-|===
-| Operator
-| Description
-
-| <<agg, agg>>
-a|
-
-| `avg`
-a| [[avg]]
-
-| `count`
-a| [[count]]
-
-| `max`
-a| [[max]]
-
-| `mean`
-a| [[mean]]
-
-| `min`
-a| [[min]]
-
-| <<pivot-internals, pivot>>
-a| [[pivot]]
-
-[source, scala]
-----
-pivot(pivotColumn: String): RelationalGroupedDataset
-pivot(pivotColumn: String, values: Seq[Any]): RelationalGroupedDataset
-pivot(pivotColumn: Column): RelationalGroupedDataset // <1>
-pivot(pivotColumn: Column, values: Seq[Any]): RelationalGroupedDataset // <1>
-----
-<1> *New in 2.4.0*
-
-Pivots on a column (with new columns per distinct value)
-
-| `sum`
-a| [[sum]]
-|===
 
 !!! note
     [spark.sql.retainGroupColumns](../configuration-properties.md#spark.sql.retainGroupColumns) configuration property controls whether to retain columns used for aggregation or not (../in `RelationalGroupedDataset` operators).

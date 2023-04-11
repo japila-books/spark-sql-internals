@@ -1,9 +1,9 @@
 # FlatMapGroupsWithState Logical Operator
 
-`FlatMapGroupsWithState` is a [binary logical operator](#BinaryNode) that represents the following [KeyValueGroupedDataset](../basic-aggregation/KeyValueGroupedDataset.md) high-level operators:
+`FlatMapGroupsWithState` is a [binary logical operator](#BinaryNode) that represents the following [KeyValueGroupedDataset](../KeyValueGroupedDataset.md) high-level operators:
 
-* [mapGroupsWithState](../basic-aggregation/KeyValueGroupedDataset.md#mapGroupsWithState)
-* [flatMapGroupsWithState](../basic-aggregation/KeyValueGroupedDataset.md#flatMapGroupsWithState)
+* [mapGroupsWithState](../KeyValueGroupedDataset.md#mapGroupsWithState)
+* [flatMapGroupsWithState](../KeyValueGroupedDataset.md#flatMapGroupsWithState)
 
 ## <span id="BinaryNode"> BinaryNode
 
@@ -74,8 +74,8 @@ In the end, `apply` [creates a SerializeFromObject unary logical operator](../Ca
 
 `apply` is used for the following high-level operators:
 
-* [KeyValueGroupedDataset.mapGroupsWithState](../basic-aggregation/KeyValueGroupedDataset.md#mapGroupsWithState)
-* [KeyValueGroupedDataset.flatMapGroupsWithState](../basic-aggregation/KeyValueGroupedDataset.md#flatMapGroupsWithState)
+* [KeyValueGroupedDataset.mapGroupsWithState](../KeyValueGroupedDataset.md#mapGroupsWithState)
+* [KeyValueGroupedDataset.flatMapGroupsWithState](../KeyValueGroupedDataset.md#flatMapGroupsWithState)
 
 ## Execution Planning
 

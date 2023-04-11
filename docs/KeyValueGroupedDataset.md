@@ -1,8 +1,13 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # KeyValueGroupedDataset
 
-`KeyValueGroupedDataset` is a high-level API for **Typed Grouping** (part of [Basic Aggregation](index.md)) to calculate aggregates over groups of objects in a typed [Dataset](../Dataset.md).
+`KeyValueGroupedDataset` is a high-level API for **Typed Grouping** (part of [Basic Aggregation](aggregations/index.md)) to calculate aggregates over groups of objects in a typed [Dataset](Dataset.md).
 
-`KeyValueGroupedDataset` represents a **grouped dataset** as a result of [Dataset.groupByKey](../Dataset.md#groupByKey) operator (that aggregates records by a grouping function).
+`KeyValueGroupedDataset` represents a **grouped dataset** as a result of [Dataset.groupByKey](Dataset.md#groupByKey) operator (that aggregates records by a grouping function).
 
 ```text
 // Dataset[T]
@@ -19,11 +24,11 @@ groupByKey(
 
 `KeyValueGroupedDataset` takes the following to be created:
 
-* <span id="kEncoder"> Key [Encoder](../Encoder.md)
-* <span id="vEncoder"> Value [Encoder](../Encoder.md)
-* <span id="queryExecution"> [QueryExecution](../QueryExecution.md)
-* <span id="dataAttributes"> Data [Attribute](../expressions/Attribute.md)s
-* <span id="groupingAttributes"> Grouping [Attribute](../expressions/Attribute.md)s
+* <span id="kEncoder"> Key [Encoder](Encoder.md)
+* <span id="vEncoder"> Value [Encoder](Encoder.md)
+* <span id="queryExecution"> [QueryExecution](QueryExecution.md)
+* <span id="dataAttributes"> Data [Attribute](expressions/Attribute.md)s
+* <span id="groupingAttributes"> Grouping [Attribute](expressions/Attribute.md)s
 
 `KeyValueGroupedDataset` is created for the following high-level operators:
 
@@ -61,7 +66,7 @@ aggUntyped(
   columns: TypedColumn[_, _]*): Dataset[_]
 ```
 
-`aggUntyped` creates a [Dataset](../Dataset.md) with an [Aggregate](../logical-operators/Aggregate.md) logical operator (with the [grouping attributes](#groupingAttributes)).
+`aggUntyped` creates a [Dataset](Dataset.md) with an [Aggregate](logical-operators/Aggregate.md) logical operator (with the [grouping attributes](#groupingAttributes)).
 
 ## <span id="flatMapGroupsWithState"> flatMapGroupsWithState
 
@@ -77,7 +82,7 @@ flatMapGroupsWithState[S: Encoder, U: Encoder](
   func: (K, Iterator[V], GroupState[S]) => Iterator[U]): Dataset[U]
 ```
 
-`flatMapGroupsWithState` creates a [Dataset](../Dataset.md#apply) with a [FlatMapGroupsWithState](../logical-operators/FlatMapGroupsWithState.md) logical operator (with the [isMapGroupsWithState](../logical-operators/FlatMapGroupsWithState.md#isMapGroupsWithState) disabled).
+`flatMapGroupsWithState` creates a [Dataset](Dataset.md#apply) with a [FlatMapGroupsWithState](logical-operators/FlatMapGroupsWithState.md) logical operator (with the [isMapGroupsWithState](logical-operators/FlatMapGroupsWithState.md#isMapGroupsWithState) disabled).
 
 `flatMapGroupsWithState` accepts `Append` and `Update` output modes only, and throws an `IllegalArgumentException` for the others:
 

@@ -15,11 +15,11 @@
 
 ### KeyValueGroupedDataset
 
-[KeyValueGroupedDataset.agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) operator is used
+[KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) operator is used
 
 ### RelationalGroupedDataset
 
-`RelationalGroupedDataset` is requested to [toDF](../basic-aggregation/RelationalGroupedDataset.md#toDF).
+`RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF).
 
 ## Group Types
 

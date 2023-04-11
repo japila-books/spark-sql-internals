@@ -95,7 +95,7 @@ tuple(
 `tuple` is used when:
 
 * `Dataset` is requested to [selectUntyped](Dataset.md#selectUntyped), [select](Dataset.md#select), [joinWith](Dataset.md#joinWith)
-* `KeyValueGroupedDataset` is requested to [aggUntyped](basic-aggregation/KeyValueGroupedDataset.md#aggUntyped)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped)
 * `Encoders` utility is used to [tuple](Encoders.md#tuple)
 * `ReduceAggregator` is requested for `bufferEncoder`
 

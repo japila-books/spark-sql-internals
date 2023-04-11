@@ -8,7 +8,7 @@
 
 Aggregates over (_applies an aggregate function on_) a subset of or the entire `Dataset` (i.e., considering the entire data set as one group)
 
-Creates a [RelationalGroupedDataset](RelationalGroupedDataset.md)
+Creates a [RelationalGroupedDataset](../RelationalGroupedDataset.md)
 
 !!! note
     `Dataset.agg` is simply a shortcut for `Dataset.groupBy().agg`.
@@ -17,15 +17,15 @@ Creates a [RelationalGroupedDataset](RelationalGroupedDataset.md)
 
 Groups the rows in a `Dataset` by columns (as [Column expressions](../Column.md) or names).
 
-Creates a [RelationalGroupedDataset](RelationalGroupedDataset.md)
+Creates a [RelationalGroupedDataset](../RelationalGroupedDataset.md)
 
 Used for **untyped aggregates** using `DataFrame`s. Grouping is described using [column expressions](../Column.md) or column names.
 
-Internally, `groupBy` resolves column names and [creates a RelationalGroupedDataset](RelationalGroupedDataset.md#creating-instance) (with [groupType](RelationalGroupedDataset.md#groupType) as `GroupByType`).
+Internally, `groupBy` resolves column names and [creates a RelationalGroupedDataset](../RelationalGroupedDataset.md#creating-instance) (with [groupType](../RelationalGroupedDataset.md#groupType) as `GroupByType`).
 
 ### <span id="groupByKey"> groupByKey
 
-Groups records (of type `T`) by the input `func` and creates a [KeyValueGroupedDataset](KeyValueGroupedDataset.md) to apply aggregation to.
+Groups records (of type `T`) by the input `func` and creates a [KeyValueGroupedDataset](../KeyValueGroupedDataset.md) to apply aggregation to.
 
 Used for **typed aggregates** using `Dataset`s with records grouped by a key-defining discriminator function
 

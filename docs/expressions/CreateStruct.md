@@ -33,7 +33,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `ColumnStat` is requested to [statExprs](../cost-based-optimization/ColumnStat.md#statExprs)
 
-* `KeyValueGroupedDataset` is requested to [aggUntyped](../basic-aggregation/KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](../basic-aggregation/KeyValueGroupedDataset.md#agg) typed operator is used)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operator is used)
 
 * <<spark-sql-dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
 

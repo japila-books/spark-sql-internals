@@ -314,13 +314,13 @@ Used when:
 
 The value of [spark.sql.pivotMaxValues](configuration-properties.md#spark.sql.pivotMaxValues) configuration property
 
-Used in [pivot](basic-aggregation/RelationalGroupedDataset.md#pivot) operator.
+Used in [pivot](RelationalGroupedDataset.md#pivot) operator.
 
 ## <span id="dataFrameRetainGroupColumns"> dataFrameRetainGroupColumns
 
 The value of [spark.sql.retainGroupColumns](configuration-properties.md#spark.sql.retainGroupColumns) configuration property
 
-Used in [RelationalGroupedDataset](basic-aggregation/RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
+Used in [RelationalGroupedDataset](RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
 
 ## <span id="DECORRELATE_INNER_QUERY_ENABLED"><span id="decorrelateInnerQueryEnabled"> decorrelateInnerQueryEnabled
 

@@ -160,6 +160,8 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
+    - Basic Aggregation:
+      - basic-aggregation/index.md
     # "Bucketing" and "Cache Serialization" sections use awesome-pages plugin
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
     # Review bucketing/.pages for setup
@@ -938,10 +940,6 @@ nav:
     - OutputWriter: connectors/OutputWriter.md
     - WriteTaskStatsTracker: connectors/WriteTaskStatsTracker.md
   - High-Level APIs:
-    - Basic Aggregation:
-      - basic-aggregation/index.md
-      - KeyValueGroupedDataset: basic-aggregation/KeyValueGroupedDataset.md
-      - RelationalGroupedDataset: basic-aggregation/RelationalGroupedDataset.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md
@@ -949,8 +947,10 @@ nav:
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
     - Encoders: Encoders.md
+    - KeyValueGroupedDataset: KeyValueGroupedDataset.md
     - Observation: Observation.md
     - QueryExecutionListener: QueryExecutionListener.md
+    - RelationalGroupedDataset: RelationalGroupedDataset.md
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
     - SparkSessionExtensions: SparkSessionExtensions.md
