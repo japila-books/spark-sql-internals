@@ -781,11 +781,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/basic-aggregation/</loc>
-         <lastmod>2023-04-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/bucketing/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
