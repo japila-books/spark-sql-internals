@@ -1,3 +1,8 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # TypedColumn
 
 `TypedColumn` is a [Column](Column.md) with the [ExpressionEncoder](#encoder) for the types of the input and the output.

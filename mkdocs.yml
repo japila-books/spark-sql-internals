@@ -828,6 +828,7 @@ nav:
       - AggregatePushDownUtils: connectors/AggregatePushDownUtils.md
       - BasicWriteJobStatsTracker: connectors/BasicWriteJobStatsTracker.md
       - BasicWriteTaskStats: connectors/BasicWriteTaskStats.md
+      - CompressionCodecs: files/CompressionCodecs.md
       - FileBatchWrite: connectors/FileBatchWrite.md
       - FileDataSourceV2: connectors/FileDataSourceV2.md
       - FileFormat: connectors/FileFormat.md
@@ -937,6 +938,7 @@ nav:
     - OutputWriter: connectors/OutputWriter.md
     - WriteTaskStatsTracker: connectors/WriteTaskStatsTracker.md
   - High-Level APIs:
+    - Column: Column.md
     - ColumnarRule: ColumnarRule.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md
@@ -958,6 +960,7 @@ nav:
       - spark-sql-functions-datetime.md
       - spark-sql-functions-regular-functions.md
       - spark-sql-functions-windows.md
+    - TypedColumn: TypedColumn.md
     - Window Functions:
       - window-functions/index.md
       - AggregateProcessor: window-functions/AggregateProcessor.md
@@ -976,7 +979,7 @@ nav:
   # Demo section uses awesome-pages plugin
   # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
   # Review demo/.pages for setup
-  - ...
+  - ... | demo/**.md
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
     - Bloom Filter:
@@ -1004,10 +1007,7 @@ nav:
       - spark-sql-Dataset-actions.md
       - spark-sql-DataFrameNaFunctions.md
       - DataFrameStatFunctions.md
-    - Column:
-      - Column: Column.md
-      - Column Operators: spark-sql-column-operators.md
-      - TypedColumn: TypedColumn.md
+    - Column Operators: spark-sql-column-operators.md
     - Data Types:
       - types/index.md
       - AbstractDataType: types/AbstractDataType.md
@@ -1037,4 +1037,3 @@ nav:
     - PhysicalAggregation: PhysicalAggregation.md
     - PhysicalOperation: PhysicalOperation.md
     - KnownSizeEstimation: KnownSizeEstimation.md
-    - CompressionCodecs: CompressionCodecs.md
