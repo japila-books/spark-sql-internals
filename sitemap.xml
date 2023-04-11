@@ -611,11 +611,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/multi-dimensional-aggregation/</loc>
-         <lastmod>2023-04-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/overview/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
@@ -752,6 +747,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/aggregations/</loc>
+         <lastmod>2023-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/aggregations/demo-multi-dimensional-aggregations/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
