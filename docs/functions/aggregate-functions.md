@@ -30,7 +30,7 @@ grouping(columnName: String): Column  // <1>
 * returns `1` if the column is in a subtotal and is `NULL`
 * returns `0` if the underlying value is `NULL` or any other value
 
-NOTE: `grouping` can only be used with [cube](multi-dimensional-aggregation.md#cube), [rollup](multi-dimensional-aggregation.md#rollup) or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#Grouping[`Analyzer` does check analysis]).
+NOTE: `grouping` can only be used with [cube](../aggregations/index.md#cube), [rollup](../aggregations/index.md#rollup) or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#Grouping[`Analyzer` does check analysis]).
 
 From [Hive's documentation about Grouping__ID function](https://cwiki.apache.org/confluence/display/Hive/Enhanced&#43;Aggregation%2C&#43;Cube%2C&#43;Grouping&#43;and&#43;Rollup#EnhancedAggregation,Cube,GroupingandRollup-Grouping\_\_IDfunction) (that can somehow help to understand `grouping`):
 
@@ -193,7 +193,7 @@ scala> query.withColumn("bitmask", bin($"grouping_id()")).show
 
 The list of columns of `grouping_id` should match grouping columns (in `cube` or `rollup`) exactly, or empty which means all the grouping columns (which is exactly what the function expects).
 
-NOTE: `grouping_id` can only be used with [cube](multi-dimensional-aggregation.md#cube), [rollup](multi-dimensional-aggregation.md#rollup) or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#GroupingID[`Analyzer` does check analysis]).
+NOTE: `grouping_id` can only be used with [cube](../aggregations/index.md#cube), [rollup](../aggregations/index.md#rollup) or `GROUPING SETS` multi-dimensional aggregate operators (and is verified when CheckAnalysis.md#GroupingID[`Analyzer` does check analysis]).
 
 NOTE: Spark SQL's `grouping_id` function is known as `grouping__id` in Hive.
 

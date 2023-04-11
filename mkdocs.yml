@@ -232,7 +232,6 @@ nav:
       - OffHeapColumnVector: vectorized-decoding/OffHeapColumnVector.md
       - OnHeapColumnVector: vectorized-decoding/OnHeapColumnVector.md
       - WritableColumnVector: vectorized-decoding/WritableColumnVector.md
-    - Multi-Dimensional Aggregation: multi-dimensional-aggregation.md
     - ANSI Intervals: new-and-noteworthy/intervals.md
     - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
     - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md

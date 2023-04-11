@@ -13,8 +13,8 @@ tags:
 `RelationalGroupedDataset` is a result of executing the following grouping operators:
 
 * [groupBy](aggregations/index.md#groupBy)
-* [rollup](multi-dimensional-aggregation.md#rollup)
-* [cube](multi-dimensional-aggregation.md#cube)
+* [rollup](aggregations/index.md#rollup)
+* [cube](aggregations/index.md#cube)
 * [pivot](#pivot)
 
 <!---
