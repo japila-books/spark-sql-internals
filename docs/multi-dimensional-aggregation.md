@@ -1,6 +1,6 @@
 # Multi-Dimensional Aggregation
 
-**Multi-dimensional aggregate operators** are enhanced variants of [groupBy](basic-aggregation/index.md#groupBy) operator to create queries for subtotals, grand totals and superset of subtotals in one go.
+**Multi-dimensional aggregate operators** are enhanced variants of [groupBy](aggregations/index.md#groupBy) operator to create queries for subtotals, grand totals and superset of subtotals in one go.
 
 It is _assumed_ that using one of the operators is usually more efficient (than `union` and `groupBy`) as it gives more freedom for query optimization.
 
@@ -27,7 +27,7 @@ GROUP BY CUBE(expressions)
 
 `cube` multi-dimensional aggregate operator returns a [RelationalGroupedDataset](RelationalGroupedDataset.md) to calculate subtotals and a grand total for every permutation of the columns specified.
 
-`cube` is an extension of [groupBy](basic-aggregation/index.md#groupBy) operator that allows calculating subtotals and a grand total across all combinations of specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
+`cube` is an extension of [groupBy](aggregations/index.md#groupBy) operator that allows calculating subtotals and a grand total across all combinations of specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
 
 `cube` returns [RelationalGroupedDataset](RelationalGroupedDataset.md) that you can use to execute aggregate function or operator.
 
@@ -51,7 +51,7 @@ GROUP BY ROLLUP(expressions)
 
 `rollup` gives a [RelationalGroupedDataset](RelationalGroupedDataset.md) to calculate subtotals and a grand total over (ordered) combination of groups.
 
-`rollup` is an extension of [groupBy](basic-aggregation/index.md#groupBy) operator that calculates subtotals and a grand total across specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
+`rollup` is an extension of [groupBy](aggregations/index.md#groupBy) operator that calculates subtotals and a grand total across specified group of `n + 1` dimensions (with `n` being the number of columns as `cols` and `col1` and `1` for where values become `null`, i.e. undefined).
 
 !!! note
     `rollup` operator is commonly used for analysis over hierarchical data; e.g. total salary by department, division, and company-wide total.
@@ -216,7 +216,7 @@ GROUP BY GROUPING SETS (expressions)
 ```
 
 !!! note
-    SQL's `GROUPING SETS` is the most general aggregate "operator" and can generate the same dataset as using a simple [groupBy](basic-aggregation/index.md#groupBy), [cube](#cube) and [rollup](#rollup) operators.
+    SQL's `GROUPING SETS` is the most general aggregate "operator" and can generate the same dataset as using a simple [groupBy](aggregations/index.md#groupBy), [cube](#cube) and [rollup](#rollup) operators.
 
 ```text
 import java.time.LocalDate
@@ -257,7 +257,7 @@ scala> q.show
 +----+-----+------+
 ```
 
-`GROUPING SETS` clause generates a dataset that is equivalent to `union` operator of multiple [groupBy](basic-aggregation/index.md#groupBy) operators.
+`GROUPING SETS` clause generates a dataset that is equivalent to `union` operator of multiple [groupBy](aggregations/index.md#groupBy) operators.
 
 ```text
 val sales = Seq(

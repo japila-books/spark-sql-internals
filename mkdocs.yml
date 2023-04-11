@@ -160,8 +160,6 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-    - Basic Aggregation:
-      - basic-aggregation/index.md
     # "Bucketing" and "Cache Serialization" sections use awesome-pages plugin
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
     # Review bucketing/.pages for setup
