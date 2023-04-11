@@ -13,6 +13,8 @@ Aggregation queries can be broken down to the following sections:
 
 ## High-Level Operators
 
+`Aggregate` is a logical representation of the high-level operators in [SQL](#sql) or [Dataset API](#dataset).
+
 ### SQL
 
 `Aggregate` represents the following SQL clauses:
@@ -20,20 +22,34 @@ Aggregation queries can be broken down to the following sections:
 * [GROUP BY](../sql/AstBuilder.md#withAggregationClause) (incl. `GROUPING SETS`, `WITH CUBE`, `WITH ROLLUP`)
 * [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan)
 
-### KeyValueGroupedDataset
+### Dataset
 
-[KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) operator is used
+`Aggregate` represents the following high-level operators in Dataset API:
 
-### RelationalGroupedDataset
+* [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg)
+* [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg)
+* [RelationalGroupedDataset.avg](../RelationalGroupedDataset.md#avg)
+* [RelationalGroupedDataset.count](../RelationalGroupedDataset.md#count)
+* [RelationalGroupedDataset.max](../RelationalGroupedDataset.md#max)
+* [RelationalGroupedDataset.mean](../RelationalGroupedDataset.md#mean)
+* [RelationalGroupedDataset.min](../RelationalGroupedDataset.md#min)
+* [RelationalGroupedDataset.sum](../RelationalGroupedDataset.md#sum)
 
-`RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF).
+## Catalyst DSL
 
-## Group Types
+[Catalyst DSL](../catalyst-dsl/index.md) defines [groupBy](../catalyst-dsl/index.md#groupBy) operator to create aggregation queries.
 
-* `CUBE`
-* `GROUPBY`
-* `PIVOT`
-* `ROLLUP`
+## Group Types { #GroupType }
+
+`GroupType` indicates the kind of an aggregation.
+
+### CUBE { #CUBE }
+
+### GROUPBY { #GROUPBY }
+
+### PIVOT { #PIVOT }
+
+### ROLLUP { #ROLLUP }
 
 ## Logical Analysis
 
@@ -53,10 +69,6 @@ The following logical analysis rules handle `Aggregate` logical operator:
 `UnsupportedOperationChecker` is responsible for asserting correctness of aggregation queries (among others).
 
 ??? note "FIXME List unsupported features"
-
-## Catalyst DSL
-
-[Catalyst DSL](../catalyst-dsl/index.md) defines [groupBy](../catalyst-dsl/index.md#groupBy) operator to create aggregation queries.
 
 ## Logical Optimizations
 
@@ -113,6 +125,14 @@ scala> println(afterPushDown.numberedTreeString)
 05             +- LocalRelation [_1#3, _2#4, _3#5]
 ```
 
+## Physical Optimizations
+
+The following physical optimizations use `Aggregate` logical operator:
+
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
+* [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md)
+* `RowLevelOperationRuntimeGroupFiltering`
+
 ## Query Planning
 
 `Aggregate` logical operator is planned to one of the physical operators in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (using [PhysicalAggregation](../PhysicalAggregation.md) utility):
@@ -120,14 +140,6 @@ scala> println(afterPushDown.numberedTreeString)
 * [HashAggregateExec](../physical-operators/HashAggregateExec.md)
 * [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
 * [SortAggregateExec](../physical-operators/SortAggregateExec.md)
-
-## Physical Optimization
-
-The following physical optimizations use `Aggregate` logical operator:
-
-* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
-* [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md)
-* `RowLevelOperationRuntimeGroupFiltering`
 
 ## Basic Aggregation
 
@@ -217,7 +229,7 @@ spark
   .start
 ```
 
-## GROUPING SETS SQL Clause { #grouping-sets }
+### GROUPING SETS { #grouping-sets }
 
 ```sql
 GROUP BY (expressions) GROUPING SETS (expressions)

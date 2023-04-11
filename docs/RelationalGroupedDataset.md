@@ -7,15 +7,103 @@ tags:
 
 `RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** (part of [Basic Aggregation](aggregations/index.md)) to calculate aggregates over groups of rows in a [DataFrame](DataFrame.md).
 
-!!! note
+??? note "KeyValueGroupedDataset is for Typed Aggregates"
     [KeyValueGroupedDataset](KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Row](Row.md)s).
 
-`RelationalGroupedDataset` is a result of executing the following grouping operators:
+`RelationalGroupedDataset` is the result of executing the following high-level operators:
 
+* [cube](aggregations/index.md#cube)
 * [groupBy](aggregations/index.md#groupBy)
 * [rollup](aggregations/index.md#rollup)
-* [cube](aggregations/index.md#cube)
-* [pivot](#pivot)
+* [pivot](aggregations/index.md#pivot)
+
+## Creating Instance
+
+`RelationalGroupedDataset` takes the following to be created:
+
+* <span id="df"> [DataFrame](DataFrame.md)
+* <span id="groupingExprs"> Grouping [Expression](expressions/Expression.md)s
+* <span id="groupType"> [GroupType](aggregations/index.md#GroupType)
+
+`RelationalGroupedDataset` is created (possibly using [apply](#apply) factory) for the following operators:
+
+* [Dataset.cube](Dataset.md#cube)
+* [Dataset.groupBy](Dataset.md#groupBy)
+* [Dataset.rollup](Dataset.md#rollup)
+* [RelationalGroupedDataset.pivot](#pivot)
+
+### Creating RelationalGroupedDataset Instance { #apply }
+
+```scala
+apply(
+  df: DataFrame,
+  groupingExprs: Seq[Expression],
+  groupType: GroupType): RelationalGroupedDataset
+```
+
+`apply` creates a [RelationalGroupedDataset](#creating-instance).
+
+## agg { #agg }
+
+```scala
+agg(
+  aggExpr: (String, String),
+  aggExprs: (String, String)*): DataFrame
+agg(
+  expr: Column,
+  exprs: Column*): DataFrame
+agg(
+  exprs: Map[String, String]): DataFrame
+```
+
+`agg` [toDF](#toDF) all the columns.
+
+## count { #count }
+
+```scala
+count(): DataFrame
+```
+
+`count` creates a `Count` with a `1` literal and [converts it to an AggregateExpression](expressions/AggregateFunction.md#toAggregateExpression).
+
+`count` creates an `Alias` unary expression with the `Count` and `count` name.
+
+In the end, `count` [toDF](#toDF) the `Alias` unary expression.
+
+## Aggregating Numeric Columns { #aggregateNumericColumns }
+
+```scala
+aggregateNumericColumns(
+  colNames: String*)(
+  f: Expression => AggregateFunction): DataFrame
+```
+
+`aggregateNumericColumns` asserts that the given `colNames` are all numberic (with [NumericType](types/index.md#NumericType)) or takes all the numeric columns of this [DataFrame](#df).
+
+For every numeric column, `aggregateNumericColumns` applies the given `f` function and [converts the result to an AggregateExpression](expressions/AggregateFunction.md#toAggregateExpression).
+
+In the end, `aggregateNumericColumns` [toDF](#toDF) the [AggregateExpression](expressions/AggregateExpression.md)s.
+
+---
+
+`aggregateNumericColumns` is used when:
+
+* `RelationalGroupedDataset` is requested to [mean](#mean), [max](#max), [avg](#avg), [min](#min), [sum](#sum)
+
+## toDF { #toDF }
+
+```scala
+toDF(
+  aggExprs: Seq[Expression]): DataFrame
+```
+
+`toDF`...FIXME
+
+---
+
+`toDF` is used when:
+
+* `RelationalGroupedDataset` is requested to [aggregate numeric columns](#aggregateNumericColumns) (for [mean](#mean), [max](#max), [avg](#avg), [min](#min), [sum](#sum) operators), [agg](#agg), [count](#count)
 
 <!---
 ## Review Me
