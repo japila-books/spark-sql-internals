@@ -116,11 +116,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/CompressionCodecs/</loc>
-         <lastmod>2023-04-11</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CreatableRelationProvider/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
@@ -2177,6 +2172,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/files/</loc>
+         <lastmod>2023-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/files/CompressionCodecs/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
