@@ -39,19 +39,44 @@ CREATE TABLE T(a INT, b INT NOT NULL);
 
 -- The default default is NULL
 INSERT INTO T VALUES (DEFAULT, 0);
-INSERT INTO T(b)  VALUES (1);
+INSERT INTO T(b) VALUES (1);
 SELECT * FROM T;
-(NULL, 0)
-(NULL, 1)
+-- (NULL, 0)
+-- (NULL, 1)
 
 -- Adding a default to a table with rows, sets the values for the
 -- existing rows (exist default) and new rows (current default).
 ALTER TABLE T ADD COLUMN c INT DEFAULT 5;
 INSERT INTO T VALUES (1, 2, DEFAULT);
 SELECT * FROM T;
-(NULL, 0, 5)
-(NULL, 1, 5)
-(1, 2, 5)
+-- (NULL, 0, 5)
+-- (NULL, 1, 5)
+-- (1, 2, 5)
+```
+
+```sql
+CREATE TABLE t1 (
+  i BOOLEAN,
+  s BIGINT DEFAULT 42)
+USING parquet;
+
+INSERT INTO t1
+VALUES
+  (true, 41),
+  (false, DEFAULT);
+
+CREATE TABLE T2 (
+  i BOOLEAN DEFAULT true,
+  s BIGINT DEFAULT 42,
+  t STRING DEFAULT 'ABC')
+USING parquet;
+
+INSERT INTO t2 (i, s)
+  SELECT DEFAULT, s
+  FROM t1
+  ORDER BY s
+  LIMIT 1
+  OFFSET 1;
 ```
 
 Default Columns uses the following configuration properties:
