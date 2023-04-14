@@ -1,3 +1,7 @@
+---
+status: new
+---
+
 # Default Columns :material-new-box:{ title="New in 3.4.0" }
 
 [Apache Spark 3.4](https://issues.apache.org/jira/browse/SPARK-38334) introduces support for `DEFAULT` columns in the following SQL statements:
