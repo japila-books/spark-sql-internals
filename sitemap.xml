@@ -2816,6 +2816,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/BaseEvalPython/</loc>
+         <lastmod>2023-04-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/CTERelationDef/</loc>
          <lastmod>2023-04-14</lastmod>
          <changefreq>daily</changefreq>
