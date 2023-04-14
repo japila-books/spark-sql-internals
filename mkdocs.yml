@@ -305,6 +305,7 @@ nav:
       - AnalyzeTableCommand: logical-operators/AnalyzeTableCommand.md
       - AnalyzeTablesCommand: logical-operators/AnalyzeTablesCommand.md
       - AppendData: logical-operators/AppendData.md
+      - logical-operators/BaseEvalPython.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - ClearCacheCommand: logical-operators/ClearCacheCommand.md
       - CollectMetrics: logical-operators/CollectMetrics.md
