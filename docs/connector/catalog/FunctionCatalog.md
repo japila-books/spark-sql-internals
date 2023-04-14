@@ -2,16 +2,35 @@
 
 `FunctionCatalog` is an [extension](#contract) of the [CatalogPlugin](CatalogPlugin.md) abstraction for [function catalogs](#implementations).
 
+`FunctionCatalog` is registered using [spark.sql.catalog](index.md#spark.sql.catalog) configuration property (as are [CatalogPlugin](CatalogPlugin.md)s).
+
 ## Contract (Subset)
 
-### <span id="loadFunction"> Loading Function
+### Listing Functions { #listFunctions }
+
+```java
+Identifier[] listFunctions(
+  String[] namespace)
+```
+
+See:
+
+* [V2SessionCatalog](../../V2SessionCatalog.md#listFunctions)
+
+Used when:
+
+* `ShowFunctionsExec` is requested to `run`
+
+### Loading Function { #loadFunction }
 
 ```java
 UnboundFunction loadFunction(
   Identifier ident)
 ```
 
-See [V2SessionCatalog](../../V2SessionCatalog.md#loadFunction)
+See:
+
+* [V2SessionCatalog](../../V2SessionCatalog.md#loadFunction)
 
 Used when:
 
@@ -24,5 +43,5 @@ Used when:
 ## Implementations
 
 * [CatalogExtension](CatalogExtension.md)
-* `FakeV2SessionCatalog`
+* `JDBCTableCatalog`
 * [V2SessionCatalog](../../V2SessionCatalog.md)
