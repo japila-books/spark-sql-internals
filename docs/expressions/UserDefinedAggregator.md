@@ -51,7 +51,7 @@ In the end, `scalaAggregator` creates a [ScalaAggregator](ScalaAggregator.md).
 
 `scalaAggregator` is used when:
 
-* `UDFRegistration` is requested to [register a UserDefinedAggregator](../UDFRegistration.md#register)
+* `UDFRegistration` is requested to [register a UserDefinedAggregator](../user-defined-functions/UDFRegistration.md#register)
 * `UserDefinedAggregator` is requested to [create a Column (for execution)](#apply)
 
 ## <span id="withName"> Creates Named UserDefinedAggregator

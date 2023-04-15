@@ -4,7 +4,7 @@ title: BaseEvalPython
 
 # BaseEvalPython Unary Logical Operators
 
-`BaseEvalPython` is an [extension](#contract) of the [UnaryNode](LogicalPlan.md#UnaryNode) abstraction for [unary logical operators](#implementations) that execute `PythonUDF`s.
+`BaseEvalPython` is an [extension](#contract) of the [UnaryNode](LogicalPlan.md#UnaryNode) abstraction for [unary logical operators](#implementations) that can execute [PythonUDFs](#udfs).
 
 ## Contract
 
@@ -14,7 +14,7 @@ title: BaseEvalPython
 udfs: Seq[PythonUDF]
 ```
 
-`PythonUDF`s
+[PythonUDF](../expressions/PythonUDF.md)s
 
 ### resultAttrs { #resultAttrs }
 

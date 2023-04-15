@@ -57,7 +57,7 @@ windowFrameExpressionFactoryPairs: Seq[(ExpressionBuffer, InternalRow => WindowF
 1. `FrameLessOffsetWindowFunction`
 1. [OffsetWindowFunction](../expressions/OffsetWindowFunction.md)
 1. [AggregateWindowFunction](../expressions/AggregateWindowFunction.md)
-1. `PythonUDF` ([PySpark]({{ book.pyspark }}/sql/PythonUDF))
+1. [PythonUDF](../expressions/PythonUDF.md)
 
 ??? note "Lazy Value"
     `windowFrameExpressionFactoryPairs` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.

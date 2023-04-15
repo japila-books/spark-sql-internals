@@ -199,7 +199,7 @@ In the end, `sql` [creates a DataFrame](Dataset.md#ofRows) with the following:
 udf: UDFRegistration
 ```
 
-`udf` attribute is [UDFRegistration](UDFRegistration.md) (for registering [user-defined functions](spark-sql-udfs.md) for SQL-based queries).
+`udf` attribute is [UDFRegistration](user-defined-functions/UDFRegistration.md) (for registering [user-defined functions](spark-sql-udfs.md) for SQL-based queries).
 
 ```text
 val spark: SparkSession = ...

@@ -194,7 +194,7 @@ Spark Structured Streaming's `StreamingQueryManager`
 udfRegistration: UDFRegistration
 ```
 
-[UDFRegistration](UDFRegistration.md)
+[UDFRegistration](user-defined-functions/UDFRegistration.md)
 
 ## <span id="createClone"> Creating Clone of SessionState
 

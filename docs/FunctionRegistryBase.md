@@ -69,9 +69,9 @@ createOrReplaceTempFunction(
 
     source | Call Site
     -------|-----------
-    `java_udf` | [UDFRegistration.register](UDFRegistration.md#register)
-    `python_udf` | [UDFRegistration.registerPython](UDFRegistration.md#registerPython)
-    `scala_udf` | [UDFRegistration.register](UDFRegistration.md#register)
+    `java_udf` | [UDFRegistration.register](user-defined-functions/UDFRegistration.md#register)
+    `python_udf` | [UDFRegistration.registerPython](user-defined-functions/UDFRegistration.md#registerPython)
+    `scala_udf` | [UDFRegistration.register](user-defined-functions/UDFRegistration.md#register)
 
     `source` is used to create an `ExpressionInfo` for [registering a named function](#registerFunction).
 
@@ -79,4 +79,4 @@ createOrReplaceTempFunction(
 
 `createOrReplaceTempFunction` is used when:
 
-* `UDFRegistration` is requested to register a user-defined function written in [Python](UDFRegistration.md#registerPython) or [Scala](UDFRegistration.md#register)
+* `UDFRegistration` is requested to register a user-defined function written in [Python](user-defined-functions/UDFRegistration.md#registerPython) or [Scala](user-defined-functions/UDFRegistration.md#register)

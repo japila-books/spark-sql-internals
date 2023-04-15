@@ -109,7 +109,7 @@ streamingQueryManager: StreamingQueryManager
 udfRegistration: UDFRegistration
 ```
 
-`SessionState` is given an [UDFRegistration](UDFRegistration.md) when [created](#creating-instance).
+`SessionState` is given an [UDFRegistration](user-defined-functions/UDFRegistration.md) when [created](#creating-instance).
 
 ### <span id="queryStagePrepRules"> AQE QueryStage Physical Preparation Rules
 

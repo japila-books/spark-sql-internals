@@ -4,7 +4,7 @@ title: ArrowEvalPython
 
 # ArrowEvalPython Logical Operator
 
-`ArrowEvalPython` is a [BaseEvalPython](BaseEvalPython.md) logical operator to execute `PythonUDF`s with [`SQL_SCALAR_PANDAS_UDF` and `SQL_SCALAR_PANDAS_ITER_UDF` eval types](#evalType).
+`ArrowEvalPython` is a [BaseEvalPython](BaseEvalPython.md) logical operator to execute [PythonUDFs](#udfs) with [`SQL_SCALAR_PANDAS_UDF` and `SQL_SCALAR_PANDAS_ITER_UDF` eval types](#evalType).
 
 `ArrowEvalPython` is planned to `ArrowEvalPythonExec` physical operator (by `PythonEvals` execution planning strategy).
 
@@ -12,7 +12,7 @@ title: ArrowEvalPython
 
 `ArrowEvalPython` takes the following to be created:
 
-* <span id="udfs"> `PythonUDF`s
+* <span id="udfs"> [PythonUDF](../expressions/PythonUDF.md)s
 * <span id="resultAttrs"> Result [Attribute](../expressions/Attribute.md)s
 * <span id="child"> Child [LogicalPlan](LogicalPlan.md)
 * [PythonUDF Eval Type](#evalType)

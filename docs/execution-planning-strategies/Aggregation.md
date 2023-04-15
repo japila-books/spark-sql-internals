@@ -47,7 +47,7 @@ In the end, `apply` creates one of the following physical operators based on whe
 
 ### <span id="apply-PythonUDFs"> PythonUDFs
 
-For [Aggregate](../logical-operators/Aggregate.md) logical operators with `PythonUDF`s ([PySpark]({{ book.pyspark }}/sql/PythonUDF))...FIXME
+For [Aggregate](../logical-operators/Aggregate.md) logical operators with [PythonUDF](../expressions/PythonUDF.md) expressions...FIXME
 
 ### <span id="apply-AnalysisException"> AnalysisException
 

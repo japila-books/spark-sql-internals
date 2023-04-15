@@ -21,14 +21,14 @@ Used when `EvalPythonExec` physical operator is [executed](#doExecute)
 
 ## Implementations
 
-* ArrowEvalPythonExec
-* BatchEvalPythonExec
+* `ArrowEvalPythonExec`
+* `BatchEvalPythonExec`
 
 ## Creating Instance
 
 `EvalPythonExec` takes the following to be created:
 
-* <span id="udfs"> `PythonUDF`s
+* <span id="udfs"> [PythonUDF](../expressions/PythonUDF.md)s
 * <span id="resultAttrs"> Result [Attributes](../expressions/Attribute.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 

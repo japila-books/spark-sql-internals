@@ -228,6 +228,7 @@ nav:
     - ... | subqueries/**.md
     - ... | table-valued-functions/**.md
     - ... | transactional-writes/**.md
+    - ... | user-defined-functions/**.md
     - Vectorized Decoding:
       - vectorized-decoding/index.md
       - ColumnVector: vectorized-decoding/ColumnVector.md
@@ -341,6 +342,7 @@ nav:
       - PlanExpression: expressions/PlanExpression.md
       - Predicate: expressions/Predicate.md
       - Projection: expressions/Projection.md
+      - expressions/PythonUDF.md
       - RowOrdering: expressions/RowOrdering.md
       - RuntimeReplaceable: expressions/RuntimeReplaceable.md
       - ScalaAggregator: expressions/ScalaAggregator.md
@@ -786,7 +788,6 @@ nav:
       - CacheManager:
         - CacheManager: CacheManager.md
       - RuntimeConfig: RuntimeConfig.md
-      - UDFRegistration: UDFRegistration.md
     - Encoder:
       - Encoder: Encoder.md
       - ExpressionEncoder: ExpressionEncoder.md

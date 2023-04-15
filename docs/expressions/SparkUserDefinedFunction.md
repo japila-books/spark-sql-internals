@@ -20,7 +20,7 @@
 
 * `FPGrowthModel` (Spark MLlib) is requested to `genericTransform`
 * [udf](../functions/index.md#udf) standard function is used
-* `UDFRegistration` is requested to [register a named user-defined function](../UDFRegistration.md#register)
+* `UDFRegistration` is requested to [register a named user-defined function](../user-defined-functions/UDFRegistration.md#register)
 
 ## <span id="apply"> Creating Column (for Function Execution)
 
@@ -48,5 +48,5 @@ createScalaUDF(
 
 `createScalaUDF` is used when:
 
-* `UDFRegistration` is requested to [register a named user-defined function](../UDFRegistration.md#register)
+* `UDFRegistration` is requested to [register a named user-defined function](../user-defined-functions/UDFRegistration.md#register)
 * `SparkUserDefinedFunction` is requested to [create a Column (for function execution)](#apply)

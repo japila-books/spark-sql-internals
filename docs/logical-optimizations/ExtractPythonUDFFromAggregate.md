@@ -1,13 +1,14 @@
 # ExtractPythonUDFFromAggregate Logical Optimization
 
-`ExtractPythonUDFFromAggregate` is...FIXME
+## Executing Rule { #apply }
 
-## <span id="apply"> Executing Rule
+??? note "Rule"
 
-```scala
-apply(plan: LogicalPlan): LogicalPlan
-```
+    ```scala
+    apply(
+    plan: LogicalPlan): LogicalPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 `apply`...FIXME
-
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.

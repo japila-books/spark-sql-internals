@@ -71,7 +71,7 @@ The <<contract, lifecycle>> of `UserDefinedAggregateFunction` is entirely manage
 
 [NOTE]
 ====
-Use UDFRegistration.md[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in SparkSession.md#sql[SQL mode].
+Use user-defined-functions/UDFRegistration.md[UDFRegistration] to register a (temporary) `UserDefinedAggregateFunction` and use it in SparkSession.md#sql[SQL mode].
 
 [source, scala]
 ----

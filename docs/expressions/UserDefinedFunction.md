@@ -24,7 +24,7 @@ Associates the given `name` with this `UserDefinedFunction`
 
 Used when:
 
-* `UDFRegistration` is requested to [register a named UserDefinedFunction](../UDFRegistration.md#register)
+* `UDFRegistration` is requested to [register a named UserDefinedFunction](../user-defined-functions/UDFRegistration.md#register)
 
 ## Implementations
 
