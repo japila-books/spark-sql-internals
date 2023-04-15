@@ -521,11 +521,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/UDFRegistration/</loc>
-         <lastmod>2023-04-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/UnsafeExternalRowSorter/</loc>
          <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
@@ -2012,6 +2007,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/Projection/</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/PythonUDF/</loc>
          <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4522,6 +4522,21 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/ui/SparkListenerSQLExecutionEnd/</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/user-defined-functions/</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/user-defined-functions/UDFRegistration/</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/user-defined-functions/UserDefinedPythonFunction/</loc>
          <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
