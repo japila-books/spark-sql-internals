@@ -4,6 +4,7 @@
 
 * `LocalLimit` with `Union`
 * `LocalLimit` with [Join](../logical-operators/Join.md)
+* `LocalLimit` with [ArrowEvalPython](../logical-operators/ArrowEvalPython.md)
 
 `LimitPushDown` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
@@ -13,18 +14,22 @@
 
 `LimitPushDown` takes no arguments to be created.
 
-`LimitPushDown` is created when [Logical Optimizer](../catalyst/Optimizer.md) is requested for the [default batches of rules](../catalyst/Optimizer.md#defaultBatches).
+`LimitPushDown` is created when:
 
-## <span id="apply"> Executing Rule
+* [Logical Optimizer](../catalyst/Optimizer.md) is requested for the [default batches of rules](../catalyst/Optimizer.md#defaultBatches)
 
-```scala
-apply(
-   plan: LogicalPlan): LogicalPlan
-```
+## Executing Rule { #apply }
+
+??? note "Rule"
+
+    ```scala
+    apply(
+       plan: LogicalPlan): LogicalPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 `apply`...FIXME
-
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 ## Demo
 

@@ -22,7 +22,7 @@
 
 * [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<LogicalRelation.md#, LogicalRelations>> with a [HadoopFsRelation](../connectors/HadoopFsRelation.md))
 
-* [ExtractPythonUDFs](../physical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
+* [ExtractPythonUDFs](../logical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
 
 [[inputRDDs]]
 [[outputOrdering]]

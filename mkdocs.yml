@@ -305,6 +305,7 @@ nav:
       - AnalyzeTableCommand: logical-operators/AnalyzeTableCommand.md
       - AnalyzeTablesCommand: logical-operators/AnalyzeTablesCommand.md
       - AppendData: logical-operators/AppendData.md
+      - logical-operators/ArrowEvalPython.md
       - logical-operators/BaseEvalPython.md
       - CacheTableCommand: logical-operators/CacheTableCommand.md
       - ClearCacheCommand: logical-operators/ClearCacheCommand.md
@@ -716,6 +717,7 @@ nav:
       - EliminateSerialization: logical-optimizations/EliminateSerialization.md
       - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
       - EliminateView: logical-optimizations/EliminateView.md
+      - logical-optimizations/ExtractPythonUDFs.md
       - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
       - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
       - GroupBasedRowLevelOperationScanPlanning: logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md
@@ -774,7 +776,6 @@ nav:
       - CollapseCodegenStages: physical-optimizations/CollapseCodegenStages.md
       - DisableUnnecessaryBucketedScan: physical-optimizations/DisableUnnecessaryBucketedScan.md
       - EnsureRequirements: physical-optimizations/EnsureRequirements.md
-      - ExtractPythonUDFs: physical-optimizations/ExtractPythonUDFs.md
       - InsertAdaptiveSparkPlan: physical-optimizations/InsertAdaptiveSparkPlan.md
       - OptimizeShuffleWithLocalRead: physical-optimizations/OptimizeShuffleWithLocalRead.md
       - OptimizeSkewedJoin: physical-optimizations/OptimizeSkewedJoin.md
