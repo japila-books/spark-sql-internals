@@ -150,7 +150,7 @@ extra:
     DeveloperApi: developerapi
 
 nav:
-  - Home: index.md
+  - index.md
   - Features:
     - features/index.md
     - ... | aggregations/**.md
@@ -262,35 +262,177 @@ nav:
       - catalyst-dsl/index.md
       - DslLogicalPlan: catalyst-dsl/DslLogicalPlan.md
     - Variable Substitution: variable-substitution.md
-  - Internals:
-    - Overview: overview.md
-    - DataSource: DataSource.md
-    - developer-api.md
-    - DataSource V1 API:
-      - DataSourceRegister: DataSourceRegister.md
-      - CreatableRelationProvider: CreatableRelationProvider.md
-      - RelationProvider: RelationProvider.md
-      - SchemaRelationProvider: SchemaRelationProvider.md
-      - BaseRelation: BaseRelation.md
-      - FileRelation: FileRelation.md
-      - InsertableRelation: InsertableRelation.md
-      - PrunedFilteredScan: PrunedFilteredScan.md
-      - PrunedScan: PrunedScan.md
-      - TableScan: TableScan.md
-      - Filter: Filter.md
-    - ExecutionListenerBus: ExecutionListenerBus.md
-    - ExecutionListenerManager: ExecutionListenerManager.md
-    - Query Execution:
-      - query-execution/index.md
-      - Logical Analyzer: Analyzer.md
-      - QueryExecution: QueryExecution.md
-      - QueryPlanningTracker: QueryPlanningTracker.md
-      - SparkOptimizer: SparkOptimizer.md
-      - SparkPlanner: SparkPlanner.md
-    - SharedState: SharedState.md
-    - SQLConf: SQLConf.md
-    - SQLConfHelper: SQLConfHelper.md
-    - StaticSQLConf: StaticSQLConf.md
+  - Query Execution:
+    - query-execution/index.md
+    - Catalyst:
+      - catalyst/index.md
+      - GenericStrategy: catalyst/GenericStrategy.md
+      - Optimizer: catalyst/Optimizer.md
+      - PlanChangeLogger: catalyst/PlanChangeLogger.md
+      - QueryPlan: catalyst/QueryPlan.md
+      - QueryPlanner: catalyst/QueryPlanner.md
+      - Rule: catalyst/Rule.md
+      - RuleExecutor: catalyst/RuleExecutor.md
+      - TreeNode: catalyst/TreeNode.md
+      - TreePattern: catalyst/TreePattern.md
+      - TreePatternBits: catalyst/TreePatternBits.md
+    - Catalyst Expressions:
+      - expressions/index.md
+      - AggregateExpression: expressions/AggregateExpression.md
+      - AggregateFunction: expressions/AggregateFunction.md
+      - AggregateWindowFunction: expressions/AggregateWindowFunction.md
+      - Aggregator: expressions/Aggregator.md
+      - ArrayFilter: expressions/ArrayFilter.md
+      - AttributeSeq: expressions/AttributeSeq.md
+      - Attribute: expressions/Attribute.md
+      - BasePredicate: expressions/BasePredicate.md
+      - BinaryComparison: expressions/BinaryComparison.md
+      - BinaryOperator: expressions/BinaryOperator.md
+      - BloomFilterAggregate: expressions/BloomFilterAggregate.md
+      - BloomFilterMightContain: expressions/BloomFilterMightContain.md
+      - BoundReference: expressions/BoundReference.md
+      - CallMethodViaReflection: expressions/CallMethodViaReflection.md
+      - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
+      - CodegenFallback: expressions/CodegenFallback.md
+      - Collect: expressions/Collect.md
+      - CollectSet: expressions/CollectSet.md
+      - CreateNamedStruct: expressions/CreateNamedStruct.md
+      - CreateStruct: expressions/CreateStruct.md
+      - CumeDist: expressions/CumeDist.md
+      - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+      - DecodeUsingSerializer: expressions/DecodeUsingSerializer.md
+      - DynamicPruningExpression: expressions/DynamicPruningExpression.md
+      - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
+      - EncodeUsingSerializer: expressions/EncodeUsingSerializer.md
+      - EqualNullSafe: expressions/EqualNullSafe.md
+      - EqualTo: expressions/EqualTo.md
+      - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
+      - Exists: expressions/Exists.md
+      - ExpectsInputTypes: expressions/ExpectsInputTypes.md
+      - ExplodeBase: expressions/ExplodeBase.md
+      - Expression: expressions/Expression.md
+      - First: expressions/First.md
+      - Generator: expressions/Generator.md
+      - HashExpression: expressions/HashExpression.md
+      - HashPartitioning: expressions/HashPartitioning.md
+      - Higher-Order Functions:
+        - HigherOrderFunction: expressions/HigherOrderFunction.md
+        - ArrayBasedSimpleHigherOrderFunction: expressions/ArrayBasedSimpleHigherOrderFunction.md
+        - MapBasedSimpleHigherOrderFunction: expressions/MapBasedSimpleHigherOrderFunction.md
+        - SimpleHigherOrderFunction: expressions/SimpleHigherOrderFunction.md
+      - ImperativeAggregate: expressions/ImperativeAggregate.md
+      - In: expressions/In.md
+      - Inline: expressions/Inline.md
+      - InSet: expressions/InSet.md
+      - InSubqueryExec: expressions/InSubqueryExec.md
+      - InterpretedProjection: expressions/InterpretedProjection.md
+      - JsonToStructs: expressions/JsonToStructs.md
+      - LessThanOrEqual: expressions/LessThanOrEqual.md
+      - ListQuery: expressions/ListQuery.md
+      - Literal: expressions/Literal.md
+      - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
+      - Murmur3Hash: expressions/Murmur3Hash.md
+      - MutableProjection: expressions/MutableProjection.md
+      - NamedExpression: expressions/NamedExpression.md
+      - Nondeterministic: expressions/Nondeterministic.md
+      - OffsetWindowFunction: expressions/OffsetWindowFunction.md
+      - ParseToDate: expressions/ParseToDate.md
+      - ParseToTimestamp: expressions/ParseToTimestamp.md
+      - PlanExpression: expressions/PlanExpression.md
+      - Predicate: expressions/Predicate.md
+      - Projection: expressions/Projection.md
+      - RowOrdering: expressions/RowOrdering.md
+      - RuntimeReplaceable: expressions/RuntimeReplaceable.md
+      - ScalaAggregator: expressions/ScalaAggregator.md
+      - ScalarSubquery: expressions/ScalarSubquery.md
+      - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
+      - ScalaUDF: expressions/ScalaUDF.md
+      - SortOrder: expressions/SortOrder.md
+      - SparkUserDefinedFunction: expressions/SparkUserDefinedFunction.md
+      - Stateful: expressions/Stateful.md
+      - StaticInvoke: expressions/StaticInvoke.md
+      - SubqueryExpression: expressions/SubqueryExpression.md
+      - TimeWindow: expressions/TimeWindow.md
+      - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
+      - UnaryExpression: expressions/UnaryExpression.md
+      - Unevaluable: expressions/Unevaluable.md
+      - UnixTimestamp: expressions/UnixTimestamp.md
+      - UnresolvedAttribute: expressions/UnresolvedAttribute.md
+      - UnresolvedFunction: expressions/UnresolvedFunction.md
+      - UnresolvedGenerator: expressions/UnresolvedGenerator.md
+      - UnresolvedOrdinal: expressions/UnresolvedOrdinal.md
+      - UnresolvedStar: expressions/UnresolvedStar.md
+      - UnsafeProjection: expressions/UnsafeProjection.md
+      - UserDefinedAggregator: expressions/UserDefinedAggregator.md
+      - User-Defined Functions:
+        - spark-sql-udfs.md
+        - UserDefinedExpression: expressions/UserDefinedExpression.md
+        - UserDefinedFunction: expressions/UserDefinedFunction.md
+        - UDFs are Blackbox: spark-sql-udfs-blackbox.md
+      - UserDefinedAggregateFunction: expressions/UserDefinedAggregateFunction.md
+      - WindowExpression: expressions/WindowExpression.md
+      - WindowFunction: expressions/WindowFunction.md
+      - WindowSpecDefinition: expressions/WindowSpecDefinition.md
+    - Execution Planning Strategies:
+      - SparkStrategy: execution-planning-strategies/SparkStrategy.md
+      - Aggregation: execution-planning-strategies/Aggregation.md
+      - BasicOperators: execution-planning-strategies/BasicOperators.md
+      - DataSourceStrategy: execution-planning-strategies/DataSourceStrategy.md
+      - DataSourceV2Strategy: execution-planning-strategies/DataSourceV2Strategy.md
+      - FileSourceStrategy: execution-planning-strategies/FileSourceStrategy.md
+      - InMemoryScans: execution-planning-strategies/InMemoryScans.md
+      - JoinSelection: execution-planning-strategies/JoinSelection.md
+      - LogicalQueryStageStrategy: execution-planning-strategies/LogicalQueryStageStrategy.md
+      - SpecialLimits: execution-planning-strategies/SpecialLimits.md
+      - SparkStrategies: execution-planning-strategies/SparkStrategies.md
+      - Window: execution-planning-strategies/Window.md
+      - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
+    - Logical Analyzer: Analyzer.md
+    - Logical Analysis Rules:
+      - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
+      - AliasViewChild: logical-analysis-rules/AliasViewChild.md
+      - CleanupAliases: logical-analysis-rules/CleanupAliases.md
+      - CTESubstitution: logical-analysis-rules/CTESubstitution.md
+      - DataSourceAnalysis: logical-analysis-rules/DataSourceAnalysis.md
+      - ExtractWindowExpressions: logical-analysis-rules/ExtractWindowExpressions.md
+      - FindDataSourceTable: logical-analysis-rules/FindDataSourceTable.md
+      - HandleNullInputsForUDF: logical-analysis-rules/HandleNullInputsForUDF.md
+      - LookupFunctions: logical-analysis-rules/LookupFunctions.md
+      - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
+      - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
+      - RemoveAllHints: logical-analysis-rules/RemoveAllHints.md
+      - ResolveAggregateFunctions: logical-analysis-rules/ResolveAggregateFunctions.md
+      - ResolveAliases: logical-analysis-rules/ResolveAliases.md
+      - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
+      - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
+      - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
+      - ResolveDefaultColumns: logical-analysis-rules/ResolveDefaultColumns.md
+      - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
+      - ResolveGroupingAnalytics: logical-analysis-rules/ResolveGroupingAnalytics.md
+      - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md
+      - ResolveInsertInto: logical-analysis-rules/ResolveInsertInto.md
+      - ResolveJoinStrategyHints: logical-analysis-rules/ResolveJoinStrategyHints.md
+      - ResolveMissingReferences: logical-analysis-rules/ResolveMissingReferences.md
+      - ResolveOrdinalInOrderByAndGroupBy: logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md
+      - ResolveOutputRelation: logical-analysis-rules/ResolveOutputRelation.md
+      - ResolveReferences: logical-analysis-rules/ResolveReferences.md
+      - ResolveRelations: logical-analysis-rules/ResolveRelations.md
+      - ResolveSessionCatalog: logical-analysis-rules/ResolveSessionCatalog.md
+      - ResolveSQLOnFile: logical-analysis-rules/ResolveSQLOnFile.md
+      - ResolveSubquery: logical-analysis-rules/ResolveSubquery.md
+      - ResolveTables: logical-analysis-rules/ResolveTables.md
+      - ResolveTempViews: logical-analysis-rules/ResolveTempViews.md
+      - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
+      - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
+      - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
+      - ResolveWithCTE: logical-analysis-rules/ResolveWithCTE.md
+      - RewriteDeleteFromTable: logical-analysis-rules/RewriteDeleteFromTable.md
+      - RewriteRowLevelCommand: logical-analysis-rules/RewriteRowLevelCommand.md
+      - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
+      - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
+      - WindowFrameCoercion: logical-analysis-rules/WindowFrameCoercion.md
+      - WidenSetOperationTypes: logical-analysis-rules/WidenSetOperationTypes.md
+      - WindowsSubstitution: logical-analysis-rules/WindowsSubstitution.md
     - Logical Operators:
       - logical-operators/index.md
       - AddColumns: logical-operators/AddColumns.md
@@ -398,153 +540,59 @@ nav:
       - WithWindowDefinition: logical-operators/WithWindowDefinition.md
       - WriteDelta: logical-operators/WriteDelta.md
       - WriteFiles: logical-operators/WriteFiles.md
-    - SparkSession Registries:
-      - Catalog:
-        - Catalog: Catalog.md
-        - CatalogImpl: CatalogImpl.md
-        - CatalogStatistics: CatalogStatistics.md
-        - CatalogUtils: CatalogUtils.md
-      - ExperimentalMethods: ExperimentalMethods.md
-      - ExternalCatalog:
-        - ExternalCatalog: ExternalCatalog.md
-        - InMemoryCatalog: InMemoryCatalog.md
-        - ExternalCatalogWithListener.md
-      - FunctionRegistry:
-        - FunctionRegistry: FunctionRegistry.md
-        - FunctionRegistryBase: FunctionRegistryBase.md
-        - SimpleFunctionRegistry: SimpleFunctionRegistry.md
-        - SimpleFunctionRegistryBase: SimpleFunctionRegistryBase.md
-        - SimpleTableFunctionRegistry: SimpleTableFunctionRegistry.md
-        - TableFunctionRegistry: TableFunctionRegistry.md
-      - GlobalTempViewManager: GlobalTempViewManager.md
-      - SessionCatalog:
-        - SessionCatalog: SessionCatalog.md
-        - CatalogStorageFormat: CatalogStorageFormat.md
-        - CatalogTable: CatalogTable.md
-        - CatalogTablePartition: CatalogTablePartition.md
-      - V2SessionCatalog: V2SessionCatalog.md
-      - SessionState:
-        - SessionState: SessionState.md
-        - BaseSessionStateBuilder: BaseSessionStateBuilder.md
-        - SessionStateBuilder: SessionStateBuilder.md
-      - CacheManager:
-        - CacheManager: CacheManager.md
-      - RuntimeConfig: RuntimeConfig.md
-      - UDFRegistration: UDFRegistration.md
-    - Catalyst:
-      - catalyst/index.md
-      - GenericStrategy: catalyst/GenericStrategy.md
-      - Optimizer: catalyst/Optimizer.md
-      - PlanChangeLogger: catalyst/PlanChangeLogger.md
-      - QueryPlan: catalyst/QueryPlan.md
-      - QueryPlanner: catalyst/QueryPlanner.md
-      - Rule: catalyst/Rule.md
-      - RuleExecutor: catalyst/RuleExecutor.md
-      - TreeNode: catalyst/TreeNode.md
-      - TreePattern: catalyst/TreePattern.md
-      - TreePatternBits: catalyst/TreePatternBits.md
-    - Encoder:
-      - Encoder: Encoder.md
-      - ExpressionEncoder: ExpressionEncoder.md
-      - RowEncoder: RowEncoder.md
-      - ScalaReflection: ScalaReflection.md
-    - Catalyst Expressions:
-      - expressions/index.md
-      - AggregateExpression: expressions/AggregateExpression.md
-      - AggregateFunction: expressions/AggregateFunction.md
-      - AggregateWindowFunction: expressions/AggregateWindowFunction.md
-      - Aggregator: expressions/Aggregator.md
-      - ArrayFilter: expressions/ArrayFilter.md
-      - AttributeSeq: expressions/AttributeSeq.md
-      - Attribute: expressions/Attribute.md
-      - BasePredicate: expressions/BasePredicate.md
-      - BinaryComparison: expressions/BinaryComparison.md
-      - BinaryOperator: expressions/BinaryOperator.md
-      - BloomFilterAggregate: expressions/BloomFilterAggregate.md
-      - BloomFilterMightContain: expressions/BloomFilterMightContain.md
-      - BoundReference: expressions/BoundReference.md
-      - CallMethodViaReflection: expressions/CallMethodViaReflection.md
-      - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
-      - CodegenFallback: expressions/CodegenFallback.md
-      - Collect: expressions/Collect.md
-      - CollectSet: expressions/CollectSet.md
-      - CreateNamedStruct: expressions/CreateNamedStruct.md
-      - CreateStruct: expressions/CreateStruct.md
-      - CumeDist: expressions/CumeDist.md
-      - DeclarativeAggregate: expressions/DeclarativeAggregate.md
-      - DecodeUsingSerializer: expressions/DecodeUsingSerializer.md
-      - DynamicPruningExpression: expressions/DynamicPruningExpression.md
-      - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
-      - EncodeUsingSerializer: expressions/EncodeUsingSerializer.md
-      - EqualNullSafe: expressions/EqualNullSafe.md
-      - EqualTo: expressions/EqualTo.md
-      - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
-      - Exists: expressions/Exists.md
-      - ExpectsInputTypes: expressions/ExpectsInputTypes.md
-      - ExplodeBase: expressions/ExplodeBase.md
-      - Expression: expressions/Expression.md
-      - First: expressions/First.md
-      - Generator: expressions/Generator.md
-      - HashExpression: expressions/HashExpression.md
-      - HashPartitioning: expressions/HashPartitioning.md
-      - Higher-Order Functions:
-        - HigherOrderFunction: expressions/HigherOrderFunction.md
-        - ArrayBasedSimpleHigherOrderFunction: expressions/ArrayBasedSimpleHigherOrderFunction.md
-        - MapBasedSimpleHigherOrderFunction: expressions/MapBasedSimpleHigherOrderFunction.md
-        - SimpleHigherOrderFunction: expressions/SimpleHigherOrderFunction.md
-      - ImperativeAggregate: expressions/ImperativeAggregate.md
-      - In: expressions/In.md
-      - Inline: expressions/Inline.md
-      - InSet: expressions/InSet.md
-      - InSubqueryExec: expressions/InSubqueryExec.md
-      - InterpretedProjection: expressions/InterpretedProjection.md
-      - JsonToStructs: expressions/JsonToStructs.md
-      - LessThanOrEqual: expressions/LessThanOrEqual.md
-      - ListQuery: expressions/ListQuery.md
-      - Literal: expressions/Literal.md
-      - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
-      - Murmur3Hash: expressions/Murmur3Hash.md
-      - MutableProjection: expressions/MutableProjection.md
-      - NamedExpression: expressions/NamedExpression.md
-      - Nondeterministic: expressions/Nondeterministic.md
-      - OffsetWindowFunction: expressions/OffsetWindowFunction.md
-      - ParseToDate: expressions/ParseToDate.md
-      - ParseToTimestamp: expressions/ParseToTimestamp.md
-      - PlanExpression: expressions/PlanExpression.md
-      - Predicate: expressions/Predicate.md
-      - Projection: expressions/Projection.md
-      - RowOrdering: expressions/RowOrdering.md
-      - RuntimeReplaceable: expressions/RuntimeReplaceable.md
-      - ScalaAggregator: expressions/ScalaAggregator.md
-      - ScalarSubquery: expressions/ScalarSubquery.md
-      - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
-      - ScalaUDF: expressions/ScalaUDF.md
-      - SortOrder: expressions/SortOrder.md
-      - SparkUserDefinedFunction: expressions/SparkUserDefinedFunction.md
-      - Stateful: expressions/Stateful.md
-      - StaticInvoke: expressions/StaticInvoke.md
-      - SubqueryExpression: expressions/SubqueryExpression.md
-      - TimeWindow: expressions/TimeWindow.md
-      - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
-      - UnaryExpression: expressions/UnaryExpression.md
-      - Unevaluable: expressions/Unevaluable.md
-      - UnixTimestamp: expressions/UnixTimestamp.md
-      - UnresolvedAttribute: expressions/UnresolvedAttribute.md
-      - UnresolvedFunction: expressions/UnresolvedFunction.md
-      - UnresolvedGenerator: expressions/UnresolvedGenerator.md
-      - UnresolvedOrdinal: expressions/UnresolvedOrdinal.md
-      - UnresolvedStar: expressions/UnresolvedStar.md
-      - UnsafeProjection: expressions/UnsafeProjection.md
-      - UserDefinedAggregator: expressions/UserDefinedAggregator.md
-      - User-Defined Functions:
-        - spark-sql-udfs.md
-        - UserDefinedExpression: expressions/UserDefinedExpression.md
-        - UserDefinedFunction: expressions/UserDefinedFunction.md
-        - UDFs are Blackbox: spark-sql-udfs-blackbox.md
-      - UserDefinedAggregateFunction: expressions/UserDefinedAggregateFunction.md
-      - WindowExpression: expressions/WindowExpression.md
-      - WindowFunction: expressions/WindowFunction.md
-      - WindowSpecDefinition: expressions/WindowSpecDefinition.md
+    - Logical Optimizations:
+      - AQEPropagateEmptyRelation: logical-optimizations/AQEPropagateEmptyRelation.md
+      - CleanupDynamicPruningFilters: logical-optimizations/CleanupDynamicPruningFilters.md
+      - CollapseWindow: logical-optimizations/CollapseWindow.md
+      - ColumnPruning: logical-optimizations/ColumnPruning.md
+      - CombineTypedFilters: logical-optimizations/CombineTypedFilters.md
+      - CombineUnions: logical-optimizations/CombineUnions.md
+      - ComputeCurrentTime: logical-optimizations/ComputeCurrentTime.md
+      - ConstantFolding: logical-optimizations/ConstantFolding.md
+      - ConvertToLocalRelation: logical-optimizations/ConvertToLocalRelation.md
+      - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
+      - DecimalAggregates: logical-optimizations/DecimalAggregates.md
+      - DynamicJoinSelection: logical-optimizations/DynamicJoinSelection.md
+      - EliminateResolvedHint: logical-optimizations/EliminateResolvedHint.md
+      - EliminateSerialization: logical-optimizations/EliminateSerialization.md
+      - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
+      - EliminateView: logical-optimizations/EliminateView.md
+      - logical-optimizations/ExtractPythonUDFs.md
+      - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
+      - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
+      - GroupBasedRowLevelOperationScanPlanning: logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md
+      - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
+      - InjectRuntimeFilter: logical-optimizations/InjectRuntimeFilter.md
+      - InlineCTE: logical-optimizations/InlineCTE.md
+      - LimitPushDown: logical-optimizations/LimitPushDown.md
+      - NullPropagation: logical-optimizations/NullPropagation.md
+      - OptimizeIn: logical-optimizations/OptimizeIn.md
+      - OptimizeMetadataOnlyQuery: logical-optimizations/OptimizeMetadataOnlyQuery.md
+      - OptimizeSubqueries: logical-optimizations/OptimizeSubqueries.md
+      - PartitionPruning: logical-optimizations/PartitionPruning.md
+      - PropagateEmptyRelation: logical-optimizations/PropagateEmptyRelation.md
+      - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
+      - PruneFilters: logical-optimizations/PruneFilters.md
+      - PruneHiveTablePartitions: logical-optimizations/PruneHiveTablePartitions.md
+      - PullupCorrelatedPredicates: logical-optimizations/PullupCorrelatedPredicates.md
+      - logical-optimizations/PushDownLeftSemiAntiJoin.md
+      - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
+      - PushDownPredicate: logical-optimizations/PushDownPredicate.md
+      - PushDownPredicates: logical-optimizations/PushDownPredicates.md
+      - PushPredicateThroughJoin: logical-optimizations/PushPredicateThroughJoin.md
+      - ReorderJoin: logical-optimizations/ReorderJoin.md
+      - ReplaceExpressions: logical-optimizations/ReplaceExpressions.md
+      - ReplaceExceptWithAntiJoin: logical-optimizations/ReplaceExceptWithAntiJoin.md
+      - ReplaceExceptWithFilter: logical-optimizations/ReplaceExceptWithFilter.md
+      - RewriteCorrelatedScalarSubquery: logical-optimizations/RewriteCorrelatedScalarSubquery.md
+      - RewriteExceptAll: logical-optimizations/RewriteExceptAll.md
+      - RewritePredicateSubquery: logical-optimizations/RewritePredicateSubquery.md
+      - SchemaPruning: logical-optimizations/SchemaPruning.md
+      - SimplifyCasts: logical-optimizations/SimplifyCasts.md
+      - UpdateCTERelationStats: logical-optimizations/UpdateCTERelationStats.md
+      - UpdateAttributeNullability: logical-optimizations/UpdateAttributeNullability.md
+      - V2ScanRelationPushDown: logical-optimizations/V2ScanRelationPushDown.md
+      - V2Writes: logical-optimizations/V2Writes.md
     - Physical Operators:
       - physical-operators/index.md
       - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
@@ -655,118 +703,6 @@ nav:
           - BroadcastMode: physical-operators/BroadcastMode.md
           - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
         - ShuffleSpec: physical-operators/ShuffleSpec.md
-    - Logical Analysis Rules:
-      - AddMetadataColumns: logical-analysis-rules/AddMetadataColumns.md
-      - AliasViewChild: logical-analysis-rules/AliasViewChild.md
-      - CleanupAliases: logical-analysis-rules/CleanupAliases.md
-      - CTESubstitution: logical-analysis-rules/CTESubstitution.md
-      - DataSourceAnalysis: logical-analysis-rules/DataSourceAnalysis.md
-      - ExtractWindowExpressions: logical-analysis-rules/ExtractWindowExpressions.md
-      - FindDataSourceTable: logical-analysis-rules/FindDataSourceTable.md
-      - HandleNullInputsForUDF: logical-analysis-rules/HandleNullInputsForUDF.md
-      - LookupFunctions: logical-analysis-rules/LookupFunctions.md
-      - PreprocessTableCreation: logical-analysis-rules/PreprocessTableCreation.md
-      - PreWriteCheck: logical-analysis-rules/PreWriteCheck.md
-      - RemoveAllHints: logical-analysis-rules/RemoveAllHints.md
-      - ResolveAggregateFunctions: logical-analysis-rules/ResolveAggregateFunctions.md
-      - ResolveAliases: logical-analysis-rules/ResolveAliases.md
-      - ResolveCatalogs: logical-analysis-rules/ResolveCatalogs.md
-      - ResolveCoalesceHints: logical-analysis-rules/ResolveCoalesceHints.md
-      - ResolveCreateNamedStruct: logical-analysis-rules/ResolveCreateNamedStruct.md
-      - ResolveDefaultColumns: logical-analysis-rules/ResolveDefaultColumns.md
-      - ResolveFunctions: logical-analysis-rules/ResolveFunctions.md
-      - ResolveGroupingAnalytics: logical-analysis-rules/ResolveGroupingAnalytics.md
-      - ResolveInlineTables: logical-analysis-rules/ResolveInlineTables.md
-      - ResolveInsertInto: logical-analysis-rules/ResolveInsertInto.md
-      - ResolveJoinStrategyHints: logical-analysis-rules/ResolveJoinStrategyHints.md
-      - ResolveMissingReferences: logical-analysis-rules/ResolveMissingReferences.md
-      - ResolveOrdinalInOrderByAndGroupBy: logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy.md
-      - ResolveOutputRelation: logical-analysis-rules/ResolveOutputRelation.md
-      - ResolveReferences: logical-analysis-rules/ResolveReferences.md
-      - ResolveRelations: logical-analysis-rules/ResolveRelations.md
-      - ResolveSessionCatalog: logical-analysis-rules/ResolveSessionCatalog.md
-      - ResolveSQLOnFile: logical-analysis-rules/ResolveSQLOnFile.md
-      - ResolveSubquery: logical-analysis-rules/ResolveSubquery.md
-      - ResolveTables: logical-analysis-rules/ResolveTables.md
-      - ResolveTempViews: logical-analysis-rules/ResolveTempViews.md
-      - ResolveTimeZone: logical-analysis-rules/ResolveTimeZone.md
-      - ResolveWindowFrame: logical-analysis-rules/ResolveWindowFrame.md
-      - ResolveWindowOrder: logical-analysis-rules/ResolveWindowOrder.md
-      - ResolveWithCTE: logical-analysis-rules/ResolveWithCTE.md
-      - RewriteDeleteFromTable: logical-analysis-rules/RewriteDeleteFromTable.md
-      - RewriteRowLevelCommand: logical-analysis-rules/RewriteRowLevelCommand.md
-      - TableCapabilityCheck: logical-analysis-rules/TableCapabilityCheck.md
-      - UpdateOuterReferences: logical-analysis-rules/UpdateOuterReferences.md
-      - WindowFrameCoercion: logical-analysis-rules/WindowFrameCoercion.md
-      - WidenSetOperationTypes: logical-analysis-rules/WidenSetOperationTypes.md
-      - WindowsSubstitution: logical-analysis-rules/WindowsSubstitution.md
-    - Logical Optimizations:
-      - AQEPropagateEmptyRelation: logical-optimizations/AQEPropagateEmptyRelation.md
-      - CleanupDynamicPruningFilters: logical-optimizations/CleanupDynamicPruningFilters.md
-      - CollapseWindow: logical-optimizations/CollapseWindow.md
-      - ColumnPruning: logical-optimizations/ColumnPruning.md
-      - CombineTypedFilters: logical-optimizations/CombineTypedFilters.md
-      - CombineUnions: logical-optimizations/CombineUnions.md
-      - ComputeCurrentTime: logical-optimizations/ComputeCurrentTime.md
-      - ConstantFolding: logical-optimizations/ConstantFolding.md
-      - ConvertToLocalRelation: logical-optimizations/ConvertToLocalRelation.md
-      - CostBasedJoinReorder: logical-optimizations/CostBasedJoinReorder.md
-      - DecimalAggregates: logical-optimizations/DecimalAggregates.md
-      - DynamicJoinSelection: logical-optimizations/DynamicJoinSelection.md
-      - EliminateResolvedHint: logical-optimizations/EliminateResolvedHint.md
-      - EliminateSerialization: logical-optimizations/EliminateSerialization.md
-      - EliminateSubqueryAliases: logical-optimizations/EliminateSubqueryAliases.md
-      - EliminateView: logical-optimizations/EliminateView.md
-      - logical-optimizations/ExtractPythonUDFs.md
-      - ExtractPythonUDFFromAggregate: logical-optimizations/ExtractPythonUDFFromAggregate.md
-      - GetCurrentDatabase: logical-optimizations/GetCurrentDatabase.md
-      - GroupBasedRowLevelOperationScanPlanning: logical-optimizations/GroupBasedRowLevelOperationScanPlanning.md
-      - InferFiltersFromConstraints: logical-optimizations/InferFiltersFromConstraints.md
-      - InjectRuntimeFilter: logical-optimizations/InjectRuntimeFilter.md
-      - InlineCTE: logical-optimizations/InlineCTE.md
-      - LimitPushDown: logical-optimizations/LimitPushDown.md
-      - NullPropagation: logical-optimizations/NullPropagation.md
-      - OptimizeIn: logical-optimizations/OptimizeIn.md
-      - OptimizeMetadataOnlyQuery: logical-optimizations/OptimizeMetadataOnlyQuery.md
-      - OptimizeSubqueries: logical-optimizations/OptimizeSubqueries.md
-      - PartitionPruning: logical-optimizations/PartitionPruning.md
-      - PropagateEmptyRelation: logical-optimizations/PropagateEmptyRelation.md
-      - PruneFileSourcePartitions: logical-optimizations/PruneFileSourcePartitions.md
-      - PruneFilters: logical-optimizations/PruneFilters.md
-      - PruneHiveTablePartitions: logical-optimizations/PruneHiveTablePartitions.md
-      - PullupCorrelatedPredicates: logical-optimizations/PullupCorrelatedPredicates.md
-      - logical-optimizations/PushDownLeftSemiAntiJoin.md
-      - PushDownOperatorsToDataSource: logical-optimizations/PushDownOperatorsToDataSource.md
-      - PushDownPredicate: logical-optimizations/PushDownPredicate.md
-      - PushDownPredicates: logical-optimizations/PushDownPredicates.md
-      - PushPredicateThroughJoin: logical-optimizations/PushPredicateThroughJoin.md
-      - ReorderJoin: logical-optimizations/ReorderJoin.md
-      - ReplaceExpressions: logical-optimizations/ReplaceExpressions.md
-      - ReplaceExceptWithAntiJoin: logical-optimizations/ReplaceExceptWithAntiJoin.md
-      - ReplaceExceptWithFilter: logical-optimizations/ReplaceExceptWithFilter.md
-      - RewriteCorrelatedScalarSubquery: logical-optimizations/RewriteCorrelatedScalarSubquery.md
-      - RewriteExceptAll: logical-optimizations/RewriteExceptAll.md
-      - RewritePredicateSubquery: logical-optimizations/RewritePredicateSubquery.md
-      - SchemaPruning: logical-optimizations/SchemaPruning.md
-      - SimplifyCasts: logical-optimizations/SimplifyCasts.md
-      - UpdateCTERelationStats: logical-optimizations/UpdateCTERelationStats.md
-      - UpdateAttributeNullability: logical-optimizations/UpdateAttributeNullability.md
-      - V2ScanRelationPushDown: logical-optimizations/V2ScanRelationPushDown.md
-      - V2Writes: logical-optimizations/V2Writes.md
-    - Execution Planning Strategies:
-      - SparkStrategy: execution-planning-strategies/SparkStrategy.md
-      - Aggregation: execution-planning-strategies/Aggregation.md
-      - BasicOperators: execution-planning-strategies/BasicOperators.md
-      - DataSourceStrategy: execution-planning-strategies/DataSourceStrategy.md
-      - DataSourceV2Strategy: execution-planning-strategies/DataSourceV2Strategy.md
-      - FileSourceStrategy: execution-planning-strategies/FileSourceStrategy.md
-      - InMemoryScans: execution-planning-strategies/InMemoryScans.md
-      - JoinSelection: execution-planning-strategies/JoinSelection.md
-      - LogicalQueryStageStrategy: execution-planning-strategies/LogicalQueryStageStrategy.md
-      - SpecialLimits: execution-planning-strategies/SpecialLimits.md
-      - SparkStrategies: execution-planning-strategies/SparkStrategies.md
-      - Window: execution-planning-strategies/Window.md
-      - WithCTEStrategy: execution-planning-strategies/WithCTEStrategy.md
     - Physical Optimizations:
       - AdjustShuffleExchangePosition: physical-optimizations/AdjustShuffleExchangePosition.md
       - ApplyColumnarRulesAndInsertTransitions: physical-optimizations/ApplyColumnarRulesAndInsertTransitions.md
@@ -792,6 +728,70 @@ nav:
       - ReuseExchangeAndSubquery: physical-optimizations/ReuseExchangeAndSubquery.md
       - ReuseSubquery: physical-optimizations/ReuseSubquery.md
       - ValidateSparkPlan: physical-optimizations/ValidateSparkPlan.md
+    - QueryExecution: QueryExecution.md
+    - QueryPlanningTracker: QueryPlanningTracker.md
+    - SparkOptimizer: SparkOptimizer.md
+    - SparkPlanner: SparkPlanner.md
+  - Internals:
+    - Overview: overview.md
+    - DataSource: DataSource.md
+    - developer-api.md
+    - DataSource V1 API:
+      - DataSourceRegister: DataSourceRegister.md
+      - CreatableRelationProvider: CreatableRelationProvider.md
+      - RelationProvider: RelationProvider.md
+      - SchemaRelationProvider: SchemaRelationProvider.md
+      - BaseRelation: BaseRelation.md
+      - FileRelation: FileRelation.md
+      - InsertableRelation: InsertableRelation.md
+      - PrunedFilteredScan: PrunedFilteredScan.md
+      - PrunedScan: PrunedScan.md
+      - TableScan: TableScan.md
+      - Filter: Filter.md
+    - ExecutionListenerBus: ExecutionListenerBus.md
+    - ExecutionListenerManager: ExecutionListenerManager.md
+    - SharedState: SharedState.md
+    - SQLConf: SQLConf.md
+    - SQLConfHelper: SQLConfHelper.md
+    - StaticSQLConf: StaticSQLConf.md
+    - SparkSession Registries:
+      - Catalog:
+        - Catalog: Catalog.md
+        - CatalogImpl: CatalogImpl.md
+        - CatalogStatistics: CatalogStatistics.md
+        - CatalogUtils: CatalogUtils.md
+      - ExperimentalMethods: ExperimentalMethods.md
+      - ExternalCatalog:
+        - ExternalCatalog: ExternalCatalog.md
+        - InMemoryCatalog: InMemoryCatalog.md
+        - ExternalCatalogWithListener.md
+      - FunctionRegistry:
+        - FunctionRegistry: FunctionRegistry.md
+        - FunctionRegistryBase: FunctionRegistryBase.md
+        - SimpleFunctionRegistry: SimpleFunctionRegistry.md
+        - SimpleFunctionRegistryBase: SimpleFunctionRegistryBase.md
+        - SimpleTableFunctionRegistry: SimpleTableFunctionRegistry.md
+        - TableFunctionRegistry: TableFunctionRegistry.md
+      - GlobalTempViewManager: GlobalTempViewManager.md
+      - SessionCatalog:
+        - SessionCatalog: SessionCatalog.md
+        - CatalogStorageFormat: CatalogStorageFormat.md
+        - CatalogTable: CatalogTable.md
+        - CatalogTablePartition: CatalogTablePartition.md
+      - V2SessionCatalog: V2SessionCatalog.md
+      - SessionState:
+        - SessionState: SessionState.md
+        - BaseSessionStateBuilder: BaseSessionStateBuilder.md
+        - SessionStateBuilder: SessionStateBuilder.md
+      - CacheManager:
+        - CacheManager: CacheManager.md
+      - RuntimeConfig: RuntimeConfig.md
+      - UDFRegistration: UDFRegistration.md
+    - Encoder:
+      - Encoder: Encoder.md
+      - ExpressionEncoder: ExpressionEncoder.md
+      - RowEncoder: RowEncoder.md
+      - ScalaReflection: ScalaReflection.md
     - SQLExecution: SQLExecution.md
     - SQLMetric: SQLMetric.md
     - Tungsten Execution Backend:

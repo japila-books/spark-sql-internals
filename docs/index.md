@@ -1,4 +1,6 @@
 ---
+title: Spark SQL
+icon: material/home
 hide:
   - toc
   - navigation
