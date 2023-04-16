@@ -46,3 +46,17 @@ Configuration Property | Default Value
 `startGRPCService` [registers interceptors](SparkConnectInterceptorRegistry.md#chainInterceptors).
 
 `startGRPCService` [builds the server](#server) and starts it.
+
+## executePlan { #executePlan }
+
+??? note "gRPC Java"
+
+    ```scala
+    executePlan(
+      request: proto.ExecutePlanRequest,
+      responseObserver: StreamObserver[proto.ExecutePlanResponse]): Unit
+    ```
+
+    `executePlan` is part of the `SparkConnectServiceImplBase` abstraction.
+
+`executePlan` creates a [SparkConnectStreamHandler](SparkConnectStreamHandler.md) (with the given `StreamObserver`) to let it [handle the request](SparkConnectStreamHandler.md#handle).
