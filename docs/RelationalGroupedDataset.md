@@ -90,14 +90,25 @@ In the end, `aggregateNumericColumns` [toDF](#toDF) the [AggregateExpression](ex
 
 * `RelationalGroupedDataset` is requested to [mean](#mean), [max](#max), [avg](#avg), [min](#min), [sum](#sum)
 
-## toDF { #toDF }
+## Creating DataFrame of Aggregates { #toDF }
 
 ```scala
 toDF(
   aggExprs: Seq[Expression]): DataFrame
 ```
 
-`toDF`...FIXME
+`toDF` determines whether to include [groupingExprs](#groupingExprs) in the result `DataFrame` or not based on [spark.sql.retainGroupColumns](configuration-properties.md#spark.sql.retainGroupColumns) configuration property.
+
+`toDF` converts the aggregate expressions to use [proper names](#alias).
+
+`toDF` creates a [DataFrame](Dataset.md#ofRows) with different [LogicalPlan](logical-operators/LogicalPlan.md)s based on the [GroupType](#groupType).
+
+GroupType | Logical Operator
+----------|-----------------
+ [GroupByType](aggregations/index.md#GroupByType) | [Aggregate](logical-operators/Aggregate.md) with the [Grouping Expressions](#groupingExprs)
+ [RollupType](aggregations/index.md#RollupType) | [Aggregate](logical-operators/Aggregate.md) with `Rollup` expression with the [Grouping Expressions](#groupingExprs)
+ [CubeType](aggregations/index.md#CubeType) | [Aggregate](logical-operators/Aggregate.md) with `Cube` expression with the [Grouping Expressions](#groupingExprs)
+ [PivotType](aggregations/index.md#PivotType) | [Pivot](logical-operators/Pivot.md)
 
 ---
 

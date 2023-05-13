@@ -43,13 +43,13 @@ Aggregation queries can be broken down to the following sections:
 
 `GroupType` indicates the kind of an aggregation.
 
-### CUBE { #CUBE }
+### <span id="CubeType"> CUBE { #CUBE }
 
-### GROUPBY { #GROUPBY }
+### <span id="GroupByType"> GROUPBY { #GROUPBY }
 
-### PIVOT { #PIVOT }
+### <span id="PivotType"> PIVOT { #PIVOT }
 
-### ROLLUP { #ROLLUP }
+### <span id="RollupType"> ROLLUP { #ROLLUP }
 
 ## Logical Analysis
 

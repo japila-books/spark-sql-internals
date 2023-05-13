@@ -213,69 +213,6 @@ Used when:
 
 * [ReplaceHashWithSortAgg](physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization is executed
 
-## spark.sql.files { #spark.sql.files }
-
-### <span id="FILES_MAX_PARTITION_BYTES"> maxPartitionBytes { #spark.sql.files.maxPartitionBytes }
-
-**spark.sql.files.maxPartitionBytes**
-
-Maximum number of bytes to pack into a single partition when reading files for file-based data sources (e.g., [Parquet](parquet/index.md))
-
-Default: `128MB` (like `parquet.block.size`)
-
-Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
-
-Used when:
-
-* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
-
-### <span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile { #spark.sql.files.maxRecordsPerFile }
-
-**spark.sql.files.maxRecordsPerFile**
-
-Maximum number of records to write out to a single file. If `0` or negative, there is no limit.
-
-Default: `0`
-
-Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method for the current value
-
-Used when:
-
-* `FileFormatWriter` is requested to [write data out](connectors/FileFormatWriter.md#write)
-* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch) (and [creates a WriteJobDescription](connectors/FileWrite.md#createWriteJobDescription))
-
-### <span id="FILES_MIN_PARTITION_NUM"> minPartitionNum { #spark.sql.files.minPartitionNum }
-
-**spark.sql.files.minPartitionNum**
-
-Hint about the minimum number of partitions for file-based data sources (e.g., [Parquet](parquet/index.md))
-
-Default: [spark.sql.leafNodeDefaultParallelism](SparkSession.md#leafNodeDefaultParallelism)
-
-Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) for the current value
-
-Used when:
-
-* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
-
-### <span id="FILES_OPEN_COST_IN_BYTES"> openCostInBytes { #spark.sql.files.openCostInBytes }
-
-**spark.sql.files.openCostInBytes**
-
-**(internal)** The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).
-Effective only for file-based sources such as Parquet, JSON and ORC.
-
-Default: `4MB`
-
-It's better to over-estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
-
-Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) for the current value
-
-Used when:
-
-* `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
-* `FilePartition` is requested to [getFilePartitions](connectors/FilePartition.md#getFilePartitions) and [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
-
 ## <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> hive.filesourcePartitionFileCacheSize
 
 **spark.sql.hive.filesourcePartitionFileCacheSize**
@@ -616,6 +553,81 @@ Used when:
 
 Default: `true`
 
+## retainGroupColumns { #spark.sql.retainGroupColumns }
+
+**spark.sql.retainGroupColumns**
+
+**(internal)** Controls whether to retain columns used for aggregation or not (in [RelationalGroupedDataset](RelationalGroupedDataset.md) operators).
+
+Default: `true`
+
+Use [SQLConf.dataFrameRetainGroupColumns](SQLConf.md#dataFrameRetainGroupColumns) method to access the current value.
+
+Used in [RelationalGroupedDataset](RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
+
+## spark.sql.files { #spark.sql.files }
+
+### <span id="FILES_MAX_PARTITION_BYTES"> maxPartitionBytes { #spark.sql.files.maxPartitionBytes }
+
+**spark.sql.files.maxPartitionBytes**
+
+Maximum number of bytes to pack into a single partition when reading files for file-based data sources (e.g., [Parquet](parquet/index.md))
+
+Default: `128MB` (like `parquet.block.size`)
+
+Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the current value
+
+Used when:
+
+* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+
+### <span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile { #spark.sql.files.maxRecordsPerFile }
+
+**spark.sql.files.maxRecordsPerFile**
+
+Maximum number of records to write out to a single file. If `0` or negative, there is no limit.
+
+Default: `0`
+
+Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method for the current value
+
+Used when:
+
+* `FileFormatWriter` is requested to [write data out](connectors/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch) (and [creates a WriteJobDescription](connectors/FileWrite.md#createWriteJobDescription))
+
+### <span id="FILES_MIN_PARTITION_NUM"> minPartitionNum { #spark.sql.files.minPartitionNum }
+
+**spark.sql.files.minPartitionNum**
+
+Hint about the minimum number of partitions for file-based data sources (e.g., [Parquet](parquet/index.md))
+
+Default: [spark.sql.leafNodeDefaultParallelism](SparkSession.md#leafNodeDefaultParallelism)
+
+Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) for the current value
+
+Used when:
+
+* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+
+### <span id="FILES_OPEN_COST_IN_BYTES"> openCostInBytes { #spark.sql.files.openCostInBytes }
+
+**spark.sql.files.openCostInBytes**
+
+**(internal)** The estimated cost to open a file, measured by the number of bytes could be scanned at the same time (to include multiple files into a partition).
+Effective only for file-based sources such as Parquet, JSON and ORC.
+
+Default: `4MB`
+
+It's better to over-estimate it, then the partitions with small files will be faster than partitions with bigger files (which is scheduled first).
+
+Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) for the current value
+
+Used when:
+
+* `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
+* `FilePartition` is requested to [getFilePartitions](connectors/FilePartition.md#getFilePartitions) and [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+
 ## spark.sql.parquet { #spark.sql.parquet }
 
 ### <span id="spark.sql.parquet.aggregatePushdown"> aggregatePushdown
@@ -721,7 +733,7 @@ Used when:
 
 * `ParquetOptions` is created (and initializes [mergeSchema](parquet/ParquetOptions.md#mergeSchema) option)
 
-## <span id="PARQUET_OUTPUT_COMMITTER_CLASS"> output.committer.class { #spark.sql.parquet.output.committer.class }
+### <span id="PARQUET_OUTPUT_COMMITTER_CLASS"> output.committer.class { #spark.sql.parquet.output.committer.class }
 
 **spark.sql.parquet.output.committer.class**
 
@@ -1998,14 +2010,6 @@ When this regex matches a string part, it is replaced by a dummy value (i.e. `**
 NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is used instead.
 
 Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method to access the current value.
-
-## <span id="spark.sql.retainGroupColumns"> spark.sql.retainGroupColumns
-
-Controls whether to retain columns used for aggregation or not (in [RelationalGroupedDataset](RelationalGroupedDataset.md) operators).
-
-Default: `true`
-
-Use [SQLConf.dataFrameRetainGroupColumns](SQLConf.md#dataFrameRetainGroupColumns) method to access the current value.
 
 ## <span id="spark.sql.runSQLOnFiles"> spark.sql.runSQLOnFiles
 
