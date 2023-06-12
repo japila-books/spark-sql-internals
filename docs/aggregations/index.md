@@ -1,10 +1,10 @@
-# Aggregation Queries
+# Aggregate Queries
 
-**Aggregation Queries** (_Aggregations_) are structured queries with [Aggregate](../logical-operators/Aggregate.md) logical operator.
+**Aggregate Queries** (_Aggregates_) are structured queries with [Aggregate](../logical-operators/Aggregate.md) logical operator.
 
-Aggregation queries calculate single value for a set of rows.
+Aggregate Queries calculate single value for a set of rows.
 
-Aggregation queries can be broken down to the following sections:
+Aggregate Queries can be broken down to the following sections:
 
 1. **Grouping** (using `GROUP BY` clause in SQL or [Dataset.groupBy](#groupBy) operator) that arranges rows into groups (possibly guarded by [HAVING](#having) SQL clause)
 1. **Aggregation** (using [Aggregate Functions](../functions/aggregate-functions.md)) to apply to a set of rows and calculate single values per groups
@@ -13,7 +13,7 @@ Aggregation queries can be broken down to the following sections:
 
 ## Configuration Properties
 
-Aggregation Queries can be fine-tuned with the following configuration properties:
+Aggregate Queries can be fine-tuned with the following configuration properties:
 
 * [spark.sql.retainGroupColumns](../configuration-properties.md#spark.sql.retainGroupColumns)
 * _others_
