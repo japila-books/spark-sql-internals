@@ -506,7 +506,9 @@ Used when:
 
 * `InMemoryTableScanExec` physical operator is requested to [filter cached column batches](physical-operators/InMemoryTableScanExec.md#filteredCachedBatches)
 
-## <span id="spark.sql.optimizer.canChangeCachedPlanOutputPartitioning"> optimizer.canChangeCachedPlanOutputPartitioning
+## spark.sql.optimizer { #spark.sql.optimizer }
+
+### canChangeCachedPlanOutputPartitioning { #spark.sql.optimizer.canChangeCachedPlanOutputPartitioning }
 
 **spark.sql.optimizer.canChangeCachedPlanOutputPartitioning**
 
@@ -516,7 +518,7 @@ Default: `false`
 
 Use [SQLConf.CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING](SQLConf.md#CAN_CHANGE_CACHED_PLAN_OUTPUT_PARTITIONING) to access the property
 
-## <span id="spark.sql.optimizer.decorrelateInnerQuery.enabled"> optimizer.decorrelateInnerQuery.enabled
+### decorrelateInnerQuery.enabled { #spark.sql.optimizer.decorrelateInnerQuery.enabled }
 
 **spark.sql.optimizer.decorrelateInnerQuery.enabled**
 
@@ -526,7 +528,7 @@ Default: `true`
 
 Use [SQLConf.decorrelateInnerQueryEnabled](SQLConf.md#decorrelateInnerQueryEnabled) for the current value
 
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio"> optimizer.dynamicPartitionPruning.fallbackFilterRatio
+### dynamicPartitionPruning.fallbackFilterRatio { #spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio }
 
 **spark.sql.optimizer.dynamicPartitionPruning.fallbackFilterRatio**
 
@@ -536,7 +538,7 @@ Default: `0.5`
 
 Use [SQLConf.dynamicPartitionPruningFallbackFilterRatio](SQLConf.md#dynamicPartitionPruningFallbackFilterRatio) method to access the current value.
 
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio"> optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio
+### dynamicPartitionPruning.pruningSideExtraFilterRatio { #spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio }
 
 **spark.sql.optimizer.dynamicPartitionPruning.pruningSideExtraFilterRatio**
 
@@ -548,7 +550,7 @@ Default: `0.04`
 
 Use [SQLConf.dynamicPartitionPruningPruningSideExtraFilterRatio](SQLConf.md#dynamicPartitionPruningPruningSideExtraFilterRatio) to access the current value.
 
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.useStats"> optimizer.dynamicPartitionPruning.useStats
+### dynamicPartitionPruning.useStats { #spark.sql.optimizer.dynamicPartitionPruning.useStats }
 
 **spark.sql.optimizer.dynamicPartitionPruning.useStats**
 
@@ -562,7 +564,7 @@ Used when:
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization rule is [executed](logical-optimizations/PartitionPruning.md#pruningHasBenefit)
 
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.enabled"> optimizer.dynamicPartitionPruning.enabled
+### dynamicPartitionPruning.enabled { #spark.sql.optimizer.dynamicPartitionPruning.enabled }
 
 **spark.sql.optimizer.dynamicPartitionPruning.enabled**
 
@@ -579,7 +581,7 @@ Used to control whether to execute the following optimizations or skip them alto
 * [PlanAdaptiveDynamicPruningFilters](physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) physical optimization
 * [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) physical optimization
 
-## <span id="spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly"> optimizer.dynamicPartitionPruning.reuseBroadcastOnly
+### dynamicPartitionPruning.reuseBroadcastOnly { #spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly }
 
 **spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly**
 
@@ -593,7 +595,7 @@ Used when:
 
 * [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed (and requested to [insertPredicate](logical-optimizations/PartitionPruning.md#insertPredicate))
 
-## <span id="spark.sql.optimizer.enableCsvExpressionOptimization"> optimizer.enableCsvExpressionOptimization
+### enableCsvExpressionOptimization { #spark.sql.optimizer.enableCsvExpressionOptimization }
 
 **spark.sql.optimizer.enableCsvExpressionOptimization**
 
@@ -603,7 +605,7 @@ Default: `true`
 
 Use [SQLConf.csvExpressionOptimization](SQLConf.md#csvExpressionOptimization) for the current value
 
-## <span id="spark.sql.optimizer.excludedRules"> optimizer.excludedRules
+### excludedRules { #spark.sql.optimizer.excludedRules }
 
 **spark.sql.optimizer.excludedRules**
 
@@ -616,7 +618,21 @@ Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method t
 !!! important
     It is not guaranteed that all the rules to be excluded will eventually be excluded, as some rules are [non-excludable](catalyst/Optimizer.md#nonExcludableRules).
 
-## <span id="spark.sql.optimizer.expression.nestedPruning.enabled"> optimizer.expression.nestedPruning.enabled
+### <span id="EXPRESSION_PROJECTION_CANDIDATE_LIMIT"> expressionProjectionCandidateLimit { #spark.sql.optimizer.expressionProjectionCandidateLimit }
+
+**spark.sql.optimizer.expressionProjectionCandidateLimit**
+
+**(internal)** The maximum number of the candidates of output expressions whose alias are replaced.
+It can preserve the output partitioning and ordering.
+Negative value means disable this optimization.
+
+Default: `100`
+
+Used when:
+
+* `AliasAwareOutputExpression` is requested for the [aliasCandidateLimit](physical-operators/AliasAwareOutputExpression.md#aliasCandidateLimit)
+
+### expression.nestedPruning.enabled { #spark.sql.optimizer.expression.nestedPruning.enabled }
 
 **spark.sql.optimizer.expression.nestedPruning.enabled**
 
@@ -624,7 +640,7 @@ Use [SQLConf.optimizerExcludedRules](SQLConf.md#optimizerExcludedRules) method t
 
 Default: `true`
 
-## <span id="spark.sql.optimizer.inSetConversionThreshold"> optimizer.inSetConversionThreshold
+### inSetConversionThreshold { #spark.sql.optimizer.inSetConversionThreshold }
 
 **spark.sql.optimizer.inSetConversionThreshold**
 
@@ -634,7 +650,7 @@ Default: `10`
 
 Use [SQLConf.optimizerInSetConversionThreshold](SQLConf.md#optimizerInSetConversionThreshold) method to access the current value.
 
-## <span id="spark.sql.optimizer.inSetSwitchThreshold"> optimizer.inSetSwitchThreshold
+### inSetSwitchThreshold { #spark.sql.optimizer.inSetSwitchThreshold }
 
 **spark.sql.optimizer.inSetSwitchThreshold**
 
@@ -644,7 +660,7 @@ Must be non-negative and less than or equal to 600.
 
 Default: `400`
 
-## <span id="spark.sql.optimizer.maxIterations"> optimizer.maxIterations
+### maxIterations { #spark.sql.optimizer.maxIterations }
 
 **spark.sql.optimizer.maxIterations**
 
@@ -652,7 +668,7 @@ Maximum number of iterations for [Analyzer](Analyzer.md#fixedPoint) and [Logical
 
 Default: `100`
 
-## <span id="spark.sql.optimizer.nestedSchemaPruning.enabled"> optimizer.nestedSchemaPruning.enabled
+### nestedSchemaPruning.enabled { #spark.sql.optimizer.nestedSchemaPruning.enabled }
 
 **spark.sql.optimizer.nestedSchemaPruning.enabled**
 
@@ -662,7 +678,7 @@ Default: `true`
 
 Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) method to access the current value.
 
-## <span id="spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources"> optimizer.nestedPredicatePushdown.supportedFileSources
+### nestedPredicatePushdown.supportedFileSources { #spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources }
 
 **spark.sql.optimizer.nestedPredicatePushdown.supportedFileSources**
 
@@ -670,7 +686,7 @@ Use [SQLConf.nestedSchemaPruningEnabled](SQLConf.md#nestedSchemaPruningEnabled) 
 
 Default: `parquet,orc`
 
-## <span id="spark.sql.optimizer.optimizeOneRowRelationSubquery"> optimizer.optimizeOneRowRelationSubquery
+### optimizeOneRowRelationSubquery { #spark.sql.optimizer.optimizeOneRowRelationSubquery }
 
 **spark.sql.optimizer.optimizeOneRowRelationSubquery**
 
@@ -680,7 +696,7 @@ Default: `true`
 
 Use [SQLConf.OPTIMIZE_ONE_ROW_RELATION_SUBQUERY](SQLConf.md#OPTIMIZE_ONE_ROW_RELATION_SUBQUERY) method to access the property (in a type-safe way)
 
-## <span id="spark.sql.optimizer.planChangeLog.batches"> optimizer.planChangeLog.batches
+### planChangeLog.batches { #spark.sql.optimizer.planChangeLog.batches }
 
 **spark.sql.optimizer.planChangeLog.batches**
 
@@ -688,7 +704,7 @@ Use [SQLConf.OPTIMIZE_ONE_ROW_RELATION_SUBQUERY](SQLConf.md#OPTIMIZE_ONE_ROW_REL
 
 Default: `(undefined)`
 
-## <span id="spark.sql.optimizer.planChangeLog.level"> optimizer.planChangeLog.level
+### planChangeLog.level { #spark.sql.optimizer.planChangeLog.level }
 
 **spark.sql.optimizer.planChangeLog.level**
 
@@ -696,7 +712,7 @@ Default: `(undefined)`
 
 Default: `TRACE`
 
-## <span id="spark.sql.optimizer.planChangeLog.rules"> optimizer.planChangeLog.rules
+### planChangeLog.rules { #spark.sql.optimizer.planChangeLog.rules }
 
 **spark.sql.optimizer.planChangeLog.rules**
 
@@ -704,7 +720,7 @@ Default: `TRACE`
 
 Default: `(undefined)`
 
-## <span id="spark.sql.optimizer.replaceExceptWithFilter"> optimizer.replaceExceptWithFilter
+### replaceExceptWithFilter { #spark.sql.optimizer.replaceExceptWithFilter }
 
 **spark.sql.optimizer.replaceExceptWithFilter**
 
@@ -712,7 +728,7 @@ Default: `(undefined)`
 
 Default: `true`
 
-## <span id="spark.sql.optimizer.runtime.bloomFilter.enabled"> optimizer.runtime.bloomFilter.enabled
+### runtime.bloomFilter.enabled { #spark.sql.optimizer.runtime.bloomFilter.enabled }
 
 **spark.sql.optimizer.runtime.bloomFilter.enabled**
 
@@ -726,7 +742,7 @@ Used when:
 
 * [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
 
-## <span id="spark.sql.optimizer.runtime.bloomFilter.expectedNumItems"> optimizer.runtime.bloomFilter.expectedNumItems
+### runtime.bloomFilter.expectedNumItems { #spark.sql.optimizer.runtime.bloomFilter.expectedNumItems }
 
 **spark.sql.optimizer.runtime.bloomFilter.expectedNumItems**
 
@@ -740,7 +756,7 @@ Used when:
 
 * [BloomFilterAggregate](expressions/BloomFilterAggregate.md#estimatedNumItemsExpression) expression is created
 
-## <span id="spark.sql.optimizer.runtime.bloomFilter.maxNumBits"> optimizer.runtime.bloomFilter.maxNumBits
+### runtime.bloomFilter.maxNumBits { #spark.sql.optimizer.runtime.bloomFilter.maxNumBits }
 
 **spark.sql.optimizer.runtime.bloomFilter.maxNumBits**
 
@@ -756,7 +772,7 @@ Used when:
 
 * `BloomFilterAggregate` is requested to [checkInputDataTypes](expressions/BloomFilterAggregate.md#checkInputDataTypes) and for the [numBits](expressions/BloomFilterAggregate.md#numBits)
 
-## <span id="spark.sql.optimizer.runtimeFilter.number.threshold"> optimizer.runtimeFilter.number.threshold
+### runtimeFilter.number.threshold { #spark.sql.optimizer.runtimeFilter.number.threshold }
 
 **spark.sql.optimizer.runtimeFilter.number.threshold**
 
@@ -772,7 +788,7 @@ Used when:
 
 * [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
 
-## <span id="spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled"> optimizer.runtimeFilter.semiJoinReduction.enabled
+### runtimeFilter.semiJoinReduction.enabled { #spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled }
 
 **spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled**
 
@@ -786,7 +802,7 @@ Used when:
 
 * [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
 
-## <span id="spark.sql.optimizer.serializer.nestedSchemaPruning.enabled"> optimizer.serializer.nestedSchemaPruning.enabled
+### serializer.nestedSchemaPruning.enabled { #spark.sql.optimizer.serializer.nestedSchemaPruning.enabled }
 
 **spark.sql.optimizer.serializer.nestedSchemaPruning.enabled**
 

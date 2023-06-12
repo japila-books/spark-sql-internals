@@ -86,9 +86,9 @@ resultExpressions: Seq[NamedExpression]
 * [ObjectHashAggregateExec](ObjectHashAggregateExec.md)
 * [SortAggregateExec](SortAggregateExec.md)
 
-## AliasAwareOutputPartitioning
+## PartitioningPreservingUnaryExecNode
 
-`BaseAggregateExec` is an [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
+`BaseAggregateExec` is an [PartitioningPreservingUnaryExecNode](PartitioningPreservingUnaryExecNode.md).
 
 ## <span id="verboseStringWithOperatorId"> Detailed Description (with Operator Id)
 

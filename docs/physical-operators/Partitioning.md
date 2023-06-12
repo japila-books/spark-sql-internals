@@ -12,7 +12,7 @@ numPartitions: Int
 
 Used when:
 
-* `AliasAwareOutputPartitioning` unary physical operators are requested for the [outputPartitioning](AliasAwareOutputPartitioning.md#outputPartitioning)
+* `PartitioningPreservingUnaryExecNode` unary physical operators are requested for the [outputPartitioning](PartitioningPreservingUnaryExecNode.md#outputPartitioning)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 * `ShuffleExchangeExec` utility is used to [prepareShuffleDependency](ShuffleExchangeExec.md#prepareShuffleDependency)
 * `ValidateRequirements` utility is used to `validateInternal`

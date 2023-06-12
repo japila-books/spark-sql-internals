@@ -1,10 +1,10 @@
-# AliasAwareOutputExpression Unary Physical Operators
+# AliasAwareOutputExpression Physical Operators
 
-`AliasAwareOutputExpression` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [unary physical operators](#implementations) with the [output named expressions](#outputExpressions).
+`AliasAwareOutputExpression` is an [abstraction](#contract) of [physical operators](#implementations) with the [output named expressions](#outputExpressions).
 
 ## Contract
 
-### <span id="outputExpressions"> Output Named Expressions
+### Output Named Expressions { #outputExpressions }
 
 ```scala
 outputExpressions: Seq[NamedExpression]
@@ -12,16 +12,33 @@ outputExpressions: Seq[NamedExpression]
 
 Output [NamedExpression](../expressions/NamedExpression.md)s
 
+See:
+
+* [BaseAggregateExec](BaseAggregateExec.md#outputExpressions)
+* [ProjectExec](ProjectExec.md#outputExpressions)
+
 Used when:
 
-* `AliasAwareOutputExpression` is requested for the [aliasMap](#aliasMap)
+* `AliasAwareOutputExpression` is requested for the [aliasMap](#aliasMap), [projectExpression](#projectExpression)
+* `AliasAwareQueryOutputOrdering` is requested for the [output ordering](AliasAwareQueryOutputOrdering.md#outputOrdering)
+* `PartitioningPreservingUnaryExecNode` is requested for the [output partitioning](PartitioningPreservingUnaryExecNode.md#outputPartitioning)
 
 ## Implementations
 
-* [AliasAwareOutputOrdering](AliasAwareOutputOrdering.md)
-* [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md)
+* [AliasAwareQueryOutputOrdering](AliasAwareQueryOutputOrdering.md)
+* [PartitioningPreservingUnaryExecNode](PartitioningPreservingUnaryExecNode.md)
 
-## <span id="aliasMap"> aliasMap
+## spark.sql.optimizer.expressionProjectionCandidateLimit { #aliasCandidateLimit }
+
+`aliasCandidateLimit` is the value of [spark.sql.optimizer.expressionProjectionCandidateLimit](../configuration-properties.md#spark.sql.optimizer.expressionProjectionCandidateLimit) configuration property.
+
+`aliasCandidateLimit` is used when:
+
+* `AliasAwareOutputExpression` is requested for the [aliasMap](#aliasMap)
+* `AliasAwareQueryOutputOrdering` is requested for the [output ordering](AliasAwareQueryOutputOrdering.md#outputOrdering)
+* `PartitioningPreservingUnaryExecNode` is requested for the [output partitioning](PartitioningPreservingUnaryExecNode.md#outputPartitioning)
+
+## aliasMap { #aliasMap }
 
 ```scala
 aliasMap: AttributeMap[Attribute]
@@ -38,7 +55,7 @@ aliasMap: AttributeMap[Attribute]
 
 * `AliasAwareOutputExpression` is requested to [hasAlias](#hasAlias) and [normalizeExpression](#normalizeExpression)
 
-## <span id="hasAlias"> hasAlias
+## hasAlias { #hasAlias }
 
 ```scala
 hasAlias: Boolean
@@ -46,12 +63,14 @@ hasAlias: Boolean
 
 `hasAlias` is `true` when the [aliasMap](#aliasMap) is not empty.
 
+---
+
 `hasAlias` is used when:
 
-* `AliasAwareOutputPartitioning` is requested for the [outputPartitioning](AliasAwareOutputPartitioning.md#outputPartitioning)
-* `AliasAwareOutputOrdering` is requested for the [outputOrdering](AliasAwareOutputOrdering.md#outputOrdering)
+* `PartitioningPreservingUnaryExecNode` is requested for the [outputPartitioning](PartitioningPreservingUnaryExecNode.md#outputPartitioning)
+* `AliasAwareQueryOutputOrdering` is requested for the [outputOrdering](AliasAwareQueryOutputOrdering.md#outputOrdering)
 
-## <span id="normalizeExpression"> normalizeExpression
+## normalizeExpression { #normalizeExpression }
 
 ```scala
 normalizeExpression(
@@ -60,7 +79,9 @@ normalizeExpression(
 
 `normalizeExpression`...FIXME
 
+---
+
 `normalizeExpression` is used when:
 
-* `AliasAwareOutputPartitioning` is requested for the [outputPartitioning](AliasAwareOutputPartitioning.md#outputPartitioning)
-* `AliasAwareOutputOrdering` is requested for the [outputOrdering](AliasAwareOutputOrdering.md#outputOrdering)
+* `PartitioningPreservingUnaryExecNode` is requested for the [outputPartitioning](PartitioningPreservingUnaryExecNode.md#outputPartitioning)
+* `AliasAwareQueryOutputOrdering` is requested for the [outputOrdering](AliasAwareQueryOutputOrdering.md#outputOrdering)

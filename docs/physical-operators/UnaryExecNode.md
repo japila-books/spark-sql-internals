@@ -20,7 +20,7 @@ Used when:
 ## Implementations
 
 * AggregateInPandasExec ([PySpark]({{ book.pyspark }}/sql/AggregateInPandasExec))
-* [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md)
+* [PartitioningPreservingUnaryExecNode](PartitioningPreservingUnaryExecNode.md)
 * [BaseAggregateExec](BaseAggregateExec.md)
 * [CoalesceExec](CoalesceExec.md)
 * [CollectMetricsExec](CollectMetricsExec.md)

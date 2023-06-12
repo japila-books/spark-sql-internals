@@ -1,6 +1,6 @@
-# AliasAwareOutputOrdering Unary Physical Operators
+# AliasAwareQueryOutputOrdering Unary Physical Operators
 
-`AliasAwareOutputOrdering` is an [extension](#contract) of the [AliasAwareOutputExpression](AliasAwareOutputExpression.md) abstraction for [unary physical operators](#implementations) with [alias-aware ordering expressions](#orderingExpressions).
+`AliasAwareQueryOutputOrdering` is an [extension](#contract) of the [AliasAwareOutputExpression](AliasAwareOutputExpression.md) abstraction for [unary physical operators](#implementations) with [alias-aware ordering expressions](#orderingExpressions).
 
 ## Contract
 
@@ -14,7 +14,7 @@ orderingExpressions: Seq[SortOrder]
 
 Used when:
 
-* `AliasAwareOutputOrdering` is requested for the [output ordering](#outputOrdering)
+* `AliasAwareQueryOutputOrdering` is requested for the [output ordering](#outputOrdering)
 
 ## Implementations
 

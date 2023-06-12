@@ -1,17 +1,10 @@
 # HashAggregateExec Physical Operator
 
-`HashAggregateExec` is a [unary physical operator](BaseAggregateExec.md) for **hash-based aggregation**.
+`HashAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Hash-Based Aggregation**.
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
-`HashAggregateExec` is a `BlockingOperatorWithCodegen`.
-
-`HashAggregateExec` is an [AliasAwareOutputPartitioning](AliasAwareOutputPartitioning.md).
-
-!!! note
-    `HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md)).
-
-`HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
+`HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md) operators).
 
 `HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
 
@@ -31,28 +24,29 @@
 `HashAggregateExec` takes the following to be created:
 
 * <span id="requiredChildDistributionExpressions"> Required child distribution [expressions](../expressions/Expression.md)
-* <span id="groupingExpressions"> Grouping Keys (as [NamedExpression](../expressions/NamedExpression.md)s)
+* <span id="isStreaming"> `isStreaming` flag
+* <span id="numShufflePartitions"> Number of Shuffle Partitions (optional)
+* <span id="groupingExpressions"> Grouping Keys ([NamedExpression](../expressions/NamedExpression.md)s)
 * <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
 * <span id="aggregateAttributes"> Aggregate [attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
 * <span id="resultExpressions"> Output [named expressions](../expressions/NamedExpression.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 
-`HashAggregateExec` is created when (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
+`HashAggregateExec` is created (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator)
-
 * `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/execution-planning-strategies/StatefulAggregationStrategy)) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics { #metrics }
 
-### <span id="avgHashProbe"> avg hash probe bucket list iters
+### avg hash probe bucket list iters { #avgHashProbe }
 
 Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
 `numProbes` and `numKeyLookups` are used in `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/BytesToBytesMap)) append-only hash map for the number of iteration to look up a single key and the number of all the lookups in total, respectively.
 
-### <span id="numOutputRows"> number of output rows
+### number of output rows { #numOutputRows }
 
 Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
@@ -65,29 +59,31 @@ Number of groups (per partition) that (depending on the number of partitions and
 !!! tip
     Use different number of elements and partitions in `range` operator to observe the difference in `numOutputRows` metric, e.g.
 
-```text
-spark.
-  range(0, 10, 1, numPartitions = 1).
-  groupBy($"id" % 5 as "gid").
-  count.
-  show
+    ```scala
+    spark.
+      range(0, 10, 1, numPartitions = 1).
+      groupBy($"id" % 5 as "gid").
+      count.
+      show
+    ```
 
-spark.
-  range(0, 10, 1, numPartitions = 5).
-  groupBy($"id" % 5 as "gid").
-  count.
-  show
-```
+    ```scala
+    spark.
+      range(0, 10, 1, numPartitions = 5).
+      groupBy($"id" % 5 as "gid").
+      count.
+      show
+    ```
 
-### <span id="numTasksFallBacked"> number of sort fallback tasks
+### number of sort fallback tasks { #numTasksFallBacked }
 
-### <span id="peakMemory"> peak memory
+### peak memory { #peakMemory }
 
-### <span id="spillSize"> spill size
+### spill size { #spillSize }
 
 Used to create a [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md#spillSize) when [doExecute](#doExecute)
 
-### <span id="aggTime"> time in aggregation build
+### time in aggregation build { #aggTime }
 
 ## <span id="requiredChildDistribution"> Required Child Distribution
 

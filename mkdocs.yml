@@ -600,8 +600,7 @@ nav:
       - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
       - AggregateCodegenSupport: physical-operators/AggregateCodegenSupport.md
       - AliasAwareOutputExpression: physical-operators/AliasAwareOutputExpression.md
-      - AliasAwareOutputOrdering: physical-operators/AliasAwareOutputOrdering.md
-      - AliasAwareOutputPartitioning: physical-operators/AliasAwareOutputPartitioning.md
+      - AliasAwareQueryOutputOrdering: physical-operators/AliasAwareQueryOutputOrdering.md
       - AlterTableExec: physical-operators/AlterTableExec.md
       - AQEShuffleReadExec: physical-operators/AQEShuffleReadExec.md
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
@@ -649,6 +648,7 @@ nav:
       - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
       - ObjectProducerExec: physical-operators/ObjectProducerExec.md
       - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+      - PartitioningPreservingUnaryExecNode: physical-operators/PartitioningPreservingUnaryExecNode.md
       - ProjectExec: physical-operators/ProjectExec.md
       - QueryStageExec: physical-operators/QueryStageExec.md
       - RangeExec: physical-operators/RangeExec.md
