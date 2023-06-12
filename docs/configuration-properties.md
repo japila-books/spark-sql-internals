@@ -30,7 +30,21 @@ scala> spark.sql("SET spark.sql.hive.metastore.version=2.3.2").show(truncate = f
 assert(spark.conf.get("spark.sql.hive.metastore.version") == "2.3.2")
 ```
 
-## <span id="spark.sql.adaptive.autoBroadcastJoinThreshold"> adaptive.autoBroadcastJoinThreshold
+## spark.sql.adaptive { #spark.sql.adaptive }
+
+### advisoryPartitionSizeInBytes { #spark.sql.adaptive.advisoryPartitionSizeInBytes }
+
+**spark.sql.adaptive.advisoryPartitionSizeInBytes**
+
+The advisory size in bytes of the shuffle partition during adaptive optimization (when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled). It takes effect when Spark coalesces small shuffle partitions or splits skewed shuffle partition.
+
+Default: `64MB`
+
+Fallback Property: `spark.sql.adaptive.shuffle.targetPostShuffleInputSize`
+
+Use [SQLConf.ADVISORY_PARTITION_SIZE_IN_BYTES](SQLConf.md#ADVISORY_PARTITION_SIZE_IN_BYTES) to reference the name.
+
+### autoBroadcastJoinThreshold { #spark.sql.adaptive.autoBroadcastJoinThreshold }
 
 **spark.sql.adaptive.autoBroadcastJoinThreshold**
 
@@ -42,7 +56,67 @@ Default: (undefined)
 
 Available as [SQLConf.ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD](SQLConf.md#ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD) value.
 
-## <span id="spark.sql.adaptive.customCostEvaluatorClass"> adaptive.customCostEvaluatorClass
+### coalescePartitions.enabled { #spark.sql.adaptive.coalescePartitions.enabled }
+
+**spark.sql.adaptive.coalescePartitions.enabled**
+
+Controls coalescing shuffle partitions
+
+When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark will coalesce contiguous shuffle partitions according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid too many small tasks.
+
+Default: `true`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+### coalescePartitions.minPartitionSize { #spark.sql.adaptive.coalescePartitions.minPartitionSize }
+
+**spark.sql.adaptive.coalescePartitions.minPartitionSize**
+
+The minimum size (in bytes unless specified) of shuffle partitions after coalescing. This is useful when the adaptively calculated target size is too small during partition coalescing
+
+Default: `1MB`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+### <span id="COALESCE_PARTITIONS_MIN_PARTITION_SIZE"><span id="COALESCE_PARTITIONS_MIN_PARTITION_NUM"> coalescePartitions.minPartitionSize { #spark.sql.adaptive.coalescePartitions.minPartitionSize }
+
+**spark.sql.adaptive.coalescePartitions.minPartitionSize**
+
+The minimum size (in bytes) of shuffle partitions after coalescing.
+
+Useful when the adaptively calculated target size is too small during partition coalescing.
+
+Default: `(undefined)`
+
+Must be positive
+
+Used when:
+
+* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
+
+### coalescePartitions.initialPartitionNum { #spark.sql.adaptive.coalescePartitions.initialPartitionNum }
+
+**spark.sql.adaptive.coalescePartitions.initialPartitionNum**
+
+The initial number of shuffle partitions before coalescing.
+
+By default it equals to [spark.sql.shuffle.partitions](#spark.sql.shuffle.partitions).
+If not set, the default value is the default parallelism of the Spark cluster.
+This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled.
+
+Default: `(undefined)`
+
+### coalescePartitions.parallelismFirst { #spark.sql.adaptive.coalescePartitions.parallelismFirst }
+
+**spark.sql.adaptive.coalescePartitions.parallelismFirst**
+
+When `true`, Spark does not respect the target size specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) when coalescing contiguous shuffle partitions, but adaptively calculate the target size according to the default parallelism of the Spark cluster. The calculated size is usually smaller than the configured target size. This is to maximize the parallelism and avoid performance regression when enabling adaptive query execution. It's recommended to set this config to `false` and respect the configured target size.
+
+Default: `true`
+
+Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
+
+### customCostEvaluatorClass { #spark.sql.adaptive.customCostEvaluatorClass }
 
 **spark.sql.adaptive.customCostEvaluatorClass**
 
@@ -56,7 +130,37 @@ Used when:
 
 * `AdaptiveSparkPlanExec` physical operator is requested for the [AQE cost evaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator)
 
-## <span id="spark.sql.adaptive.forceOptimizeSkewedJoin"> adaptive.forceOptimizeSkewedJoin
+### enabled { #spark.sql.adaptive.enabled }
+
+**spark.sql.adaptive.enabled**
+
+Enables [Adaptive Query Execution](adaptive-query-execution/index.md)
+
+Default: `true`
+
+Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
+
+### fetchShuffleBlocksInBatch { #spark.sql.adaptive.fetchShuffleBlocksInBatch }
+
+**spark.sql.adaptive.fetchShuffleBlocksInBatch**
+
+**(internal)** Whether to fetch the contiguous shuffle blocks in batch. Instead of fetching blocks one by one, fetching contiguous shuffle blocks for the same map task in batch can reduce IO and improve performance. Note, multiple contiguous blocks exist in single "fetch request only happen when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled. This feature also depends on a relocatable serializer, the concatenation support codec in use and the new version shuffle fetch protocol.
+
+Default: `true`
+
+Use [SQLConf.fetchShuffleBlocksInBatch](SQLConf.md#fetchShuffleBlocksInBatch) method to access the current value.
+
+### forceApply { #spark.sql.adaptive.forceApply }
+
+**spark.sql.adaptive.forceApply**
+
+**(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](physical-optimizations/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
+
+Default: `false`
+
+Use [SQLConf.ADAPTIVE_EXECUTION_FORCE_APPLY](SQLConf.md#ADAPTIVE_EXECUTION_FORCE_APPLY) method to access the property (in a type-safe way).
+
+### forceOptimizeSkewedJoin { #spark.sql.adaptive.forceOptimizeSkewedJoin }
 
 **spark.sql.adaptive.forceOptimizeSkewedJoin**
 
@@ -73,7 +177,49 @@ Used when:
 * `AdaptiveSparkPlanExec` physical operator is requested for the [AQE cost evaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator) (and creates a [SimpleCostEvaluator](physical-operators/AdaptiveSparkPlanExec.md#costEvaluator))
 * [OptimizeSkewedJoin](physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed
 
-## <span id="spark.sql.adaptive.optimizer.excludedRules"><span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> adaptive.optimizer.excludedRules
+### localShuffleReader.enabled { #spark.sql.adaptive.localShuffleReader.enabled }
+
+**spark.sql.adaptive.localShuffleReader.enabled**
+
+When `true` (and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`), Spark SQL tries to use local shuffle reader to read the shuffle data when the shuffle partitioning is not needed, for example, after converting sort-merge join to broadcast-hash join.
+
+Default: `true`
+
+Use [SQLConf.LOCAL_SHUFFLE_READER_ENABLED](SQLConf.md#LOCAL_SHUFFLE_READER_ENABLED) to access the property (in a type-safe way)
+
+### logLevel { #spark.sql.adaptive.logLevel }
+
+**spark.sql.adaptive.logLevel**
+
+**(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
+
+Default: `DEBUG`
+
+Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) for the current value
+
+### maxShuffledHashJoinLocalMapThreshold { #spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold }
+
+**spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold**
+
+The maximum size (in bytes) per partition that can be allowed to build local hash map. If this value is not smaller than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) and all the partition size are not larger than this config, join selection prefer to use shuffled hash join instead of sort merge join regardless of the value of [spark.sql.join.preferSortMergeJoin](#spark.sql.join.preferSortMergeJoin).
+
+Default: `0`
+
+Available as [SQLConf.ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD](SQLConf.md#ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD)
+
+### nonEmptyPartitionRatioForBroadcastJoin { #spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin }
+
+**spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin**
+
+**(internal)** A relation with a non-empty partition ratio (the number of non-empty partitions to all partitions) lower than this config will not be considered as the build side of a broadcast-hash join in [Adaptive Query Execution](adaptive-query-execution/index.md) regardless of the size.
+
+Effective with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) `true`
+
+Default: `0.2`
+
+Use [SQLConf.nonEmptyPartitionRatioForBroadcastJoin](SQLConf.md#nonEmptyPartitionRatioForBroadcastJoin) method to access the current value.
+
+### <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> optimizer.excludedRules { #spark.sql.adaptive.optimizer.excludedRules }
 
 **spark.sql.adaptive.optimizer.excludedRules**
 
@@ -86,6 +232,40 @@ Use [SQLConf.ADAPTIVE_OPTIMIZER_EXCLUDED_RULES](SQLConf.md#ADAPTIVE_OPTIMIZER_EX
 Used when:
 
 * `AQEOptimizer` is requested for the [batches](adaptive-query-execution/AQEOptimizer.md#batches)
+
+### optimizeSkewsInRebalancePartitions.enabled { #spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled }
+
+When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`, Spark SQL will optimize the skewed shuffle partitions in RebalancePartitions and split them to smaller ones according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid data skew
+
+Default: `true`
+
+Use [SQLConf.ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED](SQLConf.md#ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED) method to access the property (in a type-safe way)
+
+### skewJoin.enabled { #spark.sql.adaptive.skewJoin.enabled }
+
+**spark.sql.adaptive.skewJoin.enabled**
+
+When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark dynamically handles skew in sort-merge join by splitting (and replicating if needed) skewed partitions.
+
+Default: `true`
+
+Use [SQLConf.SKEW_JOIN_ENABLED](SQLConf.md#SKEW_JOIN_ENABLED) to reference the property.
+
+### skewJoin.skewedPartitionFactor { #spark.sql.adaptive.skewJoin.skewedPartitionFactor }
+
+**spark.sql.adaptive.skewJoin.skewedPartitionFactor**
+
+A partition is considered skewed if its size is larger than this factor multiplying the median partition size and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes).
+
+Default: `5`
+
+### skewJoin.skewedPartitionThresholdInBytes { #spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes }
+
+**spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes**
+
+A partition is considered skewed if its size in bytes is larger than this threshold and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionFactor](#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplying the median partition size. Ideally this config should be set larger than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes).
+
+Default: `256MB`
 
 ## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> autoBroadcastJoinThreshold
 
@@ -115,7 +295,68 @@ Used when:
 
 * `InMemoryRelation` is requested for the [CachedBatchSerializer](logical-operators/InMemoryRelation.md#getSerializer)
 
-## <span id="spark.sql.codegen.hugeMethodLimit"> codegen.hugeMethodLimit
+## spark.sql.codegen { #spark.sql.codegen }
+
+### aggregate.fastHashMap.capacityBit { #spark.sql.codegen.aggregate.fastHashMap.capacityBit }
+
+**spark.sql.codegen.aggregate.fastHashMap.capacityBit**
+
+**(internal)** Capacity for the max number of rows to be held in memory by the fast hash aggregate product operator.
+The bit is not for actual value, but the actual `numBuckets` is determined by `loadFactor` (e.g., the default bit value `16`, the actual numBuckets is `((1 << 16) / 0.5`).
+
+Default: `16`
+
+Must be in the range of `[10, 30]` (inclusive)
+
+Use [SQLConf.fastHashAggregateRowMaxCapacityBit](SQLConf.md#fastHashAggregateRowMaxCapacityBit) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
+
+### aggregate.map.twolevel.enabled { #spark.sql.codegen.aggregate.map.twolevel.enabled }
+
+**spark.sql.codegen.aggregate.map.twolevel.enabled**
+
+**(internal)** Enable two-level aggregate hash map.
+When enabled, records will first be inserted/looked-up at a 1st-level, small, fast map, and then fallback to a 2nd-level, larger, slower map when 1st level is full or keys cannot be found.
+When disabled, records go directly to the 2nd level.
+
+Default: `true`
+
+Use [SQLConf.enableTwoLevelAggMap](SQLConf.md#enableTwoLevelAggMap) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
+
+### aggregate.map.vectorized.enable { #spark.sql.codegen.aggregate.map.vectorized.enable }
+
+**spark.sql.codegen.aggregate.map.vectorized.enable**
+
+**(internal)** Enables vectorized aggregate hash map. For testing/benchmarking only.
+
+Default: `false`
+
+Use [SQLConf.enableVectorizedHashMap](SQLConf.md#enableVectorizedHashMap) for the current value
+
+Used when:
+
+* `HashAggregateExec` physical operator is requested to [enableTwoLevelHashMap](physical-operators/HashAggregateExec.md#enableTwoLevelHashMap), [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
+
+### aggregate.map.twolevel.partialOnly { #spark.sql.codegen.aggregate.map.twolevel.partialOnly }
+
+**spark.sql.codegen.aggregate.map.twolevel.partialOnly**
+
+**(internal)** Enables two-level aggregate hash map for partial aggregate only, because final aggregate might get more distinct keys compared to partial aggregate. "Overhead of looking up 1st-level map might dominate when having a lot of distinct keys.
+
+Default: `true`
+
+Used when:
+
+* [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is requested to [checkIfFastHashMapSupported](physical-operators/HashAggregateExec.md#checkIfFastHashMapSupported)
+
+### hugeMethodLimit { #spark.sql.codegen.hugeMethodLimit }
 
 **spark.sql.codegen.hugeMethodLimit**
 
@@ -132,7 +373,7 @@ Used when:
 
 * `WholeStageCodegenExec` physical operator is [executed](physical-operators/WholeStageCodegenExec.md#doExecute)
 
-## <span id="spark.sql.codegen.fallback"> codegen.fallback
+### fallback { #spark.sql.codegen.fallback }
 
 **spark.sql.codegen.fallback**
 
@@ -146,7 +387,7 @@ Used when:
 
 * `WholeStageCodegenExec` physical operator is [executed](physical-operators/WholeStageCodegenExec.md#doExecute)
 
-## <span id="spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled"> codegen.join.fullOuterShuffledHashJoin.enabled
+### join.fullOuterShuffledHashJoin.enabled { #spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled }
 
 **spark.sql.codegen.join.fullOuterShuffledHashJoin.enabled**
 
@@ -553,17 +794,17 @@ Used when:
 
 Default: `true`
 
-## retainGroupColumns { #spark.sql.retainGroupColumns }
+## spark.sql { #spark.sql }
+
+### <span id="DATAFRAME_RETAIN_GROUP_COLUMNS"> retainGroupColumns { #spark.sql.retainGroupColumns }
 
 **spark.sql.retainGroupColumns**
 
-**(internal)** Controls whether to retain columns used for aggregation or not (in [RelationalGroupedDataset](RelationalGroupedDataset.md) operators).
+**(internal)** Controls whether to [include (retain) grouping columns or not](RelationalGroupedDataset.md#toDF) in [Aggregation Queries](aggregations/index.md)
 
 Default: `true`
 
-Use [SQLConf.dataFrameRetainGroupColumns](SQLConf.md#dataFrameRetainGroupColumns) method to access the current value.
-
-Used in [RelationalGroupedDataset](RelationalGroupedDataset.md) when creating the result `Dataset` (after `agg`, `count`, `mean`, `max`, `avg`, `min`, and `sum` operators).
+Use [SQLConf.dataFrameRetainGroupColumns](SQLConf.md#dataFrameRetainGroupColumns) for the current value
 
 ## spark.sql.files { #spark.sql.files }
 
@@ -630,7 +871,7 @@ Used when:
 
 ## spark.sql.parquet { #spark.sql.parquet }
 
-### <span id="spark.sql.parquet.aggregatePushdown"> aggregatePushdown
+### aggregatePushdown { #spark.sql.parquet.aggregatePushdown }
 
 **spark.sql.parquet.aggregatePushdown**
 
@@ -651,7 +892,7 @@ Used when:
 
 * `ParquetScanBuilder` is requested to [pushAggregation](parquet/ParquetScanBuilder.md#pushAggregation)
 
-### <span id="spark.sql.parquet.columnarReaderBatchSize"> columnarReaderBatchSize
+### columnarReaderBatchSize { #spark.sql.parquet.columnarReaderBatchSize }
 
 **spark.sql.parquet.columnarReaderBatchSize**
 
@@ -669,7 +910,7 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#capacity)
 * `WritableColumnVector` is requested to `reserve` required capacity (and fails)
 
-### <span id="spark.sql.parquet.enableNestedColumnVectorizedReader"> enableNestedColumnVectorizedReader
+### enableNestedColumnVectorizedReader { #spark.sql.parquet.enableNestedColumnVectorizedReader }
 
 **spark.sql.parquet.enableNestedColumnVectorizedReader**
 
@@ -684,7 +925,7 @@ Used when:
 
 * `ParquetUtils` is requested to [isBatchReadSupported](parquet/ParquetUtils.md#isBatchReadSupported)
 
-### <span id="spark.sql.parquet.filterPushdown"> filterPushdown
+### filterPushdown { #spark.sql.parquet.filterPushdown }
 
 **spark.sql.parquet.filterPushdown**
 
@@ -700,7 +941,7 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#enableParquetFilterPushDown)
 * `ParquetScanBuilder` is requested to [pushDataFilters](parquet/ParquetScanBuilder.md#pushDataFilters)
 
-### <span id="spark.sql.parquet.filterPushdown.stringPredicate"> filterPushdown.stringPredicate
+### filterPushdown.stringPredicate { #spark.sql.parquet.filterPushdown.stringPredicate }
 
 **spark.sql.parquet.filterPushdown.stringPredicate**
 
@@ -717,7 +958,7 @@ Used when:
 * `ParquetPartitionReaderFactory` is [created](parquet/ParquetPartitionReaderFactory.md#pushDownStringPredicate)
 * `ParquetScanBuilder` is requested to [pushDataFilters](parquet/ParquetScanBuilder.md#pushDataFilters)
 
-### <span id="spark.sql.parquet.mergeSchema"> mergeSchema
+### mergeSchema { #spark.sql.parquet.mergeSchema }
 
 **spark.sql.parquet.mergeSchema**
 
@@ -792,72 +1033,13 @@ Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to acces
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
-**(internal)** The number of entires in an in-memory hash map (to store aggregation buffers per grouping keys) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](physical-operators/ObjectAggregationIterator.md#processInputs), precisely) falls back to sort-based aggregation
+**(internal)** The number of entires in an in-memory hash map (to store aggregation buffers per grouping keys) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](aggregations/ObjectAggregationIterator.md#processInputs), precisely) falls back to sort-based aggregation
 
 Default: `128` (entries)
 
 Use [SQLConf.objectAggSortBasedFallbackThreshold](SQLConf.md#objectAggSortBasedFallbackThreshold) for the current value
 
 Learn more in [Demo: ObjectHashAggregateExec and Sort-Based Fallback Tasks](demo/objecthashaggregateexec-sort-based-fallback-tasks.md)
-
-## <span id="spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled"> spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled
-
-When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`, Spark SQL will optimize the skewed shuffle partitions in RebalancePartitions and split them to smaller ones according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid data skew
-
-Default: `true`
-
-Use [SQLConf.ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED](SQLConf.md#ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED) method to access the property (in a type-safe way)
-
-## <span id="spark.sql.codegen.aggregate.fastHashMap.capacityBit"> spark.sql.codegen.aggregate.fastHashMap.capacityBit
-
-**(internal)** Capacity for the max number of rows to be held in memory by the fast hash aggregate product operator.
-The bit is not for actual value, but the actual `numBuckets` is determined by `loadFactor` (e.g., the default bit value `16`, the actual numBuckets is `((1 << 16) / 0.5`).
-
-Default: `16`
-
-Must be in the range of `[10, 30]` (inclusive)
-
-Use [SQLConf.fastHashAggregateRowMaxCapacityBit](SQLConf.md#fastHashAggregateRowMaxCapacityBit) for the current value
-
-Used when:
-
-* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
-
-## <span id="spark.sql.codegen.aggregate.map.twolevel.enabled"> spark.sql.codegen.aggregate.map.twolevel.enabled
-
-**(internal)** Enable two-level aggregate hash map.
-When enabled, records will first be inserted/looked-up at a 1st-level, small, fast map, and then fallback to a 2nd-level, larger, slower map when 1st level is full or keys cannot be found.
-When disabled, records go directly to the 2nd level.
-
-Default: `true`
-
-Use [SQLConf.enableTwoLevelAggMap](SQLConf.md#enableTwoLevelAggMap) for the current value
-
-Used when:
-
-* `HashAggregateExec` physical operator is requested to [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
-
-## <span id="spark.sql.codegen.aggregate.map.vectorized.enable"> spark.sql.codegen.aggregate.map.vectorized.enable
-
-**(internal)** Enables vectorized aggregate hash map. For testing/benchmarking only.
-
-Default: `false`
-
-Use [SQLConf.enableVectorizedHashMap](SQLConf.md#enableVectorizedHashMap) for the current value
-
-Used when:
-
-* `HashAggregateExec` physical operator is requested to [enableTwoLevelHashMap](physical-operators/HashAggregateExec.md#enableTwoLevelHashMap), [doProduceWithKeys](physical-operators/HashAggregateExec.md#doProduceWithKeys)
-
-## <span id="spark.sql.codegen.aggregate.map.twolevel.partialOnly"> spark.sql.codegen.aggregate.map.twolevel.partialOnly
-
-**(internal)** Enables two-level aggregate hash map for partial aggregate only, because final aggregate might get more distinct keys compared to partial aggregate. "Overhead of looking up 1st-level map might dominate when having a lot of distinct keys.
-
-Default: `true`
-
-Used when:
-
-* [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is requested to [checkIfFastHashMapSupported](physical-operators/HashAggregateExec.md#checkIfFastHashMapSupported)
 
 ## <span id="spark.sql.legacy.allowNonEmptyLocationInCTAS"> spark.sql.legacy.allowNonEmptyLocationInCTAS
 
@@ -915,144 +1097,6 @@ Enables vectorized orc decoding for nested column
 Default: `false`
 
 Use [SQLConf.orcVectorizedReaderNestedColumnEnabled](SQLConf.md#orcVectorizedReaderNestedColumnEnabled) for the current value
-
-## <span id="spark.sql.adaptive.forceApply"> spark.sql.adaptive.forceApply
-
-**(internal)** When `true` (together with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) enabled), Spark will [force apply adaptive query execution for all supported queries](physical-optimizations/InsertAdaptiveSparkPlan.md#shouldApplyAQE).
-
-Default: `false`
-
-Use [SQLConf.ADAPTIVE_EXECUTION_FORCE_APPLY](SQLConf.md#ADAPTIVE_EXECUTION_FORCE_APPLY) method to access the property (in a type-safe way).
-
-## <span id="spark.sql.adaptive.coalescePartitions.enabled"> spark.sql.adaptive.coalescePartitions.enabled
-
-Controls coalescing shuffle partitions
-
-When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark will coalesce contiguous shuffle partitions according to the target size (specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes)), to avoid too many small tasks.
-
-Default: `true`
-
-Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
-
-## <span id="spark.sql.adaptive.coalescePartitions.minPartitionSize"> spark.sql.adaptive.coalescePartitions.minPartitionSize
-
-The minimum size (in bytes unless specified) of shuffle partitions after coalescing. This is useful when the adaptively calculated target size is too small during partition coalescing
-
-Default: `1MB`
-
-Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
-
-## <span id="spark.sql.adaptive.coalescePartitions.parallelismFirst"> spark.sql.adaptive.coalescePartitions.parallelismFirst
-
-When `true`, Spark does not respect the target size specified by [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) when coalescing contiguous shuffle partitions, but adaptively calculate the target size according to the default parallelism of the Spark cluster. The calculated size is usually smaller than the configured target size. This is to maximize the parallelism and avoid performance regression when enabling adaptive query execution. It's recommended to set this config to `false` and respect the configured target size.
-
-Default: `true`
-
-Use [SQLConf.coalesceShufflePartitionsEnabled](SQLConf.md#coalesceShufflePartitionsEnabled) method to access the current value.
-
-## <span id="spark.sql.adaptive.advisoryPartitionSizeInBytes"> spark.sql.adaptive.advisoryPartitionSizeInBytes
-
-The advisory size in bytes of the shuffle partition during adaptive optimization (when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled). It takes effect when Spark coalesces small shuffle partitions or splits skewed shuffle partition.
-
-Default: `64MB`
-
-Fallback Property: `spark.sql.adaptive.shuffle.targetPostShuffleInputSize`
-
-Use [SQLConf.ADVISORY_PARTITION_SIZE_IN_BYTES](SQLConf.md#ADVISORY_PARTITION_SIZE_IN_BYTES) to reference the name.
-
-## <span id="spark.sql.adaptive.coalescePartitions.minPartitionSize"><span id="COALESCE_PARTITIONS_MIN_PARTITION_SIZE"><span id="COALESCE_PARTITIONS_MIN_PARTITION_NUM"> spark.sql.adaptive.coalescePartitions.minPartitionSize
-
-The minimum size (in bytes) of shuffle partitions after coalescing.
-
-Useful when the adaptively calculated target size is too small during partition coalescing.
-
-Default: `(undefined)`
-
-Must be positive
-
-Used when:
-
-* [CoalesceShufflePartitions](physical-optimizations/CoalesceShufflePartitions.md) adaptive physical optimization is executed
-
-## <span id="spark.sql.adaptive.coalescePartitions.initialPartitionNum"> spark.sql.adaptive.coalescePartitions.initialPartitionNum
-
-The initial number of shuffle partitions before coalescing.
-
-By default it equals to [spark.sql.shuffle.partitions](#spark.sql.shuffle.partitions).
-If not set, the default value is the default parallelism of the Spark cluster.
-This configuration only has an effect when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled.
-
-Default: `(undefined)`
-
-## <span id="spark.sql.adaptive.enabled"> spark.sql.adaptive.enabled
-
-Enables [Adaptive Query Execution](adaptive-query-execution/index.md)
-
-Default: `true`
-
-Use [SQLConf.adaptiveExecutionEnabled](SQLConf.md#adaptiveExecutionEnabled) method to access the current value.
-
-## <span id="spark.sql.adaptive.fetchShuffleBlocksInBatch"> spark.sql.adaptive.fetchShuffleBlocksInBatch
-
-**(internal)** Whether to fetch the contiguous shuffle blocks in batch. Instead of fetching blocks one by one, fetching contiguous shuffle blocks for the same map task in batch can reduce IO and improve performance. Note, multiple contiguous blocks exist in single "fetch request only happen when [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) and [spark.sql.adaptive.coalescePartitions.enabled](#spark.sql.adaptive.coalescePartitions.enabled) are both enabled. This feature also depends on a relocatable serializer, the concatenation support codec in use and the new version shuffle fetch protocol.
-
-Default: `true`
-
-Use [SQLConf.fetchShuffleBlocksInBatch](SQLConf.md#fetchShuffleBlocksInBatch) method to access the current value.
-
-## <span id="spark.sql.adaptive.localShuffleReader.enabled"> spark.sql.adaptive.localShuffleReader.enabled
-
-When `true` (and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is `true`), Spark SQL tries to use local shuffle reader to read the shuffle data when the shuffle partitioning is not needed, for example, after converting sort-merge join to broadcast-hash join.
-
-Default: `true`
-
-Use [SQLConf.LOCAL_SHUFFLE_READER_ENABLED](SQLConf.md#LOCAL_SHUFFLE_READER_ENABLED) to access the property (in a type-safe way)
-
-## <span id="spark.sql.adaptive.logLevel"> spark.sql.adaptive.logLevel
-
-**(internal)** Log level for adaptive execution logging of plan changes. The value can be `TRACE`, `DEBUG`, `INFO`, `WARN` or `ERROR`.
-
-Default: `DEBUG`
-
-Use [SQLConf.adaptiveExecutionLogLevel](SQLConf.md#adaptiveExecutionLogLevel) for the current value
-
-## <span id="spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold"> spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold
-
-The maximum size (in bytes) per partition that can be allowed to build local hash map. If this value is not smaller than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes) and all the partition size are not larger than this config, join selection prefer to use shuffled hash join instead of sort merge join regardless of the value of [spark.sql.join.preferSortMergeJoin](#spark.sql.join.preferSortMergeJoin).
-
-Default: `0`
-
-Available as [SQLConf.ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD](SQLConf.md#ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD)
-
-## <span id="spark.sql.adaptive.skewJoin.enabled"> spark.sql.adaptive.skewJoin.enabled
-
-When `true` and [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) is enabled, Spark dynamically handles skew in sort-merge join by splitting (and replicating if needed) skewed partitions.
-
-Default: `true`
-
-Use [SQLConf.SKEW_JOIN_ENABLED](SQLConf.md#SKEW_JOIN_ENABLED) to reference the property.
-
-## <span id="spark.sql.adaptive.skewJoin.skewedPartitionFactor"> spark.sql.adaptive.skewJoin.skewedPartitionFactor
-
-A partition is considered skewed if its size is larger than this factor multiplying the median partition size and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes](#spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes).
-
-Default: `5`
-
-## <span id="spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes"> spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes
-
-A partition is considered skewed if its size in bytes is larger than this threshold and also larger than [spark.sql.adaptive.skewJoin.skewedPartitionFactor](#spark.sql.adaptive.skewJoin.skewedPartitionFactor) multiplying the median partition size. Ideally this config should be set larger than [spark.sql.adaptive.advisoryPartitionSizeInBytes](#spark.sql.adaptive.advisoryPartitionSizeInBytes).
-
-Default: `256MB`
-
-## <span id="spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin"> spark.sql.adaptive.nonEmptyPartitionRatioForBroadcastJoin
-
-**(internal)** A relation with a non-empty partition ratio (the number of non-empty partitions to all partitions) lower than this config will not be considered as the build side of a broadcast-hash join in [Adaptive Query Execution](adaptive-query-execution/index.md) regardless of the size.
-
-Effective with [spark.sql.adaptive.enabled](#spark.sql.adaptive.enabled) `true`
-
-Default: `0.2`
-
-Use [SQLConf.nonEmptyPartitionRatioForBroadcastJoin](SQLConf.md#nonEmptyPartitionRatioForBroadcastJoin) method to access the current value.
 
 ## <span id="spark.sql.analyzer.maxIterations"> spark.sql.analyzer.maxIterations
 

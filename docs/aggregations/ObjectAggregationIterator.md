@@ -1,6 +1,6 @@
 # ObjectAggregationIterator
 
-`ObjectAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [ObjectHashAggregateExec](ObjectHashAggregateExec.md) physical operator.
+`ObjectAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) physical operator.
 
 ## Creating Instance
 
@@ -17,15 +17,15 @@
 * <span id="originalInputAttributes"> Original Input [Attribute](../expressions/Attribute.md)s
 * <span id="inputRows"> Input [InternalRow](../InternalRow.md)s
 * <span id="fallbackCountThreshold"> [spark.sql.objectHashAggregate.sortBased.fallbackThreshold](../configuration-properties.md#spark.sql.objectHashAggregate.sortBased.fallbackThreshold)
-* <span id="numOutputRows"> [numOutputRows](ObjectHashAggregateExec.md#numOutputRows) metric
-* <span id="spillSize"> [spillSize](ObjectHashAggregateExec.md#spillSize) metric
-* <span id="numTasksFallBacked"> [numTasksFallBacked](ObjectHashAggregateExec.md#numTasksFallBacked) metric
+* <span id="numOutputRows"> [numOutputRows](../physical-operators/ObjectHashAggregateExec.md#numOutputRows) metric
+* <span id="spillSize"> [spillSize](../physical-operators/ObjectHashAggregateExec.md#spillSize) metric
+* <span id="numTasksFallBacked"> [numTasksFallBacked](../physical-operators/ObjectHashAggregateExec.md#numTasksFallBacked) metric
 
 While being created, `ObjectAggregationIterator` starts [processing input rows](#processInputs).
 
 `ObjectAggregationIterator` is created when:
 
-* `ObjectHashAggregateExec` physical operator is requested to [doExecute](ObjectHashAggregateExec.md#doExecute)
+* `ObjectHashAggregateExec` physical operator is requested to [doExecute](../physical-operators/ObjectHashAggregateExec.md#doExecute)
 
 ## <span id="outputForEmptyGroupingKeyWithoutInput"> outputForEmptyGroupingKeyWithoutInput
 
@@ -39,7 +39,7 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 `outputForEmptyGroupingKeyWithoutInput` is used when:
 
-* `ObjectHashAggregateExec` physical operator is [executed](ObjectHashAggregateExec.md#doExecute) (with no input rows and no [groupingExpressions](ObjectHashAggregateExec.md#groupingExpressions))
+* `ObjectHashAggregateExec` physical operator is [executed](../physical-operators/ObjectHashAggregateExec.md#doExecute) (with no input rows and no [groupingExpressions](../physical-operators/ObjectHashAggregateExec.md#groupingExpressions))
 
 ## <span id="processInputs"> Processing Input Rows
 

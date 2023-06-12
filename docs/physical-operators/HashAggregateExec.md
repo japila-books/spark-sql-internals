@@ -13,10 +13,10 @@
 
 `HashAggregateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
 
-`HashAggregateExec` uses [TungstenAggregationIterator](TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
+`HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
 
 !!! note
-    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](TungstenAggregationIterator.md#switchToSortBasedAggregation).
+    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
 
     See [testFallbackStartsAt](#testFallbackStartsAt) internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
 
@@ -85,7 +85,7 @@ spark.
 
 ### <span id="spillSize"> spill size
 
-Used to create a [TungstenAggregationIterator](TungstenAggregationIterator.md#spillSize) when [doExecute](#doExecute)
+Used to create a [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md#spillSize) when [doExecute](#doExecute)
 
 ### <span id="aggTime"> time in aggregation build
 
@@ -122,23 +122,27 @@ requiredChildDistribution: List[Distribution]
 
 NOTE: The prefix for variable names for `HashAggregateExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **agg**.
 
-## <span id="doExecute"> Executing Physical Operator
+## Executing Physical Operator { #doExecute }
 
-```scala
-doExecute(): RDD[InternalRow]
-```
+??? note "SparkPlan"
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
 
----
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (that triggers physical query planning and generates an `RDD[InternalRow]`).
 
-`doExecute` transforms the `RDD[InternalRow]` with a [transformation function](#doExecute-mapPartitionsWithIndex) for every partition.
+`doExecute` transforms the `RDD[InternalRow]` with the [transformation `f` function](#doExecute-mapPartitionsWithIndex) for every partition (using [RDD.mapPartitionsWithIndex](#mapPartitionsWithIndex) transformation).
 
-### <span id="doExecute-mapPartitionsWithIndex"> Processing Partition Rows
+### Transformation Function { #doExecute-mapPartitionsWithIndex }
 
-`doExecute` uses [RDD.mapPartitionsWithIndex](#mapPartitionsWithIndex) to process [InternalRow](../InternalRow.md)s per partition (with a partition ID).
+`doExecute` uses [RDD.mapPartitionsWithIndex](#mapPartitionsWithIndex) to process partition [InternalRow](../InternalRow.md)s (with a partition ID).
+
+```scala
+f: (Int, Iterator[T]) => Iterator[U]
+```
 
 For every partition, `mapPartitionsWithIndex` records the start execution time (`beforeAgg`).
 
@@ -146,9 +150,9 @@ For every partition, `mapPartitionsWithIndex` records the start execution time (
 
 For a _grouped aggregate_ ([grouping keys](#groupingExpressions) defined) with no input rows (an empty partition), `doExecute` returns an empty iterator.
 
-Otherwise, `doExecute` creates a [TungstenAggregationIterator](TungstenAggregationIterator.md).
+Otherwise, `doExecute` creates a [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md).
 
-With no [grouping keys](#groupingExpressions) defined and no input rows (an empty partition), `doExecute` increments the [numOutputRows](#numOutputRows) metric and returns a single-element `Iterator[UnsafeRow]` from the [TungstenAggregationIterator](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
+With no [grouping keys](#groupingExpressions) defined and no input rows (an empty partition), `doExecute` increments the [numOutputRows](#numOutputRows) metric and returns a single-element `Iterator[UnsafeRow]` from the [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput).
 
 With input rows available (and regardless of [grouping keys](#groupingExpressions)), `doExecute` returns the `TungstenAggregationIterator`.
 
@@ -156,42 +160,64 @@ In the end, `doExecute` calculates the [aggTime](#aggTime) metric and returns an
 
 * Empty
 * A single-element one
-* The [TungstenAggregationIterator](TungstenAggregationIterator.md)
+* The [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md)
 
-### mapPartitionsWithIndex
+### RDD.mapPartitionsWithIndex { #mapPartitionsWithIndex }
 
-```scala
-mapPartitionsWithIndex[U: ClassTag](
-  f: (Int, Iterator[T]) => Iterator[U],
-  preservesPartitioning: Boolean = false): RDD[U]
-```
+!!! note "RDD.mapPartitionsWithIndex"
 
-`RDD.mapPartitionsWithIndex` adds a new `MapPartitionsRDD` to the RDD lineage.
+    ```scala
+    mapPartitionsWithIndex[U: ClassTag](
+      f: (Int, Iterator[T]) => Iterator[U],
+      preservesPartitioning: Boolean = false): RDD[U]
+    ```
+
+`mapPartitionsWithIndex` transformation adds a new [MapPartitionsRDD]({{ book.spark_core }}/rdd/MapPartitionsRDD) to the RDD lineage.
+
+!!! warning "FIXME Disable AQE"
+
+=== "Scala"
+
+    ```scala
+    val ids = spark.range(1)
+    println(ids.queryExecution.toRdd.toDebugString)
+    ```
 
 ```text
-val ids = spark.range(1)
-scala> println(ids.queryExecution.toRdd.toDebugString)
-(8) MapPartitionsRDD[12] at toRdd at <console>:29 []
-|  MapPartitionsRDD[11] at toRdd at <console>:29 []
-|  ParallelCollectionRDD[10] at toRdd at <console>:29 []
+(12) SQLExecutionRDD[3] at toRdd at <console>:1 []
+ |   MapPartitionsRDD[2] at toRdd at <console>:1 []
+ |   MapPartitionsRDD[1] at toRdd at <console>:1 []
+ |   ParallelCollectionRDD[0] at toRdd at <console>:1 []
+```
 
-// Use groupBy that gives HashAggregateExec operator
-val q = ids.groupBy('id).count
-scala> q.explain
+=== "Scala"
+
+    ```scala
+    // Use groupBy that gives HashAggregateExec operator
+    val q = ids.groupBy('id).count
+    q.explain
+    ```
+
+```text
 == Physical Plan ==
-*(2) HashAggregate(keys=[id#30L], functions=[count(1)])
-+- Exchange hashpartitioning(id#30L, 200)
-  +- *(1) HashAggregate(keys=[id#30L], functions=[partial_count(1)])
-      +- *(1) Range (0, 1, step=1, splits=8)
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[id#2L], functions=[count(1)])
+   +- HashAggregate(keys=[id#2L], functions=[partial_count(1)])
+      +- Range (0, 1, step=1, splits=12)
+```
 
-val rdd = q.queryExecution.toRdd
-scala> println(rdd.toDebugString)
-(200) MapPartitionsRDD[18] at toRdd at <console>:28 []
-  |   ShuffledRowRDD[17] at toRdd at <console>:28 []
-  +-(8) MapPartitionsRDD[16] at toRdd at <console>:28 []
-    |  MapPartitionsRDD[15] at toRdd at <console>:28 []
-    |  MapPartitionsRDD[14] at toRdd at <console>:28 []
-    |  ParallelCollectionRDD[13] at toRdd at <console>:28 []
+=== "Scala"
+
+    ```scala
+    val rdd = q.queryExecution.toRdd
+    println(rdd.toDebugString)
+    ```
+
+```text
+(12) SQLExecutionRDD[11] at toRdd at <console>:1 []
+ |   MapPartitionsRDD[10] at toRdd at <console>:1 []
+ |   MapPartitionsRDD[9] at toRdd at <console>:1 []
+ |   ParallelCollectionRDD[8] at toRdd at <console>:1 []
 ```
 
 ## <span id="doConsume"> Generating Java Code for Consume Path
@@ -320,15 +346,15 @@ createHashMap(): UnsafeFixedWidthAggregationMap
 `createHashMap` [creates an UnsafeProjection](../expressions/UnsafeProjection.md#create) for the expressions and [executes it](../expressions/UnsafeProjection.md#apply) (with an "empty" `null` row).
 
 !!! note
-    [Executing an UnsafeProjection](../expressions/UnsafeProjection.md#apply) produces an [UnsafeRow](../UnsafeRow.md) that becomes an [empty aggregation buffer](../UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) of an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) to be created.
+    [Executing an UnsafeProjection](../expressions/UnsafeProjection.md#apply) produces an [UnsafeRow](../UnsafeRow.md) that becomes an [empty aggregation buffer](../aggregations/UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) of an [UnsafeFixedWidthAggregationMap](../aggregations/UnsafeFixedWidthAggregationMap.md) to be created.
 
-In the end, `createHashMap` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following:
+In the end, `createHashMap` creates an [UnsafeFixedWidthAggregationMap](../aggregations/UnsafeFixedWidthAggregationMap.md) with the following:
 
 UnsafeFixedWidthAggregationMap | Value
 -------------------------------|-------
- [emptyAggregationBuffer](../UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) | The `UnsafeRow` after executing the `UnsafeProjection` to [initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues)
- [aggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#aggregationBufferSchema) | [bufferSchema](#bufferSchema)
- [groupingKeySchema](../UnsafeFixedWidthAggregationMap.md#groupingKeySchema) | [groupingKeySchema](#groupingKeySchema)
+ [emptyAggregationBuffer](../aggregations/UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) | The `UnsafeRow` after executing the `UnsafeProjection` to [initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues)
+ [aggregationBufferSchema](../aggregations/UnsafeFixedWidthAggregationMap.md#aggregationBufferSchema) | [bufferSchema](#bufferSchema)
+ [groupingKeySchema](../aggregations/UnsafeFixedWidthAggregationMap.md#groupingKeySchema) | [groupingKeySchema](#groupingKeySchema)
 
 ## Demo
 

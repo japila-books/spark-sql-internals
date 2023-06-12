@@ -103,4 +103,4 @@ isAggregateBufferMutable(
 `isAggregateBufferMutable` is used when:
 
 * `Aggregate` is requested to [check the requirements for HashAggregateExec](#supportsHashAggregate)
-* `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](../UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)
+* `UnsafeFixedWidthAggregationMap` is requested to [supportsAggregationBufferSchema](../aggregations/UnsafeFixedWidthAggregationMap.md#supportsAggregationBufferSchema)

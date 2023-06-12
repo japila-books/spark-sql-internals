@@ -2,7 +2,7 @@
 
 `ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.
 
-`ObjectHashAggregateExec` uses [ObjectAggregationIterator](ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
+`ObjectHashAggregateExec` uses [ObjectAggregationIterator](../aggregations/ObjectAggregationIterator.md) for [aggregation](#doExecute) (one per partition).
 
 <figure markdown>
   ![ObjectHashAggregateExec in web UI (Details for Query)](../images/ObjectHashAggregateExec-webui-details-for-query.png)
@@ -42,17 +42,17 @@ Time to [execute a single partition](#doExecute-mapPartitionsWithIndexInternal)
 
 * `1` when there is neither input rows in a partition nor [grouping expressions](#groupingExpressions)
 
-Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numOutputRows)
+Used to create an [ObjectAggregationIterator](../aggregations/ObjectAggregationIterator.md#numOutputRows)
 
 ### <span id="numTasksFallBacked"> number of sort fallback tasks
 
 Number of tasks that crossed [spark.sql.objectHashAggregate.sortBased.fallbackThreshold](../configuration-properties.md#spark.sql.objectHashAggregate.sortBased.fallbackThreshold)
 
-Used to create an [ObjectAggregationIterator](ObjectAggregationIterator.md#numTasksFallBacked)
+Used to create an [ObjectAggregationIterator](../aggregations/ObjectAggregationIterator.md#numTasksFallBacked)
 
 ### <span id="spillSize"> spill size
 
-Used to create a [ObjectAggregationIterator](ObjectAggregationIterator.md#spillSize)
+Used to create a [ObjectAggregationIterator](../aggregations/ObjectAggregationIterator.md#spillSize)
 
 ## <span id="doExecute"> Executing Physical Operator
 
@@ -83,9 +83,9 @@ For no input records (in a partition) and non-empty [grouping expressions](#grou
 
 ### <span id="doExecute-mapPartitionsWithIndexInternal-no-input-rows-and-no-grouping-expression"> No Input Rows and No Grouping Expression
 
-Otherwise, `doExecute` creates an [ObjectAggregationIterator](ObjectAggregationIterator.md).
+Otherwise, `doExecute` creates an [ObjectAggregationIterator](../aggregations/ObjectAggregationIterator.md).
 
-For no input records (in a partition) and no [grouping expressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (to be `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) (that is the only output row).
+For no input records (in a partition) and no [grouping expressions](#groupingExpressions), `doExecute` increments the [numOutputRows](#numOutputRows) metric (to be `1`) and requests the `ObjectAggregationIterator` for [outputForEmptyGroupingKeyWithoutInput](../aggregations/ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput) (that is the only output row).
 
 ### <span id="doExecute-mapPartitionsWithIndexInternal-input-rows-available"> Input Rows Available
 

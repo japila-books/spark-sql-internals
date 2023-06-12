@@ -1,6 +1,6 @@
 # SortBasedAggregationIterator
 
-`SortBasedAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [SortAggregateExec](SortAggregateExec.md) physical operator.
+`SortBasedAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operator.
 
 ## Creating Instance
 
@@ -19,4 +19,4 @@
 
 `SortBasedAggregationIterator` is created when:
 
-* `SortAggregateExec` physical operator is requested to [doExecute](SortAggregateExec.md#doExecute)
+* `SortAggregateExec` physical operator is requested to [doExecute](../physical-operators/SortAggregateExec.md#doExecute)

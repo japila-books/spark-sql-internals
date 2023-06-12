@@ -1,33 +1,33 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](UnsafeRow.md) keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](../UnsafeRow.md) keys and values.
 
-`UnsafeFixedWidthAggregationMap` is used when [HashAggregateExec](physical-operators/HashAggregateExec.md) physical operator is executed:
+`UnsafeFixedWidthAggregationMap` is used when [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator is executed:
 
-* Directly in [createHashMap](physical-operators/HashAggregateExec.md#createHashMap)
-* Indirectly using [TungstenAggregationIterator](physical-operators/TungstenAggregationIterator.md#hashMap) in [doExecute](physical-operators/HashAggregateExec.md#doExecute)
+* Directly in [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap)
+* Indirectly using [TungstenAggregationIterator](TungstenAggregationIterator.md#hashMap) in [doExecute](../physical-operators/HashAggregateExec.md#doExecute)
 
 ## Creating Instance
 
 `UnsafeFixedWidthAggregationMap` takes the following to be created:
 
-* <span id="emptyAggregationBuffer"> Empty aggregation buffer ([InternalRow](InternalRow.md))
-* <span id="aggregationBufferSchema"> Aggregation Buffer Schema ([StructType](types/StructType.md))
-* <span id="groupingKeySchema"> Grouping Key Schema ([StructType](types/StructType.md))
+* <span id="emptyAggregationBuffer"> Empty aggregation buffer ([InternalRow](../InternalRow.md))
+* <span id="aggregationBufferSchema"> Aggregation Buffer Schema ([StructType](../types/StructType.md))
+* <span id="groupingKeySchema"> Grouping Key Schema ([StructType](../types/StructType.md))
 * <span id="taskContext"> `TaskContext` ([Spark Core]({{ book.spark_core }}/scheduler/TaskContext))
 * [Initial Capacity](#initialCapacity)
 * <span id="pageSizeBytes"> Page Size (in bytes)
 
 `UnsafeFixedWidthAggregationMap` is created when:
 
-* `HashAggregateExec` physical operator is requested to [create a HashMap](physical-operators/HashAggregateExec.md#createHashMap)
-* `TungstenAggregationIterator` is [created](physical-operators/TungstenAggregationIterator.md#hashMap)
+* `HashAggregateExec` physical operator is requested to [create a HashMap](../physical-operators/HashAggregateExec.md#createHashMap)
+* `TungstenAggregationIterator` is [created](TungstenAggregationIterator.md#hashMap)
 
 ### <span id="initialCapacity"> Initial Capacity
 
 `UnsafeFixedWidthAggregationMap` is given the initial capacity of the [BytesToBytesMap](#map) when [created](#creating-instance).
 
-The initial capacity is hard-coded to `1024 * 16` (when created for [HashAggregateExec](physical-operators/HashAggregateExec.md#createHashMap) and [TungstenAggregationIterator](physical-operators/TungstenAggregationIterator.md#hashMap)).
+The initial capacity is hard-coded to `1024 * 16` (when created for [HashAggregateExec](../physical-operators/HashAggregateExec.md#createHashMap) and [TungstenAggregationIterator](TungstenAggregationIterator.md#hashMap)).
 
 ## <span id="map"> BytesToBytesMap
 
@@ -53,7 +53,7 @@ boolean supportsAggregationBufferSchema(
   StructType schema)
 ```
 
-`supportsAggregationBufferSchema` is enabled (`true`) if all of the [top-level fields](types/StructType.md#fields) (of the given [schema](types/StructType.md)) are [mutable](UnsafeRow.md#isMutable).
+`supportsAggregationBufferSchema` is enabled (`true`) if all of the [top-level fields](../types/StructType.md#fields) (of the given [schema](../types/StructType.md)) are [mutable](../UnsafeRow.md#isMutable).
 
 ```scala
 import org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap
@@ -74,7 +74,7 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 
 `supportsAggregationBufferSchema` is used when:
 
-* `HashAggregateExec` utility is used for the [selection requirements](physical-operators/HashAggregateExec.md#supportsAggregate)
+* `HashAggregateExec` utility is used for the [selection requirements](../physical-operators/HashAggregateExec.md#supportsAggregate)
 
 ## <span id="getAggregationBufferFromUnsafeRow"> getAggregationBufferFromUnsafeRow
 
@@ -99,17 +99,17 @@ UnsafeRow getAggregationBufferFromUnsafeRow(
 
 If the key has not been found (is not defined at the key's position), `getAggregationBufferFromUnsafeRow` inserts a copy of the [emptyAggregationBuffer](#emptyAggregationBuffer) into the [map](#map). `getAggregationBufferFromUnsafeRow` returns `null` if insertion failed.
 
-`getAggregationBufferFromUnsafeRow` requests the [currentAggregationBuffer](#currentAggregationBuffer) to [pointTo](UnsafeRow.md#pointTo) to an object at `BytesToBytesMap.Location`.
+`getAggregationBufferFromUnsafeRow` requests the [currentAggregationBuffer](#currentAggregationBuffer) to [pointTo](../UnsafeRow.md#pointTo) to an object at `BytesToBytesMap.Location`.
 
 ---
 
 `getAggregationBufferFromUnsafeRow` is used when:
 
-* `TungstenAggregationIterator` is requested to [process input rows](physical-operators/TungstenAggregationIterator.md#processInputs)
+* `TungstenAggregationIterator` is requested to [process input rows](TungstenAggregationIterator.md#processInputs)
 
 ## <span id="currentAggregationBuffer"> currentAggregationBuffer
 
-`UnsafeFixedWidthAggregationMap` creates an [UnsafeRow](UnsafeRow.md) when [created](#creating-instance).
+`UnsafeFixedWidthAggregationMap` creates an [UnsafeRow](../UnsafeRow.md) when [created](#creating-instance).
 
 The number of fields of this `UnsafeRow` is the length of the [aggregationBufferSchema](#aggregationBufferSchema).
 

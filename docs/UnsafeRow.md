@@ -125,7 +125,7 @@ Object getBaseObject()
 
 * `UnsafeWriter` is requested to `write` an `UnsafeRow`
 * `UnsafeExternalRowSorter` is requested to `insertRow` an `UnsafeRow`
-* `UnsafeFixedWidthAggregationMap` is requested to [getAggregationBufferFromUnsafeRow](UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow)
+* `UnsafeFixedWidthAggregationMap` is requested to [getAggregationBufferFromUnsafeRow](aggregations/UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow)
 * `UnsafeKVExternalSorter` is requested to `insertKV`
 * `ExternalAppendOnlyUnsafeRowArray` is requested to [add an UnsafeRow](ExternalAppendOnlyUnsafeRowArray.md#add)
 * `UnsafeHashedRelation` is requested to [get](UnsafeHashedRelation.md#get), [getValue](UnsafeHashedRelation.md#getValue), [getWithKeyIndex](UnsafeHashedRelation.md#getWithKeyIndex), [getValueWithKeyIndex](UnsafeHashedRelation.md#getValueWithKeyIndex), [apply](UnsafeHashedRelation.md#apply)
@@ -180,10 +180,12 @@ void copyFrom(
 
 `copyFrom`...FIXME
 
+---
+
 `copyFrom` is used when:
 
-* `ObjectAggregationIterator` is requested to [processInputs](physical-operators/ObjectAggregationIterator.md#processInputs) (using `SortBasedAggregator`)
-* `TungstenAggregationIterator` is requested to [produce the next UnsafeRow](physical-operators/TungstenAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](physical-operators/TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
+* `ObjectAggregationIterator` is requested to [processInputs](aggregations/ObjectAggregationIterator.md#processInputs) (using `SortBasedAggregator`)
+* `TungstenAggregationIterator` is requested to [produce the next UnsafeRow](aggregations/TungstenAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](aggregations/TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 
 ## Deserializing UnsafeRow
 

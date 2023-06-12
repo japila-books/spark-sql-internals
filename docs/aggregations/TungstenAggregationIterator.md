@@ -1,6 +1,6 @@
 # TungstenAggregationIterator
 
-`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](HashAggregateExec.md) physical operator.
+`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
 
 `TungstenAggregationIterator` prefers [hash-based aggregation before switching to sort-based one](#sortBased).
 
@@ -16,8 +16,8 @@
 * <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="newMutableProjection"> Function to create a new `MutableProjection` given expressions and attributes (`(Seq[Expression], Seq[Attribute]) => MutableProjection`)
 * <span id="originalInputAttributes"> Original Input [Attribute](../expressions/Attribute.md)s
-* <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](HashAggregateExec.md#child) of the [HashAggregateExec](HashAggregateExec.md) physical operator)
-* <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](HashAggregateExec.md#testFallbackStartsAt)
+* <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](../physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator)
+* <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](../physical-operators/HashAggregateExec.md#testFallbackStartsAt)
 * <span id="numOutputRows"> `numOutputRows` [SQLMetric](../SQLMetric.md)
 * <span id="peakMemory"> `peakMemory` [SQLMetric](../SQLMetric.md)
 * <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
@@ -25,19 +25,19 @@
 
 `TungstenAggregationIterator` is created when:
 
-* `HashAggregateExec` physical operator is [executed](HashAggregateExec.md#doExecute)
+* `HashAggregateExec` physical operator is [executed](../physical-operators/HashAggregateExec.md#doExecute)
 
 `TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) unless [switched to a sort-based aggregation](#sortBased).
 
 ## <span id="metrics"> Performance Metrics
 
-When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](../SQLMetric.md)s from the [HashAggregateExec](HashAggregateExec.md#metrics) aggregate physical operator being executed.
+When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](../SQLMetric.md)s from the [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 
 * [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) are used at the [end of every task](#TaskCompletionListener) (one per partition)
 
-The metrics are displayed as part of [HashAggregateExec](HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../ui/SQLTab.md#ExecutionPage)).
+The metrics are displayed as part of [HashAggregateExec](../physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../ui/SQLTab.md#ExecutionPage)).
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
@@ -63,7 +63,7 @@ processCurrentSortedGroup(): Unit
 
 ## <span id="hashMap"> UnsafeFixedWidthAggregationMap
 
-When [created](#creating-instance), `TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](../UnsafeFixedWidthAggregationMap.md) with the following:
+When [created](#creating-instance), `TungstenAggregationIterator` creates an [UnsafeFixedWidthAggregationMap](../aggregations/UnsafeFixedWidthAggregationMap.md) with the following:
 
 * [initialAggregationBuffer](#initialAggregationBuffer)
 * [Schema](../types/StructType.md#fromAttributes) built from the [attributes of the aggregation buffers](../expressions/AggregateFunction.md#aggBufferAttributes) of all the [AggregateFunctions](AggregationIterator.md#aggregateFunctions)
@@ -95,7 +95,7 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 `outputForEmptyGroupingKeyWithoutInput` is used when:
 
-* `HashAggregateExec` physical operator is requested to [execute](HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
+* `HashAggregateExec` physical operator is requested to [execute](../physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
 
 ## <span id="processInputs"> Processing Input Rows
 

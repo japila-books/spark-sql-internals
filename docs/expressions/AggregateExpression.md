@@ -22,7 +22,7 @@ The filter is assumed undefined by default when `AggregateExpression` is [create
 
 A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf. [AggUtils](../AggUtils.md#mayRemoveAggFilters)).
 
-`AggregationIterator` initializes predicates with `AggregateExpression`s with filters when requested to [generateProcessRow](../physical-operators/AggregationIterator.md#generateProcessRow).
+`AggregationIterator` initializes predicates with `AggregateExpression`s with filters when requested to [generateProcessRow](../aggregations/AggregationIterator.md#generateProcessRow).
 
 ## <span id="mode"> AggregateMode
 
@@ -30,7 +30,7 @@ A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf
 
 * For `PartialMerge` or `Final` modes, the input to the [AggregateFunction](#aggregateFunction) is [immutable input aggregation buffers](AggregateFunction.md#inputAggBufferAttributes), and the actual children of the `AggregateFunction` are not used
 
-* [AggregateExpression](../physical-operators/AggregationIterator.md#aggregateExpressions)s of an [AggregationIterator](../physical-operators/AggregationIterator.md) cannot have more than 2 distinct modes nor the modes be among `Partial` and `PartialMerge` or `Final` and `Complete` mode pairs
+* [AggregateExpression](../aggregations/AggregationIterator.md#aggregateExpressions)s of an [AggregationIterator](../aggregations/AggregationIterator.md) cannot have more than 2 distinct modes nor the modes be among `Partial` and `PartialMerge` or `Final` and `Complete` mode pairs
 
 * `Partial` and `Complete` or `PartialMerge` and `Final` pairs are supported
 
@@ -40,8 +40,8 @@ No prefix (in [toString](#toString))
 
 Used when:
 
-* `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](../physical-operators/ObjectAggregationIterator.md#mergeAggregationBuffers)
-* `TungstenAggregationIterator` is requested for the [switchToSortBasedAggregation](../physical-operators/TungstenAggregationIterator.md#switchToSortBasedAggregation)
+* `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](../aggregations/ObjectAggregationIterator.md#mergeAggregationBuffers)
+* `TungstenAggregationIterator` is requested for the [switchToSortBasedAggregation](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation)
 * _others_
 
 ### <span id="Final"> Final

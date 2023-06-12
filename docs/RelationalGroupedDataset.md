@@ -5,12 +5,12 @@ tags:
 
 # RelationalGroupedDataset
 
-`RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** (part of [Basic Aggregation](aggregations/index.md)) to calculate aggregates over groups of rows in a [DataFrame](DataFrame.md).
+`RelationalGroupedDataset` is a high-level API for **Untyped (Row-based) Grouping** in [Aggregation Queries](aggregations/index.md) to [calculate aggregates over groups of rows](#toDF) in a [DataFrame](DataFrame.md).
 
 ??? note "KeyValueGroupedDataset is for Typed Aggregates"
     [KeyValueGroupedDataset](KeyValueGroupedDataset.md) is used for typed aggregates over groups of custom Scala objects (not [Row](Row.md)s).
 
-`RelationalGroupedDataset` is the result of executing the following high-level operators:
+`RelationalGroupedDataset` is the result of executing the following `Dataset` high-level operators:
 
 * [cube](aggregations/index.md#cube)
 * [groupBy](aggregations/index.md#groupBy)
@@ -43,7 +43,9 @@ apply(
 
 `apply` creates a [RelationalGroupedDataset](#creating-instance).
 
-## agg { #agg }
+## High-Level Operators
+
+### agg { #agg }
 
 ```scala
 agg(
@@ -56,9 +58,9 @@ agg(
   exprs: Map[String, String]): DataFrame
 ```
 
-`agg` [toDF](#toDF) all the columns.
+`agg` [creates a DataFrame of aggregates](#toDF) for all the given column expressions.
 
-## count { #count }
+### count { #count }
 
 ```scala
 count(): DataFrame
@@ -101,7 +103,7 @@ toDF(
 
 `toDF` converts the aggregate expressions to use [proper names](#alias).
 
-`toDF` creates a [DataFrame](Dataset.md#ofRows) with different [LogicalPlan](logical-operators/LogicalPlan.md)s based on the [GroupType](#groupType).
+`toDF` creates a new [DataFrame](Dataset.md#ofRows) with different [LogicalPlan](logical-operators/LogicalPlan.md)s based on the [GroupType](#groupType).
 
 GroupType | Logical Operator
 ----------|-----------------
@@ -118,9 +120,6 @@ GroupType | Logical Operator
 
 <!---
 ## Review Me
-
-!!! note
-    [spark.sql.retainGroupColumns](../configuration-properties.md#spark.sql.retainGroupColumns) configuration property controls whether to retain columns used for aggregation or not (../in `RelationalGroupedDataset` operators).
 
 === [[agg]] Computing Aggregates Using Aggregate Column Expressions or Function Names -- `agg` Operator
 

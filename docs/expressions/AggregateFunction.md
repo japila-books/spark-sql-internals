@@ -24,7 +24,7 @@ aggBufferSchema: StructType
 
 Used when:
 
-* `AggregationIterator` is requested to [initializeAggregateFunctions](../physical-operators/AggregationIterator.md#initializeAggregateFunctions)
+* `AggregationIterator` is requested to [initializeAggregateFunctions](../aggregations/AggregationIterator.md#initializeAggregateFunctions)
 
 ### <span id="inputAggBufferAttributes"> inputAggBufferAttributes
 
