@@ -23,7 +23,7 @@ Used when:
 
 * `AggregateCodegenSupport` is requested to [doConsume](#doConsume)
 
-### <span id="doProduceWithKeys"> doProduceWithKeys
+### doProduceWithKeys { #doProduceWithKeys }
 
 ```scala
 doProduceWithKeys(
@@ -37,7 +37,7 @@ See:
 
 Used when:
 
-* `AggregateCodegenSupport` is requested to [doProduce](#doProduce)
+* `AggregateCodegenSupport` is requested to [doProduce](#doProduce) (with [grouping keys](BaseAggregateExec.md#groupingExpressions) specified)
 
 ### <span id="needHashTable"> needHashTable
 

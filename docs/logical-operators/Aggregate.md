@@ -1,10 +1,13 @@
 # Aggregate Logical Operator
 
-`Aggregate` is an [unary logical operator](LogicalPlan.md#UnaryNode) for [Aggregation Queries](../aggregations/index.md) and represents the following high-level operators in a [logical query plan](LogicalPlan.md):
+`Aggregate` is a [unary logical operator](LogicalPlan.md#UnaryNode) for [Aggregation Queries](../aggregations/index.md) and can represent the following high-level operators in a [logical query plan](LogicalPlan.md):
 
 * `AstBuilder` is requested to [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan) (`HAVING` clause without `GROUP BY`) and [parse GROUP BY clause](../sql/AstBuilder.md#withAggregationClause)
 * `KeyValueGroupedDataset` is requested to [agg](../KeyValueGroupedDataset.md#agg) (and [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped))
 * `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+
+!!! note "Internal Use"
+    `Aggregate` logical operator is also [used internally](#creating-instance) as part of logical and physical optimizations.
 
 ## Creating Instance
 
@@ -16,23 +19,25 @@
 
 `Aggregate` is created when:
 
-* `AstBuilder` is requested to [withSelectQuerySpecification](../sql/AstBuilder.md#withSelectQuerySpecification) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
+* `ResolveGroupingAnalytics` is requested to [constructAggregate](../logical-analysis-rules/ResolveGroupingAnalytics.md#constructAggregate)
+* `ResolvePivot` logical resolution rule is executed
+* `GlobalAggregates` logical resolution rule is executed
+* Catalyst DSL's [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy) operator is used
 * `DecorrelateInnerQuery` is requested to `rewriteDomainJoins`
-* `DslLogicalPlan` is used to [groupBy](../catalyst-dsl/DslLogicalPlan.md#groupBy)
-* `InjectRuntimeFilter` logical optimization is requested to [injectBloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter) and [injectInSubqueryFilter](../logical-optimizations/InjectRuntimeFilter.md#injectInSubqueryFilter)
-* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped)
-* `MergeScalarSubqueries` is requested to `tryMergePlans`
-* `PullOutGroupingExpressions` logical optimization is executed
-* [PullupCorrelatedPredicates](../logical-optimizations/PullupCorrelatedPredicates.md) logical optimization is executed
-* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+* `InjectRuntimeFilter` is requested to [injectBloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter) and [injectInSubqueryFilter](../logical-optimizations/InjectRuntimeFilter.md#injectInSubqueryFilter)
 * `ReplaceDistinctWithAggregate` logical optimization is executed
 * `ReplaceDeduplicateWithAggregate` logical optimization is executed
-* `RewriteAsOfJoin` logical optimization is executed
-* [RewriteCorrelatedScalarSubquery](../logical-optimizations/RewriteCorrelatedScalarSubquery.md) logical optimization is executed
-* `RewriteDistinctAggregates` logical optimization is executed
 * [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization is executed
 * `RewriteIntersectAll` logical optimization is executed
-* [AnalyzeColumnCommand](AnalyzeColumnCommand.md) logical command (when `CommandUtils` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles))
+* `RewriteAsOfJoin` logical optimization is executed
+* `AstBuilder` is requested to [visitCommonSelectQueryClausePlan](../sql/AstBuilder.md#visitCommonSelectQueryClausePlan) (for a global aggregate, i.e. `HAVING` without `GROUP BY`) and [withAggregationClause](../sql/AstBuilder.md#withAggregationClause)
+* `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped)
+* `RelationalGroupedDataset` is requested to [toDF](../RelationalGroupedDataset.md#toDF)
+* [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md) physical optimization is executed
+* [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed
+* `CommandUtils` is requested to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles)
+* `RowLevelOperationRuntimeGroupFiltering` logical optimization is executed
+* _others_
 
 ## Output Schema { #output }
 

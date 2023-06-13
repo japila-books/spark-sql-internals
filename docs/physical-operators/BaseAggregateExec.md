@@ -25,13 +25,19 @@ aggregateExpressions: Seq[AggregateExpression]
 
 [AggregateExpression](../expressions/AggregateExpression.md)s
 
-### <span id="groupingExpressions"> Grouping Keys
+### Grouping Keys { #groupingExpressions }
 
 ```scala
 groupingExpressions: Seq[NamedExpression]
 ```
 
 [NamedExpression](../expressions/NamedExpression.md)s of the grouping keys
+
+See:
+
+* [HashAggregateExec](HashAggregateExec.md#groupingExpressions)
+* [ObjectHashAggregateExec](ObjectHashAggregateExec.md#groupingExpressions)
+* [SortAggregateExec](SortAggregateExec.md#groupingExpressions)
 
 ### <span id="initialInputBufferOffset"> initialInputBufferOffset
 

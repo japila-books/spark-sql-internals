@@ -26,7 +26,7 @@
 * <span id="requiredChildDistributionExpressions"> Required child distribution [expressions](../expressions/Expression.md)
 * <span id="isStreaming"> `isStreaming` flag
 * <span id="numShufflePartitions"> Number of Shuffle Partitions (optional)
-* <span id="groupingExpressions"> Grouping Keys ([NamedExpression](../expressions/NamedExpression.md)s)
+* [Grouping Keys](#groupingExpressions)
 * <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
 * <span id="aggregateAttributes"> Aggregate [attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
@@ -37,6 +37,18 @@
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator)
 * `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/execution-planning-strategies/StatefulAggregationStrategy)) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
+
+### Grouping Keys { #groupingExpressions }
+
+```scala
+groupingExpressions: Seq[NamedExpression]
+```
+
+`HashAggregateExec` can be given grouping keys ([NamedExpression](../expressions/NamedExpression.md)s) when [created](#creating-instance).
+
+`groupingExpressions` is part of the [BaseAggregateExec](BaseAggregateExec.md#groupingExpressions) abstraction.
+
+The grouping keys are the [groupingExpressions](../logical-operators/Aggregate.md#groupingExpressions) of [Aggregate](../logical-operators/Aggregate.md), if any.
 
 ## Performance Metrics { #metrics }
 
@@ -295,16 +307,16 @@ finishAggregate(
 
 `finishAggregate`...FIXME
 
-## <span id="doProduceWithKeys"> doProduceWithKeys
+## doProduceWithKeys { #doProduceWithKeys }
 
-```scala
-doProduceWithKeys(
-  ctx: CodegenContext): String
-```
+??? note "AggregateCodegenSupport"
 
-`doProduceWithKeys` is part of the [AggregateCodegenSupport](AggregateCodegenSupport.md#doProduceWithKeys) abstraction.
+    ```scala
+    doProduceWithKeys(
+      ctx: CodegenContext): String
+    ```
 
----
+    `doProduceWithKeys` is part of the [AggregateCodegenSupport](AggregateCodegenSupport.md#doProduceWithKeys) abstraction.
 
 `doProduceWithKeys` uses the following configuration properties:
 
@@ -331,11 +343,14 @@ if (![initAgg]) {
 [outputFromRegularHashMap]
 ```
 
-### <span id="createHashMap"> Creating HashMap
+### Creating HashMap { #createHashMap }
 
 ```scala
 createHashMap(): UnsafeFixedWidthAggregationMap
 ```
+
+!!! note
+    `createHashMap` is used in the Java code from [doProduceWithKeys](#doProduceWithKeys).
 
 `createHashMap` requests all the [DeclarativeAggregate functions](#declFunctions) for the [Catalyst expressions to initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues).
 
