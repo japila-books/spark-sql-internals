@@ -1,14 +1,18 @@
 # SortAggregateExec Aggregate Physical Operator
 
-`SortAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **sort-based aggregation**.
+`SortAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Sort-Based Aggregation**.
 
 ![SortAggregateExec in web UI (Details for Query)](../images/SortAggregateExec-webui-details-for-query.png)
+
+`SortAggregateExec` is a `OrderPreservingUnaryExecNode`.
 
 ## Creating Instance
 
 `SortAggregateExec` takes the following to be created:
 
-* <span id="requiredChildDistributionExpressions"> (optional) Required Child Distribution [Expression](../expressions/Expression.md)s
+* <span id="requiredChildDistributionExpressions"> Required Child Distribution
+* <span id="isStreaming"> `isStreaming` flag
+* <span id="numShufflePartitions"> Number of Shuffle Partitions
 * <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
 * <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
@@ -20,11 +24,31 @@
 
 * `AggUtils` utility is used to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics { #metrics }
 
 Key             | Name (in web UI)
 ----------------|--------------------------
 numOutputRows   | number of output rows
+
+## Whole-Stage Code Generation
+
+As an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator, `SortAggregateExec` supports [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) only when [supportCodegen](#supportCodegen) flag is enabled.
+
+### supportCodegen { #supportCodegen }
+
+??? note "AggregateCodegenSupport"
+
+    ```scala
+    supportCodegen: Boolean
+    ```
+
+    `supportCodegen` is part of the [AggregateCodegenSupport](AggregateCodegenSupport.md#supportCodegen) abstraction.
+
+`supportCodegen` is enabled (`true`) when all the following hold:
+
+* The parent [supportCodegen](AggregateCodegenSupport.md#supportCodegen) is enabled
+* [spark.sql.codegen.aggregate.sortAggregate.enabled](../configuration-properties.md#spark.sql.codegen.aggregate.sortAggregate.enabled) is enabled
+* No [groupingExpressions](#groupingExpressions)
 
 ## Demo
 

@@ -39,7 +39,7 @@ Used when:
 
 * `AggregateCodegenSupport` is requested to [doProduce](#doProduce) (with [grouping keys](BaseAggregateExec.md#groupingExpressions) specified)
 
-### <span id="needHashTable"> needHashTable
+### needHashTable { #needHashTable }
 
 ```scala
 needHashTable: Boolean
@@ -61,42 +61,36 @@ Used when:
 * [HashAggregateExec](HashAggregateExec.md)
 * [SortAggregateExec](SortAggregateExec.md)
 
-## <span id="supportCodegen"> supportCodegen Flag
+## supportCodegen { #supportCodegen }
 
-```scala
-supportCodegen: Boolean
-```
+??? note "CodegenSupport"
 
-`supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
+    ```scala
+    supportCodegen: Boolean
+    ```
 
----
+    `supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
 
 `supportCodegen` is enabled (`true`) when all the following hold:
 
-* All `AttributeReference`s in the [aggregateBufferAttributes](#aggregateBufferAttributes) use [mutable data types](../UnsafeRow.md#isMutable)
-* There are no [ImperativeAggregate](../expressions/ImperativeAggregate.md)s (among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions))
+* All [aggregate buffer attributes](#aggregateBufferAttributes) are [mutable](../UnsafeRow.md#isMutable)
+* No [ImperativeAggregate](../expressions/ImperativeAggregate.md)s (among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions))
 
-## <span id="doProduce"> Generating Java Source Code for Produce Path
+!!! note "SortAggregateExec"
+    `SortAggregateExec` physical operator can change [supportCodegen](SortAggregateExec.md#supportCodegen).
 
-```scala
-doProduce(
-  ctx: CodegenContext): String
-```
+## Generating Java Source Code for Produce Path { #doProduce }
 
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
+??? note "CodegenSupport"
 
----
+    ```scala
+    doProduce(
+      ctx: CodegenContext): String
+    ```
 
-`doProduce` [doProduceWithoutKeys](#doProduceWithoutKeys) when this aggregate operator uses no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doProduce` [doProduceWithKeys](#doProduceWithKeys).
+    `doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
-### <span id="doProduceWithoutKeys"> doProduceWithoutKeys
-
-```scala
-doProduceWithoutKeys(
-  ctx: CodegenContext): String
-```
-
-`doProduceWithoutKeys`...FIXME
+`doProduce` [doProduceWithoutKeys](#doProduceWithoutKeys) when this aggregate operator has no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doProduce` [doProduceWithKeys](#doProduceWithKeys).
 
 ## <span id="doConsume"> Generating Java Source Code for Consume Path
 

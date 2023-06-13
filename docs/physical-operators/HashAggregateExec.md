@@ -19,6 +19,8 @@
     falling back to sort based aggregation.
     ```
 
+The prefix for variable names for `HashAggregateExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **agg**.
+
 ## Creating Instance
 
 `HashAggregateExec` takes the following to be created:
@@ -128,8 +130,6 @@ requiredChildDistribution: List[Distribution]
 
     *FIXME* for the following two cases in aggregation with one distinct.
 
-NOTE: The prefix for variable names for `HashAggregateExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **agg**.
-
 ## Executing Physical Operator { #doExecute }
 
 ??? note "SparkPlan"
@@ -228,86 +228,25 @@ AdaptiveSparkPlan isFinalPlan=false
  |   ParallelCollectionRDD[8] at toRdd at <console>:1 []
 ```
 
-## <span id="doConsume"> Generating Java Code for Consume Path
+## Whole-Stage Code Generation
 
-```scala
-doConsume(
-  ctx: CodegenContext,
-  input: Seq[ExprCode],
-  row: ExprCode): String
-```
+As an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator, `HashAggregateExec` supports [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) only when [supportCodegen](#supportCodegen) flag is enabled.
 
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
+### doConsumeWithKeys { #doConsumeWithKeys }
 
----
+??? note "AggregateCodegenSupport"
 
-`doConsume` [doConsumeWithoutKeys](#doConsumeWithoutKeys) when no [named expressions for the grouping keys](#groupingExpressions) were specified for the `HashAggregateExec` or [doConsumeWithKeys](#doConsumeWithKeys) otherwise.
+    ```scala
+    doConsumeWithKeys(
+      ctx: CodegenContext,
+      input: Seq[ExprCode]): String
+    ```
 
-### <span id="doConsumeWithKeys"> doConsumeWithKeys
-
-```scala
-doConsumeWithKeys(
-  ctx: CodegenContext,
-  input: Seq[ExprCode]): String
-```
+    `doConsumeWithKeys` is part of the [AggregateCodegenSupport](AggregateCodegenSupport.md#doConsumeWithKeys) abstraction.
 
 `doConsumeWithKeys`...FIXME
 
-### <span id="doConsumeWithoutKeys"> doConsumeWithoutKeys
-
-```scala
-doConsumeWithoutKeys(
-  ctx: CodegenContext,
-  input: Seq[ExprCode]): String
-```
-
-`doConsumeWithoutKeys`...FIXME
-
-## <span id="doProduce"> Generating Java Code for Produce Path
-
-```scala
-doProduce(
-  ctx: CodegenContext): String
-```
-
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
-
----
-
-`doProduce` executes [doProduceWithoutKeys](#doProduceWithoutKeys) when no [named expressions for the grouping keys](#groupingExpressions) were specified for the `HashAggregateExec` or [doProduceWithKeys](#doProduceWithKeys) otherwise.
-
-### <span id="doProduceWithoutKeys"> doProduceWithoutKeys
-
-```scala
-doProduceWithoutKeys(
-  ctx: CodegenContext): String
-```
-
-`doProduceWithoutKeys`...FIXME
-
-### <span id="generateResultFunction"> generateResultFunction
-
-```scala
-generateResultFunction(
-  ctx: CodegenContext): String
-```
-
-`generateResultFunction`...FIXME
-
-### <span id="finishAggregate"> finishAggregate
-
-```scala
-finishAggregate(
-  hashMap: UnsafeFixedWidthAggregationMap,
-  sorter: UnsafeKVExternalSorter,
-  peakMemory: SQLMetric,
-  spillSize: SQLMetric,
-  avgHashProbe: SQLMetric): KVIterator[UnsafeRow, UnsafeRow]
-```
-
-`finishAggregate`...FIXME
-
-## doProduceWithKeys { #doProduceWithKeys }
+### doProduceWithKeys { #doProduceWithKeys }
 
 ??? note "AggregateCodegenSupport"
 
@@ -343,7 +282,7 @@ if (![initAgg]) {
 [outputFromRegularHashMap]
 ```
 
-### Creating HashMap { #createHashMap }
+#### Creating HashMap { #createHashMap }
 
 ```scala
 createHashMap(): UnsafeFixedWidthAggregationMap
@@ -366,6 +305,28 @@ UnsafeFixedWidthAggregationMap | Value
  [emptyAggregationBuffer](../aggregations/UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) | The `UnsafeRow` after executing the `UnsafeProjection` to [initialize aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues)
  [aggregationBufferSchema](../aggregations/UnsafeFixedWidthAggregationMap.md#aggregationBufferSchema) | [bufferSchema](#bufferSchema)
  [groupingKeySchema](../aggregations/UnsafeFixedWidthAggregationMap.md#groupingKeySchema) | [groupingKeySchema](#groupingKeySchema)
+
+#### finishAggregate { #finishAggregate }
+
+```scala
+finishAggregate(
+  hashMap: UnsafeFixedWidthAggregationMap,
+  sorter: UnsafeKVExternalSorter,
+  peakMemory: SQLMetric,
+  spillSize: SQLMetric,
+  avgHashProbe: SQLMetric,
+  numTasksFallBacked: SQLMetric): KVIterator[UnsafeRow, UnsafeRow]
+```
+
+`finishAggregate`...FIXME
+
+#### DeclarativeAggregate Functions { #declFunctions }
+
+```scala
+declFunctions: Seq[DeclarativeAggregate]
+```
+
+`declFunctions` is the [DeclarativeAggregate](../expressions/DeclarativeAggregate.md) expressions among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s of this [AggregateExpressions](#aggregateExpressions).
 
 ## Demo
 

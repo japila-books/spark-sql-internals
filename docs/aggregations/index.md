@@ -11,6 +11,10 @@ Aggregate Queries can be broken down to the following sections:
 
 `Aggregate` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles).
 
+## Whole-Stage Code Generation
+
+[Whole-Stage Code Generation](../whole-stage-code-generation/index.md) is supported by [AggregateCodegenSupport](../physical-operators/AggregateCodegenSupport.md) physical operators only with [supportCodegen](../physical-operators/AggregateCodegenSupport.md#supportCodegen) flag enabled.
+
 ## Configuration Properties
 
 Aggregate Queries can be fine-tuned with the following configuration properties:

@@ -397,6 +397,26 @@ Default: `true`
 
 Use [SQLConf.ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN](SQLConf.md#ENABLE_FULL_OUTER_SHUFFLED_HASH_JOIN_CODEGEN) to access the property
 
+### methodSplitThreshold { #spark.sql.codegen.methodSplitThreshold }
+
+**spark.sql.codegen.methodSplitThreshold**
+
+**(internal)** The threshold of source-code splitting in the codegen. When the number of characters in a single Java function (without comment) exceeds the threshold, the function will be automatically split to multiple smaller ones. We cannot know how many bytecode will be generated, so use the code length as metric. When running on HotSpot, a function's bytecode should not go beyond 8KB, otherwise it will not be JITted; it also should not be too small, otherwise there will be many function calls.
+
+Default: `1024`
+
+Use [SQLConf.methodSplitThreshold](SQLConf.md#methodSplitThreshold) for the current value
+
+### wholeStage { #spark.sql.codegen.wholeStage }
+
+**spark.sql.codegen.wholeStage**
+
+**(internal)** Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
+
+Default: `true`
+
+Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
+
 ## <span id="spark.sql.columnVector.offheap.enabled"> columnVector.offheap.enabled
 
 **spark.sql.columnVector.offheap.enabled**
@@ -1143,22 +1163,6 @@ Default: `false`
 
 Use [SQLConf.cliPrintHeader](SQLConf.md#cliPrintHeader) for the current value
 
-## <span id="spark.sql.codegen.wholeStage"> spark.sql.codegen.wholeStage
-
-**(internal)** Whether the whole stage (of multiple physical operators) will be compiled into a single Java method (`true`) or not (`false`).
-
-Default: `true`
-
-Use [SQLConf.wholeStageEnabled](SQLConf.md#wholeStageEnabled) method to access the current value.
-
-## <span id="spark.sql.codegen.methodSplitThreshold"> spark.sql.codegen.methodSplitThreshold
-
-**(internal)** The threshold of source-code splitting in the codegen. When the number of characters in a single Java function (without comment) exceeds the threshold, the function will be automatically split to multiple smaller ones. We cannot know how many bytecode will be generated, so use the code length as metric. When running on HotSpot, a function's bytecode should not go beyond 8KB, otherwise it will not be JITted; it also should not be too small, otherwise there will be many function calls.
-
-Default: `1024`
-
-Use [SQLConf.methodSplitThreshold](SQLConf.md#methodSplitThreshold) for the current value
-
 ## <span id="spark.sql.debug.maxToStringFields"> spark.sql.debug.maxToStringFields
 
 Maximum number of fields of sequence-like entries can be converted to strings in debug output. Any elements beyond the limit will be dropped and replaced by a "... N more fields" placeholder.
@@ -1495,25 +1499,43 @@ Default: `false`
 
 Use [SQLConf.starSchemaDetection](SQLConf.md#starSchemaDetection) method to access the current value.
 
-## <span id="spark.sql.codegen.aggregate.map.vectorized.enable"> spark.sql.codegen.aggregate.map.vectorized.enable
+## spark.sql.codegen
+
+### aggregate.map.vectorized.enable { #spark.sql.codegen.aggregate.map.vectorized.enable }
+
+**spark.sql.codegen.aggregate.map.vectorized.enable**
 
 **(internal)** Enables vectorized aggregate hash map. This is for testing/benchmarking only.
 
 Default: `false`
 
-## <span id="spark.sql.codegen.aggregate.splitAggregateFunc.enabled"> spark.sql.codegen.aggregate.splitAggregateFunc.enabled
+### <span id="ENABLE_SORT_AGGREGATE_CODEGEN"> aggregate.sortAggregate.enabled { #spark.sql.codegen.aggregate.sortAggregate.enabled }
+
+**spark.sql.codegen.aggregate.sortAggregate.enabled**
+
+Enables code generation for [SortAggregateExec](physical-operators/SortAggregateExec.md#supportCodegen) physical operator
+
+Default: `true`
+
+### aggregate.splitAggregateFunc.enabled { #spark.sql.codegen.aggregate.splitAggregateFunc.enabled }
+
+**spark.sql.codegen.aggregate.splitAggregateFunc.enabled**
 
 **(internal)** When true, the code generator would split aggregate code into individual methods instead of a single big method. This can be used to avoid oversized function that can miss the opportunity of JIT optimization.
 
 Default: `true`
 
-## <span id="spark.sql.codegen.comments"> spark.sql.codegen.comments
+### comments { #spark.sql.codegen.comments }
+
+**spark.sql.codegen.comments**
 
 Controls whether `CodegenContext` should [register comments](physical-operators/CodegenSupport.md#registerComment) (`true`) or not (`false`).
 
 Default: `false`
 
-## <span id="spark.sql.codegen.factoryMode"> spark.sql.codegen.factoryMode
+### factoryMode { #spark.sql.codegen.factoryMode }
+
+**spark.sql.codegen.factoryMode**
 
 **(internal)** Determines the codegen generator fallback behavior
 
@@ -1527,7 +1549,9 @@ Acceptable values:
 
 Used when `CodeGeneratorWithInterpretedFallback` is requested to [createObject](expressions/CodeGeneratorWithInterpretedFallback.md#createObject) (when `UnsafeProjection` is requested to [create an UnsafeProjection for Catalyst expressions](expressions/UnsafeProjection.md#create))
 
-## <span id="spark.sql.codegen.useIdInClassName"> spark.sql.codegen.useIdInClassName
+### useIdInClassName { #spark.sql.codegen.useIdInClassName }
+
+**spark.sql.codegen.useIdInClassName**
 
 **(internal)** Controls whether to embed the (whole-stage) codegen stage ID into the class name of the generated class as a suffix (`true`) or not (`false`)
 
@@ -1535,7 +1559,9 @@ Default: `true`
 
 Use [SQLConf.wholeStageUseIdInClassName](SQLConf.md#wholeStageUseIdInClassName) method to access the current value.
 
-## <span id="spark.sql.codegen.maxFields"> spark.sql.codegen.maxFields
+### maxFields { #spark.sql.codegen.maxFields }
+
+**spark.sql.codegen.maxFields**
 
 **(internal)** Maximum number of output fields (including nested fields) that whole-stage codegen supports. Going above the number deactivates whole-stage codegen.
 
@@ -1543,7 +1569,9 @@ Default: `100`
 
 Use [SQLConf.wholeStageMaxNumFields](SQLConf.md#wholeStageMaxNumFields) method to access the current value.
 
-## <span id="spark.sql.codegen.splitConsumeFuncByOperator"> spark.sql.codegen.splitConsumeFuncByOperator
+### splitConsumeFuncByOperator { #spark.sql.codegen.splitConsumeFuncByOperator }
+
+**spark.sql.codegen.splitConsumeFuncByOperator**
 
 **(internal)** Controls whether whole stage codegen puts the logic of consuming rows of each physical operator into individual methods, instead of a single big method. This can be used to avoid oversized function that can miss the opportunity of JIT optimization.
 

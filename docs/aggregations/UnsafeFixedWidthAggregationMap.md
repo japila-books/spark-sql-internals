@@ -4,7 +4,7 @@
 
 `UnsafeFixedWidthAggregationMap` is used when [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator is executed:
 
-* Directly in [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap)
+* Directly in [createHashMap](../physical-operators/HashAggregateExec.md#createHashMap) while generating Java code in [doProduceWithKeys](../physical-operators/HashAggregateExec.md#doProduceWithKeys)
 * Indirectly through [TungstenAggregationIterator](TungstenAggregationIterator.md#hashMap) while [doExecute](../physical-operators/HashAggregateExec.md#doExecute)
 
 ## Creating Instance
