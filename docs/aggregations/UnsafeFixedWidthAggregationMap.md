@@ -1,6 +1,6 @@
 # UnsafeFixedWidthAggregationMap
 
-`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) with [UnsafeRow](../UnsafeRow.md) keys and values.
+`UnsafeFixedWidthAggregationMap` is a tiny layer (_extension_) over Spark Core's [BytesToBytesMap](#map) for [UnsafeRow](../UnsafeRow.md) keys and values.
 
 `UnsafeFixedWidthAggregationMap` is used when [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator is executed:
 
@@ -11,29 +11,53 @@
 
 `UnsafeFixedWidthAggregationMap` takes the following to be created:
 
-* <span id="emptyAggregationBuffer"> Empty aggregation buffer ([InternalRow](../InternalRow.md))
+* [Empty Aggregation Buffer](#emptyAggregationBuffer)
 * <span id="aggregationBufferSchema"> Aggregation Buffer Schema ([StructType](../types/StructType.md))
 * <span id="groupingKeySchema"> Grouping Key Schema ([StructType](../types/StructType.md))
 * <span id="taskContext"> `TaskContext` ([Spark Core]({{ book.spark_core }}/scheduler/TaskContext))
 * [Initial Capacity](#initialCapacity)
-* <span id="pageSizeBytes"> Page Size (in bytes)
+* [Page Size](#pageSizeBytes)
 
-`UnsafeFixedWidthAggregationMap` is created when:
+### Page Size { #pageSizeBytes }
 
-* `HashAggregateExec` physical operator is requested to [create a HashMap](../physical-operators/HashAggregateExec.md#createHashMap)
-* `TungstenAggregationIterator` is [created](TungstenAggregationIterator.md#hashMap)
+`UnsafeFixedWidthAggregationMap` is given the page size (in bytes) of the [BytesToBytesMap](#map) when [created](#creating-instance).
 
-### <span id="initialCapacity"> Initial Capacity
+The page size is what the `TaskMemoryManager` ([Spark Core]({{ book.spark_core }}/memory/TaskMemoryManager/#page-size)) is configured with.
+
+### Initial Capacity { #initialCapacity }
 
 `UnsafeFixedWidthAggregationMap` is given the initial capacity of the [BytesToBytesMap](#map) when [created](#creating-instance).
 
-The initial capacity is hard-coded to `1024 * 16` (when created for [HashAggregateExec](../physical-operators/HashAggregateExec.md#createHashMap) and [TungstenAggregationIterator](TungstenAggregationIterator.md#hashMap)).
+The initial capacity is hard-coded to `1024 * 16`.
 
-## <span id="map"> BytesToBytesMap
+## Empty Aggregation Buffer { #emptyAggregationBuffer }
+
+??? note "There are two `emptyAggregationBuffer`s"
+
+```java
+InternalRow emptyAggregationBuffer
+```
+
+`UnsafeFixedWidthAggregationMap` is given an [InternalRow](../InternalRow.md) (`emptyAggregationBuffer`) when [created](#creating-instance).
+
+This `emptyAggregationBuffer` is used to initialize another `emptyAggregationBuffer` to be of type `byte[]`.
+
+```java
+byte[] emptyAggregationBuffer
+```
+
+??? note "private final"
+    `emptyAggregationBuffer` is a `private final`  value that has to be initialized when this `UnsafeFixedWidthAggregationMap` is [created](#creating-instance).
+
+`emptyAggregationBuffer` is initialized to be `byte`s of an [UnsafeProjection](../expressions/UnsafeProjection.md#create) (with the [aggregationBufferSchema](#aggregationBufferSchema)) applied to the input `emptyAggregationBuffer`.
+
+`emptyAggregationBuffer` is used to [getAggregationBufferFromUnsafeRow](#getAggregationBufferFromUnsafeRow) as the (default) value for new keys (a "zero" of an aggregate function).
+
+## BytesToBytesMap { #map }
 
 When [created](#creating-instance), `UnsafeFixedWidthAggregationMap` creates a `BytesToBytesMap` ([Spark Core]({{ book.spark_core }}/BytesToBytesMap)) with the following:
 
-* `TaskMemoryManager` ([Spark Core]({{ book.spark_core }}/memory/TaskMemoryManager)) of the [TaskContext](#taskContext)
+* `TaskMemoryManager` ([Spark Core]({{ book.spark_core }}/memory/TaskMemoryManager)) of this [TaskContext](#taskContext)
 * [Initial Capacity](#initialCapacity)
 * [Page Size](#pageSizeBytes)
 
@@ -46,7 +70,7 @@ The `BytesToBytesMap` is used when:
 * [getAvgHashProbeBucketListIterations](#getAvgHashProbeBucketListIterations)
 * [destructAndCreateExternalSorter](#destructAndCreateExternalSorter)
 
-## <span id="supportsAggregationBufferSchema"> supportsAggregationBufferSchema
+## supportsAggregationBufferSchema { #supportsAggregationBufferSchema }
 
 ```java
 boolean supportsAggregationBufferSchema(
@@ -76,7 +100,7 @@ assert(UnsafeFixedWidthAggregationMap.supportsAggregationBufferSchema(schemaWith
 
 * `HashAggregateExec` utility is used for the [selection requirements](../physical-operators/HashAggregateExec.md#supportsAggregate)
 
-## <span id="getAggregationBufferFromUnsafeRow"> getAggregationBufferFromUnsafeRow
+## Looking Up Aggregation Value Buffer for Grouping Key { #getAggregationBufferFromUnsafeRow }
 
 ```java
 UnsafeRow getAggregationBufferFromUnsafeRow(
@@ -88,18 +112,23 @@ UnsafeRow getAggregationBufferFromUnsafeRow(
 
 1. Uses the hash code of the given key
 
-`getAggregationBufferFromUnsafeRow` returns the following:
+`getAggregationBufferFromUnsafeRow` gives one of the following:
 
-* `null` when the given `key` was not found and had to be inserted but failed
-* [currentAggregationBuffer](#currentAggregationBuffer) pointed to the value (object)
+* [currentAggregationBuffer](#currentAggregationBuffer) pointed to the value for the grouping `key`
+* `null` for no value for the given `key` and insertion failed
 
 ---
 
-`getAggregationBufferFromUnsafeRow` uses the [BytesToBytesMap](#map) to look up `BytesToBytesMap.Location` of the given (grouping) `key`.
+`getAggregationBufferFromUnsafeRow` looks up the given (grouping) `key` (in the [BytesToBytesMap](#map)).
 
-If the key has not been found (is not defined at the key's position), `getAggregationBufferFromUnsafeRow` inserts a copy of the [emptyAggregationBuffer](#emptyAggregationBuffer) into the [map](#map). `getAggregationBufferFromUnsafeRow` returns `null` if insertion failed.
+Unless found, `getAggregationBufferFromUnsafeRow` uses the [Empty Aggregation Buffer](#emptyAggregationBuffer) as the value instead.
 
-`getAggregationBufferFromUnsafeRow` requests the [currentAggregationBuffer](#currentAggregationBuffer) to [pointTo](../UnsafeRow.md#pointTo) to an object at `BytesToBytesMap.Location`.
+??? note "`null` when insertion fails"
+    The [Empty Aggregation Buffer](#emptyAggregationBuffer) is copied over to the [BytesToBytesMap](#map) for the grouping key.
+
+    In case the insertion fails, `getAggregationBufferFromUnsafeRow` returns `null`.
+
+In the end, `getAggregationBufferFromUnsafeRow` requests the [currentAggregationBuffer](#currentAggregationBuffer) to [pointTo](../UnsafeRow.md#pointTo) to the value (that was just stored or looked up).
 
 ---
 
@@ -107,30 +136,10 @@ If the key has not been found (is not defined at the key's position), `getAggreg
 
 * `TungstenAggregationIterator` is requested to [process input rows](TungstenAggregationIterator.md#processInputs)
 
-## <span id="currentAggregationBuffer"> currentAggregationBuffer
+## Current Aggregation Buffer { #currentAggregationBuffer }
 
 `UnsafeFixedWidthAggregationMap` creates an [UnsafeRow](../UnsafeRow.md) when [created](#creating-instance).
 
 The number of fields of this `UnsafeRow` is the length of the [aggregationBufferSchema](#aggregationBufferSchema).
 
 The `UnsafeRow` is (re)used to point to the value (that was stored or looked up) in [getAggregationBufferFromUnsafeRow](#getAggregationBufferFromUnsafeRow).
-
-<!---
-## Review Me
-
-Whenever requested for performance metrics (i.e. <<getAverageProbesPerLookup, average number of probes per key lookup>> and <<getPeakMemoryUsedBytes, peak memory used>>), `UnsafeFixedWidthAggregationMap` simply requests the underlying <<map, BytesToBytesMap>>.
-
-[[internal-registries]]
-.UnsafeFixedWidthAggregationMap's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1m,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| emptyAggregationBuffer
-| [[emptyAggregationBuffer-byte-array]] <<emptyAggregationBuffer, Empty aggregation buffer>> ([encoded in UnsafeRow format](expressions/UnsafeProjection.md#create))
-
-| groupingKeyProjection
-| [[groupingKeyProjection]] [UnsafeProjection](expressions/UnsafeProjection.md) for the <<groupingKeySchema, groupingKeySchema>> (to encode grouping keys as UnsafeRows)
-|===
--->

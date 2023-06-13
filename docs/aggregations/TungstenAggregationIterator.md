@@ -22,6 +22,7 @@
 * <span id="peakMemory"> `peakMemory` [SQLMetric](../SQLMetric.md)
 * <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
 * <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](../SQLMetric.md)
+* <span id="numTasksFallBacked"> `numTasksFallBacked` [SQLMetric](../SQLMetric.md)
 
 `TungstenAggregationIterator` is created when:
 
@@ -125,6 +126,46 @@ The flag is used to indicate whether `TungstenAggregationIterator` has [switched
 `sortBased` flag is turned on (`true`) while [switching to sort-based aggregation](#switchToSortBasedAggregation) (and the [numTasksFallBacked](#numTasksFallBacked) metric is incremented).
 
 Switching from hash-based to sort-based aggregation happens when the [external sorter](#externalSorter) is initialized (that is used for sort-based aggregation).
+
+## initialAggregationBuffer { #initialAggregationBuffer }
+
+```scala
+initialAggregationBuffer: UnsafeRow
+```
+
+`TungstenAggregationIterator` initializes `initialAggregationBuffer` (as a [new UnsafeRow](#createNewAggregationBuffer)) when [created](#creating-instance).
+
+`initialAggregationBuffer` is used as the [emptyAggregationBuffer](UnsafeFixedWidthAggregationMap.md#emptyAggregationBuffer) of the [UnsafeFixedWidthAggregationMap](#hashMap).
+
+When requested for [next row](#next) in [sortBased](#sortBased) aggregation, `TungstenAggregationIterator` copies the `initialAggregationBuffer` to the [sortBasedAggregationBuffer](#sortBasedAggregationBuffer).
+
+When requested to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput) with no [groupingExpressions](#groupingExpressions), `TungstenAggregationIterator` copies the `initialAggregationBuffer` to the [sortBasedAggregationBuffer](#sortBasedAggregationBuffer).
+
+## sortBasedAggregationBuffer { #sortBasedAggregationBuffer }
+
+```scala
+sortBasedAggregationBuffer: UnsafeRow
+```
+
+`TungstenAggregationIterator` initializes `sortBasedAggregationBuffer` (as a [new UnsafeRow](#createNewAggregationBuffer)) when [created](#creating-instance).
+
+## createNewAggregationBuffer { #createNewAggregationBuffer }
+
+```scala
+createNewAggregationBuffer(): UnsafeRow
+```
+
+`createNewAggregationBuffer` creates an [UnsafeRow](../UnsafeRow.md).
+
+---
+
+`createNewAggregationBuffer`...FIXME
+
+---
+
+`createNewAggregationBuffer` is used when:
+
+* `TungstenAggregationIterator` is created (and creates the [initialAggregationBuffer](#initialAggregationBuffer) and [sortBasedAggregationBuffer](#sortBasedAggregationBuffer) buffers)
 
 ## Demo
 
