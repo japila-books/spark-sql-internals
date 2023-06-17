@@ -1821,6 +1821,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/Count/</loc>
+         <lastmod>2023-06-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/CreateNamedStruct/</loc>
          <lastmod>2023-06-17</lastmod>
          <changefreq>daily</changefreq>
@@ -2067,6 +2072,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/SimpleHigherOrderFunction/</loc>
+         <lastmod>2023-06-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/SimpleTypedAggregateExpression/</loc>
          <lastmod>2023-06-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
