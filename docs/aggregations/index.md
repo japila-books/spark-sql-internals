@@ -9,8 +9,6 @@ Aggregate Queries can be broken down to the following sections:
 1. **Grouping** (using `GROUP BY` clause in SQL or [Dataset.groupBy](#groupBy) operator) that arranges rows into groups (possibly guarded by [HAVING](#having) SQL clause)
 1. **Aggregation** (using [Aggregate Functions](../functions/aggregate-functions.md)) to apply to a set of rows and calculate single values per groups
 
-`Aggregate` is used to [computeColumnStats](../CommandUtils.md#computeColumnStats) and [computePercentiles](../CommandUtils.md#computePercentiles).
-
 ## Whole-Stage Code Generation
 
 [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) is supported by [AggregateCodegenSupport](../physical-operators/AggregateCodegenSupport.md) physical operators only with [supportCodegen](../physical-operators/AggregateCodegenSupport.md#supportCodegen) flag enabled.

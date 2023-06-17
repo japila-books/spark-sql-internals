@@ -78,6 +78,35 @@ compareAndGetNewStats(
 * [AnalyzePartitionCommand](logical-operators/AnalyzePartitionCommand.md) is executed
 * `CommandUtils` is requested to [analyze a table](#analyzeTable)
 
+## computeColumnStats { #computeColumnStats }
+
+```scala
+computeColumnStats(
+  sparkSession: SparkSession,
+  relation: LogicalPlan,
+  columns: Seq[Attribute]): (Long, Map[Attribute, ColumnStat])
+```
+
+`computeColumnStats`...FIXME
+
+---
+
+`computeColumnStats` is used when:
+
+* `CacheManager` is requested to [analyzeColumnCacheQuery](CacheManager.md#analyzeColumnCacheQuery)
+* `AnalyzeColumnCommand` logical command is requested to [analyzeColumnInCatalog](logical-operators/AnalyzeColumnCommand.md#analyzeColumnInCatalog)
+
+### computePercentiles { #computePercentiles }
+
+```scala
+computePercentiles(
+  attributesToAnalyze: Seq[Attribute],
+  sparkSession: SparkSession,
+  relation: LogicalPlan): AttributeMap[ArrayData]
+```
+
+`computePercentiles`...FIXME
+
 ## Logging
 
 Enable `ALL` logging level for `org.apache.spark.sql.execution.command.CommandUtils` logger to see what happens inside.
@@ -85,7 +114,8 @@ Enable `ALL` logging level for `org.apache.spark.sql.execution.command.CommandUt
 Add the following line to `conf/log4j2.properties`:
 
 ```text
-log4j.logger.org.apache.spark.sql.execution.command.CommandUtils=ALL
+logger.CommandUtils.name = org.apache.spark.sql.execution.command.CommandUtils
+logger.CommandUtils.level = all
 ```
 
 Refer to [Logging](spark-logging.md).
