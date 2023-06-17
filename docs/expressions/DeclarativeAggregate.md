@@ -22,13 +22,18 @@ Used when:
 * `HashAggregateExec` physical operator is requested to [doProduceWithoutKeys](../physical-operators/HashAggregateExec.md#doProduceWithoutKeys) and [generateResultFunction](../physical-operators/HashAggregateExec.md#generateResultFunction)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
-### <span id="initialValues"> Expressions to Initialize Empty Aggregation Buffers
+### Expressions to Initialize Empty Aggregation Buffers { #initialValues }
 
 ```scala
 initialValues: Seq[Expression]
 ```
 
 Catalyst [Expression](Expression.md)s to initialize empty aggregation buffers (for the initial values of this aggregate function)
+
+See:
+
+* [Count](Count.md#initialValues)
+* [SimpleTypedAggregateExpression](SimpleTypedAggregateExpression.md#initialValues)
 
 Used when:
 
@@ -40,21 +45,31 @@ Used when:
 * `HashMapGenerator` is [created](../HashMapGenerator.md#buffVars)
 * `AggregateProcessor` is [created](../window-functions/AggregateProcessor.md#apply)
 
-### <span id="mergeExpressions"> mergeExpressions
+### Merge Expressions { #mergeExpressions }
 
 ```scala
 mergeExpressions: Seq[Expression]
 ```
 
-Catalyst [Expression](Expression.md)s to...FIXME
+Catalyst [Expression](Expression.md)s
 
-### <span id="updateExpressions"> updateExpressions
+See:
+
+* [Count](Count.md#mergeExpressions)
+* [SimpleTypedAggregateExpression](SimpleTypedAggregateExpression.md#mergeExpressions)
+
+### Update Expressions { #updateExpressions }
 
 ```scala
 updateExpressions: Seq[Expression]
 ```
 
 Catalyst [Expression](Expression.md)s to update the mutable aggregation buffer based on an input row
+
+See:
+
+* [Count](Count.md#updateExpressions)
+* [SimpleTypedAggregateExpression](SimpleTypedAggregateExpression.md#updateExpressions)
 
 Used when:
 

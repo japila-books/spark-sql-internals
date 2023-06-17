@@ -42,6 +42,36 @@ The `AggregateMode`s have to be a subset of the following mode pairs:
 * `Partial` and `PartialMerge`
 * `Final` and `Complete`
 
+## Process Row Function { #processRow }
+
+```scala
+processRow: (InternalRow, InternalRow) => Unit
+```
+
+`AggregationIterator` [generates](#generateProcessRow) a `processRow` function when [created](#creating-instance).
+
+??? note "`processRow` is a procedure"
+    `processRow` is a procedure that takes two [InternalRow](../InternalRow.md)s and produces no output (returns `Unit`).
+
+    `processRow` is similar to the following definition:
+
+    ```scala
+    def processRow(currentBuffer: InternalRow, row: InternalRow): Unit = {
+      ...
+    }
+    ```
+
+`AggregationIterator` uses the [aggregateExpressions](#aggregateExpressions), the [aggregateFunctions](#aggregateFunctions) and the [inputAttributes](#inputAttributes) to [generate the processRow procedure](#generateProcessRow).
+
+---
+
+`processRow` is used when:
+
+* `MergingSessionsIterator` is requested to `processCurrentSortedGroup`
+* `ObjectAggregationIterator` is requested to [process input rows](ObjectAggregationIterator.md#processInputs)
+* `SortBasedAggregationIterator` is requested to [processCurrentSortedGroup](SortBasedAggregationIterator.md#processCurrentSortedGroup)
+* `TungstenAggregationIterator` is requested to [process input rows](TungstenAggregationIterator.md#processInputs)
+
 ## <span id="aggregateFunctions"> AggregateFunctions
 
 ```scala
@@ -64,47 +94,6 @@ initializeAggregateFunctions(
 
 * `AggregationIterator` is requested for the [aggregateFunctions](#aggregateFunctions)
 * `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](ObjectAggregationIterator.md#mergeAggregationBuffers)
-* `TungstenAggregationIterator` is requested to [switchToSortBasedAggregation](TungstenAggregationIterator.md#switchToSortBasedAggregation)
-
-## <span id="generateProcessRow"> Generating Process Row Function
-
-```scala
-generateProcessRow(
-  expressions: Seq[AggregateExpression],
-  functions: Seq[AggregateFunction],
-  inputAttributes: Seq[Attribute]): (InternalRow, InternalRow) => Unit
-```
-
-!!! note "`generateProcessRow` is a procedure"
-    `generateProcessRow` creates a Scala function (_procedure_) that takes two [InternalRow](../InternalRow.md)s and produces no output.
-
-    ```scala
-    def generateProcessRow(currentBuffer: InternalRow, row: InternalRow): Unit = {
-      ...
-    }
-    ```
-
-`generateProcessRow` creates a mutable `JoinedRow` (of two [InternalRow](../InternalRow.md)s).
-
-`generateProcessRow` branches off based on the given [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`).
-
-With no [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`), `generateProcessRow` creates a function that does nothing (and "swallows" the input).
-
-!!! note "`functions` Argument"
-    `generateProcessRow` works differently based on the type of the given [AggregateFunction](../expressions/AggregateFunction.md)s:
-
-    * [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)
-    * [AggregateFunction](../expressions/AggregateFunction.md)
-    * [ImperativeAggregate](../expressions/ImperativeAggregate.md)
-
-Otherwise, with some [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`), `generateProcessRow`...FIXME
-
----
-
-`generateProcessRow` is used when:
-
-* `AggregationIterator` is requested for the [processRow function](#processRow)
-* `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers function](ObjectAggregationIterator.md#mergeAggregationBuffers)
 * `TungstenAggregationIterator` is requested to [switchToSortBasedAggregation](TungstenAggregationIterator.md#switchToSortBasedAggregation)
 
 ## <span id="generateOutput"> generateOutput
@@ -146,3 +135,81 @@ initializeBuffer(
 
 * `MergingSessionsIterator` is requested to `newBuffer`, `initialize`, `next`, `outputForEmptyGroupingKeyWithoutInput`
 * `SortBasedAggregationIterator` is requested to [newBuffer](SortBasedAggregationIterator.md#newBuffer), [initialize](SortBasedAggregationIterator.md#initialize), [next](SortBasedAggregationIterator.md#next) and [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
+
+## Generating Process Row Function { #generateProcessRow }
+
+```scala
+generateProcessRow(
+  expressions: Seq[AggregateExpression],
+  functions: Seq[AggregateFunction],
+  inputAttributes: Seq[Attribute]): (InternalRow, InternalRow) => Unit
+```
+
+`generateProcessRow` creates a mutable `JoinedRow` (of two [InternalRow](../InternalRow.md)s).
+
+`generateProcessRow` branches off based on the given [AggregateExpression](../expressions/AggregateExpression.md)s, [specified](#generateProcessRow-aggregate-expressions-specified) or [not](#generateProcessRow-no-aggregate-expressions).
+
+??? note "Where AggregateExpressions come from"
+
+    Caller | AggregateExpressions
+    -------|---------------------
+    [AggregationIterator](#processRow) | [aggregateExpressions](#aggregateExpressions)
+    [ObjectAggregationIterator](ObjectAggregationIterator.md#mergeAggregationBuffers) | [aggregateExpressions](ObjectAggregationIterator.md#aggregateExpressions)
+    [TungstenAggregationIterator](TungstenAggregationIterator.md#switchToSortBasedAggregation) | [aggregateExpressions](TungstenAggregationIterator.md#aggregateExpressions)
+
+!!! note "`functions` Argument"
+    `generateProcessRow` works differently based on the type of the given [AggregateFunction](../expressions/AggregateFunction.md)s:
+
+    * [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)
+    * [AggregateFunction](../expressions/AggregateFunction.md)
+    * [ImperativeAggregate](../expressions/ImperativeAggregate.md)
+
+---
+
+`generateProcessRow` is used when:
+
+* `AggregationIterator` is requested for the [process row function](#processRow)
+* `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers function](ObjectAggregationIterator.md#mergeAggregationBuffers)
+* `TungstenAggregationIterator` is requested to [switch to sort-based aggregation](TungstenAggregationIterator.md#switchToSortBasedAggregation)
+
+### Aggregate Expressions Specified { #generateProcessRow-aggregate-expressions-specified }
+
+#### Merge Expressions { #generateProcessRow-aggregate-expressions-specified-merge-expressions }
+
+With [AggregateExpression](../expressions/AggregateExpression.md)s specified, `generateProcessRow` determines so-called "merge expressions" (`mergeExpressions`) as follows:
+
+* For [DeclarativeAggregate](../expressions/DeclarativeAggregate.md) functions, the merge expressions are choosen based on the [AggregateMode](../expressions/AggregateExpression.md#mode) of the corresponding [AggregateExpression](../expressions/AggregateExpression.md)
+
+     AggregateMode | Merge Expressions
+    ---------------|------------------
+    `Partial` or `Complete` | [Update Expressions](../expressions/DeclarativeAggregate.md#updateExpressions) of a `DeclarativeAggregate`
+    `PartialMerge` or `Final` | [Merge Expressions](../expressions/DeclarativeAggregate.md#mergeExpressions) of a `DeclarativeAggregate`
+
+* For [AggregateFunction](../expressions/AggregateFunction.md) functions, there are as many `NoOp` merge expressions (that do nothing and do not change a value) as there are [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) in a `AggregateFunction`
+
+#### Initialize Predicates { #generateProcessRow-aggregate-expressions-specified-initialize-predicates }
+
+`generateProcessRow` finds [AggregateExpression](../expressions/AggregateExpression.md)s with [filter](../expressions/AggregateExpression.md#filter)s specified.
+
+When in `Partial` or `Complete` aggregate modes, `generateProcessRow`...FIXME
+
+#### Update Functions { #generateProcessRow-aggregate-expressions-specified-update-functions }
+
+`generateProcessRow` determines so-called "update functions" (`updateFunctions`) among [ImperativeAggregate](../expressions/ImperativeAggregate.md) functions (in the given [AggregateFunction](../expressions/AggregateFunction.md)s) to be as follows:
+
+* FIXME
+
+#### Update Projection { #generateProcessRow-aggregate-expressions-specified-update-projection }
+
+`generateProcessRow` uses the [newMutableProjection](#newMutableProjection) generator function to create a [MutableProjection](../expressions/MutableProjection.md) based on the `mergeExpressions` and the [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) of the given [AggregateFunction](../expressions/AggregateFunction.md)s with the given `inputAttributes`.
+
+#### Process Row Function { #generateProcessRow-aggregate-expressions-specified-process-row-function }
+
+In the end, `generateProcessRow` creates a procedure that accepts two [InternalRow](../InternalRow.md)s (`currentBuffer` and `row`) that does the following:
+
+1. Processes all [expression-based aggregate](../expressions/DeclarativeAggregate.md) functions (using `updateProjection`).`generateProcessRow` requests the [MutableProjection](../expressions/MutableProjection.md) to [store the output](../expressions/MutableProjection.md#target) in the `currentBuffer`. The output is created based on the `currentBuffer` and the `row`.
+1. Processes all [imperative aggregate](../expressions/ImperativeAggregate.md) functions. `generateProcessRow` requests every "update function"  (in `updateFunctions`) to execute with the given `currentBuffer` and the `row`.
+
+### No Aggregate Expressions { #generateProcessRow-no-aggregate-expressions }
+
+With no [AggregateExpression](../expressions/AggregateExpression.md)s (`expressions`), `generateProcessRow` creates a function that does nothing ("swallows" the input).

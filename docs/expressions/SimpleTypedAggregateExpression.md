@@ -1,0 +1,3 @@
+# SimpleTypedAggregateExpression
+
+`SimpleTypedAggregateExpression` is...FIXME

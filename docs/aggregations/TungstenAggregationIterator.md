@@ -9,7 +9,7 @@
 `TungstenAggregationIterator` takes the following to be created:
 
 * <span id="partIndex"> Partition ID
-* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="groupingExpressions"> Grouping [Named Expression](../expressions/NamedExpression.md)s
 * <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
 * <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial input buffer offset
@@ -98,21 +98,6 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 * `HashAggregateExec` physical operator is requested to [execute](../physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
 
-## <span id="processInputs"> Processing Input Rows
-
-```scala
-processInputs(
-  fallbackStartsAt: (Int, Int)): Unit
-```
-
-`processInputs`...FIXME
-
----
-
-`processInputs` is used when:
-
-* `TungstenAggregationIterator` is [created](#creating-instance)
-
 ## <span id="sortBased"> Hash- vs Sort-Based Aggregations
 
 ```scala
@@ -166,6 +151,36 @@ createNewAggregationBuffer(): UnsafeRow
 `createNewAggregationBuffer` is used when:
 
 * `TungstenAggregationIterator` is created (and creates the [initialAggregationBuffer](#initialAggregationBuffer) and [sortBasedAggregationBuffer](#sortBasedAggregationBuffer) buffers)
+
+## Processing Input Rows { #processInputs }
+
+```scala
+processInputs(
+  fallbackStartsAt: (Int, Int)): Unit
+```
+
+!!! note "Procedure"
+    `processInputs` returns `Unit` (_nothing_) and whatever happens inside stays inside (just like in Las Vegas, _doesn't it?!_ 😉)
+
+`processInputs` is used when:
+
+* `TungstenAggregationIterator` is [created](#creating-instance)
+
+---
+
+`processInputs` branches off based on the [grouping expressions](#groupingExpressions), [specified](#processInputs-grouping-expressions-specified) or [not](#processInputs-no-grouping-expressions).
+
+### Grouping Expressions Specified { #processInputs-grouping-expressions-specified }
+
+`processInputs`...FIXME
+
+### No Grouping Expressions { #processInputs-no-grouping-expressions }
+
+With no [grouping expressions](#groupingExpressions), `processInputs` generates one single grouping key (an [UnsafeRow](../UnsafeRow.md)) for [all the partition rows](#inputIter). `processInputs` executes ([applies](../expressions/UnsafeProjection.md#apply)) the [grouping projection](#groupingProjection) to a `null` (_undefined_) row.
+
+`processInputs` [looks up the aggregation buffer](UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow) ([UnsafeRow](../UnsafeRow.md)) in the [UnsafeFixedWidthAggregationMap](#hashMap) for the generated grouping key.
+
+In the end, for every `InternalRow` in the [inputIter](#inputIter), `processInputs` [processRow](AggregationIterator.md#processRow) one by one (with the same aggregation buffer).
 
 ## Demo
 

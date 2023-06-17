@@ -297,6 +297,7 @@ nav:
       - CodegenFallback: expressions/CodegenFallback.md
       - Collect: expressions/Collect.md
       - CollectSet: expressions/CollectSet.md
+      - Count: expressions/Count.md
       - CreateNamedStruct: expressions/CreateNamedStruct.md
       - CreateStruct: expressions/CreateStruct.md
       - CumeDist: expressions/CumeDist.md
@@ -349,6 +350,7 @@ nav:
       - ScalarSubquery: expressions/ScalarSubquery.md
       - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
       - ScalaUDF: expressions/ScalaUDF.md
+      - SimpleTypedAggregateExpression: expressions/SimpleTypedAggregateExpression.md
       - SortOrder: expressions/SortOrder.md
       - SparkUserDefinedFunction: expressions/SparkUserDefinedFunction.md
       - Stateful: expressions/Stateful.md
