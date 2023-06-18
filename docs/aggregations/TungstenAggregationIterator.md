@@ -36,13 +36,13 @@ As with any `Iterator`, `TungstenAggregationIterator` comes with the following:
 
 ### TaskCompletionListener { #TaskCompletionListener }
 
-`TungstenAggregationIterator` registers a `TaskCompletionListener` that is executed at the end of this task (one per partition).
+`TungstenAggregationIterator` registers a `TaskCompletionListener` ([Spark Core]({{ book.spark_core }}/TaskCompletionListener)) that is executed at the end of this task (one per partition).
 
 When executed, the `TaskCompletionListener` updates the metrics.
 
  Metric | Value
 --------|------
- [peakMemory](#peakMemory) | The maximum of the [getPeakMemoryUsedBytes](UnsafeFixedWidthAggregationMap.md#getPeakMemoryUsedBytes) of this [UnsafeFixedWidthAggregationMap](#hashMap) and the [getPeakMemoryUsedBytes](UnsafeKVExternalSorter.md#getPeakMemoryUsedBytes) of this [UnsafeKVExternalSorter](#externalSorter) for sort-based aggregation, if a switch happened
+ [peak memory](#peakMemory) | The maximum of the [getPeakMemoryUsedBytes](UnsafeFixedWidthAggregationMap.md#getPeakMemoryUsedBytes) of this [UnsafeFixedWidthAggregationMap](#hashMap) and the [getPeakMemoryUsedBytes](UnsafeKVExternalSorter.md#getPeakMemoryUsedBytes) of this [UnsafeKVExternalSorter](#externalSorter) for sort-based aggregation, if a switch happened
  [spillSize](#spillSize) |
  [avgHashProbe](#avgHashProbe) | The [getAvgHashProbesPerKey](UnsafeFixedWidthAggregationMap.md#getAvgHashProbesPerKey) of this [UnsafeFixedWidthAggregationMap](#hashMap)
 
@@ -63,10 +63,10 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 * <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](../physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator)
 * <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](../physical-operators/HashAggregateExec.md#testFallbackStartsAt)
 * <span id="numOutputRows"> `numOutputRows` [SQLMetric](../SQLMetric.md)
-* <span id="peakMemory"> `peakMemory` [SQLMetric](../SQLMetric.md)
+* [peakMemory](#peakMemory) Performance Metric
 * <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
 * <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](../SQLMetric.md)
-* [numTasksFallBacked](#numTasksFallBacked) metric
+* [numTasksFallBacked](#numTasksFallBacked) Performance Metric
 
 `TungstenAggregationIterator` is created when:
 
@@ -74,13 +74,13 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 
 `TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) unless [switched to a sort-based aggregation](#sortBased).
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics { #metrics }
 
 When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](../SQLMetric.md)s from the [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 
-* [peakMemory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) are used at the [end of every task](#TaskCompletionListener) (one per partition)
+* [peak memory](#peakMemory), [spillSize](#spillSize) and [avgHashProbe](#avgHashProbe) are used at the [end of every task](#TaskCompletionListener) (one per partition)
 
 The metrics are displayed as part of [HashAggregateExec](../physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../ui/SQLTab.md#ExecutionPage)).
 
@@ -88,11 +88,19 @@ The metrics are displayed as part of [HashAggregateExec](../physical-operators/H
 
 ### number of sort fallback tasks { #numTasksFallBacked }
 
-`TungstenAggregationIterator` is given **number of sort fallback tasks** [SQLMetric](../SQLMetric.md) when [created](#creating-instance).
+`TungstenAggregationIterator` is given **number of sort fallback tasks** [performance metric](../SQLMetric.md) when [created](#creating-instance).
 
 The metric is [number of sort fallback tasks](../physical-operators/HashAggregateExec.md#numTasksFallBacked) metric of the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
 
 The metric is incremented only when `TungstenAggregationIterator` is requested to [fall back to sort-based aggregation](#switchToSortBasedAggregation).
+
+### peak memory { #peakMemory }
+
+`TungstenAggregationIterator` is given **peak memory** [performance metric](../SQLMetric.md) when [created](#creating-instance).
+
+The metric is [peak memory](../physical-operators/HashAggregateExec.md#peakMemory) metric of the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
+
+The metric is set at [task completion](#TaskCompletionListener).
 
 ## Checking for Next Row Available { #hasNext }
 
@@ -141,20 +149,6 @@ Used when:
 
 * `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next), to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput), [process input rows](#processInputs), to initialize the [aggregationBufferMapIterator](#aggregationBufferMapIterator) and [every time a partition has been processed](#TaskCompletionListener)
 
-## <span id="outputForEmptyGroupingKeyWithoutInput"> outputForEmptyGroupingKeyWithoutInput
-
-```scala
-outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
-```
-
-`outputForEmptyGroupingKeyWithoutInput`...FIXME
-
----
-
-`outputForEmptyGroupingKeyWithoutInput` is used when:
-
-* `HashAggregateExec` physical operator is requested to [execute](../physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
-
 ## Hash- vs Sort-Based Aggregations { #sortBased }
 
 ```scala
@@ -163,13 +157,15 @@ sortBased: Boolean = false
 
 `TungstenAggregationIterator` turns `sortBased` flag off (`false`) when [created](#creating-instance).
 
-The flag indicates whether `TungstenAggregationIterator` has [switched (fallen back) to sort-based aggregation](#switchToSortBasedAggregation) while [processing input rows](#processInputs).
-
 `sortBased` flag is turned on (`true`) at the end of [switching to sort-based aggregation](#switchToSortBasedAggregation) (alongside incrementing [number of sort fallback tasks](#numTasksFallBacked) metric).
 
-Switching from hash-based to sort-based aggregation happens when the [external sorter](#externalSorter) is initialized (that is used for sort-based aggregation).
+In other words, `sortBased` flag indicates whether `TungstenAggregationIterator` has [switched (fallen back) to sort-based aggregation](#switchToSortBasedAggregation) (from initial hash-based processing mode) while [processing input rows](#processInputs).
 
-## initialAggregationBuffer { #initialAggregationBuffer }
+As long as the underlying [UnsafeFixedWidthAggregationMap](#hashMap) has got enough memory to hold [grouping keys](UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow) (and [externalSorter](#externalSorter) is not created), `TungstenAggregationIterator` uses [processRow](AggregationIterator.md#processRow) function to [process rows](#processInputs).
+
+It is only when [externalSorter](#externalSorter) is created, `TungstenAggregationIterator` [switches to sort-based aggregation](#switchToSortBasedAggregation).
+
+## Initial Aggregation Buffer { #initialAggregationBuffer }
 
 ```scala
 initialAggregationBuffer: UnsafeRow
@@ -183,13 +179,20 @@ When requested for [next row](#next) in [sortBased](#sortBased) aggregation, `Tu
 
 When requested to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput) with no [groupingExpressions](#groupingExpressions), `TungstenAggregationIterator` copies the `initialAggregationBuffer` to the [sortBasedAggregationBuffer](#sortBasedAggregationBuffer).
 
-## sortBasedAggregationBuffer { #sortBasedAggregationBuffer }
+## Sort-Based Aggregation Buffer { #sortBasedAggregationBuffer }
 
 ```scala
 sortBasedAggregationBuffer: UnsafeRow
 ```
 
-`TungstenAggregationIterator` initializes `sortBasedAggregationBuffer` (as a [new UnsafeRow](#createNewAggregationBuffer)) when [created](#creating-instance).
+`TungstenAggregationIterator` initializes `sortBasedAggregationBuffer` to be a [new UnsafeRow](#createNewAggregationBuffer) when [created](#creating-instance).
+
+`sortBasedAggregationBuffer` is used when `TungstenAggregationIterator` is requested for [next row](#next) in [sort-based](#sortBased) processing mode.
+
+`sortBasedAggregationBuffer` is copied from the [initialAggregationBuffer](#initialAggregationBuffer) when requested for:
+
+* [Next row](#next) (in [sort-based](#sortBased) processing mode)
+* [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput)
 
 ## createNewAggregationBuffer { #createNewAggregationBuffer }
 
@@ -284,7 +287,52 @@ var mapIteratorHasNext: Boolean = false
 
 `mapIteratorHasNext` is used to pre-load next key-value pair form [aggregationBufferMapIterator](#aggregationBufferMapIterator) to make [hasNext](#hasNext) idempotent.
 
-`mapIteratorHasNext` is also used to control whether to free up the memory associated with the [UnsafeFixedWidthAggregationMap](#hashMap) when still in [hash-based](#sortBased) processing mode.
+`mapIteratorHasNext` is also used to control whether to free up the memory associated with the [UnsafeFixedWidthAggregationMap](#hashMap) while in [hash-based](#sortBased) processing mode.
+
+## Output Row for Empty Partition and No Grouping Keys { #outputForEmptyGroupingKeyWithoutInput }
+
+```scala
+outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
+```
+
+`outputForEmptyGroupingKeyWithoutInput` requests the [sortBasedAggregationBuffer](#sortBasedAggregationBuffer) to [copy the bytes](../UnsafeRow.md#copyFrom) off from the [initialAggregationBuffer](#initialAggregationBuffer).
+
+`outputForEmptyGroupingKeyWithoutInput` generates the result using the [generateOutput](AggregationIterator.md#generateOutput) function with an empty `UnsafeRow` and the [sortBasedAggregationBuffer](#sortBasedAggregationBuffer).
+
+In the end, `outputForEmptyGroupingKeyWithoutInput` frees up the memory associated with this [UnsafeFixedWidthAggregationMap](#hashMap).
+
+??? note "groupingExpressions Should Be Empty or IllegalStateException"
+    `outputForEmptyGroupingKeyWithoutInput` throws an `IllegalStateException` when executed with the [groupingExpressions](#groupingExpressions) specified:
+
+    ```text
+    This method should not be called when groupingExpressions is not empty.
+    ```
+
+    That cannot really happen since `HashAggregateExec` physical operator makes sure to execute `outputForEmptyGroupingKeyWithoutInput` when there are no [groupingExpressions](../physical-operators/HashAggregateExec.md#groupingExpressions).
+
+---
+
+`outputForEmptyGroupingKeyWithoutInput` is used when:
+
+* `HashAggregateExec` physical operator is requested to [execute](../physical-operators/HashAggregateExec.md#doExecute) (with an empty partition and no grouping expressions)
+
+## UnsafeKVExternalSorter { #externalSorter }
+
+```scala
+var externalSorter: UnsafeKVExternalSorter = null
+```
+
+`externalSorter` is an [UnsafeKVExternalSorter](UnsafeKVExternalSorter.md).
+
+`externalSorter` is uninitialized (`null`) when `TungstenAggregationIterator` is [created](#creating-instance).
+
+`TungstenAggregationIterator` initializes the `externalSorter` to be the [UnsafeKVExternalSorter](UnsafeFixedWidthAggregationMap.md#destructAndCreateExternalSorter) (of [UnsafeFixedWidthAggregationMap](#hashMap)) when the [UnsafeFixedWidthAggregationMap](#hashMap) found no buffer (`null`) for a grouping key when [getAggregationBufferFromUnsafeRow](UnsafeFixedWidthAggregationMap.md#getAggregationBufferFromUnsafeRow) (likely due to running out of memory) while [processInputs](#processInputs).
+
+`TungstenAggregationIterator` [switchToSortBasedAggregation](#switchToSortBasedAggregation) right after [processing the whole partition](#processInputs) that ended up with an `UnsafeKVExternalSorter`.
+
+While [switchToSortBasedAggregation](#switchToSortBasedAggregation), `TungstenAggregationIterator` requests the [UnsafeKVExternalSorter](#externalSorter) for a [KVSorterIterator](UnsafeKVExternalSorter.md#sortedIterator) ([sortedKVIterator](#sortedKVIterator)).
+
+Peak memory consumption can be monitored using [peakMemory](#peakMemory) performance metric.
 
 ## Demo
 
