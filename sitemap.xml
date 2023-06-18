@@ -6,11 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/AggUtils/</loc>
-         <lastmod>2023-06-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/AggregatingAccumulator/</loc>
          <lastmod>2023-06-18</lastmod>
          <changefreq>daily</changefreq>
@@ -732,6 +727,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/aggregations/</loc>
+         <lastmod>2023-06-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/aggregations/AggUtils/</loc>
          <lastmod>2023-06-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
