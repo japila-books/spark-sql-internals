@@ -22,7 +22,7 @@
 * <span id="peakMemory"> `peakMemory` [SQLMetric](../SQLMetric.md)
 * <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
 * <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](../SQLMetric.md)
-* <span id="numTasksFallBacked"> `numTasksFallBacked` [SQLMetric](../SQLMetric.md)
+* [numTasksFallBacked](#numTasksFallBacked) metric
 
 `TungstenAggregationIterator` is created when:
 
@@ -41,6 +41,14 @@ When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetri
 The metrics are displayed as part of [HashAggregateExec](../physical-operators/HashAggregateExec.md) aggregate physical operator (e.g. in web UI in [Details for Query](../ui/SQLTab.md#ExecutionPage)).
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
+
+### number of sort fallback tasks { #numTasksFallBacked }
+
+`TungstenAggregationIterator` is given **number of sort fallback tasks** [SQLMetric](../SQLMetric.md) when [created](#creating-instance).
+
+The metric is [number of sort fallback tasks](../physical-operators/HashAggregateExec.md#numTasksFallBacked) metric of the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
+
+The metric is incremented only when `TungstenAggregationIterator` is requested to [fall back to sort-based aggregation](#switchToSortBasedAggregation).
 
 ## <span id="next"> Next UnsafeRow
 
@@ -182,6 +190,36 @@ With no [grouping expressions](#groupingExpressions), `processInputs` generates 
 
 In the end, for every `InternalRow` in the [inputIter](#inputIter), `processInputs` [processRow](AggregationIterator.md#processRow) one by one (with the same aggregation buffer).
 
+### Falling Back to Sort-Based Aggregation { #switchToSortBasedAggregation }
+
+```scala
+switchToSortBasedAggregation(): Unit
+```
+
+!!! note "Procedure"
+    `switchToSortBasedAggregation` returns `Unit` (_nothing_) and whatever happens inside stays inside (just like in Las Vegas, _doesn't it?!_ 😉)
+
+`switchToSortBasedAggregation` prints out the following INFO message to the logs:
+
+```text
+falling back to sort based aggregation.
+```
+
+`switchToSortBasedAggregation` initializes the [sortBasedProcessRow](#sortBasedProcessRow) to be [generateProcessRow](AggregationIterator.md#generateProcessRow) with the `newExpressions`, `newFunctions`, `newInputAttributes`:
+
+* `newExpressions` is this [AggregateExpressions](#aggregateExpressions) with the [AggregateExpression](../expressions/AggregateExpression.md)s in `Partial` or `Complete` [aggregation mode](../expressions/AggregateExpression.md#mode)s changed to `PartialMerge` or `Final`, respectively
+* `newFunctions` is [initializeAggregateFunctions](#initializeAggregateFunctions) with the `newExpressions` and `startingInputBufferOffset` as `0`
+* `newInputAttributes` is the [inputAggBufferAttributes](../expressions/AggregateFunction.md#inputAggBufferAttributes) of the `newFunctions` aggregate functions
+
+`switchToSortBasedAggregation` initializes the [sortedKVIterator](#sortedKVIterator) to be the [KVSorterIterator](UnsafeKVExternalSorter.md#sortedIterator) of this [UnsafeKVExternalSorter](#externalSorter).
+
+`switchToSortBasedAggregation` pre-loads the first key-value pair from the sorted iterator (to make [hasNext](#hasNext) idempotent).
+`switchToSortBasedAggregation` requests this [UnsafeKVExternalSorter](#sortedKVIterator) if there is [next element](KVSorterIterator.md#next) and stores the answer in this [sortedInputHasNewGroup](#sortedInputHasNewGroup).
+
+If this [sortedInputHasNewGroup](#sortedInputHasNewGroup) is enabled (`true`), `switchToSortBasedAggregation`...FIXME
+
+In the end, `switchToSortBasedAggregation` turns this [sortBased](#sortBased) flag on and increments this [numTasksFallBacked](#numTasksFallBacked) metric.
+
 ## Demo
 
 ```text
@@ -217,3 +255,16 @@ val f = mpRDD.iterator(_, _)
 import org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
 // FIXME How to show that TungstenAggregationIterator is used?
 ```
+
+## Logging
+
+Enable `ALL` logging level for `org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator` logger to see what happens inside.
+
+Add the following line to `conf/log4j2.properties`:
+
+```text
+logger.TungstenAggregationIterator.name = org.apache.spark.sql.execution.aggregate.TungstenAggregationIterator
+logger.TungstenAggregationIterator.level = all
+```
+
+Refer to [Logging](../spark-logging.md).

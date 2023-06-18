@@ -91,6 +91,13 @@ Number of groups (per partition) that (depending on the number of partitions and
 
 ### number of sort fallback tasks { #numTasksFallBacked }
 
+This metric is managed entirely by a [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md#numTasksFallBacked).
+
+Indicates how many tasks (that used [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) to process input rows for aggregates) switched (_fell back_) to [sort-based aggregation](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation)
+
+!!! note "Number of Input Rows in Partition Matters"
+    Not every task will use [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) and may even have a chance to fall back to [sort-based aggregation](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
+
 ### peak memory { #peakMemory }
 
 ### spill size { #spillSize }
