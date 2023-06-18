@@ -2,7 +2,51 @@
 
 `TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
 
-`TungstenAggregationIterator` prefers [hash-based aggregation before switching to sort-based one](#sortBased).
+`TungstenAggregationIterator` starts [hash-based before switching to sort-based aggregation](#sortBased)
+
+## Lifecycle
+
+`TungstenAggregationIterator` is created for `HashAggregateExec` physical operator when [executed](../physical-operators/HashAggregateExec.md#doExecute) with a non-empty partition or [groupingExpressions](../physical-operators/HashAggregateExec.md#groupingExpressions) are not specified.
+
+There is one `TungstenAggregationIterator` created per partition of `HashAggregateExec` physical operator.
+
+`TungstenAggregationIterator` immediately initializes the internal registries:
+
+* [Spill Size Before Execution](#spillSizeBefore)
+* [Initial Aggregation Buffer](#initialAggregationBuffer)
+* [UnsafeFixedWidthAggregationMap](#hashMap)
+* [Sort-Based Aggregation Buffer](#sortBasedAggregationBuffer)
+
+`TungstenAggregationIterator` immediately [starts processing input rows](#processInputs) and, if not [switched to sort-based aggregation](#sortBased), initializes the other internal registries:
+
+* [Aggregation Buffer KVIterator](#aggregationBufferMapIterator)
+* [mapIteratorHasNext](#mapIteratorHasNext)
+
+`TungstenAggregationIterator` frees up the memory associated with [UnsafeFixedWidthAggregationMap](#hashMap) if [the map is empty](#mapIteratorHasNext).
+
+`TungstenAggregationIterator` registers a [task completion listener](#TaskCompletionListener) that is executed at the end of this task.
+
+`TungstenAggregationIterator` is an `Iterator[UnsafeRow]` (indirectly as a [AggregationIterator](AggregationIterator.md)) and so is a data structure that allows to iterate over a sequence of `UnsafeRow`s.
+The sequence of `UnsafeRow`s is partition data.
+
+As with any `Iterator`, `TungstenAggregationIterator` comes with the following:
+
+* [hasNext](#hasNext) method for checking if there is a next row available
+* [next](#next) method which returns the next row and advances itself
+
+### TaskCompletionListener { #TaskCompletionListener }
+
+`TungstenAggregationIterator` registers a `TaskCompletionListener` that is executed at the end of this task (one per partition).
+
+When executed, the `TaskCompletionListener` updates the metrics.
+
+ Metric | Value
+--------|------
+ [peakMemory](#peakMemory) | The maximum of the [getPeakMemoryUsedBytes](UnsafeFixedWidthAggregationMap.md#getPeakMemoryUsedBytes) of this [UnsafeFixedWidthAggregationMap](#hashMap) and the [getPeakMemoryUsedBytes](UnsafeKVExternalSorter.md#getPeakMemoryUsedBytes) of this [UnsafeKVExternalSorter](#externalSorter) for sort-based aggregation, if a switch happened
+ [spillSize](#spillSize) |
+ [avgHashProbe](#avgHashProbe) | The [getAvgHashProbesPerKey](UnsafeFixedWidthAggregationMap.md#getAvgHashProbesPerKey) of this [UnsafeFixedWidthAggregationMap](#hashMap)
+
+The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.spark_core }}/executor/TaskMetrics/)) to `incPeakExecutionMemory`.
 
 ## Creating Instance
 
@@ -50,19 +94,34 @@ The metric is [number of sort fallback tasks](../physical-operators/HashAggregat
 
 The metric is incremented only when `TungstenAggregationIterator` is requested to [fall back to sort-based aggregation](#switchToSortBasedAggregation).
 
-## <span id="next"> Next UnsafeRow
+## Checking for Next Row Available { #hasNext }
 
-```scala
-next(): UnsafeRow
-```
+??? note "Iterator"
 
-`next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
+    ```scala
+    hasNext
+    ```
 
----
+    `hasNext` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#hasNext:Boolean)) abstraction.
+
+`hasNext` is enabled (`true`) when one of the following holds:
+
+1. Either this `TungstenAggregationIterator` is [sort-based](#sortBased) and [sortedInputHasNewGroup](#sortedInputHasNewGroup)
+1. Or this `TungstenAggregationIterator` is not [sort-based](#sortBased) and [mapIteratorHasNext](#mapIteratorHasNext)
+
+## Next Row { #next }
+
+??? note "Iterator"
+
+    ```scala
+    next(): UnsafeRow
+    ```
+
+    `next` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#next():A)) abstraction.
 
 `next`...FIXME
 
-### <span id="processCurrentSortedGroup"> processCurrentSortedGroup
+### processCurrentSortedGroup { #processCurrentSortedGroup }
 
 ```scala
 processCurrentSortedGroup(): Unit
@@ -82,16 +141,6 @@ Used when:
 
 * `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next), to [outputForEmptyGroupingKeyWithoutInput](#outputForEmptyGroupingKeyWithoutInput), [process input rows](#processInputs), to initialize the [aggregationBufferMapIterator](#aggregationBufferMapIterator) and [every time a partition has been processed](#TaskCompletionListener)
 
-## <span id="TaskCompletionListener"> TaskCompletionListener
-
-`TungstenAggregationIterator` registers a `TaskCompletionListener` that is executed on task completion (for every task that processes a partition).
-
-When executed (once per partition), the `TaskCompletionListener` updates the following metrics:
-
-* [peakMemory](#peakMemory)
-* [spillSize](#spillSize)
-* [avgHashProbe](#avgHashProbe)
-
 ## <span id="outputForEmptyGroupingKeyWithoutInput"> outputForEmptyGroupingKeyWithoutInput
 
 ```scala
@@ -106,17 +155,17 @@ outputForEmptyGroupingKeyWithoutInput(): UnsafeRow
 
 * `HashAggregateExec` physical operator is requested to [execute](../physical-operators/HashAggregateExec.md#doExecute) (with no input rows and grouping expressions)
 
-## <span id="sortBased"> Hash- vs Sort-Based Aggregations
+## Hash- vs Sort-Based Aggregations { #sortBased }
 
 ```scala
 sortBased: Boolean = false
 ```
 
-`TungstenAggregationIterator` creates and initializes `sortBased` flag to `false` when [created](#creating-instance).
+`TungstenAggregationIterator` turns `sortBased` flag off (`false`) when [created](#creating-instance).
 
-The flag is used to indicate whether `TungstenAggregationIterator` has [switched (fall back) to sort-based aggregation](#switchToSortBasedAggregation) while [processing input rows](#processInputs).
+The flag indicates whether `TungstenAggregationIterator` has [switched (fallen back) to sort-based aggregation](#switchToSortBasedAggregation) while [processing input rows](#processInputs).
 
-`sortBased` flag is turned on (`true`) while [switching to sort-based aggregation](#switchToSortBasedAggregation) (and the [numTasksFallBacked](#numTasksFallBacked) metric is incremented).
+`sortBased` flag is turned on (`true`) at the end of [switching to sort-based aggregation](#switchToSortBasedAggregation) (alongside incrementing [number of sort fallback tasks](#numTasksFallBacked) metric).
 
 Switching from hash-based to sort-based aggregation happens when the [external sorter](#externalSorter) is initialized (that is used for sort-based aggregation).
 
@@ -216,9 +265,26 @@ falling back to sort based aggregation.
 `switchToSortBasedAggregation` pre-loads the first key-value pair from the sorted iterator (to make [hasNext](#hasNext) idempotent).
 `switchToSortBasedAggregation` requests this [UnsafeKVExternalSorter](#sortedKVIterator) if there is [next element](KVSorterIterator.md#next) and stores the answer in this [sortedInputHasNewGroup](#sortedInputHasNewGroup).
 
-If this [sortedInputHasNewGroup](#sortedInputHasNewGroup) is enabled (`true`), `switchToSortBasedAggregation`...FIXME
+With [sortedInputHasNewGroup](#sortedInputHasNewGroup) enabled (`true`), `switchToSortBasedAggregation`...FIXME
 
-In the end, `switchToSortBasedAggregation` turns this [sortBased](#sortBased) flag on and increments this [numTasksFallBacked](#numTasksFallBacked) metric.
+In the end, `switchToSortBasedAggregation` turns this [sortBased](#sortBased) flag on and increments [number of sort fallback tasks](#numTasksFallBacked) metric.
+
+## mapIteratorHasNext { #mapIteratorHasNext }
+
+```scala
+var mapIteratorHasNext: Boolean = false
+```
+
+`mapIteratorHasNext` is an internal variable that starts disabled (`false`) when `TungstenAggregationIterator` is [created](#creating-instance).
+
+`TungstenAggregationIterator` uses `mapIteratorHasNext` for hash-based aggregation (not [sort-based](#sortBased)) to indicate whether the [aggregationBufferMapIterator](#aggregationBufferMapIterator) has next key-value pair or not when:
+
+* [Created](#creating-instance)
+* Requested for [next row](#next)
+
+`mapIteratorHasNext` is used to pre-load next key-value pair form [aggregationBufferMapIterator](#aggregationBufferMapIterator) to make [hasNext](#hasNext) idempotent.
+
+`mapIteratorHasNext` is also used to control whether to free up the memory associated with the [UnsafeFixedWidthAggregationMap](#hashMap) when still in [hash-based](#sortBased) processing mode.
 
 ## Demo
 
