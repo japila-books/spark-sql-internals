@@ -35,7 +35,7 @@ The prefix for variable names for `HashAggregateExec` operators in [CodegenSuppo
 * <span id="resultExpressions"> Output [named expressions](../expressions/NamedExpression.md)
 * <span id="child"> Child [physical operator](SparkPlan.md)
 
-`HashAggregateExec` is created (indirectly through [AggUtils.createAggregate](../AggUtils.md#createAggregate)) when:
+`HashAggregateExec` is created (indirectly through [AggUtils.createAggregate](../aggregations/AggUtils.md#createAggregate)) when:
 
 * [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is executed (to select the aggregate physical operator for an [Aggregate](../logical-operators/Aggregate.md) logical operator)
 * `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/execution-planning-strategies/StatefulAggregationStrategy)) execution planning strategy creates plan for streaming `EventTimeWatermark` or [Aggregate](../logical-operators/Aggregate.md) logical operators
@@ -123,7 +123,7 @@ requiredChildDistribution: List[Distribution]
 * [UnspecifiedDistribution](UnspecifiedDistribution.md) when undefined
 
 !!! note
-    `requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from [AggUtils.createAggregate](../AggUtils.md#createAggregate) and is undefined by default.
+    `requiredChildDistributionExpressions` is exactly `requiredChildDistributionExpressions` from [AggUtils.createAggregate](../aggregations/AggUtils.md#createAggregate) and is undefined by default.
 
     ---
 

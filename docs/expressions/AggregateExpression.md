@@ -20,7 +20,7 @@
 
 The filter is assumed undefined by default when `AggregateExpression` is [created](#apply).
 
-A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf. [AggUtils](../AggUtils.md#mayRemoveAggFilters)).
+A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf. [AggUtils](../aggregations/AggUtils.md#mayRemoveAggFilters)).
 
 `AggregationIterator` initializes predicates with `AggregateExpression`s with filters when requested to [generateProcessRow](../aggregations/AggregationIterator.md#generateProcessRow).
 

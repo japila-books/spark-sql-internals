@@ -22,7 +22,7 @@
 
 `SortAggregateExec` is created when:
 
-* `AggUtils` utility is used to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
+* `AggUtils` utility is used to [create a physical operator for aggregation](../aggregations/AggUtils.md#createAggregate)
 
 ## Performance Metrics { #metrics }
 

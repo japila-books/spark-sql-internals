@@ -63,6 +63,6 @@ The [input](#inputEncoder) and [buffer](#bufferEncoder) encoders are [resolved a
 
 `ScalaAggregator` (as a [TypedImperativeAggregate](TypedImperativeAggregate.md)) uses [aggBufferAttributes](TypedImperativeAggregate.md#aggBufferAttributes) with [BinaryType](../types/DataType.md#BinaryType).
 
-`BinaryType` is among [unsupported types of HashAggregateExec](../logical-operators/Aggregate.md#supportsHashAggregate) and makes the physical operator out of scope for [aggregation planning](../AggUtils.md#createAggregate).
+`BinaryType` is among [unsupported types of HashAggregateExec](../logical-operators/Aggregate.md#supportsHashAggregate) and makes the physical operator out of scope for [aggregation planning](../aggregations/AggUtils.md#createAggregate).
 
 Because of this `BinaryType` (in an [aggregation buffer](TypedImperativeAggregate.md#aggBufferAttributes)) `ScalaAggregator` will always be planned as [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) or [SortAggregateExec](../physical-operators/SortAggregateExec.md) physical operators.

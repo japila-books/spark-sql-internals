@@ -1613,7 +1613,7 @@ Use [SQLConf.defaultSizeInBytes](SQLConf.md#defaultSizeInBytes) method to access
 
 **spark.sql.execution.useObjectHashAggregateExec**
 
-**(internal)** [Prefers ObjectHashAggregateExec (over SortAggregateExec) for aggregation](AggUtils.md#createAggregate)
+**(internal)** [Prefers ObjectHashAggregateExec (over SortAggregateExec) for aggregation](aggregations/AggUtils.md#createAggregate)
 
 Default: `true`
 

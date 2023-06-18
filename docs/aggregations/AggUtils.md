@@ -1,6 +1,10 @@
+---
+title: AggUtils
+---
+
 # AggUtils Utility
 
-`AggUtils` is an utility for [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy.
+`AggUtils` is an utility for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy.
 
 ## <span id="planAggregateWithoutDistinct"> planAggregateWithoutDistinct
 
@@ -22,7 +26,7 @@ planAggregateWithoutDistinct(
 In the end, `planAggregateWithoutDistinct` [creates another aggregate physical operator](#createAggregate) (of the same type as before), but `aggregateExpressions` are now in `Final` mode (for final aggregations). The aggregate physical operator becomes the parent of the first aggregate operator.
 
 !!! NOTE
-    `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the [Attribute](expressions/Attribute.md)s of the `groupingExpressions`.
+    `requiredChildDistributionExpressions` for the parent aggregate physical operator for final aggregation "stage" are the [Attribute](../expressions/Attribute.md)s of the `groupingExpressions`.
 
 ## <span id="planAggregateWithOneDistinct"> planAggregateWithOneDistinct
 
@@ -50,15 +54,15 @@ createAggregate(
   child: SparkPlan): SparkPlan
 ```
 
-`createAggregate` creates one of the following [physical operator](physical-operators/SparkPlan.md)s based on the given [AggregateExpression](expressions/AggregateExpression.md)s (in the following order):
+`createAggregate` creates one of the following [physical operator](../physical-operators/SparkPlan.md)s based on the given [AggregateExpression](../expressions/AggregateExpression.md)s (in the following order):
 
-1. [HashAggregateExec](physical-operators/HashAggregateExec.md) when all the [aggBufferAttributes](expressions/AggregateFunction.md#aggBufferAttributes) (of the [AggregateFunction](expressions/AggregateFunction.md)s of the given [AggregateExpression](expressions/AggregateExpression.md)s) are [supported](logical-operators/Aggregate.md#supportsHashAggregate)
+1. [HashAggregateExec](../physical-operators/HashAggregateExec.md) when all the [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) (of the [AggregateFunction](../expressions/AggregateFunction.md)s of the given [AggregateExpression](../expressions/AggregateExpression.md)s) are [supported](../logical-operators/Aggregate.md#supportsHashAggregate)
 
-1. [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) when the following all hold:
-    * [spark.sql.execution.useObjectHashAggregateExec](configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled
-    * [Aggregate expression supported](physical-operators/ObjectHashAggregateExec.md#supportsAggregate)
+1. [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) when the following all hold:
+    * [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property is enabled
+    * [Aggregate expression supported](../physical-operators/ObjectHashAggregateExec.md#supportsAggregate)
 
-1. [SortAggregateExec](physical-operators/SortAggregateExec.md)
+1. [SortAggregateExec](../physical-operators/SortAggregateExec.md)
 
 ---
 
@@ -83,7 +87,7 @@ planStreamingAggregation(
 
 `planStreamingAggregation` is used when:
 
-* `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/StatefulAggregationStrategy)) execution planning strategy is requested to plan a logical plan of a streaming aggregation (a streaming query with [Aggregate](logical-operators/Aggregate.md) operator)
+* `StatefulAggregationStrategy` ([Spark Structured Streaming]({{ book.structured_streaming }}/StatefulAggregationStrategy)) execution planning strategy is requested to plan a logical plan of a streaming aggregation (a streaming query with [Aggregate](../logical-operators/Aggregate.md) operator)
 
 ## <span id="createStreamingAggregate"> Creating Streaming Aggregate Physical Operator
 

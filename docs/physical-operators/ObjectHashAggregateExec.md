@@ -24,13 +24,13 @@
 
 `ObjectHashAggregateExec` is created when:
 
-* `AggUtils` is requested to [create a physical operator for aggregation](../AggUtils.md#createAggregate)
+* `AggUtils` is requested to [create a physical operator for aggregation](../aggregations/AggUtils.md#createAggregate)
 
 ### <span id="isStreaming"> isStreaming Flag
 
 `ObjectHashAggregateExec` is given `isStreaming` flag when [created](#creating-instance).
 
-The `isStreaming` is always `false` but when `AggUtils` is requested to [create a streaming aggregate physical operator](../AggUtils.md#createStreamingAggregate).
+The `isStreaming` is always `false` but when `AggUtils` is requested to [create a streaming aggregate physical operator](../aggregations/AggUtils.md#createStreamingAggregate).
 
 ## <span id="metrics"> Performance Metrics
 
@@ -104,7 +104,7 @@ supportsAggregate(
 
 `supportsAggregate` is used when:
 
-* `AggUtils` utility is used to [select an aggregate physical operator](../AggUtils.md#createAggregate)
+* `AggUtils` utility is used to [select an aggregate physical operator](../aggregations/AggUtils.md#createAggregate)
 
 ## Demo
 

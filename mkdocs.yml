@@ -1030,7 +1030,6 @@ nav:
     - CatalystTypeConverters: CatalystTypeConverters.md
     - SubExprUtils: SubExprUtils.md
     - PredicateHelper: PredicateHelper.md
-    - AggUtils: AggUtils.md
     - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
     - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
     - ExtractJoinWithBuckets: ExtractJoinWithBuckets.md

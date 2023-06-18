@@ -1043,7 +1043,7 @@ Used when `CacheManager` is requested to [cache a structured query](CacheManager
 
 [spark.sql.execution.useObjectHashAggregateExec](configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec)
 
-Used when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (and uses `AggUtils` to [create an aggregation physical operator](AggUtils.md#createAggregate)).
+Used when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (and uses `AggUtils` to [create an aggregation physical operator](aggregations/AggUtils.md#createAggregate)).
 
 ## <span id="VARIABLE_SUBSTITUTE_ENABLED"><span id="variableSubstituteEnabled"><span id="spark.sql.variable.substitute"> variableSubstituteEnabled
 
