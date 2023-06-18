@@ -1,12 +1,12 @@
 # TungstenAggregationIterator
 
-`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) for [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator.
+`TungstenAggregationIterator` is an [AggregationIterator](AggregationIterator.md) that is used by [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator to [process rows](#processInputs) in a partition.
 
-`TungstenAggregationIterator` starts [hash-based before switching to sort-based aggregation](#sortBased)
+`TungstenAggregationIterator` [starts processing](#processInputs) using [UnsafeFixedWidthAggregationMap](#hashMap) in **Hash-Based Processing Mode** until it runs out of memory (starts spilling to disk) and switches to [Sort-Based Aggregation](#sortBased).
 
 ## Lifecycle
 
-`TungstenAggregationIterator` is created for `HashAggregateExec` physical operator when [executed](../physical-operators/HashAggregateExec.md#doExecute) with a non-empty partition or [groupingExpressions](../physical-operators/HashAggregateExec.md#groupingExpressions) are not specified.
+`TungstenAggregationIterator` is [created](#creating-instance) for `HashAggregateExec` physical operator when [executed](../physical-operators/HashAggregateExec.md#doExecute) with a non-empty partition or no [Grouping Keys](../physical-operators/HashAggregateExec.md#groupingExpressions).
 
 There is one `TungstenAggregationIterator` created per partition of `HashAggregateExec` physical operator.
 
@@ -24,7 +24,7 @@ There is one `TungstenAggregationIterator` created per partition of `HashAggrega
 
 `TungstenAggregationIterator` frees up the memory associated with [UnsafeFixedWidthAggregationMap](#hashMap) if [the map is empty](#mapIteratorHasNext).
 
-`TungstenAggregationIterator` registers a [task completion listener](#TaskCompletionListener) that is executed at the end of this task.
+`TungstenAggregationIterator` registers a [task completion listener](#TaskCompletionListener) to be executed at the end of this task.
 
 `TungstenAggregationIterator` is an `Iterator[UnsafeRow]` (indirectly as a [AggregationIterator](AggregationIterator.md)) and so is a data structure that allows to iterate over a sequence of `UnsafeRow`s.
 The sequence of `UnsafeRow`s is partition data.
@@ -62,11 +62,11 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 * <span id="originalInputAttributes"> Original Input [Attribute](../expressions/Attribute.md)s
 * <span id="inputIter"> Input Iterator of [InternalRow](../InternalRow.md)s (from a single partition of the [child](../physical-operators/HashAggregateExec.md#child) of the [HashAggregateExec](../physical-operators/HashAggregateExec.md) physical operator)
 * <span id="testFallbackStartsAt"> (only for testing) Optional `HashAggregateExec`'s [testFallbackStartsAt](../physical-operators/HashAggregateExec.md#testFallbackStartsAt)
-* <span id="numOutputRows"> `numOutputRows` [SQLMetric](../SQLMetric.md)
-* [peakMemory](#peakMemory) Performance Metric
-* <span id="spillSize"> `spillSize` [SQLMetric](../SQLMetric.md)
-* <span id="avgHashProbe"> `avgHashProbe` [SQLMetric](../SQLMetric.md)
-* [numTasksFallBacked](#numTasksFallBacked) Performance Metric
+* <span id="numOutputRows"> `numOutputRows` Performance Metric
+* [peak memory](#peakMemory) Performance Metric
+* <span id="spillSize"> `spillSize` Performance Metric
+* <span id="avgHashProbe"> `avgHashProbe` Performance Metric
+* [number of sort fallback tasks](#numTasksFallBacked) Performance Metric
 
 `TungstenAggregationIterator` is created when:
 
@@ -76,7 +76,7 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 
 ## Performance Metrics { #metrics }
 
-When [created](#creating-instance), `TungstenAggregationIterator` gets [SQLMetric](../SQLMetric.md)s from the [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
+When [created](#creating-instance), `TungstenAggregationIterator` gets [performance metrics](../SQLMetric.md) from the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 
