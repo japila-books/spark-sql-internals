@@ -2,6 +2,8 @@
 
 `BaseAggregateExec` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [aggregate unary physical operators](#implementations).
 
+`BaseAggregateExec` is a [PartitioningPreservingUnaryExecNode](PartitioningPreservingUnaryExecNode.md) physical operator.
+
 ## Contract
 
 ### <span id="aggregateAttributes"> Aggregate Attributes
@@ -169,3 +171,17 @@ aggregateBufferAttributes: Seq[AttributeReference]
 
 * `AggregateCodegenSupport` is requested to [supportCodegen](AggregateCodegenSupport.md#supportCodegen), [doProduceWithoutKeys](AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `BaseAggregateExec` is requested for the [produced attributes](#producedAttributes)
+
+## toSortAggregate { #toSortAggregate }
+
+```scala
+toSortAggregate: SortAggregateExec
+```
+
+`toSortAggregate`...FIXME
+
+---
+
+`toSortAggregate` is used when:
+
+* [ReplaceHashWithSortAgg](../physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization is executed (and [replaceHashAgg](../physical-optimizations/ReplaceHashWithSortAgg.md#replaceHashAgg))

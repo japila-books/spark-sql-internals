@@ -462,17 +462,108 @@ Default: `true`
 
 Use [SQLConf.exchangeReuseEnabled](SQLConf.md#exchangeReuseEnabled) for the current value
 
-## <span id="spark.sql.execution.replaceHashWithSortAgg"> execution.replaceHashWithSortAgg
+## spark.sql.execution { #spark.sql.execution }
+
+### arrow.pyspark.enabled { #spark.sql.execution.arrow.pyspark.enabled }
+
+**spark.sql.execution.arrow.pyspark.enabled**
+
+When true, make use of Apache Arrow for columnar data transfers in PySpark. This optimization applies to:
+
+1. pyspark.sql.DataFrame.toPandas
+2. pyspark.sql.SparkSession.createDataFrame when its input is a Pandas DataFrame
+
+The following data types are unsupported: BinaryType, MapType, [ArrayType](types/ArrayType.md) of TimestampType, and nested StructType.
+
+Default: `false`
+
+### arrow.pyspark.fallback.enabled { #spark.sql.execution.arrow.pyspark.fallback.enabled }
+
+**spark.sql.execution.arrow.pyspark.fallback.enabled**
+
+When true, optimizations enabled by [spark.sql.execution.arrow.pyspark.enabled](#spark.sql.execution.arrow.pyspark.enabled) will fallback automatically to non-optimized implementations if an error occurs.
+
+Default: `true`
+
+### arrow.pyspark.selfDestruct.enabled { #spark.sql.execution.arrow.pyspark.selfDestruct.enabled }
+
+**spark.sql.execution.arrow.pyspark.selfDestruct.enabled**
+
+(Experimental) When `true`, make use of Apache Arrow's self-destruct and split-blocks options for columnar data transfers in PySpark, when converting from Arrow to Pandas. This reduces memory usage at the cost of some CPU time.
+Applies to: `pyspark.sql.DataFrame.toPandas` when [spark.sql.execution.arrow.pyspark.enabled](#spark.sql.execution.arrow.pyspark.enabled) is `true`.
+
+Default: `false`
+
+Use [SQLConf.arrowPySparkSelfDestructEnabled](SQLConf.md#arrowPySparkSelfDestructEnabled) for the current value
+
+### pandas.convertToArrowArraySafely { #spark.sql.execution.pandas.convertToArrowArraySafely }
+
+**spark.sql.execution.pandas.convertToArrowArraySafely**
+
+**(internal)** When true, Arrow will perform safe type conversion when converting Pandas.
+Series to Arrow array during serialization. Arrow will raise errors when detecting unsafe type conversion like overflow. When false, disabling Arrow's type check and do type conversions anyway. This config only works for Arrow 0.11.0+.
+
+Default: `false`
+
+### pandas.udf.buffer.size { #spark.sql.execution.pandas.udf.buffer.size }
+
+**spark.sql.execution.pandas.udf.buffer.size**
+
+Same as `${BUFFER_SIZE.key}` but only applies to Pandas UDF executions. If it is not set, the fallback is `${BUFFER_SIZE.key}`. Note that Pandas execution requires more than 4 bytes. Lowering this value could make small Pandas UDF batch iterated and pipelined; however, it might degrade performance. See SPARK-27870.
+
+Default: `65536`
+
+### rangeExchange.sampleSizePerPartition { #spark.sql.execution.rangeExchange.sampleSizePerPartition }
+
+**spark.sql.execution.rangeExchange.sampleSizePerPartition**
+
+**(internal)** Number of points to sample per partition in order to determine the range boundaries for range partitioning, typically used in global sorting (without limit).
+
+Default: `100`
+
+Use [SQLConf.rangeExchangeSampleSizePerPartition](SQLConf.md#rangeExchangeSampleSizePerPartition) method to access the current value.
+
+### removeRedundantSorts { #spark.sql.execution.removeRedundantSorts }
+
+**spark.sql.execution.removeRedundantSorts**
+
+**(internal)** Whether to remove redundant physical sort node
+
+Default: `true`
+
+Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SORTS_ENABLED)
+
+### replaceHashWithSortAgg { #spark.sql.execution.replaceHashWithSortAgg }
 
 **spark.sql.execution.replaceHashWithSortAgg**
 
-**internal** Enables replacing hash aggregate operators with sort aggregate based on children's ordering
+**internal** Enables replacing hash aggregate operators (i.e., [HashAggregateExec](physical-operators/HashAggregateExec.md) and [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md)) with [SortAggregateExec](physical-operators/SortAggregateExec.md) based on children's ordering
 
 Default: `false`
 
 Used when:
 
 * [ReplaceHashWithSortAgg](physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization is executed
+
+### reuseSubquery { #spark.sql.execution.reuseSubquery }
+
+**spark.sql.execution.reuseSubquery**
+
+**(internal)** When `true`, the planner will try to find duplicated subqueries and re-use them.
+
+Default: `true`
+
+Use [SQLConf.subqueryReuseEnabled](SQLConf.md#subqueryReuseEnabled) for the current value
+
+### sortBeforeRepartition { #spark.sql.execution.sortBeforeRepartition }
+
+**spark.sql.execution.sortBeforeRepartition**
+
+**(internal)** When perform a repartition following a shuffle, the output row ordering would be nondeterministic. If some downstream stages fail and some tasks of the repartition stage retry, these tasks may generate different data, and that can lead to correctness issues. Turn on this config to insert a local sort before actually doing repartition to generate consistent repartition results. The performance of `repartition()` may go down since we insert extra local sort before it.
+
+Default: `true`
+
+Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to access the current value.
 
 ## <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> hive.filesourcePartitionFileCacheSize
 
@@ -1101,15 +1192,6 @@ Default: [spark.shuffle.spill.numElementsForceSpillThreshold](#spark.shuffle.spi
 
 Use [SQLConf.sessionWindowBufferSpillThreshold](SQLConf.md#sessionWindowBufferSpillThreshold) for the current value
 
-## <span id="spark.sql.execution.arrow.pyspark.selfDestruct.enabled"> spark.sql.execution.arrow.pyspark.selfDestruct.enabled
-
-(Experimental) When `true`, make use of Apache Arrow's self-destruct and split-blocks options for columnar data transfers in PySpark, when converting from Arrow to Pandas. This reduces memory usage at the cost of some CPU time.
-Applies to: `pyspark.sql.DataFrame.toPandas` when [spark.sql.execution.arrow.pyspark.enabled](#spark.sql.execution.arrow.pyspark.enabled) is `true`.
-
-Default: `false`
-
-Use [SQLConf.arrowPySparkSelfDestructEnabled](SQLConf.md#arrowPySparkSelfDestructEnabled) for the current value
-
 ## <span id="spark.sql.legacy.allowStarWithSingleTableIdentifierInCount"> spark.sql.legacy.allowStarWithSingleTableIdentifierInCount
 
 **(internal)** When `true`, the SQL function `count` is allowed to take a single `tblName.*` as parameter
@@ -1178,87 +1260,6 @@ Name of the default catalog
 Default: [spark_catalog](connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME)
 
 Use [SQLConf.DEFAULT_CATALOG](SQLConf.md#DEFAULT_CATALOG) to access the current value.
-
-## <span id="spark.sql.execution.arrow.pyspark.enabled"> spark.sql.execution.arrow.pyspark.enabled
-
-When true, make use of Apache Arrow for columnar data transfers in PySpark. This optimization applies to:
-
-1. pyspark.sql.DataFrame.toPandas
-2. pyspark.sql.SparkSession.createDataFrame when its input is a Pandas DataFrame
-
-The following data types are unsupported: BinaryType, MapType, [ArrayType](types/ArrayType.md) of TimestampType, and nested StructType.
-
-Default: `false`
-
-## <span id="spark.sql.execution.removeRedundantSorts"> spark.sql.execution.removeRedundantSorts
-
-**(internal)** Whether to remove redundant physical sort node
-
-Default: `true`
-
-Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SORTS_ENABLED)
-
-## <span id="spark.sql.execution.reuseSubquery"> spark.sql.execution.reuseSubquery
-
-**(internal)** When `true`, the planner will try to find duplicated subqueries and re-use them.
-
-Default: `true`
-
-Use [SQLConf.subqueryReuseEnabled](SQLConf.md#subqueryReuseEnabled) for the current value
-
-## <span id="spark.sql.execution.sortBeforeRepartition"> spark.sql.execution.sortBeforeRepartition
-
-**(internal)** When perform a repartition following a shuffle, the output row ordering would be nondeterministic. If some downstream stages fail and some tasks of the repartition stage retry, these tasks may generate different data, and that can lead to correctness issues. Turn on this config to insert a local sort before actually doing repartition to generate consistent repartition results. The performance of `repartition()` may go down since we insert extra local sort before it.
-
-Default: `true`
-
-Since: `2.1.4`
-
-Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to access the current value.
-
-## <span id="spark.sql.execution.rangeExchange.sampleSizePerPartition"> spark.sql.execution.rangeExchange.sampleSizePerPartition
-
-**(internal)** Number of points to sample per partition in order to determine the range boundaries for range partitioning, typically used in global sorting (without limit).
-
-Default: `100`
-
-Since: `2.3.0`
-
-Use [SQLConf.rangeExchangeSampleSizePerPartition](SQLConf.md#rangeExchangeSampleSizePerPartition) method to access the current value.
-
-## <span id="spark.sql.execution.arrow.pyspark.fallback.enabled"> spark.sql.execution.arrow.pyspark.fallback.enabled
-
-When true, optimizations enabled by [spark.sql.execution.arrow.pyspark.enabled](#spark.sql.execution.arrow.pyspark.enabled) will fallback automatically to non-optimized implementations if an error occurs.
-
-Default: `true`
-
-## <span id="spark.sql.execution.arrow.sparkr.enabled"> spark.sql.execution.arrow.sparkr.enabled
-
-When true, make use of Apache Arrow for columnar data transfers in SparkR.
-This optimization applies to:
-
-1. createDataFrame when its input is an R DataFrame
-2. collect
-3. dapply
-4. gapply
-
-The following data types are unsupported:
-FloatType, BinaryType, [ArrayType](types/ArrayType.md), StructType and MapType.
-
-Default: `false`
-
-## <span id="spark.sql.execution.pandas.udf.buffer.size"> spark.sql.execution.pandas.udf.buffer.size
-
-Same as `${BUFFER_SIZE.key}` but only applies to Pandas UDF executions. If it is not set, the fallback is `${BUFFER_SIZE.key}`. Note that Pandas execution requires more than 4 bytes. Lowering this value could make small Pandas UDF batch iterated and pipelined; however, it might degrade performance. See SPARK-27870.
-
-Default: `65536`
-
-## <span id="spark.sql.execution.pandas.convertToArrowArraySafely"> spark.sql.execution.pandas.convertToArrowArraySafely
-
-**(internal)** When true, Arrow will perform safe type conversion when converting Pandas.
-Series to Arrow array during serialization. Arrow will raise errors when detecting unsafe type conversion like overflow. When false, disabling Arrow's type check and do type conversions anyway. This config only works for Arrow 0.11.0+.
-
-Default: `false`
 
 ## <span id="spark.sql.statistics.histogram.enabled"> spark.sql.statistics.histogram.enabled
 

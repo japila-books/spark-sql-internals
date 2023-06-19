@@ -17,6 +17,7 @@ Aggregate Queries can be broken down to the following sections:
 
 Aggregate Queries can be fine-tuned with the following configuration properties:
 
+* [spark.sql.execution.replaceHashWithSortAgg](../configuration-properties.md#spark.sql.execution.replaceHashWithSortAgg)
 * [spark.sql.retainGroupColumns](../configuration-properties.md#spark.sql.retainGroupColumns)
 * _others_
 
@@ -520,9 +521,13 @@ The following physical optimizations use `Aggregate` logical operator:
 * [PlanDynamicPruningFilters](../physical-optimizations/PlanDynamicPruningFilters.md)
 * `RowLevelOperationRuntimeGroupFiltering`
 
+#### ReplaceHashWithSortAgg
+
+[ReplaceHashWithSortAgg](../physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization can replace [HashAggregateExec](../physical-operators/HashAggregateExec.md) and [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) physical operators with [SortAggregateExec](../physical-operators/SortAggregateExec.md) when executed with [spark.sql.execution.replaceHashWithSortAgg](../configuration-properties.md#spark.sql.execution.replaceHashWithSortAgg) configuration property and _some sorting requirements_ are met.
+
 ### Query Planning
 
-`Aggregate` logical operator is planned for execution to one of the available physical operators using [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (and [PhysicalAggregation](PhysicalAggregation.md) utility):
+[Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy is used to plan [Aggregate](../logical-operators/Aggregate.md) logical operators for execution as one of the available [BaseAggregateExec](../physical-operators/BaseAggregateExec.md) physical operators:
 
 * [HashAggregateExec](../physical-operators/HashAggregateExec.md)
 * [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
