@@ -349,6 +349,7 @@ nav:
       - ScalaAggregator: expressions/ScalaAggregator.md
       - ScalarSubquery: expressions/ScalarSubquery.md
       - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
+      - ScalaUDAF: expressions/ScalaUDAF.md
       - ScalaUDF: expressions/ScalaUDF.md
       - SimpleTypedAggregateExpression: expressions/SimpleTypedAggregateExpression.md
       - SortOrder: expressions/SortOrder.md

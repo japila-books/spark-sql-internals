@@ -178,7 +178,7 @@ aggregateBufferAttributes: Seq[AttributeReference]
 toSortAggregate: SortAggregateExec
 ```
 
-`toSortAggregate`...FIXME
+`toSortAggregate` creates a [SortAggregateExec](SortAggregateExec.md) physical operator.
 
 ---
 

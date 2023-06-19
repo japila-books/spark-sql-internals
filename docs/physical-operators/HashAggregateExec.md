@@ -1,14 +1,14 @@
 # HashAggregateExec Physical Operator
 
-`HashAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Hash-Based Aggregation**.
+`HashAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Hash-Based Aggregation** with [UnsafeRow](../UnsafeRow.md) keys and values.
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
-`HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md#aggregate-physical-operator-preference) for [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md) operators).
+`HashAggregateExec` is the [preferred aggregate physical operator](#query-planning) for [Aggregate](../logical-operators/Aggregate.md) logical operator.
 
 `HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
 
-!!! note
+??? note "Falling Back To Sort Based Aggregation"
     `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
 
     See [testFallbackStartsAt](#testFallbackStartsAt) internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
@@ -18,8 +18,6 @@
     ```text
     falling back to sort based aggregation.
     ```
-
-The prefix for variable names for `HashAggregateExec` operators in [CodegenSupport](CodegenSupport.md)-generated code is **agg**.
 
 ## Creating Instance
 
@@ -42,19 +40,21 @@ The prefix for variable names for `HashAggregateExec` operators in [CodegenSuppo
 
 ### Grouping Keys { #groupingExpressions }
 
-```scala
-groupingExpressions: Seq[NamedExpression]
-```
+??? note "BaseAggregateExec"
 
-`HashAggregateExec` can be given grouping keys ([NamedExpression](../expressions/NamedExpression.md)s) when [created](#creating-instance).
+    ```scala
+    groupingExpressions: Seq[NamedExpression]
+    ```
 
-`groupingExpressions` is part of the [BaseAggregateExec](BaseAggregateExec.md#groupingExpressions) abstraction.
+    `groupingExpressions` is part of the [BaseAggregateExec](BaseAggregateExec.md#groupingExpressions) abstraction.
+
+`HashAggregateExec` is given grouping keys ([NamedExpression](../expressions/NamedExpression.md)s) when [created](#creating-instance). There can be no grouping keys.
 
 The grouping keys are the [groupingExpressions](../logical-operators/Aggregate.md#groupingExpressions) of [Aggregate](../logical-operators/Aggregate.md), if any.
 
 ## Performance Metrics { #metrics }
 
-### avg hash probe bucket list iters { #avgHashProbe }
+### avg hash probes per key { #avgHashProbe }
 
 Average hash map probe per lookup (i.e. `numProbes` / `numKeyLookups`)
 
@@ -108,13 +108,38 @@ Used to create a [TungstenAggregationIterator](../aggregations/TungstenAggregati
 
 ### time in aggregation build { #aggTime }
 
-## <span id="requiredChildDistribution"> Required Child Distribution
+## Query Planning
 
-```scala
-requiredChildDistribution: List[Distribution]
-```
+`HashAggregateExec` is the [preferred aggregate physical operator](../execution-planning-strategies/Aggregation.md) in [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (over [ObjectHashAggregateExec](ObjectHashAggregateExec.md) and [SortAggregateExec](SortAggregateExec.md) operators).
 
-`requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
+`HashAggregateExec` is selected as the aggregate physical operator for [Aggregate](../logical-operators/Aggregate.md) logical operator when all the [AggregateFunction](#aggregateFunction)s (of the [AggregateExpressions](#aggregateExpressions)) use [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) with [mutable data types](../logical-operators/Aggregate.md#supportsHashAggregate):
+
+* `BooleanType`
+* `ByteType`
+* `CalendarIntervalType`
+* `DateType`
+* `DayTimeIntervalType`
+* `DecimalType`
+* `DoubleType`
+* `FloatType`
+* `IntegerType`
+* `LongType`
+* `NullType`
+* `ShortType`
+* `TimestampNTZType`
+* `TimestampType`
+* [UserDefinedType](../types/UserDefinedType.md) with a mutable data type
+* `YearMonthIntervalType`
+
+## Required Child Distribution { #requiredChildDistribution }
+
+??? note "SparkPlan"
+
+    ```scala
+    requiredChildDistribution: List[Distribution]
+    ```
+
+    `requiredChildDistribution` is part of the [SparkPlan](SparkPlan.md#requiredChildDistribution) abstraction.
 
 `requiredChildDistribution` varies per the input [required child distribution expressions](#requiredChildDistributionExpressions):
 
@@ -239,7 +264,9 @@ AdaptiveSparkPlan isFinalPlan=false
 
 ## Whole-Stage Code Generation
 
-As an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator, `HashAggregateExec` supports [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) only when [supportCodegen](#supportCodegen) flag is enabled.
+`HashAggregateExec` supports [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) (as an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator) only when [supportCodegen](AggregateCodegenSupport.md#supportCodegen) flag is enabled.
+
+`HashAggregateExec` is given `hashAgg` as the [variable prefix](CodegenSupport.md#variablePrefix).
 
 ### doConsumeWithKeys { #doConsumeWithKeys }
 
@@ -478,7 +505,7 @@ scala> println(execPlan.numberedTreeString)
 03       +- Range (0, 10, step=1, splits=16)
 ```
 
-Going low level. Watch your steps :)
+Going low level. Mind your steps! 😊
 
 ```scala
 import org.apache.spark.sql.catalyst.plans.logical.Aggregate
@@ -563,25 +590,3 @@ if (hashAgg_sorter_0 == null) {
   hashAgg_hashMap_0.free();
 }
 ```
-
-<!---
-## Internal Properties
-
-| aggregateBufferAttributes
-| [[aggregateBufferAttributes]] All the <<spark-sql-Expression-AggregateFunction.md#aggBufferAttributes, AttributeReferences>> of the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>
-
-| testFallbackStartsAt
-| [[testFallbackStartsAt]] Optional pair of numbers for controlled fall-back to a sort-based aggregation when the hash-based approach is unable to acquire enough memory.
-
-| declFunctions
-| [[declFunctions]] <<spark-sql-Expression-DeclarativeAggregate.md#, DeclarativeAggregate>> expressions (from the [AggregateFunctions](../expressions/AggregateExpression.md#aggregateFunction) of the <<aggregateExpressions, AggregateExpressions>>)
-
-| bufferSchema
-| [[bufferSchema]] [StructType](../types/StructType.md#fromAttributes) built from the <<aggregateBufferAttributes, aggregateBufferAttributes>>
-
-| groupingKeySchema
-| [[groupingKeySchema]] [StructType](../types/StructType.md#fromAttributes) built from the <<groupingAttributes, groupingAttributes>>
-
-| groupingAttributes
-| [[groupingAttributes]] <<expressions/NamedExpression.md#toAttribute, Attributes>> of the <<groupingExpressions, groupingExpressions>>
--->

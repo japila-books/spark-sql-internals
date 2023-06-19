@@ -51,7 +51,7 @@ Used when:
 
 * `HyperLogLogPlusPlus`
 * `PivotFirst`
-* `ScalaUDAF`
+* [ScalaUDAF](ScalaUDAF.md)
 * [TypedImperativeAggregate](TypedImperativeAggregate.md)
 
 ## <span id="CodegenFallback"> CodegenFallback

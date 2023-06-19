@@ -74,7 +74,7 @@ Used when:
 `supportCodegen` is enabled (`true`) when all the following hold:
 
 * All [aggregate buffer attributes](#aggregateBufferAttributes) are [mutable](../UnsafeRow.md#isMutable)
-* No [ImperativeAggregate](../expressions/ImperativeAggregate.md)s (among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions))
+* No [ImperativeAggregate](../expressions/ImperativeAggregate.md)s among the [AggregateFunction](../expressions/AggregateExpression.md#aggregateFunction)s (of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions))
 
 !!! note "SortAggregateExec"
     `SortAggregateExec` physical operator can change [supportCodegen](SortAggregateExec.md#supportCodegen).
@@ -92,22 +92,22 @@ Used when:
 
 `doProduce` [doProduceWithoutKeys](#doProduceWithoutKeys) when this aggregate operator has no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doProduce` [doProduceWithKeys](#doProduceWithKeys).
 
-## <span id="doConsume"> Generating Java Source Code for Consume Path
+## Generating Java Source Code for Consume Path { #doConsume }
 
-```scala
-doConsume(
-  ctx: CodegenContext,
-  input: Seq[ExprCode],
-  row: ExprCode): String
-```
+??? note "CodegenSupport"
 
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
+    ```scala
+    doConsume(
+      ctx: CodegenContext,
+      input: Seq[ExprCode],
+      row: ExprCode): String
+    ```
 
----
+    `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
 `doConsume` [doConsumeWithoutKeys](#doConsumeWithoutKeys) when this aggregate operator uses no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doConsume` [doConsumeWithKeys](#doConsumeWithKeys).
 
-### <span id="doConsumeWithoutKeys"> doConsumeWithoutKeys
+### doConsumeWithoutKeys { #doConsumeWithoutKeys }
 
 ```scala
 doConsumeWithoutKeys(
