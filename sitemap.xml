@@ -2071,6 +2071,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/expressions/ScalaUDAF/</loc>
+         <lastmod>2023-06-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/expressions/ScalaUDF/</loc>
          <lastmod>2023-06-19</lastmod>
          <changefreq>daily</changefreq>
