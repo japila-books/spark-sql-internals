@@ -522,7 +522,7 @@ The following physical optimizations use `Aggregate` logical operator:
 
 ### Query Planning
 
-`Aggregate` logical operator is planned for execution to one of the available physical operators using [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (and [PhysicalAggregation](../PhysicalAggregation.md) utility):
+`Aggregate` logical operator is planned for execution to one of the available physical operators using [Aggregation](../execution-planning-strategies/Aggregation.md) execution planning strategy (and [PhysicalAggregation](PhysicalAggregation.md) utility):
 
 * [HashAggregateExec](../physical-operators/HashAggregateExec.md)
 * [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)

@@ -1,4 +1,8 @@
-# PhysicalOperation -- Scala Extractor for Destructuring Logical Query Plans
+---
+title: PhysicalOperation
+---
+
+# PhysicalOperation Scala Extractor
 
 `PhysicalOperation` is a Scala extractor to <<unapply, destructure a logical query plan>> into a tuple with the following elements:
 

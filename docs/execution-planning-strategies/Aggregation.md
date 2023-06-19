@@ -26,7 +26,7 @@
     Cannot use a mixture of aggregate function and group aggregate pandas UDF
     ```
 
-`apply` [destructures the Aggregate logical operator](../PhysicalAggregation.md#unapply) (into a four-element tuple) with the following:
+`apply` [destructures the Aggregate logical operator](../aggregations/PhysicalAggregation.md#unapply) (into a four-element tuple) with the following:
 
 * Grouping Expressions
 * Aggregration Expressions
