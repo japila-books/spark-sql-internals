@@ -1,3 +1,7 @@
+---
+title: ApplyColumnarRulesAndInsertTransitions
+---
+
 # ApplyColumnarRulesAndInsertTransitions Physical Optimization
 
 `ApplyColumnarRulesAndInsertTransitions` is a physical query plan optimization.

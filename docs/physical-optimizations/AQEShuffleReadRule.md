@@ -1,3 +1,7 @@
+---
+title: AQEShuffleReadRule
+---
+
 # AQEShuffleReadRule Physical Optimization Rules
 
 `AQEShuffleReadRule` is an [extension](#contract) of the [Rule](../catalyst/Rule.md) abstraction for [physical optimization rules](#implementations) (`Rule[SparkPlan]`) that [supportedShuffleOrigins](#supportedShuffleOrigins).

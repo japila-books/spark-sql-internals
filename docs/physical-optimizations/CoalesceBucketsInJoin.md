@@ -1,3 +1,7 @@
+---
+title: CoalesceBucketsInJoin
+---
+
 # CoalesceBucketsInJoin Physical Optimization
 
 `CoalesceBucketsInJoin` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_).

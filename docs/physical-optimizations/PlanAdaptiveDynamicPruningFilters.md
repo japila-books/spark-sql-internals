@@ -1,3 +1,7 @@
+---
+title: PlanAdaptiveDynamicPruningFilters
+---
+
 # PlanAdaptiveDynamicPruningFilters Physical Optimization
 
 `PlanAdaptiveDynamicPruningFilters` is a physical optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md).

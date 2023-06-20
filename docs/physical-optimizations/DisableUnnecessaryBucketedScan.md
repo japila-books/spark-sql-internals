@@ -1,3 +1,7 @@
+---
+title: DisableUnnecessaryBucketedScan
+---
+
 # DisableUnnecessaryBucketedScan Physical Optimization
 
 `DisableUnnecessaryBucketedScan` is a physical query plan optimization.

@@ -1,3 +1,7 @@
+---
+title: ReuseSubquery
+---
+
 # ReuseSubquery Physical Optimization
 
 `ReuseSubquery` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` [uses](../QueryExecution.md#preparations) to optimize the physical plan of a structured query.

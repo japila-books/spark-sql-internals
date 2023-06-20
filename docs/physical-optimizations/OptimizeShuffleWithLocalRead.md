@@ -1,3 +1,7 @@
+---
+title: OptimizeShuffleWithLocalRead
+---
+
 # OptimizeShuffleWithLocalRead Adaptive Physical Optimization
 
 `OptimizeShuffleWithLocalRead` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).

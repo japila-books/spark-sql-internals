@@ -1,3 +1,7 @@
+---
+title: PlanDynamicPruningFilters
+---
+
 # PlanDynamicPruningFilters Physical Optimization
 
 `PlanDynamicPruningFilters` is a physical optimization and part of the default [physical optimizations (preparations)](../QueryExecution.md#preparations).

@@ -1,3 +1,7 @@
+---
+title: ReplaceHashWithSortAgg
+---
+
 # ReplaceHashWithSortAgg Physical Optimization
 
 `ReplaceHashWithSortAgg` is a physical optimization (`Rule[SparkPlan]`) to [replace Hash Aggregate operators with grouping keys with SortAggregateExec operators](#replaceHashAgg).

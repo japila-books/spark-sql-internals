@@ -1,3 +1,7 @@
+---
+title: ReuseExchangeAndSubquery
+---
+
 # ReuseExchangeAndSubquery Physical Optimization
 
 `ReuseExchangeAndSubquery` is a physical query optimization.

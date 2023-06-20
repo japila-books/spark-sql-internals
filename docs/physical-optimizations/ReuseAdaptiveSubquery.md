@@ -1,3 +1,7 @@
+---
+title: ReuseAdaptiveSubquery
+---
+
 # ReuseAdaptiveSubquery Physical Optimization
 
 `ReuseAdaptiveSubquery` is a physical query plan optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md).

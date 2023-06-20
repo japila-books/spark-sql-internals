@@ -1,3 +1,7 @@
+---
+title: CoalesceShufflePartitions
+---
+
 # CoalesceShufflePartitions Adaptive Physical Optimization
 
 `CoalesceShufflePartitions` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).

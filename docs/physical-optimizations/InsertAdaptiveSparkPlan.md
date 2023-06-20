@@ -1,3 +1,7 @@
+---
+title: InsertAdaptiveSparkPlan
+---
+
 # InsertAdaptiveSparkPlan Physical Optimization
 
 `InsertAdaptiveSparkPlan` is a physical query plan optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md) that [inserts AdaptiveSparkPlanExec operators](#apply).

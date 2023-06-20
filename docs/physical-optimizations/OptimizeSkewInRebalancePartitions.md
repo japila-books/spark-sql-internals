@@ -1,3 +1,7 @@
+---
+title: OptimizeSkewInRebalancePartitions
+---
+
 # OptimizeSkewInRebalancePartitions Adaptive Physical Optimization
 
 `OptimizeSkewInRebalancePartitions` is a [physical optimization](AQEShuffleReadRule.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).

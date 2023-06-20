@@ -1,3 +1,7 @@
+---
+title: CollapseCodegenStages
+---
+
 # CollapseCodegenStages Physical Optimization
 
 `CollapseCodegenStages` is a physical query optimization (aka _physical query preparation rule_ or simply _preparation rule_) that [collapses physical operators and generates a Java source code for their execution](#apply).

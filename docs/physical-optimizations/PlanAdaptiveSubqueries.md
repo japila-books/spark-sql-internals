@@ -1,3 +1,7 @@
+---
+title: PlanAdaptiveSubqueries
+---
+
 # PlanAdaptiveSubqueries Physical Optimization
 
 `PlanAdaptiveSubqueries` is a physical query plan optimization in [Adaptive Query Execution](../adaptive-query-execution/index.md).
