@@ -6,7 +6,7 @@
 
 `HashAggregateExec` is the [preferred aggregate physical operator](#query-planning) for [Aggregate](../logical-operators/Aggregate.md) logical operator.
 
-`HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over `UnsafeRows` in partitions) when [executed](#doExecute).
+`HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over [UnsafeRows](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
 
 ??? note "Falling Back To Sort Based Aggregation"
     `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
@@ -27,11 +27,11 @@
 * <span id="isStreaming"> `isStreaming` flag
 * <span id="numShufflePartitions"> Number of Shuffle Partitions (optional)
 * [Grouping Keys](#groupingExpressions)
-* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
-* <span id="aggregateAttributes"> Aggregate [attribute](../expressions/Attribute.md)s
-* <span id="initialInputBufferOffset"> Initial input buffer offset
-* <span id="resultExpressions"> Output [named expressions](../expressions/NamedExpression.md)
-* <span id="child"> Child [physical operator](SparkPlan.md)
+* <span id="aggregateExpressions"> Aggregates ([AggregateExpression](../expressions/AggregateExpression.md)s)
+* <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
+* <span id="initialInputBufferOffset"> Initial Input Buffer Offset
+* <span id="resultExpressions"> Result ([NamedExpression](../expressions/NamedExpression.md)s)
+* <span id="child"> Child [Physical Operator](SparkPlan.md)
 
 `HashAggregateExec` is created (indirectly through [AggUtils.createAggregate](../aggregations/AggUtils.md#createAggregate)) when:
 

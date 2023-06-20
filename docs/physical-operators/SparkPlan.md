@@ -239,7 +239,7 @@ Part of [prepare](#prepare)
 requiredChildDistribution: Seq[Distribution]
 ```
 
-**Required Partition Requirements** (*child output distributions*) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
+**Required Partition Requirements** (_child output distributions_) of the input data, i.e. how [child](../catalyst/TreeNode.md#children) physical operators' output is split across partitions.
 
 Defaults to a [UnspecifiedDistribution](UnspecifiedDistribution.md) for all of the [child](../catalyst/TreeNode.md#children) operators.
 
@@ -247,19 +247,26 @@ Used when:
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
-### <span id="requiredChildOrdering"> Required Child Ordering
+### Required Child Ordering { #requiredChildOrdering }
 
 ```scala
 requiredChildOrdering: Seq[Seq[SortOrder]]
 ```
 
-Specifies required sort ordering for each partition requirement (from [child](../catalyst/TreeNode.md#children) operators)
+Specifies required [sort ordering](../expressions/SortOrder.md) for every partition of the input data for this operator (from [child](../catalyst/TreeNode.md#children) operators)
 
-Defaults to no sort ordering for all of the physical operator's [child](../catalyst/TreeNode.md#children).
+Defaults to no sort ordering from all the [children](../catalyst/TreeNode.md#children) of this operator
+
+See:
+
+* [SortAggregateExec](SortAggregateExec.md#requiredChildOrdering)
+* [SortMergeJoinExec](SortMergeJoinExec.md#requiredChildOrdering)
+* [WindowExecBase](WindowExecBase.md#requiredChildOrdering)
 
 Used when:
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
+* [OptimizeSkewedJoin](../physical-optimizations/OptimizeSkewedJoin.md) physical optimization is executed (indirectly through `ValidateRequirements`)
 
 ## <span id="prepareSubqueries"> Preparing Subqueries
 

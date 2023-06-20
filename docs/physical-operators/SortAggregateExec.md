@@ -1,10 +1,16 @@
-# SortAggregateExec Aggregate Physical Operator
+---
+title: SortAggregateExec
+---
+
+# SortAggregateExec Aggregate Unary Physical Operator
 
 `SortAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Sort-Based Aggregation**.
 
 ![SortAggregateExec in web UI (Details for Query)](../images/SortAggregateExec-webui-details-for-query.png)
 
-`SortAggregateExec` is a `OrderPreservingUnaryExecNode`.
+`SortAggregateExec` uses [SortBasedAggregationIterator](../aggregations/SortBasedAggregationIterator.md) (to iterate over [UnsafeRows](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
+
+`SortAggregateExec` is an [OrderPreservingUnaryExecNode](OrderPreservingUnaryExecNode.md).
 
 ## Creating Instance
 
@@ -13,11 +19,11 @@
 * <span id="requiredChildDistributionExpressions"> Required Child Distribution
 * <span id="isStreaming"> `isStreaming` flag
 * <span id="numShufflePartitions"> Number of Shuffle Partitions
-* <span id="groupingExpressions"> Grouping [NamedExpression](../expressions/NamedExpression.md)s
-* <span id="aggregateExpressions"> [AggregateExpression](../expressions/AggregateExpression.md)s
+* <span id="groupingExpressions"> Grouping Keys ([NamedExpression](../expressions/NamedExpression.md)s)
+* <span id="aggregateExpressions"> Aggregates ([AggregateExpression](../expressions/AggregateExpression.md)s)
 * <span id="aggregateAttributes"> Aggregate [Attribute](../expressions/Attribute.md)s
 * <span id="initialInputBufferOffset"> Initial Input Buffer Offset
-* <span id="resultExpressions"> Result [NamedExpression](../expressions/NamedExpression.md)s
+* <span id="resultExpressions"> Result ([NamedExpression](../expressions/NamedExpression.md)s)
 * <span id="child"> Child [Physical Operator](SparkPlan.md)
 
 `SortAggregateExec` is created when:
@@ -26,9 +32,7 @@
 
 ## Performance Metrics { #metrics }
 
-Key             | Name (in web UI)
-----------------|--------------------------
-numOutputRows   | number of output rows
+### number of output rows { #numOutputRows }
 
 ## Whole-Stage Code Generation
 
@@ -48,13 +52,13 @@ As an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator, `
 
 * The parent [supportCodegen](AggregateCodegenSupport.md#supportCodegen) is enabled
 * [spark.sql.codegen.aggregate.sortAggregate.enabled](../configuration-properties.md#spark.sql.codegen.aggregate.sortAggregate.enabled) is enabled
-* No [groupingExpressions](#groupingExpressions)
+* No [grouping keys](#groupingExpressions)
 
 ## Demo
 
 Let's disable preference for [ObjectHashAggregateExec](ObjectHashAggregateExec.md) physical operator (using the [spark.sql.execution.useObjectHashAggregateExec](../configuration-properties.md#spark.sql.execution.useObjectHashAggregateExec) configuration property).
 
-```text
+```scala
 spark.conf.set("spark.sql.execution.useObjectHashAggregateExec", false)
 assert(spark.sessionState.conf.useObjectHashAggregation == false)
 ```
@@ -68,15 +72,20 @@ val names = Seq(
 
 Let's use [immutable](../UnsafeRow.md#isMutable) data types for `aggregateBufferAttributes` (so [HashAggregateExec](HashAggregateExec.md) physical operator will not be selected).
 
-```text
+```scala
 val q = names
   .withColumn("initial", substring('name, 0, 1))
   .groupBy('initial)
   .agg(collect_set('initial))
 ```
 
+=== "Scala"
+
+    ```scala
+    q.explain
+    ```
+
 ```text
-scala> q.explain
 == Physical Plan ==
 SortAggregate(key=[initial#160], functions=[collect_set(initial#160, 0, 0)])
 +- *(2) Sort [initial#160 ASC NULLS FIRST], false, 0
@@ -97,7 +106,19 @@ val aggregateBufferAttributes =
   aggregateExpressions.flatMap(_.aggregateFunction.aggBufferAttributes)
 ```
 
-```text
+```scala
 import org.apache.spark.sql.execution.aggregate.HashAggregateExec
 assert(HashAggregateExec.supportsAggregate(aggregateBufferAttributes) == false)
 ```
+
+## Required Child Ordering { #requiredChildOrdering }
+
+??? note "SparkPlan"
+
+    ```scala
+    requiredChildOrdering: Seq[Seq[SortOrder]]
+    ```
+
+    `requiredChildOrdering` is part of the [SparkPlan](SparkPlan.md#requiredChildOrdering) abstraction.
+
+`requiredChildOrdering` is [SortOrder](../expressions/SortOrder.md)s in `Ascending` direction for every [grouping key](#groupingExpressions).

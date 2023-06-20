@@ -650,6 +650,7 @@ nav:
       - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
       - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
       - ObjectProducerExec: physical-operators/ObjectProducerExec.md
+      - OrderPreservingUnaryExecNode: physical-operators/OrderPreservingUnaryExecNode.md
       - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
       - PartitioningPreservingUnaryExecNode: physical-operators/PartitioningPreservingUnaryExecNode.md
       - ProjectExec: physical-operators/ProjectExec.md
