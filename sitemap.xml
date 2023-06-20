@@ -4266,6 +4266,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/</loc>
+         <lastmod>2023-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-optimizations/AQEShuffleReadRule/</loc>
          <lastmod>2023-06-20</lastmod>
          <changefreq>daily</changefreq>
