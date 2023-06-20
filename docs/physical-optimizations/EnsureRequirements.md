@@ -4,19 +4,98 @@ title: EnsureRequirements
 
 # EnsureRequirements Physical Optimization
 
+`EnsureRequirements` is a physical query optimization.
+
+`EnsureRequirements` is a [Catalyst rule](../catalyst/Rule.md) for transforming [physical query plans](../physical-operators/SparkPlan.md) (`Rule[SparkPlan]`).
+
+## Creating Instance
+
+`EnsureRequirements` takes the following to be created:
+
+* <span id="optimizeOutRepartition"> `optimizeOutRepartition` flag (default: `true`)
+* [Required Distribution](#requiredDistribution)
+
+`EnsureRequirements` is created when:
+
+* `QueryExecution` is requested for the [preparations rules](../QueryExecution.md#preparations)
+* [AdaptiveSparkPlanExec](../physical-operators/AdaptiveSparkPlanExec.md) physical operator is [created](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)
+
+### Required Distribution { #requiredDistribution }
+
+```scala
+requiredDistribution: Option[Distribution] = None
+```
+
+`EnsureRequirements` can be given a [Distribution](../physical-operators/Distribution.md) when [created](#creating-instance).
+
+The `Distribution` is undefined (`None`):
+
+* By default
+* When `QueryExecution` is requested for the [preparations rules](../QueryExecution.md#preparations)
+
+The `Distribution` can only be specified for [Adaptive Query Execution](../adaptive-query-execution/index.md) (for [QueryStage Physical Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)).
+
+## Executing Rule { #apply }
+
+??? note "Rule"
+
+    ```scala
+    apply(
+      plan: SparkPlan): SparkPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+`apply` transforms the following physical operators in the query plan (up the plan tree):
+
+* [ShuffleExchangeExec](#ShuffleExchangeExec)
+* Any [SparkPlan](#SparkPlan)s
+
+With the [required distribution](#requiredDistribution) not specified, `apply` gives the new transformed plan.
+
+Otherwise, with the [required distribution](#requiredDistribution) specified, `apply`...FIXME
+
+### ShuffleExchangeExec { #ShuffleExchangeExec }
+
+`apply` transforms [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) with [HashPartitioning](../expressions/HashPartitioning.md) only beside the following requirements:
+
+* [optimizeOutRepartition](#optimizeOutRepartition) is enabled (the default)
+* [shuffleOrigin](../physical-operators/ShuffleExchangeExec.md#shuffleOrigin) is either `REPARTITION_BY_COL` or `REPARTITION_BY_NUM`
+
+### SparkPlan { #SparkPlan }
+
+`apply` transforms other [SparkPlan](../physical-operators/SparkPlan.md)s to [ensureDistributionAndOrdering](#ensureDistributionAndOrdering) of the [children](../physical-operators/SparkPlan.md#children) based on [requiredChildDistribution](../physical-operators/SparkPlan.md#requiredChildDistribution) and [requiredChildOrdering](../physical-operators/SparkPlan.md#requiredChildOrdering).
+
+While transforming the query plan, `apply` may also [reorderJoinPredicates](#reorderJoinPredicates) of [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) and [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) physical operators, if found.
+
+[ensureDistributionAndOrdering](#ensureDistributionAndOrdering) can introduce [BroadcastExchangeExec](../physical-operators/BroadcastExchangeExec.md)s or [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md)s physical operators in the query plan.
+
+### ensureDistributionAndOrdering { #ensureDistributionAndOrdering }
+
+```scala
+ensureDistributionAndOrdering(
+  parent: Option[SparkPlan],
+  originalChildren: Seq[SparkPlan],
+  requiredChildDistributions: Seq[Distribution],
+  requiredChildOrderings: Seq[Seq[SortOrder]],
+  shuffleOrigin: ShuffleOrigin): Seq[SparkPlan]
+```
+
+`ensureDistributionAndOrdering` is...FIXME
+
+## OptimizeSkewedJoin { #OptimizeSkewedJoin }
+
+`EnsureRequirements` is used to create a [OptimizeSkewedJoin](OptimizeSkewedJoin.md) physical optimization.
+
+<!---
+## Review Me
+
 [[apply]]
-`EnsureRequirements` is a *physical query optimization* (aka _physical query preparation rule_ or simply _preparation rule_) that `QueryExecution` [uses](../QueryExecution.md#preparations) to optimize the physical plan of a structured query by transforming the following physical operators (up the plan tree):
+`EnsureRequirements` is a *physical query optimization* that optimizes the physical plans by transforming the following physical operators:
 
 . Removes two adjacent ShuffleExchangeExec.md[ShuffleExchangeExec] physical operators if the child partitioning scheme guarantees the parent's partitioning
 
 . For other non-``ShuffleExchangeExec`` physical operators, <<ensureDistributionAndOrdering, ensures partition distribution and ordering>> (possibly adding new physical operators, e.g. BroadcastExchangeExec.md[BroadcastExchangeExec] and ShuffleExchangeExec.md[ShuffleExchangeExec] for distribution or SortExec.md[SortExec] for sorting)
-
-Technically, `EnsureRequirements` is just a catalyst/Rule.md[Catalyst rule] for transforming SparkPlan.md[physical query plans], i.e. `Rule[SparkPlan]`.
-
-`EnsureRequirements` is part of [preparations](../QueryExecution.md#preparations) batch of physical query plan rules and is executed when `QueryExecution` is requested for the [optimized physical query plan](../QueryExecution.md#executedPlan) (i.e. in *executedPlan* phase of a query execution).
-
-[[conf]]
-`EnsureRequirements` takes a [SQLConf](../SQLConf.md) when created.
 
 [source, scala]
 ----
@@ -26,14 +105,6 @@ val sparkPlan = q.queryExecution.sparkPlan
 import org.apache.spark.sql.execution.exchange.EnsureRequirements
 val plan = EnsureRequirements(spark.sessionState.conf).apply(sparkPlan)
 ----
-
-=== [[createPartitioning]] `createPartitioning` Internal Method
-
-CAUTION: FIXME
-
-=== [[defaultNumPreShufflePartitions]] `defaultNumPreShufflePartitions` Internal Method
-
-CAUTION: FIXME
 
 ## <span id="ensureDistributionAndOrdering"> Enforcing Partition Requirements (Distribution and Ordering) of Physical Operator
 
@@ -75,14 +146,4 @@ NOTE: At this point in `ensureDistributionAndOrdering` the required child distri
 In the end, `ensureDistributionAndOrdering` [sets the new children](../catalyst/TreeNode.md#withNewChildren) for the input `operator`.
 
 `ensureDistributionAndOrdering` is used when `EnsureRequirements` physical optimization is [executed](#apply).
-
-=== [[reorderJoinPredicates]] `reorderJoinPredicates` Internal Method
-
-[source, scala]
-----
-reorderJoinPredicates(plan: SparkPlan): SparkPlan
-----
-
-`reorderJoinPredicates`...FIXME
-
-NOTE: `reorderJoinPredicates` is used when...FIXME
+-->
