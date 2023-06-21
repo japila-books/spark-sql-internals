@@ -65,7 +65,7 @@ create(
 create(
   expr: Expression): UnsafeProjection
 create(
-  exprs: Seq[Expression]): UnsafeProjection
+  exprs: Seq[Expression]): UnsafeProjection // (1)!
 create(
   exprs: Seq[Expression],
   inputSchema: Seq[Attribute]): UnsafeProjection
@@ -73,4 +73,20 @@ create(
   schema: StructType): UnsafeProjection
 ```
 
-`create` [creates an UnsafeProjection](CodeGeneratorWithInterpretedFallback.md#createObject) for the given [BoundReference](BoundReference.md)s.
+1. The main `create` that the other variants depend on
+
+`create` [creates an UnsafeProjection](CodeGeneratorWithInterpretedFallback.md#createObject) for the given [Expression](Expression.md)s.
+
+---
+
+`create` is used when:
+
+* `ExpressionEncoder` is requested to [create a serializer](../ExpressionEncoder.md#apply)
+* `V2Aggregator` is requested for an `inputProjection`
+* [SerializeFromObjectExec](../physical-operators/SerializeFromObjectExec.md) physical operator is executed
+* `SortExec` physical operator is requested to [create an UnsafeExternalRowSorter](../physical-operators/SortExec.md#createSorter)
+* `HashAggregateExec` physical operator is requested to [create a hash map](../physical-operators/HashAggregateExec.md#createHashMap) and [getEmptyAggregationBuffer](../physical-operators/HashAggregateExec.md#getEmptyAggregationBuffer)
+* `AggregationIterator` is [created](../aggregations/AggregationIterator.md#groupingProjection) and requested to [generateResultProjection](../aggregations/AggregationIterator.md#generateResultProjection)
+* `TungstenAggregationIterator` is requested to [create an aggregation buffer](../aggregations/TungstenAggregationIterator.md#createNewAggregationBuffer)
+* `ScalaAggregator` is requested for the [inputProjection](ScalaAggregator.md#inputProjection)
+* _others_
