@@ -776,11 +776,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/aggregations/demo-multi-dimensional-aggregations/</loc>
-         <lastmod>2023-06-21</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/avro/</loc>
          <lastmod>2023-06-21</lastmod>
          <changefreq>daily</changefreq>
@@ -1627,6 +1622,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/demo/connecting-spark-sql-to-hive-metastore/</loc>
+         <lastmod>2023-06-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/demo/demo-multi-dimensional-aggregations/</loc>
          <lastmod>2023-06-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
