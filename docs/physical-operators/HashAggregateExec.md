@@ -1,15 +1,17 @@
+---
+title: HashAggregateExec
+---
+
 # HashAggregateExec Physical Operator
 
-`HashAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Hash-Based Aggregation** with [UnsafeRow](../UnsafeRow.md) keys and values.
+`HashAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Hash-Based Aggregation** (with [UnsafeRow](../UnsafeRow.md) keys and values) that uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over [UnsafeRow](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
 
 ![HashAggregateExec in web UI (Details for Query)](../images/HashAggregateExec-webui-details-for-query.png)
 
 `HashAggregateExec` is the [preferred aggregate physical operator](#query-planning) for [Aggregate](../logical-operators/Aggregate.md) logical operator.
 
-`HashAggregateExec` uses [TungstenAggregationIterator](../aggregations/TungstenAggregationIterator.md) (to iterate over [UnsafeRows](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
-
-??? note "Falling Back To Sort Based Aggregation"
-    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based approach is unable to acquire enough memory](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
+??? note "Falling Back To Sort-Based Aggregation"
+    `HashAggregateExec` uses `TungstenAggregationIterator` that can (theoretically) [switch to a sort-based aggregation when the hash-based processing mode is unable to acquire enough memory](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation).
 
     See [testFallbackStartsAt](#testFallbackStartsAt) internal property and [spark.sql.TungstenAggregate.testFallbackStartsAt](../configuration-properties.md#spark.sql.TungstenAggregate.testFallbackStartsAt) configuration property.
 

@@ -4,11 +4,9 @@ title: SortAggregateExec
 
 # SortAggregateExec Aggregate Unary Physical Operator
 
-`SortAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Sort-Based Aggregation**.
+`SortAggregateExec` is an [AggregateCodegenSupport](AggregateCodegenSupport.md) physical operator for **Sort-Based Aggregation** that uses [SortBasedAggregationIterator](../aggregations/SortBasedAggregationIterator.md) (to iterate over [UnsafeRow](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
 
 ![SortAggregateExec in web UI (Details for Query)](../images/SortAggregateExec-webui-details-for-query.png)
-
-`SortAggregateExec` uses [SortBasedAggregationIterator](../aggregations/SortBasedAggregationIterator.md) (to iterate over [UnsafeRows](../UnsafeRow.md)s in partitions) when [executed](#doExecute).
 
 `SortAggregateExec` is an [OrderPreservingUnaryExecNode](OrderPreservingUnaryExecNode.md).
 

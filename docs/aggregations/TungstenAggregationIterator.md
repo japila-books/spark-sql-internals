@@ -76,7 +76,7 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 
 ## Performance Metrics { #metrics }
 
-When [created](#creating-instance), `TungstenAggregationIterator` gets [performance metrics](../SQLMetric.md) from the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator being executed.
+`TungstenAggregationIterator` is given the [performance metrics](../SQLMetric.md) of the owning [HashAggregateExec](../physical-operators/HashAggregateExec.md#metrics) aggregate physical operator when [created](#creating-instance).
 
 * [numOutputRows](#numOutputRows) is used when `TungstenAggregationIterator` is requested for the [next UnsafeRow](#next) (and it [has one](#hasNext))
 

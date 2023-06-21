@@ -96,19 +96,21 @@ initializeAggregateFunctions(
 * `ObjectAggregationIterator` is requested for the [mergeAggregationBuffers](ObjectAggregationIterator.md#mergeAggregationBuffers)
 * `TungstenAggregationIterator` is requested to [switchToSortBasedAggregation](TungstenAggregationIterator.md#switchToSortBasedAggregation)
 
-## <span id="generateOutput"> generateOutput
+## Generate Output Function { #generateOutput }
 
 ```scala
 generateOutput: (UnsafeRow, InternalRow) => UnsafeRow
 ```
 
-When [created](#creating-instance), `AggregationIterator` [creates a ResultProjection function](#generateResultProjection).
+`AggregationIterator` [creates a ResultProjection function](#generateResultProjection) when [created](#creating-instance).
 
-`generateOutput` is used when:
+`generateOutput` is used by the [aggregate iterators](#implementations) when they are requested for the next element (aggregate result) and generate an output for empty grouping with no input.
 
-* `ObjectAggregationIterator` is requested for the [next element](ObjectAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
-* `SortBasedAggregationIterator` is requested for the [next element](SortBasedAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
-* `TungstenAggregationIterator` is requested for the [next element](TungstenAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
+Aggregate Iterators | Operations
+--------------------|-----------
+ `ObjectAggregationIterator` | <ul><li>[next element](ObjectAggregationIterator.md#next)<li>[outputForEmptyGroupingKeyWithoutInput](ObjectAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)</ul>
+ `SortBasedAggregationIterator` | <ul><li>[next element](SortBasedAggregationIterator.md#next)<li>[outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)</ul>
+ `TungstenAggregationIterator` | <ul><li>[next element](TungstenAggregationIterator.md#next)<li>[outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)</ul>
 
 ### generateResultProjection { #generateResultProjection }
 
