@@ -257,6 +257,11 @@ Specifies required [sort ordering](../expressions/SortOrder.md) for every partit
 
 Defaults to no sort ordering from all the [children](../catalyst/TreeNode.md#children) of this operator
 
+!!! note "`Seq[Seq[SortOrder]]` Return Type"
+    `Seq[Seq[SortOrder]]` allows specifying [sort ordering](../expressions/SortOrder.md) per every [child](../catalyst/TreeNode.md#children) and then every partition (of every child operator's output).
+
+    In other words, for [unary physical operators](UnaryExecNode.md) there will only be a single `Seq[SortOrder]` within the top-level `Seq[...]`, if at all.
+
 See:
 
 * [SortAggregateExec](SortAggregateExec.md#requiredChildOrdering)
@@ -534,26 +539,6 @@ outputPartitioning: Partitioning
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
 * `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
-
-## <span id="outputOrdering"> Output Data Ordering Requirements
-
-```scala
-outputOrdering: Seq[SortOrder]
-```
-
-`outputOrdering` specifies the **output data ordering requirements** of the physical operator, i.e. a hint for the Spark Physical Optimizer for the sorting (ordering) of the data (within and across partitions).
-
-`outputOrdering` defaults to no ordering (`Nil`).
-
----
-
-`outputOrdering` is used when:
-
-* [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
-
-* `Dataset` is requested to [checkpoint](../spark-sql-dataset-operators.md#checkpoint)
-
-* `FileFormatWriter` is used to [write out a query result](../connectors/FileFormatWriter.md#write)
 
 ## <span id="supportsColumnar"> Checking Support for Columnar Processing
 

@@ -2,15 +2,24 @@
 
 `AliasAwareQueryOutputOrdering` is an [extension](#contract) of the [AliasAwareOutputExpression](AliasAwareOutputExpression.md) abstraction for [unary physical operators](#implementations) with [alias-aware ordering expressions](#orderingExpressions).
 
+```scala
+AliasAwareQueryOutputOrdering[T <: QueryPlan[T]]
+```
+
 ## Contract
 
-### <span id="orderingExpressions"> Ordering Expressions
+### Ordering Expressions { #orderingExpressions }
 
 ```scala
 orderingExpressions: Seq[SortOrder]
 ```
 
-[SortOrder](../expressions/SortOrder.md) expressions
+[Sort ordering](../expressions/SortOrder.md)s of this unary physical operator
+
+See:
+
+* [ProjectExec](ProjectExec.md#orderingExpressions)
+* [SortAggregateExec](SortAggregateExec.md#orderingExpressions)
 
 Used when:
 
@@ -18,15 +27,17 @@ Used when:
 
 ## Implementations
 
-* [ProjectExec](ProjectExec.md)
-* [SortAggregateExec](SortAggregateExec.md)
+* [OrderPreservingUnaryExecNode](OrderPreservingUnaryExecNode.md)
+* `OrderPreservingUnaryNode`
 
-## <span id="outputOrdering"> Output Data Ordering Requirements
+## Output Data Ordering Requirements { #outputOrdering }
 
-```scala
-outputOrdering: Seq[SortOrder]
-```
+??? note "QueryPlan"
+
+    ```scala
+    outputOrdering: Seq[SortOrder]
+    ```
+
+    `outputOrdering` is part of the [QueryPlan](../catalyst/QueryPlan.md#outputOrdering) abstraction.
 
 `outputOrdering`...FIXME
-
-`outputOrdering` is part of the [SparkPlan](SparkPlan.md#outputOrdering) abstraction.

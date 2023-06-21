@@ -110,7 +110,7 @@ When [created](#creating-instance), `AggregationIterator` [creates a ResultProje
 * `SortBasedAggregationIterator` is requested for the [next element](SortBasedAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 * `TungstenAggregationIterator` is requested for the [next element](TungstenAggregationIterator.md#next) and to [outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)
 
-### <span id="generateResultProjection"> generateResultProjection
+### generateResultProjection { #generateResultProjection }
 
 ```scala
 generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
@@ -118,7 +118,7 @@ generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 
 `generateResultProjection`...FIXME
 
-## <span id="initializeBuffer"> initializeBuffer
+## Initializing Aggregation Buffer { #initializeBuffer }
 
 ```scala
 initializeBuffer(

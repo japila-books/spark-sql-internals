@@ -33,7 +33,7 @@ The `Distribution` is undefined (`None`):
 * By default
 * When `QueryExecution` is requested for the [preparations rules](../QueryExecution.md#preparations)
 
-The `Distribution` can only be specified for [Adaptive Query Execution](../adaptive-query-execution/index.md) (for [QueryStage Physical Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)).
+The `Distribution` can only be specified for `EnsureRequirements` in [Adaptive Query Execution](../adaptive-query-execution/index.md) (for [QueryStage Physical Preparation Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)) with [distribution requirement](../physical-operators/AdaptiveSparkPlanExec.md#requiredDistribution) specified.
 
 ## Executing Rule { #apply }
 

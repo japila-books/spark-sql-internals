@@ -288,3 +288,22 @@ producedAttributes: AttributeSet
 
 * `NestedColumnAliasing` is requested to `unapply` (destructure a logical operator)
 * `QueryPlan` is requested for the [references](#references)
+
+## Output Data Ordering Requirements { #outputOrdering }
+
+```scala
+outputOrdering: Seq[SortOrder]
+```
+
+`outputOrdering` specifies the **Output Data Ordering Requirements** of this operator (as [SortOrder](../expressions/SortOrder.md)s):
+
+* For [logical operators](../logical-operators/index.md) it is global ordering of the data
+* For [physical operators](../physical-operators/index.md) it is ordering in each partition
+
+`outputOrdering` defaults to no ordering (`Nil`).
+
+---
+
+`outputOrdering` is used when:
+
+* FIXME

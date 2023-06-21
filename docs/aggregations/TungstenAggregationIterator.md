@@ -68,11 +68,11 @@ The `TaskCompletionListener` requests the `TaskMetrics` ([Spark Core]({{ book.sp
 * <span id="avgHashProbe"> `avgHashProbe` Performance Metric
 * [number of sort fallback tasks](#numTasksFallBacked) Performance Metric
 
+`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) unless [switched to a sort-based aggregation](#sortBased).
+
 `TungstenAggregationIterator` is created when:
 
 * `HashAggregateExec` physical operator is [executed](../physical-operators/HashAggregateExec.md#doExecute)
-
-`TungstenAggregationIterator` starts [processing input rows](#processInputs) and pre-loads the first key-value pair from the [UnsafeFixedWidthAggregationMap](#hashMap) unless [switched to a sort-based aggregation](#sortBased).
 
 ## Performance Metrics { #metrics }
 
@@ -107,7 +107,7 @@ The metric is set at [task completion](#TaskCompletionListener).
 ??? note "Iterator"
 
     ```scala
-    hasNext
+    hasNext: Boolean
     ```
 
     `hasNext` is part of the `Iterator` ([Scala]({{ scala.api }}/scala/collection/Iterator.html#hasNext:Boolean)) abstraction.
