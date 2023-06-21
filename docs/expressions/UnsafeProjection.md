@@ -1,14 +1,16 @@
 # UnsafeProjection
 
-`UnsafeProjection` is an [extension](#contract) of the [Projection](Projection.md) abstraction for [expressions](#implementations) that [encode InternalRows to UnsafeRows](#apply).
+`UnsafeProjection` is an [extension](#contract) of the [Projection](Projection.md) abstraction for [projection functions](#implementations) from [InternalRows to (produce) UnsafeRows](#apply).
 
 ```text
-UnsafeProjection: InternalRow =[apply]=> UnsafeRow
+UnsafeProjection: InternalRow => UnsafeRow
 ```
+
+`UnsafeProjection` is created for [code generated](#createCodeGeneratedObject) and [interpreted](#createInterpretedObject) code evaluation paths (using [UnsafeProjection](#CodeGeneratorWithInterpretedFallback) factory object).
 
 ## Contract
 
-### <span id="apply"> Encoding InternalRow as UnsafeRow
+### Encoding InternalRow as UnsafeRow { #apply }
 
 ```scala
 apply(
@@ -29,29 +31,33 @@ Encodes the given [InternalRow](../InternalRow.md) to an [UnsafeRow](../UnsafeRo
 CodeGeneratorWithInterpretedFallback[Seq[Expression], UnsafeProjection]
 ```
 
-### <span id="createCodeGeneratedObject"> createCodeGeneratedObject
+### createCodeGeneratedObject { #createCodeGeneratedObject }
 
-```scala
-createCodeGeneratedObject(
-  in: Seq[Expression]): UnsafeProjection
-```
+??? note "CodeGeneratorWithInterpretedFallback"
 
-`createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
+    ```scala
+    createCodeGeneratedObject(
+      in: Seq[Expression]): UnsafeProjection
+    ```
 
-`createCodeGeneratedObject`...FIXME
+    `createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
 
-### <span id="createInterpretedObject"> createInterpretedObject
+`createCodeGeneratedObject` [generates an UnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md#generate) for the given [Expression](Expression.md)s (possibly with [Subexpression Elimination](../subexpression-elimination.md) based on [spark.sql.subexpressionElimination.enabled](../configuration-properties.md#spark.sql.subexpressionElimination.enabled) configuration property).
 
-```scala
-createInterpretedObject(
-  in: Seq[Expression]): UnsafeProjection
-```
+### createInterpretedObject { #createInterpretedObject }
 
-`createInterpretedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createInterpretedObject) abstraction.
+??? note "CodeGeneratorWithInterpretedFallback"
 
-`createInterpretedObject`...FIXME
+    ```scala
+    createInterpretedObject(
+      in: Seq[Expression]): UnsafeProjection
+    ```
 
-## <span id="create"> create
+    `createInterpretedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createInterpretedObject) abstraction.
+
+`createInterpretedObject` creates an `UnsafeProjection` for the given [Expression](Expression.md)s.
+
+## Creating UnsafeProjection { #create }
 
 ```scala
 create(
