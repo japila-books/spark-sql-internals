@@ -1,3 +1,9 @@
+---
+title: Mult-Dimensional Aggregations
+hide:
+  - navigation
+---
+
 # Demo: Mult-Dimensional Aggregations
 
 ## GROUPING SETS { #grouping-sets }

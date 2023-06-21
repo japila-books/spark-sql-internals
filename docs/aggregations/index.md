@@ -532,3 +532,7 @@ The following physical optimizations use `Aggregate` logical operator:
 * [HashAggregateExec](../physical-operators/HashAggregateExec.md)
 * [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
 * [SortAggregateExec](../physical-operators/SortAggregateExec.md)
+
+## Demo
+
+[Demo: Mult-Dimensional Aggregations](../demo/demo-multi-dimensional-aggregations.md)
