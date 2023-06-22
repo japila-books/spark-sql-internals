@@ -34,7 +34,7 @@ A filter is used in [Partial](#Partial) and [Complete](#Complete) modes only (cf
 
 * `Partial` and `Complete` or `PartialMerge` and `Final` pairs are supported
 
-### <span id="Complete"> Complete
+### Complete { #Complete }
 
 No prefix (in [toString](#toString))
 
@@ -44,16 +44,16 @@ Used when:
 * `TungstenAggregationIterator` is requested for the [switchToSortBasedAggregation](../aggregations/TungstenAggregationIterator.md#switchToSortBasedAggregation)
 * _others_
 
-### <span id="Final"> Final
+### Final { #Final }
 
 No prefix (in [toString](#toString))
 
-### <span id="Partial"> Partial
+### Partial { #Partial }
 
 * Partial aggregation
 * `partial_` prefix (in [toString](#toString))
 
-### <span id="PartialMerge"> PartialMerge
+### PartialMerge { #PartialMerge }
 
 * `merge_` prefix (in [toString](#toString))
 

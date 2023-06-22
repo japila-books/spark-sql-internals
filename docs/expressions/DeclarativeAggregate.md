@@ -1,6 +1,10 @@
+---
+title: DeclarativeAggregate
+---
+
 # DeclarativeAggregate Expression-Based Functions
 
-`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [Catalyst Expression-based aggregate functions](#implementations) that use [Catalyst Expression](Expression.md) for evaluation.
+`DeclarativeAggregate` is an [extension](#contract) of the [AggregateFunction](AggregateFunction.md) abstraction for [expression-based aggregate functions](#implementations) that use [Catalyst Expression](Expression.md) for evaluation.
 
 `DeclarativeAggregate` is an [Unevaluable](Unevaluable.md).
 

@@ -334,6 +334,18 @@ While [switchToSortBasedAggregation](#switchToSortBasedAggregation), `TungstenAg
 
 Peak memory consumption can be monitored using [peakMemory](#peakMemory) performance metric.
 
+## Generating Result Projection { #generateResultProjection }
+
+??? note "AggregationIterator"
+
+    ```scala
+    generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
+    ```
+
+    `generateResultProjection` is part of the [AggregationIterator](AggregationIterator.md#generateResultProjection) abstraction.
+
+`generateResultProjection` uses an `UnsafeRowJoiner` for a fast(er) path (than projection) for partial aggregation (when the [aggregateExpressions](#aggregateExpressions) have [aggregation modes](../expressions/AggregateExpression.md#mode) that are neither [Final](../expressions/AggregateExpression.md#Final) nor [Complete](../expressions/AggregateExpression.md#Complete) aggregation mode).
+
 ## Demo
 
 ```text

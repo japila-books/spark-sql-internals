@@ -1,6 +1,6 @@
-# AggregationIterators
+# AggregationIterator
 
-`AggregationIterator` is an [abstraction](#contract) of [aggregation iterators](#implementations) of [UnsafeRow](../UnsafeRow.md)s.
+`AggregationIterator` is an [abstraction](#contract) of [aggregation iterators](#implementations) (of [UnsafeRow](../UnsafeRow.md)s) that are used by [aggregate physical operators](../physical-operators/BaseAggregateExec.md) to process rows in a partition.
 
 ```scala
 abstract class AggregationIterator(...)
@@ -112,13 +112,61 @@ Aggregate Iterators | Operations
  `SortBasedAggregationIterator` | <ul><li>[next element](SortBasedAggregationIterator.md#next)<li>[outputForEmptyGroupingKeyWithoutInput](SortBasedAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)</ul>
  `TungstenAggregationIterator` | <ul><li>[next element](TungstenAggregationIterator.md#next)<li>[outputForEmptyGroupingKeyWithoutInput](TungstenAggregationIterator.md#outputForEmptyGroupingKeyWithoutInput)</ul>
 
-### generateResultProjection { #generateResultProjection }
+### Generating Result Projection { #generateResultProjection }
 
 ```scala
 generateResultProjection(): (UnsafeRow, InternalRow) => UnsafeRow
 ```
 
-`generateResultProjection`...FIXME
+??? note "TungstenAggregationIterator"
+    [TungstenAggregationIterator](TungstenAggregationIterator.md) overrides [generateResultProjection](TungstenAggregationIterator.md#generateResultProjection) for partial aggregation (non-`Final` and non-`Complete` aggregate modes).
+
+`generateResultProjection` branches off based on the [aggregate modes](../expressions/AggregateExpression.md#mode) of the [aggregates](#aggregateExpressions):
+
+1. [Final and Complete](#generateResultProjection-final-complete)
+1. [Partial and PartialMerge](#generateResultProjection-partial-partialmerge)
+1. [No modes](#generateResultProjection-no-modes)
+
+!!! note "Main Differences between Aggregate Modes"
+
+    Final and Complete | Partial and PartialMerge
+    -------------------|-------------------------
+    Focus on [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)s to execute the [evaluateExpression](../expressions/DeclarativeAggregate.md#evaluateExpression)s (while the [allImperativeAggregateFunctions](#allImperativeAggregateFunctions) simply [eval](../expressions/Expression.md#eval)) | Focus on [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md)s so they can [serializeAggregateBufferInPlace](../expressions/TypedImperativeAggregate.md#serializeAggregateBufferInPlace)
+    An [UnsafeProjection](../expressions/UnsafeProjection.md) binds the [resultExpressions](#resultExpressions) to the following:<ol><li> [groupingAttributes](#groupingAttributes)<li>the [aggregateAttributes](#aggregateAttributes)</ol> | An [UnsafeProjection](../expressions/UnsafeProjection.md) binds the [groupingAttributes](#groupingAttributes) and [bufferAttributes](#bufferAttributes) to the following (repeated twice rightly):<ol><li>the [groupingAttributes](#groupingAttributes)<li>the [bufferAttributes](#bufferAttributes)</ol>
+    Uses an [UnsafeProjection](../expressions/UnsafeProjection.md) to generate an [UnsafeRow](../UnsafeRow.md) for the following:<ol><li>the current grouping key<li>the aggregate results</ol> | Uses an [UnsafeProjection](../expressions/UnsafeProjection.md) to generate an [UnsafeRow](../UnsafeRow.md) for the following:<ol><li>the current grouping key<li>the current buffer</ol>
+
+#### Final and Complete { #generateResultProjection-final-complete }
+
+For [Final](../expressions/AggregateExpression.md#Final) or [Complete](../expressions/AggregateExpression.md#Complete) modes, `generateResultProjection` does the following:
+
+1. Collects [expressions to evaluate the final value](../expressions/DeclarativeAggregate.md#evaluateExpression)s of the [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)s and `NoOp`s for the [AggregateFunction](../expressions/AggregateFunction.md)s among the [aggregateFunctions](#aggregateFunctions). `generateResultProjection` preserves the order of the evaluate expressions and `NoOp`s (so the `i`th aggregate function uses the `i`th evaluation expressions)
+1. Executes the [newMutableProjection](#newMutableProjection) with the evaluation expressions and the [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) of the [aggregateFunctions](#aggregateFunctions) to create a [MutableProjection](../expressions/MutableProjection.md)
+1. Requests the `MutableProjection` to [store the aggregate results](../expressions/MutableProjection.md#target) (of all the [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)s) in a `SpecificInternalRow`
+1. [Creates an UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [resultExpressions](#resultExpressions) and the [groupingAttributes](#groupingAttributes) with the [aggregateAttributes](#aggregateAttributes) (for the input schema)
+1. Initializes the `UnsafeProjection` with the [partIndex](#partIndex)
+
+In the end, `generateResultProjection` creates a result projection function that does the following:
+
+1. Generates results for all expression-based aggregate functions (using the `MutableProjection` with the given `currentBuffer`)
+1. Generates results for all [imperative aggregate functions](#allImperativeAggregateFunctions)
+1. Uses the `UnsafeProjection` to generate an [UnsafeRow](../UnsafeRow.md) with the aggregate results for the current grouping key and the aggregate results
+
+#### Partial and PartialMerge { #generateResultProjection-partial-partialmerge }
+
+For [Partial](../expressions/AggregateExpression.md#Partial) or [PartialMerge](../expressions/AggregateExpression.md#PartialMerge) modes, `generateResultProjection` does the following:
+
+1. [Creates an UnsafeProjection](../expressions/UnsafeProjection.md#create) for the [groupingAttributes](#groupingAttributes) with the [aggBufferAttributes](../expressions/AggregateFunction.md#aggBufferAttributes) of the [aggregateFunctions](#aggregateFunctions)
+1. Initializes the `UnsafeProjection` with the [partIndex](#partIndex)
+1. Collects the [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md)s from the [aggregateFunctions](#aggregateFunctions) (as they store a generic object in an aggregation buffer, and require calling serialization before shuffling)
+
+In the end, `generateResultProjection` creates a result projection function that does the following:
+
+1. Requests the [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md)s (from the [aggregateFunctions](#aggregateFunctions)) to [serializeAggregateBufferInPlace](../expressions/TypedImperativeAggregate.md#serializeAggregateBufferInPlace) with the given `currentBuffer`
+1. Uses the `UnsafeProjection` to generate an [UnsafeRow](../UnsafeRow.md) with the current grouping key and buffer
+
+#### No Modes { #generateResultProjection-no-modes }
+
+For no aggregate modes, `generateResultProjection`...FIXME
 
 ## Initializing Aggregation Buffer { #initializeBuffer }
 
