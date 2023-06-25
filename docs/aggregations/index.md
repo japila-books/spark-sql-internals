@@ -13,6 +13,10 @@ Aggregate Queries can be broken down to the following sections:
 
 [Whole-Stage Code Generation](../whole-stage-code-generation/index.md) is supported by [AggregateCodegenSupport](../physical-operators/AggregateCodegenSupport.md) physical operators only with [supportCodegen](../physical-operators/AggregateCodegenSupport.md#supportCodegen) flag enabled.
 
+## Adaptive Query Execution
+
+[Adaptive Query Execution](../adaptive-query-execution/index.md) uses [ReplaceHashWithSortAgg](../physical-optimizations/ReplaceHashWithSortAgg.md) physical optimization among the [queryStagePreparationRules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules).
+
 ## Configuration Properties
 
 Aggregate Queries can be fine-tuned with the following configuration properties:

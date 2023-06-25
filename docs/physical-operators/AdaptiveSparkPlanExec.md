@@ -612,25 +612,42 @@ With `loggerAndBatchName` specified, `applyPhysicalRules` executes the rules and
 * `AdaptiveSparkPlanExec` physical operator is created (and initializes the [initialPlan](#initialPlan)), is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan), [newQueryStage](#newQueryStage), [reOptimize](#reOptimize)
 * [InsertAdaptiveSparkPlan](../physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
-## <span id="withFinalPlanUpdate"> withFinalPlanUpdate
+## withFinalPlanUpdate { #withFinalPlanUpdate }
 
 ```scala
 withFinalPlanUpdate[T](
   fun: SparkPlan => T): T
 ```
 
-`withFinalPlanUpdate` executes the given `fun` with the [adaptively-optimized physical query plan](#getFinalPhysicalPlan) and returns the result (of type `T`). `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
+`withFinalPlanUpdate` executes the given `fun` with the [adaptively-optimized physical query plan](#getFinalPhysicalPlan) and returns the result (of type `T`).
+
+In the meantime, `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
 
 ---
 
 `withFinalPlanUpdate` is a helper method for `AdaptiveSparkPlanExec` when requested for the following:
 
-* [executeCollect](#executeCollect)
-* [executeTake](#executeTake)
-* [executeTail](#executeTail)
 * [doExecute](#doExecute)
 * [doExecuteColumnar](#doExecuteColumnar)
 * [doExecuteBroadcast](#doExecuteBroadcast)
+* [executeCollect](#executeCollect)
+* [executeTake](#executeTake)
+* [executeTail](#executeTail)
+* [finalPhysicalPlan](#finalPhysicalPlan)
+
+## finalPhysicalPlan { #finalPhysicalPlan }
+
+```scala
+finalPhysicalPlan: SparkPlan
+```
+
+`finalPhysicalPlan` is [withFinalPlanUpdate](#withFinalPlanUpdate) with `identity` function (which boils down to [getFinalPhysicalPlan](#getFinalPhysicalPlan)).
+
+---
+
+`finalPhysicalPlan` is used when:
+
+* `FileFormatWriter` is requested to [write out](../connectors/FileFormatWriter.md#write)
 
 ## Logging
 

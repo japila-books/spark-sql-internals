@@ -90,7 +90,83 @@ Used when:
 
     `doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
 
-`doProduce` [doProduceWithoutKeys](#doProduceWithoutKeys) when this aggregate operator has no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doProduce` [doProduceWithKeys](#doProduceWithKeys).
+With no [grouping keys](BaseAggregateExec.md#groupingExpressions), `doProduce` [doProduceWithoutKeys](#doProduceWithoutKeys). Otherwise, `doProduce` [doProduceWithKeys](#doProduceWithKeys).
+
+### doProduceWithoutKeys { #doProduceWithoutKeys }
+
+```scala
+doProduceWithoutKeys(
+  ctx: CodegenContext): String
+```
+
+`doProduceWithoutKeys` takes the [DeclarativeAggregate](../expressions/DeclarativeAggregate.md)s of the [AggregateExpressions](BaseAggregateExec.md#aggregateExpressions) for the [expressions to initialize empty aggregation buffers](../expressions/DeclarativeAggregate.md#initialValues).
+
+`doProduceWithoutKeys`...FIXME
+
+#### Demo
+
+Not only does the following query uses no groping keys, but also no aggregate functions.
+
+```scala
+val q = spark.range(4).groupBy().agg(lit(1))
+```
+
+```text
+scala> q.explain
+warning: 1 deprecation (since 2.13.3); for details, enable `:setting -deprecation` or `:replay -deprecation`
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[], functions=[])
+   +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=174]
+      +- HashAggregate(keys=[], functions=[])
+         +- Project
+            +- Range (0, 4, step=1, splits=16)
+```
+
+```scala
+import org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec
+val aqe = q.queryExecution.executedPlan.collectFirst { case asp: AdaptiveSparkPlanExec => asp }.get
+```
+
+```scala
+assert(aqe.isFinalPlan == false)
+```
+
+```scala
+aqe.execute()
+```
+
+```scala
+assert(aqe.isFinalPlan == true)
+```
+
+```text
+scala> println(q.queryExecution.explainString(mode = org.apache.spark.sql.execution.CodegenMode))
+Found 2 WholeStageCodegen subtrees.
+== Subtree 1 / 2 (maxMethodCodeSize:282; maxConstantPoolSize:193(0.29% used); numInnerClasses:0) ==
+*(1) HashAggregate(keys=[], functions=[], output=[])
++- *(1) Project
+   +- *(1) Range (0, 4, step=1, splits=16)
+
+Generated code:
+/* 001 */ public Object generate(Object[] references) {
+/* 002 */   return new GeneratedIteratorForCodegenStage1(references);
+/* 003 */ }
+/* 004 */
+/* 005 */ // codegenStageId=1
+/* 006 */ final class GeneratedIteratorForCodegenStage1 extends org.apache.spark.sql.execution.BufferedRowIterator {
+/* 007 */   private Object[] references;
+/* 008 */   private scala.collection.Iterator[] inputs;
+/* 009 */   private boolean hashAgg_initAgg_0;
+/* 010 */   private boolean range_initRange_0;
+/* 011 */   private long range_nextIndex_0;
+/* 012 */   private TaskContext range_taskContext_0;
+/* 013 */   private InputMetrics range_inputMetrics_0;
+/* 014 */   private long range_batchEnd_0;
+/* 015 */   private long range_numElementsTodo_0;
+/* 016 */   private org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[] range_mutableStateArray_0 = new org.apache.spark.sql.catalyst.expressions.codegen.UnsafeRowWriter[1];
+...
+```
 
 ## Generating Java Source Code for Consume Path { #doConsume }
 
@@ -105,7 +181,7 @@ Used when:
 
     `doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
 
-`doConsume` [doConsumeWithoutKeys](#doConsumeWithoutKeys) when this aggregate operator uses no [grouping keys](BaseAggregateExec.md#groupingExpressions). Otherwise, `doConsume` [doConsumeWithKeys](#doConsumeWithKeys).
+With no [grouping keys](BaseAggregateExec.md#groupingExpressions), `doConsume` [doConsumeWithoutKeys](#doConsumeWithoutKeys). Otherwise, `doConsume` [doConsumeWithKeys](#doConsumeWithKeys).
 
 ### doConsumeWithoutKeys { #doConsumeWithoutKeys }
 
