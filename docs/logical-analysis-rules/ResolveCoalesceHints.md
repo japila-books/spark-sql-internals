@@ -1,6 +1,6 @@
 # ResolveCoalesceHints Logical Resolution Rule
 
-`ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply).
+`ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with the following hint names:
 
 Hint Name | Arguments | Logical Operator
 ----------|-----------|-----------------
@@ -21,12 +21,16 @@ Hint Name | Arguments | Logical Operator
 
 `ResolveCoalesceHints` is created when [Logical Analyzer](../Analyzer.md) is requested for the [batches of rules](../Analyzer.md#batches).
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
-```scala
-apply(
-  plan: LogicalPlan): LogicalPlan
-```
+??? note "Rule"
+
+    ```scala
+    apply(
+      plan: LogicalPlan): LogicalPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 `apply` resolves [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operators with the following hint names (case-insensitive).
 
@@ -36,8 +40,6 @@ Hint Name | Trigger
  `REBALANCE` | [createRebalance](#createRebalance)
  `REPARTITION` | [createRepartition](#createRepartition) (with `shuffle` on)
  `REPARTITION_BY_RANGE` | [createRepartitionByRange](#createRepartitionByRange)
-
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 ### <span id="createRebalance"> createRebalance
 

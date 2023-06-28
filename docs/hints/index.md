@@ -1,12 +1,33 @@
-# Hint Framework
+# Hints (SQL)
 
-Structured queries can be optimized using **Hint Framework** that allows for [specifying query hints](#specifying-query-hints).
+Structured queries can be optimized using **hints**.
 
-**Query hints** allow for annotating a query and give a hint to the query optimizer how to optimize logical plans. This can be very useful when the query optimizer cannot make optimal decision, e.g. with respect to join methods due to conservativeness or the lack of proper statistics.
+Hints annotate a query and give a hint to the query optimizer how to optimize logical plans. This can be very useful when the query optimizer cannot make optimal decision (e.g., with respect to join methods due to conservativeness or the lack of proper statistics).
 
-Spark SQL supports [COALESCE and REPARTITION](#coalesce-repartition-hints) and [BROADCAST](#broadcast-hints) hints. All remaining unresolved hints are silently removed from a query plan at [analysis](#spark-analyzer).
+Since SQL has no sense of partitioning (e.g., using `DataFrame.repartition`), the hints let express this "need" declaratively in SQL.
 
-Hint Framework was added in [Apache Spark 2.2](https://issues.apache.org/jira/browse/SPARK-20857).
+Spark SQL supports [COALESCE and REPARTITION](#coalesce-repartition-hints) and [BROADCAST](#broadcast-hints) hints.
+
+All unresolved hints are removed from a query plan at [analysis](#spark-analyzer).
+
+## ResolveCoalesceHints { #ResolveCoalesceHints }
+
+[ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical resolution rule is responsible for resolving the following hint names:
+
+Hint Name | Arguments | Logical Operator
+----------|-----------|-----------------
+ `COALESCE` | Number of partitions | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` off / `false`)
+ `REBALANCE` | | [RebalancePartitions](../logical-operators/RebalancePartitions.md)
+ `REPARTITION` | Number of partitions alone or like `REPARTITION_BY_RANGE` | [Repartition](../logical-operators/RepartitionOperation.md#Repartition) (with `shuffle` on / `true`)
+ `REPARTITION_BY_RANGE` | Column names with an optional number of partitions (default: [spark.sql.shuffle.partitions](../configuration-properties.md#spark.sql.shuffle.partitions) configuration property) | [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)
+
+```sql
+SELECT c1, count(1)
+FROM (
+  SELECT /*+ REBALANCE(c1, n) */ c1, 1 as n FROM v
+  ) t
+GROUP BY c1
+```
 
 ## Specifying Query Hints
 
@@ -14,26 +35,34 @@ Hints are defined using [Dataset.hint](../spark-sql-dataset-operators.md#hint) o
 
 ### Dataset API
 
-```text
-val q = spark.range(1).hint(name = "myHint", 100, true)
-val plan = q.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 'UnresolvedHint myHint, [100, true]
-01 +- Range (0, 1, step=1, splits=Some(8))
-```
+=== "Scala"
 
-### SQL
+    ```scala
+    val q = spark.range(1).hint(name = "myHint", 100, true)
+    val plan = q.queryExecution.logical
+    println(plan.numberedTreeString)
+    ```
 
-```text
-val q = sql("SELECT /*+ myHint (100, true) */ 1")
-val plan = q.queryExecution.logical
-scala> println(plan.numberedTreeString)
-00 'UnresolvedHint myHint, [100, true]
-01 +- 'Project [unresolvedalias(1, None)]
-02    +- OneRowRelation
-```
+    ```text
+    00 'UnresolvedHint myHint, [100, true]
+    01 +- Range (0, 1, step=1, splits=Some(8))
+    ```
 
-## <span id="sql-hints"> SELECT SQL Statements With Hints
+=== "SQL"
+
+    ```scala
+    val q = sql("SELECT /*+ myHint (100, true) */ 1")
+    val plan = q.queryExecution.logical
+    scala> println(plan.numberedTreeString)
+    ```
+
+    ```text
+    00 'UnresolvedHint myHint, [100, true]
+    01 +- 'Project [unresolvedalias(1, None)]
+    02    +- OneRowRelation
+    ```
+
+## Hints in SELECT Statements { #sql-hints }
 
 `SELECT` SQL statement supports query hints as comments in SQL query that Spark SQL [translates](../sql/AstBuilder.md#withHints) into a [UnresolvedHint](../logical-operators/UnresolvedHint.md) unary logical operator.
 
@@ -101,9 +130,7 @@ scala> println(plan.numberedTreeString)
 [Logical Analyzer](../Analyzer.md) uses the following logical rules to resolve [UnresolvedHint](../logical-operators/UnresolvedHint.md) logical operators:
 
 * [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md)
-
 * [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md)
-
 * `RemoveAllHints` (to remove all `UnresolvedHint` operators left unresolved)
 
 The order of executing the above rules matters.
@@ -156,3 +183,7 @@ scala> println(plan.numberedTreeString)
 00 'UnresolvedHint myHint, [100, true]
 01 +- LocalRelation <empty>, [a#0, b#1, c#2]
 ```
+
+## Learn More
+
+* [SPARK-20857](https://issues.apache.org/jira/browse/SPARK-20857)
