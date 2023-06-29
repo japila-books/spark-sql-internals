@@ -4,21 +4,26 @@
 
 `InjectRuntimeFilter` is part of [InjectRuntimeFilter](../SparkOptimizer.md#InjectRuntimeFilter) fixed-point batch of rules.
 
-## <span id="apply"> Executing Rule
+!!! note "Noop"
+    `InjectRuntimeFilter` is a _noop_ (and does nothing) for the following cases:
 
-```scala
-apply(
-  plan: LogicalPlan): LogicalPlan
-```
+    1. The [query plan to optimize](#apply) is a correlated `Subquery` (to be rewritten into a join later)
+    1. Neither [spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled) nor [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) are enabled
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+## Executing Rule { #apply }
 
----
+??? note "Rule"
 
-`apply` [tryInjectRuntimeFilter](#tryInjectRuntimeFilter) unless one of the following holds (and the rule is a _noop_):
+    ```scala
+    apply(
+      plan: LogicalPlan): LogicalPlan
+    ```
 
-* The given query plan is a correlated `Subquery`
-* [spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled) and [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) are both disabled
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+`apply` [tryInjectRuntimeFilter](#tryInjectRuntimeFilter).
+
+With [runtimeFilterSemiJoinReductionEnabled](../SQLConf.md#runtimeFilterSemiJoinReductionEnabled) enabled and the new and the initial logical plans not equal, `apply` executes [RewritePredicateSubquery](RewritePredicateSubquery.md) logical optimization with the new logical plan. Otherwise, `apply` returns the new logical plan.
 
 ## <span id="tryInjectRuntimeFilter"> tryInjectRuntimeFilter
 
@@ -33,7 +38,7 @@ When _some_ requirements are met, `tryInjectRuntimeFilter` [injectFilter](#injec
 
 `tryInjectRuntimeFilter` uses [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) configuration property.
 
-## <span id="injectFilter"> Injecting Filter Operator
+## Injecting Filter Operator { #injectFilter }
 
 ```scala
 injectFilter(
@@ -45,7 +50,7 @@ injectFilter(
 
 `injectFilter`...FIXME
 
-## <span id="injectBloomFilter"> Injecting BloomFilter
+### Injecting BloomFilter { #injectBloomFilter }
 
 ```scala
 injectBloomFilter(
@@ -55,12 +60,36 @@ injectBloomFilter(
   filterCreationSidePlan: LogicalPlan): LogicalPlan
 ```
 
-`injectBloomFilter`...FIXME
-
 !!! note
-    `injectBloomFilter` is used when `InjectRuntimeFilter` is requested to [inject a Filter](#injectFilter) with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration properties enabled.
+    `injectBloomFilter` returns the given `filterApplicationSidePlan` logical plan unchanged when the [size](../cost-based-optimization/Statistics.md#sizeInBytes) of the given `filterCreationSidePlan` logical plan is above [spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold).
 
-## <span id="injectInSubqueryFilter"> injectInSubqueryFilter
+`injectBloomFilter` creates a [BloomFilterAggregate](../expressions/BloomFilterAggregate.md) expression with a `XxHash64` child expression (with the given `filterCreationSideExp` expression), possibly with the [row count](../cost-based-optimization/Statistics.md#rowCount) statistic of the given `filterCreationSidePlan` logical plan, if available.
+
+`injectBloomFilter` creates an `Alias` expression with the [BloomFilterAggregate converted to an AggregateExpression](../expressions/AggregateFunction.md#toAggregateExpression) and **bloomFilter** name.
+
+`injectBloomFilter` creates an [Aggregate](../logical-operators/Aggregate.md) logical operator with the following:
+
+* No Grouping Expressions
+* Aliased `BloomFilterAggregate`
+* The given `filterCreationSidePlan` logical plan
+
+`injectBloomFilter` executes the following logical optimization on the `Aggregate` logical operator:
+
+1. [ColumnPruning](../logical-optimizations/ColumnPruning.md)
+1. [ConstantFolding](../logical-optimizations/ConstantFolding.md)
+
+`injectBloomFilter` creates a [ScalarSubquery](../expressions/ScalarSubquery.md) expression with the `Aggregate` logical operator (`bloomFilterSubquery`).
+
+`injectBloomFilter` creates a [BloomFilterMightContain](../expressions/BloomFilterMightContain.md) expression.
+
+Property | Value
+---------|------
+[bloomFilterExpression](../expressions/BloomFilterMightContain.md#bloomFilterExpression) | The [ScalarSubquery](../expressions/ScalarSubquery.md)
+[valueExpression](../expressions/BloomFilterMightContain.md#valueExpression) | A `XxHash64` expression with the given `filterApplicationSideExp`
+
+In the end, `injectBloomFilter` creates a `Filter` logical operator with the `BloomFilterMightContain` expression and the given `filterApplicationSidePlan` logical plan.
+
+### injectInSubqueryFilter { #injectInSubqueryFilter }
 
 ```scala
 injectInSubqueryFilter(
@@ -74,3 +103,20 @@ injectInSubqueryFilter(
 
 !!! note
     `injectInSubqueryFilter` is used when `InjectRuntimeFilter` is requested to [injectFilter](#injectFilter) with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration properties disabled (unlike [spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled)).
+
+## isSimpleExpression { #isSimpleExpression }
+
+```scala
+isSimpleExpression(
+  e: Expression): Boolean
+```
+
+`isSimpleExpression` is an [Expression](../expressions/Expression.md) that does not [contains any of the following patterns](../catalyst/TreePatternBits.md#containsAnyPattern):
+
+* `PYTHON_UDF`
+* `SCALA_UDF`
+* `INVOKE`
+* `JSON_TO_STRUCT`
+* `LIKE_FAMLIY`
+* `REGEXP_EXTRACT_FAMILY`
+* `REGEXP_REPLACE`

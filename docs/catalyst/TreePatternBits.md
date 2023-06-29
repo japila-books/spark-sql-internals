@@ -1,14 +1,21 @@
 # TreePatternBits
 
-`TreePatternBits` is an [abstraction](#contract) of [trees](#implementations) with the [treePatternBits](#treePatternBits).
+`TreePatternBits` is an [abstraction](#contract) of [tree nodes](#implementations) with the [treePatternBits](#treePatternBits).
 
 ## Contract
 
-### <span id="treePatternBits"> treePatternBits
+### Tree Pattern Bits { #treePatternBits }
 
 ```scala
 treePatternBits: BitSet
 ```
+
+See:
+
+* [Literal](../expressions/Literal.md#treePatternBits)
+* [PlanExpression](../expressions/PlanExpression.md#treePatternBits)
+* [QueryPlan](../catalyst/QueryPlan.md#treePatternBits)
+* [TreeNode](../catalyst/TreeNode.md#treePatternBits)
 
 Used when:
 
@@ -18,7 +25,7 @@ Used when:
 
 * [TreeNode](TreeNode.md)
 
-## <span id="containsPattern"> containsPattern
+## containsPattern { #containsPattern }
 
 ```scala
 containsPattern(
@@ -26,3 +33,12 @@ containsPattern(
 ```
 
 `containsPattern` is `true` when the given `TreePattern` is among the [treePatternBits](#treePatternBits).
+
+## containsAnyPattern { #containsAnyPattern }
+
+```scala
+containsAnyPattern(
+  patterns: TreePattern*): Boolean
+```
+
+`containsAnyPattern` checks if any of the given [TreePattern](TreePattern.md)s is a [pattern of this TreeNode](#containsPattern).

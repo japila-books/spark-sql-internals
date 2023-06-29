@@ -845,13 +845,28 @@ Default: `true`
 
 Enables a bloom filter on one side of a shuffle join if the other side has a selective predicate (to reduce the amount of shuffle data)
 
-Default: `false`
+Default: `true`
 
 Use [SQLConf.runtimeFilterBloomFilterEnabled](SQLConf.md#runtimeFilterBloomFilterEnabled) for the current value
 
 Used when:
 
 * [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
+
+### runtime.bloomFilter.creationSideThreshold { #spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold }
+
+**spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold**
+
+Size threshold of the bloom filter creation side plan.
+Estimated size needs to be under this value to try to inject bloom filter.
+
+Default: `10MB`
+
+Use [SQLConf.runtimeFilterCreationSideThreshold](SQLConf.md#runtimeFilterCreationSideThreshold) for the current value
+
+Used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed (to [injectBloomFilter](logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter))
 
 ### runtime.bloomFilter.expectedNumItems { #spark.sql.optimizer.runtime.bloomFilter.expectedNumItems }
 

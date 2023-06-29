@@ -1,3 +1,7 @@
+---
+title: BloomFilterAggregate
+---
+
 # BloomFilterAggregate Expression
 
 `BloomFilterAggregate` is a [TypedImperativeAggregate](TypedImperativeAggregate.md) expression that uses [BloomFilter](../BloomFilter.md) for an [aggregation buffer](#createAggregationBuffer).
@@ -49,27 +53,27 @@ The `numBits` value [must be a positive value](#checkInputDataTypes).
 
 `numBits` is used to [create an aggregation buffer](#createAggregationBuffer).
 
-## <span id="createAggregationBuffer"> Creating Aggregation Buffer
+## Creating Aggregation Buffer { #createAggregationBuffer }
 
-```scala
-createAggregationBuffer(): BloomFilter
-```
+??? note "TypedImperativeAggregate"
 
-`createAggregationBuffer` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#createAggregationBuffer) abstraction.
+    ```scala
+    createAggregationBuffer(): BloomFilter
+    ```
 
----
+    `createAggregationBuffer` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#createAggregationBuffer) abstraction.
 
 `createAggregationBuffer` [creates a BloomFilter](../BloomFilter.md#create) (with the [estimated number of items](#estimatedNumItems) and the [number of bits](#numBits)).
 
-## <span id="eval"> Interpreted Execution
+## Interpreted Execution { #eval }
 
-```scala
-eval(
-  buffer: BloomFilter): Any
-```
+??? note "TypedImperativeAggregate"
 
-`eval` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#eval) abstraction.
+    ```scala
+    eval(
+      buffer: BloomFilter): Any
+    ```
 
----
+    `eval` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#eval) abstraction.
 
 `eval`...FIXME

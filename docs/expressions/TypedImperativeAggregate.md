@@ -2,13 +2,18 @@
 
 `TypedImperativeAggregate` is an [extension](#contract) of the [ImperativeAggregate](ImperativeAggregate.md) abstraction for [typed ImperativeAggregates](#implementations).
 
+??? note "Scala Definition"
+    `TypedImperativeAggregate[T]` is a type constructor ([Scala]({{ scala.spec }}/03-types.html#type-constructors)) with `T` type parameter.
+
 ## Contract
 
-### <span id="createAggregationBuffer"> Creating Aggregation Buffer
+### Creating Aggregation Buffer { #createAggregationBuffer }
 
 ```scala
 createAggregationBuffer(): T
 ```
+
+Creates an empty aggregation buffer object (to [initialize](#initialize) this `TypedImperativeAggregate`)
 
 See:
 
@@ -20,7 +25,7 @@ Used when:
 * `Collect` is requested to [deserialize](Collect.md#deserialize)
 * `TypedImperativeAggregate` is requested to [initialize](#initialize)
 
-### <span id="deserialize"> Deserializing
+### Deserializing { #deserialize }
 
 ```scala
 deserialize(
@@ -36,7 +41,7 @@ Used when:
 
 * `TypedImperativeAggregate` is requested to [merge](#merge-Expression)
 
-### <span id="eval"> Interpreted Execution
+### Interpreted Execution { #eval }
 
 ```scala
 eval(
@@ -52,7 +57,7 @@ Used when:
 
 * `TypedImperativeAggregate` is requested to [execute (interpreted mode)](#eval-Expression)
 
-### <span id="merge"> merge
+### merge { #merge }
 
 ```scala
 merge(
@@ -69,7 +74,7 @@ Used when:
 
 * `TypedImperativeAggregate` is requested to [merge](#merge-Expression) and [mergeBuffersObjects](#mergeBuffersObjects)
 
-### <span id="serialize"> serialize
+### serialize { #serialize }
 
 ```scala
 serialize(
@@ -85,7 +90,7 @@ Used when:
 
 * `TypedImperativeAggregate` is requested to [serializeAggregateBufferInPlace](#serializeAggregateBufferInPlace)
 
-### <span id="update"> update
+### update { #update }
 
 ```scala
 update(
@@ -108,28 +113,28 @@ Used when:
 * [ScalaAggregator](ScalaAggregator.md)
 * _others_
 
-## <span id="eval-Expression"> Interpreted Expression Evaluation
+## Interpreted Expression Evaluation { #eval-Expression }
 
-```scala
-eval(
-  buffer: InternalRow): Any
-```
+??? note "Expression"
 
-`eval` is part of the [Expression](Expression.md#eval) abstraction.
+    ```scala
+    eval(
+      buffer: InternalRow): Any
+    ```
 
----
+    `eval` is part of the [Expression](Expression.md#eval) abstraction.
 
-`eval` [extracts the buffer object](#getBufferObject) (for the given [InternalRow](../InternalRow.md)) and [evaluates the result](#eval).
+`eval` [take the buffer object](#getBufferObject) out of the given [InternalRow](../InternalRow.md) and [evaluates the result](#eval).
 
-## <span id="aggBufferAttributes"> Aggregation Buffer Attributes
+## Aggregation Buffer Attributes { #aggBufferAttributes }
 
-```scala
-aggBufferAttributes: Seq[AttributeReference]
-```
+??? note "AggregateFunction"
 
-`aggBufferAttributes` is part of the [AggregateFunction](AggregateFunction.md#aggBufferAttributes) abstraction.
+    ```scala
+    aggBufferAttributes: Seq[AttributeReference]
+    ```
 
----
+    `aggBufferAttributes` is part of the [AggregateFunction](AggregateFunction.md#aggBufferAttributes) abstraction.
 
 `aggBufferAttributes` is a single [AttributeReference](Attribute.md):
 
@@ -137,7 +142,7 @@ aggBufferAttributes: Seq[AttributeReference]
 -------|---------
  `buf` | [BinaryType](../types/DataType.md#BinaryType)
 
-## <span id="getBufferObject"> Extracting Buffer Object
+## Accessing Buffer Object { #getBufferObject }
 
 ```scala
 getBufferObject(
@@ -157,7 +162,7 @@ getBufferObject(
 
 * `TypedImperativeAggregate` is requested to [mergeBuffersObjects](#mergeBuffersObjects), [update](#update), [merge](#merge), [eval](#eval-Expression), [serializeAggregateBufferInPlace](#serializeAggregateBufferInPlace)
 
-## <span id="anyObjectType"> ObjectType
+## ObjectType { #anyObjectType }
 
 ```scala
 anyObjectType: ObjectType

@@ -641,7 +641,7 @@ In the meantime, `withFinalPlanUpdate` [finalPlanUpdate](#finalPlanUpdate).
 finalPhysicalPlan: SparkPlan
 ```
 
-`finalPhysicalPlan` is [withFinalPlanUpdate](#withFinalPlanUpdate) with `identity` function (which boils down to [getFinalPhysicalPlan](#getFinalPhysicalPlan)).
+`finalPhysicalPlan` is [withFinalPlanUpdate](#withFinalPlanUpdate) with `identity` function (which boils down to [getFinalPhysicalPlan](#getFinalPhysicalPlan) alone).
 
 ---
 
