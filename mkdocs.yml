@@ -162,9 +162,10 @@ nav:
       - CostEvaluator: adaptive-query-execution/CostEvaluator.md
       - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
       - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
-    # "Bucketing" and "Cache Serialization" sections use awesome-pages plugin
+    # Sections under awesome-pages plugin's control
     # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
-    # Review bucketing/.pages for setup
+    # Review corresponding .pages for setup
+    - ... | bloom-filter-join/**.md
     - ... | bucketing/**.md
     - ... | cache-serialization/**.md
     - Catalog Plugin API:
@@ -960,9 +961,6 @@ nav:
   - ... | demo/**.md
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
-    - Bloom Filter:
-      - BloomFilter: BloomFilter.md
-      - BloomFilterImpl: BloomFilterImpl.md
     - JoinSelectionHelper.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md

@@ -4,7 +4,7 @@ title: BloomFilterAggregate
 
 # BloomFilterAggregate Expression
 
-`BloomFilterAggregate` is a [TypedImperativeAggregate](TypedImperativeAggregate.md) expression that uses [BloomFilter](../BloomFilter.md) for an [aggregation buffer](#createAggregationBuffer).
+`BloomFilterAggregate` is a [TypedImperativeAggregate](TypedImperativeAggregate.md) expression that uses [BloomFilter](../bloom-filter-join/BloomFilter.md) for an [aggregation buffer](#createAggregationBuffer).
 
 ## Creating Instance
 
@@ -63,7 +63,7 @@ The `numBits` value [must be a positive value](#checkInputDataTypes).
 
     `createAggregationBuffer` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#createAggregationBuffer) abstraction.
 
-`createAggregationBuffer` [creates a BloomFilter](../BloomFilter.md#create) (with the [estimated number of items](#estimatedNumItems) and the [number of bits](#numBits)).
+`createAggregationBuffer` [creates a BloomFilter](../bloom-filter-join/BloomFilter.md#create) (with the [estimated number of items](#estimatedNumItems) and the [number of bits](#numBits)).
 
 ## Interpreted Execution { #eval }
 

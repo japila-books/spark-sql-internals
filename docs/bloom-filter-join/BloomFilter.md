@@ -2,9 +2,9 @@
 
 `BloomFilter` is an [abstraction](#contract) of [bloom filters](#implementations) for the following:
 
-* [DataFrameStatFunctions.bloomFilter](DataFrameStatFunctions.md#bloomFilter) operator
-* As an [aggregation buffer](expressions/BloomFilterAggregate.md#createAggregationBuffer) in [BloomFilterAggregate](expressions/BloomFilterAggregate.md) expression
-* [BloomFilterMightContain](expressions/BloomFilterMightContain.md#bloomFilter) expression
+* [DataFrameStatFunctions.bloomFilter](../DataFrameStatFunctions.md#bloomFilter) operator
+* As an [aggregation buffer](../expressions/BloomFilterAggregate.md#createAggregationBuffer) in [BloomFilterAggregate](../expressions/BloomFilterAggregate.md) expression
+* [BloomFilterMightContain](../expressions/BloomFilterMightContain.md#bloomFilter) expression
 
 ## Contract (Subset)
 
@@ -32,7 +32,7 @@ See [BloomFilterImpl](BloomFilterImpl.md#mightContainLong)
 Used when:
 
 * `BloomFilterImpl` is requested to [mightContain](BloomFilterImpl.md#mightContain)
-* `BloomFilterMightContain` is requested to [eval](expressions/BloomFilterMightContain.md#eval) and [doGenCode](expressions/BloomFilterMightContain.md#doGenCode)
+* `BloomFilterMightContain` is requested to [eval](../expressions/BloomFilterMightContain.md#eval) and [doGenCode](../expressions/BloomFilterMightContain.md#doGenCode)
 
 ### <span id="mightContainString"> mightContainString
 
@@ -72,5 +72,5 @@ Unless the false positive probability is given, `create` uses [DEFAULT_FPP](#DEF
 
 `create` is used when:
 
-* `BloomFilterAggregate` is requested to [create an aggregation buffer](expressions/BloomFilterAggregate.md#createAggregationBuffer)
-* `DataFrameStatFunctions` is requested to [build a BloomFilter](DataFrameStatFunctions.md#buildBloomFilter)
+* `BloomFilterAggregate` is requested to [create an aggregation buffer](../expressions/BloomFilterAggregate.md#createAggregationBuffer)
+* `DataFrameStatFunctions` is requested to [build a BloomFilter](../DataFrameStatFunctions.md#buildBloomFilter)
