@@ -31,16 +31,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BloomFilter/</loc>
-         <lastmod>2023-06-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/BloomFilterImpl/</loc>
-         <lastmod>2023-06-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/CacheManager/</loc>
          <lastmod>2023-06-29</lastmod>
          <changefreq>daily</changefreq>
@@ -797,6 +787,21 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/avro/CatalystDataToAvro/</loc>
+         <lastmod>2023-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/bloom-filter-join/</loc>
+         <lastmod>2023-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/bloom-filter-join/BloomFilter/</loc>
+         <lastmod>2023-06-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/bloom-filter-join/BloomFilterImpl/</loc>
          <lastmod>2023-06-29</lastmod>
          <changefreq>daily</changefreq>
     </url>
