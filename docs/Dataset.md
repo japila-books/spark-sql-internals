@@ -1,3 +1,7 @@
+---
+title: Dataset
+---
+
 # Dataset
 
 `Dataset[T]` is a strongly-typed data structure that represents a structured query over rows of `T` type.

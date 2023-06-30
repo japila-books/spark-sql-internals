@@ -3,45 +3,65 @@
 `BloomFilter` is an [abstraction](#contract) of [bloom filters](#implementations) for the following:
 
 * [DataFrameStatFunctions.bloomFilter](../DataFrameStatFunctions.md#bloomFilter) operator
-* As an [aggregation buffer](../expressions/BloomFilterAggregate.md#createAggregationBuffer) in [BloomFilterAggregate](../expressions/BloomFilterAggregate.md) expression
+* [BloomFilterAggregate](../expressions/BloomFilterAggregate.md) expression (as an [aggregation buffer](../expressions/BloomFilterAggregate.md#createAggregationBuffer))
 * [BloomFilterMightContain](../expressions/BloomFilterMightContain.md#bloomFilter) expression
 
 ## Contract (Subset)
 
-### <span id="mightContain"> mightContain
+### bitSize { #bitSize }
+
+```java
+long bitSize()
+```
+
+See:
+
+* [BloomFilterImpl](BloomFilterImpl.md#bitSize)
+
+Used when:
+
+* `BloomFilterAggregate` is requested to [serialize a BloomFilter](../expressions/BloomFilterAggregate.md#serialize)
+
+### mightContain { #mightContain }
 
 ```java
 boolean mightContain(
   Object item)
 ```
 
-See [BloomFilterImpl](BloomFilterImpl.md#mightContain)
+See:
+
+* [BloomFilterImpl](BloomFilterImpl.md#mightContain)
 
 !!! note "Not Used"
     `mightContain` does not seem to be used (as [mightContainLong](#mightContainLong) seems to be used directly instead).
 
-### <span id="mightContainLong"> mightContainLong
+### mightContainLong { #mightContainLong }
 
 ```java
 boolean mightContainLong(
   long item)
 ```
 
-See [BloomFilterImpl](BloomFilterImpl.md#mightContainLong)
+See:
+
+* [BloomFilterImpl](BloomFilterImpl.md#mightContainLong)
 
 Used when:
 
 * `BloomFilterImpl` is requested to [mightContain](BloomFilterImpl.md#mightContain)
-* `BloomFilterMightContain` is requested to [eval](../expressions/BloomFilterMightContain.md#eval) and [doGenCode](../expressions/BloomFilterMightContain.md#doGenCode)
+* `BloomFilterMightContain` is requested to [evaluate](../expressions/BloomFilterMightContain.md#eval) and [doGenCode](../expressions/BloomFilterMightContain.md#doGenCode)
 
-### <span id="mightContainString"> mightContainString
+### mightContainString { #mightContainString }
 
 ```java
 boolean mightContainString(
   String item)
 ```
 
-See [BloomFilterImpl](BloomFilterImpl.md#mightContainString)
+See:
+
+* [BloomFilterImpl](BloomFilterImpl.md#mightContainString)
 
 Used when:
 
@@ -51,7 +71,7 @@ Used when:
 
 * [BloomFilterImpl](BloomFilterImpl.md)
 
-## <span id="create"> Creating BloomFilter
+## Creating BloomFilter { #create }
 
 ```java
 BloomFilter create(
@@ -66,7 +86,7 @@ BloomFilter create(
 
 `create` creates a [BloomFilterImpl](BloomFilterImpl.md) for the given `expectedNumItems`.
 
-Unless the false positive probability is given, `create` uses [DEFAULT_FPP](#DEFAULT_FPP) value to [determine the number of bits](#optimalNumOfBits).
+Unless the **False Positive Probability** (`fpp`) is given, `create` uses [DEFAULT_FPP](#DEFAULT_FPP) value to [determine the optimal number of bits](#optimalNumOfBits).
 
 ---
 

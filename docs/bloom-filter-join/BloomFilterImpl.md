@@ -13,15 +13,20 @@
 
 * `BloomFilter` is requested to [create a BloomFilter](BloomFilter.md#create)
 
-## <span id="mightContainLong"> mightContainLong
+## mightContainLong { #mightContainLong }
 
-```java
-boolean mightContainLong(
-  long item)
-```
+??? note "BloomFilter"
 
-`mightContainLong` is part of the [BloomFilter](BloomFilter.md#mightContainLong) abstraction.
+    ```java
+    boolean mightContainLong(
+      long item)
+    ```
 
----
+    `mightContainLong` is part of the [BloomFilter](BloomFilter.md#mightContainLong) abstraction.
 
-`mightContainLong`...FIXME
+`mightContainLong` uses `Murmur3_x86_32` to generate two hashes of the given `item` with two different seeds: `0` and the hash result of the first hashing.
+
+`mightContainLong` requests the [BitArray](#bits) for the number of bits (`bitSize`).
+
+In the end, `mightContainLong` checks out if the bit for the hashes (combined) is set (non-zero) in the [BitArray](#bits) up to [numHashFunctions](#numHashFunctions) times.
+With all the bits checked and set, `mightContainLong` is positive. Otherwise, `mightContainLong` is negative.

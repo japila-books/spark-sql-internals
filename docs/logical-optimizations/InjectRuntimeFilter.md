@@ -25,18 +25,24 @@
 
 With [runtimeFilterSemiJoinReductionEnabled](../SQLConf.md#runtimeFilterSemiJoinReductionEnabled) enabled and the new and the initial logical plans not equal, `apply` executes [RewritePredicateSubquery](RewritePredicateSubquery.md) logical optimization with the new logical plan. Otherwise, `apply` returns the new logical plan.
 
-## <span id="tryInjectRuntimeFilter"> tryInjectRuntimeFilter
+## tryInjectRuntimeFilter { #tryInjectRuntimeFilter }
 
 ```scala
 tryInjectRuntimeFilter(
   plan: LogicalPlan): LogicalPlan
 ```
 
-`tryInjectRuntimeFilter` [finds equi-joins](../ExtractEquiJoinKeys.md#unapply) in the given [LogicalPlan](../logical-operators/LogicalPlan.md).
+`tryInjectRuntimeFilter` transforms the given [LogicalPlan](../logical-operators/LogicalPlan.md) with regards to [equi-joins](../ExtractEquiJoinKeys.md#unapply).
 
-When _some_ requirements are met, `tryInjectRuntimeFilter` [injectFilter](#injectFilter) on the left side first and on the right side if on the left was not successful.
+For every equi-join, `tryInjectRuntimeFilter` [injects a runtime filter](#injectFilter) (on the left side first and on the right side if on the left was not successful) when all the following requirements are met:
 
-`tryInjectRuntimeFilter` uses [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) configuration property.
+1. A join side has no [DynamicPruningSubquery](#hasDynamicPruningSubquery) filter already
+1. A join side has no [RuntimeFilter](#hasRuntimeFilter)
+1. The left and right keys (pair-wise) are [simple expression](#isSimpleExpression)s
+1. [canPruneLeft](../JoinSelectionHelper.md#canPruneLeft) or [canPruneRight](../JoinSelectionHelper.md#canPruneRight)
+1. [filteringHasBenefit](#filteringHasBenefit)
+
+`tryInjectRuntimeFilter` tries to inject up to [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) filters.
 
 ## Injecting Filter Operator { #injectFilter }
 
@@ -48,7 +54,9 @@ injectFilter(
   filterCreationSidePlan: LogicalPlan): LogicalPlan
 ```
 
-`injectFilter`...FIXME
+With [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled), `injectFilter` [injects a filter using BloomFilter](#injectBloomFilter).
+
+Otherwise, `injectFilter` [injects a filter using InSubquery](#injectInSubqueryFilter).
 
 ### Injecting BloomFilter { #injectBloomFilter }
 

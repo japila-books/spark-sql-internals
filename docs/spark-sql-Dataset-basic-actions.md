@@ -1,3 +1,7 @@
+---
+title: Basic Actions
+---
+
 # Dataset API &mdash; Basic Actions
 
 **Basic actions** are a set of operators (_methods_) of the <<spark-sql-dataset-operators.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).

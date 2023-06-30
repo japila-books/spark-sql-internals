@@ -1,3 +1,7 @@
+---
+title: DataFrameNaFunctions
+---
+
 # DataFrameNaFunctions &mdash; Working With Missing Data
 
 `DataFrameNaFunctions` is used to work with <<methods, missing data>> in a structured query (a [DataFrame](DataFrame.md)).
