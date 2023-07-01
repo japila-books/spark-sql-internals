@@ -29,7 +29,7 @@
 initialize(): Unit
 ```
 
-!!! note "Procedure"
+!!! warning "Procedure"
     `initialize` returns `Unit` (_nothing_) and whatever happens inside stays inside (just like in Las Vegas, _doesn't it?!_ 😉)
 
 `initialize`...FIXME

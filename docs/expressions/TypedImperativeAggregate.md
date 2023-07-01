@@ -74,7 +74,7 @@ Used when:
 
 * `TypedImperativeAggregate` is requested to [merge](#merge-Expression) and [mergeBuffersObjects](#mergeBuffersObjects)
 
-### serialize { #serialize }
+### Serializing Aggregate Buffer { #serialize }
 
 ```scala
 serialize(
@@ -88,7 +88,7 @@ See:
 
 Used when:
 
-* `TypedImperativeAggregate` is requested to [serializeAggregateBufferInPlace](#serializeAggregateBufferInPlace)
+* `TypedImperativeAggregate` is requested to [serialize the aggregate buffer in-place](#serializeAggregateBufferInPlace)
 
 ### update { #update }
 
@@ -126,7 +126,7 @@ Used when:
 
 `eval` [take the buffer object](#getBufferObject) out of the given [InternalRow](../InternalRow.md) and [evaluates the result](#eval).
 
-## Aggregation Buffer Attributes { #aggBufferAttributes }
+## Aggregate Buffer Attributes { #aggBufferAttributes }
 
 ??? note "AggregateFunction"
 
@@ -142,7 +142,7 @@ Used when:
 -------|---------
  `buf` | [BinaryType](../types/DataType.md#BinaryType)
 
-## Accessing Buffer Object { #getBufferObject }
+## Extracting Aggregate Buffer Object { #getBufferObject }
 
 ```scala
 getBufferObject(
@@ -171,3 +171,25 @@ anyObjectType: ObjectType
 When created, `TypedImperativeAggregate` creates an `ObjectType` of a value of Scala `AnyRef` type.
 
 The `ObjectType` is used in [getBufferObject](#getBufferObject).
+
+## Serializing Aggregate Buffer In-Place { #serializeAggregateBufferInPlace }
+
+```scala
+serializeAggregateBufferInPlace(
+  buffer: InternalRow): Unit
+```
+
+??? warning "Procedure"
+    `serializeAggregateBufferInPlace` is a procedure (returns `Unit`) so _whatever happens inside, stays inside_ (paraphrasing the [former advertising slogan of Las Vegas, Nevada](https://idioms.thefreedictionary.com/what+happens+in+Vegas+stays+in+Vegas)).
+
+`serializeAggregateBufferInPlace` [gets the aggregate buffer](#getBufferObject) from the given `buffer` and [serializes it](#serialize).
+
+In the end, `serializeAggregateBufferInPlace` stores the serialized aggregate buffer back to the given `buffer` at [mutableAggBufferOffset](ImperativeAggregate.md#mutableAggBufferOffset).
+
+---
+
+`serializeAggregateBufferInPlace` is used when:
+
+* `AggregatingAccumulator` is requested to [withBufferSerialized](../AggregatingAccumulator.md#withBufferSerialized)
+* `AggregationIterator` is requested to [generateResultProjection](../aggregations/AggregationIterator.md#generateResultProjection)
+* `ObjectAggregationMap` is requested to [dumpToExternalSorter](../aggregations/ObjectAggregationMap.md#dumpToExternalSorter)

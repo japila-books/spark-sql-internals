@@ -20,13 +20,13 @@ title: BloomFilterAggregate
 
 * `InjectRuntimeFilter` logical optimization is requested to [inject a BloomFilter](../logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter)
 
-### <span id="estimatedNumItemsExpression"> Estimated Number of Items Expression
+### Estimated Number of Items Expression { #estimatedNumItemsExpression }
 
 `BloomFilterAggregate` can be given **Estimated Number of Items** (as an [Expression](Expression.md)) when [created](#creating-instance).
 
 Unless given, `BloomFilterAggregate` uses [spark.sql.optimizer.runtime.bloomFilter.expectedNumItems](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.expectedNumItems) configuration property.
 
-### <span id="numBitsExpression"> Number of Bits Expression
+### Number of Bits Expression { #numBitsExpression }
 
 `BloomFilterAggregate` can be given **Number of Bits** (as an [Expression](Expression.md)) when [created](#creating-instance).
 
@@ -36,7 +36,7 @@ The maximum value for the number of bits is [spark.sql.optimizer.runtime.bloomFi
 
 The number of bits expression is the [third](#third) expression (in this `TernaryLike` tree node).
 
-## <span id="numBits"> Number of Bits
+## Number of Bits { #numBits }
 
 ```scala
 numBits: Long
@@ -76,4 +76,22 @@ The `numBits` value [must be a positive value](#checkInputDataTypes).
 
     `eval` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#eval) abstraction.
 
-`eval`...FIXME
+`eval` [serializes](#serialize) the given `buffer` (unless the [cardinality](../bloom-filter-join/BloomFilter.md#cardinality) of this `BloomFilter` is `0` and `eval` returns `null`).
+
+??? note "FIXME Why does `eval` return `null`?"
+
+## Serializing Aggregate Buffer { #serialize }
+
+??? note "TypedImperativeAggregate"
+
+    ```scala
+    serialize(
+      obj: BloomFilter): Array[Byte]
+    ```
+
+    `serialize` is part of the [TypedImperativeAggregate](TypedImperativeAggregate.md#serialize) abstraction.
+
+??? note "Two `serialize`s"
+    There is another `serialize` (in `BloomFilterAggregate` companion object) that just makes unit testing easier.
+
+`serialize`...FIXME

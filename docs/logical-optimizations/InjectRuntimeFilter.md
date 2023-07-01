@@ -4,6 +4,9 @@
 
 `InjectRuntimeFilter` is part of [InjectRuntimeFilter](../SparkOptimizer.md#InjectRuntimeFilter) fixed-point batch of rules.
 
+!!! note "Runtime Filter"
+    **Runtime Filter** can be a [BloomFilter](#hasBloomFilter) (with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) enabled) or [InSubquery](#hasInSubquery) filter.
+
 !!! note "Noop"
     `InjectRuntimeFilter` is a _noop_ (and does nothing) for the following cases:
 
@@ -107,7 +110,30 @@ injectInSubqueryFilter(
   filterCreationSidePlan: LogicalPlan): LogicalPlan
 ```
 
-`injectInSubqueryFilter`...FIXME
+!!! note "The same `DataType`s"
+    `injectInSubqueryFilter` requires that the [DataType](../expressions/Expression.md#dataType)s of the given `filterApplicationSideExp` and `filterCreationSideExp` are the same.
+
+`injectInSubqueryFilter` creates an [Aggregate](../logical-operators/Aggregate.md) logical operator with the following:
+
+Property | Value
+---------|------
+[Grouping Expressions](../logical-operators/Aggregate.md#groupingExpressions) | The given `filterCreationSideExp` expression
+[Aggregate Expressions](../logical-operators/Aggregate.md#aggregateExpressions) | An `Alias` expression for the `filterCreationSideExp` expression (possibly [mayWrapWithHash](#mayWrapWithHash))
+[Child Logical Operator](../logical-operators/Aggregate.md#child) | The given `filterCreationSidePlan` expression
+
+`injectInSubqueryFilter` executes [ColumnPruning](../logical-optimizations/ColumnPruning.md) logical optimization on the `Aggregate` logical operator.
+
+Unless the `Aggregate` logical operator [canBroadcastBySize](../JoinSelectionHelper.md#canBroadcastBySize), `injectInSubqueryFilter` returns the given `filterApplicationSidePlan` logical plan (and basically throws away all the work so far).
+
+!!! note
+    `injectInSubqueryFilter` skips the `InSubquery` filter if the size of the `Aggregate` is beyond [broadcast join threshold](../JoinSelectionHelper.md#canBroadcastBySize) and the semi-join will be a shuffle join, which is not worthwhile.
+
+`injectInSubqueryFilter` creates an `InSubquery` logical operator with the following:
+
+* The given `filterApplicationSideExp` (possibly [mayWrapWithHash](#mayWrapWithHash))
+* [ListQuery](../expressions/ListQuery.md) expression with the `Aggregate`
+
+In the end, `injectInSubqueryFilter` creates a `Filter` logical operator with the `InSubquery` logical operator and the given `filterApplicationSidePlan` expression.
 
 !!! note
     `injectInSubqueryFilter` is used when `InjectRuntimeFilter` is requested to [injectFilter](#injectFilter) with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration properties disabled (unlike [spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.semiJoinReduction.enabled)).
@@ -128,3 +154,49 @@ isSimpleExpression(
 * `LIKE_FAMLIY`
 * `REGEXP_EXTRACT_FAMILY`
 * `REGEXP_REPLACE`
+
+## hasDynamicPruningSubquery { #hasDynamicPruningSubquery }
+
+```scala
+hasDynamicPruningSubquery(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  leftKey: Expression,
+  rightKey: Expression): Boolean
+```
+
+`hasDynamicPruningSubquery` checks if there is a `Filter` logical operator with a [DynamicPruningSubquery](../expressions/DynamicPruningSubquery.md) expression on the `left` or `right` side (of a join).
+
+## hasRuntimeFilter { #hasRuntimeFilter }
+
+```scala
+hasRuntimeFilter(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  leftKey: Expression,
+  rightKey: Expression): Boolean
+```
+
+`hasRuntimeFilter` checks if there is [hasBloomFilter](#hasBloomFilter) (with [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) enabled) or [hasInSubquery](#hasInSubquery) filter on the `left` or `right` side (of a join).
+
+## hasBloomFilter { #hasBloomFilter }
+
+```scala
+hasBloomFilter(
+  left: LogicalPlan,
+  right: LogicalPlan,
+  leftKey: Expression,
+  rightKey: Expression): Boolean
+```
+
+`hasBloomFilter` checks if there is [findBloomFilterWithExp](#findBloomFilterWithExp) on the `left` or `right` side (of a join).
+
+## findBloomFilterWithExp { #findBloomFilterWithExp }
+
+```scala
+findBloomFilterWithExp(
+  plan: LogicalPlan,
+  key: Expression): Boolean
+```
+
+`findBloomFilterWithExp` tries to find a `Filter` logical operator with a [BloomFilterMightContain](../expressions/BloomFilterMightContain.md) expression (and `XxHash64`) among the nodes of the given [LogicalPlan](../logical-operators/LogicalPlan.md).
