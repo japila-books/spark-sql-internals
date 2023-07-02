@@ -1,6 +1,9 @@
 # Bloom Filter Join
 
-**Bloom Filter Join** is an optimization of join queries by pre-filtering one side of a join using [BloomFilter](BloomFilter.md) or `InSubquery` predicate based on the values from the other side of the join.
+**Bloom Filter Join** is an optimization of join queries by pre-filtering one side of a join using [BloomFilter](BloomFilter.md) based on the values from the other side of the join.
+
+!!! note "Runtime Filtering"
+    Bloom Filter Join is one of the two optimizations in [Runtime Filtering](../runtime-filtering/index.md) optimization.
 
 Bloom Filter Join uses [BloomFilter](BloomFilter.md)s as runtime filters when [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration property is enabled.
 

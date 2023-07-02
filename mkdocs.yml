@@ -223,7 +223,9 @@ nav:
     - ... | metadata-columns/**.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
+    # spark-connect
     - ... | connect/**.md
+    - ... | runtime-filtering/**.md
     - ... | thrift-server/**.md
     - Statistics: new-and-noteworthy/statistics.md
     - ... | subqueries/**.md
