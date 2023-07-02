@@ -7,7 +7,7 @@
 
 Bloom Filter Join uses [BloomFilter](BloomFilter.md)s as runtime filters when [spark.sql.optimizer.runtime.bloomFilter.enabled](../configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.enabled) configuration property is enabled.
 
-Bloom Filter Join uses [InjectRuntimeFilter](../logical-optimizations/InjectRuntimeFilter.md) logical optimization to inject up to [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) filters ([BloomFilter](BloomFilter.md)s or `InSubquery`s).
+Bloom Filter Join uses [InjectRuntimeFilter](../logical-optimizations/InjectRuntimeFilter.md) logical optimization to inject up to [spark.sql.optimizer.runtimeFilter.number.threshold](../configuration-properties.md#spark.sql.optimizer.runtimeFilter.number.threshold) filters ([BloomFilter](BloomFilter.md)s or [InSubquery](../expressions/InSubquery.md)s).
 
 ??? note "SPARK-32268"
     Bloom Filter Join was introduced in [SPARK-32268]({{ spark.jira }}/SPARK-32268).

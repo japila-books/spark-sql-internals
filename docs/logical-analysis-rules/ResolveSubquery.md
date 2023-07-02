@@ -11,7 +11,7 @@
 
 * [ScalarSubquery](../expressions/ExecSubqueryExpression-ScalarSubquery.md)
 * [Exists](../expressions/Exists.md)
-* [ListQuery](../expressions/ListQuery.md) (in `InSubquery` expressions)
+* [ListQuery](../expressions/ListQuery.md) (in [InSubquery](../expressions/InSubquery.md) expressions)
 
 `ResolveSubquery` is part of [Resolution](../Analyzer.md#Resolution) rule batch of the [Logical Analyzer](../Analyzer.md).
 
@@ -79,7 +79,7 @@ resolveSubQueries(
 
 * [ScalarSubquery](../expressions/ExecSubqueryExpression-ScalarSubquery.md)
 * [Exists](../expressions/Exists.md)
-* [ListQuery](../expressions/ListQuery.md) (in `InSubquery` expressions)
+* [ListQuery](../expressions/ListQuery.md) (in [InSubquery](../expressions/InSubquery.md) expressions)
 
 `resolveSubQueries` is used when `ResolveSubquery` is [executed](#apply).
 

@@ -329,6 +329,7 @@ nav:
       - In: expressions/In.md
       - Inline: expressions/Inline.md
       - InSet: expressions/InSet.md
+      - InSubquery: expressions/InSubquery.md
       - InSubqueryExec: expressions/InSubqueryExec.md
       - InterpretedProjection: expressions/InterpretedProjection.md
       - JsonToStructs: expressions/JsonToStructs.md

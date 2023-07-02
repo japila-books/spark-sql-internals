@@ -763,7 +763,7 @@ Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md) for the 
 HAVING booleanExpression
 ```
 
-### <span id="withHints"> withHints
+### withHints { #withHints }
 
 Adds an [UnresolvedHint](../logical-operators/UnresolvedHint.md) for `/*+ hint */` in `SELECT` queries.
 
@@ -826,17 +826,19 @@ For regular `SELECT` (no `TRANSFORM`, `MAP` or `REDUCE` qualifiers), `withQueryS
 
 1. [UnresolvedHint](#withHints) unary logical operator (if used in the parsed SQL text)
 
-### withPredicate
+### withPredicate { #withPredicate }
 
-* `NOT? IN '(' query ')'` adds an [In](../expressions/In.md) predicate expression with a [ListQuery](../expressions/ListQuery.md) subquery expression
+Creates a [InSubquery](../expressions/InSubquery.md) over a [ListQuery](../expressions/ListQuery.md) (possibly "inverted" using `Not` unary expression)
 
-* `NOT? IN '(' expression (',' expression)* ')'` adds an [In](../expressions/In.md) predicate expression
+```sql
+NOT? IN '(' query ')'
+```
 
-### <span id="withPivot"> withPivot
+### withPivot { #withPivot }
 
 Creates a [Pivot](../logical-operators/Pivot.md) unary logical operator for the following SQL clause:
 
-```text
+```sql
 PIVOT '(' aggregates FOR pivotColumn IN '(' pivotValue (',' pivotValue)* ')' ')'
 ```
 

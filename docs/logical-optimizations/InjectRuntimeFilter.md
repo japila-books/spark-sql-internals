@@ -126,9 +126,9 @@ Property | Value
 Unless the `Aggregate` logical operator [canBroadcastBySize](../JoinSelectionHelper.md#canBroadcastBySize), `injectInSubqueryFilter` returns the given `filterApplicationSidePlan` logical plan (and basically throws away all the work so far).
 
 !!! note
-    `injectInSubqueryFilter` skips the `InSubquery` filter if the size of the `Aggregate` is beyond [broadcast join threshold](../JoinSelectionHelper.md#canBroadcastBySize) and the semi-join will be a shuffle join, which is not worthwhile.
+    `injectInSubqueryFilter` skips the [InSubquery](../expressions/InSubquery.md) filter if the size of the `Aggregate` is beyond [broadcast join threshold](../JoinSelectionHelper.md#canBroadcastBySize) and the semi-join will be a shuffle join, which is not worthwhile.
 
-`injectInSubqueryFilter` creates an `InSubquery` logical operator with the following:
+`injectInSubqueryFilter` creates an [InSubquery](../expressions/InSubquery.md) expression with the following:
 
 * The given `filterApplicationSideExp` (possibly [mayWrapWithHash](#mayWrapWithHash))
 * [ListQuery](../expressions/ListQuery.md) expression with the `Aggregate`

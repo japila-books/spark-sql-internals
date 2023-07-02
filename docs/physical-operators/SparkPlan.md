@@ -520,7 +520,7 @@ executeCollect(): Array[InternalRow]
 
 * `SparkPlan` is requested to <<executeCollectPublic, executeCollectPublic>>
 
-* `ScalarSubquery` and `InSubquery` plan expressions are requested to `updateResult`
+* [ScalarSubquery](../expressions/ScalarSubquery.md) and [InSubquery](../expressions/InSubquery.md) plan expressions are requested to `updateResult`
 
 ## <span id="outputPartitioning"> Output Data Partitioning Requirements
 
