@@ -331,22 +331,34 @@ multiUnitsInterval
     ;
 ```
 
-### <span id="visitMergeIntoTable"> visitMergeIntoTable
+### visitMergeIntoTable { #visitMergeIntoTable }
 
-Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md) logical command
+```scala
+visitMergeIntoTable(
+  ctx: MergeIntoTableContext): LogicalPlan
+```
 
-```text
+Creates a [MergeIntoTable](../logical-operators/MergeIntoTable.md) logical command for a `MERGE INTO` DML statement
+
+```antlr
 MERGE INTO target targetAlias
-USING (source | '(' sourceQuery ')') sourceAlias
+USING (source | (sourceQuery)) sourceAlias
 ON mergeCondition
 matchedClause*
 notMatchedClause*
+notMatchedBySourceClause*
 
 matchedClause
   : WHEN MATCHED (AND matchedCond)? THEN matchedAction
+  ;
 
 notMatchedClause
-  : WHEN NOT MATCHED (AND notMatchedCond)? THEN notMatchedAction
+  : WHEN NOT MATCHED (BY TARGET)? (AND notMatchedCond)? THEN notMatchedAction
+  ;
+
+notMatchedBySourceClause
+  : WHEN NOT MATCHED BY SOURCE (AND notMatchedBySourceCond)? THEN notMatchedBySourceAction
+  ;
 
 matchedAction
   : DELETE
@@ -357,6 +369,11 @@ notMatchedAction
   : INSERT *
   | INSERT '(' columns ')'
     VALUES '(' expression (',' expression)* ')'
+
+notMatchedBySourceAction
+  : DELETE
+  | UPDATE SET assignment (',' assignment)*
+  ;
 ```
 
 Requirements:

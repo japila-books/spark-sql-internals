@@ -1,6 +1,6 @@
 # MergeIntoTable Logical Command
 
-`MergeIntoTable` is a [Command](Command.md) that represents [MERGE INTO](../sql/AstBuilder.md#visitMergeIntoTable) SQL statement.
+`MergeIntoTable` is a [BinaryCommand](Command.md#BinaryCommand) that represents [MERGE INTO](../sql/AstBuilder.md#visitMergeIntoTable) DML statement.
 
 `MergeIntoTable` is a [SupportsSubquery](SupportsSubquery.md) (for the [source](#sourceTable)).
 
@@ -13,6 +13,7 @@
 * <span id="mergeCondition"> Merge Condition ([Expression](../expressions/Expression.md))
 * <span id="matchedActions"> Matched `MergeAction`s
 * <span id="notMatchedActions"> Not-Matched `MergeAction`s
+* <span id="notMatchedBySourceActions"> Not-Matched-by-Source `MergeAction`s
 
 `MergeIntoTable` is created when:
 
@@ -27,4 +28,4 @@ MERGE INTO TABLE is not supported temporarily.
 ```
 
 !!! note
-    `MergeIntoTable` is to allow custom data sources to support `MERGE` SQL statement (and so does [Delta Lake]({{ book.delta }}/commands/merge)).
+    `MergeIntoTable` is to allow custom connectors to support `MERGE` SQL statement (and so does [Delta Lake]({{ book.delta }}/commands/merge/)).
