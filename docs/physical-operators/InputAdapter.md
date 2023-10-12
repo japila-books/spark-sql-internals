@@ -1,37 +1,30 @@
 # InputAdapter Unary Physical Operator
 
-`InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the <<child, child>> physical operator that does not meet the requirements of [whole-stage Java code generation](CodegenSupport.md) (possibly due to [supportCodegen](CodegenSupport.md#supportCodegen) flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
+`InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the [child](../catalyst/TreeNode.md#children) physical operator that does not meet the requirements of [whole-stage Java code generation](CodegenSupport.md) (possibly due to [supportCodegen](CodegenSupport.md#supportCodegen) flag turned off) but is between operators that participate in whole-stage Java code generation optimization.
 
-.InputAdapter's doProduce
-image::images/spark-sql-InputAdapter-doProduce.png[align="center"]
+![spark-sql-InputAdapter-doProduce](../images/spark-sql-InputAdapter-doProduce.png)
 
-[[child]]
-[[creating-instance]]
-`InputAdapter` takes a single `child` SparkPlan.md[physical plan] when created.
+`InputAdapter` takes a single `child` [physical plan](SparkPlan.md) when created.
 
-`InputAdapter` is <<creating-instance, created>> exclusively when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and requested to [insert InputAdapters](../physical-optimizations/CollapseCodegenStages.md#insertInputAdapter) into a physical query plan with whole-stage Java code generation enabled).
+`InputAdapter` is created exclusively when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and requested to [insert InputAdapters](../physical-optimizations/CollapseCodegenStages.md#insertInputAdapter) into a physical query plan with whole-stage Java code generation enabled).
 
-[[generateTreeString]]
-`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that WholeStageCodegenExec.md#generateTreeString[WholeStageCodegenExec] adds), e.g. for spark-sql-dataset-operators.md#explain[explain] or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString) operators.
+`InputAdapter` makes sure that the prefix in the _text representation_ of a physical plan tree is an empty string (and so it removes the star from the tree representation that [WholeStageCodegenExec](WholeStageCodegenExec.md) adds), e.g. for [explain](../spark-sql-dataset-operators.md#explain) or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString) operators.
 
 TIP: The number of `InputAdapters` is exactly the number of subtrees in a physical query plan that do not have stars.
 
-[source, scala]
-----
+```scala
 scala> println(plan.numberedTreeString)
-00 *(1) Project [id#117L]
-01 +- *(1) BroadcastHashJoin [id#117L], [cast(id#115 as bigint)], Inner, BuildRight
-02    :- *(1) Range (0, 1, step=1, splits=8)
-03    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
-04       +- Generate explode(ids#112), false, [id#115]
-05          +- LocalTableScan [ids#112]
-----
+*(1) Project [id#117L]
++- *(1) BroadcastHashJoin [id#117L], [cast(id#115 as bigint)], Inner, BuildRight
+   :- *(1) Range (0, 1, step=1, splits=8)
+   +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, false] as bigint)))
+      +- Generate explode(ids#112), false, [id#115]
+         +- LocalTableScan [ids#112]
+```
 
-[[needCopyResult]]
 `InputAdapter` requires that...FIXME, i.e. `needCopyResult` flag is turned off.
 
-[[inputRDDs]]
-`InputAdapter` SparkPlan.md#execute[executes] the <<child, child>> physical operator to get the one and only one `RDD[InternalRow]` as its own [input RDDs](CodegenSupport.md#inputRDDs) for <<doProduce, whole-stage produce path code generation>>.
+`InputAdapter` [executes](SparkPlan.md#execute) the child physical operator to get the one and only one `RDD[InternalRow]` as its own [input RDDs](CodegenSupport.md#inputRDDs) for whole-stage produce path code generation.
 
 ```text
 // explode expression (that uses Generate operator) does not support codegen
@@ -56,12 +49,11 @@ scala> plan.collect { case a: InputAdapter => a }.zipWithIndex.map { case (op, i
    +- LocalTableScan [ids#112]
 ```
 
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
+Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
 
-[source, scala]
-----
+```scala
 doProduce(ctx: CodegenContext): String
-----
+```
 
 `doProduce` generates a Java source code that consumes [InternalRow](../InternalRow.md) of a single input `RDD` one at a time (in a `while` loop).
 
