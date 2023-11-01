@@ -1396,6 +1396,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connectors/DDLUtils/</loc>
+         <lastmod>2023-11-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connectors/DataSourceUtils/</loc>
+         <lastmod>2023-11-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connectors/DataSourceV2Utils/</loc>
          <lastmod>2023-11-01</lastmod>
          <changefreq>daily</changefreq>
