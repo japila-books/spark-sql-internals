@@ -13,7 +13,7 @@ getRequiredDistribution(
 
 * For [FilterExec](../physical-operators/FilterExec.md), ([non-global](../physical-operators/SortExec.md#global)) [SortExec](../physical-operators/SortExec.md) and [CollectMetricsExec](../physical-operators/CollectMetricsExec.md) physical operators, `getRequiredDistribution` skips them and determines the required distribution using their child operator
 
-* For [ProjectExec](../physical-operators/ProjectExec) physical operators, `getRequiredDistribution` finds a [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md) using the [child](../physical-operators/ProjectExec#child)
+* For [ProjectExec](../physical-operators/ProjectExec.md) physical operators, `getRequiredDistribution` finds a [HashClusteredDistribution](../physical-operators/HashClusteredDistribution.md) using the [child](../physical-operators/ProjectExec.md#child)
 
 * For all other operators, `getRequiredDistribution` returns the [UnspecifiedDistribution](../physical-operators/UnspecifiedDistribution.md)
 

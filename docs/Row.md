@@ -1,8 +1,13 @@
 # Row
 
-`Row` is a generic row object with an ordered collection of fields that can be accessed by an <<apply-index, ordinal / an index>> (aka _generic access by ordinal_), a name (aka _native primitive access_) or using <<pattern-matching-on-row, Scala's pattern matching>>.
+`Row` is a generic object that represents a table `row` (_record_).
 
-NOTE: `Row` is also called *Catalyst Row*.
+`Row` is referred to as **Catalyst Row**.
+
+<!---
+## Review Me
+
+with an ordered collection of fields that can be accessed by an <<apply-index, ordinal / an index>> (aka _generic access by ordinal_), a name (aka _native primitive access_) or using <<pattern-matching-on-row, Scala's pattern matching>>.
 
 `Row` may have an optional <<schema, schema>>.
 
@@ -17,10 +22,6 @@ The traits of `Row`:
 ----
 import org.apache.spark.sql.Row
 ----
-
-=== [[apply]] Creating Row -- `apply` Factory Method
-
-CAUTION: FIXME
 
 === [[field-access]][[get]][[apply-index]] Field Access by Index -- `apply` and `get` methods
 
@@ -118,3 +119,4 @@ Row(1, "hello") match { case Row(key: Int, value: String) =>
   key -> value
 }
 ----
+-->

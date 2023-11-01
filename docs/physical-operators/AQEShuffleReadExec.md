@@ -55,7 +55,7 @@ shuffleStage: Option[ShuffleQueryStageExec]
 
 `AQEShuffleReadExec` is given a child [physical operator](SparkPlan.md) when [created](#creating-instance).
 
-When requested for a [ShuffleQueryStageExec](ShuffleQueryStageExec), `AQEShuffleReadExec` returns the child physical operator (if that is its type or returns `None`).
+When requested for a [ShuffleQueryStageExec](ShuffleQueryStageExec.md), `AQEShuffleReadExec` returns the child physical operator (if that is its type or returns `None`).
 
 `shuffleStage` is used when:
 

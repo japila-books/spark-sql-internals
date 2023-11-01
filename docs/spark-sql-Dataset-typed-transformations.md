@@ -1,6 +1,10 @@
 # Dataset API &mdash; Typed Transformations
 
-**Typed transformations** are part of the Dataset API for transforming a `Dataset` with an [Encoder](Encoder.md) (except the [RowEncoder](RowEncoder.md)).
+**Typed transformations** are part of the Dataset API for transforming a `Dataset` with an [Encoder](Encoder.md) (that is different than [RowEncoder](RowEncoder.md)).
+
+<!---
+
+## Review Me
 
 NOTE: Typed transformations are the methods in the `Dataset` Scala class that are grouped in `typedrel` group name, i.e. `@group typedrel`.
 
@@ -312,3 +316,4 @@ scala> println(events.queryExecution.logical.numberedTreeString)
 NOTE: `delayThreshold` must not be negative (and `milliseconds` and `months` should both be equal or greater than `0`).
 
 NOTE: `withWatermark` is used when...FIXME
+-->

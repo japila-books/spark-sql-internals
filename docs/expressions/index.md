@@ -1,6 +1,6 @@
 # Catalyst Expressions
 
-The [Catalyst Tree Manipulation Framework](../catalyst/index.md) defines [Expression](Expression.md) abstraction for expression nodes in (the trees of) [logical](../logical-operators/) and [physical](../physical-operators/) query plans.
+The [Catalyst Tree Manipulation Framework](../catalyst/index.md) defines [Expression](Expression.md) abstraction for expression nodes in (the trees of) [logical](../logical-operators/index.md) and [physical](../physical-operators/index.md) query plans.
 
 Spark SQL uses `Expression` abstraction to represent standard and user-defined functions as well as subqueries in logical query plans. Every time you use one of them in a query it creates a new `Expression`.
 

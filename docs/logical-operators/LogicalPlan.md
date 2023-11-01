@@ -162,7 +162,7 @@ val analyzedPlan = qe.analyzed
 
 Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../Dataset.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../RowEncoder.md).
 
-## <span id="childrenResolved"> childrenResolved
+## childrenResolved { #childrenResolved }
 
 ```scala
 childrenResolved: Boolean
@@ -176,7 +176,7 @@ A logical operator is considered **partially resolved** when its [child operator
 resolved: Boolean
 ```
 
-`resolved` is `true` for all [expressions](../catalyst/QueryPlan.md#expressions) and the [children](childrenResolved) resolved.
+`resolved` is `true` for all [expressions](../catalyst/QueryPlan.md#expressions) and the [children](#childrenResolved) resolved.
 
 ??? note "Lazy Value"
     `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
