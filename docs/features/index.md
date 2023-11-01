@@ -1,3 +1,8 @@
+---
+hide:
+   - toc
+---
+
 # Features
 
 The following are the features of Spark SQL that help place it in the top of the modern distributed SQL query processing engines:

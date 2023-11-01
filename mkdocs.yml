@@ -106,7 +106,7 @@ extra:
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   grpc:
-    version: 1.47.0
+    version: 1.56.0
     docs: https://grpc.io/docs/languages/java/
     api: https://grpc.github.io/grpc-java/javadoc
   hadoop:
@@ -120,8 +120,8 @@ extra:
     api: https://docs.oracle.com/en/java/javase/17/docs/api/java.base
     spec: https://docs.oracle.com/javase/specs/jls/se11/html
   kafka:
-    version: 3.3.2
-    api: https://kafka.apache.org/33/javadoc
+    version: 3.4.1
+    api: https://kafka.apache.org/34/javadoc
   scala:
     version: 2.13.8
     api: https://www.scala-lang.org/api/2.13.8
@@ -139,12 +139,13 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 3.4.1
+    version: 3.5.0
     github: https://github.com/apache/spark/tree/v3.4.1
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
     new: New in 3.4.0
+    new350: New in 3.5.0
   # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/#tag-icons-and-identifiers
   tags:
     DeveloperApi: developerapi
