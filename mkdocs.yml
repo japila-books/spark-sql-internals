@@ -923,6 +923,7 @@ nav:
   - High-Level APIs:
     - Column: Column.md
     - ColumnarRule: ColumnarRule.md
+    - ... | types/**.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md
     - DataFrameReader: DataFrameReader.md
@@ -944,13 +945,7 @@ nav:
       - spark-sql-functions-regular-functions.md
       - spark-sql-functions-windows.md
     - TypedColumn: TypedColumn.md
-    - Window Functions:
-      - window-functions/index.md
-      - AggregateProcessor: window-functions/AggregateProcessor.md
-      - RangeFrame: window-functions/RangeFrame.md
-      - Window: window-functions/Window.md
-      - WindowFunctionFrame: window-functions/WindowFunctionFrame.md
-      - WindowSpec: window-functions/WindowSpec.md
+    - ... | window-functions/**.md
   - Web UI:
     - ui/index.md
     - AllExecutionsPage: ui/AllExecutionsPage.md
@@ -988,16 +983,6 @@ nav:
       - spark-sql-DataFrameNaFunctions.md
       - DataFrameStatFunctions.md
     - Column Operators: spark-sql-column-operators.md
-    - Data Types:
-      - types/index.md
-      - AbstractDataType: types/AbstractDataType.md
-      - ArrayType: types/ArrayType.md
-      - AtomicType: types/AtomicType.md
-      - CalendarInterval: types/CalendarInterval.md
-      - DataType: types/DataType.md
-      - StructField: types/StructField.md
-      - StructType: types/StructType.md
-      - UserDefinedType: types/UserDefinedType.md
     - Caching and Persistence:
       - Caching and Persistence: caching-and-persistence.md
       - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md

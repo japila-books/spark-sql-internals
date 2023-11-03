@@ -1,4 +1,4 @@
-# Window Utility
+# Window
 
 `Window` utility allows to define a [WindowSpec](WindowSpec.md).
 

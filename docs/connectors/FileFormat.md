@@ -80,21 +80,22 @@ buildReaderWithPartitionValues(
 
 `buildReaderWithPartitionValues` is used when `FileSourceScanExec` physical operator is requested for the [inputRDD](../physical-operators/FileSourceScanExec.md#inputRDD).
 
-## createFileMetadataCol { #createFileMetadataCol }
+## Creating FileFormat Metadata Column { #createFileMetadataCol }
 
 ```scala
-createFileMetadataCol(
-  fileFormat: FileFormat): AttributeReference
+createFileMetadataCol(): AttributeReference
 ```
 
-`createFileMetadataCol`...FIXME
+`createFileMetadataCol` [cleans up metadata](../metadata-columns/FileSourceMetadataAttribute.md#cleanupFileSourceMetadataInformation) of the [metadata fields](#metadataSchemaFields).
+
+In the end, `createFileMetadataCol` [creates an AttributeReference](../metadata-columns/FileSourceMetadataAttribute.md#apply) for [_metadata](#METADATA_NAME) column (with the [file internal metadata](../metadata-columns/FileSourceMetadataAttribute.md#metadata)).
 
 ---
 
 `createFileMetadataCol` is used when:
 
-* `LogicalRelation` logical operator is requested for the [metadataOutput](../logical-operators/LogicalRelation.md#metadataOutput)
-* `StreamingRelation` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/StreamingRelation)) logical operator is requested for the `metadataOutput`
+* `LogicalRelation` logical operator is requested for the [metadataOutput](../logical-operators/LogicalRelation.md#metadataOutput) (of a [HadoopFsRelation](HadoopFsRelation.md))
+* `StreamingRelation` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/StreamingRelation)) logical operator is requested for the `metadataOutput` (of a `FileFormat`)
 
 ## Building Data Reader { #buildReader }
 

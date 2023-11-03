@@ -1,28 +1,31 @@
 # FileSourceMetadataAttribute
 
-## cleanupFileSourceMetadataInformation { #cleanupFileSourceMetadataInformation }
+## Cleaning Up Metadata { #cleanupFileSourceMetadataInformation }
 
 ```scala
 cleanupFileSourceMetadataInformation(
   attr: Attribute): Attribute
+cleanupFileSourceMetadataInformation(
+  field: StructField): StructField
 ```
 
-`cleanupFileSourceMetadataInformation` [removeInternalMetadata](#removeInternalMetadata).
+`cleanupFileSourceMetadataInformation` [removes internal metadata](#removeInternalMetadata) from (the metadata of) the given [Attribute](../expressions/Attribute.md) or [StructField](../types/StructField.md).
 
 ---
 
 `cleanupFileSourceMetadataInformation` is used when:
 
 * `FileFormatWriter` is requested to [write data out](../connectors/FileFormatWriter.md#write)
+* `FileFormat` is requested to [create a FileFormat metadata struct column](../connectors/FileFormat.md#createFileMetadataCol)
 
 ### removeInternalMetadata { #removeInternalMetadata }
 
 ```scala
 removeInternalMetadata(
-  attr: Attribute): Attribute
+  metadata: Metadata)
 ```
 
-`removeInternalMetadata` removes the following internal entries from the [metadata](../expressions/NamedExpression.md#metadata) of the given [Attribute](../expressions/Attribute.md):
+`removeInternalMetadata` creates a new [MetadataBuilder](../types/MetadataBuilder.md) to [build a metadata](../types/MetadataBuilder.md#build) for the given [Metadata](../types/Metadata.md) but without the following metadata entries:
 
 * [__metadata_col](#METADATA_COL_ATTR_KEY)
 * [__file_source_metadata_col](#FILE_SOURCE_METADATA_COL_ATTR_KEY)
