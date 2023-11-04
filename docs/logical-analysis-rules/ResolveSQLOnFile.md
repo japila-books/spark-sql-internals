@@ -1,4 +1,8 @@
-# ResolveSQLOnFile Logical Evaluation Rule for...FIXME
+---
+title: ResolveSQLOnFile
+---
+
+# ResolveSQLOnFile Logical Evaluation Rule
 
 `ResolveSQLOnFile` is...FIXME
 

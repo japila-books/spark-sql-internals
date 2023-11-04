@@ -1,3 +1,7 @@
+---
+title: ResolveReferences
+---
+
 # ResolveReferences Logical Resolution Rule
 
 `ResolveReferences` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveReferences) uses to <<apply, resolve FIXME>> in a logical query plan, i.e.

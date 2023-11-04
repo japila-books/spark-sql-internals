@@ -1,3 +1,7 @@
+---
+title: ResolveWindowFrame
+---
+
 # ResolveWindowFrame Logical Resolution Rule
 
 `ResolveWindowFrame` is a logical resolution rule that the [Logical Analyzer](../Analyzer.md) uses to <<apply, validate and resolve WindowExpression expressions>> in an entire logical query plan.

@@ -1,3 +1,7 @@
+---
+title: Aggregation
+---
+
 # Aggregation Execution Planning Strategy
 
 `Aggregation` is an [execution planning strategy](SparkStrategy.md) that [SparkPlanner](../SparkPlanner.md) uses for [planning Aggregate logical operators](#apply) (in the order of preference):

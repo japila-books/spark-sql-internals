@@ -1,3 +1,7 @@
+---
+title: ResolveSubquery
+---
+
 # ResolveSubquery Logical Resolution Rule
 
 `ResolveSubquery` is a **logical resolution rule** that [resolves SubqueryExpressions](#apply) in the following logical operators:

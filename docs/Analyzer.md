@@ -73,40 +73,11 @@ Rules:
 * [ResolveCatalogs](logical-analysis-rules/ResolveCatalogs.md)
 * [ResolveInsertInto](logical-analysis-rules/ResolveInsertInto.md)
 * [ResolveRelations](logical-analysis-rules/ResolveRelations.md)
-* [ResolveTables](logical-analysis-rules/ResolveTables.md)
-* ResolveReferences
-* ResolveCreateNamedStruct
-* ResolveDeserializer
-* ResolveNewInstance
-* ResolveUpCast
 * [ResolveGroupingAnalytics](logical-analysis-rules/ResolveGroupingAnalytics.md)
-* ResolvePivot
-* ResolveOrdinalInOrderByAndGroupBy
-* ResolveAggAliasInGroupBy
-* ResolveMissingReferences
-* ExtractGenerator
-* ResolveGenerate
-* ResolveFunctions
-* ResolveAliases
-* ResolveSubquery
-* ResolveSubqueryColumnAliases
-* ResolveWindowOrder
-* ResolveWindowFrame
-* ResolveNaturalAndUsingJoin
-* ResolveOutputRelation
-* ExtractWindowExpressions
-* GlobalAggregates
 * [ResolveAggregateFunctions](logical-analysis-rules/ResolveAggregateFunctions.md)
-* TimeWindowing
-* ResolveInlineTables
-* ResolveHigherOrderFunctions
-* ResolveLambdaVariables
-* ResolveTimeZone
-* ResolveRandomSeed
-* ResolveBinaryArithmetic
-* Type Coercion Rules
 * [ResolveWithCTE](logical-analysis-rules/ResolveWithCTE.md)
 * [extendedResolutionRules](#extendedResolutionRules)
+* _others_
 
 Strategy: [fixedPoint](#fixedPoint)
 
@@ -146,7 +117,7 @@ Strategy: Once
 
 Rules:
 
-* [HandleNullInputsForUDF](logical-analysis-rules/HandleNullInputsForUDF.md)
+* `HandleNullInputsForUDF`
 
 Strategy: Once
 
@@ -162,7 +133,7 @@ Strategy: Once
 
 Rules:
 
-* [UpdateOuterReferences](logical-analysis-rules/UpdateOuterReferences.md)
+* `UpdateOuterReferences`
 
 Strategy: Once
 

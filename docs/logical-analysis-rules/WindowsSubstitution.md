@@ -1,3 +1,7 @@
+---
+title: WindowsSubstitution
+---
+
 # WindowsSubstitution Logical Evaluation Rule
 
 `WindowsSubstitution` is a [logical evaluation rule](../catalyst/Rule.md) (`Rule[LogicalPlan]`) that the [Logical Analyzer](../Analyzer.md) uses to resolve (_aka_ substitute) [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) unary logical operators with `UnresolvedWindowExpression` to their corresponding spark-sql-Expression-WindowExpression.md[WindowExpression] with resolved spark-sql-Expression-WindowSpecDefinition.md[WindowSpecDefinition].

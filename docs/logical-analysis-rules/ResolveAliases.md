@@ -1,3 +1,7 @@
+---
+title: ResolveAliases
+---
+
 # ResolveAliases Logical Resolution Rule
 
 `ResolveAliases` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveAliases) uses to <<apply, FIXME>> in an entire logical query plan.

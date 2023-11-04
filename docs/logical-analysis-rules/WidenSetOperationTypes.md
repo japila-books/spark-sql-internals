@@ -1,3 +1,0 @@
-# WidenSetOperationTypes
-
-`WidenSetOperationTypes` is...FIXME

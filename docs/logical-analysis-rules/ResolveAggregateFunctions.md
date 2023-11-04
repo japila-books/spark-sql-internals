@@ -1,3 +1,7 @@
+---
+title: ResolveAggregateFunctions
+---
+
 # ResolveAggregateFunctions Logical Analysis Rule
 
 `ResolveAggregateFunctions` is a [logical rule](../catalyst/Rule.md) (`Rule[LogicalPlan]`).

@@ -1,3 +1,7 @@
+---
+title: ResolveInsertInto
+---
+
 # ResolveInsertInto Logical Resolution Rule
 
 `ResolveInsertInto` is a logical resolution rule (`Rule[LogicalPlan]`).

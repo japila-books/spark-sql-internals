@@ -33,7 +33,7 @@ The following logical rules are used to act on `UnresolvedHint` logical operator
 
 * [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md)
 * [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md)
-* [RemoveAllHints](../logical-analysis-rules/RemoveAllHints.md)
+* `RemoveAllHints`
 
 [Analyzer](../CheckAnalysis.md#checkAnalysis) throws an `IllegalStateException` for any `UnresolvedHint`s left (_unresolved_):
 

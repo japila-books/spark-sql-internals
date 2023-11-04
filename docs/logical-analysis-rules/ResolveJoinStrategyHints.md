@@ -1,3 +1,7 @@
+---
+title: ResolveJoinStrategyHints
+---
+
 # ResolveJoinStrategyHints Logical Resolution Rule
 
 `ResolveJoinStrategyHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with [JoinStrategyHint](../hints/JoinStrategyHint.md)s.

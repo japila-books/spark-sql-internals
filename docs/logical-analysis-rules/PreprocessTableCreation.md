@@ -1,3 +1,7 @@
+---
+title: PreprocessTableCreation
+---
+
 # PreprocessTableCreation PostHoc Logical Resolution Rule
 
 `PreprocessTableCreation` is a [posthoc logical resolution rule](../Analyzer.md#postHocResolutionRules) that <<apply, resolves a logical query plan>> with <<CreateTable.md#, CreateTable>> logical operators.

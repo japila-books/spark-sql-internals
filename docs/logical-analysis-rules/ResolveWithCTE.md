@@ -1,3 +1,7 @@
+---
+title: ResolveWithCTE
+---
+
 # ResolveWithCTE Logical Resolution Rule
 
 `ResolveWithCTE` is a logical resolution rule that the [Logical Analyzer](../Analyzer.md) uses to [resolveWithCTE](#resolveWithCTE) for [CTE](../catalyst/TreePattern.md#CTE) query plans.

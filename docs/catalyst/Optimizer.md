@@ -1,3 +1,7 @@
+---
+title: Optimizer
+---
+
 # Optimizer &mdash; Generic Logical Query Plan Optimizer
 
 `Optimizer` (**Catalyst Optimizer**) is an extension of the [RuleExecutor](RuleExecutor.md) abstraction for [logical query plan optimizers](#implementations).

@@ -1,3 +1,7 @@
+---
+title: QueryPlan
+---
+
 # QueryPlan &mdash; Structured Query Plan
 
 `QueryPlan` is an [extension](#contract) of the [TreeNode](TreeNode.md) abstraction for [query plans](#implementations) in [Catalyst Framework](index.md).

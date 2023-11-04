@@ -32,7 +32,7 @@ Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggr
 
 |===
 
-The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in [WidenSetOperationTypes](../logical-analysis-rules/WidenSetOperationTypes.md) logical analysis type-coercion rule.
+The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in `WidenSetOperationTypes` logical analysis type-coercion rule.
 
 === [[creating-instance]] Creating Except Instance
 

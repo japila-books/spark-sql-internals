@@ -6,7 +6,7 @@
 
 * [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [enforce whole-stage codegen requirements for Catalyst expressions](../physical-optimizations/CollapseCodegenStages.md#supportCodegen-Expression))
 * `Generator` expressions is requested to [supportCodegen](Generator.md#supportCodegen)
-* `EquivalentExpressions` is requested to [childrenToRecurse](../EquivalentExpressions.md#childrenToRecurse) and [commonChildrenToRecurse](../EquivalentExpressions.md#commonChildrenToRecurse)
+* `EquivalentExpressions` is requested to [childrenToRecurse](../subexpression-elimination/EquivalentExpressions.md#childrenToRecurse) and [commonChildrenToRecurse](../subexpression-elimination/EquivalentExpressions.md#commonChildrenToRecurse)
 
 ## Implementations
 

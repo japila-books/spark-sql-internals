@@ -1,3 +1,7 @@
+---
+title: DataSourceAnalysis
+---
+
 # DataSourceAnalysis PostHoc Logical Resolution Rule
 
 `DataSourceAnalysis` is a [post-hoc logical resolution rule](../Analyzer.md#postHocResolutionRules) that the [default](../BaseSessionStateBuilder.md#analyzer) and [Hive-specific](../hive/HiveSessionStateBuilder.md#analyzer) logical query plan analyzers use to <<apply, FIXME>>.

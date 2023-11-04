@@ -42,7 +42,7 @@ CodeGeneratorWithInterpretedFallback[Seq[Expression], UnsafeProjection]
 
     `createCodeGeneratedObject` is part of the [CodeGeneratorWithInterpretedFallback](CodeGeneratorWithInterpretedFallback.md#createCodeGeneratedObject) abstraction.
 
-`createCodeGeneratedObject` [generates an UnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md#generate) for the given [Expression](Expression.md)s (possibly with [Subexpression Elimination](../subexpression-elimination.md) based on [spark.sql.subexpressionElimination.enabled](../configuration-properties.md#spark.sql.subexpressionElimination.enabled) configuration property).
+`createCodeGeneratedObject` [generates an UnsafeProjection](../whole-stage-code-generation/GenerateUnsafeProjection.md#generate) for the given [Expression](Expression.md)s (possibly with [Subexpression Elimination](../subexpression-elimination/index.md) based on [spark.sql.subexpressionElimination.enabled](../configuration-properties.md#spark.sql.subexpressionElimination.enabled) configuration property).
 
 ### createInterpretedObject { #createInterpretedObject }
 

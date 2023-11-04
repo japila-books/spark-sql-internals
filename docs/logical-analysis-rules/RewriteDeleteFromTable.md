@@ -1,3 +1,7 @@
+---
+title: RewriteDeleteFromTable
+---
+
 # RewriteDeleteFromTable Analysis Rule
 
 ## <span id="apply"> Executing Rule

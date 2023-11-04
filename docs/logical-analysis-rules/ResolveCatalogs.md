@@ -1,3 +1,7 @@
+---
+title: ResolveCatalogs
+---
+
 # ResolveCatalogs Logical Resolution Rule
 
 `ResolveCatalogs` is a logical rule (`Rule[LogicalPlan]`).

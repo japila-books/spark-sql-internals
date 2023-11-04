@@ -1,3 +1,7 @@
+---
+title: GenericStrategy
+---
+
 # GenericStrategy &mdash; Planning Strategies
 
 `GenericStrategy` is an [abstraction](#contract) of [planning strategies](#implementations) of [QueryPlanner](QueryPlanner.md#strategies).

@@ -28,5 +28,5 @@ resolved: Boolean
 
 `UnresolvedTableOrView` is resolved to the following logical operators:
 
-* `ResolvedView` (by [ResolveTempViews](../logical-analysis-rules/ResolveTempViews.md) and [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rules)
-* [ResolvedTable](ResolvedTable.md) (by [ResolveTables](../logical-analysis-rules/ResolveTables.md) and [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rules)
+* `ResolvedView` (by `ResolveTempViews` and [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rules)
+* [ResolvedTable](ResolvedTable.md) (by `ResolveTables` and [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rules)

@@ -1,3 +1,7 @@
+---
+title: CleanupAliases
+---
+
 # CleanupAliases Logical Analysis Rule
 
 `CleanupAliases` is a [logical analysis rule](../Analyzer.md#batches) that <<apply, transforms a logical query plan>> with...FIXME

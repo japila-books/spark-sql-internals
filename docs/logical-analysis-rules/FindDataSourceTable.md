@@ -1,3 +1,7 @@
+---
+title: FindDataSourceTable
+---
+
 # FindDataSourceTable Logical Evaluation Rule
 
 `FindDataSourceTable` is a catalyst/Rule.md[Catalyst rule] for <<apply, resolving UnresolvedCatalogRelations>> (of Spark and Hive tables) in a logical query plan.

@@ -1,3 +1,7 @@
+---
+title: InMemoryScans
+---
+
 # InMemoryScans Execution Planning Strategy
 
 `InMemoryScans` is an [execution planning strategy](SparkStrategy.md) that <<apply, plans InMemoryRelation logical operators to InMemoryTableScanExec physical operators>>.

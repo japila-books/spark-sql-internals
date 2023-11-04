@@ -12,6 +12,6 @@
 
 `ResolvedTable` is created when:
 
-* [ResolveTables](../logical-analysis-rules/ResolveTables.md) logical resolution rule is executed (for [UnresolvedTable](UnresolvedTable.md) and [UnresolvedTableOrView](UnresolvedTableOrView.md))
+* `ResolveTables` logical resolution rule is executed (for [UnresolvedTable](UnresolvedTable.md) and [UnresolvedTableOrView](UnresolvedTableOrView.md))
 * [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule is executed ([lookupTableOrView](../logical-analysis-rules/ResolveRelations.md#lookupTableOrView))
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (for `RenameTable`)

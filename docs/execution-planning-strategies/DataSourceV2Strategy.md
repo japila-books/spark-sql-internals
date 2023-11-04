@@ -1,3 +1,7 @@
+---
+title: DataSourceV2Strategy
+---
+
 # DataSourceV2Strategy Execution Planning Strategy
 
 `DataSourceV2Strategy` is an [execution planning strategy](SparkStrategy.md).

@@ -2199,7 +2199,7 @@ Use [SQLConf.autoSizeUpdateEnabled](SQLConf.md#autoSizeUpdateEnabled) method to 
 
 ## <span id="spark.sql.subexpressionElimination.enabled"> spark.sql.subexpressionElimination.enabled
 
-**(internal)** Enables [Subexpression Elimination](subexpression-elimination.md)
+**(internal)** Enables [Subexpression Elimination](subexpression-elimination/index.md)
 
 Default: `true`
 

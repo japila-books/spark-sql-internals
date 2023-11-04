@@ -1,3 +1,7 @@
+---
+title: FileSourceStrategy
+---
+
 # FileSourceStrategy Execution Planning Strategy
 
 `FileSourceStrategy` is an [execution planning strategy](SparkStrategy.md).

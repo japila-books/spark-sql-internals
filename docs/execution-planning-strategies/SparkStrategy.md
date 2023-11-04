@@ -1,3 +1,7 @@
+---
+title: SparkStrategy
+---
+
 # SparkStrategy &mdash; Base for Execution Planning Strategies
 
 `SparkStrategy` is an extension of the [GenericStrategy](../catalyst/GenericStrategy.md) abstraction for [execution planning strategies](#implementations) that can convert (_plan_) a [logical query plan](../logical-operators/LogicalPlan.md) to zero or more [physical query plans](../physical-operators/SparkPlan.md) for execution.

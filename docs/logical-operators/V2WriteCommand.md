@@ -17,7 +17,7 @@ Always disabled (`false`):
 
 Used when:
 
-* [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical resolution rule is executed (for `TableOutputResolver` to `resolveOutputColumns`)
+* `ResolveOutputRelation` logical resolution rule is executed (for `TableOutputResolver` to `resolveOutputColumns`)
 
 ### <span id="query"> Query
 
@@ -44,7 +44,7 @@ withNewQuery(
 
 Used when:
 
-* [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical analysis rule is executed
+* `ResolveOutputRelation` logical analysis rule is executed
 
 ### <span id="withNewTable"> withNewTable
 
@@ -56,7 +56,7 @@ withNewTable(
 Used when:
 
 * [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical analysis rule is executed
-* [ResolveOutputRelation](../logical-analysis-rules/ResolveOutputRelation.md) logical analysis rule is executed
+* `ResolveOutputRelation` logical analysis rule is executed
 
 ## Implementations
 

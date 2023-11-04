@@ -1,3 +1,7 @@
+---
+title: ResolveFunctions
+---
+
 # ResolveFunctions Logical Resolution Rule
 
 `ResolveFunctions` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveFunctions) uses to [resolve the following logical operators and expressions](#apply) in a logical query plan:

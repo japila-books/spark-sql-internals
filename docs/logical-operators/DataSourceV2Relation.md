@@ -54,7 +54,7 @@ In the end, `create` uses the new schema to [create a DataSourceV2Relation](#cre
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto), [saveAsTable](../DataFrameWriter.md#saveAsTable) and [saveInternal](../DataFrameWriter.md#saveInternal)
 * `DataSourceV2Strategy` execution planning strategy is requested to [invalidateCache](../execution-planning-strategies/DataSourceV2Strategy.md#invalidateCache)
 * `RenameTableExec` physical command is executed
-* [ResolveTables](../logical-analysis-rules/ResolveTables.md) logical resolution rule is executed (and requested to [lookupV2Relation](../logical-analysis-rules/ResolveTables.md#lookupV2Relation))
+* `ResolveTables` logical resolution rule is executed
 * [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule is executed (and requested to [lookupRelation](../logical-analysis-rules/ResolveRelations.md#lookupRelation))
 * `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
 

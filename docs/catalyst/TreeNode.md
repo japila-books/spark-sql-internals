@@ -1,3 +1,7 @@
+---
+title: TreeNode
+---
+
 # TreeNode &mdash; Node in Catalyst Tree
 
 `TreeNode` is an [abstraction](#contract) of [named nodes](#implementations) in [Catalyst](index.md) with zero, one or more [children](#children).

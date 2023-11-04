@@ -1,3 +1,7 @@
+---
+title: ResolveInlineTables
+---
+
 # ResolveInlineTables Logical Resolution Rule
 
 `ResolveInlineTables` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, resolves (replaces) UnresolvedInlineTable operators to LocalRelations>> in a logical query plan.

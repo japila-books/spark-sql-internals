@@ -1,3 +1,7 @@
+---
+title: SpecialLimits
+---
+
 # SpecialLimits Execution Planning Strategy
 
 `SpecialLimits` is an [execution planning strategy](SparkStrategy.md) that [Spark Planner](../SparkPlanner.md) uses to <<apply, FIXME>>.

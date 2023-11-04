@@ -1,3 +1,7 @@
+---
+title: WindowFrameCoercion
+---
+
 # WindowFrameCoercion Type Coercion Logical Rule
 
 `WindowFrameCoercion` is a `TypeCoercionRule` that [cast the data types of the boundaries of a range window frame to the data type of the order specification in a WindowSpecDefinition](#coerceTypes) in a [logical plan](../logical-operators/LogicalPlan.md).

@@ -80,7 +80,7 @@ genCode(
 
 `genCode` returns an `ExprCode` with a Java source code for code-generated expression evaluation.
 
-`genCode` is [doGenCode](#doGenCode) but does [Subexpression Elimination](../subexpression-elimination.md).
+`genCode` is [doGenCode](#doGenCode) but does [Subexpression Elimination](../subexpression-elimination/index.md).
 
 `genCode` is a faster "relative" of the [interpreted expression evaluation](#eval).
 

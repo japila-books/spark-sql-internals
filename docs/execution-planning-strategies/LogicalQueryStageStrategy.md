@@ -1,3 +1,7 @@
+---
+title: LogicalQueryStageStrategy
+---
+
 # LogicalQueryStageStrategy Execution Planning Strategy
 
 `LogicalQueryStageStrategy` is an [execution planning strategy](SparkStrategy.md) that [plans the following logical operators](#apply):

@@ -1,3 +1,7 @@
+---
+title: ResolveDefaultColumns
+---
+
 # ResolveDefaultColumns Logical Resolution Rule
 
 `ResolveDefaultColumns` is a logical resolution rule (a [Rule](../catalyst/Rule.md) to transform a [LogicalPlan](../logical-operators/LogicalPlan.md)) that resolves the following operators (top-down):

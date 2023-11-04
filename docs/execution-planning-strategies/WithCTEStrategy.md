@@ -1,3 +1,7 @@
+---
+title: WithCTEStrategy
+---
+
 # WithCTEStrategy Execution Planning Strategy
 
 `WithCTEStrategy` is an [execution planning strategy](SparkStrategy.md) to plan [WithCTE](../logical-operators/WithCTE.md) and [CTERelationRef](../logical-operators/CTERelationRef.md) logical operators.

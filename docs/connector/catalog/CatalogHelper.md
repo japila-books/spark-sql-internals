@@ -43,7 +43,7 @@ Cannot use catalog [name]: not a TableCatalog
 
 `asTableCatalog` is used when:
 
-* [ResolveTables](../../logical-analysis-rules/ResolveTables.md), [ResolveRelations](../../logical-analysis-rules/ResolveRelations.md), [ResolveCatalogs](../../logical-analysis-rules/ResolveCatalogs.md) and [ResolveSessionCatalog](../../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rules are executed
+* `ResolveTables`, [ResolveRelations](../../logical-analysis-rules/ResolveRelations.md), [ResolveCatalogs](../../logical-analysis-rules/ResolveCatalogs.md) and [ResolveSessionCatalog](../../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rules are executed
 * `CatalogV2Util` utility is used to [load a table](CatalogV2Util.md#loadTable), [createAlterTable](CatalogV2Util.md#createAlterTable) and [getTableProviderCatalog](CatalogV2Util.md#getTableProviderCatalog)
 * `DataFrameWriter` is requested to [insertInto](../../DataFrameWriter.md#insertInto) and [saveAsTable](../../DataFrameWriter.md#saveAsTable)
 * `DataFrameWriterV2` is [created](../../DataFrameWriterV2.md#catalog)

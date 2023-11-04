@@ -1,3 +1,7 @@
+---
+title: SparkStrategies
+---
+
 # SparkStrategies &mdash; Container of Execution Planning Strategies
 
 `SparkStrategies` is an abstract Catalyst [query planner](../catalyst/QueryPlanner.md) that _merely_ serves as a "container" (or a namespace) of the concrete [execution planning strategies](SparkStrategy.md) (for [SparkPlanner](../SparkPlanner.md)):

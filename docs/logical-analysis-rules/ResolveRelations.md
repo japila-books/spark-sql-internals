@@ -1,3 +1,7 @@
+---
+title: ResolveRelations
+---
+
 # ResolveRelations Logical Resolution Rule
 
 `ResolveRelations` is a logical resolution rule that the [logical query plan analyzer](../Analyzer.md#ResolveRelations) uses to [replace (_resolve_) UnresolvedRelations](#apply).

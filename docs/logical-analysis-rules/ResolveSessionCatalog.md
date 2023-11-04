@@ -1,3 +1,7 @@
+---
+title: ResolveSessionCatalog
+---
+
 # ResolveSessionCatalog Logical Resolution Rule
 
 `ResolveSessionCatalog` is a logical resolution rule (`Rule[LogicalPlan]`).

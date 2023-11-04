@@ -1,3 +1,7 @@
+---
+title: LookupFunctions
+---
+
 # LookupFunctions Logical Rule
 
 `LookupFunctions` is a [logical rule](../catalyst/Rule.md) that the [logical query plan analyzer](../Analyzer.md#LookupFunctions) uses to [make sure that UnresolvedFunction expressions can be resolved](#apply) in a logical query plan.

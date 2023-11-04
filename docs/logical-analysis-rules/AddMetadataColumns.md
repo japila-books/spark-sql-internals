@@ -1,3 +1,7 @@
+---
+title: AddMetadataColumns
+---
+
 # AddMetadataColumns Logical Resolution Rule
 
 `AddMetadataColumns` [adds metadata columns to logical operators with metadata columns defined](#apply)

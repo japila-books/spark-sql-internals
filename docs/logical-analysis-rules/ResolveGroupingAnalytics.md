@@ -1,3 +1,7 @@
+---
+title: ResolveGroupingAnalytics
+---
+
 # ResolveGroupingAnalytics Logical Resolution Rule
 
 `ResolveGroupingAnalytics` is a [logical rule](../catalyst/Rule.md) (`Rule[LogicalPlan]`).

@@ -20,7 +20,7 @@
 [Analyzer](../Analyzer.md) uses the following rules to work with `WindowFunction`s:
 
 1. [ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md)
-1. [ResolveWindowOrder](../logical-analysis-rules/ResolveWindowOrder.md)
+1. `ResolveWindowOrder`
 1. [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md)
 
 ## <span id="frame"> WindowFrame

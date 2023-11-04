@@ -1,3 +1,7 @@
+---
+title: DataSourceStrategy
+---
+
 # DataSourceStrategy Execution Planning Strategy
 
 `DataSourceStrategy` is an [execution planning strategy](SparkStrategy.md) (of [SparkPlanner](../SparkPlanner.md)) that [plans LogicalRelation logical operators as RowDataSourceScanExec physical operators](#apply) (possibly under [FilterExec](../physical-operators/FilterExec.md) and [ProjectExec](../physical-operators/ProjectExec.md) logical operators).

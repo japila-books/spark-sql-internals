@@ -1,4 +1,8 @@
-# ResolveCreateNamedStruct Logical Resolution Rule -- Resolving NamePlaceholders In CreateNamedStruct Expressions
+---
+title: ResolveCreateNamedStruct
+---
+
+# ResolveCreateNamedStruct Logical Resolution Rule
 
 `ResolveCreateNamedStruct` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, replaces NamePlaceholders with Literals for the names in CreateNamedStruct expressions>> in an entire logical query plan.
 

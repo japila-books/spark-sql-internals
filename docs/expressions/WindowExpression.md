@@ -18,7 +18,7 @@ val wf = 'count.function(star())
 val windowSpec = ???
 ```
 
-`WindowExpression` is resolved in [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md), [ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md) and [ResolveWindowOrder](../logical-analysis-rules/ResolveWindowOrder.md) logical rules.
+`WindowExpression` is resolved in [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md), [ResolveWindowFrame](../logical-analysis-rules/ResolveWindowFrame.md) and `ResolveWindowOrder` logical rules.
 
 `WindowExpression` is subject to [NullPropagation](../logical-optimizations/NullPropagation.md) and [DecimalAggregates](../logical-optimizations/DecimalAggregates.md) logical optimizations.
 

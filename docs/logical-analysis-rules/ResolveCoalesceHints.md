@@ -1,3 +1,7 @@
+---
+title: ResolveCoalesceHints
+---
+
 # ResolveCoalesceHints Logical Resolution Rule
 
 `ResolveCoalesceHints` is a logical resolution rule to [resolve UnresolvedHint logical operators](#apply) with the following hint names:

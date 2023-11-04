@@ -1,3 +1,7 @@
+---
+title: ResolveOrdinalInOrderByAndGroupBy
+---
+
 # ResolveOrdinalInOrderByAndGroupBy Logical Resolution Rule
 
 `ResolveOrdinalInOrderByAndGroupBy` is a [logical resolution rule](../Analyzer.md#batches) that <<apply, converts ordinal positions in Sort and Aggregate logical operators with corresponding expressions>>  in a logical query plan.

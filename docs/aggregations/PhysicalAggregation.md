@@ -35,7 +35,7 @@ unapply(
 
 ---
 
-`unapply` creates a [EquivalentExpressions](../EquivalentExpressions.md) (to eliminate duplicate aggregate expressions and avoid evaluating them multiple times).
+`unapply` creates a [EquivalentExpressions](../subexpression-elimination/EquivalentExpressions.md) (to eliminate duplicate aggregate expressions and avoid evaluating them multiple times).
 
 `unapply` collects [AggregateExpressions](../expressions/AggregateExpression.md#isAggregate) in the [resultExpressions](../logical-operators/Aggregate.md#resultExpressions) of the given [Aggregate](../logical-operators/Aggregate.md) logical operator.
 

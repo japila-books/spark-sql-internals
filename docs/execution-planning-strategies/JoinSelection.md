@@ -1,3 +1,7 @@
+---
+title: JoinSelection
+---
+
 # JoinSelection Execution Planning Strategy
 
 `JoinSelection` is an [execution planning strategy](SparkStrategy.md) for [Join](../logical-operators/Join.md) logical operators.

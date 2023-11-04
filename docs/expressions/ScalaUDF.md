@@ -145,7 +145,7 @@ nodePatterns: Seq[TreePattern]
 
 ## Analysis
 
-[Logical Analyzer](../Analyzer.md) uses [HandleNullInputsForUDF](../logical-analysis-rules/HandleNullInputsForUDF.md) and `ResolveEncodersInUDF` logical evaluation rules to analyze queries with `ScalaUDF` expressions.
+[Logical Analyzer](../Analyzer.md) uses `HandleNullInputsForUDF` and `ResolveEncodersInUDF` logical evaluation rules to analyze queries with `ScalaUDF` expressions.
 
 ## Demo
 

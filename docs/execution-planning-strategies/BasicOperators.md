@@ -1,3 +1,7 @@
+---
+title: BasicOperators
+---
+
 # BasicOperators Execution Planning Strategy
 
 `BasicOperators` is an [execution planning strategy](SparkStrategy.md) for [basic conversions](#conversions) of [logical operators](../logical-operators/LogicalPlan.md) to their [physical representatives](../physical-operators/SparkPlan.md).

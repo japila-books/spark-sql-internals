@@ -25,4 +25,4 @@ resolved: Boolean
 
 ## Logical Analysis
 
-`UnresolvedTable` is resolved to a [ResolvedTable](ResolvedTable.md) by [ResolveTables](../logical-analysis-rules/ResolveTables.md) logical resolution rule.
+`UnresolvedTable` is resolved to a [ResolvedTable](ResolvedTable.md) by `ResolveTables` logical resolution rule.

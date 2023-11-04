@@ -1,3 +1,7 @@
+---
+title: CTESubstitution
+---
+
 # CTESubstitution Logical Analysis Rule
 
 `CTESubstitution` is a [logical analysis rule](../Analyzer.md#batches) that [transforms a logical query plan](#apply) with...FIXME
