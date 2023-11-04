@@ -176,11 +176,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/EquivalentExpressions/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/ExecutionListenerBus/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
@@ -662,11 +657,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/spark-sql-udfs/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/subexpression-elimination/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1681,6 +1671,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/execution-planning-strategies/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/execution-planning-strategies/Aggregation/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
@@ -2611,6 +2606,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/AddMetadataColumns/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
@@ -2646,11 +2646,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/HandleNullInputsForUDF/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/LookupFunctions/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
@@ -2662,11 +2657,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/PreprocessTableCreation/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/RemoveAllHints/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2726,17 +2716,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveMissingReferences/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveOrdinalInOrderByAndGroupBy/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveOutputRelation/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2766,27 +2746,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveTables/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveTempViews/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveTimeZone/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveWindowFrame/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/ResolveWindowOrder/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -2807,16 +2767,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/TableCapabilityCheck/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/UpdateOuterReferences/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/logical-analysis-rules/WidenSetOperationTypes/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -3357,6 +3307,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/WriteFiles/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-optimizations/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4467,6 +4422,16 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/sql/VariableSubstitution/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/subexpression-elimination/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/subexpression-elimination/EquivalentExpressions/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
