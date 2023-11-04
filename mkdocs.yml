@@ -216,6 +216,7 @@ nav:
     - File-Based Data Scanning:
       - file-based-data-scanning/index.md
     - ... | generated-columns/**.md
+    - ... | hidden-file-metadata/**.md
     - ... | hints/**.md
     - Join Queries:
       - Joins: joins.md

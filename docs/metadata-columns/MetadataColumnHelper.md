@@ -30,11 +30,11 @@ isMetadataCol: Boolean
 markAsQualifiedAccessOnly(): Attribute
 ```
 
-`markAsQualifiedAccessOnly` propagates hidden columns by adding the following metadata to the [Attribute](#attr):
+`markAsQualifiedAccessOnly` propagates hidden columns by adding the following entries to the metadata of this [Attribute](#attr):
 
 Metadata Key | Value
 -------------|------
- [__metadata_col](#METADATA_COL_ATTR_KEY) | `true`
+ [__metadata_col](#METADATA_COL_ATTR_KEY) | The [name](../expressions/Attribute.md#name) of this [Attribute](#attr)
  [__qualified_access_only](#QUALIFIED_ACCESS_ONLY) | `true`
 
 ---
