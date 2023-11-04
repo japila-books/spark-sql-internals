@@ -1,3 +1,7 @@
+---
+title: UnresolvedRelation
+---
+
 # UnresolvedRelation Logical Operator
 
 `UnresolvedRelation` is a [leaf logical operator](LeafNode.md) with a [name](#name) (as a [NamedRelation](NamedRelation.md)) that represents a named relation that has yet to be looked up in a catalog at analysis.

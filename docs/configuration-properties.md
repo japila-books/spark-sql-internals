@@ -2115,13 +2115,17 @@ NOTE: When this conf is not set, the value of `spark.redaction.string.regex` is 
 
 Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method to access the current value.
 
-## <span id="spark.sql.runSQLOnFiles"> spark.sql.runSQLOnFiles
+## spark.sql.runSQLOnFiles { #spark.sql.runSQLOnFiles }
 
-**(internal)** Controls whether Spark SQL could use `datasource`.`path` as a table in a SQL query.
+**(internal)** Enables ```datasource`.`path``` table names in SQL queries for [FileFormat](connectors/FileFormat.md)-based data sources (excluding [hive](hive/index.md) tables)
 
 Default: `true`
 
 Use [SQLConf.runSQLonFile](SQLConf.md#runSQLonFile) method to access the current value.
+
+Used when:
+
+* [ResolveSQLOnFile](logical-analysis-rules/ResolveSQLOnFile.md) logical analysis rule is executed
 
 ## <span id="spark.sql.selfJoinAutoResolveAmbiguity"> spark.sql.selfJoinAutoResolveAmbiguity
 

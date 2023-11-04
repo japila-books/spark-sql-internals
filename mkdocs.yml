@@ -211,6 +211,7 @@ nav:
       - SizeInBytesOnlyStatsPlanVisitor: cost-based-optimization/SizeInBytesOnlyStatsPlanVisitor.md
       - Statistics: cost-based-optimization/Statistics.md
     - ... | default-columns/**.md
+    - ... | direct-queries-on-files/**.md
     - Dynamic Partition Pruning:
       - dynamic-partition-pruning/index.md
     - File-Based Data Scanning:

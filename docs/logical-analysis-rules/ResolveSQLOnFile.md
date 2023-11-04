@@ -4,28 +4,45 @@ title: ResolveSQLOnFile
 
 # ResolveSQLOnFile Logical Evaluation Rule
 
-`ResolveSQLOnFile` is...FIXME
+`ResolveSQLOnFile` is an [extended resolution rule](../Analyzer.md#extendedResolutionRules) for [hive](../hive/HiveSessionStateBuilder.md#analyzer) and [non-hive](../BaseSessionStateBuilder.md#analyzer) sessions for [Direct Queries on Files](../direct-queries-on-files/index.md).
 
-=== [[maybeSQLFile]] `maybeSQLFile` Internal Method
+`ResolveSQLOnFile` is a [logical rule](index.md).
 
-[source, scala]
-----
-maybeSQLFile(u: UnresolvedRelation): Boolean
-----
+## Creating Instance
 
-`maybeSQLFile` is enabled (i.e. `true`) where the following all hold:
+`ResolveSQLOnFile` takes the following to be created:
 
-1. FIXME
+* <span id="sparkSession"> [SparkSession](../SparkSession.md)
 
-NOTE: `maybeSQLFile` is used exclusively when...FIXME
+`ResolveSQLOnFile` is created when:
 
-=== [[apply]] Applying Rule to Logical Plan -- `apply` Method
+* `HiveSessionStateBuilder` is requested for the [Analyzer](../hive/HiveSessionStateBuilder.md#analyzer)
+* `BaseSessionStateBuilder` is requested for the [Analyzer](../BaseSessionStateBuilder.md#analyzer)
 
-[source, scala]
-----
-apply(plan: LogicalPlan): LogicalPlan
-----
+## Executing Rule { #apply }
 
-NOTE: `apply` is part of catalyst/Rule.md#apply[Rule Contract] to apply a rule to a spark-sql-LogicalPlan.md[logical plan].
+??? note "Rule"
 
-`apply`...FIXME
+    ```scala
+    apply(
+      plan: LogicalPlan): LogicalPlan
+    ```
+
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+
+`apply` handles the following logical operators:
+
+* `RelationTimeTravel`
+* [UnresolvedRelation](../logical-operators/UnresolvedRelation.md)
+
+### maybeSQLFile { #maybeSQLFile }
+
+```scala
+maybeSQLFile(
+  u: UnresolvedRelation): Boolean
+```
+
+`maybeSQLFile` holds `true` when the following are all `true`:
+
+1. [spark.sql.runSQLOnFiles](../configuration-properties.md#spark.sql.runSQLOnFiles) is enabled
+1. The given [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) is two-part (i.e., uses a single `.` to separate the data source part from the path itself, ```datasource`.`path```).
