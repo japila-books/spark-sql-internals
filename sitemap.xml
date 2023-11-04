@@ -1666,6 +1666,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/direct-queries-on-files/</loc>
+         <lastmod>2023-11-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/dynamic-partition-pruning/</loc>
          <lastmod>2023-11-04</lastmod>
          <changefreq>daily</changefreq>
