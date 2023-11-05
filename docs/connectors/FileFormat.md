@@ -220,13 +220,13 @@ Used when:
 
 * `FileSourceScanExec` physical operator is requested for the [vectorTypes](../physical-operators/FileSourceScanExec.md#vectorTypes)
 
-## <span id="BASE_METADATA_FIELDS"> Metadata Schema (Fields) { #metadataSchemaFields }
+## <span id="BASE_METADATA_FIELDS"> Metadata Columns { #metadataSchemaFields }
 
 ```scala
 metadataSchemaFields: Seq[StructField]
 ```
 
-`metadataSchemaFields` is the following schema of non-`nullable` **constant metadata columns**.
+`metadataSchemaFields` is the following non-`nullable` [hidden file metadata columns](../hidden-file-metadata/index.md):
 
 Name | Data Type
 -----|----------

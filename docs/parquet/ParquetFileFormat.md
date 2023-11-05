@@ -9,7 +9,7 @@
 
 `ParquetFileFormat` is `Serializable`.
 
-## <span id="DataSourceRegister"><span id="shortName"> Short Name
+## <span id="DataSourceRegister"> Short Name { #shortName }
 
 ```scala
 shortName(): String
@@ -21,9 +21,30 @@ shortName(): String
 parquet
 ```
 
-## <span id="isSplitable"> isSplitable
+## Metadata Columns { #metadataSchemaFields }
 
-??? note "Signature"
+??? note "FileFormat"
+
+    ```scala
+    metadataSchemaFields: Seq[StructField]
+    ```
+
+    `metadataSchemaFields` is part of the [FileFormat](../connectors/FileFormat.md#metadataSchemaFields) abstraction.
+
+`metadataSchemaFields` is the following metadata columns:
+
+* The default [FileFormat-specific metadata columns](../connectors/FileFormat.md#metadataSchemaFields)
+* [row_index](#row_index)
+
+### <span id="ROW_INDEX_FIELD"> row_index { #row_index }
+
+`row_index` is a `ParquetFileFormat`-specific [metadata column](#metadataSchemaFields).
+
+### <span id="ROW_INDEX_TEMPORARY_COLUMN_NAME"> _tmp_metadata_row_index
+
+## isSplitable { #isSplitable }
+
+??? note "FileFormat"
 
     ```scala
     isSplitable(
@@ -36,9 +57,9 @@ parquet
 
 `ParquetFileFormat` is splitable (`true`).
 
-## <span id="buildReaderWithPartitionValues"> Building Data Reader With Partition Values
+## Building Data Reader With Partition Values { #buildReaderWithPartitionValues }
 
-??? note "Signature"
+??? note "FileFormat"
 
     ```scala
     buildReaderWithPartitionValues(
@@ -116,9 +137,9 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 
 * FIXME (since Parquet vectorized reader is enabled by default it's of less interest)
 
-## <span id="supportBatch"> supportBatch
+## supportBatch { #supportBatch }
 
-??? note "Signature"
+??? note "FileFormat"
 
     ```scala
     supportBatch(
@@ -141,9 +162,9 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 
 1. All the fields in the output schema are of [AtomicType](../types/AtomicType.md)
 
-## <span id="vectorTypes"> Vector Types
+## Vector Types { #vectorTypes }
 
-??? note "Signature"
+??? note "FileFormat"
 
     ```scala
     vectorTypes(
@@ -161,7 +182,7 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
 
 The size of the collection are all the fields of the given `requiredSchema` and `partitionSchema` schemas.
 
-## <span id="mergeSchemasInParallel"> mergeSchemasInParallel
+## mergeSchemasInParallel { #mergeSchemasInParallel }
 
 ```scala
 mergeSchemasInParallel(
