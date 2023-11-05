@@ -234,6 +234,7 @@ nav:
     - ... | subexpression-elimination/**.md
     - ... | subqueries/**.md
     - ... | table-valued-functions/**.md
+    - ... | time-travel/**.md
     - ... | transactional-writes/**.md
     - ... | user-defined-functions/**.md
     - Vectorized Decoding:

@@ -1,3 +1,7 @@
+---
+title: AstBuilder
+---
+
 # AstBuilder &mdash; ANTLR-based SQL Parser
 
 `AstBuilder` converts ANTLR `ParseTree`s into Catalyst entities using [visit callbacks](#visit-callbacks).
@@ -879,6 +883,27 @@ Used when:
 
 * [visitRegularQuerySpecification](#visitRegularQuerySpecification)
 * [withFromStatementBody](#withFromStatementBody)
+
+### withTimeTravel { #withTimeTravel }
+
+`withTimeTravel` creates a [RelationTimeTravel](../logical-operators/RelationTimeTravel.md) for the following in a SQL query:
+
+```antlr
+temporalClause
+    : FOR? (SYSTEM_VERSION | VERSION) AS OF version
+    | FOR? (SYSTEM_TIME | TIMESTAMP) AS OF timestamp
+    ;
+
+relationPrimary
+    : identifierReference temporalClause?
+      sample? tableAlias                                    #tableName
+    ...
+```
+
+!!! note "ParseException"
+    `timestamp` expression cannot refer to any columns.
+
+Used in [visitTableName](#visitTableName) (to handle the optional `temporalClause`).
 
 ### withTransformQuerySpecification { #withTransformQuerySpecification }
 

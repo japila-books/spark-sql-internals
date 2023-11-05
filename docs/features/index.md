@@ -12,14 +12,15 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Catalog Plugin API](../connector/catalog/index.md)
 * [Columnar Execution](../columnar-execution/index.md)
 * [Connector API](../connector/index.md)
-* [Default Columns](../default-columns/index.md) :material-new-box:{ title="New in 3.4.0" }
+* [Default Columns](../default-columns/index.md)
 * [Direct Queries on Files](../direct-queries-on-files/index.md)
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
 * [File-Based Data Scanning](../file-based-data-scanning/index.md)
 * [Hints](../hints/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
-* [Spark Connect](../connect/index.md) :material-new-box:{ title="New in 3.4.0" }
-* [Table-Valued Functions](../table-valued-functions/index.md) :material-new-box:{ title="New in 3.4.0" }
+* [Spark Connect](../connect/index.md)
+* [Table-Valued Functions](../table-valued-functions/index.md)
+* [Time Travel](../time-travel/index.md)
 * [Variable Substitution](../variable-substitution.md)
 * [Vectorized Parquet Decoding (Reader)](../vectorized-decoding/index.md)
 * [Whole-Stage Code Generation](../whole-stage-code-generation/index.md)
