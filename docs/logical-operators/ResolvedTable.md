@@ -1,3 +1,7 @@
+---
+title: ResolvedTable
+---
+
 # ResolvedTable Leaf Logical Operator
 
 `ResolvedTable` is a [leaf logical operator](LeafNode.md).

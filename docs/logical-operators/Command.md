@@ -1,3 +1,7 @@
+---
+title: Command
+---
+
 # Command &mdash; Eagerly-Executed Logical Operators
 
 `Command` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical operators in general).

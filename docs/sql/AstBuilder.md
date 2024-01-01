@@ -521,6 +521,18 @@ MSCK REPAIR TABLE multipartIdentifier
 
 ANTLR labeled alternative: `#repairTable`
 
+### visitShowColumns { #visitShowColumns }
+
+Creates a [ShowColumns](../logical-operators/ShowColumns.md) logical command for the following SQL statement:
+
+```antlr
+SHOW COLUMNS
+  (FROM | IN) [table]
+  ((FROM | IN) [ns])?
+```
+
+ANTLR labeled alternative: `#showColumns`
+
 ### <span id="visitShowCreateTable"> visitShowCreateTable
 
 Creates a [ShowCreateTable](../logical-operators/ShowCreateTable.md) logical command for the following SQL statement:
@@ -541,17 +553,6 @@ SHOW CURRENT NAMESPACE
 
 ANTLR labeled alternative: `#showCurrentNamespace`
 
-### <span id="visitShowTblProperties"> visitShowTblProperties
-
-Creates a [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command
-
-```text
-SHOW TBLPROPERTIES [multi-part table identifier]
-  ('(' [dot-separated table property key] ')')?
-```
-
-ANTLR labeled alternative: `#showTblProperties`
-
 ### <span id="visitShowTables"> visitShowTables
 
 Creates a [ShowTables](../logical-operators/ShowTables.md) for the following SQL statement:
@@ -562,6 +563,17 @@ SHOW TABLES ((FROM | IN) multipartIdentifier)?
 ```
 
 ANTLR labeled alternative: `#showTables`
+
+### <span id="visitShowTblProperties"> visitShowTblProperties
+
+Creates a [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command
+
+```text
+SHOW TBLPROPERTIES [multi-part table identifier]
+  ('(' [dot-separated table property key] ')')?
+```
+
+ANTLR labeled alternative: `#showTblProperties`
 
 ### <span id="visitSingleDataType"> visitSingleDataType
 
@@ -606,6 +618,12 @@ tableProvider
 
 ANTLR labeled alternative: `#singleInsertQuery`
 
+### <span id="visitSingleStatement"> visitSingleStatement
+
+Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) from a single SQL statement
+
+ANTLR rule: `singleStatement`
+
 ### <span id="visitSortItem"> visitSortItem
 
 Creates a [SortOrder](../expressions/SortOrder.md) unary expression
@@ -624,12 +642,6 @@ SORT BY sort+=sortItem (',' sort+=sortItem)*
 ```
 
 ANTLR rule: `sortItem`
-
-### <span id="visitSingleStatement"> visitSingleStatement
-
-Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) from a single SQL statement
-
-ANTLR rule: `singleStatement`
 
 ### <span id="visitStar"> visitStar
 

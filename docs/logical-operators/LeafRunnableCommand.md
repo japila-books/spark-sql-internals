@@ -1,3 +1,7 @@
+---
+title: LeafRunnableCommand
+---
+
 # LeafRunnableCommand &mdash; Leaf Logical Runnable Commands
 
 `LeafRunnableCommand` is an [extension](#contract) of the [RunnableCommand](RunnableCommand.md) abstraction for [leaf logical runnable commands](#implementations).

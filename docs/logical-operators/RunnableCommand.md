@@ -1,3 +1,7 @@
+---
+title: RunnableCommand
+---
+
 # RunnableCommand Logical Operators
 
 `RunnableCommand` is an [extension](#contract) of the [Command](Command.md) abstraction for [logical commands](#implementations) that can be [executed](#run) for side effects.

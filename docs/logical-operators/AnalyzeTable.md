@@ -1,4 +1,8 @@
-# AnalyzeTable
+---
+title: AnalyzeTable
+---
+
+# AnalyzeTable Unary Command
 
 `AnalyzeTable` is a `UnaryCommand` (and a [Logical Command](Command.md)) for [ANALYZE TABLE](../sql/AstBuilder.md#visitAnalyze) SQL statement.
 
