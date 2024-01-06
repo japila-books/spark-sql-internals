@@ -1,40 +1,43 @@
+---
+title: PrunedFilteredScan
+---
+
 # PrunedFilteredScan &mdash; Relations with Column Pruning and Filter Pushdown
 
-`PrunedFilteredScan` is the <<contract, contract>> of <<implementations, BaseRelations>> with support for <<buildScan, column pruning>> (i.e. eliminating unneeded columns) and <<buildScan, filter pushdown>> (i.e. filtering using selected predicates only).
+`PrunedFilteredScan` is an [abstraction](#contract) of [BaseRelations](#implementations) that support [column pruning](#buildScan) (_eliminating unneeded columns_) and [filter pushdown](#buildScan) (_filtering using selected predicates only_).
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.sources
+## Contract
 
-trait PrunedFilteredScan {
-  def buildScan(requiredColumns: Array[String], filters: Array[Filter]): RDD[Row]
-}
-----
+### Building Distributed Scan { #buildScan }
 
-.PrunedFilteredScan Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Property
-| Description
+```scala
+buildScan(
+  requiredColumns: Array[String],
+  filters: Array[Filter]): RDD[Row]
+```
 
-| `buildScan`
-| [[buildScan]] Building distributed data scan with column pruning and filter pushdown
-
-In other words, `buildScan` creates a `RDD[Row]` to represent a distributed data scan (i.e. scanning over data in a relation)
-
-Used exclusively when `DataSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation with a PrunedFilteredScan](execution-planning-strategies/DataSourceStrategy.md#PrunedFilteredScan).
-|===
+Builds a distributed data scan (`RDD[Row]`) with column pruning and filter pushdown
 
 !!! note
     `PrunedFilteredScan` is a "lighter" and stable version of the `CatalystScan` abstraction.
 
-[[implementations]]
-NOTE: [JDBCRelation](jdbc/JDBCRelation.md) is the one and only known implementation of the <<contract, PrunedFilteredScan Contract>> in Spark SQL.
+See:
 
-[[example]]
-[source, scala]
-----
+* [JDBCRelation](jdbc/JDBCRelation.md#buildScan)
+* `DeltaCDFRelation` ([Delta Lake]({{ book.delta }}/change-data-feed/DeltaCDFRelation/#buildScan))
+
+Used when:
+
+* `DataSourceStrategy` execution planning strategy is requested to [plan a LogicalRelation over a PrunedFilteredScan](execution-planning-strategies/DataSourceStrategy.md#apply)
+
+## Implementations
+
+* [JDBCRelation](jdbc/JDBCRelation.md)
+* `DeltaCDFRelation` ([Delta Lake]({{ book.delta }}/change-data-feed/DeltaCDFRelation/))
+
+## Example
+
+```scala
 // Use :paste to define MyBaseRelation case class
 // BEGIN
 import org.apache.spark.sql.sources.PrunedFilteredScan
@@ -54,21 +57,34 @@ case class MyBaseRelation(sqlContext: SQLContext) extends BaseRelation with Prun
   }
 }
 // END
+```
+
+```scala
 val scan = MyBaseRelation(spark.sqlContext)
 
 import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.execution.datasources.LogicalRelation
 val plan: LogicalPlan = LogicalRelation(scan)
+```
 
+```text
 scala> println(plan.numberedTreeString)
 00 Relation[a#1] MyBaseRelation(org.apache.spark.sql.SQLContext@4a57ad67)
+```
 
+```scala
 import org.apache.spark.sql.execution.datasources.DataSourceStrategy
 val strategy = DataSourceStrategy(spark.sessionState.conf)
 
 val sparkPlan = strategy(plan).head
+```
+
+```text
 // >>> [buildScan] requiredColumns = a
 // >>> [buildScan] filters =
+```
+
+```text
 scala> println(sparkPlan.numberedTreeString)
 00 Scan MyBaseRelation(org.apache.spark.sql.SQLContext@4a57ad67) [a#8] PushedFilters: [], ReadSchema: struct<a:string>
-----
+```

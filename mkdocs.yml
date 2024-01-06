@@ -191,7 +191,6 @@ nav:
       - columnar-execution/index.md
     - ... | common-table-expressions/**.md
     - Configuration Properties: configuration-properties.md
-    - ... | connector/**.md
     # FIXME No idea how to include a subdirectory (connector/expressions)
     #       to be under Connector API using awesome-pages
     - Connector Expressions:
@@ -481,18 +480,6 @@ nav:
     - Overview: overview.md
     - DataSource: DataSource.md
     - developer-api.md
-    - DataSource V1 API:
-      - DataSourceRegister: DataSourceRegister.md
-      - CreatableRelationProvider: CreatableRelationProvider.md
-      - RelationProvider: RelationProvider.md
-      - SchemaRelationProvider: SchemaRelationProvider.md
-      - BaseRelation: BaseRelation.md
-      - FileRelation: FileRelation.md
-      - InsertableRelation: InsertableRelation.md
-      - PrunedFilteredScan: PrunedFilteredScan.md
-      - PrunedScan: PrunedScan.md
-      - TableScan: TableScan.md
-      - Filter: Filter.md
     - ExecutionListenerBus: ExecutionListenerBus.md
     - ExecutionListenerManager: ExecutionListenerManager.md
     - SharedState: SharedState.md
@@ -687,12 +674,25 @@ nav:
   - High-Level APIs:
     - Column: Column.md
     - ColumnarRule: ColumnarRule.md
+    - ... | connector/**.md
     - ... | types/**.md
     - Dataset: Dataset.md
     - DataFrame: DataFrame.md
     - DataFrameReader: DataFrameReader.md
     - DataFrameWriter: DataFrameWriter.md
     - DataFrameWriterV2: DataFrameWriterV2.md
+    - DataSource V1 API:
+      - DataSourceRegister: DataSourceRegister.md
+      - CreatableRelationProvider: CreatableRelationProvider.md
+      - RelationProvider: RelationProvider.md
+      - SchemaRelationProvider: SchemaRelationProvider.md
+      - BaseRelation: BaseRelation.md
+      - FileRelation: FileRelation.md
+      - InsertableRelation: InsertableRelation.md
+      - PrunedFilteredScan: PrunedFilteredScan.md
+      - PrunedScan: PrunedScan.md
+      - TableScan: TableScan.md
+      - Filter: Filter.md
     - Encoders: Encoders.md
     - KeyValueGroupedDataset: KeyValueGroupedDataset.md
     - Observation: Observation.md
