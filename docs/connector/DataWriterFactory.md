@@ -22,8 +22,8 @@ Used when:
 
 ## Implementations
 
-* [FileWriterFactory](../connectors/FileWriterFactory.md)
-* `KafkaBatchWriterFactory`
+* [FileWriterFactory](../files/FileWriterFactory.md)
+* [KafkaBatchWriterFactory](../kafka/KafkaBatchWriterFactory.md)
 * `MemoryWriterFactory` (Spark Structured Streaming)
 * `MicroBatchWriterFactory` (Spark Structured Streaming)
 * `NoopWriterFactory`

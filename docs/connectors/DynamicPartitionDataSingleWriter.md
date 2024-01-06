@@ -1,3 +1,0 @@
-# DynamicPartitionDataSingleWriter
-
-`DynamicPartitionDataSingleWriter` is...FIXME

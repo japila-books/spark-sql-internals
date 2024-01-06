@@ -54,10 +54,10 @@ refresh(): Unit
 
 `refresh` is part of [LogicalPlan](LogicalPlan.md#refresh) abstraction.
 
-`refresh` requests the [FileIndex](../connectors/HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
+`refresh` requests the [FileIndex](../files/HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
 
 !!! note
-    `refresh` does the work for [HadoopFsRelation](../connectors/HadoopFsRelation.md) relations only.
+    `refresh` does the work for [HadoopFsRelation](../files/HadoopFsRelation.md) relations only.
 
 ## <span id="simpleString"> Simple Text Representation
 

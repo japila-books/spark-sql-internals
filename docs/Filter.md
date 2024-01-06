@@ -8,9 +8,9 @@
 
 * (Data Source API V1) `PrunedFilteredScan` is requested for [build a scan](PrunedFilteredScan.md#buildScan) (and hence `PrunedFilteredScan` implementations, i.e. [JDBCRelation](jdbc/JDBCRelation.md#buildScan))
 
-* `FileFormat` is requested to [buildReader](connectors/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, `TextFileFormat` and Spark MLlib's `LibSVMFileFormat`)
+* `FileFormat` is requested to [buildReader](files/FileFormat.md#buildReader) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, `CSVFileFormat`, `JsonFileFormat`, `TextFileFormat` and Spark MLlib's `LibSVMFileFormat`)
 
-* `FileFormat` is requested to [build a Data Reader with partition column values appended](connectors/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, [ParquetFileFormat](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
+* `FileFormat` is requested to [build a Data Reader with partition column values appended](files/FileFormat.md#buildReaderWithPartitionValues) (and hence `FileFormat` implementations, i.e. `OrcFileFormat`, [ParquetFileFormat](parquet/ParquetFileFormat.md#buildReaderWithPartitionValues))
 
 * `RowDataSourceScanExec` is RowDataSourceScanExec.md#creating-instance[created] (for a DataSourceScanExec.md#simpleString[simple text representation (in a query plan tree)])
 

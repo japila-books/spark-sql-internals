@@ -559,39 +559,44 @@ nav:
       - AvroDataToCatalyst: avro/AvroDataToCatalyst.md
     - Files:
       - files/index.md
-      - AggregatePushDownUtils: connectors/AggregatePushDownUtils.md
-      - BasicWriteJobStatsTracker: connectors/BasicWriteJobStatsTracker.md
-      - BasicWriteTaskStats: connectors/BasicWriteTaskStats.md
+      - AggregatePushDownUtils: files/AggregatePushDownUtils.md
+      - BaseDynamicPartitionDataWriter: files/BaseDynamicPartitionDataWriter.md
+      - BasicWriteJobStatsTracker: files/BasicWriteJobStatsTracker.md
+      - BasicWriteTaskStats: files/BasicWriteTaskStats.md
+      - BasicWriteTaskStatsTracker: files/BasicWriteTaskStatsTracker.md
       - CompressionCodecs: files/CompressionCodecs.md
-      - FileBatchWrite: connectors/FileBatchWrite.md
-      - FileDataSourceV2: connectors/FileDataSourceV2.md
-      - FileFormat: connectors/FileFormat.md
-      - FileFormatDataWriter: connectors/FileFormatDataWriter.md
-      - FileFormatWriter: connectors/FileFormatWriter.md
+      - DynamicPartitionDataSingleWriter: files/DynamicPartitionDataSingleWriter.md
+      - DynamicPartitionDataConcurrentWriter: files/DynamicPartitionDataConcurrentWriter.md
+      - FileBatchWrite: files/FileBatchWrite.md
+      - FileDataSourceV2: files/FileDataSourceV2.md
+      - FileFormat: files/FileFormat.md
+      - FileFormatDataWriter: files/FileFormatDataWriter.md
+      - FileFormatWriter: files/FileFormatWriter.md
       - FileIndex:
-        - connectors/FileIndex.md
-        - connectors/CatalogFileIndex.md
-        - connectors/InMemoryFileIndex.md
-        - connectors/PartitioningAwareFileIndex.md
-        - connectors/PrunedInMemoryFileIndex.md
-      - FilePartition: connectors/FilePartition.md
-      - FilePartitionReaderFactory: connectors/FilePartitionReaderFactory.md
-      - FileScan: connectors/FileScan.md
-      - FileScanBuilder: connectors/FileScanBuilder.md
-      - FileStatusCache: connectors/FileStatusCache.md
-      - FileTable: connectors/FileTable.md
-      - FileWrite: connectors/FileWrite.md
-      - FileWriterFactory: connectors/FileWriterFactory.md
-      - HadoopFileLinesReader: connectors/HadoopFileLinesReader.md
-      - HadoopFsRelation: connectors/HadoopFsRelation.md
-      - PartitionedFile: connectors/PartitionedFile.md
-      - PartitionedFileUtil: connectors/PartitionedFileUtil.md
-      - RecordReaderIterator: connectors/RecordReaderIterator.md
-      - SharedInMemoryCache: connectors/SharedInMemoryCache.md
-      - SchemaMergeUtils: connectors/SchemaMergeUtils.md
-      - SingleDirectoryDataWriter: connectors/SingleDirectoryDataWriter.md
-      - WriteJobStatsTracker: connectors/WriteJobStatsTracker.md
-      - WriteTaskStats: connectors/WriteTaskStats.md
+        - files/FileIndex.md
+        - files/CatalogFileIndex.md
+        - files/InMemoryFileIndex.md
+        - files/PartitioningAwareFileIndex.md
+        - files/PrunedInMemoryFileIndex.md
+      - FilePartition: files/FilePartition.md
+      - FilePartitionReaderFactory: files/FilePartitionReaderFactory.md
+      - FileScan: files/FileScan.md
+      - FileScanBuilder: files/FileScanBuilder.md
+      - FileStatusCache: files/FileStatusCache.md
+      - FileTable: files/FileTable.md
+      - FileWrite: files/FileWrite.md
+      - FileWriterFactory: files/FileWriterFactory.md
+      - HadoopFileLinesReader: files/HadoopFileLinesReader.md
+      - HadoopFsRelation: files/HadoopFsRelation.md
+      - PartitionedFile: files/PartitionedFile.md
+      - PartitionedFileUtil: files/PartitionedFileUtil.md
+      - RecordReaderIterator: files/RecordReaderIterator.md
+      - SharedInMemoryCache: files/SharedInMemoryCache.md
+      - SchemaMergeUtils: files/SchemaMergeUtils.md
+      - SingleDirectoryDataWriter: files/SingleDirectoryDataWriter.md
+      - WriteJobStatsTracker: files/WriteJobStatsTracker.md
+      - WriteTaskStats: files/WriteTaskStats.md
+      - WriteTaskStatsTracker: files/WriteTaskStatsTracker.md
     - Hive:
       - hive/index.md
       - Configuration Properties: hive/configuration-properties.md
@@ -663,14 +668,9 @@ nav:
       - NoopBatchWrite: noop/NoopBatchWrite.md
       - NoopStreamingWrite: noop/NoopStreamingWrite.md
     - ... | parquet/**.md
-    - BaseDynamicPartitionDataWriter: connectors/BaseDynamicPartitionDataWriter.md
-    - BasicWriteTaskStatsTracker: connectors/BasicWriteTaskStatsTracker.md
     - DataWritingSparkTask: connectors/DataWritingSparkTask.md
     - DataSourceV2Utils: connectors/DataSourceV2Utils.md
-    - DynamicPartitionDataConcurrentWriter: connectors/DynamicPartitionDataConcurrentWriter.md
-    - DynamicPartitionDataSingleWriter: connectors/DynamicPartitionDataSingleWriter.md
     - OutputWriter: connectors/OutputWriter.md
-    - WriteTaskStatsTracker: connectors/WriteTaskStatsTracker.md
   - High-Level APIs:
     - Column: Column.md
     - ColumnarRule: ColumnarRule.md

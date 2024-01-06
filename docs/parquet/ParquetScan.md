@@ -1,6 +1,6 @@
 # ParquetScan
 
-`ParquetScan` is the [FileScan](../connectors/FileScan.md) of [Parquet Connector](index.md) that uses [ParquetPartitionReaderFactory](ParquetPartitionReaderFactory.md) with [ParquetReadSupport](ParquetReadSupport.md).
+`ParquetScan` is the [FileScan](../files/FileScan.md) of [Parquet Connector](index.md) that uses [ParquetPartitionReaderFactory](ParquetPartitionReaderFactory.md) with [ParquetReadSupport](ParquetReadSupport.md).
 
 ## Creating Instance
 
@@ -8,7 +8,7 @@
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
 * <span id="hadoopConf"> Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html)
-* <span id="fileIndex"> [PartitioningAwareFileIndex](../connectors/PartitioningAwareFileIndex.md)
+* <span id="fileIndex"> [PartitioningAwareFileIndex](../files/PartitioningAwareFileIndex.md)
 * <span id="dataSchema"> Data [schema](../types/StructType.md)
 * <span id="readDataSchema"> Read data [schema](../types/StructType.md)
 * <span id="readPartitionSchema"> Read partition [schema](../types/StructType.md)
@@ -69,7 +69,7 @@ Name | Value
       path: Path): Boolean
     ```
 
-    `isSplitable` is part of the [FileScan](../connectors/FileScan.md#isSplitable) abstraction.
+    `isSplitable` is part of the [FileScan](../files/FileScan.md#isSplitable) abstraction.
 
 `isSplitable` is enabled (`true`) when all the following hold:
 
@@ -86,7 +86,7 @@ Name | Value
 
     `readSchema` is part of the [Scan](../connector/Scan.md#readSchema) abstraction.
 
-`readSchema` is [readDataSchema](#readDataSchema) with [aggregate pushed down](#pushedAggregate). Otherwise, `readSchema` is the default [readSchema](../connectors/FileScan.md#readSchema).
+`readSchema` is [readDataSchema](#readDataSchema) with [aggregate pushed down](#pushedAggregate). Otherwise, `readSchema` is the default [readSchema](../files/FileScan.md#readSchema).
 
 ## <span id="getMetaData"> Custom Metadata
 
@@ -98,7 +98,7 @@ Name | Value
 
     `getMetaData` is part of the [SupportsMetadata](../connector/SupportsMetadata.md#getMetaData) abstraction.
 
-`getMetaData` adds the following metadata to the default [file-based metadata](../connectors/FileScan.md#getMetaData):
+`getMetaData` adds the following metadata to the default [file-based metadata](../files/FileScan.md#getMetaData):
 
 Metadata | Value
 ---------|------

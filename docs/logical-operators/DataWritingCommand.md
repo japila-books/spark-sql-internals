@@ -57,9 +57,9 @@ Used when:
 
 ### <span id="numParts"> number of dynamic part
 
-[Number of partitions](../connectors/BasicWriteTaskStats.md#partitions) (when [processing write job statistics](../connectors/BasicWriteJobStatsTracker.md#processStats))
+[Number of partitions](../files/BasicWriteTaskStats.md#partitions) (when [processing write job statistics](../files/BasicWriteJobStatsTracker.md#processStats))
 
-Corresponds to the number of times when [newPartition](../connectors/BasicWriteTaskStatsTracker.md#newPartition) of [BasicWriteTaskStatsTracker](../connectors/BasicWriteTaskStatsTracker.md) was called (that is to announce the fact that a new partition is about to be written)
+Corresponds to the number of times when [newPartition](../files/BasicWriteTaskStatsTracker.md#newPartition) of [BasicWriteTaskStatsTracker](../files/BasicWriteTaskStatsTracker.md) was called (that is to announce the fact that a new partition is about to be written)
 
 ### <span id="numOutputRows"> number of output rows
 
@@ -85,12 +85,12 @@ basicWriteJobStatsTracker(
 
 1. Uses the [metrics](#metrics)
 
-`basicWriteJobStatsTracker` creates a new [BasicWriteJobStatsTracker](../connectors/BasicWriteJobStatsTracker.md) (with the given Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html) and the [metrics](#metrics)).
+`basicWriteJobStatsTracker` creates a new [BasicWriteJobStatsTracker](../files/BasicWriteJobStatsTracker.md) (with the given Hadoop [Configuration]({{ hadoop.api }}/org/apache/hadoop/conf/Configuration.html) and the [metrics](#metrics)).
 
 ---
 
 `basicWriteJobStatsTracker` is used when:
 
-* `FileFormatWriter` is requested to [write data out](../connectors/FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write data out](../files/FileFormatWriter.md#write)
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md) logical command is executed
 * [SaveAsHiveFile](../hive/SaveAsHiveFile.md) logical command is executed (and requested to [saveAsHiveFile](../hive/SaveAsHiveFile.md#saveAsHiveFile))

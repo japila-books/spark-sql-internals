@@ -136,7 +136,7 @@ executeWrite(
 
 Used when:
 
-* `FileFormatWriter` is requested to [executeWrite](../connectors/FileFormatWriter.md#executeWrite)
+* `FileFormatWriter` is requested to [executeWrite](../files/FileFormatWriter.md#executeWrite)
 
 ### <span id="prepare"> prepare
 

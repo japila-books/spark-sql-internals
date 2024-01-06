@@ -1,6 +1,6 @@
 # ParquetScanBuilder
 
-`ParquetScanBuilder` is a [FileScanBuilder](../connectors/FileScanBuilder.md) (of [ParquetTable](ParquetTable.md#newScanBuilder)) that [SupportsPushDownFilters](../connector/SupportsPushDownFilters.md).
+`ParquetScanBuilder` is a [FileScanBuilder](../files/FileScanBuilder.md) (of [ParquetTable](ParquetTable.md#newScanBuilder)) that [SupportsPushDownFilters](../connector/SupportsPushDownFilters.md).
 
 `ParquetScanBuilder` [builds ParquetScans](#build).
 
@@ -11,7 +11,7 @@
 `ParquetScanBuilder` takes the following to be created:
 
 * <span id="sparkSession"> [SparkSession](../SparkSession.md)
-* <span id="fileIndex"> [PartitioningAwareFileIndex](../connectors/PartitioningAwareFileIndex.md)
+* <span id="fileIndex"> [PartitioningAwareFileIndex](../files/PartitioningAwareFileIndex.md)
 * <span id="schema"> [Schema](../types/StructType.md)
 * <span id="dataSchema"> [Data Schema](../types/StructType.md)
 * <span id="options"> Case-Insensitive Options
@@ -37,12 +37,12 @@ ParquetScan | Value
  [fileIndex](ParquetScan.md#fileIndex) | the given [fileIndex](#fileIndex)
  [dataSchema](ParquetScan.md#dataSchema) | the given [dataSchema](#dataSchema)
  [readDataSchema](ParquetScan.md#readDataSchema) | [finalSchema](#finalSchema)
- [readPartitionSchema](ParquetScan.md#readPartitionSchema) | [readPartitionSchema](../connectors/FileScanBuilder.md#readPartitionSchema)
- [pushedFilters](ParquetScan.md#pushedFilters) | [pushedDataFilters](../connectors/FileScanBuilder.md#pushedDataFilters)
+ [readPartitionSchema](ParquetScan.md#readPartitionSchema) | [readPartitionSchema](../files/FileScanBuilder.md#readPartitionSchema)
+ [pushedFilters](ParquetScan.md#pushedFilters) | [pushedDataFilters](../files/FileScanBuilder.md#pushedDataFilters)
  [options](ParquetScan.md#options) | the given [options](#options)
  [pushedAggregate](ParquetScan.md#pushedAggregate) | [pushedAggregations](#pushedAggregations)
- [partitionFilters](ParquetScan.md#partitionFilters) | [partitionFilters](../connectors/FileScanBuilder.md#partitionFilters)
- [dataFilters](ParquetScan.md#dataFilters) | [dataFilters](../connectors/FileScanBuilder.md#dataFilters)
+ [partitionFilters](ParquetScan.md#partitionFilters) | [partitionFilters](../files/FileScanBuilder.md#partitionFilters)
+ [dataFilters](ParquetScan.md#dataFilters) | [dataFilters](../files/FileScanBuilder.md#dataFilters)
 
 ## <span id="pushedAggregations"> pushedAggregations
 
@@ -54,7 +54,7 @@ pushedAggregations: Option[Aggregation]
 
 The `pushedAggregations` is undefined when `ParquetScanBuilder` is [created](#creating-instance) and can only be assigned when [pushAggregation](#pushAggregation).
 
-`pushedAggregations` controls the [finalSchema](#finalSchema). When undefined, the [finalSchema](#finalSchema) is [readDataSchema](../connectors/FileScanBuilder.md#readDataSchema) when [building a ParquetScan](#build).
+`pushedAggregations` controls the [finalSchema](#finalSchema). When undefined, the [finalSchema](#finalSchema) is [readDataSchema](../files/FileScanBuilder.md#readDataSchema) when [building a ParquetScan](#build).
 
 `pushedAggregations` is used to create a [ParquetScan](ParquetScan.md#pushedAggregate).
 
@@ -71,7 +71,7 @@ The `pushedAggregations` is undefined when `ParquetScanBuilder` is [created](#cr
 
 `pushAggregation` does nothing and returns `false` for [spark.sql.parquet.aggregatePushdown](../configuration-properties.md#spark.sql.parquet.aggregatePushdown) disabled.
 
-`pushAggregation` [determines the data schema for aggregate to be pushed down](../connectors/AggregatePushDownUtils.md#getSchemaForPushedAggregation).
+`pushAggregation` [determines the data schema for aggregate to be pushed down](../files/AggregatePushDownUtils.md#getSchemaForPushedAggregation).
 
 With the schema determined, `pushAggregation` registers it as [finalSchema](#finalSchema) and the given [Aggregation](../connector/expressions/Aggregation.md) as [pushedAggregations](#pushedAggregations). `pushAggregation` returns `true`.
 
@@ -86,12 +86,12 @@ Otherwise, `pushAggregation` returns `false`.
       dataFilters: Array[Filter]): Array[Filter]
     ```
 
-    `pushDataFilters` is part of the [FileScanBuilder](../connectors/FileScanBuilder.md#pushDataFilters) abstraction.
+    `pushDataFilters` is part of the [FileScanBuilder](../files/FileScanBuilder.md#pushDataFilters) abstraction.
 
 !!! note "spark.sql.parquet.filterPushdown"
     `pushDataFilters` does nothing and returns no [Catalyst Filter](../Filter.md)s with [spark.sql.parquet.filterPushdown](../configuration-properties.md#spark.sql.parquet.filterPushdown) disabled.
 
-`pushDataFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../connectors/FileScanBuilder.md#readDataSchema) ([converted into the corresponding parquet schema](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
+`pushDataFilters` creates a [ParquetFilters](ParquetFilters.md) with the [readDataSchema](../files/FileScanBuilder.md#readDataSchema) ([converted into the corresponding parquet schema](SparkToParquetSchemaConverter.md#convert)) and the following configuration properties:
 
 * [spark.sql.parquet.filterPushdown.date](../SQLConf.md#parquetFilterPushDownDate)
 * [spark.sql.parquet.filterPushdown.decimal](../SQLConf.md#parquetFilterPushDownDecimal)
@@ -110,6 +110,6 @@ In the end, `pushedParquetFilters` requests the `ParquetFilters` for the [conver
     supportsNestedSchemaPruning: Boolean
     ```
 
-    `supportsNestedSchemaPruning` is part of the [FileScanBuilder](../connectors/FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.
+    `supportsNestedSchemaPruning` is part of the [FileScanBuilder](../files/FileScanBuilder.md#supportsNestedSchemaPruning) abstraction.
 
 `supportsNestedSchemaPruning` is enabled (`true`).

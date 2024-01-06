@@ -4,16 +4,21 @@
 
 ## Contract
 
-### <span id="write"> Writing Record Out
+### Writing Record Out { #write }
 
 ```scala
 write(
   record: InternalRow): Unit
 ```
 
-Used when:
+See:
 
-* `FileFormatDataWriter` is requested to [writeWithMetrics](#writeWithMetrics)
+* [DynamicPartitionDataConcurrentWriter](DynamicPartitionDataConcurrentWriter.md#write)
+* [DynamicPartitionDataSingleWriter](DynamicPartitionDataSingleWriter.md#write)
+* [SingleDirectoryDataWriter](SingleDirectoryDataWriter.md#write)
+
+!!! note
+    `write` is a concrete type variant of [DataWriter](../connector/DataWriter.md#write) (with `T` as [InternalRow](../InternalRow.md))
 
 ## Implementations
 
@@ -25,15 +30,15 @@ Used when:
 
 `FileFormatDataWriter` takes the following to be created:
 
-* <span id=""description"> `WriteJobDescription`
-* <span id=""taskAttemptContext"> `TaskAttemptContext` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html))
-* <span id=""committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-* <span id=""customMetrics"> Custom [SQLMetric](../SQLMetric.md)s by name (`Map[String, SQLMetric]`)
+* <span id="description"> `WriteJobDescription`
+* <span id="taskAttemptContext"> `TaskAttemptContext` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html))
+* <span id="committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
+* <span id="customMetrics"> Custom [SQLMetric](../SQLMetric.md)s by name (`Map[String, SQLMetric]`)
 
 !!! note "Abstract Class"
     `FileFormatDataWriter` is an abstract class and cannot be created directly. It is created indirectly for the [concrete FileFormatDataWriters](#implementations).
 
-## <span id="writeWithMetrics"> writeWithMetrics
+## writeWithMetrics { #writeWithMetrics }
 
 ```scala
 writeWithMetrics(
@@ -43,11 +48,13 @@ writeWithMetrics(
 
 `writeWithMetrics` updates the [CustomTaskMetrics](../connector/DataWriter.md#currentMetricsValues) with the [customMetrics](#customMetrics) and [writes out the given InternalRow](#write).
 
+---
+
 `writeWithMetrics` is used when:
 
 * `FileFormatDataWriter` is requested to [write out (a collection of) records](#writeWithIterator)
 
-## <span id="writeWithIterator"> Writing Out (Collection of) Records
+## Writing Out (Collection of) Records { #writeWithIterator }
 
 ```scala
 writeWithIterator(
@@ -56,15 +63,21 @@ writeWithIterator(
 
 `writeWithIterator`...FIXME
 
+---
+
 `writeWithIterator` is used when:
 
 * `FileFormatWriter` utility is used to [write data out in a single Spark task](FileFormatWriter.md#executeTask)
 
-## <span id="commit"> Committing Successful Write
+## Committing Successful Write { #commit }
 
-```scala
-commit(): WriteTaskResult
-```
+??? note "DataWriter"
+
+    ```scala
+    commit(): WriteTaskResult
+    ```
+
+    `commit` is part of the [DataWriter](../connector/DataWriter.md#commit) abstraction.
 
 `commit` [releaseResources](#releaseResources).
 
@@ -73,7 +86,3 @@ commit(): WriteTaskResult
 `commit` creates a new `ExecutedWriteSummary` with the [updatedPartitions](#updatedPartitions) and the [WriteTaskStats](WriteTaskStatsTracker.md#getFinalStats) of the [WriteTaskStatsTrackers](#statsTrackers).
 
 In the end, `commit` creates a `WriteTaskResult` (for the `TaskCommitMessage` and the `ExecutedWriteSummary`).
-
----
-
-`commit` is part of the [DataWriter](../connector/DataWriter.md#commit) abstraction.

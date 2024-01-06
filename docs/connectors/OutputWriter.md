@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="close"> Closing
+### Closing { #close }
 
 ```scala
 close(): Unit
@@ -14,10 +14,10 @@ Closes this `OutputWriter`
 
 Used when:
 
-* `FileFormatDataWriter` is requested to [releaseCurrentWriter](FileFormatDataWriter.md#releaseCurrentWriter)
+* `FileFormatDataWriter` is requested to [releaseCurrentWriter](../files/FileFormatDataWriter.md#releaseCurrentWriter)
 * `DynamicPartitionDataConcurrentWriter` is requested to `releaseResources`
 
-### <span id="path"> Path
+### Path { #path }
 
 ```scala
 path(): String
@@ -27,11 +27,11 @@ The file path to write records to
 
 Used when:
 
-* `FileFormatDataWriter` is requested to [releaseCurrentWriter](FileFormatDataWriter.md#releaseCurrentWriter)
-* `SingleDirectoryDataWriter` is requested to [write](SingleDirectoryDataWriter.md#write)
-* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](BaseDynamicPartitionDataWriter.md#writeRecord)
+* `FileFormatDataWriter` is requested to [releaseCurrentWriter](../files/FileFormatDataWriter.md#releaseCurrentWriter)
+* `SingleDirectoryDataWriter` is requested to [write](../files/SingleDirectoryDataWriter.md#write)
+* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](../files/BaseDynamicPartitionDataWriter.md#writeRecord)
 
-### <span id="write"> Writing Row Out
+### Writing Row Out { #write }
 
 ```scala
 write(
@@ -42,8 +42,8 @@ Writes out a single [InternalRow](../InternalRow.md)
 
 Used when:
 
-* `SingleDirectoryDataWriter` is requested to [write](SingleDirectoryDataWriter.md#write)
-* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](BaseDynamicPartitionDataWriter.md#writeRecord)
+* `SingleDirectoryDataWriter` is requested to [write](../files/SingleDirectoryDataWriter.md#write)
+* `BaseDynamicPartitionDataWriter` is requested to [writeRecord](../files/BaseDynamicPartitionDataWriter.md#writeRecord)
 
 ## Implementations
 

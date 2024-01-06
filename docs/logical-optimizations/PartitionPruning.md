@@ -55,13 +55,13 @@ getFilterableTableScan(
 
     * [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) over `SupportsRuntimeFiltering` scans
     * [HiveTableRelation](../hive/HiveTableRelation.md)
-    * [LogicalRelation](../logical-operators/LogicalRelation.md) over [HadoopFsRelation](../connectors/HadoopFsRelation.md)
+    * [LogicalRelation](../logical-operators/LogicalRelation.md) over [HadoopFsRelation](../files/HadoopFsRelation.md)
 
 `getFilterableTableScan`...FIXME
 
 ### <span id="getFilterableTableScan-LogicalRelation"> LogicalRelation over (Partitioned) HadoopFsRelation
 
-For [LogicalRelation](../logical-operators/LogicalRelation.md) with (the [relation](../logical-operators/LogicalRelation.md#relation) that is) a partitioned [HadoopFsRelation](../connectors/HadoopFsRelation.md), `getFilterableTableScan` checks if the [references](../expressions/Expression.md#references) (of the given [Expression](../expressions/Expression.md)) are all among the [partition columns](../connectors/HadoopFsRelation.md#partitionSchema).
+For [LogicalRelation](../logical-operators/LogicalRelation.md) with (the [relation](../logical-operators/LogicalRelation.md#relation) that is) a partitioned [HadoopFsRelation](../files/HadoopFsRelation.md), `getFilterableTableScan` checks if the [references](../expressions/Expression.md#references) (of the given [Expression](../expressions/Expression.md)) are all among the [partition columns](../files/HadoopFsRelation.md#partitionSchema).
 
 If so, `getFilterableTableScan` returns the `LogicalRelation` with the partitioned `HadoopFsRelation`.
 

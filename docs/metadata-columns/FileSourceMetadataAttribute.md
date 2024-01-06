@@ -15,8 +15,8 @@ cleanupFileSourceMetadataInformation(
 
 `cleanupFileSourceMetadataInformation` is used when:
 
-* `FileFormatWriter` is requested to [write data out](../connectors/FileFormatWriter.md#write)
-* `FileFormat` is requested to [create a FileFormat metadata struct column](../connectors/FileFormat.md#createFileMetadataCol)
+* `FileFormatWriter` is requested to [write data out](../files/FileFormatWriter.md#write)
+* `FileFormat` is requested to [create a FileFormat metadata struct column](../files/FileFormat.md#createFileMetadataCol)
 
 ### removeInternalMetadata { #removeInternalMetadata }
 
@@ -52,4 +52,4 @@ Metadata Key | Value
 
 `apply` is used when:
 
-* `FileFormat` is requested to [createFileMetadataCol](../connectors/FileFormat.md#createFileMetadataCol)
+* `FileFormat` is requested to [createFileMetadataCol](../files/FileFormat.md#createFileMetadataCol)

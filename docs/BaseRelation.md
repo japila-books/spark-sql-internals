@@ -72,7 +72,7 @@ Used when [DataSourceStrategy](execution-planning-strategies/DataSourceStrategy.
 ## Implementations
 
 * ConsoleRelation ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/console/ConsoleRelation))
-* [HadoopFsRelation](connectors/HadoopFsRelation.md)
+* [HadoopFsRelation](files/HadoopFsRelation.md)
 * [JDBCRelation](jdbc/JDBCRelation.md)
 * [KafkaRelation](kafka/KafkaRelation.md)
 * [KafkaSourceProvider](kafka/KafkaSourceProvider.md)

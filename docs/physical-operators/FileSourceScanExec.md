@@ -6,7 +6,7 @@
 
 `FileSourceScanExec` takes the following to be created:
 
-* <span id="relation"> [HadoopFsRelation](../connectors/HadoopFsRelation.md)
+* <span id="relation"> [HadoopFsRelation](../files/HadoopFsRelation.md)
 * <span id="output"> Output [Attribute](../expressions/Attribute.md)s
 * <span id="requiredSchema"> Required [Schema](../types/StructType.md)
 * [Partition Filters](#partitionFilters)
@@ -18,19 +18,19 @@
 
 `FileSourceScanExec` is created when:
 
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../connectors/HadoopFsRelation.md))
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (for [LogicalRelation](../logical-operators/LogicalRelation.md)s over a [HadoopFsRelation](../files/HadoopFsRelation.md))
 
 ### <span id="dataFilters"> Data Filters
 
 `FileSourceScanExec` is given Data Filters ([Expression](../expressions/Expression.md)s) when [created](#creating-instance).
 
-The Data Filters are [data columns](../connectors/HadoopFsRelation.md#dataSchema) of the [HadoopFsRelation](#relation) (that are not [partition columns](../connectors/HadoopFsRelation.md#partitionSchema) that are part of [Partition Filters](#partitionFilters)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
+The Data Filters are [data columns](../files/HadoopFsRelation.md#dataSchema) of the [HadoopFsRelation](#relation) (that are not [partition columns](../files/HadoopFsRelation.md#partitionSchema) that are part of [Partition Filters](#partitionFilters)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
 
 ### <span id="partitionFilters"> Partition Filters
 
 `FileSourceScanExec` is given Partition Filters ([Expression](../expressions/Expression.md)s) when [created](#creating-instance).
 
-The Partition Filters are the [PushedDownFilters](../execution-planning-strategies/DataSourceStrategy.md#getPushedDownFilters) (based on the [partition columns](../connectors/HadoopFsRelation.md#partitionSchema) of the [HadoopFsRelation](#relation)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
+The Partition Filters are the [PushedDownFilters](../execution-planning-strategies/DataSourceStrategy.md#getPushedDownFilters) (based on the [partition columns](../files/HadoopFsRelation.md#partitionSchema) of the [HadoopFsRelation](#relation)) in [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy.
 
 ## <span id="nodeNamePrefix"> Node Name Prefix
 
@@ -73,7 +73,7 @@ Key              | Name (in web UI)               | Description
 
 ### <span id="metrics-partitionSchema"> Partition Scan Metrics
 
-The following performance metrics are available only when [partitions](../connectors/HadoopFsRelation.md#partitionSchemaOption) are used
+The following performance metrics are available only when [partitions](../files/HadoopFsRelation.md#partitionSchemaOption) are used
 
 Key              | Name (in web UI)               | Description
 -----------------|--------------------------------|---------
@@ -120,9 +120,9 @@ inputRDD: RDD[InternalRow]
 
 `inputRDD` is an input `RDD` that is used when `FileSourceScanExec` physical operator is requested for [inputRDDs](#inputRDDs) and to [execute](#doExecute).
 
-When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../connectors/HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../connectors/FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
+When created, `inputRDD` requests [HadoopFsRelation](#relation) to get the underlying [FileFormat](../files/HadoopFsRelation.md#fileFormat) that is in turn requested to [build a data reader with partition column values appended](../files/FileFormat.md#buildReaderWithPartitionValues) (with the input parameters from the properties of `HadoopFsRelation` and [pushedDownFilters](#pushedDownFilters)).
 
-In case the `HadoopFsRelation` has [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing/index.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
+In case the `HadoopFsRelation` has [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) specified and [bucketing support is enabled](../bucketing/index.md#spark.sql.sources.bucketing.enabled), `inputRDD` [creates a FileScanRDD with bucketing](#createBucketedReadRDD) (with the bucketing specification, the reader, [selectedPartitions](#selectedPartitions) and the `HadoopFsRelation` itself). Otherwise, `inputRDD` [createNonBucketedReadRDD](#createNonBucketedReadRDD).
 
 ### <span id="createReadRDD"> Creating RDD for Non-Bucketed Read
 
@@ -133,7 +133,7 @@ createReadRDD(
   fsRelation: HadoopFsRelation): RDD[InternalRow]
 ```
 
-`createReadRDD` prints out the following INFO message to the logs (with [maxSplitBytes](../connectors/FilePartition.md#maxSplitBytes) hint and [openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)):
+`createReadRDD` prints out the following INFO message to the logs (with [maxSplitBytes](../files/FilePartition.md#maxSplitBytes) hint and [openCostInBytes](../configuration-properties.md#spark.sql.files.openCostInBytes)):
 
 ```text
 Planning scan with bin packing, max size: [maxSplitBytes] bytes,
@@ -147,10 +147,10 @@ open cost is considered as scanning [openCostInBytes] bytes.
 
     With [Bucketing](../bucketing/index.md) disabled or [optionalBucketSet](#optionalBucketSet) undefined, all files are included in scanning.
 
-`createReadRDD` [splits files](../connectors/PartitionedFileUtil.md#splitFiles) to be scanned (in the given `selectedPartitions`), possibly applying bucket pruning (with [Bucketing](../bucketing/index.md) enabled). `createReadRDD` uses the following:
+`createReadRDD` [splits files](../files/PartitionedFileUtil.md#splitFiles) to be scanned (in the given `selectedPartitions`), possibly applying bucket pruning (with [Bucketing](../bucketing/index.md) enabled). `createReadRDD` uses the following:
 
-* [isSplitable](../connectors/FileFormat.md#isSplitable) property of the [FileFormat](../connectors/FileFormat.md) of the [HadoopFsRelation](#relation)
-* [maxSplitBytes](../connectors/FilePartition.md#maxSplitBytes) hint
+* [isSplitable](../files/FileFormat.md#isSplitable) property of the [FileFormat](../files/FileFormat.md) of the [HadoopFsRelation](#relation)
+* [maxSplitBytes](../files/FilePartition.md#maxSplitBytes) hint
 
 `createReadRDD` sorts the split files (by length in reverse order).
 
@@ -159,8 +159,8 @@ In the end, creates a [FileScanRDD](../rdds/FileScanRDD.md) with the following:
 Property | Value
 ---------|------
 [readFunction](../rdds/FileScanRDD.md#readFunction) | Input `readFile` function
-[filePartitions](../rdds/FileScanRDD.md#filePartitions) | [Partitions](../connectors/FilePartition.md#getFilePartitions)
-[readSchema](../rdds/FileScanRDD.md#readSchema) | [requiredSchema](#requiredSchema) with [partitionSchema](../connectors/HadoopFsRelation.md#partitionSchema) of the input [HadoopFsRelation](../connectors/HadoopFsRelation.md)
+[filePartitions](../rdds/FileScanRDD.md#filePartitions) | [Partitions](../files/FilePartition.md#getFilePartitions)
+[readSchema](../rdds/FileScanRDD.md#readSchema) | [requiredSchema](#requiredSchema) with [partitionSchema](../files/HadoopFsRelation.md#partitionSchema) of the input [HadoopFsRelation](../files/HadoopFsRelation.md)
 [metadataColumns](../rdds/FileScanRDD.md#metadataColumns) | [metadataColumns](#metadataColumns)
 
 ### <span id="dynamicallySelectedPartitions"> Dynamically Selected Partitions
@@ -214,7 +214,7 @@ outputOrdering: Seq[SortOrder]
 `outputOrdering` is a [SortOrder](../expressions/SortOrder.md) expression for every [sort column](../bucketing/BucketSpec.md#sortColumnNames) in `Ascending` order only when the following all hold:
 
 * [bucketing is enabled](../SQLConf.md#bucketingEnabled)
-* [HadoopFsRelation](#relation) has a [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) defined
+* [HadoopFsRelation](#relation) has a [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) defined
 * All the buckets have a single file in it
 
 Otherwise, `outputOrdering` is simply empty (`Nil`).
@@ -232,7 +232,7 @@ outputPartitioning: Partitioning
 
 `outputPartitioning` can be one of the following:
 
-* [HashPartitioning](Partitioning.md#HashPartitioning) (with the [bucket column names](../bucketing/BucketSpec.md#bucketColumnNames) and the [number of buckets](../bucketing/BucketSpec.md#numBuckets) of the [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation)) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the [HadoopFsRelation](#relation) has a [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) defined
+* [HashPartitioning](Partitioning.md#HashPartitioning) (with the [bucket column names](../bucketing/BucketSpec.md#bucketColumnNames) and the [number of buckets](../bucketing/BucketSpec.md#numBuckets) of the [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation)) when [bucketing is enabled](../SQLConf.md#bucketingEnabled) and the [HadoopFsRelation](#relation) has a [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) defined
 
 * [UnknownPartitioning](Partitioning.md#UnknownPartitioning) (with `0` partitions) otherwise
 
@@ -247,7 +247,7 @@ vectorTypes: Option[Seq[String]]
 !!! danger
     Review Me
 
-`vectorTypes` simply requests the [FileFormat](../connectors/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../connectors/FileFormat.md#vectorTypes).
+`vectorTypes` simply requests the [FileFormat](../files/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) for [vectorTypes](../files/FileFormat.md#vectorTypes).
 
 ## <span id="doExecuteColumnar"> doExecuteColumnar
 
@@ -315,7 +315,7 @@ createBucketedReadRDD(
 Planning with [numBuckets] buckets
 ```
 
-`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into [PartitionedFiles](../connectors/PartitionedFile.md). For every file, `createBucketedReadRDD` [getBlockLocations](#getBlockLocations) and [getBlockHosts](#getBlockHosts).
+`createBucketedReadRDD` maps the available files of the input `selectedPartitions` into [PartitionedFiles](../files/PartitionedFile.md). For every file, `createBucketedReadRDD` [getBlockLocations](#getBlockLocations) and [getBlockHosts](#getBlockHosts).
 
 `createBucketedReadRDD` then groups the `PartitionedFiles` by bucket ID.
 
@@ -353,7 +353,7 @@ In the end, `createBucketedReadRDD` creates a [FileScanRDD](../rdds/FileScanRDD.
 
 `createBucketedReadRDD` is used when:
 
-* `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and the optional [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined and [bucketing is enabled](../SQLConf.md#bucketingEnabled))
+* `FileSourceScanExec` physical operator is requested for the [input RDD](#inputRDD) (and the optional [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) of the [HadoopFsRelation](#relation) is defined and [bucketing is enabled](../SQLConf.md#bucketingEnabled))
 
 ## <span id="needsUnsafeRowConversion"> needsUnsafeRowConversion Flag
 
@@ -363,7 +363,7 @@ needsUnsafeRowConversion: Boolean
 
 `needsUnsafeRowConversion` is enabled (i.e. `true`) when the following conditions all hold:
 
-1. [FileFormat](../connectors/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../parquet/ParquetFileFormat.md)
+1. [FileFormat](../files/HadoopFsRelation.md#fileFormat) of the [HadoopFsRelation](#relation) is [ParquetFileFormat](../parquet/ParquetFileFormat.md)
 
 1. [spark.sql.parquet.enableVectorizedReader](../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 

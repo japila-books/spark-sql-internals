@@ -18,4 +18,4 @@ Used when:
 
 ## Implementations
 
-* [HadoopFsRelation](connectors/HadoopFsRelation.md)
+* [HadoopFsRelation](files/HadoopFsRelation.md)

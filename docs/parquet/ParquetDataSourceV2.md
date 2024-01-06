@@ -1,6 +1,6 @@
 # ParquetDataSourceV2
 
-`ParquetDataSourceV2` is the [FileDataSourceV2](../connectors/FileDataSourceV2.md) (and hence indirectly a [DataSourceRegister](../DataSourceRegister.md)) of [Parquet Data Source](index.md).
+`ParquetDataSourceV2` is the [FileDataSourceV2](../files/FileDataSourceV2.md) (and hence indirectly a [DataSourceRegister](../DataSourceRegister.md)) of [Parquet Data Source](index.md).
 
 `ParquetDataSourceV2` uses [ParquetTable](ParquetTable.md) for scanning and writing.
 
@@ -26,14 +26,14 @@
       schema: StructType): Table
     ```
 
-    `getTable` is part of the [FileDataSourceV2](../connectors/FileDataSourceV2.md#getTable) abstraction.
+    `getTable` is part of the [FileDataSourceV2](../files/FileDataSourceV2.md#getTable) abstraction.
 
 `getTable` creates a [ParquetTable](ParquetTable.md) with the following:
 
 Property | Value
 ---------|------
-[name](ParquetTable.md#name) | [Table name](../connectors/FileDataSourceV2.md#getTableName) from the [paths](#getPaths) (and based on the given `options`)
-[paths](ParquetTable.md#paths) | [Paths](../connectors/FileDataSourceV2.md#getPaths) (in the given `options`)
+[name](ParquetTable.md#name) | [Table name](../files/FileDataSourceV2.md#getTableName) from the [paths](#getPaths) (and based on the given `options`)
+[paths](ParquetTable.md#paths) | [Paths](../files/FileDataSourceV2.md#getPaths) (in the given `options`)
 [userSpecifiedSchema](ParquetTable.md#userSpecifiedSchema) | The given `schema`, if given
 [fallbackFileFormat](ParquetTable.md#fallbackFileFormat) | [ParquetFileFormat](#fallbackFileFormat)
 
@@ -61,6 +61,6 @@ parquet
     fallbackFileFormat: Class[_ <: FileFormat]
     ```
 
-    `fallbackFileFormat` is part of the [FileDataSourceV2](../connectors/FileDataSourceV2.md#fallbackFileFormat) abstraction.
+    `fallbackFileFormat` is part of the [FileDataSourceV2](../files/FileDataSourceV2.md#fallbackFileFormat) abstraction.
 
 `fallbackFileFormat` is [ParquetFileFormat](ParquetFileFormat.md).

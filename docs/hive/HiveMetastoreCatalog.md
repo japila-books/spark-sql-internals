@@ -43,7 +43,7 @@ convertToLogicalRelation(
 [[convertToLogicalRelation-partitioned]]
 When the `HiveTableRelation` is HiveTableRelation.md#isPartitioned[partitioned], `convertToLogicalRelation` uses [spark.sql.hive.manageFilesourcePartitions](configuration-properties.md#spark.sql.hive.manageFilesourcePartitions) configuration property to compute the root paths. With the property enabled, the root path is simply the [table location](../CatalogTable.md#location) (aka _locationUri_). Otherwise, the root paths are the `locationUri` of the [partitions](../ExternalCatalog.md#listPartitions) (using the [shared ExternalCatalog](../SharedState.md#externalCatalog)).
 
-`convertToLogicalRelation` creates a new ../LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../connectors/HadoopFsRelation.md) (with no bucketing specification among things) unless a `LogicalRelation` for the table is already in a <<getCached, cache>>.
+`convertToLogicalRelation` creates a new ../LogicalRelation.md[LogicalRelation] with a [HadoopFsRelation](../files/HadoopFsRelation.md) (with no bucketing specification among things) unless a `LogicalRelation` for the table is already in a <<getCached, cache>>.
 
 [[convertToLogicalRelation-not-partitioned]]
 When the `HiveTableRelation` is not partitioned, `convertToLogicalRelation`...FIXME

@@ -58,7 +58,7 @@ getMetaData(): Map[String, String]
 
 See:
 
-* [FileScan](../connectors/FileScan.md#getMetaData)
+* [FileScan](../files/FileScan.md#getMetaData)
 * [ParquetScan](../parquet/ParquetScan.md#getMetaData)
 
 Used when:
@@ -67,4 +67,4 @@ Used when:
 
 ## Implementations
 
-* [FileScan](../connectors/FileScan.md)
+* [FileScan](../files/FileScan.md)

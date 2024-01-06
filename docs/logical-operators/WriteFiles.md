@@ -7,7 +7,7 @@
 `WriteFiles` takes the following to be created:
 
 * <span id="child"> Child [LogicalPlan](LogicalPlan.md)
-* <span id="fileFormat"> [FileFormat](../connectors/FileFormat.md)
+* <span id="fileFormat"> [FileFormat](../files/FileFormat.md)
 * <span id="partitionColumns"> Partition Columns ([Attribute](../expressions/Attribute.md)s)
 * <span id="bucketSpec"> [BucketSpec](../bucketing/BucketSpec.md)
 * <span id="options"> Options

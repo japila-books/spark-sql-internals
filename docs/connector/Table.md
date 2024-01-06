@@ -87,13 +87,13 @@ Used when:
 * `SimpleTableProvider` is requested to [inferSchema](SimpleTableProvider.md#inferSchema)
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
 * [DescribeTableExec](../physical-operators/DescribeTableExec.md) physical operator is executed
-* `FileDataSourceV2` is requested to [inferSchema](../connectors/FileDataSourceV2.md#inferSchema)
+* `FileDataSourceV2` is requested to [inferSchema](../files/FileDataSourceV2.md#inferSchema)
 * (Spark Structured Streaming) `TextSocketTable` is requested for a `ScanBuilder` with a read schema
 * (Spark Structured Streaming) `DataStreamReader` is requested to load data
 
 ## Implementations
 
-* [FileTable](../connectors/FileTable.md)
+* [FileTable](../files/FileTable.md)
 * [KafkaTable](../kafka/KafkaTable.md)
 * [NoopTable](../noop/NoopTable.md)
 * [StagedTable](StagedTable.md)

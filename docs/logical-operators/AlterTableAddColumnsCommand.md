@@ -46,7 +46,7 @@ verifyAlterTableAddColumn(
 `verifyAlterTableAddColumn` asserts that the table is as follows:
 
 1. The table is not a view
-1. The table is a Hive table or one of the supported [FileFormat](../connectors/FileFormat.md)s
+1. The table is a Hive table or one of the supported [FileFormat](../files/FileFormat.md)s
 
 ---
 

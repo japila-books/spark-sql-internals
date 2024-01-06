@@ -6,7 +6,7 @@
 
 Enable the following loggers:
 
-* [FileFormatWriter](../connectors/FileFormatWriter.md#logging)
+* [FileFormatWriter](../files/FileFormatWriter.md#logging)
 * [ParquetUtils](../parquet/ParquetUtils.md#logging)
 * [SQLHadoopMapReduceCommitProtocol](SQLHadoopMapReduceCommitProtocol.md#logging)
 

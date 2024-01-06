@@ -18,4 +18,4 @@ checkFieldNames(
 `checkFieldNames` is used when:
 
 * `DDLUtils` is requested to [checkDataColNames](DDLUtils.md#checkDataColNames)
-* `FileFormatWriter` is requested to [write data out](FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write data out](../files/FileFormatWriter.md#write)

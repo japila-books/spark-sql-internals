@@ -30,7 +30,7 @@ InputPartition[] planInputPartitions()
 
 See:
 
-* [FileScan](../connectors/FileScan.md#planInputPartitions)
+* [FileScan](../files/FileScan.md#planInputPartitions)
 
 Used when:
 
@@ -38,5 +38,5 @@ Used when:
 
 ## Implementations
 
-* [FileScan](../connectors/FileScan.md)
+* [FileScan](../files/FileScan.md)
 * [KafkaBatch](../kafka/KafkaBatch.md)

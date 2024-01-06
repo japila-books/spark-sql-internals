@@ -31,7 +31,7 @@ While being created, `InMemoryFileIndex` [refresh0](#refresh0).
 
 * `CatalogFileIndex` is requested to [filter the partitions](CatalogFileIndex.md#filterPartitions)
 * `DataSource` is requested to [create an InMemoryFileIndex](../DataSource.md#createInMemoryFileIndex)
-* `FileTable` is requested for the [PartitioningAwareFileIndex](../connectors/FileTable.md#fileIndex)
+* `FileTable` is requested for the [PartitioningAwareFileIndex](../files/FileTable.md#fileIndex)
 
 ## <span id="refresh"> Refreshing Cached File Listings
 

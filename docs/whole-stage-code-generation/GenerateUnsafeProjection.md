@@ -67,7 +67,7 @@ generate(
 
 * `ExpressionEncoder` is requested to [initialize the internal UnsafeProjection](../ExpressionEncoder.md#extractProjection)
 
-* `FileFormat` is requested to [build a data reader with partition column values appended](../connectors/FileFormat.md#buildReaderWithPartitionValues)
+* `FileFormat` is requested to [build a data reader with partition column values appended](../files/FileFormat.md#buildReaderWithPartitionValues)
 
 * `OrcFileFormat` is requested to `buildReaderWithPartitionValues`
 

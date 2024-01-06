@@ -16,7 +16,7 @@
 * [DataSourceStrategy](../execution-planning-strategies/DataSourceStrategy.md) execution planning strategy is [executed](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
 * [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
-* `FileFormatWriter` is requested to [write](../connectors/FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write](../files/FileFormatWriter.md#write)
 
 ## <span id="doExecute"> Executing Physical Operator
 

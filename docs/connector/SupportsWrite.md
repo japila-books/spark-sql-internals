@@ -32,7 +32,7 @@ Used when:
 ## Implementations
 
 * ConsoleTable (Spark Structured Streaming)
-* [FileTable](../connectors/FileTable.md)
+* [FileTable](../files/FileTable.md)
 * ForeachWriterTable (Spark Structured Streaming)
 * [KafkaTable](../kafka/KafkaTable.md)
 * MemorySink (Spark Structured Streaming)

@@ -1,6 +1,6 @@
 # ParquetWrite
 
-`ParquetWrite` is a [FileWrite](../connectors/FileWrite.md) of [ParquetTable](ParquetTable.md#newWriteBuilder) in [Parquet Connector](index.md).
+`ParquetWrite` is a [FileWrite](../files/FileWrite.md) of [ParquetTable](ParquetTable.md#newWriteBuilder) in [Parquet Connector](index.md).
 
 ## Creating Instance
 
@@ -27,7 +27,7 @@
       dataSchema: StructType): OutputWriterFactory
     ```
 
-    `prepareWrite` is part of the [FileWrite](../connectors/FileWrite.md#prepareWrite) abstraction.
+    `prepareWrite` is part of the [FileWrite](../files/FileWrite.md#prepareWrite) abstraction.
 
 `prepareWrite` creates a [ParquetOptions](ParquetOptions.md) (for the given `options` and `SQLConf`).
 

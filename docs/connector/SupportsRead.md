@@ -31,7 +31,7 @@ Used when:
 
 ## Implementations
 
-* [FileTable](../connectors/FileTable.md)
+* [FileTable](../files/FileTable.md)
 * `JDBCTable`
 * [KafkaTable](../kafka/KafkaTable.md)
 * `MemoryStreamTable` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/memory))

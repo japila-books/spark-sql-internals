@@ -427,4 +427,4 @@ leafNodeDefaultParallelism: Int
 * `RangeExec` leaf physical operator is [created](physical-operators/RangeExec.md#numSlices)
 * `CommandResultExec` physical operator is requested for the `RDD[InternalRow]`
 * `LocalTableScanExec` physical operator is requested for the [RDD](physical-operators/LocalTableScanExec.md#rdd)
-* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested for [maxSplitBytes](files/FilePartition.md#maxSplitBytes)

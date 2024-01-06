@@ -48,7 +48,7 @@ saveAsHiveFile(
 
 `saveAsHiveFile` uses `FileCommitProtocol` utility to instantiate a committer for the input `outputLocation` based on the [spark.sql.sources.commitProtocolClass](../configuration-properties.md#spark.sql.sources.commitProtocolClass) configuration property.
 
-`saveAsHiveFile` uses `FileFormatWriter` utility to [write out](../connectors/FileFormatWriter.md#write) the result of executing the input [physical operator](../physical-operators/SparkPlan.md) (with a [HiveFileFormat](HiveFileFormat.md) for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
+`saveAsHiveFile` uses `FileFormatWriter` utility to [write out](../files/FileFormatWriter.md#write) the result of executing the input [physical operator](../physical-operators/SparkPlan.md) (with a [HiveFileFormat](HiveFileFormat.md) for the input `FileSinkDesc`, the new `FileCommitProtocol` committer, and the input arguments).
 
 `saveAsHiveFile` is used when [InsertIntoHiveDirCommand](InsertIntoHiveDirCommand.md) and [InsertIntoHiveTable](InsertIntoHiveTable.md) logical commands are executed.
 

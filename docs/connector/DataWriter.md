@@ -4,63 +4,71 @@
 
 ## Contract
 
-### <span id="abort"> Aborting Write
+### Aborting Write { #abort }
 
 ```java
 void abort()
 ```
 
-See [KafkaDataWriter](../kafka/KafkaDataWriter.md#abort)
+See:
+
+* [KafkaDataWriter](../kafka/KafkaDataWriter.md#abort)
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../connectors/FileFormatWriter.md#executeTask)
+* `FileFormatWriter` utility is used to [executeTask](../files/FileFormatWriter.md#executeTask)
 * `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
-### <span id="commit"> Committing Successful Write
+### Committing Successful Write { #commit }
 
 ```java
 WriterCommitMessage commit()
 ```
 
-See [KafkaDataWriter](../kafka/KafkaDataWriter.md#commit)
+See:
+
+* [KafkaDataWriter](../kafka/KafkaDataWriter.md#commit)
 
 Used when:
 
 * `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
-### <span id="currentMetricsValues"> currentMetricsValues
+### currentMetricsValues { #currentMetricsValues }
 
 ```java
 CustomTaskMetric[] currentMetricsValues()
 ```
 
-See [KafkaDataWriter](../kafka/KafkaDataWriter.md#currentMetricsValues)
+See:
+
+* [KafkaDataWriter](../kafka/KafkaDataWriter.md#currentMetricsValues)
 
 Used when:
 
-* `FileFormatWriter` utility is used to [executeTask](../connectors/FileFormatWriter.md#executeTask)
+* `FileFormatWriter` utility is used to [executeTask](../files/FileFormatWriter.md#executeTask)
 * `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
 * `ContinuousWriteRDD` (Spark Structured Streaming) is requested to `compute` a partition
 
-### <span id="write"> Writing Out Record
+### Writing Out Record { #write }
 
 ```java
 void write(
   T record)
 ```
 
-See [KafkaDataWriter](../kafka/KafkaDataWriter.md#write)
+See:
+
+* [KafkaDataWriter](../kafka/KafkaDataWriter.md#write)
 
 Used when:
 
-* `DataWritingSparkTask` utility is used to [process a partition](../connectors/DataWritingSparkTask.md#run)
+* `DataWritingSparkTask` is requested to [write a record out](../connectors/DataWritingSparkTask.md#write)
 * `ContinuousWriteRDD` ([Spark Structured Streaming]({{ book.structured_streaming }}/ContinuousWriteRDD)) is requested to `compute` a partition
 
 ## Implementations
 
-* [FileFormatDataWriter](../connectors/FileFormatDataWriter.md)
+* [FileFormatDataWriter](../files/FileFormatDataWriter.md)
 * [KafkaDataWriter](../kafka/KafkaDataWriter.md)
 * _others_

@@ -14,12 +14,12 @@
 * <span id="description"> `WriteJobDescription`
 * <span id="taskAttemptContext"> `TaskAttemptContext` ([Apache Hadoop]({{ hadoop.api }}/org/apache/hadoop/mapreduce/TaskAttemptContext.html))
 * <span id="committer"> `FileCommitProtocol` ([Spark Core]({{ book.spark_core }}/FileCommitProtocol))
-* <span id="customMetrics"> Custom [SQLMetric](../SQLMetric.md)s
+* <span id="customMetrics"> [SQLMetric](../SQLMetric.md)s
 
 !!! note "Abstract Class"
     `BaseDynamicPartitionDataWriter` is an abstract class and cannot be created directly. It is created indirectly for the [concrete BaseDynamicPartitionDataWriters](#implementations).
 
-## <span id="renewCurrentWriter"> renewCurrentWriter
+## renewCurrentWriter { #renewCurrentWriter }
 
 ```scala
 renewCurrentWriter(
@@ -38,7 +38,7 @@ renewCurrentWriter(
 * `DynamicPartitionDataSingleWriter` is requested to [write a record](DynamicPartitionDataSingleWriter.md#write)
 * `DynamicPartitionDataConcurrentWriter` is requested to [setupCurrentWriterUsingMap](DynamicPartitionDataConcurrentWriter.md#setupCurrentWriterUsingMap)
 
-### <span id="getPartitionPath"> getPartitionPath
+### getPartitionPath { #getPartitionPath }
 
 ```scala
 getPartitionPath: InternalRow => String
@@ -51,7 +51,7 @@ getPartitionPath: InternalRow => String
 
 `getPartitionPath`...FIXME
 
-### <span id="partitionPathExpression"> partitionPathExpression
+### partitionPathExpression { #partitionPathExpression }
 
 ```scala
 partitionPathExpression: Expression

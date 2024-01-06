@@ -95,7 +95,7 @@ postDriverMetricUpdates(
 
 `postDriverMetricUpdates` is used when:
 
-* `BasicWriteJobStatsTracker` is requested for [processStats](connectors/BasicWriteJobStatsTracker.md#processStats)
+* `BasicWriteJobStatsTracker` is requested for [processStats](files/BasicWriteJobStatsTracker.md#processStats)
 * `BroadcastExchangeExec` is requested for [relationFuture](physical-operators/BroadcastExchangeExec.md#relationFuture)
 * `FileSourceScanExec` physical operator is requested for [sendDriverMetrics](physical-operators/FileSourceScanExec.md#sendDriverMetrics)
 * `SubqueryBroadcastExec` physical operator is requested for `relationFuture`

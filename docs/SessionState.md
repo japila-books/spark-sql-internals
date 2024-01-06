@@ -193,7 +193,7 @@ newHadoopConfWithOptions(
 * `TextBasedFileFormat` is requested to `isSplitable`
 * `FileSourceScanExec` physical operator is requested for the [input RDD](physical-operators/FileSourceScanExec.md#inputRDD)
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
-* `PartitioningAwareFileIndex` is requested for the [Hadoop Configuration](connectors/PartitioningAwareFileIndex.md#hadoopConf)
+* `PartitioningAwareFileIndex` is requested for the [Hadoop Configuration](files/PartitioningAwareFileIndex.md#hadoopConf)
 
 ## Accessing SessionState
 

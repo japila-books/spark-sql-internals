@@ -3,7 +3,7 @@
 [Statistics](../cost-based-optimization/Statistics.md) are supported for the following only:
 
 1. Hive Metastore tables for which `ANALYZE TABLE <tableName> COMPUTE STATISTICS noscan` has been executed
-1. [File-based data source tables](../connectors/FileFormat.md) for which the statistics are computed directly on the files of data
+1. [File-based data source tables](../files/FileFormat.md) for which the statistics are computed directly on the files of data
 
 ## Broadcast Join
 

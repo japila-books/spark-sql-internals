@@ -3,7 +3,7 @@
 !!! important "Obsolete"
     `ParquetFileFormat` is a mere [fallbackFileFormat](ParquetDataSourceV2.md#fallbackFileFormat) of [ParquetDataSourceV2](ParquetDataSourceV2.md).
 
-`ParquetFileFormat` is the [FileFormat](../connectors/FileFormat.md) of [Parquet Data Source](index.md).
+`ParquetFileFormat` is the [FileFormat](../files/FileFormat.md) of [Parquet Data Source](index.md).
 
 `ParquetFileFormat` is [splitable](#isSplitable).
 
@@ -29,11 +29,11 @@ parquet
     metadataSchemaFields: Seq[StructField]
     ```
 
-    `metadataSchemaFields` is part of the [FileFormat](../connectors/FileFormat.md#metadataSchemaFields) abstraction.
+    `metadataSchemaFields` is part of the [FileFormat](../files/FileFormat.md#metadataSchemaFields) abstraction.
 
 `metadataSchemaFields` is the following metadata columns:
 
-* The default [FileFormat-specific metadata columns](../connectors/FileFormat.md#metadataSchemaFields)
+* The default [FileFormat-specific metadata columns](../files/FileFormat.md#metadataSchemaFields)
 * [row_index](#row_index)
 
 ### <span id="ROW_INDEX_FIELD"> row_index { #row_index }
@@ -53,7 +53,7 @@ parquet
       path: Path): Boolean
     ```
 
-    `isSplitable` is part of the [FileFormat](../connectors/FileFormat.md#isSplitable) abstraction.
+    `isSplitable` is part of the [FileFormat](../files/FileFormat.md#isSplitable) abstraction.
 
 `ParquetFileFormat` is splitable (`true`).
 
@@ -72,7 +72,7 @@ parquet
       hadoopConf: Configuration): (PartitionedFile) => Iterator[InternalRow]
     ```
 
-    `buildReaderWithPartitionValues` is part of the [FileFormat](../connectors/FileFormat.md#buildReaderWithPartitionValues) abstraction.
+    `buildReaderWithPartitionValues` is part of the [FileFormat](../files/FileFormat.md#buildReaderWithPartitionValues) abstraction.
 
 !!! FIXME
     Review Me
@@ -99,7 +99,7 @@ With [spark.sql.parquet.filterPushdown](../configuration-properties.md#spark.sql
 
 `buildReaderWithPartitionValues` broadcasts the input `hadoopConf` Hadoop `Configuration`.
 
-In the end, `buildReaderWithPartitionValues` gives a function that takes a [PartitionedFile](../connectors/PartitionedFile.md) and does the following:
+In the end, `buildReaderWithPartitionValues` gives a function that takes a [PartitionedFile](../files/PartitionedFile.md) and does the following:
 
 1. Creates a Hadoop `FileSplit` for the input `PartitionedFile`
 
@@ -117,7 +117,7 @@ The function then branches off on whether [Parquet vectorized reader](Vectorized
 
 With [Parquet vectorized reader](VectorizedParquetRecordReader.md) enabled, the function does the following:
 
-* Creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) and a [RecordReaderIterator](../connectors/RecordReaderIterator.md)
+* Creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) and a [RecordReaderIterator](../files/RecordReaderIterator.md)
 
 * Requests `VectorizedParquetRecordReader` to [initialize](VectorizedParquetRecordReader.md#initialize) (with the Parquet `ParquetInputSplit` and the Hadoop `TaskAttemptContextImpl`)
 
@@ -131,7 +131,7 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) enabled, the 
 
 * (only with [supportBatch](#supportBatch) enabled) Requests `VectorizedParquetRecordReader` to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches)
 
-* In the end, the function gives the [RecordReaderIterator](../connectors/RecordReaderIterator.md) (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
+* In the end, the function gives the [RecordReaderIterator](../files/RecordReaderIterator.md) (over the `VectorizedParquetRecordReader`) as the `Iterator[InternalRow]`
 
 With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the function does the following:
 
@@ -147,12 +147,12 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
       schema: StructType): Boolean
     ```
 
-    `supportBatch` is part of the [FileFormat](../connectors/FileFormat.md#supportBatch) abstraction.
+    `supportBatch` is part of the [FileFormat](../files/FileFormat.md#supportBatch) abstraction.
 
 !!! FIXME
     Review Me
 
-`supportBatch` [supports vectorized parquet decoding in whole-stage code generation](../connectors/FileFormat.md#supportBatch) when the following all hold:
+`supportBatch` [supports vectorized parquet decoding in whole-stage code generation](../files/FileFormat.md#supportBatch) when the following all hold:
 
 1. [spark.sql.parquet.enableVectorizedReader](../configuration-properties.md#spark.sql.parquet.enableVectorizedReader) configuration property is enabled
 
@@ -173,7 +173,7 @@ With [Parquet vectorized reader](VectorizedParquetRecordReader.md) disabled, the
       sqlConf: SQLConf): Option[Seq[String]]
     ```
 
-    `vectorTypes` is part of the [FileFormat](../connectors/FileFormat.md#vectorTypes) abstraction.
+    `vectorTypes` is part of the [FileFormat](../files/FileFormat.md#vectorTypes) abstraction.
 
 !!! FIXME
     Review Me
@@ -191,13 +191,13 @@ mergeSchemasInParallel(
   sparkSession: SparkSession): Option[StructType]
 ```
 
-`mergeSchemasInParallel` [mergeSchemasInParallel](../connectors/SchemaMergeUtils.md#mergeSchemasInParallel) with the given `filesToTouch` and a multi-threaded parquet footer reader.
+`mergeSchemasInParallel` [mergeSchemasInParallel](../files/SchemaMergeUtils.md#mergeSchemasInParallel) with the given `filesToTouch` and a multi-threaded parquet footer reader.
 
 !!! note "FIXME"
     Describe the multi-threaded parquet footer reader.
 
 !!! note
-    With the multi-threaded parquet footer reader, the whole `mergeSchemasInParallel` is distributed (using `RDD` while [mergeSchemasInParallel](../connectors/SchemaMergeUtils.md#mergeSchemasInParallel)) and multithreaded (per RDD partition).
+    With the multi-threaded parquet footer reader, the whole `mergeSchemasInParallel` is distributed (using `RDD` while [mergeSchemasInParallel](../files/SchemaMergeUtils.md#mergeSchemasInParallel)) and multithreaded (per RDD partition).
 
 ---
 

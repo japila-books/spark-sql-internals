@@ -27,7 +27,7 @@ apply(
 
 `apply` transforms the given [logical plan](../logical-operators/LogicalPlan.md) as follows:
 
-* For [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators over [HadoopFsRelation](../connectors/HadoopFsRelation.md)s, `apply` [removeUnnecessaryDynamicPruningSubquery](#removeUnnecessaryDynamicPruningSubquery)
+* For [LogicalRelation](../logical-operators/LogicalRelation.md) logical operators over [HadoopFsRelation](../files/HadoopFsRelation.md)s, `apply` [removeUnnecessaryDynamicPruningSubquery](#removeUnnecessaryDynamicPruningSubquery)
 
 * For [HiveTableRelation](../hive/HiveTableRelation.md) logical operators, `apply` [removeUnnecessaryDynamicPruningSubquery](#removeUnnecessaryDynamicPruningSubquery)
 

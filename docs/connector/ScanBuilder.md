@@ -27,7 +27,7 @@ Used when:
 
 ## Implementations
 
-* [FileScanBuilder](../connectors/FileScanBuilder.md)
+* [FileScanBuilder](../files/FileScanBuilder.md)
 * [JDBCScanBuilder](../jdbc/JDBCScanBuilder.md)
 * `MemoryStreamScanBuilder` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/memory/MemoryStreamScanBuilder))
 * [SupportsPushDownAggregates](SupportsPushDownAggregates.md)

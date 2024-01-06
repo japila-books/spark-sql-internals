@@ -1,6 +1,6 @@
 # AvroFileFormat
 
-`AvroFileFormat` is a [FileFormat](../connectors/FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
+`AvroFileFormat` is a [FileFormat](../files/FileFormat.md) for Apache Avro, i.e. a data source format that can read and write Avro-encoded data in files.
 
 <!---
 ## Review Me

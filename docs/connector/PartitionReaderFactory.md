@@ -21,7 +21,7 @@ Cannot create columnar reader.
 
 See:
 
-* [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md#createColumnarReader)
+* [FilePartitionReaderFactory](../files/FilePartitionReaderFactory.md#createColumnarReader)
 
 Used when:
 
@@ -63,7 +63,7 @@ Used when:
 ## Implementations
 
 * `ContinuousPartitionReaderFactory`
-* [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md)
+* [FilePartitionReaderFactory](../files/FilePartitionReaderFactory.md)
 * `KafkaBatchReaderFactory`
 * `MemoryStreamReaderFactory`
 * `RateStreamMicroBatchReaderFactory`

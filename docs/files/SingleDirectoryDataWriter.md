@@ -18,30 +18,30 @@ While being created, `SingleDirectoryDataWriter` [creates a new OutputWriter](#n
 * `FileFormatWriter` is requested to [write data out (in a single Spark task)](FileFormatWriter.md#executeTask) (of a non-partitioned non-bucketed write job)
 * `FileWriterFactory` is requested for a [DataWriter](FileWriterFactory.md#createWriter) (of a non-partitioned write job)
 
-## <span id="recordsInFile"> recordsInFile Counter
+## recordsInFile Counter { #recordsInFile }
 
 `SingleDirectoryDataWriter` uses `recordsInFile` counter to track how many records have been [written out](#write).
 
 `recordsInFile` counter is `0` when `SingleDirectoryDataWriter` [creates a new OutputWriter](#newOutputWriter) (and increments until `maxRecordsPerFile` threshold if defined).
 
-## <span id="write"> Writing Record Out
+## Writing Record Out { #write }
 
-```scala
-write(
-  record: InternalRow): Unit
-```
+??? note "FileFormatDataWriter"
+
+    ```scala
+    write(
+      record: InternalRow): Unit
+    ```
+
+    `write` is part of the [FileFormatDataWriter](FileFormatDataWriter.md#write) abstraction.
 
 `write` [creates a new OutputWriter](#newOutputWriter) for a positive `maxRecordsPerFile` (of the [WriteJobDescription](#description)) and the [recordsInFile](#recordsInFile) counter above the threshold.
 
-`write` requests the current [OutputWriter](#currentWriter) to [write the record](OutputWriter.md#write) and informs the [WriteTaskStatsTrackers](#statsTrackers) that there was a [new row](WriteTaskStatsTracker.md#newRow).
+`write` requests the current [OutputWriter](#currentWriter) to [write the record](../connectors/OutputWriter.md#write) and informs the [WriteTaskStatsTrackers](#statsTrackers) that there was a [new row](WriteTaskStatsTracker.md#newRow).
 
 `write` increments the [recordsInFile](#recordsInFile).
 
----
-
-`write` is part of the [FileFormatDataWriter](FileFormatDataWriter.md#write) abstraction.
-
-## <span id="newOutputWriter"> Creating New OutputWriter
+## Creating New OutputWriter { #newOutputWriter }
 
 ```scala
 newOutputWriter(): Unit
@@ -58,6 +58,8 @@ newOutputWriter(): Unit
 `newOutputWriter` uses the given [WriteJobDescription](#description) to access the `OutputWriterFactory` for a new [OutputWriter](#currentWriter).
 
 `newOutputWriter` informs the [WriteTaskStatsTrackers](#statsTrackers) that [a new file is about to be written](WriteTaskStatsTracker.md#newFile).
+
+---
 
 `newOutputWriter` is used when:
 

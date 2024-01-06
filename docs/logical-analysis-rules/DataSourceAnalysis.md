@@ -30,7 +30,7 @@ title: DataSourceAnalysis
 | InsertIntoDataSourceDirCommand
 | [[InsertIntoDir]]
 
-| [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../connectors/HadoopFsRelation.md)
+| [InsertIntoTable](../logical-operators/InsertIntoTable.md) with [HadoopFsRelation](../files/HadoopFsRelation.md)
 | [InsertIntoHadoopFsRelationCommand](../logical-operators/InsertIntoHadoopFsRelationCommand.md)
 | [[InsertIntoTable-HadoopFsRelation]]
 |===

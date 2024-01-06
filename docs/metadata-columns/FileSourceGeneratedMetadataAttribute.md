@@ -21,4 +21,4 @@ Metadata Key | Value
 
 `apply` is used when:
 
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (to plan a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../connectors/HadoopFsRelation.md))
+* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (to plan a [LogicalRelation](../logical-operators/LogicalRelation.md) over a [HadoopFsRelation](../files/HadoopFsRelation.md))

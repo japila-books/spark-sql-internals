@@ -647,7 +647,7 @@ finalPhysicalPlan: SparkPlan
 
 `finalPhysicalPlan` is used when:
 
-* `FileFormatWriter` is requested to [write out](../connectors/FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write out](../files/FileFormatWriter.md#write)
 
 ## Logging
 

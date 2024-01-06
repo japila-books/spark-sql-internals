@@ -1,6 +1,6 @@
 # ParquetTable
 
-`ParquetTable` is a [FileTable](../connectors/FileTable.md) of [ParquetDataSourceV2](ParquetDataSourceV2.md) in [Parquet Data Source](index.md).
+`ParquetTable` is a [FileTable](../files/FileTable.md) of [ParquetDataSourceV2](ParquetDataSourceV2.md) in [Parquet Data Source](index.md).
 
 `ParquetTable` uses [ParquetScanBuilder](#newScanBuilder) for scanning and [ParquetWrite](#newWriteBuilder) for writing.
 
@@ -13,7 +13,7 @@
 * <span id="options"> Case-insensitive options
 * <span id="paths"> Paths
 * <span id="userSpecifiedSchema"> User-specified [schema](../types/StructType.md)
-* <span id="fallbackFileFormat"> Fallback [FileFormat](../connectors/FileFormat.md)
+* <span id="fallbackFileFormat"> Fallback [FileFormat](../files/FileFormat.md)
 
 `ParquetTable` is created when:
 
@@ -27,7 +27,7 @@
     formatName: String
     ```
 
-    `formatName` is part of the [FileTable](../connectors/FileTable.md#formatName) abstraction.
+    `formatName` is part of the [FileTable](../files/FileTable.md#formatName) abstraction.
 
 `formatName` is the following text:
 
@@ -44,7 +44,7 @@ Parquet
       files: Seq[FileStatus]): Option[StructType]
     ```
 
-    `inferSchema` is part of the [FileTable](../connectors/FileTable.md#inferSchema) abstraction.
+    `inferSchema` is part of the [FileTable](../files/FileTable.md#inferSchema) abstraction.
 
 `inferSchema` [infers the schema](ParquetUtils.md#inferSchema) (with the [options](#options) and the input Hadoop `FileStatus`es).
 
@@ -61,9 +61,9 @@ Parquet
 
 `newScanBuilder` creates a [ParquetScanBuilder](ParquetScanBuilder.md) with the following:
 
-* [fileIndex](../connectors/FileTable.md#fileIndex)
-* [schema](../connectors/FileTable.md#schema)
-* [dataSchema](../connectors/FileTable.md#dataSchema)
+* [fileIndex](../files/FileTable.md#fileIndex)
+* [schema](../files/FileTable.md#schema)
+* [dataSchema](../files/FileTable.md#dataSchema)
 * [options](#options)
 
 ## <span id="newWriteBuilder"> Creating WriteBuilder
@@ -88,7 +88,7 @@ Parquet
       dataType: DataType): Boolean
     ```
 
-    `supportsDataType` is part of the [FileTable](../connectors/FileTable.md#supportsDataType) abstraction.
+    `supportsDataType` is part of the [FileTable](../files/FileTable.md#supportsDataType) abstraction.
 
 `supportsDataType` supports all [AtomicType](../types/AtomicType.md)s and the following complex [DataType](../types/DataType.md)s with `AtomicType`s:
 

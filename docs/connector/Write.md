@@ -50,7 +50,7 @@ BatchWrite toBatch()
 See:
 
 * [KafkaWrite](../kafka/KafkaWrite.md#toBatch)
-* [FileWrite](../connectors/FileWrite.md#toBatch)
+* [FileWrite](../files/FileWrite.md#toBatch)
 
 Used when:
 
@@ -79,7 +79,7 @@ Used when:
 
 * `ConsoleTable` (Spark Structured Streaming)
 * [WriteBuilder](WriteBuilder.md)
-* [FileWrite](../connectors/FileWrite.md)
+* [FileWrite](../files/FileWrite.md)
 * `ForeachWrite` (Spark Structured Streaming)
 * [KafkaWrite](../kafka/KafkaWrite.md)
 * `MemoryWrite` (Spark Structured Streaming)

@@ -304,7 +304,7 @@ Bucket pruning supports the following predicate expressions:
 * [InSet](../expressions/InSet.md)
 * `And` and `Or` of the above
 
-[FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../connectors/HadoopFsRelation.md) with the [bucketing specification](../connectors/HadoopFsRelation.md#bucketSpec) with the following:
+[FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is responsible for selecting only [LogicalRelation](../logical-operators/LogicalRelation.md)s over [HadoopFsRelation](../files/HadoopFsRelation.md) with the [bucketing specification](../files/HadoopFsRelation.md#bucketSpec) with the following:
 
 1. There is exactly one bucketing column
 1. The number of buckets is greater than 1

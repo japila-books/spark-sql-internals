@@ -569,7 +569,7 @@ Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to 
 
 **spark.sql.hive.filesourcePartitionFileCacheSize**
 
-When greater than `0`, enables caching of partition file metadata in memory (using [SharedInMemoryCache](connectors/SharedInMemoryCache.md)).
+When greater than `0`, enables caching of partition file metadata in memory (using [SharedInMemoryCache](files/SharedInMemoryCache.md)).
 All tables share a cache that can use up to specified num bytes for file metadata.
 
 Requires [spark.sql.hive.manageFilesourcePartitions](#spark.sql.hive.manageFilesourcePartitions) to be enabled
@@ -580,7 +580,7 @@ Use [SQLConf.filesourcePartitionFileCacheSize](SQLConf.md#filesourcePartitionFil
 
 Used when:
 
-* `FileStatusCache` is requested to [look up the system-wide FileStatusCache](connectors/FileStatusCache.md#getOrCreate)
+* `FileStatusCache` is requested to [look up the system-wide FileStatusCache](files/FileStatusCache.md#getOrCreate)
 
 ## <span id="spark.sql.hive.manageFilesourcePartitions"> hive.manageFilesourcePartitions
 
@@ -600,7 +600,7 @@ Used when:
 * [CreateDataSourceTableCommand](logical-operators/CreateDataSourceTableCommand.md), [CreateDataSourceTableAsSelectCommand](logical-operators/CreateDataSourceTableAsSelectCommand.md) and [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical commands are executed
 * `DDLUtils` utility is used to `verifyPartitionProviderIsHive`
 * `DataSource` is requested to [resolve a BaseRelation](DataSource.md#resolveRelation) (for file-based data source tables and creates a `HadoopFsRelation`)
-* `FileStatusCache` is [created](connectors/FileStatusCache.md#getOrCreate)
+* `FileStatusCache` is [created](files/FileStatusCache.md#getOrCreate)
 * `V2SessionCatalog` is requested to [create a table](V2SessionCatalog.md#createTable) (_deprecated_)
 
 ## <span id="spark.sql.inMemoryColumnarStorage.partitionPruning"> inMemoryColumnarStorage.partitionPruning
@@ -962,7 +962,7 @@ Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the 
 
 Used when:
 
-* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested for [maxSplitBytes](files/FilePartition.md#maxSplitBytes)
 
 ### <span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile { #spark.sql.files.maxRecordsPerFile }
 
@@ -976,8 +976,8 @@ Use [SQLConf.maxRecordsPerFile](SQLConf.md#maxRecordsPerFile) method for the cur
 
 Used when:
 
-* `FileFormatWriter` is requested to [write data out](connectors/FileFormatWriter.md#write)
-* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch) (and [creates a WriteJobDescription](connectors/FileWrite.md#createWriteJobDescription))
+* `FileFormatWriter` is requested to [write data out](files/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](files/FileWrite.md#toBatch) (and [creates a WriteJobDescription](files/FileWrite.md#createWriteJobDescription))
 
 ### <span id="FILES_MIN_PARTITION_NUM"> minPartitionNum { #spark.sql.files.minPartitionNum }
 
@@ -991,7 +991,7 @@ Use [SQLConf.filesMinPartitionNum](SQLConf.md#filesMinPartitionNum) for the curr
 
 Used when:
 
-* `FilePartition` is requested for [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested for [maxSplitBytes](files/FilePartition.md#maxSplitBytes)
 
 ### <span id="FILES_OPEN_COST_IN_BYTES"> openCostInBytes { #spark.sql.files.openCostInBytes }
 
@@ -1009,7 +1009,7 @@ Use [SQLConf.filesOpenCostInBytes](SQLConf.md#filesOpenCostInBytes) for the curr
 Used when:
 
 * `FileSourceScanExec` physical operator is requested to [create an RDD for a non-bucketed read](physical-operators/FileSourceScanExec.md#createReadRDD)
-* `FilePartition` is requested to [getFilePartitions](connectors/FilePartition.md#getFilePartitions) and [maxSplitBytes](connectors/FilePartition.md#maxSplitBytes)
+* `FilePartition` is requested to [getFilePartitions](files/FilePartition.md#getFilePartitions) and [maxSplitBytes](files/FilePartition.md#maxSplitBytes)
 
 ## spark.sql.parquet { #spark.sql.parquet }
 
@@ -1156,7 +1156,7 @@ Use [SQLConf.fileCommitProtocolClass](SQLConf.md#fileCommitProtocolClass) method
 
 Used when:
 
-* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
+* `FileWrite` is requested for a [BatchWrite](files/FileWrite.md#toBatch)
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) logical command is executed
 * `SaveAsHiveFile` is requested to [saveAsHiveFile](hive/SaveAsHiveFile.md#saveAsHiveFile)
 
@@ -1390,7 +1390,7 @@ Default: `EXCEPTION`
 
 ## <span id="spark.sql.maxConcurrentOutputFileWriters"> spark.sql.maxConcurrentOutputFileWriters
 
-**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](connectors/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
+**(internal)** Maximum number of output file writers for `FileFormatWriter` to use concurrently ([writing out a query result](files/FileFormatWriter.md#write)). If number of writers needed reaches this limit, a task will sort rest of output then writing them.
 
 Default: `0`
 
@@ -1398,7 +1398,7 @@ Use [SQLConf.maxConcurrentOutputFileWriters](SQLConf.md#maxConcurrentOutputFileW
 
 ## <span id="spark.sql.maxMetadataStringLength"> spark.sql.maxMetadataStringLength
 
-Maximum number of characters to output for a metadata string (e.g., `Location` in [FileScan](connectors/FileScan.md#getMetaData))
+Maximum number of characters to output for a metadata string (e.g., `Location` in [FileScan](files/FileScan.md#getMetaData))
 
 Default: `100`
 
@@ -2117,7 +2117,7 @@ Use [SQLConf.stringRedactionPattern](SQLConf.md#stringRedactionPattern) method t
 
 ## spark.sql.runSQLOnFiles { #spark.sql.runSQLOnFiles }
 
-**(internal)** Enables ```datasource`.`path``` table names in SQL queries for [FileFormat](connectors/FileFormat.md)-based data sources (excluding [hive](hive/index.md) tables)
+**(internal)** Enables ```datasource`.`path``` table names in SQL queries for [FileFormat](files/FileFormat.md)-based data sources (excluding [hive](hive/index.md) tables)
 
 Default: `true`
 

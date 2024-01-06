@@ -201,7 +201,7 @@ See:
 
 `supportFieldName` is used when:
 
-* `DataSourceUtils` is requested to [checkFieldNames](DataSourceUtils.md#checkFieldNames)
+* `DataSourceUtils` is requested to [checkFieldNames](../connectors/DataSourceUtils.md#checkFieldNames)
 
 ## Vector Types { #vectorTypes }
 

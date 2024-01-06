@@ -348,7 +348,7 @@ Used when:
 * `DetermineTableStats` logical resolution rule could not compute the table size or [spark.sql.statistics.fallBackToHdfs](#spark.sql.statistics.fallBackToHdfs) is disabled
 * [ExternalRDD](logical-operators/ExternalRDD.md#computeStats), [LogicalRDD](logical-operators/LogicalRDD.md#computeStats) and [DataSourceV2Relation](logical-operators/DataSourceV2Relation.md) are requested to compute stats
 * (Spark Structured Streaming) `StreamingRelation`, `StreamingExecutionRelation`, `StreamingRelationV2` and `ContinuousExecutionRelation` are requested for statistics (i.e. `computeStats`)
-* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](connectors/CatalogFileIndex.md) when no table statistics are available)
+* `DataSource` [creates a HadoopFsRelation for FileFormat data source](DataSource.md#resolveRelation) (and builds a [CatalogFileIndex](files/CatalogFileIndex.md) when no table statistics are available)
 * `BaseRelation` is requested for [an estimated size of this relation](BaseRelation.md#sizeInBytes) (in bytes)
 
 ## <span id="DYNAMIC_PARTITION_PRUNING_ENABLED"><span id="dynamicPartitionPruningEnabled"> dynamicPartitionPruningEnabled
@@ -441,8 +441,8 @@ The value of [spark.sql.sources.fileCompressionFactor](configuration-properties.
 
 Used when:
 
-* `HadoopFsRelation` is requested for a [size](connectors/HadoopFsRelation.md#sizeInBytes)
-* `FileScan` is requested to [estimate statistics](connectors/FileScan.md#estimateStatistics)
+* `HadoopFsRelation` is requested for a [size](files/HadoopFsRelation.md#sizeInBytes)
+* `FileScan` is requested to [estimate statistics](files/FileScan.md#estimateStatistics)
 
 ## <span id="filesMaxPartitionBytes"><span id="FILES_MAX_PARTITION_BYTES"> filesMaxPartitionBytes
 
@@ -504,7 +504,7 @@ The value of [spark.sql.files.ignoreMissingFiles](configuration-properties.md#sp
 Used when:
 
 * `FileScanRDD` is [created](rdds/FileScanRDD.md#ignoreMissingFiles) (and then to [compute a partition](rdds/FileScanRDD.md#compute))
-* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](connectors/InMemoryFileIndex.md#bulkListLeafFiles)
+* `InMemoryFileIndex` utility is requested to [bulkListLeafFiles](files/InMemoryFileIndex.md#bulkListLeafFiles)
 * `FilePartitionReader` is requested to `ignoreMissingFiles`
 
 ## <span id="inMemoryPartitionPruning"> inMemoryPartitionPruning
@@ -577,7 +577,7 @@ The value of [spark.sql.maxConcurrentOutputFileWriters](configuration-properties
 
 Used when:
 
-* `FileFormatWriter` is requested to [write out a query result](connectors/FileFormatWriter.md#write)
+* `FileFormatWriter` is requested to [write out a query result](files/FileFormatWriter.md#write)
 
 ## <span id="maxMetadataStringLength"><span id="MAX_METADATA_STRING_LENGTH"> maxMetadataStringLength
 
@@ -586,7 +586,7 @@ Used when:
 Used when:
 
 * `DataSourceScanExec` is requested for [simpleString](physical-operators/DataSourceScanExec.md#simpleString)
-* `FileScan` is requested for [description](connectors/FileScan.md#description) and [metadata](connectors/FileScan.md#getMetaData)
+* `FileScan` is requested for [description](files/FileScan.md#description) and [metadata](files/FileScan.md#getMetaData)
 * `HiveTableRelation` is requested for [simpleString](hive/HiveTableRelation.md#simpleString)
 
 ## <span id="maxRecordsPerFile"><span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile
@@ -595,8 +595,8 @@ Used when:
 
 Used when:
 
-* `FileFormatWriter` utility is used to [write out a query result](connectors/FileFormatWriter.md#write)
-* `FileWrite` is requested for a [BatchWrite](connectors/FileWrite.md#toBatch)
+* `FileFormatWriter` utility is used to [write out a query result](files/FileFormatWriter.md#write)
+* `FileWrite` is requested for a [BatchWrite](files/FileWrite.md#toBatch)
 
 ## <span id="maxToStringFields"><span id="MAX_TO_STRING_FIELDS"> maxToStringFields
 

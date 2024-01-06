@@ -1,6 +1,6 @@
 # ParquetPartitionReaderFactory
 
-`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md) (of [ParquetScan](ParquetScan.md#createReaderFactory)) for batch queries in [Parquet Connector](index.md).
+`ParquetPartitionReaderFactory` is a [FilePartitionReaderFactory](../files/FilePartitionReaderFactory.md) (of [ParquetScan](ParquetScan.md#createReaderFactory)) for batch queries in [Parquet Connector](index.md).
 
 ## Creating Instance
 
@@ -63,9 +63,9 @@
       file: PartitionedFile): PartitionReader[ColumnarBatch]
     ```
 
-    `buildColumnarReader` is part of the [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
+    `buildColumnarReader` is part of the [FilePartitionReaderFactory](../files/FilePartitionReaderFactory.md#buildColumnarReader) abstraction.
 
-`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../connectors/PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
+`buildColumnarReader` [createVectorizedReader](#createVectorizedReader) (for the given [PartitionedFile](../files/PartitionedFile.md)) and requests it to [enableReturningBatches](VectorizedParquetRecordReader.md#enableReturningBatches).
 
 In the end, `buildColumnarReader` returns a [PartitionReader](../connector/PartitionReader.md) that returns [ColumnarBatch](../vectorized-query-execution/ColumnarBatch.md)es (when [requested for records](../connector/PartitionReader.md#get)).
 
@@ -78,7 +78,7 @@ In the end, `buildColumnarReader` returns a [PartitionReader](../connector/Parti
       file: PartitionedFile): PartitionReader[InternalRow]
     ```
 
-    `buildReader` is part of the [FilePartitionReaderFactory](../connectors/FilePartitionReaderFactory.md#buildReader) abstraction.
+    `buildReader` is part of the [FilePartitionReaderFactory](../files/FilePartitionReaderFactory.md#buildReader) abstraction.
 
 `buildReader` determines a Hadoop [RecordReader]({{ hadoop.api }}/org/apache/hadoop/mapred/RecordReader.html) to use based on the [enableVectorizedReader](#enableVectorizedReader) flag. When enabled, `buildReader` [createVectorizedReader](#createVectorizedReader) and [createRowBaseReader](#createRowBaseReader) otherwise.
 
@@ -91,7 +91,7 @@ createRowBaseReader(
   file: PartitionedFile): RecordReader[Void, InternalRow]
 ```
 
-`createRowBaseReader` [buildReaderBase](#buildReaderBase) for the given [PartitionedFile](../connectors/PartitionedFile.md) and with [createRowBaseParquetReader](#createRowBaseParquetReader) factory.
+`createRowBaseReader` [buildReaderBase](#buildReaderBase) for the given [PartitionedFile](../files/PartitionedFile.md) and with [createRowBaseParquetReader](#createRowBaseParquetReader) factory.
 
 ### createRowBaseParquetReader { #createRowBaseParquetReader }
 
@@ -112,7 +112,7 @@ Falling back to parquet-mr
 
 `createRowBaseParquetReader` creates a [ParquetReadSupport](ParquetReadSupport.md) (with [enableVectorizedReader](ParquetReadSupport.md#enableVectorizedReader) flag disabled).
 
-`createRowBaseParquetReader` creates a [RecordReaderIterator](../connectors/RecordReaderIterator.md) with a new `ParquetRecordReader`.
+`createRowBaseParquetReader` creates a [RecordReaderIterator](../files/RecordReaderIterator.md) with a new `ParquetRecordReader`.
 
 In the end, `createRowBaseParquetReader` returns the `ParquetRecordReader`.
 
@@ -123,9 +123,9 @@ createVectorizedReader(
   file: PartitionedFile): VectorizedParquetRecordReader
 ```
 
-`createVectorizedReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../connectors/PartitionedFile.md) and [createParquetVectorizedReader](#createParquetVectorizedReader)).
+`createVectorizedReader` [buildReaderBase](#buildReaderBase) (for the given [PartitionedFile](../files/PartitionedFile.md) and [createParquetVectorizedReader](#createParquetVectorizedReader)).
 
-In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../connectors/PartitionedFile.md#partitionValues) of the given [PartitionedFile](../connectors/PartitionedFile.md)) and returns it.
+In the end, `createVectorizedReader` requests the [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) to [initBatch](VectorizedParquetRecordReader.md#initBatch) (with the [partitionSchema](#partitionSchema) and the [partitionValues](../files/PartitionedFile.md#partitionValues) of the given [PartitionedFile](../files/PartitionedFile.md)) and returns it.
 
 ---
 
@@ -147,7 +147,7 @@ createParquetVectorizedReader(
 
 `createParquetVectorizedReader` creates a [VectorizedParquetRecordReader](VectorizedParquetRecordReader.md) (with [capacity](#capacity)).
 
-`createParquetVectorizedReader` creates a [RecordReaderIterator](../connectors/RecordReaderIterator.md) (for the `VectorizedParquetRecordReader`).
+`createParquetVectorizedReader` creates a [RecordReaderIterator](../files/RecordReaderIterator.md) (for the `VectorizedParquetRecordReader`).
 
 `createParquetVectorizedReader` prints out the following DEBUG message to the logs (with the [partitionSchema](#partitionSchema) and the given `partitionValues`):
 
