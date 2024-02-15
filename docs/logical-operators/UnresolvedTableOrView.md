@@ -1,3 +1,7 @@
+---
+title: UnresolvedTableOrView
+---
+
 # UnresolvedTableOrView Leaf Logical Operator
 
 `UnresolvedTableOrView` is a [leaf logical operator](LeafNode.md).

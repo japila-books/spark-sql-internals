@@ -1,3 +1,7 @@
+---
+title: UnresolvedTable
+---
+
 # UnresolvedTable Leaf Logical Operator
 
 `UnresolvedTable` is a [leaf logical operator](LeafNode.md).

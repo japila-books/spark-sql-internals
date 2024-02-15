@@ -1,3 +1,7 @@
+---
+title: ShowTables
+---
+
 # ShowTables Logical Command
 
 `ShowTables` is a [logical command](Command.md) that represents [SHOW TABLES](../sql/AstBuilder.md#visitShowTables) SQL statement.

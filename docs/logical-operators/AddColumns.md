@@ -1,3 +1,7 @@
+---
+title: AddColumns
+---
+
 # AddColumns Logical Operator
 
 `AddColumns` is an `AlterTableCommand` logical operator that represents [ALTER TABLE ADD COLUMNS](../sql/AstBuilder.md#visitAddTableColumns) SQL statement (in a logical query plan).

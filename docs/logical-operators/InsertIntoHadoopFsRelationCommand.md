@@ -1,3 +1,7 @@
+---
+title: InsertIntoHadoopFsRelationCommand
+---
+
 # InsertIntoHadoopFsRelationCommand Logical Command
 
 `InsertIntoHadoopFsRelationCommand` is a [logical command](DataWritingCommand.md) that writes the result of executing a [query](#query) to an [output path](#outputPath) in the given [format](#fileFormat).

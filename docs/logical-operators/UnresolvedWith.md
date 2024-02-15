@@ -1,3 +1,7 @@
+---
+title: UnresolvedWith
+---
+
 # UnresolvedWith Unary Logical Operator
 
 `UnresolvedWith` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents a [WITH](../sql/AstBuilder.md#withCTE) clause in logical query plans.

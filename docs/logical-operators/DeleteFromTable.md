@@ -1,3 +1,7 @@
+---
+title: DeleteFromTable
+---
+
 # DeleteFromTable Logical Command
 
 `DeleteFromTable` is a [Command](Command.md) that represents [DELETE FROM](../sql/AstBuilder.md#visitDeleteFromTable) SQL statement.

@@ -1,3 +1,7 @@
+---
+title: DescribeRelation
+---
+
 # DescribeRelation Logical Command
 
 `DescribeRelation` is a [logical command](Command.md) that represents [DESCRIBE TABLE](../sql/AstBuilder.md#visitDescribeRelation) SQL statement.

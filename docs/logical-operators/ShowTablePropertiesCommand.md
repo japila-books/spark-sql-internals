@@ -1,3 +1,7 @@
+---
+title: ShowTablePropertiesCommand
+---
+
 # ShowTablePropertiesCommand Logical Command
 
 `ShowTablePropertiesCommand` is a [RunnableCommand](RunnableCommand.md) that represents [ShowTableProperties](ShowTableProperties.md) logical operator with the following logical operators at execution:

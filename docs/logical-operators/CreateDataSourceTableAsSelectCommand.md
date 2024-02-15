@@ -1,3 +1,7 @@
+---
+title: CreateDataSourceTableAsSelectCommand
+---
+
 # CreateDataSourceTableAsSelectCommand Logical Command
 
 `CreateDataSourceTableAsSelectCommand` is a <<DataWritingCommand.md#, logical command>> that <<run, creates a DataSource table>> with the data from a <<query, structured query>> (_AS query_).

@@ -1,10 +1,14 @@
+---
+title: DataWritingCommand
+---
+
 # DataWritingCommand Logical Commands
 
 `DataWritingCommand` is an [extension](#contract) of the `UnaryCommand` abstraction for [logical commands](#implementations) that write the result of executing [query](#query) (_query data_) to a relation (when [executed](#run)).
 
 ## Contract
 
-### <span id="outputColumnNames"> Output Column Names
+### Output Column Names { #outputColumnNames }
 
 ```scala
 outputColumnNames: Seq[String]
@@ -16,7 +20,7 @@ Used when:
 
 * `DataWritingCommand` is requested for the [output columns](#outputColumns)
 
-### <span id="query"> Query
+### Query
 
 ```scala
 query: LogicalPlan
@@ -29,7 +33,7 @@ Used when:
 * [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed
 * `DataWritingCommand` is requested for the [child logical operator](#child) and the [output columns](#outputColumns)
 
-### <span id="run"> Executing
+### Executing Command { #run }
 
 ```scala
 run(
@@ -49,25 +53,25 @@ Used when:
 * [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 * [SaveAsHiveFile](../hive/SaveAsHiveFile.md)
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics { #metrics }
 
 ![DataWritingCommand's Performance Metrics](../images/DataWritingCommand-metrics.png)
 
-### <span id="jobCommitTime"> job commit time
+### job commit time { #jobCommitTime }
 
-### <span id="numParts"> number of dynamic part
+### number of dynamic part { #numParts }
 
 [Number of partitions](../files/BasicWriteTaskStats.md#partitions) (when [processing write job statistics](../files/BasicWriteJobStatsTracker.md#processStats))
 
 Corresponds to the number of times when [newPartition](../files/BasicWriteTaskStatsTracker.md#newPartition) of [BasicWriteTaskStatsTracker](../files/BasicWriteTaskStatsTracker.md) was called (that is to announce the fact that a new partition is about to be written)
 
-### <span id="numOutputRows"> number of output rows
+### number of output rows { #numOutputRows }
 
-### <span id="numFiles"> number of written files
+### number of written files { #numFiles }
 
-### <span id="taskCommitTime"> task commit time
+### task commit time { #taskCommitTime }
 
-### <span id="numOutputBytes"> written output
+### written output { #numOutputBytes }
 
 ## Execution Planning
 

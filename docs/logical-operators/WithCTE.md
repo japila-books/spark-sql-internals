@@ -1,3 +1,7 @@
+---
+title: WithCTE
+---
+
 # WithCTE Logical Operator
 
 `WithCTE` is a [logical operator](LogicalPlan.md) that represents [UnresolvedWith](../logical-operators/UnresolvedWith.md) unary logical operators after analysis.

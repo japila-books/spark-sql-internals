@@ -1,3 +1,7 @@
+---
+title: CommentOnTable
+---
+
 # CommentOnTable Logical Command
 
 `CommentOnTable` is a [Command](Command.md) that represents [COMMENT ON TABLE](../sql/AstBuilder.md#visitCommentTable) SQL command.

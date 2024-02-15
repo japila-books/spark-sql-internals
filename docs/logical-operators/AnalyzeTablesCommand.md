@@ -1,3 +1,7 @@
+---
+title: AnalyzeTablesCommand
+---
+
 # AnalyzeTablesCommand Logical Command
 
 `AnalyzeTablesCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents `ANALYZE TABLES COMPUTE STATISTICS` SQL statement (`AnalyzeTables` logical command) at query execution.

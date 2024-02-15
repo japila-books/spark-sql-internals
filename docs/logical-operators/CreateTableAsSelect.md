@@ -1,3 +1,7 @@
+---
+title: CreateTableAsSelect
+---
+
 # CreateTableAsSelect Logical Command
 
 `CreateTableAsSelect` is a `BinaryCommand` with [V2CreateTablePlan](V2CreateTablePlan.md) that represents the following high-level operators in a logical query plan:

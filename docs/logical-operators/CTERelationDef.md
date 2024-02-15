@@ -1,3 +1,7 @@
+---
+title: CTERelationDef
+---
+
 # CTERelationDef Unary Logical Operator
 
 `CTERelationDef` is a [unary logical operator](LogicalPlan.md#UnaryNode).
@@ -13,12 +17,14 @@
 
 * [CTESubstitution](../logical-analysis-rules/CTESubstitution.md) logical analysis rule is executed
 
-## <span id="nodePatterns"> Node Patterns
+## Node Patterns { #nodePatterns }
 
-```scala
-nodePatterns: Seq[TreePattern]
-```
+??? note "TreeNode"
+
+    ```scala
+    nodePatterns: Seq[TreePattern]
+    ```
+
+    `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 `nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
-
-`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.

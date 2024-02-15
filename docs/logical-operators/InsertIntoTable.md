@@ -1,3 +1,7 @@
+---
+title: InsertIntoTable
+---
+
 # InsertIntoTable Unary Logical Operator
 
 `InsertIntoTable` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in a logical plan:

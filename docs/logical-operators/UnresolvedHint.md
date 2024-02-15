@@ -1,3 +1,7 @@
+---
+title: UnresolvedHint
+---
+
 # UnresolvedHint Unary Logical Operator
 
 `UnresolvedHint` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents a hint (by [name](#name)) for the [child](#child) logical plan.

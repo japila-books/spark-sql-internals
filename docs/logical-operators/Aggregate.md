@@ -1,3 +1,7 @@
+---
+title: Aggregate
+---
+
 # Aggregate Logical Operator
 
 `Aggregate` is a [unary logical operator](LogicalPlan.md#UnaryNode) for [Aggregation Queries](../aggregations/index.md) and can represent the following high-level operators in a [logical query plan](LogicalPlan.md):
@@ -94,7 +98,7 @@ In the end, `supportsHashAggregate` [isAggregateBufferMutable](#isAggregateBuffe
 * `AggUtils` is requested to [create a physical operator for aggregation](../aggregations/AggUtils.md#createAggregate)
 * `HashAggregateExec` physical operator is created (to assert that the [aggregateBufferAttributes](../physical-operators/HashAggregateExec.md#aggregateBufferAttributes) are supported)
 
-## <span id="isAggregateBufferMutable"> isAggregateBufferMutable
+## isAggregateBufferMutable { #isAggregateBufferMutable }
 
 ```scala
 isAggregateBufferMutable(

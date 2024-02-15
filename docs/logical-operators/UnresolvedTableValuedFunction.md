@@ -1,3 +1,7 @@
+---
+title: UnresolvedTableValuedFunction
+---
+
 # UnresolvedTableValuedFunction Logical Operator
 
 `UnresolvedTableValuedFunction` is a [LeafNode](LeafNode.md) that represents a table-valued function (e.g. `range`, `explode`).

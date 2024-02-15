@@ -1,3 +1,7 @@
+---
+title: ShowCreateTableCommand
+---
+
 # ShowCreateTableCommand Logical Command
 
 `ShowCreateTableCommand` is a [logical command](RunnableCommand.md) that <<run, executes>> a `SHOW CREATE TABLE` SQL statement (with a data source / non-Hive or a Hive table).

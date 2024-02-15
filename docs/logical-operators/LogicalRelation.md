@@ -1,3 +1,7 @@
+---
+title: LogicalRelation
+---
+
 # LogicalRelation Leaf Logical Operator
 
 `LogicalRelation` is a [leaf logical operator](LeafNode.md) that represents a [BaseRelation](#relation) in a [logical query plan](LogicalPlan.md).

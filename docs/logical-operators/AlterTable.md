@@ -1,3 +1,7 @@
+---
+title: AlterTable
+---
+
 # AlterTable Logical Command
 
 `AlterTable` is a [Command](Command.md) for `ALTER TABLE` SQL commands:

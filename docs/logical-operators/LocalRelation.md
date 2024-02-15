@@ -1,3 +1,7 @@
+---
+title: LocalRelation
+---
+
 # LocalRelation Leaf Logical Operator
 
 `LocalRelation` is a [leaf logical operator](LeafNode.md) that represents a scan over local collections (and so allows for optimizations for functions like `collect` or `take` to be executed locally on the driver with no executors).

@@ -1,3 +1,7 @@
+---
+title: Repartition
+---
+
 # Repartition Logical Operator
 
 `Repartition` is a concrete [RepartitionOperation](RepartitionOperation.md).

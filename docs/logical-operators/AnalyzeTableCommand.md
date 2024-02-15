@@ -1,3 +1,7 @@
+---
+title: AnalyzeTableCommand
+---
+
 # AnalyzeTableCommand Logical Command
 
 `AnalyzeTableCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that [computes statistics](#run) (and stores them in a metastore).
@@ -13,18 +17,20 @@
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (and resolves an [AnalyzeTable](AnalyzeTable.md) logical operator with no `PARTITION`s)
 
-## <span id="run"> run
+## Executing Command { #run }
 
-```scala
-run(
-  sparkSession: SparkSession): Seq[Row]
-```
+??? note "RunnableCommand"
+
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
+
+    `run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 `run` [analyzes](../CommandUtils.md#analyzeTable) the given [table](#tableIdent).
 
 `run` returns an empty collection.
-
-`run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 ## Demo
 

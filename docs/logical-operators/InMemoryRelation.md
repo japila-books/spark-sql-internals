@@ -1,3 +1,7 @@
+---
+title: InMemoryRelation
+---
+
 # InMemoryRelation Leaf Logical Operator
 
 `InMemoryRelation` is a [leaf logical operator](LeafNode.md) that represents a structured query that is cached in memory (when `CacheManager` is requested to [cache it](../CacheManager.md#cacheQuery)).

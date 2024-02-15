@@ -1,3 +1,7 @@
+---
+title: DescribeTableCommand
+---
+
 # DescribeTableCommand Logical Command
 
 `DescribeTableCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) (indirectly as `DescribeCommandBase`) that represents a [DescribeRelation](DescribeRelation.md) at execution (and hence [DESCRIBE TABLE](../sql/AstBuilder.md#visitDescribeRelation) SQL statement).
@@ -15,7 +19,7 @@
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [DescribeRelation](DescribeRelation.md) logical operator)
 
-## <span id="describeFormattedTableInfo"> Detailed Table Information
+## Detailed Table Information { #describeFormattedTableInfo }
 
 ```scala
 describeFormattedTableInfo(

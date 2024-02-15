@@ -1,3 +1,7 @@
+---
+title: InsertIntoDataSourceCommand
+---
+
 # InsertIntoDataSourceCommand Logical Command
 
 `InsertIntoDataSourceCommand` is a [RunnableCommand](RunnableCommand.md) that <<run, inserts or overwrites data in an InsertableRelation>> (per <<overwrite, overwrite>> flag).

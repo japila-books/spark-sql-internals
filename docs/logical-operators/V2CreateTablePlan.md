@@ -1,3 +1,7 @@
+---
+title: V2CreateTablePlan
+---
+
 # V2CreateTablePlan Logical Operators
 
 `V2CreateTablePlan` is an [extension](#contract) of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that create or replace V2 table definitions.

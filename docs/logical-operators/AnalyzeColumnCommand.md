@@ -1,3 +1,7 @@
+---
+title: AnalyzeColumnCommand
+---
+
 # AnalyzeColumnCommand Logical Command
 
 `AnalyzeColumnCommand` is a [logical command](RunnableCommand.md) to represent [AnalyzeColumn](AnalyzeColumn.md) logical operator.
@@ -16,21 +20,23 @@
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to resolve an [AnalyzeColumn](AnalyzeColumn.md))
 
-## <span id="run"> Executing Logical Command
+## Executing Command { #run }
 
-```scala
-run(
-  sparkSession: SparkSession): Seq[Row]
-```
+??? note "RunnableCommand"
 
-`run` is part of [RunnableCommand](RunnableCommand.md#run) abstraction.
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
+
+    `run` is part of [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 `run` calculates the following statistics:
 
-* sizeInBytes
+* `sizeInBytes`
 * stats for each column
 
-### <span id="computeColumnStats"> Computing Statistics for Specified Columns
+### Computing Statistics for Specified Columns { #computeColumnStats }
 
 ```scala
 computeColumnStats(
@@ -41,7 +47,7 @@ computeColumnStats(
 
 `computeColumnStats`...FIXME
 
-### <span id="computePercentiles"> Computing Percentiles
+### Computing Percentiles { #computePercentiles }
 
 ```scala
 computePercentiles(
@@ -52,7 +58,7 @@ computePercentiles(
 
 `computePercentiles`...FIXME
 
-### <span id="analyzeColumnInCatalog"> analyzeColumnInCatalog
+### analyzeColumnInCatalog { #analyzeColumnInCatalog }
 
 ```scala
 analyzeColumnInCatalog(
@@ -79,7 +85,7 @@ Property | Value
 
 In the end, `analyzeColumnInCatalog` requests the [SessionCatalog](../SessionState.md#catalog) to [alter](../SessionCatalog.md#alterTableStats) the [table](#tableIdent) with the new [CatalogStatistics](../CatalogStatistics.md).
 
-#### <span id="analyzeColumnInCatalog-AnalysisException"> AnalysisException
+#### AnalysisException { #analyzeColumnInCatalog-AnalysisException }
 
 `analyzeColumnInCatalog` throws the following `AnalysisException` unless the catalog view is cached:
 

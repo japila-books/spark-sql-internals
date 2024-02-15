@@ -1,3 +1,7 @@
+---
+title: CreateTempViewUsing
+---
+
 # CreateTempViewUsing Logical Command
 
 `CreateTempViewUsing` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents the following SQL statement at execution:

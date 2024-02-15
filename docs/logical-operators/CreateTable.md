@@ -1,3 +1,7 @@
+---
+title: CreateTable
+---
+
 # CreateTable Logical Operator
 
 `CreateTable` is a [logical operator](LogicalPlan.md) that represents (is <<creating-instance, created>> for) the following:

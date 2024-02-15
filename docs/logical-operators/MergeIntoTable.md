@@ -1,3 +1,7 @@
+---
+title: MergeIntoTable
+---
+
 # MergeIntoTable Logical Command
 
 `MergeIntoTable` is a [BinaryCommand](Command.md#BinaryCommand) that represents [MERGE INTO](../sql/AstBuilder.md#visitMergeIntoTable) DML statement.

@@ -1,3 +1,7 @@
+---
+title: CreateDataSourceTableCommand
+---
+
 # CreateDataSourceTableCommand Logical Command
 
 `CreateDataSourceTableCommand` is a RunnableCommand.md[logical command] that <<run, creates a new table>> (in a [SessionCatalog](../SessionCatalog.md)).

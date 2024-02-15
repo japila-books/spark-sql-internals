@@ -1,3 +1,7 @@
+---
+title: DataSourceV2Relation
+---
+
 # DataSourceV2Relation Leaf Logical Operator
 
 `DataSourceV2Relation` is a [leaf logical operator](LeafNode.md) that represents a scan over [tables with support for BATCH_READ](#TableCapabilityCheck) ([at the very least](#TableCapabilityCheck)).
@@ -28,7 +32,7 @@ The `CatalogPlugin` can be as follows:
 * [v2SessionCatalog](../connector/catalog/CatalogManager.md#v2SessionCatalog) for global temp views
 * [Custom Catalog by name](../connector/catalog/CatalogManager.md#catalog)
 
-## <span id="create"> Creating DataSourceV2Relation
+## Creating DataSourceV2Relation { #create }
 
 ```scala
 create(
@@ -58,13 +62,13 @@ In the end, `create` uses the new schema to [create a DataSourceV2Relation](#cre
 * [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule is executed (and requested to [lookupRelation](../logical-analysis-rules/ResolveRelations.md#lookupRelation))
 * `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
 
-## <span id="MultiInstanceRelation"> MultiInstanceRelation
+## MultiInstanceRelation { #MultiInstanceRelation }
 
 `DataSourceV2Relation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
-## <span id="metadataOutput"> Metadata Columns
+## Metadata Columns { #metadataOutput }
 
-??? note "Signature"
+??? note "LogicalPlan"
 
     ```scala
     metadataOutput: Seq[AttributeReference]
@@ -76,7 +80,7 @@ In the end, `create` uses the new schema to [create a DataSourceV2Relation](#cre
 
 `metadataOutput` filters out metadata columns with the same name as regular [output columns](../catalyst/QueryPlan.md#output).
 
-## <span id="withMetadataColumns"> Creating DataSourceV2Relation with Metadata Columns
+## Creating DataSourceV2Relation with Metadata Columns { #withMetadataColumns }
 
 ```scala
 withMetadataColumns(): DataSourceV2Relation
@@ -88,7 +92,7 @@ withMetadataColumns(): DataSourceV2Relation
 
 * [AddMetadataColumns](../logical-analysis-rules/AddMetadataColumns.md) logical resolution rule is executed
 
-## <span id="TableCapabilityCheck"> Required Table Capabilities
+## Required Table Capabilities { #TableCapabilityCheck }
 
 [TableCapabilityCheck](../logical-analysis-rules/TableCapabilityCheck.md) is used to assert the following regarding `DataSourceV2Relation` and the [Table](#table):
 
@@ -97,9 +101,9 @@ withMetadataColumns(): DataSourceV2Relation
 1. [Table](#table) supports [BATCH_WRITE](../connector/TableCapability.md#BATCH_WRITE) with [OVERWRITE_DYNAMIC](../connector/TableCapability.md#OVERWRITE_DYNAMIC) for [OverwritePartitionsDynamic](OverwritePartitionsDynamic.md) (_dynamic overwrite in batch mode_)
 1. [Table](#table) supports [BATCH_WRITE](../connector/TableCapability.md#BATCH_WRITE), [V1_BATCH_WRITE](../connector/TableCapability.md#V1_BATCH_WRITE) or [OVERWRITE_BY_FILTER](../connector/TableCapability.md#OVERWRITE_BY_FILTER) possibly with [TRUNCATE](../connector/TableCapability.md#TRUNCATE) for [OverwriteByExpression](OverwriteByExpression.md) (_truncate in batch mode_ and _overwrite by filter in batch mode_)
 
-## <span id="name"> Name
+## Name
 
-??? note "Signature"
+??? note "NamedRelation"
 
     ```scala
     name: String
@@ -109,9 +113,9 @@ withMetadataColumns(): DataSourceV2Relation
 
 `name` requests the [Table](#table) for the [name](../connector/Table.md#name)
 
-## <span id="simpleString"> Simple Node Description
+## Simple Node Description { #simpleString }
 
-??? note "Signature"
+??? note "TreeNode"
 
     ```scala
     simpleString(
@@ -126,9 +130,9 @@ withMetadataColumns(): DataSourceV2Relation
 RelationV2[output] [name]
 ```
 
-## <span id="skipSchemaResolution"> skipSchemaResolution
+## skipSchemaResolution { #skipSchemaResolution }
 
-??? note "Signature"
+??? note "NamedRelation"
 
     ```scala
     skipSchemaResolution: Boolean

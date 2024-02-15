@@ -1,3 +1,7 @@
+---
+title: ShowCreateTable
+---
+
 # ShowCreateTable Logical Command
 
 `ShowCreateTable` is a [UnaryCommand](Command.md#UnaryCommand) that represents [SHOW CREATE TABLE](../sql/AstBuilder.md#visitShowCreateTable) SQL statement in a logical query plan.

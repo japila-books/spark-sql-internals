@@ -1,3 +1,7 @@
+---
+title: V2WriteCommand
+---
+
 # V2WriteCommand Logical Commands
 
 `V2WriteCommand` is an [extension](#contract) of the [UnaryCommand](Command.md) abstraction for [unary logical commands](#implementations) that write [data](#query) out to [tables](#table).

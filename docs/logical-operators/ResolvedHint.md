@@ -1,3 +1,7 @@
+---
+title: ResolvedHint
+---
+
 # ResolvedHint Unary Logical Operator
 
 `ResolvedHint` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent resolved hint nodes in a [logical query plan](#child).

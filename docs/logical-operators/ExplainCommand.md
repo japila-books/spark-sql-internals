@@ -1,3 +1,7 @@
+---
+title: ExplainCommand
+---
+
 # ExplainCommand Logical Command
 
 `ExplainCommand` is a [logical command](RunnableCommand.md) to [display logical and physical query plans](#run) (with optional details about codegen and cost statistics) that represents [EXPLAIN](../sql/SparkSqlAstBuilder.md#visitExplain) SQL statement at execution.
@@ -13,18 +17,22 @@
 
 * `SparkSqlAstBuilder` is requested to [parse EXPLAIN statement](../sql/SparkSqlAstBuilder.md#visitExplain)
 
-## <span id="output"> Output Attributes
+## Output Attributes { #output }
 
 `ExplainCommand` uses the following [output attributes](Command.md#output):
 
 * `plan` (type: `StringType`)
 
-## <span id="run"> Executing Logical Command
+## Executing Command { #run }
 
-```scala
-run(
-  sparkSession: SparkSession): Seq[Row]
-```
+??? note "RunnableCommand"
+
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
+
+    `run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 `run` requests the given [SparkSession](../SparkSession.md) for [SessionState](../SparkSession.md#sessionState) that is requested to [execute](../SessionState.md#executePlan) the given [LogicalPlan](#logicalPlan).
 
@@ -36,5 +44,3 @@ In case of a `TreeNodeException`, `run` gives the following output:
 Error occurred during query planning:
 [cause]
 ```
-
-`run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.

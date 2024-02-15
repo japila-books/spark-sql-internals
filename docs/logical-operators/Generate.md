@@ -1,3 +1,7 @@
+---
+title: Generate
+---
+
 # Generate Unary Logical Operator
 
 `Generate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):

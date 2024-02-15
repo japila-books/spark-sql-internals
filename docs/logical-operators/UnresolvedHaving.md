@@ -1,3 +1,7 @@
+---
+title: UnresolvedHaving
+---
+
 # UnresolvedHaving Unary Logical Operator
 
 `UnresolvedHaving` is a [unary logical operator](LogicalPlan.md#UnaryNode).

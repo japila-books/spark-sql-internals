@@ -1,3 +1,7 @@
+---
+title: CreateViewCommand
+---
+
 # CreateViewCommand Logical Command
 
 `CreateViewCommand` is a <<RunnableCommand.md#, logical command>> for <<run, creating or replacing a view or a table>>.

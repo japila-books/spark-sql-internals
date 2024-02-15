@@ -1,3 +1,7 @@
+---
+title: CacheTableCommand
+---
+
 # CacheTableCommand Runnable Logical Command
 
 When <<run, executed>>, `CacheTableCommand` [creates a DataFrame](../Dataset.md#ofRows) followed by [registering a temporary view](../spark-sql-dataset-operators.md#createTempView) for the optional `query`.

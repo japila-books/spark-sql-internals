@@ -1,3 +1,7 @@
+---
+title: FlatMapGroupsWithState
+---
+
 # FlatMapGroupsWithState Logical Operator
 
 `FlatMapGroupsWithState` is a [binary logical operator](#BinaryNode) that represents the following [KeyValueGroupedDataset](../KeyValueGroupedDataset.md) high-level operators:
@@ -5,14 +9,14 @@
 * [mapGroupsWithState](../KeyValueGroupedDataset.md#mapGroupsWithState)
 * [flatMapGroupsWithState](../KeyValueGroupedDataset.md#flatMapGroupsWithState)
 
-## <span id="BinaryNode"> BinaryNode
+## BinaryNode { #BinaryNode }
 
 `FlatMapGroupsWithState` is a [binary logical operator](LogicalPlan.md#BinaryNode) with two child operators:
 
 * The [child](#child) as the left operator
 * The [initialState](#initialState) as the right operator
 
-## <span id="ObjectProducer"> ObjectProducer
+## ObjectProducer { #ObjectProducer }
 
 `FlatMapGroupsWithState` is an `ObjectProducer`.
 
@@ -39,7 +43,7 @@
 
 `FlatMapGroupsWithState` is created using [apply](#apply) factory.
 
-## <span id="apply"> Creating FlatMapGroupsWithState
+## Creating FlatMapGroupsWithState { #apply }
 
 ```scala
 apply[K: Encoder, V: Encoder, S: Encoder, U: Encoder](

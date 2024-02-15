@@ -1,3 +1,7 @@
+---
+title: WithWindowDefinition
+---
+
 # WithWindowDefinition Unary Logical Operator
 
 [[windowDefinitions]][[child]]

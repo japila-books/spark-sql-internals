@@ -1,3 +1,7 @@
+---
+title: Except
+---
+
 # Except Logical Operator
 
 `Except` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:

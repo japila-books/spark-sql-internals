@@ -1,10 +1,14 @@
+---
+title: MultiInstanceRelation
+---
+
 # MultiInstanceRelation Logical Operators
 
 `MultiInstanceRelation` is an [abstraction](#contract) of [logical operators](#implementations) for which a single instance might appear multiple times in a logical query plan.
 
 ## Contract
 
-### <span id="newInstance"> Creating New Instance
+### Creating New Instance { #newInstance }
 
 ```scala
 newInstance(): LogicalPlan

@@ -1,3 +1,7 @@
+---
+title: MapPartitions
+---
+
 # MapPartitions Unary Logical Operator
 
 `MapPartitions` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent [Dataset.mapPartitions](../Dataset.md#mapPartitions) operator in a logical query plan.
@@ -20,7 +24,7 @@
 
 `MapPartitions` is planned as `MapPartitionsExec` physical operator when [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed.
 
-## <span id="apply"> Creating MapPartitions
+## Creating MapPartitions { #apply }
 
 ```scala
 apply[T : Encoder, U : Encoder](

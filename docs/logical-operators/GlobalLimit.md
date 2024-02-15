@@ -1,3 +1,7 @@
+---
+title: GlobalLimit
+---
+
 # GlobalLimit Logical Operator
 
 `GlobalLimit` is an order-preserving unary logical operator.
@@ -19,7 +23,7 @@
 
 * `CombineLimits` physical optimization
 
-## <span id="apply"> apply Utility
+## Creating GlobalLimit { #apply }
 
 ```scala
 apply(
@@ -28,6 +32,8 @@ apply(
 ```
 
 `apply` creates a `GlobalLimit` for the given `limitExpr` expression and a `LocalLimit` logical operator.
+
+---
 
 `apply` is used when:
 

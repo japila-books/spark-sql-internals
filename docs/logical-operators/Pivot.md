@@ -1,3 +1,7 @@
+---
+title: Pivot
+---
+
 # Pivot Unary Logical Operator
 
 `Pivot` is an [unary logical operator](LogicalPlan.md#UnaryNode) that represents [pivot](../RelationalGroupedDataset.md#pivot) operator.

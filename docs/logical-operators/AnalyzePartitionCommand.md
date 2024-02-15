@@ -1,3 +1,7 @@
+---
+title: AnalyzePartitionCommand
+---
+
 # AnalyzePartitionCommand Logical Command
 
 `AnalyzePartitionCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents [ANALYZE TABLE PARTITION COMPUTE STATISTICS](../sql/AstBuilder.md#visitAnalyze) ([AnalyzeTable](AnalyzeTable.md) logical command with [partition specification](#partitionSpec)) at analysis.

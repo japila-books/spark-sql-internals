@@ -1,3 +1,7 @@
+---
+title: ShowTableProperties
+---
+
 # ShowTableProperties Logical Command
 
 `ShowTableProperties` is a [logical command](Command.md) that represents `SHOW TBLPROPERTIES` SQL statement.

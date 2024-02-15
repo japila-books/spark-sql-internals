@@ -1,3 +1,7 @@
+---
+title: UpdateTable
+---
+
 # UpdateTable Logical Operator
 
 `UpdateTable` is a [Command](Command.md) that represents [UPDATE](../sql/AstBuilder.md#visitUpdateTable) SQL statement.

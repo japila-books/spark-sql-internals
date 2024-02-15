@@ -1,3 +1,7 @@
+---
+title: CTERelationRef
+---
+
 # CTERelationRef Leaf Logical Operator
 
 `CTERelationRef` is a [leaf logical operator](LeafNode.md).
@@ -16,19 +20,21 @@
 * [CTESubstitution](../logical-analysis-rules/CTESubstitution.md) logical resolution rule is executed
 * [ResolveWithCTE](../logical-analysis-rules/ResolveWithCTE.md) logical resolution rule is executed
 
-## <span id="MultiInstanceRelation"> MultiInstanceRelation
+## MultiInstanceRelation { #MultiInstanceRelation }
 
 `CTERelationRef` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
-## <span id="nodePatterns"> Node Patterns
+## Node Patterns { #nodePatterns }
 
-```scala
-nodePatterns: Seq[TreePattern]
-```
+??? note "TreeNode"
+
+    ```scala
+    nodePatterns: Seq[TreePattern]
+    ```
+
+    `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 `nodePatterns` is [CTE](../catalyst/TreePattern.md#CTE).
-
-`nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
 
 ## Query Planning
 

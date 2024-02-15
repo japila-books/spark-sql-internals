@@ -1,3 +1,7 @@
+---
+title: SaveIntoDataSourceCommand
+---
+
 # SaveIntoDataSourceCommand Logical Command
 
 `SaveIntoDataSourceCommand` is a [logical runnable command](RunnableCommand.md).

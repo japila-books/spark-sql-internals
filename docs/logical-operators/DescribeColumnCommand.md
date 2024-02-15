@@ -1,14 +1,16 @@
+---
+title: DescribeColumnCommand
+---
+
 # DescribeColumnCommand Logical Command
 
 `DescribeColumnCommand` is a RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
 
-```
+```text
 [DESC|DESCRIBE] TABLE? [EXTENDED|FORMATTED] table_name column_name
 ```
 
-[source, scala]
-----
-// Make the example reproducible
+```text
 val tableName = "t1"
 import org.apache.spark.sql.catalyst.TableIdentifier
 val tableId = TableIdentifier(tableName)
@@ -63,7 +65,7 @@ scala> spark.sql(descExtSQL).show
 |   max_col_len|         8|
 |     histogram|      NULL|
 +--------------+----------+
-----
+```
 
 [[output]]
 `DescribeColumnCommand` defines the Command.md#output[output schema] with the following columns:
@@ -71,7 +73,7 @@ scala> spark.sql(descExtSQL).show
 * `info_name` with "name of the column info" comment
 * `info_value` with "value of the column info" comment
 
-## describeTable Labeled Alternative
+## describeTable Labeled Alternative { #describeTable }
 
 `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in [SqlBaseParser.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../sql/SparkSqlParser.md#visitDescribeTable).
 

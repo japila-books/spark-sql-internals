@@ -1,3 +1,7 @@
+---
+title: Join
+---
+
 # Join Logical Operator
 
 `Join` is a [binary logical operator](LogicalPlan.md#BinaryNode) that represents the following high-level operators in a logical plan:

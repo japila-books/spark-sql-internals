@@ -1,3 +1,7 @@
+---
+title: CollectMetrics
+---
+
 # CollectMetrics Logical Operator
 
 `CollectMetrics` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents [Dataset.observe](../spark-sql-dataset-operators.md#observe) operator (in the [logical query plan](LogicalPlan.md)).

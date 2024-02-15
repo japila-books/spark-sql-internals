@@ -1,3 +1,7 @@
+---
+title: Window
+---
+
 # Window Unary Logical Operator
 
 `Window` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that...FIXME

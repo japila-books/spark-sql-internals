@@ -1,3 +1,7 @@
+---
+title: InsertIntoDir
+---
+
 # InsertIntoDir Unary Logical Operator
 
 `InsertIntoDir` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents sql/AstBuilder.md#withInsertInto[INSERT OVERWRITE DIRECTORY] SQL statement.

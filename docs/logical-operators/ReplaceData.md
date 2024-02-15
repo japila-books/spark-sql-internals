@@ -1,3 +1,7 @@
+---
+title: ReplaceData
+---
+
 # ReplaceData Logical Operator
 
 `ReplaceData` is a [RowLevelWrite](RowLevelWrite.md) logical operator.

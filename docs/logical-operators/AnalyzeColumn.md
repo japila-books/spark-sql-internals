@@ -1,3 +1,7 @@
+---
+title: AnalyzeColumn
+---
+
 # AnalyzeColumn Logical Command
 
 `AnalyzeColumn` is a [Command](Command.md) for [ANALYZE TABLE FOR COLUMNS](../sql/AstBuilder.md#visitAnalyze) SQL statement.

@@ -1,3 +1,7 @@
+---
+title: RepartitionOperation
+---
+
 # RepartitionOperation Unary Logical Operators
 
 `RepartitionOperation` is an [extension](#contract) of the [UnaryNode](LogicalPlan.md#UnaryNode) abstraction for [repartition operations](#implementations).

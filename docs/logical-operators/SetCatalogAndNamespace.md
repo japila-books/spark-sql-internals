@@ -1,3 +1,7 @@
+---
+title: SetCatalogAndNamespace
+---
+
 # SetCatalogAndNamespace Logical Command
 
 `SetCatalogAndNamespace` is a `UnaryCommand` that represents [USE SQL statement](../sql/AstBuilder.md#visitUse).

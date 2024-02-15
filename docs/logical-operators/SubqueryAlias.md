@@ -1,3 +1,7 @@
+---
+title: SubqueryAlias
+---
+
 # SubqueryAlias Unary Logical Operator
 
 `SubqueryAlias` is a <<spark-sql-LogicalPlan.md#UnaryNode, unary logical operator>> that represents an *aliased subquery* (i.e. the <<child, child>> logical query plan with the <<alias, alias>> in the <<output, output schema>>).

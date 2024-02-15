@@ -1,3 +1,7 @@
+---
+title: LogicalQueryStage
+---
+
 # LogicalQueryStage Leaf Logical Operator
 
 `LogicalQueryStage` is a [leaf logical operator](../logical-operators/LeafNode.md) for [Adaptive Query Execution](index.md).
@@ -24,15 +28,15 @@
 
 `LogicalQueryStage` is planned by [LogicalQueryStageStrategy](../execution-planning-strategies/LogicalQueryStageStrategy.md) execution planning strategy.
 
-## <span id="computeStats"> Computing Runtime Statistics
+## Computing Runtime Statistics { #computeStats }
 
-```scala
-computeStats(): Statistics
-```
+??? note "LeafNode"
 
-`computeStats` is part of the [LeafNode](../logical-operators/LeafNode.md#computeStats) abstraction.
+    ```scala
+    computeStats(): Statistics
+    ```
 
----
+    `computeStats` is part of the [LeafNode](../logical-operators/LeafNode.md#computeStats) abstraction.
 
 `computeStats` tries to find the first [QueryStageExec](../physical-operators/QueryStageExec.md) leaf physical operators in the [physical plan](#physicalPlan) that is then requested for the [statistics](../physical-operators/QueryStageExec.md#computeStats).
 

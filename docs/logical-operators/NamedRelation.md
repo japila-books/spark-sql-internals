@@ -1,10 +1,14 @@
+---
+title: NamedRelation
+---
+
 # NamedRelation Logical Operators
 
 `NamedRelation` is an [extension](#contract) of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) with a [name](#name) and support for [skipSchemaResolution](#skipSchemaResolution).
 
 ## Contract
 
-### <span id="name"> Name
+### Name
 
 ```scala
 name: String
@@ -18,7 +22,7 @@ See:
 * [DataSourceV2ScanRelation](DataSourceV2ScanRelation.md#name)
 * [UnresolvedRelation](UnresolvedRelation.md#name)
 
-### <span id="skipSchemaResolution"> skipSchemaResolution
+### skipSchemaResolution { #skipSchemaResolution }
 
 ```scala
 skipSchemaResolution: Boolean

@@ -1,3 +1,7 @@
+---
+title: RebalancePartitions
+---
+
 # RebalancePartitions Unary Logical Operator
 
 `RebalancePartitions` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents a `REBALANCE` hint in a logical query plan.

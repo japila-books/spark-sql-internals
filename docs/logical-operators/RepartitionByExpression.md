@@ -1,3 +1,7 @@
+---
+title: RepartitionByExpression
+---
+
 # RepartitionByExpression Logical Operator
 
 `RepartitionByExpression` is a concrete [RepartitionOperation](RepartitionOperation.md).

@@ -1,3 +1,7 @@
+---
+title: AlterTableAddColumnsCommand
+---
+
 # AlterTableAddColumnsCommand Logical Runnable Command
 
 `AlterTableAddColumnsCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents [AddColumns](AddColumns.md) logical operator.
@@ -13,12 +17,16 @@
 
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (and resolves [AddColumns](AddColumns.md) logical operator)
 
-## <span id="run"> Executing Command
+## Executing Command { #run }
 
-```scala
-run(
-  sparkSession: SparkSession): Seq[Row]
-```
+??? note "RunnableCommand"
+
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
+
+    `run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
 `run` [verifyAlterTableAddColumn](#verifyAlterTableAddColumn) (with the [SessionCatalog](../SessionCatalog.md)).
 
@@ -30,11 +38,7 @@ run(
 
 `run` requests the `SessionCatalog` to [alterTableDataSchema](../SessionCatalog.md#alterTableDataSchema).
 
----
-
-`run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
-
-### <span id="verifyAlterTableAddColumn"> verifyAlterTableAddColumn
+### verifyAlterTableAddColumn { #verifyAlterTableAddColumn }
 
 ```scala
 verifyAlterTableAddColumn(

@@ -1,3 +1,7 @@
+---
+title: ExternalRDD
+---
+
 # ExternalRDD Leaf Logical Operator
 
 `ExternalRDD` is a LeafNode.md[leaf logical operator] that is a logical representation of (the data from) an RDD in a logical query plan.

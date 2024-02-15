@@ -1,3 +1,7 @@
+---
+title: Sort
+---
+
 # Sort Unary Logical Operator
 
 `Sort` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following operators in a logical plan:

@@ -1,3 +1,7 @@
+---
+title: DataSourceV2ScanRelation
+---
+
 # DataSourceV2ScanRelation Leaf Logical Operator
 
 `DataSourceV2ScanRelation` is a [leaf logical operator](LeafNode.md) and a [NamedRelation](NamedRelation.md).
@@ -14,24 +18,28 @@
 
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (for a [DataSourceV2Relation](DataSourceV2Relation.md))
 
-## <span id="name"> Name
+## Name
 
-```scala
-name: String
-```
+??? note "NamedRelation"
 
-`name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
+    ```scala
+    name: String
+    ```
+
+    `name` is part of the [NamedRelation](NamedRelation.md#name) abstraction.
 
 `name` requests the [DataSourceV2Relation](#relation) for the [Table](DataSourceV2Relation.md#table) that is in turn requested for the [name](../connector/Table.md#name).
 
-## <span id="simpleString"> Simple Node Description
+## Simple Node Description { #simpleString }
 
-```scala
-simpleString(
-  maxFields: Int): String
-```
+??? note "TreeNode"
 
-`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+    ```scala
+    simpleString(
+      maxFields: Int): String
+    ```
+
+    `simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
 
 `simpleString` is the following (with the [output schema](#output) and the [name](#name)):
 
@@ -39,13 +47,15 @@ simpleString(
 RelationV2[output] [name]
 ```
 
-## <span id="computeStats"> Statistics
+## Statistics { #computeStats }
 
-```scala
-computeStats(): Statistics
-```
+??? note "LeafNode"
 
-`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+    ```scala
+    computeStats(): Statistics
+    ```
+
+    `computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
 
 `computeStats`...FIXME
 

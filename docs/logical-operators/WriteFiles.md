@@ -1,3 +1,7 @@
+---
+title: WriteFiles
+---
+
 # WriteFiles Unary Logical Operator
 
 `WriteFiles` is a [unary logical operator](LogicalPlan.md#UnaryNode).

@@ -1,3 +1,7 @@
+---
+title: LogicalPlan
+---
+
 # LogicalPlan &mdash; Logical Relational Operators of Structured Query
 
 `LogicalPlan` is an extension of the [QueryPlan](../catalyst/QueryPlan.md) abstraction for [logical operators](#implementations) to build a **logical query plan** (as a tree of logical operators).

@@ -24,34 +24,38 @@ title: Command
 * [V2WriteCommand](V2WriteCommand.md)
 * _others_
 
-## <span id="output"> Output Attributes
+## Output Attributes { #output }
 
-```scala
-output: Seq[Attribute]
-```
+??? note "QueryPlan"
+
+    ```scala
+    output: Seq[Attribute]
+    ```
+
+    `output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
 
 `Command` has no output [attributes](../expressions/Attribute.md) by default.
 
-`output` is part of the [QueryPlan](../catalyst/QueryPlan.md#output) abstraction.
+## Child Logical Operators { #children }
 
-## <span id="children"> Child Logical Operators
+??? note "TreeNode"
 
-```scala
-children: Seq[LogicalPlan]
-```
+    ```scala
+    children: Seq[LogicalPlan]
+    ```
+
+    `children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
 
 `Command` has no child [logical operators](LogicalPlan.md) by default.
 
-`children` is part of the [TreeNode](../catalyst/TreeNode.md#children) abstraction.
+## Statistics { #stats }
 
-## <span id="stats"> Statistics
+??? note "LogicalPlanStats"
 
-```scala
-stats: Statistics
-```
+    ```scala
+    stats: Statistics
+    ```
 
-`stats` is part of the [LogicalPlanStats](../cost-based-optimization/LogicalPlanStats.md#stats) abstraction.
-
----
+    `stats` is part of the [LogicalPlanStats](../cost-based-optimization/LogicalPlanStats.md#stats) abstraction.
 
 `Command` has no [Statistics](../cost-based-optimization/Statistics.md) by default.
