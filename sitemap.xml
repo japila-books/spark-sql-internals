@@ -1066,6 +1066,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/RowLevelOperation/</loc>
+         <lastmod>2024-02-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/Scan/</loc>
          <lastmod>2024-02-15</lastmod>
          <changefreq>daily</changefreq>
@@ -1102,6 +1107,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsDeleteV2/</loc>
+         <lastmod>2024-02-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsDelta/</loc>
          <lastmod>2024-02-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -4257,6 +4267,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WindowExecBase/</loc>
+         <lastmod>2024-02-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/WriteDeltaExec/</loc>
          <lastmod>2024-02-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
