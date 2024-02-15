@@ -734,6 +734,7 @@ nav:
     - SerializerBuildHelper: SerializerBuildHelper.md
     - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
     - Dataset and SQL: spark-sql-dataset-vs-sql.md
+    - DDLUtils: connectors/DDLUtils.md
     - Implicits: implicits.md
     - Row: Row.md
     - Data Source API:
