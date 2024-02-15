@@ -18,7 +18,7 @@ Used when:
 
 * `V2ExistingTableWriteExec` is [executed](#run)
 
-### write { #write }
+### write
 
 ```scala
 write: Write
@@ -32,11 +32,9 @@ Used when:
 
 ## Implementations
 
-* `AppendDataExec`
 * [OverwriteByExpressionExec](OverwriteByExpressionExec.md)
-* `OverwritePartitionsDynamicExec`
-* `ReplaceDataExec`
-* `WriteDeltaExec`
+* [WriteDeltaExec](WriteDeltaExec.md)
+* _others_
 
 ## Executing Command { #run }
 

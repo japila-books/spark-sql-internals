@@ -456,6 +456,7 @@ nav:
       - WindowExec:
         - WindowExec: physical-operators/WindowExec.md
       - WindowExecBase: physical-operators/WindowExecBase.md
+      - WriteDeltaExec: physical-operators/WriteDeltaExec.md
       - WriteFilesExec: physical-operators/WriteFilesExec.md
       - Distribution and Partitioning:
         - Distribution: physical-operators/Distribution.md
