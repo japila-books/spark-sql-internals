@@ -4,6 +4,24 @@ title: DescribeColumnCommand
 
 # DescribeColumnCommand Logical Command
 
+`DescribeColumnCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents a `DescribeColumn` logical operator with the default [spark_catalog](../connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME) at execution.
+
+## Creating Instance
+
+`DescribeColumnCommand` takes the following to be created:
+
+* <span id="table"> `TableIdentifier`
+* <span id="colNameParts"> Column Name Parts
+* <span id="isExtended"> `isExtended` flag
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+
+`DescribeColumnCommand` is created when:
+
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to resolve `DescribeColumn` logical operators with the default [spark_catalog](../connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME))
+
+<!---
+## Review Me
+
 `DescribeColumnCommand` is a RunnableCommand.md[logical command] for spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[DESCRIBE TABLE] SQL command with a single column only (i.e. no `PARTITION` specification).
 
 ```text
@@ -67,12 +85,6 @@ scala> spark.sql(descExtSQL).show
 +--------------+----------+
 ```
 
-[[output]]
-`DescribeColumnCommand` defines the Command.md#output[output schema] with the following columns:
-
-* `info_name` with "name of the column info" comment
-* `info_value` with "value of the column info" comment
-
 ## describeTable Labeled Alternative { #describeTable }
 
 `DescribeColumnCommand` is described by `describeTable` labeled alternative in `statement` expression in [SqlBaseParser.g4](../sql/AstBuilder.md#grammar) and parsed using [SparkSqlParser](../sql/SparkSqlParser.md#visitDescribeTable).
@@ -115,22 +127,4 @@ If `DescribeColumnCommand` command was executed with <<isExtended, EXTENDED or F
 . <<histogramDescription, histogram>>
 
 `run` gives `NULL` for the value of the comment and statistics if not available.
-
-=== [[histogramDescription]] `histogramDescription` Internal Method
-
-[source, scala]
-----
-histogramDescription(histogram: Histogram): Seq[Row]
-----
-
-`histogramDescription`...FIXME
-
-NOTE: `histogramDescription` is used exclusively when `DescribeColumnCommand` is <<run, executed>> with `EXTENDED` or `FORMATTED` option turned on.
-
-=== [[creating-instance]] Creating DescribeColumnCommand Instance
-
-`DescribeColumnCommand` takes the following when created:
-
-* [[table]] `TableIdentifier`
-* [[colNameParts]] Column name
-* [[isExtended]] `isExtended` flag that indicates whether spark-sql-SparkSqlAstBuilder.md#DescribeColumnCommand[EXTENDED or FORMATTED option] was used or not
+-->
