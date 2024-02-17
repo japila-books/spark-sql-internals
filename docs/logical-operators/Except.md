@@ -4,61 +4,48 @@ title: Except
 
 # Except Logical Operator
 
-`Except` is a spark-sql-LogicalPlan.md#BinaryNode[binary logical operator] that represents the following high-level operators in a logical plan:
+`Except` is a `SetOperation` binary logical operator that represents the following high-level operators (in a logical plan):
 
-* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. sql/AstBuilder.md#visitSetOperation[AstBuilder])
+* `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. [AstBuilder](../sql/AstBuilder.md#visitSetOperation))
+* [Dataset.except](../Dataset.md#except) and [Dataset.exceptAll](../Dataset.md#exceptAll)
 
-* spark-sql-dataset-operators.md#except[Dataset.except] and spark-sql-dataset-operators.md#exceptAll[Dataset.exceptAll]
-
-`Except` is supposed to be resolved (_optimized_) to <<logical-conversions, other logical commands>> at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization). [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `IllegalStateException` if conversions did not happen.
-
-[[logical-conversions]]
-.Except's Logical Resolutions (Conversions)
-[cols="30,70",options="header",width="100%"]
-|===
-| Target Logical Operators
-| Optimization Rules and Demos
-
-| Left-Anti Join.md[Join]
-| `Except` (DISTINCT) in ReplaceExceptWithAntiJoin.md[ReplaceExceptWithAntiJoin] logical optimization rule
-
-Consult <<demo-left-anti-join, Demo: Except Operator Replaced with Left-Anti Join>>
-
-| `Filter`
-| `Except` (DISTINCT) in [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md) logical optimization rule
-
-Consult <<demo-except-filter, Demo: Except Operator Replaced with Filter Operator>>
-
-| `Union`, Aggregate.md[Aggregate] and Generate.md[Generate]
-| `Except` (ALL) in RewriteExceptAll.md[RewriteExceptAll] logical optimization rule
-
-Consult <<demo-except-all, Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators>>
-
-|===
-
-The types of the <<left, left>> and <<right, right>> logical (sub)operators can be widen in `WidenSetOperationTypes` logical analysis type-coercion rule.
-
-=== [[creating-instance]] Creating Except Instance
+## Creating Instance
 
 `Except` takes the following to be created:
 
-* [[left]] Left spark-sql-LogicalPlan.md[logical operator]
-* [[right]] Right spark-sql-LogicalPlan.md[logical operator]
-* [[isAll]] `isAll` flag for `DISTINCT` (`false`) or `ALL` (`true`)
+* <span id="left"> Left [logical operator](LogicalPlan.md)
+* <span id="right"> Right [logical operator](LogicalPlan.md)
+* <span id="isAll"> `isAll` flag for `DISTINCT` (`false`) or `ALL` (`true`)
 
-=== [[catalyst-dsl]] Catalyst DSL -- `except` Operator
+`Except` is created when:
 
-[source, scala]
-----
+* `AstBuilder` is requested to [visit a SetOperation](../sql/AstBuilder.md#visitSetOperation) (`EXCEPT` and `MINUS` operators)
+* [Dataset.except](../Dataset.md#except) and [Dataset.exceptAll](../Dataset.md#exceptAll) operators are used
+* Catalyst DSL's [except](../catalyst-dsl/DslLogicalPlan.md#except) operator is used
+
+## Logical Optimization
+
+`Except` is supposed to be resolved (_optimized_) to other logical commands at logical optimization phase (i.e. `Except` should not be part of a logical plan after logical optimization).
+
+[BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy throws an `IllegalStateException` if conversions did not happen.
+
+Target Logical Operators | Optimization Rules and Demos
+-------------------------|-----------------------------
+Left-Anti [Join](Join.md) | `Except` (DISTINCT) in [ReplaceExceptWithAntiJoin](../logical-optimizations/ReplaceExceptWithAntiJoin.md) logical optimization rule<p>Demo: [Except Operator Replaced with Left-Anti Join](#demo-left-anti-join)
+`Filter` | `Except` (DISTINCT) in [ReplaceExceptWithFilter](../logical-optimizations/ReplaceExceptWithFilter.md) logical optimization rule<p>Demo: [Except Operator Replaced with Filter Operator](#demo-except-filter)
+`Union`, [Aggregate](Aggregate.md) and [Generate](Generate.md) | `Except` (ALL) in [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization rule<p>Demo: [Except (All) Operator Replaced with Union, Aggregate and Generate Operators](#demo-except-all)
+
+## Catalyst DSL
+
+```scala
 except(
   otherPlan: LogicalPlan,
   isAll: Boolean): LogicalPlan
-----
+```
 
-[Catalyst DSL](../catalyst-dsl/index.md) defines [except](../catalyst-dsl/index.md#except) extension method to create an `Except` logical operator, e.g. for testing or Spark SQL internals exploration.
+[Catalyst DSL](../catalyst-dsl/index.md) defines [except](../catalyst-dsl/index.md#except) extension method to create an `Except` logical operator (e.g. for testing or Spark SQL internals exploration).
 
-[source, plaintext]
-----
+```text
 import org.apache.spark.sql.catalyst.dsl.plans._
 val plan = table("a").except(table("b"), isAll = false)
 scala> println(plan.numberedTreeString)
@@ -69,13 +56,13 @@ scala> println(plan.numberedTreeString)
 import org.apache.spark.sql.catalyst.plans.logical.Except
 val op = plan.p(0)
 assert(op.isInstanceOf[Except])
-----
-
-=== [[CheckAnalysis]] Except Only on Relations with Same Number of Columns
-
-`Except` logical operator can only be performed on CheckAnalysis.md#checkAnalysis[tables with the same number of columns].
-
 ```
+
+## Except Only on Relations with Same Number of Columns { #CheckAnalysis }
+
+`Except` logical operator can only be performed on [tables with the same number of columns](../CheckAnalysis.md#checkAnalysis).
+
+```text
 scala> left.except(right)
 org.apache.spark.sql.AnalysisException: Except can only be performed on tables with the same number of columns, but the first table has 3 columns and the second table has 4 columns;;
 'Except false
@@ -91,9 +78,11 @@ org.apache.spark.sql.AnalysisException: Except can only be performed on tables w
   ...
 ```
 
-=== [[demo-left-anti-join]] Demo: Except Operator Replaced with Left-Anti Join
+## Demo
 
-```
+### Except Operator Replaced with Left-Anti Join { #demo-left-anti-join }
+
+```text
 Seq((0, "zero", "000"), (1, "one", "111"))
   .toDF("id", "name", "triple")
   .write
@@ -121,9 +110,9 @@ scala> println(q.queryExecution.optimizedPlan.numberedTreeString)
 03    +- Relation[id#209,name#210,triple#211] parquet
 ```
 
-=== [[demo-except-filter]] Demo: Except Operator Replaced with Filter Operator
+### Except Operator Replaced with Filter Operator { #demo-except-filter }
 
-```
+```text
 Seq((0, "zero", "000"), (1, "one", "111"))
   .toDF("id", "name", "triple")
   .write
@@ -142,9 +131,9 @@ scala> println(q.queryExecution.optimizedPlan.numberedTreeString)
 02    +- Relation[id#16,name#17,triple#18] parquet
 ```
 
-=== [[demo-except-all]] Demo: Except (All) Operator Replaced with Union, Aggregate and Generate Operators
+### Except (All) Operator Replaced with Union, Aggregate and Generate Operators { #demo-except-all }
 
-```
+```text
 Seq((0, "zero", "000"), (1, "one", "111"))
   .toDF("id", "name", "triple")
   .write
