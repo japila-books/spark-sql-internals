@@ -565,7 +565,9 @@ Default: `true`
 
 Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to access the current value.
 
-## <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> hive.filesourcePartitionFileCacheSize
+## <span id="spark.sql.hive"> spark.sql.hive
+
+### <span id="spark.sql.hive.filesourcePartitionFileCacheSize"> filesourcePartitionFileCacheSize
 
 **spark.sql.hive.filesourcePartitionFileCacheSize**
 
@@ -582,7 +584,7 @@ Used when:
 
 * `FileStatusCache` is requested to [look up the system-wide FileStatusCache](files/FileStatusCache.md#getOrCreate)
 
-## <span id="spark.sql.hive.manageFilesourcePartitions"> hive.manageFilesourcePartitions
+### <span id="spark.sql.hive.manageFilesourcePartitions"> manageFilesourcePartitions
 
 **spark.sql.hive.manageFilesourcePartitions**
 

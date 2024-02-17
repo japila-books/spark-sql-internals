@@ -4,32 +4,47 @@ title: CreateDataSourceTableCommand
 
 # CreateDataSourceTableCommand Logical Command
 
-`CreateDataSourceTableCommand` is a RunnableCommand.md[logical command] that <<run, creates a new table>> (in a [SessionCatalog](../SessionCatalog.md)).
+`CreateDataSourceTableCommand` is a [LeafRunnableCommand](LeafRunnableCommand.md) that represents a [CreateTable](CreateTable.md) logical operator (with [DataSource Tables](../connectors/DDLUtils.md#isDatasourceTable)) at execution.
 
-`CreateDataSourceTableCommand` is created when [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule resolves a CreateTable.md[CreateTable] logical operator for a non-Hive table provider with no query.
+`CreateDataSourceTableCommand` uses the [SessionCatalog](../SessionState.md#catalog) to [create a table](../SessionCatalog.md#createTable) when [executed](#run).
 
 ## Creating Instance
 
 `CreateDataSourceTableCommand` takes the following to be created:
 
-* [[table]] [CatalogTable](../CatalogTable.md)
-* [[ignoreIfExists]] `ignoreIfExists` Flag
+* <span id="table"> [CatalogTable](../CatalogTable.md)
+* <span id="ignoreIfExists"> `ignoreIfExists` flag
 
-=== [[run]] Executing Logical Command -- `run` Method
+`CreateDataSourceTableCommand` is created when:
 
-[source, scala]
-----
-run(sparkSession: SparkSession): Seq[Row]
-----
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) posthoc logical resolution rule is executed (to resolve [CreateTable](CreateTable.md) logical operators with [DataSource Tables](../connectors/DDLUtils.md#isDatasourceTable))
 
-NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
+## Executing Command { #run }
 
-`run` requests a session-scoped `SessionCatalog` to [create a table](../SessionCatalog.md#createTable).
+??? note "RunnableCommand"
 
-NOTE: `run` uses the input `SparkSession` to SparkSession.md#sessionState[access SessionState] that in turn is used to SessionState.md#catalog[access the current SessionCatalog].
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
 
-Internally, `run` [creates a BaseRelation](../DataSource.md#resolveRelation) to access the table's schema.
+    `run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
 
-CAUTION: FIXME
+`run` requests the [SessionCatalog](../SessionState.md#catalog) to [tableExists](../SessionCatalog.md#tableExists). With `ignoreIfExists` flag enabled, `run` exits. Otherwise, `run` reports a `TableAlreadyExistsException`.
 
-NOTE: `run` accepts tables only (not views) with the provider defined.
+`run` uses the [locationUri](../CatalogStorageFormat.md#locationUri) as the `path` option.
+
+`run` uses the [current database](../SessionCatalog.md#getCurrentDatabase) (of the [SessionCatalog](../SessionState.md#catalog)) unless defined.
+
+`run` sets the [tracksPartitionsInCatalog](../CatalogTable.md#tracksPartitionsInCatalog) to the value of [spark.sql.hive.manageFilesourcePartitions](../configuration-properties.md#spark.sql.hive.manageFilesourcePartitions) configuration property.
+
+`run` creates a [DataSource](../DataSource.md) to [resolveRelation](../DataSource.md#resolveRelation).
+
+In the end, `run` requests the [SessionCatalog](../SessionState.md#catalog) to [create a table](../SessionCatalog.md#createTable).
+
+??? note "AssertionError"
+
+    `run` expects the following (or reports an `AssertionError`):
+
+    * The [tableType](../CatalogTable.md#tableType) of the [CatalogTable](#table) is not `view`
+    * The [provider](../CatalogTable.md#provider) of the [CatalogTable](#table) is defined
