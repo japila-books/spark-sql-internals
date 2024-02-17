@@ -2,9 +2,11 @@
 
 `TableProvider` is an [abstraction](#contract) of [table providers](#implementations) (for `DataSourceV2Utils` utility when requested for a [Table](../connectors/DataSourceV2Utils.md#getTableFromProvider)).
 
+`TableProvider` is part of [Connector API](index.md) and serves as an indication to use newer code execution paths (e.g., [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule).
+
 ## Contract
 
-### <span id="getTable"> Table
+### Table { #getTable }
 
 ```java
 Table getTable(
@@ -20,7 +22,7 @@ Used when:
 * `DataFrameWriter` is requested to [save data](../DataFrameWriter.md#save)
 * `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
-### <span id="inferPartitioning"> Inferring Partitioning
+### Inferring Partitioning { #inferPartitioning }
 
 ```java
 Transform[] inferPartitioning(
@@ -33,7 +35,7 @@ Used when:
 
 * `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
-### <span id="inferSchema"> Inferring Schema
+### Inferring Schema { #inferSchema }
 
 ```java
 StructType inferSchema(
@@ -44,7 +46,7 @@ Used when:
 
 * `DataSourceV2Utils` utility is used to [getTableFromProvider](../connectors/DataSourceV2Utils.md#getTableFromProvider)
 
-### <span id="supportsExternalMetadata"> supportsExternalMetadata
+### supportsExternalMetadata { #supportsExternalMetadata }
 
 ```java
 boolean supportsExternalMetadata()

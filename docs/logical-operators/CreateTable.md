@@ -4,6 +4,29 @@ title: CreateTable
 
 # CreateTable Logical Operator
 
+`CreateTable` is a [LogicalPlan](LogicalPlan.md).
+
+## Creating Instance
+
+`CreateTable` takes the following to be created:
+
+* <span id="tableDesc"> [CatalogTable](../CatalogTable.md)
+* <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)
+* <span id="query"> Optional Query ([LogicalPlan](LogicalPlan.md))
+
+While being created, `CreateTable` asserts the following:
+
+* The [table](#tableDesc) to be created must have the [provider](../CatalogTable.md#provider)
+* With no [query](#query), the [SaveMode](#mode) must be `ErrorIfExists` or `Ignore`
+
+`CreateTable` is created when:
+
+* [DataFrameWriter.saveAsTable](../DataFrameWriter.md#saveAsTable) operator is used (to [create a table](../DataFrameWriter.md#createTable))
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed (to [constructV1TableCmd](../logical-analysis-rules/ResolveSessionCatalog.md#constructV1TableCmd))
+
+<!---
+## Review Me
+
 `CreateTable` is a [logical operator](LogicalPlan.md) that represents (is <<creating-instance, created>> for) the following:
 
 * `DataFrameWriter` is requested to [create a table](../DataFrameWriter.md#createTable) (for [DataFrameWriter.saveAsTable](../DataFrameWriter.md#saveAsTable) operator)
@@ -38,9 +61,4 @@ The optional <<query, AS query>> is defined when used for the following:
 * [[tableDesc]] [Table metadata](../CatalogTable.md)
 * [[mode]] [SaveMode](../DataFrameWriter.md#SaveMode)
 * [[query]] Optional AS query ([Logical query plan](../logical-operators/LogicalPlan.md))
-
-When created, `CreateTable` makes sure that the optional <<query, logical query plan>> is undefined only when the <<mode, mode>> is `ErrorIfExists` or `Ignore`. `CreateTable` throws an `AssertionError` otherwise:
-
-```
-assertion failed: create table without data insertion can only use ErrorIfExists or Ignore as SaveMode.
-```
+-->
