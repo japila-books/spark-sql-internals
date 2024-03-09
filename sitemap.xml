@@ -686,6 +686,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/adaptive-query-execution/AdaptiveRulesHolder/</loc>
+         <lastmod>2024-03-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/adaptive-query-execution/CostEvaluator/</loc>
          <lastmod>2024-03-09</lastmod>
          <changefreq>daily</changefreq>
