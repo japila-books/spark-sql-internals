@@ -1,3 +1,7 @@
+---
+title: AQEOptimizer
+---
+
 # AQEOptimizer &mdash; AQE Logical Optimizer
 
 `AQEOptimizer` is the logical optimizer for [optimizing logical plans](../physical-operators/AdaptiveSparkPlanExec.md#reOptimize) in [Adaptive Query Execution](index.md).

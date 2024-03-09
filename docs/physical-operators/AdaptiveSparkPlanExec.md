@@ -53,7 +53,7 @@ Unless configured, `AdaptiveSparkPlanExec` uses [SimpleCostEvaluator](../adaptiv
 
 `AdaptiveSparkPlanExec` uses the `CostEvaluator` to [evaluate cost](../adaptive-query-execution/CostEvaluator.md#evaluateCost) (of a candidate for a new `SparkPlan`) when requested for the [adaptively-optimized physical query plan](#getFinalPhysicalPlan).
 
-### <span id="preprocessingRules"> Preprocessing Physical Optimizations
+### Preprocessing Physical Optimizations { #preprocessingRules }
 
 ```scala
 preprocessingRules: Seq[Rule[SparkPlan]]
@@ -65,7 +65,7 @@ The rules is just the single physical optimization:
 
 * [PlanAdaptiveSubqueries](../physical-optimizations/PlanAdaptiveSubqueries.md)
 
-### <span id="queryStagePreparationRules"> QueryStage Physical Preparation Rules
+### Adaptive Query Stage Physical Preparation Rules { #queryStagePreparationRules }
 
 ```scala
 queryStagePreparationRules: Seq[Rule[SparkPlan]]
@@ -476,7 +476,7 @@ cleanUpAndThrowException(
 
 `cleanUpAndThrowException` is used when `AdaptiveSparkPlanExec` physical operator is requested to [getFinalPhysicalPlan](#getFinalPhysicalPlan) (and materialization of new stages fails).
 
-## <span id="reOptimize"> Re-Optimizing Logical Query Plan
+## Replanning Logical Query Plan { #reOptimize }
 
 ```scala
 reOptimize(
@@ -592,7 +592,28 @@ replaceWithQueryStagesInLogicalPlan(
 
 `replaceWithQueryStagesInLogicalPlan` is used when `AdaptiveSparkPlanExec` physical operator is requested for a [final physical plan](#getFinalPhysicalPlan).
 
-## <span id="applyPhysicalRules"> Executing Physical Optimizations
+## Executing AQE Query Post Planner Strategy Rules { #applyQueryPostPlannerStrategyRules }
+
+```scala
+applyQueryPostPlannerStrategyRules(
+  plan: SparkPlan): SparkPlan
+```
+
+`applyQueryPostPlannerStrategyRules` [runs](#applyPhysicalRules) the [queryPostPlannerStrategyRules](../adaptive-query-execution/AdaptiveRulesHolder.md#queryPostPlannerStrategyRules) on the given [SparkPlan](SparkPlan.md).
+
+`applyQueryPostPlannerStrategyRules` uses the [planChangeLogger](#planChangeLogger) and the batch name as follows:
+
+```text
+AQE Query Post Planner Strategy Rules
+```
+
+---
+
+`applyQueryPostPlannerStrategyRules` is used when:
+
+* `AdaptiveSparkPlanExec` physical operator is requested for the [initialPlan](#initialPlan) and to [reOptimize](#reOptimize)
+
+## Executing Physical Optimizations { #applyPhysicalRules }
 
 ```scala
 applyPhysicalRules(
@@ -661,14 +682,18 @@ log4j.logger.org.apache.spark.sql.execution.adaptive.AdaptiveSparkPlanExec=ALL
 
 Refer to [Logging](../spark-logging.md).
 
-### <span id="planChangeLogger"> PlanChangeLogger
+### PlanChangeLogger { #planChangeLogger }
 
 `AdaptiveSparkPlanExec` uses a [PlanChangeLogger](../catalyst/PlanChangeLogger.md) for the following:
 
-* [initialPlan](#initialPlan) (`batchName`: **AQE Preparations**)
-* [getFinalPhysicalPlan](#getFinalPhysicalPlan) (`batchName`: **AQE Final Query Stage Optimization**)
-* [newQueryStage](#newQueryStage) (`batchName`: **AQE Query Stage Optimization** and **AQE Post Stage Creation**)
-* [reOptimize](#reOptimize) (`batchName`: **AQE Replanning**)
+Operation | Batch Name
+-|-
+ [Executing AQE Query Post Planner Strategy Rules](#applyQueryPostPlannerStrategyRules) | AQE Query Post Planner Strategy Rules
+ [Initial Plan](#initialPlan) | AQE Preparations
+ [Adaptively-Optimized Physical Query Plan](#getFinalPhysicalPlan) | AQE Post Stage Creation
+ [Creating QueryStageExec for Exchange](#newQueryStage) | AQE Post Stage Creation
+ [Optimizing QueryStage](#optimizeQueryStage) | AQE Query Stage Optimization
+ [Replanning Logical Query Plan](#reOptimize) | AQE Replanning
 
 ### <span id="logOnLevel"> logOnLevel
 

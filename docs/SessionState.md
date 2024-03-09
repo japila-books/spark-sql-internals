@@ -1,10 +1,33 @@
+---
+title: SessionState
+---
+
 # SessionState &mdash; State Separation Layer Between SparkSessions
 
 `SessionState` is a [state separation layer](#attributes) between Spark SQL sessions, including SQL configuration, tables, functions, UDFs, SQL parser, and everything else that depends on a [SQLConf](SQLConf.md).
 
 ## Attributes
 
-### <span id="columnarRules"> ColumnarRules
+### Adaptive Rules { #adaptiveRulesHolder }
+
+```scala
+adaptiveRulesHolder: AdaptiveRulesHolder
+```
+
+[User-Defined Adaptive Query Rules](adaptive-query-execution/AdaptiveRulesHolder.md)
+
+`adaptiveRulesHolder` is given when `SessionState` is [created](#creating-instance).
+
+`adaptiveRulesHolder` is used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested for the following:
+
+The `AdaptiveRulesHolder` is used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is requested for the following:
+
+* [Executing AQE Query Post Planner Strategy Rules](physical-operators/AdaptiveSparkPlanExec.md#applyQueryPostPlannerStrategyRules)
+* [Adaptive Logical Optimizer](physical-operators/AdaptiveSparkPlanExec.md#optimizer)
+* [Adaptive Query Stage Physical Optimizations](physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
+* [Adaptive Query Stage Physical Preparation Rules](physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)
+
+### ColumnarRules { #columnarRules }
 
 ```scala
 columnarRules: Seq[ColumnarRule]
@@ -12,7 +35,7 @@ columnarRules: Seq[ColumnarRule]
 
 [ColumnarRule](ColumnarRule.md)s
 
-### <span id="listenerManager"> ExecutionListenerManager
+### ExecutionListenerManager { #listenerManager }
 
 ```scala
 listenerManager: ExecutionListenerManager
@@ -20,7 +43,7 @@ listenerManager: ExecutionListenerManager
 
 [ExecutionListenerManager](ExecutionListenerManager.md)
 
-### <span id="experimentalMethods"> ExperimentalMethods
+### ExperimentalMethods { #experimentalMethods }
 
 ```scala
 experimentalMethods: ExperimentalMethods
@@ -28,7 +51,7 @@ experimentalMethods: ExperimentalMethods
 
 [ExperimentalMethods](ExperimentalMethods.md)
 
-### <span id="functionRegistry"> FunctionRegistry
+### FunctionRegistry { #functionRegistry }
 
 ```scala
 functionRegistry: FunctionRegistry
@@ -36,7 +59,7 @@ functionRegistry: FunctionRegistry
 
 [FunctionRegistry](FunctionRegistry.md)
 
-### <span id="analyzer"> Logical Analyzer
+### Logical Analyzer { #analyzer }
 
 ```scala
 analyzer: Analyzer
@@ -46,7 +69,7 @@ analyzer: Analyzer
 
 Initialized lazily (only when requested the first time) using the [analyzerBuilder](#analyzerBuilder) factory function.
 
-### <span id="optimizer"> Logical Optimizer
+### Logical Optimizer { #optimizer }
 
 ```scala
 optimizer: Optimizer
@@ -59,7 +82,7 @@ Used when:
 * `QueryExecution` is requested to [create an optimized logical plan](QueryExecution.md#optimizedPlan)
 * (Structured Streaming) `IncrementalExecution` is requested to create an optimized logical plan
 
-### <span id="sqlParser"> ParserInterface
+### ParserInterface { #sqlParser }
 
 ```scala
 sqlParser: ParserInterface
@@ -67,7 +90,7 @@ sqlParser: ParserInterface
 
 [ParserInterface](sql/ParserInterface.md)
 
-### <span id="catalog"> SessionCatalog
+### SessionCatalog { #catalog }
 
 ```scala
 catalog: SessionCatalog
@@ -75,13 +98,13 @@ catalog: SessionCatalog
 
 [SessionCatalog](SessionCatalog.md) that is created using the [catalogBuilder function](#catalogBuilder) (and cached for later usage).
 
-### <span id="resourceLoader"> SessionResourceLoader
+### SessionResourceLoader { #resourceLoader }
 
 ```scala
 resourceLoader: SessionResourceLoader
 ```
 
-### <span id="planner"> Spark Query Planner
+### Spark Query Planner { #planner }
 
 ```scala
 planner: SparkPlanner
@@ -89,7 +112,7 @@ planner: SparkPlanner
 
 [SparkPlanner](SparkPlanner.md)
 
-### <span id="conf"> SQLConf
+### SQLConf { #conf }
 
 ```scala
 conf: SQLConf
@@ -97,13 +120,13 @@ conf: SQLConf
 
 [SQLConf](SQLConf.md)
 
-### <span id="streamingQueryManager"> StreamingQueryManager
+### StreamingQueryManager { #streamingQueryManager }
 
 ```scala
 streamingQueryManager: StreamingQueryManager
 ```
 
-### <span id="udfRegistration"><span id="UDFRegistration"> UDFRegistration
+### span id="UDFRegistration"> UDFRegistration { #udfRegistration }
 
 ```scala
 udfRegistration: UDFRegistration
@@ -111,7 +134,7 @@ udfRegistration: UDFRegistration
 
 `SessionState` is given an [UDFRegistration](user-defined-functions/UDFRegistration.md) when [created](#creating-instance).
 
-### <span id="queryStagePrepRules"> AQE QueryStage Physical Preparation Rules
+### AQE QueryStage Physical Preparation Rules { #queryStagePrepRules }
 
 ```scala
 queryStagePrepRules: Seq[Rule[SparkPlan]]
@@ -143,7 +166,8 @@ queryStagePrepRules: Seq[Rule[SparkPlan]]
 * <span id="createQueryExecution"> Function to build a [QueryExecution](QueryExecution.md) (`LogicalPlan => QueryExecution`)
 * <span id="createClone"> `SessionState` Clone Function (`(SparkSession, SessionState) => SessionState`)
 * [ColumnarRules](#columnarRules)
-* [AQE QueryStage Preparation Rules](#queryStagePrepRules)
+* [AQE Rules](#adaptiveRulesHolder)
+* [planNormalizationRules](#planNormalizationRules)
 
 `SessionState` is created when:
 

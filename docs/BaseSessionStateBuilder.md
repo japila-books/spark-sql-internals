@@ -1,3 +1,7 @@
+---
+title: BaseSessionStateBuilder
+---
+
 # BaseSessionStateBuilder &mdash; Generic Builder of SessionState
 
 `BaseSessionStateBuilder` is an [abstraction](#contract) of [builders](#extensions) that can [produce a new BaseSessionStateBuilder](#newBuilder) to [create a SessionState](#createClone).
@@ -13,7 +17,7 @@ assert(spark.sessionState.isInstanceOf[org.apache.spark.sql.internal.SessionStat
 
 ## Contract
 
-### <span id="newBuilder"> newBuilder
+### newBuilder { #newBuilder }
 
 ```scala
 newBuilder: (SparkSession, Option[SessionState]) => BaseSessionStateBuilder
@@ -41,7 +45,7 @@ Used when `BaseSessionStateBuilder` is requested to <<createClone, create a Sess
 
 The following registries are Scala lazy values which are created once and on demand (when accessed for the first time).
 
-### <span id="analyzer"> Analyzer
+### Analyzer { #analyzer }
 
 ```scala
 analyzer: Analyzer
@@ -49,7 +53,7 @@ analyzer: Analyzer
 
 [Logical Analyzer](Analyzer.md)
 
-### <span id="catalog"> SessionCatalog
+### SessionCatalog { #catalog }
 
 ```scala
 catalog: SessionCatalog
@@ -60,7 +64,7 @@ catalog: SessionCatalog
 !!! note HiveSessionStateBuilder
     [HiveSessionStateBuilder](hive/HiveSessionStateBuilder.md) manages its own Hive-aware [HiveSessionCatalog](hive/HiveSessionStateBuilder.md#catalog).
 
-### <span id="catalogManager"> CatalogManager
+### CatalogManager { #catalogManager }
 
 ```scala
 catalogManager: CatalogManager
@@ -74,19 +78,19 @@ catalogManager: CatalogManager
 
 * `HiveSessionStateBuilder` is requested for [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)
 
-### <span id="conf"> SQLConf
+### SQLConf { #conf }
 
 [SQLConf](SQLConf.md)
 
-### <span id="experimentalMethods"> ExperimentalMethods
+### ExperimentalMethods { #experimentalMethods }
 
 [ExperimentalMethods](ExperimentalMethods.md)
 
-### <span id="functionRegistry"> FunctionRegistry
+### FunctionRegistry { #functionRegistry }
 
 [FunctionRegistry](FunctionRegistry.md)
 
-### <span id="resourceLoader"> SessionResourceLoader
+### SessionResourceLoader { #resourceLoader }
 
 ```scala
 resourceLoader: SessionResourceLoader
@@ -94,7 +98,7 @@ resourceLoader: SessionResourceLoader
 
 `SessionResourceLoader`
 
-### <span id="sqlParser"> ParserInterface
+### ParserInterface { #sqlParser }
 
 ```scala
 sqlParser: ParserInterface
@@ -102,7 +106,7 @@ sqlParser: ParserInterface
 
 [ParserInterface](sql/ParserInterface.md)
 
-### <span id="tableFunctionRegistry"> TableFunctionRegistry
+### TableFunctionRegistry { #tableFunctionRegistry }
 
 ```scala
 tableFunctionRegistry: TableFunctionRegistry
@@ -119,7 +123,7 @@ When requested for the first time (as a `lazy val`), `tableFunctionRegistry` req
 * `HiveSessionStateBuilder` is requested for a [HiveSessionCatalog](hive/HiveSessionStateBuilder.md#catalog)
 * `BaseSessionStateBuilder` is requested for a [SessionCatalog](BaseSessionStateBuilder.md#catalog) and a [SessionState](BaseSessionStateBuilder.md#build)
 
-### <span id="v2SessionCatalog"> V2SessionCatalog
+### V2SessionCatalog { #v2SessionCatalog }
 
 ```scala
 v2SessionCatalog: V2SessionCatalog
@@ -246,7 +250,7 @@ createQueryExecution: LogicalPlan => QueryExecution
 
 `createQueryExecution` is used when `BaseSessionStateBuilder` is requested to [create a SessionState instance](#build).
 
-## <span id="columnarRules"> columnarRules Method
+## ColumnarRules { #columnarRules }
 
 ```scala
 columnarRules: Seq[ColumnarRule]
@@ -254,9 +258,13 @@ columnarRules: Seq[ColumnarRule]
 
 `columnarRules` requests the [SparkSessionExtensions](#extensions) to [buildColumnarRules](SparkSessionExtensions.md#buildColumnarRules).
 
-`columnarRules` is used when `BaseSessionStateBuilder` is requested to [build a SessionState instance](#build).
+---
 
-## <span id="customCheckRules"> customCheckRules
+`columnarRules` is used when:
+
+* `BaseSessionStateBuilder` is requested to [build a SessionState instance](#build)
+
+## customCheckRules { #customCheckRules }
 
 ```scala
 customCheckRules: Seq[LogicalPlan => Unit]
@@ -264,7 +272,22 @@ customCheckRules: Seq[LogicalPlan => Unit]
 
 `customCheckRules` requests the [SparkSessionExtensions](#extensions) to [buildCheckRules](SparkSessionExtensions.md#buildCheckRules) on the [SparkSession](#session).
 
+---
+
 `customCheckRules` is used when:
 
 * `BaseSessionStateBuilder` is requested for an [Analyzer](#analyzer)
 * `HiveSessionStateBuilder` is requested for an [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)
+
+## Adaptive Rules { #adaptiveRulesHolder }
+
+```scala
+adaptiveRulesHolder: AdaptiveRulesHolder
+```
+
+`adaptiveRulesHolder` creates a new [AdaptiveRulesHolder](adaptive-query-execution/AdaptiveRulesHolder.md) with the user-defined AQE rules built using the [SparkSessionExtensions](#extensions):
+
+* [Adaptive Query Stage Preparation Rules](SparkSessionExtensions.md#buildQueryStagePrepRules)
+* [AQE Optimizer rules](SparkSessionExtensions.md#buildRuntimeOptimizerRules)
+* [AQE query stage optimizer rules](SparkSessionExtensions.md#buildQueryStageOptimizerRules)
+* [Adaptive Query Post Planner Strategy Rules](SparkSessionExtensions.md#buildQueryPostPlannerStrategyRules)

@@ -158,14 +158,7 @@ nav:
   - Features:
     - features/index.md
     - ... | aggregations/**.md
-    - Adaptive Query Execution:
-      - adaptive-query-execution/index.md
-      - AdaptiveExecutionContext: adaptive-query-execution/AdaptiveExecutionContext.md
-      - AQEOptimizer: adaptive-query-execution/AQEOptimizer.md
-      - AQEUtils: adaptive-query-execution/AQEUtils.md
-      - CostEvaluator: adaptive-query-execution/CostEvaluator.md
-      - ShufflePartitionsUtil: adaptive-query-execution/ShufflePartitionsUtil.md
-      - SimpleCostEvaluator: adaptive-query-execution/SimpleCostEvaluator.md
+    - ... | adaptive-query-execution/**.md
     - ... | bloom-filter-join/**.md
     - ... | bucketing/**.md
     - ... | cache-serialization/**.md
