@@ -1,174 +1,52 @@
+---
+tags:
+  - DeveloperApi
+---
+
 # JdbcDialect
 
-`JdbcDialect` is the <<contract, base>> of <<extensions, JDBC dialects>> that <<canHandle, handle a specific JDBC URL>> (and handle necessary type-related conversions to properly load a data from a table into a `DataFrame`).
+`JdbcDialect` is an [abstraction](#contract) of [JDBC dialects](#implementations) that [can handle a specific JDBC URL](#canHandle) and all the necessary type-related conversions to properly load a data from a JDBC table into a `DataFrame`.
 
-[[contract]]
-[source, scala]
-----
-package org.apache.spark.sql.jdbc
+`JdbcDialect` is a `Serializable` ([Java]({{ java.api }}/java/io/Serializable.html)).
 
-abstract class JdbcDialect extends Serializable {
-  // only required properties (vals and methods) that have no implementation
-  // the others follow
-  def canHandle(url : String): Boolean
-}
-----
+`JdbcDialect` is a `DeveloperApi`.
 
-.(Subset of) JdbcDialect Contract
-[cols="1,2",options="header",width="100%"]
-|===
-| Property
-| Description
+## Contract
 
-| `canHandle`
-| [[canHandle]] Used when...FIXME
-|===
+### canHandle { #canHandle }
 
-[[extensions]]
-.JdbcDialects
-[cols="1,2",options="header",width="100%"]
-|===
-| JdbcDialect
-| Description
+```scala
+canHandle(
+  url : String): Boolean
+```
 
-| `AggregatedDialect`
-| [[AggregatedDialect]]
+Checks out whether the dialect can handle the given JDBC URL
 
-| `DB2Dialect`
-| [[DB2Dialect]]
+Used when:
 
-| `DerbyDialect`
-| [[DerbyDialect]]
+* `JdbcDialects` is requested for the [dialect](JdbcDialects.md#get) to handle a given URL
 
-| `MsSqlServerDialect`
-| [[MsSqlServerDialect]]
+## Implementations
 
-| `MySQLDialect`
-| [[MySQLDialect]]
+* [AggregatedDialect](AggregatedDialect.md)
+* _others_
 
-| `NoopDialect`
-| [[NoopDialect]]
+## getTableExistsQuery { #getTableExistsQuery }
 
-| `OracleDialect`
-| [[OracleDialect]]
+```scala
+getTableExistsQuery(
+  table: String): String
+```
 
-| `PostgresDialect`
-| [[PostgresDialect]]
+`getTableExistsQuery` is the following SQL statement (to be used to find out if the [table](#table) exists):
 
-| `TeradataDialect`
-| [[TeradataDialect]]
-|===
+```text
+SELECT 1 FROM [table] WHERE 1=0
+```
 
-=== [[getCatalystType]] `getCatalystType` Method
+---
 
-[source, scala]
-----
-getCatalystType(
-  sqlType: Int,
-  typeName: String,
-  size: Int,
-  md: MetadataBuilder): Option[DataType]
-----
+`getTableExistsQuery` is used when:
 
-`getCatalystType`...FIXME
-
-NOTE: `getCatalystType` is used when...FIXME
-
-=== [[getJDBCType]] `getJDBCType` Method
-
-[source, scala]
-----
-getJDBCType(dt: DataType): Option[JdbcType]
-----
-
-`getJDBCType`...FIXME
-
-NOTE: `getJDBCType` is used when...FIXME
-
-=== [[quoteIdentifier]] `quoteIdentifier` Method
-
-[source, scala]
-----
-quoteIdentifier(colName: String): String
-----
-
-`quoteIdentifier`...FIXME
-
-NOTE: `quoteIdentifier` is used when...FIXME
-
-=== [[getTableExistsQuery]] `getTableExistsQuery` Method
-
-[source, scala]
-----
-getTableExistsQuery(table: String): String
-----
-
-`getTableExistsQuery`...FIXME
-
-NOTE: `getTableExistsQuery` is used when...FIXME
-
-=== [[getSchemaQuery]] `getSchemaQuery` Method
-
-[source, scala]
-----
-getSchemaQuery(table: String): String
-----
-
-`getSchemaQuery`...FIXME
-
-NOTE: `getSchemaQuery` is used when...FIXME
-
-=== [[getTruncateQuery]] `getTruncateQuery` Method
-
-[source, scala]
-----
-getTruncateQuery(table: String): String
-----
-
-`getTruncateQuery`...FIXME
-
-NOTE: `getTruncateQuery` is used when...FIXME
-
-=== [[beforeFetch]] `beforeFetch` Method
-
-[source, scala]
-----
-beforeFetch(connection: Connection, properties: Map[String, String]): Unit
-----
-
-`beforeFetch`...FIXME
-
-NOTE: `beforeFetch` is used when...FIXME
-
-=== [[escapeSql]] `escapeSql` Internal Method
-
-[source, scala]
-----
-escapeSql(value: String): String
-----
-
-`escapeSql`...FIXME
-
-NOTE: `escapeSql` is used when...FIXME
-
-=== [[compileValue]] `compileValue` Method
-
-[source, scala]
-----
-compileValue(value: Any): Any
-----
-
-`compileValue`...FIXME
-
-NOTE: `compileValue` is used when...FIXME
-
-=== [[isCascadingTruncateTable]] `isCascadingTruncateTable` Method
-
-[source, scala]
-----
-isCascadingTruncateTable(): Option[Boolean]
-----
-
-`isCascadingTruncateTable`...FIXME
-
-NOTE: `isCascadingTruncateTable` is used when...FIXME
+* `JdbcUtils` is requested to [tableExists](JdbcUtils.md#tableExists)
+* `AggregatedDialect` is requested to [getTableExistsQuery](AggregatedDialect.md#getTableExistsQuery)

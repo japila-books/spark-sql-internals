@@ -618,15 +618,7 @@ nav:
       - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
       - DetermineTableStats: hive/DetermineTableStats.md
       - HiveAnalysis: hive/HiveAnalysis.md
-    - JDBC:
-      - jdbc/index.md
-      - JDBCOptions: jdbc/JDBCOptions.md
-      - JdbcRelationProvider: jdbc/JdbcRelationProvider.md
-      - JDBCRelation: jdbc/JDBCRelation.md
-      - JDBCScan: jdbc/JDBCScan.md
-      - JDBCScanBuilder: jdbc/JDBCScanBuilder.md
-      - JDBCRDD: jdbc/JDBCRDD.md
-      - JdbcDialect: jdbc/JdbcDialect.md
+    - ... | jdbc/**.md
     - Kafka:
       - kafka/index.md
       - Configuration Properties: kafka/configuration-properties.md
