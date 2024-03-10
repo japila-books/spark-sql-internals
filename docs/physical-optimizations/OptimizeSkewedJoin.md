@@ -4,7 +4,7 @@ title: OptimizeSkewedJoin
 
 # OptimizeSkewedJoin Adaptive Physical Optimization
 
-`OptimizeSkewedJoin` is a [physical optimization](AQEShuffleReadRule.md) to [make data distribution more even](#apply) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
+`OptimizeSkewedJoin` is a physical optimization (`Rule[SparkPlan]`) to [make data distribution more even](#apply) in [Adaptive Query Execution](../adaptive-query-execution/index.md).
 
 `OptimizeSkewedJoin` is also called **skew join optimization**.
 

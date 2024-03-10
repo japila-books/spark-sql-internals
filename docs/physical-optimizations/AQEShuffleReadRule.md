@@ -8,11 +8,19 @@ title: AQEShuffleReadRule
 
 ## Contract
 
-### <span id="supportedShuffleOrigins"> Supported ShuffleOrigins
+### Supported ShuffleOrigins { #supportedShuffleOrigins }
 
 ```scala
 supportedShuffleOrigins: Seq[ShuffleOrigin]
 ```
+
+Supported [ShuffleOrigin](../physical-operators/ShuffleOrigin.md)s
+
+See:
+
+* [CoalesceShufflePartitions](CoalesceShufflePartitions.md#supportedShuffleOrigins)
+* [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md#supportedShuffleOrigins)
+* [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md#supportedShuffleOrigins)
 
 Used when:
 
@@ -23,5 +31,4 @@ Used when:
 
 * [CoalesceShufflePartitions](CoalesceShufflePartitions.md)
 * [OptimizeShuffleWithLocalRead](OptimizeShuffleWithLocalRead.md)
-* [OptimizeSkewedJoin](OptimizeSkewedJoin.md)
 * [OptimizeSkewInRebalancePartitions](OptimizeSkewInRebalancePartitions.md)

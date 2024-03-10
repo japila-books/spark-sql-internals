@@ -8,20 +8,7 @@ title: OptimizeShuffleWithLocalRead
 
 `OptimizeShuffleWithLocalRead` can be turned on and off using [spark.sql.adaptive.localShuffleReader.enabled](../configuration-properties.md#spark.sql.adaptive.localShuffleReader.enabled) configuration property.
 
-## <span id="supportedShuffleOrigins"> Supported ShuffleOrigins
-
-```scala
-supportedShuffleOrigins: Seq[ShuffleOrigin]
-```
-
-`supportedShuffleOrigins` is the following [ShuffleOrigin](../physical-operators/ShuffleOrigin.md)s:
-
-* [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
-* [REBALANCE_PARTITIONS_BY_NONE](../physical-operators/ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_NONE)
-
-`supportedShuffleOrigins` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#supportedShuffleOrigins) abstraction.
-
-## <span id="isSupported"> isSupported
+## isSupported { #isSupported }
 
 ```scala
 isSupported(
@@ -35,7 +22,7 @@ isSupported(
 
 `isSupported` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#isSupported) abstraction.
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
 ```scala
 apply(
@@ -48,7 +35,7 @@ With [canUseLocalShuffleRead](#canUseLocalShuffleRead) `apply` [createLocalRead]
 
 `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
-### <span id="canUseLocalShuffleRead"> canUseLocalShuffleRead
+### canUseLocalShuffleRead { #canUseLocalShuffleRead }
 
 ```scala
 canUseLocalShuffleRead(
@@ -63,7 +50,7 @@ canUseLocalShuffleRead(
 
 `canUseLocalShuffleRead` is `false` otherwise.
 
-### <span id="createLocalRead"> createLocalRead
+### createLocalRead { #createLocalRead }
 
 ```scala
 createLocalRead(
@@ -76,7 +63,7 @@ createLocalRead(
 
 * For [ShuffleQueryStageExec](../physical-operators/ShuffleQueryStageExec.md)s, the [advisory parallelism](#getPartitionSpecs) is undefined
 
-### <span id="createProbeSideLocalRead"> createProbeSideLocalRead
+### createProbeSideLocalRead { #createProbeSideLocalRead }
 
 ```scala
 createProbeSideLocalRead(
@@ -85,7 +72,7 @@ createProbeSideLocalRead(
 
 `createProbeSideLocalRead`...FIXME
 
-### <span id="getPartitionSpecs"> getPartitionSpecs
+### getPartitionSpecs { #getPartitionSpecs }
 
 ```scala
 getPartitionSpecs(
@@ -94,3 +81,18 @@ getPartitionSpecs(
 ```
 
 `createProbeSideLocalRead`...FIXME
+
+## Supported ShuffleOrigins { #supportedShuffleOrigins }
+
+??? note "AQEShuffleReadRule"
+
+    ```scala
+    supportedShuffleOrigins: Seq[ShuffleOrigin]
+    ```
+
+    `supportedShuffleOrigins` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#supportedShuffleOrigins) abstraction.
+
+`supportedShuffleOrigins` is a collection of the following [ShuffleOrigin](../physical-operators/ShuffleOrigin.md)s:
+
+* [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
+* [REBALANCE_PARTITIONS_BY_NONE](../physical-operators/ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_NONE)

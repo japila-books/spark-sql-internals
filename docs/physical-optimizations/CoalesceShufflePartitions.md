@@ -16,20 +16,20 @@ title: CoalesceShufflePartitions
 
 * `AdaptiveSparkPlanExec` physical operator is requested for the [QueryStage Optimizer Rules](../physical-operators/AdaptiveSparkPlanExec.md#queryStageOptimizerRules)
 
-## <span id="spark.sql.adaptive.coalescePartitions.enabled"> spark.sql.adaptive.coalescePartitions.enabled
+## spark.sql.adaptive.coalescePartitions.enabled { #spark.sql.adaptive.coalescePartitions.enabled }
 
 `CoalesceShufflePartitions` is enabled by default and can be turned off using [spark.sql.adaptive.coalescePartitions.enabled](../configuration-properties.md#spark.sql.adaptive.coalescePartitions.enabled) configuration property.
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
-```scala
-apply(
-  plan: SparkPlan): SparkPlan
-```
+??? note "Rule"
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+    ```scala
+    apply(
+      plan: SparkPlan): SparkPlan
+    ```
 
----
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 `apply` does nothing (and simply gives the input [SparkPlan](../physical-operators/SparkPlan.md) back unmodified) when one of the following holds:
 
@@ -47,7 +47,7 @@ apply(
 
 * [spark.sql.adaptive.coalescePartitions.minPartitionSize](../SQLConf.md#COALESCE_PARTITIONS_MIN_PARTITION_SIZE) as the minimum size of partitions
 
-### <span id="updateShuffleReads"> updateShuffleReads
+### updateShuffleReads { #updateShuffleReads }
 
 ```scala
 updateShuffleReads(
@@ -57,17 +57,19 @@ updateShuffleReads(
 
 `updateShuffleReads`...FIXME
 
-## <span id="supportedShuffleOrigins"> Supported ShuffleOrigins
+## Supported ShuffleOrigins { #supportedShuffleOrigins }
 
-```scala
-supportedShuffleOrigins: Seq[ShuffleOrigin]
-```
+??? note "AQEShuffleReadRule"
 
-`supportedShuffleOrigins` is the following `ShuffleOrigin`s:
+    ```scala
+    supportedShuffleOrigins: Seq[ShuffleOrigin]
+    ```
 
-* `ENSURE_REQUIREMENTS`
-* `REPARTITION_BY_COL`
-* `REBALANCE_PARTITIONS_BY_NONE`
-* `REBALANCE_PARTITIONS_BY_COL`
+    `supportedShuffleOrigins` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#supportedShuffleOrigins) abstraction.
 
-`supportedShuffleOrigins` is part of the [AQEShuffleReadRule](AQEShuffleReadRule.md#supportedShuffleOrigins) abstraction.
+`supportedShuffleOrigins` is a collection of the following [ShuffleOrigin](../physical-operators/ShuffleOrigin.md)s:
+
+* [ENSURE_REQUIREMENTS](../physical-operators/ShuffleOrigin.md#ENSURE_REQUIREMENTS)
+* [REBALANCE_PARTITIONS_BY_COL](../physical-operators/ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_COL)
+* [REBALANCE_PARTITIONS_BY_NONE](../physical-operators/ShuffleOrigin.md#REBALANCE_PARTITIONS_BY_NONE)
+* [REPARTITION_BY_COL](../physical-operators/ShuffleOrigin.md#REPARTITION_BY_COL)
