@@ -841,20 +841,6 @@ Default: `(undefined)`
 
 Default: `true`
 
-### runtime.bloomFilter.enabled { #spark.sql.optimizer.runtime.bloomFilter.enabled }
-
-**spark.sql.optimizer.runtime.bloomFilter.enabled**
-
-Enables a bloom filter on one side of a shuffle join if the other side has a selective predicate (to reduce the amount of shuffle data)
-
-Default: `true`
-
-Use [SQLConf.runtimeFilterBloomFilterEnabled](SQLConf.md#runtimeFilterBloomFilterEnabled) for the current value
-
-Used when:
-
-* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
-
 ### runtime.bloomFilter.creationSideThreshold { #spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold }
 
 **spark.sql.optimizer.runtime.bloomFilter.creationSideThreshold**
@@ -869,6 +855,20 @@ Use [SQLConf.runtimeFilterCreationSideThreshold](SQLConf.md#runtimeFilterCreatio
 Used when:
 
 * [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed (to [injectBloomFilter](logical-optimizations/InjectRuntimeFilter.md#injectBloomFilter))
+
+### runtime.bloomFilter.enabled { #spark.sql.optimizer.runtime.bloomFilter.enabled }
+
+**spark.sql.optimizer.runtime.bloomFilter.enabled**
+
+Enables a bloom filter on one side of a shuffle join if the other side has a selective predicate (to reduce the amount of shuffle data)
+
+Default: `true`
+
+Use [SQLConf.runtimeFilterBloomFilterEnabled](SQLConf.md#runtimeFilterBloomFilterEnabled) for the current value
+
+Used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed
 
 ### runtime.bloomFilter.expectedNumItems { #spark.sql.optimizer.runtime.bloomFilter.expectedNumItems }
 
@@ -899,6 +899,25 @@ Must be a [non-zero positive number](expressions/BloomFilterAggregate.md#checkIn
 Used when:
 
 * `BloomFilterAggregate` is requested to [checkInputDataTypes](expressions/BloomFilterAggregate.md#checkInputDataTypes) and for the [numBits](expressions/BloomFilterAggregate.md#numBits)
+
+### <span id="RUNTIME_ROW_LEVEL_OPERATION_GROUP_FILTER_ENABLED"> runtime.rowLevelOperationGroupFilter.enabled { #spark.sql.optimizer.runtime.rowLevelOperationGroupFilter.enabled }
+
+**spark.sql.optimizer.runtime.rowLevelOperationGroupFilter.enabled**
+
+Enables runtime group filtering for group-based row-level operations.
+
+Data sources that replace groups of data (e.g. files, partitions) may prune entire groups using provided data source filters when planning a row-level operation scan.
+However, such filtering is limited as not all expressions can be converted into data source filters and some expressions can only be evaluated by Spark (e.g. subqueries).
+Since rewriting groups is expensive, Spark can execute a query at runtime to find what records match the condition of the row-level operation.
+The information about matching records will be passed back to the row-level operation scan, allowing data sources to discard groups that don't have to be rewritten.
+
+Default: `true`
+
+Current value: [SQLConf.runtimeRowLevelOperationGroupFilterEnabled](SQLConf.md#runtimeRowLevelOperationGroupFilterEnabled)
+
+Used when:
+
+* `RowLevelOperationRuntimeGroupFiltering` logical optimization is executed
 
 ### runtimeFilter.number.threshold { #spark.sql.optimizer.runtimeFilter.number.threshold }
 

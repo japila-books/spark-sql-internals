@@ -948,11 +948,15 @@ Used when:
 
 [spark.sql.optimizer.runtime.bloomFilter.expectedNumItems](configuration-properties.md#spark.sql.optimizer.runtime.bloomFilter.expectedNumItems)
 
-## <span id="sessionLocalTimeZone"><span id="SESSION_LOCAL_TIMEZONE"> sessionLocalTimeZone
+## <span id="RUNTIME_ROW_LEVEL_OPERATION_GROUP_FILTER_ENABLED"> runtimeRowLevelOperationGroupFilterEnabled { #runtimeRowLevelOperationGroupFilterEnabled }
+
+[spark.sql.optimizer.runtime.rowLevelOperationGroupFilter.enabled](configuration-properties.md#spark.sql.optimizer.runtime.rowLevelOperationGroupFilter.enabled)
+
+## <span id="SESSION_LOCAL_TIMEZONE"> sessionLocalTimeZone { #sessionLocalTimeZone }
 
 [spark.sql.session.timeZone](configuration-properties.md#spark.sql.session.timeZone)
 
-## <span id="SESSION_WINDOW_BUFFER_IN_MEMORY_THRESHOLD"><span id="sessionWindowBufferInMemoryThreshold"> sessionWindowBufferInMemoryThreshold
+## <span id="SESSION_WINDOW_BUFFER_IN_MEMORY_THRESHOLD"> sessionWindowBufferInMemoryThreshold { #sessionWindowBufferInMemoryThreshold }
 
 [spark.sql.sessionWindow.buffer.in.memory.threshold](configuration-properties.md#spark.sql.sessionWindow.buffer.in.memory.threshold)
 
