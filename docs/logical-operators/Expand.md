@@ -4,67 +4,51 @@ title: Expand
 
 # Expand Unary Logical Operator
 
-`Expand` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents `Cube`, `Rollup`, GroupingSets.md[GroupingSets] and expressions/TimeWindow.md[TimeWindow] logical operators after they have been resolved at <<analyzer, analysis phase>>.
+`Expand` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents `Cube`, `Rollup`, [GroupingSets](GroupingSets.md) and [TimeWindow](../expressions/TimeWindow.md) logical operators after they have been resolved at [analysis phase](#analyzer).
 
+## Creating Instance
+
+`Expand` takes the following to be created:
+
+* <span id="projections"> Projections (`Seq[Seq[Expression]]`)
+* <span id="output"> Output [Attribute](../expressions/Attribute.md)s
+* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
+
+`Expand` is created when:
+
+* `ResolveUnpivot` logical resolution rule is executed (to resolve `Unpivot` expression)
+* `TimeWindowing` logical resolution rule is executed (to resolve [TimeWindow](../expressions/TimeWindow.md) expressions)
+* `RewriteUpdateTable` logical resolution rule is executed (to `buildDeletesAndInserts`)
+* `Expand` is requested to [apply](#apply)
+
+## Creating Expand { #apply }
+
+```scala
+apply(
+  groupingSetsAttrs: Seq[Seq[Attribute]],
+  groupByAliases: Seq[Alias],
+  groupByAttrs: Seq[Attribute],
+  gid: Attribute,
+  child: LogicalPlan): Expand
 ```
-FIXME Examples for
-1. Cube
-2. Rollup
-3. GroupingSets
-4. See TimeWindow
 
-val q = ...
+`apply`...FIXME
 
-scala> println(q.queryExecution.logical.numberedTreeString)
-...
-```
+---
 
-!!! note
-    `Expand` logical operator is resolved to `ExpandExec` physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
+`apply` is used when:
 
-[[properties]]
-.Expand's Properties
-[width="100%",cols="1,2",options="header"]
-|===
-| Name
-| Description
+* [ResolveGroupingAnalytics](../logical-analysis-rules/ResolveGroupingAnalytics.md) logical analysis rule is [executed](../logical-analysis-rules/ResolveGroupingAnalytics.md#constructExpand)
 
-| `references`
-| `AttributeSet` from <<projections, projections>>
+## Analysis Phase { #analyzer }
 
-| `validConstraints`
-| Empty set of expressions/Expression.md[expressions]
-|===
-
-## <span id="analyzer"> Analysis Phase
-
-`Expand` logical operator is resolved to at [analysis phase](../Analyzer.md) in the following logical evaluation rules:
+`Expand` logical operator is resolved at [analysis phase](../Analyzer.md) in the following logical evaluation rules:
 
 * [ResolveGroupingAnalytics](../Analyzer.md#ResolveGroupingAnalytics) (for `Cube`, `Rollup`, [GroupingSets](GroupingSets.md) logical operators)
-
+* `ResolveUnpivot`
+* `RewriteUpdateTable`
 * `TimeWindowing` (for [TimeWindow](../expressions/TimeWindow.md) logical operator)
 
-NOTE: Aggregate -> (Cube|Rollup|GroupingSets) -> constructAggregate -> constructExpand
+## Physical Planning
 
-```text
-val spark: SparkSession = ...
-// using q from the example above
-val plan = q.queryExecution.logical
-
-scala> println(plan.numberedTreeString)
-...FIXME
-```
-
-=== [[optimizer]] Rule-Based Logical Query Optimization Phase
-
-* [ColumnPruning](../logical-optimizations/ColumnPruning.md)
-* [FoldablePropagation](../catalyst/Optimizer.md#FoldablePropagation)
-* [RewriteDistinctAggregates](../catalyst/Optimizer.md#RewriteDistinctAggregates)
-
-=== [[creating-instance]] Creating Expand Instance
-
-`Expand` takes the following when created:
-
-* [[projections]] Projection [expressions](../expressions/Expression.md)
-* [[output]] Output schema [attributes](../expressions/Attribute.md)
-* [[child]] Child [logical plan](../logical-operators/LogicalPlan.md)
+`Expand` logical operator is resolved to `ExpandExec` physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy.
