@@ -1,8 +1,4 @@
----
-status: new
----
-
-# Spark Connect :material-new-box:{ title="New in 3.4.0" }
+# Spark Connect
 
 [Apache Spark 3.4](https://issues.apache.org/jira/browse/SPARK-39375) introduces **Spark Connect** module for a client-server interface for Apache Spark for remote connectivity to Spark clusters (using the DataFrame API and unresolved logical plans as the protocol based on [gRPC Java]({{ grpc.docs }})).
 

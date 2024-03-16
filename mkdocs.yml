@@ -144,8 +144,9 @@ extra:
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
-    new: New in 3.4.0
-    new350: New in 3.5.0
+    # There seem to be no use of any other 'new' markers
+    # as many 'new's would make the newest less visible
+    new: New in 3.5
   # https://squidfunk.github.io/mkdocs-material/setup/setting-up-tags/#tag-icons-and-identifiers
   tags:
     DeveloperApi: developerapi
@@ -216,9 +217,10 @@ nav:
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Logging: spark-logging.md
     - ... | metadata-columns/**.md
+    - ... | parameterized-queries/**.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
-    # spark-connect
+    # FIXME Rename to spark-connect?
     - ... | connect/**.md
     - ... | runtime-filtering/**.md
     - ... | thrift-server/**.md

@@ -1,8 +1,4 @@
----
-status: new
----
-
-# Table-Valued Functions :material-new-box:{ title="New in 3.4.0" }
+# Table-Valued Functions
 
 **Table-Valued Functions (TFVs)** are functions that return a table (as a [LogicalPlan](../logical-operators/LogicalPlan.md)) that can be used anywhere that a regular (scalar) table is allowed.
 
