@@ -52,15 +52,16 @@ Rules:
 
 Strategy: Once
 
-### <span id="Substitution"> Substitution
+### Substitution { #Substitution }
 
 Rules:
 
-* OptimizeUpdateFields
+* `OptimizeUpdateFields`
 * [CTESubstitution](logical-analysis-rules/CTESubstitution.md)
+* [BindParameters](logical-analysis-rules/BindParameters.md)
 * [WindowsSubstitution](logical-analysis-rules/WindowsSubstitution.md)
-* EliminateUnions
-* SubstituteUnresolvedOrdinals
+* `EliminateUnions`
+* `SubstituteUnresolvedOrdinals`
 
 Strategy: [fixedPoint](#fixedPoint)
 
