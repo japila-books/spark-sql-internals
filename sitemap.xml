@@ -3731,6 +3731,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/parameterized-queries/</loc>
+         <lastmod>2024-03-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/parquet/</loc>
          <lastmod>2024-03-16</lastmod>
          <changefreq>daily</changefreq>
