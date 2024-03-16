@@ -176,11 +176,14 @@ Internally, `createDataset` first looks up the implicit [ExpressionEncoder](Expr
 
 The expression encoder is then used to map elements (of the input `Seq[T]`) into a collection of [InternalRow](InternalRow.md)s. With the references and rows, `createDataset` returns a Dataset.md[Dataset] with a LocalRelation.md[`LocalRelation` logical query plan].
 
-## <span id="sql"> Executing SQL Queries (SQL Mode)
+## Executing SQL Queries (SQL Mode) { #sql }
 
 ```scala
 sql(
   sqlText: String): DataFrame
+sql(
+  sqlText: String,
+  args: Map[String, Any]): DataFrame
 ```
 
 `sql` creates a [QueryPlanningTracker](QueryPlanningTracker.md) to [measure](QueryPlanningTracker.md#measurePhase) executing the following in [parsing](QueryPlanningTracker.md#PARSING) phase:
@@ -193,7 +196,24 @@ In the end, `sql` [creates a DataFrame](Dataset.md#ofRows) with the following:
 * The `LogicalPlan`
 * The `QueryPlanningTracker`
 
-## <span id="udf"> Accessing UDFRegistration
+### sql Private Helper
+
+```scala
+sql(
+  sqlText: String,
+  args: Map[String, Any],
+  tracker: QueryPlanningTracker): DataFrame
+```
+
+`sql` requests the given [QueryPlanningTracker](QueryPlanningTracker.md) to [measure parsing phase](QueryPlanningTracker.md#measurePhase).
+
+While being measured, `sql` requests the [SessionState](#sessionState) for the [sqlParser](SessionState.md#sqlParser) to [parse](sql/ParserInterface.md#parsePlan) the given `sqlText`.
+
+With non-empty `args`, `sql` creates a [NameParameterizedQuery](logical-operators/NameParameterizedQuery.md) with the parsed logical plan and the `args`. `sql` converts the values to literals.
+
+In the end, `sql` creates a [DataFrame](Dataset.md#ofRows) for the plan produced (and the `QueryPlanningTracker`).
+
+## Accessing UDFRegistration { #udf }
 
 ```scala
 udf: UDFRegistration

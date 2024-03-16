@@ -2,7 +2,7 @@
 
 `TreePattern`s are part of [TreeNode](TreeNode.md#node-patterns)s.
 
-## <span id="CTE"> CTE
+## CTE { #CTE }
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
@@ -10,7 +10,7 @@ Used as a [node pattern](TreeNode.md#nodePatterns):
 * [CTERelationRef](../logical-operators/CTERelationRef.md)
 * [WithCTE](../logical-operators/WithCTE.md)
 
-## <span id="DYNAMIC_PRUNING_EXPRESSION"> DYNAMIC_PRUNING_EXPRESSION
+## DYNAMIC_PRUNING_EXPRESSION { #DYNAMIC_PRUNING_EXPRESSION }
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
@@ -21,7 +21,7 @@ Used to transform query plans in the following rules:
 * [PlanAdaptiveDynamicPruningFilters](../physical-optimizations/PlanAdaptiveDynamicPruningFilters.md)
 * [CleanupDynamicPruningFilters](../logical-optimizations/CleanupDynamicPruningFilters.md)
 
-## <span id="EXCHANGE"> EXCHANGE
+## EXCHANGE { #EXCHANGE }
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
@@ -31,13 +31,23 @@ Used to transform query plans in the following rules:
 
 * [ReuseExchangeAndSubquery](../physical-optimizations/ReuseExchangeAndSubquery.md)
 
-## <span id="PLAN_EXPRESSION"> PLAN_EXPRESSION
+## PARAMETERIZED_QUERY { #PARAMETERIZED_QUERY }
+
+Used as a [node pattern](TreeNode.md#nodePatterns):
+
+* [ParameterizedQuery](../logical-operators/ParameterizedQuery.md)
+
+Used in the following rules:
+
+* [BindParameters](../logical-analysis-rules/BindParameters.md)
+
+## PLAN_EXPRESSION { #PLAN_EXPRESSION }
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
 * [PlanExpression](../expressions/PlanExpression.md)
 
-## <span id="UNRESOLVED_HINT"> UNRESOLVED_HINT
+## UNRESOLVED_HINT { #UNRESOLVED_HINT }
 
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
