@@ -22,13 +22,13 @@
 
 ## Performance Metrics
 
-### <span id="numOutputRows"> number of output rows
+### number of output rows { #numOutputRows }
 
-## <span id="InputRDDCodegen"> InputRDDCodegen
+## InputRDDCodegen { #InputRDDCodegen }
 
 `LocalTableScanExec` is a `InputRDDCodegen`.
 
-## <span id="CollapseCodegenStages"> CollapseCodegenStages
+## CollapseCodegenStages { #CollapseCodegenStages }
 
 [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization considers `LocalTableScanExec` special when [insertWholeStageCodegen](../physical-optimizations/CollapseCodegenStages.md#insertWholeStageCodegen) (so it won't be the root of [WholeStageCodegen](../whole-stage-code-generation/index.md) to support the fast driver-local collect/take paths).
 

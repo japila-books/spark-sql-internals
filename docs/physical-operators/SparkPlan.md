@@ -41,7 +41,7 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
 
 ## Contract
 
-### <span id="doExecute"> doExecute
+### Executing Operator { #doExecute }
 
 ```scala
 doExecute(): RDD[InternalRow]
@@ -50,6 +50,10 @@ doExecute(): RDD[InternalRow]
 Generates a distributed computation (that is a runtime representation of the operator in particular and a structured query in general) as an RDD of [InternalRow](../InternalRow.md)s (`RDD[InternalRow]`) and thus _execute_.
 
 Part of [execute](#execute)
+
+See:
+
+* [ExpandExec](ExpandExec.md#doExecute)
 
 ## Implementations
 

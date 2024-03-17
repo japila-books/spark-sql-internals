@@ -1,10 +1,14 @@
+---
+title: CodegenSupport
+---
+
 # CodegenSupport Physical Operators
 
 `CodegenSupport` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [physical operators](#implementations) that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 
 ## Contract
 
-### <span id="doConsume"> Java Source Code for Consume Path
+### Generating Java Source Code for Consume Path { #doConsume }
 
 ```scala
 doConsume(
@@ -18,9 +22,11 @@ Generates a Java source code (as a text) for this physical operator for the [con
 !!! note "UnsupportedOperationException"
     `doConsume` throws an `UnsupportedOperationException` by default.
 
-Used when the physical operator is requested to [generate the Java source code for consume code path](#consume) (a Java code that consumers the generated columns or a row from a physical operator)
+Used when:
 
-### <span id="doProduce"> Java Source Code for Produce Path
+* This physical operator is requested to [generate the Java source code for consume code path](#consume) (a Java code that consumers the generated columns or a row from a physical operator)
+
+### Generating Java Source Code for Produce Path { #doProduce }
 
 ```scala
 doProduce(
@@ -29,9 +35,11 @@ doProduce(
 
 Generates a Java source code (as a text) for the physical operator to process the rows from the [input RDDs](#inputRDDs) for the [whole-stage-codegen "produce" path](../whole-stage-code-generation/index.md#produce-path).
 
-Used when the physical operator is requested to [generate the Java source code for "produce" code path](#produce)
+Used when:
 
-### <span id="inputRDDs"> Input RDDs
+* This physical operator is requested to [generate the Java source code for "produce" code path](#produce)
+
+### Input RDDs { #inputRDDs }
 
 ```scala
 inputRDDs(): Seq[RDD[InternalRow]]
@@ -42,13 +50,16 @@ Input RDDs of the physical operator
 !!! important
     [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) supports up to two input RDDs.
 
-Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical operator is executed
+Used when:
+
+* [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical operator is executed
 
 ## Implementations
 
 * [BroadcastHashJoinExec](BroadcastHashJoinExec.md)
 * [ColumnarToRowExec](ColumnarToRowExec.md)
 * [DebugExec](DebugExec.md)
+* [ExpandExec](ExpandExec.md)
 * [FilterExec](FilterExec.md)
 * [GenerateExec](GenerateExec.md)
 * [ProjectExec](ProjectExec.md)
@@ -62,7 +73,7 @@ Used when [WholeStageCodegenExec](WholeStageCodegenExec.md) unary physical opera
 
 Final methods are used to generate the Java source code in different phases of [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md).
 
-### <span id="consume"> Generating Java Source Code for Consume Code Path
+### Generating Java Source Code for Consume Code Path { #consume }
 
 ```scala
 consume(
@@ -157,7 +168,7 @@ Found 2 WholeStageCodegen subtrees.
 
 * [HashAggregateExec](HashAggregateExec.md#doProduce), [InputAdapter](InputAdapter.md#doProduce), [RowDataSourceScanExec](RowDataSourceScanExec.md#doProduce), [RangeExec](RangeExec.md#doProduce), [SortExec](SortExec.md#doProduce), [SortMergeJoinExec](SortMergeJoinExec.md#doProduce) physical operators are requested to generate the Java source code for the ["produce" path](../whole-stage-code-generation/index.md#produce-path) in whole-stage code generation
 
-### <span id="limitNotReachedCond"> Data-Producing Loop Condition
+### Data-Producing Loop Condition { #limitNotReachedCond }
 
 ```scala
 limitNotReachedCond: String
@@ -169,7 +180,7 @@ limitNotReachedCond: String
 
 `limitNotReachedCond` returns an empty string for no [limit-not-reached checks](#limitNotReachedChecks) or concatenates them with `&&`.
 
-### <span id="produce"> Generating Java Source Code for Produce Code Path
+### Generating Java Source Code for Produce Code Path { #produce }
 
 ```scala
 produce(
@@ -230,7 +241,7 @@ Found 2 WholeStageCodegen subtrees.
 ...
 ```
 
-## <span id="supportCodegen"> supportCodegen Flag
+## supportCodegen Flag { #supportCodegen }
 
 ```scala
 supportCodegen: Boolean
@@ -251,7 +262,7 @@ supportCodegen: Boolean
 
 `supportCodegen` flag is used to select between `InputAdapter` or `WholeStageCodegenExec` physical operators when [CollapseCodegenStages](../physical-optimizations/CollapseCodegenStages.md) physical optimization is executed (and [checks whether a physical operator meets the requirements of whole-stage Java code generation or not](../physical-optimizations/CollapseCodegenStages.md#supportCodegen)).
 
-## <span id="prepareRowVar"> prepareRowVar Internal Method
+## prepareRowVar Internal Method { #prepareRowVar }
 
 ```scala
 prepareRowVar(
@@ -264,7 +275,7 @@ prepareRowVar(
 
 `prepareRowVar` is used when `CodegenSupport` is requested to [consume](#consume) (and [constructDoConsumeFunction](#constructDoConsumeFunction) with [spark.sql.codegen.splitConsumeFuncByOperator](../configuration-properties.md#spark.sql.codegen.splitConsumeFuncByOperator) enabled).
 
-## <span id="constructDoConsumeFunction"> constructDoConsumeFunction Internal Method
+## constructDoConsumeFunction Internal Method { #constructDoConsumeFunction }
 
 ```scala
 constructDoConsumeFunction(
@@ -277,7 +288,7 @@ constructDoConsumeFunction(
 
 `constructDoConsumeFunction` is used when `CodegenSupport` is requested to [consume](#consume).
 
-## <span id="usedInputs"> Used Input Attributes
+## Used Input Attributes { #usedInputs }
 
 ```scala
 usedInputs: AttributeSet
@@ -294,7 +305,7 @@ usedInputs: AttributeSet
 
 * `CodegenSupport` is requested to [generate a Java source code for consume path](#consume)
 
-## <span id="parent"> parent Internal Variable Property
+## parent Internal Variable Property { #parent }
 
 ```scala
 parent: CodegenSupport
@@ -304,7 +315,7 @@ parent: CodegenSupport
 
 `parent` starts empty, (defaults to `null` value) and is assigned a physical operator (with `CodegenContext`) only when `CodegenContext` is requested to [generate a Java source code for produce code path](#produce). The physical operator is passed in as an input argument for the [produce](#produce) code path.
 
-## <span id="limitNotReachedChecks"> limitNotReachedChecks
+## limitNotReachedChecks { #limitNotReachedChecks }
 
 ```scala
 limitNotReachedChecks: Seq[String]
@@ -322,7 +333,7 @@ limitNotReachedChecks: Seq[String]
 * `BaseLimitExec` physical operator is requested to `limitNotReachedChecks`
 * `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond)
 
-## <span id="canCheckLimitNotReached"> canCheckLimitNotReached
+## canCheckLimitNotReached { #canCheckLimitNotReached }
 
 ```scala
 canCheckLimitNotReached: Boolean
@@ -336,7 +347,7 @@ canCheckLimitNotReached: Boolean
 
 * `CodegenSupport` physical operator is requested to [limitNotReachedCond](#limitNotReachedCond).
 
-## <span id="variablePrefix"> Variable Name Prefix
+## Variable Name Prefix { #variablePrefix }
 
 ```scala
 variablePrefix: String
@@ -360,7 +371,7 @@ Physical Operator | Prefix
 
 * `CodegenSupport` is requested to generate the Java source code for [produce](#produce) and [consume](#consume) code paths
 
-## <span id="needCopyResult"> needCopyResult Flag
+## needCopyResult Flag { #needCopyResult }
 
 ```scala
 needCopyResult: Boolean

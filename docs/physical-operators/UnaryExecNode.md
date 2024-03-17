@@ -1,10 +1,14 @@
+---
+title: UnaryExecNode
+---
+
 # UnaryExecNode Physical Operators
 
-`UnaryExecNode` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [unary physical operators](#implementations) (with one [child physical operator](#child) only).
+`UnaryExecNode` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [unary physical operators](#implementations) that have a single [child physical operator](#child) only.
 
 ## Contract
 
-### <span id="child"> Child Physical Operator
+### Child Physical Operator { #child }
 
 ```scala
 child: SparkPlan
@@ -29,6 +33,7 @@ Used when:
 * [DebugExec](DebugExec.md)
 * [EvalPythonExec](EvalPythonExec.md)
 * [Exchange](Exchange.md)
+* [ExpandExec](ExpandExec.md)
 * [FilterExec](FilterExec.md)
 * FlatMapGroupsInPandasExec ([PySpark]({{ book.pyspark }}/sql/FlatMapGroupsInPandasExec))
 * FlatMapGroupsWithStateExec ([Structured Streaming]({{ book.structured_streaming }}/FlatMapGroupsWithStateExec))

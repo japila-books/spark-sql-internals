@@ -29,8 +29,8 @@
 initialize(): Unit
 ```
 
-!!! warning "Procedure"
-    `initialize` returns `Unit` (_nothing_) and whatever happens inside stays inside (just like in Las Vegas, _doesn't it?!_ 😉)
+??? warning "Procedure"
+    `initialize` is a procedure (returns `Unit`) so _what happens inside stays inside_ (paraphrasing the [former advertising slogan of Las Vegas, Nevada](https://idioms.thefreedictionary.com/what+happens+in+Vegas+stays+in+Vegas)).
 
 `initialize`...FIXME
 
