@@ -1,38 +1,45 @@
+---
+title: CoalesceExec
+---
+
 # CoalesceExec Unary Physical Operator
 
-`CoalesceExec` is a [unary physical operator](UnaryExecNode.md) to...FIXME...with `numPartitions` number of partitions and a `child` spark plan.
+`CoalesceExec` is a [unary physical operator](UnaryExecNode.md) that represents [Repartition](../logical-operators/Repartition.md) logical operator (with [shuffle](../logical-operators/Repartition.md#shuffle) disabled) at execution.
 
-`CoalesceExec` represents [Repartition](../logical-operators/RepartitionOperation.md#Repartition) logical operator at execution (when `shuffle` was disabled -- see [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy). When executed, it executes the input `child` and calls spark-rdd-partitions.md#coalesce[coalesce] on the result RDD (with `shuffle` disabled).
+## Creating Instance
 
-Please note that since physical operators present themselves without the suffix _Exec_, `CoalesceExec` is the `Coalesce` in the Physical Plan section in the following example:
+`CoalesceExec` takes the following to be created:
 
-[source, scala]
-----
-scala> df.rdd.getNumPartitions
-res6: Int = 8
+* <span id="numPartitions"> Number of partitions
+* <span id="child"> Child [physical operator](SparkPlan.md)
 
-scala> df.coalesce(1).rdd.getNumPartitions
-res7: Int = 1
+`CoalesceExec` is created when:
 
-scala> df.coalesce(1).explain(extended = true)
-== Parsed Logical Plan ==
-Repartition 1, false
-+- LocalRelation [value#1]
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (to plan a [Repartition](../logical-operators/Repartition.md) logical operator with [shuffle](../logical-operators/Repartition.md#shuffle) disabled)
 
-== Analyzed Logical Plan ==
-value: int
-Repartition 1, false
-+- LocalRelation [value#1]
+## Executing Operator { #doExecute }
 
-== Optimized Logical Plan ==
-Repartition 1, false
-+- LocalRelation [value#1]
+??? note "SparkPlan"
 
-== Physical Plan ==
-Coalesce 1
-+- LocalTableScan [value#1]
-----
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
 
-`output` collection of spark-sql-Expression-Attribute.md[Attribute] matches the ``child``'s (since `CoalesceExec` is about changing the number of partitions not the internal representation).
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
-`outputPartitioning` returns a [SinglePartition](Partitioning.md#SinglePartition) when the input `numPartitions` is `1` while a [UnknownPartitioning](Partitioning.md#UnknownPartitioning) partitioning scheme for the other cases.
+`doExecute`...FIXME
+
+## Output Data Partitioning Requirements { #outputPartitioning }
+
+??? note "SparkPlan"
+
+    ```scala
+    outputPartitioning: Partitioning
+    ```
+
+    `outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+
+`outputPartitioning` is one of the following:
+
+* [SinglePartition](Partitioning.md#SinglePartition) for the [number of partitions](#numPartitions) being `1`
+* [UnknownPartitioning](Partitioning.md#UnknownPartitioning) with the [number of partitions](#numPartitions)

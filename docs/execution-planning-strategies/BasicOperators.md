@@ -22,6 +22,7 @@ Logical Operator | Physical Operator
  MemoryPlan ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/memory/MemoryPlan/)) | [LocalTableScanExec](../physical-operators/LocalTableScanExec.md)
  `Range` | [RangeExec](../physical-operators/RangeExec.md)
  [RebalancePartitions](../logical-operators/RebalancePartitions.md) | [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md)
+ [Repartition](../logical-operators/Repartition.md) | [CoalesceExec](../physical-operators/CoalesceExec.md) or [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md) based on [shuffle](../logical-operators/Repartition.md#shuffle) flag
  [RepartitionByExpression](../logical-operators/RepartitionByExpression.md) | [ShuffleExchangeExec](../physical-operators/ShuffleExchangeExec.md)
  [RunnableCommand](../logical-operators/RunnableCommand.md) | [ExecutedCommandExec](../physical-operators/ExecutedCommandExec.md)
  [WriteFiles](../logical-operators/WriteFiles.md) | [WriteFilesExec](../physical-operators/WriteFilesExec.md)
