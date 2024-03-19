@@ -1,0 +1,3 @@
+# TableCatalogCapability
+
+`TableCatalogCapability` is...FIXME

@@ -1,8 +1,12 @@
 # V2SessionCatalog
 
-`V2SessionCatalog` is the [default session catalog](connector/catalog/CatalogManager.md#defaultSessionCatalog) of [CatalogManager](connector/catalog/CatalogManager.md).
+`V2SessionCatalog` is a [TableCatalog](connector/catalog/TableCatalog.md) that makes the good ol' [SessionCatalog](SessionCatalog.md) available in the modern [Catalog Plugin API](connector/catalog/index.md)-based infrastructure.
 
-`V2SessionCatalog` is a [TableCatalog](connector/catalog/TableCatalog.md) and a [SupportsNamespaces](connector/catalog/SupportsNamespaces.md).
+`V2SessionCatalog` is known under the name of [spark_catalog](#name).
+
+`V2SessionCatalog` is a [SupportsNamespaces](connector/catalog/SupportsNamespaces.md).
+
+`V2SessionCatalog` is the [default session catalog](connector/catalog/CatalogManager.md#defaultSessionCatalog) of [CatalogManager](connector/catalog/CatalogManager.md).
 
 ## Creating Instance
 
@@ -11,21 +15,37 @@
 * <span id="catalog"> [SessionCatalog](SessionCatalog.md)
 * <span id="conf"> [SQLConf](SQLConf.md)
 
-`V2SessionCatalog` is created when `BaseSessionStateBuilder` is requested for [one](BaseSessionStateBuilder.md#v2SessionCatalog).
+`V2SessionCatalog` is created when:
 
-## <span id="defaultNamespace"> Default Namespace
+* `BaseSessionStateBuilder` is requested for [one](BaseSessionStateBuilder.md#v2SessionCatalog)
 
-```scala
-defaultNamespace: Array[String]
-```
+## capabilities { #capabilities }
 
-The default namespace of `V2SessionCatalog` is **default**.
+??? note "TableCatalog"
 
-`defaultNamespace` is part of the [CatalogPlugin](connector/catalog/CatalogPlugin.md#defaultNamespace) abstraction.
+    ```scala
+    capabilities(): Set[TableCatalogCapability]
+    ```
+
+    `capabilities` is part of the [TableCatalog](connector/catalog/TableCatalog.md#capabilities) abstraction.
+
+`capabilities` is [SUPPORT_COLUMN_DEFAULT_VALUE](connector/catalog/TableCatalogCapability.md#SUPPORT_COLUMN_DEFAULT_VALUE).
+
+## Default Namespace { #defaultNamespace }
+
+??? note "CatalogPlugin"
+
+    ```scala
+    defaultNamespace: Array[String]
+    ```
+
+    `defaultNamespace` is part of the [CatalogPlugin](connector/catalog/CatalogPlugin.md#defaultNamespace) abstraction.
+
+`defaultNamespace` is **default**.
 
 ## Name
 
-??? note "Signature"
+??? note "CatalogPlugin"
 
     ```scala
     name: String
@@ -35,9 +55,9 @@ The default namespace of `V2SessionCatalog` is **default**.
 
 The name of `V2SessionCatalog` is [spark_catalog](connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME).
 
-## <span id="loadTable"> Loading Table
+## Loading Table { #loadTable }
 
-??? note "Signature"
+??? note "TableCatalog"
 
     ```scala
     loadTable(
@@ -48,9 +68,9 @@ The name of `V2SessionCatalog` is [spark_catalog](connector/catalog/CatalogManag
 
 `loadTable` creates a [V1Table](connector/V1Table.md) for a [table metadata](SessionCatalog.md#getTableMetadata) (from the [SessionCatalog](#catalog)).
 
-## <span id="loadFunction"> Loading Function
+## Loading Function { #loadFunction }
 
-??? note "Signature"
+??? note "FunctionCatalog"
 
     ```scala
     loadFunction(
@@ -61,9 +81,9 @@ The name of `V2SessionCatalog` is [spark_catalog](connector/catalog/CatalogManag
 
 `loadFunction`...FIXME
 
-## <span id="createTable"> Creating Table
+## Creating Table { #createTable }
 
-??? note "Signature"
+??? note "FunctionCatalog"
 
     ```scala
     createTable(

@@ -1,3 +1,7 @@
+---
+title: SessionCatalog
+---
+
 # SessionCatalog &mdash; Session-Scoped Registry of Relational Entities
 
 `SessionCatalog` is a catalog of relational entities in [SparkSession](SparkSession.md#catalog) (e.g. databases, tables, views, partitions, and functions).

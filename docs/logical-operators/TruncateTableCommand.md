@@ -4,15 +4,20 @@ title: TruncateTableCommand
 
 # TruncateTableCommand Logical Command
 
-`TruncateTableCommand` is a RunnableCommand.md[logical command] that represents spark-sql-SparkSqlAstBuilder.md#visitTruncateTable[TRUNCATE TABLE] SQL statement.
+`TruncateTableCommand` is a [leaf logical runnable command](LeafRunnableCommand.md) that represents `TruncateTable` or `TruncatePartition` (over a [V1Table](../connector/V1Table.md) in the [spark_catalog](../connector/catalog/CatalogManager.md#SESSION_CATALOG_NAME) catalog) at execution time.
 
-=== [[creating-instance]] Creating TruncateTableCommand Instance
+## Creating Instance
 
 `TruncateTableCommand` takes the following to be created:
 
-* [[tableName]] `TableIdentifier`
-* [[partitionSpec]] Optional `TablePartitionSpec`
+* <span id="tableName"> `TableIdentifier`
+* <span id="partitionSpec"> Optional `TablePartitionSpec`
 
+`TruncateTableCommand` is created when:
+
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical resolution rule is executed
+
+<!---
 === [[run]] Executing Logical Command -- `run` Method
 
 [source, scala]
@@ -43,3 +48,4 @@ Operation not allowed: TRUNCATE TABLE ... PARTITION is not supported for tables 
 ```
 
 `run` throws an `AnalysisException` when executed with <<partitionSpec, TablePartitionSpec>> with filesource partition disabled or partition metadata not in a Hive metastore.
+-->

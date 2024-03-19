@@ -179,6 +179,7 @@ nav:
       - SupportsNamespaces: connector/catalog/SupportsNamespaces.md
       - SupportsCatalogOptions: connector/catalog/SupportsCatalogOptions.md
       - TableCatalog: connector/catalog/TableCatalog.md
+      - TableCatalogCapability: connector/catalog/TableCatalogCapability.md
       - TableChange: connector/catalog/TableChange.md
       - V2TableWithV1Fallback: connector/catalog/V2TableWithV1Fallback.md
     - Columnar Execution:
