@@ -313,3 +313,15 @@ registerFunction[T](
 * `CreateFunctionCommand` is executed
 * `RefreshFunctionCommand` is executed
 * `SessionCatalog` is requested to [resolvePersistentFunctionInternal](#resolvePersistentFunctionInternal)
+
+## Looking Up Table Metadata { #getTableMetadata }
+
+```scala
+getTableMetadata(
+  name: TableIdentifier): CatalogTable
+```
+
+`getTableMetadata` [getTableRawMetadata](#getTableRawMetadata) and replaces `CharType` and `VarcharType` field types with `StringType` in the table schema, recursively.
+
+!!! note "`CharType` and `VarcharType` Unsupported"
+    The Spark SQL query engine does not support char/varchar types yet.
