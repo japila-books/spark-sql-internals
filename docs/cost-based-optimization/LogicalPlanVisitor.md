@@ -1,100 +1,92 @@
-# LogicalPlanVisitor &mdash; Contract for Computing Statistic Estimates and Query Hints of Logical Plan
+# LogicalPlanVisitor
 
-`LogicalPlanVisitor` is the <<contract, contract>> that uses the <<visit, visitor design pattern>> to scan a logical query plan and compute [estimates of plan statistics and query hints](Statistics.md).
+`LogicalPlanVisitor` is an [abstraction](#contract) of [visitors](#implementations) that can [traverse a logical query plan](#visit) to compute result of type `T` (e.g., [Statistics](Statistics.md) or unique [Expression](../expressions/Expression.md)s).
 
-TIP: Read about the *visitor design pattern* in https://en.wikipedia.org/wiki/Visitor_pattern[Wikipedia].
+??? note "Type Constructor"
+    `LogicalPlanVisitor[T]` is a Scala type constructor with the type parameter `T`.
 
-[[visit]]
-`LogicalPlanVisitor` defines `visit` method that dispatches computing the statistics of a logical plan to the <<handlers, corresponding handler methods>>.
+??? note "Visitor Design Pattern"
+    `LogicalPlanVisitor` uses [Visitor Design Pattern](https://en.wikipedia.org/wiki/Visitor_pattern) for traversing a logical query plan.
 
-[source, scala]
-----
-visit(p: LogicalPlan): T
-----
+## Contract (Subset) { #contract }
 
-NOTE: `T` stands for the type of a result to be computed (while visiting the query plan tree) and is currently always [Statistics](Statistics.md) only.
+### visitAggregate { #visitAggregate }
 
-The <<implementations, concrete>> `LogicalPlanVisitor` is chosen per cost-based-optimization/index.md#spark.sql.cbo.enabled[spark.sql.cbo.enabled] configuration property. When turned on (i.e. `true`), `LogicalPlanStats` [uses](LogicalPlanStats.md#stats) <<BasicStatsPlanVisitor, BasicStatsPlanVisitor>> while <<SizeInBytesOnlyStatsPlanVisitor, SizeInBytesOnlyStatsPlanVisitor>> otherwise.
+```scala
+visitAggregate(
+  p: Aggregate): T
+```
 
-[[implementations]]
-.LogicalPlanVisitors
-[cols="1,2",options="header",width="100%"]
-|===
-| LogicalPlanVisitor
-| Description
+Visits the given [Aggregate](../logical-operators/Aggregate.md) logical operator
 
-| [[BasicStatsPlanVisitor]] [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md)
-|
+See:
 
-| [[SizeInBytesOnlyStatsPlanVisitor]] [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
-|
-|===
+* [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md#visitAggregate)
+* [DistinctKeyVisitor](../DistinctKeyVisitor.md#visitAggregate)
+* [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md#visitAggregate)
 
-[[contract]]
-[[handlers]]
-.LogicalPlanVisitor's Logical Operators and Their Handlers
-[cols="1,2",options="header",width="100%"]
-|===
-| Logical Operator
-| Handler
+Used when:
 
-| [[Aggregate]] Aggregate.md[Aggregate]
-| [[visitAggregate]] `visitAggregate`
+* `LogicalPlanVisitor` is requested to [visit](#visit) a [Aggregate](../logical-operators/Aggregate.md) logical operator
+* `BasicStatsPlanVisitor` is requested to [visitDistinct](BasicStatsPlanVisitor.md#visitDistinct)
 
-| [[Distinct]] `Distinct`
-| `visitDistinct`
+### visitJoin { #visitJoin }
 
-| [[Except]] `Except`
-| `visitExcept`
+```scala
+visitJoin(
+  p: Join): T
+```
 
-| [[Expand]] Expand.md[Expand]
-| `visitExpand`
+Visits the given [Join](../logical-operators/Join.md) logical operator
 
-| [[Filter]] `Filter`
-| [[visitFilter]] `visitFilter`
+See:
 
-| [[Generate]] Generate.md[Generate]
-| `visitGenerate`
+* [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md#visitJoin)
+* [DistinctKeyVisitor](../DistinctKeyVisitor.md#visitJoin)
+* [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md#visitJoin)
 
-| [[GlobalLimit]] [GlobalLimit](../logical-operators/GlobalLimit.md)
-| `visitGlobalLimit`
+Used when:
 
-| [[Intersect]] `Intersect`
-| [[visitIntersect]] `visitIntersect`
+* `LogicalPlanVisitor` is requested to [visit](#visit) a [Join](../logical-operators/Join.md) logical operator
 
-| [[Join]] Join.md[Join]
-| [[visitJoin]] `visitJoin`
+### visitOffset { #visitOffset }
 
-| [[LocalLimit]] `LocalLimit`
-| `visitLocalLimit`
+```scala
+visitOffset(
+  p: Offset): T
+```
 
-| [[Pivot]] Pivot.md[Pivot]
-| `visitPivot`
+Visits the given [Offset](../logical-operators/Offset.md) logical operator
 
-| [[Project]] Project.md[Project]
-| [[visitProject]] `visitProject`
+See:
 
-| [[Repartition]] [Repartition](../logical-operators/RepartitionOperation.md#Repartition)
-| `visitRepartition`
+* [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md#visitOffset)
+* [DistinctKeyVisitor](../DistinctKeyVisitor.md#visitOffset)
+* [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md#visitOffset)
 
-| [RepartitionByExpression](../logical-operators/RepartitionByExpression.md)
-| `visitRepartitionByExpr`
+Used when:
 
-| [[ResolvedHint]] ResolvedHint.md[ResolvedHint]
-| `visitHint`
+* `LogicalPlanVisitor` is requested to [visit](#visit) a [Offset](../logical-operators/Offset.md) logical operator
 
-| [[Sample]] `Sample`
-| `visitSample`
+## Implementations
 
-| [[ScriptTransformation]] `ScriptTransformation`
-| `visitScriptTransform`
+* [BasicStatsPlanVisitor](BasicStatsPlanVisitor.md)
+* [DistinctKeyVisitor](../DistinctKeyVisitor.md)
+* [SizeInBytesOnlyStatsPlanVisitor](SizeInBytesOnlyStatsPlanVisitor.md)
 
-| [[Union]] `Union`
-| `visitUnion`
+## Visiting Logical Operator { #visit }
 
-| [[Window]] Window.md[Window]
-| `visitWindow`
+```scala
+visit(
+  p: LogicalPlan): T
+```
 
-| [[LogicalPlan]] Other spark-sql-LogicalPlan.md[logical operators]
-| `default`
-|===
+`visit` is the entry point (a dispatcher) to hand over the task of computing the statistics of the given [logical operator](../logical-operators/LogicalPlan.md) to the [corresponding handler methods](#contract).
+
+---
+
+`visit` is used when:
+
+* `LogicalPlanDistinctKeys` logical operator is requested for the [distinct keys](../logical-operators/LogicalPlanDistinctKeys.md#distinctKeys)
+* `BasicStatsPlanVisitor` is requested to [fallback](BasicStatsPlanVisitor.md#fallback)
+* `LogicalPlanStats` logical operator is requested for the [estimated statistics](LogicalPlanStats.md#stats)
