@@ -926,6 +926,10 @@ Used when:
 
 [spark.sql.legacy.ctePrecedencePolicy](configuration-properties.md#spark.sql.legacy.ctePrecedencePolicy)
 
+## PROPAGATE_DISTINCT_KEYS_ENABLED { #PROPAGATE_DISTINCT_KEYS_ENABLED }
+
+[spark.sql.optimizer.propagateDistinctKeys.enabled](configuration-properties.md#spark.sql.optimizer.propagateDistinctKeys.enabled)
+
 ## <span id="replaceDatabricksSparkAvroEnabled"><span id="LEGACY_REPLACE_DATABRICKS_SPARK_AVRO_ENABLED"> replaceDatabricksSparkAvroEnabled
 
 [spark.sql.legacy.replaceDatabricksSparkAvro.enabled](configuration-properties.md#spark.sql.legacy.replaceDatabricksSparkAvro.enabled)

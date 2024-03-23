@@ -714,6 +714,7 @@ nav:
   - ... | demo/**.md
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
+    - DistinctKeyVisitor: DistinctKeyVisitor.md
     - JoinSelectionHelper.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md

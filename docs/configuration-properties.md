@@ -833,11 +833,29 @@ Default: `TRACE`
 
 Default: `(undefined)`
 
+### propagateDistinctKeys.enabled { #spark.sql.optimizer.propagateDistinctKeys.enabled }
+
+**spark.sql.optimizer.propagateDistinctKeys.enabled**
+
+**(internal)** Controls whether the [Logical Query Optimizer](catalyst/Optimizer.md) propagates the distinct attributes of logical operators for query optimization
+
+Default: `true`
+
+Used when:
+
+* `LogicalPlanDistinctKeys` logical operator is requested for the [distinct keys](logical-operators/LogicalPlanDistinctKeys.md#distinctKeys)
+
 ### replaceExceptWithFilter { #spark.sql.optimizer.replaceExceptWithFilter }
 
 **spark.sql.optimizer.replaceExceptWithFilter**
 
-**(internal)** When `true`, the apply function of the rule verifies whether the right node of the except operation is of type Filter or Project followed by Filter. If yes, the rule further verifies 1) Excluding the filter operations from the right (as well as the left node, if any) on the top, whether both the nodes evaluates to a same result. 2) The left and right nodes don't contain any SubqueryExpressions. 3) The output column names of the left node are distinct. If all the conditions are met, the rule will replace the except operation with a Filter by flipping the filter condition(s) of the right node.
+**(internal)** When `true`, the `apply` function of the rule verifies whether the right node of the `except` operation is of type `Filter` or `Project` followed by `Filter`. If so, the rule further verifies the following conditions:
+
+1. Excluding the filter operations from the right (as well as the left node, if any) on the top, whether both the nodes evaluates to a same result
+1. The left and right nodes don't contain any [SubqueryExpression](expressions/SubqueryExpression.md)s
+1. The output column names of the left node are distinct
+
+If all the conditions are met, the rule will replace the `except` operation with a `Filter` by flipping the filter condition(s) of the right node.
 
 Default: `true`
 
