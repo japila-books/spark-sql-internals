@@ -3171,6 +3171,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Offset/</loc>
+         <lastmod>2024-03-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/OrderPreservingUnaryNode/</loc>
+         <lastmod>2024-03-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/OverwriteByExpression/</loc>
          <lastmod>2024-03-23</lastmod>
          <changefreq>daily</changefreq>
