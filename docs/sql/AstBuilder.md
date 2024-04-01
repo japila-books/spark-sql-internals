@@ -768,7 +768,7 @@ groupingSet
 
 Used in [visitCommonSelectQueryClausePlan](#visitCommonSelectQueryClausePlan)
 
-### <span id="withCTE"> withCTE
+### withCTE { #withCTE }
 
 Creates an [UnresolvedWith](../logical-operators/UnresolvedWith.md) logical operator for [Common Table Expressions](../common-table-expressions/index.md) (in [visitQuery](#visitQuery) and [visitDmlStatement](#visitDmlStatement))
 
@@ -784,11 +784,23 @@ namedQuery
 
 Used in [visitFromStatement](#visitFromStatement) and [visitMultiInsertQuery](#visitMultiInsertQuery)
 
-### <span id="withGenerate"> withGenerate
+### withGenerate { #withGenerate }
 
-Adds a [Generate](../logical-operators/Generate.md) with a [UnresolvedGenerator](../expressions/UnresolvedGenerator.md) and [join](../logical-operators/Generate.md#join) flag enabled for `LATERAL VIEW` (in `SELECT` or `FROM` clauses).
+```scala
+withGenerate(
+  query: LogicalPlan,
+  ctx: LateralViewContext): LogicalPlan
+```
 
-### <span id="withHavingClause"> withHavingClause
+Creates a [Generate](../logical-operators/Generate.md) logical operator (with an [UnresolvedGenerator](../expressions/UnresolvedGenerator.md)) to represent `LATERAL VIEW`s in [SELECT](#visitCommonSelectQueryClausePlan) and [FROM](#visitFromClause) clauses.
+
+```antlr
+lateralView
+  : LATERAL VIEW (OUTER)? qualifiedName '(' (expression (',' expression)*)? ')' tblName (AS? colName (',' colName)*)?
+  ;
+```
+
+### withHavingClause { #withHavingClause }
 
 Creates an [UnresolvedHaving](../logical-operators/UnresolvedHaving.md) for the following:
 

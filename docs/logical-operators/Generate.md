@@ -4,32 +4,47 @@ title: Generate
 
 # Generate Unary Logical Operator
 
-`Generate` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that is <<creating-instance, created>> to represent the following (after a logical plan is spark-sql-LogicalPlan.md#analyzed[analyzed]):
+`Generate` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in [logical query plans](LogicalPlan.md) (_among other use cases_):
 
-* expressions/Generator.md[Generator] or `GeneratorOuter` expressions (by [ExtractGenerator](../Analyzer.md#ExtractGenerator) logical evaluation rule)
+* [LATERAL VIEW](../sql/AstBuilder.md#withGenerate) in `SELECT` or `FROM` clauses in SQL
+* [Dataset.explode](../Dataset.md#explode) (_deprecated_)
+* [Generator](../expressions/Generator.md) or `GeneratorOuter` expressions (by [ExtractGenerator](../Analyzer.md#ExtractGenerator) logical evaluation rule)
 
-* SQL's sql/AstBuilder.md#withGenerate[LATERAL VIEW] clause (in `SELECT` or `FROM` clauses)
+## Creating Instance
 
-[[resolved]]
-`resolved` flag is...FIXME
+`Generate` takes the following to be created:
 
-NOTE: `resolved` is part of spark-sql-LogicalPlan.md#resolved[LogicalPlan Contract] to...FIXME.
+* <span id="generator"> [Generator](../expressions/Generator.md)
+* <span id="unrequiredChildIndex"> Unrequired Child Index (`Seq[Int]`)
+* <span id="outer"> `outer` flag
+* <span id="qualifier"> Qualifier
+* <span id="generatorOutput"> Generator Output [Attribute](../expressions/Attribute.md)s
+* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
 
-[[producedAttributes]]
-`producedAttributes`...FIXME
+`Generate` is created when:
 
-[[output]]
-The catalyst/QueryPlan.md#output[output schema] of a `Generate` is...FIXME
+* `GeneratorBuilder` is requested to `build` (a `Generate` logical operator)
+* `TableFunctionRegistry` is requested to [generator](../TableFunctionRegistry.md#generator)
+* [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization is executed (on [Except](Except.md) logical operator with [isAll](Except.md#isAll) enabled)
+* `RewriteIntersectAll` logical optimization is executed (on `Intersect` logical operator with `isAll` enabled)
+* `AstBuilder` is requested to [withGenerate](../sql/AstBuilder.md#withGenerate)
+* [Dataset.explode](../Dataset.md#explode) (_deprecated_) is used
+* `UserDefinedPythonTableFunction` ([PySpark]({{ book.pyspark }})) is requested to `builder`
 
-!!! note
-  `Generate` logical operator is resolved to GenerateExec.md[GenerateExec] unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
+## Catalyst DSL
 
-[TIP]
-====
-Use `generate` operator from [Catalyst DSL](../catalyst-dsl/index.md) to create a `Generate` logical operator, e.g. for testing or Spark SQL internals exploration.
+```scala
+generate(
+  generator: Generator,
+  unrequiredChildIndex: Seq[Int] = Nil,
+  outer: Boolean = false,
+  alias: Option[String] = None,
+  outputNames: Seq[String] = Nil): LogicalPlan
+```
 
-[source, scala]
-----
+[Catalyst DSL](../catalyst-dsl/index.md) defines [generate](../catalyst-dsl/DslLogicalPlan.md#generate) operator to create a `Generate` logical operator.
+
+```text
 import org.apache.spark.sql.catalyst.plans.logical._
 import org.apache.spark.sql.types._
 val lr = LocalRelation('key.int, 'values.array(StringType))
@@ -51,18 +66,20 @@ val plan = lr.generate(
 scala> println(plan.numberedTreeString)
 00 'Generate json_tuple(e), true, true, alias
 01 +- LocalRelation <empty>, [key#0, values#1]
-----
-====
+```
 
-=== [[creating-instance]] Creating Generate Instance
+## Node Patterns { #nodePatterns }
 
-`Generate` takes the following when created:
+??? note "TreeNode"
 
-* [[generator]] expressions/Generator.md[Generator] expression
-* [[join]] `join` flag...FIXME
-* [[outer]] `outer` flag...FIXME
-* [[qualifier]] Optional qualifier
-* [[generatorOutput]] Output spark-sql-Expression-Attribute.md[attributes]
-* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
+    ```scala
+    nodePatterns: Seq[TreePattern]
+    ```
 
-`Generate` initializes the <<internal-registries, internal registries and counters>>.
+    `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+`nodePatterns` is a single [GENERATE](../catalyst/TreePattern.md#GENERATE).
+
+## Execution Planning
+
+`Generate` logical operator is resolved to [GenerateExec](../physical-operators/GenerateExec.md) unary physical operator in [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy.
