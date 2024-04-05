@@ -1,73 +1,159 @@
+---
+title: GenerateExec
+---
+
 # GenerateExec Unary Physical Operator
 
-`GenerateExec` is a [unary physical operator](UnaryExecNode.md) that is <<creating-instance, created>> exclusively when [BasicOperators](../execution-planning-strategies/BasicOperators.md#Generate) execution planning strategy is executed.
+`GenerateExec` is a [unary physical operator](UnaryExecNode.md) with [CodegenSupport](CodegenSupport.md).
 
-```text
-val nums = Seq((0 to 4).toArray).toDF("nums")
-val q = nums.withColumn("explode", explode($"nums"))
+`GenerateExec` represents [Generate](../logical-operators/Generate.md) unary logical operator at execution time.
 
-scala> q.explain
-== Physical Plan ==
-Generate explode(nums#3), true, false, [explode#12]
-+- LocalTableScan [nums#3]
+`GenerateExec` is an executon environment for the [Generator](#generator) expression.
 
-val sparkPlan = q.queryExecution.executedPlan
-import org.apache.spark.sql.execution.GenerateExec
-val ge = sparkPlan.asInstanceOf[GenerateExec]
-
-scala> :type ge
-org.apache.spark.sql.execution.GenerateExec
-
-val rdd = ge.execute
-
-scala> rdd.toDebugString
-res1: String =
-(1) MapPartitionsRDD[2] at execute at <console>:26 []
- |  MapPartitionsRDD[1] at execute at <console>:26 []
- |  ParallelCollectionRDD[0] at execute at <console>:26 []
-```
-
-When <<doExecute, executed>>, `GenerateExec` expressions/Generator.md#eval[executes] (aka _evaluates_) the <<boundGenerator, Generator>> expression on every row in a RDD partition.
+When [executed](#doExecute), `GenerateExec` [executes](../expressions/Generator.md#eval) (aka _evaluates_) the [Generator](#boundGenerator) expression on every row in a RDD partition.
 
 ![GenerateExec's Execution -- `doExecute` Method](../images/spark-sql-GenerateExec-doExecute.png)
 
-NOTE: <<child, child>> physical operator has to support [CodegenSupport](CodegenSupport.md).
+`GenerateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) only when this [Generator](#generator) does.
 
-`GenerateExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_).
+## Creating Instance
 
-[[supportCodegen]]
-`GenerateExec` does not support [Java code generation](../whole-stage-code-generation/index.md) (aka _whole-stage codegen_), i.e. [supportCodegen](CodegenSupport.md#supportCodegen) flag is turned off.
+`GenerateExec` takes the following to be created:
+
+* <span id="generator"> [Generator](../expressions/Generator.md) Expression
+* [Required child attributes](#requiredChildOutput)
+* <span id="outer"> `outer` Flag
+* <span id="generatorOutput"> Generator Output [Attribute](../expressions/Attribute.md)s
+* <span id="child"> Child [Physical Operator](SparkPlan.md)
+
+`GenerateExec` is created when:
+
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (to plan [Generate](../logical-operators/Generate.md) logical operator)
+
+### Required Child Attributes { #requiredChildOutput }
+
+`GenerateExec` is given the required child [attribute](../expressions/Attribute.md)s when [created](#creating-instance).
+
+The required child attributes are by default the [requiredChildOutput](../logical-operators/Generate.md#requiredChildOutput) of this [Generator](#generator) expression.
+
+## Performance Metrics { #metrics }
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![GenerateExec in web UI (Details for Query)](../images/spark-sql-GenerateExec-webui-details-for-query.png)
+
+## Executing Operator { #doExecute }
+
+??? note "SparkPlan"
+
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
+
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute` requests the [child physical operator](#child) to [execute](SparkPlan.md#execute) (that creates a `RDD[InternalRow]`).
+
+`doExecute` uses `RDD.mapPartitionsWithIndexInternal` operator to process each partition of the RDD.
+
+For every partition, `doExecute` requests the [boundGenerator](#boundGenerator) to [initialize](../expressions/Nondeterministic.md#initialize) (with the partition index) if [Nondeterministic](../expressions/Nondeterministic.md).
+
+With some extra _voodoo_, `doExecute` requests the [boundGenerator](#boundGenerator) to [eval](../expressions/Generator.md#eval) on every row in the current partition.
+
+After all rows in a partition have been processed, `doExecute` requests the [boundGenerator](#boundGenerator) to [terminate](../expressions/Generator.md#terminate).
+
+In the end, `doExecute` converts the rows to [UnsafeRow](../UnsafeRow.md)s and increments the [numOutputRows](#numOutputRows) metric.
+
+## supportCodegen { #supportCodegen }
+
+??? note "CodegenSupport"
+
+    ```scala
+    supportCodegen: Boolean
+    ```
+
+    `supportCodegen` is part of the [CodegenSupport](CodegenSupport.md#supportCodegen) abstraction.
+
+`supportCodegen` is the [supportCodegen](CodegenSupport.md#supportCodegen) of this [Generator](#generator).
+
+## Demo
+
+```scala
+val nums = Seq((0 to 4).toArray).toDF("nums")
+val q = nums.withColumn("explode", explode($"nums"))
+```
+
+```text
+scala> q.explain
+== Physical Plan ==
+*(1) Generate explode(nums#4), [nums#4], false, [explode#7]
++- *(1) LocalTableScan [nums#4]
+```
+
+```scala
+val sparkPlan = q.queryExecution.executedPlan
+import org.apache.spark.sql.execution.GenerateExec
+val ge = sparkPlan.collect { case ge: GenerateExec => ge }.head
+```
 
 ```text
 scala> :type ge
 org.apache.spark.sql.execution.GenerateExec
+```
 
-scala> ge.supportCodegen
-res2: Boolean = false
+```scala
+val rdd = ge.execute
 ```
 
 ```text
-// Turn spark.sql.codegen.comments on to see comments in the code
-// ./bin/spark-shell --conf spark.sql.codegen.comments=true
-// inline function gives Inline expression
+scala> rdd.toDebugString
+res1: String =
+(1) MapPartitionsRDD[2] at execute at <console>:1 []
+ |  MapPartitionsRDD[1] at execute at <console>:1 []
+ |  ParallelCollectionRDD[0] at execute at <console>:1 []
+```
+
+### Code Generation
+
+??? note "spark.sql.codegen.comments"
+    Turn [spark.sql.codegen.comments](../configuration-properties.md#spark.sql.codegen.comments) on to see comments in the code.
+
+    ```text
+    ./bin/spark-shell --conf spark.sql.codegen.comments=true
+    ```
+
+```text
 val q = spark.range(1)
   .selectExpr("inline(array(struct(1, 'a'), struct(2, 'b')))")
+```
 
+```text
 scala> q.explain
 == Physical Plan ==
-Generate inline([[1,a],[2,b]]), false, false, [col1#47, col2#48]
-+- *Project
-   +- *Range (0, 1, step=1, splits=8)
+*(1) Generate inline([[1,a],[2,b]]), false, [col1#12, col2#13]
++- *(1) Project
+   +- *(1) Range (0, 1, step=1, splits=16)
+```
 
+```scala
 val sparkPlan = q.queryExecution.executedPlan
 import org.apache.spark.sql.execution.GenerateExec
-val ge = sparkPlan.asInstanceOf[GenerateExec]
+val ge = sparkPlan.collect { case ge: GenerateExec => ge }.head
+```
 
+!!! note "FIXME"
+
+```scala
 import org.apache.spark.sql.execution.WholeStageCodegenExec
 val wsce = ge.child.asInstanceOf[WholeStageCodegenExec]
 val (_, code) = wsce.doCodeGen
 import org.apache.spark.sql.catalyst.expressions.codegen.CodeFormatter
 val formattedCode = CodeFormatter.format(code)
+```
+
+```text
 scala> println(formattedCode)
 /* 001 */ public Object generate(Object[] references) {
 /* 002 */   return new GeneratedIterator(references);
@@ -197,120 +283,3 @@ scala> println(formattedCode)
 /* 122 */
 /* 123 */ }
 ```
-
-[[output]]
-The catalyst/QueryPlan.md#output[output schema] of a `GenerateExec` is...FIXME
-
-[[producedAttributes]]
-`producedAttributes`...FIXME
-
-[[outputPartitioning]]
-`outputPartitioning`...FIXME
-
-[[boundGenerator]]
-`boundGenerator`...FIXME
-
-[[inputRDDs]]
-`GenerateExec` gives <<child, child>>'s [input RDDs](CodegenSupport.md#inputRDDs) (when `WholeStageCodegenExec` is WholeStageCodegenExec.md#doExecute[executed]).
-
-[[needCopyResult]]
-`GenerateExec` requires that...FIXME
-
-=== [[doProduce]] Generating Java Source Code for Produce Path in Whole-Stage Code Generation -- `doProduce` Method
-
-[source, scala]
-----
-doProduce(ctx: CodegenContext): String
-----
-
-`doProduce`...FIXME
-
-`doProduce` is part of the [CodegenSupport](CodegenSupport.md#doProduce) abstraction.
-
-=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
-
-[source, scala]
-----
-doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-----
-
-`doConsume`...FIXME
-
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
-
-=== [[codeGenCollection]] `codeGenCollection` Internal Method
-
-[source, scala]
-----
-codeGenCollection(
-  ctx: CodegenContext,
-  e: CollectionGenerator,
-  input: Seq[ExprCode],
-  row: ExprCode): String
-----
-
-`codeGenCollection`...FIXME
-
-NOTE: `codeGenCollection` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the "consume" path in whole-stage code generation>> (when <<boundGenerator, Generator>> is a `CollectionGenerator`).
-
-=== [[codeGenTraversableOnce]] `codeGenTraversableOnce` Internal Method
-
-[source, scala]
-----
-codeGenTraversableOnce(
-  ctx: CodegenContext,
-  e: Expression,
-  input: Seq[ExprCode],
-  row: ExprCode): String
-----
-
-`codeGenTraversableOnce`...FIXME
-
-NOTE: `codeGenTraversableOnce` is used exclusively when `GenerateExec` is requested to <<doConsume, generate the Java code for the consume path in whole-stage code generation>> (when <<boundGenerator, Generator>> is not a `CollectionGenerator`).
-
-=== [[codeGenAccessor]] `codeGenAccessor` Internal Method
-
-[source, scala]
-----
-codeGenAccessor(
-  ctx: CodegenContext,
-  source: String,
-  name: String,
-  index: String,
-  dt: DataType,
-  nullable: Boolean,
-  initialChecks: Seq[String]): ExprCode
-----
-
-`codeGenAccessor`...FIXME
-
-NOTE: `codeGenAccessor` is used...FIXME
-
-=== [[creating-instance]] Creating GenerateExec Instance
-
-`GenerateExec` takes the following when created:
-
-* [[generator]] expressions/Generator.md[Generator]
-* [[join]] `join` flag
-* [[outer]] `outer` flag
-* [[generatorOutput]] Generator's output schema
-* [[child]] Child SparkPlan.md[physical operator]
-
-=== [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
-
-[source, scala]
-----
-doExecute(): RDD[InternalRow]
-----
-
-`doExecute`...FIXME
-
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
-
-![GenerateExec in web UI (Details for Query)](../images/spark-sql-GenerateExec-webui-details-for-query.png)

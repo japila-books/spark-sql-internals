@@ -19,7 +19,7 @@ title: Generate
 * <span id="outer"> `outer` flag
 * <span id="qualifier"> Qualifier
 * <span id="generatorOutput"> Generator Output [Attribute](../expressions/Attribute.md)s
-* <span id="child"> Child [LogicalPlan](LogicalPlan.md)
+* <span id="child"> Child [Logical Operator](LogicalPlan.md)
 
 `Generate` is created when:
 

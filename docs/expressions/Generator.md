@@ -1,3 +1,7 @@
+---
+title: Generator
+---
+
 # Generator Expressions
 
 `Generator` is a <<contract, contract>> for [Catalyst expressions](Expression.md) that can <<eval, produce>> zero or more rows given a single input row.
