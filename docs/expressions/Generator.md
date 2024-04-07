@@ -23,7 +23,9 @@ eval(
 Evaluates the given [InternalRow](../InternalRow.md) to produce zero, one or more [InternalRow](../InternalRow.md)s
 
 !!! note "Return Type"
-    `eval` is part of the [Expression](Expression.md#eval) abstraction and this `eval` enforces that `Generator`s produce a collection of [InternalRow](../InternalRow.md)s (not any other value as by non-generator expressions).
+    `eval` is part of the [Expression](Expression.md#eval) abstraction.
+    
+    This `eval` enforces that `Generator`s produce a collection of [InternalRow](../InternalRow.md)s (not any other value as by non-generator expressions).
 
 ## Implementations
 

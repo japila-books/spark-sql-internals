@@ -244,7 +244,7 @@ over(window: WindowSpec): Column
 
 `over` creates a _windowing column_ (_aka_ _analytic clause_) that allows to execute an aggregate function over a [window](window-functions/WindowSpec.md) (i.e. a group of records that are in _some_ relation to the current record).
 
-TIP: Read up on windowed aggregation in Spark SQL in spark-sql-functions-windows.md[Window Aggregate Functions].
+TIP: Read up on windowed aggregation in Spark SQL in functions/windows-functions.md[Window Aggregate Functions].
 
 [source, scala]
 ----

@@ -1,6 +1,6 @@
 # ParseToTimestamp
 
-`ParseToTimestamp` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_timestamp](../spark-sql-functions-datetime.md#to_timestamp) standard function (in logical query plans).
+`ParseToTimestamp` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_timestamp](../functions/datetime.md#to_timestamp) standard function (in logical query plans).
 
 As a `RuntimeReplaceable` expression, `ParseToTimestamp` is replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the [child](#child) expression:
 

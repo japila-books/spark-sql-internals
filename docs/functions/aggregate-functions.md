@@ -1,6 +1,45 @@
 # Standard Aggregate Functions
 
-## <span id="collect_set"> collect_set
+## any { #any }
+
+```scala
+any(
+  e: Column): Column
+```
+
+`any`...FIXME
+
+## any_value { #any_value }
+
+```scala
+any_value(
+  e: Column): Column
+any_value(
+  e: Column,
+  ignoreNulls: Column): Column
+```
+
+`any_value`...FIXME
+
+## bool_and { #bool_and }
+
+```scala
+bool_and(
+  e: Column): Column
+```
+
+`bool_and`...FIXME
+
+## bool_or { #bool_or }
+
+```scala
+bool_or(
+  e: Column): Column
+```
+
+`bool_or`...FIXME
+
+## collect_set { #collect_set }
 
 ```scala
 collect_set(
@@ -12,6 +51,43 @@ collect_set(
 `collect_set` creates a [CollectSet](../expressions/CollectSet.md) expression (for the [expr](../Column.md#expr) of the given [Column](../Column.md)) and requests it to [toAggregateExpression](../expressions/AggregateFunction.md#toAggregateExpression).
 
 In the end, `collect_set` wraps the [AggregateExpression](../expressions/AggregateExpression.md) up in a [Column](../Column.md).
+
+## count_if { #count_if }
+
+```scala
+count_if(
+  e: Column): Column
+```
+
+`count_if`...FIXME
+
+## every { #every }
+
+```scala
+every(
+  e: Column): Column
+```
+
+`every`...FIXME
+
+## max_by { #max_by }
+
+```scala
+max_by(
+  e: Column,
+  ord: Column): Column
+```
+
+`max_by` creates a [MaxBy](../expressions/MaxBy.md) aggregate function that is then [wrapped into a Column](../functions/index.md#withAggregateFunction) (as an [AggregateExpression](../expressions/AggregateExpression.md)).
+
+## some { #some }
+
+```scala
+some(
+  e: Column): Column
+```
+
+`some`...FIXME
 
 <!---
 ## Review Me

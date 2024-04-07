@@ -312,6 +312,7 @@ nav:
       - ListQuery: expressions/ListQuery.md
       - Literal: expressions/Literal.md
       - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
+      - MaxBy: expressions/MaxBy.md
       - Murmur3Hash: expressions/Murmur3Hash.md
       - MutableProjection: expressions/MutableProjection.md
       - NamedExpression: expressions/NamedExpression.md
@@ -695,9 +696,9 @@ nav:
       - functions/index.md
       - functions/aggregate-functions.md
       - functions/collection-functions.md
-      - spark-sql-functions-datetime.md
-      - spark-sql-functions-regular-functions.md
-      - spark-sql-functions-windows.md
+      - functions/datetime.md
+      - functions/regular-functions.md
+      - functions/windows-functions.md
     - TypedColumn: TypedColumn.md
     - ... | window-functions/**.md
   - Web UI:

@@ -2,15 +2,18 @@
 
 **Window aggregate functions** (aka **window functions** or **windowed aggregates**) are functions that perform a calculation over a group of records called **window** that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
-In other words, when executed, a window function computes a value for each and every row in a window (per [window specification](window-functions/WindowSpec.md)).
+In other words, when executed, a window function computes a value for each and every row in a window (per [window specification](../window-functions/WindowSpec.md)).
 
-Window functions are also called **over functions** due to how they are applied using [over](Column.md#over) operator.
+Window functions are also called **over functions** due to how they are applied using [over](../Column.md#over) operator.
 
 Spark SQL supports three kinds of window functions:
 
-* *ranking* functions
-* *analytic* functions
-* *aggregate* functions
+* _ranking_ functions
+* _analytic_ functions
+* _aggregate_ functions
+
+<!---
+## Review Me
 
 .Window Aggregate Functions in Spark SQL
 [align="center",cols="1,1,2",width="80%",options="header"]
@@ -952,3 +955,4 @@ unboundedPreceding(): Column
 * https://sqlsunday.com/2013/03/31/windowed-functions/[An introduction to windowed functions]
 * https://blog.jooq.org/2013/11/03/probably-the-coolest-sql-feature-window-functions/[Probably the Coolest SQL Feature: Window Functions]
 * https://sqlschool.modeanalytics.com/advanced/window-functions/[Window Functions]
+-->

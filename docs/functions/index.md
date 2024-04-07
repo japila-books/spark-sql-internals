@@ -741,7 +741,7 @@ window(
 
 .11+^.^| [[window-functions]] *Window functions*
 
-| [[cume_dist]] <<spark-sql-functions-windows.md#cume_dist, cume_dist>>
+| [[cume_dist]] <<functions/windows-functions.md#cume_dist, cume_dist>>
 a|
 
 [source, scala]
@@ -751,7 +751,7 @@ cume_dist(): Column
 
 Computes the cumulative distribution of records across window partitions
 
-| [[currentRow]] <<spark-sql-functions-windows.md#currentRow, currentRow>>
+| [[currentRow]] <<functions/windows-functions.md#currentRow, currentRow>>
 a|
 
 [source, scala]
@@ -759,7 +759,7 @@ a|
 currentRow(): Column
 ----
 
-| [[dense_rank]] <<spark-sql-functions-windows.md#dense_rank, dense_rank>>
+| [[dense_rank]] <<functions/windows-functions.md#dense_rank, dense_rank>>
 a|
 
 [source, scala]
@@ -769,7 +769,7 @@ dense_rank(): Column
 
 Computes the rank of records per window partition
 
-| [[lag]] <<spark-sql-functions-windows.md#lag, lag>>
+| [[lag]] <<functions/windows-functions.md#lag, lag>>
 a|
 
 [source, scala]
@@ -779,7 +779,7 @@ lag(columnName: String, offset: Int): Column
 lag(columnName: String, offset: Int, defaultValue: Any): Column
 ----
 
-| [[lead]] <<spark-sql-functions-windows.md#lead, lead>>
+| [[lead]] <<functions/windows-functions.md#lead, lead>>
 a|
 
 [source, scala]
@@ -790,7 +790,7 @@ lead(columnName: String, offset: Int, defaultValue: Any): Column
 lead(e: Column, offset: Int, defaultValue: Any): Column
 ----
 
-| [[ntile]] <<spark-sql-functions-windows.md#ntile, ntile>>
+| [[ntile]] <<functions/windows-functions.md#ntile, ntile>>
 a|
 
 [source, scala]
@@ -800,7 +800,7 @@ ntile(n: Int): Column
 
 Computes the ntile group
 
-| [[percent_rank]] <<spark-sql-functions-windows.md#percent_rank, percent_rank>>
+| [[percent_rank]] <<functions/windows-functions.md#percent_rank, percent_rank>>
 a|
 
 [source, scala]
@@ -810,7 +810,7 @@ percent_rank(): Column
 
 Computes the rank of records per window partition
 
-| [[rank]] <<spark-sql-functions-windows.md#rank, rank>>
+| [[rank]] <<functions/windows-functions.md#rank, rank>>
 a|
 
 [source, scala]
@@ -820,7 +820,7 @@ rank(): Column
 
 Computes the rank of records per window partition
 
-| [[row_number]] <<spark-sql-functions-windows.md#row_number, row_number>>
+| [[row_number]] <<functions/windows-functions.md#row_number, row_number>>
 a|
 
 [source, scala]
@@ -830,7 +830,7 @@ row_number(): Column
 
 Computes the sequential numbering per window partition
 
-| [[unboundedFollowing]] <<spark-sql-functions-windows.md#unboundedFollowing, unboundedFollowing>>
+| [[unboundedFollowing]] <<functions/windows-functions.md#unboundedFollowing, unboundedFollowing>>
 a|
 
 [source, scala]
@@ -838,7 +838,7 @@ a|
 unboundedFollowing(): Column
 ----
 
-| [[unboundedPreceding]] <<spark-sql-functions-windows.md#unboundedPreceding, unboundedPreceding>>
+| [[unboundedPreceding]] <<functions/windows-functions.md#unboundedPreceding, unboundedPreceding>>
 a|
 
 [source, scala]

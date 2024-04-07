@@ -1,5 +1,48 @@
 # Date and Time Functions
 
+## to_date { #to_date }
+
+```scala
+to_date(
+  e: Column): Column
+to_date(
+  e: Column,
+  fmt: String): Column
+```
+
+`to_date` converts the column into [DateType](../types/DataType.md#DateType) (by casting to `DateType`).
+
+!!! note
+    `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
+
+Internally, `to_date` creates a [Column](../Column.md) with [ParseToDate](../expressions/ParseToDate.md) expression (and `Literal` expression for `fmt`).
+
+!!! tip
+    Use [ParseToDate](../expressions/ParseToDate.md) expression to use a column for the values of `fmt`.
+
+## to_timestamp { #to_timestamp }
+
+```scala
+to_timestamp(
+  s: Column): Column
+to_timestamp(
+  s: Column,
+  fmt: String): Column
+```
+
+`to_timestamp` converts the column into [TimestampType](../types/DataType.md#TimestampType) (by casting to `TimestampType`).
+
+!!! note
+    `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
+
+Internally, `to_timestamp` creates a [Column](../Column.md) with [ParseToTimestamp](../expressions/ParseToTimestamp.md) expression (and `Literal` expression for `fmt`).
+
+!!! tip
+    Use [ParseToTimestamp](../expressions/ParseToTimestamp.md) expression to use a column for the values of `fmt`.
+
+<!---
+## Review Me
+
 [[functions]]
 .(Subset of) Standard Functions for Date and Time
 [align="center",cols="1,2",width="100%",options="header"]
@@ -35,7 +78,7 @@
 current_date(): Column
 ```
 
-`current_date` function gives the current date as a [date](types/DataType.md#DateType) column.
+`current_date` function gives the current date as a [date](../types/DataType.md#DateType) column.
 
 ```text
 val df = spark.range(1).select(current_date)
@@ -51,7 +94,7 @@ root
  |-- current_date(): date (nullable = false)
 ```
 
-Internally, `current_date` creates a [Column](Column.md) with `CurrentDate` Catalyst leaf expression.
+Internally, `current_date` creates a [Column](../Column.md) with `CurrentDate` Catalyst leaf expression.
 
 ```text
 val c = current_date()
@@ -70,7 +113,7 @@ scala> println(cd.numberedTreeString)
 date_format(dateExpr: Column, format: String): Column
 ```
 
-Internally, `date_format` creates a [Column](Column.md) with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
+Internally, `date_format` creates a [Column](../Column.md) with `DateFormatClass` binary expression. `DateFormatClass` takes the expression from `dateExpr` column and `format`.
 
 ```text
 val c = date_format($"date", "dd/MM/yyyy")
@@ -161,7 +204,7 @@ scala> spark.sql("SELECT unix_timestamp() as unix_timestamp").show
 +--------------+
 ```
 
-Internally, `unix_timestamp` creates a [Column](Column.md) with [UnixTimestamp](expressions/UnixTimestamp.md) binary expression (possibly with `CurrentTimestamp`).
+Internally, `unix_timestamp` creates a [Column](../Column.md) with [UnixTimestamp](../expressions/UnixTimestamp.md) binary expression (possibly with `CurrentTimestamp`).
 
 === [[window]] Generating Time Windows -- `window` Function
 
@@ -208,7 +251,7 @@ scala> val timeColumn = window('time, "5 seconds")
 timeColumn: org.apache.spark.sql.Column = timewindow(time, 5000000, 5000000, 0) AS `window`
 ----
 
-`timeColumn` should be of [TimestampType](types/DataType.md#TimestampType), i.e. with [java.sql.Timestamp]({{ java.api }}/java/sql/Timestamp.html) values.
+`timeColumn` should be of [TimestampType](../types/DataType.md#TimestampType), i.e. with [java.sql.Timestamp]({{ java.api }}/java/sql/Timestamp.html) values.
 
 !!! tip
     Use [java.sql.Timestamp.from]({{ java.api }}/java/sql/Timestamp.html#from-java.time.Instant-) or [java.sql.Timestamp.valueOf]({{ java.api }}/java/sql/Timestamp.html#valueOf-java.time.LocalDateTime-) factory methods to create `Timestamp` instances.
@@ -279,7 +322,7 @@ scala> sums.show
 !!! TIP
     Use `CalendarInterval` for valid window identifiers.
 
-Internally, `window` creates a [Column](Column.md) (with [TimeWindow](expressions/TimeWindow.md) expression) available as `window` alias.
+Internally, `window` creates a [Column](../Column.md) (with [TimeWindow](../expressions/TimeWindow.md) expression) available as `window` alias.
 
 ```text
 // q is the query defined earlier
@@ -305,43 +348,4 @@ scala> println(timeColumn.expr.numberedTreeString)
 NOTE: The example is borrowed from https://flink.apache.org/news/2015/12/04/Introducing-windows.html[Introducing Stream Windows in Apache Flink].
 
 The example shows how to use `window` function to model a traffic sensor that counts every 15 seconds the number of vehicles passing a certain location.
-
-## <span id="to_date"> to_date
-
-```scala
-to_date(
-  e: Column): Column
-to_date(
-  e: Column,
-  fmt: String): Column
-```
-
-`to_date` converts the column into [DateType](types/DataType.md#DateType) (by casting to `DateType`).
-
-!!! note
-    `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
-
-Internally, `to_date` creates a [Column](Column.md) with [ParseToDate](expressions/ParseToDate.md) expression (and `Literal` expression for `fmt`).
-
-!!! tip
-    Use [ParseToDate](expressions/ParseToDate.md) expression to use a column for the values of `fmt`.
-
-## <span id="to_timestamp"> to_timestamp
-
-```scala
-to_timestamp(
-  s: Column): Column
-to_timestamp(
-  s: Column,
-  fmt: String): Column
-```
-
-`to_timestamp` converts the column into [TimestampType](types/DataType.md#TimestampType) (by casting to `TimestampType`).
-
-!!! note
-    `fmt` follows [the formatting styles](http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html).
-
-Internally, `to_timestamp` creates a [Column](Column.md) with [ParseToTimestamp](expressions/ParseToTimestamp.md) expression (and `Literal` expression for `fmt`).
-
-!!! tip
-    Use [ParseToTimestamp](expressions/ParseToTimestamp.md) expression to use a column for the values of `fmt`.
+-->

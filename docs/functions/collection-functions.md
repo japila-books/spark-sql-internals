@@ -1,6 +1,6 @@
 # Standard Collection Functions
 
-## <span id="filter"> filter
+## filter { #filter }
 
 ```scala
 filter(
@@ -14,6 +14,22 @@ filter(
 `filter` creates an [ArrayFilter](../expressions/ArrayFilter.md) expression (for the [expr](../Column.md#expr) of the given [Column](../Column.md) and a [LambdaFunction](#createLambda)).
 
 In the end, `collect_set` wraps the `ArrayFilter` up in a [Column](../Column.md).
+
+## str_to_map { #str_to_map }
+
+```scala
+str_to_map(
+  text: Column): Column
+str_to_map(
+  text: Column,
+  pairDelim: Column): Column
+str_to_map(
+  text: Column,
+  pairDelim: Column,
+  keyValueDelim: Column): Column
+```
+
+`str_to_map`...FIXME
 
 <!---
 ## Review Me

@@ -1,5 +1,17 @@
 # Regular Functions (Non-Aggregate Functions)
 
+## named_struct { #named_struct }
+
+```scala
+named_struct(
+  cols: Column*): Column
+```
+
+`named_struct`...FIXME
+
+<!---
+## Review Me
+
 [[functions]]
 .(Subset of) Regular Functions
 [align="center",cols="1,2",width="100%",options="header"]
@@ -323,3 +335,4 @@ scala> demo.orderBy("id").show
 ```
 
 Internally, `monotonically_increasing_id` creates a [Column](Column.md#apply) with a [MonotonicallyIncreasingID](expressions/MonotonicallyIncreasingID.md) non-deterministic leaf expression.
+-->
