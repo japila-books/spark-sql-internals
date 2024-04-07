@@ -4,11 +4,9 @@ title: GenerateExec
 
 # GenerateExec Unary Physical Operator
 
-`GenerateExec` is a [unary physical operator](UnaryExecNode.md) with [CodegenSupport](CodegenSupport.md).
+`GenerateExec` is a [unary physical operator](UnaryExecNode.md) to manage execution of a [Generator](#generator) expression.
 
 `GenerateExec` represents [Generate](../logical-operators/Generate.md) unary logical operator at execution time.
-
-`GenerateExec` is an executon environment for the [Generator](#generator) expression.
 
 When [executed](#doExecute), `GenerateExec` [executes](../expressions/Generator.md#eval) (aka _evaluates_) the [Generator](#boundGenerator) expression on every row in a RDD partition.
 
