@@ -11,7 +11,7 @@
 
 `ArrayFilter` is created for the following functions:
 
-* [filter](../functions/index.md#filter) standard function (Scala)
+* [filter](../standard-functions//index.md#filter) standard function (Scala)
 * [filter](../FunctionRegistry.md#expressions) function (SQL)
 
 ## Demo

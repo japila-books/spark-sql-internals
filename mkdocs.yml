@@ -692,23 +692,10 @@ nav:
     - SparkSession: SparkSession.md
     - SparkSession.Builder: SparkSession-Builder.md
     - SparkSessionExtensions: SparkSessionExtensions.md
-    - Standard Functions:
-      - functions/index.md
-      - functions/aggregate-functions.md
-      - functions/collection-functions.md
-      - functions/datetime.md
-      - functions/regular-functions.md
-      - functions/windows-functions.md
+    - ... | standard-functions/**.md
     - TypedColumn: TypedColumn.md
     - ... | window-functions/**.md
-  - Web UI:
-    - ui/index.md
-    - AllExecutionsPage: ui/AllExecutionsPage.md
-    - ExecutionPage: ui/ExecutionPage.md
-    - SparkListenerSQLExecutionEnd: ui/SparkListenerSQLExecutionEnd.md
-    - SQLAppStatusListener: ui/SQLAppStatusListener.md
-    - SQLAppStatusStore: ui/SQLAppStatusStore.md
-    - SQLTab: ui/SQLTab.md
+  - ... | ui/**.md
   # Demo section uses awesome-pages plugin
   # https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin
   # Review demo/.pages for setup

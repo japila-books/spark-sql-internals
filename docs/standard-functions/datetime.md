@@ -1,3 +1,7 @@
+---
+title: Date time
+---
+
 # Date and Time Functions
 
 ## to_date { #to_date }

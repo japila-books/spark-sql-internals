@@ -1,3 +1,7 @@
+---
+title: Collection
+---
+
 # Standard Collection Functions
 
 ## filter { #filter }

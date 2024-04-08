@@ -7,7 +7,7 @@ Aggregate Queries calculate single value for a set of rows.
 Aggregate Queries can be broken down to the following sections:
 
 1. **Grouping** (using `GROUP BY` clause in SQL or [Dataset.groupBy](#groupBy) operator) that arranges rows into groups (possibly guarded by [HAVING](#having) SQL clause)
-1. **Aggregation** (using [Aggregate Functions](../functions/aggregate-functions.md)) to apply to a set of rows and calculate single values per groups
+1. **Aggregation** (using [Aggregate Functions](../standard-functions//aggregate-functions.md)) to apply to a set of rows and calculate single values per groups
 
 ## Whole-Stage Code Generation
 
@@ -69,7 +69,7 @@ Aggregate Queries can be fine-tuned with the following configuration properties:
 
 ## Basic Aggregation
 
-**Basic Aggregation** calculates aggregates over a group of rows using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../functions/index.md#aggregate-functions)).
+**Basic Aggregation** calculates aggregates over a group of rows using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../standard-functions//index.md#aggregate-functions)).
 
 ## Multi-Dimensional Aggregation
 

@@ -44,7 +44,7 @@ scala> val idCol: Column = $"id"
 idCol: org.apache.spark.sql.Column = id
 ----
 
-Beside using the `implicits` conversions, you can create columns using [col](functions/index.md#col) and [column](functions/index.md#column) functions.
+Beside using the `implicits` conversions, you can create columns using [col](standard-functions/index.md#col) and [column](standard-functions/index.md#column) functions.
 
 [source, scala]
 ----

@@ -16,7 +16,7 @@
 `CollectSet` is created when:
 
 * Catalyst DSL's [collectSet](../catalyst-dsl/index.md#collectSet) is used
-* [collect_set](../functions/aggregate-functions.md#collect_set) standard function is used
+* [collect_set](../standard-functions//aggregate-functions.md#collect_set) standard function is used
 * [collect_set](../FunctionRegistry.md#collect_set) SQL function is used
 
 ## <span id="prettyName"> Pretty Name

@@ -1,6 +1,6 @@
 # ParseToDate
 
-`ParseToDate` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_date](../functions/datetime.md#to_date) function (in logical query plans).
+`ParseToDate` is a [RuntimeReplaceable](RuntimeReplaceable.md) expression to represent [to_date](../standard-functions//datetime.md#to_date) function (in logical query plans).
 
 As a `RuntimeReplaceable` expression, `ParseToDate` is replaced by [Logical Query Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with the [child](#child) expression:
 

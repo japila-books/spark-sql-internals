@@ -1,6 +1,6 @@
 # TimeWindow
 
-`TimeWindow` is an [Unevaluable](Unevaluable.md), `NonSQLExpression` [UnaryExpression](UnaryExpression.md) that represents [window](../functions/index.md#window) function.
+`TimeWindow` is an [Unevaluable](Unevaluable.md), `NonSQLExpression` [UnaryExpression](UnaryExpression.md) that represents [window](../standard-functions//index.md#window) function.
 
 ```scala
 import org.apache.spark.sql.functions.window
@@ -48,7 +48,7 @@ apply(
 
 `apply` is used when:
 
-* [window](../functions/index.md#window) standard function is used
+* [window](../standard-functions//index.md#window) standard function is used
 
 ## <span id="getIntervalInMicroSeconds"> Parsing Time Interval to Microseconds
 

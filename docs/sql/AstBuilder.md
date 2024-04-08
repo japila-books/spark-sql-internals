@@ -958,7 +958,7 @@ Used when:
 
 ### <span id="withWindows"> withWindows
 
-Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../functions/windows-functions.md) (given `WINDOW` definitions).
+Adds a [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) for [window aggregates](../standard-functions//windows-functions.md) (given `WINDOW` definitions).
 
 ```text
 WINDOW identifier AS windowSpec

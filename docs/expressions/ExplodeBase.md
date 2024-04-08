@@ -11,7 +11,7 @@ title: ExplodeBase
 
 `Explode` is a unary expression that produces a sequence of records for each value in the array or map.
 
-`Explode` is a result of executing `explode` function (in SQL and [functions](../functions/index.md#explode))
+`Explode` is a result of executing `explode` function (in SQL and [functions](../standard-functions//index.md#explode))
 
 [source, scala]
 ----

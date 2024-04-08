@@ -4,7 +4,7 @@
 
 `UnresolvedFunction` is <<creating-instance, created>> as a result of the following:
 
-* [callUDF](../functions/index.md#callUDF) standard function
+* [callUDF](../standard-functions//index.md#callUDF) standard function
 
 * [RelationalGroupedDataset.agg](../RelationalGroupedDataset.md#agg) operator with aggregation functions specified by name (that [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
 
@@ -35,7 +35,7 @@ apply(name: String, children: Seq[Expression], isDistinct: Boolean): UnresolvedF
 
 `apply` is used when:
 
-* [callUDF](../functions/index.md#callUDF) standard function is used
+* [callUDF](../standard-functions//index.md#callUDF) standard function is used
 
 * `RelationalGroupedDataset` is requested to [agg](../RelationalGroupedDataset.md#agg) with aggregation functions specified by name (and [converts function names to UnresolvedFunction expressions](../RelationalGroupedDataset.md#strToExpr))
 

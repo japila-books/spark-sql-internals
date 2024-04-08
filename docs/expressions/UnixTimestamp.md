@@ -1,6 +1,6 @@
 # UnixTimestamp
 
-`UnixTimestamp` is a [binary](Expression.md#BinaryExpression) expression with [timezone](Expression.md#TimeZoneAwareExpression) support that represents [unix_timestamp](../functions/datetime.md#unix_timestamp) function (and indirectly [to_date](../functions/datetime.md#to_date) and [to_timestamp](../functions/datetime.md#to_timestamp)).
+`UnixTimestamp` is a [binary](Expression.md#BinaryExpression) expression with [timezone](Expression.md#TimeZoneAwareExpression) support that represents [unix_timestamp](../standard-functions//datetime.md#unix_timestamp) function (and indirectly [to_date](../standard-functions//datetime.md#to_date) and [to_timestamp](../standard-functions//datetime.md#to_timestamp)).
 
 ```text
 import org.apache.spark.sql.functions.unix_timestamp

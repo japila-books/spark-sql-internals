@@ -28,7 +28,7 @@ assert(SQLConf.get.objectAggSortBasedFallbackThreshold == 1)
 
 ## No Sort Fallback Tasks
 
-[collect_set](../functions/aggregate-functions.md#collect_set) standard function (a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) expression) is one of the built-in standard functions that are planned for execution using [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) physical operator.
+[collect_set](../standard-functions//aggregate-functions.md#collect_set) standard function (a [TypedImperativeAggregate](../expressions/TypedImperativeAggregate.md) expression) is one of the built-in standard functions that are planned for execution using [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md) physical operator.
 
 The following query over a single-row dataset produces one group (so it is under `spark.sql.objectHashAggregate.sortBased.fallbackThreshold` of `1`) and hence there will be no [sort fallback tasks](../physical-operators/ObjectHashAggregateExec.md#number-of-sort-fallback-tasks).
 

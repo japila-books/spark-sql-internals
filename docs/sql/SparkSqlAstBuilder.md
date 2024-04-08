@@ -13,7 +13,7 @@
 ![Creating SparkSqlAstBuilder](../images/spark-sql-SparkSqlAstBuilder.png)
 
 ??? note "expr Standard Function"
-    `SparkSqlAstBuilder` can also be temporarily created for [expr](../functions/index.md#expr) standard function (to create column expressions).
+    `SparkSqlAstBuilder` can also be temporarily created for [expr](../standard-functions//index.md#expr) standard function (to create column expressions).
 
     ```text
     val c = expr("from_json(value, schema)")

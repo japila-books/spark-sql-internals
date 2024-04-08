@@ -1,3 +1,7 @@
+---
+title: Window
+---
+
 # Standard Functions for Window Aggregation (Window Functions)
 
 **Window aggregate functions** (aka **window functions** or **windowed aggregates**) are functions that perform a calculation over a group of records called **window** that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
@@ -100,7 +104,7 @@ NOTE: Window functions are supported in structured queries using <<sql, SQL>> an
 
 Although similar to [aggregate functions](aggregations/index.md), a window function does not group rows into a single output row and retains their separate identities. A window function can access rows that are linked to the current row.
 
-NOTE: The main difference between window aggregate functions and [aggregate functions](functions/index.md#aggregate-functions) with [grouping operators](aggregations/index.md) is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
+NOTE: The main difference between window aggregate functions and [aggregate functions](standard-functions/index.md#aggregate-functions) with [grouping operators](aggregations/index.md) is that the former calculate values for every row in a window while the latter gives you at most the number of input rows, one value per group.
 
 TIP: See <<examples, Examples>> section in this document.
 

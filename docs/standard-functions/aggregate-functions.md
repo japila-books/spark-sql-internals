@@ -1,3 +1,7 @@
+---
+title: Aggregate
+---
+
 # Standard Aggregate Functions
 
 ## any { #any }
@@ -78,7 +82,7 @@ max_by(
   ord: Column): Column
 ```
 
-`max_by` creates a [MaxBy](../expressions/MaxBy.md) aggregate function that is then [wrapped into a Column](../functions/index.md#withAggregateFunction) (as an [AggregateExpression](../expressions/AggregateExpression.md)).
+`max_by` creates a [MaxBy](../expressions/MaxBy.md) aggregate function that is then [wrapped into a Column](../standard-functions//index.md#withAggregateFunction) (as an [AggregateExpression](../expressions/AggregateExpression.md)).
 
 ## some { #some }
 

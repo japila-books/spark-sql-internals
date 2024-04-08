@@ -1,4 +1,8 @@
-# Regular Functions (Non-Aggregate Functions)
+---
+title: Non-aggregate (Normal)
+---
+
+# Non-Aggregate (Normal) Functions
 
 ## named_struct { #named_struct }
 
@@ -11,47 +15,6 @@ named_struct(
 
 <!---
 ## Review Me
-
-[[functions]]
-.(Subset of) Regular Functions
-[align="center",cols="1,2",width="100%",options="header"]
-|===
-| Name
-| Description
-
-| <<array, array>>
-|
-
-| <<broadcast, broadcast>>
-|
-
-| <<coalesce, coalesce>>
-| Gives the first non-``null`` value among the given columns or `null`.
-
-| <<col, col>> and <<column, column>>
-| Creating [Columns](Column.md)
-
-| <<expr, expr>>
-|
-
-| <<lit, lit>>
-|
-
-| <<map, map>>
-|
-
-| <<monotonically_increasing_id, monotonically_increasing_id>>
-|
-
-| <<struct, struct>>
-|
-
-| <<typedLit, typedLit>>
-|
-
-| <<when, when>>
-|
-|===
 
 === [[broadcast]] `broadcast` Function
 
@@ -199,15 +162,6 @@ scala> ds.filter(filterExpr).show
 
 Internally, `expr` uses the active session's SessionState.md[sqlParser] or creates a new  sql/SparkSqlParser.md[SparkSqlParser] to call spark-sql-ParserInterface.md#parseExpression[parseExpression] method.
 
-=== [[lit]] `lit` Function
-
-[source, scala]
-----
-lit(literal: Any): Column
-----
-
-`lit` function...FIXME
-
 === [[struct]] `struct` Functions
 
 [source, scala]
@@ -231,43 +185,6 @@ scala> df.withColumn("struct", struct($"name", $"val")).show
 |  2|  4|  ala|  [ala,4]|
 +---+---+-----+---------+
 ----
-
-=== [[typedLit]] `typedLit` Function
-
-[source, scala]
-----
-typedLit[T : TypeTag](literal: T): Column
-----
-
-`typedLit`...FIXME
-
-=== [[array]] `array` Function
-
-[source, scala]
-----
-array(cols: Column*): Column
-array(colName: String, colNames: String*): Column
-----
-
-`array`...FIXME
-
-=== [[map]] `map` Function
-
-[source, scala]
-----
-map(cols: Column*): Column
-----
-
-`map`...FIXME
-
-=== [[when]] `when` Function
-
-[source, scala]
-----
-when(condition: Column, value: Any): Column
-----
-
-`when`...FIXME
 
 === [[monotonically_increasing_id]] `monotonically_increasing_id` Function
 
