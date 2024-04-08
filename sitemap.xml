@@ -2266,36 +2266,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/aggregate-functions/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/collection-functions/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/datetime/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/regular-functions/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/functions/windows-functions/</loc>
-         <lastmod>2024-04-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/generated-columns/</loc>
          <lastmod>2024-04-08</lastmod>
          <changefreq>daily</changefreq>
@@ -4537,6 +4507,36 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/sql/VariableSubstitution/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/aggregate-functions/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/collection-functions/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/datetime/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/regular-functions/</loc>
+         <lastmod>2024-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/standard-functions/windows-functions/</loc>
          <lastmod>2024-04-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
