@@ -2,9 +2,9 @@
 title: Window
 ---
 
-# Standard Functions for Window Aggregation (Window Functions)
+# Aggregate Window Functions
 
-**Window aggregate functions** (aka **window functions** or **windowed aggregates**) are functions that perform a calculation over a group of records called **window** that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
+**Aggregate Window Functions** (aka **window functions** or **windowed aggregates**) are functions that perform a calculation over a group of records called **window** that are in _some_ relation to the current record (i.e. can be in the same partition or frame as the current row).
 
 In other words, when executed, a window function computes a value for each and every row in a window (per [window specification](../window-functions/WindowSpec.md)).
 
@@ -12,9 +12,54 @@ Window functions are also called **over functions** due to how they are applied 
 
 Spark SQL supports three kinds of window functions:
 
-* _ranking_ functions
-* _analytic_ functions
-* _aggregate_ functions
+* [Aggregate functions](aggregate-functions.md)
+* Analytic functions
+* [Ranking functions](#ranking-functions)
+
+## Ranking Functions
+
+### row_number { #row_number }
+
+```scala
+row_number(): Column
+```
+
+`row_number` assigns a unique, sequential number to each row within a window partition according to the ordering of rows (starting from 1).
+
+Internally, `row_number` creates a [RowNumber](../expressions/RowNumber.md) aggregate window leaf expression.
+
+```text
+val buckets = spark.range(5).withColumn("bucket", 'id % 3)
+// Make duplicates
+val input = buckets.union(buckets)
+```
+
+```scala
+import org.apache.spark.sql.expressions.Window
+val windowSpec = Window.partitionBy('bucket).orderBy('id)
+```
+
+```scala
+val q = input.withColumn("row_number", row_number() over windowSpec)
+```
+
+```text
+scala> q.show
++---+------+----------+
+| id|bucket|row_number|
++---+------+----------+
+|  0|     0|         1|
+|  0|     0|         2|
+|  3|     0|         3|
+|  3|     0|         4|
+|  1|     1|         1|
+|  1|     1|         2|
+|  4|     1|         3|
+|  4|     1|         4|
+|  2|     2|         1|
+|  2|     2|         2|
++---+------+----------+
+```
 
 <!---
 ## Review Me
@@ -38,9 +83,6 @@ Spark SQL supports three kinds of window functions:
 |
 
 | <<ntile, ntile>>
-|
-
-| <<row_number, row_number>>
 |
 
 .3+^.^| *Analytic functions*
@@ -716,48 +758,6 @@ scala> dataset.withColumn("cume_dist", cume_dist over windowSpec).show
 |  5|     2|0.6666666666666666|
 |  8|     2|               1.0|
 +---+------+------------------+
-----
-
-=== [[row_number]] Sequential numbering per window partition -- `row_number` Window Function
-
-[source, scala]
-----
-row_number(): Column
-----
-
-`row_number` returns a sequential number starting at `1` within a window partition.
-
-[source, scala]
-----
-val buckets = spark.range(9).withColumn("bucket", 'id % 3)
-// Make duplicates
-val dataset = buckets.union(buckets)
-
-import org.apache.spark.sql.expressions.Window
-val windowSpec = Window.partitionBy('bucket).orderBy('id)
-scala> dataset.withColumn("row_number", row_number() over windowSpec).show
-+---+------+----------+
-| id|bucket|row_number|
-+---+------+----------+
-|  0|     0|         1|
-|  0|     0|         2|
-|  3|     0|         3|
-|  3|     0|         4|
-|  6|     0|         5|
-|  6|     0|         6|
-|  1|     1|         1|
-|  1|     1|         2|
-|  4|     1|         3|
-|  4|     1|         4|
-|  7|     1|         5|
-|  7|     1|         6|
-|  2|     2|         1|
-|  2|     2|         2|
-|  5|     2|         3|
-|  5|     2|         4|
-|  8|     2|         5|
-|  8|     2|         6|
-+---+------+----------+
 ----
 
 === [[ntile]] `ntile` Window Function

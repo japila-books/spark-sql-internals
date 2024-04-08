@@ -23,13 +23,19 @@
 1. `ResolveWindowOrder`
 1. [ExtractWindowExpressions](../logical-analysis-rules/ExtractWindowExpressions.md)
 
-## <span id="frame"> WindowFrame
+## WindowFrame { #frame }
 
 ```scala
 frame: WindowFrame
 ```
 
-`frame` is `UnspecifiedFrame` by default.
+`frame` is an `UnspecifiedFrame` by default.
+
+See:
+
+* [AggregateWindowFunction](AggregateWindowFunction.md#frame)
+
+---
 
 `frame` is used when:
 

@@ -6,5 +6,21 @@
 
 * `NthValue`
 * `RankLike`
-* `RowNumberLike`
+* [RowNumberLike](RowNumberLike.md)
 * `SizeBasedWindowFunction`
+
+## Frame { #frame }
+
+??? note "WindowFunction"
+
+    ```scala
+    frame: WindowFrame
+    ```
+
+    `frame` is part of the [WindowFunction](WindowFunction.md#frame) abstraction.
+
+`frame` is a `SpecifiedWindowFrame` with the following:
+
+* `RowFrame` type
+* `UnboundedPreceding` lower expression
+* `CurrentRow` lower expression

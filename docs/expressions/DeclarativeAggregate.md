@@ -10,13 +10,17 @@ title: DeclarativeAggregate
 
 ## Contract
 
-### <span id="evaluateExpression"> evaluateExpression
+### Evaluating Expression { #evaluateExpression }
 
 ```scala
 evaluateExpression: Expression
 ```
 
 Catalyst [Expression](Expression.md) to calculate the final value of this aggregate function
+
+See:
+
+* [RowNumber](RowNumber.md#evaluateExpression)
 
 Used when:
 
@@ -73,6 +77,7 @@ Catalyst [Expression](Expression.md)s to update the mutable aggregation buffer b
 See:
 
 * [Count](Count.md#updateExpressions)
+* [RowNumber](RowNumber.md#updateExpressions)
 * [SimpleTypedAggregateExpression](SimpleTypedAggregateExpression.md#updateExpressions)
 
 Used when:
