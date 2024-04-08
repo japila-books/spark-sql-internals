@@ -1,10 +1,16 @@
+---
+title: WindowExec
+---
+
 # WindowExec Unary Physical Operator
 
 `WindowExec` is a [WindowExecBase unary physical operator](WindowExecBase.md) for [window function execution](../window-functions/index.md).
 
 ![WindowExec in web UI (Details for Query)](../images/spark-sql-WindowExec-webui-query-details.png)
 
-`WindowExec` represents [Window](../logical-operators/Window.md) unary logical operator at execution.
+`WindowExec` represents [Window](../logical-operators/Window.md) unary logical operator at execution time.
+
+`WindowExec` uses [ExternalAppendOnlyUnsafeRowArray](../ExternalAppendOnlyUnsafeRowArray.md) when [executed](#doExecute). This `ExternalAppendOnlyUnsafeRowArray` can be fine-tuned using the [Configuration Properties](#configuration-properties).
 
 ## Creating Instance
 
@@ -19,27 +25,33 @@
 
 * [Window](../execution-planning-strategies/Window.md) execution planning strategy plans a [Window](../logical-operators/Window.md) unary logical operator with a [WindowFunction](../expressions/WindowFunction.md) or an [AggregateFunction](../expressions/AggregateFunction.md)
 
+## Performance Metrics
+
+### spill size { #spillSize }
+
 ## Configuration Properties
 
 `WindowExec` uses the following configuration properties when [executed](#doExecute).
 
-### <span id="spark.sql.windowExec.buffer.in.memory.threshold"> spark.sql.windowExec.buffer.in.memory.threshold
+### spark.sql.windowExec.buffer.in.memory.threshold { #spark.sql.windowExec.buffer.in.memory.threshold }
 
 [spark.sql.windowExec.buffer.in.memory.threshold](../configuration-properties.md#spark.sql.windowExec.buffer.in.memory.threshold)
 
-### <span id="spark.sql.windowExec.buffer.spill.threshold"> spark.sql.windowExec.buffer.spill.threshold
+### spark.sql.windowExec.buffer.spill.threshold { #spark.sql.windowExec.buffer.spill.threshold }
 
 [spark.sql.windowExec.buffer.spill.threshold](../configuration-properties.md#spark.sql.windowExec.buffer.spill.threshold)
 
-## <span id="doExecute"> Executing Physical Operator
+## Executing Operator { #doExecute }
 
-```scala
-doExecute(): RDD[InternalRow]
-```
+??? note "SparkPlan"
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
 
-`doExecute` requests the [child](#child) physical operator to [execute](SparkPlan.md#execute) and maps over `InternalRow`s in partitions (using `RDD.mapPartitions` operator).
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute` requests the [child](#child) physical operator to [execute](SparkPlan.md#execute) (to create a `RDD[InternalRow]`) and uses `RDD.mapPartitions` operator to process partition rows.
 
 !!! note
     When executed, `doExecute` creates a new `MapPartitionsRDD` with the `RDD[InternalRow]` of the [child](#child) physical operator.

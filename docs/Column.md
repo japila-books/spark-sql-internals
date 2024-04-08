@@ -5,6 +5,39 @@ tags:
 
 # Column
 
+## over
+
+```scala
+over(): Column // (1)!
+over(
+  window: expressions.WindowSpec): Column
+```
+
+1. Uses an empty [WindowSpec](window-functions/WindowSpec.md)
+
+`over` creates a **windowing column** (*analytic clause*) for executing an aggregate window function over the given `window` (as a [WindowSpec](window-functions/WindowSpec.md)).
+
+---
+
+Internally, `over` requests the given [WindowSpec](window-functions/WindowSpec.md) to [withAggregate](window-functions/WindowSpec.md#withAggregate) with this `Column`.
+
+```scala
+val overUnspecifiedFrame = $"someColumn".over()
+```
+
+```scala
+import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.expressions.WindowSpec
+
+val spec: WindowSpec = Window.rangeBetween(Window.unboundedPreceding, Window.currentRow)
+val overRange = $"someColumn" over spec
+```
+
+```text
+scala> overRange
+overRange: org.apache.spark.sql.Column = someColumn OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+```
+
 <!---
 [[creating-instance]]
 [[expr]]
@@ -232,30 +265,6 @@ scala> df.select('id).show
 |  0|
 |  1|
 +---+
-----
-
-=== [[over]] Defining Windowing Column (Analytic Clause) -- `over` Operator
-
-[source, scala]
-----
-over(): Column
-over(window: WindowSpec): Column
-----
-
-`over` creates a _windowing column_ (_aka_ _analytic clause_) that allows to execute an aggregate function over a [window](window-functions/WindowSpec.md) (i.e. a group of records that are in _some_ relation to the current record).
-
-TIP: Read up on windowed aggregation in Spark SQL in functions/windows-functions.md[Window Aggregate Functions].
-
-[source, scala]
-----
-scala> val overUnspecifiedFrame = $"someColumn".over()
-overUnspecifiedFrame: org.apache.spark.sql.Column = someColumn OVER (UnspecifiedFrame)
-
-import org.apache.spark.sql.expressions.Window
-import org.apache.spark.sql.expressions.WindowSpec
-val spec: WindowSpec = Window.rangeBetween(Window.unboundedPreceding, Window.currentRow)
-scala> val overRange = $"someColumn" over spec
-overRange: org.apache.spark.sql.Column = someColumn OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
 ----
 
 === [[cast]] `cast` Operator

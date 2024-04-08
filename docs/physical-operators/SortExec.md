@@ -17,13 +17,13 @@
 * `FileFormatWriter` utility is used to [write out a query result](../files/FileFormatWriter.md#write)
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics
 
-### <span id="peakMemory"> peak memory
+### peak memory { #peakMemory }
 
-### <span id="sortTime"> sort time
+### sort time { #sortTime }
 
-### <span id="spillSize"> spill size
+### spill size { #spillSize }
 
 Number of in-memory bytes spilled by this operator at [execution](#doExecute) (while an [UnsafeExternalRowSorter](#createSorter) was [sorting](../UnsafeExternalRowSorter.md#sort) the rows in a partition)
 

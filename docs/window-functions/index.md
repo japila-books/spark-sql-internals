@@ -4,7 +4,7 @@ From the [official documentation of PostgreSQL](https://www.postgresql.org/docs/
 
 > **Window functions** provide the ability to perform calculations across sets of rows that are related to the current query row.
 
-Since window functions are a subset of standard functions in Spark SQL, they generate a value for every group of rows that are associated with the current row by some _relation_.
+Window functions are a subset of [standard functions](../standard-functions/index.md) and hence generate a value for every group of rows that are associated with the current row by some _relation_.
 
 Window functions require a **window specification** ([WindowSpec](WindowSpec.md)) that defines which rows are included in a **window** (_frame_, i.e. the set of rows that are associated with the current row by some _relation_).
 
@@ -38,6 +38,10 @@ rank.over(byHTokens)
 import org.apache.spark.sql.functions.first
 first.over(windowSpec)
 ```
+
+## Execution
+
+Window functions are executed by [WindowExec](../physical-operators/WindowExec.md) unary physical operator.
 
 ## Limitations
 

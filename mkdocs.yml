@@ -453,8 +453,7 @@ nav:
       - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
       - V2TableWriteExec: physical-operators/V2TableWriteExec.md
       - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
-      - WindowExec:
-        - WindowExec: physical-operators/WindowExec.md
+      - WindowExec: physical-operators/WindowExec.md
       - WindowExecBase: physical-operators/WindowExecBase.md
       - WriteDeltaExec: physical-operators/WriteDeltaExec.md
       - WriteFilesExec: physical-operators/WriteFilesExec.md

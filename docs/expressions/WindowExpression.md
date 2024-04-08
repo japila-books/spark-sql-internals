@@ -1,6 +1,6 @@
 # WindowExpression
 
-`WindowExpression` is an [unevaluable expression](Unevaluable.md) that represents a [window function](#windowFunction) (over some [WindowSpecDefinition](#windowSpec)).
+`WindowExpression` is an [unevaluable expression](Unevaluable.md) that represents a [window function](#windowFunction) over some [WindowSpecDefinition](#windowSpec).
 
 `WindowExpression` is [created](#creating-instance) when:
 
@@ -8,7 +8,7 @@
 
 * [WindowsSubstitution](../logical-analysis-rules/WindowsSubstitution.md) logical evaluation rule is executed (with [WithWindowDefinition](../logical-operators/WithWindowDefinition.md) logical operators with `UnresolvedWindowExpression` expressions)
 
-* `AstBuilder` is requested to [parse a function call](../sql/AstBuilder.md#visitFunctionCall) in a SQL statement
+* `AstBuilder` is requested to [parse a function call](../sql/AstBuilder.md#visitFunctionCall) or [visitPercentile](../sql/AstBuilder.md#visitPercentile) in a SQL statement
 
 `WindowExpression` can only be with [AggregateExpression](AggregateExpression.md), [AggregateWindowFunction](AggregateWindowFunction.md) or [OffsetWindowFunction](OffsetWindowFunction.md) expressions which is enforced at [analysis](../CheckAnalysis.md#WindowExpression).
 
@@ -45,23 +45,26 @@ windowExpr(
 
 ## Demo
 
-```text
+```scala
 import org.apache.spark.sql.catalyst.expressions.WindowExpression
 // relation - Dataset as a table to query
 val table = spark.emptyDataset[Int]
+```
 
-scala> val windowExpr = table
+```scala
+val windowExpr = table
   .selectExpr("count() OVER (PARTITION BY value) AS count")
   .queryExecution
-  .logical      // (1)!
+  .logical  // (1)!
   .expressions
   .toList(0)
   .children(0)
   .asInstanceOf[WindowExpression]
-windowExpr: org.apache.spark.sql.catalyst.expressions.WindowExpression = 'count() windowspecdefinition('value, UnspecifiedFrame)
-
-scala> windowExpr.sql
-res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
 ```
 
 1. Use `sqlParser` directly as in [WithWindowDefinition Example](../logical-operators/WithWindowDefinition.md#example)
+
+```text
+scala> windowExpr.sql
+res2: String = count() OVER (PARTITION BY `value` UnspecifiedFrame)
+```

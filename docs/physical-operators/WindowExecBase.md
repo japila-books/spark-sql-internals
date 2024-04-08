@@ -1,10 +1,14 @@
+---
+title: WindowExecBase
+---
+
 # WindowExecBase Unary Physical Operators
 
 `WindowExecBase` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [window unary physical operators](#implementations).
 
 ## Contract
 
-### <span id="orderSpec"> orderSpec
+### orderSpec { #orderSpec }
 
 ```scala
 orderSpec: Seq[SortOrder]
@@ -16,7 +20,7 @@ Used when:
 
 * `WindowExecBase` is requested to [createBoundOrdering](#createBoundOrdering)
 
-### <span id="partitionSpec"> partitionSpec
+### partitionSpec { #partitionSpec }
 
 ```scala
 partitionSpec: Seq[Expression]
@@ -24,7 +28,7 @@ partitionSpec: Seq[Expression]
 
 Partition Specification ([Expression](../expressions/Expression.md)s)
 
-### <span id="windowExpression"> windowExpression
+### windowExpression { #windowExpression }
 
 ```scala
 windowExpression: Seq[NamedExpression]
@@ -41,7 +45,7 @@ Used when:
 * [WindowExec](WindowExec.md)
 * `WindowInPandasExec` ([PySpark]({{ book.pyspark }}/sql/WindowInPandasExec))
 
-## <span id="windowFrameExpressionFactoryPairs"> windowFrameExpressionFactoryPairs
+## windowFrameExpressionFactoryPairs { #windowFrameExpressionFactoryPairs }
 
 ```scala
 windowFrameExpressionFactoryPairs: Seq[(ExpressionBuffer, InternalRow => WindowFunctionFrame)]
@@ -64,7 +68,7 @@ windowFrameExpressionFactoryPairs: Seq[(ExpressionBuffer, InternalRow => WindowF
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-## <span id="createBoundOrdering"> createBoundOrdering
+## createBoundOrdering { #createBoundOrdering }
 
 ```scala
 createBoundOrdering(

@@ -28,7 +28,7 @@ row_number(): Column
 
 Internally, `row_number` creates a [RowNumber](../expressions/RowNumber.md) aggregate window leaf expression.
 
-```text
+```scala
 val buckets = spark.range(5).withColumn("bucket", 'id % 3)
 // Make duplicates
 val input = buckets.union(buckets)
@@ -36,11 +36,17 @@ val input = buckets.union(buckets)
 
 ```scala
 import org.apache.spark.sql.expressions.Window
-val windowSpec = Window.partitionBy('bucket).orderBy('id)
+val buckets = Window.partitionBy('bucket).orderBy('id)
+val rn = row_number().over(buckets)
+```
+
+```text
+scala> print(rn)
+row_number() OVER (PARTITION BY bucket ORDER BY id ASC NULLS FIRST unspecifiedframe$())
 ```
 
 ```scala
-val q = input.withColumn("row_number", row_number() over windowSpec)
+val q = input.withColumn("row_number", rn)
 ```
 
 ```text
@@ -59,6 +65,17 @@ scala> q.show
 |  2|     2|         1|
 |  2|     2|         2|
 +---+------+----------+
+```
+
+```text
+scala> println(rn.expr.treeString)
+row_number() windowspecdefinition('bucket, 'id ASC NULLS FIRST, unspecifiedframe$())
+:- row_number()
++- windowspecdefinition('bucket, 'id ASC NULLS FIRST, unspecifiedframe$())
+   :- 'bucket
+   :- 'id ASC NULLS FIRST
+   :  +- 'id
+   +- unspecifiedframe$()
 ```
 
 <!---
