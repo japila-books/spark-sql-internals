@@ -12,7 +12,7 @@ Window functions are also called **over functions** due to how they are applied 
 
 Spark SQL supports three kinds of window functions:
 
-* [Aggregate functions](aggregate-functions.md)
+* [Aggregate functions](aggregate.md)
 * Analytic functions
 * [Ranking functions](#ranking-functions)
 

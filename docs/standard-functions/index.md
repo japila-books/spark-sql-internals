@@ -8,7 +8,7 @@ You can access the standard functions using the following `import` statement in 
 import org.apache.spark.sql.functions._
 ```
 
-## <span id="udaf"> udaf
+## udaf { #udaf }
 
 ```scala
 udaf[IN: TypeTag, BUF, OUT](
@@ -22,7 +22,20 @@ udaf[IN, BUF, OUT](
 
 `udaf` creates a [UserDefinedAggregator](../expressions/UserDefinedAggregator.md) with the given [Aggregator](../expressions/Aggregator.md) and [Encoder](../Encoder.md).
 
+## Creating AggregateExpression for AggregateFunction { #withAggregateFunction }
+
+```scala
+withAggregateFunction(
+  func: AggregateFunction,
+  isDistinct: Boolean = false): Column
+```
+
+`withAggregateFunction` requests the given [AggregateFunction](../expressions/AggregateFunction.md) expression to [toAggregateExpression](../expressions/AggregateFunction.md#toAggregateExpression) (with the given `isDistinct` flag).
+
+In the end, `withAggregateFunction` creates a [Column](../Column.md) for the `AggregateExpression`.
+
 <!---
+## Review Me
 
 [[standard-functions]]
 .(Subset of) Standard Functions in Spark SQL
@@ -34,7 +47,7 @@ udaf[IN, BUF, OUT](
 
 .26+^.^| [[aggregate-functions]][[agg_funcs]] *Aggregate functions*
 
-| <<aggregate-functions.md#approx_count_distinct, approx_count_distinct>>
+| <<aggregate.md#approx_count_distinct, approx_count_distinct>>
 a| [[approx_count_distinct]]
 
 [source, scala]
@@ -45,7 +58,7 @@ approx_count_distinct(e: Column, rsd: Double): Column
 approx_count_distinct(columnName: String, rsd: Double): Column
 ----
 
-| <<aggregate-functions.md#avg, avg>>
+| <<aggregate.md#avg, avg>>
 a| [[avg]]
 
 [source, scala]
@@ -54,7 +67,7 @@ avg(e: Column): Column
 avg(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#collect_list, collect_list>>
+| <<aggregate.md#collect_list, collect_list>>
 a| [[collect_list]]
 
 [source, scala]
@@ -63,7 +76,7 @@ collect_list(e: Column): Column
 collect_list(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#collect_set, collect_set>>
+| <<aggregate.md#collect_set, collect_set>>
 a| [[collect_set]]
 
 [source, scala]
@@ -72,7 +85,7 @@ collect_set(e: Column): Column
 collect_set(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#corr, corr>>
+| <<aggregate.md#corr, corr>>
 a| [[corr]]
 
 [source, scala]
@@ -81,7 +94,7 @@ corr(column1: Column, column2: Column): Column
 corr(columnName1: String, columnName2: String): Column
 ----
 
-| <<aggregate-functions.md#count, count>>
+| <<aggregate.md#count, count>>
 a| [[count]]
 
 [source, scala]
@@ -90,7 +103,7 @@ count(e: Column): Column
 count(columnName: String): TypedColumn[Any, Long]
 ----
 
-| <<aggregate-functions.md#countDistinct, countDistinct>>
+| <<aggregate.md#countDistinct, countDistinct>>
 a| [[countDistinct]]
 
 [source, scala]
@@ -99,7 +112,7 @@ countDistinct(expr: Column, exprs: Column*): Column
 countDistinct(columnName: String, columnNames: String*): Column
 ----
 
-| <<aggregate-functions.md#covar_pop, covar_pop>>
+| <<aggregate.md#covar_pop, covar_pop>>
 a| [[covar_pop]]
 
 [source, scala]
@@ -108,7 +121,7 @@ covar_pop(column1: Column, column2: Column): Column
 covar_pop(columnName1: String, columnName2: String): Column
 ----
 
-| <<aggregate-functions.md#covar_samp, covar_samp>>
+| <<aggregate.md#covar_samp, covar_samp>>
 a| [[covar_samp]]
 
 [source, scala]
@@ -117,7 +130,7 @@ covar_samp(column1: Column, column2: Column): Column
 covar_samp(columnName1: String, columnName2: String): Column
 ----
 
-| <<aggregate-functions.md#first, first>>
+| <<aggregate.md#first, first>>
 a| [[first]]
 
 [source, scala]
@@ -130,7 +143,7 @@ first(columnName: String, ignoreNulls: Boolean): Column
 
 Returns the first value in a group. Returns the first non-null value when `ignoreNulls` flag on. If all values are null, then returns null.
 
-| <<aggregate-functions.md#grouping, grouping>>
+| <<aggregate.md#grouping, grouping>>
 a| [[grouping]]
 
 [source, scala]
@@ -141,7 +154,7 @@ grouping(columnName: String): Column
 
 Indicates whether a given column is aggregated or not
 
-| <<aggregate-functions.md#grouping_id, grouping_id>>
+| <<aggregate.md#grouping_id, grouping_id>>
 a| [[grouping_id]]
 
 [source, scala]
@@ -152,7 +165,7 @@ grouping_id(colName: String, colNames: String*): Column
 
 Computes the level of grouping
 
-| <<aggregate-functions.md#kurtosis, kurtosis>>
+| <<aggregate.md#kurtosis, kurtosis>>
 a| [[kurtosis]]
 
 [source, scala]
@@ -161,7 +174,7 @@ kurtosis(e: Column): Column
 kurtosis(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#last, last>>
+| <<aggregate.md#last, last>>
 a| [[last]]
 
 [source, scala]
@@ -172,7 +185,7 @@ last(e: Column): Column
 last(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#max, max>>
+| <<aggregate.md#max, max>>
 a| [[max]]
 
 [source, scala]
@@ -181,7 +194,7 @@ max(e: Column): Column
 max(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#mean, mean>>
+| <<aggregate.md#mean, mean>>
 a| [[mean]]
 
 [source, scala]
@@ -190,7 +203,7 @@ mean(e: Column): Column
 mean(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#min, min>>
+| <<aggregate.md#min, min>>
 a| [[min]]
 
 [source, scala]
@@ -199,7 +212,7 @@ min(e: Column): Column
 min(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#skewness, skewness>>
+| <<aggregate.md#skewness, skewness>>
 a| [[skewness]]
 
 [source, scala]
@@ -208,7 +221,7 @@ skewness(e: Column): Column
 skewness(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#stddev, stddev>>
+| <<aggregate.md#stddev, stddev>>
 a| [[stddev]]
 
 [source, scala]
@@ -217,7 +230,7 @@ stddev(e: Column): Column
 stddev(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#stddev_pop, stddev_pop>>
+| <<aggregate.md#stddev_pop, stddev_pop>>
 a| [[stddev_pop]]
 
 [source, scala]
@@ -226,7 +239,7 @@ stddev_pop(e: Column): Column
 stddev_pop(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#stddev_samp, stddev_samp>>
+| <<aggregate.md#stddev_samp, stddev_samp>>
 a| [[stddev_samp]]
 
 [source, scala]
@@ -235,7 +248,7 @@ stddev_samp(e: Column): Column
 stddev_samp(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#sum, sum>>
+| <<aggregate.md#sum, sum>>
 a| [[sum]]
 
 [source, scala]
@@ -244,7 +257,7 @@ sum(e: Column): Column
 sum(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#sumDistinct, sumDistinct>>
+| <<aggregate.md#sumDistinct, sumDistinct>>
 a| [[sumDistinct]]
 
 [source, scala]
@@ -253,7 +266,7 @@ sumDistinct(e: Column): Column
 sumDistinct(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#variance, variance>>
+| <<aggregate.md#variance, variance>>
 a| [[variance]]
 
 [source, scala]
@@ -262,7 +275,7 @@ variance(e: Column): Column
 variance(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#var_pop, var_pop>>
+| <<aggregate.md#var_pop, var_pop>>
 a| [[var_pop]]
 
 [source, scala]
@@ -271,7 +284,7 @@ var_pop(e: Column): Column
 var_pop(columnName: String): Column
 ----
 
-| <<aggregate-functions.md#var_samp, var_samp>>
+| <<aggregate.md#var_samp, var_samp>>
 a| [[var_samp]]
 
 [source, scala]

@@ -82,7 +82,115 @@ max_by(
   ord: Column): Column
 ```
 
-`max_by` creates a [MaxBy](../expressions/MaxBy.md) aggregate function that is then [wrapped into a Column](../standard-functions//index.md#withAggregateFunction) (as an [AggregateExpression](../expressions/AggregateExpression.md)).
+---
+
+```text
+scala> sql("DESC FUNCTION max_by").show(truncate=false)
++----------------------------------------------------------------------------------------+
+|function_desc                                                                           |
++----------------------------------------------------------------------------------------+
+|Function: max_by                                                                        |
+|Class: org.apache.spark.sql.catalyst.expressions.aggregate.MaxBy                        |
+|Usage: max_by(x, y) - Returns the value of `x` associated with the maximum value of `y`.|
++----------------------------------------------------------------------------------------+
+```
+
+??? note "Learn More"
+    Learn more in [this post on LinkedIn](https://www.linkedin.com/posts/jaceklaskowski_dataengineering-sql-activity-7180976392119959555-urz6/) that drew my attention to `max_by`.
+
+### Demo { #max_by-demo }
+
+Problem: Find the most expensive vegetable
+
+```scala
+val veggies = Seq(
+    ("broccoli", 10.15),
+    ("cabbage", 5.25),
+    ("arugula", 1.05),
+    ("beetroot", 10.15),
+  ).toDF("vegetable", "price")
+```
+
+```text
+scala> veggies.show()
++---------+-----+
+|vegetable|price|
++---------+-----+
+| broccoli|10.15|
+|  cabbage| 5.25|
+|  arugula| 1.05|
+| beetroot|10.15|
++---------+-----+
+```
+
+```scala
+val the_most_expensive_veggie_q = veggies.select(max_by($"vegetable", $"price"))
+```
+
+```text
+scala> the_most_expensive_veggie_q.show()
++------------------------+
+|max_by(vegetable, price)|
++------------------------+
+|                beetroot|
++------------------------+
+```
+
+Closing questions:
+
+1. Is the answer correct?
+1. How is this different from `groupBy` or `rank`?
+
+### Internals { #max_by-internals }
+
+Internally, `max_by` creates a [MaxBy](../expressions/MaxBy.md) aggregate function that is then [wrapped into a Column](../standard-functions/index.md#withAggregateFunction) (as an [AggregateExpression](../expressions/AggregateExpression.md)).
+
+```scala
+import org.apache.spark.sql.functions.max_by
+val c = max_by($"id", $"ord")
+```
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateExpression
+val ae = c.expr.asInstanceOf[AggregateExpression]
+```
+
+```scala
+import org.apache.spark.sql.catalyst.expressions.aggregate.MaxBy
+val maxByFn = ae.aggregateFunction.asInstanceOf[MaxBy]
+```
+
+```text
+scala> print(maxByFn.numberedTreeString)
+00 max_by('id, 'ord)
+01 :- 'id
+02 +- 'ord
+```
+
+```text
+scala> q.explain(extended=true)
+== Parsed Logical Plan ==
+'Project [unresolvedalias(max_by('x, 'y), Some(org.apache.spark.sql.Column$$Lambda$2839/0x0000000129e57160@5e3ea926))]
++- Project [_1#14 AS x#19, _2#15 AS y#20]
+   +- LocalRelation [_1#14, _2#15]
+
+== Analyzed Logical Plan ==
+max_by(x, y): string
+Aggregate [max_by(x#19, y#20) AS max_by(x, y)#97]
++- Project [_1#14 AS x#19, _2#15 AS y#20]
+   +- LocalRelation [_1#14, _2#15]
+
+== Optimized Logical Plan ==
+Aggregate [max_by(x#19, y#20) AS max_by(x, y)#97]
++- LocalRelation [x#19, y#20]
+
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- SortAggregate(key=[], functions=[max_by(x#19, y#20)], output=[max_by(x, y)#97])
+   +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=86]
+      +- SortAggregate(key=[], functions=[partial_max_by(x#19, y#20)], output=[valueWithExtremumOrdering#101, extremumOrdering#102])
+         +- LocalTableScan [x#19, y#20]
+```
 
 ## some { #some }
 
