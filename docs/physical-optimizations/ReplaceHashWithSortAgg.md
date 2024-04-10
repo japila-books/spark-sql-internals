@@ -4,7 +4,7 @@ title: ReplaceHashWithSortAgg
 
 # ReplaceHashWithSortAgg Physical Optimization
 
-`ReplaceHashWithSortAgg` is a physical optimization (`Rule[SparkPlan]`) to [replace Hash Aggregate operators with grouping keys with SortAggregateExec operators](#replaceHashAgg).
+`ReplaceHashWithSortAgg` is a physical optimization (`Rule[SparkPlan]`) to [replace Hash Aggregate operators (with grouping keys) with corresponding SortAggregateExec operators](#replaceHashAgg) when the child satisfies the sort order of the corresponding `SortAggregateExec` operator.
 
 `ReplaceHashWithSortAgg` can be enabled using [spark.sql.execution.replaceHashWithSortAgg](../configuration-properties.md#spark.sql.execution.replaceHashWithSortAgg) configuration property.
 
@@ -13,9 +13,9 @@ title: ReplaceHashWithSortAgg
 * [preparations](../QueryExecution.md#preparations)
 * [queryStagePreparationRules](../physical-operators/AdaptiveSparkPlanExec.md#queryStagePreparationRules)
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
-??? note "Signature"
+??? note "Rule"
 
     ```scala
     apply(
@@ -29,7 +29,7 @@ title: ReplaceHashWithSortAgg
 
 `apply` [replaceHashAgg](#replaceHashAgg).
 
-## <span id="replaceHashAgg"> replaceHashAgg
+## replaceHashAgg { #replaceHashAgg }
 
 ```scala
 replaceHashAgg(
@@ -38,10 +38,10 @@ replaceHashAgg(
 
 `replaceHashAgg` finds [BaseAggregateExec](../physical-operators/BaseAggregateExec.md) physical operators that are [Hash Aggregate operators with grouping keys](#isHashBasedAggWithKeys) and [converts them to SortAggregateExec](../physical-operators/BaseAggregateExec.md#toSortAggregate) when either is met:
 
-1. The child operator is again a [Hash Aggregate operator with grouping keys](../physical-operators/BaseAggregateExec.md) with [isPartialAgg](#isPartialAgg) and [ordering is satisfied](../expressions/SortOrder.md#orderingSatisfies)
+1. The child operator is another [Hash Aggregate operator with grouping keys](../physical-operators/BaseAggregateExec.md) with [isPartialAgg](#isPartialAgg) and [ordering is satisfied](../expressions/SortOrder.md#orderingSatisfies)
 1. [Ordering is satisfied](../expressions/SortOrder.md#orderingSatisfies)
 
-## <span id="isHashBasedAggWithKeys"> isHashBasedAggWithKeys
+## isHashBasedAggWithKeys { #isHashBasedAggWithKeys }
 
 ```scala
 isHashBasedAggWithKeys(
@@ -53,7 +53,7 @@ isHashBasedAggWithKeys(
 1. It is either [HashAggregateExec](../physical-operators/HashAggregateExec.md) or [ObjectHashAggregateExec](../physical-operators/ObjectHashAggregateExec.md)
 1. It has got [grouping keys](../physical-operators/BaseAggregateExec.md#groupingExpressions)
 
-## <span id="isPartialAgg"> isPartialAgg
+## isPartialAgg { #isPartialAgg }
 
 ```scala
 isPartialAgg(

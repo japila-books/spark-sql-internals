@@ -537,7 +537,7 @@ Used as [SQLConf.REMOVE_REDUNDANT_SORTS_ENABLED](SQLConf.md#REMOVE_REDUNDANT_SOR
 
 **spark.sql.execution.replaceHashWithSortAgg**
 
-**internal** Enables replacing hash aggregate operators (i.e., [HashAggregateExec](physical-operators/HashAggregateExec.md) and [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md)) with [SortAggregateExec](physical-operators/SortAggregateExec.md) based on children's ordering
+**(internal)** Enables replacing hash aggregate operators (i.e., [HashAggregateExec](physical-operators/HashAggregateExec.md) and [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md)) with [SortAggregateExec](physical-operators/SortAggregateExec.md) based on children's ordering
 
 Default: `false`
 

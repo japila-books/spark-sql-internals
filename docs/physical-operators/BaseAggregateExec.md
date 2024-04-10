@@ -6,7 +6,7 @@
 
 ## Contract
 
-### <span id="aggregateAttributes"> Aggregate Attributes
+### Aggregate Attributes { #aggregateAttributes }
 
 ```scala
 aggregateAttributes: Seq[Attribute]
@@ -19,7 +19,7 @@ Used when:
 * `AggregateCodegenSupport` is requested to [doProduceWithoutKeys](AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `BaseAggregateExec` is requested to [verboseStringWithOperatorId](#verboseStringWithOperatorId), [producedAttributes](#producedAttributes), [toSortAggregate](#toSortAggregate)
 
-### <span id="aggregateExpressions"> Aggregate Functions
+### Aggregate Functions { #aggregateExpressions }
 
 ```scala
 aggregateExpressions: Seq[AggregateExpression]
@@ -41,13 +41,13 @@ See:
 * [ObjectHashAggregateExec](ObjectHashAggregateExec.md#groupingExpressions)
 * [SortAggregateExec](SortAggregateExec.md#groupingExpressions)
 
-### <span id="initialInputBufferOffset"> initialInputBufferOffset
+### initialInputBufferOffset { #initialInputBufferOffset }
 
 ```scala
 initialInputBufferOffset: Int
 ```
 
-### <span id="isStreaming"> isStreaming
+### isStreaming { #isStreaming }
 
 ```scala
 isStreaming: Boolean
@@ -57,7 +57,7 @@ Used when:
 
 * `BaseAggregateExec` is requested to [requiredChildDistribution](#requiredChildDistribution), [toSortAggregate](#toSortAggregate)
 
-### <span id="numShufflePartitions"> numShufflePartitions
+### numShufflePartitions { #numShufflePartitions }
 
 ```scala
 numShufflePartitions: Option[Int]
@@ -67,7 +67,7 @@ Used when:
 
 * `BaseAggregateExec` is requested to [requiredChildDistribution](#requiredChildDistribution), [toSortAggregate](#toSortAggregate)
 
-### <span id="requiredChildDistributionExpressions"> Required Child Distribution Expressions
+### Required Child Distribution Expressions { #requiredChildDistributionExpressions }
 
 ```scala
 requiredChildDistributionExpressions: Option[Seq[Expression]]
@@ -80,7 +80,7 @@ Used when:
 * `BaseAggregateExec` is requested for the [requiredChildDistribution](#requiredChildDistribution)
 * [DisableUnnecessaryBucketedScan](../physical-optimizations/DisableUnnecessaryBucketedScan.md) physical optimization is executed
 
-### <span id="resultExpressions"> Result Expressions
+### Result Expressions { #resultExpressions }
 
 ```scala
 resultExpressions: Seq[NamedExpression]
@@ -98,7 +98,7 @@ resultExpressions: Seq[NamedExpression]
 
 `BaseAggregateExec` is an [PartitioningPreservingUnaryExecNode](PartitioningPreservingUnaryExecNode.md).
 
-## <span id="verboseStringWithOperatorId"> Detailed Description (with Operator Id)
+## Detailed Description (with Operator Id) { #verboseStringWithOperatorId }
 
 ```scala
 verboseStringWithOperatorId(): String
@@ -128,7 +128,7 @@ Field | Description
  Aggregate Attributes | [Aggregate Attributes](#aggregateAttributes)
  Results | [Result Expressions](#resultExpressions)
 
-## <span id="requiredChildDistribution"> Required Child Output Distribution
+## Required Child Output Distribution { #requiredChildDistribution }
 
 ```scala
 requiredChildDistribution: List[Distribution]
@@ -140,7 +140,7 @@ requiredChildDistribution: List[Distribution]
 
 `requiredChildDistribution`...FIXME
 
-## <span id="producedAttributes"> Produced Attributes (Schema)
+## Produced Attributes (Schema) { #producedAttributes }
 
 ```scala
 producedAttributes: AttributeSet
@@ -157,7 +157,7 @@ producedAttributes: AttributeSet
 * [Aggregate Buffer Attributes](#aggregateBufferAttributes)
 * [inputAggBufferAttributes](#inputAggBufferAttributes) without the [output attributes](../catalyst/QueryPlan.md#output) of the single child operator
 
-## <span id="aggregateBufferAttributes"> Aggregate Buffer Attributes (Schema)
+## Aggregate Buffer Attributes (Schema) { #aggregateBufferAttributes }
 
 ```scala
 aggregateBufferAttributes: Seq[AttributeReference]
@@ -172,13 +172,13 @@ aggregateBufferAttributes: Seq[AttributeReference]
 * `AggregateCodegenSupport` is requested to [supportCodegen](AggregateCodegenSupport.md#supportCodegen), [doProduceWithoutKeys](AggregateCodegenSupport.md#doProduceWithoutKeys)
 * `BaseAggregateExec` is requested for the [produced attributes](#producedAttributes)
 
-## toSortAggregate { #toSortAggregate }
+## Converting This Node to SortAggregateExec { #toSortAggregate }
 
 ```scala
 toSortAggregate: SortAggregateExec
 ```
 
-`toSortAggregate` creates a [SortAggregateExec](SortAggregateExec.md) physical operator.
+`toSortAggregate` creates a [SortAggregateExec](SortAggregateExec.md) physical operator (for the same arguments and hence to get the same result as this node).
 
 ---
 
