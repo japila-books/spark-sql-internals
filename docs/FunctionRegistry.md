@@ -69,3 +69,27 @@ generator[T <: Generator : ClassTag](
 `generator` is used when:
 
 * [TableFunctionRegistry](TableFunctionRegistry.md) is created (and [registers generate table functions](TableFunctionRegistry.md#logicalPlans))
+
+## Expression { #expression }
+
+```scala
+expression[T <: Expression : ClassTag](
+  name: String,
+  setAlias: Boolean = false,
+  since: Option[String] = None): (String, (ExpressionInfo, FunctionBuilder))
+```
+
+`expression` [builds a function builder](FunctionRegistryBase.md#build) for the given `name` and `since`.
+
+`expression` creates a new builder that accepts [Expression](expressions/Expression.md)s and (_among other things_) asserts that no `NamedArgumentExpression` is among the given `Expression`s. If there are any, `expression` reports an `AnalysisException`:
+
+```text
+Named parameters are not supported for function [functionName];
+please retry the query with positional arguments to the function call instead.
+```
+
+---
+
+`expression` is used when:
+
+* `FunctionRegistry` is requested for the [built-in function expressions](#expressions) (incl. [expressionGeneratorOuter](#expressionGeneratorOuter))

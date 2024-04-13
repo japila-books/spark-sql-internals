@@ -4,7 +4,9 @@ title: UnresolvedTableValuedFunction
 
 # UnresolvedTableValuedFunction Logical Operator
 
-`UnresolvedTableValuedFunction` is a [LeafNode](LeafNode.md) that represents a table-valued function (e.g. `range`, `explode`).
+`UnresolvedTableValuedFunction` is a [unresolved leaf logical operator](LeafNode.md) that represents a [table-valued function](../table-valued-functions/index.md).
+
+`UnresolvedTableValuedFunction` is resolved into a concrete [LogicalPlan](LogicalPlan.md) by [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical analysis rule.
 
 ## Creating Instance
 
@@ -16,9 +18,9 @@ title: UnresolvedTableValuedFunction
 `UnresolvedTableValuedFunction` is created when:
 
 * `UnresolvedTableValuedFunction` is requested to [apply](#apply)
-* `AstBuilder` is requested to [visitTableValuedFunction](../sql/AstBuilder.md#visitTableValuedFunction)
+* `AstBuilder` is requested to [parse a table-valued function](../sql/AstBuilder.md#visitTableValuedFunction) in a SQL statement
 
-## <span id="apply"> Creating UnresolvedTableValuedFunction
+## Creating UnresolvedTableValuedFunction { #apply }
 
 ```scala
 apply(
@@ -34,6 +36,16 @@ apply(
 ??? note "Unused"
     `apply` does not seem to be used beside the tests.
 
-## Logical Analysis
+## Node Patterns { #nodePatterns }
 
-`UnresolvedTableValuedFunction` is resolved in [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical analysis rule.
+??? note "TreeNode"
+
+    ```scala
+    nodePatterns: Seq[TreePattern]
+    ```
+
+    `nodePatterns` is part of the [TreeNode](../catalyst/TreeNode.md#nodePatterns) abstraction.
+
+`nodePatterns` is the following:
+
+* [UNRESOLVED_TABLE_VALUED_FUNCTION](../catalyst/TreePattern.md#UNRESOLVED_TABLE_VALUED_FUNCTION)

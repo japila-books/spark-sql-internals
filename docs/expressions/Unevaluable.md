@@ -1,10 +1,14 @@
+---
+title: Unevaluable
+---
+
 # Unevaluable Expressions
 
-`Unevaluable` is an extension of the [Expression](Expression.md) abstraction for [unevaluable expression](#implementations) that cannot be evaluated to produce a value (neither in the [interpreted](Expression.md#eval) nor [code-generated](Expression.md#doGenCode) mode).
+`Unevaluable` is an extension of the [Expression](Expression.md) abstraction for [unevaluable expressions](#implementations) that cannot be evaluated to produce a value (neither in the [interpreted](Expression.md#eval) nor [code-generated](Expression.md#doGenCode) mode).
 
 `Unevaluable` expressions are expected to be resolved (replaced) to "evaluable" expressions or logical operators at [analysis](../QueryExecution.md#analyzed) or [optimization](../QueryExecution.md#optimizedPlan) phases or they fail analysis.
 
-Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, interpreted>> nor <<Expression.md#doGenCode, code-generated>> expression evaluations) and has to be  
+`Unevaluable` expressions can never be [foldable](#foldable).
 
 ## Implementations
 
@@ -13,6 +17,7 @@ Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, in
 * [DynamicPruningSubquery](DynamicPruningSubquery.md)
 * [Exists](Exists.md)
 * [HashPartitioning](HashPartitioning.md)
+* [InSubquery](InSubquery.md)
 * [ListQuery](ListQuery.md)
 * [RuntimeReplaceable](RuntimeReplaceable.md)
 * [SortOrder](SortOrder.md)
@@ -24,6 +29,18 @@ Unevaluable expressions cannot be evaluated (neither in <<Expression.md#eval, in
 * [WindowExpression](WindowExpression.md)
 * [WindowSpecDefinition](WindowSpecDefinition.md)
 * _others_
+
+## Never Foldable { #foldable }
+
+??? note "Expression"
+
+    ```scala
+    foldable: Boolean
+    ```
+
+    `foldable` is part of the [Expression](Expression.md#foldable) abstraction.
+
+`foldable` is always disabled (`false`).
 
 ## Demo
 

@@ -12,6 +12,8 @@ NOT? IN '(' query ')'
 
 `InSubquery` can also be used internally for other use cases (e.g., [Runtime Filtering](../runtime-filtering/index.md), [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)).
 
+`InSubquery` is an [Unevaluable](#Unevaluable) expression.
+
 ## Creating Instance
 
 `InSubquery` takes the following to be created:

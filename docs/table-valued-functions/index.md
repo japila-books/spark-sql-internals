@@ -4,6 +4,8 @@
 
 Table functions behave similarly to views, but, as functions in general, table functions accept parameters.
 
+Table-Valued Functions are represented as [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md) logical operators in logical plans (after `AstBuilder` is requested to [parse a table-valued function](../sql/AstBuilder.md#visitTableValuedFunction) in a SQL statement).
+
 !!! tip "Google BigQuery Documentation :fontawesome-solid-face-smile-wink:"
     Read up on table-valued functions in the official documentation of [Google BigQuery](https://cloud.google.com/bigquery/docs/reference/standard-sql/table-functions) (for a lack of a better documentation).
 

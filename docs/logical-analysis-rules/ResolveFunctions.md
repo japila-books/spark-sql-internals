@@ -10,15 +10,15 @@ Logical Operator | Expression
 -----------------|-----------
  `UnresolvedFunctionName` | [UnresolvedFunction](../expressions/UnresolvedFunction.md)
  [UnresolvedTableValuedFunction](#UnresolvedTableValuedFunction) | [UnresolvedGenerator](../expressions/UnresolvedGenerator.md)
- `UnresolvedTVFAliases`
+ `UnresolvedTVFAliases` | &nbsp;
 
 `ResolveReferences` is a [Catalyst rule](../catalyst/Rule.md) for transforming [logical plans](../logical-operators/LogicalPlan.md) (`Rule[LogicalPlan]`).
 
 `ResolveFunctions` is part of [Resolution](../Analyzer.md#Resolution) fixed-point batch of rules.
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
-??? note "Signature"
+??? note "Rule"
 
     ```scala
     apply(
@@ -27,31 +27,25 @@ Logical Operator | Expression
 
     `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
----
-
 `apply` resolves logical operators up (post-order, bottom-up) in trees with the following [TreePattern](../catalyst/TreePattern.md)s:
 
-* `GENERATOR`
-* `UNRESOLVED_FUNC`
-* `UNRESOLVED_FUNCTION`
-* `UNRESOLVED_TABLE_VALUED_FUNCTION`
-* `UNRESOLVED_TVF_ALIASES`
+* [GENERATOR](../catalyst/TreePattern.md#GENERATOR)
+* [UNRESOLVED_FUNC](../catalyst/TreePattern.md#UNRESOLVED_FUNC)
+* [UNRESOLVED_FUNCTION](../catalyst/TreePattern.md#UNRESOLVED_FUNCTION)
+* [UNRESOLVED_TABLE_VALUED_FUNCTION](../catalyst/TreePattern.md#UNRESOLVED_TABLE_VALUED_FUNCTION)
+* [UNRESOLVED_TVF_ALIASES](../catalyst/TreePattern.md#UNRESOLVED_TVF_ALIASES)
 
-### <span id="apply-UnresolvedFunctionName"> UnresolvedFunctionName
-
-For an `UnresolvedFunctionName`, `apply`...FIXME
-
-### <span id="apply-UnresolvedTableValuedFunction"> UnresolvedTableValuedFunction
+### UnresolvedTableValuedFunction { #apply-UnresolvedTableValuedFunction }
 
 For an [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md), `apply` first attempts to [resolveBuiltinOrTempTableFunction](#resolveBuiltinOrTempTableFunction), if available.
 
 Otherwise, `apply` attempts to resolve a [CatalogPlugin](../connector/catalog/CatalogPlugin.md) and, for the [spark_catalog](../connector/catalog/CatalogV2Util.md#isSessionCatalog) only, requests the [SessionCatalog](../Analyzer.md#v1SessionCatalog) to [resolvePersistentTableFunction](../SessionCatalog.md#resolvePersistentTableFunction).
 
-### <span id="apply-others"> Others
+### Others { #apply-others }
 
 `apply`...FIXME
 
-## <span id="resolveBuiltinOrTempTableFunction"> resolveBuiltinOrTempTableFunction
+## resolveBuiltinOrTempTableFunction { #resolveBuiltinOrTempTableFunction }
 
 ```scala
 resolveBuiltinOrTempTableFunction(

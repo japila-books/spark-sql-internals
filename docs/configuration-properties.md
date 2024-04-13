@@ -267,6 +267,18 @@ A partition is considered skewed if its size in bytes is larger than this thresh
 
 Default: `256MB`
 
+## <span id="ALLOW_NAMED_FUNCTION_ARGUMENTS"> allowNamedFunctionArguments { #spark.sql.allowNamedFunctionArguments }
+
+**spark.sql.allowNamedFunctionArguments**
+
+Controls support for named parameters in function calls in SQL statements
+
+Default: `true`
+
+Used when:
+
+* `AstBuilder` is requested to [parse table-valued function](#visitTableValuedFunction) (and [extractFunctionTableNamedArgument](sql/AstBuilder.md#extractFunctionTableNamedArgument) and [extractNamedArgument](sql/AstBuilder.md#extractNamedArgument))
+
 ## <span id="spark.sql.autoBroadcastJoinThreshold"><span id="AUTO_BROADCASTJOIN_THRESHOLD"> autoBroadcastJoinThreshold
 
 **spark.sql.autoBroadcastJoinThreshold**
@@ -564,6 +576,27 @@ Use [SQLConf.subqueryReuseEnabled](SQLConf.md#subqueryReuseEnabled) for the curr
 Default: `true`
 
 Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to access the current value.
+
+### <span id="USE_PARTITION_EVALUATOR"> usePartitionEvaluator { #spark.sql.execution.usePartitionEvaluator }
+
+**spark.sql.execution.usePartitionEvaluator**
+
+**(internal)** Enables `PartitionEvaluator` to execute physical operators
+
+Default: `false`
+
+Use [SQLConf.usePartitionEvaluator](SQLConf.md#usePartitionEvaluator) for the current value
+
+Used when:
+
+* `FilterExec` physical operator is [executed](physical-operators/FilterExec.md#doExecute)
+* `ProjectExec` physical operator is [executed](physical-operators/ProjectExec.md#doExecute)
+* `ColumnarToRowExec` physical operator is [executed](physical-operators/ColumnarToRowExec.md#doExecute)
+* `RowToColumnarExec` physical operator is [executed](physical-operators/RowToColumnarExec.md#doExecuteColumnar)
+* `WholeStageCodegenExec` physical operator is [executed](physical-operators/WholeStageCodegenExec.md#doExecute)
+* `SortMergeJoinExec` physical operator is [executed](physical-operators/SortMergeJoinExec.md#doExecute)
+* `MapInBatchExec` ([PySpark]({{ book.pyspark }}/sql/MapInBatchExec)) physical operator is executed
+* `WindowGroupLimitExec` physical operator is executed
 
 ## <span id="spark.sql.hive"> spark.sql.hive
 
@@ -1002,6 +1035,23 @@ Use [SQLConf.filesMaxPartitionBytes](SQLConf.md#filesMaxPartitionBytes) for the 
 Used when:
 
 * `FilePartition` is requested for [maxSplitBytes](files/FilePartition.md#maxSplitBytes)
+
+### <span id="FILES_MAX_PARTITION_NUM"> maxPartitionNum { #spark.sql.files.maxPartitionNum }
+
+**spark.sql.files.maxPartitionNum**
+
+The suggested (not guaranteed) maximum number of split file partitions.
+If set, Spark will rescale each partition to make the number of partitions close to this value if the initial number of partitions exceeds this value.
+
+Effective only with file-based sources such as Parquet, JSON and ORC.
+
+Default: `(undefined)`
+
+Use [SQLConf.filesMaxPartitionNum](SQLConf.md#filesMaxPartitionNum) for the current value
+
+Used when:
+
+* `FilePartition` is requested for the [file partitions](files/FilePartition.md#getFilePartitions)
 
 ### <span id="MAX_RECORDS_PER_FILE"> maxRecordsPerFile { #spark.sql.files.maxRecordsPerFile }
 
@@ -2247,6 +2297,21 @@ Use [SQLConf.autoSizeUpdateEnabled](SQLConf.md#autoSizeUpdateEnabled) method to 
 Default: `true`
 
 Use [SQLConf.subexpressionEliminationEnabled](SQLConf.md#subexpressionEliminationEnabled) method to access the current value.
+
+## <span id="SUBEXPRESSION_ELIMINATION_SKIP_FOR_SHORTCUT_EXPR"><span id="subexpressionElimination.enabled"> spark.sql.subexpressionElimination.enabled { #spark.sql.subexpressionElimination.skipForShortcutExpr }
+
+**(internal)** Enables shortcut eliminate subexpression with `AND` and `OR`.
+
+The subexpression may not need to eval even if it appears more than once,
+e.g., `if(or(a, and(b, b)))`, the expression `b` would be skipped if `a` is true.
+
+Default: `false`
+
+Use [SQLConf.subexpressionEliminationSkipForShotcutExpr](SQLConf.md#subexpressionEliminationSkipForShotcutExpr) method to access the current value.
+
+Used when:
+
+* [EquivalentExpressions](subexpression-elimination/EquivalentExpressions.md) is created
 
 ## <span id="spark.sql.shuffle.partitions"> spark.sql.shuffle.partitions
 

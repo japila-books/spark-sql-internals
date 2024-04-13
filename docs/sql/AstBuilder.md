@@ -223,14 +223,26 @@ fromStatementBody
     ;
 ```
 
-### <span id="visitFunctionCall"> visitFunctionCall
+### visitFunctionCall { #visitFunctionCall }
+
+```antlr
+primaryExpression:
+    : functionName '(' (setQuantifier? [argument] (',' [argument])*)? ')'
+      (FILTER '(' WHERE [whereExpression] ')')?
+      ((IGNORE | RESPECT) NULLS)? (OVER windowSpec)?
+    ...
+    ;
+
+setQuantifier
+    : DISTINCT
+    | ALL
+    ;
+```
 
 Creates one of the following:
 
 * [UnresolvedFunction](../expressions/UnresolvedFunction.md) for a bare function (with no window specification)
-
 * `UnresolvedWindowExpression` for a function evaluated in a windowed context with a `WindowSpecReference`
-
 * [WindowExpression](../expressions/WindowExpression.md) for a function over a window
 
 ANTLR rule: `functionCall`
@@ -655,20 +667,64 @@ Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)
 
 ANTLR labeled alternative: `#subqueryExpression`
 
-### <span id="visitTableValuedFunction"> visitTableValuedFunction
+### visitTableValuedFunction { #visitTableValuedFunction }
 
-Creates a [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md)
+Creates an [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md)
 
 ```antlr
 relationPrimary
-  :
+  : functionTable
   ...
-  | functionTable                                         #tableValuedFunction
   ;
 
 functionTable
-  : funcName '(' (expression (',' expression)*)? ')' tableAlias
-  ;
+    : functionName '('
+      (functionTableArgument (',' functionTableArgument)*)?
+      ')' tableAlias
+    ;
+
+functionName
+    : 'IDENTIFIER' '(' expression ')'
+    | 'IDENTIFIER'
+    | qualifiedName
+    | 'FILTER'
+    | 'LEFT'
+    | 'RIGHT'
+    ;
+
+functionTableArgument
+    : functionTableReferenceArgument
+    | functionArgument
+    ;
+
+functionTableReferenceArgument
+    : functionTableSubqueryArgument
+    | functionTableNamedArgumentExpression
+    ;
+
+functionTableSubqueryArgument
+    : TABLE identifierReference
+    | TABLE '(' identifierReference ')'
+    | TABLE '(' query ')'
+    ;
+
+functionTableNamedArgumentExpression
+    : key '=>' table=functionTableSubqueryArgument
+    ;
+
+identifierReference
+    : 'IDENTIFIER' '(' expression ')'
+    | multipartIdentifier
+    ;
+
+functionArgument
+    : expression
+    | namedArgumentExpression
+    ;
+
+namedArgumentExpression
+    : key '=>' value
+    ;
 ```
 
 ANTLR labeled alternative: `#tableValuedFunction`
@@ -980,3 +1036,57 @@ parseIntervalLiteral(
 
 * `AstBuilder` is requested to [visitInterval](#visitInterval)
 * `SparkSqlAstBuilder` is requested to [visitSetTimeZone](SparkSqlAstBuilder.md#visitSetTimeZone)
+
+## extractFunctionTableNamedArgument { #extractFunctionTableNamedArgument }
+
+```scala
+extractFunctionTableNamedArgument(
+  expr: FunctionTableReferenceArgumentContext,
+  funcName: String) : Expression
+```
+
+If `functionTableNamedArgumentExpression` is used with [spark.sql.allowNamedFunctionArguments](../configuration-properties.md#spark.sql.allowNamedFunctionArguments) enabled, `extractFunctionTableNamedArgument` creates a `NamedArgumentExpression` for the `key` with [visitFunctionTableSubqueryArgument](#visitFunctionTableSubqueryArgument) as the value.
+With [spark.sql.allowNamedFunctionArguments](../configuration-properties.md#spark.sql.allowNamedFunctionArguments) disabled, `extractFunctionTableNamedArgument` reports an `AnalysisException`.
+
+??? note "functionTableNamedArgumentExpression"
+
+    ```antlr
+    functionTableNamedArgumentExpression
+        : key=identifier '=>' table=functionTableSubqueryArgument
+        ;
+    ```
+
+With no `functionTableNamedArgumentExpression` used, `extractFunctionTableNamedArgument` [visitFunctionTableSubqueryArgument](#visitFunctionTableSubqueryArgument) (with `functionTableSubqueryArgument`).
+
+---
+
+`extractFunctionTableNamedArgument` is used when:
+
+* `AstBuilder` is requested to [visitTableValuedFunction](#visitTableValuedFunction)
+
+## extractNamedArgument { #extractNamedArgument }
+
+```scala
+extractNamedArgument(
+  expr: FunctionArgumentContext,
+  funcName: String) : Expression
+```
+
+If `namedArgumentExpression` is used with [spark.sql.allowNamedFunctionArguments](../configuration-properties.md#spark.sql.allowNamedFunctionArguments) enabled, `extractNamedArgument` creates a `NamedArgumentExpression` for the key (text) and the value (as an [Expression](../expressions/Expression.md)).
+With [spark.sql.allowNamedFunctionArguments](../configuration-properties.md#spark.sql.allowNamedFunctionArguments) disabled, `extractNamedArgument` reports an `AnalysisException`.
+
+??? note "namedArgumentExpression"
+
+    ```antlr
+    namedArgumentExpression
+        : key=identifier '=>' value=expression
+        ;
+    ```
+
+With no `namedArgumentExpression` used, `extractNamedArgument` creates an [Expression](../expressions/Expression.md).
+
+---
+
+`extractNamedArgument` is used when:
+
+* `AstBuilder` is requested to [visitFunctionCall](#visitFunctionCall) and [visitTableValuedFunction](#visitTableValuedFunction)

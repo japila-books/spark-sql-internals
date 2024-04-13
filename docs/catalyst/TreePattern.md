@@ -52,3 +52,13 @@ Used as a [node pattern](TreeNode.md#nodePatterns):
 Used as a [node pattern](TreeNode.md#nodePatterns):
 
 * [UnresolvedHint](../logical-operators/UnresolvedHint.md#nodePatterns)
+
+## UNRESOLVED_TABLE_VALUED_FUNCTION { #UNRESOLVED_TABLE_VALUED_FUNCTION }
+
+Used as a [node pattern](TreeNode.md#nodePatterns) by the following logical operators:
+
+* [UnresolvedTableValuedFunction](../logical-operators/UnresolvedTableValuedFunction.md#nodePatterns)
+
+Used in the following rules:
+
+* [ResolveFunctions](../logical-analysis-rules/ResolveFunctions.md) logical analysis rule

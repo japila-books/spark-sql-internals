@@ -18,6 +18,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [File-Based Data Scanning](../file-based-data-scanning/index.md)
 * [Hints](../hints/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
+* [Named Function Arguments](../named-function-arguments.md)
 * [Spark Connect](../connect/index.md)
 * [Table-Valued Functions](../table-valued-functions/index.md)
 * [Time Travel](../time-travel/index.md)

@@ -1,3 +1,7 @@
+---
+title: ShuffleExchangeExec
+---
+
 # ShuffleExchangeExec Physical Operator
 
 `ShuffleExchangeExec` is an [Exchange](Exchange.md) (indirectly as a [ShuffleExchangeLike](ShuffleExchangeLike.md)) unary physical operator that is used to [perform a shuffle](#doExecute).
