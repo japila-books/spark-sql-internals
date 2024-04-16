@@ -1,0 +1,3 @@
+# FilterEvaluatorFactory
+
+`FilterEvaluatorFactory` is...FIXME

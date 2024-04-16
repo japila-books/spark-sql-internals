@@ -1,6 +1,49 @@
+---
+title: FilterExec
+---
+
 # FilterExec Unary Physical Operator
 
 `FilterExec` is a [unary physical operator](UnaryExecNode.md) that represents `Filter` and `TypedFilter` unary logical operators at execution time.
+
+## Creating Instance
+
+`FilterExec` takes the following to be created:
+
+* <span id="condition"> Condition ([Expression](../expressions/Expression.md))
+* <span id="child"> Child [physical operator](SparkPlan.md)
+
+`FilterExec` is created when:
+
+* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Filter](../execution-planning-strategies/BasicOperators.md#Filter) and [TypedFilter](../execution-planning-strategies/BasicOperators.md#TypedFilter) unary logical operators
+* _others_
+
+## Performance Metrics { #metrics }
+
+Key             | Name (in web UI)        | Description
+----------------|-------------------------|---------
+numOutputRows   | number of output rows   | Number of output rows
+
+![FilterExec in web UI (Details for Query)](../images/spark-sql-FilterExec-webui-details-for-query.png)
+
+## Executing Operator { #doExecute }
+
+??? note "SparkPlan"
+
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
+
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+
+`doExecute` creates a [FilterEvaluatorFactory](../FilterEvaluatorFactory.md) (with the [condition](#condition), the [output](../catalyst/QueryPlan.md#output) of the [child operator](#child), and the [numOutputRows](#numOutputRows) metric).
+
+With [spark.sql.execution.usePartitionEvaluator](../configuration-properties.md#spark.sql.execution.usePartitionEvaluator) enabled, `doExecute` requests the [child operator](#child) to [execute](SparkPlan.md#execute) (that gives a `RDD[InternalRow]`). In the end, `doExecute` uses `RDD.mapPartitionsWithEvaluator` operator ([Spark Core]({{ book.spark_core }}/rdd/RDD#mapPartitionsWithEvaluator)) with the `FilterEvaluatorFactory`.
+
+Otherwise, `doExecute`...FIXME
+
+<!---
+## Review Me
 
 `FilterExec` supports [Java code generation](CodegenSupport.md) (aka _codegen_) as follows:
 
@@ -10,95 +53,10 @@
 
 * Generates a Java source code for the <<doProduce, produce>> and <<doConsume, consume>> paths in whole-stage code generation
 
-`FilterExec` is <<creating-instance, created>> when:
-
-* [BasicOperators](../execution-planning-strategies/BasicOperators.md) execution planning strategy is executed (and plans [Filter](../execution-planning-strategies/BasicOperators.md#Filter) and [TypedFilter](../execution-planning-strategies/BasicOperators.md#TypedFilter) unary logical operators
-
-* hive/HiveTableScans.md[HiveTableScans] execution planning strategy is executed (and plans hive/HiveTableRelation.md[HiveTableRelation] leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
-
-* [InMemoryScans](../execution-planning-strategies/InMemoryScans.md) execution planning strategy is executed (and plans [InMemoryRelation](../logical-operators/InMemoryRelation.md) leaf logical operators and requests `SparkPlanner` to [pruneFilterProject](../SparkPlanner.md#pruneFilterProject))
-
-* `DataSourceStrategy` execution planning strategy is requested to [create a RowDataSourceScanExec physical operator (possibly under FilterExec and ProjectExec operators)](../execution-planning-strategies/DataSourceStrategy.md#pruneFilterProjectRaw)
-
-* [FileSourceStrategy](../execution-planning-strategies/FileSourceStrategy.md) execution planning strategy is executed (on <<LogicalRelation.md#, LogicalRelations>> with a [HadoopFsRelation](../files/HadoopFsRelation.md))
-
-* [ExtractPythonUDFs](../logical-optimizations/ExtractPythonUDFs.md) physical optimization is executed
-
 [[inputRDDs]]
 [[outputOrdering]]
 [[outputPartitioning]]
 `FilterExec` uses whatever the <<child, child>> physical operator uses for the [input RDDs](CodegenSupport.md#inputRDDs), the [outputOrdering](SparkPlan.md#outputOrdering) and the [outputPartitioning](SparkPlan.md#outputPartitioning).
-
-`FilterExec` uses [PredicateHelper](../PredicateHelper.md).
-
-[[internal-registries]]
-.FilterExec's Internal Properties (e.g. Registries, Counters and Flags)
-[cols="1,2",options="header",width="100%"]
-|===
-| Name
-| Description
-
-| `notNullAttributes`
-| [[notNullAttributes]] FIXME
-
-Used when...FIXME
-
-| `notNullPreds`
-| [[notNullPreds]] FIXME
-
-Used when...FIXME
-
-| `otherPreds`
-| [[otherPreds]] FIXME
-
-Used when...FIXME
-|===
-
-=== [[creating-instance]] Creating FilterExec Instance
-
-`FilterExec` takes the following when created:
-
-* [[condition]] <<expressions/Expression.md#, Catalyst expression>> for the filter condition
-* [[child]] Child <<SparkPlan.md#, physical operator>>
-
-`FilterExec` initializes the <<internal-registries, internal registries and counters>>.
-
-=== [[isNullIntolerant]] `isNullIntolerant` Internal Method
-
-[source, scala]
-----
-isNullIntolerant(expr: Expression): Boolean
-----
-
-`isNullIntolerant`...FIXME
-
-NOTE: `isNullIntolerant` is used when...FIXME
-
-=== [[doConsume]] Generating Java Source Code for Consume Path in Whole-Stage Code Generation -- `doConsume` Method
-
-[source, scala]
-----
-doConsume(ctx: CodegenContext, input: Seq[ExprCode], row: ExprCode): String
-----
-
-`doConsume` creates a new [metric term](CodegenSupport.md#metricTerm) for the <<numOutputRows, numOutputRows>> metric.
-
-`doConsume`...FIXME
-
-In the end, `doConsume` uses [consume](CodegenSupport.md#consume) and _FIXME_ to generate a Java source code (as a plain text) inside a `do {...} while(false);` code block.
-
-`doConsume` is part of the [CodegenSupport](CodegenSupport.md#doConsume) abstraction.
-
-==== [[doConsume-genPredicate]] `genPredicate` Internal Method
-
-[source, scala]
-----
-genPredicate(c: Expression, in: Seq[ExprCode], attrs: Seq[Attribute]): String
-----
-
-NOTE: `genPredicate` is an internal method of <<doConsume, doConsume>>.
-
-`genPredicate`...FIXME
 
 === [[doExecute]] Executing Physical Operator (Generating RDD[InternalRow]) -- `doExecute` Method
 
@@ -128,11 +86,4 @@ In the end, `doExecute` requests the <<child, child>> physical operator to <<Spa
 .. Increments the <<numOutputRows, numOutputRows>> metric for positive evaluations (i.e. that returned `true`)
 
 NOTE: `doExecute` (by `RDD.mapPartitionsWithIndexInternal`) adds a new `MapPartitionsRDD` to the RDD lineage. Use `RDD.toDebugString` to see the additional `MapPartitionsRDD`.
-
-## <span id="metrics"> Performance Metrics
-
-Key             | Name (in web UI)        | Description
-----------------|-------------------------|---------
-numOutputRows   | number of output rows   | Number of output rows
-
-![FilterExec in web UI (Details for Query)](../images/spark-sql-FilterExec-webui-details-for-query.png)
+-->

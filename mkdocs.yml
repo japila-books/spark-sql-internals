@@ -705,6 +705,7 @@ nav:
   - Misc:
     - AggregatingAccumulator: AggregatingAccumulator.md
     - DistinctKeyVisitor: DistinctKeyVisitor.md
+    - FilterEvaluatorFactory: FilterEvaluatorFactory.md
     - JoinSelectionHelper.md
     - PushDownUtils: PushDownUtils.md
     - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md

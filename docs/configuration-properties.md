@@ -581,7 +581,7 @@ Use [SQLConf.sortBeforeRepartition](SQLConf.md#sortBeforeRepartition) method to 
 
 **spark.sql.execution.usePartitionEvaluator**
 
-**(internal)** Enables `PartitionEvaluator` to execute physical operators
+**(internal)** Enables `PartitionEvaluator` ([Spark Core]({{ book.spark_core }}/PartitionEvaluator)) to [execute physical operators](physical-operators/SparkPlan.md#execute) (using `RDD.mapPartitionsWithEvaluator` operator)
 
 Default: `false`
 
