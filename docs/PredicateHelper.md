@@ -1,6 +1,6 @@
 # PredicateHelper
 
-## <span id="isLikelySelective"> isLikelySelective
+## isLikelySelective { #isLikelySelective }
 
 ```scala
 isLikelySelective(
@@ -42,10 +42,35 @@ isLikelySelective(
 * `InjectRuntimeFilter` logical optimization is requested to [isSelectiveFilterOverScan](logical-optimizations/InjectRuntimeFilter.md#isSelectiveFilterOverScan)
 * `PartitionPruning` logical optimization is requested to [hasSelectivePredicate](logical-optimizations/PartitionPruning.md#hasSelectivePredicate)
 
+## findExpressionAndTrackLineageDown { #findExpressionAndTrackLineageDown }
+
+```scala
+findExpressionAndTrackLineageDown(
+  exp: Expression,
+  plan: LogicalPlan): Option[(Expression, LogicalPlan)]
+```
+
+`findExpressionAndTrackLineageDown` returns `None` for no [references](expressions/Expression.md#references) in the given [Expression](expressions/Expression.md).
+
+For a [Project](logical-operators/Project.md) logical operator, `findExpressionAndTrackLineageDown`...FIXME
+
+For a [Aggregate](logical-operators/Aggregate.md) logical operator, `findExpressionAndTrackLineageDown`...FIXME
+
+For any [LeafNode](logical-operators/LeafNode.md) logical operator with the [output attributes](catalyst/QueryPlan.md#outputSet) being the superset of the [references](expressions/Expression.md#references) of the given [Expression](expressions/Expression.md), `findExpressionAndTrackLineageDown` returns a pair of the [Expression](expressions/Expression.md) and the [LeafNode](logical-operators/LeafNode.md).
+
+For a `Union` logical operator, `findExpressionAndTrackLineageDown`...FIXME
+
+For any other [logical operator](logical-operators/LogicalPlan.md), `findExpressionAndTrackLineageDown` checks the [child logical operator](catalyst/TreeNode.md#children) one by one, recursively, and only when the [references](expressions/Expression.md#references) of the given [Expression](expressions/Expression.md) are all among the [output attributes](catalyst/QueryPlan.md#outputSet) of a child operator.
+
+---
+
+`findExpressionAndTrackLineageDown` is used when:
+
+* [InjectRuntimeFilter](logical-optimizations/InjectRuntimeFilter.md) logical optimization is executed (to [extractBeneficialFilterCreatePlan](logical-optimizations/InjectRuntimeFilter.md#extractBeneficialFilterCreatePlan))
+* [PartitionPruning](logical-optimizations/PartitionPruning.md) logical optimization is executed (to [getFilterableTableScan](logical-optimizations/PartitionPruning.md#getFilterableTableScan))
+
 <!---
 ## Review Me
-
-`PredicateHelper` defines the <<methods, methods>> that are used to work with predicates (mainly).
 
 === [[splitConjunctivePredicates]] Splitting Conjunctive Predicates -- `splitConjunctivePredicates` Method
 

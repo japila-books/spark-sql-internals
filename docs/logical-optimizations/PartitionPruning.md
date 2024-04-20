@@ -1,3 +1,7 @@
+---
+title: PartitionPruning
+---
+
 # PartitionPruning Logical Optimization
 
 `PartitionPruning` is a logical optimization for [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md).
@@ -6,9 +10,9 @@
 
 `PartitionPruning` is part of the [PartitionPruning](../SparkOptimizer.md#PartitionPruning) batch of the [SparkOptimizer](../SparkOptimizer.md#defaultBatches).
 
-## <span id="apply"> Executing Rule
+## Executing Rule { #apply }
 
-??? note "Signature"
+??? note "Rule"
 
     ```scala
     apply(
@@ -24,7 +28,7 @@
 
 Otherwise, when enabled, `apply` [prunes](#prune) the given [LogicalPlan](../logical-operators/LogicalPlan.md).
 
-## <span id="prune"> Pruning
+## Pruning { #prune }
 
 ```scala
 prune(
@@ -40,7 +44,7 @@ prune(
 ??? note "FIXME More Work Needed"
     `prune` needs more love and would benefit from more insight on how it works.
 
-## <span id="getFilterableTableScan"> getFilterableTableScan
+## getFilterableTableScan { #getFilterableTableScan }
 
 ```scala
 getFilterableTableScan(
@@ -48,7 +52,7 @@ getFilterableTableScan(
   plan: LogicalPlan): Option[LogicalPlan]
 ```
 
-`getFilterableTableScan` [findExpressionAndTrackLineageDown](#findExpressionAndTrackLineageDown) (that finds a [LeafNode](../logical-operators/LeafNode.md) with the [output](../catalyst/QueryPlan.md#output) schema that includes all the [Attribute](../expressions/Attribute.md) references of the given [Expression](../expressions/Expression.md)).
+`getFilterableTableScan` [findExpressionAndTrackLineageDown](../PredicateHelper.md#findExpressionAndTrackLineageDown) (that finds a [LeafNode](../logical-operators/LeafNode.md) with the [output](../catalyst/QueryPlan.md#output) schema that includes all the [Attribute](../expressions/Attribute.md) references of the given [Expression](../expressions/Expression.md)).
 
 !!! note "Leaf Nodes"
     `getFilterableTableScan` is only interested in the following [leaf logical operators](../logical-operators/LeafNode.md):
@@ -59,13 +63,13 @@ getFilterableTableScan(
 
 `getFilterableTableScan`...FIXME
 
-### <span id="getFilterableTableScan-LogicalRelation"> LogicalRelation over (Partitioned) HadoopFsRelation
+### LogicalRelation over (Partitioned) HadoopFsRelation { #getFilterableTableScan-LogicalRelation }
 
 For [LogicalRelation](../logical-operators/LogicalRelation.md) with (the [relation](../logical-operators/LogicalRelation.md#relation) that is) a partitioned [HadoopFsRelation](../files/HadoopFsRelation.md), `getFilterableTableScan` checks if the [references](../expressions/Expression.md#references) (of the given [Expression](../expressions/Expression.md)) are all among the [partition columns](../files/HadoopFsRelation.md#partitionSchema).
 
 If so, `getFilterableTableScan` returns the `LogicalRelation` with the partitioned `HadoopFsRelation`.
 
-## <span id="hasPartitionPruningFilter"> hasPartitionPruningFilter
+## hasPartitionPruningFilter { #hasPartitionPruningFilter }
 
 ```scala
 hasPartitionPruningFilter(
@@ -80,7 +84,7 @@ hasPartitionPruningFilter(
 1. The given [LogicalPlan](../logical-operators/LogicalPlan.md) is not [streaming](../logical-operators/LogicalPlan.md#isStreaming)
 1. [hasSelectivePredicate](#hasSelectivePredicate)
 
-## <span id="hasSelectivePredicate"> hasSelectivePredicate
+## hasSelectivePredicate { #hasSelectivePredicate }
 
 ```scala
 hasSelectivePredicate(
@@ -89,7 +93,7 @@ hasSelectivePredicate(
 
 `hasSelectivePredicate` is `true` when there is a `Filter` logical operator with a [likely-selective](../PredicateHelper.md#isLikelySelective) filter condition.
 
-## <span id="insertPredicate"> Inserting Predicate with DynamicPruningSubquery Expression
+## Inserting Predicate with DynamicPruningSubquery Expression { #insertPredicate }
 
 ```scala
 insertPredicate(
@@ -111,7 +115,7 @@ Otherwise, `insertPredicate` returns the given `pruningPlan` logical query plan 
     * [spark.sql.exchange.reuse](../configuration-properties.md#spark.sql.exchange.reuse)
     * [spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly](../configuration-properties.md#spark.sql.optimizer.dynamicPartitionPruning.reuseBroadcastOnly)
 
-## <span id="pruningHasBenefit"> pruningHasBenefit
+## pruningHasBenefit { #pruningHasBenefit }
 
 ```scala
 pruningHasBenefit(

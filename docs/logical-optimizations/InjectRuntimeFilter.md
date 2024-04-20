@@ -1,3 +1,7 @@
+---
+title: InjectRuntimeFilter
+---
+
 # InjectRuntimeFilter Logical Optimization
 
 `InjectRuntimeFilter` is a logical optimization (i.e., a [Rule](../catalyst/Rule.md) of [LogicalPlan](../logical-operators/LogicalPlan.md)).
