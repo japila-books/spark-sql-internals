@@ -13,6 +13,8 @@ title: DataSourceV2ScanRelation
 * <span id="relation"> [DataSourceV2Relation](DataSourceV2Relation.md)
 * <span id="scan"> [Scan](../connector/Scan.md)
 * <span id="output"> Output Schema (`AttributeReference`s)
+* <span id="keyGroupedPartitioning"> Optional `keyGroupedPartitioning` [Expression](../expressions/Expression.md)s
+* <span id="ordering"> Optional [SortOrder](../expressions/SortOrder.md)s
 
 `DataSourceV2ScanRelation` is created when:
 

@@ -1,3 +1,7 @@
+---
+title: BatchScanExec
+---
+
 # BatchScanExec Physical Operator
 
 `BatchScanExec` is a [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md) leaf physical operator for scanning a batch of data from a [Scan](#scan).
@@ -10,21 +14,18 @@
 
 * <span id="output"> Output Schema (`Seq[AttributeReference]`)
 * <span id="scan"> [Scan](../connector/Scan.md)
-* <span id="runtimeFilters"> Runtime Filters
-* <span id="keyGroupedPartitioning"> Key Grouped Partitioning
-* <span id="ordering"> Ordering
+* <span id="runtimeFilters"> Runtime Filters ([Expression](../expressions/Expression.md)s)
+* <span id="ordering"> Optional [SortOrder](../expressions/SortOrder.md)s
 * <span id="table"> [Table](../connector/Table.md)
-* <span id="commonPartitionValues"> Common Partition Values
-* <span id="applyPartialClustering"> `applyPartialClustering` flag (default: `false`)
-* <span id="replicatePartitions"> `replicatePartitions` flag (default: `false`)
+* <span id="spjParams"> `StoragePartitionJoinParams`
 
 `BatchScanExec` is created when:
 
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (for physical operators with a [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) relation)
 
-## <span id="inputRDD"> Input RDD
+## Input RDD { #inputRDD }
 
-??? note "Signature"
+??? note "DataSourceV2ScanExecBase"
 
     ```scala
     inputRDD: RDD[InternalRow]
@@ -43,7 +44,7 @@ DataSourceRDD's Attribute | Value
  [columnarReads](../DataSourceRDD.md#columnarReads) | [supportsColumnar](DataSourceV2ScanExecBase.md#supportsColumnar)
  [Custom Metrics](../DataSourceRDD.md#customMetrics) | [customMetrics](DataSourceV2ScanExecBase.md#customMetrics)
 
-### <span id="filteredPartitions"> Filtered Input Partitions
+### Filtered Input Partitions { #filteredPartitions }
 
 ```scala
 filteredPartitions: Seq[Seq[InputPartition]]
@@ -58,9 +59,9 @@ For non-empty [runtimeFilters](#runtimeFilters), `filteredPartitions`...FIXME
 
 Otherwise, `filteredPartitions` is the [partitions](DataSourceV2ScanExecBase.md#partitions) (that _usually_ is the [input partitions](#inputPartitions) of this `BatchScanExec`).
 
-## <span id="inputPartitions"> Input Partitions
+## Input Partitions { #inputPartitions }
 
-??? note "Signature"
+??? note "DataSourceV2ScanExecBase"
 
     ```scala
     inputPartitions: Seq[InputPartition]
@@ -70,9 +71,9 @@ Otherwise, `filteredPartitions` is the [partitions](DataSourceV2ScanExecBase.md#
 
 `inputPartitions` requests the [Batch](#batch) to [plan input partitions](../connector/Batch.md#planInputPartitions).
 
-## <span id="readerFactory"> PartitionReaderFactory
+## PartitionReaderFactory { #readerFactory }
 
-??? note "Signature"
+??? note "DataSourceV2ScanExecBase"
 
     ```scala
     readerFactory: PartitionReaderFactory
@@ -82,7 +83,7 @@ Otherwise, `filteredPartitions` is the [partitions](DataSourceV2ScanExecBase.md#
 
 `readerFactory` requests the [Batch](#batch) to [createReaderFactory](../connector/Batch.md#createReaderFactory).
 
-## <span id="batch"> Batch
+## Batch
 
 ```scala
 batch: Batch
@@ -95,3 +96,15 @@ batch: Batch
 `batch` is used when:
 
 * `BatchScanExec` is requested for [partitions](#partitions) and [readerFactory](#readerFactory)
+
+## keyGroupedPartitioning { #keyGroupedPartitioning }
+
+??? note "DataSourceV2ScanExecBase"
+
+    ```scala
+    keyGroupedPartitioning: Option[Seq[Expression]]
+    ```
+
+    `keyGroupedPartitioning` is part of the [DataSourceV2ScanExecBase](DataSourceV2ScanExecBase.md#keyGroupedPartitioning) abstraction.
+
+`keyGroupedPartitioning` requests this [StoragePartitionJoinParams](#spjParams) for the `keyGroupedPartitioning`.

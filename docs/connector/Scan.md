@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="description"> Description
+### Description { #description }
 
 ```java
 String description()
@@ -19,7 +19,7 @@ Used when:
 * `BatchScanExec` physical operator is requested for the [simpleString](../physical-operators/BatchScanExec.md#simpleString)
 * `DataSourceV2ScanExecBase` physical operator is requested for the [simpleString](../physical-operators/DataSourceV2ScanExecBase.md#simpleString) and [verboseStringWithOperatorId](../physical-operators/DataSourceV2ScanExecBase.md#verboseStringWithOperatorId)
 
-### <span id="readSchema"> Read Schema
+### Read Schema { #readSchema }
 
 ```java
 StructType readSchema()
@@ -34,7 +34,7 @@ Used when:
 * `PushDownUtils` utility is used to [pruneColumns](../PushDownUtils.md#pruneColumns)
 * [V2ScanRelationPushDown](../logical-optimizations/V2ScanRelationPushDown.md) logical optimization is executed (and requested to [pushDownAggregates](../logical-optimizations/V2ScanRelationPushDown.md#pushDownAggregates))
 
-### <span id="supportedCustomMetrics"> Supported Custom Metrics
+### Supported Custom Metrics { #supportedCustomMetrics }
 
 ```java
 CustomMetric[] supportedCustomMetrics()
@@ -52,7 +52,7 @@ Used when:
 
 * `DataSourceV2ScanExecBase` physical operator is requested for the [custom metrics](../physical-operators/DataSourceV2ScanExecBase.md#customMetrics)
 
-### <span id="toBatch"> Physical Representation for Batch Query
+### Physical Representation for Batch Query { #toBatch }
 
 ```java
 Batch toBatch()
@@ -78,7 +78,7 @@ Used when:
 
 * `BatchScanExec` physical operator is requested for the [Batch](../physical-operators/BatchScanExec.md#batch) and the [filteredPartitions](../physical-operators/BatchScanExec.md#filteredPartitions)
 
-### <span id="toContinuousStream"> Converting to ContinuousStream
+### Converting to ContinuousStream { #toContinuousStream }
 
 ```java
 ContinuousStream toContinuousStream(
@@ -101,7 +101,7 @@ Used when:
 
 * `ContinuousExecution` ([Spark Structured Streaming]({{ book.structured_streaming }}/continuous-execution/ContinuousExecution)) is requested for the logical plan ([WriteToContinuousDataSource]({{ book.structured_streaming }}/logical-operators/WriteToContinuousDataSource/))
 
-### <span id="toMicroBatchStream"> Converting to MicroBatchStream
+### Converting to MicroBatchStream { #toMicroBatchStream }
 
 ```java
 MicroBatchStream toMicroBatchStream(
@@ -130,5 +130,6 @@ Used when:
 * [KafkaScan](../kafka/KafkaScan.md)
 * [SupportsReportPartitioning](SupportsReportPartitioning.md)
 * [SupportsReportStatistics](SupportsReportStatistics.md)
+* [SupportsRuntimeV2Filtering](SupportsRuntimeV2Filtering.md)
 * [V1Scan](V1Scan.md)
 * _others_

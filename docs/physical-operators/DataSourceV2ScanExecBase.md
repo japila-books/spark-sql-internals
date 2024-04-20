@@ -1,10 +1,14 @@
+---
+title: DataSourceV2ScanExecBase
+---
+
 # DataSourceV2ScanExecBase Leaf Physical Operators
 
 `DataSourceV2ScanExecBase` is an [extension](#contract) of [LeafExecNode](SparkPlan.md#LeafExecNode) abstraction for [leaf physical operators](#implementations) that [track number of output rows](#metrics) when executed ([with](#doExecuteColumnar) or [without](#doExecute) support for [columnar reads](#supportsColumnar)).
 
 ## Contract
 
-### <span id="inputPartitions"> Input Partitions
+### Input Partitions { #inputPartitions }
 
 ```scala
 partitions: Seq[InputPartition]
@@ -18,7 +22,7 @@ Used when:
 
 * `DataSourceV2ScanExecBase` is requested for the [partitions](#partitions), [groupedPartitions](#groupedPartitions), [supportsColumnar](#supportsColumnar)
 
-### <span id="inputRDD"> Input RDD
+### Input RDD { #inputRDD }
 
 ```scala
 inputRDD: RDD[InternalRow]
@@ -28,13 +32,23 @@ See:
 
 * [BatchScanExec](BatchScanExec.md#inputRDD)
 
-### <span id="keyGroupedPartitioning"> keyGroupedPartitioning
+### keyGroupedPartitioning { #keyGroupedPartitioning }
 
 ```scala
 keyGroupedPartitioning: Option[Seq[Expression]]
 ```
 
-### <span id="readerFactory"> PartitionReaderFactory
+Optional partitioning [expression](../expressions/Expression.md)s
+
+See:
+
+* [BatchScanExec](BatchScanExec.md#keyGroupedPartitioning)
+
+Used when:
+
+* `DataSourceV2ScanExecBase` is requested to [groupedPartitions](#groupedPartitions), [groupPartitions](#groupPartitions), [outputPartitioning](#outputPartitioning)
+
+### PartitionReaderFactory { #readerFactory }
 
 ```scala
 readerFactory: PartitionReaderFactory
@@ -52,7 +66,7 @@ Used when:
 * `ContinuousScanExec` and `MicroBatchScanExec` physical operators (Spark Structured Streaming) are requested for an `inputRDD`
 * `DataSourceV2ScanExecBase` physical operator is requested to [outputPartitioning](#outputPartitioning) or [supportsColumnar](#supportsColumnar)
 
-### <span id="scan"> Scan
+### Scan
 
 ```scala
 scan: Scan
