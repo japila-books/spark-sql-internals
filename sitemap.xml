@@ -1191,6 +1191,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsRuntimeFiltering/</loc>
+         <lastmod>2024-04-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsRuntimeV2Filtering/</loc>
+         <lastmod>2024-04-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/connector/SupportsStreamingUpdate/</loc>
          <lastmod>2024-04-20</lastmod>
          <changefreq>daily</changefreq>
