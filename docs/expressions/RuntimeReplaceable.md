@@ -1,6 +1,10 @@
+---
+title: RuntimeReplaceable
+---
+
 # RuntimeReplaceable Expressions
 
-`RuntimeReplaceable` is the marker contract for [unary expressions](UnaryExpression.md) that are replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with their child expression (that can then be evaluated).
+`RuntimeReplaceable` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [expressions](#implementations) that are replaced by [Logical Optimizer](../catalyst/Optimizer.md#ReplaceExpressions) with [replacement](#replacement) expression (that can then be evaluated).
 
 !!! note
     Catalyst Optimizer uses [ReplaceExpressions](../logical-optimizations/ReplaceExpressions.md) logical optimization to replace `RuntimeReplaceable` expressions.
@@ -12,3 +16,24 @@
 
 !!! note
     To make sure the `explain` plan and expression SQL works correctly, a `RuntimeReplaceable` implementation should override [flatArguments](Expression.md#flatArguments) and [sql](Expression.md#sql) methods.
+
+## Contract
+
+### Replacement Expression { #replacement }
+
+```scala
+replacement: Expression
+```
+
+See:
+
+* [ParseToTimestamp](ParseToTimestamp.md#replacement)
+
+Used (mainly) when:
+
+* [ReplaceExpressions](../logical-optimizations/ReplaceExpressions.md) logical optimization is executed 
+
+## Implementations
+
+* [ParseToTimestamp](ParseToTimestamp.md)
+* _many others_

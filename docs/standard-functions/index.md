@@ -1,3 +1,7 @@
+---
+subtitle: org.apache.spark.sql.functions
+---
+
 # Standard Functions
 
 `org.apache.spark.sql.functions` object defines built-in [standard functions](#standard-functions) to work with (values produced by) [columns](../Column.md).
@@ -8,7 +12,7 @@ You can access the standard functions using the following `import` statement in 
 import org.apache.spark.sql.functions._
 ```
 
-## udaf { #udaf }
+## udaf
 
 ```scala
 udaf[IN: TypeTag, BUF, OUT](
