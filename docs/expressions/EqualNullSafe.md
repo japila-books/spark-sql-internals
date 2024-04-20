@@ -1,3 +1,7 @@
+---
+title: EqualNullSafe
+---
+
 # EqualNullSafe Predicate Expression
 
 `EqualNullSafe` is a [BinaryComparison](BinaryComparison.md) predicate expression that represents the following high-level operators in a logical plan:
@@ -25,23 +29,90 @@
 * `Column.<=>` operator is used
 * _others_
 
-## <span id="symbol"> Symbol
+## Interpreted Expression Evaluation { #eval }
 
-```scala
-symbol: String
+??? note "Expression"
+
+    ```scala
+    eval(
+      input: InternalRow): Any
+    ```
+
+    `eval` is part of the [Expression](Expression.md#eval) abstraction.
+
+`eval` requests the [left](#left) and [right](#right) expressions to [evaluate](Expression.md#eval) with the given [InternalRow](../InternalRow.md).
+
+For all the two expressions evaluated to `null`s, `eval` returns `true`.
+
+For either expression evaluated to `null`, `eval` returns `false`.
+
+Otherwise, `eval` uses ordering on the [data type](Expression.md#dataType) of the [left](#left) expression.
+
+## Generating Java Source Code for Code-Generated Expression Evaluation { #doGenCode }
+
+??? note "Expression"
+
+    ```scala
+    doGenCode(
+      ctx: CodegenContext,
+      ev: ExprCode): ExprCode
+    ```
+
+    `doGenCode` is part of the [Expression](Expression.md#doGenCode) abstraction.
+
+`doGenCode` requests the [left](#left) and [right](#right) expressions to [generate a source code for expression evaluation](Expression.md#genCode).
+
+`doGenCode` requests the given [CodegenContext](../whole-stage-code-generation/CodegenContext.md) to [generate code for equal expression](../whole-stage-code-generation/CodegenContext.md#genEqual).
+
+In the end, `doGenCode` updates the given `ExprCode` to use the code to evaluate the expression.
+
+```text
+import org.apache.spark.sql.catalyst.dsl.expressions._
+val right = 'right
+val left = 'left
+val c = right <=> left
+
+import org.apache.spark.sql.catalyst.expressions.EqualNullSafe
+val e = c.expr.asInstanceOf[EqualNullSafe]
+
+import org.apache.spark.sql.catalyst.expressions.codegen.CodegenContext
+val ctx = new CodegenContext
+
+// FIXME
+scala> e.genCode(ctx)
+org.apache.spark.sql.catalyst.analysis.UnresolvedException: Invalid call to dataType on unresolved object
+  at org.apache.spark.sql.catalyst.analysis.UnresolvedAttribute.dataType(unresolved.scala:227)
+  at org.apache.spark.sql.catalyst.expressions.Expression.$anonfun$genCode$3(Expression.scala:201)
+  at scala.Option.getOrElse(Option.scala:201)
+  at org.apache.spark.sql.catalyst.expressions.Expression.genCode(Expression.scala:196)
+  at org.apache.spark.sql.catalyst.expressions.EqualNullSafe.doGenCode(predicates.scala:1115)
+  at org.apache.spark.sql.catalyst.expressions.Expression.$anonfun$genCode$3(Expression.scala:201)
+  at scala.Option.getOrElse(Option.scala:201)
+  at org.apache.spark.sql.catalyst.expressions.Expression.genCode(Expression.scala:196)
+  ... 42 elided
 ```
 
-`symbol` is part of the `BinaryOperator` abstraction.
+## Symbol
+
+??? note "BinaryOperator"
+
+    ```scala
+    symbol: String
+    ```
+
+    `symbol` is part of the [BinaryOperator](BinaryOperator.md#symbol) abstraction.
 
 `symbol` is `<=>`.
 
-## <span id="nullable"> nullable
+## nullable
 
-```scala
-nullable: Boolean
-```
+??? note "Expression"
 
-`nullable` is part of the [Expression](Expression.md#nullable) abstraction.
+    ```scala
+    nullable: Boolean
+    ```
+
+    `nullable` is part of the [Expression](Expression.md#nullable) abstraction.
 
 `nullable` is always `false`.
 
