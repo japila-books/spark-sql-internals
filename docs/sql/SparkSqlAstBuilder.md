@@ -1,3 +1,7 @@
+---
+title: SparkSqlAstBuilder
+---
+
 # SparkSqlAstBuilder &mdash; ANTLR-based SQL Parser
 
 `SparkSqlAstBuilder` is an [AstBuilder](AstBuilder.md) that converts SQL statements into Catalyst expressions, logical plans or table identifiers (using [visit callbacks](#visit-callbacks)).
@@ -44,7 +48,7 @@ org.apache.spark.sql.execution.SparkSqlAstBuilder
 
 ## Visit Callbacks
 
-### <span id="ANALYZE-TABLE"> visitAnalyze
+### visitAnalyze { #ANALYZE-TABLE }
 
 Creates [AnalyzeColumnCommand](#AnalyzeColumnCommand), [AnalyzePartitionCommand](#AnalyzePartitionCommand) or [AnalyzeTableCommand](#AnalyzeTableCommand) logical commands.
 
@@ -60,7 +64,7 @@ ANTLR labeled alternative: `#analyze`
 
 [AnalyzeColumnCommand](../logical-operators/AnalyzeColumnCommand.md) logical command for `ANALYZE TABLE` with `FOR COLUMNS` clause (but no `PARTITION` specification)
 
-```
+```text
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
 val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS FOR COLUMNS id, p1"
 val plan = spark.sql(sqlText).queryExecution.logical
@@ -74,7 +78,7 @@ AnalyzeColumnCommand `t1`, [id, p1]
 
 [AnalyzePartitionCommand](../logical-operators/AnalyzePartitionCommand.md) logical command for `ANALYZE TABLE` with `PARTITION` specification (but no `FOR COLUMNS` clause)
 
-```
+```text
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
 val analyzeTable = "ANALYZE TABLE t1 PARTITION (p1, p2) COMPUTE STATISTICS"
 val plan = spark.sql(analyzeTable).queryExecution.logical
@@ -88,7 +92,7 @@ AnalyzePartitionCommand `t1`, Map(p1 -> None, p2 -> None), false
 
 [AnalyzeTableCommand](../logical-operators/AnalyzeTableCommand.md) logical command for `ANALYZE TABLE` with neither `PARTITION` specification nor `FOR COLUMNS` clause
 
-```
+```text
 // Seq((0, 0, "zero"), (1, 1, "one")).toDF("id", "p1", "p2").write.partitionBy("p1", "p2").saveAsTable("t1")
 val sqlText = "ANALYZE TABLE t1 COMPUTE STATISTICS NOSCAN"
 val plan = spark.sql(sqlText).queryExecution.logical
@@ -121,22 +125,23 @@ Creates a [CreateTable](../logical-operators/CreateTable.md)
 
 ANTLR labeled alternative: `#createHiveTable`
 
-### <span id="visitCreateTable"> visitCreateTable
+### visitCreateTable { #visitCreateTable }
 
 Creates [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;` or falls back to [AstBuilder](AstBuilder.md#visitCreateTable)
 
 ANTLR labeled alternative: `#createTable`
 
-### visitCreateView
+### visitCreateView { #visitCreateView }
 
-Creates a [CreateViewCommand](../logical-operators/CreateViewCommand.md) for `CREATE VIEW AS` SQL statement.
+Creates either a [CreateViewCommand](../logical-operators/CreateViewCommand.md) or a [CreateView](../logical-operators/CreateView.md) logical operator for `CREATE VIEW AS` SQL statement.
 
 ```sql
-CREATE [OR REPLACE] [[GLOBAL] TEMPORARY]
-VIEW [IF NOT EXISTS] tableIdentifier
-[identifierCommentList] [COMMENT STRING]
-[PARTITIONED ON identifierList]
-[TBLPROPERTIES tablePropertyList] AS query
+CREATE [OR REPLACE] [[GLOBAL] TEMPORARY] VIEW [IF NOT EXISTS] name
+  [(identifierComment (, identifierComment)*)]
+  [COMMENT STRING]
+  [PARTITIONED ON identifierList]
+  [TBLPROPERTIES propertyList]
+AS query
 ```
 
 ANTLR labeled alternative: `#createView`
@@ -147,7 +152,7 @@ Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) for
 
 ANTLR labeled alternative: `#createTempViewUsing`
 
-### <span id="DESCRIBE"> visitDescribeTable
+### visitDescribeTable { #DESCRIBE }
 
 Creates [DescribeColumnCommand](#DescribeColumnCommand) or [DescribeTableCommand](#DescribeTableCommand) logical commands.
 
@@ -181,7 +186,7 @@ scala> println(cmd)
 DescribeTableCommand `t1`, false
 ```
 
-### <span id="visitExplain"> visitExplain
+### visitExplain { #visitExplain }
 
 Creates an [ExplainCommand](../logical-operators/ExplainCommand.md) logical command for the following:
 
@@ -195,7 +200,7 @@ EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
 
 ANTLR labeled alternative: `#explain`
 
-### visitShowCreateTable
+### visitShowCreateTable { #visitShowCreateTable }
 
 Creates [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md) logical command for `SHOW CREATE TABLE` SQL statement.
 
@@ -205,7 +210,7 @@ SHOW CREATE TABLE tableIdentifier
 
 ANTLR labeled alternative: `#showCreateTable`
 
-### visitTruncateTable
+### visitTruncateTable { #visitTruncateTable }
 
 Creates [TruncateTableCommand](../logical-operators/TruncateTableCommand.md) logical command for `TRUNCATE TABLE` SQL statement.
 
@@ -215,7 +220,7 @@ TRUNCATE TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 
 ANTLR labeled alternative: `#truncateTable`
 
-## <span id="withRepartitionByExpression"> withRepartitionByExpression
+## withRepartitionByExpression { #withRepartitionByExpression }
 
 ```scala
 withRepartitionByExpression(

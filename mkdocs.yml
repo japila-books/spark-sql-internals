@@ -385,6 +385,7 @@ nav:
       - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
       - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
       - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
+      - physical-operators/CacheTableAsSelectExec.md
       - CoalesceExec: physical-operators/CoalesceExec.md
       - CollectLimitExec: physical-operators/CollectLimitExec.md
       - CollectMetricsExec: physical-operators/CollectMetricsExec.md

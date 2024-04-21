@@ -4,15 +4,151 @@ title: CreateViewCommand
 
 # CreateViewCommand Logical Command
 
-`CreateViewCommand` is a <<RunnableCommand.md#, logical command>> for <<run, creating or replacing a view or a table>>.
+`CreateViewCommand` is a [RunnableCommand](RunnableCommand.md).
+
+`CreateViewCommand` is a [AnalysisOnlyCommand](AnalysisOnlyCommand.md).
+
+## Creating Instance
+
+`CreateViewCommand` takes the following to be created:
+
+* <span id="name"> Table name (`TableIdentifier`)
+* <span id="userSpecifiedColumns"> User-specified columns (`Seq[(String, Option[String])]`)
+* <span id="comment"> Optional comments
+* <span id="properties"> Properties (`Map[String, String]`)
+* <span id="originalText"> Optional "Original Text"
+* <span id="plan"> [Logical query plan](LogicalPlan.md)
+* <span id="allowExisting"> `allowExisting` flag
+* <span id="replace"> `replace` flag
+* <span id="viewType"> `ViewType`
+* <span id="isAnalyzed"> `isAnalyzed` flag (default: `false`)
+* <span id="referredTempFunctions"> `referredTempFunctions`
+
+`CreateViewCommand` is created when:
+
+* [CacheTableAsSelectExec](../physical-operators/CacheTableAsSelectExec.md) physical operator is executed (and requested for [planToCache](../physical-operators/CacheTableAsSelectExec.md#planToCache))
+* [Dataset.createTempViewCommand](../Dataset.md#createTempViewCommand) operator is used
+* [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [CreateView](CreateView.md) logical operator)
+* `SparkConnectPlanner` is requested to [handleCreateViewCommand](../connect/SparkConnectPlanner.md#handleCreateViewCommand)
+* `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
+
+## Executing Command { #run }
+
+??? note "RunnableCommand"
+
+    ```scala
+    run(
+      sparkSession: SparkSession): Seq[Row]
+    ```
+
+    `run` is part of the [RunnableCommand](RunnableCommand.md#run) abstraction.
+
+`run` requests the given [SparkSession](../SparkSession.md) for the [SessionCatalog](../SessionState.md#catalog) (through the [SessionState](../SparkSession.md#sessionState)).
+
+`run` branches off based on this [ViewType](#viewType).
+
+For `LocalTempView`, `run` [creates a temporary view relation](#createTemporaryViewRelation) and requests the `SessionCatalog` to [create a local temporary view](../SessionCatalog.md#createTempView).
+
+For `GlobalTempView`, `run` [creates a temporary view relation](#createTemporaryViewRelation) and requests the `SessionCatalog` to [create a global temporary view](../SessionCatalog.md#createGlobalTempView) (in the global temporary views database per [spark.sql.globalTempDatabase](../configuration-properties.md#spark.sql.globalTempDatabase) configuration property).
+
+For a non-temporary view, `run` branches off based on whether the [view name is registered already or not](../SessionCatalog.md#tableExists).
+
+When the view name is in use already and this [allowExisting](#allowExisting) flag is enabled, `run` does nothing.
+
+When the view name is in use and this [replace](#replace) flag is enabled, `run` prints out the following DEBUG message to the logs:
+
+```text
+Try to uncache [name] before replacing.
+```
+
+`run` then requests the [Catalog](../SparkSession.md#catalog) to [remove the table from the in-memory cache](../Catalog.md#uncacheTable) followed by the `SessionCatalog` to [drop](../SessionCatalog.md#dropTable) and (re)[create](../SessionCatalog.md#createTable) it.
+
+??? note "Extra Checks when View Name In Use"
+    `run` may report exceptions with extra checks that are not covered here.
+
+When neither temporary nor the view name is registered, `run` requests the `SessionCatalog` to [create a (metastore) table](../SessionCatalog.md#createTable).
+
+In the end, `run` returns no rows (no metrics or similar).
+
+??? note "AnalysisException"
+    `run` throws an `AnalysisException` for the [isAnalyzed](#isAnalyzed) flag disabled.
+
+### Preparing CatalogTable { #prepareTable }
+
+```scala
+prepareTable(
+  session: SparkSession,
+  analyzedPlan: LogicalPlan): CatalogTable
+```
+
+`prepareTable` creates a [CatalogTable](../CatalogTable.md).
+
+Property Name | Property Value
+-|-
+ [identifier](../CatalogTable.md#identifier) | [Table name](#name)
+ [tableType](../CatalogTable.md#tableType) | `VIEW`
+ [storage](../CatalogTable.md#storage) | Empty [CatalogStorageFormat](../CatalogStorageFormat.md)
+ [schema](../CatalogTable.md#schema) | Aliased schema of the given [LogicalPlan](#plan)
+ [properties](../CatalogTable.md#properties) | [generateViewProperties](#generateViewProperties)
+ [viewOriginalText](../CatalogTable.md#viewOriginalText) | [originalText](#originalText)
+ [viewText](../CatalogTable.md#viewText) | [originalText](#originalText)
+ [comment](../CatalogTable.md#comment) | [comment](#comment)
+
+??? note "AnalysisException"
+    `prepareTable` reports an `AnalysisException` when this [originalText](#originalText) is not defined.
+
+## Demo
+
+```scala
+val tableName = "demo_source_table"
+
+// Demo table for "AS query" part
+sql(s"CREATE TABLE ${tableName} AS SELECT * FROM VALUES 1,2,3")
+
+// The "AS" query
+val asQuery = s"SELECT * FROM ${tableName}"
+
+val viewName = "demo_view"
+
+sql(s"CREATE VIEW ${viewName} AS ${asQuery}")
+```
+
+```text
+scala> sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
++----------------------------+---------------------------------------------------------+-------+
+|col_name                    |data_type                                                |comment|
++----------------------------+---------------------------------------------------------+-------+
+|col1                        |int                                                      |NULL   |
+|                            |                                                         |       |
+|# Detailed Table Information|                                                         |       |
+|Catalog                     |spark_catalog                                            |       |
+|Database                    |default                                                  |       |
+|Table                       |demo_view                                                |       |
+|Owner                       |jacek                                                    |       |
+|Created Time                |Sun Apr 21 14:02:23 CEST 2024                            |       |
+|Last Access                 |UNKNOWN                                                  |       |
+|Created By                  |Spark 3.5.1                                              |       |
+|Type                        |VIEW                                                     |       |
+|View Text                   |SELECT * FROM demo_source_table                          |       |
+|View Original Text          |SELECT * FROM demo_source_table                          |       |
+|View Catalog and Namespace  |spark_catalog.default                                    |       |
+|View Query Output Columns   |[col1]                                                   |       |
+|Table Properties            |[transient_lastDdlTime=1713700943]                       |       |
+|Serde Library               |org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe       |       |
+|InputFormat                 |org.apache.hadoop.mapred.SequenceFileInputFormat         |       |
+|OutputFormat                |org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat|       |
+|Storage Properties          |[serialization.format=1]                                 |       |
++----------------------------+---------------------------------------------------------+-------+
+```
+
+<!---
+## Review Me
 
 `CreateViewCommand` is <<creating-instance, created>> to represent the following:
 
 * <<spark-sql-SparkSqlAstBuilder.md#visitCreateView, CREATE VIEW AS>> SQL statements
 
 * `Dataset` operators: <<spark-sql-dataset-operators.md#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
-
-CAUTION: FIXME What's the difference between `CreateTempViewUsing`?
 
 `CreateViewCommand` works with different <<viewType, view types>>.
 
@@ -46,15 +182,9 @@ VIEW [IF NOT EXISTS] tableIdentifier
 [PARTITIONED ON identifierList]
 [TBLPROPERTIES tablePropertyList] AS query */
 
-// Demo table for "AS query" part
-spark.range(10).write.mode("overwrite").saveAsTable("t1")
 
-// The "AS" query
-val asQuery = "SELECT * FROM t1"
 
 // The following queries should all work fine
-val q1 = "CREATE VIEW v1 AS " + asQuery
-sql(q1)
 
 val q2 = "CREATE OR REPLACE VIEW v1 AS " + asQuery
 sql(q2)
@@ -143,25 +273,7 @@ scala> println(plan.numberedTreeString)
 02       +- 'UnresolvedRelation `t1`
 ----
 
-=== [[prepareTable]] Creating CatalogTable -- `prepareTable` Internal Method
-
-[source, scala]
-----
-prepareTable(session: SparkSession, analyzedPlan: LogicalPlan): CatalogTable
-----
-
-`prepareTable`...FIXME
-
-NOTE: `prepareTable` is used exclusively when `CreateViewCommand` logical command is <<run, executed>>.
-
 === [[run]] Executing Logical Command -- `run` Method
-
-[source, scala]
-----
-run(sparkSession: SparkSession): Seq[Row]
-----
-
-NOTE: `run` is part of <<RunnableCommand.md#run, RunnableCommand Contract>> to execute (run) a logical command.
 
 `run` requests the input `SparkSession` for the <<SparkSession.md#sessionState, SessionState>> that is in turn requested to ["execute"](../SessionState.md#executePlan) the <<child, child logical plan>> (which simply creates a [QueryExecution](../QueryExecution.md)).
 
@@ -212,39 +324,4 @@ View [name] already exists. If you want to update the view definition, please us
 ```
 The number of columns produced by the SELECT clause (num: `[output.length]`) does not match the number of column names specified by CREATE VIEW (num: `[userSpecifiedColumns.length]`).
 ```
-
-=== [[creating-instance]] Creating CreateViewCommand Instance
-
-`CreateViewCommand` takes the following when created:
-
-* [[name]] `TableIdentifier`
-* [[userSpecifiedColumns]] User-defined columns (as `Seq[(String, Option[String])]`)
-* [[comment]] Optional comment
-* [[properties]] Properties (as `Map[String, String]`)
-* [[originalText]] Optional DDL statement
-* [[child]] Child <<spark-sql-LogicalPlan.md#, logical plan>>
-* [[allowExisting]] `allowExisting` flag
-* [[replace]] `replace` flag
-* <<viewType, ViewType>>
-
-=== [[verifyTemporaryObjectsNotExists]] `verifyTemporaryObjectsNotExists` Internal Method
-
-[source, scala]
-----
-verifyTemporaryObjectsNotExists(sparkSession: SparkSession): Unit
-----
-
-`verifyTemporaryObjectsNotExists`...FIXME
-
-NOTE: `verifyTemporaryObjectsNotExists` is used exclusively when `CreateViewCommand` logical command is <<run, executed>>.
-
-=== [[aliasPlan]] `aliasPlan` Internal Method
-
-[source, scala]
-----
-aliasPlan(session: SparkSession, analyzedPlan: LogicalPlan): LogicalPlan
-----
-
-`aliasPlan`...FIXME
-
-NOTE: `aliasPlan` is used when `CreateViewCommand` logical command is <<run, executed>> (and <<prepareTable, prepareTable>>).
+-->

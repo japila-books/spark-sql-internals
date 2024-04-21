@@ -8,7 +8,7 @@ title: RunnableCommand
 
 ## Contract
 
-### <span id="run"> Executing Command
+### Executing Command { #run }
 
 ```scala
 run(
@@ -16,6 +16,10 @@ run(
 ```
 
 Executes the command for side effects (possibly giving [Row](../Row.md) back with the result)
+
+See:
+
+* [CreateViewCommand](CreateViewCommand.md#run)
 
 Used when:
 
