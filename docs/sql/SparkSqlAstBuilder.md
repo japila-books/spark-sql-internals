@@ -113,9 +113,9 @@ Creates a [CatalogStorageFormat](../CatalogStorageFormat.md) with the Hive SerDe
 * `textfile`
 * `avro`
 
-### visitCacheTable
+### CACHE TABLE { #visitCacheTable }
 
-Creates a [CacheTableCommand](../logical-operators/RunnableCommand.md#CacheTableCommand) logical command for `CACHE LAZY? TABLE [table] (AS? [query])?`
+Creates a [CacheTableCommand](../logical-operators/RunnableCommand.md#CacheTableCommand) logical command for `CACHE [LAZY] TABLE [table] (AS? [query])?`
 
 ANTLR labeled alternative: `#cacheTable`
 
@@ -125,19 +125,27 @@ Creates a [CreateTable](../logical-operators/CreateTable.md)
 
 ANTLR labeled alternative: `#createHiveTable`
 
-### visitCreateTable { #visitCreateTable }
+### CREATE TABLE { #visitCreateTable }
 
-Creates [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW &hellip; USING &hellip;` or falls back to [AstBuilder](AstBuilder.md#visitCreateTable)
+Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW USING` or falls back to [AstBuilder](AstBuilder.md#visitCreateTable) (to create either a [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) or a [CreateTable](../logical-operators/CreateTable.md))
+
+```sql
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] identifierReference
+  [(createOrReplaceTableColTypeList)]
+  [USING multipartIdentifier]
+  createTableClauses
+  [[AS] query]
+```
 
 ANTLR labeled alternative: `#createTable`
 
-### visitCreateView { #visitCreateView }
+### CREATE VIEW AS { #visitCreateView }
 
 Creates either a [CreateViewCommand](../logical-operators/CreateViewCommand.md) or a [CreateView](../logical-operators/CreateView.md) logical operator for `CREATE VIEW AS` SQL statement.
 
 ```sql
 CREATE [OR REPLACE] [[GLOBAL] TEMPORARY] VIEW [IF NOT EXISTS] name
-  [(identifierComment (, identifierComment)*)]
+  [identifierComment (, identifierComment)*]
   [COMMENT STRING]
   [PARTITIONED ON identifierList]
   [TBLPROPERTIES propertyList]
@@ -146,9 +154,9 @@ AS query
 
 ANTLR labeled alternative: `#createView`
 
-### visitCreateTempViewUsing
+### CREATE TEMPORARY VIEW USING { #visitCreateTempViewUsing }
 
-Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) for `CREATE TEMPORARY VIEW &hellip; USING`
+Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) for `CREATE TEMPORARY VIEW USING` SQL statement
 
 ANTLR labeled alternative: `#createTempViewUsing`
 
@@ -186,7 +194,7 @@ scala> println(cmd)
 DescribeTableCommand `t1`, false
 ```
 
-### visitExplain { #visitExplain }
+### EXPLAIN { #visitExplain }
 
 Creates an [ExplainCommand](../logical-operators/ExplainCommand.md) logical command for the following:
 
@@ -200,7 +208,7 @@ EXPLAIN (LOGICAL | FORMATTED | EXTENDED | CODEGEN | COST)?
 
 ANTLR labeled alternative: `#explain`
 
-### visitShowCreateTable { #visitShowCreateTable }
+### SHOW CREATE TABLE { #visitShowCreateTable }
 
 Creates [ShowCreateTableCommand](../logical-operators/ShowCreateTableCommand.md) logical command for `SHOW CREATE TABLE` SQL statement.
 
@@ -210,7 +218,7 @@ SHOW CREATE TABLE tableIdentifier
 
 ANTLR labeled alternative: `#showCreateTable`
 
-### visitTruncateTable { #visitTruncateTable }
+### TRUNCATE TABLE { #visitTruncateTable }
 
 Creates [TruncateTableCommand](../logical-operators/TruncateTableCommand.md) logical command for `TRUNCATE TABLE` SQL statement.
 

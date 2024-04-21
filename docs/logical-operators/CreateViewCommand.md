@@ -30,7 +30,7 @@ title: CreateViewCommand
 * [Dataset.createTempViewCommand](../Dataset.md#createTempViewCommand) operator is used
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [CreateView](CreateView.md) logical operator)
 * `SparkConnectPlanner` is requested to [handleCreateViewCommand](../connect/SparkConnectPlanner.md#handleCreateViewCommand)
-* `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
+* `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW AS statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
 
 ## Executing Command { #run }
 
@@ -103,37 +103,52 @@ Property Name | Property Value
 val tableName = "demo_source_table"
 
 // Demo table for "AS query" part
-sql(s"CREATE TABLE ${tableName} AS SELECT * FROM VALUES 1,2,3")
+sql(s"CREATE TABLE ${tableName} AS SELECT * FROM VALUES 1,2,3 t(id)")
 
 // The "AS" query
 val asQuery = s"SELECT * FROM ${tableName}"
 
 val viewName = "demo_view"
 
-sql(s"CREATE VIEW ${viewName} AS ${asQuery}")
+sql(s"CREATE OR REPLACE VIEW ${viewName} AS ${asQuery}")
+```
+
+```scala
+sql("SHOW VIEWS").show(truncate = false)
 ```
 
 ```text
-scala> sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
++---------+---------+-----------+
+|namespace|viewName |isTemporary|
++---------+---------+-----------+
+|default  |demo_view|false      |
++---------+---------+-----------+
+```
+
+```scala
+sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
+```
+
+```text
 +----------------------------+---------------------------------------------------------+-------+
 |col_name                    |data_type                                                |comment|
 +----------------------------+---------------------------------------------------------+-------+
-|col1                        |int                                                      |NULL   |
+|id                          |int                                                      |NULL   |
 |                            |                                                         |       |
 |# Detailed Table Information|                                                         |       |
 |Catalog                     |spark_catalog                                            |       |
 |Database                    |default                                                  |       |
 |Table                       |demo_view                                                |       |
 |Owner                       |jacek                                                    |       |
-|Created Time                |Sun Apr 21 14:02:23 CEST 2024                            |       |
+|Created Time                |Sun Apr 21 18:22:16 CEST 2024                            |       |
 |Last Access                 |UNKNOWN                                                  |       |
 |Created By                  |Spark 3.5.1                                              |       |
 |Type                        |VIEW                                                     |       |
 |View Text                   |SELECT * FROM demo_source_table                          |       |
 |View Original Text          |SELECT * FROM demo_source_table                          |       |
 |View Catalog and Namespace  |spark_catalog.default                                    |       |
-|View Query Output Columns   |[col1]                                                   |       |
-|Table Properties            |[transient_lastDdlTime=1713700943]                       |       |
+|View Query Output Columns   |[id]                                                     |       |
+|Table Properties            |[transient_lastDdlTime=1713716536]                       |       |
 |Serde Library               |org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe       |       |
 |InputFormat                 |org.apache.hadoop.mapred.SequenceFileInputFormat         |       |
 |OutputFormat                |org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat|       |
