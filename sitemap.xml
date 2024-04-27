@@ -3111,6 +3111,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Intersect/</loc>
+         <lastmod>2024-04-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Join/</loc>
          <lastmod>2024-04-27</lastmod>
          <changefreq>daily</changefreq>
@@ -3337,6 +3342,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/TruncateTableCommand/</loc>
+         <lastmod>2024-04-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Union/</loc>
          <lastmod>2024-04-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
