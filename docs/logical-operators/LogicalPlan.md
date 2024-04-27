@@ -10,19 +10,19 @@ title: LogicalPlan
 
 ## Implementations
 
-### <span id="BinaryNode"> BinaryNode
+### BinaryNode { #BinaryNode }
 
 Logical operators with two [child](../catalyst/TreeNode.md#children) logical operators
 
-### <span id="Command"> Command
+### Command { #Command }
 
 [Command](Command.md)
 
-### <span id="LeafNode"> LeafNode
+### LeafNode { #LeafNode }
 
 [LeafNode](LeafNode.md) is a logical operator with no [child](../catalyst/TreeNode.md#children) operators
 
-### <span id="UnaryNode"> UnaryNode
+### UnaryNode { #UnaryNode }
 
 Logical operators with a single [child](../catalyst/TreeNode.md#children) logical operator
 
@@ -37,7 +37,7 @@ Logical operators with a single [child](../catalyst/TreeNode.md#children) logica
 * [View](View.md)
 * _others_
 
-## <span id="statsCache"> Statistics Cache
+## Statistics Cache { #statsCache }
 
 Cached plan statistics (as `Statistics`) of the `LogicalPlan`
 
@@ -47,7 +47,7 @@ Used in [stats](#stats) and [verboseStringWithSuffix](#verboseStringWithSuffix)
 
 Reset in [invalidateStatsCache](#invalidateStatsCache)
 
-## <span id="stats"> Estimated Statistics
+## Estimated Statistics { #stats }
 
 ```scala
 stats(
@@ -69,7 +69,7 @@ stats(
 * `LeftSemiAntiEstimation` estimates `Statistics`
 * `ProjectEstimation` estimates `Statistics`
 
-## <span id="refresh"> Refreshing Child Logical Operators
+## Refreshing Child Logical Operators { #refresh }
 
 ```scala
 refresh(): Unit
@@ -86,7 +86,7 @@ refresh(): Unit
 
 * `CatalogImpl` is requested to [refresh a table](../CatalogImpl.md#refreshTable)
 
-## <span id="resolve"> Resolving Column Attributes to References in Query Plan
+## Resolving Column Attributes to References in Query Plan { #resolve }
 
 ```scala
 resolve(
@@ -127,17 +127,40 @@ scala> :type qe
 org.apache.spark.sql.execution.QueryExecution
 ```
 
-## <span id="maxRows"> Maximum Number of Records
+## Maximum Number of Records { #maxRows }
 
 ```scala
 maxRows: Option[Long]
 ```
 
-`maxRows` is undefined by default (`None`).
+`maxRows` is undefined (`None`).
 
-`maxRows` is used when `LogicalPlan` is requested for [maxRowsPerPartition](#maxRowsPerPartition).
+!!! note
+    `maxRows` is supposed to be overriden by the [implementations](#implementations) for logical optimizations to eliminate in particular (e.g., `EliminateLimits` and `EliminateOffsets` logical optimizations) or optimize in general (e.g., `OptimizeOneRowPlan`) logical query plans.
 
-## <span id="maxRowsPerPartition"> Maximum Number of Records per Partition
+    See:
+
+    * [Aggregate](Aggregate.md#maxRows)
+    * [Expand](Expand.md#maxRows)
+    * [Intersect](Intersect.md#maxRows)
+    * [Join](Join.md#maxRows)
+    * [Offset](Offset.md#maxRows)
+    * [Union](Union.md#maxRows)
+
+---
+
+`maxRows` is used when:
+
+* `EliminateLimits` logical optimization is executed
+* `EliminateOffsets` logical optimization is executed
+* `InferWindowGroupLimit` logical optimization is executed
+* [LimitPushDown](../logical-optimizations/LimitPushDown.md) logical optimization is executed (for `LeftSemiOrAnti` with no join condition)
+* `LimitPushDownThroughWindow` logical optimization is executed
+* `LogicalPlan` is requested for [maxRowsPerPartition](#maxRowsPerPartition)
+* `OptimizeOneRowPlan` logical optimization is executed
+* `RewriteCorrelatedScalarSubquery` logical optimization is executed
+
+## Maximum Number of Records per Partition { #maxRowsPerPartition }
 
 ```scala
 maxRowsPerPartition: Option[Long]
@@ -174,7 +197,7 @@ childrenResolved: Boolean
 
 A logical operator is considered **partially resolved** when its [child operators](../catalyst/TreeNode.md#children) are resolved (aka _children resolved_).
 
-## <span id="resolved"> resolved
+## resolved
 
 ```scala
 resolved: Boolean

@@ -24,6 +24,18 @@ title: Join
 * `AstBuilder` is requested to [withJoinRelations](../sql/AstBuilder.md#withJoinRelations) (and [visitFromClause](../sql/AstBuilder.md#visitFromClause))
 * [Dataset.crossJoin](../joins.md#crossJoin), [Dataset.join](../joins.md#join) and [Dataset.joinWith](../joins.md#joinWith) operators are used
 
+## Maximum Number of Records { #maxRows }
+
+??? note "LogicalPlan"
+
+    ```scala
+    maxRows: Option[Long]
+    ```
+
+    `maxRows` is part of the [LogicalPlan](LogicalPlan.md#maxRows) abstraction.
+
+`maxRows`...FIXME
+
 ## Catalyst DSL
 
 `DslLogicalPlan` defines [join](../catalyst-dsl/DslLogicalPlan.md#join) operator to create a `Join`.
