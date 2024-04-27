@@ -1,3 +1,8 @@
+---
+title: SparkSession
+subtitle: The Entry Point to Spark SQL
+---
+
 # SparkSession &mdash; The Entry Point to Spark SQL
 
 `SparkSession` is the entry point to Spark SQL. It is one of the first objects created in a Spark SQL application.

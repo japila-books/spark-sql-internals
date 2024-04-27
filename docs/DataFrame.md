@@ -1,3 +1,7 @@
+---
+title: DataFrame
+---
+
 # DataFrame &mdash; Dataset of Rows with RowEncoder
 
 Spark SQL introduces a tabular functional data abstraction called *DataFrame*. It is designed to ease developing Spark applications for processing large amount of structured tabular data on Spark infrastructure.

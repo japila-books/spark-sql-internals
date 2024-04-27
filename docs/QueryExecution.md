@@ -1,3 +1,8 @@
+---
+title: QueryExecution
+subtitle: Structured Query Execution Pipeline
+---
+
 # QueryExecution &mdash; Structured Query Execution Pipeline
 
 `QueryExecution` is the [execution pipeline](#execution-pipeline) (_workflow_) of a [structured query](#logical).
@@ -28,7 +33,7 @@ val qe = new QueryExecution(sparkSession, plan)
 * `CommandUtils` utility is requested to [computeColumnStats](CommandUtils.md#computeColumnStats) and [computePercentiles](CommandUtils.md#computePercentiles)
 * `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
 
-## <span id="tracker"> QueryPlanningTracker
+### QueryPlanningTracker { #tracker }
 
 `QueryExecution` can be given a [QueryPlanningTracker](QueryPlanningTracker.md) when [created](#creating-instance).
 
@@ -36,31 +41,30 @@ val qe = new QueryExecution(sparkSession, plan)
 
 `QueryExecution` is part of `Dataset` using [queryExecution](Dataset.md#queryExecution) attribute.
 
-```text
-val ds: Dataset[Long] = ...
+```scala
 ds.queryExecution
 ```
 
 ## <span id="attributes"><span id="execution-pipeline"><span id="query-plan-lifecycle"> Execution Pipeline Phases
 
-### <span id="analyzed"> Analyzed Logical Plan
+### Analyzed Logical Plan { #analyzed }
 
 Analyzed [logical plan](#logical) that has passed [Logical Analyzer](Analyzer.md).
 
 !!! tip
     Beside `analyzed`, you can use [Dataset.explain](spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
-### <span id="withCachedData"> Analyzed Logical Plan with Cached Data
+### Analyzed Logical Plan with Cached Data { #withCachedData }
 
 [Analyzed](#analyzed) logical plan after `CacheManager` was requested to [replace logical query segments with cached query plans](CacheManager.md#useCachedData).
 
 `withCachedData` makes sure that the logical plan was [analyzed](#assertAnalyzed) and [uses supported operations only](#assertSupported).
 
-### <span id="optimizedPlan"> Optimized Logical Plan
+### Optimized Logical Plan { #optimizedPlan }
 
 Logical plan after executing the [logical query plan optimizer](SessionState.md#optimizer) on the [withCachedData](#withCachedData) logical plan.
 
-### <span id="sparkPlan"> Physical Plan
+### Physical Plan { #sparkPlan }
 
 [Physical plan](physical-operators/SparkPlan.md) (after [SparkPlanner](SparkPlanner.md) has planned the [optimized logical plan](#optimizedPlan)).
 
@@ -69,11 +73,11 @@ Logical plan after executing the [logical query plan optimizer](SessionState.md#
 !!! note
     It is guaranteed that Catalyst's `QueryPlanner` (which `SparkPlanner` extends) [will always generate at least one physical plan](catalyst/QueryPlanner.md#plan).
 
-### <span id="executedPlan"> Optimized Physical Plan
+### Optimized Physical Plan { #executedPlan }
 
 Optimized physical plan that is in the final optimized "shape" and therefore ready for execution, i.e. the [physical sparkPlan](#sparkPlan) with [physical preparation rules applied](#prepareForExecution).
 
-### <span id="toRdd"> RDD
+### RDD { #toRdd }
 
 ```scala
 toRdd: RDD[InternalRow]
@@ -112,11 +116,11 @@ dataset.queryExecution.executedPlan
 
     Refer to [IncrementalExecution — QueryExecution of Streaming Datasets](https://jaceklaskowski.gitbooks.io/spark-structured-streaming/spark-sql-streaming-IncrementalExecution.html) in the Spark Structured Streaming online gitbook.
 
-## <span id="planner"> SparkPlanner
+## SparkPlanner { #planner }
 
 [SparkPlanner](SparkPlanner.md)
 
-## <span id="stringWithStats"> Text Representation With Statistics
+## Text Representation With Statistics { #stringWithStats }
 
 ```scala
 stringWithStats: String
@@ -143,7 +147,7 @@ stringWithStats: String
 1. [ReuseExchange](physical-optimizations/ReuseExchange.md)
 1. [ReuseSubquery](physical-optimizations/ReuseSubquery.md)
 
-### <span id="preparations"> preparations
+### preparations
 
 ```scala
 preparations: Seq[Rule[SparkPlan]]
@@ -170,7 +174,9 @@ preparations(
 * `QueryExecution` is requested for the [physical optimization rules (preparations)](#preparations) (with the `InsertAdaptiveSparkPlan` defined)
 * `QueryExecution` utility is requested to [prepareExecutedPlan](#prepareExecutedPlan) (with no `InsertAdaptiveSparkPlan`)
 
-## <span id="prepareExecutedPlan"><span id="prepareExecutedPlan-SparkPlan"> prepareExecutedPlan for Physical Operators
+## prepareExecutedPlan { #prepareExecutedPlan }
+
+### prepareExecutedPlan for Physical Operators { #prepareExecutedPlan-SparkPlan }
 
 ```scala
 prepareExecutedPlan(
@@ -186,7 +192,7 @@ prepareExecutedPlan(
 
 * [PlanDynamicPruningFilters](physical-optimizations/PlanDynamicPruningFilters.md) physical optimization is executed
 
-## <span id="prepareExecutedPlan-LogicalPlan"> prepareExecutedPlan for Logical Operators
+### prepareExecutedPlan for Logical Operators { #prepareExecutedPlan-LogicalPlan }
 
 ```scala
 prepareExecutedPlan(
@@ -198,7 +204,7 @@ prepareExecutedPlan(
 
 `prepareExecutedPlan` is used when [PlanSubqueries](physical-optimizations/PlanSubqueries.md) physical optimization is executed.
 
-## <span id="prepareForExecution"> Applying preparations Physical Query Optimization Rules to Physical Plan
+## Applying preparations Physical Query Optimization Rules to Physical Plan { #prepareForExecution }
 
 ```scala
 prepareForExecution(
@@ -212,7 +218,7 @@ prepareForExecution(
 
 * `QueryExecution` is requested to [prepare the physical plan for execution](#executedPlan) and [prepareExecutedPlan](#prepareExecutedPlan)
 
-## <span id="assertSupported"> assertSupported Method
+## assertSupported { #assertSupported }
 
 ```scala
 assertSupported(): Unit
@@ -220,9 +226,13 @@ assertSupported(): Unit
 
 `assertSupported` requests `UnsupportedOperationChecker` to `checkForBatch`.
 
-`assertSupported` is used when `QueryExecution` is requested for [withCachedData](#withCachedData) logical plan.
+---
 
-## <span id="assertAnalyzed"> Creating Analyzed Logical Plan and Checking Correctness
+`assertSupported` is used when:
+
+* `QueryExecution` is requested for the [withCachedData](#withCachedData) logical plan.
+
+## Creating Analyzed Logical Plan and Checking Correctness { #assertAnalyzed }
 
 ```scala
 assertAnalyzed(): Unit
@@ -239,7 +249,7 @@ assertAnalyzed(): Unit
 
 In case of any `AnalysisException`, `assertAnalyzed` creates a new `AnalysisException` to make sure that it holds [analyzed](#analyzed) and reports it.
 
-## <span id="toStringWithStats"> Building Text Representation with Cost Stats
+## Building Text Representation with Cost Stats { #toStringWithStats }
 
 ```scala
 toStringWithStats: String
@@ -278,7 +288,7 @@ CollectLimit 2
 
 `toStringWithStats` is used when [ExplainCommand](logical-operators/ExplainCommand.md) logical command is executed (with `cost` attribute enabled).
 
-## <span id="toString"> Extended Text Representation with Logical and Physical Plans
+## Extended Text Representation with Logical and Physical Plans { #toString }
 
 ```scala
 toString: String
@@ -291,7 +301,7 @@ toString: String
 
 `toString` is part of Java's `Object` abstraction.
 
-## <span id="simpleString"> Simple (Basic) Text Representation
+## Simple (Basic) Text Representation { #simpleString }
 
 ```scala
 simpleString: String // (1)
@@ -310,7 +320,7 @@ In the end, `simpleString` adds **== Physical Plan ==** header to the text repre
 * `QueryExecution` is requested to [explainString](#explainString)
 * _others_
 
-### <span id="simpleString-demo"> Demo
+### Demo { #simpleString-demo }
 
 ```scala
 import org.apache.spark.sql.{functions => f}
@@ -325,7 +335,7 @@ scala> println(output)
 +- *(1) Range (0, 10, step=1, splits=16)
 ```
 
-## <span id="explainString"> explainString
+## explainString { #explainString }
 
 ```scala
 explainString(
@@ -346,7 +356,7 @@ explainString(
 * `ExplainCommand` logical command is [executed](logical-operators/ExplainCommand.md#run)
 * `debug` utility is used to `toFile`
 
-## <span id="withRedaction"> Redacting Sensitive Information
+## Redacting Sensitive Information { #withRedaction }
 
 ```scala
 withRedaction(
@@ -359,7 +369,7 @@ NOTE: Internally, Spark Core's `Utils.redact` uses Java's `Regex.replaceAllIn` t
 
 NOTE: `withRedaction` is used when `QueryExecution` is requested for the <<simpleString, simple>>, <<toString, extended>> and <<stringWithStats, with statistics>> text representations.
 
-## <span id="writePlans"> writePlans
+## writePlans { #writePlans }
 
 ```scala
 writePlans(
@@ -368,5 +378,7 @@ writePlans(
 ```
 
 `writePlans`...FIXME
+
+---
 
 `writePlans` is used when...FIXME

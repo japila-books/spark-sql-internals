@@ -6,8 +6,8 @@ title: Offset
 
 `Offset` is an [OrderPreservingUnaryNode](OrderPreservingUnaryNode.md) that can skip the [specified number of rows](#offsetExpr) (_offset_) from the beginning of the output of the [child logical operator](#child).
 
-??? note "Spark Structured Streaming"
-    `Offset` is not supported on streaming DataFrames/Datasets.
+??? note "Spark Structured Streaming Unsupported"
+    `Offset` is not supported on streaming DataFrames/Datasets (that is enforced by `UnsupportedOperationChecker` at [QueryExecution](../QueryExecution.md#assertSupported)).
 
 ## Creating Instance
 
