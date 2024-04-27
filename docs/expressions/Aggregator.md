@@ -8,7 +8,7 @@ abstract class Aggregator[-IN, BUF, OUT]
 
 `Aggregator` is a `Serializable` ([Java]({{ java.api }}/java/lang/Serializable.html)).
 
-`Aggregator` is registered using [udaf](../standard-functions//index.md#udaf) standard function.
+`Aggregator` is registered using [udaf](../standard-functions/index.md#udaf) standard function.
 
 ## Contract
 

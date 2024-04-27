@@ -1,6 +1,6 @@
 # MonotonicallyIncreasingID
 
-`MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that represents `monotonically_increasing_id` [standard](../standard-functions//index.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions in [logical query plans](../logical-operators/LogicalPlan.md).
+`MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that represents `monotonically_increasing_id` [standard](../standard-functions/index.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions in [logical query plans](../logical-operators/LogicalPlan.md).
 
 `MonotonicallyIncreasingID` supports [code-generated](#doGenCode) and [interpreted](#evalInternal) execution modes.
 

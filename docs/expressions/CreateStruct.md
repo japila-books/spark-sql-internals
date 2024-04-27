@@ -37,6 +37,6 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * <<spark-sql-dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
 
-* [struct](../standard-functions//index.md#struct) standard function is used
+* [struct](../standard-functions/index.md#struct) standard function is used
 
 * `SimpleTypedAggregateExpression` expression is requested `evaluateExpression` and `resultObjToRow`

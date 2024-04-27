@@ -2,7 +2,7 @@
 
 `SparkUserDefinedFunction` is a [UserDefinedFunction](UserDefinedFunction.md) that uses [ScalaUDF](ScalaUDF.md) for execution.
 
-`SparkUserDefinedFunction` is [created](#creating-instance) using [udf](../standard-functions//index.md#udaf) standard function (among the other _less interesting_ means).
+`SparkUserDefinedFunction` is [created](#creating-instance) using [udf](../standard-functions/index.md#udaf) standard function (among the other _less interesting_ means).
 
 ## Creating Instance
 
@@ -19,7 +19,7 @@
 `SparkUserDefinedFunction` is created when:
 
 * `FPGrowthModel` (Spark MLlib) is requested to `genericTransform`
-* [udf](../standard-functions//index.md#udf) standard function is used
+* [udf](../standard-functions/index.md#udf) standard function is used
 * `UDFRegistration` is requested to [register a named user-defined function](../user-defined-functions/UDFRegistration.md#register)
 
 ## <span id="apply"> Creating Column (for Function Execution)

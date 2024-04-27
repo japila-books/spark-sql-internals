@@ -22,7 +22,7 @@
 
 * `BaseSessionStateBuilder` is requested for a [SQL parser](../BaseSessionStateBuilder.md#sqlParser)
 
-* [expr](../standard-functions//index.md#expr) standard function is used
+* [expr](../standard-functions/index.md#expr) standard function is used
 
 ## <span id="parse"> Parsing Command
 
@@ -69,7 +69,7 @@ assert(spark.sessionState.sqlParser.isInstanceOf[SparkSqlParser])
 
 `SparkSqlParser` is used to translate an expression to the corresponding [Column](../Column.md) in the following:
 
-* [expr](../standard-functions//index.md#expr) standard function
+* [expr](../standard-functions/index.md#expr) standard function
 * Dataset operators: [selectExpr](../Dataset.md#selectExpr), [filter](../Dataset.md#filter), [where](../Dataset.md#where)
 
 ```text

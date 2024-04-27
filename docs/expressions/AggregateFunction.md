@@ -88,5 +88,5 @@ scala> println(aggFn.numberedTreeString)
 `toAggregateExpression` is used when:
 
 * `AggregateFunction` is requested to [toAggregateExpression](#toAggregateExpression)
-* `functions` utility is used to [withAggregateFunction](../standard-functions//index.md#withAggregateFunction)
+* `functions` utility is used to [withAggregateFunction](../standard-functions/index.md#withAggregateFunction)
 * _others_

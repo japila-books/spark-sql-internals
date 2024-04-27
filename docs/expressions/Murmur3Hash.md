@@ -12,7 +12,7 @@
 `Murmur3Hash` is created when:
 
 * `HashPartitioning` is requested for the [partitionId expression](HashPartitioning.md#partitionIdExpression)
-* [hash](../standard-functions//index.md#hash) standard and SQL functions are used
+* [hash](../standard-functions/index.md#hash) standard and SQL functions are used
 
 ## Demo
 

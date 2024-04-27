@@ -5,7 +5,7 @@
 
 * `AstBuilder` is requested to <<sql/AstBuilder.md#visitFirst, parse a FIRST statement>>
 
-* [first](../standard-functions//index.md#first) standard function is used
+* [first](../standard-functions/index.md#first) standard function is used
 
 * `first` and `first_value` <<FunctionRegistry.md#, SQL functions>> are used
 

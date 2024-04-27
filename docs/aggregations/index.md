@@ -69,7 +69,7 @@ Aggregate Queries can be fine-tuned with the following configuration properties:
 
 ## Basic Aggregation
 
-**Basic Aggregation** calculates aggregates over a group of rows using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../standard-functions//index.md#aggregate-functions)).
+**Basic Aggregation** calculates aggregates over a group of rows using [aggregate operators](#aggregate-operators) (possibly with [aggregate functions](../standard-functions/index.md#aggregate-functions)).
 
 ## Multi-Dimensional Aggregation
 

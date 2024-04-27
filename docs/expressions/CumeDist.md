@@ -2,7 +2,7 @@
 
 `CumeDist` is a `SizeBasedWindowFunction` and a `RowNumberLike` expression that is used for the following:
 
-* [cume_dist](../standard-functions//index.md#cume_dist) standard function
+* [cume_dist](../standard-functions/index.md#cume_dist) standard function
 
 * [cume_dist](../FunctionRegistry.md#expressions) SQL function
 

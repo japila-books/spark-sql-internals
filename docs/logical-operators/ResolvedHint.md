@@ -16,7 +16,7 @@ title: ResolvedHint
 `ResolvedHint` is created when:
 
 * [ResolveJoinStrategyHints](../logical-analysis-rules/ResolveJoinStrategyHints.md) logical resolution rule is [executed](../logical-analysis-rules/ResolveJoinStrategyHints.md#applyJoinStrategyHint)
-* [broadcast](../standard-functions//index.md#broadcast) standard function is used (on a `Dataset`)
+* [broadcast](../standard-functions/index.md#broadcast) standard function is used (on a `Dataset`)
 * `CacheManager` is requested to [useCachedData](../CacheManager.md#useCachedData)
 
 ## Query Execution Planning
