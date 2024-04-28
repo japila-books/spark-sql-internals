@@ -35,7 +35,7 @@ Left Semi [Join](Join.md) | `ReplaceIntersectWithSemiJoin` | disabled
 
 ## Catalyst DSL
 
-[Catalyst DSL](../catalyst-dsl/index.md) comes with [intersect](../catalyst-dsl/DslLogicalPlan.md#intersect) operator to create an `Intersect`.
+[Catalyst DSL](../catalyst-dsl/index.md) comes with [intersect](../catalyst-dsl/DslLogicalPlan.md#intersect) operator to create an `Intersect` operator.
 
 ```scala
 intersect(

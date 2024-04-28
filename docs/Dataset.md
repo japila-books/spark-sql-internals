@@ -378,6 +378,32 @@ collectToPython(): Array[Any]
 
 * `DataFrame` ([PySpark]({{ book.pyspark }}/sql/DataFrame#collect)) is requested to `collect`
 
+## combineUnions { #combineUnions }
+
+```scala
+combineUnions(
+  plan: LogicalPlan): LogicalPlan
+```
+
+`combineUnions`...FIXME
+
+---
+
+`combineUnions` is used when:
+
+* [Dataset.union](#union) operator is used
+* [Dataset.unionByName](#unionByName) operator is used
+
+### flattenUnion { #flattenUnion }
+
+```scala
+flattenUnion(
+  u: Union,
+  isUnionDistinct: Boolean): Union
+```
+
+`flattenUnion`...FIXME
+
 <!---
 ## Review Me
 
