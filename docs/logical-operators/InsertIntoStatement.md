@@ -1,3 +1,7 @@
+---
+title: InsertIntoStatement
+---
+
 # InsertIntoStatement
 
 `InsertIntoStatement` is a [UnaryParsedStatement](ParsedStatement.md).
@@ -17,7 +21,7 @@
 
 * Catalyst DSL is used to [insertInto](../catalyst-dsl/index.md#insertInto)
 * `AstBuilder` is requested to [withInsertInto](../sql/AstBuilder.md#withInsertInto)
-* `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto)
+* [DataFrameWriter.insertInto](../DataFrameWriter.md#insertInto) operator is used
 
 ## Logical Resolution
 

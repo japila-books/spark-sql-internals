@@ -27,11 +27,11 @@ import org.apache.spark.sql.DataFrameWriter
 assert(writer.isInstanceOf[DataFrameWriter])
 ```
 
-## <span id="df"> DataFrame
+## DataFrame { #df }
 
 When [created](#creating-instance), `DataFrameWriter` converts the [Dataset](#ds) to a [DataFrame](Dataset.md#toDF).
 
-## <span id="source"><span id="format"> Name of Data Source
+## <span id="format"> Name of Data Source { #source }
 
 ```scala
 source: String
@@ -48,7 +48,7 @@ format(
 
 Default: [spark.sql.sources.default](configuration-properties.md#spark.sql.sources.default) configuration property
 
-## <span id="insertInto"> insertInto
+## insertInto { #insertInto }
 
 ```scala
 insertInto(
@@ -70,7 +70,7 @@ In the end, `insertInto` uses the [modern](#insertInto-CatalogPlugin) or the [le
 !!! note
     [saveAsTable](#saveAsTable) and [insertInto](#insertInto) are structurally alike.
 
-### <span id="insertInto-CatalogPlugin"> Modern Insert Path (CatalogPlugin)
+### Modern Insert Path (CatalogPlugin) { #insertInto-CatalogPlugin }
 
 ```scala
 insertInto(
@@ -80,16 +80,18 @@ insertInto(
 
 `insertInto`...FIXME
 
-### <span id="insertInto-TableIdentifier"> Legacy Insert Path (TableIdentifier)
+### Legacy Insert Path (TableIdentifier) { #insertInto-TableIdentifier }
 
 ```scala
 insertInto(
   tableIdent: TableIdentifier): Unit
 ```
 
-`insertInto`...FIXME
+`insertInto` creates an [InsertIntoStatement](logical-operators/InsertIntoStatement.md) logical operator (with [overwrite](logical-operators/InsertIntoStatement.md#overwrite) flag enabled when [SaveMode](#mode) is `Overwrite`).
 
-### <span id="insertInto-AnalysisException"> AnalysisException
+In the end, `insertInto` [executes the InsertIntoStatement logical command](#runCommand).
+
+### AnalysisException { #insertInto-AnalysisException }
 
 `insertInto` throws an `AnalysisException` when the [partitioningColumns](#partitioningColumns) are defined:
 
@@ -97,7 +99,7 @@ insertInto(
 insertInto() can't be used together with partitionBy(). Partition columns have already been defined for the table. It is not necessary to use partitionBy().
 ```
 
-## <span id="saveAsTable"> saveAsTable
+## saveAsTable { #saveAsTable }
 
 ```scala
 saveAsTable(
@@ -115,7 +117,7 @@ In the end, `saveAsTable` uses the [modern](#saveAsTable-TableCatalog) or the [l
 !!! note
     [saveAsTable](#saveAsTable) and [insertInto](#insertInto) are structurally alike.
 
-### <span id="saveAsTable-TableCatalog"> Modern saveAsTable with TableCatalog
+### Modern saveAsTable with TableCatalog { #saveAsTable-TableCatalog }
 
 ```scala
 saveAsTable(
@@ -124,7 +126,7 @@ saveAsTable(
   nameParts: Seq[String]): Unit
 ```
 
-### <span id="saveAsTable-TableIdentifier"> Legacy saveAsTable with TableIdentifier
+### Legacy saveAsTable with TableIdentifier { #saveAsTable-TableIdentifier }
 
 ```scala
 saveAsTable(
@@ -133,7 +135,7 @@ saveAsTable(
 
 `saveAsTable` saves the content of a `DataFrame` to the `tableName` table.
 
-### <span id="saveAsTable-AnalysisException"> AnalysisException
+### AnalysisException { #saveAsTable-AnalysisException }
 
 `saveAsTable` throws an `AnalysisException` when no catalog could handle the table identifier:
 
@@ -141,7 +143,7 @@ saveAsTable(
 Couldn't find a catalog to handle the identifier [tableName].
 ```
 
-### Demo
+### Demo { #saveAsTable-demo }
 
 ```text
 val ids = spark.range(5)
@@ -159,7 +161,7 @@ scala> q.show
 +--------+--------+-----------+---------+-----------+
 ```
 
-## <span id="save"> Writing Out Data (save)
+## Writing Out Data (save) { #save }
 
 ```scala
 save(): Unit
@@ -193,7 +195,7 @@ Hive data source can only be used with tables, you can not write files of Hive d
 '[operation]' does not support bucketing right now
 ```
 
-### <span id="saveInternal"> saveInternal
+### saveInternal { #saveInternal }
 
 ```scala
 saveInternal(
@@ -202,7 +204,7 @@ saveInternal(
 
 `saveInternal`...FIXME
 
-## <span id="lookupV2Provider"> Looking up TableProvider
+## Looking up TableProvider { #lookupV2Provider }
 
 ```scala
 lookupV2Provider(): Option[TableProvider]
@@ -212,11 +214,13 @@ lookupV2Provider(): Option[TableProvider]
 
 `lookupV2Provider` explicitly excludes [FileDataSourceV2](files/FileDataSourceV2.md)-based data sources (due to [SPARK-28396](https://issues.apache.org/jira/browse/SPARK-28396)).
 
+---
+
 `lookupV2Provider` is used when:
 
 * `DataFrameWriter` is requested to [save](#save), [insertInto](#insertInto) and [saveAsTable](#saveAsTable)
 
-## <span id="SaveMode"><span id="mode"> Save Mode
+## <span id="SaveMode"> Save Mode { #mode }
 
 ```scala
 mode(
@@ -234,7 +238,7 @@ Name     | Behaviour
  <span id="Ignore"> Ignore | Do not save the records and not change the existing data in any way
  <span id="Overwrite"> Overwrite | Existing data is overwritten by new records
 
-## <span id="getBucketSpec"> Creating BucketSpec
+## Creating BucketSpec { #getBucketSpec }
 
 ```scala
 getBucketSpec: Option[BucketSpec]
@@ -255,7 +259,7 @@ getBucketSpec: Option[BucketSpec]
 
 * `DataFrameWriter` is requested to [assertNotBucketed](#assertNotBucketed), [createTable](#createTable), [partitioningAsV2](#partitioningAsV2)
 
-## <span id="partitioningAsV2"> partitioningAsV2
+## partitioningAsV2 { #partitioningAsV2 }
 
 ```scala
 partitioningAsV2: Seq[Transform]
@@ -269,7 +273,7 @@ partitioningAsV2: Seq[Transform]
 
 * `DataFrameWriter` is requested to [saveInternal](#saveInternal), [saveAsTable](#saveAsTable), [checkPartitioningMatchesV2Table](#checkPartitioningMatchesV2Table)
 
-## <span id="saveToV1Source"> Executing Logical Command for Writing to Data Source V1
+## Executing Logical Command for Writing to Data Source V1 { #saveToV1Source }
 
 ```scala
 saveToV1Source(): Unit
@@ -289,9 +293,11 @@ In the end, `saveToV1Source` [runs the logical command for writing](#runCommand)
 
     * An [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) for [FileFormats](files/FileFormat.md)
 
-`saveToV1Source` is used when `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save).
+`saveToV1Source` is used when:
 
-## <span id="runCommand"> Executing Logical Command(s)
+* `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save)
+
+## Executing Logical Command(s) { #runCommand }
 
 ```scala
 runCommand(
@@ -317,7 +323,7 @@ In case of any exceptions, `runCommand` requests the `ExecutionListenerManager` 
 
 * `DataFrameWriter` is requested to [save the rows of a structured query (a DataFrame) to a data source](#save) (and indirectly [executing a logical command for writing to a data source V1](#saveToV1Source)), [insert the rows of a structured streaming (a DataFrame) into a table](#insertInto) and [create a table](#createTable) (that is used exclusively for [saveAsTable](#saveAsTable))
 
-## <span id="createTable"> Creating Table
+## Creating Table { #createTable }
 
 ```scala
 createTable(
@@ -331,6 +337,8 @@ createTable(
 `createTable` creates a [CatalogTable](CatalogTable.md) (with the [bucketSpec](CatalogTable.md#bucketSpec) per [getBucketSpec](#getBucketSpec)).
 
 In the end, `createTable` creates a [CreateTable](logical-operators/CreateTable.md) logical command (with the `CatalogTable`, [mode](#mode) and the [logical query plan](Dataset.md#planWithBarrier) of the [dataset](#df)) and [runs](#runCommand) it.
+
+---
 
 `createTable` is used when:
 

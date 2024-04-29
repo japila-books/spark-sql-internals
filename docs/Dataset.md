@@ -46,7 +46,7 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 * `CatalogImpl` is requested to
 [makeDataset](CatalogImpl.md#makeDataset) (when requested to [list databases](CatalogImpl.md#listDatabases), [tables](CatalogImpl.md#listTables), [functions](CatalogImpl.md#listFunctions) and [columns](CatalogImpl.md#listColumns))
 
-## <span id="observe"> observe
+## observe
 
 ```scala
 observe(
@@ -67,7 +67,7 @@ For an [Observation](Observation.md) argument, `observe` requests the `Observati
     1. An `Observation` can be used with a `Dataset` only once
     1. `Observation` does not support streaming `Dataset`s.
 
-## <span id="repartition"> repartition
+## repartition
 
 ```scala
 repartition(
@@ -83,7 +83,7 @@ repartition(
 1. Creates a [Repartition](logical-operators/Repartition.md) logical operator with `shuffle` enabled
 1. An alias of [repartitionByExpression](#repartitionByExpression)
 
-### <span id="repartitionByExpression"> repartitionByExpression
+### repartitionByExpression { #repartitionByExpression }
 
 ```scala
 repartitionByExpression(
@@ -93,7 +93,7 @@ repartitionByExpression(
 
 `repartitionByExpression` [withTypedPlan](#withTypedPlan) with a new [RepartitionByExpression](logical-operators/RepartitionByExpression.md) (with the given `numPartitions` and `partitionExprs`, and the [logicalPlan](#logicalPlan)).
 
-### <span id="repartition-example"> Example: Number of Partitions Only
+### Example: Number of Partitions Only { #repartition-example }
 
 ```scala
 val numsRepd = nums.repartition(numPartitions = 4)
@@ -126,7 +126,7 @@ AdaptiveSparkPlan isFinalPlan=false
    +- Range (0, 10, step=1, splits=16)
 ```
 
-## <span id="repartitionByRange"> repartitionByRange
+## repartitionByRange { #repartitionByRange }
 
 ```scala
 repartitionByRange(
@@ -145,7 +145,7 @@ repartitionByRange(
 
 In the end, `repartitionByRange` creates a [Dataset](#apply) with a [RepartitionByExpression](logical-operators/RepartitionByExpression.md) (with the `SortOrder`s, the [logicalPlan](#logicalPlan) and the given `numPartitions`).
 
-### <span id="repartitionByRange-example"> Example: Partition Expressions Only
+### Example: Partition Expressions Only { #repartitionByRange-example }
 
 ```scala
 val nums = spark.range(10).repartitionByRange($"id".asc)
@@ -175,7 +175,7 @@ scala> println(nums.queryExecution.toRdd.toDebugString)
     |   ParallelCollectionRDD[9] at toRdd at <console>:24 []
 ```
 
-### <span id="repartitionByRange-example-numPartitions"> Example: Number of Partitions and Partition Expressions
+### Example: Number of Partitions and Partition Expressions { #repartitionByRange-example-numPartitions }
 
 ```text
 val q = spark.range(10).repartitionByRange(numPartitions = 5, $"id")
@@ -202,7 +202,7 @@ scala> println(q.queryExecution.toRdd.toDebugString)
     |   ParallelCollectionRDD[0] at toRdd at <console>:24 []
 ```
 
-## <span id="logicalPlan"> LogicalPlan
+## LogicalPlan { #logicalPlan }
 
 ```scala
 logicalPlan: LogicalPlan
@@ -220,7 +220,7 @@ The following are Scala **lazy values** of `Dataset`. Using lazy values guarante
 
 Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-### <span id="rdd"> RDD
+### RDD { #rdd }
 
 ```scala
 rdd: RDD[T]
@@ -228,11 +228,13 @@ rdd: RDD[T]
 
 `rdd` ...FIXME
 
+---
+
 `rdd` is used when:
 
 * `Dataset` is requested for an [RDD](#rdd) and [withNewRDDExecutionId](#withNewRDDExecutionId)
 
-### <span id="rddQueryExecution"> QueryExecution
+### QueryExecution { #rddQueryExecution }
 
 ```scala
 rddQueryExecution: QueryExecution
@@ -244,11 +246,13 @@ In other words, `rddQueryExecution` simply adds a new [DeserializeToObject](logi
 
 In the end, `rddQueryExecution` requests the [SparkSession](#sparkSession) for the [SessionState](SparkSession.md#sessionState) to [create a QueryExecution](SessionState.md#executePlan) for the query plan with the top-most `DeserializeToObject`.
 
+---
+
 `rddQueryExecution` is used when:
 
 * `Dataset` is requested for an [RDD](#rdd) and [withNewRDDExecutionId](#withNewRDDExecutionId)
 
-## <span id="withNewRDDExecutionId"> withNewRDDExecutionId
+## withNewRDDExecutionId { #withNewRDDExecutionId }
 
 ```scala
 withNewRDDExecutionId[U](
@@ -259,11 +263,13 @@ withNewRDDExecutionId[U](
 
 `withNewRDDExecutionId` requests the [QueryExecution](#rddQueryExecution) for the [SparkPlan](#executedPlan) to [resetMetrics](physical-operators/SparkPlan.md#resetMetrics).
 
+---
+
 `withNewRDDExecutionId` is used when the following `Dataset` operators are used:
 
 * [reduce](#reduce), [foreach](#foreach) and [foreachPartition](#foreachPartition)
 
-## <span id="writeTo"> writeTo
+## writeTo { #writeTo }
 
 ```scala
 writeTo(
@@ -272,7 +278,7 @@ writeTo(
 
 `writeTo` creates a [DataFrameWriterV2](DataFrameWriterV2.md) for the input table and this `Dataset`.
 
-## <span id="write"> write
+## write
 
 ```scala
 write: DataFrameWriter[T]
@@ -280,7 +286,7 @@ write: DataFrameWriter[T]
 
 `write` creates a [DataFrameWriter](DataFrameWriter.md) for this `Dataset`.
 
-## <span id="withTypedPlan"> withTypedPlan
+## withTypedPlan { #withTypedPlan }
 
 ```scala
 withTypedPlan[U : Encoder](
@@ -292,7 +298,7 @@ withTypedPlan[U : Encoder](
 
 `withTypedPlan`...FIXME
 
-## <span id="withSetOperator"> withSetOperator
+## withSetOperator { #withSetOperator }
 
 ```scala
 withSetOperator[U: Encoder](
@@ -304,7 +310,7 @@ withSetOperator[U: Encoder](
 
 `withSetOperator`...FIXME
 
-## <span id="apply"> apply
+## apply
 
 ```scala
 apply[T: Encoder](
@@ -314,11 +320,13 @@ apply[T: Encoder](
 
 `apply`...FIXME
 
+---
+
 `apply` is used when:
 
 * `Dataset` is requested to [withTypedPlan](#withTypedPlan) and [withSetOperator](#withSetOperator)
 
-## <span id="withAction"> Executing Action Under New Execution ID
+## Executing Action Under New Execution ID { #withAction }
 
 ```scala
 withAction[U](
@@ -350,7 +358,7 @@ Action | Name
  [collectAsArrowToR](#collectAsArrowToR) | `collectAsArrowToR`
  [collectAsArrowToPython](#collectAsArrowToPython) | `collectAsArrowToPython`
 
-## <span id="collectAsArrowToPython"> collectAsArrowToPython
+## collectAsArrowToPython { #collectAsArrowToPython }
 
 ```scala
 collectAsArrowToPython: Array[Any]
@@ -364,7 +372,7 @@ collectAsArrowToPython: Array[Any]
 
 * `PandasConversionMixin` ([PySpark]({{ book.pyspark }}/sql/PandasConversionMixin#_collect_as_arrow)) is requested to `_collect_as_arrow`
 
-## <span id="collectToPython"> collectToPython
+## collectToPython { #collectToPython }
 
 ```scala
 collectToPython(): Array[Any]
@@ -377,6 +385,24 @@ collectToPython(): Array[Any]
 `collectToPython` is used when:
 
 * `DataFrame` ([PySpark]({{ book.pyspark }}/sql/DataFrame#collect)) is requested to `collect`
+
+## unionAll { #unionAll }
+
+```scala
+unionAll(
+  other: Dataset[T]): Dataset[T]
+```
+
+`unionAll` is a synonym of [union](#union).
+
+## union
+
+```scala
+union(
+  other: Dataset[T]): Dataset[T]
+```
+
+`union` [combineUnions](#combineUnions) with a [Union](logical-operators/Union.md) logical operator with this [logicalPlan](#logicalPlan) and the `other`'s [logicalPlan](#logicalPlan).
 
 ## combineUnions { #combineUnions }
 
