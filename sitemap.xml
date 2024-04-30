@@ -3031,6 +3031,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/DropNamespace/</loc>
+         <lastmod>2024-04-30</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/Except/</loc>
          <lastmod>2024-04-30</lastmod>
          <changefreq>daily</changefreq>
