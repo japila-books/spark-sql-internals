@@ -24,7 +24,7 @@ subtitle: ANTLR-based SQL Parser
 
 ## Visit Callbacks
 
-### <span id="visitAddTableColumns"> visitAddTableColumns
+### visitAddTableColumns { #visitAddTableColumns }
 
 Creates an [AddColumns](../logical-operators/AddColumns.md) logical operator
 
@@ -52,7 +52,7 @@ colPosition
 
 ANTLR labeled alternative: `#addTableColumns`
 
-### <span id="visitAnalyze"> visitAnalyze
+### visitAnalyze { #visitAnalyze }
 
 Creates an [AnalyzeColumn](../logical-operators/AnalyzeColumn.md) or [AnalyzeTable](../logical-operators/AnalyzeTable.md) logical operators
 
@@ -78,7 +78,7 @@ EQ  : '=' | '==';
 
 ANTLR labeled alternative: `#analyze`
 
-### <span id="visitBucketSpec"> visitBucketSpec
+### visitBucketSpec { #visitBucketSpec }
 
 Creates a [BucketSpec](../bucketing/BucketSpec.md)
 
@@ -92,7 +92,7 @@ bucketSpec
 
 Column ordering must be `ASC`
 
-### <span id="visitCommentTable"> visitCommentTable
+### visitCommentTable { #visitCommentTable }
 
 Creates a [CommentOnTable](../logical-operators/CommentOnTable.md) logical command
 
@@ -109,7 +109,7 @@ Used when:
 * [withSelectQuerySpecification](#withSelectQuerySpecification)
 * [withTransformQuerySpecification](#withTransformQuerySpecification)
 
-### <span id="visitCreateTable"> visitCreateTable
+### visitCreateTable { #visitCreateTable }
 
 Creates a [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) (for CTAS queries with `AS` clause) or [CreateTable](../logical-operators/CreateTable.md) logical operator
 
@@ -138,7 +138,7 @@ createTableClauses:
 
 ANTLR labeled alternative: `#createTable`
 
-### <span id="visitDeleteFromTable"> visitDeleteFromTable
+### visitDeleteFromTable { #visitDeleteFromTable }
 
 Creates a [DeleteFromTable](../logical-operators/DeleteFromTable.md) logical command
 
@@ -148,30 +148,42 @@ DELETE FROM multipartIdentifier tableAlias whereClause?
 
 ANTLR labeled alternative: `#deleteFromTable`
 
-### <span id="visitDescribeRelation"> visitDescribeRelation
+### visitDescribeRelation { #visitDescribeRelation }
 
 Creates a `DescribeColumnStatement` or [DescribeRelation](../logical-operators/DescribeRelation.md)
 
-```text
-(DESC | DESCRIBE) TABLE? option=(EXTENDED | FORMATTED)?
-  multipartIdentifier partitionSpec? describeColName?
+```sql
+(DESC | DESCRIBE) [TABLE] [EXTENDED | FORMATTED] multipartIdentifier
+[partitionSpec]
+[describeColName]
 ```
 
 ANTLR labeled alternative: `#describeRelation`
 
-### <span id="visitExists"> visitExists
+### visitDropNamespace { #visitDropNamespace }
+
+Creates a [DropNamespace](../logical-operators/DropNamespace.md) logical operator
+
+```sql
+DROP (NAMESPACE | DATABASE | SCHEMA) [IF EXISTS] identifierReference
+[RESTRICT | CASCADE]  #dropNamespace
+```
+
+ANTLR labeled alternative: `#dropNamespace`
+
+### visitExists { #visitExists }
 
 Creates an [Exists](../expressions/Exists.md) expression
 
 ANTLR labeled alternative: `#exists`
 
-### <span id="visitExplain"> visitExplain
+### visitExplain { #visitExplain }
 
 Creates a [ExplainCommand](../logical-operators/ExplainCommand.md)
 
 ANTLR rule: `explain`
 
-### <span id="visitFirst"> visitFirst
+### visitFirst { #visitFirst }
 
 Creates a [First](../expressions/First.md) aggregate function expression
 
@@ -181,7 +193,7 @@ FIRST '(' expression (IGNORE NULLS)? ')'
 
 ANTLR labeled alternative: `#first`
 
-### <span id="visitFromClause"> visitFromClause
+### visitFromClause { #visitFromClause }
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md)
 
@@ -261,7 +273,7 @@ scala> sqlParser.parseExpression("foo() OVER (CLUSTER BY field)")
 res2: org.apache.spark.sql.catalyst.expressions.Expression = 'foo() windowspecdefinition('field, UnspecifiedFrame)
 ```
 
-### <span id="visitInlineTable"> visitInlineTable
+### visitInlineTable { #visitInlineTable }
 
 Creates a `UnresolvedInlineTable` unary logical operator (as the child of [SubqueryAlias](../logical-operators/SubqueryAlias.md) for `tableAlias`)
 
@@ -279,7 +291,7 @@ VALUES expression (',' expression)* tableAlias
 
 ANTLR rule: `inlineTable`
 
-### <span id="visitInsertIntoTable"> visitInsertIntoTable
+### visitInsertIntoTable { #visitInsertIntoTable }
 
 Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly)
 
@@ -294,7 +306,7 @@ ANTLR labeled alternative: `#insertIntoTable`
 !!! note
     `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
 
-### <span id="visitInsertOverwriteTable"> visitInsertOverwriteTable
+### visitInsertOverwriteTable { #visitInsertOverwriteTable }
 
 Creates a [InsertIntoTable](../logical-operators/InsertIntoTable.md) (indirectly)
 
@@ -311,7 +323,7 @@ ANTLR labeled alternative: `#insertOverwriteTable`
 !!! note
     `insertIntoTable` is part of `insertInto` that is in turn used only as a helper labeled alternative in [singleInsertQuery](#singleInsertQuery) and [multiInsertQueryBody](#multiInsertQueryBody) ANTLR rules.
 
-### <span id="visitInterval"> visitInterval
+### visitInterval { #visitInterval }
 
 Creates a [Literal](../expressions/Literal.md) expression to represent an interval type
 
@@ -415,7 +427,7 @@ INSERT INTO TABLE? ...
 
 ANTLR rule: `multiInsertQueryBody`
 
-### <span id="visitNamedExpression"> visitNamedExpression
+### visitNamedExpression { #visitNamedExpression }
 
 Creates one of the following Catalyst expressions:
 
@@ -425,11 +437,11 @@ Creates one of the following Catalyst expressions:
 
 ANTLR rule: `namedExpression`
 
-### <span id="visitNamedQuery"> visitNamedQuery
+### visitNamedQuery { #visitNamedQuery }
 
 Creates a [SubqueryAlias](../logical-operators/SubqueryAlias.md)
 
-### <span id="visitPrimitiveDataType"> visitPrimitiveDataType
+### visitPrimitiveDataType { #visitPrimitiveDataType }
 
 Creates a primitive [DataType](../types/DataType.md) from SQL type representation.
 
@@ -452,13 +464,13 @@ SQL Type | DataType
 `void` | NullType
 `interval` | CalendarIntervalType
 
-### <span id="visitPredicated"> visitPredicated
+### visitPredicated { #visitPredicated }
 
 Creates an [Expression](../expressions/Expression.md)
 
 ANTLR rule: `predicated`
 
-### <span id="visitQuerySpecification"> visitQuerySpecification
+### visitQuerySpecification { #visitQuerySpecification }
 
 Creates `OneRowRelation` or [LogicalPlan](../logical-operators/LogicalPlan.md)
 
@@ -507,13 +519,13 @@ ANTLR rule: `regularQuerySpecification`
 ??? note "transformQuerySpecification"
     The other rule `transformQuerySpecification` is handled by [withTransformQuerySpecification](#withTransformQuerySpecification).
 
-### <span id="visitRelation"> visitRelation
+### visitRelation { #visitRelation }
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) for a `FROM` clause.
 
 ANTLR rule: `relation`
 
-### <span id="visitRenameTableColumn"> visitRenameTableColumn
+### visitRenameTableColumn { #visitRenameTableColumn }
 
 Creates a [RenameColumn](../logical-operators/AlterTableCommand.md#RenameColumn) for the following SQL statement:
 
@@ -524,7 +536,7 @@ RENAME COLUMN from TO to
 
 ANTLR labeled alternative: `#renameTableColumn`
 
-### <span id="visitRepairTable"> visitRepairTable
+### visitRepairTable { #visitRepairTable }
 
 Creates a `RepairTable` unary logical command for the following SQL statement:
 
@@ -546,7 +558,7 @@ SHOW COLUMNS
 
 ANTLR labeled alternative: `#showColumns`
 
-### <span id="visitShowCreateTable"> visitShowCreateTable
+### visitShowCreateTable { #visitShowCreateTable }
 
 Creates a [ShowCreateTable](../logical-operators/ShowCreateTable.md) logical command for the following SQL statement:
 
@@ -556,7 +568,7 @@ SHOW CREATE TABLE multipartIdentifier (AS SERDE)?
 
 ANTLR labeled alternative: `#showCreateTable`
 
-### <span id="visitShowCurrentNamespace"> visitShowCurrentNamespace
+### visitShowCurrentNamespace { #visitShowCurrentNamespace }
 
 Creates a `ShowCurrentNamespaceCommand` logical command for the following SQL statement:
 
@@ -566,7 +578,7 @@ SHOW CURRENT NAMESPACE
 
 ANTLR labeled alternative: `#showCurrentNamespace`
 
-### <span id="visitShowTables"> visitShowTables
+### visitShowTables { #visitShowTables }
 
 Creates a [ShowTables](../logical-operators/ShowTables.md) for the following SQL statement:
 
@@ -577,7 +589,7 @@ SHOW TABLES ((FROM | IN) multipartIdentifier)?
 
 ANTLR labeled alternative: `#showTables`
 
-### <span id="visitShowTblProperties"> visitShowTblProperties
+### visitShowTblProperties { #visitShowTblProperties }
 
 Creates a [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command
 
@@ -588,13 +600,13 @@ SHOW TBLPROPERTIES [multi-part table identifier]
 
 ANTLR labeled alternative: `#showTblProperties`
 
-### <span id="visitSingleDataType"> visitSingleDataType
+### visitSingleDataType { #visitSingleDataType }
 
 Creates a [DataType](../types/DataType.md)
 
 ANTLR rule: `singleDataType`
 
-### <span id="visitSingleExpression"> visitSingleExpression
+### visitSingleExpression { #visitSingleExpression }
 
 Creates an [Expression](../expressions/Expression.md)
 
@@ -602,7 +614,7 @@ Takes the named expression and relays to [visitNamedExpression](#visitNamedExpre
 
 ANTLR rule: `singleExpression`
 
-### <span id="visitSingleInsertQuery"> visitSingleInsertQuery
+### visitSingleInsertQuery { #visitSingleInsertQuery }
 
 Calls [withInsertInto](#withInsertInto) (with an `InsertIntoContext`) for the following SQLs:
 
@@ -631,13 +643,13 @@ tableProvider
 
 ANTLR labeled alternative: `#singleInsertQuery`
 
-### <span id="visitSingleStatement"> visitSingleStatement
+### visitSingleStatement { #visitSingleStatement }
 
 Creates a [LogicalPlan](../logical-operators/LogicalPlan.md) from a single SQL statement
 
 ANTLR rule: `singleStatement`
 
-### <span id="visitSortItem"> visitSortItem
+### visitSortItem { #visitSortItem }
 
 Creates a [SortOrder](../expressions/SortOrder.md) unary expression
 
@@ -656,13 +668,13 @@ SORT BY sort+=sortItem (',' sort+=sortItem)*
 
 ANTLR rule: `sortItem`
 
-### <span id="visitStar"> visitStar
+### visitStar { #visitStar }
 
 Creates a [UnresolvedStar](../expressions/UnresolvedStar.md)
 
 ANTLR labeled alternative: `#star`
 
-### <span id="visitSubqueryExpression"> visitSubqueryExpression
+### visitSubqueryExpression { #visitSubqueryExpression }
 
 Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)
 
@@ -730,7 +742,7 @@ namedArgumentExpression
 
 ANTLR labeled alternative: `#tableValuedFunction`
 
-### <span id="visitUpdateTable"> visitUpdateTable
+### visitUpdateTable { #visitUpdateTable }
 
 Creates an [UpdateTable](../logical-operators/UpdateTable.md) logical operator
 
@@ -740,7 +752,7 @@ UPDATE multipartIdentifier tableAlias setClause whereClause?
 
 ANTLR labeled alternative: `#updateTable`
 
-### <span id="visitUse"> visitUse
+### visitUse { #visitUse }
 
 Creates a [SetCatalogAndNamespace](../logical-operators/SetCatalogAndNamespace.md)
 
@@ -750,7 +762,7 @@ USE NAMESPACE? multipartIdentifier
 
 ANTLR labeled alternative: `#use`
 
-### <span id="visitWindowDef"> visitWindowDef
+### visitWindowDef { #visitWindowDef }
 
 Creates a [WindowSpecDefinition](../expressions/WindowSpecDefinition.md)
 
