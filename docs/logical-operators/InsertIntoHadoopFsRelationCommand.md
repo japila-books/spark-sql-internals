@@ -4,7 +4,7 @@ title: InsertIntoHadoopFsRelationCommand
 
 # InsertIntoHadoopFsRelationCommand Logical Command
 
-`InsertIntoHadoopFsRelationCommand` is a [logical command](DataWritingCommand.md) that writes the result of the [query](#query) to an [output path](#outputPath) in the given [format](#fileFormat).
+`InsertIntoHadoopFsRelationCommand` is a [write command](V1WriteCommand.md) that is used to write the result of a [query](#query) to an [output path](#outputPath) (in the given [format](#fileFormat)).
 
 ## Creating Instance
 
@@ -14,13 +14,13 @@ title: InsertIntoHadoopFsRelationCommand
 * [Static Partitions](#staticPartitions)
 * <span id="ifPartitionNotExists"> `ifPartitionNotExists` Flag
 * <span id="partitionColumns"> Partition Columns (`Seq[Attribute]`)
-* <span id="bucketSpec"> [BucketSpec](../bucketing/BucketSpec.md) if defined
+* <span id="bucketSpec"> [BucketSpec](../bucketing/BucketSpec.md) (optional)
 * <span id="fileFormat"> [FileFormat](../files/FileFormat.md)
 * <span id="options"> Options (`Map[String, String]`)
 * <span id="query"> [Query](../logical-operators/LogicalPlan.md)
 * <span id="mode"> [SaveMode](../DataFrameWriter.md#SaveMode)
-* <span id="catalogTable"> [CatalogTable](../CatalogTable.md) if available
-* <span id="fileIndex"> [FileIndex](../files/FileIndex.md), if defined
+* <span id="catalogTable"> [CatalogTable](../CatalogTable.md) (optional)
+* <span id="fileIndex"> [FileIndex](../files/FileIndex.md) (optional)
 * <span id="outputColumnNames"> Names of the output columns
 
 `InsertIntoHadoopFsRelationCommand` is created when:

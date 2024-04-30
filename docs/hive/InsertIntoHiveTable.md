@@ -1,3 +1,7 @@
+---
+title: InsertIntoHiveTable
+---
+
 # InsertIntoHiveTable Logical Command
 
 `InsertIntoHiveTable` is a SaveAsHiveFile.md[logical command] that writes the result of executing a <<query, structured query>> to a <<table, Hive table>>.

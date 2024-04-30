@@ -4,7 +4,7 @@ title: DataWritingCommand
 
 # DataWritingCommand Logical Commands
 
-`DataWritingCommand` is an [extension](#contract) of the `UnaryCommand` abstraction for [logical commands](#implementations) that write the result of executing [query](#query) (_query data_) to a relation (when [executed](#run)).
+`DataWritingCommand` is an [extension](#contract) of the `UnaryCommand` abstraction for [logical commands](#implementations) that write the result of a [query](#query) (_query data_) to a relation (when [executed](#run)).
 
 ## Contract
 
@@ -48,10 +48,8 @@ Used when:
 
 ## Implementations
 
-* [CreateDataSourceTableAsSelectCommand](CreateDataSourceTableAsSelectCommand.md)
-* `CreateHiveTableAsSelectBase`
-* [InsertIntoHadoopFsRelationCommand](InsertIntoHadoopFsRelationCommand.md)
 * [SaveAsHiveFile](../hive/SaveAsHiveFile.md)
+* [V1WriteCommand](V1WriteCommand.md)
 
 ## Performance Metrics { #metrics }
 
