@@ -1,3 +1,7 @@
+---
+title: RelationConversions
+---
+
 # RelationConversions PostHoc Logical Evaluation Rule
 
 `RelationConversions` is a HiveSessionStateBuilder.md#postHocResolutionRules[posthoc logical resolution rule] that the HiveSessionStateBuilder.md#analyzer[Hive-specific logical analyzer] uses to <<apply, convert HiveTableRelations>> with Parquet and ORC storage formats.

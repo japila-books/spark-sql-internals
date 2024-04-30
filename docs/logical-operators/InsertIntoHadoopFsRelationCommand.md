@@ -25,11 +25,11 @@ title: InsertIntoHadoopFsRelationCommand
 
 `InsertIntoHadoopFsRelationCommand` is created when:
 
-* `OptimizedCreateHiveTableAsSelectCommand` logical command is executed
 * `DataSource` is requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
-* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a `InsertIntoStatement` over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../files/HadoopFsRelation.md))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for a [InsertIntoStatement](InsertIntoStatement.md) over a [LogicalRelation](LogicalRelation.md) with a [HadoopFsRelation](../files/HadoopFsRelation.md))
+* [RelationConversions](../hive/RelationConversions.md) logical evaluation rule is executed
 
-## <span id="staticPartitions"> Static Partitions
+## Static Partitions { #staticPartitions }
 
 ```scala
 type TablePartitionSpec = Map[String, String]
@@ -45,7 +45,7 @@ There will be no partitions when created for the following:
 * `OptimizedCreateHiveTableAsSelectCommand` logical command
 * `DataSource` when requested to [planForWritingFileFormat](../DataSource.md#planForWritingFileFormat)
 
-## <span id="dynamicPartitionOverwrite"> Dynamic Partition Inserts and dynamicPartitionOverwrite Flag
+## Dynamic Partition Inserts and dynamicPartitionOverwrite Flag { #dynamicPartitionOverwrite }
 
 ```scala
 dynamicPartitionOverwrite: Boolean
@@ -58,22 +58,24 @@ dynamicPartitionOverwrite: Boolean
 * **partitionOverwriteMode** option (`STATIC` or `DYNAMIC`) in the [parameters](#parameters) if available
 * [spark.sql.sources.partitionOverwriteMode](../configuration-properties.md#spark.sql.sources.partitionOverwriteMode)
 
+---
+
 `dynamicPartitionOverwrite` is used when:
 
 * [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (for dynamic partition overwrite)
 * `InsertIntoHadoopFsRelationCommand` is [executed](#run)
 
-## <span id="run"> Executing Command
+## Executing Command { #run }
 
-```scala
-run(
-  sparkSession: SparkSession,
-  child: SparkPlan): Seq[Row]
-```
+??? note "DataWritingCommand"
 
-`run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.
+    ```scala
+    run(
+      sparkSession: SparkSession,
+      child: SparkPlan): Seq[Row]
+    ```
 
----
+    `run` is part of the [DataWritingCommand](DataWritingCommand.md#run) abstraction.
 
 `run` creates a new Hadoop `Configuration` with the [options](#options) and resolves the [outputPath](#outputPath).
 
