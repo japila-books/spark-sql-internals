@@ -3936,6 +3936,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/BaseCacheTableExec/</loc>
+         <lastmod>2024-05-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/BaseJoinExec/</loc>
          <lastmod>2024-05-04</lastmod>
          <changefreq>daily</changefreq>
@@ -3992,6 +3997,11 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/physical-operators/CacheTableAsSelectExec/</loc>
+         <lastmod>2024-05-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/physical-operators/CacheTableExec/</loc>
          <lastmod>2024-05-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
