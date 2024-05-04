@@ -1,13 +1,12 @@
 # CacheManager
 
-`CacheManager` is a registry of structured queries that are cached and supposed to be replaced with corresponding [InMemoryRelation](logical-operators/InMemoryRelation.md) logical operators as their cached representation (when `QueryExecution` is requested for a [logical query plan with cached data](QueryExecution.md#withCachedData)).
+`CacheManager` is a registry of logical query plans that are cached and supposed to be replaced with corresponding [InMemoryRelation](logical-operators/InMemoryRelation.md) logical operators as their cached representation (when `QueryExecution` is requested for a [logical query plan with cached data](QueryExecution.md#withCachedData)).
 
 ## Accessing CacheManager
 
 `CacheManager` is shared across [SparkSession](SparkSession.md)s through [SharedState](SparkSession.md#sharedState).
 
-```text
-val spark: SparkSession = ...
+```scala
 spark.sharedState.cacheManager
 ```
 
@@ -15,7 +14,7 @@ spark.sharedState.cacheManager
 
 A structured query (as [Dataset](Dataset.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](caching-and-persistence.md#cache) or [Dataset.persist](caching-and-persistence.md#persist) high-level operators.
 
-## <span id="cachedData"><span id="CachedData"> Cached Queries
+## <span id="CachedData"> Cached Queries { #cachedData }
 
 ```scala
 cachedData: LinkedList[CachedData]
@@ -35,7 +34,7 @@ A `CachedData` is removed when `CacheManager` is requested to:
 
 All `CachedData` are removed (cleared) when `CacheManager` is requested to [clearCache](#clearCache)
 
-## <span id="recacheByPath"> Re-Caching By Path
+## Re-Caching By Path { #recacheByPath }
 
 ```scala
 recacheByPath(
@@ -49,12 +48,14 @@ recacheByPath(
 
 `recacheByPath`...FIXME
 
+---
+
 `recacheByPath` is used when:
 
 * `CatalogImpl` is requested to [refreshByPath](CatalogImpl.md#refreshByPath)
 * [InsertIntoHadoopFsRelationCommand](logical-operators/InsertIntoHadoopFsRelationCommand.md) command is executed
 
-### <span id="lookupAndRefresh"> lookupAndRefresh
+### lookupAndRefresh { #lookupAndRefresh }
 
 ```scala
 lookupAndRefresh(
@@ -65,7 +66,7 @@ lookupAndRefresh(
 
 `lookupAndRefresh`...FIXME
 
-### <span id="refreshFileIndexIfNecessary"> refreshFileIndexIfNecessary
+### refreshFileIndexIfNecessary { #refreshFileIndexIfNecessary }
 
 ```scala
 refreshFileIndexIfNecessary(
@@ -76,9 +77,7 @@ refreshFileIndexIfNecessary(
 
 `refreshFileIndexIfNecessary`...FIXME
 
-`refreshFileIndexIfNecessary` is used when `CacheManager` is requested to [lookupAndRefresh](#lookupAndRefresh).
-
-## <span id="lookupCachedData"> Looking Up CachedData
+## Looking Up CachedData { #lookupCachedData }
 
 ```scala
 lookupCachedData(
@@ -89,13 +88,15 @@ lookupCachedData(
 
 `lookupCachedData`...FIXME
 
+---
+
 `lookupCachedData` is used when:
 
-* [Dataset.storageLevel](spark-sql-dataset-operators.md#storageLevel) basic action is used
+* [Dataset.storageLevel](spark-sql-dataset-operators.md#storageLevel) action is used
 * `CatalogImpl` is requested to [isCached](CatalogImpl.md#isCached)
 * `CacheManager` is requested to [cacheQuery](#cacheQuery) and [useCachedData](#useCachedData)
 
-## <span id="uncacheQuery"> Un-caching Dataset
+## Un-caching Dataset { #uncacheQuery }
 
 ```scala
 uncacheQuery(
@@ -111,13 +112,15 @@ uncacheQuery(
 
 `uncacheQuery`...FIXME
 
+---
+
 `uncacheQuery` is used when:
 
 * [Dataset.unpersist](spark-sql-dataset-operators.md#unpersist) basic action is used
 * `DropTableCommand` and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
 * `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
-## <span id="cacheQuery"> Caching Query
+## Caching Query { #cacheQuery }
 
 ```scala
 cacheQuery(
@@ -145,12 +148,14 @@ If the input `query` [has already been cached](#lookupCachedData), `cacheQuery` 
 Asked to cache already cached data.
 ```
 
+---
+
 `cacheQuery` is used when:
 
 * [Dataset.persist](spark-sql-dataset-operators.md#persist) basic action is used
 * `CatalogImpl` is requested to [cache](CatalogImpl.md#cacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view in-memory
 
-## <span id="clearCache"> Clearing Cache
+## Clearing Cache { #clearCache }
 
 ```scala
 clearCache(): Unit
@@ -160,9 +165,13 @@ clearCache(): Unit
 
 In the end, `clearCache` removes all `CachedData` entries from the [cachedData](#cachedData) internal registry.
 
-`clearCache` is used when `CatalogImpl` is requested to [clear the cache](CatalogImpl.md#clearCache).
+---
 
-## <span id="recacheByCondition"> Re-Caching Query
+`clearCache` is used when:
+
+* `CatalogImpl` is requested to [clear the cache](CatalogImpl.md#clearCache)
+
+## Re-Caching Query { #recacheByCondition }
 
 ```scala
 recacheByCondition(
@@ -172,9 +181,13 @@ recacheByCondition(
 
 `recacheByCondition`...FIXME
 
-`recacheByCondition` is used when `CacheManager` is requested to [uncache a structured query](#uncacheQuery), [recacheByPlan](#recacheByPlan), and [recacheByPath](#recacheByPath).
+---
 
-## <span id="recacheByPlan"> Re-Caching By Logical Plan
+`recacheByCondition` is used when:
+
+* `CacheManager` is requested to [uncache a structured query](#uncacheQuery), [recacheByPlan](#recacheByPlan), and [recacheByPath](#recacheByPath)
+
+## Re-Caching By Logical Plan { #recacheByPlan }
 
 ```scala
 recacheByPlan(
@@ -184,9 +197,13 @@ recacheByPlan(
 
 `recacheByPlan`...FIXME
 
-`recacheByPlan` is used when [InsertIntoDataSourceCommand](logical-operators/InsertIntoDataSourceCommand.md) logical command is executed.
+---
 
-## <span id="useCachedData"> Replacing Segments of Logical Query Plan With Cached Data
+`recacheByPlan` is used when:
+
+* [InsertIntoDataSourceCommand](logical-operators/InsertIntoDataSourceCommand.md) logical command is executed
+
+## Replacing Segments of Logical Query Plan With Cached Data { #useCachedData }
 
 ```scala
 useCachedData(
@@ -197,7 +214,11 @@ useCachedData(
 
 `useCachedData` skips [IgnoreCachedData](logical-operators/IgnoreCachedData.md) commands (and leaves them unchanged).
 
-`useCachedData` is used (recursively) when `QueryExecution` is requested for a [logical query plan with cached data](QueryExecution.md#withCachedData).
+---
+
+`useCachedData` is used (recursively) when:
+
+* `QueryExecution` is requested for a [logical query plan with cached data](QueryExecution.md#withCachedData)
 
 ## Logging
 

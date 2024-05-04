@@ -1,3 +1,8 @@
+---
+title: SharedState
+subtitle: State Shared Across SparkSessions
+---
+
 # SharedState &mdash; State Shared Across SparkSessions
 
 `SharedState` holds the state that can be shared across [SparkSessions](SparkSession.md):

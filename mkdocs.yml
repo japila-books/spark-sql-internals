@@ -376,6 +376,7 @@ nav:
       - AQEShuffleReadExec: physical-operators/AQEShuffleReadExec.md
       - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
       - BaseAggregateExec: physical-operators/BaseAggregateExec.md
+      - BaseCacheTableExec: physical-operators/BaseCacheTableExec.md
       - BaseJoinExec: physical-operators/BaseJoinExec.md
       - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
       - BatchWriteHelper: physical-operators/BatchWriteHelper.md
@@ -386,6 +387,7 @@ nav:
       - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
       - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
       - physical-operators/CacheTableAsSelectExec.md
+      - physical-operators/CacheTableExec.md
       - CoalesceExec: physical-operators/CoalesceExec.md
       - CollectLimitExec: physical-operators/CollectLimitExec.md
       - CollectMetricsExec: physical-operators/CollectMetricsExec.md

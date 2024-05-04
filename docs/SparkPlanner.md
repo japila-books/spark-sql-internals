@@ -1,3 +1,8 @@
+---
+title: SparkPlanner
+subtitle: Spark Query Planner
+---
+
 # SparkPlanner &mdash; Spark Query Planner
 
 `SparkPlanner` is a concrete [Catalyst Query Planner](catalyst/QueryPlanner.md) that converts a [logical plan](logical-operators/LogicalPlan.md) to one or more [physical plans](physical-operators/SparkPlan.md) using [execution planning strategies](#strategies) with support for extension points:

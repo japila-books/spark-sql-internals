@@ -1,3 +1,8 @@
+---
+title: DataSource
+subtitle: Pluggable Data Provider Framework
+---
+
 # DataSource &mdash; Pluggable Data Provider Framework
 
 `DataSource` paves the way for **Pluggable Data Provider Framework** in Spark SQL.

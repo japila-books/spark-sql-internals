@@ -1,3 +1,8 @@
+---
+title: StaticSQLConf
+subtitle: Static Configuration Properties
+---
+
 # StaticSQLConf &mdash; Static Configuration Properties
 
 `StaticSQLConf` holds cross-session, immutable and static SQL configuration properties.

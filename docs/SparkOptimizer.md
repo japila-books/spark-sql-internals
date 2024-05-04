@@ -1,3 +1,8 @@
+---
+title: SparkOptimizer
+subtitle: Logical Query Plan Optimizer
+---
+
 # SparkOptimizer &mdash; Logical Query Plan Optimizer
 
 `SparkOptimizer` is a concrete [logical query plan optimizer](catalyst/Optimizer.md).
