@@ -1,3 +1,8 @@
+---
+title: SparkSqlParser
+subtitle: Default SQL Parser
+---
+
 # SparkSqlParser &mdash; Default SQL Parser
 
 `SparkSqlParser` is a [SQL parser](AbstractSqlParser.md) to extract Catalyst expressions, plans, table identifiers from SQL texts using [SparkSqlAstBuilder](SparkSqlAstBuilder.md) (as [AstBuilder](AbstractSqlParser.md#astBuilder)).

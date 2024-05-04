@@ -139,17 +139,17 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] identifierReference
 
 ANTLR labeled alternative: `#createTable`
 
-### CREATE VIEW AS { #visitCreateView }
+### CREATE VIEW { #visitCreateView }
 
-Creates either a [CreateViewCommand](../logical-operators/CreateViewCommand.md) or a [CreateView](../logical-operators/CreateView.md) logical operator for `CREATE VIEW AS` SQL statement.
+Creates either a [CreateViewCommand](../logical-operators/CreateViewCommand.md) or a [CreateView](../logical-operators/CreateView.md) logical operator for `CREATE VIEW` SQL statement, for temporary or persisted views, respectively
 
 ```sql
-CREATE [OR REPLACE] [[GLOBAL] TEMPORARY] VIEW [IF NOT EXISTS] name
-  [identifierComment (, identifierComment)*]
-  [COMMENT STRING]
+CREATE [OR REPLACE] [[GLOBAL] TEMPORARY] VIEW [IF NOT EXISTS] view_name
+  [column_alias [COMMENT column_comment] (, column_alias [COMMENT column_comment])*]
+  [COMMENT view_comment]
   [PARTITIONED ON identifierList]
   [TBLPROPERTIES propertyList]
-AS query
+  AS query
 ```
 
 ANTLR labeled alternative: `#createView`
