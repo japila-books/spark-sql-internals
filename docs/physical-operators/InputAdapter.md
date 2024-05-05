@@ -1,3 +1,7 @@
+---
+title: InputAdapter
+---
+
 # InputAdapter Unary Physical Operator
 
 `InputAdapter` is a [unary physical operator](UnaryExecNode.md) that is an adapter for the [child](../catalyst/TreeNode.md#children) physical operator that does not meet the requirements of [whole-stage Java code generation](CodegenSupport.md) (possibly due to [supportCodegen](CodegenSupport.md#supportCodegen) flag turned off) but is between operators that participate in whole-stage Java code generation optimization.

@@ -1,3 +1,7 @@
+---
+title: ShuffledJoin
+---
+
 # ShuffledJoin Physical Operators
 
 `ShuffledJoin` is an [extension](#contract) of the [JoinCodegenSupport](JoinCodegenSupport.md) abstraction for [join operators](#implementations) that shuffle two child relations using some join keys.

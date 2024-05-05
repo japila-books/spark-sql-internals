@@ -1,3 +1,7 @@
+---
+title: ShuffledHashJoinExec
+---
+
 # ShuffledHashJoinExec Physical Operator
 
 `ShuffledHashJoinExec` is a [ShuffledJoin](#ShuffledJoin) and [HashJoin](#HashJoin) for [shuffle-hash join](#doExecute).

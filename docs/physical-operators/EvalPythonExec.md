@@ -1,3 +1,7 @@
+---
+title: EvalPythonExec
+---
+
 # EvalPythonExec Physical Operators
 
 `EvalPythonExec` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [unary physical operators](#implementations) that can [evaluate PythonUDFs](#evaluate).

@@ -1,3 +1,7 @@
+---
+title: ExecutedCommandExec
+---
+
 # ExecutedCommandExec Physical Operator
 
 `ExecutedCommandExec` is a leaf physical operator for executing [runnable logical commands](../logical-operators/RunnableCommand.md).

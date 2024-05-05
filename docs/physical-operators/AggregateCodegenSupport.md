@@ -1,3 +1,7 @@
+---
+title: AggregateCodegenSupport
+---
+
 # AggregateCodegenSupport Physical Operators
 
 `AggregateCodegenSupport` is an [extension](#contract) of the [BaseAggregateExec](BaseAggregateExec.md) abstraction for [aggregate physical operators](#implementations) that support [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) (with [produce](#doProduce) and [consume](#doConsume) code execution paths).

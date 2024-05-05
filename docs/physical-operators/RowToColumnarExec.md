@@ -1,3 +1,7 @@
+---
+title: RowToColumnarExec
+---
+
 # RowToColumnarExec Physical Operator
 
 `RowToColumnarExec` is a `RowToColumnarTransition` for [Columnar Execution](../columnar-execution/index.md).

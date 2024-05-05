@@ -1,3 +1,7 @@
+---
+title: ShuffleExchangeLike
+---
+
 # ShuffleExchangeLike Physical Operators
 
 `ShuffleExchangeLike` is an [extension](#contract) of the [Exchange](Exchange.md) abstraction for [physical operators](#implementations).

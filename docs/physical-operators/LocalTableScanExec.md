@@ -1,3 +1,7 @@
+---
+title: LocalTableScanExec
+---
+
 # LocalTableScanExec Leaf Physical Operator
 
 `LocalTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) that represents the following at execution:

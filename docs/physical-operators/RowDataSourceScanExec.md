@@ -1,3 +1,7 @@
+---
+title: RowDataSourceScanExec
+---
+
 # RowDataSourceScanExec Leaf Physical Operator
 
 `RowDataSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) (and so indirectly a leaf physical operator) for scanning data from a [BaseRelation](#relation).

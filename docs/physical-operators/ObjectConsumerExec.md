@@ -1,4 +1,8 @@
-# ObjectConsumerExec -- Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema
+---
+title: ObjectConsumerExec
+---
+
+# ObjectConsumerExec &mdash; Unary Physical Operators with Child Physical Operator with One-Attribute Output Schema
 
 `ObjectConsumerExec` is the <<contract, contract>> of <<implementations, unary physical operators>> with the child physical operator using a one-attribute <<catalyst/QueryPlan.md#output, output schema>>.
 

@@ -1,3 +1,7 @@
+---
+title: ReusedSubqueryExec
+---
+
 # ReusedSubqueryExec Physical Operator
 
 `ReusedSubqueryExec` is a [BaseSubqueryExec](BaseSubqueryExec.md) and a `LeafExecNode` with a [child BaseSubqueryExec](#child) physical operator.

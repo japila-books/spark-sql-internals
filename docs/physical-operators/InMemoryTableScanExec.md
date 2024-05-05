@@ -1,3 +1,7 @@
+---
+title: InMemoryTableScanExec
+---
+
 # InMemoryTableScanExec Leaf Physical Operator
 
 `InMemoryTableScanExec` is a [leaf physical operator](SparkPlan.md#LeafExecNode) that represents an [InMemoryRelation](#relation) logical operator at execution time.

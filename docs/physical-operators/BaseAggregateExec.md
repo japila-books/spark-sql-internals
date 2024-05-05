@@ -1,3 +1,7 @@
+---
+title: BaseAggregateExec
+---
+
 # BaseAggregateExec Unary Physical Operators
 
 `BaseAggregateExec` is an [extension](#contract) of the [UnaryExecNode](UnaryExecNode.md) abstraction for [aggregate unary physical operators](#implementations).

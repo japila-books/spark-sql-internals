@@ -1,3 +1,7 @@
+---
+title: ShuffleQueryStageExec
+---
+
 # ShuffleQueryStageExec Adaptive Leaf Physical Operator
 
 `ShuffleQueryStageExec` is a [QueryStageExec](QueryStageExec.md) with either [ShuffleExchangeExec](ShuffleExchangeExec.md) or [ReusedExchangeExec](ReusedExchangeExec.md) child operators.

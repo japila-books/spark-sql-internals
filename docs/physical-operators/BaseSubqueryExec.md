@@ -1,3 +1,7 @@
+---
+title: BaseSubqueryExec
+---
+
 # BaseSubqueryExec Physical Operators
 
 `BaseSubqueryExec` is an [extension](#contract) of the [SparkPlan](SparkPlan.md) abstraction for [physical operators](#implementations) with a [child subquery plan](#child).

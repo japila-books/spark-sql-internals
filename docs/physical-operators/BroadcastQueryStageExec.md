@@ -1,3 +1,7 @@
+---
+title: BroadcastQueryStageExec
+---
+
 # BroadcastQueryStageExec Physical Operator
 
 `BroadcastQueryStageExec` is a [QueryStageExec](QueryStageExec.md).

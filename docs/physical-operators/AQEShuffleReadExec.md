@@ -1,3 +1,7 @@
+---
+title: AQEShuffleReadExec
+---
+
 # AQEShuffleReadExec Physical Operator
 
 `AQEShuffleReadExec` is a [unary physical operator](UnaryExecNode.md) in [Adaptive Query Execution](../adaptive-query-execution/index.md).

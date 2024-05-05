@@ -1,3 +1,7 @@
+---
+title: WholeStageCodegenExec
+---
+
 # WholeStageCodegenExec Physical Operator
 
 `WholeStageCodegenExec` is a [unary physical operator](UnaryExecNode.md) that (alongside [InputAdapter](InputAdapter.md)) lays the foundation for the [Whole-Stage Java Code Generation](../whole-stage-code-generation/index.md) for a **Codegened Execution Pipeline** of a structured query.

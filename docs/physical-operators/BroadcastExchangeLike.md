@@ -1,3 +1,7 @@
+---
+title: BroadcastExchangeLike
+---
+
 # BroadcastExchangeLike Physical Operators
 
 `BroadcastExchangeLike` is an [extension](#contract) of the [Exchange](Exchange.md) abstraction for [physical operators](#implementations) that...FIXME

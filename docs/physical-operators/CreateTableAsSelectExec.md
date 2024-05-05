@@ -1,3 +1,7 @@
+---
+title: CreateTableAsSelectExec
+---
+
 # CreateTableAsSelectExec Physical Command
 
 `CreateTableAsSelectExec` is a [TableWriteExecHelper](TableWriteExecHelper.md) that represents [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) logical operator at execution time.

@@ -1,3 +1,7 @@
+---
+title: BroadcastExchangeExec
+---
+
 # BroadcastExchangeExec Unary Physical Operator for Broadcast Joins
 
 `BroadcastExchangeExec` is an [BroadcastExchangeLike](BroadcastExchangeLike.md) unary physical operator to collect and broadcast rows of a child relation (to worker nodes).

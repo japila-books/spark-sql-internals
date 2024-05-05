@@ -1,3 +1,7 @@
+---
+title: DataSourceScanExec
+---
+
 # DataSourceScanExec Leaf Physical Operators
 
 `DataSourceScanExec` is an [extension](#contract) of the `LeafExecNode` abstraction for [leaf physical operators](#implementations) that represent scans over a [BaseRelation](#relation).

@@ -1,3 +1,7 @@
+---
+title: SerializeFromObjectExec
+---
+
 # SerializeFromObjectExec Unary Physical Operator
 
 `SerializeFromObjectExec` is a [unary physical operator](UnaryExecNode.md) that supports [Java code generation](CodegenSupport.md).

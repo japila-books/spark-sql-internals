@@ -1,3 +1,7 @@
+---
+title: FileSourceScanExec
+---
+
 # FileSourceScanExec Physical Operator
 
 `FileSourceScanExec` is a [DataSourceScanExec](DataSourceScanExec.md) that represents a scan over a [HadoopFsRelation](#relation).

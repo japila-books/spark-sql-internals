@@ -1,3 +1,7 @@
+---
+title: ColumnarToRowExec
+---
+
 # ColumnarToRowExec Physical Operator
 
 `ColumnarToRowExec` is a [ColumnarToRowTransition](ColumnarToRowTransition.md) unary physical operator to [translate an RDD of ColumnarBatches into an RDD of InternalRows](#doExecute) in [Columnar Processing](../columnar-execution/index.md).

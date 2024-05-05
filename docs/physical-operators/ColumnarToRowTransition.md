@@ -1,3 +1,7 @@
+---
+title: ColumnarToRowTransition
+---
+
 # ColumnarToRowTransition Unary Physical Operators
 
 `ColumnarToRowTransition` is a marker extension of the [UnaryExecNode](UnaryExecNode.md) abstraction for [unary physical operators](#implementations) that can transition from columns to rows (when [executed](SparkPlan.md#doExecute)).

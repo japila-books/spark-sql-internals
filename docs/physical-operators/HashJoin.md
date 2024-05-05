@@ -1,3 +1,7 @@
+---
+title: HashJoin
+---
+
 # HashJoin &mdash; Hash-Based Join Physical Operators
 
 `HashJoin` is an [extension](#contract) of the [JoinCodegenSupport](JoinCodegenSupport.md) abstraction for [hash-based join physical operators](#implementations) with support for [Java code generation](#CodegenSupport).

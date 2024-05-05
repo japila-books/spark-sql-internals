@@ -1,3 +1,7 @@
+---
+title: SortExec
+---
+
 # SortExec Physical Operator
 
 `SortExec` is a [unary physical operator](UnaryExecNode.md) that (most importantly) represents [Sort](../logical-operators/Sort.md) logical operator at execution.

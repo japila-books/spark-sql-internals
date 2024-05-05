@@ -1,3 +1,7 @@
+---
+title: DataWritingCommandExec
+---
+
 # DataWritingCommandExec Physical Operator
 
 `DataWritingCommandExec` is a [UnaryExecNode](UnaryExecNode.md) that is the execution environment for a [DataWritingCommand](#cmd) logical command at [execution time](#doExecute).

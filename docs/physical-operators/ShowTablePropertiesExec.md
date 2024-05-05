@@ -1,3 +1,7 @@
+---
+title: ShowTablePropertiesExec
+---
+
 # ShowTablePropertiesExec Physical Command
 
 `ShowTablePropertiesExec` is a [physical command](V2CommandExec.md) that represents [ShowTableProperties](../logical-operators/ShowTableProperties.md) logical command at execution time (for non-[ShowTablePropertiesCommand](../logical-operators/ShowTablePropertiesCommand.md) cases).

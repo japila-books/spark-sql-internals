@@ -1,3 +1,7 @@
+---
+title: PartitioningPreservingUnaryExecNode
+---
+
 # PartitioningPreservingUnaryExecNode Unary Physical Operators
 
 `PartitioningPreservingUnaryExecNode` is an extension of the [UnaryExecNode](UnaryExecNode.md) abstraction for [unary physical operators](#implementations) with well-determined [output partitioning](#outputPartitioning).

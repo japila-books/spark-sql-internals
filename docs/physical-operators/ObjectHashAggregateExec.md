@@ -1,3 +1,7 @@
+---
+title: ObjectHashAggregateExec
+---
+
 # ObjectHashAggregateExec Physical Operator
 
 `ObjectHashAggregateExec` is an [aggregate unary physical operator](BaseAggregateExec.md) for **object aggregation**.

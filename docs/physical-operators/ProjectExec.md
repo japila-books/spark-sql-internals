@@ -1,3 +1,7 @@
+---
+title: ProjectExec
+---
+
 # ProjectExec Unary Physical Operator
 
 `ProjectExec` is a [unary physical operator](UnaryExecNode.md) with support for [Java code generation](CodegenSupport.md) that represents [Project](../logical-operators/Project.md) logical operator at execution.

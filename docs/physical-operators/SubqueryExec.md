@@ -1,3 +1,7 @@
+---
+title: SubqueryExec
+---
+
 # SubqueryExec Unary Physical Operator
 
 `SubqueryExec` is a [unary physical operator](UnaryExecNode.md).

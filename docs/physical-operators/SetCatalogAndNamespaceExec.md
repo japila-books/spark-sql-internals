@@ -1,3 +1,7 @@
+---
+title: SetCatalogAndNamespaceExec
+---
+
 # SetCatalogAndNamespaceExec Physical Command
 
 `SetCatalogAndNamespaceExec` is a [physical command](V2CommandExec.md) that represents [SetCatalogAndNamespace](../logical-operators/SetCatalogAndNamespace.md) logical command at execution time.

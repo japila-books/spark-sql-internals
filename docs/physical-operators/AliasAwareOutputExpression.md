@@ -1,3 +1,7 @@
+---
+title: AliasAwareOutputExpression
+---
+
 # AliasAwareOutputExpression Physical Operators
 
 `AliasAwareOutputExpression` is an [abstraction](#contract) of [physical operators](#implementations) with the [output named expressions](#outputExpressions).

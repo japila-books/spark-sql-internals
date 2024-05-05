@@ -1,3 +1,7 @@
+---
+title: BatchWriteHelper
+---
+
 # BatchWriteHelper Physical Operators
 
 `BatchWriteHelper` is an [abstraction](#contract) of [physical operators](#implementations) that [build batch writes](#newWriteBuilder).

@@ -1,3 +1,7 @@
+---
+title: DescribeTableExec
+---
+
 # DescribeTableExec Physical Command
 
 `DescribeTableExec` is a [physical command](V2CommandExec.md) that represents [DescribeRelation](../logical-operators/DescribeRelation.md) logical command at execution time.

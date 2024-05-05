@@ -1,3 +1,7 @@
+---
+title: CollectMetricsExec
+---
+
 # CollectMetricsExec Physical Operator
 
 `CollectMetricsExec` is a [unary physical operator](UnaryExecNode.md).

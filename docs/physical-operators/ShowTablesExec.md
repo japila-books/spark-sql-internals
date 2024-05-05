@@ -1,3 +1,7 @@
+---
+title: ShowTablesExec
+---
+
 # ShowTablesExec Physical Command
 
 `ShowTablesExec` is a [physical command](V2CommandExec.md) that represents a [ShowTables](../logical-operators/ShowTables.md) logical command at execution time.

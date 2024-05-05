@@ -1,3 +1,7 @@
+---
+title: AliasAwareQueryOutputOrdering
+---
+
 # AliasAwareQueryOutputOrdering Unary Physical Operators
 
 `AliasAwareQueryOutputOrdering` is an [extension](#contract) of the [AliasAwareOutputExpression](AliasAwareOutputExpression.md) abstraction for [unary physical operators](#implementations) with [alias-aware ordering expressions](#orderingExpressions).

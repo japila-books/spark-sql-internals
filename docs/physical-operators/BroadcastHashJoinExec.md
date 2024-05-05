@@ -1,3 +1,7 @@
+---
+title: BroadcastHashJoinExec
+---
+
 # BroadcastHashJoinExec Physical Operator
 
 `BroadcastHashJoinExec` is a [hash-based join physical operator](HashJoin.md) for [broadcast hash join](#doExecute).
