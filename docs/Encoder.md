@@ -11,7 +11,7 @@
 
 `Encoder` is also called _"a container of serde expressions in Dataset"_.
 
-`Encoder` is a part of [Dataset](Dataset.md)s (to serialize and deserialize the records of this dataset).
+`Encoder` is a part of [Dataset](dataset/index.md)s (to serialize and deserialize the records of this dataset).
 
 `Encoder` knows the [schema](#schema) of the records and that is how they offer significantly faster serialization and deserialization (comparing to the default Java or Kryo serializers).
 

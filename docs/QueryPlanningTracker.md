@@ -11,7 +11,7 @@ Phase | Description
 
 ## Accessing QueryPlanningTracker
 
-`QueryPlanningTracker` of a structured query is available using [QueryExecution](Dataset.md#queryExecution).
+`QueryPlanningTracker` of a structured query is available using [QueryExecution](dataset/index.md#queryExecution).
 
 ```scala
 val df_ops = spark.range(1000).selectExpr("count(*)")

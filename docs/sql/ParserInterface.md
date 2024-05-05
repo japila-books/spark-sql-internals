@@ -36,7 +36,7 @@ Creates an [Expression](../expressions/Expression.md) from the given SQL text
 
 Used when:
 
-* `Dataset` is requested to [selectExpr](../dataset-operators.md#selectExpr), [filter](../dataset-operators.md#filter), [where](../dataset-operators.md#where)
+* `Dataset` is requested to [selectExpr](../dataset/index.md#selectExpr), [filter](../dataset/index.md#filter), [where](../dataset/index.md#where)
 * [expr](../standard-functions/index.md#expr) standard function is used
 
 ### <span id="parseFunctionIdentifier"> parseFunctionIdentifier
@@ -100,7 +100,7 @@ Used when:
 
 * `DataFrameWriter` is requested to [insertInto](../DataFrameWriter.md#insertInto) and [saveAsTable](../DataFrameWriter.md#saveAsTable)
 
-* `Dataset` is requested to [createTempViewCommand](../dataset-basic-actions.md#createTempViewCommand)
+* `Dataset` is requested to [createTempViewCommand](../dataset/basic-actions.md#createTempViewCommand)
 
 * `SparkSession` is requested to [table](../SparkSession.md#table)
 

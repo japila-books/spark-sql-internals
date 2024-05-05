@@ -14,7 +14,7 @@ The files that this relation will read when scanning
 
 Used when:
 
-* `Dataset` is requested for the [inputFiles](Dataset.md#inputFiles)
+* `Dataset` is requested for the [inputFiles](dataset/index.md#inputFiles)
 
 ## Implementations
 

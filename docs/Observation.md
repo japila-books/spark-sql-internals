@@ -1,6 +1,6 @@
 # Observation
 
-`Observation` is used to simplify observing named metrics in batch queries using [Dataset.observe](Dataset.md#observe).
+`Observation` is used to simplify observing named metrics in batch queries using [Dataset.observe](dataset/index.md#observe).
 
 ```scala
 val observation = Observation("name")

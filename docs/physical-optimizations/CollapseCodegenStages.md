@@ -23,7 +23,7 @@ When [executed](#apply) (with [whole-stage code generation enabled](../whole-sta
 With [spark.sql.codegen.wholeStage](../configuration-properties.md#spark.sql.codegen.wholeStage) internal configuration property enabled, `CollapseCodegenStages` [finds physical operators with CodegenSupport](#insertWholeStageCodegen) for which [whole-stage codegen requirements hold](#supportCodegen) and collapses them together as `WholeStageCodegenExec` physical operator (possibly with [InputAdapter](../physical-operators/InputAdapter.md) in-between for physical operators with no support for Java code generation).
 
 ??? note InputAdapter
-    `InputAdapter` [shows itself with no star in the output](../physical-operators/InputAdapter.md#generateTreeString) of [explain](../dataset-operators.md#explain) (or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString)).
+    `InputAdapter` [shows itself with no star in the output](../physical-operators/InputAdapter.md#generateTreeString) of [explain](../dataset/index.md#explain) (or [TreeNode.numberedTreeString](../catalyst/TreeNode.md#numberedTreeString)).
 
     ```text
     val q = spark.range(1).groupBy("id").count

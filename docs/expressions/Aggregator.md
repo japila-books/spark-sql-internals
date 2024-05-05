@@ -98,7 +98,7 @@ Used when:
 toColumn: TypedColumn[IN, OUT]
 ```
 
-`toColumn` converts the `Aggregator` to a [TypedColumn](../TypedColumn.md) (that can be used with [Dataset.select](../dataset-operators.md#select) and [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operators).
+`toColumn` converts the `Aggregator` to a [TypedColumn](../TypedColumn.md) (that can be used with [Dataset.select](../dataset/index.md#select) and [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operators).
 
 ## Demo
 

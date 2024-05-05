@@ -4,7 +4,7 @@ title: Actions
 
 # Dataset API &nbsp; Actions
 
-**Actions** are part of the <<dataset-operators.md#, Dataset API>> for...FIXME
+**Actions** are part of the <<dataset/index.md#, Dataset API>> for...FIXME
 
 <!---
 ## Review Me

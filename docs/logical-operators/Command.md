@@ -6,7 +6,7 @@ title: Command
 
 `Command` is an extension of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that are executed early in the [query plan lifecycle](../QueryExecution.md#query-plan-lifecycle) (unlike logical operators in general).
 
-`Command` is a marker interface for logical operators that are executed when a `Dataset` is requested for the [logical plan](../Dataset.md#logicalPlan) (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
+`Command` is a marker interface for logical operators that are executed when a `Dataset` is requested for the [logical plan](../dataset/index.md#logicalPlan) (which is after the query has been [analyzed](../QueryExecution.md#analyzed)).
 
 ## Implementations
 

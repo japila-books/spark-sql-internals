@@ -4,7 +4,7 @@ title: MapPartitions
 
 # MapPartitions Unary Logical Operator
 
-`MapPartitions` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent [Dataset.mapPartitions](../Dataset.md#mapPartitions) operator in a logical query plan.
+`MapPartitions` is a [unary logical operator](LogicalPlan.md#UnaryNode) to represent [Dataset.mapPartitions](../dataset/index.md#mapPartitions) operator in a logical query plan.
 
 `MapPartitions` is an `ObjectConsumer` and an `ObjectProducer`.
 
@@ -18,7 +18,7 @@ title: MapPartitions
 
 `MapPartitions` is created (indirectly using [apply](#apply) utility) when:
 
-* [Dataset.mapPartitions](../Dataset.md#mapPartitions) operator is used
+* [Dataset.mapPartitions](../dataset/index.md#mapPartitions) operator is used
 
 ## Query Planning
 
@@ -36,7 +36,7 @@ apply[T : Encoder, U : Encoder](
 
 `apply` is used when:
 
-* [Dataset.mapPartitions](../Dataset.md#mapPartitions) operator is used
+* [Dataset.mapPartitions](../dataset/index.md#mapPartitions) operator is used
 
 ## Demo
 

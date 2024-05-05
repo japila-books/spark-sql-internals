@@ -14,7 +14,7 @@ q.debugCodegen
 !!! tip "Package Objects"
     Read up on [Package Objects](https://www.scala-lang.org/docu/files/packageobjects/packageobjects.html) in the Scala programming language.
 
-[debug](#debug) and [debugCodegen](#debugCodegen) are part of an implicit class (`DebugQuery`) that takes a [Dataset](Dataset.md) when created (that is the query to execute`debug` on).
+[debug](#debug) and [debugCodegen](#debugCodegen) are part of an implicit class (`DebugQuery`) that takes a [Dataset](dataset/index.md) when created (that is the query to execute`debug` on).
 
 !!! tip
     Read up on [Implicit Classes](https://docs.scala-lang.org/overviews/core/implicit-classes.html) in the official documentation of the Scala programming language.
@@ -150,7 +150,7 @@ debugCodegen(): Unit
 
 ### Review Me
 
-`debugCodegen` requests the [QueryExecution](Dataset.md#queryExecution) (of the [structured query](#query)) for the [optimized physical query plan](QueryExecution.md#executedPlan).
+`debugCodegen` requests the [QueryExecution](dataset/index.md#queryExecution) (of the [structured query](#query)) for the [optimized physical query plan](QueryExecution.md#executedPlan).
 
 In the end, `debugCodegen` prints out the result to the standard output.
 

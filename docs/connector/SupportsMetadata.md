@@ -1,6 +1,6 @@
 # SupportsMetadata
 
-`SupportsMetadata` is an [abstraction](#contract) of [file-based scan operators](#implementations) that can [report custom metadata](#getMetaData) for formatted explain (e.g., [Dataset.explain](../Dataset.md#explain) or [EXPLAIN FORMATTED](../logical-operators/ExplainCommand.md) SQL statement).
+`SupportsMetadata` is an [abstraction](#contract) of [file-based scan operators](#implementations) that can [report custom metadata](#getMetaData) for formatted explain (e.g., [Dataset.explain](../dataset/index.md#explain) or [EXPLAIN FORMATTED](../logical-operators/ExplainCommand.md) SQL statement).
 
 === "Spark Shell"
 

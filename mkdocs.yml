@@ -672,11 +672,14 @@ nav:
     - ColumnarRule: ColumnarRule.md
     - ... | connector/**.md
     - ... | types/**.md
-    - Dataset: Dataset.md
     - DataFrame: DataFrame.md
-    - DataFrameReader: DataFrameReader.md
-    - DataFrameWriter: DataFrameWriter.md
-    - DataFrameWriterV2: DataFrameWriterV2.md
+    - DataFrameNaFunctions.md
+    - DataFrameReader.md
+    - DataFrameStatFunctions.md
+    - DataFrameWriter.md
+    - DataFrameWriterV2.md
+    - Dataset.md
+    - ... | dataset/**.md
     - DataSource V1 API:
       - DataSourceRegister: DataSourceRegister.md
       - CreatableRelationProvider: CreatableRelationProvider.md
@@ -724,14 +727,6 @@ nav:
     - Data Source API:
       - CreateTableWriter: CreateTableWriter.md
       - WriteConfigMethods: WriteConfigMethods.md
-    - Dataset API:
-      - dataset-operators.md
-      - dataset-typed-transformations.md
-      - dataset-untyped-transformations.md
-      - dataset-basic-actions.md
-      - dataset-actions.md
-      - DataFrameNaFunctions.md
-      - DataFrameStatFunctions.md
     - Column Operators: spark-sql-column-operators.md
     - Caching and Persistence:
       - Caching and Persistence: caching-and-persistence.md

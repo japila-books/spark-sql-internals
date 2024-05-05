@@ -1,6 +1,6 @@
 # RowEncoder
 
-`RowEncoder` is part of the [Encoder framework](Encoder.md) and is used as the encoder of [DataFrame](DataFrame.md)s ([Dataset](Dataset.md)s of [Row](Row.md)s).
+`RowEncoder` is part of the [Encoder framework](Encoder.md) and is used as the encoder of [DataFrame](DataFrame.md)s ([Dataset](dataset/index.md)s of [Row](Row.md)s).
 
 !!! note
     `DataFrame` type is a type alias for `Dataset[Row]` that expects an `Encoder[Row]` available in scope which is `RowEncoder` itself.

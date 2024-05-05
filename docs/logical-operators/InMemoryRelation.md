@@ -31,7 +31,7 @@ The `CachedRDDBuilder` is used by the following:
 
 The `CachedRDDBuilder` is used to access [storageLevel](../cache-serialization/CachedRDDBuilder.md#storageLevel) when (when the `Dataset` is [cached](../CacheManager.md#lookupCachedData)):
 
-* [Dataset.storageLevel](../Dataset.md#storageLevel) operator is used
+* [Dataset.storageLevel](../dataset/index.md#storageLevel) operator is used
 * `AlterTableRenameCommand` is executed
 * `DataSourceV2Strategy` execution planning strategy is requested to [invalidateTableCache](../execution-planning-strategies/DataSourceV2Strategy.md#invalidateTableCache) (to plan a `RenameTable` unary logical command)
 * [PartitionPruning](../logical-optimizations/PartitionPruning.md) logical optimization is executed (and [calculatePlanOverhead](../logical-optimizations/PartitionPruning.md#calculatePlanOverhead))

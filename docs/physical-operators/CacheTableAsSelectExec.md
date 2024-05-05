@@ -53,7 +53,7 @@ title: CacheTableAsSelectExec
     [Logical query plan](../logical-operators/CreateViewCommand.md#plan) | this [query](#query)
     [ViewType](../logical-operators/CreateViewCommand.md#viewType) | `LocalTempView`
 
-In the end, `planToCache` requests the [dataFrameForCachedPlan](#dataFrameForCachedPlan) for the [logical plan](../Dataset.md#logicalPlan).
+In the end, `planToCache` requests the [dataFrameForCachedPlan](#dataFrameForCachedPlan) for the [logical plan](../dataset/index.md#logicalPlan).
 
 ## dataFrameForCachedPlan { #dataFrameForCachedPlan }
 

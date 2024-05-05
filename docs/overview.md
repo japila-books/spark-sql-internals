@@ -4,7 +4,7 @@
 
 **Spark SQL** allows expressing distributed in-memory computations using [relational operators](logical-operators/index.md).
 
-Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (incl. HiveQL) and the high-level SQL-like functional declarative [Dataset API](Dataset.md) (_Structured Query DSL_).
+Spark SQL is a relational framework for ingesting, querying and persisting (semi)structured data using **structured queries** (aka **relational queries**) that can be expressed in _good ol'_ **SQL** (incl. HiveQL) and the high-level SQL-like functional declarative [Dataset API](dataset/index.md) (_Structured Query DSL_).
 
 !!! note
     Semi- and structured data are collections of records that can be described using [schema](types/index.md) with column names, their types and whether a column can be null or not (_nullability_).
@@ -13,7 +13,7 @@ Spark SQL comes with a uniform and pluggable interface for data access in distri
 
 Spark SQL allows you to execute SQL-like queries on large volume of data that can live in Hadoop HDFS or Hadoop-compatible file systems like S3. It can access data from different data sources - files or tables.
 
-Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a [Dataset](Dataset.md) (with a mandatory [Encoder](Encoder.md)).
+Whichever query interface you use to describe a structured query, i.e. SQL or Query DSL, the query becomes a [Dataset](dataset/index.md) (with a mandatory [Encoder](Encoder.md)).
 
 !!! quote "[Shark, Spark SQL, Hive on Spark, and the future of SQL on Apache Spark](https://databricks.com/blog/2014/07/01/shark-spark-sql-hive-on-spark-and-the-future-of-sql-on-spark.html)"
     For **SQL users**, Spark SQL provides state-of-the-art SQL performance and maintains compatibility with Shark/Hive. In particular, like Shark, Spark SQL supports all existing Hive data formats, user-defined functions (UDF), and the Hive metastore.
@@ -24,9 +24,9 @@ Whichever query interface you use to describe a structured query, i.e. SQL or Qu
 
 ## Dataset Data Structure
 
-The main data abstraction of Spark SQL is [Dataset](Dataset.md) that represents a **structured data** (records with a known schema). This structured data representation `Dataset` enables [compact binary representation](tungsten/index.md) using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
+The main data abstraction of Spark SQL is [Dataset](dataset/index.md) that represents a **structured data** (records with a known schema). This structured data representation `Dataset` enables [compact binary representation](tungsten/index.md) using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
-`Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](dataset-operators.md) (as in the good old days of RDD API in Spark Core).
+`Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](dataset/index.md) (as in the good old days of RDD API in Spark Core).
 
 Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 

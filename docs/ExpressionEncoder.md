@@ -3,7 +3,7 @@
 `ExpressionEncoder[T]` is the only built-in [Encoder](Encoder.md).
 
 !!! important
-    `ExpressionEncoder` is the only supported [Encoder](Encoder.md) which is enforced when `Dataset` [is created](Dataset.md#exprEnc) (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
+    `ExpressionEncoder` is the only supported [Encoder](Encoder.md) which is enforced when `Dataset` [is created](dataset/index.md#exprEnc) (even though `Dataset` data structure accepts a _bare_ `Encoder[T]`).
 
 ## Creating Instance
 
@@ -94,7 +94,7 @@ tuple(
 
 `tuple` is used when:
 
-* `Dataset` is requested to [selectUntyped](Dataset.md#selectUntyped), [select](Dataset.md#select), [joinWith](Dataset.md#joinWith)
+* `Dataset` is requested to [selectUntyped](dataset/index.md#selectUntyped), [select](dataset/index.md#select), [joinWith](dataset/index.md#joinWith)
 * `KeyValueGroupedDataset` is requested to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped)
 * `Encoders` utility is used to [tuple](Encoders.md#tuple)
 * `ReduceAggregator` is requested for `bufferEncoder`
@@ -128,7 +128,7 @@ resolveAndBind(
 
 `resolveAndBind` is used when:
 
-* `Dataset` is requested for [resolvedEnc](Dataset.md#resolvedEnc)
+* `Dataset` is requested for [resolvedEnc](dataset/index.md#resolvedEnc)
 * _others_
 
 ### Demo

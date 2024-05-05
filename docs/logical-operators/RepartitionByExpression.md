@@ -18,7 +18,7 @@ title: RepartitionByExpression
 
 `RepartitionByExpression` is created when:
 
-* [Dataset.repartition](../Dataset.md#repartition) and [Dataset.repartitionByRange](../Dataset.md#repartitionByRange) operators
+* [Dataset.repartition](../dataset/index.md#repartition) and [Dataset.repartitionByRange](../dataset/index.md#repartitionByRange) operators
 * `COALESCE`, `REPARTITION` and `REPARTITION_BY_RANGE` hints (via [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical analysis rule)
 * `DISTRIBUTE BY` and `CLUSTER BY` SQL clauses (via [SparkSqlAstBuilder](../sql/SparkSqlAstBuilder.md#withRepartitionByExpression))
 

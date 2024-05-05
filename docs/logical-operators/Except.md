@@ -7,7 +7,7 @@ title: Except
 `Except` is a `SetOperation` binary logical operator that represents the following high-level operators (in a logical plan):
 
 * `EXCEPT [ DISTINCT | ALL ]` and `MINUS [ DISTINCT | ALL ]` SQL statements (cf. [AstBuilder](../sql/AstBuilder.md#visitSetOperation))
-* [Dataset.except](../Dataset.md#except) and [Dataset.exceptAll](../Dataset.md#exceptAll)
+* [Dataset.except](../dataset/index.md#except) and [Dataset.exceptAll](../dataset/index.md#exceptAll)
 
 ## Creating Instance
 
@@ -20,7 +20,7 @@ title: Except
 `Except` is created when:
 
 * `AstBuilder` is requested to [visit a SetOperation](../sql/AstBuilder.md#visitSetOperation) (`EXCEPT` and `MINUS` operators)
-* [Dataset.except](../Dataset.md#except) and [Dataset.exceptAll](../Dataset.md#exceptAll) operators are used
+* [Dataset.except](../dataset/index.md#except) and [Dataset.exceptAll](../dataset/index.md#exceptAll) operators are used
 * Catalyst DSL's [except](../catalyst-dsl/DslLogicalPlan.md#except) operator is used
 
 ## Logical Optimization

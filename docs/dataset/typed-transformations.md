@@ -4,7 +4,7 @@ title: Typed Transformations
 
 # Dataset API &mdash; Typed Transformations
 
-**Typed transformations** are part of the Dataset API for transforming a `Dataset` with an [Encoder](Encoder.md) (that is different than [RowEncoder](RowEncoder.md)).
+**Typed transformations** are part of the Dataset API for transforming a `Dataset` with an [Encoder](../Encoder.md) (that is different than [RowEncoder](../RowEncoder.md)).
 
 <!---
 ## Review Me

@@ -6,7 +6,7 @@ title: DataFrameStatFunctions
 
 `DataFrameStatFunctions` API gives the statistic functions to be used in a structured query.
 
-`DataFrameStatFunctions` is available using [stat](dataset-untyped-transformations.md#stat) untyped transformation.
+`DataFrameStatFunctions` is available using [stat](dataset/untyped-transformations.md#stat) untyped transformation.
 
 ```scala
 val q: DataFrame = ...

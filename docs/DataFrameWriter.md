@@ -8,13 +8,13 @@
 
 `DataFrameWriter` ends description of a write specification and does trigger a Spark job (unlike [DataFrameWriter](DataFrameWriter.md)).
 
-`DataFrameWriter` is available using [Dataset.write](Dataset.md#write) operator.
+`DataFrameWriter` is available using [Dataset.write](dataset/index.md#write) operator.
 
 ## Creating Instance
 
 `DataFrameWriter` takes the following to be created:
 
-* <span id="ds"> [Dataset](Dataset.md)
+* <span id="ds"> [Dataset](dataset/index.md)
 
 ### Demo
 
@@ -29,7 +29,7 @@ assert(writer.isInstanceOf[DataFrameWriter])
 
 ## DataFrame { #df }
 
-When [created](#creating-instance), `DataFrameWriter` converts the [Dataset](#ds) to a [DataFrame](Dataset.md#toDF).
+When [created](#creating-instance), `DataFrameWriter` converts the [Dataset](#ds) to a [DataFrame](dataset/index.md#toDF).
 
 ## <span id="format"> Name of Data Source { #source }
 
@@ -55,7 +55,7 @@ insertInto(
   tableName: String): Unit
 ```
 
-`insertInto` requests the [DataFrame](#df) for the [SparkSession](Dataset.md#sparkSession).
+`insertInto` requests the [DataFrame](#df) for the [SparkSession](dataset/index.md#sparkSession).
 
 `insertInto` tries to [look up the TableProvider](#lookupV2Provider) for the [data source](#source).
 
@@ -106,7 +106,7 @@ saveAsTable(
   tableName: String): Unit
 ```
 
-`saveAsTable` requests the [DataFrame](#df) for the [SparkSession](Dataset.md#sparkSession).
+`saveAsTable` requests the [DataFrame](#df) for the [SparkSession](dataset/index.md#sparkSession).
 
 `saveAsTable` tries to [look up the TableProvider](#lookupV2Provider) for the [data source](#source).
 
@@ -174,7 +174,7 @@ Saves a `DataFrame` (the result of executing a structured query) to a data sourc
 Internally, `save` uses `DataSource` to [look up the class of the requested data source](DataSource.md#lookupDataSource) (for the [source](#source) option and the [SQLConf](SessionState.md#conf)).
 
 !!! note
-    `save` uses [SparkSession](Dataset.md#sparkSession) to access the [SessionState](SparkSession.md#sessionState) and in turn the [SQLConf](SessionState.md#conf).
+    `save` uses [SparkSession](dataset/index.md#sparkSession) to access the [SessionState](SparkSession.md#sessionState) and in turn the [SQLConf](SessionState.md#conf).
 
     ```text
     val df: DataFrame = ???
@@ -279,10 +279,10 @@ partitioningAsV2: Seq[Transform]
 saveToV1Source(): Unit
 ```
 
-`saveToV1Source` creates a [DataSource](DataSource.md#apply) (for the [source](#source) class name, the [partitioningColumns](#partitioningColumns) and the [extraOptions](#extraOptions)) and requests it for the [logical command for writing](DataSource.md#planForWriting) (with the [mode](#mode) and the [analyzed logical plan](Dataset.md#logicalPlan) of the structured query).
+`saveToV1Source` creates a [DataSource](DataSource.md#apply) (for the [source](#source) class name, the [partitioningColumns](#partitioningColumns) and the [extraOptions](#extraOptions)) and requests it for the [logical command for writing](DataSource.md#planForWriting) (with the [mode](#mode) and the [analyzed logical plan](dataset/index.md#logicalPlan) of the structured query).
 
 !!! note
-    While requesting the [analyzed logical plan](Dataset.md#logicalPlan) of the structured query, `saveToV1Source` triggers execution of logical commands.
+    While requesting the [analyzed logical plan](dataset/index.md#logicalPlan) of the structured query, `saveToV1Source` triggers execution of logical commands.
 
 In the end, `saveToV1Source` [runs the logical command for writing](#runCommand).
 
@@ -336,7 +336,7 @@ createTable(
 
 `createTable` creates a [CatalogTable](CatalogTable.md) (with the [bucketSpec](CatalogTable.md#bucketSpec) per [getBucketSpec](#getBucketSpec)).
 
-In the end, `createTable` creates a [CreateTable](logical-operators/CreateTable.md) logical command (with the `CatalogTable`, [mode](#mode) and the [logical query plan](Dataset.md#planWithBarrier) of the [dataset](#df)) and [runs](#runCommand) it.
+In the end, `createTable` creates a [CreateTable](logical-operators/CreateTable.md) logical command (with the `CatalogTable`, [mode](#mode) and the [logical query plan](dataset/index.md#planWithBarrier) of the [dataset](#df)) and [runs](#runCommand) it.
 
 ---
 

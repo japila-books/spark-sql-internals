@@ -27,7 +27,7 @@ title: CreateViewCommand
 `CreateViewCommand` is created when:
 
 * [CacheTableAsSelectExec](../physical-operators/CacheTableAsSelectExec.md) physical operator is executed (and requested for [planToCache](../physical-operators/CacheTableAsSelectExec.md#planToCache))
-* [Dataset.createTempViewCommand](../Dataset.md#createTempViewCommand) operator is used
+* [Dataset.createTempViewCommand](../dataset/index.md#createTempViewCommand) operator is used
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [CreateView](CreateView.md) logical operator)
 * `SparkConnectPlanner` is requested to [handleCreateViewCommand](../connect/SparkConnectPlanner.md#handleCreateViewCommand)
 * `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW AS statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
@@ -163,7 +163,7 @@ sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
 
 * <<spark-sql-SparkSqlAstBuilder.md#visitCreateView, CREATE VIEW AS>> SQL statements
 
-* `Dataset` operators: <<dataset-operators.md#createTempView, Dataset.createTempView>>, <<dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
+* `Dataset` operators: <<dataset/index.md#createTempView, Dataset.createTempView>>, <<dataset/index.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset/index.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset/index.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
 
 `CreateViewCommand` works with different <<viewType, view types>>.
 

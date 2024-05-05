@@ -16,7 +16,7 @@ File names to read when scanning this relation
 
 Used when:
 
-* `Dataset` is requested for [inputFiles](../Dataset.md#inputFiles)
+* `Dataset` is requested for [inputFiles](../dataset/index.md#inputFiles)
 * `HadoopFsRelation` is requested for [input files](HadoopFsRelation.md#inputFiles)
 
 ### <span id="listFiles"> Listing Files

@@ -12,7 +12,7 @@ spark.sharedState.cacheManager
 
 ## Dataset.cache and persist Operators
 
-A structured query (as [Dataset](Dataset.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](caching-and-persistence.md#cache) or [Dataset.persist](caching-and-persistence.md#persist) high-level operators.
+A structured query (as [Dataset](dataset/index.md)) can be [cached](#cacheQuery) and registered with `CacheManager` using [Dataset.cache](caching-and-persistence.md#cache) or [Dataset.persist](caching-and-persistence.md#persist) high-level operators.
 
 ## <span id="CachedData"> Cached Queries { #cachedData }
 
@@ -92,7 +92,7 @@ lookupCachedData(
 
 `lookupCachedData` is used when:
 
-* [Dataset.storageLevel](dataset-operators.md#storageLevel) action is used
+* [Dataset.storageLevel](dataset/index.md#storageLevel) action is used
 * `CatalogImpl` is requested to [isCached](CatalogImpl.md#isCached)
 * `CacheManager` is requested to [cacheQuery](#cacheQuery) and [useCachedData](#useCachedData)
 
@@ -116,7 +116,7 @@ uncacheQuery(
 
 `uncacheQuery` is used when:
 
-* [Dataset.unpersist](dataset-operators.md#unpersist) basic action is used
+* [Dataset.unpersist](dataset/index.md#unpersist) basic action is used
 * `DropTableCommand` and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
 * `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
@@ -129,9 +129,9 @@ cacheQuery(
   storageLevel: StorageLevel = MEMORY_AND_DISK): Unit
 ```
 
-`cacheQuery` adds the [analyzed logical plan](Dataset.md#logicalPlan) of the input [Dataset](Dataset.md) to the [cachedData](#cachedData) internal registry of cached queries.
+`cacheQuery` adds the [analyzed logical plan](dataset/index.md#logicalPlan) of the input [Dataset](dataset/index.md) to the [cachedData](#cachedData) internal registry of cached queries.
 
-Internally, `cacheQuery` requests the `Dataset` for the [analyzed logical plan](Dataset.md#logicalPlan) and creates a [InMemoryRelation](logical-operators/InMemoryRelation.md) with the following:
+Internally, `cacheQuery` requests the `Dataset` for the [analyzed logical plan](dataset/index.md#logicalPlan) and creates a [InMemoryRelation](logical-operators/InMemoryRelation.md) with the following:
 
 * [spark.sql.inMemoryColumnarStorage.compressed](configuration-properties.md#spark.sql.inMemoryColumnarStorage.compressed) configuration property
 * [spark.sql.inMemoryColumnarStorage.batchSize](configuration-properties.md#spark.sql.inMemoryColumnarStorage.batchSize) configuration property
@@ -152,7 +152,7 @@ Asked to cache already cached data.
 
 `cacheQuery` is used when:
 
-* [Dataset.persist](dataset-operators.md#persist) basic action is used
+* [Dataset.persist](dataset/index.md#persist) basic action is used
 * `CatalogImpl` is requested to [cache](CatalogImpl.md#cacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view in-memory
 
 ## Clearing Cache { #clearCache }

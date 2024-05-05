@@ -8,7 +8,7 @@ title: Sort
 
 * `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to [parse a query](../sql/AstBuilder.md#withQueryResultClauses))
 
-* [Dataset.sortWithinPartitions](../dataset-operators.md#sortWithinPartitions), [Dataset.sort](../dataset-operators.md#sort) and [Dataset.randomSplit](../dataset-operators.md#randomSplit) operators
+* [Dataset.sortWithinPartitions](../dataset/index.md#sortWithinPartitions), [Dataset.sort](../dataset/index.md#sort) and [Dataset.randomSplit](../dataset/index.md#randomSplit) operators
 
 ## Creating Instance
 

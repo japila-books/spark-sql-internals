@@ -72,7 +72,7 @@ A `Row` instance can have a schema defined.
 NOTE: Unless you are instantiating `Row` yourself (using <<row-object, Row Object>>), a `Row` has always a schema.
 
 !!! note
-    It is [RowEncoder](RowEncoder.md) to take care of assigning a schema to a `Row` when `toDF` on a [Dataset](Dataset.md) or when instantiating [DataFrame](DataFrame.md) through [DataFrameReader](DataFrameReader.md).
+    It is [RowEncoder](RowEncoder.md) to take care of assigning a schema to a `Row` when `toDF` on a [Dataset](dataset/index.md) or when instantiating [DataFrame](DataFrame.md) through [DataFrameReader](DataFrameReader.md).
 
 === [[row-object]] Row Object
 

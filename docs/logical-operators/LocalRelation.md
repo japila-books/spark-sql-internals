@@ -40,7 +40,7 @@ isStreaming: Boolean
 
 ## Local Datasets
 
-`Dataset` is [local](../Dataset.md#isLocal) when the [analyzed logical plan](../Dataset.md#logicalPlan) is a `LocalRelation`.
+`Dataset` is [local](../dataset/index.md#isLocal) when the [analyzed logical plan](../dataset/index.md#logicalPlan) is a `LocalRelation`.
 
 ```text
 val data = Seq(1, 3, 4, 7)

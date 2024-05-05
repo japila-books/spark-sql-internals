@@ -7,7 +7,7 @@ title: Intersect
 `Intersect` is a `SetOperation` binary logical operator that represents the following high-level operators in a logical plan:
 
 * [INTERSECT](../sql/AstBuilder.md#visitSetOperation) SQL statement
-* [Dataset.intersect](../Dataset.md#intersect) and [Dataset.intersectAll](../Dataset.md#intersectAll) operators
+* [Dataset.intersect](../dataset/index.md#intersect) and [Dataset.intersectAll](../dataset/index.md#intersectAll) operators
 
 `Intersect` is replaced at [logical optimization](../logical-optimizations/index.md) phase (based on [isAll](#isAll) flag):
 
@@ -30,8 +30,8 @@ Left Semi [Join](Join.md) | `ReplaceIntersectWithSemiJoin` | disabled
 `Intersect` is created when:
 
 * `AstBuilder` is requested to [parse INTERSECT statement](../sql/AstBuilder.md#visitSetOperation)
-* [Dataset.intersect](../Dataset.md#intersect) operator is used ([isAll](#isAll) is `false`)
-* [Dataset.intersectAll](../Dataset.md#intersectAll) operator is used ([isAll](#isAll) is `true`)
+* [Dataset.intersect](../dataset/index.md#intersect) operator is used ([isAll](#isAll) is `false`)
+* [Dataset.intersectAll](../dataset/index.md#intersectAll) operator is used ([isAll](#isAll) is `true`)
 
 ## Catalyst DSL
 

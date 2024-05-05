@@ -12,7 +12,7 @@ title: Project
 
 `Project` is <<creating-instance, created>> to represent the following:
 
-* Dataset operators, i.e. [joinWith](../joins.md#joinWith), [select](../dataset-operators.md#select) (incl. `selectUntyped`), `unionByName`
+* Dataset operators, i.e. [joinWith](../joins.md#joinWith), [select](../dataset/index.md#select) (incl. `selectUntyped`), `unionByName`
 * `KeyValueGroupedDataset` operators, i.e. `keys`, `mapValues`
 * `CreateViewCommand` logical command is <<CreateViewCommand.md#run, executed>> (and <<CreateViewCommand.md#aliasPlan, aliasPlan>>)
 * SQL's [SELECT](../sql/AstBuilder.md#withQuerySpecification) queries with named expressions

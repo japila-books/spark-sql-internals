@@ -4,7 +4,7 @@
 
 Built-in data types belong to the `org.apache.spark.sql.types` package.
 
-A **schema** is the description of the structure of your data (which together create a [Dataset](../Dataset.md) in Spark SQL). It can be **implicit** (and inferred at runtime) or **explicit** (and known at compile time).
+A **schema** is the description of the structure of your data (which together create a [Dataset](../dataset/index.md) in Spark SQL). It can be **implicit** (and inferred at runtime) or **explicit** (and known at compile time).
 
 ```text
 val df = Seq((0, s"""hello\tworld"""), (1, "two  spaces inside")).toDF("label", "sentence")

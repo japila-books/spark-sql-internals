@@ -28,7 +28,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 `QueryExecution` is created when:
 
-* [Dataset.ofRows](Dataset.md#ofRows) and [Dataset.selectUntyped](Dataset.md#selectUntyped) are executed
+* [Dataset.ofRows](dataset/index.md#ofRows) and [Dataset.selectUntyped](dataset/index.md#selectUntyped) are executed
 * `KeyValueGroupedDataset` is requested to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped)
 * `CommandUtils` utility is requested to [computeColumnStats](CommandUtils.md#computeColumnStats) and [computePercentiles](CommandUtils.md#computePercentiles)
 * `BaseSessionStateBuilder` is requested to [create a QueryExecution for a LogicalPlan](BaseSessionStateBuilder.md#createQueryExecution)
@@ -39,7 +39,7 @@ val qe = new QueryExecution(sparkSession, plan)
 
 ## Accessing QueryExecution
 
-`QueryExecution` is part of `Dataset` using [queryExecution](Dataset.md#queryExecution) attribute.
+`QueryExecution` is part of `Dataset` using [queryExecution](dataset/index.md#queryExecution) attribute.
 
 ```scala
 ds.queryExecution
@@ -52,7 +52,7 @@ ds.queryExecution
 Analyzed [logical plan](#logical) that has passed [Logical Analyzer](Analyzer.md).
 
 !!! tip
-    Beside `analyzed`, you can use [Dataset.explain](dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
+    Beside `analyzed`, you can use [Dataset.explain](dataset/index.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
 ### Analyzed Logical Plan with Cached Data { #withCachedData }
 
@@ -98,7 +98,7 @@ The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical opera
     [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](types/StructType.md) to an `RDD[InternalRow]`.
 
 !!! note
-    [Dataset.rdd](dataset-operators.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.
+    [Dataset.rdd](dataset/index.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.
 
 You can access the lazy attributes as follows:
 
@@ -350,7 +350,7 @@ explainString(
 
 `explainString` is used when:
 
-* `Dataset` is requested to [explain](Dataset.md#explain)
+* `Dataset` is requested to [explain](dataset/index.md#explain)
 * `SQLExecution` utility is used to [withNewExecutionId](SQLExecution.md#withNewExecutionId)
 * `AdaptiveSparkPlanExec` leaf physical operator is requested to [onUpdatePlan](physical-operators/AdaptiveSparkPlanExec.md#onUpdatePlan)
 * `ExplainCommand` logical command is [executed](logical-operators/ExplainCommand.md#run)

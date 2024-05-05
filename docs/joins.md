@@ -10,7 +10,7 @@ Operator | Return Type | Description
 ---------|----------|---------
  [crossJoin](#crossJoin) | [DataFrame](DataFrame.md) | Untyped ``Row``-based cross join
  [join](#join) | [DataFrame](DataFrame.md) | Untyped ``Row``-based join
- [joinWith](#joinWith) | [Dataset](Dataset.md) | Type-preserving join with two output columns for records for which a join condition holds
+ [joinWith](#joinWith) | [Dataset](dataset/index.md) | Type-preserving join with two output columns for records for which a join condition holds
 
 `join` operators create a `DataFrame` with a [Join](logical-operators/Join.md) logical operator.
 
@@ -69,7 +69,7 @@ joinWith[U](
 
 ## Join Condition
 
-Join condition (_join expression_) can be specified using the [join operators](#dataset-join-operators), [where](dataset-operators.md#where) or [filter](dataset-operators.md#filter) operators.
+Join condition (_join expression_) can be specified using the [join operators](#dataset-join-operators), [where](dataset/index.md#where) or [filter](dataset/index.md#filter) operators.
 
 ```scala
 df1.join(df2, $"df1Key" === $"df2Key")

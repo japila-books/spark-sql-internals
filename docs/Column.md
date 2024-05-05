@@ -335,6 +335,6 @@ named: NamedExpression
 
 `named` is used when the following operators are used:
 
-* [Dataset.select](dataset-operators.md#select)
+* [Dataset.select](dataset/index.md#select)
 * [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)
 -->

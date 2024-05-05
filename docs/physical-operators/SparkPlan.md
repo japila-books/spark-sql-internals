@@ -13,7 +13,7 @@ title: SparkPlan
 ![Physical Plan of Structured Query (i.e. Tree of SparkPlans)](../images/webui-physical-plan.png)
 
 ??? note "High-Level Dataset API"
-    A structured query can be expressed using Spark SQL's high-level [Dataset](../Dataset.md) API for Scala, Java, Python, R or good ol' SQL.
+    A structured query can be expressed using Spark SQL's high-level [Dataset](../dataset/index.md) API for Scala, Java, Python, R or good ol' SQL.
 
 A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.md) that may have zero or more [child physical operators](../catalyst/TreeNode.md#children).
 
@@ -23,14 +23,14 @@ A `SparkPlan` physical operator is a [Catalyst tree node](../catalyst/TreeNode.m
     Spark SQL uses [Catalyst](../catalyst/index.md) tree manipulation framework to compose nodes to build a tree of (logical or physical) operators that, in this particular case, is composing `SparkPlan` physical operator nodes to build the physical execution plan tree of a structured query.
 
 ??? tip "explain Operator"
-    Use [explain](../dataset-operators.md#explain) operator to see the execution plan of a structured query.
+    Use [explain](../dataset/index.md#explain) operator to see the execution plan of a structured query.
 
     ```scala
     val q = // your query here
     q.explain
     ```
 
-    You may also access the execution plan of a `Dataset` using its [queryExecution](../Dataset.md#queryExecution) property.
+    You may also access the execution plan of a `Dataset` using its [queryExecution](../dataset/index.md#queryExecution) property.
 
     ```scala
     val q = // your query here
@@ -516,7 +516,7 @@ executeCollect(): Array[InternalRow]
 
 * `Dataset` is requested for the Dataset.md#logicalPlan[logical plan] (being a single Command.md[Command] or their `Union`)
 
-* dataset-operators.md#explain[explain] and dataset-operators.md#count[count] operators are executed
+* dataset/index.md#explain[explain] and dataset/index.md#count[count] operators are executed
 
 * `Dataset` is requested to `collectFromPlan`
 
@@ -542,7 +542,7 @@ outputPartitioning: Partitioning
 
 * [EnsureRequirements](../physical-optimizations/EnsureRequirements.md) physical optimization is executed
 
-* `Dataset` is requested to [checkpoint](../dataset-operators.md#checkpoint)
+* `Dataset` is requested to [checkpoint](../dataset/index.md#checkpoint)
 
 ## <span id="supportsColumnar"> Checking Support for Columnar Processing
 

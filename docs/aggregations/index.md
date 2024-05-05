@@ -438,7 +438,7 @@ scala> inventory.rollup(expr("(item, color)") as "(item, color)").sum().show
 +-------------+-------------+
 ```
 
-Internally, `rollup` [converts the Dataset into a DataFrame](../dataset-operators.md#toDF) and then creates a [RelationalGroupedDataset](../RelationalGroupedDataset.md) (with `RollupType` group type).
+Internally, `rollup` [converts the Dataset into a DataFrame](../dataset/index.md#toDF) and then creates a [RelationalGroupedDataset](../RelationalGroupedDataset.md) (with `RollupType` group type).
 
 !!! tip
     Read up on `rollup` in [Deeper into Postgres 9.5 - New Group By Options for Aggregation](https://www.compose.com/articles/deeper-into-postgres-9-5-new-group-by-options-for-aggregation/).

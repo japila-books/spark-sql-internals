@@ -8,7 +8,7 @@ title: LogicalRDD
 
 `LogicalRDD` is <<creating-instance, created>> when:
 
-* `Dataset` is requested to [checkpoint](../dataset-untyped-transformations.md#checkpoint)
+* `Dataset` is requested to [checkpoint](../dataset/untyped-transformations.md#checkpoint)
 
 * `SparkSession` is requested to [create a DataFrame from an RDD of internal binary rows](../SparkSession.md#internalCreateDataFrame)
 

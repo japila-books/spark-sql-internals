@@ -187,7 +187,7 @@ val analyzedPlan = qe.analyzed
 
 ## Converting Logical Plan to Dataset
 
-Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../Dataset.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../Dataset.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../RowEncoder.md).
+Another common idiom in Spark SQL to convert a `LogicalPlan` into a `Dataset` is to use [Dataset.ofRows](../dataset/index.md#ofRows) internal method that ["executes"](../SessionState.md#executePlan) the logical plan followed by creating a [Dataset](../dataset/index.md) with the [QueryExecution](../QueryExecution.md) and [RowEncoder](../RowEncoder.md).
 
 ## childrenResolved { #childrenResolved }
 

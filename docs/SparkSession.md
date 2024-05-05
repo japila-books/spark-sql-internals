@@ -124,7 +124,7 @@ Internally, `version` uses `spark.SPARK_VERSION` value that is the `version` pro
 emptyDataset[T: Encoder]: Dataset[T]
 ```
 
-`emptyDataset` creates an empty [Dataset](Dataset.md) (assuming that future records being of type `T`).
+`emptyDataset` creates an empty [Dataset](dataset/index.md) (assuming that future records being of type `T`).
 
 ```text
 scala> val strings = spark.emptyDataset[String]
@@ -146,7 +146,7 @@ createDataset[T : Encoder](
   data: Seq[T]): Dataset[T]
 ```
 
-`createDataset` creates a [Dataset](Dataset.md) from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
+`createDataset` creates a [Dataset](dataset/index.md) from a local Scala collection, i.e. `Seq[T]`, Java's `List[T]`, or a distributed `RDD[T]`.
 
 ```text
 scala> val one = spark.createDataset(Seq(1))
@@ -195,7 +195,7 @@ sql(
 
 * `sql` requests the [SessionState](#sessionState) for the [ParserInterface](SessionState.md#sqlParser) to [parse](sql/ParserInterface.md#parsePlan) the given `sqlText` SQL statement (that gives a [LogicalPlan](logical-operators/LogicalPlan.md))
 
-In the end, `sql` [creates a DataFrame](Dataset.md#ofRows) with the following:
+In the end, `sql` [creates a DataFrame](dataset/index.md#ofRows) with the following:
 
 * This `SparkSession`
 * The `LogicalPlan`
@@ -216,7 +216,7 @@ While being measured, `sql` requests the [SessionState](#sessionState) for the [
 
 With non-empty `args`, `sql` creates a [NameParameterizedQuery](logical-operators/NameParameterizedQuery.md) with the parsed logical plan and the `args`. `sql` converts the values to literals.
 
-In the end, `sql` creates a [DataFrame](Dataset.md#ofRows) for the plan produced (and the `QueryPlanningTracker`).
+In the end, `sql` creates a [DataFrame](dataset/index.md#ofRows) for the plan produced (and the `QueryPlanningTracker`).
 
 ## Accessing UDFRegistration { #udf }
 
@@ -370,7 +370,7 @@ internalCreateDataFrame(
   isStreaming: Boolean = false): DataFrame
 ```
 
-`internalCreateDataFrame` creates a [DataFrame](Dataset.md#ofRows) with [LogicalRDD](logical-operators/LogicalRDD.md).
+`internalCreateDataFrame` creates a [DataFrame](dataset/index.md#ofRows) with [LogicalRDD](logical-operators/LogicalRDD.md).
 
 `internalCreateDataFrame` is used when:
 

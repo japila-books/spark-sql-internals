@@ -4,7 +4,7 @@ title: Basic Actions
 
 # Dataset API &mdash; Basic Actions
 
-**Basic actions** are a set of operators (_methods_) of the <<dataset-operators.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
+**Basic actions** are a set of operators (_methods_) of the <<dataset/index.md#, Dataset API>> for transforming a `Dataset` into a session-scoped or global temporary view and _other basic actions_ (FIXME).
 
 NOTE: Basic actions are the methods in the `Dataset` Scala class that are grouped in `basic` group name, i.e. `@group basic`.
 
@@ -26,7 +26,7 @@ a| [[cache]]
 cache(): this.type
 ----
 
-Marks the `Dataset` to be persisted (_cached_) and is actually a synonym of <<dataset-operators.md#persist, persist>> basic action
+Marks the `Dataset` to be persisted (_cached_) and is actually a synonym of <<dataset/index.md#persist, persist>> basic action
 
 | <<checkpoint, checkpoint>>
 a|
@@ -292,7 +292,7 @@ createTempViewCommand(
 
 `createTempViewCommand`...FIXME
 
-NOTE: `createTempViewCommand` is used when the following `Dataset` operators are used: <<dataset-operators.md#createTempView, Dataset.createTempView>>, <<dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>.
+NOTE: `createTempViewCommand` is used when the following `Dataset` operators are used: <<dataset/index.md#createTempView, Dataset.createTempView>>, <<dataset/index.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset/index.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset/index.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>.
 
 === [[explain]] Displaying Logical and Physical Plans, Their Cost and Codegen -- `explain` Basic Action
 
@@ -398,7 +398,7 @@ With `eager` flag on, `checkpoint` counts the number of records in the RDD (by e
 
 In the end, `checkpoint` Dataset.md#ofRows[creates a DataFrame] with a new LogicalRDD.md#creating-instance[logical plan node for scanning data from an RDD of InternalRows] (`LogicalRDD`).
 
-NOTE: `checkpoint` is used in the `Dataset` [untyped transformations](dataset-untyped-transformations.md), i.e. [checkpoint](dataset-untyped-transformations.md#checkpoint) and [localCheckpoint](dataset-untyped-transformations.md#localCheckpoint).
+NOTE: `checkpoint` is used in the `Dataset` [untyped transformations](dataset/untyped-transformations.md), i.e. [checkpoint](dataset/untyped-transformations.md#checkpoint) and [localCheckpoint](dataset/untyped-transformations.md#localCheckpoint).
 
 === [[rdd]] Generating RDD of Internal Binary Rows -- `rdd` Basic Action
 
@@ -437,7 +437,7 @@ schema: StructType
 You may also use the following methods to learn about the schema:
 
 * `printSchema(): Unit`
-* <<dataset-basic-actions.md#explain, explain>>
+* <<dataset/basic-actions.md#explain, explain>>
 ====
 
 === [[toDF]] Converting Typed Dataset to Untyped DataFrame -- `toDF` Basic Action

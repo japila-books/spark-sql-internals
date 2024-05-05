@@ -19,7 +19,7 @@ title: Offset
 `Offset` is created when:
 
 * `AstBuilder` is requested to [withQueryResultClauses](../sql/AstBuilder.md#withQueryResultClauses)
-* [Dataset.offset](../Dataset.md#offset) operator is used
+* [Dataset.offset](../dataset/index.md#offset) operator is used
 
 ## Catalyst DSL
 

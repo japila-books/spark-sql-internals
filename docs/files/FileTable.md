@@ -185,7 +185,7 @@ fileIndex: PartitioningAwareFileIndex
 `fileIndex` is used when:
 
 * [FileTable](FileTable.md#implementations)s are requested for [FileScanBuilder](FileScanBuilder.md#fileIndex)s
-* `Dataset` is requested for the [inputFiles](../Dataset.md#inputFiles)
+* `Dataset` is requested for the [inputFiles](../dataset/index.md#inputFiles)
 * `CacheManager` is requested to [lookupAndRefresh](../CacheManager.md#lookupAndRefresh)
 * `FallBackFileSourceV2` is created
 * `FileTable` is requested to [dataSchema](#dataSchema), [schema](#schema), [partitioning](#partitioning)

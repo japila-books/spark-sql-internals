@@ -27,9 +27,9 @@ tags:
 
 `RelationalGroupedDataset` is created (possibly using [apply](#apply) factory) for the following operators:
 
-* [Dataset.cube](Dataset.md#cube)
-* [Dataset.groupBy](Dataset.md#groupBy)
-* [Dataset.rollup](Dataset.md#rollup)
+* [Dataset.cube](dataset/index.md#cube)
+* [Dataset.groupBy](dataset/index.md#groupBy)
+* [Dataset.rollup](dataset/index.md#rollup)
 * [RelationalGroupedDataset.pivot](#pivot)
 
 ### Creating RelationalGroupedDataset Instance { #apply }
@@ -103,7 +103,7 @@ toDF(
 
 `toDF` converts the aggregate expressions to use [proper names](#alias).
 
-`toDF` creates a new [DataFrame](Dataset.md#ofRows) with different [LogicalPlan](logical-operators/LogicalPlan.md)s based on the [GroupType](#groupType).
+`toDF` creates a new [DataFrame](dataset/index.md#ofRows) with different [LogicalPlan](logical-operators/LogicalPlan.md)s based on the [GroupType](#groupType).
 
 GroupType | Logical Operator
 ----------|-----------------

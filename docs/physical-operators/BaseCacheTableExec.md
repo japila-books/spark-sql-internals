@@ -47,6 +47,6 @@ See:
 
 `run` requests the [CacheManager](../SharedState.md#cacheManager) (of the [SharedState](../SparkSession.md#sharedState)) to [cache](../CacheManager.md#cacheQuery) this [logical query plan](#planToCache).
 
-Unless [isLazy](#isLazy), `run` performs eager caching (using [Dataset.count](../Dataset.md#count) action).
+Unless [isLazy](#isLazy), `run` performs eager caching (using [Dataset.count](../dataset/index.md#count) action).
 
 In the end, `run` returns an empty collection.

@@ -77,7 +77,7 @@ withNewExecutionId[T](
 
 `withNewExecutionId` is used when:
 
-* `Dataset` is requested to [withNewExecutionId](Dataset.md#withNewExecutionId), [withNewRDDExecutionId](Dataset.md#withNewRDDExecutionId), [Dataset.withAction](Dataset.md#withAction)
+* `Dataset` is requested to [withNewExecutionId](dataset/index.md#withNewExecutionId), [withNewRDDExecutionId](dataset/index.md#withNewRDDExecutionId), [Dataset.withAction](dataset/index.md#withAction)
 * `QueryExecution` is requested to [eagerlyExecuteCommands](QueryExecution.md#eagerlyExecuteCommands)
 * _others_ (in Spark Thrift Server and [Spark Structured Streaming]({{ book.structured_streaming }}))
 

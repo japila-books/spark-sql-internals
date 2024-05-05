@@ -41,7 +41,7 @@ withInputType(
 
 `withInputType` is used when the following typed operators are used:
 
-* [Dataset.select](dataset-operators.md#select)
+* [Dataset.select](dataset/index.md#select)
 
 * [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg)
 

@@ -143,7 +143,7 @@ insert(data: DataFrame, overwrite: Boolean): Unit
 
 `insert` is part of the [InsertableRelation](../InsertableRelation.md#insert) abstraction.
 
-`insert` simply requests the input `DataFrame` for a <<dataset-operators.md#write, DataFrameWriter>> that in turn is requested to [save the data to a table using the JDBC data source](../DataFrameWriter.md#jdbc) (itself!) with the [url](JDBCOptions.md#url), [table](JDBCOptions.md#table) and [all options](JDBCOptions.md#asProperties).
+`insert` simply requests the input `DataFrame` for a <<dataset/index.md#write, DataFrameWriter>> that in turn is requested to [save the data to a table using the JDBC data source](../DataFrameWriter.md#jdbc) (itself!) with the [url](JDBCOptions.md#url), [table](JDBCOptions.md#table) and [all options](JDBCOptions.md#asProperties).
 
 `insert` also requests the `DataFrameWriter` to [set the save mode](../DataFrameWriter.md#mode) as [Overwrite](../DataFrameWriter.md#Overwrite) or [Append](../DataFrameWriter.md#Append) per the input `overwrite` flag.
 

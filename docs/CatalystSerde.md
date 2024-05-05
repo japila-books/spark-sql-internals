@@ -17,7 +17,7 @@ Internally, `deserialize` creates an `UnresolvedDeserializer` for the deserializ
 
 `deserialize` is used when:
 
-* `Dataset` is requested for a [QueryExecution](Dataset.md#rddQueryExecution)
+* `Dataset` is requested for a [QueryExecution](dataset/index.md#rddQueryExecution)
 * `ExpressionEncoder` is requested to [resolveAndBind](ExpressionEncoder.md#resolveAndBind)
 * `MapPartitions` utility is used to [apply](logical-operators/MapPartitions.md#apply)
 * `MapElements` utility is used to `apply`

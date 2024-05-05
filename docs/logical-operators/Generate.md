@@ -7,7 +7,7 @@ title: Generate
 `Generate` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents the following high-level operators in [logical query plans](LogicalPlan.md) (_among other use cases_):
 
 * [LATERAL VIEW](../sql/AstBuilder.md#withGenerate) in `SELECT` or `FROM` clauses in SQL
-* [Dataset.explode](../Dataset.md#explode) (_deprecated_)
+* [Dataset.explode](../dataset/index.md#explode) (_deprecated_)
 * [Generator](../expressions/Generator.md) or `GeneratorOuter` expressions (by [ExtractGenerator](../Analyzer.md#ExtractGenerator) logical evaluation rule)
 
 ## Creating Instance
@@ -28,7 +28,7 @@ title: Generate
 * [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization is executed (on [Except](Except.md) logical operator with [isAll](Except.md#isAll) enabled)
 * `RewriteIntersectAll` logical optimization is executed (on `Intersect` logical operator with `isAll` enabled)
 * `AstBuilder` is requested to [withGenerate](../sql/AstBuilder.md#withGenerate)
-* [Dataset.explode](../Dataset.md#explode) (_deprecated_) is used
+* [Dataset.explode](../dataset/index.md#explode) (_deprecated_) is used
 * `UserDefinedPythonTableFunction` ([PySpark]({{ book.pyspark }})) is requested to `builder`
 
 ## Catalyst DSL

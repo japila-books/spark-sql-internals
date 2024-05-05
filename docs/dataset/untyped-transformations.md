@@ -4,7 +4,7 @@ title: Untyped Transformations
 
 # Dataset API &mdash; Untyped Transformations
 
-**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](RelationalGroupedDataset.md), a [DataFrameNaFunctions](DataFrameNaFunctions.md) or a [DataFrameStatFunctions](DataFrameStatFunctions.md) (and hence _untyped_).
+**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](../DataFrame.md), a [Column](../Column.md), a [RelationalGroupedDataset](../RelationalGroupedDataset.md), a [DataFrameNaFunctions](../DataFrameNaFunctions.md) or a [DataFrameStatFunctions](../DataFrameStatFunctions.md) (and hence _untyped_).
 
 !!! note
     Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.
@@ -32,11 +32,11 @@ col(
 
 Internally, `col` branches off per the input column name.
 
-If the column name is `*` (a star), `col` simply creates a [Column](Column.md#apply) with `ResolvedStar` expression (with the [schema output attributes](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](Dataset.md#queryExecution)).
+If the column name is `*` (a star), `col` simply creates a [Column](Column.md#apply) with `ResolvedStar` expression (with the [schema output attributes](catalyst/QueryPlan.md#output) of the [analyzed logical plan](QueryExecution.md#analyzed) of the [QueryExecution](dataset/index.md#queryExecution)).
 
 Otherwise, `col` uses [colRegex](#colRegex) untyped transformation when [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is enabled.
 
-In the case when the column name is not `*` and [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is disabled, `col` creates a [Column](Column.md#apply) with the column name [resolved](Dataset.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md)).
+In the case when the column name is not `*` and [spark.sql.parser.quotedRegexColumnNames](configuration-properties.md#spark.sql.parser.quotedRegexColumnNames) configuration property is disabled, `col` creates a [Column](Column.md#apply) with the column name [resolved](dataset/index.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md)).
 
 === [[colRegex]] `colRegex` Untyped Transformation
 
@@ -56,7 +56,7 @@ Internally, `colRegex` matches the input column name to different regular expres
 
 1. For column names with quotes with a qualifier, `colRegex` simply creates a [Column](Column.md#apply) with a `UnresolvedRegex` (with a table specified)
 
-1. For other column names, `colRegex` (behaves like [col](#col) and) creates a [Column](Column.md#apply) with the column name [resolved](Dataset.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md))
+1. For other column names, `colRegex` (behaves like [col](#col) and) creates a [Column](Column.md#apply) with the column name [resolved](dataset/index.md#resolve) (as a [NamedExpression](expressions/NamedExpression.md))
 
 === [[na]] `na` Untyped Transformation
 

@@ -11,12 +11,12 @@ Checkpointing truncates the lineage of a RDD to be checkpointed. That has been s
 Dataset checkpointing in Spark SQL uses checkpointing to truncate the lineage of the underlying RDD of a `Dataset` being checkpointed.
 ====
 
-Checkpointing can be eager or lazy per `eager` flag of [checkpoint](dataset-untyped-transformations.md#checkpoint) operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
+Checkpointing can be eager or lazy per `eager` flag of [checkpoint](dataset/untyped-transformations.md#checkpoint) operator. *Eager checkpointing* is the default checkpointing and happens immediately when requested. *Lazy checkpointing* does not and will only happen when an action is executed.
 
 [[checkpoint-directory]]
 Using Dataset checkpointing requires that you specify the *checkpoint directory*. The directory stores the checkpoint files for RDDs to be checkpointed. Use <<sparkcontext-setCheckpointDir, SparkContext.setCheckpointDir>> to set the path to a checkpoint directory.
 
-Checkpointing can be [local](dataset-untyped-transformations.md#localCheckpoint) or [reliable](dataset-untyped-transformations.md#checkpoint) which defines how reliable the [checkpoint directory](#checkpoint-directory) is. *Local checkpointing* uses executor storage to write checkpoint files to and due to the executor lifecycle is considered unreliable. *Reliable checkpointing* uses a reliable data storage like Hadoop HDFS.
+Checkpointing can be [local](dataset/untyped-transformations.md#localCheckpoint) or [reliable](dataset/untyped-transformations.md#checkpoint) which defines how reliable the [checkpoint directory](#checkpoint-directory) is. *Local checkpointing* uses executor storage to write checkpoint files to and due to the executor lifecycle is considered unreliable. *Reliable checkpointing* uses a reliable data storage like Hadoop HDFS.
 
 .Dataset Checkpointing Types
 [cols="1,^1,^2",options="header",width="100%"]
@@ -26,12 +26,12 @@ Checkpointing can be [local](dataset-untyped-transformations.md#localCheckpoint)
 | Lazy
 
 ^| *Reliable*
-| [checkpoint](dataset-untyped-transformations.md#checkpoint)
-| [checkpoint(eager = false)](dataset-untyped-transformations.md#checkpoint)
+| [checkpoint](dataset/untyped-transformations.md#checkpoint)
+| [checkpoint(eager = false)](dataset/untyped-transformations.md#checkpoint)
 
 ^| *Local*
-| [localCheckpoint](dataset-untyped-transformations.md#localCheckpoint)
-| [localCheckpoint(eager = false)](dataset-untyped-transformations.md#localCheckpoint)
+| [localCheckpoint](dataset/untyped-transformations.md#localCheckpoint)
+| [localCheckpoint(eager = false)](dataset/untyped-transformations.md#localCheckpoint)
 |===
 
 A RDD can be recovered from a checkpoint files using <<sparkcontext-checkpointFile, SparkContext.checkpointFile>>. You can use SparkSession.md#internalCreateDataFrame[SparkSession.internalCreateDataFrame] method to (re)create the DataFrame from the RDD of internal binary rows.

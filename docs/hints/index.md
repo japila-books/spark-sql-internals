@@ -31,7 +31,7 @@ GROUP BY c1
 
 ## Specifying Query Hints
 
-Hints are defined using [Dataset.hint](../dataset-operators.md#hint) operator or [SQL hints](#sql-hints).
+Hints are defined using [Dataset.hint](../dataset/index.md#hint) operator or [SQL hints](#sql-hints).
 
 ### Dataset API
 

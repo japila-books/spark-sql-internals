@@ -16,7 +16,7 @@ title: Repartition
 
 `Repartition` is created for the following:
 
-* [Dataset.coalesce](../Dataset.md#coalesce) and [Dataset.repartition](../Dataset.md#repartition) operators (with [shuffle](#shuffle) disabled and enabled, respectively)
+* [Dataset.coalesce](../dataset/index.md#coalesce) and [Dataset.repartition](../dataset/index.md#repartition) operators (with [shuffle](#shuffle) disabled and enabled, respectively)
 * `COALESCE` and `REPARTITION` hints (via [ResolveCoalesceHints](../logical-analysis-rules/ResolveCoalesceHints.md) logical analysis rule, with [shuffle](#shuffle) disabled and enabled, respectively)
 
 ## Query Planning

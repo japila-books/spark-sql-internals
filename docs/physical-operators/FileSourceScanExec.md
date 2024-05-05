@@ -475,7 +475,7 @@ Bucket 3 => path: file:///Users/jacek/dev/oss/spark/spark-warehouse/bucketed_4_i
 
 `FileSourceScanExec` uses a `HashPartitioning` or the default `UnknownPartitioning` as the [output partitioning scheme](#outputPartitioning).
 
-`FileSourceScanExec` supports [data source filters](#pushedDownFilters) that are printed out to the console (at [INFO](#logging) logging level) and available as [metadata](#metadata) (e.g. in web UI or [explain](../dataset-operators.md#explain)).
+`FileSourceScanExec` supports [data source filters](#pushedDownFilters) that are printed out to the console (at [INFO](#logging) logging level) and available as [metadata](#metadata) (e.g. in web UI or [explain](../dataset/index.md#explain)).
 
 ```text
 Pushed Filters: [pushedDownFilters]

@@ -170,7 +170,7 @@ scala> :type spark.sessionState.analyzer
 org.apache.spark.sql.catalyst.analysis.Analyzer
 ```
 
-You can access the analyzed logical plan of a structured query using [Dataset.explain](dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
+You can access the analyzed logical plan of a structured query using [Dataset.explain](dataset/index.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` SQL command.
 
 ```text
 // sample structured query

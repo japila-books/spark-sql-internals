@@ -7,7 +7,7 @@ title: Union
 `Union` is a [logical operator](LogicalPlan.md) that represents the following high-level operators in a logical plan:
 
 * [UNION](../sql/AstBuilder.md#visitSetOperation) SQL statement
-* [Dataset.union](../Dataset.md#union), [Dataset.unionAll](../Dataset.md#unionAll) and [Dataset.unionByName](../Dataset.md#unionByName) operators
+* [Dataset.union](../dataset/index.md#union), [Dataset.unionAll](../dataset/index.md#unionAll) and [Dataset.unionByName](../dataset/index.md#unionByName) operators
 
 `Union` is resolved using `ResolveUnion` logical analysis rule.
 
@@ -27,8 +27,8 @@ title: Union
 `Union` is created (possibly using [apply](#apply) utility) when:
 
 * `AstBuilder` is requested to [visitFromStatement](../sql/AstBuilder.md#visitFromStatement) and [visitMultiInsertQuery](../sql/AstBuilder.md#visitMultiInsertQuery)
-* `Dataset` is requested to [flattenUnion](../Dataset.md#flattenUnion) (for [Dataset.union](../Dataset.md#union) and [Dataset.unionByName](../Dataset.md#unionByName) operators)
-* [Dataset.unionByName](../Dataset.md#unionByName) operator is used
+* `Dataset` is requested to [flattenUnion](../dataset/index.md#flattenUnion) (for [Dataset.union](../dataset/index.md#union) and [Dataset.unionByName](../dataset/index.md#unionByName) operators)
+* [Dataset.unionByName](../dataset/index.md#unionByName) operator is used
 
 ## Creating Union { #apply }
 
@@ -49,7 +49,7 @@ apply(
 * [RewriteExceptAll](../logical-optimizations/RewriteExceptAll.md) logical optimization is executed
 * `RewriteIntersectAll` logical optimization is executed
 * `AstBuilder` is requested to [parse UNION SQL statement](../sql/AstBuilder.md#visitSetOperation)
-* [Dataset.union](../Dataset.md#union) operator is used
+* [Dataset.union](../dataset/index.md#union) operator is used
 
 ## Maximum Number of Records { #maxRows }
 
