@@ -161,11 +161,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://books.japila.pl/spark-sql-internals/Dataset-untyped-transformations/</loc>
-         <lastmod>2024-05-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://books.japila.pl/spark-sql-internals/Dataset/</loc>
          <lastmod>2024-05-05</lastmod>
          <changefreq>daily</changefreq>
@@ -552,26 +547,6 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/configuration-properties/</loc>
-         <lastmod>2024-05-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/dataset-actions/</loc>
-         <lastmod>2024-05-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/dataset-basic-actions/</loc>
-         <lastmod>2024-05-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/dataset-operators/</loc>
-         <lastmod>2024-05-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://books.japila.pl/spark-sql-internals/dataset-typed-transformations/</loc>
          <lastmod>2024-05-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1457,6 +1432,31 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/cost-based-optimization/Statistics/</loc>
+         <lastmod>2024-05-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/dataset/</loc>
+         <lastmod>2024-05-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/dataset/actions/</loc>
+         <lastmod>2024-05-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/dataset/basic-actions/</loc>
+         <lastmod>2024-05-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/dataset/typed-transformations/</loc>
+         <lastmod>2024-05-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/dataset/untyped-transformations/</loc>
          <lastmod>2024-05-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
