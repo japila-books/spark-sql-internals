@@ -20,11 +20,13 @@ See:
 
 * [CacheTableAsSelectExec](CacheTableAsSelectExec.md#relationName)
 
-### planToCache { #planToCache }
+### LogicalPlan to Cache { #planToCache }
 
 ```scala
 planToCache: LogicalPlan
 ```
+
+[LogicalPlan](../logical-operators/LogicalPlan.md) to cache
 
 See:
 

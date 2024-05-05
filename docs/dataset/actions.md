@@ -2,13 +2,15 @@
 title: Actions
 ---
 
-# Dataset API &nbsp; Actions
+# Dataset API &mdash; Actions
 
-**Actions** are part of the <<dataset/index.md#, Dataset API>> for...FIXME
+**Actions** are part of the [Dataset API](index.md).
+
+!!! note
+    Actions are the methods in the `Dataset` Scala class that are grouped in `action` group name, i.e. `@group action`.
 
 <!---
 ## Review Me
-NOTE: Actions are the methods in the `Dataset` Scala class that are grouped in `action` group name, i.e. `@group action`.
 
 [[methods]]
 .Dataset API's Actions
@@ -16,84 +18,6 @@ NOTE: Actions are the methods in the `Dataset` Scala class that are grouped in `
 |===
 | Action
 | Description
-
-| <<collect, collect>>
-a|
-
-[source, scala]
-----
-collect(): Array[T]
-----
-
-| <<count, count>>
-a|
-
-[source, scala]
-----
-count(): Long
-----
-
-| <<describe, describe>>
-a|
-
-[source, scala]
-----
-describe(cols: String*): DataFrame
-----
-
-| <<first, first>>
-a|
-
-[source, scala]
-----
-first(): T
-----
-
-| <<foreach, foreach>>
-a|
-
-[source, scala]
-----
-foreach(f: T => Unit): Unit
-----
-
-| <<foreachPartition, foreachPartition>>
-a|
-
-[source, scala]
-----
-foreachPartition(f: Iterator[T] => Unit): Unit
-----
-
-| <<head, head>>
-a|
-
-[source, scala]
-----
-head(): T
-head(n: Int): Array[T]
-----
-
-| <<reduce, reduce>>
-a|
-
-[source, scala]
-----
-reduce(func: (T, T) => T): T
-----
-
-| <<show, show>>
-a|
-
-[source, scala]
-----
-show(): Unit
-show(truncate: Boolean): Unit
-show(numRows: Int): Unit
-show(numRows: Int, truncate: Boolean): Unit
-show(numRows: Int, truncate: Int): Unit
-show(numRows: Int, truncate: Int, vertical: Boolean): Unit
-----
 
 | <<summary, summary>>
 a| Computes specified statistics for numeric and string columns. The default statistics are: `count`, `mean`, `stddev`, `min`, `max` and `25%`, `50%`, `75%` percentiles.
@@ -105,33 +29,7 @@ summary(statistics: String*): DataFrame
 
 NOTE: `summary` is an extended version of the <<describe, describe>> action that simply calculates `count`, `mean`, `stddev`, `min` and `max` statistics.
 
-| <<take, take>>
-a|
-
-[source, scala]
-----
-take(n: Int): Array[T]
-----
-
-| <<toLocalIterator, toLocalIterator>>
-a|
-
-[source, scala]
-----
-toLocalIterator(): java.util.Iterator[T]
-----
 |===
-
-=== [[head]] `head` Action
-
-[source, scala]
-----
-head(): T // <1>
-head(n: Int): Array[T]
-----
-<1> Calls the other `head` with `n` as `1` and takes the first element
-
-`head`...FIXME
 
 === [[summary]] Calculating Statistics -- `summary` Action
 

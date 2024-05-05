@@ -4,9 +4,15 @@ title: CreateViewCommand
 
 # CreateViewCommand Logical Command
 
-`CreateViewCommand` is a [RunnableCommand](RunnableCommand.md).
+`CreateViewCommand` is a [RunnableCommand](RunnableCommand.md) that represents the following high-level operators (among other internal uses):
 
-`CreateViewCommand` is a [AnalysisOnlyCommand](AnalysisOnlyCommand.md).
+* [CREATE VIEW](../sql/SparkSqlAstBuilder.md#visitCreateView) SQL command
+* [Dataset.createGlobalTempView](../dataset/index.md#createGlobalTempView)
+* [Dataset.createOrReplaceGlobalTempView](../dataset/index.md#createOrReplaceGlobalTempView)
+* [Dataset.createOrReplaceTempView](../dataset/index.md#createOrReplaceTempView)
+* [Dataset.createTempView](../dataset/index.md#createTempView)
+
+`CreateViewCommand` is an [AnalysisOnlyCommand](AnalysisOnlyCommand.md).
 
 ## Creating Instance
 
@@ -27,7 +33,7 @@ title: CreateViewCommand
 `CreateViewCommand` is created when:
 
 * [CacheTableAsSelectExec](../physical-operators/CacheTableAsSelectExec.md) physical operator is executed (and requested for [planToCache](../physical-operators/CacheTableAsSelectExec.md#planToCache))
-* [Dataset.createTempViewCommand](../dataset/index.md#createTempViewCommand) operator is used
+* `Dataset` is requested to [createTempViewCommand](../dataset/index.md#createTempViewCommand)
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [CreateView](CreateView.md) logical operator)
 * `SparkConnectPlanner` is requested to [handleCreateViewCommand](../connect/SparkConnectPlanner.md#handleCreateViewCommand)
 * `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW AS statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
@@ -158,12 +164,6 @@ sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
 
 <!---
 ## Review Me
-
-`CreateViewCommand` is <<creating-instance, created>> to represent the following:
-
-* <<spark-sql-SparkSqlAstBuilder.md#visitCreateView, CREATE VIEW AS>> SQL statements
-
-* `Dataset` operators: <<dataset/index.md#createTempView, Dataset.createTempView>>, <<dataset/index.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset/index.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset/index.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
 
 `CreateViewCommand` works with different <<viewType, view types>>.
 
