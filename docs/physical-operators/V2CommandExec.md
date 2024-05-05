@@ -19,6 +19,7 @@ Executing the command (and computing the [result](#result))
 See:
 
 * [DropNamespaceExec](DropNamespaceExec.md#run)
+* [TruncateTableExec](TruncateTableExec.md#run)
 
 Used when:
 

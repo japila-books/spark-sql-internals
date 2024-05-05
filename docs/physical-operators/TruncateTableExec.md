@@ -1,9 +1,13 @@
+---
+title: TruncateTableExec
+---
+
 # TruncateTableExec Physical Operator
 
 `TruncateTableExec` is a `LeafV2CommandExec` physical operator that represents the following logical operators at execution:
 
 * [DeleteFromTable](../logical-operators/DeleteFromTable.md) logical operator with a [DataSourceV2ScanRelation](../logical-operators/DataSourceV2ScanRelation.md) over a [TruncatableTable](../connector/TruncatableTable.md) table with no `WHERE` clause
-* `TruncateTable`
+* `TRUNCATE TABLE` SQL command (with no `PARTITION` clause)
 
 ## Creating Instance
 
@@ -16,9 +20,9 @@
 
 * [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed
 
-## <span id="output"> Output Schema
+## Output Schema { #output }
 
-??? note "Signature"
+??? note "QueryPlan"
 
     ```scala
     output: Seq[Attribute]
@@ -28,9 +32,9 @@
 
 `output` is empty.
 
-## <span id="run"> run
+## Executing Command { #run }
 
-??? note "Signature"
+??? note "V2CommandExec"
 
     ```scala
     run(): Seq[InternalRow]
@@ -38,4 +42,6 @@
 
     `run` is part of the [V2CommandExec](V2CommandExec.md#run) abstraction.
 
-`run` requests the [TruncatableTable](#table) to [truncateTable](../connector/TruncatableTable.md#truncateTable) followed by executing the [refreshCache](#refreshCache) procedure.
+`run` requests the [TruncatableTable](#table) to [truncateTable](../connector/TruncatableTable.md#truncateTable). Only if successful, `run` executes this [refreshCache](#refreshCache) procedure.
+
+`run` returns an empty collection.

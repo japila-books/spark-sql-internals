@@ -742,6 +742,17 @@ namedArgumentExpression
 
 ANTLR labeled alternative: `#tableValuedFunction`
 
+### visitTruncateTable { #visitTruncateTable }
+
+Creates either a `TruncatePartition` or a `TruncateTable` logical operator based on `PARTITION` clause (defined or not, respectively)
+
+```sql
+TRUNCATE TABLE identifierReference
+  [PARTITION (partitionVal (, partitionVal)*)]
+```
+
+ANTLR labeled alternative: `#truncateTable`
+
 ### visitUpdateTable { #visitUpdateTable }
 
 Creates an [UpdateTable](../logical-operators/UpdateTable.md) logical operator

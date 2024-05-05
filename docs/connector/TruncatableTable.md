@@ -1,10 +1,10 @@
 # TruncatableTable
 
-`TruncatableTable` is an [extension](#contract) of the [Table](Table.md) abstraction for [tables](#implementations) that can [truncateTable](#truncateTable).
+`TruncatableTable` is an [extension](#contract) of the [Table](Table.md) abstraction for [tables](#implementations) that can be [truncated](#truncateTable) (i.e., with all rows removed from the table).
 
 ## Contract
 
-### <span id="truncateTable"> truncateTable
+### truncateTable { #truncateTable }
 
 ```java
 boolean truncateTable()

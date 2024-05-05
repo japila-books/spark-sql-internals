@@ -451,7 +451,7 @@ nav:
       - SparkPlan: physical-operators/SparkPlan.md
       - SubqueryExec: physical-operators/SubqueryExec.md
       - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
-      - TruncateTableExec: physical-operators/TruncateTableExec.md
+      - physical-operators/TruncateTableExec.md
       - UnaryExecNode: physical-operators/UnaryExecNode.md
       - V2CommandExec: physical-operators/V2CommandExec.md
       - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
