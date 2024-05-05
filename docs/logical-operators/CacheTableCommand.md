@@ -4,7 +4,7 @@ title: CacheTableCommand
 
 # CacheTableCommand Runnable Logical Command
 
-When <<run, executed>>, `CacheTableCommand` [creates a DataFrame](../Dataset.md#ofRows) followed by [registering a temporary view](../spark-sql-dataset-operators.md#createTempView) for the optional `query`.
+When <<run, executed>>, `CacheTableCommand` [creates a DataFrame](../Dataset.md#ofRows) followed by [registering a temporary view](../dataset-operators.md#createTempView) for the optional `query`.
 
 ```text
 CACHE LAZY? TABLE [table] (AS? [query])?
@@ -15,7 +15,7 @@ CACHE LAZY? TABLE [table] (AS? [query])?
 !!! note
     `CacheTableCommand` uses `SparkSession` [to access the `Catalog`](../SparkSession.md#catalog).
 
-If the caching is not `LAZY` (which is not by default), `CacheTableCommand` [creates a DataFrame for the table](../SparkSession.md#table) and [counts the rows](../spark-sql-dataset-operators.md#count) (that will trigger the caching).
+If the caching is not `LAZY` (which is not by default), `CacheTableCommand` [creates a DataFrame for the table](../SparkSession.md#table) and [counts the rows](../dataset-operators.md#count) (that will trigger the caching).
 
 !!! note
     `CacheTableCommand` uses a Spark SQL pattern to trigger DataFrame caching by executing `count` operation.

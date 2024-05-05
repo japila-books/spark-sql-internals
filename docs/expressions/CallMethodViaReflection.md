@@ -4,7 +4,7 @@ title: CallMethodViaReflection
 
 `CallMethodViaReflection` is an Expression.md[expression] that represents a static method call in Scala or Java using `reflect` and `java_method` functions.
 
-NOTE: `reflect` and `java_method` functions are only supported in SparkSession.md#sql[SQL] and spark-sql-dataset-operators.md#selectExpr[expression] modes.
+NOTE: `reflect` and `java_method` functions are only supported in SparkSession.md#sql[SQL] and dataset-operators.md#selectExpr[expression] modes.
 
 .CallMethodViaReflection's DataType to JVM Types Mapping
 [cols="1,2",options="header",width="100%"]

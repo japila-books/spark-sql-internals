@@ -92,7 +92,7 @@ lookupCachedData(
 
 `lookupCachedData` is used when:
 
-* [Dataset.storageLevel](spark-sql-dataset-operators.md#storageLevel) action is used
+* [Dataset.storageLevel](dataset-operators.md#storageLevel) action is used
 * `CatalogImpl` is requested to [isCached](CatalogImpl.md#isCached)
 * `CacheManager` is requested to [cacheQuery](#cacheQuery) and [useCachedData](#useCachedData)
 
@@ -116,7 +116,7 @@ uncacheQuery(
 
 `uncacheQuery` is used when:
 
-* [Dataset.unpersist](spark-sql-dataset-operators.md#unpersist) basic action is used
+* [Dataset.unpersist](dataset-operators.md#unpersist) basic action is used
 * `DropTableCommand` and [TruncateTableCommand](logical-operators/TruncateTableCommand.md) logical commands are executed
 * `CatalogImpl` is requested to [uncache](CatalogImpl.md#uncacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view, [dropTempView](CatalogImpl.md#dropTempView) and [dropGlobalTempView](CatalogImpl.md#dropGlobalTempView)
 
@@ -152,7 +152,7 @@ Asked to cache already cached data.
 
 `cacheQuery` is used when:
 
-* [Dataset.persist](spark-sql-dataset-operators.md#persist) basic action is used
+* [Dataset.persist](dataset-operators.md#persist) basic action is used
 * `CatalogImpl` is requested to [cache](CatalogImpl.md#cacheTable) and [refresh](CatalogImpl.md#refreshTable) a table or view in-memory
 
 ## Clearing Cache { #clearCache }

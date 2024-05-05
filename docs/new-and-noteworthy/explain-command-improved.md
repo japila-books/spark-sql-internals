@@ -2,7 +2,7 @@
 
 **New in 3.0.0**
 
-Spark 3 comes with new output modes for explaining query plans (using [EXPLAIN](../sql/SparkSqlAstBuilder.md#visitExplain) SQL statement or [Dataset.explain](../spark-sql-dataset-operators.md#explain) operator).
+Spark 3 comes with new output modes for explaining query plans (using [EXPLAIN](../sql/SparkSqlAstBuilder.md#visitExplain) SQL statement or [Dataset.explain](../dataset-operators.md#explain) operator).
 
 !!! tip "EXPLAIN SQL Examples"
     Visit [explain.sql](https://github.com/apache/spark/blob/c9748d4f00c505053c81c8aeb69f7166e92f82a6/sql/core/src/test/resources/sql-tests/inputs/explain.sql) for SQL examples of `EXPLAIN` SQL statement.

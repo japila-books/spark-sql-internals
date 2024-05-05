@@ -1,9 +1,13 @@
+---
 title: Actions
+---
 
-# Dataset API -- Actions
+# Dataset API &nbsp; Actions
 
-*Actions* are part of the <<spark-sql-dataset-operators.md#, Dataset API>> for...FIXME
+**Actions** are part of the <<dataset-operators.md#, Dataset API>> for...FIXME
 
+<!---
+## Review Me
 NOTE: Actions are the methods in the `Dataset` Scala class that are grouped in `action` group name, i.e. `@group action`.
 
 [[methods]]
@@ -118,60 +122,6 @@ toLocalIterator(): java.util.Iterator[T]
 ----
 |===
 
-=== [[collect]] `collect` Action
-
-[source, scala]
-----
-collect(): Array[T]
-----
-
-`collect`...FIXME
-
-=== [[count]] `count` Action
-
-[source, scala]
-----
-count(): Long
-----
-
-`count`...FIXME
-
-=== [[describe]] Calculating Basic Statistics -- `describe` Action
-
-[source, scala]
-----
-describe(cols: String*): DataFrame
-----
-
-`describe`...FIXME
-
-=== [[first]] `first` Action
-
-[source, scala]
-----
-first(): T
-----
-
-`first`...FIXME
-
-=== [[foreach]] `foreach` Action
-
-[source, scala]
-----
-foreach(f: T => Unit): Unit
-----
-
-`foreach`...FIXME
-
-=== [[foreachPartition]] `foreachPartition` Action
-
-[source, scala]
-----
-foreachPartition(f: Iterator[T] => Unit): Unit
-----
-
-`foreachPartition`...FIXME
-
 === [[head]] `head` Action
 
 [source, scala]
@@ -182,29 +132,6 @@ head(n: Int): Array[T]
 <1> Calls the other `head` with `n` as `1` and takes the first element
 
 `head`...FIXME
-
-=== [[reduce]] `reduce` Action
-
-[source, scala]
-----
-reduce(func: (T, T) => T): T
-----
-
-`reduce`...FIXME
-
-=== [[show]] `show` Action
-
-[source, scala]
-----
-show(): Unit
-show(truncate: Boolean): Unit
-show(numRows: Int): Unit
-show(numRows: Int, truncate: Boolean): Unit
-show(numRows: Int, truncate: Int): Unit
-show(numRows: Int, truncate: Int, vertical: Boolean): Unit
-----
-
-`show`...FIXME
 
 === [[summary]] Calculating Statistics -- `summary` Action
 
@@ -233,12 +160,4 @@ take(n: Int): Array[T]
 WARNING: `take` loads all the data into the memory of the Spark application's driver process and for a large `n` could result in `OutOfMemoryError`.
 
 Internally, `take` creates a new `Dataset` with `Limit` logical plan for `Literal` expression and the current `LogicalPlan`. It then runs the SparkPlan.md[SparkPlan] that produces a `Array[InternalRow]` that is in turn decoded to `Array[T]` using a bounded [encoder](Encoder.md).
-
-=== [[toLocalIterator]] `toLocalIterator` Action
-
-[source, scala]
-----
-toLocalIterator(): java.util.Iterator[T]
-----
-
-`toLocalIterator`...FIXME
+-->

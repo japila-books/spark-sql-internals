@@ -35,7 +35,7 @@ NOTE: `apply` is part of Scala's https://www.scala-lang.org/api/2.11.12/index.ht
 
 * `KeyValueGroupedDataset` is requested to [aggUntyped](../KeyValueGroupedDataset.md#aggUntyped) (when [KeyValueGroupedDataset.agg](../KeyValueGroupedDataset.md#agg) typed operator is used)
 
-* <<spark-sql-dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
+* <<dataset-operators.md#joinWith, Dataset.joinWith>> typed transformation is used
 
 * [struct](../standard-functions/index.md#struct) standard function is used
 

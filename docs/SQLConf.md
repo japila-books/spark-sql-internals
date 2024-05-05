@@ -1018,7 +1018,7 @@ Used when:
 
 Used when:
 
-* [Dataset.col](Dataset-untyped-transformations.md#col) operator is used
+* [Dataset.col](dataset-untyped-transformations.md#col) operator is used
 * `AstBuilder` is requested to parse a [dereference](sql/AstBuilder.md#visitDereference) and [column reference](sql/AstBuilder.md#visitColumnReference) in a SQL statement
 
 ## <span id="targetPostShuffleInputSize"> targetPostShuffleInputSize

@@ -725,12 +725,12 @@ nav:
       - CreateTableWriter: CreateTableWriter.md
       - WriteConfigMethods: WriteConfigMethods.md
     - Dataset API:
-      - spark-sql-dataset-operators.md
-      - Typed Transformations: spark-sql-Dataset-typed-transformations.md
-      - Untyped Transformations: Dataset-untyped-transformations.md
-      - spark-sql-Dataset-basic-actions.md
-      - spark-sql-Dataset-actions.md
-      - spark-sql-DataFrameNaFunctions.md
+      - dataset-operators.md
+      - dataset-typed-transformations.md
+      - dataset-untyped-transformations.md
+      - dataset-basic-actions.md
+      - dataset-actions.md
+      - DataFrameNaFunctions.md
       - DataFrameStatFunctions.md
     - Column Operators: spark-sql-column-operators.md
     - Caching and Persistence:

@@ -26,7 +26,7 @@ Whichever query interface you use to describe a structured query, i.e. SQL or Qu
 
 The main data abstraction of Spark SQL is [Dataset](Dataset.md) that represents a **structured data** (records with a known schema). This structured data representation `Dataset` enables [compact binary representation](tungsten/index.md) using compressed columnar format that is stored in managed objects outside JVM's heap. It is supposed to speed computations up by reducing memory usage and GCs.
 
-`Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](spark-sql-dataset-operators.md) (as in the good old days of RDD API in Spark Core).
+`Dataset` is a programming interface to the [structured query execution pipeline](QueryExecution.md) with [transformations and actions](dataset-operators.md) (as in the good old days of RDD API in Spark Core).
 
 Internally, a structured query is a [Catalyst tree](catalyst/index.md) of (logical and physical) [relational operators](catalyst/QueryPlan.md) and [expressions](expressions/Expression.md).
 

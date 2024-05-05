@@ -1,6 +1,10 @@
+---
+title: Untyped Transformations
+---
+
 # Dataset API &mdash; Untyped Transformations
 
-**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](RelationalGroupedDataset.md), a [DataFrameNaFunctions](spark-sql-DataFrameNaFunctions.md) or a [DataFrameStatFunctions](DataFrameStatFunctions.md) (and hence _untyped_).
+**Untyped transformations** are part of the Dataset API for transforming a `Dataset` to a [DataFrame](DataFrame.md), a [Column](Column.md), a [RelationalGroupedDataset](RelationalGroupedDataset.md), a [DataFrameNaFunctions](DataFrameNaFunctions.md) or a [DataFrameStatFunctions](DataFrameStatFunctions.md) (and hence _untyped_).
 
 !!! note
     Untyped transformations are the methods in the `Dataset` Scala class that are grouped in `untypedrel` group name, i.e. `@group untypedrel`.
@@ -61,7 +65,7 @@ Internally, `colRegex` matches the input column name to different regular expres
 na: DataFrameNaFunctions
 ----
 
-`na` creates a <<spark-sql-DataFrameNaFunctions.md#, DataFrameNaFunctions>> to work with missing data.
+`na` creates a <<DataFrameNaFunctions.md#, DataFrameNaFunctions>> to work with missing data.
 
 === [[selectExpr]] Projecting Columns using SQL Statements -- `selectExpr` Untyped Transformation
 

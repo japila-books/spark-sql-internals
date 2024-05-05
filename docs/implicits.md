@@ -94,7 +94,7 @@ scala> :imports
 
 `DatasetHolder` is <<creating-instance, created>> (implicitly) when <<rddToDatasetHolder, rddToDatasetHolder>> and <<localSeqToDatasetHolder, localSeqToDatasetHolder>> implicit conversions are used.
 
-`DatasetHolder` has `toDS` and `toDF` methods that simply return the <<ds, Dataset[T]>> (it was created with) or a `DataFrame` (using <<spark-sql-dataset-operators.md#toDF, Dataset.toDF>> operator), respectively.
+`DatasetHolder` has `toDS` and `toDF` methods that simply return the <<ds, Dataset[T]>> (it was created with) or a `DataFrame` (using <<dataset-operators.md#toDF, Dataset.toDF>> operator), respectively.
 
 [source, scala]
 ----

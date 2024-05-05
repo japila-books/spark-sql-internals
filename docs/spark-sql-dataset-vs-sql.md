@@ -1,6 +1,6 @@
 # Dataset API and SQL
 
-Spark SQL supports two "modes" to write structured queries: spark-sql-dataset-operators.md[Dataset API] and SparkSession.md#sql[SQL].
+Spark SQL supports two "modes" to write structured queries: dataset-operators.md[Dataset API] and SparkSession.md#sql[SQL].
 
 *SQL Mode* is used to express structured queries using SQL statements using SparkSession.md#sql[SparkSession.sql] operator, [expr](standard-functions/index.md#expr) standard function and `spark-sql` command-line tool.
 

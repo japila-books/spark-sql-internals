@@ -109,7 +109,7 @@ scala> Seq(Array(0,1,2)).toDF("array").withColumn("num", explode('array)).show
 +---------+---+
 ----
 
-NOTE: `explode` function is an equivalent of spark-sql-dataset-operators.md#flatMap[`flatMap` operator] for `Dataset`.
+NOTE: `explode` function is an equivalent of dataset-operators.md#flatMap[`flatMap` operator] for `Dataset`.
 
 === [[explode_outer]] `explode_outer` Collection Function
 

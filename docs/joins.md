@@ -69,7 +69,7 @@ joinWith[U](
 
 ## Join Condition
 
-Join condition (_join expression_) can be specified using the [join operators](#dataset-join-operators), [where](spark-sql-dataset-operators.md#where) or [filter](spark-sql-dataset-operators.md#filter) operators.
+Join condition (_join expression_) can be specified using the [join operators](#dataset-join-operators), [where](dataset-operators.md#where) or [filter](dataset-operators.md#filter) operators.
 
 ```scala
 df1.join(df2, $"df1Key" === $"df2Key")

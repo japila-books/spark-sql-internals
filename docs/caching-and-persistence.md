@@ -1,12 +1,12 @@
 # Caching and Persistence
 
-One of the optimizations in Spark SQL is *Dataset caching* (aka *Dataset persistence*) which is available using the <<spark-sql-dataset-operators.md#, Dataset API>> using the following basic actions:
+One of the optimizations in Spark SQL is *Dataset caching* (aka *Dataset persistence*) which is available using the <<dataset-operators.md#, Dataset API>> using the following basic actions:
 
-* [[cache]] <<spark-sql-dataset-operators.md#cache, cache>>
+* [[cache]] <<dataset-operators.md#cache, cache>>
 
-* [[persist]] <<spark-sql-dataset-operators.md#persist, persist>>
+* [[persist]] <<dataset-operators.md#persist, persist>>
 
-* [[unpersist]] <<spark-sql-dataset-operators.md#unpersist, unpersist>>
+* [[unpersist]] <<dataset-operators.md#unpersist, unpersist>>
 
 `cache` is simply `persist` with `MEMORY_AND_DISK` storage level.
 
@@ -69,7 +69,7 @@ res1: Array[org.apache.spark.sql.Row] = Array()
 
 [NOTE]
 ====
-You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<spark-sql-dataset-operators.md#persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
+You can also use SQL's `CACHE TABLE [tableName]` to cache `tableName` table in memory. Unlike <<cache, cache>> and <<dataset-operators.md#persist, persist>> operators, `CACHE TABLE` is an eager operation which is executed as soon as the statement is executed.
 
 [source,scala]
 ----

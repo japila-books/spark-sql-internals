@@ -163,7 +163,7 @@ sql(s"DESC EXTENDED ${viewName}").show(truncate = false)
 
 * <<spark-sql-SparkSqlAstBuilder.md#visitCreateView, CREATE VIEW AS>> SQL statements
 
-* `Dataset` operators: <<spark-sql-dataset-operators.md#createTempView, Dataset.createTempView>>, <<spark-sql-dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<spark-sql-dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<spark-sql-dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
+* `Dataset` operators: <<dataset-operators.md#createTempView, Dataset.createTempView>>, <<dataset-operators.md#createOrReplaceTempView, Dataset.createOrReplaceTempView>>, <<dataset-operators.md#createGlobalTempView, Dataset.createGlobalTempView>> and <<dataset-operators.md#createOrReplaceGlobalTempView, Dataset.createOrReplaceGlobalTempView>>
 
 `CreateViewCommand` works with different <<viewType, view types>>.
 

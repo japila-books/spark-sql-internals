@@ -1,8 +1,19 @@
+---
+title: DataFrameStatFunctions
+---
+
 # DataFrameStatFunctions
 
 `DataFrameStatFunctions` API gives the statistic functions to be used in a structured query.
 
-## <span id="bloomFilter"> bloomFilter
+`DataFrameStatFunctions` is available using [stat](dataset-untyped-transformations.md#stat) untyped transformation.
+
+```scala
+val q: DataFrame = ...
+q.stat
+```
+
+## bloomFilter { #bloomFilter }
 
 ```scala
 bloomFilter(
@@ -25,7 +36,7 @@ bloomFilter(
 
 `bloomFilter` [builds a BloomFilter](#buildBloomFilter).
 
-### <span id="buildBloomFilter"> Building BloomFilter
+### Building BloomFilter { #buildBloomFilter }
 
 ```scala
 buildBloomFilter(
@@ -35,15 +46,3 @@ buildBloomFilter(
 ```
 
 `buildBloomFilter`...FIXME
-
-<!---
-## Review Me
-
-`DataFrameStatFunctions` is available using [stat](Dataset-untyped-transformations.md#stat) untyped transformation.
-
-[source, scala]
-----
-val q: DataFrame = ...
-q.stat
-----
--->

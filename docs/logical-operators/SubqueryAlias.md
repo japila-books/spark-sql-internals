@@ -10,7 +10,7 @@ title: SubqueryAlias
 
 * `AstBuilder` is requested to parse a <<sql/AstBuilder.md#visitNamedQuery, named>> or <<sql/AstBuilder.md#visitAliasedQuery, aliased>> query, <<sql/AstBuilder.md#aliasPlan, aliased query plan>> and <<sql/AstBuilder.md#mayApplyAliasPlan, mayApplyAliasPlan>> in a SQL statement
 
-* <<spark-sql-dataset-operators.md#as, Dataset.as>> operator is used
+* <<dataset-operators.md#as, Dataset.as>> operator is used
 
 * `SessionCatalog` is requested to [find a table or view in catalogs](../SessionCatalog.md#lookupRelation)
 

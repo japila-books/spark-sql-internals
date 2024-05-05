@@ -52,7 +52,7 @@ ds.queryExecution
 Analyzed [logical plan](#logical) that has passed [Logical Analyzer](Analyzer.md).
 
 !!! tip
-    Beside `analyzed`, you can use [Dataset.explain](spark-sql-dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
+    Beside `analyzed`, you can use [Dataset.explain](dataset-operators.md#explain) basic action (with `extended` flag enabled) or SQL's `EXPLAIN EXTENDED` to see the analyzed logical plan of a structured query.
 
 ### Analyzed Logical Plan with Cached Data { #withCachedData }
 
@@ -98,7 +98,7 @@ The `RDD` is the top-level RDD of the DAG of RDDs (that represent physical opera
     [SparkSession.internalCreateDataFrame](SparkSession.md#internalCreateDataFrame) applies a [schema](types/StructType.md) to an `RDD[InternalRow]`.
 
 !!! note
-    [Dataset.rdd](spark-sql-dataset-operators.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.
+    [Dataset.rdd](dataset-operators.md#rdd) gives the `RDD[InternalRow]` with internal binary rows deserialized to a concrete Scala type.
 
 You can access the lazy attributes as follows:
 

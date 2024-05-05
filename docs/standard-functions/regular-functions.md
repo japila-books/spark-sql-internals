@@ -74,7 +74,7 @@ Project [token#127, id#126, prob#140]
             +- LocalTableScan [_1#136, _2#137]
 ----
 
-NOTE: `broadcast` standard function is a special case of spark-sql-dataset-operators.md[Dataset.hint] operator that allows for attaching any hint to a logical plan.
+NOTE: `broadcast` standard function is a special case of dataset-operators.md[Dataset.hint] operator that allows for attaching any hint to a logical plan.
 
 ## <span id="coalesce"> coalesce
 

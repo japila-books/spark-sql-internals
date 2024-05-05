@@ -8,7 +8,7 @@ title: Sort
 
 * `ORDER BY`, `SORT BY`, `SORT BY ... DISTRIBUTE BY` and `CLUSTER BY` clauses (when `AstBuilder` is requested to [parse a query](../sql/AstBuilder.md#withQueryResultClauses))
 
-* [Dataset.sortWithinPartitions](../spark-sql-dataset-operators.md#sortWithinPartitions), [Dataset.sort](../spark-sql-dataset-operators.md#sort) and [Dataset.randomSplit](../spark-sql-dataset-operators.md#randomSplit) operators
+* [Dataset.sortWithinPartitions](../dataset-operators.md#sortWithinPartitions), [Dataset.sort](../dataset-operators.md#sort) and [Dataset.randomSplit](../dataset-operators.md#randomSplit) operators
 
 ## Creating Instance
 

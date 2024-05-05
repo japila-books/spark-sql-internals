@@ -4,7 +4,7 @@ title: CollectMetrics
 
 # CollectMetrics Logical Operator
 
-`CollectMetrics` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents [Dataset.observe](../spark-sql-dataset-operators.md#observe) operator (in the [logical query plan](LogicalPlan.md)).
+`CollectMetrics` is a [unary logical operator](LogicalPlan.md#UnaryNode) that represents [Dataset.observe](../dataset-operators.md#observe) operator (in the [logical query plan](LogicalPlan.md)).
 
 ## Creating Instance
 
@@ -14,7 +14,7 @@ title: CollectMetrics
 * <span id="metricExpressions"> Metric [NamedExpression](../expressions/NamedExpression.md)s
 * <span id="child"> Child [logical operator](LogicalPlan.md)
 
-`CollectMetrics` is created when [Dataset.observe](../spark-sql-dataset-operators.md#observe) operator is used.
+`CollectMetrics` is created when [Dataset.observe](../dataset-operators.md#observe) operator is used.
 
 ## Execution Planning
 

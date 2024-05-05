@@ -6,7 +6,7 @@ title: Dataset
 
 `Dataset[T]` is a strongly-typed data structure that represents a structured query over rows of `T` type.
 
-`Dataset` is created using [SQL](sql/index.md) or [Dataset](spark-sql-dataset-operators.md) high-level declarative "languages".
+`Dataset` is created using [SQL](sql/index.md) or [Dataset](dataset-operators.md) high-level declarative "languages".
 
 ![Dataset's Internals](images/spark-sql-Dataset.png)
 
@@ -35,9 +35,9 @@ When created, `Dataset` requests [QueryExecution](#queryExecution) to [assert an
 
 * [Dataset.ofRows](#ofRows) (for a [LogicalPlan](logical-operators/LogicalPlan.md) and a [SparkSession](SparkSession.md))
 
-* [Dataset.toDF](Dataset-untyped-transformations.md#toDF) untyped transformation is used
+* [Dataset.toDF](dataset-untyped-transformations.md#toDF) untyped transformation is used
 
-* [Dataset.select](spark-sql-Dataset-typed-transformations.md#select), [Dataset.randomSplit](spark-sql-Dataset-typed-transformations.md#randomSplit) and [Dataset.mapPartitions](spark-sql-Dataset-typed-transformations.md#mapPartitions) typed transformations are used
+* [Dataset.select](dataset-typed-transformations.md#select), [Dataset.randomSplit](dataset-typed-transformations.md#randomSplit) and [Dataset.mapPartitions](dataset-typed-transformations.md#mapPartitions) typed transformations are used
 
 * [KeyValueGroupedDataset.agg](KeyValueGroupedDataset.md#agg) operator is used (that requests `KeyValueGroupedDataset` to [aggUntyped](KeyValueGroupedDataset.md#aggUntyped))
 
@@ -452,7 +452,7 @@ dataset.filter('value % 2 === 0).count
 dataset.filter("value % 2 = 0").count
 ```
 
-The <<spark-sql-dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based [Row](Row.md)s).
+The <<dataset-operators.md#, Dataset API>> offers declarative and type-safe operators that makes for an improved experience for data processing (comparing to [DataFrames](DataFrame.md) that were a set of index- or column name-based [Row](Row.md)s).
 
 `Dataset` offers convenience of RDDs with the performance optimizations of DataFrames and the strong static type-safety of Scala. The last feature of bringing the strong type-safety to [DataFrame](DataFrame.md) makes Dataset so appealing. All the features together give you a more functional programming interface to work with structured data.
 
@@ -504,13 +504,13 @@ A `Dataset` is <<Queryable, Queryable>> and `Serializable`, i.e. can be saved to
 
 NOTE: SparkSession.md[SparkSession] and [QueryExecution](QueryExecution.md) are transient attributes of a `Dataset` and therefore do not participate in Dataset serialization. The only _firmly-tied_ feature of a `Dataset` is the [Encoder](Encoder.md).
 
-You can request the ["untyped" view](spark-sql-dataset-operators.md#toDF) of a Dataset or access the spark-sql-dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
+You can request the ["untyped" view](dataset-operators.md#toDF) of a Dataset or access the dataset-operators.md#rdd[RDD] that is generated after executing the query. It is supposed to give you a more pleasant experience while transitioning from the legacy RDD-based or DataFrame-based APIs you may have used in the earlier versions of Spark SQL or encourage migrating from Spark Core's RDD API to Spark SQL's Dataset API.
 
 The default storage level for `Datasets` is spark-rdd-caching.md[MEMORY_AND_DISK] because recomputing the in-memory columnar representation of the underlying table is expensive. You can however [persist a `Dataset`](caching-and-persistence.md#persist).
 
 NOTE: Spark 2.0 has introduced a new query model called spark-structured-streaming.md[Structured Streaming] for continuous incremental execution of structured queries. That made possible to consider Datasets a static and bounded as well as streaming and unbounded data sets with a single unified API for different execution models.
 
-A `Dataset` is spark-sql-dataset-operators.md#isLocal[local] if it was created from local collections using SparkSession.md#emptyDataset[SparkSession.emptyDataset] or SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
+A `Dataset` is dataset-operators.md#isLocal[local] if it was created from local collections using SparkSession.md#emptyDataset[SparkSession.emptyDataset] or SparkSession.md#createDataset[SparkSession.createDataset] methods and their derivatives like <<toDF,toDF>>. If so, the queries on the Dataset can be optimized and run locally, i.e. without using Spark executors.
 
 NOTE: `Dataset` makes sure that the underlying `QueryExecution` is [analyzed](QueryExecution.md#analyzed) and CheckAnalysis.md#checkAnalysis[checked].
 
@@ -531,7 +531,7 @@ Used when:
 
 * `Dataset` is <<apply, created>> (for a logical plan in a given `SparkSession`)
 
-* spark-sql-dataset-operators.md#spark-sql-dataset-operators.md[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
+* dataset-operators.md#dataset-operators.md[Dataset.toLocalIterator] operator is used (to create a Java `Iterator` of objects of type `T`)
 
 * `Dataset` is requested to <<collectFromPlan, collect all rows from a spark plan>>
 
@@ -712,7 +712,7 @@ collectFromPlan(plan: SparkPlan): Array[T]
 
 `collectFromPlan`...FIXME
 
-NOTE: `collectFromPlan` is used for spark-sql-dataset-operators.md#head[Dataset.head], spark-sql-dataset-operators.md#collect[Dataset.collect] and spark-sql-dataset-operators.md#collectAsList[Dataset.collectAsList] operators.
+NOTE: `collectFromPlan` is used for dataset-operators.md#head[Dataset.head], dataset-operators.md#collect[Dataset.collect] and dataset-operators.md#collectAsList[Dataset.collectAsList] operators.
 
 === [[selectUntyped]] `selectUntyped` Internal Method
 
@@ -723,7 +723,7 @@ selectUntyped(columns: TypedColumn[_, _]*): Dataset[_]
 
 `selectUntyped`...FIXME
 
-NOTE: `selectUntyped` is used exclusively when <<spark-sql-Dataset-typed-transformations.md#select, Dataset.select>> typed transformation is used.
+NOTE: `selectUntyped` is used exclusively when <<dataset-typed-transformations.md#select, Dataset.select>> typed transformation is used.
 
 === [[sortInternal]] `sortInternal` Internal Method
 
@@ -752,7 +752,7 @@ Internally, `sortInternal` firstly builds ordering expressions for the given `so
 
 In the end, `sortInternal` <<withTypedPlan, creates a Dataset>> with <<Sort.md#, Sort>> unary logical operator (with the ordering expressions, the given `global` flag, and the <<logicalPlan, logicalPlan>> as the <<Sort.md#child, child logical plan>>).
 
-NOTE: `sortInternal` is used for the <<spark-sql-dataset-operators.md#sort, sort>> and <<spark-sql-dataset-operators.md#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
+NOTE: `sortInternal` is used for the <<dataset-operators.md#sort, sort>> and <<dataset-operators.md#sortWithinPartitions, sortWithinPartitions>> typed transformations in the Dataset API (with the only change of the `global` flag being enabled and disabled, respectively).
 
 === [[withPlan]] Helper Method for Untyped Transformations and Basic Actions -- `withPlan` Internal Method
 
@@ -765,7 +765,7 @@ withPlan(logicalPlan: LogicalPlan): DataFrame
 
 NOTE: `withPlan` is annotated with Scala's https://www.scala-lang.org/api/current/scala/inline.html[@inline] annotation that requests the Scala compiler to try especially hard to inline it.
 
-`withPlan` is used in [untyped transformations](Dataset-untyped-transformations.md)
+`withPlan` is used in [untyped transformations](dataset-untyped-transformations.md)
 
 === [[i-want-more]] Further Reading and Watching
 

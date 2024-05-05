@@ -16,7 +16,7 @@ title: UnresolvedHint
 
 `UnresolvedHint` is created when:
 
-* [Dataset.hint](../spark-sql-dataset-operators.md#hint) operator is used
+* [Dataset.hint](../dataset-operators.md#hint) operator is used
 * `AstBuilder` is requested to [parse hints in a SQL query](../sql/AstBuilder.md#withHints)
 
 ## <span id="resolved"> Never Resolved
