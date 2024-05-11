@@ -4,6 +4,50 @@ title: GroupingSets
 
 # GroupingSets Unary Logical Operator
 
+`GroupingSets` is a `BaseGroupingSets` that represents the following high-level SQL-only operators (in a logical query plan):
+
+* [GROUPING SETS](../sql/AstBuilder.md#visitGroupingAnalytics) SQL statement
+* [GROUP BY ... GROUPING SETS](../sql/AstBuilder.md#withAggregationClause) SQL statement
+
+!!! note
+    `grouping` and `grouping_id` standard functions can only be used with grouping analytics clauses (incl. `GroupingSets`).
+
+??? note "Spark Structured Streaming Not Supported"
+    Grouping Sets is not supported on streaming DataFrames (that is enforced by `UnsupportedOperationChecker`).
+
+## Creating Instance
+
+`GroupingSets` takes the following to be created:
+
+* <span id="groupingSetIndexes"> GroupingSets Indicies
+* <span id="flatGroupingSets"> Flat GroupingSets [Expression](../expressions/Expression.md)s
+* <span id="userGivenGroupByExprs"> User-Specified GroupBy [Expression](../expressions/Expression.md)s
+
+`GroupingSets` is created using [apply](#apply) utility only.
+
+## Creating GroupingSets { #apply }
+
+```scala
+apply(
+  groupingSets: Seq[Seq[Expression]]): GroupingSets // (1)!
+apply(
+  groupingSets: Seq[Seq[Expression]],
+  userGivenGroupByExprs: Seq[Expression]): GroupingSets
+```
+
+1. `userGivenGroupByExprs` is an empty collection (`Nil`)
+
+`apply` computes the [GroupingSet indicies](#groupingSetIndexes) and creates a [GroupingSets](#creating-instance).
+
+---
+
+`apply` is used when:
+
+* `AstBuilder` is requested to parse [GROUPING SETS](../sql/AstBuilder.md#visitGroupingAnalytics) or [GROUP BY ... GROUPING SETS](../sql/AstBuilder.md#withAggregationClause) SQL statements
+
+<!---
+## Review Me
+
 `GroupingSets` is a spark-sql-LogicalPlan.md#UnaryNode[unary logical operator] that represents SQL's sql/AstBuilder.md#withAggregation[GROUPING SETS] variant of `GROUP BY` clause.
 
 ```text
@@ -66,12 +110,4 @@ scala> println(plan.numberedTreeString)
 
 // FIXME Show the evaluation rules to get rid of the unresolvable parts
 ----
-
-=== [[creating-instance]] Creating GroupingSets Instance
-
-`GroupingSets` takes the following when created:
-
-* [[selectedGroupByExprs]] expressions/Expression.md[Expressions] from `GROUPING SETS` clause
-* [[groupByExprs]] Grouping expressions/Expression.md[expressions] from `GROUP BY` clause
-* [[child]] Child spark-sql-LogicalPlan.md[logical plan]
-* [[aggregations]] Aggregate expressions/NamedExpression.md[named expressions]
+-->
