@@ -12,7 +12,7 @@ title: AddMetadataColumns
 
 ## Executing Rule { #apply }
 
-??? note "Signature"
+??? note "Rule"
 
     ```scala
     apply(

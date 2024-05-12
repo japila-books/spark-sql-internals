@@ -77,3 +77,49 @@ StructField(id,LongType,false)
 scala> println(f.toDDL)
 `id` BIGINT COMMENT 'this is a comment'
 ```
+
+## Removing CURRENT_DEFAULT Metadata Attribute { #clearCurrentDefaultValue }
+
+```scala
+clearCurrentDefaultValue(): StructField
+```
+
+`clearCurrentDefaultValue` removes (_clears_) [CURRENT_DEFAULT](../default-columns/index.md#CURRENT_DEFAULT_COLUMN_METADATA_KEY) column metadata attribute from this [Metadata](#metadata).
+
+---
+
+`clearCurrentDefaultValue` is used when:
+
+* `CatalogV2Util` is requested to [applySchemaChanges](../connector/catalog/CatalogV2Util.md#applySchemaChanges)
+* `AlterTableChangeColumnCommand` logical command is executed
+
+## Updating CURRENT_DEFAULT Metadata Attribute { #withCurrentDefaultValue }
+
+```scala
+withCurrentDefaultValue(
+  value: String): StructField
+```
+
+`withCurrentDefaultValue` adds or updates [CURRENT_DEFAULT](../default-columns/index.md#CURRENT_DEFAULT_COLUMN_METADATA_KEY) column metadata attribute (of this [Metadata](#metadata)) to the given `value`.
+
+---
+
+`withCurrentDefaultValue` is used when:
+
+* `CatalogV2Util` is requested to [applySchemaChanges](../connector/catalog/CatalogV2Util.md#applySchemaChanges) and [encodeDefaultValue](../connector/catalog/CatalogV2Util.md#encodeDefaultValue)
+* `AlterTableChangeColumnCommand` logical command is executed (to [addCurrentDefaultValue](#addCurrentDefaultValue))
+
+## Updating EXISTS_DEFAULT Metadata Attribute { #withExistenceDefaultValue }
+
+```scala
+withExistenceDefaultValue(
+  value: String): StructField
+```
+
+`withExistenceDefaultValue` adds or updates [EXISTS_DEFAULT](../default-columns/index.md#EXISTS_DEFAULT_COLUMN_METADATA_KEY) column metadata attribute (of this [Metadata](#metadata)) to the given `value`.
+
+---
+
+`withExistenceDefaultValue` is used when:
+
+* `CatalogV2Util` is requested to [encodeDefaultValue](../connector/catalog/CatalogV2Util.md#encodeDefaultValue)

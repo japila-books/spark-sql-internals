@@ -86,3 +86,11 @@ Default Columns uses the following configuration properties:
 * [spark.sql.jsonGenerator.writeNullIfWithDefaultValue](../configuration-properties.md#spark.sql.jsonGenerator.writeNullIfWithDefaultValue)
 
 Default Columns are resolved using [ResolveDefaultColumns](../logical-analysis-rules/ResolveDefaultColumns.md) logical resolution rule.
+
+## Column Metadata Attributes
+
+Default Columns feature uses the internal column metadata attributes to mark schema fields with default values.
+
+### CURRENT_DEFAULT { #CURRENT_DEFAULT_COLUMN_METADATA_KEY }
+
+### EXISTS_DEFAULT { #EXISTS_DEFAULT_COLUMN_METADATA_KEY }

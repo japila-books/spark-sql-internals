@@ -57,3 +57,24 @@ For [UpdateTable](../logical-operators/UpdateTable.md)s, `apply` [resolveDefault
 ### MergeIntoTable { #MergeIntoTable }
 
 For [MergeIntoTable](../logical-operators/MergeIntoTable.md)s, `apply` [resolveDefaultColumnsForMerge](#resolveDefaultColumnsForMerge).
+
+## constantFoldCurrentDefaultsToExistDefaults { #constantFoldCurrentDefaultsToExistDefaults }
+
+```scala
+constantFoldCurrentDefaultsToExistDefaults(
+  tableSchema: StructType,
+  statementType: String): StructType
+```
+
+Only with [spark.sql.defaultColumn.enabled](../configuration-properties.md#spark.sql.defaultColumn.enabled) enabled, `constantFoldCurrentDefaultsToExistDefaults`...FIXME
+
+Otherwise, `constantFoldCurrentDefaultsToExistDefaults` does nothing (a _noop_) and returns the given [table schema](../types/StructType.md) intact.
+
+---
+
+`constantFoldCurrentDefaultsToExistDefaults` is used when:
+
+* `CatalogV2Util` is requested to [addField](../connector/catalog/CatalogV2Util.md#addField)
+* [AlterTableAddColumnsCommand](../logical-operators/AlterTableAddColumnsCommand.md) logical command is executed (to [constantFoldCurrentDefaultsToExistDefaults](../logical-operators/AlterTableAddColumnsCommand.md#constantFoldCurrentDefaultsToExistDefaults))
+* [DataSourceAnalysis](../logical-analysis-rules/DataSourceAnalysis.md) logical resolution rule is executed (to resolve a [CreateTable](../logical-operators/CreateTable.md) logical operator with a [DataSource table](../connectors/DDLUtils.md#isDatasourceTable))
+* [DataSourceV2Strategy](../execution-planning-strategies/DataSourceV2Strategy.md) execution planning strategy is executed (to resolve [CreateTable](../logical-operators/CreateTable.md) and `ReplaceTable` logical operators)

@@ -93,22 +93,23 @@ cloneSession(): SparkSession
 * `AdaptiveSparkPlanHelper` is requested to `getOrCloneSessionWithAqeOff`
 * `StreamExecution` (Spark Structured Streaming) is created
 
-## <span id="builder"> Creating SparkSession Using Builder Pattern
+## Creating SparkSession Using Builder Pattern { #builder }
 
 ```scala
 builder(): Builder
 ```
 
-`builder` is an object method that creates a new [Builder](SparkSession-Builder.md) to build a `SparkSession` using a _fluent API_.
+`builder` is an object method that creates a new [Builder](SparkSession-Builder.md) (that is then used to build a `SparkSession` using a so-called *Fluent API*).
 
 ```scala
 import org.apache.spark.sql.SparkSession
 val builder = SparkSession.builder
 ```
 
-TIP: Read about https://en.wikipedia.org/wiki/Fluent_interface[Fluent interface] design pattern in Wikipedia, the free encyclopedia.
+??? note "Fluent interface"
+    Read about [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) design pattern in Wikipedia, the free encyclopedia.
 
-## <span id="version"> Spark Version
+## Spark Version { #version }
 
 ```scala
 version: String

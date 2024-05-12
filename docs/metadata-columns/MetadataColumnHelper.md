@@ -4,7 +4,7 @@ title: MetadataColumnHelper
 
 # MetadataColumnHelper Implicit Class
 
-`MetadataColumnHelper` is a Scala implicit class for [Attribute](#attr).
+`MetadataColumnHelper` is a Scala implicit class of [Attribute](#attr) class.
 
 ## Creating Instance
 
@@ -12,7 +12,7 @@ title: MetadataColumnHelper
 
 * <span id="attr"> [Attribute](../expressions/Attribute.md)
 
-## <span id="isMetadataCol"> isMetadataCol
+## isMetadataCol { #isMetadataCol }
 
 ```scala
 isMetadataCol: Boolean
@@ -35,10 +35,28 @@ markAsQualifiedAccessOnly(): Attribute
 Metadata Key | Value
 -------------|------
  [__metadata_col](#METADATA_COL_ATTR_KEY) | The [name](../expressions/Attribute.md#name) of this [Attribute](#attr)
- [__qualified_access_only](#QUALIFIED_ACCESS_ONLY) | `true`
+ [__qualified_access_only](index.md#QUALIFIED_ACCESS_ONLY) | `true`
 
 ---
 
 `markAsQualifiedAccessOnly` is used when:
 
 * `Analyzer` is requested to [commonNaturalJoinProcessing](../Analyzer.md#commonNaturalJoinProcessing)
+
+## markAsAllowAnyAccess { #markAsAllowAnyAccess }
+
+```scala
+markAsAllowAnyAccess(): Attribute
+```
+
+Only with [qualifiedAccessOnly](#qualifiedAccessOnly) enabled, `markAsAllowAnyAccess` removes [__qualified_access_only](index.md#QUALIFIED_ACCESS_ONLY) metadata key from this [Attribute](#attr).
+
+Otherwise, `markAsAllowAnyAccess` does nothing (a _noop_) and returns this [Attribute](#attr) intact.
+
+---
+
+`markAsAllowAnyAccess` is used when:
+
+* [AddMetadataColumns](../logical-analysis-rules/AddMetadataColumns.md) logical resolution rule is executed (to [addMetadataCol](../logical-analysis-rules/AddMetadataColumns.md#addMetadataCol))
+* `UnresolvedStar` expression is requested to [expand](../expressions/UnresolvedStar.md#expand)
+* _others_
