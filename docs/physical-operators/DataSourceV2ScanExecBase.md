@@ -32,17 +32,20 @@ See:
 
 * [BatchScanExec](BatchScanExec.md#inputRDD)
 
-### keyGroupedPartitioning { #keyGroupedPartitioning }
+### Custom Partitioning Expressions { #keyGroupedPartitioning }
 
 ```scala
 keyGroupedPartitioning: Option[Seq[Expression]]
 ```
 
-Optional partitioning [expression](../expressions/Expression.md)s
+Optional partitioning [expression](../expressions/Expression.md)s (provided by [connectors](../connector/index.md) using [SupportsReportPartitioning](../connector/SupportsReportPartitioning.md))
 
 See:
 
 * [BatchScanExec](BatchScanExec.md#keyGroupedPartitioning)
+
+??? note "Spark Structured Streaming Not Supported"
+    `ContinuousScanExec` and `MicroBatchScanExec` physical operators are not supported (and have `keyGroupedPartitioning` undefined (`None`)).
 
 Used when:
 
@@ -80,39 +83,39 @@ scan: Scan
 * `ContinuousScanExec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/ContinuousScanExec))
 * `MicroBatchScanExec` ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/MicroBatchScanExec))
 
-## <span id="doExecute"> Executing Physical Operator
+## Executing Physical Operator { #doExecute }
 
-```scala
-doExecute(): RDD[InternalRow]
-```
+??? note "SparkPlan"
 
-`doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
+    ```scala
+    doExecute(): RDD[InternalRow]
+    ```
 
----
+    `doExecute` is part of the [SparkPlan](SparkPlan.md#doExecute) abstraction.
 
 `doExecute`...FIXME
 
-## <span id="doExecuteColumnar"> doExecuteColumnar
+## doExecuteColumnar { #doExecuteColumnar }
 
-```scala
-doExecuteColumnar(): RDD[ColumnarBatch]
-```
+??? note "SparkPlan"
 
-`doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
+    ```scala
+    doExecuteColumnar(): RDD[ColumnarBatch]
+    ```
 
----
+    `doExecuteColumnar` is part of the [SparkPlan](SparkPlan.md#doExecuteColumnar) abstraction.
 
 `doExecuteColumnar`...FIXME
 
-## <span id="metrics"> Performance Metrics
+## Performance Metrics { #metrics }
 
-```scala
-metrics: Map[String, SQLMetric]
-```
+??? note "SparkPlan"
 
-`metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
+    ```scala
+    metrics: Map[String, SQLMetric]
+    ```
 
----
+    `metrics` is part of the [SparkPlan](SparkPlan.md#metrics) abstraction.
 
 `metrics` is the following [SQLMetric](../SQLMetric.md)s with the [customMetrics](#customMetrics):
 
@@ -120,40 +123,52 @@ Metric Name | web UI
 ------------|--------
  `numOutputRows` | number of output rows
 
-## <span id="outputPartitioning"> Output Data Partitioning Requirements
+## Output Data Partitioning { #outputPartitioning }
 
-```scala
-outputPartitioning: physical.Partitioning
-```
+??? note "SparkPlan"
 
-`outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
+    ```scala
+    outputPartitioning: physical.Partitioning
+    ```
 
----
+    `outputPartitioning` is part of the [SparkPlan](SparkPlan.md#outputPartitioning) abstraction.
 
 `outputPartitioning`...FIXME
 
-## <span id="simpleString"> Simple Node Description
+## Output Data Ordering { #outputOrdering }
 
-```scala
-simpleString(
-    maxFields: Int): String
-```
+??? note "QueryPlan"
 
-`simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
+    ```scala
+    outputOrdering: Seq[SortOrder]
+    ```
 
----
+    `outputOrdering` is part of the [QueryPlan](../catalyst/QueryPlan.md#outputOrdering) abstraction.
+
+`outputOrdering`...FIXME
+
+## Simple Node Description { #simpleString }
+
+??? note "TreeNode"
+
+    ```scala
+    simpleString(
+        maxFields: Int): String
+    ```
+
+    `simpleString` is part of the [TreeNode](../catalyst/TreeNode.md#simpleString) abstraction.
 
 `simpleString`...FIXME
 
-## <span id="supportsColumnar"> supportsColumnar
+## supportsColumnar { #supportsColumnar }
 
-```scala
-supportsColumnar: Boolean
-```
+??? note "SparkPlan"
 
-`supportsColumnar` is part of the [SparkPlan](SparkPlan.md#supportsColumnar) abstraction.
+    ```scala
+    supportsColumnar: Boolean
+    ```
 
----
+    `supportsColumnar` is part of the [SparkPlan](SparkPlan.md#supportsColumnar) abstraction.
 
 `supportsColumnar` is `true` if the [PartitionReaderFactory](#readerFactory) can [supportColumnarReads](../connector/PartitionReaderFactory.md#supportColumnarReads) for all the [input partitions](#inputPartitions). Otherwise, `supportsColumnar` is `false`.
 
@@ -165,7 +180,7 @@ supportsColumnar: Boolean
 Cannot mix row-based and columnar input partitions.
 ```
 
-## <span id="customMetrics"> Custom Metrics
+## Custom Metrics { #customMetrics }
 
 ```scala
 customMetrics: Map[String, SQLMetric]
@@ -187,9 +202,9 @@ customMetrics: Map[String, SQLMetric]
 * `ContinuousScanExec` is requested for the `inputRDD`
 * `MicroBatchScanExec` is requested for the `inputRDD` (that creates a [DataSourceRDD](../DataSourceRDD.md))
 
-## <span id="verboseStringWithOperatorId"> verboseStringWithOperatorId
+## verboseStringWithOperatorId { #verboseStringWithOperatorId }
 
-??? note "Signature"
+??? note "QueryPlan"
 
     ```scala
     verboseStringWithOperatorId(): String
@@ -209,3 +224,58 @@ In the end, `verboseStringWithOperatorId` is as follows (based on [formattedNode
 Output: [output]
 [metaDataStr]
 ```
+
+## Input Partitions { #partitions }
+
+```scala
+partitions: Seq[Seq[InputPartition]]
+```
+
+`partitions`...FIXME
+
+---
+
+`partitions` is used when:
+
+* `BatchScanExec` physical operator is requested to [filteredPartitions](BatchScanExec.md#filteredPartitions)
+* `ContinuousScanExec` physical operator ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/ContinuousScanExec)) is requested for the `inputRDD`
+* `MicroBatchScanExec` physical operator ([Spark Structured Streaming]({{ book.structured_streaming }}/physical-operators/MicroBatchScanExec)) is requested for the `inputRDD`
+
+## groupedPartitions { #groupedPartitions }
+
+```scala
+groupedPartitions: Option[Seq[(InternalRow, Seq[InputPartition])]]
+```
+
+??? note "Lazy Value"
+    `groupedPartitions` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+`groupedPartitions` takes the [keyGroupedPartitioning](#keyGroupedPartitioning), if specified, and [group](#groupPartitions) the [input partitions](#inputPartitions).
+
+---
+
+`groupedPartitions` is used when:
+
+* `DataSourceV2ScanExecBase` physical operator is requested for the [output data ordering](#outputOrdering), [output data partitioning requirements](#outputPartitioning), [partitions](#partitions)
+
+## groupPartitions { #groupPartitions }
+
+```scala
+groupPartitions(
+  inputPartitions: Seq[InputPartition],
+  groupSplits: Boolean = !conf.v2BucketingPushPartValuesEnabled || !conf.v2BucketingPartiallyClusteredDistributionEnabled): Option[Seq[(InternalRow, Seq[InputPartition])]]
+```
+
+!!! note "Noop"
+    `groupPartitions` does nothing (and returns `None`) when called with [spark.sql.sources.v2.bucketing.enabled](../configuration-properties.md#spark.sql.sources.v2.bucketing.enabled) disabled.
+
+`groupPartitions`...FIXME
+
+---
+
+`groupPartitions` is used when:
+
+* `BatchScanExec` physical operator is requested for the [filtered input partitions](BatchScanExec.md#filteredPartitions) and [input RDD](BatchScanExec.md#inputRDD)
+* `DataSourceV2ScanExecBase` is requested for the [groupedPartitions](#groupedPartitions)

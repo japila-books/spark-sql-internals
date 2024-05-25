@@ -1,6 +1,6 @@
 # Connector API
 
-**Connector API** is a new API in Spark 3 for Spark SQL developers to create [connectors](../connectors/index.md) (_data sources_ or _providers_).
+**Connector API** is a new API in Spark 3 for Spark SQL developers to create [connectors](../connectors/index.md) (_V2 data sources_ or _providers_).
 
 !!! note
     Connector API is meant to replace the older (deprecated) DataSource v1 and v2.

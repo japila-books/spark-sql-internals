@@ -1262,6 +1262,47 @@ Use [SQLConf.OUTPUT_COMMITTER_CLASS](SQLConf.md#OUTPUT_COMMITTER_CLASS) to acces
 !!! note
     `ParquetUtils` uses [spark.sql.parquet.output.committer.class](#spark.sql.parquet.output.committer.class) or the default `ParquetOutputCommitter` instead.
 
+### <span id="V2_BUCKETING_ENABLED"> v2.bucketing.enabled { #spark.sql.sources.v2.bucketing.enabled }
+
+**spark.sql.sources.v2.bucketing.enabled**
+
+Enables bucketing for [connectors](connector/index.md) (_V2 data sources_).
+
+When enabled, Spark will recognize the specific distribution reported by a V2 data source through [SupportsReportPartitioning](connector/SupportsReportPartitioning.md), and avoid shuffle if necessary.
+
+Similar to [spark.sql.sources.bucketing.enabled](#spark.sql.sources.bucketing.enabled)
+
+Use [SQLConf.v2BucketingEnabled](SQLConf.md#v2BucketingEnabled) for the current value
+
+Used when:
+
+* `DataSourceV2ScanExecBase` is requested to [groupPartitions](physical-operators/DataSourceV2ScanExecBase.md#groupPartitions)
+
+### <span id="V2_BUCKETING_PARTIALLY_CLUSTERED_DISTRIBUTION_ENABLED"> v2.bucketing.partiallyClusteredDistribution.enabled { #spark.sql.sources.v2.bucketing.partiallyClusteredDistribution.enabled }
+
+**spark.sql.sources.v2.bucketing.partiallyClusteredDistribution.enabled**
+
+During a Storage-Partitioned Join, whether to allow input partitions to be partially clustered, when both sides of the join are of `KeyGroupedPartitioning`.
+
+Default: `false`
+
+At planning time, Spark will pick the side with less data size based on table statistics, group and replicate them to match the other side.
+
+This is an optimization on skew join and can help to reduce data skewness when certain partitions are assigned large amount of data.
+
+Requires both [spark.sql.sources.v2.bucketing.enabled](#spark.sql.sources.v2.bucketing.enabled) and [spark.sql.sources.v2.bucketing.pushPartValues.enabled](#spark.sql.sources.v2.bucketing.pushPartValues.enabled) to be enabled
+
+### <span id="V2_BUCKETING_PUSH_PART_VALUES_ENABLED"> v2.bucketing.pushPartValues.enabled { #spark.sql.sources.v2.bucketing.pushPartValues.enabled }
+
+**spark.sql.sources.v2.bucketing.pushPartValues.enabled**
+
+Whether to pushdown common partition values when [spark.sql.sources.v2.bucketing.enabled](#spark.sql.sources.v2.bucketing.enabled) is enabled.
+
+Default: `false`
+
+When enabled, if both sides of a join are of `KeyGroupedPartitioning` and if they share compatible partition keys, even if they don't have the exact same partition values, Spark will calculate a superset of partition values and pushdown that info to scan nodes, which will use empty partitions for the missing partition values on either side.
+This could help to eliminate unnecessary shuffles.
+
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 
 **(internal)** The number of entires in an in-memory hash map (to store aggregation buffers per grouping keys) before [ObjectHashAggregateExec](physical-operators/ObjectHashAggregateExec.md) ([ObjectAggregationIterator](aggregations/ObjectAggregationIterator.md#processInputs), precisely) falls back to sort-based aggregation
