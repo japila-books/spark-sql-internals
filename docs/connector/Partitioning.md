@@ -4,14 +4,14 @@ title: Partitioning
 
 # Partitioning
 
-`Partitioning` is an [abstraction](#contract) of [output data partitioning requirements](#implementations) (_data distribution_) of a Spark SQL connector.
+`Partitioning` is an [abstraction](#contract) of [output data partitioning requirements](#implementations) (_data distribution_) of a [Spark SQL connector](index.md).
 
 !!! note
     This `Partitioning` interface for Spark SQL developers mimics the internal Catalyst [Partitioning](../physical-operators/Partitioning.md) that is converted into with the help of [DataSourcePartitioning](../physical-operators/Partitioning.md#DataSourcePartitioning).
 
 ## Contract
 
-### <span id="numPartitions"> Number of Partitions
+### Number of Partitions { #numPartitions }
 
 ```java
 int numPartitions()
@@ -21,7 +21,7 @@ Used when:
 
 * [DataSourcePartitioning](../physical-operators/Partitioning.md#DataSourcePartitioning) is requested for the [number of partitions](../physical-operators/Partitioning.md#numPartitions)
 
-### <span id="satisfy"> Satisfying Distribution
+### Satisfying Distribution { #satisfy }
 
 ```java
 boolean satisfy(
@@ -34,5 +34,5 @@ Used when:
 
 ## Implementations
 
-* `KeyGroupedPartitioning`
+* [KeyGroupedPartitioning](KeyGroupedPartitioning.md)
 * `UnknownPartitioning`

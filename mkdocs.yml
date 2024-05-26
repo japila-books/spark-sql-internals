@@ -163,6 +163,7 @@ nav:
     - ... | bloom-filter-join/**.md
     - ... | bucketing/**.md
     - ... | cache-serialization/**.md
+    - ... | storage-partitioned-joins/**.md
     - Catalog Plugin API:
       - connector/catalog/index.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
