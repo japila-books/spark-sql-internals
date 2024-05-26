@@ -1282,7 +1282,7 @@ Used when:
 
 **spark.sql.sources.v2.bucketing.partiallyClusteredDistribution.enabled**
 
-During a Storage-Partitioned Join, whether to allow input partitions to be partially clustered, when both sides of the join are of `KeyGroupedPartitioning`.
+During a [Storage-Partitioned Join](storage-partitioned-joins/index.md), whether to allow input partitions to be partially clustered, when both sides of the join are of [KeyGroupedPartitioning](connector/KeyGroupedPartitioning.md).
 
 Default: `false`
 
@@ -1291,6 +1291,14 @@ At planning time, Spark will pick the side with less data size based on table st
 This is an optimization on skew join and can help to reduce data skewness when certain partitions are assigned large amount of data.
 
 Requires both [spark.sql.sources.v2.bucketing.enabled](#spark.sql.sources.v2.bucketing.enabled) and [spark.sql.sources.v2.bucketing.pushPartValues.enabled](#spark.sql.sources.v2.bucketing.pushPartValues.enabled) to be enabled
+
+Use [SQLConf.v2BucketingPartiallyClusteredDistributionEnabled](SQLConf.md#v2BucketingPartiallyClusteredDistributionEnabled) for the current value
+
+Used when:
+
+* `BatchScanExec` physical operator is requested for the [input RDD](physical-operators/BatchScanExec.md#inputRDD)
+* `DataSourceV2ScanExecBase` physical operator is requested for [groupPartitions](physical-operators/DataSourceV2ScanExecBase.md#groupPartitions)
+* [EnsureRequirements](physical-optimizations/EnsureRequirements.md) physical optimization is executed (to [checkKeyGroupCompatible](physical-optimizations/EnsureRequirements.md#checkKeyGroupCompatible))
 
 ### <span id="V2_BUCKETING_PUSH_PART_VALUES_ENABLED"> v2.bucketing.pushPartValues.enabled { #spark.sql.sources.v2.bucketing.pushPartValues.enabled }
 
@@ -1302,6 +1310,14 @@ Default: `false`
 
 When enabled, if both sides of a join are of `KeyGroupedPartitioning` and if they share compatible partition keys, even if they don't have the exact same partition values, Spark will calculate a superset of partition values and pushdown that info to scan nodes, which will use empty partitions for the missing partition values on either side.
 This could help to eliminate unnecessary shuffles.
+
+Use [SQLConf.v2BucketingPushPartValuesEnabled](SQLConf.md#v2BucketingPushPartValuesEnabled) for the current value
+
+Used when:
+
+* `DataSourceV2ScanExecBase` physical operator is requested to [groupPartitions](physical-operators/DataSourceV2ScanExecBase.md#groupPartitions)
+* `BatchScanExec` physical operator is requested for the [inputRDD](physical-operators/BatchScanExec.md#inputRDD)
+* `EnsureRequirements` physical optimization is requested to [checkKeyGroupCompatible](physical-optimizations/EnsureRequirements.md#checkKeyGroupCompatible)
 
 ## <span id="spark.sql.objectHashAggregate.sortBased.fallbackThreshold"> spark.sql.objectHashAggregate.sortBased.fallbackThreshold
 

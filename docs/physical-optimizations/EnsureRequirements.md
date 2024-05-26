@@ -83,6 +83,28 @@ ensureDistributionAndOrdering(
 
 `ensureDistributionAndOrdering` is...FIXME
 
+### checkKeyGroupCompatible { #checkKeyGroupCompatible }
+
+```scala
+checkKeyGroupCompatible(
+  left: SparkPlan,
+  right: SparkPlan,
+  joinType: JoinType,
+  requiredChildDistribution: Seq[Distribution]): Option[Seq[SparkPlan]]
+checkKeyGroupCompatible(
+  parent: SparkPlan,
+  left: SparkPlan,
+  right: SparkPlan,
+  requiredChildDistribution: Seq[Distribution]): Option[Seq[SparkPlan]] // (1)!
+```
+
+1. Uses `JoinType` of either [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) or [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) physical operator
+
+!!! note
+    Only [SortMergeJoinExec](../physical-operators/SortMergeJoinExec.md) and [ShuffledHashJoinExec](../physical-operators/ShuffledHashJoinExec.md) physical operators are considered.
+
+`checkKeyGroupCompatible`...FIXME
+
 ## OptimizeSkewedJoin { #OptimizeSkewedJoin }
 
 `EnsureRequirements` is used to create a [OptimizeSkewedJoin](OptimizeSkewedJoin.md) physical optimization.

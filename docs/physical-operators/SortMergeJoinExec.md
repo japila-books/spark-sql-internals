@@ -1,3 +1,7 @@
+---
+title: SortMergeJoinExec
+---
+
 # SortMergeJoinExec Physical Operator
 
 `SortMergeJoinExec` is a [shuffle-based join physical operator](ShuffledJoin.md) for [sort-merge join](#doExecute) (with the [left join keys](#leftKeys) being [orderable](../expressions/RowOrdering.md#isorderable)).

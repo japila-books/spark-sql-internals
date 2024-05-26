@@ -163,7 +163,6 @@ nav:
     - ... | bloom-filter-join/**.md
     - ... | bucketing/**.md
     - ... | cache-serialization/**.md
-    - ... | storage-partitioned-joins/**.md
     - Catalog Plugin API:
       - connector/catalog/index.md
       - CatalogExtension: connector/catalog/CatalogExtension.md
@@ -224,10 +223,11 @@ nav:
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
     # FIXME Rename to spark-connect?
-    - ... | connect/**.md
     - ... | runtime-filtering/**.md
+    - ... | connect/**.md
     - ... | thrift-server/**.md
-    - Statistics: new-and-noteworthy/statistics.md
+    - new-and-noteworthy/statistics.md
+    - ... | storage-partitioned-joins/**.md
     - ... | subexpression-elimination/**.md
     - ... | subqueries/**.md
     - ... | table-valued-functions/**.md

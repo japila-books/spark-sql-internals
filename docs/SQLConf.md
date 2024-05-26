@@ -1053,6 +1053,14 @@ Used when `CacheManager` is requested to [cache a structured query](CacheManager
 
 Used when [Aggregation](execution-planning-strategies/Aggregation.md) execution planning strategy is executed (and uses `AggUtils` to [create an aggregation physical operator](aggregations/AggUtils.md#createAggregate)).
 
+## <span id="V2_BUCKETING_PARTIALLY_CLUSTERED_DISTRIBUTION_ENABLED"> v2BucketingPartiallyClusteredDistributionEnabled { #v2BucketingPartiallyClusteredDistributionEnabled }
+
+[spark.sql.sources.v2.bucketing.partiallyClusteredDistribution.enabled](configuration-properties.md#spark.sql.sources.v2.bucketing.partiallyClusteredDistribution.enabled)
+
+## <span id="V2_BUCKETING_PUSH_PART_VALUES_ENABLED"> v2BucketingPushPartValuesEnabled { #v2BucketingPushPartValuesEnabled }
+
+[spark.sql.sources.v2.bucketing.pushPartValues.enabled](configuration-properties.md#spark.sql.sources.v2.bucketing.pushPartValues.enabled)
+
 ## <span id="VARIABLE_SUBSTITUTE_ENABLED"><span id="variableSubstituteEnabled"><span id="spark.sql.variable.substitute"> variableSubstituteEnabled
 
 [spark.sql.variable.substitute](configuration-properties.md#spark.sql.variable.substitute)
