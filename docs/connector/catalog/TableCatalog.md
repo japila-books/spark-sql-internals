@@ -4,7 +4,7 @@
 
 ## Contract
 
-### <span id="alterTable"> Altering Table
+### Alter Table { #alterTable }
 
 ```java
 Table alterTable(
@@ -19,7 +19,7 @@ Used when:
 * [AlterTableExec](../../physical-operators/AlterTableExec.md) physical command is executed
 * `DelegatingCatalogExtension` is requested to [alterTable](DelegatingCatalogExtension.md#alterTable)
 
-### <span id="createTable"> createTable
+### Create Table { #createTable }
 
 ```java
 Table createTable(
@@ -40,7 +40,7 @@ Used when the following commands are executed:
 * [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md)
 * `ReplaceTableAsSelectExec`
 
-### <span id="dropTable"> dropTable
+### Drop Table { #dropTable }
 
 ```java
 boolean dropTable(
@@ -54,7 +54,7 @@ Used when the following commands are executed:
 * [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md)
 * `ReplaceTableAsSelectExec`
 
-### <span id="listTables"> Listing Tables
+### List Tables { #listTables }
 
 ```java
 Identifier[] listTables(
@@ -66,7 +66,7 @@ Used when the following commands are executed:
 * [DropNamespaceExec](../../physical-operators/DropNamespaceExec.md)
 * [ShowTablesExec](../../physical-operators/ShowTablesExec.md)
 
-### <span id="loadTable"> Loading Table
+### Load Table { #loadTable }
 
 ```java
 Table loadTable(
@@ -88,7 +88,7 @@ Used when:
 * `TableCatalog` is requested to [tableExists](#tableExists)
 * `V2SessionCatalog` is requested to [createTable](../../V2SessionCatalog.md#createTable), [alterTable](../../V2SessionCatalog.md#alterTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
 
-### <span id="renameTable"> renameTable
+### Rename Table { #renameTable }
 
 ```java
 void renameTable(
@@ -100,7 +100,7 @@ Used when the following commands are executed:
 
 * `RenameTableExec`
 
-### <span id="tableExists"> tableExists
+### Table Exists { #tableExists }
 
 ```java
 boolean tableExists(
@@ -124,5 +124,6 @@ Used when:
 ## Implementations
 
 * [CatalogExtension](CatalogExtension.md)
+* [JDBCTableCatalog](../../jdbc/JDBCTableCatalog.md)
 * [StagingTableCatalog](StagingTableCatalog.md)
 * [V2SessionCatalog](../../V2SessionCatalog.md)

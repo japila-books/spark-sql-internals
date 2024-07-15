@@ -7,7 +7,7 @@
 
 ## Contract
 
-### <span id="defaultNamespace"> Default Namespace
+### Default Namespace { #defaultNamespace }
 
 ```java
 String[] defaultNamespace()
@@ -21,7 +21,7 @@ Used when:
 
 * `CatalogManager` is requested for the [current namespace](CatalogManager.md#currentNamespace)
 
-### <span id="initialize"> Initializing CatalogPlugin
+### Initialize CatalogPlugin { #initialize }
 
 ```java
 void initialize(
@@ -38,7 +38,7 @@ Used when:
 
 * `Catalogs` utility is used to [load a catalog by name](Catalogs.md#load)
 
-### <span id="name"> Name
+### Name
 
 ```java
 String name()
@@ -52,6 +52,7 @@ String name()
 * [FunctionCatalog](FunctionCatalog.md)
 * [SupportsNamespaces](SupportsNamespaces.md)
 * [TableCatalog](TableCatalog.md)
+* [ViewCatalog](ViewCatalog.md)
 
 ## Demo
 
