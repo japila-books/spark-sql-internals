@@ -14,9 +14,9 @@
 
 * `SparkSession` is requested for the [Catalog](SparkSession.md#catalog)
 
-## <span id="listColumns"> listColumns
+## listColumns { #listColumns }
 
-??? note "Signature"
+??? note "Catalog"
 
     ```scala
     listColumns(
@@ -34,9 +34,9 @@
 
 In the end, `listColumns` [makeDataset](#makeDataset) with the columns.
 
-## <span id="getTable"> getTable
+## getTable { #getTable }
 
-??? note "Signature"
+??? note "Catalog"
 
     ```scala
     getTable(
@@ -50,7 +50,7 @@ In the end, `listColumns` [makeDataset](#makeDataset) with the columns.
 
 `getTable`...FIXME
 
-## <span id="makeTable"> Looking Up Table
+## Looking Up Table { #makeTable }
 
 ```scala
 makeTable(
@@ -66,7 +66,7 @@ makeTable(
 
 * `CatalogImpl` is requested to [listTables](#listTables) and [getTable](#getTable)
 
-### <span id="loadTable"> loadTable
+### loadTable { #loadTable }
 
 ```scala
 loadTable(
@@ -75,6 +75,22 @@ loadTable(
 ```
 
 `loadTable`...FIXME
+
+## getNamespace { #getNamespace }
+
+```scala
+getNamespace(
+  catalog: CatalogPlugin,
+  ns: Seq[String]): Database
+```
+
+`getNamespace`...FIXME
+
+---
+
+`getNamespace` is used when:
+
+* `CatalogImpl` is requested to [getDatabase](#getDatabase) and [listDatabases](#listDatabases)
 
 <!---
 ## Review Me
