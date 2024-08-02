@@ -117,8 +117,9 @@ extra:
     version: 2.3.9
     api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.9/api
   java:
+    version: 17
     api: https://docs.oracle.com/en/java/javase/17/docs/api/java.base
-    spec: https://docs.oracle.com/javase/specs/jls/se11/html
+    spec: https://docs.oracle.com/javase/specs/jls/se17/html
   kafka:
     version: 3.4.1
     api: https://kafka.apache.org/34/javadoc

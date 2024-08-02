@@ -4,14 +4,16 @@
 
 ## Contract
 
-### <span id="setDelegateCatalog"> setDelegateCatalog
+### setDelegateCatalog { #setDelegateCatalog }
 
 ```java
 void setDelegateCatalog(
   CatalogPlugin delegate)
 ```
 
-Used when `CatalogManager` is requested to [loadV2SessionCatalog](CatalogManager.md#loadV2SessionCatalog)
+Used when:
+
+* `CatalogManager` is requested to [loadV2SessionCatalog](CatalogManager.md#loadV2SessionCatalog)
 
 ## Implementations
 

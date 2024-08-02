@@ -307,6 +307,16 @@ Used when:
 
 * `InMemoryRelation` is requested for the [CachedBatchSerializer](logical-operators/InMemoryRelation.md#getSerializer)
 
+## <span id="V2_SESSION_CATALOG_IMPLEMENTATION"> spark.sql.catalog.spark_catalog { #spark.sql.catalog.spark_catalog }
+
+The fully-qualified class name of a [CatalogPlugin](connector/catalog/CatalogPlugin.md) to handle `spark_catalog` built-in session catalog
+
+Default: [defaultSessionCatalog](connector/catalog/CatalogManager.md#defaultSessionCatalog)
+
+Used when:
+
+* `CatalogManager` is requested for the [user-specified v2 session catalog](connector/catalog/CatalogManager.md#v2SessionCatalog)
+
 ## spark.sql.codegen { #spark.sql.codegen }
 
 ### aggregate.fastHashMap.capacityBit { #spark.sql.codegen.aggregate.fastHashMap.capacityBit }
@@ -1624,12 +1634,6 @@ Default: `false`
 It is highly discouraged to turn on case sensitive mode.
 
 Use [SQLConf.caseSensitiveAnalysis](SQLConf.md#caseSensitiveAnalysis) method to access the current value.
-
-## <span id="spark.sql.catalog.spark_catalog"><span id="V2_SESSION_CATALOG_IMPLEMENTATION"> spark.sql.catalog.spark_catalog
-
-The [CatalogPlugin](connector/catalog/CatalogPlugin.md) for `spark_catalog`
-
-Default: [defaultSessionCatalog](connector/catalog/CatalogManager.md#defaultSessionCatalog)
 
 ## <span id="spark.sql.cbo.enabled"> spark.sql.cbo.enabled
 

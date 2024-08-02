@@ -70,13 +70,12 @@ catalog: SessionCatalog
 catalogManager: CatalogManager
 ```
 
-[CatalogManager](connector/catalog/CatalogManager.md) that is created for the session-specific [SQLConf](#conf), [V2SessionCatalog](#v2SessionCatalog) and [SessionCatalog](#catalog).
+[CatalogManager](connector/catalog/CatalogManager.md) that is created with this [V2SessionCatalog](#v2SessionCatalog) and this [SessionCatalog](#catalog).
 
 `catalogManager` is used when:
 
-* `BaseSessionStateBuilder` is requested for [Analyzer](#analyzer) and [Optimizer](#optimizer)
-
-* `HiveSessionStateBuilder` is requested for [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)
+* `BaseSessionStateBuilder` is requested for the [Analyzer](#analyzer) and the [Optimizer](#optimizer)
+* `HiveSessionStateBuilder` is requested for the [Analyzer](hive/HiveSessionStateBuilder.md#analyzer)
 
 ### SQLConf { #conf }
 
@@ -129,11 +128,13 @@ When requested for the first time (as a `lazy val`), `tableFunctionRegistry` req
 v2SessionCatalog: V2SessionCatalog
 ```
 
-[V2SessionCatalog](V2SessionCatalog.md) that is created for the session-specific [SessionCatalog](#catalog) and  [SQLConf](#conf).
+[V2SessionCatalog](V2SessionCatalog.md) that is created with this [SessionCatalog](#catalog).
 
-`v2SessionCatalog` is used when `BaseSessionStateBuilder` is requested for the [CatalogManager](#catalogManager).
+This `V2SessionCatalog` is used when:
 
-## <span id="customOperatorOptimizationRules"> Custom Operator Optimization Rules
+* `BaseSessionStateBuilder` is requested for the [CatalogManager](#catalogManager)
+
+## Custom Operator Optimization Rules { #customOperatorOptimizationRules }
 
 ```scala
 customOperatorOptimizationRules: Seq[Rule[LogicalPlan]]

@@ -12,25 +12,25 @@
 
 * `BaseSessionStateBuilder` is requested for a [CatalogManager](../../BaseSessionStateBuilder.md#catalogManager)
 
-## <span id="defaultSessionCatalog"> Default Session Catalog
+## Default Session Catalog { #defaultSessionCatalog }
 
 ```scala
 defaultSessionCatalog: CatalogPlugin
 ```
 
-`CatalogManager` is given a [CatalogPlugin](CatalogPlugin.md) when [created](#creating-instance) for the **default session catalog**.
+`CatalogManager` is given a [CatalogPlugin](CatalogPlugin.md) when [created](#creating-instance) for the **default session catalog** (which is a [V2SessionCatalog](../../BaseSessionStateBuilder.md#v2SessionCatalog)).
 
 `defaultSessionCatalog` is used as the [delegate catalog](CatalogExtension.md#setDelegateCatalog) when `CatalogManager` is requested to [load a V2SessionCatalog](#loadV2SessionCatalog).
 
-`defaultSessionCatalog` is used as the fall-back catalog when `CatalogManager` is requested to [load a custom V2CatalogPlugin](#v2SessionCatalog).
+`defaultSessionCatalog` is used as the fallback catalog when `CatalogManager` is requested to [load a custom V2CatalogPlugin](#v2SessionCatalog).
 
-## <span id="SESSION_CATALOG_NAME"> Default Catalog Name
+## spark_catalog Default Catalog Name { #SESSION_CATALOG_NAME }
 
 `CatalogManager` defines `spark_catalog` as the name of the default catalog ([V2SessionCatalog](../../V2SessionCatalog.md)).
 
 `spark_catalog` is used as the default value of [spark.sql.defaultCatalog](../../configuration-properties.md#spark.sql.defaultCatalog) configuration property.
 
-## <span id="_currentCatalogName"> Current Catalog Name
+## Current Catalog Name { #_currentCatalogName }
 
 ```scala
 _currentCatalogName: Option[String]
@@ -40,7 +40,7 @@ _currentCatalogName: Option[String]
 
 `_currentCatalogName` can be changed using [setCurrentCatalog](#setCurrentCatalog).
 
-## <span id="currentCatalog"> Current CatalogPlugin
+## Current CatalogPlugin { #currentCatalog }
 
 ```scala
 currentCatalog: CatalogPlugin
@@ -56,13 +56,15 @@ currentCatalog: CatalogPlugin
 
 * `ViewHelper` utility is requested to `generateViewProperties`
 
-## <span id="currentNamespace"> Current Namespace
+## Current Namespace { #currentNamespace }
 
 ```scala
 currentNamespace: Array[String]
 ```
 
 `currentNamespace`...FIXME
+
+---
 
 `currentNamespace` is used when:
 
@@ -71,7 +73,7 @@ currentNamespace: Array[String]
 * `CatalogAndIdentifier` extractor utility is requested to `unapply`
 * `ViewHelper` utility is requested to `generateViewProperties`
 
-## <span id="setCurrentNamespace"> Setting Current Namespace
+## Setting Current Namespace { #setCurrentNamespace }
 
 ```scala
 setCurrentNamespace(
@@ -80,9 +82,13 @@ setCurrentNamespace(
 
 `setCurrentNamespace`...FIXME
 
-`setCurrentNamespace` is used when `SetCatalogAndNamespaceExec` physical command is executed.
+---
 
-## <span id="setCurrentCatalog"> Changing Current Catalog Name
+`setCurrentNamespace` is used when:
+
+* `SetCatalogAndNamespaceExec` physical command is executed
+
+## Changing Current Catalog Name { #setCurrentCatalog }
 
 ```scala
 setCurrentCatalog(
@@ -100,7 +106,7 @@ Only if the names are different, `setCurrentCatalog` makes it [_currentCatalogNa
 * `SetCatalogCommand` logical command is executed
 * [SetCatalogAndNamespaceExec](../../physical-operators/SetCatalogAndNamespaceExec.md) physical command is executed
 
-## <span id="catalog"> Finding CatalogPlugin by Name
+## Finding CatalogPlugin by Name { #catalog }
 
 ```scala
 catalog(
@@ -111,15 +117,15 @@ catalog(
 
 Otherwise, `catalog` looks up the name in [catalogs](#catalogs) internal registry. When not found, `catalog` tries to [load a CatalogPlugin by name](Catalogs.md#load) (and registers it in [catalogs](#catalogs) internal registry).
 
+---
+
 `catalog` is used when:
 
 * `CatalogManager` is requested to [isCatalogRegistered](#isCatalogRegistered) and [currentCatalog](#currentCatalog)
-
 * `CatalogV2Util` utility is requested to [getTableProviderCatalog](CatalogV2Util.md#getTableProviderCatalog)
-
 * `CatalogAndMultipartIdentifier`, `CatalogAndNamespace` and `CatalogAndIdentifier` utilities are requested to extract a [CatalogPlugin](CatalogPlugin.md) (`unapply`)
 
-## <span id="isCatalogRegistered"> isCatalogRegistered
+## isCatalogRegistered { #isCatalogRegistered }
 
 ```scala
 isCatalogRegistered(
@@ -130,7 +136,7 @@ isCatalogRegistered(
 
 `isCatalogRegistered` is used when `Analyzer` is requested to [expandRelationName](../../Analyzer.md#expandRelationName).
 
-## <span id="v2SessionCatalog"> v2SessionCatalog
+## v2SessionCatalog { #v2SessionCatalog }
 
 ```scala
 v2SessionCatalog: CatalogPlugin
@@ -138,24 +144,29 @@ v2SessionCatalog: CatalogPlugin
 
 `v2SessionCatalog`...FIXME
 
+---
+
 `v2SessionCatalog` is used when:
 
 * `CatalogManager` is requested to [look up a CatalogPlugin by name](#catalog)
-
 * `CatalogV2Util` is requested to `getTableProviderCatalog`
-
 * `CatalogAndIdentifier` utility is requested to extract a CatalogPlugin and an identifier from a multi-part name (`unapply`)
 
-## <span id="loadV2SessionCatalog"> loadV2SessionCatalog
+## loadV2SessionCatalog { #loadV2SessionCatalog }
 
 ```scala
 loadV2SessionCatalog(): CatalogPlugin
 ```
 
-`loadV2SessionCatalog` [loads](Catalogs.md#load) the default [spark_catalog](#SESSION_CATALOG_NAME).
+`loadV2SessionCatalog` [loads](Catalogs.md#load) the default [CatalogPlugin](CatalogPlugin.md) that handles [spark_catalog](#SESSION_CATALOG_NAME) catalog.
 
-If it is of type [CatalogExtension](CatalogExtension.md), `loadV2SessionCatalog` requests it to [setDelegateCatalog](CatalogExtension.md#setDelegateCatalog) with the [defaultSessionCatalog](#defaultSessionCatalog).
+!!! note "spark.sql.catalog.spark_catalog"
+    [spark.sql.catalog.spark_catalog](../../configuration-properties.md#spark.sql.catalog.spark_catalog) configuration property is used to specify the fully-qualified class name of the session [CatalogPlugin](CatalogPlugin.md).
+
+Only if the `CatalogPlugin` is a [CatalogExtension](CatalogExtension.md), `loadV2SessionCatalog` assigns this [default session CatalogPlugin](#defaultSessionCatalog) to be the [delegate CatalogPlugin](CatalogExtension.md#setDelegateCatalog).
+
+---
 
 `loadV2SessionCatalog` is used when:
 
-* `CatalogManager` is requested for a [CatalogPlugin](#v2SessionCatalog)
+* `CatalogManager` is requested for the [user-specified v2 session catalog](#v2SessionCatalog)
