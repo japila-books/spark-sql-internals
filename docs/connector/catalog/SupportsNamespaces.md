@@ -4,7 +4,22 @@
 
 ## Contract (Subset)
 
-### listNamespaces { #listNamespaces }
+### Create Namespace { #createNamespace }
+
+```java
+void createNamespace(
+  String[] namespace,
+  Map<String, String> metadata)
+```
+
+Creates a multi-part namespace in this catalog
+
+Used when:
+
+* `DelegatingCatalogExtension` is requested to [createNamespace](DelegatingCatalogExtension.md#createNamespace)
+* `CREATE NAMESPACE` command is executed
+
+### List Namespaces { #listNamespaces }
 
 ```java
 String[][] listNamespaces()
@@ -17,7 +32,7 @@ Used when:
 * `DelegatingCatalogExtension` is requested to [listNamespaces](DelegatingCatalogExtension.md#listNamespaces)
 * `SHOW NAMESPACES` command is executed
 
-### loadNamespaceMetadata { #loadNamespaceMetadata }
+### Load Namespace Metadata { #loadNamespaceMetadata }
 
 ```java
 Map<String, String> loadNamespaceMetadata(
@@ -32,6 +47,23 @@ Used when:
 * `SupportsNamespaces` is requested to [namespaceExists](#namespaceExists)
 * `DESCRIBE NAMESPACE` command is executed
 * `CatalogImpl` is requested to [getNamespace](../../CatalogImpl.md#getNamespace)
+
+### Check If Namespace Exists { #namespaceExists }
+
+```java
+boolean namespaceExists(
+  String[] namespace)
+```
+
+By default, `namespaceExists` tries to [load the namespace metadata](#loadNamespaceMetadata) in this catalog. For a successful load, `namespaceExists` is positive (`true`).
+
+Used when:
+
+* `CatalogManager` is requested to [setCurrentNamespace](CatalogManager.md#setCurrentNamespace)
+* `CatalogImpl` is requested to [databaseExists](../../CatalogImpl.md#databaseExists)
+* `DelegatingCatalogExtension` is requested to [namespaceExists](DelegatingCatalogExtension.md#namespaceExists)
+* `CREATE NAMESPACE` command is executed
+* `DROP NAMESPACE` command is executed
 
 ## Implementations
 

@@ -109,6 +109,24 @@ Used when:
 * [withSelectQuerySpecification](#withSelectQuerySpecification)
 * [withTransformQuerySpecification](#withTransformQuerySpecification)
 
+### visitCreateNamespace { #visitCreateNamespace }
+
+Creates a [CreateNamespace](../logical-operators/CreateNamespace.md) logical operator
+
+```sql
+CREATE (NAMESPACE | DATABASE | SCHEMA) [IF NOT EXISTS] identifierReference
+  [COMMENT comment]
+  [LOCATION location]
+  [WITH (DBPROPERTIES | PROPERTIES) propertyList]
+
+identifierReference
+    : IDENTIFIER_KW LEFT_PAREN expression RIGHT_PAREN
+    | multipartIdentifier
+    ;
+```
+
+ANTLR labeled alternative: `#createNamespace`
+
 ### visitCreateTable { #visitCreateTable }
 
 Creates a [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) (for CTAS queries with `AS` clause) or [CreateTable](../logical-operators/CreateTable.md) logical operator
