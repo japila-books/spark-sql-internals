@@ -7,7 +7,7 @@ repo_name: spark-sql-internals
 repo_url: https://github.com/japila-books/spark-sql-internals
 edit_uri: edit/main/docs/
 
-copyright: Copyright &copy; 2023-2024 Jacek Laskowski
+copyright: Copyright &copy; 2024 Jacek Laskowski
 
 theme:
   name: material
@@ -140,8 +140,8 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 3.5.1
-    github: https://github.com/apache/spark/tree/v3.5.1
+    version: 3.5.2
+    github: https://github.com/apache/spark/tree/v3.5.2
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
