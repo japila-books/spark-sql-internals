@@ -140,8 +140,8 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 3.5.2
-    github: https://github.com/apache/spark/tree/v3.5.2
+    version: 3.5.3
+    github: https://github.com/apache/spark/tree/v3.5.3
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
