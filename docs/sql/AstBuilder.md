@@ -1132,3 +1132,40 @@ With no `namedArgumentExpression` used, `extractNamedArgument` creates an [Expre
 `extractNamedArgument` is used when:
 
 * `AstBuilder` is requested to [visitFunctionCall](#visitFunctionCall) and [visitTableValuedFunction](#visitTableValuedFunction)
+
+## Create UnresolvedTable Logical Operator { #createUnresolvedTable }
+
+```scala
+createUnresolvedTable(
+  ctx: IdentifierReferenceContext,
+  commandName: String,
+  relationTypeMismatchHint: Option[String] = None): LogicalPlan
+```
+
+`createUnresolvedTable` creates an [UnresolvedTable](../logical-operators/UnresolvedTable.md) logical operator.
+
+---
+
+`createUnresolvedTable` is used when `AstBuilder` is requested for the following:
+
+* [visitAddTableColumns](#visitAddTableColumns)
+* [visitAddTablePartition](#visitAddTablePartition)
+* [visitAlterTableAlterColumn](#visitAlterTableAlterColumn)
+* [visitCommentTable](#visitCommentTable)
+* [visitCreateIndex](#visitCreateIndex)
+* [visitDropIndex](#visitDropIndex)
+* [visitDropTableColumns](#visitDropTableColumns)
+* [visitDropTablePartitions](#visitDropTablePartitions)
+* [visitHiveChangeColumn](#visitHiveChangeColumn)
+* [visitHiveReplaceColumns](#visitHiveReplaceColumns)
+* [visitLoadData](#visitLoadData)
+* [visitRecoverPartitions](#visitRecoverPartitions)
+* [visitRenameTableColumn](#visitRenameTableColumn)
+* [visitRenameTablePartition](#visitRenameTablePartition)
+* [visitRepairTable](#visitRepairTable)
+* [visitSetTableLocation](#visitSetTableLocation)
+* [visitSetTableProperties](#visitSetTableProperties)
+* [visitSetTableSerDe](#visitSetTableSerDe)
+* [visitShowPartitions](#visitShowPartitions)
+* [visitTruncateTable](#visitTruncateTable)
+* [visitUnsetTableProperties](#visitUnsetTableProperties)

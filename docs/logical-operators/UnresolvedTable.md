@@ -4,7 +4,7 @@ title: UnresolvedTable
 
 # UnresolvedTable Leaf Logical Operator
 
-`UnresolvedTable` is a [leaf logical operator](LeafNode.md).
+`UnresolvedTable` is an unresolved [leaf logical operator](LeafNode.md) (`UnresolvedLeafNode`) that represents a table that has yet to be looked up in a catalog.
 
 ## Creating Instance
 
@@ -12,21 +12,16 @@ title: UnresolvedTable
 
 * <span id="multipartIdentifier"> Multi-Part Identifier
 * <span id="commandName"> Command Name
+* <span id="relationTypeMismatchHint"> Optional `relationTypeMismatchHint`
 
 `UnresolvedTable` is created when:
 
-* `AstBuilder` is requested to [visitLoadData](../sql/AstBuilder.md#visitLoadData), [visitTruncateTable](../sql/AstBuilder.md#visitTruncateTable), [visitShowPartitions](../sql/AstBuilder.md#visitShowPartitions), [visitAddTablePartition](../sql/AstBuilder.md#visitAddTablePartition), [visitDropTablePartitions](../sql/AstBuilder.md#visitDropTablePartitions), [visitCommentTable](../sql/AstBuilder.md#visitCommentTable)
-
-## <span id="resolved"> resolved
-
-```scala
-resolved: Boolean
-```
-
-`resolved` is part of the [LogicalPlan](LogicalPlan.md#resolved) abstraction.
-
-`resolved` is `false`.
+* `AstBuilder` is requested to [create an UnresolvedTable](../sql/AstBuilder.md#createUnresolvedTable)
+* `CatalogImpl` is requested to [recover partitions](../CatalogImpl.md#recoverPartitions)
 
 ## Logical Analysis
 
-`UnresolvedTable` is resolved to a [ResolvedTable](ResolvedTable.md) by `ResolveTables` logical resolution rule.
+`UnresolvedTable` is resolved by [ResolveRelations](../logical-analysis-rules/ResolveRelations.md) logical resolution rule.
+
+??? note "CheckAnalysis and AnalysisException"
+    [CheckAnalysis](../CheckAnalysis.md#checkAnalysis0) reports an `AnalysisException` (`TABLE_OR_VIEW_NOT_FOUND`) when there are any `UnresolvedTable`s left in a logical query plan after logical analysis.
