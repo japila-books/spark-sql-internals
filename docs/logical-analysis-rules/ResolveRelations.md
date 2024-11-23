@@ -18,26 +18,26 @@ title: ResolveRelations
 
 * `Analyzer` is requested for the [batches](../Analyzer.md#batches)
 
-## <span id="apply"> Executing Rule
+## Execute Rule { #apply }
 
-```scala
-apply(
-  plan: LogicalPlan): LogicalPlan
-```
+??? note "Rule"
 
-`apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
+    ```scala
+    apply(
+      plan: LogicalPlan): LogicalPlan
+    ```
 
----
+    `apply` is part of the [Rule](../catalyst/Rule.md#apply) abstraction.
 
 `apply` resolves the following operators in the given [LogicalPlan](../logical-operators/LogicalPlan.md) (from bottom to the top of the tree):
 
-* [InsertIntoStatement](../logical-operators/InsertIntoStatement.md)s
-* [V2WriteCommand](../logical-operators/V2WriteCommand.md)s
-* `UnresolvedRelation`s
-* `RelationTimeTravel`s
-* [UnresolvedTable](../logical-operators/UnresolvedTable.md)s
+* [InsertIntoStatement](../logical-operators/InsertIntoStatement.md)
+* [V2WriteCommand](../logical-operators/V2WriteCommand.md)
+* [UnresolvedRelation](../logical-operators/UnresolvedRelation.md)
+* [RelationTimeTravel](../logical-operators/RelationTimeTravel.md)
+* [UnresolvedTable](../logical-operators/UnresolvedTable.md)
 * `UnresolvedView`s
-* [UnresolvedTableOrView](../logical-operators/UnresolvedTableOrView.md)s
+* [UnresolvedTableOrView](../logical-operators/UnresolvedTableOrView.md)
 
 ## Demo
 

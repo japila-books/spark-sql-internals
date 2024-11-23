@@ -6,6 +6,9 @@ title: UnresolvedTable
 
 `UnresolvedTable` is an unresolved [leaf logical operator](LeafNode.md) (`UnresolvedLeafNode`) that represents a table that has yet to be looked up in a catalog.
 
+??? note "UnresolvedCatalogRelation"
+    [UnresolvedCatalogRelation](UnresolvedCatalogRelation.md) leaf logical operator looks very similar.
+
 ## Creating Instance
 
 `UnresolvedTable` takes the following to be created:

@@ -325,3 +325,25 @@ getTableMetadata(
 
 !!! note "`CharType` and `VarcharType` Unsupported"
     The Spark SQL query engine does not support char/varchar types yet.
+
+## getRelation { #getRelation }
+
+```scala
+getRelation(
+  metadata: CatalogTable,
+  options: CaseInsensitiveStringMap): LogicalPlan
+```
+
+`getRelation` creates a [LogicalPlan](logical-operators/LogicalPlan.md) with a [SubqueryAlias](logical-operators/SubqueryAlias.md) logical operator with a child logical operator based on the [table type](CatalogTable.md#tableType) of the given [CatalogTable](CatalogTable.md) metadata:
+
+Table Type | Child Logical Operator
+-|-
+ `VIEW` | [fromCatalogTable](#fromCatalogTable)
+ `EXTERNAL` or `MANAGED` | [UnresolvedCatalogRelation](logical-operators/UnresolvedCatalogRelation.md)
+
+---
+
+`getRelation` is used when:
+
+* [ResolveRelations](logical-analysis-rules/ResolveRelations.md) logical analysis rule is executed
+* `SessionCatalog` is requested to [lookupRelation](#lookupRelation)
