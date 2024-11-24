@@ -1,8 +1,12 @@
+---
+title: DataSourceV2Utils
+---
+
 # DataSourceV2Utils Utility
 
 `DataSourceV2Utils` is an utility to [extractSessionConfigs](#extractSessionConfigs) and [getTableFromProvider](#getTableFromProvider) for batch and streaming reads and writes.
 
-## <span id="extractSessionConfigs"> extractSessionConfigs
+## extractSessionConfigs { #extractSessionConfigs }
 
 ```scala
 extractSessionConfigs(
@@ -24,7 +28,7 @@ extractSessionConfigs(
 * (Spark Structured Streaming) `DataStreamReader` is requested to load data from a streaming data source
 * (Spark Structured Streaming) `DataStreamWriter` is requested to start a streaming query
 
-## <span id="getTableFromProvider"> Creating Table (using TableProvider)
+## Creating Table (using TableProvider) { #getTableFromProvider }
 
 ```scala
 getTableFromProvider(
@@ -44,7 +48,7 @@ getTableFromProvider(
 * `DataStreamReader` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader)) is requested to load data from a streaming data source
 * `DataStreamWriter` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamWriter)) is requested to start a streaming query
 
-## <span id="loadV2Source"> loadV2Source
+## Load V2 Source { #loadV2Source }
 
 ```scala
 loadV2Source(
@@ -56,11 +60,15 @@ loadV2Source(
   paths: String*): Option[DataFrame]
 ```
 
-`loadV2Source` creates a [DataFrame](../DataFrame.md).
+`loadV2Source` [extractSessionConfigs](DataSourceV2Utils.md#extractSessionConfigs) and [adds the given paths](#getOptionsWithPaths) if specified.
+
+For the given [TableProvider](../connector/TableProvider.md) being a [SupportsCatalogOptions](../connector/catalog/SupportsCatalogOptions.md), `loadV2Source`...FIXME
+
+In the end, for a [SupportsRead](../connector/SupportsRead.md) table with [BATCH_READ](../connector/TableCapability.md#BATCH_READ) capability, `loadV2Source` creates a `DataFrame` with [DataSourceV2Relation](../logical-operators/DataSourceV2Relation.md#create) logical operator. Otherwise, `loadV2Source` gives no `DataFrame` (`None`).
 
 ---
 
 `loadV2Source` is used when:
 
-* `DataFrameReader` is requested to [load data](../DataFrameReader.md#load)
+* [DataFrameReader.load](../DataFrameReader.md#load) operator is used
 * [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator is executed

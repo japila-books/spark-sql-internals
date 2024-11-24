@@ -1,9 +1,12 @@
 # CatalogPlugin
 
-`CatalogPlugin` is an [abstraction](#contract) of [table catalogs](#implementations).
+`CatalogPlugin` is an [abstraction](#contract) of [catalogs](#implementations) (of assets like [functions](FunctionCatalog.md), [tables](TableCatalog.md) and [views](ViewCatalog.md)).
 
 !!! note "CatalogHelper"
     [CatalogHelper](CatalogHelper.md) is a Scala implicit class of `CatalogPlugin` with extensions methods.
+
+!!! note "Demo"
+    Learn more in [Demo: Developing CatalogPlugin](../../demo/developing-catalogplugin.md).
 
 ## Contract
 
@@ -53,7 +56,3 @@ String name()
 * [SupportsNamespaces](SupportsNamespaces.md)
 * [TableCatalog](TableCatalog.md)
 * [ViewCatalog](ViewCatalog.md)
-
-## Demo
-
-Learn more in [Demo: Developing CatalogPlugin](../../demo/developing-catalogplugin.md).

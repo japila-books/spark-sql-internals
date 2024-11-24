@@ -1,18 +1,19 @@
 # CatalogV2Util
 
-## Loading Table { #loadTable }
+## Load Table { #loadTable }
 
 ```scala
 loadTable(
   catalog: CatalogPlugin,
   ident: Identifier,
-  timeTravelSpec: Option[TimeTravelSpec] = None): Option[Table]
+  timeTravelSpec: Option[TimeTravelSpec] = None,
+  writePrivilegesString: Option[String] = None): Option[Table]
 ```
 
-`loadTable` [loads the table](#getTable) (by the given identifier and the optional [TimeTravelSpec](../../time-travel/TimeTravelSpec.md) in the given [CatalogPlugin](CatalogPlugin.md)).
+`loadTable` [loads a table](#getTable) (by the given `Identifier` and the optional [TimeTravelSpec](../../time-travel/TimeTravelSpec.md) using the given [CatalogPlugin](CatalogPlugin.md)).
 
 !!! note
-    `loadTable` is a Scala `Option`-aware wrapper around [CatalogV2Util.getTable](#getTable) that may not only return `null` but also throw an exception.
+    `loadTable` is a Scala `Option`-aware wrapper around [CatalogV2Util.getTable](#getTable).
 
 ---
 
@@ -22,16 +23,24 @@ loadTable(
 * `CatalogV2Util` is requested to [loadRelation](#loadRelation)
 * `CatalogImpl` is requested to [load a table](../../CatalogImpl.md#loadTable)
 
-## getTable { #getTable }
+## Load Table { #getTable }
 
 ```scala
 getTable(
   catalog: CatalogPlugin,
   ident: Identifier,
-  timeTravelSpec: Option[TimeTravelSpec] = None): Table
+  timeTravelSpec: Option[TimeTravelSpec] = None,
+  writePrivilegesString: Option[String] = None): Table
 ```
 
+`getTable` assumes the given [CatalogPlugin](CatalogPlugin.md) to be a [TableCatalog](CatalogHelper.md#asTableCatalog) to [load a table](TableCatalog.md#loadTable) (by the given `Identifier`).
+
+---
+
 `getTable` requests the given [CatalogPlugin](CatalogPlugin.md) for the [TableCatalog](CatalogHelper.md#asTableCatalog) to [load a table](TableCatalog.md#loadTable) (possibly versioned based on the [TimeTravelSpec](../../time-travel/TimeTravelSpec.md)).
+
+!!! note
+    It is not allowed for `getTable` to be called with both `timeTravelSpec` and `writePrivilegesString` defined.
 
 !!! note "NoSuchTableException for versioned tables"
     [TableCatalog](TableCatalog.md) throws a `NoSuchTableException` exception for versioned tables by default (and leaves other behaviour to custom [TableCatalog](TableCatalog.md#implementations)s, e.g. [Delta Lake]({{ book.delta }}/DeltaCatalog)).
@@ -40,10 +49,10 @@ getTable(
 
 `getTable` is used when:
 
-* `CatalogV2Util` is requested to [loadTable](#loadTable)
+* `CatalogV2Util` is requested to [load a table](#loadTable)
 * `DataSourceV2Utils` is requested to [loadV2Source](../../connectors/DataSourceV2Utils.md#loadV2Source)
 
-## <span id="getTableProviderCatalog"> getTableProviderCatalog
+## getTableProviderCatalog { #getTableProviderCatalog }
 
 ```scala
 getTableProviderCatalog(

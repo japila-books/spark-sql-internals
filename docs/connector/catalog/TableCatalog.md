@@ -61,10 +61,10 @@ Identifier[] listTables(
   String[] namespace)
 ```
 
-Used when the following commands are executed:
+Used when:
 
-* [DropNamespaceExec](../../physical-operators/DropNamespaceExec.md)
-* [ShowTablesExec](../../physical-operators/ShowTablesExec.md)
+* `DelegatingCatalogExtension` is requested to [listTables](DelegatingCatalogExtension.md#listTables)
+* [ShowTablesExec](../../physical-operators/ShowTablesExec.md) is executed
 
 ### Load Table { #loadTable }
 
@@ -76,17 +76,28 @@ Table loadTable(
   long timestamp)
 Table loadTable(
   Identifier ident,
+  Set<TableWritePrivilege> writePrivileges) // (1)!
+Table loadTable(
+  Identifier ident,
   String version)
 ```
+
+1. Added in 3.5.3
 
 Used when:
 
 * `CatalogV2Util` is requested to [load a table](CatalogV2Util.md#getTable)
-* `DataFrameReader` is requested to [load](../../DataFrameReader.md#load) (for [SupportsCatalogOptions](SupportsCatalogOptions.md) providers)
-* `DataFrameWriter` is requested to [save](../../DataFrameWriter.md#save), [insertInto](../../DataFrameWriter.md#insertInto) and [saveAsTable](../../DataFrameWriter.md#saveAsTable)
-* `DelegatingCatalogExtension` is requested to [loadTable](DelegatingCatalogExtension.md#loadTable)
-* `TableCatalog` is requested to [tableExists](#tableExists)
-* `V2SessionCatalog` is requested to [createTable](../../V2SessionCatalog.md#createTable), [alterTable](../../V2SessionCatalog.md#alterTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
+* `DataFrameWriter` is requested to [insertInto](../../DataFrameWriter.md#insertInto), [saveInternal](../../DataFrameWriter.md#saveInternal), [saveAsTable](../../DataFrameWriter.md#saveAsTable)
+* `AtomicCreateTableAsSelectExec` physical operator is executed
+* `AtomicReplaceTableAsSelectExec` physical operator is executed
+* [CreateTableAsSelectExec](../../physical-operators/CreateTableAsSelectExec.md) physical operator is executed
+* `ReplaceTableAsSelectExec` physical operator is executed
+* `DelegatingCatalogExtension` is requested to [load a table](DelegatingCatalogExtension.md#loadTable)
+* `RenameTableExec` physical operator is executed
+* `AtomicReplaceTableExec` physical operator is executed
+* `ReplaceTableExec` physical operator is executed
+* `V2SessionCatalog` is requested to [dropTableInternal](../../V2SessionCatalog.md#dropTableInternal), [loadTable](../../V2SessionCatalog.md#loadTable), [dropTable](../../V2SessionCatalog.md#dropTable), [renameTable](../../V2SessionCatalog.md#renameTable)
+* `DataStreamWriter` is requested to `toTable`
 
 ### Rename Table { #renameTable }
 
