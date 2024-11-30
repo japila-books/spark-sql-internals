@@ -1,3 +1,0 @@
-# ExpressionPlugin
-
-`ExpressionPlugin` is...FIXME

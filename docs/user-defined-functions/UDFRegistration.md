@@ -68,7 +68,6 @@ In the end, requests the [FunctionRegistry](#functionRegistry) to [createOrRepla
 
 `registerPython` is used when:
 
-* `SparkConnectPlanner` is requested to [handleRegisterPythonUDF](../connect/SparkConnectPlanner.md#handleRegisterPythonUDF)
 * `UDFRegistration` ([PySpark]({{ book.pyspark }}/sql/UDFRegistration)) is requested to `register`
 
 ## Logging

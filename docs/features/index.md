@@ -19,7 +19,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Hints](../hints/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
 * [Named Function Arguments](../named-function-arguments.md)
-* [Spark Connect](../connect/index.md)
+* [Spark Connect](../spark-connect.md)
 * [Table-Valued Functions](../table-valued-functions/index.md)
 * [Time Travel](../time-travel/index.md)
 * [Variable Substitution](../variable-substitution.md)

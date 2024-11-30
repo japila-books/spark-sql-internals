@@ -1,3 +1,0 @@
-# SimpleSparkConnectService
-
-`SimpleSparkConnectService` is...FIXME

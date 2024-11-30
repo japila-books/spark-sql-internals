@@ -22,7 +22,7 @@ title: PythonUDF
 
 `PythonUDF` is created when:
 
-* `SparkConnectPlanner` is requested to [transformPythonUDF](../connect/SparkConnectPlanner.md#transformPythonUDF)
+* `SparkConnectPlanner` is requested to `transformPythonUDF`
 * `UserDefinedPythonFunction` is requested to [builder](../user-defined-functions/UserDefinedPythonFunction.md#builder)
 
 ### evalType { #evalType }

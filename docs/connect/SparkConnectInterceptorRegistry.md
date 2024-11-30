@@ -1,3 +1,0 @@
-# SparkConnectInterceptorRegistry
-
-`SparkConnectInterceptorRegistry` is...FIXME

@@ -25,7 +25,6 @@ title: UnresolvedRelation
     * [DataFrameWriterV2.overwrite](../DataFrameWriterV2.md#overwrite)
     * [DataFrameWriterV2.overwritePartitions](../DataFrameWriterV2.md#overwritePartitions)
 * `DataStreamReader.table` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader#table)) operator is used
-* `SparkConnectPlanner` is requested to [transformReadRel](../connect/SparkConnectPlanner.md#transformReadRel)
 * [table](../catalyst-dsl/index.md#table) ([Catalyst DSL](../catalyst-dsl/index.md)) operator is used
 
 ## Creating UnresolvedRelation { #apply }

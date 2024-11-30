@@ -105,10 +105,6 @@ extra:
     pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
-  grpc:
-    version: 1.56.0
-    docs: https://grpc.io/docs/languages/java/
-    api: https://grpc.github.io/grpc-java/javadoc
   hadoop:
     version: 3.3.4
     docs: https://hadoop.apache.org/docs/r3.3.4
@@ -223,9 +219,8 @@ nav:
     - ... | parameterized-queries/**.md
     - Partition File Metadata Caching:
       - partition-file-metadata-caching/index.md
-    # FIXME Rename to spark-connect?
     - ... | runtime-filtering/**.md
-    - ... | connect/**.md
+    - spark-connect.md
     - ... | thrift-server/**.md
     - new-and-noteworthy/statistics.md
     - ... | storage-partitioned-joins/**.md

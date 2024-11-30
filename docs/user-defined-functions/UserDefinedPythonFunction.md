@@ -14,7 +14,7 @@
 
 `UserDefinedPythonFunction` is created when:
 
-* `SparkConnectPlanner` is requested to [handleRegisterPythonUDF](../connect/SparkConnectPlanner.md#handleRegisterPythonUDF) (to [register a user-defined Python function](UDFRegistration.md#registerPython))
+* `SparkConnectPlanner` is requested to `handleRegisterPythonUDF` (to [register a user-defined Python function](UDFRegistration.md#registerPython))
 
 ## Creating Column (to Execute PythonUDF) { #apply }
 

@@ -15,5 +15,4 @@ title: NameParameterizedQuery
 
 `NameParameterizedQuery` is created when:
 
-* `SparkConnectPlanner` is requested to [transformSql](../connect/SparkConnectPlanner.md#transformSql)
 * `SparkSession` is requested to [sql](../SparkSession.md#sql)

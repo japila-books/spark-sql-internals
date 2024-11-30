@@ -35,7 +35,6 @@ title: CreateViewCommand
 * [CacheTableAsSelectExec](../physical-operators/CacheTableAsSelectExec.md) physical operator is executed (and requested for [planToCache](../physical-operators/CacheTableAsSelectExec.md#planToCache))
 * `Dataset` is requested to [createTempViewCommand](../dataset/index.md#createTempViewCommand)
 * [ResolveSessionCatalog](../logical-analysis-rules/ResolveSessionCatalog.md) logical analysis rule is executed (to resolve [CreateView](CreateView.md) logical operator)
-* `SparkConnectPlanner` is requested to [handleCreateViewCommand](../connect/SparkConnectPlanner.md#handleCreateViewCommand)
 * `SparkSqlAstBuilder` is requested to [parse a CREATE VIEW AS statement](../sql/SparkSqlAstBuilder.md#visitCreateView)
 
 ## Executing Command { #run }
