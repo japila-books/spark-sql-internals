@@ -1,28 +1,42 @@
+---
+title: Nondeterministic
+---
+
 # Nondeterministic Expressions
 
-`Nondeterministic` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [non-deterministic and non-foldable expressions](#implementations).
+`Nondeterministic` is an [extension](#contract) of the [Expression](Expression.md) abstraction for [non-deterministic, non-foldable expressions](#implementations).
 
-Nondeterministic expression should be [initialized](#initialize) (with the partition ID) before [evaluation](#eval).
+`Nondeterministic` expressions should be [initialized](#initialize) (with the partition ID) before [evaluation](#eval).
 
 ## Contract
 
-### <span id="evalInternal"> evalInternal
+### Internal Interpreted Expression Evaluation { #evalInternal }
 
 ```scala
 evalInternal(
   input: InternalRow): Any
 ```
 
+See:
+
+* [CallMethodViaReflection](CallMethodViaReflection.md#evalInternal)
+* [MonotonicallyIncreasingID](MonotonicallyIncreasingID.md#evalInternal)
+
 Used when:
 
-* `Nondeterministic` is requested to [eval](#eval)
+* `Nondeterministic` expression is requested to [evaluate](#eval)
 
-### <span id="initializeInternal"> initializeInternal
+### Internal Initialize { #initializeInternal }
 
 ```scala
 initializeInternal(
   partitionIndex: Int): Unit
 ```
+
+See:
+
+* [CallMethodViaReflection](CallMethodViaReflection.md#initializeInternal)
+* [MonotonicallyIncreasingID](MonotonicallyIncreasingID.md#initializeInternal)
 
 Used when:
 
@@ -31,43 +45,55 @@ Used when:
 ## Implementations
 
 * [CallMethodViaReflection](CallMethodViaReflection.md)
-* `CurrentBatchTimestamp`
-* `InputFileBlockLength`
-* `InputFileBlockStart`
-* `InputFileName`
-* `SparkPartitionID`
-* `Stateful`
+* [MonotonicallyIncreasingID](MonotonicallyIncreasingID.md)
+* _others_
 
-## Review Me
+## Deterministic { #deterministic }
 
-NOTE: `Nondeterministic` expressions are the target of `PullOutNondeterministic` logical plan rule.
+??? note "Expression"
 
-=== [[initialize]] Initializing Expression -- `initialize` Method
+    ```scala
+    deterministic: Boolean
+    ```
 
-[source, scala]
-----
-initialize(partitionIndex: Int): Unit
-----
+    `deterministic` is part of the [Expression](Expression.md#deterministic) abstraction.
 
-Internally, `initialize` <<initializeInternal, initializes>> itself (with the input partition index) and turns the internal <<initialized, initialized>> flag on.
+??? note "Final Method"
+    `deterministic` is a Scala **final method** and may not be overridden in [subclasses](#implementations).
 
-`initialize` is used when [InterpretedProjection](InterpretedProjection.md#initialize) and `InterpretedMutableProjection` are requested to `initialize` themselves.
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#final).
 
-=== [[eval]] Evaluating Expression -- `eval` Method
+`deterministic` is always `false`.
 
-[source, scala]
-----
-eval(input: InternalRow): Any
-----
+## Foldable { #foldable }
 
-`eval` is part of the [Expression](Expression.md#eval) abstraction.
+??? note "Expression"
 
-`eval` is just a wrapper of <<evalInternal, evalInternal>> that makes sure that <<initialize, initialize>> has already been executed (and so the expression is initialized).
+    ```scala
+    foldable: Boolean
+    ```
 
-Internally, `eval` makes sure that the expression was <<initialized, initialized>> and calls <<evalInternal, evalInternal>>.
+    `foldable` is part of the [Expression](Expression.md#foldable) abstraction.
 
-`eval` reports a `IllegalArgumentException` exception when the internal <<initialized, initialized>> flag is off, i.e. <<initialize, initialize>> has not yet been executed.
+??? note "Final Method"
+    `foldable` is a Scala **final method** and may not be overridden in [subclasses](#implementations).
 
-```text
-requirement failed: Nondeterministic expression [name] should be initialized before eval.
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#final).
+
+`foldable` is always `false`.
+
+## Initialize { #initialize }
+
+```scala
+initialize(
+  partitionIndex: Int): Unit
 ```
+
+`initialize` [initializeInternal](#initializeInternal) and sets the [initialized](#initialized) internal flag to `true`.
+
+---
+
+`initialize` is used when:
+
+* `ExpressionsEvaluator` is requested to `initializeExprs`
+* `GenerateExec` physical operator is requested to [doExecute](../physical-operators/GenerateExec.md#doExecute)

@@ -1,10 +1,14 @@
-# MonotonicallyIncreasingID
+---
+title: MonotonicallyIncreasingID
+---
+
+# MonotonicallyIncreasingID Leaf Expression
 
 `MonotonicallyIncreasingID` is a [non-deterministic](Nondeterministic.md) [leaf expression](Expression.md#LeafExpression) that represents `monotonically_increasing_id` [standard](../standard-functions/index.md#monotonically_increasing_id) and [SQL](../FunctionRegistry.md#monotonically_increasing_id) functions in [logical query plans](../logical-operators/LogicalPlan.md).
 
 `MonotonicallyIncreasingID` supports [code-generated](#doGenCode) and [interpreted](#evalInternal) execution modes.
 
-## <span id="dataType"> Result DataType
+## Result DataType { #dataType }
 
 ```scala
 dataType: DataType
@@ -14,7 +18,7 @@ dataType: DataType
 
 `dataType` is part of the [Expression](Expression.md#dataType) abstraction.
 
-## <span id="nullable"> Never Nullable
+## Never Nullable { #nullable }
 
 ```scala
 nullable: Boolean
@@ -24,7 +28,7 @@ nullable: Boolean
 
 `nullable` is part of the [Expression](Expression.md#nullable) abstraction.
 
-## <span id="initializeInternal"> Initialization
+## Internal Initialize { #initializeInternal }
 
 ```scala
 initializeInternal(
@@ -45,7 +49,7 @@ scala> println(partitionMask.toBinaryString)
 
 `initializeInternal` is part of the [Nondeterministic](Nondeterministic.md#initializeInternal) abstraction.
 
-## <span id="evalInternal"> Interpreted Expression Evaluation
+## Internal Interpreted Expression Evaluation { #evalInternal }
 
 ```scala
 evalInternal(
@@ -58,7 +62,7 @@ evalInternal(
 
 `evalInternal` is part of the [Nondeterministic](Nondeterministic.md#evalInternal) abstraction.
 
-## <span id="doGenCode"> Code-Generated Expression Evaluation
+## Code-Generated Expression Evaluation { #doGenCode }
 
 ```scala
 doGenCode(
@@ -104,6 +108,6 @@ final long value_0 = partitionMask + count_0;
       count_0++;
 ```
 
-## <span id="Stateful"> Stateful
+## Stateful { #Stateful }
 
 `MonotonicallyIncreasingID` is a [Stateful](Stateful.md).
