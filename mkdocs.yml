@@ -106,22 +106,27 @@ extra:
     spark_core: https://books.japila.pl/apache-spark-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   hadoop:
-    version: 3.3.4
-    docs: https://hadoop.apache.org/docs/r3.3.4
-    api: https://hadoop.apache.org/docs/r3.3.4/api
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L126
+    version: 3.4.1
+    docs: https://hadoop.apache.org/docs/r3.4.1
+    api: https://hadoop.apache.org/docs/r3.4.1/api
   hive:
-    version: 2.3.9
-    api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.9/api
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L135
+    version: 2.3.10
+    api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.10/api
   java:
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L117
     version: 17
     api: https://docs.oracle.com/en/java/javase/17/docs/api/java.base
     spec: https://docs.oracle.com/javase/specs/jls/se17/html
   kafka:
-    version: 3.4.1
-    api: https://kafka.apache.org/34/javadoc
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L137C20-L137C25
+    version: 3.9.0
+    api: https://kafka.apache.org/39/javadoc
   scala:
-    version: 2.13.8
-    api: https://www.scala-lang.org/api/2.13.8
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L173
+    version: 2.13.16
+    api: https://www.scala-lang.org/api/2.13.16
     docs: https://docs.scala-lang.org/
     spec: https://www.scala-lang.org/files/archive/spec/2.13
   social:
@@ -134,8 +139,9 @@ extra:
     - icon: fontawesome/brands/medium
       link: https://jaceklaskowski.medium.com
   spark:
-    version: 3.5.4
-    github: https://github.com/apache/spark/tree/v3.5.4
+    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L29
+    version: 4.0.0
+    github: https://github.com/apache/spark/tree/v4.0.0
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
