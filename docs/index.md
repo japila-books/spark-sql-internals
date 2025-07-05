@@ -10,12 +10,12 @@ hide:
 
 Welcome to **The Internals of {{ book.title }}** online book! 🤙
 
-I'm [Jacek Laskowski](https://pl.linkedin.com/in/jaceklaskowski), a Freelance Data(bricks) Engineer 🧱 specializing in
+I'm [Jacek Laskowski](https://www.linkedin.com/in/jaceklaskowski), a Freelance Data(bricks) Engineer 🧱 specializing in
 [Apache Spark](https://books.japila.pl/apache-spark-internals/) (incl. [Spark SQL](https://books.japila.pl/spark-sql-internals/) and [Spark Structured Streaming](https://books.japila.pl/spark-structured-streaming-internals/)),
 [Delta Lake](https://books.japila.pl/delta-lake-internals/),
 [Unity Catalog](https://books.japila.pl/unity-catalog-internals/),
 [MLflow](https://mlflow.org/),
-[Databricks](https://www.databricks.com/)
+[Databricks](https://github.com/jaceklaskowski/learn-databricks)
 with brief forays into a wider data engineering space (mostly during [Warsaw Data Engineering](https://www.meetup.com/Warsaw-Data-Engineering/) meetups).
 
 I'm very excited to have you here and hope you will enjoy exploring the internals of {{ book.title }} as much as I have.
