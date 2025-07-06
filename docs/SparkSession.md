@@ -52,7 +52,15 @@ val spark = SparkSession.builder
 * `SparkSession.Builder` is requested to [getOrCreate](SparkSession-Builder.md#getOrCreate)
 * Indirectly using [newSession](#newSession) or [cloneSession](#cloneSession)
 
-## <span id="sessionState"> SessionState
+## StreamingQueryManager { #streams }
+
+```scala
+streams: StreamingQueryManager
+```
+
+`streams` requests this [SessionState](#sessionState) for the [StreamingQueryManager](SessionState.md#streamingQueryManager)
+
+## SessionState { #sessionState }
 
 ```scala
 sessionState: SessionState
@@ -65,7 +73,7 @@ Internally, `sessionState` <<SessionState.md#clone, clones>> the optional <<pare
 * *in-memory* (default) for SessionStateBuilder.md[org.apache.spark.sql.internal.SessionStateBuilder]
 * *hive* for hive/HiveSessionStateBuilder.md[org.apache.spark.sql.hive.HiveSessionStateBuilder]
 
-## <span id="newSession"> Creating New SparkSession
+## Creating New SparkSession { #newSession }
 
 ```scala
 newSession(): SparkSession
@@ -80,7 +88,7 @@ newSession(): SparkSession
 !!! note "SparkSession.newSession and SparkSession.cloneSession"
     `SparkSession.newSession` uses no parent [SessionState](#parentSessionState) while [SparkSession.cloneSession](#cloneSession) (re)uses [SessionState](#sessionState).
 
-## <span id="cloneSession"> Cloning SparkSession
+## Cloning SparkSession { #cloneSession }
 
 ```scala
 cloneSession(): SparkSession
@@ -119,7 +127,7 @@ version: String
 
 Internally, `version` uses `spark.SPARK_VERSION` value that is the `version` property in `spark-version-info.properties` properties file on CLASSPATH.
 
-## <span id="emptyDataset"> Creating Empty Dataset (Given Encoder)
+## Creating Empty Dataset (Given Encoder) { #emptyDataset }
 
 ```scala
 emptyDataset[T: Encoder]: Dataset[T]
@@ -138,7 +146,7 @@ root
 
 `emptyDataset` creates a [LocalRelation](logical-operators/LocalRelation.md) logical operator.
 
-## <span id="createDataset"> Creating Dataset from Local Collections or RDDs
+## Creating Dataset from Local Collections or RDDs { #createDataset }
 
 ```scala
 createDataset[T : Encoder](
@@ -246,7 +254,7 @@ scala> sql("SELECT *, myUpper(value) UPPER FROM strs").show
 
 Internally, it is simply an alias for [SessionState.udfRegistration](SessionState.md#udfRegistration).
 
-## <span id="table"> Loading Data From Table
+## Loading Data From Table { #table }
 
 ```scala
 table(
@@ -282,7 +290,7 @@ catalog: Catalog
 ??? note "lazy value"
     `catalog` is a Scala lazy value which is computed once when accessed and cached afterwards.
 
-## <span id="read"> DataFrameReader
+## DataFrameReader { #read }
 
 ```scala
 read: DataFrameReader
@@ -295,7 +303,7 @@ val spark: SparkSession = ... // create instance
 val dfReader: DataFrameReader = spark.read
 ```
 
-## <span id="conf"> Runtime Configuration
+## Runtime Configuration { #conf }
 
 ```scala
 conf: RuntimeConfig
@@ -305,7 +313,7 @@ conf: RuntimeConfig
 
 Internally, `conf` creates a [RuntimeConfig](RuntimeConfig.md) (when requested the very first time and cached afterwards) with the [SQLConf](SessionState.md#conf) (of the [SessionState](#sessionState)).
 
-## <span id="experimentalMethods"> ExperimentalMethods
+## ExperimentalMethods { #experimentalMethods }
 
 ```scala
 experimental: ExperimentalMethods
@@ -315,7 +323,7 @@ experimental: ExperimentalMethods
 
 `experimental` is used in [SparkPlanner](SparkPlanner.md) and [SparkOptimizer](SparkOptimizer.md).
 
-## <span id="baseRelationToDataFrame"> Create DataFrame for BaseRelation
+## Create DataFrame for BaseRelation { #baseRelationToDataFrame }
 
 ```scala
 baseRelationToDataFrame(
@@ -330,7 +338,7 @@ Internally, `baseRelationToDataFrame` creates a [DataFrame](DataFrame.md) from t
 * `TextInputCSVDataSource` creates a base `Dataset` (of Strings)
 * `TextInputJsonDataSource` creates a base `Dataset` (of Strings)
 
-## <span id="instantiateSessionState"> Creating SessionState
+## Creating SessionState { #instantiateSessionState }
 
 ```scala
 instantiateSessionState(
@@ -348,7 +356,7 @@ Error while instantiating '[className]'
 
 `instantiateSessionState` is used when `SparkSession` is requested for [SessionState](#sessionState) (based on [spark.sql.catalogImplementation](StaticSQLConf.md#spark.sql.catalogImplementation) configuration property).
 
-## <span id="sessionStateClassName"> sessionStateClassName
+## sessionStateClassName { #sessionStateClassName }
 
 ```scala
 sessionStateClassName(
@@ -362,7 +370,7 @@ sessionStateClassName(
 
 `sessionStateClassName` is used when `SparkSession` is requested for the [SessionState](#sessionState) (and one is not available yet).
 
-## <span id="internalCreateDataFrame"> Creating DataFrame From RDD Of Internal Binary Rows and Schema
+## Creating DataFrame From RDD Of Internal Binary Rows and Schema { #internalCreateDataFrame }
 
 ```scala
 internalCreateDataFrame(
@@ -381,7 +389,7 @@ internalCreateDataFrame(
 
 * [InsertIntoDataSourceCommand](logical-operators/InsertIntoDataSourceCommand.md) logical command is executed
 
-## <span id="listenerManager"> ExecutionListenerManager
+## ExecutionListenerManager { #listenerManager }
 
 ```scala
 listenerManager: ExecutionListenerManager
@@ -389,7 +397,7 @@ listenerManager: ExecutionListenerManager
 
 [ExecutionListenerManager](ExecutionListenerManager.md)
 
-## <span id="sharedState"> SharedState
+## SharedState { #sharedState }
 
 ```scala
 sharedState: SharedState
@@ -397,7 +405,7 @@ sharedState: SharedState
 
 [SharedState](SharedState.md)
 
-## <span id="time"> Measuring Duration of Executing Code Block
+## Measuring Duration of Executing Code Block { #time }
 
 ```scala
 time[T](f: => T): T
@@ -405,7 +413,7 @@ time[T](f: => T): T
 
 `time` executes a code block and prints out (to standard output) the time taken to execute it
 
-## <span id="applyExtensions"> Applying SparkSessionExtensions
+## Applying SparkSessionExtensions { #applyExtensions }
 
 ```scala
 applyExtensions(
@@ -437,7 +445,7 @@ Cannot use [extensionConfClassName] to configure session extensions.
 * `SparkSession.Builder` is requested to [get active or create a new SparkSession instance](SparkSession-Builder.md#getOrCreate)
 * `SparkSession` is [created](#creating-instance) (from a `SparkContext`)
 
-## <span id="leafNodeDefaultParallelism"> Default Parallelism of Leaf Nodes
+## Default Parallelism of Leaf Nodes { #leafNodeDefaultParallelism }
 
 ```scala
 leafNodeDefaultParallelism: Int

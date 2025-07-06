@@ -2,7 +2,21 @@
 
 `GraphExecution` is an [abstraction](#contract) of [graph executors](#implementations) that can...FIXME
 
-## Contract
+## Contract (Subset) { #contract }
+
+### awaitCompletion { #awaitCompletion }
+
+```scala
+awaitCompletion(): Unit
+```
+
+See:
+
+* [TriggeredGraphExecution](TriggeredGraphExecution.md#awaitCompletion)
+
+Used when:
+
+* `PipelineExecution` is requested to [await completion](PipelineExecution.md#awaitCompletion)
 
 ### streamTrigger { #streamTrigger }
 
@@ -10,6 +24,10 @@
 streamTrigger(
   flow: Flow): Trigger
 ```
+
+See:
+
+* [TriggeredGraphExecution](TriggeredGraphExecution.md#streamTrigger)
 
 Used when:
 
@@ -66,3 +84,26 @@ planAndStartFlow(
 `planAndStartFlow` is used when:
 
 * `TriggeredGraphExecution` is requested to [topologicalExecution](TriggeredGraphExecution.md#topologicalExecution)
+
+## StreamListener { #streamListener }
+
+`GraphExecution` creates a new [StreamListener](StreamListener.md) when [created](#creating-instance).
+
+The `StreamListener` is created for this [PipelineUpdateContext](#env) and [DataflowGraph](#graphForExecution).
+
+The `StreamListener` is registered (_added_) to the session-bound [StreamingQueryManager](../SparkSession.md#streams) when [started](#start), and deregistered (_removed_) when [stopped](#stop).
+
+## Stop { #stop }
+
+```scala
+stop(): Unit
+```
+
+`stop` requests this session-bound [StreamingQueryManager](../SparkSession.md#streams) to remove this [StreamListener](#streamListener).
+
+---
+
+`stop` is used when:
+
+* `PipelineExecution` is requested to [stop the pipeline](PipelineExecution.md#stopPipeline)
+* `TriggeredGraphExecution` is requested to [create the Topological Execution thread](TriggeredGraphExecution.md#buildTopologicalExecutionThread) and [stopInternal](TriggeredGraphExecution.md#stopInternal)

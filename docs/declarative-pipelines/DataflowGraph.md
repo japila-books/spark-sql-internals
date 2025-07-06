@@ -28,3 +28,32 @@ reanalyzeFlow(
 
 * `BatchTableWrite` is requested to [executeInternal](BatchTableWrite.md#executeInternal)
 * `StreamingTableWrite` is requested to [startStream](StreamingTableWrite.md#startStream)
+
+## Resolve { #resolve }
+
+```scala
+resolve(): DataflowGraph
+```
+
+`resolve`...FIXME
+
+---
+
+`resolve` is used when:
+
+* `DataflowGraph` is requested to [reanalyzeFlow](#reanalyzeFlow)
+* `PipelineExecution` is requested to [initializeGraph](PipelineExecution.md#initializeGraph)
+
+## Validate { #validate }
+
+```scala
+validate(): DataflowGraph
+```
+
+`validate`...FIXME
+
+---
+
+`validate` is used when:
+
+* `PipelineExecution` is requested to [initialize the dataflow graph](PipelineExecution.md#initializeGraph)

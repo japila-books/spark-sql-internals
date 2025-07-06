@@ -1,5 +1,7 @@
 # DataflowGraphRegistry
 
+`DataflowGraphRegistry` is a registry of [Dataflow Graphs](#dataflowGraphs).
+
 !!! note "Scala object"
     `DataflowGraphRegistry` is an `object` in Scala which means it is a class that has exactly one instance (itself).
     A Scala `object` is created lazily when it is referenced for the first time.
@@ -17,6 +19,14 @@ val graphId = DataflowGraphRegistry.createDataflowGraph(
   defaultSqlConf=Map.empty)
 ```
 
+## Dataflow Graphs { #dataflowGraphs }
+
+```scala
+dataflowGraphs: ConcurrentHashMap[String, GraphRegistrationContext]
+```
+
+`DataflowGraphRegistry` creates an empty collection of [GraphRegistrationContext](GraphRegistrationContext.md)s by their UUIDs.
+
 ## createDataflowGraph { #createDataflowGraph }
 
 ```scala
@@ -33,3 +43,37 @@ createDataflowGraph(
 `createDataflowGraph` is used when:
 
 * `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [createDataflowGraph](PipelinesHandler.md#createDataflowGraph)
+
+## Find Dataflow Graph (or Throw SparkException) { #getDataflowGraphOrThrow }
+
+```scala
+getDataflowGraphOrThrow(
+  dataflowGraphId: String): GraphRegistrationContext
+```
+
+`getDataflowGraphOrThrow` [looks up the GraphRegistrationContext](#getDataflowGraph) for the given `dataflowGraphId` or throws an `SparkException` if it does not exist.
+
+```text
+Dataflow graph with id [graphId] could not be found
+```
+
+---
+
+`getDataflowGraphOrThrow` is used when:
+
+* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [defineDataset](PipelinesHandler.md#defineDataset), [defineFlow](PipelinesHandler.md#defineFlow), [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements), [startRun](PipelinesHandler.md#startRun)
+
+## Find Dataflow Graph { #getDataflowGraph }
+
+```scala
+getDataflowGraph(
+  graphId: String): Option[GraphRegistrationContext]
+```
+
+`getDataflowGraph` finds the [GraphRegistrationContext](GraphRegistrationContext.md) for the given `graphId` (in this [dataflowGraphs](#dataflowGraphs) registry).
+
+---
+
+`getDataflowGraph` is used when:
+
+* `DataflowGraphRegistry` is requested to [getDataflowGraphOrThrow](#getDataflowGraphOrThrow)

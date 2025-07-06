@@ -15,9 +15,31 @@ Used when:
 * `DatasetManager` is requested to [constructFullRefreshSet](DatasetManager.md#constructFullRefreshSet)
 * `PipelineUpdateContext` is requested to [refreshFlows](PipelineUpdateContext.md#refreshFlows)
 
+### Unresolved Dataflow Graph { #unresolvedGraph }
+
+```scala
+unresolvedGraph: DataflowGraph
+```
+
+The unresolved [DataflowGraph](DataflowGraph.md) of this pipeline update
+
+Used when:
+
+* `PipelineUpdateContext` is requested to [initializeGraph](#initializeGraph)
+
 ## Implementations
 
 * [PipelineUpdateContextImpl](PipelineUpdateContextImpl.md)
+
+## PipelineExecution { #pipelineExecution }
+
+```scala
+pipelineExecution: PipelineExecution
+```
+
+`PipelineUpdateContext` creates a [PipelineExecution](PipelineExecution.md) when created.
+
+The `PipelineExecution` is created for this `PipelineUpdateContext`.
 
 ## refreshFlows { #refreshFlows }
 
@@ -37,3 +59,17 @@ refreshFlows: FlowFilter
 `refreshFlows` is used when:
 
 * `TriggeredGraphExecution` is requested to [start](TriggeredGraphExecution.md#start)
+
+## Initialize Dataflow Graph { #initializeGraph }
+
+```scala
+initializeGraph(): DataflowGraph
+```
+
+`initializeGraph`...FIXME
+
+---
+
+`initializeGraph` is used when:
+
+* `PipelineExecution` is requested to [start the pipeline](PipelineExecution.md#startPipeline)

@@ -1,5 +1,7 @@
 # GraphRegistrationContext
 
+`GraphRegistrationContext` is a registry of [tables](#tables), [views](#views), and [flows](#flows) in a dataflow graph.
+
 ## Creating Instance
 
 `GraphRegistrationContext` takes the following to be created:
@@ -25,3 +27,32 @@ toDataflowGraph: DataflowGraph
 `toDataflowGraph` is used when:
 
 * `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [startRun](PipelinesHandler.md#startRun)
+
+## Tables { #tables }
+
+`GraphRegistrationContext` creates an empty registry of [Table](Table.md)s when [created](#creating-instance).
+
+A new [Table](Table.md) is added when [registerTable](#registerTable).
+
+## Views { #views }
+
+`GraphRegistrationContext` creates an empty registry of [View](View.md)s when [created](#creating-instance).
+
+## Flows { #flows }
+
+`GraphRegistrationContext` creates an empty registry of [UnresolvedFlow](UnresolvedFlow.md)s when [created](#creating-instance).
+
+## Register Table { #registerTable }
+
+```scala
+registerTable(
+  tableDef: Table): Unit
+```
+
+`registerTable` adds the given [Table](Table.md) to [tables](#tables) registry.
+
+---
+
+`registerTable` is used when:
+
+* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested is requested to [defineDataset](PipelinesHandler.md#defineDataset)

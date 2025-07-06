@@ -60,6 +60,8 @@ val sdp: DataflowGraph = graphCtx.toDataflowGraph
 
 ### Step 4. Create Update Context
 
+[PipelineUpdateContextImpl](PipelineUpdateContextImpl.md)
+
 ```scala
 import org.apache.spark.sql.pipelines.graph.{ PipelineUpdateContext, PipelineUpdateContextImpl }
 import org.apache.spark.sql.pipelines.logging.PipelineEvent

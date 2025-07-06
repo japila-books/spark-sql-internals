@@ -28,3 +28,44 @@ startRun(
 ```
 
 `startRun`...FIXME
+
+### createDataflowGraph { #createDataflowGraph }
+
+```scala
+createDataflowGraph(
+  cmd: proto.PipelineCommand.CreateDataflowGraph,
+  spark: SparkSession): String
+```
+
+`createDataflowGraph`...FIXME
+
+### defineSqlGraphElements { #defineSqlGraphElements }
+
+```scala
+defineSqlGraphElements(
+  cmd: proto.PipelineCommand.DefineSqlGraphElements,
+  session: SparkSession): Unit
+```
+
+`defineSqlGraphElements`...FIXME
+
+### defineDataset { #defineDataset }
+
+```scala
+defineDataset(
+  dataset: proto.PipelineCommand.DefineDataset,
+  sparkSession: SparkSession): Unit
+```
+
+`defineDataset`...FIXME
+
+### defineFlow { #defineFlow }
+
+```scala
+defineFlow(
+  flow: proto.PipelineCommand.DefineFlow,
+  transformRelationFunc: Relation => LogicalPlan,
+  sparkSession: SparkSession): Unit
+```
+
+`defineFlow`...FIXME
