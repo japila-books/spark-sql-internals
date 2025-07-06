@@ -12,6 +12,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Catalog Plugin API](../connector/catalog/index.md)
 * [Columnar Execution](../columnar-execution/index.md)
 * [Connector API](../connector/index.md)
+* [Declarative Pipelines](../declarative-pipelines/index.md) (4.1.0-SNAPSHOT)
 * [Default Columns](../default-columns/index.md)
 * [Direct Queries on Files](../direct-queries-on-files/index.md)
 * [Dynamic Partition Pruning](../dynamic-partition-pruning/index.md)
