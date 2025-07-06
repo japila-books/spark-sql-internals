@@ -1137,6 +1137,74 @@
          <lastmod>2025-07-06</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/BatchTableWrite/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/DataflowGraph/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/DataflowGraphRegistry/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/DatasetManager/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/Flow/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowExecution/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowPlanner/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/GraphExecution/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/GraphRegistrationContext/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/PipelineExecution/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/PipelineUpdateContext/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/PipelineUpdateContextImpl/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/PipelinesHandler/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/StreamingTableWrite/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/Table/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/TriggeredGraphExecution/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/View/</loc>
+         <lastmod>2025-07-06</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/default-columns/</loc>
          <lastmod>2025-07-06</lastmod>
     </url>
