@@ -104,6 +104,7 @@ extra:
     kafka: https://books.japila.pl/kafka-internals
     pyspark: https://books.japila.pl/pyspark-internals
     spark_core: https://books.japila.pl/apache-spark-internals
+    spark_connect: https://books.japila.pl/spark-connect-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   hadoop:
     # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L126
