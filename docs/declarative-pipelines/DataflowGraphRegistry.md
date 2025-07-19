@@ -1,6 +1,6 @@
 # DataflowGraphRegistry
 
-`DataflowGraphRegistry` is a registry of [Dataflow Graphs](#dataflowGraphs).
+`DataflowGraphRegistry` is a registry of [Dataflow Graphs](#dataflowGraphs) (a mere wrapper around a collection of [GraphRegistrationContext](GraphRegistrationContext.md)s)
 
 !!! note "Scala object"
     `DataflowGraphRegistry` is an `object` in Scala which means it is a class that has exactly one instance (itself).
@@ -19,13 +19,27 @@ val graphId = DataflowGraphRegistry.createDataflowGraph(
   defaultSqlConf=Map.empty)
 ```
 
+```scala
+assert(DataflowGraphRegistry.getAllDataflowGraphs.size == 1)
+```
+
 ## Dataflow Graphs { #dataflowGraphs }
 
 ```scala
 dataflowGraphs: ConcurrentHashMap[String, GraphRegistrationContext]
 ```
 
-`DataflowGraphRegistry` creates an empty collection of [GraphRegistrationContext](GraphRegistrationContext.md)s by their UUIDs.
+`DataflowGraphRegistry` manages [GraphRegistrationContext](GraphRegistrationContext.md)s (by graph IDs).
+
+A new [GraphRegistrationContext](GraphRegistrationContext.md) is added when `DataflowGraphRegistry` is requested to [createDataflowGraph](#createDataflowGraph).
+
+A single [GraphRegistrationContext](GraphRegistrationContext.md) can be looked up with [getDataflowGraph](#getDataflowGraph) and [getDataflowGraphOrThrow](#getDataflowGraphOrThrow).
+
+All the [GraphRegistrationContext](GraphRegistrationContext.md)s can be returned with [getAllDataflowGraphs](#getAllDataflowGraphs).
+
+A [GraphRegistrationContext](GraphRegistrationContext.md) is removed when [dropDataflowGraph](#dropDataflowGraph).
+
+`dataflowGraphs` is cleared up with [dropAllDataflowGraphs](#dropAllDataflowGraphs).
 
 ## createDataflowGraph { #createDataflowGraph }
 
