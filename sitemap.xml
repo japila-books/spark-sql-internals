@@ -1209,6 +1209,10 @@
          <lastmod>2025-07-27</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/StreamingFlow/</loc>
+         <lastmod>2025-07-27</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/StreamingFlowExecution/</loc>
          <lastmod>2025-07-27</lastmod>
     </url>
