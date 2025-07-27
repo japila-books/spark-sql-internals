@@ -16,13 +16,16 @@
 
 * `DataflowGraphRegistry` is requested to [createDataflowGraph](DataflowGraphRegistry.md#createDataflowGraph)
 
-## toDataflowGraph { #toDataflowGraph }
+## Create DataflowGraph { #toDataflowGraph }
 
 ```scala
 toDataflowGraph: DataflowGraph
 ```
 
 `toDataflowGraph` creates a [DataflowGraph](DataflowGraph.md) for the [tables](#tables), [views](#views), and [flows](#flows).
+
+??? note "AnalysisException"
+    `toDataflowGraph` reports an `AnalysisException` for a `GraphRegistrationContext` with no [tables](#tables) and no `PersistedView`s (in the [views](#views) registry).
 
 ---
 
