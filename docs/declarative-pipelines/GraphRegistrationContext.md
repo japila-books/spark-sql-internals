@@ -16,7 +16,7 @@
 
 * `DataflowGraphRegistry` is requested to [createDataflowGraph](DataflowGraphRegistry.md#createDataflowGraph)
 
-## Create DataflowGraph { #toDataflowGraph }
+## Convert to DataflowGraph { #toDataflowGraph }
 
 ```scala
 toDataflowGraph: DataflowGraph
