@@ -30,6 +30,10 @@ getOrigin: QueryOrigin
 isStreaming: Boolean
 ```
 
+See:
+
+* [BatchTableWrite](BatchTableWrite.md#isStreaming)
+
 ### PipelineUpdateContext { #updateContext }
 
 ```scala

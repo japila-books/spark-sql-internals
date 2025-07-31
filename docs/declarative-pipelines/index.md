@@ -4,7 +4,7 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
 
 # Declarative Pipelines
 
-**Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark.
+**Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark using Python or SQL.
 
 !!! danger
     Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
