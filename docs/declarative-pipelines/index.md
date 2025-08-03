@@ -22,6 +22,182 @@ Declarative Pipelines uses the following [Python decorators](https://peps.python
 
 Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (on a [PipelineExecution](PipelineExecution.md)).
 
+## Demo: spark-pipelines CLI
+
+```bash
+uv init hello-spark-pipelines
+```
+
+```bash
+cd hello-spark-pipelines
+```
+
+```console
+❯ uv pip list
+Using Python 3.12.11 environment at: /Users/jacek/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none
+Package Version
+------- -------
+pip     24.3.1
+```
+
+```bash
+export SPARK_HOME=/Users/jacek/oss/spark
+```
+
+```bash
+uv add --editable $SPARK_HOME/python/packaging/client
+```
+
+```console
+❯ uv pip list
+Package                  Version     Editable project location
+------------------------ ----------- ----------------------------------------------
+googleapis-common-protos 1.70.0
+grpcio                   1.74.0
+grpcio-status            1.74.0
+numpy                    2.3.2
+pandas                   2.3.1
+protobuf                 6.31.1
+pyarrow                  21.0.0
+pyspark-client           4.1.0.dev0  /Users/jacek/oss/spark/python/packaging/client
+python-dateutil          2.9.0.post0
+pytz                     2025.2
+pyyaml                   6.0.2
+six                      1.17.0
+tzdata                   2025.2
+```
+
+Activate (_source_) the virtual environment (that `uv` helped us create).
+It will bring all the necessary PySpark modules that have not been released yet and are only available in the source format only.
+
+```bash
+source .venv/bin/activate
+```
+
+```console
+❯ $SPARK_HOME/bin/spark-pipelines --help
+usage: cli.py [-h] {run,dry-run,init} ...
+
+Pipelines CLI
+
+positional arguments:
+  {run,dry-run,init}
+    run               Run a pipeline. If no refresh options specified, a
+                      default incremental update is performed.
+    dry-run           Launch a run that just validates the graph and checks
+                      for errors.
+    init              Generate a sample pipeline project, including a spec
+                      file and example definitions.
+
+options:
+  -h, --help          show this help message and exit
+```
+
+```bash
+$SPARK_HOME/bin/spark-pipelines dry-run
+```
+
+??? note "Output"
+    ```console
+    Traceback (most recent call last):
+      File "/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py", line 382, in <module>
+        main()
+      File "/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py", line 358, in main
+        spec_path = find_pipeline_spec(Path.cwd())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py", line 101, in find_pipeline_spec
+        raise PySparkException(
+    pyspark.errors.exceptions.base.PySparkException: [PIPELINE_SPEC_FILE_NOT_FOUND] No pipeline.yaml or pipeline.yml file provided in arguments or found in directory `/` or readable ancestor directories.
+    ```
+
+Create a demo double `hello-spark-pipelines` pipelines project with a sample `pipeline.yml` and sample transformations (in Python and in SQL).
+
+```bash
+$SPARK_HOME/bin/spark-pipelines init --name hello-spark-pipelines && \
+mv hello-spark-pipelines/* . && \
+rm -rf hello-spark-pipelines
+```
+
+```console
+❯ cat pipeline.yml
+
+name: hello-spark-pipelines
+definitions:
+  - glob:
+      include: transformations/**/*.py
+  - glob:
+      include: transformations/**/*.sql
+```
+
+```console
+❯ tree transformations
+transformations
+├── example_python_materialized_view.py
+└── example_sql_materialized_view.sql
+
+1 directory, 2 files
+```
+
+```bash
+$SPARK_HOME/bin/spark-pipelines dry-run
+```
+
+??? note "Output"
+    ```text
+    2025-08-03 15:17:08: Loading pipeline spec from /private/tmp/hello-spark-pipelines/pipeline.yml...
+    2025-08-03 15:17:08: Creating Spark session...
+    ...
+    2025-08-03 15:17:10: Creating dataflow graph...
+    2025-08-03 15:17:10: Registering graph elements...
+    2025-08-03 15:17:10: Loading definitions. Root directory: '/private/tmp/hello-spark-pipelines'.
+    2025-08-03 15:17:10: Found 1 files matching glob 'transformations/**/*.py'
+    2025-08-03 15:17:10: Importing /private/tmp/hello-spark-pipelines/transformations/example_python_materialized_view.py...
+    2025-08-03 15:17:11: Found 1 files matching glob 'transformations/**/*.sql'
+    2025-08-03 15:17:11: Registering SQL file /private/tmp/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
+    2025-08-03 15:17:11: Starting run...
+    2025-08-03 13:17:11: Run is COMPLETED.
+    ```
+
+```bash
+$SPARK_HOME/bin/spark-pipelines run
+```
+
+??? note "Output"
+    ```console
+    2025-08-03 15:17:58: Creating dataflow graph...
+    2025-08-03 15:17:58: Registering graph elements...
+    2025-08-03 15:17:58: Loading definitions. Root directory: '/private/tmp/hello-spark-pipelines'.
+    2025-08-03 15:17:58: Found 1 files matching glob 'transformations/**/*.py'
+    2025-08-03 15:17:58: Importing /private/tmp/hello-spark-pipelines/transformations/example_python_materialized_view.py...
+    2025-08-03 15:17:58: Found 1 files matching glob 'transformations/**/*.sql'
+    2025-08-03 15:17:58: Registering SQL file /private/tmp/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
+    2025-08-03 15:17:58: Starting run...
+    2025-08-03 13:17:59: Flow spark_catalog.default.example_python_materialized_view is QUEUED.
+    2025-08-03 13:17:59: Flow spark_catalog.default.example_sql_materialized_view is QUEUED.
+    2025-08-03 13:17:59: Flow spark_catalog.default.example_python_materialized_view is PLANNING.
+    2025-08-03 13:17:59: Flow spark_catalog.default.example_python_materialized_view is STARTING.
+    2025-08-03 13:17:59: Flow spark_catalog.default.example_python_materialized_view is RUNNING.
+    2025-08-03 13:18:00: Flow spark_catalog.default.example_python_materialized_view has COMPLETED.
+    2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view is PLANNING.
+    2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view is STARTING.
+    2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view is RUNNING.
+    2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view has COMPLETED.
+    2025-08-03 13:18:03: Run is COMPLETED.
+    ```
+
+```console
+❯ tree spark-warehouse
+spark-warehouse
+├── example_python_materialized_view
+│   ├── _SUCCESS
+│   └── part-00000-75bc5b01-aea2-4d05-a71c-5c04937981bc-c000.snappy.parquet
+└── example_sql_materialized_view
+    ├── _SUCCESS
+    └── part-00000-e1d0d33c-5d9e-43c3-a87d-f5f772d32942-c000.snappy.parquet
+
+3 directories, 4 files
+```
+
 ## Spark Connect Only { #spark-connect }
 
 Declarative Pipelines currently only supports Spark Connect.
@@ -44,7 +220,15 @@ Exception in thread "main" org.apache.spark.SparkUserAppException: User applicat
 
 `spark-pipelines` shell script is used to launch [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md).
 
-## Demo
+## Dataset Types
+
+Declarative Pipelines supports the following dataset types:
+
+* **Materialized Views** (datasets) that are published to a catalog
+* **Table** that are published to a catalog
+* **Views** that are not published to a catalog
+
+## Demo: Scala API
 
 ### Step 1. Register Dataflow Graph
 
@@ -101,14 +285,6 @@ val updateCtx: PipelineUpdateContext =
 ```scala
 updateCtx.pipelineExecution.runPipeline()
 ```
-
-## Dataset Types
-
-Declarative Pipelines supports the following dataset types:
-
-* **Materialized Views** (datasets) that are published to a catalog
-* **Table** that are published to a catalog
-* **Views** that are not published to a catalog
 
 ## Learning Resources
 
