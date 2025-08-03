@@ -6,10 +6,10 @@
 <span class=go>------- -------</span>
 <span class=go>pip     24.3.1</span>
 </code></pre></div> <div class=highlight><pre><span></span><code><span class=nb>export</span><span class=w> </span><span class=nv>SPARK_HOME</span><span class=o>=</span>/Users/jacek/oss/spark
-</code></pre></div> <div class=highlight><pre><span></span><code>uv<span class=w> </span>add<span class=w> </span><span class=nv>$SPARK_HOME</span>/python/packaging/client
+</code></pre></div> <div class=highlight><pre><span></span><code>uv<span class=w> </span>add<span class=w> </span>--editable<span class=w> </span><span class=nv>$SPARK_HOME</span>/python/packaging/client
 </code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ uv pip list</span>
-<span class=go>Package                  Version</span>
-<span class=go>------------------------ -----------</span>
+<span class=go>Package                  Version     Editable project location</span>
+<span class=go>------------------------ ----------- ----------------------------------------------</span>
 <span class=go>googleapis-common-protos 1.70.0</span>
 <span class=go>grpcio                   1.74.0</span>
 <span class=go>grpcio-status            1.74.0</span>
@@ -17,14 +17,14 @@
 <span class=go>pandas                   2.3.1</span>
 <span class=go>protobuf                 6.31.1</span>
 <span class=go>pyarrow                  21.0.0</span>
-<span class=go>pyspark-client           4.1.0.dev0</span>
+<span class=go>pyspark-client           4.1.0.dev0  /Users/jacek/oss/spark/python/packaging/client</span>
 <span class=go>python-dateutil          2.9.0.post0</span>
 <span class=go>pytz                     2025.2</span>
 <span class=go>pyyaml                   6.0.2</span>
 <span class=go>six                      1.17.0</span>
 <span class=go>tzdata                   2025.2</span>
 </code></pre></div> <div class=highlight><pre><span></span><code><span class=nb>source</span><span class=w> </span>.venv/bin/activate
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=gp>$ </span><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>--help
+</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ $SPARK_HOME/bin/spark-pipelines --help</span>
 <span class=go>usage: cli.py [-h] {run,dry-run,init} ...</span>
 
 <span class=go>Pipelines CLI</span>
