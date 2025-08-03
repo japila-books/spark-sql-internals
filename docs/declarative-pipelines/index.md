@@ -22,6 +22,28 @@ Declarative Pipelines uses the following [Python decorators](https://peps.python
 
 Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (on a [PipelineExecution](PipelineExecution.md)).
 
+## Spark Connect Only { #spark-connect }
+
+Declarative Pipelines currently only supports Spark Connect.
+
+```console
+$ ./bin/spark-pipelines --conf spark.api.mode=xxx
+...
+25/08/03 12:33:57 INFO SparkPipelines: --spark.api.mode must be 'connect'. Declarative Pipelines currently only supports Spark Connect.
+Exception in thread "main" org.apache.spark.SparkUserAppException: User application exited with 1
+ at org.apache.spark.deploy.SparkPipelines$$anon$1.handle(SparkPipelines.scala:73)
+ at org.apache.spark.launcher.SparkSubmitOptionParser.parse(SparkSubmitOptionParser.java:169)
+ at org.apache.spark.deploy.SparkPipelines$$anon$1.<init>(SparkPipelines.scala:58)
+ at org.apache.spark.deploy.SparkPipelines$.splitArgs(SparkPipelines.scala:57)
+ at org.apache.spark.deploy.SparkPipelines$.constructSparkSubmitArgs(SparkPipelines.scala:43)
+ at org.apache.spark.deploy.SparkPipelines$.main(SparkPipelines.scala:37)
+ at org.apache.spark.deploy.SparkPipelines.main(SparkPipelines.scala)
+```
+
+## spark-pipelines Shell Script { #spark-pipelines }
+
+`spark-pipelines` shell script is used to launch [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md).
+
 ## Demo
 
 ### Step 1. Register Dataflow Graph
