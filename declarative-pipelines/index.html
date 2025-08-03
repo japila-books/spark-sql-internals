@@ -23,7 +23,7 @@
 <span class=go>pyyaml                   6.0.2</span>
 <span class=go>six                      1.17.0</span>
 <span class=go>tzdata                   2025.2</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=nb>source</span><span class=w> </span>.venv/bin/activate
+</code></pre></div> <p>Activate (<em>source</em>) the virtual environment (that <code>uv</code> helped us create). It will bring all the necessary PySpark modules that have not been released yet and are only available in the source format only.</p> <div class=highlight><pre><span></span><code><span class=nb>source</span><span class=w> </span>.venv/bin/activate
 </code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ $SPARK_HOME/bin/spark-pipelines --help</span>
 <span class=go>usage: cli.py [-h] {run,dry-run,init} ...</span>
 
@@ -40,8 +40,8 @@
 
 <span class=go>options:</span>
 <span class=go>  -h, --help          show this help message and exit</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ $SPARK_HOME/bin/spark-pipelines dry-run</span>
-<span class=go>Traceback (most recent call last):</span>
+</code></pre></div> <div class=highlight><pre><span></span><code><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>dry-run
+</code></pre></div> <details class=note> <summary>Output</summary> <div class=highlight><pre><span></span><code><span class=go>Traceback (most recent call last):</span>
 <span class=go>  File &quot;/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py&quot;, line 382, in &lt;module&gt;</span>
 <span class=go>    main()</span>
 <span class=go>  File &quot;/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py&quot;, line 358, in main</span>
@@ -50,32 +50,38 @@
 <span class=go>  File &quot;/Users/jacek/oss/spark/python/pyspark/pipelines/cli.py&quot;, line 101, in find_pipeline_spec</span>
 <span class=go>    raise PySparkException(</span>
 <span class=go>pyspark.errors.exceptions.base.PySparkException: [PIPELINE_SPEC_FILE_NOT_FOUND] No pipeline.yaml or pipeline.yml file provided in arguments or found in directory `/` or readable ancestor directories.</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>init<span class=w> </span>--name<span class=w> </span>delete_me
-</code></pre></div> <div class=highlight><pre><span></span><code>mv<span class=w> </span>delete_me/*<span class=w> </span>.<span class=p>;</span><span class=w> </span>rm<span class=w> </span>-rf<span class=w> </span>delete_me
+</code></pre></div> </details> <p>Create a demo double <code>hello-spark-pipelines</code> pipelines project with a sample <code>pipeline.yml</code> and sample transformations (in Python and in SQL).</p> <div class=highlight><pre><span></span><code><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>init<span class=w> </span>--name<span class=w> </span>hello-spark-pipelines<span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=se>\</span>
+mv<span class=w> </span>hello-spark-pipelines/*<span class=w> </span>.<span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=se>\</span>
+rm<span class=w> </span>-rf<span class=w> </span>hello-spark-pipelines
 </code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ cat pipeline.yml</span>
 
-<span class=go>name: delete_me</span>
+<span class=go>name: hello-spark-pipelines</span>
 <span class=go>definitions:</span>
 <span class=go>  - glob:</span>
 <span class=go>      include: transformations/**/*.py</span>
 <span class=go>  - glob:</span>
 <span class=go>      include: transformations/**/*.sql</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ $SPARK_HOME/bin/spark-pipelines dry-run</span>
-<span class=go>2025-08-03 15:17:08: Loading pipeline spec from /private/tmp/hello-spark-pipelines/pipeline.yml...</span>
-<span class=go>2025-08-03 15:17:08: Creating Spark session...</span>
-<span class=go>...</span>
-<span class=go>2025-08-03 15:17:10: Creating dataflow graph...</span>
-<span class=go>2025-08-03 15:17:10: Registering graph elements...</span>
-<span class=go>2025-08-03 15:17:10: Loading definitions. Root directory: &#39;/private/tmp/hello-spark-pipelines&#39;.</span>
-<span class=go>2025-08-03 15:17:10: Found 1 files matching glob &#39;transformations/**/*.py&#39;</span>
-<span class=go>2025-08-03 15:17:10: Importing /private/tmp/hello-spark-pipelines/transformations/example_python_materialized_view.py...</span>
-<span class=go>2025-08-03 15:17:11: Found 1 files matching glob &#39;transformations/**/*.sql&#39;</span>
-<span class=go>2025-08-03 15:17:11: Registering SQL file /private/tmp/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...</span>
-<span class=go>2025-08-03 15:17:11: Starting run...</span>
-<span class=go>2025-08-03 13:17:11: Run is COMPLETED.</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ $SPARK_HOME/bin/spark-pipelines run</span>
-<span class=go>...</span>
-<span class=go>2025-08-03 15:17:58: Creating dataflow graph...</span>
+</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ tree transformations</span>
+<span class=go>transformations</span>
+<span class=go>├── example_python_materialized_view.py</span>
+<span class=go>└── example_sql_materialized_view.sql</span>
+
+<span class=go>1 directory, 2 files</span>
+</code></pre></div> <div class=highlight><pre><span></span><code><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>dry-run
+</code></pre></div> <details class=note> <summary>Output</summary> <div class=highlight><pre><span></span><code>2025-08-03 15:17:08: Loading pipeline spec from /private/tmp/hello-spark-pipelines/pipeline.yml...
+2025-08-03 15:17:08: Creating Spark session...
+...
+2025-08-03 15:17:10: Creating dataflow graph...
+2025-08-03 15:17:10: Registering graph elements...
+2025-08-03 15:17:10: Loading definitions. Root directory: &#39;/private/tmp/hello-spark-pipelines&#39;.
+2025-08-03 15:17:10: Found 1 files matching glob &#39;transformations/**/*.py&#39;
+2025-08-03 15:17:10: Importing /private/tmp/hello-spark-pipelines/transformations/example_python_materialized_view.py...
+2025-08-03 15:17:11: Found 1 files matching glob &#39;transformations/**/*.sql&#39;
+2025-08-03 15:17:11: Registering SQL file /private/tmp/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
+2025-08-03 15:17:11: Starting run...
+2025-08-03 13:17:11: Run is COMPLETED.
+</code></pre></div> </details> <div class=highlight><pre><span></span><code><span class=nv>$SPARK_HOME</span>/bin/spark-pipelines<span class=w> </span>run
+</code></pre></div> <details class=note> <summary>Output</summary> <div class=highlight><pre><span></span><code><span class=go>2025-08-03 15:17:58: Creating dataflow graph...</span>
 <span class=go>2025-08-03 15:17:58: Registering graph elements...</span>
 <span class=go>2025-08-03 15:17:58: Loading definitions. Root directory: &#39;/private/tmp/hello-spark-pipelines&#39;.</span>
 <span class=go>2025-08-03 15:17:58: Found 1 files matching glob &#39;transformations/**/*.py&#39;</span>
@@ -94,7 +100,7 @@
 <span class=go>2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view is RUNNING.</span>
 <span class=go>2025-08-03 13:18:01: Flow spark_catalog.default.example_sql_materialized_view has COMPLETED.</span>
 <span class=go>2025-08-03 13:18:03: Run is COMPLETED.</span>
-</code></pre></div> <div class=highlight><pre><span></span><code><span class=go>❯ tree spark-warehouse</span>
+</code></pre></div> </details> <div class=highlight><pre><span></span><code><span class=go>❯ tree spark-warehouse</span>
 <span class=go>spark-warehouse</span>
 <span class=go>├── example_python_materialized_view</span>
 <span class=go>│   ├── _SUCCESS</span>
