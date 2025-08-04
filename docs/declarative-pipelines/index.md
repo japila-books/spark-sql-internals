@@ -6,21 +6,125 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
 
 **Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark using Python or SQL.
 
-!!! danger
+??? warning "Apache Spark 4.1.0-SNAPSHOT"
     Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
 
     Declarative Pipelines has not been released in any Spark version yet.
 
+    ```console
+    ❯ $SPARK_HOME/bin/pyspark --version
+    Welcome to
+         ____              __
+        / __/__  ___ _____/ /__
+       _\ \/ _ \/ _ `/ __/  '_/
+      /___/ .__/\_,_/_/ /_/\_\   version 4.1.0-SNAPSHOT
+         /_/
+
+    Using Scala version 2.13.16, OpenJDK 64-Bit Server VM, 17.0.16
+    Branch master
+    Compiled by user jacek on 2025-08-04T11:30:08Z
+    Revision 6ef9a9d340539fc870acca042bd036f33ea995c3
+    Url https://github.com/apache/spark.git
+    Type --help for more information.
+    ```
+
 Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
 
-Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
-
-* `@sdp.materialized_view` for materialized views
-* `@sdp.table` for streaming and batch tables
+Declarative Pipelines uses [Python decorators](#python-decorators) to describe tables, views and flows, declaratively.
 
 [DataflowGraph](DataflowGraph.md) is the core graph structure in Declarative Pipelines.
 
 Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (on a [PipelineExecution](PipelineExecution.md)).
+
+## Python Decorators for Datasets and Flows { #python-decorators }
+
+Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
+
+* [@sdp.materialized_view](#materialized_view) for materialized views
+* [@sdp.table](#table) for streaming and batch tables
+
+### pyspark.pipelines Python Module { #pyspark_pipelines }
+
+`pyspark.pipelines` module (in `__init__.py`) imports `pyspark.pipelines.api` module to expose the following Python decorators to wildcard imports:
+
+* [append_flow](#append_flow)
+* [create_streaming_table](#create_streaming_table)
+* [materialized_view](#materialized_view)
+* [table](#table)
+* [temporary_view](#temporary_view)
+
+Use the following import in your Python code:
+
+```py
+from pyspark import pipelines as sdp
+```
+
+### @sdp.append_flow { #append_flow }
+
+### @sdp.create_streaming_table { #create_streaming_table }
+
+### @sdp.materialized_view { #materialized_view }
+
+### @sdp.table { #table }
+
+### @sdp.temporary_view { #temporary_view }
+
+## Demo: Python API
+
+In a terminal, start a Spark Connect Server.
+
+```bash
+./sbin/start-connect-server.sh
+```
+
+It will listen on port 15002.
+
+??? note "Tip"
+    Review the logs with `tail -f`.
+
+Start a Spark Connect-enabled PySpark shell.
+
+```bash
+$SPARK_HOME/bin/pyspark --remote sc://localhost:15002
+```
+
+```py
+from pyspark.pipelines.spark_connect_pipeline import create_dataflow_graph
+dataflow_graph_id = create_dataflow_graph(
+  spark,
+  default_catalog=None,
+  default_database=None,
+  sql_conf=None,
+)
+
+# >>> print(dataflow_graph_id)
+# 3cb66d5a-0621-4f15-9920-e99020e30e48
+```
+
+```py
+from pyspark.pipelines.spark_connect_graph_element_registry import SparkConnectGraphElementRegistry
+registry = SparkConnectGraphElementRegistry(spark, dataflow_graph_id)
+```
+
+```py
+from pyspark import pipelines as sdp
+```
+
+```py
+from pyspark.pipelines.graph_element_registry import graph_element_registration_context
+with graph_element_registration_context(registry):
+  sdp.create_streaming_table("demo_streaming_table")
+```
+
+You should see the following INFO message in the logs of the Spark Connect Server:
+
+```text
+INFO PipelinesHandler: Define pipelines dataset cmd received: define_dataset {
+  dataflow_graph_id: "3cb66d5a-0621-4f15-9920-e99020e30e48"
+  dataset_name: "demo_streaming_table"
+  dataset_type: TABLE
+}
+```
 
 ## Demo: spark-pipelines CLI
 
