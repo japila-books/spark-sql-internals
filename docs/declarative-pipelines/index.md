@@ -44,7 +44,7 @@ As of this [Commit 6ab0df9]({{ spark.commit }}/6ab0df9287c5a9ce49769612c2bb0a1da
 from pyspark import pipelines as dp
 ```
 
-## Python Decorators for Datasets and Flows { #python-decorators }
+## Python Decorators for Tables and Flows { #python-decorators }
 
 Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
 
@@ -72,6 +72,8 @@ from pyspark import pipelines as dp
 ### @dp.create_streaming_table { #create_streaming_table }
 
 ### @dp.materialized_view { #materialized_view }
+
+Creates a [MaterializedView](MaterializedView.md) (for a table whose contents are defined to be the result of a query).
 
 ### @dp.table { #table }
 
