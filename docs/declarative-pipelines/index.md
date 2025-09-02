@@ -44,6 +44,30 @@ As of this [Commit 6ab0df9]({{ spark.commit }}/6ab0df9287c5a9ce49769612c2bb0a1da
 from pyspark import pipelines as dp
 ```
 
+## Pipeline Specification File
+
+The heart of a Declarative Pipelines project is a pipeline specification file (in YAML format).
+
+The following fields are supported:
+
+Field Name | Description
+-|-
+ `name` (required) | |
+ `catalog` | |
+ `database` |  |
+ `schema` | Alias of `database`. Used unless `database` is defined |
+ `configuration` | |
+ `definitions` | `glob` of `include`s |
+
+```yaml
+name: hello-spark-pipelines
+definitions:
+  - glob:
+      include: transformations/**/*.py
+  - glob:
+      include: transformations/**/*.sql
+```
+
 ## Python Decorators for Tables and Flows { #python-decorators }
 
 Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
@@ -198,7 +222,7 @@ Run `spark-pipelines --help` to learn the options.
 === "Command Line"
 
     ```shell
-    $ $SPARK_HOME/bin/spark-pipelines --help
+    $SPARK_HOME/bin/spark-pipelines --help
     ```
 
     !!! note ""
@@ -271,6 +295,22 @@ transformations
 
 1 directory, 2 files
 ```
+
+!!! warning "Spark Connect Server should be down"
+    `spark-pipelines dry-run` starts its own Spark Connect Server at 15002 port (unless started with `--remote` option).
+
+    Shut down Spark Connect Server if you started it already.
+
+    ```shell
+    $SPARK_HOME/sbin/stop-connect-server.sh
+    ```
+
+!!! info "`--remote` option"
+    Use `--remote` option to connect to a standalone Spark Connect Server.
+
+    ```shell
+    $SPARK_HOME/bin/spark-pipelines --remote sc://localhost dry-run
+    ```
 
 === "Command Line"
 

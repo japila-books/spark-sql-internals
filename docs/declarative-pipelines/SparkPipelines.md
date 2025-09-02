@@ -1,14 +1,23 @@
 ---
 title: SparkPipelines
+subtitle: Spark Pipelines CLI
 ---
 
 # SparkPipelines &mdash; Spark Pipelines CLI
 
-`SparkPipelines` is a standalone application that can be executed using [spark-pipelines](./index.md#spark-pipelines) shell script.
+`SparkPipelines` is a standalone application that is executed using [spark-pipelines](./index.md#spark-pipelines) shell script.
 
-`SparkPipelines` is a Scala "launchpad" to execute [python/pyspark/pipelines/cli.py](#pyspark-pipelines-cli) Python script (through [SparkSubmit]({{ book.spark_core }}/tools/spark-submit/SparkSubmit/)).
+`SparkPipelines` is a Scala "launchpad" to execute [pyspark/pipelines/cli.py](#pyspark-pipelines-cli) Python script (through [SparkSubmit]({{ book.spark_core }}/tools/spark-submit/SparkSubmit/)).
 
 ## PySpark Pipelines CLI
+
+`pyspark/pipelines/cli.py` is the Pipelines CLI that is launched using [spark-pipelines](./index.md#spark-pipelines) shell script.
+
+The Pipelines CLI supports the following commands:
+
+* [dry-run](#dry-run)
+* [init](#init)
+* [run](#run)
 
 === "uv run"
 
@@ -61,3 +70,54 @@ Option | Description | Default
  `--full-refresh` | List of datasets to reset and recompute (comma-separated) | (empty)
  `--full-refresh-all` | Perform a full graph reset and recompute | (undefined)
  `--refresh` | List of datasets to update (comma-separated) | (empty)
+
+When executed, `run` prints out the following log message:
+
+```text
+Loading pipeline spec from [spec_path]...
+```
+
+`run` loads a pipeline spec.
+
+`run` prints out the following log message:
+
+```text
+Creating Spark session...
+```
+
+`run` creates a Spark session with the configurations from the pipeline spec.
+
+`run` prints out the following log message:
+
+```text
+Creating dataflow graph...
+```
+
+`run` sends a `CreateDataflowGraph` command for execution in the Spark Connect server.
+
+!!! note "Spark Connect Server and Command Execution"
+    `CreateDataflowGraph` and other pipeline commands are handled by [PipelinesHandler](PipelinesHandler.md) on the Spark Connect server.
+
+`run` prints out the following log message:
+
+```text
+Dataflow graph created (ID: [dataflow_graph_id]).
+```
+
+`run` prints out the following log message:
+
+```text
+Registering graph elements...
+```
+
+`run` creates a [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md) and `register_definitions`.
+
+`run` prints out the following log message:
+
+```text
+Starting run (dry=[dry], full_refresh=[full_refresh], full_refresh_all=[full_refresh_all], refresh=[refresh])...
+```
+
+`run` sends a `StartRun` command for execution in the Spark Connect server.
+
+In the end, `run` keeps printing out pipeline events from the Spark Connect server.
