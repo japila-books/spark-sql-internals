@@ -20,8 +20,14 @@ handlePipelinesCommand(
 | `DROP_DATAFLOW_GRAPH` | [Drops a pipeline](#DROP_DATAFLOW_GRAPH) |
 | `DEFINE_DATASET` | [Defines a dataset](#DEFINE_DATASET) |
 | `DEFINE_FLOW` | [Defines a flow](#DEFINE_FLOW) |
-| `START_RUN` | [START_RUN](#START_RUN) |
+| `START_RUN` | [Starts a pipeline](#START_RUN) |
 | `DEFINE_SQL_GRAPH_ELEMENTS` | [DEFINE_SQL_GRAPH_ELEMENTS](#DEFINE_SQL_GRAPH_ELEMENTS) |
+
+`handlePipelinesCommand` reports an `UnsupportedOperationException` for incorrect commands:
+
+```text
+[other] not supported
+```
 
 ---
 
@@ -49,7 +55,7 @@ Define pipelines flow cmd received: [cmd]
 
 `handlePipelinesCommand` [defines a flow](#defineFlow).
 
-### startRun { #startRun }
+### Start Pipeline { #startRun }
 
 ```scala
 startRun(
@@ -58,9 +64,21 @@ startRun(
   sessionHolder: SessionHolder): Unit
 ```
 
-`startRun`...FIXME
+`startRun` prints out the following INFO message to the logs:
 
-### createDataflowGraph { #createDataflowGraph }
+```text
+Start pipeline cmd received: [cmd]
+```
+
+`startRun` finds the [GraphRegistrationContext](GraphRegistrationContext.md) by `dataflowGraphId` in the [DataflowGraphRegistry](DataflowGraphRegistry.md) (in the given `SessionHolder`).
+
+`startRun` creates a `PipelineEventSender` to send pipeline events back to the Spark Connect client (_Python pipeline runtime_).
+
+`startRun` creates a [PipelineUpdateContextImpl](PipelineUpdateContextImpl.md) (with the `PipelineEventSender`).
+
+In the end, `startRun` requests the `PipelineUpdateContextImpl` for the [PipelineExecution](PipelineExecution.md) to [runPipeline](PipelineExecution.md#runPipeline) or [dryRunPipeline](PipelineExecution.md#dryRunPipeline) for `dry-run` or `run` command, respectively.
+
+### Create Dataflow Graph { #createDataflowGraph }
 
 ```scala
 createDataflowGraph(
@@ -105,7 +123,7 @@ For unknown types, `defineDataset` reports an `IllegalArgumentException`:
 Unknown dataset type: [type]
 ```
 
-### defineFlow { #defineFlow }
+### Define Flow { #defineFlow }
 
 ```scala
 defineFlow(

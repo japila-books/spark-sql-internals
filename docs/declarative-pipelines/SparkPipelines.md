@@ -96,7 +96,7 @@ Creating dataflow graph...
 `run` sends a `CreateDataflowGraph` command for execution in the Spark Connect server.
 
 !!! note "Spark Connect Server and Command Execution"
-    `CreateDataflowGraph` and other pipeline commands are handled by [PipelinesHandler](PipelinesHandler.md) on the Spark Connect server.
+    `CreateDataflowGraph` is handled by [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) on the Spark Connect Server.
 
 `run` prints out the following log message:
 
@@ -118,6 +118,9 @@ Registering graph elements...
 Starting run (dry=[dry], full_refresh=[full_refresh], full_refresh_all=[full_refresh_all], refresh=[refresh])...
 ```
 
-`run` sends a `StartRun` command for execution in the Spark Connect server.
+`run` sends a `StartRun` command for execution in the Spark Connect Server.
+
+!!! note "StartRun Command and PipelinesHandler"
+    `StartRun` command is handled by [PipelinesHandler](PipelinesHandler.md#startRun) on the Spark Connect Server.
 
 In the end, `run` keeps printing out pipeline events from the Spark Connect server.
