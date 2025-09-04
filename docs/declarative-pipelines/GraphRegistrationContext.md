@@ -77,7 +77,7 @@ registerFlow(
 
 * `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [handle DEFINE_FLOW command](PipelinesHandler.md#defineFlow)
 * `SqlGraphRegistrationContext` is requested to [process the following SQL commands](SqlGraphRegistrationContext.md#processSqlQuery):
-    * `CreateFlowCommand`
+    * [CreateFlowCommand](../logical-operators/CreateFlowCommand.md)
     * `CreateMaterializedViewAsSelect`
     * `CreateView`
     * `CreateStreamingTableAsSelect`

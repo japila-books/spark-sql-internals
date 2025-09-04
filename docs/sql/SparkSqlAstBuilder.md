@@ -125,6 +125,17 @@ Creates a [CreateTable](../logical-operators/CreateTable.md)
 
 ANTLR labeled alternative: `#createHiveTable`
 
+### CREATE FLOW AS INSERT INTO BY NAME { #visitCreatePipelineInsertIntoFlow }
+
+Creates a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical operator for `CREATE FLOW` SQL statement
+
+```sql
+CREATE FLOW [ flow_name ]
+AS INSERT INTO [ destination_name ] BY NAME
+```
+
+ANTLR labeled alternative: `#createPipelineInsertIntoFlow`
+
 ### CREATE TABLE { #visitCreateTable }
 
 Creates a [CreateTempViewUsing](../logical-operators/CreateTempViewUsing.md) logical operator for `CREATE TEMPORARY VIEW USING` or falls back to [AstBuilder](AstBuilder.md#visitCreateTable) (to create either a [CreateTableAsSelect](../logical-operators/CreateTableAsSelect.md) or a [CreateTable](../logical-operators/CreateTable.md))

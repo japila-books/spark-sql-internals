@@ -4,7 +4,7 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
 
 # Declarative Pipelines
 
-**Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark using Python or SQL.
+**Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark using [Python](#python) or [SQL](#sql).
 
 ??? warning "Apache Spark 4.1.0-SNAPSHOT"
     Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
@@ -28,21 +28,17 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
     Type --help for more information.
     ```
 
-Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
+A Declarative Pipelines project is configured using a [pipeline specification file](#pipeline-specification-file) and executed with [spark-pipelines](#spark-pipelines) shell script.
+
+In the pipeline specification file, Declarative Pipelines developers include definitions of tables, views and flows (transformations) in Python and SQL. A SDP project can use both languages simultaneously.
 
 Declarative Pipelines uses [Python decorators](#python-decorators) to describe tables, views and flows, declaratively.
+
+Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
 
 [DataflowGraph](DataflowGraph.md) is the core graph structure in Declarative Pipelines.
 
 Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (on a [PipelineExecution](PipelineExecution.md)).
-
-## Python Import Alias Convention
-
-As of this [Commit 6ab0df9]({{ spark.commit }}/6ab0df9287c5a9ce49769612c2bb0a1daab83bee), the convention to alias the import of Declarative Pipelines in Python is `dp` (from `sdp`).
-
-```python
-from pyspark import pipelines as dp
-```
 
 ## Pipeline Specification File
 
@@ -68,12 +64,45 @@ definitions:
       include: transformations/**/*.sql
 ```
 
-## Python Decorators for Tables and Flows { #python-decorators }
+## spark-pipelines Shell Script { #spark-pipelines }
 
-Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
+`spark-pipelines` shell script is used to launch [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md).
 
-* [@dp.materialized_view](#materialized_view) for materialized views
-* [@dp.table](#table) for streaming and batch tables
+## Dataset Types
+
+Declarative Pipelines supports the following dataset types:
+
+* **Materialized Views** (datasets) that are published to a catalog
+* **Table** that are published to a catalog
+* **Views** that are not published to a catalog
+
+## Spark Connect Only { #spark-connect }
+
+Declarative Pipelines currently only supports Spark Connect.
+
+```console
+$ ./bin/spark-pipelines --conf spark.api.mode=xxx
+...
+25/08/03 12:33:57 INFO SparkPipelines: --spark.api.mode must be 'connect'. Declarative Pipelines currently only supports Spark Connect.
+Exception in thread "main" org.apache.spark.SparkUserAppException: User application exited with 1
+ at org.apache.spark.deploy.SparkPipelines$$anon$1.handle(SparkPipelines.scala:73)
+ at org.apache.spark.launcher.SparkSubmitOptionParser.parse(SparkSubmitOptionParser.java:169)
+ at org.apache.spark.deploy.SparkPipelines$$anon$1.<init>(SparkPipelines.scala:58)
+ at org.apache.spark.deploy.SparkPipelines$.splitArgs(SparkPipelines.scala:57)
+ at org.apache.spark.deploy.SparkPipelines$.constructSparkSubmitArgs(SparkPipelines.scala:43)
+ at org.apache.spark.deploy.SparkPipelines$.main(SparkPipelines.scala:37)
+ at org.apache.spark.deploy.SparkPipelines.main(SparkPipelines.scala)
+```
+
+## Python
+
+### Python Import Alias Convention
+
+As of this [Commit 6ab0df9]({{ spark.commit }}/6ab0df9287c5a9ce49769612c2bb0a1daab83bee), the convention to alias the import of Declarative Pipelines in Python is `dp` (from `sdp`).
+
+```python
+from pyspark import pipelines as dp
+```
 
 ### pyspark.pipelines Python Module { #pyspark_pipelines }
 
@@ -91,6 +120,13 @@ Use the following import in your Python code:
 from pyspark import pipelines as dp
 ```
 
+### Python Decorators
+
+Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
+
+* [@dp.materialized_view](#materialized_view) for materialized views
+* [@dp.table](#table) for streaming and batch tables
+
 ### @dp.append_flow { #append_flow }
 
 ### @dp.create_streaming_table { #create_streaming_table }
@@ -102,6 +138,20 @@ Creates a [MaterializedView](MaterializedView.md) (for a table whose contents ar
 ### @dp.table { #table }
 
 ### @dp.temporary_view { #temporary_view }
+
+[Registers](GraphElementRegistry.md#register_dataset) a `TemporaryView` dataset and a [Flow](Flow.md) in the [GraphElementRegistry](GraphElementRegistry.md#register_flow).
+
+## SQL
+
+Spark Declarative Pipelines supports SQL language to define pipelines.
+
+Pipelines elements are defined in SQL files included as `definitions` in a [pipelines specification file](#pipeline-specification-file).
+
+[SqlGraphRegistrationContext](SqlGraphRegistrationContext.md) is used on Spark Connect Server to handle SQL statements (from SQL definitions files and [Python decorators](#python-decorators)).
+
+Supported SQL statements:
+
+* [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
 
 ## Demo: Create Virtual Environment for Python Client
 
@@ -378,36 +428,6 @@ spark-warehouse
 
 3 directories, 4 files
 ```
-
-## Spark Connect Only { #spark-connect }
-
-Declarative Pipelines currently only supports Spark Connect.
-
-```console
-$ ./bin/spark-pipelines --conf spark.api.mode=xxx
-...
-25/08/03 12:33:57 INFO SparkPipelines: --spark.api.mode must be 'connect'. Declarative Pipelines currently only supports Spark Connect.
-Exception in thread "main" org.apache.spark.SparkUserAppException: User application exited with 1
- at org.apache.spark.deploy.SparkPipelines$$anon$1.handle(SparkPipelines.scala:73)
- at org.apache.spark.launcher.SparkSubmitOptionParser.parse(SparkSubmitOptionParser.java:169)
- at org.apache.spark.deploy.SparkPipelines$$anon$1.<init>(SparkPipelines.scala:58)
- at org.apache.spark.deploy.SparkPipelines$.splitArgs(SparkPipelines.scala:57)
- at org.apache.spark.deploy.SparkPipelines$.constructSparkSubmitArgs(SparkPipelines.scala:43)
- at org.apache.spark.deploy.SparkPipelines$.main(SparkPipelines.scala:37)
- at org.apache.spark.deploy.SparkPipelines.main(SparkPipelines.scala)
-```
-
-## spark-pipelines Shell Script { #spark-pipelines }
-
-`spark-pipelines` shell script is used to launch [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md).
-
-## Dataset Types
-
-Declarative Pipelines supports the following dataset types:
-
-* **Materialized Views** (datasets) that are published to a catalog
-* **Table** that are published to a catalog
-* **Views** that are not published to a catalog
 
 ## Demo: Scala API
 

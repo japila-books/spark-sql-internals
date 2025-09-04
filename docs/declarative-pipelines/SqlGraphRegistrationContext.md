@@ -51,7 +51,7 @@ processSqlQuery(
 * `CreateMaterializedViewAsSelect`
 * `CreateStreamingTableAsSelect`
 * `CreateStreamingTable`
-* `CreateFlowCommand`
+* [CreateFlowCommand](#CreateFlowCommand)
 
 ### splitSqlFileIntoQueries { #splitSqlFileIntoQueries }
 
@@ -63,3 +63,22 @@ splitSqlFileIntoQueries(
 ```
 
 `splitSqlFileIntoQueries`...FIXME
+
+## CreateFlowCommand { #CreateFlowCommand }
+
+[CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical commands are handled by `CreateFlowHandler`.
+
+A flow name must be a single-part name (that is resolved against the current pipelines catalog and database).
+
+The [flowOperation](../logical-operators/CreateFlowCommand.md#flowOperation) of a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) command must be [InsertIntoStatement](../logical-operators/InsertIntoStatement.md).
+
+!!! note
+    Only `INSERT INTO ... BY NAME` flows are supported in [Spark Declarative Pipelines](index.md).
+
+    `INSERT OVERWRITE` flows are not supported.
+
+    `IF NOT EXISTS` not supported for flows.
+
+    Neither partition spec nor user-specified schema can be specified.
+
+In the end, `CreateFlowHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register](GraphRegistrationContext.md#registerFlow) an [UnresolvedFlow](UnresolvedFlow.md).
