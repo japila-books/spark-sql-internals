@@ -152,6 +152,7 @@ Pipelines elements are defined in SQL files included as `definitions` in a [pipe
 Supported SQL statements:
 
 * [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
+* ...
 
 ## Demo: Create Virtual Environment for Python Client
 

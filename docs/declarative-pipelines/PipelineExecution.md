@@ -18,13 +18,13 @@
 runPipeline(): Unit
 ```
 
-`runPipeline` [starts the pipeline](#startPipeline) and requests the [PipelineExecution](PipelineUpdateContext.md#pipelineExecution) (of this [PipelineUpdateContext](#context)) to [wait for the execution to complete](#awaitCompletion).
+`runPipeline` [starts this pipeline](#startPipeline) and requests the [PipelineExecution](PipelineUpdateContext.md#pipelineExecution) (of this [PipelineUpdateContext](#context)) to [wait for the execution to complete](#awaitCompletion).
 
 ---
 
 `runPipeline` is used when:
 
-* `PipelinesHandler` is requested to [startRun](PipelinesHandler.md#startRun) (for [Spark Connect]({{ book.spark_connect }}))
+* `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun)
 
 ## Start Pipeline { #startPipeline }
 

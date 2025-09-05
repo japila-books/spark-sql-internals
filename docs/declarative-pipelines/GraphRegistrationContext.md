@@ -31,7 +31,7 @@ toDataflowGraph: DataflowGraph
 
 `toDataflowGraph` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [startRun](PipelinesHandler.md#startRun)
+* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [start a pipeline run](PipelinesHandler.md#startRun)
 
 ## Tables { #tables }
 
