@@ -135,15 +135,18 @@ extra:
       link: https://github.com/jaceklaskowski
     - icon: fontawesome/brands/bluesky
       link: https://bsky.app/profile/books.japila.pl
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/jaceklaskowski
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/jaceklaskowski
     - icon: fontawesome/brands/medium
       link: https://jaceklaskowski.medium.com
+    - icon: fontawesome/brands/mastodon
+      link: https://fosstodon.org/@jaceklaskowski
   spark:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L29
     version: 4.0.0
     commit: https://github.com/apache/spark/commit
-    github: https://github.com/apache/spark/tree/v4.0.0
+    github: https://github.com/apache/spark/blob/v4.0.1
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
