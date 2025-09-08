@@ -1,3 +1,7 @@
+---
+subtitle: Spark Connect Endpoint
+---
+
 # PipelinesHandler
 
 `PipelinesHandler` is used to [handle pipeline commands](#handlePipelinesCommand) in [Spark Connect]({{ book.spark_connect }}) ([SparkConnectPlanner]({{ book.spark_connect }}/server/SparkConnectPlanner), precisely).
@@ -87,7 +91,7 @@ startRun(
 
 `startRun` finds the [GraphRegistrationContext](GraphRegistrationContext.md) by `dataflowGraphId` in the [DataflowGraphRegistry](DataflowGraphRegistry.md) (in the given `SessionHolder`).
 
-`startRun` creates a `PipelineEventSender` to send pipeline events back to the Spark Connect client (_Python pipeline runtime_).
+`startRun` creates a [PipelineEventSender](PipelineEventSender.md) to [send pipeline execution progress events back to the Spark Connect client](PipelineEventSender.md#sendEvent) (_Python pipeline runtime_).
 
 `startRun` creates a [PipelineUpdateContextImpl](PipelineUpdateContextImpl.md) (with the `PipelineEventSender`).
 

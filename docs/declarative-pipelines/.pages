@@ -1,4 +1,5 @@
 title: Declarative Pipelines
 nav:
     - index.md
+    - configuration-properties.md
     - ...
