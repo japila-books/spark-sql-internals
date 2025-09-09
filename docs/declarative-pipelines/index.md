@@ -32,9 +32,11 @@ A Declarative Pipelines project is configured using a [pipeline specification fi
 
 In the pipeline specification file, Declarative Pipelines developers include definitions of tables, views and flows (transformations) in Python and SQL. A SDP project can use both languages simultaneously.
 
+Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
+
 Declarative Pipelines uses [Python decorators](#python-decorators) to describe tables, views and flows, declaratively.
 
-Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
+The definitions of tables, views and flows are registered in [DataflowGraphRegistry](DataflowGraphRegistry.md) (with [GraphRegistrationContext](GraphRegistrationContext.md)s by graph IDs). A `GraphRegistrationContext` is [converted into a DataflowGraph](GraphRegistrationContext.md#toDataflowGraph) when `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun) (when [spark-pipelines](#spark-pipelines) script is launched with `run` or `dry-run` command).
 
 [DataflowGraph](DataflowGraph.md) is the core graph structure in Declarative Pipelines.
 

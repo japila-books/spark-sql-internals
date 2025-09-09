@@ -31,7 +31,7 @@ dataflowGraphs: ConcurrentHashMap[String, GraphRegistrationContext]
 
 `DataflowGraphRegistry` manages [GraphRegistrationContext](GraphRegistrationContext.md)s (by graph IDs).
 
-A new [GraphRegistrationContext](GraphRegistrationContext.md) is added when `DataflowGraphRegistry` is requested to [createDataflowGraph](#createDataflowGraph).
+A new [GraphRegistrationContext](GraphRegistrationContext.md) is added when `DataflowGraphRegistry` is requested to [create a new dataflow graph](#createDataflowGraph).
 
 A single [GraphRegistrationContext](GraphRegistrationContext.md) can be looked up with [getDataflowGraph](#getDataflowGraph) and [getDataflowGraphOrThrow](#getDataflowGraphOrThrow).
 
@@ -41,7 +41,7 @@ A [GraphRegistrationContext](GraphRegistrationContext.md) is removed when [dropD
 
 `dataflowGraphs` is cleared up with [dropAllDataflowGraphs](#dropAllDataflowGraphs).
 
-## createDataflowGraph { #createDataflowGraph }
+## Create Dataflow Graph { #createDataflowGraph }
 
 ```scala
 createDataflowGraph(
@@ -50,13 +50,17 @@ createDataflowGraph(
   defaultSqlConf: Map[String, String]): String
 ```
 
-`createDataflowGraph`...FIXME
+`createDataflowGraph` generates a graph ID (as a pseudo-randomly generated UUID).
+
+`createDataflowGraph` registers a new [GraphRegistrationContext](GraphRegistrationContext.md) with the graph ID (in this [dataflowGraphs](#dataflowGraphs) registry).
+
+In the end, `createDataflowGraph` returns the graph ID.
 
 ---
 
 `createDataflowGraph` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [createDataflowGraph](PipelinesHandler.md#createDataflowGraph)
+* `PipelinesHandler` is requested to [create a dataflow graph](PipelinesHandler.md#createDataflowGraph)
 
 ## Find Dataflow Graph (or Throw SparkException) { #getDataflowGraphOrThrow }
 

@@ -1,6 +1,6 @@
 # GraphRegistrationContext
 
-`GraphRegistrationContext` is a registry of [tables](#tables), [views](#views), and [flows](#flows) in a dataflow graph.
+`GraphRegistrationContext` is a registry of [tables](#tables), [views](#views), and [flows](#flows) in a dataflow graph (described with Python decorators and SQL statements).
 
 `GraphRegistrationContext` is required to create a new [SqlGraphRegistrationContext](SqlGraphRegistrationContext.md).
 
@@ -16,13 +16,13 @@
 
 * `DataflowGraphRegistry` is requested to [createDataflowGraph](DataflowGraphRegistry.md#createDataflowGraph)
 
-## Convert to DataflowGraph { #toDataflowGraph }
+## Create DataflowGraph { #toDataflowGraph }
 
 ```scala
 toDataflowGraph: DataflowGraph
 ```
 
-`toDataflowGraph` creates a [DataflowGraph](DataflowGraph.md) for the [tables](#tables), [views](#views), and [flows](#flows).
+`toDataflowGraph` creates a new [DataflowGraph](DataflowGraph.md) with the [tables](#tables), [views](#views), and [flows](#flows) fully-qualified, resolved, and de-duplicated.
 
 ??? note "AnalysisException"
     `toDataflowGraph` reports an `AnalysisException` for a `GraphRegistrationContext` with no [tables](#tables) and no `PersistedView`s (in the [views](#views) registry).
@@ -31,7 +31,7 @@ toDataflowGraph: DataflowGraph
 
 `toDataflowGraph` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [start a pipeline run](PipelinesHandler.md#startRun)
+* `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun)
 
 ## Tables { #tables }
 

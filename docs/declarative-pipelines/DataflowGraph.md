@@ -1,5 +1,7 @@
 # DataflowGraph
 
+`DataflowGraph` is a [GraphRegistrationContext](GraphRegistrationContext.md) with [tables](#tables), [views](#views) and [flows](#flows) fully-qualified, resolved and de-duplicated.
+
 ## Creating Instance
 
 `DataflowGraph` takes the following to be created:

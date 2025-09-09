@@ -6,7 +6,7 @@
 
     Learn more in [Tour of Scala](https://docs.scala-lang.org/tour/singleton-objects.html).
 
-## materializeDatasets { #materializeDatasets }
+## Materialize Datasets { #materializeDatasets }
 
 ```scala
 materializeDatasets(
@@ -15,6 +15,8 @@ materializeDatasets(
 ```
 
 `materializeDatasets` [constructFullRefreshSet](#constructFullRefreshSet) for the [tables](DataflowGraph.md#tables) in the given [DataflowGraph](DataflowGraph.md) (and the [PipelineUpdateContext](PipelineUpdateContext.md)).
+
+`materializeDatasets` marks the [tables](DataflowGraph.md#tables) (in the given [DataflowGraph](DataflowGraph.md)) as to be refreshed and fully-refreshed.
 
 `materializeDatasets`...FIXME
 
