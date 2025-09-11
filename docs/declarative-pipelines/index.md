@@ -30,7 +30,7 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
 
 A Declarative Pipelines project is configured using a [pipeline specification file](#pipeline-specification-file) and executed with [spark-pipelines](#spark-pipelines) shell script.
 
-In the pipeline specification file, Declarative Pipelines developers include definitions of tables, views and flows (transformations) in Python and SQL. A SDP project can use both languages simultaneously.
+In the pipeline specification file, Declarative Pipelines developers include libraries with tables, views and flows (transformations) definitions in Python and SQL. A SDP project can use both languages simultaneously.
 
 Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
 
@@ -55,11 +55,15 @@ Field Name | Description
  `database` |  |
  `schema` | Alias of `database`. Used unless `database` is defined |
  `configuration` | |
- `definitions` | `glob` of `include`s |
+ `libraries` | `glob`s of `include`s with SQL and Python transformations |
 
 ```yaml
 name: hello-spark-pipelines
-definitions:
+catalog: default_catalog
+schema: default
+configuration:
+  spark.key1: value1
+libraries:
   - glob:
       include: transformations/**/*.py
   - glob:
@@ -147,7 +151,7 @@ Creates a [MaterializedView](MaterializedView.md) (for a table whose contents ar
 
 Spark Declarative Pipelines supports SQL language to define pipelines.
 
-Pipelines elements are defined in SQL files included as `definitions` in a [pipelines specification file](#pipeline-specification-file).
+Pipelines elements are defined in SQL files included as `libraries` in a [pipelines specification file](#pipeline-specification-file).
 
 [SqlGraphRegistrationContext](SqlGraphRegistrationContext.md) is used on Spark Connect Server to handle SQL statements (from SQL definitions files and [Python decorators](#python-decorators)).
 
@@ -333,7 +337,7 @@ rm -rf hello-spark-pipelines
 ❯ cat pipeline.yml
 
 name: hello-spark-pipelines
-definitions:
+libraries:
   - glob:
       include: transformations/**/*.py
   - glob:
