@@ -8,10 +8,10 @@
 
 `SqlGraphRegistrationContext` is created when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [handle DEFINE_SQL_GRAPH_ELEMENTS command](PipelinesHandler.md#handlePipelinesCommand) (and [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements))
+* `PipelinesHandler` is requested to [handle DEFINE_SQL_GRAPH_ELEMENTS command](PipelinesHandler.md#handlePipelinesCommand) (and [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements))
 * `SqlGraphRegistrationContext` is requested to [processSqlFile](#processSqlFile)
 
-## processSqlFile { #processSqlFile }
+## Process SQL Definition File { #processSqlFile }
 
 ```scala
 processSqlFile(
@@ -25,15 +25,15 @@ processSqlFile(
 !!! warning
     Why does `processSqlFile` creates a brand new [SqlGraphRegistrationContext](SqlGraphRegistrationContext.md) for the same [GraphRegistrationContext](#graphRegistrationContext) it is executed with?!
 
-`processSqlFile` [splitSqlFileIntoQueries](#splitSqlFileIntoQueries) followed by [processSqlQuery](#processSqlQuery) for every query (a `LogicalPlan`).
+`processSqlFile` [splits the contents of the SQL file into separate queries](#splitSqlFileIntoQueries) and [processes every SQL query](#processSqlQuery).
 
 ---
 
 `processSqlFile` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements)
+* `PipelinesHandler` is requested to [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements)
 
-### processSqlQuery { #processSqlQuery }
+### Process Single SQL Query { #processSqlQuery }
 
 ```scala
 processSqlQuery(
@@ -41,14 +41,14 @@ processSqlQuery(
   queryOrigin: QueryOrigin): Unit
 ```
 
-`processSqlQuery` handles (_processes_) the given `LogicalPlan` query plan:
+`processSqlQuery` handles (_processes_) the given [LogicalPlan](../logical-operators/LogicalPlan.md) logical commands:
 
 * `SetCommand`
 * `SetNamespaceCommand`
 * `SetCatalogCommand`
 * `CreateView`
 * `CreateViewCommand`
-* `CreateMaterializedViewAsSelect`
+* [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
 * `CreateStreamingTableAsSelect`
 * `CreateStreamingTable`
 * [CreateFlowCommand](#CreateFlowCommand)
@@ -82,3 +82,9 @@ The [flowOperation](../logical-operators/CreateFlowCommand.md#flowOperation) of 
     Neither partition spec nor user-specified schema can be specified.
 
 In the end, `CreateFlowHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register](GraphRegistrationContext.md#registerFlow) an [UnresolvedFlow](UnresolvedFlow.md).
+
+## CreateMaterializedViewAsSelect { #CreateMaterializedViewAsSelect }
+
+[CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) logical commands are handled by `CreateMaterializedViewAsSelectHandler`.
+
+`CreateMaterializedViewAsSelectHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to register a [table](GraphRegistrationContext.md#registerTable) and a [flow](GraphRegistrationContext.md#registerFlow) (that backs the materialized view).

@@ -117,7 +117,9 @@ defineSqlGraphElements(
   session: SparkSession): Unit
 ```
 
-`defineSqlGraphElements`...FIXME
+`defineSqlGraphElements` [looks up the GraphRegistrationContext for the dataflow graph ID](DataflowGraphRegistry.md#getDataflowGraphOrThrow) (from the given `DefineSqlGraphElements` command and in the given `SessionHolder`).
+
+`defineSqlGraphElements` creates a new [SqlGraphRegistrationContext](SqlGraphRegistrationContext.md) (for the `GraphRegistrationContext`) to [process the SQL definition file](SqlGraphRegistrationContext.md#processSqlFile).
 
 ## Define Dataset (Table or View) { #defineDataset }
 

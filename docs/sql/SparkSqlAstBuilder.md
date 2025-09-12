@@ -127,7 +127,7 @@ ANTLR labeled alternative: `#createHiveTable`
 
 ### CREATE FLOW AS INSERT INTO BY NAME { #visitCreatePipelineInsertIntoFlow }
 
-Creates a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical operator for `CREATE FLOW` SQL statement
+Creates an append (insert into) flow (a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical operator) for `CREATE FLOW` SQL statement
 
 ```sql
 CREATE FLOW [ flow_name ]
@@ -149,6 +149,30 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] identifierReference
 ```
 
 ANTLR labeled alternative: `#createTable`
+
+### Create Pipeline Dataset { #visitCreatePipelineDataset }
+
+Creates the following logical operators for [Spark Declarative Pipelines](../declarative-pipelines/index.md) framework:
+
+Logical Operator | SQL Statement
+-|-
+ [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) | `CREATE MATERIALIZED VIEW`
+ [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) | `CREATE STREAMING TABLE ... AS`
+ [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) | `CREATE STREAMING TABLE`
+
+```sql
+CREATE MATERIALIZED VIEW (IF NOT EXISTS)? [ materialized_view_identifier ]
+[ column_definitions ]?
+[ create_table_options ]?
+AS [ query ]
+```
+
+```sql
+CREATE STREAMING TABLE (IF NOT EXISTS)? [ streaming_table_identifier ]
+[ column_definitions ]?
+[ create_table_options ]?
+(AS [ query ])?
+```
 
 ### CREATE VIEW { #visitCreateView }
 

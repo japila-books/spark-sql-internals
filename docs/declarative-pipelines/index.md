@@ -4,7 +4,7 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
 
 # Declarative Pipelines
 
-**Spark Declarative Pipelines (SDP)** is a declarative framework for building ETL pipelines on Apache Spark using [Python](#python) or [SQL](#sql).
+**Spark Declarative Pipelines (SDP)** is a declarative framework for building data processing (ETL) pipelines on Apache Spark using [Python](#python) (PySpark) and [SQL](#sql) (Spark SQL).
 
 ??? warning "Apache Spark 4.1.0-SNAPSHOT"
     Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
@@ -149,7 +149,7 @@ Creates a [MaterializedView](MaterializedView.md) (for a table whose contents ar
 
 ## SQL
 
-Spark Declarative Pipelines supports SQL language to define pipelines.
+Spark Declarative Pipelines supports SQL language to define data processing pipelines.
 
 Pipelines elements are defined in SQL files included as `libraries` in a [pipelines specification file](#pipeline-specification-file).
 
@@ -158,7 +158,12 @@ Pipelines elements are defined in SQL files included as `libraries` in a [pipeli
 Supported SQL statements:
 
 * [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
+* [CREATE MATERIALIZED VIEW](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * ...
+
+A streaming table can be defined without a query, as streaming tables' data can be backed by standalone flows.
+During a pipeline execution, it is validated that a streaming table has at least one standalone flow writing to the table, if no query is specified in the create statement itself.
 
 ## Demo: Create Virtual Environment for Python Client
 
