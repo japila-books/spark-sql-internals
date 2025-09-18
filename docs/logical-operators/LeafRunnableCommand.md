@@ -30,6 +30,8 @@ title: LeafRunnableCommand
 * [ExplainCommand](ExplainCommand.md)
 * [InsertIntoDataSourceCommand](InsertIntoDataSourceCommand.md)
 * [SaveIntoDataSourceCommand](SaveIntoDataSourceCommand.md)
+* [SetCommand](SetCommand.md)
+* [SetNamespaceCommand](SetNamespaceCommand.md)
 * [ShowCreateTableCommand](ShowCreateTableCommand.md)
 * [ShowTablePropertiesCommand](ShowTablePropertiesCommand.md)
 * [TruncateTableCommand](TruncateTableCommand.md)

@@ -11,6 +11,10 @@
 * `PipelinesHandler` is requested to [handle DEFINE_SQL_GRAPH_ELEMENTS command](PipelinesHandler.md#handlePipelinesCommand) (and [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements))
 * `SqlGraphRegistrationContext` is requested to [processSqlFile](#processSqlFile)
 
+### SqlGraphRegistrationContextState { #context }
+
+When [created](#creating-instance), `SqlGraphRegistrationContext` creates a `SqlGraphRegistrationContextState` for the [defaultCatalog](GraphRegistrationContext.md#defaultCatalog), the [defaultDatabase](GraphRegistrationContext.md#defaultDatabase) and the [defaultSqlConf](GraphRegistrationContext.md#defaultSqlConf).
+
 ## Process SQL Definition File { #processSqlFile }
 
 ```scala
@@ -43,14 +47,14 @@ processSqlQuery(
 
 `processSqlQuery` handles (_processes_) the given [LogicalPlan](../logical-operators/LogicalPlan.md) logical commands:
 
-* `SetCommand`
-* `SetNamespaceCommand`
+* [SetCommand](#SetCommand)
+* [SetNamespaceCommand](#SetNamespaceCommand)
 * `SetCatalogCommand`
 * `CreateView`
 * `CreateViewCommand`
 * [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
 * `CreateStreamingTableAsSelect`
-* `CreateStreamingTable`
+* [CreateStreamingTable](#CreateStreamingTable)
 * [CreateFlowCommand](#CreateFlowCommand)
 
 ### splitSqlFileIntoQueries { #splitSqlFileIntoQueries }
@@ -64,7 +68,9 @@ splitSqlFileIntoQueries(
 
 `splitSqlFileIntoQueries`...FIXME
 
-## CreateFlowCommand { #CreateFlowCommand }
+## Logical Command Handlers
+
+### CreateFlowCommand { #CreateFlowCommand }
 
 [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical commands are handled by `CreateFlowHandler`.
 
@@ -83,8 +89,65 @@ The [flowOperation](../logical-operators/CreateFlowCommand.md#flowOperation) of 
 
 In the end, `CreateFlowHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register](GraphRegistrationContext.md#registerFlow) an [UnresolvedFlow](UnresolvedFlow.md).
 
-## CreateMaterializedViewAsSelect { #CreateMaterializedViewAsSelect }
+### CreateMaterializedViewAsSelect { #CreateMaterializedViewAsSelect }
 
 [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) logical commands are handled by `CreateMaterializedViewAsSelectHandler`.
 
 `CreateMaterializedViewAsSelectHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to register a [table](GraphRegistrationContext.md#registerTable) and a [flow](GraphRegistrationContext.md#registerFlow) (that backs the materialized view).
+
+### SetCommand { #SetCommand }
+
+[processSqlQuery](#processSqlQuery) handles [SetCommand](../logical-operators/SetCommand.md) logical commands using `SetCommandHandler`.
+
+```scala
+handle(
+  setCommand: SetCommand): Unit
+```
+
+`handle` requests this [SqlGraphRegistrationContextState](#context) to [setSqlConf](#setSqlConf) with the key-value pair of the given [SetCommand](../logical-operators/SetCommand.md) logical command.
+
+??? note "RuntimeException"
+
+    `handle` makes sure that the given `SetCommand` comes with a `key = value` pair or throws a `RuntimeException`:
+
+    ```text
+    Invalid SET command without key-value pair
+    ```
+
+    ```text
+    Invalid SET command without value
+    ```
+
+### SetNamespaceCommand { #SetNamespaceCommand }
+
+[processSqlQuery](#processSqlQuery) handles [SetNamespaceCommand](../logical-operators/SetNamespaceCommand.md) logical commands using `SetNamespaceCommandHandler`.
+
+```scala
+handle(
+  setNamespaceCommand: SetNamespaceCommand): Unit
+```
+
+`handle` requests this [SqlGraphRegistrationContextState](#context) for the following:
+
+* For a `database`-only, single-part namespace, [setCurrentDatabase](SqlGraphRegistrationContextState.md#setCurrentDatabase)
+* For a `catalog.database` two-part namespace, [setCurrentCatalog](SqlGraphRegistrationContextState.md#setCurrentCatalog) and [setCurrentDatabase](SqlGraphRegistrationContextState.md#setCurrentDatabase)
+
+??? note "SparkException"
+
+    `handle` throws a `SparkException` for invalid namespaces:
+
+    ```text
+    Invalid schema identifier provided on USE command: [namespace]
+    ```
+
+### CreateStreamingTable { #CreateStreamingTable }
+
+[processSqlQuery](#processSqlQuery) handles [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) logical commands using `CreateStreamingTableHandler`.
+
+```scala
+handle(
+  cst: CreateStreamingTable,
+  queryOrigin: QueryOrigin): Unit
+```
+
+`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable).
