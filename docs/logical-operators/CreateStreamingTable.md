@@ -2,7 +2,7 @@
 title: CreateStreamingTable
 ---
 
-# CreateStreamingTable Logical Operator
+# CreateStreamingTable Unary Logical Command
 
 `CreateStreamingTable` is a `UnaryCommand` and a [CreatePipelineDataset](CreatePipelineDataset.md).
 

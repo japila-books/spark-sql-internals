@@ -11,9 +11,9 @@
 * `PipelinesHandler` is requested to [handle DEFINE_SQL_GRAPH_ELEMENTS command](PipelinesHandler.md#handlePipelinesCommand) (and [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements))
 * `SqlGraphRegistrationContext` is requested to [processSqlFile](#processSqlFile)
 
-### SqlGraphRegistrationContextState { #context }
+## SqlGraphRegistrationContextState { #context }
 
-When [created](#creating-instance), `SqlGraphRegistrationContext` creates a `SqlGraphRegistrationContextState` for the [defaultCatalog](GraphRegistrationContext.md#defaultCatalog), the [defaultDatabase](GraphRegistrationContext.md#defaultDatabase) and the [defaultSqlConf](GraphRegistrationContext.md#defaultSqlConf).
+When [created](#creating-instance), `SqlGraphRegistrationContext` creates a [SqlGraphRegistrationContextState](SqlGraphRegistrationContextState.md) (with the [defaultCatalog](GraphRegistrationContext.md#defaultCatalog), the [defaultDatabase](GraphRegistrationContext.md#defaultDatabase) and the [defaultSqlConf](GraphRegistrationContext.md#defaultSqlConf)).
 
 ## Process SQL Definition File { #processSqlFile }
 
@@ -47,15 +47,15 @@ processSqlQuery(
 
 `processSqlQuery` handles (_processes_) the given [LogicalPlan](../logical-operators/LogicalPlan.md) logical commands:
 
-* [SetCommand](#SetCommand)
-* [SetNamespaceCommand](#SetNamespaceCommand)
-* `SetCatalogCommand`
+* [CreateFlowCommand](#CreateFlowCommand)
+* [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
+* [CreateStreamingTable](#CreateStreamingTable)
+* [CreateStreamingTableAsSelect](#CreateStreamingTableAsSelect)
 * `CreateView`
 * `CreateViewCommand`
-* [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
-* `CreateStreamingTableAsSelect`
-* [CreateStreamingTable](#CreateStreamingTable)
-* [CreateFlowCommand](#CreateFlowCommand)
+* `SetCatalogCommand`
+* [SetCommand](#SetCommand)
+* [SetNamespaceCommand](#SetNamespaceCommand)
 
 ### splitSqlFileIntoQueries { #splitSqlFileIntoQueries }
 
@@ -94,6 +94,30 @@ In the end, `CreateFlowHandler` requests this [GraphRegistrationContext](#graphR
 [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) logical commands are handled by `CreateMaterializedViewAsSelectHandler`.
 
 `CreateMaterializedViewAsSelectHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to register a [table](GraphRegistrationContext.md#registerTable) and a [flow](GraphRegistrationContext.md#registerFlow) (that backs the materialized view).
+
+### CreateStreamingTable { #CreateStreamingTable }
+
+[processSqlQuery](#processSqlQuery) handles [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) logical commands using `CreateStreamingTableHandler`.
+
+```scala
+handle(
+  cst: CreateStreamingTable,
+  queryOrigin: QueryOrigin): Unit
+```
+
+`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable).
+
+### CreateStreamingTableAsSelect { #CreateStreamingTableAsSelect }
+
+[processSqlQuery](#processSqlQuery) handles [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) logical commands using `CreateStreamingTableAsSelectHandler`.
+
+```scala
+handle(
+  cst: CreateStreamingTableAsSelect,
+  queryOrigin: QueryOrigin): Unit
+```
+
+`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable) and the accompanying [flow](GraphRegistrationContext.md#registerFlow) (for the streaming table).
 
 ### SetCommand { #SetCommand }
 
@@ -139,15 +163,3 @@ handle(
     ```text
     Invalid schema identifier provided on USE command: [namespace]
     ```
-
-### CreateStreamingTable { #CreateStreamingTable }
-
-[processSqlQuery](#processSqlQuery) handles [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) logical commands using `CreateStreamingTableHandler`.
-
-```scala
-handle(
-  cst: CreateStreamingTable,
-  queryOrigin: QueryOrigin): Unit
-```
-
-`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable).
