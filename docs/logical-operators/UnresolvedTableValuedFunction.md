@@ -14,6 +14,7 @@ title: UnresolvedTableValuedFunction
 
 * <span id="name"> Name
 * <span id="functionArgs"> Function Arguments ([Expression](../expressions/Expression.md)s)
+* <span id="isStreaming"> [isStreaming](LogicalPlan.md#isStreaming) flag (default:`false`)
 
 `UnresolvedTableValuedFunction` is created when:
 

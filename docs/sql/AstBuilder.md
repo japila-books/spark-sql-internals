@@ -692,6 +692,22 @@ Creates a [UnresolvedStar](../expressions/UnresolvedStar.md)
 
 ANTLR labeled alternative: `#star`
 
+### visitStreamTableName { #visitStreamTableName }
+
+Creates an [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) logical operator (with [isStreaming](../logical-operators/UnresolvedRelation.md#isStreaming) flag enabled)
+
+```antlr
+streamRelationPrimary
+    : STREAM multipartIdentifier         [WITH options]? (AS? strictIdentifier identifierList?)? #streamTableName
+    | STREAM '(' multipartIdentifier ')' [WITH options]? (AS? strictIdentifier identifierList?)? #streamTableName
+    ;
+```
+
+??? note "Spark Structured Streaming"
+    `STREAM` operator in SQL is equivalent to `DataStreamReader.table` operator in [Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader/#table).
+
+ANTLR labeled alternative: `#streamTableName`
+
 ### visitSubqueryExpression { #visitSubqueryExpression }
 
 Creates a [ScalarSubquery](../expressions/ScalarSubquery.md)

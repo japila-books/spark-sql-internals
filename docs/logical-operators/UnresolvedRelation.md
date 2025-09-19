@@ -14,7 +14,7 @@ title: UnresolvedRelation
 
 * <span id="multipartIdentifier"> Multi-part identifier
 * <span id="options"> Options
-* <span id="isStreaming"> `isStreaming` flag (default: `false`)
+* <span id="isStreaming"> [isStreaming](LogicalPlan.md#isStreaming) flag (default:`false`)
 
 `UnresolvedRelation` is created (possibly indirectly using [apply](#apply) factory) when:
 
