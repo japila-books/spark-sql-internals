@@ -26,17 +26,19 @@ runPipeline(): Unit
 
 * `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun)
 
-## Start Pipeline { #startPipeline }
+## Run Pipeline Update { #startPipeline }
 
 ```scala
 startPipeline(): Unit
 ```
 
-`startPipeline` [resolves and validates the pipeline graph](#initializeGraph).
+`startPipeline` [resolves and validates the dataflow graph](#resolveGraph) (of this pipeline update).
 
-`startPipeline` creates a new [TriggeredGraphExecution](#graphExecution).
+`startPipeline` [materializes the datasets](DatasetManager.md#materializeDatasets) (of this dataflow graph).
 
-In the end, `startPipeline` requests the [GraphExecution](#graphExecution) to [start](TriggeredGraphExecution.md#start).
+`startPipeline` creates a new [TriggeredGraphExecution](#graphExecution) for the materialized dataflow graph.
+
+In the end, `startPipeline` requests the [TriggeredGraphExecution](#graphExecution) to [start](TriggeredGraphExecution.md#start).
 
 ---
 
@@ -124,3 +126,17 @@ Pipeline execution has not started yet.
 `stopPipeline` is used when:
 
 * `SessionHolder` ([Spark Connect]({{ book.spark_connect }}/server/SessionHolder/)) is requested to `removeCachedPipelineExecution`
+
+## Resolve Dataflow Graph { #resolveGraph }
+
+```scala
+resolveGraph(): DataflowGraph
+```
+
+`resolveGraph` requests this [PipelineUpdateContext](#context) for the [unresolved DataflowGraph](PipelineUpdateContext.md#unresolvedGraph) to [resolve](DataflowGraph.md#resolve) and [validate](DataflowGraph.md#validate).
+
+---
+
+`resolveGraph` is used when:
+
+* `PipelineExecution` is requested to [dry-run](#dryRunPipeline) and [run](#startPipeline) a pipeline update

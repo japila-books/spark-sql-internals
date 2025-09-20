@@ -57,7 +57,7 @@ Define pipelines dataset cmd received: [cmd]
 
 `handlePipelinesCommand` [defines a dataset](#defineDataset).
 
-### DEFINE_FLOW { #DEFINE_FLOW }
+### <span id="DefineFlow"> DEFINE_FLOW { #DEFINE_FLOW }
 
 `handlePipelinesCommand` prints out the following INFO message to the logs:
 

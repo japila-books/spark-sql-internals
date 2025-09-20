@@ -211,7 +211,6 @@ nav:
       - SizeInBytesOnlyStatsPlanVisitor: cost-based-optimization/SizeInBytesOnlyStatsPlanVisitor.md
       - Statistics: cost-based-optimization/Statistics.md
     - ... | default-columns/**.md
-    - ... | declarative-pipelines/**.md
     - ... | direct-queries-on-files/**.md
     - Dynamic Partition Pruning:
       - dynamic-partition-pruning/index.md
@@ -231,6 +230,7 @@ nav:
       - partition-file-metadata-caching/index.md
     - ... | runtime-filtering/**.md
     - spark-connect.md
+    - ... | declarative-pipelines/**.md
     - ... | thrift-server/**.md
     - new-and-noteworthy/statistics.md
     - ... | storage-partitioned-joins/**.md

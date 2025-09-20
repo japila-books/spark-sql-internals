@@ -2,9 +2,9 @@
 subtitle: ⚠️ 4.1.0-SNAPSHOT
 ---
 
-# Declarative Pipelines
+# Spark Declarative Pipelines
 
-**Spark Declarative Pipelines (SDP)** is a declarative framework for building data processing (ETL) pipelines on Apache Spark using [Python](#python) (PySpark) and [SQL](#sql) (Spark SQL).
+**Spark Declarative Pipelines (SDP)** is a declarative framework for building data processing (ETL) pipelines on Apache Spark in [Python](#python) and [SQL](#sql) languages.
 
 ??? warning "Apache Spark 4.1.0-SNAPSHOT"
     Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
@@ -28,15 +28,15 @@ subtitle: ⚠️ 4.1.0-SNAPSHOT
     Type --help for more information.
     ```
 
-A Declarative Pipelines project is configured using a [pipeline specification file](#pipeline-specification-file) and executed with [spark-pipelines](#spark-pipelines) shell script.
+A Declarative Pipelines project is defined and configured in a [pipeline specification file](#pipeline-specification-file).
 
-In the pipeline specification file, Declarative Pipelines developers include libraries with tables, views and flows (transformations) definitions in Python and SQL. A SDP project can use both languages simultaneously.
-
-Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
+A Declarative Pipelines project can be executed with [spark-pipelines](#spark-pipelines) shell script.
 
 Declarative Pipelines uses [Python decorators](#python-decorators) to describe tables, views and flows, declaratively.
 
 The definitions of tables, views and flows are registered in [DataflowGraphRegistry](DataflowGraphRegistry.md) (with [GraphRegistrationContext](GraphRegistrationContext.md)s by graph IDs). A `GraphRegistrationContext` is [converted into a DataflowGraph](GraphRegistrationContext.md#toDataflowGraph) when `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun) (when [spark-pipelines](#spark-pipelines) script is launched with `run` or `dry-run` command).
+
+Streaming flows are backed by streaming sources, and batch flows are backed by batch sources.
 
 [DataflowGraph](DataflowGraph.md) is the core graph structure in Declarative Pipelines.
 
@@ -44,7 +44,9 @@ Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (o
 
 ## Pipeline Specification File
 
-The heart of a Declarative Pipelines project is a pipeline specification file (in YAML format).
+The heart of a Declarative Pipelines project is a **pipeline specification file** (in YAML format).
+
+In the pipeline specification file, Declarative Pipelines developers specify files (`libraries`) with tables, views and flows (transformations) definitions in Python and SQL. A SDP project can use both languages simultaneously.
 
 The following fields are supported:
 
@@ -130,10 +132,28 @@ from pyspark import pipelines as dp
 
 Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
 
+* [@dp.append_flow](#append_flow)
+* [create_streaming_table](#create_streaming_table)
 * [@dp.materialized_view](#materialized_view) for materialized views
 * [@dp.table](#table) for streaming and batch tables
+* [@dp.temporary_view](#temporary_view)
 
 ### @dp.append_flow { #append_flow }
+
+```py
+append_flow(
+    *,
+    target: str,
+    name: Optional[str] = None,
+    spark_conf: Optional[Dict[str, str]] = None,
+) -> Callable[[QueryFunction], None]
+```
+
+`append_flow` defines a flow in a pipeline.
+
+`target` is the name of the dataset (_destination_) this flow writes to.
+
+Sends a `DefineFlow` pipeline command for execution (to be handled by [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
 
 ### @dp.create_streaming_table { #create_streaming_table }
 

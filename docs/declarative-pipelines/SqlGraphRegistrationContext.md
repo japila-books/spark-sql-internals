@@ -51,9 +51,9 @@ processSqlQuery(
 * [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
 * [CreateStreamingTable](#CreateStreamingTable)
 * [CreateStreamingTableAsSelect](#CreateStreamingTableAsSelect)
-* `CreateView`
-* `CreateViewCommand`
-* `SetCatalogCommand`
+* [CreateView](#CreateView)
+* [CreateViewCommand](#CreateViewCommand)
+* [SetCatalogCommand](#SetCatalogCommand)
 * [SetCommand](#SetCommand)
 * [SetNamespaceCommand](#SetNamespaceCommand)
 

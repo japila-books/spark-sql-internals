@@ -21,11 +21,11 @@ Used when:
 unresolvedGraph: DataflowGraph
 ```
 
-The unresolved [DataflowGraph](DataflowGraph.md) of this pipeline update
+The unresolved [DataflowGraph](DataflowGraph.md) of this pipeline update (_pipeline run_) to execute
 
 Used when:
 
-* `PipelineUpdateContext` is requested to [initializeGraph](#initializeGraph)
+* `PipelineExecution` is requested to [resolve this unresolved DataflowGraph](PipelineExecution.md#resolveGraph)
 
 ## Implementations
 

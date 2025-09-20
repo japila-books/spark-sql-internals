@@ -1,8 +1,10 @@
 # GraphRegistrationContext
 
-`GraphRegistrationContext` is a registry of [tables](#tables), [views](#views), and [flows](#flows) in a dataflow graph (described with Python decorators and SQL statements).
+`GraphRegistrationContext` is a registry of [tables](#tables), [views](#views), and [flows](#flows) in a pipeline (_dataflow graph_).
 
 `GraphRegistrationContext` is required to create a new [SqlGraphRegistrationContext](SqlGraphRegistrationContext.md).
+
+Eventually, `GraphRegistrationContext` [becomes a DataflowGraph](#toDataflowGraph) (to create a [PipelineUpdateContextImpl](PipelineUpdateContextImpl.md#unresolvedGraph) to [run a pipeline](PipelinesHandler.md#startRun)).
 
 ## Creating Instance
 
@@ -60,7 +62,7 @@ registerTable(
 
 `registerTable` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [handle DEFINE_DATASET command](PipelinesHandler.md#defineDataset)
+* `PipelinesHandler` is requested to [define a dataset](PipelinesHandler.md#defineDataset)
 
 ## Register Flow { #registerFlow }
 
@@ -75,10 +77,10 @@ registerFlow(
 
 `registerFlow` is used when:
 
-* `PipelinesHandler` ([Spark Connect]({{ book.spark_connect }})) is requested to [handle DEFINE_FLOW command](PipelinesHandler.md#defineFlow)
+* `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
 * `SqlGraphRegistrationContext` is requested to [process the following SQL commands](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CreateFlowCommand](../logical-operators/CreateFlowCommand.md)
-    * `CreateMaterializedViewAsSelect`
-    * `CreateView`
-    * `CreateStreamingTableAsSelect`
-    * `CreateViewCommand`
+    * [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md)
+    * [CreateView](../logical-operators/CreateView.md)
+    * [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md)
+    * [CreateViewCommand](../logical-operators/CreateViewCommand.md)
