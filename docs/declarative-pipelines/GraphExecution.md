@@ -54,6 +54,8 @@ Used when:
 
 This `FlowPlanner` is created for this [DataflowGraph](#graphForExecution) and this [PipelineUpdateContext](#env), with a [Trigger](#streamTrigger) (that is supposed to be defined by the [implementations](#implementations)).
 
+This `FlowPlanner` is used when `GraphExecution` is requested to [plan and start a flow](#planAndStartFlow).
+
 ## Start { #start }
 
 ```scala

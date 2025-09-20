@@ -24,7 +24,7 @@ triggerFor: Flow => Trigger
 
 The `triggerFor` function is the [streamTrigger](GraphExecution.md#streamTrigger) function of the owning [GraphExecution](GraphExecution.md).
 
-## Plan DataflowGraph { #plan }
+## Plan Flow for Execution { #plan }
 
 ```scala
 plan(

@@ -15,6 +15,21 @@
 * `DataflowGraph` is requested to [reanalyzeFlow](#reanalyzeFlow)
 * `GraphRegistrationContext` is requested to [convert to a DataflowGraph](GraphRegistrationContext.md#toDataflowGraph)
 
+## Outputs by TableIdentifier { #output }
+
+```scala
+output: Map[TableIdentifier, Output]
+```
+
+`output` is a collection of unique `Output`s ([Table](Table.md)s) by their `TableIdentifier`.
+
+---
+
+`output` is used when:
+
+* `FlowPlanner` is requested to [plan a flow for execution](FlowPlanner.md#plan) (to find the destination table of a flow)
+* `DataflowGraph` is requested for the [materialized flows](#materializedFlows)
+
 ## reanalyzeFlow { #reanalyzeFlow }
 
 ```scala

@@ -1,6 +1,6 @@
 # TriggeredGraphExecution
 
-`TriggeredGraphExecution` is a [GraphExecution](GraphExecution.md) that...FIXME
+`TriggeredGraphExecution` is a [GraphExecution](GraphExecution.md) for the [DataflowGraph](#graphForExecution) and [PipelineUpdateContext](#env).
 
 ## Creating Instance
 
@@ -8,12 +8,12 @@
 
 * <span id="graphForExecution"> [DataflowGraph](DataflowGraph.md)
 * <span id="env"> [PipelineUpdateContext](PipelineUpdateContext.md)
-* <span id="onCompletion"> `onCompletion` Callback (`RunTerminationReason => Unit`, default: `_ => ()`)
+* <span id="onCompletion"> `onCompletion` Callback (`RunTerminationReason => Unit`, default: do nothing)
 * <span id="clock"> `Clock` (default: `SystemClock`)
 
 `TriggeredGraphExecution` is created when:
 
-* `PipelineExecution` is requested to [startPipeline](PipelineExecution.md#startPipeline)
+* `PipelineExecution` is requested to [run a pipeline update](PipelineExecution.md#startPipeline)
 
 ## Topological Execution Thread { #topologicalExecutionThread }
 
@@ -21,7 +21,7 @@
 topologicalExecutionThread: Option[Thread]
 ```
 
-`topologicalExecutionThread` is the **Topological Execution** thread of [execution](#start) of this pipeline.
+`topologicalExecutionThread` is the **Topological Execution** thread of [execution](#start) of this pipeline update.
 
 `topologicalExecutionThread` is initialized and started when `TriggeredGraphExecution` is requested to [start](#start).
 
@@ -37,15 +37,21 @@ topologicalExecutionThread: Option[Thread]
 
     `start` is part of the [GraphExecution](GraphExecution.md#start) abstraction.
 
-`start`...FIXME
+`start` [registers the stream listener](GraphExecution.md#start).
 
-### buildTopologicalExecutionThread { #buildTopologicalExecutionThread }
+`start` requests this [PipelineUpdateContext](#env) for the [flows to be refreshed](PipelineUpdateContext.md#refreshFlows) and...FIXME
+
+`start` [creates a Topological Execution thread](#buildTopologicalExecutionThread) and [starts its execution](#topologicalExecution).
+
+### Create Topological Execution Thread { #buildTopologicalExecutionThread }
 
 ```scala
 buildTopologicalExecutionThread(): Thread
 ```
 
-`buildTopologicalExecutionThread`...FIXME
+`buildTopologicalExecutionThread` creates a new thread of execution known as **Topological Execution**.
+
+When started, the thread does [topological execution](#topologicalExecution).
 
 ### topologicalExecution { #topologicalExecution }
 
@@ -53,7 +59,34 @@ buildTopologicalExecutionThread(): Thread
 topologicalExecution(): Unit
 ```
 
-`topologicalExecution`...FIXME
+`topologicalExecution` [finds the flows](#flowsWithState) in `QUEUED` and `RUNNING` states or [failed but can be re-tried](#flowsQueuedForRetry).
+
+For each flow in `RUNNING` state, `topologicalExecution`...FIXME
+
+`topologicalExecution` checks leaking permits.
+
+!!! note "FIXME Explain"
+
+`topologicalExecution` [starts flows](#startFlow) that are ready to start.
+
+### Start Single Flow { #startFlow }
+
+```scala
+startFlow(
+  flow: ResolvedFlow): Unit
+```
+
+`startFlow` prints out the following INFO message to the logs:
+
+```text
+Starting flow [flow_identifier]
+```
+
+`startFlow` requests this [PipelineUpdateContext](#env) for the [FlowProgressEventLogger](PipelineUpdateContext.md#flowProgressEventLogger) to [recordPlanningForBatchFlow](FlowProgressEventLogger.md#recordPlanningForBatchFlow).
+
+`startFlow` [planAndStartFlow](#planAndStartFlow).
+
+`startFlow`...FIXME
 
 ## Streaming Trigger { #streamTrigger }
 
