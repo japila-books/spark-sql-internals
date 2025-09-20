@@ -1145,6 +1145,10 @@
          <lastmod>2025-09-20</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/CoreDataflowNodeProcessor/</loc>
+         <lastmod>2025-09-20</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/DataflowGraph/</loc>
          <lastmod>2025-09-20</lastmod>
     </url>
@@ -1170,6 +1174,10 @@
     </url>
     <url>
          <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowProgressEventLogger/</loc>
+         <lastmod>2025-09-20</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowResolver/</loc>
          <lastmod>2025-09-20</lastmod>
     </url>
     <url>
