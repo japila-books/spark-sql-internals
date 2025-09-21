@@ -35,6 +35,32 @@ toDataflowGraph: DataflowGraph
 
 * `PipelinesHandler` is requested to [start a pipeline run](PipelinesHandler.md#startRun)
 
+### assertNoDuplicates { #assertNoDuplicates }
+
+```scala
+assertNoDuplicates(
+  qualifiedTables: Seq[Table],
+  validatedViews: Seq[View],
+  qualifiedFlows: Seq[UnresolvedFlow]): Unit
+```
+
+`assertNoDuplicates`...FIXME
+
+### assertFlowIdentifierIsUnique { #assertFlowIdentifierIsUnique }
+
+```scala
+assertFlowIdentifierIsUnique(
+  flow: UnresolvedFlow,
+  datasetType: DatasetType,
+  flows: Seq[UnresolvedFlow]): Unit
+```
+
+`assertFlowIdentifierIsUnique` throws an `AnalysisException` if the given [UnresolvedFlow](UnresolvedFlow.md)'s identifier is used by multiple flows (among the given `flows`):
+
+```text
+Flow [flow_name] was found in multiple datasets: [dataset_names]
+```
+
 ## Tables { #tables }
 
 `GraphRegistrationContext` creates an empty registry of [Table](Table.md)s when [created](#creating-instance).
@@ -78,9 +104,9 @@ registerFlow(
 `registerFlow` is used when:
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
-* `SqlGraphRegistrationContext` is requested to [process the following SQL commands](SqlGraphRegistrationContext.md#processSqlQuery):
-    * [CreateFlowCommand](../logical-operators/CreateFlowCommand.md)
-    * [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md)
-    * [CreateView](../logical-operators/CreateView.md)
-    * [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md)
-    * [CreateViewCommand](../logical-operators/CreateViewCommand.md)
+* `SqlGraphRegistrationContext` is requested to [handle the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
+    * [CreateFlowCommand](SqlGraphRegistrationContext.md#CreateFlowCommand)
+    * [CreateMaterializedViewAsSelect](SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect)
+    * [CreateView](SqlGraphRegistrationContext.md#CreateView)
+    * [CreateStreamingTableAsSelect](SqlGraphRegistrationContext.md#CreateStreamingTableAsSelect)
+    * [CreateViewCommand](SqlGraphRegistrationContext.md#CreateViewCommand)

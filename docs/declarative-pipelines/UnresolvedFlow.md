@@ -1,6 +1,17 @@
+---
+hide:
+    - toc
+---
+
 # UnresolvedFlow
 
-`UnresolvedFlow` is a [Flow](Flow.md).
+`UnresolvedFlow` is a [Flow](Flow.md) that represents flows in the following Python and SQL transformations in [Spark Declarative Pipelines](index.md):
+
+* [register_flow](GraphElementRegistry.md#register_flow) in PySpark's decorators
+* [CREATE FLOW ... AS INSERT INTO ... BY NAME](../logical-operators/CreateFlowCommand.md)
+* [CREATE MATERIALIZED VIEW](../logical-operators/CreateMaterializedViewAsSelect.md)
+* [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
+* [CREATE VIEW](../logical-operators/CreateView.md) and the other variants of [CREATE VIEW](../logical-operators/CreateViewCommand.md)
 
 `UnresolvedFlow` is registered to a [GraphRegistrationContext](GraphRegistrationContext.md) with [registerFlow](GraphRegistrationContext.md#registerFlow).
 
@@ -23,7 +34,7 @@
 `UnresolvedFlow` is created when:
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
-* `SqlGraphRegistrationContext` is requested to [handle the following pipeline commands](SqlGraphRegistrationContext.md#processSqlQuery):
+* `SqlGraphRegistrationContext` is requested to [handle the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CreateFlowCommand](SqlGraphRegistrationContext.md#CreateFlowCommand)
     * [CreateMaterializedViewAsSelect](SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect)
     * [CreateView](SqlGraphRegistrationContext.md#CreateView)

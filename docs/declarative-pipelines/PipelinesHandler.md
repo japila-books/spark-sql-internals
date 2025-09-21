@@ -45,11 +45,15 @@ handlePipelinesCommand(
 
 ### CREATE_DATAFLOW_GRAPH { #CREATE_DATAFLOW_GRAPH }
 
-`handlePipelinesCommand` [creates a dataflow graph](#createDataflowGraph) and sends the graph ID back.
+[handlePipelinesCommand](#handlePipelinesCommand) creates a [dataflow graph](#createDataflowGraph) and sends the graph ID back.
+
+### DROP_DATAFLOW_GRAPH { #DROP_DATAFLOW_GRAPH }
+
+[handlePipelinesCommand](#handlePipelinesCommand)...FIXME
 
 ### DEFINE_DATASET { #DEFINE_DATASET }
 
-`handlePipelinesCommand` prints out the following INFO message to the logs:
+[handlePipelinesCommand](#handlePipelinesCommand) prints out the following INFO message to the logs:
 
 ```text
 Define pipelines dataset cmd received: [cmd]
@@ -59,7 +63,7 @@ Define pipelines dataset cmd received: [cmd]
 
 ### <span id="DefineFlow"> DEFINE_FLOW { #DEFINE_FLOW }
 
-`handlePipelinesCommand` prints out the following INFO message to the logs:
+[handlePipelinesCommand](#handlePipelinesCommand) prints out the following INFO message to the logs:
 
 ```text
 Define pipelines flow cmd received: [cmd]
@@ -69,13 +73,17 @@ Define pipelines flow cmd received: [cmd]
 
 ### START_RUN { #START_RUN }
 
-`handlePipelinesCommand` prints out the following INFO message to the logs:
+[handlePipelinesCommand](#handlePipelinesCommand) prints out the following INFO message to the logs:
 
 ```text
 Start pipeline cmd received: [cmd]
 ```
 
 `handlePipelinesCommand` [starts a pipeline run](#startRun).
+
+### DEFINE_SQL_GRAPH_ELEMENTS { #DEFINE_SQL_GRAPH_ELEMENTS }
+
+[handlePipelinesCommand](#handlePipelinesCommand)...FIXME
 
 ## Start Pipeline Run { #startRun }
 
@@ -153,6 +161,9 @@ defineFlow(
   sparkSession: SparkSession): Unit
 ```
 
+??? note "DEFINE_FLOW Pipeline Command"
+    `defineFlow` is used to handle [DEFINE_FLOW](#DEFINE_FLOW).
+
 `defineFlow` looks up the [GraphRegistrationContext](DataflowGraphRegistry.md#getDataflowGraphOrThrow) for the given `flow` (or throws a `SparkException` if not found).
 
 !!! note "Implicit Flows"
@@ -164,3 +175,4 @@ defineFlow(
     `defineFlow` reports an `AnalysisException` if the given `flow` is not an implicit flow, but is defined with a multi-part identifier.
 
 In the end, `defineFlow` [registers a flow](GraphRegistrationContext.md#registerFlow).
+
