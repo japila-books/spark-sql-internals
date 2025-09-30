@@ -1,6 +1,8 @@
 # DatasetManager
 
-`DatasetManager` is a global manager to [materialize datasets](#materializeDatasets) (tables and persistent views).
+`DatasetManager` is a global manager to [materialize datasets](#materializeDatasets) (tables and persistent views) right after a [pipeline update](PipelineExecution.md#startPipeline).
+
+![DatasetManager](./images/DatasetManager.png)
 
 !!! note ""
     **Materialization** is a process of publishing tables and persistent views to session [TableCatalog](../connector/catalog/TableCatalog.md) and [SessionCatalog](../SessionCatalog.md), for tables and persistent views, respectively.
