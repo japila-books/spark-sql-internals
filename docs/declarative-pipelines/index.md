@@ -178,8 +178,9 @@ Pipelines elements are defined in SQL files included as `libraries` in a [pipeli
 Supported SQL statements:
 
 * [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
-* [CREATE MATERIALIZED VIEW](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE MATERIALIZED VIEW ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * ...
 
 A streaming table can be defined without a query, as streaming tables' data can be backed by standalone flows.

@@ -4,9 +4,9 @@ title: CreateMaterializedViewAsSelect
 
 # CreateMaterializedViewAsSelect Logical Operator
 
-`CreateMaterializedViewAsSelect` is a [CreatePipelineDatasetAsSelect](CreatePipelineDatasetAsSelect.md) logical operator that represents [CREATE MATERIALIZED VIEW](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement.
+`CreateMaterializedViewAsSelect` is a [CreatePipelineDatasetAsSelect](CreatePipelineDatasetAsSelect.md) binary logical command that represents [CREATE MATERIALIZED VIEW ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement in [Spark Declarative Pipelines](../declarative-pipelines/index.md) framework.
 
-`CreateMaterializedViewAsSelect` is handled by [SqlGraphRegistrationContext](../declarative-pipelines/SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect) in [Spark Declarative Pipelines](../declarative-pipelines/index.md) framework.
+`CreateMaterializedViewAsSelect` is handled by [SqlGraphRegistrationContext](../declarative-pipelines/SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect).
 
 ## Creating Instance
 
@@ -22,4 +22,4 @@ title: CreateMaterializedViewAsSelect
 
 `CreateMaterializedViewAsSelect` is created when:
 
-* `SparkSqlAstBuilder` is requested to [parse CREATE MATERIALIZED VIEW SQL statement](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* `SparkSqlAstBuilder` is requested to [parse CREATE MATERIALIZED VIEW ... AS SQL statement](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
