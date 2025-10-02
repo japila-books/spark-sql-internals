@@ -1,0 +1,3 @@
+# SetCatalogCommand
+
+`SetCatalogCommand` is...FIXME

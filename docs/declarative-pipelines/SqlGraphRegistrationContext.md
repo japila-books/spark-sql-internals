@@ -47,15 +47,17 @@ processSqlQuery(
 
 `processSqlQuery` handles (_processes_) the given [LogicalPlan](../logical-operators/LogicalPlan.md) logical commands:
 
-* [CreateFlowCommand](#CreateFlowCommand)
-* [CreateMaterializedViewAsSelect](#CreateMaterializedViewAsSelect)
-* [CreateStreamingTable](#CreateStreamingTable)
-* [CreateStreamingTableAsSelect](#CreateStreamingTableAsSelect)
-* [CreateView](#CreateView)
-* [CreateViewCommand](#CreateViewCommand)
-* [SetCatalogCommand](#SetCatalogCommand)
-* [SetCommand](#SetCommand)
-* [SetNamespaceCommand](#SetNamespaceCommand)
+| Logical Command | Command Handler | Datasets |
+|-|-|-|
+| [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) | [CreateFlowHandler](#CreateFlowCommand) | [UnresolvedFlow](GraphRegistrationContext.md#registerFlow) ([once](UnresolvedFlow.md#once) disabled) |
+| [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) | [CreateMaterializedViewAsSelectHandler](#CreateMaterializedViewAsSelect) | [Table](GraphRegistrationContext.md#registerTable) ([isStreamingTable](Table.md#isStreamingTable) disabled)<br>[UnresolvedFlow](GraphRegistrationContext.md#registerFlow) ([once](UnresolvedFlow.md#once) disabled) |
+| [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) | [CreateStreamingTableHandler](#CreateStreamingTable) | [Table](GraphRegistrationContext.md#registerTable) ([isStreamingTable](Table.md#isStreamingTable) enabled) |
+| [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) | [CreateStreamingTableAsSelectHandler](#CreateStreamingTableAsSelect) | [Table](GraphRegistrationContext.md#registerTable) ([isStreamingTable](Table.md#isStreamingTable) enabled)<br>[UnresolvedFlow](GraphRegistrationContext.md#registerFlow) ([once](UnresolvedFlow.md#once) disabled) |
+| [CreateView](../logical-operators/CreateView.md) | [CreatePersistedViewCommandHandler](#CreateView) | [PersistedView](GraphRegistrationContext.md#registerView)<br>[UnresolvedFlow](GraphRegistrationContext.md#registerFlow) ([once](UnresolvedFlow.md#once) disabled) |
+| [CreateViewCommand](../logical-operators/CreateViewCommand.md) | [CreateTemporaryViewHandler](#CreateViewCommand) | [TemporaryView](GraphRegistrationContext.md#registerView)<br>[UnresolvedFlow](GraphRegistrationContext.md#registerFlow) ([once](UnresolvedFlow.md#once) disabled) |
+| [SetCatalogCommand](../logical-operators/SetCatalogCommand.md) | [SetCatalogCommandHandler](#SetCatalogCommand) | |
+| [SetCommand](../logical-operators/SetCommand.md) | [SetCommandHandler](#SetCommand) | |
+| [SetNamespaceCommand](../logical-operators/SetNamespaceCommand.md) | [SetNamespaceCommandHandler](#SetNamespaceCommand) | |
 
 ### splitSqlFileIntoQueries { #splitSqlFileIntoQueries }
 
@@ -78,7 +80,7 @@ A flow name must be a single-part name (that is resolved against the current pip
 
 The [flowOperation](../logical-operators/CreateFlowCommand.md#flowOperation) of a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) command must be [InsertIntoStatement](../logical-operators/InsertIntoStatement.md).
 
-!!! note
+??? warning
     Only `INSERT INTO ... BY NAME` flows are supported in [Spark Declarative Pipelines](index.md).
 
     `INSERT OVERWRITE` flows are not supported.
@@ -91,46 +93,49 @@ In the end, `CreateFlowHandler` requests this [GraphRegistrationContext](#graphR
 
 ### CreateMaterializedViewAsSelect { #CreateMaterializedViewAsSelect }
 
-[CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) logical commands are handled by `CreateMaterializedViewAsSelectHandler`.
+[processSqlQuery](#processSqlQuery) handles [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) logical commands using `CreateMaterializedViewAsSelectHandler`.
 
-`CreateMaterializedViewAsSelectHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to register a [table](GraphRegistrationContext.md#registerTable) and a [flow](GraphRegistrationContext.md#registerFlow) (that backs the materialized view).
+`CreateMaterializedViewAsSelectHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register a table](GraphRegistrationContext.md#registerTable) and a [flow](GraphRegistrationContext.md#registerFlow) (that backs the materialized view).
 
 ### CreateStreamingTable { #CreateStreamingTable }
 
 [processSqlQuery](#processSqlQuery) handles [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) logical commands using `CreateStreamingTableHandler`.
 
-```scala
-handle(
-  cst: CreateStreamingTable,
-  queryOrigin: QueryOrigin): Unit
-```
-
-`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable).
+`CreateStreamingTableHandler` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable).
 
 ### CreateStreamingTableAsSelect { #CreateStreamingTableAsSelect }
 
 [processSqlQuery](#processSqlQuery) handles [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) logical commands using `CreateStreamingTableAsSelectHandler`.
 
-```scala
-handle(
-  cst: CreateStreamingTableAsSelect,
-  queryOrigin: QueryOrigin): Unit
-```
+`CreateStreamingTableAsSelectHandler` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable) and the accompanying [flow](GraphRegistrationContext.md#registerFlow) (for the streaming table).
 
-`handle` requests this [SqlGraphRegistrationContextState](#context) to [register a streaming table](GraphRegistrationContext.md#registerTable) and the accompanying [flow](GraphRegistrationContext.md#registerFlow) (for the streaming table).
+### CreateView { #CreateView }
+
+[processSqlQuery](#processSqlQuery) handles [CreateView](../logical-operators/CreateView.md) logical commands using `CreatePersistedViewCommandHandler`.
+
+`CreatePersistedViewCommandHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register a PersistedView](GraphRegistrationContext.md#registerView) and the accompanying [flow](GraphRegistrationContext.md#registerFlow) (for the `PersistedView`).
+
+### CreateViewCommand { #CreateViewCommand }
+
+[processSqlQuery](#processSqlQuery) handles [CreateViewCommand](../logical-operators/CreateViewCommand.md) logical commands using `CreateTemporaryViewHandler`.
+
+`CreateTemporaryViewHandler` requests this [GraphRegistrationContext](#graphRegistrationContext) to [register a TemporaryView](GraphRegistrationContext.md#registerView) and the accompanying [flow](GraphRegistrationContext.md#registerFlow) (for the `TemporaryView`).
+
+### SetCatalogCommand { #SetCatalogCommand }
+
+[processSqlQuery](#processSqlQuery) handles [SetCatalogCommand](../logical-operators/SetCatalogCommand.md) logical commands using `SetCatalogCommandHandler`.
+
+`SetCatalogCommandHandler` requests this [SqlGraphRegistrationContextState](#context) to [setCurrentCatalog](SqlGraphRegistrationContextState.md#setCurrentCatalog) to the [catalogName](../logical-operators/SetCatalogCommand.md#catalogName) of the given [SetCatalogCommand](../logical-operators/SetCatalogCommand.md).
+
+In the end, `SetCatalogCommandHandler` requests this [SqlGraphRegistrationContextState](#context) to [clearCurrentDatabase](SqlGraphRegistrationContextState.md#clearCurrentDatabase).
 
 ### SetCommand { #SetCommand }
 
 [processSqlQuery](#processSqlQuery) handles [SetCommand](../logical-operators/SetCommand.md) logical commands using `SetCommandHandler`.
 
-```scala
-handle(
-  setCommand: SetCommand): Unit
-```
+`SetCommandHandler` requests this [SqlGraphRegistrationContextState](#context) to [setSqlConf](#setSqlConf) with the key-value pair of the given [SetCommand](../logical-operators/SetCommand.md) logical command.
 
-`handle` requests this [SqlGraphRegistrationContextState](#context) to [setSqlConf](#setSqlConf) with the key-value pair of the given [SetCommand](../logical-operators/SetCommand.md) logical command.
-
-??? note "RuntimeException"
+??? warning "RuntimeException"
 
     `handle` makes sure that the given `SetCommand` comes with a `key = value` pair or throws a `RuntimeException`:
 
@@ -146,17 +151,12 @@ handle(
 
 [processSqlQuery](#processSqlQuery) handles [SetNamespaceCommand](../logical-operators/SetNamespaceCommand.md) logical commands using `SetNamespaceCommandHandler`.
 
-```scala
-handle(
-  setNamespaceCommand: SetNamespaceCommand): Unit
-```
-
-`handle` requests this [SqlGraphRegistrationContextState](#context) for the following:
+`SetNamespaceCommandHandler` requests this [SqlGraphRegistrationContextState](#context) for the following:
 
 * For a `database`-only, single-part namespace, [setCurrentDatabase](SqlGraphRegistrationContextState.md#setCurrentDatabase)
 * For a `catalog.database` two-part namespace, [setCurrentCatalog](SqlGraphRegistrationContextState.md#setCurrentCatalog) and [setCurrentDatabase](SqlGraphRegistrationContextState.md#setCurrentDatabase)
 
-??? note "SparkException"
+??? warning "SparkException"
 
     `handle` throws a `SparkException` for invalid namespaces:
 

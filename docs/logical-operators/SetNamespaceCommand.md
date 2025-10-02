@@ -18,4 +18,4 @@ USE [NAMESPACE | DATABASE | SCHEMA] identifier
 
 `SetNamespaceCommand` is created when:
 
-* `SparkSqlAstBuilder` is requested to parse [USE NAMESPACE](../sql/SparkSqlAstBuilder.md#visitUseNamespace) SQL statement
+* `SparkSqlAstBuilder` is requested to [parse USE NAMESPACE SQL statement](../sql/SparkSqlAstBuilder.md#visitUseNamespace)

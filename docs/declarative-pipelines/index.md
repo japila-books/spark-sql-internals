@@ -181,7 +181,11 @@ Supported SQL statements:
 * [CREATE MATERIALIZED VIEW ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
-* ...
+* [CREATE (PERSISTED) VIEW](../sql/SparkSqlAstBuilder.md#visitCreateView)
+* [CREATE TEMPORARY VIEW](../sql/SparkSqlAstBuilder.md#visitCreateView)
+* [SET](../logical-operators/SetCommand.md)
+* [SET CATALOG](../logical-operators/SetCatalogCommand.md)
+* [USE NAMESPACE](../logical-operators/SetNamespaceCommand.md)
 
 A streaming table can be defined without a query, as streaming tables' data can be backed by standalone flows.
 During a pipeline execution, it is validated that a streaming table has at least one standalone flow writing to the table, if no query is specified in the create statement itself.
