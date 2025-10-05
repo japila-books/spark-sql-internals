@@ -6,7 +6,22 @@ Flows must be successfully analyzed, thus resolved, in order to determine whethe
 
 ## Contract (Subset)
 
-### once { #once }
+### FlowFunction { #func }
+
+```scala
+func: FlowFunction
+```
+
+[FlowFunction](FlowFunction.md) of this `Flow`
+
+Used to create an [UnresolvedFlow](UnresolvedFlow.md#func)
+
+See:
+
+* [ResolutionCompletedFlow](ResolutionCompletedFlow.md#func)
+* [UnresolvedFlow](UnresolvedFlow.md#func)
+
+### once
 
 ```scala
 once: Boolean
