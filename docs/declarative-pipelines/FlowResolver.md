@@ -33,8 +33,8 @@ convertResolvedToTypedFlow(
   funcResult: FlowFunctionResult): ResolvedFlow
 ```
 
-`convertResolvedToTypedFlow` converts the given [UnresolvedFlow](UnresolvedFlow.md) as follows:
+`convertResolvedToTypedFlow` converts the given [UnresolvedFlow](UnresolvedFlow.md) as follows (and in that order):
 
-* `AppendOnceFlow` for a [once flow](UnresolvedFlow.md#once)
+* [AppendOnceFlow](AppendOnceFlow.md) for a [once flow](UnresolvedFlow.md#once)
 * [StreamingFlow](StreamingFlow.md) for the given `FlowFunctionResult` with a streaming `DataFrame`
-* `CompleteFlow` otherwise
+* [CompleteFlow](CompleteFlow.md), otherwise

@@ -21,6 +21,11 @@ Indicates whether this is a **ONCE flow** or not. ONCE flows can only be run onc
 
 Default: `false`
 
+See:
+
+* [AppendOnceFlow](AppendOnceFlow.md#once)
+* [UnresolvedFlow](UnresolvedFlow.md#once)
+
 Used when:
 
 * `TriggeredGraphExecution` is requested to [topologicalExecution](TriggeredGraphExecution.md#topologicalExecution)
