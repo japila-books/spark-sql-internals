@@ -166,13 +166,16 @@ defineFlow(
 
 `defineFlow` looks up the [GraphRegistrationContext](DataflowGraphRegistry.md#getDataflowGraphOrThrow) for the given `flow` (or throws a `SparkException` if not found).
 
-!!! note "Implicit Flows"
-    An **implicit flow** is a flow with the name of the target dataset (i.e. one defined as part of dataset creation).
+??? note "Implicit Flows"
+    **Implicit Flows** are flows with the name of the target datasets (i.e. one defined as part of dataset creation).
+
+    Implicit flows can be defined with multi-part identifiers (as the corresponding datasets).
+
+    Multi-part identifiers are composed of catalog, schema and table parts (separated by `.` (dot)).
 
 `defineFlow` [creates a flow identifier](GraphIdentifierManager.md#parseTableIdentifier) (for the `flow` name).
 
 ??? note "AnalysisException"
     `defineFlow` reports an `AnalysisException` if the given `flow` is not an implicit flow, but is defined with a multi-part identifier.
 
-In the end, `defineFlow` [registers a flow](GraphRegistrationContext.md#registerFlow).
-
+In the end, `defineFlow` [registers a flow](GraphRegistrationContext.md#registerFlow) (with a proper [FlowFunction](FlowAnalysis.md#createFlowFunctionFromLogicalPlan)).

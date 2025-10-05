@@ -16,11 +16,11 @@ createFlowFunctionFromLogicalPlan(
   plan: LogicalPlan): FlowFunction
 ```
 
-`createFlowFunctionFromLogicalPlan` takes a [LogicalPlan](../logical-operators/LogicalPlan.md) and creates a [FlowFunction](FlowFunction.md).
+`createFlowFunctionFromLogicalPlan` takes a [LogicalPlan](../logical-operators/LogicalPlan.md) (that represents one of the supported logical commands) and creates a [FlowFunction](FlowFunction.md).
 
 When [executed](FlowFunction.md#call), this `FlowFunction` creates a [FlowAnalysisContext](FlowAnalysisContext.md).
 
-`FlowFunction` uses this `FlowAnalysisContext` to [setConf](#setConf) the given SQL configs (to the [FlowFunction](FlowFunction.md#call)).
+`FlowFunction` uses this `FlowAnalysisContext` to [set the SQL configs](FlowAnalysisContext.md#setConf) (given to the [FlowFunction](FlowFunction.md#call) being defined).
 
 `FlowFunction` [analyze](#analyze) this `LogicalPlan` (with the `FlowAnalysisContext`). This gives the result data (as a `DataFrame`).
 
@@ -37,3 +37,31 @@ In the end, `FlowFunction` creates a [FlowFunctionResult](FlowFunctionResult.md)
     * [CreateView](SqlGraphRegistrationContext.md#CreateView)
     * [CreateStreamingTableAsSelect](SqlGraphRegistrationContext.md#CreateStreamingTableAsSelect)
     * [CreateViewCommand](SqlGraphRegistrationContext.md#CreateViewCommand)
+
+### Analyze Logical Command { #analyze }
+
+```scala
+analyze(
+  context: FlowAnalysisContext,
+  plan: LogicalPlan): DataFrame
+```
+
+!!! note "CTEs"
+    `analyze` resolves pipeline-specific TVFs and CTEs.
+
+    ```sql
+    SELECT ... FROM STREAM(t1)
+    SELECT ... FROM STREAM t1
+    ```
+
+    Developers can define CTEs within their CREATE statements:
+
+    ```sql
+    CREATE STREAMING TABLE a
+    WITH b AS (
+       SELECT * FROM STREAM upstream
+    )
+    SELECT * FROM b
+    ```
+
+`analyze`...FIXME
