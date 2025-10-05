@@ -1169,7 +1169,19 @@
          <lastmod>2025-10-05</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowAnalysis/</loc>
+         <lastmod>2025-10-05</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowAnalysisContext/</loc>
+         <lastmod>2025-10-05</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowExecution/</loc>
+         <lastmod>2025-10-05</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/declarative-pipelines/FlowFunction/</loc>
          <lastmod>2025-10-05</lastmod>
     </url>
     <url>
