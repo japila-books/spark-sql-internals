@@ -9,13 +9,13 @@
 `SqlGraphRegistrationContext` is created when:
 
 * `PipelinesHandler` is requested to [handle DEFINE_SQL_GRAPH_ELEMENTS command](PipelinesHandler.md#handlePipelinesCommand) (and [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements))
-* `SqlGraphRegistrationContext` is requested to [processSqlFile](#processSqlFile)
+* `SqlGraphRegistrationContext` is requested to [process a SQL file](#processSqlFile)
 
 ## SqlGraphRegistrationContextState { #context }
 
 When [created](#creating-instance), `SqlGraphRegistrationContext` creates a [SqlGraphRegistrationContextState](SqlGraphRegistrationContextState.md) (with the [defaultCatalog](GraphRegistrationContext.md#defaultCatalog), the [defaultDatabase](GraphRegistrationContext.md#defaultDatabase) and the [defaultSqlConf](GraphRegistrationContext.md#defaultSqlConf)).
 
-## Process SQL Definition File { #processSqlFile }
+## Process SQL File { #processSqlFile }
 
 ```scala
 processSqlFile(
