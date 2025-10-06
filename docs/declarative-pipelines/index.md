@@ -132,40 +132,116 @@ from pyspark import pipelines as dp
 
 Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
 
-* [@dp.append_flow](#append_flow)
-* [create_streaming_table](#create_streaming_table)
-* [@dp.materialized_view](#materialized_view) for materialized views
-* [@dp.table](#table) for streaming and batch tables
-* [@dp.temporary_view](#temporary_view)
+* [@dp.append_flow](#append_flow) for append-only flows
+* [@dp.create_streaming_table](#create_streaming_table) for streaming tables
+* [@dp.materialized_view](#materialized_view) for materialized views (with supporting flows)
+* [@dp.table](#table) for streaming and batch tables (with supporting flows)
+* [@dp.temporary_view](#temporary_view) for temporary views (with supporting flows)
 
 ### @dp.append_flow { #append_flow }
 
 ```py
 append_flow(
-    *,
-    target: str,
-    name: Optional[str] = None,
-    spark_conf: Optional[Dict[str, str]] = None,
+  *,
+  target: str,
+  name: Optional[str] = None,
+  spark_conf: Optional[Dict[str, str]] = None,
 ) -> Callable[[QueryFunction], None]
 ```
 
-`append_flow` defines a flow in a pipeline.
+Registers an (append) flow in a pipeline.
 
 `target` is the name of the dataset (_destination_) this flow writes to.
 
-Sends a `DefineFlow` pipeline command for execution (to be handled by [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+Sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
 
 ### @dp.create_streaming_table { #create_streaming_table }
 
+```py
+create_streaming_table(
+  name: str,
+  *,
+  comment: Optional[str] = None,
+  table_properties: Optional[Dict[str, str]] = None,
+  partition_cols: Optional[List[str]] = None,
+  schema: Optional[Union[StructType, str]] = None,
+  format: Optional[str] = None,
+) -> None
+```
+
+Registers a `StreamingTable` dataset in a pipeline.
+
+Sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
+
+`dataset_type` is `TABLE`.
+
 ### @dp.materialized_view { #materialized_view }
 
-Creates a [MaterializedView](MaterializedView.md) (for a table whose contents are defined to be the result of a query).
+```py
+materialized_view(
+  query_function: Optional[QueryFunction] = None,
+  *,
+  name: Optional[str] = None,
+  comment: Optional[str] = None,
+  spark_conf: Optional[Dict[str, str]] = None,
+  table_properties: Optional[Dict[str, str]] = None,
+  partition_cols: Optional[List[str]] = None,
+  schema: Optional[Union[StructType, str]] = None,
+  format: Optional[str] = None,
+) -> Union[Callable[[QueryFunction], None], None]
+```
+
+Registers a [MaterializedView](MaterializedView.md) dataset and the corresponding `Flow` in a pipeline.
+
+For the `MaterializedView`, `materialized_view` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
+
+* `dataset_type` is `MATERIALIZED_VIEW`.
+
+For the `Flow`, `materialized_view` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
 
 ### @dp.table { #table }
 
+```py
+table(
+  query_function: Optional[QueryFunction] = None,
+  *,
+  name: Optional[str] = None,
+  comment: Optional[str] = None,
+  spark_conf: Optional[Dict[str, str]] = None,
+  table_properties: Optional[Dict[str, str]] = None,
+  partition_cols: Optional[List[str]] = None,
+  schema: Optional[Union[StructType, str]] = None,
+  format: Optional[str] = None,
+) -> Union[Callable[[QueryFunction], None], None]
+```
+
+Registers a `StreamingTable` dataset and the corresponding `Flow` in a pipeline.
+
+For the `StreamingTable`, `table` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
+
+`dataset_type` is `TABLE`.
+
+For the `Flow`, `table` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+
 ### @dp.temporary_view { #temporary_view }
 
+```py
+temporary_view(
+  query_function: Optional[QueryFunction] = None,
+  *,
+  name: Optional[str] = None,
+  comment: Optional[str] = None,
+  spark_conf: Optional[Dict[str, str]] = None,
+) -> Union[Callable[[QueryFunction], None], None]
+```
+
 [Registers](GraphElementRegistry.md#register_dataset) a `TemporaryView` dataset and a [Flow](Flow.md) in the [GraphElementRegistry](GraphElementRegistry.md#register_flow).
+
+For the `TemporaryView`, `temporary_view` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
+
+`dataset_type` is `TEMPORARY_VIEW`.
+
+For the `Flow`, `temporary_view` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
 
 ## SQL
 

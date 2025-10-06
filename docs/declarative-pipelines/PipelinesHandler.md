@@ -51,7 +51,7 @@ handlePipelinesCommand(
 
 [handlePipelinesCommand](#handlePipelinesCommand)...FIXME
 
-### DEFINE_DATASET { #DEFINE_DATASET }
+### <span id="DefineDataset"> DEFINE_DATASET { #DEFINE_DATASET }
 
 [handlePipelinesCommand](#handlePipelinesCommand) prints out the following INFO message to the logs:
 
