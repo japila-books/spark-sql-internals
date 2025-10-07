@@ -67,9 +67,7 @@ configuration:
   spark.key1: value1
 libraries:
   - glob:
-      include: transformations/**/*.py
-  - glob:
-      include: transformations/**/*.sql
+      include: transformations/**
 ```
 
 ## spark-pipelines Shell Script { #spark-pipelines }
