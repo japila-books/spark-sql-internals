@@ -2,7 +2,7 @@
 
 `AppendOnceFlow` is a [ResolvedFlow](ResolvedFlow.md) with [once](Flow.md#once) enabled.
 
-`AppendOnceFlow` is [created](#creating-instance) for a [UnresolvedFlow](UnresolvedFlow.md) with [once](UnresolvedFlow.md#once) flag enabled.
+`AppendOnceFlow` is [created](#creating-instance) for an [UnresolvedFlow](UnresolvedFlow.md) with [once](UnresolvedFlow.md#once) flag enabled.
 
 ## Creating Instance
 
