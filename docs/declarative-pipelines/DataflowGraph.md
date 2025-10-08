@@ -15,11 +15,16 @@
 * `DataflowGraph` is requested to [reanalyzeFlow](#reanalyzeFlow)
 * `GraphRegistrationContext` is requested to [convert to a DataflowGraph](GraphRegistrationContext.md#toDataflowGraph)
 
-## Outputs by TableIdentifier { #output }
+## Outputs { #output }
 
 ```scala
 output: Map[TableIdentifier, Output]
 ```
+
+??? note "Lazy Value"
+    `output` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
 `output` is a collection of unique `Output`s ([Table](Table.md)s) by their `TableIdentifier`.
 

@@ -65,3 +65,78 @@ analyze(
     ```
 
 `analyze`...FIXME
+
+## Read Batch Input { #readBatchInput }
+
+```scala
+readBatchInput(
+  context: FlowAnalysisContext,
+  name: String,
+  batchReadOptions: BatchReadOptions): DataFrame
+```
+
+`readBatchInput`...FIXME
+
+---
+
+`readBatchInput` is used when:
+
+* `FlowAnalysis` is requested to [analyze](#analyze)
+
+### Read External Batch Input { #readExternalBatchInput }
+
+```scala
+readExternalBatchInput(
+  context: FlowAnalysisContext,
+  inputIdentifier: ExternalDatasetIdentifier,
+  name: String): DataFrame
+```
+
+`readExternalBatchInput`...FIXME
+
+## Read Stream Input { #readStreamInput }
+
+```scala
+readStreamInput(
+  context: FlowAnalysisContext,
+  name: String,
+  streamReader: DataStreamReader,
+  streamingReadOptions: StreamingReadOptions): DataFrame
+```
+
+`readStreamInput`...FIXME
+
+---
+
+`readStreamInput` is used when:
+
+* `FlowAnalysis` is requested to [analyze](#analyze)
+
+### Read External Stream Input { #readExternalStreamInput }
+
+```scala
+readExternalStreamInput(
+  context: FlowAnalysisContext,
+  inputIdentifier: ExternalDatasetIdentifier,
+  streamReader: DataStreamReader,
+  name: String): DataFrame
+```
+
+`readExternalStreamInput`...FIXME
+
+## Read Graph Input { #readGraphInput }
+
+```scala
+readGraphInput(
+  ctx: FlowAnalysisContext,
+  inputIdentifier: InternalDatasetIdentifier,
+  readOptions: InputReadOptions): DataFrame
+```
+
+`readGraphInput`...FIXME
+
+---
+
+`readGraphInput` is used when:
+
+* `FlowAnalysis` is requested to read [batch](#readBatchInput) and [stream](#readStreamInput) input
