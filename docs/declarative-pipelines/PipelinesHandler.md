@@ -24,11 +24,11 @@ handlePipelinesCommand(
 
 | PipelineCommand | Description | Initiator |
 |-----------------|-------------|-----------|
-| `CREATE_DATAFLOW_GRAPH` | [Creates a new dataflow graph](#CREATE_DATAFLOW_GRAPH) | [pyspark.pipelines.spark_connect_pipeline](#create_dataflow_graph) |
+| `CREATE_DATAFLOW_GRAPH` | [Creates a new dataflow graph](#CREATE_DATAFLOW_GRAPH) | [pyspark.pipelines.spark_connect_pipeline](spark_connect_pipeline.md#create_dataflow_graph) |
 | `DROP_DATAFLOW_GRAPH` | [Drops a pipeline](#DROP_DATAFLOW_GRAPH) ||
 | `DEFINE_DATASET` | [Defines a dataset](#DEFINE_DATASET) | [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_dataset) |
 | `DEFINE_FLOW` | [Defines a flow](#DEFINE_FLOW) | [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_flow) |
-| `START_RUN` | [Starts a pipeline run](#START_RUN) | [pyspark.pipelines.spark_connect_pipeline.start_run](#start_run) |
+| `START_RUN` | [Starts a pipeline run](#START_RUN) | [pyspark.pipelines.spark_connect_pipeline.start_run](spark_connect_pipeline.md#start_run) |
 | `DEFINE_SQL_GRAPH_ELEMENTS` | [DEFINE_SQL_GRAPH_ELEMENTS](#DEFINE_SQL_GRAPH_ELEMENTS) | [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_sql) |
 
 `handlePipelinesCommand` reports an `UnsupportedOperationException` for incorrect commands:
@@ -43,7 +43,7 @@ handlePipelinesCommand(
 
 * `SparkConnectPlanner` ([Spark Connect]({{ book.spark_connect }}/server/SparkConnectPlanner)) is requested to `handlePipelineCommand` (for `PIPELINE_COMMAND` command)
 
-### CREATE_DATAFLOW_GRAPH { #CREATE_DATAFLOW_GRAPH }
+### <span id="CreateDataflowGraph"> CREATE_DATAFLOW_GRAPH { #CREATE_DATAFLOW_GRAPH }
 
 [handlePipelinesCommand](#handlePipelinesCommand) creates a [dataflow graph](#createDataflowGraph) and sends the graph ID back.
 
@@ -113,9 +113,19 @@ createDataflowGraph(
   spark: SparkSession): String
 ```
 
-`createDataflowGraph` finds the catalog and the database in the given `cmd` command and [creates a dataflow graph](DataflowGraphRegistry.md#createDataflowGraph).
+`createDataflowGraph` gets the catalog (from the given `CreateDataflowGraph` if defined in the [pipeline specification file](index.md#pipeline-specification-file)) or prints out the following INFO message to the logs and uses the current catalog instead.
 
-`createDataflowGraph` returns the ID of the created dataflow graph.
+```text
+No default catalog was supplied. Falling back to the current catalog: [currentCatalog].
+```
+
+`createDataflowGraph` gets the database (from the given `CreateDataflowGraph` if defined in the [pipeline specification file](index.md#pipeline-specification-file)) or prints out the following INFO message to the logs and uses the current database instead.
+
+```text
+No default database was supplied. Falling back to the current database: [currentDatabase].
+```
+
+In the end, `createDataflowGraph` [creates a dataflow graph](DataflowGraphRegistry.md#createDataflowGraph) (in the session's [DataflowGraphRegistry](DataflowGraphRegistry.md)).
 
 ## defineSqlGraphElements { #defineSqlGraphElements }
 

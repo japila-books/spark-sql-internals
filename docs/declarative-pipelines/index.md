@@ -46,23 +46,25 @@ Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (o
 
 The heart of a Declarative Pipelines project is a **pipeline specification file** (in YAML format).
 
-In the pipeline specification file, Declarative Pipelines developers specify files (`libraries`) with tables, views and flows (transformations) definitions in Python and SQL. A SDP project can use both languages simultaneously.
+In the pipeline specification file, Declarative Pipelines developers specify files (`libraries`) with tables, views and flows (transformations) definitions in [Python](#python) and [SQL](#sql). A SDP project can use both languages simultaneously.
 
 The following fields are supported:
 
 Field Name | Description
 -|-
- `name` (required) | |
- `catalog` | |
- `database` |  |
- `schema` | Alias of `database`. Used unless `database` is defined |
- `configuration` | |
- `libraries` | `glob`s of `include`s with SQL and Python transformations |
+ `name` (required) | &nbsp;
+ `catalog` | The default catalog to register datasets into.<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current catalog.
+ `database` | The default database to register datasets into<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current database.
+ `schema` | Alias of `database`. Used unless `database` is defined
+ `storage` | ⚠️ does not seem to be used
+ `configuration` | SparkSession configs<br>Spark Pipelines runtime uses the configs to build a new `SparkSession` when `run`.<br>[spark.sql.connect.serverStacktrace.enabled]({{ book.spark_connect }}/configuration-properties/#spark.sql.connect.serverStacktrace.enabled) is hardcoded to be always `false`.
+ `libraries` | `glob`s of `include`s with transformations in [SQL](#sql) and [Python](#python-decorators)
 
 ```yaml
 name: hello-spark-pipelines
 catalog: default_catalog
 schema: default
+storage: storage-root
 configuration:
   spark.key1: value1
 libraries:
@@ -70,9 +72,9 @@ libraries:
       include: transformations/**
 ```
 
-## spark-pipelines Shell Script { #spark-pipelines }
+## Spark Pipelines CLI { #spark-pipelines }
 
-`spark-pipelines` shell script is used to launch [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md).
+`spark-pipelines` shell script is the **Spark Pipelines CLI** (that launches [org.apache.spark.deploy.SparkPipelines](SparkPipelines.md) behind the scenes).
 
 ## Dataset Types
 

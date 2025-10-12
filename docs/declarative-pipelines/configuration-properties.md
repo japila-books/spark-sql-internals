@@ -1,6 +1,6 @@
 # Configuration Properties
 
-**Configuration properties** (aka **settings**) for [Spark Declarative Pipelines](index.md).
+**Configuration properties** (aka **configs**) for [Spark Declarative Pipelines](index.md).
 
 ## <span id="PIPELINES_EVENT_QUEUE_CAPACITY"> event.queue.capacity { #spark.sql.pipelines.event.queue.capacity }
 

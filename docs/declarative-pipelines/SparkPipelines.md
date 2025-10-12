@@ -9,9 +9,11 @@ subtitle: Spark Pipelines CLI
 
 `SparkPipelines` is a Scala "launchpad" to execute [pyspark/pipelines/cli.py](#pyspark-pipelines-cli) Python script (through [SparkSubmit]({{ book.spark_core }}/tools/spark-submit/SparkSubmit/)).
 
-## PySpark Pipelines CLI
+## cli.py { #pyspark-pipelines-cli }
 
-`pyspark/pipelines/cli.py` is the Pipelines CLI that is launched using [spark-pipelines](./index.md#spark-pipelines) shell script.
+`pyspark/pipelines/cli.py` is the heart of the Spark Pipelines CLI (launched using [spark-pipelines](./index.md#spark-pipelines) shell script).
+
+As a Python script, `cli.py` can simply import Python libraries (to trigger their execution) whereas SQL libraries are left untouched and sent over the wire to a Spark Connect server ([PipelinesHandler](PipelinesHandler.md)) for execution.
 
 The Pipelines CLI supports the following commands:
 
