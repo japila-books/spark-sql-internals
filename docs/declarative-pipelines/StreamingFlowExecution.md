@@ -2,7 +2,17 @@
 
 `StreamingFlowExecution` is an [extension](#contract) of the [FlowExecution](FlowExecution.md) abstraction for [streaming flow executions](#implementations) that process data statefully using [Spark Structured Streaming]({{ book.structured_streaming }}).
 
-## Contract
+## Contract (Subset)
+
+### Checkpoint Location { #checkpointPath }
+
+```scala
+checkpointPath: String
+```
+
+Used when:
+
+* `StreamingTableWrite` is requested to [start a streaming query](StreamingTableWrite.md#startStream)
 
 ### Execute Streaming Query { #startStream }
 

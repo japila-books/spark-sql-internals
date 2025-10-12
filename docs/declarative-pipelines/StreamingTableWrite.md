@@ -12,7 +12,7 @@ When [executed](#startStream), `StreamingTableWrite` starts a streaming query to
 * <span id="flow"> [ResolvedFlow](StreamingFlowExecution.md#flow)
 * <span id="graph"> [DataflowGraph](DataflowGraph.md)
 * <span id="updateContext"> [PipelineUpdateContext](FlowExecution.md#updateContext)
-* <span id="checkpointPath"> [Checkpoint Path](StreamingFlowExecution.md#checkpointPath)
+* <span id="checkpointPath"> [Checkpoint Location](StreamingFlowExecution.md#checkpointPath)
 * <span id="trigger"> [Streaming Trigger](StreamingFlowExecution.md#trigger)
 * <span id="destination"> [Output table](FlowExecution.md#destination)
 * <span id="sqlConf"> [SQL Configuration](StreamingFlowExecution.md#sqlConf)

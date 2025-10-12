@@ -2,9 +2,9 @@
 
 `PipelineUpdateContext` is an [abstraction](#contract) of [pipeline update contexts](#implementations) that can [refreshTables](#refreshTables) (_among other things_).
 
-## Contract (Subset) { #contract }
+## Contract (Subset)
 
-### refreshTables { #refreshTables }
+### refreshTables Table Filter { #refreshTables }
 
 ```scala
 refreshTables: TableFilter
@@ -14,6 +14,18 @@ Used when:
 
 * `DatasetManager` is requested to [constructFullRefreshSet](DatasetManager.md#constructFullRefreshSet)
 * `PipelineUpdateContext` is requested to [refreshFlows](PipelineUpdateContext.md#refreshFlows)
+
+### Root Storage Location { #storageRoot }
+
+```scala
+storageRoot: String
+```
+
+The root storage location of pipeline metadata (e.g., checkpoints for streaming flows)
+
+Used when:
+
+* `FlowSystemMetadata` is requested to [flowCheckpointsDirOpt](FlowSystemMetadata.md#flowCheckpointsDirOpt)
 
 ### Unresolved Dataflow Graph { #unresolvedGraph }
 

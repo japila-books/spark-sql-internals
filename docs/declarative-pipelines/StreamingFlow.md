@@ -2,6 +2,8 @@
 
 `StreamingFlow` is a [ResolvedFlow](ResolvedFlow.md) that may or may not be [append](#mustBeAppend).
 
+`StreamingFlow` represents an [UnresolvedFlow](UnresolvedFlow.md) with a [streaming dataframe](FlowFunctionResult.md#dataFrame) in a dataflow graph.
+
 `StreamingFlow` is [planned for execution](FlowPlanner.md#plan) as [StreamingTableWrite](StreamingTableWrite.md) (assuming that the [Output](DataflowGraph.md#output) of [this flow](#flow)'s [destination](ResolutionCompletedFlow.md#destinationIdentifier) is a [Table](Table.md)).
 
 ## Creating Instance
@@ -14,7 +16,7 @@
 
 `StreamingFlow` is created when:
 
-* `FlowResolver` is requested to [convertResolvedToTypedFlow](FlowResolver.md#convertResolvedToTypedFlow) (for [UnresolvedFlow](UnresolvedFlow.md)s with their results being streaming dataframes)
+* `FlowResolver` is requested to [convertResolvedToTypedFlow](FlowResolver.md#convertResolvedToTypedFlow) (for an [UnresolvedFlow](UnresolvedFlow.md) with a [streaming dataframe](FlowFunctionResult.md#dataFrame))
 
 ### mustBeAppend Flag { #mustBeAppend }
 

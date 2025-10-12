@@ -53,12 +53,15 @@ The following fields are supported:
 Field Name | Description
 -|-
  `name` (required) | &nbsp;
+ `storage` (required) | The root storage location of pipeline metadata (e.g., checkpoints for streaming flows).<br>[SPARK-53751 Explicit Checkpoint Location]({{ spark.jira }}/SPARK-53751)
  `catalog` | The default catalog to register datasets into.<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current catalog.
  `database` | The default database to register datasets into<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current database.
  `schema` | Alias of `database`. Used unless `database` is defined
- `storage` | ⚠️ does not seem to be used
  `configuration` | SparkSession configs<br>Spark Pipelines runtime uses the configs to build a new `SparkSession` when `run`.<br>[spark.sql.connect.serverStacktrace.enabled]({{ book.spark_connect }}/configuration-properties/#spark.sql.connect.serverStacktrace.enabled) is hardcoded to be always `false`.
  `libraries` | `glob`s of `include`s with transformations in [SQL](#sql) and [Python](#python-decorators)
+
+??? info
+    Pipeline spec is resolved in `pyspark/pipelines/cli.py::unpack_pipeline_spec`.
 
 ```yaml
 name: hello-spark-pipelines

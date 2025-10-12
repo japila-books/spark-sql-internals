@@ -10,6 +10,7 @@
 * <span id="eventCallback"> `PipelineEvent` Callback (`PipelineEvent => Unit`)
 * <span id="refreshTables"> `TableFilter` of the tables to be refreshed (default: `AllTables`)
 * <span id="fullRefreshTables"> `TableFilter` of the tables to be refreshed (default: `NoTables`)
+* <span id="storageRoot"> [storageRoot](PipelineUpdateContext.md#storageRoot)
 
 `PipelineUpdateContextImpl` is created when:
 
