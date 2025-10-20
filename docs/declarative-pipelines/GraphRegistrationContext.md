@@ -105,7 +105,7 @@ registerFlow(
 `registerFlow` is used when:
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
-* `SqlGraphRegistrationContext` is requested to [process the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
+* `SqlGraphRegistrationContext` is requested to [process the following SQL queries](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CREATE FLOW ... AS INSERT INTO ... BY NAME](../logical-operators/CreateFlowCommand.md)
     * [CREATE MATERIALIZED VIEW ... AS](../logical-operators/CreateMaterializedViewAsSelect.md)
     * [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
@@ -141,7 +141,7 @@ registerTable(
 `registerTable` is used when:
 
 * `PipelinesHandler` is requested to [define an output](PipelinesHandler.md#defineOutput)
-* `SqlGraphRegistrationContext` is requested to [process the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
+* `SqlGraphRegistrationContext` is requested to [process the following SQL queries](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CREATE MATERIALIZED VIEW ... AS](../logical-operators/CreateMaterializedViewAsSelect.md)
     * [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
     * [CREATE STREAMING TABLE](../logical-operators/CreateStreamingTable.md)

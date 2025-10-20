@@ -31,7 +31,7 @@ In the end, `FlowFunction` creates a [FlowFunctionResult](FlowFunctionResult.md)
 `createFlowFunctionFromLogicalPlan` is used when:
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
-* `SqlGraphRegistrationContext` is requested to [handle the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
+* `SqlGraphRegistrationContext` is requested to [handle the following queries](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CreateFlowCommand](SqlGraphRegistrationContext.md#CreateFlowCommand)
     * [CreateMaterializedViewAsSelect](SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect)
     * [CreateView](SqlGraphRegistrationContext.md#CreateView)

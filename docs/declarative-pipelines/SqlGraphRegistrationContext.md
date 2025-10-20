@@ -37,7 +37,7 @@ processSqlFile(
 
 * `PipelinesHandler` is requested to [defineSqlGraphElements](PipelinesHandler.md#defineSqlGraphElements)
 
-### Process Single Logical Command { #processSqlQuery }
+### Process Single SQL Query { #processSqlQuery }
 
 ```scala
 processSqlQuery(

@@ -29,7 +29,7 @@
 `UnresolvedFlow` is created when:
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
-* `SqlGraphRegistrationContext` is requested to [handle the following logical commands](SqlGraphRegistrationContext.md#processSqlQuery):
+* `SqlGraphRegistrationContext` is requested to [handle the following SQL queries](SqlGraphRegistrationContext.md#processSqlQuery):
     * [CreateFlowCommand](SqlGraphRegistrationContext.md#CreateFlowCommand)
     * [CreateMaterializedViewAsSelect](SqlGraphRegistrationContext.md#CreateMaterializedViewAsSelect)
     * [CreateView](SqlGraphRegistrationContext.md#CreateView)
