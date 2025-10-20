@@ -87,6 +87,14 @@ A new [Table](Table.md) is added when `GraphRegistrationContext` is requested to
 
 `GraphRegistrationContext` creates an empty registry of [Sink](Sink.md)s when [created](#creating-instance).
 
+A new sink is registered using [registerSink](#registerSink) (when `PipelinesHandler` is requested to [define a sink](PipelinesHandler.md#defineOutput)).
+
+All the sinks registered are available via [getSinks](#getSinks).
+
+A pipeline is considered [empty](#isPipelineEmpty) if there are no sinks (among the other persistent entities).
+
+Eventually, `GraphRegistrationContext` uses the `sinks` to [create a DataflowGraph](#toDataflowGraph).
+
 ## Flows { #flows }
 
 `GraphRegistrationContext` creates an empty registry of [UnresolvedFlow](UnresolvedFlow.md)s when [created](#creating-instance).
