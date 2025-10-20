@@ -4,21 +4,22 @@
 
 ## Contract
 
-### register_dataset { #register_dataset }
+### Register Output { #register_output }
 
 ```py
-register_dataset(
+register_output(
     self,
-    dataset: Dataset,
+    output: Output,
 ) -> None
 ```
 
 See:
 
-* [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_dataset)
+* [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_output)
 
 Used when:
 
+* [create_sink](./index.md#create_sink) is used
 * [@create_streaming_table](./index.md#create_streaming_table), [@table](./index.md#table), [@materialized_view](./index.md#materialized_view), [@temporary_view](./index.md#temporary_view) decorators are used
 
 ### register_flow { #register_flow }

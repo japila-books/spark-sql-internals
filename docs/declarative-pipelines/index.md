@@ -120,6 +120,7 @@ from pyspark import pipelines as dp
 `pyspark.pipelines` module (in `__init__.py`) imports `pyspark.pipelines.api` module to expose the following Python decorators to wildcard imports:
 
 * [append_flow](#append_flow)
+* [create_sink](#create_sink)
 * [create_streaming_table](#create_streaming_table)
 * [materialized_view](#materialized_view)
 * [table](#table)
@@ -152,11 +153,24 @@ append_flow(
 ) -> Callable[[QueryFunction], None]
 ```
 
-Registers an (append) flow in a pipeline.
+[Registers](GraphElementRegistry.md#register_flow) an append [Flow](Flow.md) in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 `target` is the name of the dataset (_destination_) this flow writes to.
 
-Sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+### dp.create_sink { #create_sink }
+
+```py
+create_sink(
+  name: str,
+  format: str,
+  options: Optional[Dict[str, str]] = None,
+) -> None
+```
+
+[Registers](GraphElementRegistry.md#register_output) a [Sink](Sink.md) output in the active [GraphElementRegistry](GraphElementRegistry.md).
+
+!!! warning "Not Python Decorator"
+    Unlike the others, `create_sink` is not a Python decorator.
 
 ### @dp.create_streaming_table { #create_streaming_table }
 
@@ -172,11 +186,7 @@ create_streaming_table(
 ) -> None
 ```
 
-Registers a `StreamingTable` dataset in a pipeline.
-
-Sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
-
-`dataset_type` is `TABLE`.
+[Registers](GraphElementRegistry.md#register_output) a `StreamingTable` dataset in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 ### @dp.materialized_view { #materialized_view }
 
@@ -194,13 +204,7 @@ materialized_view(
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
-Registers a [MaterializedView](MaterializedView.md) dataset and the corresponding `Flow` in a pipeline.
-
-For the `MaterializedView`, `materialized_view` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
-
-* `dataset_type` is `MATERIALIZED_VIEW`.
-
-For the `Flow`, `materialized_view` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+[Registers](GraphElementRegistry.md#register_output) a [MaterializedView](MaterializedView.md) dataset with an accompanying [Flow](GraphElementRegistry.md#register_flow) in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 ### @dp.table { #table }
 
@@ -218,13 +222,7 @@ table(
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
-Registers a `StreamingTable` dataset and the corresponding `Flow` in a pipeline.
-
-For the `StreamingTable`, `table` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
-
-`dataset_type` is `TABLE`.
-
-For the `Flow`, `table` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+[Registers](GraphElementRegistry.md#register_output) a `StreamingTable` dataset with an accompanying [Flow](GraphElementRegistry.md#register_flow) in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 ### @dp.temporary_view { #temporary_view }
 
@@ -238,13 +236,7 @@ temporary_view(
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
-[Registers](GraphElementRegistry.md#register_dataset) a `TemporaryView` dataset and a [Flow](Flow.md) in the [GraphElementRegistry](GraphElementRegistry.md#register_flow).
-
-For the `TemporaryView`, `temporary_view` sends a `DefineDataset` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineDataset) on a Spark Connect server).
-
-`dataset_type` is `TEMPORARY_VIEW`.
-
-For the `Flow`, `temporary_view` sends a `DefineFlow` pipeline command for execution (to [PipelinesHandler](PipelinesHandler.md#DefineFlow) on a Spark Connect server).
+[Registers](GraphElementRegistry.md#register_output) a `TemporaryView` dataset with an accompanying [Flow](GraphElementRegistry.md#register_flow) in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 ## SQL
 

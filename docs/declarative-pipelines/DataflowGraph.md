@@ -8,6 +8,7 @@
 
 * <span id="flows"> [Flow](Flow.md)s
 * <span id="tables"> [Table](Table.md)s
+* <span id="sinks"> [Sink](Sink.md)s
 * <span id="views"> [View](View.md)s
 
 `DataflowGraph` is created when:
@@ -26,7 +27,7 @@ output: Map[TableIdentifier, Output]
 
     Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
 
-`output` is a collection of unique `Output`s ([Table](Table.md)s) by their `TableIdentifier`.
+`output` is a collection of unique `Output`s ([tables](#tables) and [sinks](#sinks)) by their `TableIdentifier`.
 
 ---
 

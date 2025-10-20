@@ -15,27 +15,7 @@
 
 * `pyspark.pipelines.cli` is requested to [run](#run)
 
-## register_dataset { #register_dataset }
-
-??? note "GraphElementRegistry"
-
-    ```py
-    register_dataset(
-        self,
-        dataset: Dataset,
-    ) -> None
-    ```
-
-    `register_dataset` is part of the [GraphElementRegistry](GraphElementRegistry.md#register_dataset) abstraction.
-
-`register_dataset` makes sure that the given `Dataset` is either `MaterializedView`, `StreamingTable` or `TemporaryView`.
-
-`register_dataset` requests this [SparkConnectClient](#spark) to [execute](#execute_command) a `PipelineCommand.DefineDataset` command.
-
-!!! note "PipelinesHandler"
-    `DefineDataset` commands are handled by [PipelinesHandler](PipelinesHandler.md#defineDataset) on Spark Connect Server.
-
-## register_flow { #register_flow }
+## Register Flow { #register_flow }
 
 ??? note "GraphElementRegistry"
 
@@ -50,5 +30,23 @@
 
 `register_flow` requests this [SparkConnectClient](#spark) to [execute](#execute_command) a `PipelineCommand.DefineFlow` command.
 
-!!! note "PipelinesHandler"
-    `DefineFlow` commands are handled by [PipelinesHandler](PipelinesHandler.md#defineFlow) on Spark Connect Server.
+??? note "PipelinesHandler on Spark Connect Server"
+    `DefineFlow` commands are handled by [PipelinesHandler](PipelinesHandler.md#DEFINE_FLOW) on Spark Connect Server.
+
+## Register Output { #register_output }
+
+??? note "GraphElementRegistry"
+
+    ```py
+    register_output(
+        self,
+        output: Output
+    ) -> None
+    ```
+
+    `register_output` is part of the [GraphElementRegistry](GraphElementRegistry.md#register_output) abstraction.
+
+`register_output` requests this [SparkConnectClient](#spark) to [execute](#execute_command) a `DefineOutput` pipeline command.
+
+??? note "PipelinesHandler on Spark Connect Server"
+    `DefineOutput` command is handled by [PipelinesHandler](PipelinesHandler.md#DEFINE_OUTPUT) on Spark Connect Server.
