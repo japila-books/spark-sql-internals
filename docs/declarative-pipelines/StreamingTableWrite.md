@@ -1,6 +1,10 @@
-# StreamingTableWrite
+---
+title: StreamingTableWrite
+---
 
-`StreamingTableWrite` is a [StreamingFlowExecution](StreamingFlowExecution.md).
+# StreamingTableWrite Flow Execution
+
+`StreamingTableWrite` is a [StreamingFlowExecution](StreamingFlowExecution.md) that writes a streaming `DataFrame` to a [Table](#destination)..
 
 When [executed](#startStream), `StreamingTableWrite` starts a streaming query to append new rows to an [output table](#destination).
 
@@ -14,7 +18,7 @@ When [executed](#startStream), `StreamingTableWrite` starts a streaming query to
 * <span id="updateContext"> [PipelineUpdateContext](FlowExecution.md#updateContext)
 * <span id="checkpointPath"> [Checkpoint Location](StreamingFlowExecution.md#checkpointPath)
 * <span id="trigger"> [Streaming Trigger](StreamingFlowExecution.md#trigger)
-* <span id="destination"> [Output table](FlowExecution.md#destination)
+* <span id="destination"> [Destination](FlowExecution.md#destination) ([Table](Table.md))
 * <span id="sqlConf"> [SQL Configuration](StreamingFlowExecution.md#sqlConf)
 
 `StreamingTableWrite` is created when:

@@ -14,7 +14,7 @@ Used when:
 
 * `StreamingTableWrite` is requested to [start a streaming query](StreamingTableWrite.md#startStream)
 
-### Execute Streaming Query { #startStream }
+### Start Streaming Query { #startStream }
 
 ```scala
 startStream(): StreamingQuery
@@ -22,6 +22,7 @@ startStream(): StreamingQuery
 
 See:
 
+* [SinkWrite](SinkWrite.md#startStream)
 * [StreamingTableWrite](StreamingTableWrite.md#startStream)
 
 Used when:
@@ -34,8 +35,11 @@ Used when:
 trigger: Trigger
 ```
 
+`Trigger` ([Structured Streaming]({{ book.structured_streaming }}/Trigger))
+
 See:
 
+* [SinkWrite](SinkWrite.md#trigger)
 * [StreamingTableWrite](StreamingTableWrite.md#trigger)
 
 Used when:
@@ -45,6 +49,7 @@ Used when:
 
 ## Implementations
 
+* [SinkWrite](SinkWrite.md)
 * [StreamingTableWrite](StreamingTableWrite.md)
 
 ## executeInternal { #executeInternal }
@@ -60,7 +65,7 @@ Used when:
 `executeInternal` prints out the following INFO message to the logs:
 
 ```text
-Starting [identifier] with checkpoint location [checkpointPath]"
+Starting [identifier] with checkpoint location [checkpointPath]
 ```
 
 `executeInternal` [starts the stream](#startStream) (with this [SparkSession](FlowExecution.md#spark) and [sqlConf](#sqlConf)).

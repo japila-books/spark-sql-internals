@@ -31,12 +31,15 @@ plan(
   flow: ResolvedFlow): FlowExecution
 ```
 
-`plan` creates a [FlowExecution](FlowExecution.md) (for the given [ResolvedFlow](ResolvedFlow.md)) as follows:
+`plan` [looks up the output](DataflowGraph.md#output) for the [destination identifier](ResolutionCompletedFlow.md#destinationIdentifier) of the given [ResolvedFlow](ResolvedFlow.md) in this [DataflowGraph](#graph).
 
- FlowExecution | ResolvedFlow
--|-
- [BatchTableWrite](BatchTableWrite.md) | [CompleteFlow](CompleteFlow.md)
- [StreamingTableWrite](StreamingTableWrite.md) | [StreamingFlow](StreamingFlow.md)
+`plan` creates a [FlowExecution](FlowExecution.md) (for the given [ResolvedFlow](ResolvedFlow.md) and the [Output](Output.md)) as follows:
+
+ FlowExecution | ResolvedFlow | Output |
+-|-|-
+ [BatchTableWrite](BatchTableWrite.md) | [CompleteFlow](CompleteFlow.md) | [Table](Table.md)
+ [SinkWrite](SinkWrite.md) | [StreamingFlow](StreamingFlow.md) | [Sink](Sink.md)
+ [StreamingTableWrite](StreamingTableWrite.md) | [StreamingFlow](StreamingFlow.md) | [Table](Table.md)
 
 ---
 
