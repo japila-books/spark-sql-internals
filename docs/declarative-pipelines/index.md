@@ -83,9 +83,20 @@ libraries:
 
 Declarative Pipelines supports the following dataset types:
 
-* **Materialized Views** (datasets) that are published to a catalog
-* **Table** that are published to a catalog
-* **Views** that are not published to a catalog
+* **Materialized views** that are published to a catalog.
+* **Table** that are published to a catalog.
+* [Streaming tables](#streaming-tables)
+* **Views** that are not published to a catalog.
+
+### Streaming Tables
+
+**Streaming tables** are tables whose content is produced by one or more streaming flows.
+
+Streaming tables can be created with the following:
+
+* [@dp.create_streaming_table](#create_streaming_table)
+* [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineDataset)
 
 ## Spark Connect Only { #spark-connect }
 
@@ -176,13 +187,14 @@ create_sink(
 
 ```py
 create_streaming_table(
-  name: str,
-  *,
-  comment: Optional[str] = None,
-  table_properties: Optional[Dict[str, str]] = None,
-  partition_cols: Optional[List[str]] = None,
-  schema: Optional[Union[StructType, str]] = None,
-  format: Optional[str] = None,
+    name: str,
+    *,
+    comment: Optional[str] = None,
+    table_properties: Optional[Dict[str, str]] = None,
+    partition_cols: Optional[List[str]] = None,
+    cluster_by: Optional[List[str]] = None,
+    schema: Optional[Union[StructType, str]] = None,
+    format: Optional[str] = None,
 ) -> None
 ```
 
