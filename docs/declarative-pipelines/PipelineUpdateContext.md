@@ -34,13 +34,13 @@ Used when:
 * `DatasetManager` is requested to [constructFullRefreshSet](DatasetManager.md#constructFullRefreshSet)
 * `PipelineUpdateContext` is requested to [refreshFlows](PipelineUpdateContext.md#refreshFlows)
 
-### Root Storage Location { #storageRoot }
+### Storage Root { #storageRoot }
 
 ```scala
 storageRoot: String
 ```
 
-The root storage location of pipeline metadata (e.g., checkpoints for streaming flows)
+The root storage location of pipeline metadata (e.g., checkpoints of [streaming flows](ResolvedFlow.md))
 
 Used when:
 
