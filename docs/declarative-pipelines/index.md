@@ -83,10 +83,15 @@ libraries:
 
 Declarative Pipelines supports the following dataset types:
 
+* [Append Flows](#append-flows)
 * **Materialized views** that are published to a catalog.
 * **Table** that are published to a catalog.
 * [Streaming tables](#streaming-tables)
 * **Views** that are not published to a catalog.
+
+### Append Flows
+
+**Append Flows** are...FIXME
 
 ### Streaming Tables
 
@@ -127,7 +132,7 @@ from pyspark import pipelines as dp
 
 ### pyspark.pipelines Python Module { #pyspark_pipelines }
 
-`pyspark.pipelines` module (in `__init__.py`) imports `pyspark.pipelines.api` module to expose the following Python decorators to wildcard imports:
+`pyspark.pipelines` module (in `__init__.py`) imports `pyspark.pipelines.api` module to expose the following Python functions (incl. decorators) to wildcard imports:
 
 * [append_flow](#append_flow)
 * [create_sink](#create_sink)
@@ -147,7 +152,6 @@ from pyspark import pipelines as dp
 Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
 
 * [@dp.append_flow](#append_flow) for append-only flows
-* [@dp.create_streaming_table](#create_streaming_table) for streaming tables
 * [@dp.materialized_view](#materialized_view) for materialized views (with supporting flows)
 * [@dp.table](#table) for streaming and batch tables (with supporting flows)
 * [@dp.temporary_view](#temporary_view) for temporary views (with supporting flows)
@@ -156,10 +160,10 @@ Declarative Pipelines uses the following [Python decorators](https://peps.python
 
 ```py
 append_flow(
-  *,
-  target: str,
-  name: Optional[str] = None,
-  spark_conf: Optional[Dict[str, str]] = None,
+    *,
+    target: str,
+    name: Optional[str] = None,
+    spark_conf: Optional[Dict[str, str]] = None,
 ) -> Callable[[QueryFunction], None]
 ```
 
@@ -171,18 +175,18 @@ append_flow(
 
 ```py
 create_sink(
-  name: str,
-  format: str,
-  options: Optional[Dict[str, str]] = None,
+    name: str,
+    format: str,
+    options: Optional[Dict[str, str]] = None,
 ) -> None
 ```
 
 [Registers](GraphElementRegistry.md#register_output) a [Sink](Sink.md) output in the active [GraphElementRegistry](GraphElementRegistry.md).
 
 !!! warning "Not Python Decorator"
-    Unlike the others, `create_sink` is not a Python decorator.
+    Unlike the others, `create_sink` is not a [Python decorator](https://peps.python.org/pep-0318/) (`Callable`).
 
-### @dp.create_streaming_table { #create_streaming_table }
+### dp.create_streaming_table { #create_streaming_table }
 
 ```py
 create_streaming_table(
@@ -197,21 +201,25 @@ create_streaming_table(
 ) -> None
 ```
 
-[Registers](GraphElementRegistry.md#register_output) a `StreamingTable` dataset in the active [GraphElementRegistry](GraphElementRegistry.md).
+!!! warning "Not Python Decorator"
+    Unlike the others, `create_streaming_table` is not a [Python decorator](https://peps.python.org/pep-0318/) (`Callable`).
+
+[Registers](GraphElementRegistry.md#register_output) a `StreamingTable` dataset (in the active [GraphElementRegistry](GraphElementRegistry.md)) for [Append Flows](#append-flows).
 
 ### @dp.materialized_view { #materialized_view }
 
 ```py
 materialized_view(
-  query_function: Optional[QueryFunction] = None,
-  *,
-  name: Optional[str] = None,
-  comment: Optional[str] = None,
-  spark_conf: Optional[Dict[str, str]] = None,
-  table_properties: Optional[Dict[str, str]] = None,
-  partition_cols: Optional[List[str]] = None,
-  schema: Optional[Union[StructType, str]] = None,
-  format: Optional[str] = None,
+    query_function: Optional[QueryFunction] = None,
+    *,
+    name: Optional[str] = None,
+    comment: Optional[str] = None,
+    spark_conf: Optional[Dict[str, str]] = None,
+    table_properties: Optional[Dict[str, str]] = None,
+    partition_cols: Optional[List[str]] = None,
+    cluster_by: Optional[List[str]] = None,
+    schema: Optional[Union[StructType, str]] = None,
+    format: Optional[str] = None,
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
@@ -221,15 +229,16 @@ materialized_view(
 
 ```py
 table(
-  query_function: Optional[QueryFunction] = None,
-  *,
-  name: Optional[str] = None,
-  comment: Optional[str] = None,
-  spark_conf: Optional[Dict[str, str]] = None,
-  table_properties: Optional[Dict[str, str]] = None,
-  partition_cols: Optional[List[str]] = None,
-  schema: Optional[Union[StructType, str]] = None,
-  format: Optional[str] = None,
+    query_function: Optional[QueryFunction] = None,
+    *,
+    name: Optional[str] = None,
+    comment: Optional[str] = None,
+    spark_conf: Optional[Dict[str, str]] = None,
+    table_properties: Optional[Dict[str, str]] = None,
+    partition_cols: Optional[List[str]] = None,
+    cluster_by: Optional[List[str]] = None,
+    schema: Optional[Union[StructType, str]] = None,
+    format: Optional[str] = None,
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
@@ -239,11 +248,11 @@ table(
 
 ```py
 temporary_view(
-  query_function: Optional[QueryFunction] = None,
-  *,
-  name: Optional[str] = None,
-  comment: Optional[str] = None,
-  spark_conf: Optional[Dict[str, str]] = None,
+    query_function: Optional[QueryFunction] = None,
+    *,
+    name: Optional[str] = None,
+    comment: Optional[str] = None,
+    spark_conf: Optional[Dict[str, str]] = None,
 ) -> Union[Callable[[QueryFunction], None], None]
 ```
 
@@ -293,7 +302,6 @@ uv tree --depth 2
 === "Output"
 
     ```text
-    Resolved 15 packages in 3ms
     hello-spark-pipelines v0.1.0
     └── pyspark-client v4.2.0.dev0
         ├── googleapis-common-protos v1.72.0
@@ -302,7 +310,8 @@ uv tree --depth 2
         ├── numpy v2.3.4
         ├── pandas v2.3.3
         ├── pyarrow v22.0.0
-        └── pyyaml v6.0.3
+        ├── pyyaml v6.0.3
+        └── zstandard v0.25.0
     ```
 
 ```shell
@@ -319,7 +328,7 @@ uv pip list
     grpcio-status            1.76.0
     numpy                    2.3.4
     pandas                   2.3.3
-    protobuf                 6.33.0
+    protobuf                 6.33.1
     pyarrow                  22.0.0
     pyspark-client           4.2.0.dev0  /Users/jacek/oss/spark/python/packaging/client
     python-dateutil          2.9.0.post0
@@ -328,6 +337,7 @@ uv pip list
     six                      1.17.0
     typing-extensions        4.15.0
     tzdata                   2025.2
+    zstandard                0.25.0
     ```
 
 Activate (_source_) the virtual environment (that `uv` helped us create).
@@ -362,7 +372,7 @@ $SPARK_HOME/bin/spark-pipelines --help
       -h, --help          show this help message and exit
     ```
 
-??? note "macOS and PYSPARK_PYTHON"
+!!! note "macOS and PYSPARK_PYTHON"
     On macOS, you may want to define `PYSPARK_PYTHON` environment variable to point at Python >= 3.10.
 
     ```shell
@@ -445,7 +455,7 @@ Run `spark-pipelines --help` to learn the options.
 $SPARK_HOME/bin/spark-pipelines --help
 ```
 
-!!! note ""
+=== "Output"
 
     ```text
     usage: cli.py [-h] {run,dry-run,init} ...
@@ -481,12 +491,12 @@ rm -rf hello-spark-pipelines
 cat pipeline.yml
 ```
 
-!!! note ""
+=== "Output"
 
-    ```text
+    ```yaml
 
     name: hello-spark-pipelines
-    storage: storage-root
+    storage: file:///Users/jacek/sandbox/hello-spark-pipelines/hello-spark-pipelines/pipeline-storage
     libraries:
       - glob:
           include: transformations/**
@@ -496,7 +506,7 @@ cat pipeline.yml
 tree transformations
 ```
 
-!!! note ""
+=== "Output"
 
     ```text
     transformations
@@ -528,17 +538,19 @@ tree transformations
 $SPARK_HOME/bin/spark-pipelines dry-run
 ```
 
-!!! note ""
+=== "Output"
 
     ```text
-    2025-11-08 18:01:45: Creating dataflow graph...
-    2025-11-08 18:01:45: Registering graph elements...
-    2025-11-08 18:01:45: Loading definitions. Root directory: '/Users/jacek/sandbox/hello-spark-pipelines'.
-    2025-11-08 18:01:45: Found 2 files matching glob 'transformations/**/*'
-    2025-11-08 18:01:45: Importing /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_python_materialized_view.py...
-    2025-11-08 18:01:45: Registering SQL file /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
-    2025-11-08 18:01:45: Starting run...
-    2025-11-08 17:01:45: Run is COMPLETED.
+    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/pipeline.yml...
+    Creating Spark session...
+    Creating dataflow graph...
+    Registering graph elements...
+    Loading definitions. Root directory: '/Users/jacek/sandbox/hello-spark-pipelines'.
+    Found 2 files matching glob 'transformations/**/*'
+    Importing /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_python_materialized_view.py...
+    Registering SQL file /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
+    Starting run...
+    Run is COMPLETED.
     ```
 
 ### 4️⃣ Run Pipelines Project
@@ -549,43 +561,45 @@ Run the pipeline.
 $SPARK_HOME/bin/spark-pipelines run
 ```
 
-!!! note ""
+=== "Output"
 
     ```text
-    2025-11-08 18:02:35: Creating dataflow graph...
-    2025-11-08 18:02:35: Registering graph elements...
-    2025-11-08 18:02:35: Loading definitions. Root directory: '/Users/jacek/sandbox/hello-spark-pipelines'.
-    2025-11-08 18:02:35: Found 2 files matching glob 'transformations/**/*'
-    2025-11-08 18:02:35: Importing /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_python_materialized_view.py...
-    2025-11-08 18:02:35: Registering SQL file /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
-    2025-11-08 18:02:35: Starting run...
-    2025-11-08 17:02:35: Flow spark_catalog.default.example_python_materialized_view is QUEUED.
-    2025-11-08 17:02:35: Flow spark_catalog.default.example_sql_materialized_view is QUEUED.
-    2025-11-08 17:02:35: Flow spark_catalog.default.example_python_materialized_view is PLANNING.
-    2025-11-08 17:02:35: Flow spark_catalog.default.example_python_materialized_view is STARTING.
-    2025-11-08 17:02:35: Flow spark_catalog.default.example_python_materialized_view is RUNNING.
-    2025-11-08 17:02:37: Flow spark_catalog.default.example_python_materialized_view has COMPLETED.
-    2025-11-08 17:02:37: Flow spark_catalog.default.example_sql_materialized_view is PLANNING.
-    2025-11-08 17:02:37: Flow spark_catalog.default.example_sql_materialized_view is STARTING.
-    2025-11-08 17:02:37: Flow spark_catalog.default.example_sql_materialized_view is RUNNING.
-    2025-11-08 17:02:38: Flow spark_catalog.default.example_sql_materialized_view has COMPLETED.
-    2025-11-08 17:02:39: Run is COMPLETED.
+    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/pipeline.yml...
+    Creating Spark session...
+    Creating dataflow graph...
+    Registering graph elements...
+    Loading definitions. Root directory: '/Users/jacek/sandbox/hello-spark-pipelines'.
+    Found 2 files matching glob 'transformations/**/*'
+    Importing /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_python_materialized_view.py...
+    Registering SQL file /Users/jacek/sandbox/hello-spark-pipelines/transformations/example_sql_materialized_view.sql...
+    Starting run...
+    Flow spark_catalog.default.example_python_materialized_view is QUEUED.
+    Flow spark_catalog.default.example_sql_materialized_view is QUEUED.
+    Flow spark_catalog.default.example_python_materialized_view is PLANNING.
+    Flow spark_catalog.default.example_python_materialized_view is STARTING.
+    Flow spark_catalog.default.example_python_materialized_view is RUNNING.
+    Flow spark_catalog.default.example_python_materialized_view has COMPLETED.
+    Flow spark_catalog.default.example_sql_materialized_view is PLANNING.
+    Flow spark_catalog.default.example_sql_materialized_view is STARTING.
+    Flow spark_catalog.default.example_sql_materialized_view is RUNNING.
+    Flow spark_catalog.default.example_sql_materialized_view has COMPLETED.
+    Run is COMPLETED.
     ```
 
 ```shell
 tree spark-warehouse
 ```
 
-!!! note ""
+=== "Output"
 
     ```text
     spark-warehouse
     ├── example_python_materialized_view
     │   ├── _SUCCESS
-    │   └── part-00000-25786a51-3973-4839-9220-f2411cf9725f-c000.snappy.parquet
+    │   └── part-00000-284bc03a-3405-4e8e-bbd7-f6f17d79c282-c000.snappy.parquet
     └── example_sql_materialized_view
         ├── _SUCCESS
-        └── part-00000-7c8dcf19-8b55-4683-9895-b23ed752e71a-c000.snappy.parquet
+        └── part-00000-8316b6c6-7532-4f7a-92f6-2ec024e069f4-c000.snappy.parquet
 
     3 directories, 4 files
     ```
