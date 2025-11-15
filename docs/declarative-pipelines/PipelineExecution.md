@@ -34,6 +34,8 @@ startPipeline(): Unit
 
 `startPipeline` [resolves and validates the dataflow graph](#resolveGraph) (of this pipeline update).
 
+For a full-refresh update, `startPipeline` [resets the state of all the flows](State.md#reset) in the [DataflowGraph](DataflowGraph.md).
+
 `startPipeline` [materializes the datasets](DatasetManager.md#materializeDatasets) (of this dataflow graph).
 
 `startPipeline` creates a new [TriggeredGraphExecution](#graphExecution) for the materialized dataflow graph.

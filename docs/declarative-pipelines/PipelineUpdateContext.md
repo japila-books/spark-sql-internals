@@ -4,6 +4,25 @@
 
 ## Contract (Subset)
 
+### fullRefreshTables { #fullRefreshTables }
+
+```scala
+fullRefreshTables: TableFilter
+```
+
+`TableFilter` of the tables to be fully refreshed in a pipeline update run
+
+See:
+
+* [PipelineUpdateContextImpl](PipelineUpdateContextImpl.md#fullRefreshTables)
+
+Used when:
+
+* `DatasetManager` is requested to [constructFullRefreshSet](DatasetManager.md#constructFullRefreshSet)
+* `PipelineExecution` is requested to [start a pipeline update](PipelineExecution.md#startPipeline)
+* `PipelineUpdateContext` is requested to [refreshFlows](PipelineUpdateContext.md#refreshFlows)
+* `State` is requested to [find the inputs to reset (state of)](State.md#findElementsToReset)
+
 ### refreshTables Table Filter { #refreshTables }
 
 ```scala
