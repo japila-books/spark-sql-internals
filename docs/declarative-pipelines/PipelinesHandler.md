@@ -180,7 +180,7 @@ defineOutput(
 defineFlow(
   flow: proto.PipelineCommand.DefineFlow,
   transformRelationFunc: Relation => LogicalPlan,
-  sparkSession: SparkSession): Unit
+  sessionHolder: SessionHolder): TableIdentifier
 ```
 
 ??? note "DEFINE_FLOW Pipeline Command"
@@ -197,7 +197,10 @@ defineFlow(
 
 `defineFlow` [creates a flow identifier](GraphIdentifierManager.md#parseTableIdentifier) (for the `flow` name).
 
-??? warning "AnalysisException"
-    `defineFlow` reports an `AnalysisException` if the given `flow` is not an implicit flow, but is defined with a multi-part identifier.
+??? warning "AnalysisExceptions"
+    `defineFlow` reports an `AnalysisException` for the following:
+
+    1. `DefineFlow` proto command defines the flow as a one-time flow
+    1. The given `flow` is not an implicit flow, but is defined with a multi-part identifier.
 
 In the end, `defineFlow` [registers a flow](GraphRegistrationContext.md#registerFlow) (with a proper [FlowFunction](FlowAnalysis.md#createFlowFunctionFromLogicalPlan)).

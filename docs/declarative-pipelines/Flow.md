@@ -2,7 +2,14 @@
 
 `Flow` is an [extension](#contract) of the [GraphElement](GraphElement.md) abstraction for [flows](#implementations) in dataflow graphs.
 
-Flows must be successfully analyzed, thus resolved, in order to determine whether they are streaming or not.
+Flows can be **batch** or **streaming**.
+
+Flows can be defined explicitly or implicitly (while defining other pipeline elements) in [SQL](index.md#sql) and [Python](index.md#python).
+
+Flows must be successfully analyzed (resolved) in order to determine whether they are streaming or not.
+
+!!! note "Flows and DataFrames"
+    Think of flows as Spark DataFrames (that declaratively describe computations over batch or streaming data sources in Apache Spark).
 
 ## Contract (Subset)
 
@@ -26,6 +33,9 @@ See:
 ```scala
 once: Boolean
 ```
+
+!!! warning "One-time flows Unsupported"
+    One-time flows are not supported yet (and [defineFlow](PipelinesHandler.md#defineFlow) reports an `AnalysisException` for `DefineFlow`s with `once` enabled).
 
 Indicates whether this is a **ONCE flow** or not. ONCE flows can only be run once per full refresh.
 

@@ -50,15 +50,15 @@ In the pipeline specification file, Declarative Pipelines developers specify fil
 
 The following fields are supported:
 
-Field Name | Description
--|-
- `name` (required) | &nbsp;
- `storage` (required) | The root storage location of pipeline metadata (e.g., checkpoints for streaming flows).<br>[SPARK-53751 Explicit Checkpoint Location]({{ spark.jira }}/SPARK-53751)
- `catalog` | The default catalog to register datasets into.<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current catalog.
- `database` | The default database to register datasets into<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current database.
- `schema` | Alias of `database`. Used unless `database` is defined
- `configuration` | SparkSession configs<br>Spark Pipelines runtime uses the configs to build a new `SparkSession` when `run`.<br>[spark.sql.connect.serverStacktrace.enabled]({{ book.spark_connect }}/configuration-properties/#spark.sql.connect.serverStacktrace.enabled) is hardcoded to be always `false`.
- `libraries` | `glob`s of `include`s with transformations in [SQL](#sql) and [Python](#python-decorators)
+| Field Name | Description |
+|----------|----------|
+| `name` (required) | &nbsp; |
+| `storage` (required) | The root storage location of pipeline metadata (e.g., checkpoints for streaming flows).<br>[SPARK-53751 Explicit Checkpoint Location]({{ spark.jira }}/SPARK-53751) |
+| `catalog` | The default catalog to register datasets into.<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current catalog. |
+| `database` | The default database to register datasets into<br>Unless specified, [PipelinesHandler](PipelinesHandler.md#createDataflowGraph) falls back to the current database. |
+| `schema` | Alias of `database`. Used unless `database` is defined |
+| `configuration` | SparkSession configs<br>Spark Pipelines runtime uses the configs to build a new `SparkSession` when `run`.<br>[spark.sql.connect.serverStacktrace.enabled]({{ book.spark_connect }}/configuration-properties/#spark.sql.connect.serverStacktrace.enabled) is hardcoded to be always `false`. |
+| `libraries` | `glob`s of `include`s with transformations in [SQL](#sql) and [Python](#python-decorators) |
 
 ??? info
     Pipeline spec is resolved in `pyspark/pipelines/cli.py::unpack_pipeline_spec`.
@@ -91,7 +91,10 @@ Declarative Pipelines supports the following dataset types:
 
 ### Append Flows
 
-**Append Flows** are...FIXME
+**Append Flows** can be created with the following:
+
+* [@dp.append_flow](#append_flow)
+* [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
 
 ### Streaming Tables
 
@@ -149,12 +152,14 @@ from pyspark import pipelines as dp
 
 ### Python Decorators
 
-Declarative Pipelines uses the following [Python decorators](https://peps.python.org/pep-0318/) to describe tables and views:
+Declarative Pipelines uses [Python decorators](https://peps.python.org/pep-0318/) to define tables and views.
 
-* [@dp.append_flow](#append_flow) for append-only flows
-* [@dp.materialized_view](#materialized_view) for materialized views (with supporting flows)
-* [@dp.table](#table) for streaming and batch tables (with supporting flows)
-* [@dp.temporary_view](#temporary_view) for temporary views (with supporting flows)
+| Decorator | Purpose |
+|-----------|---------|
+| [@dp.append_flow](#append_flow) | [Append-only flows](#append-flows) |
+| [@dp.materialized_view](#materialized_view) | Materialized views (with supporting flows) |
+| [@dp.table](#table) | [Streaming](#streaming-tables) and batch tables (with supporting flows) |
+| [@dp.temporary_view](#temporary_view) | Temporary views (with supporting flows) |
 
 ### @dp.append_flow { #append_flow }
 
@@ -164,10 +169,12 @@ append_flow(
     target: str,
     name: Optional[str] = None,
     spark_conf: Optional[Dict[str, str]] = None,
-) -> Callable[[QueryFunction], None]
+) -> Callable[[QueryFunction], None] # (1)!
 ```
 
-[Registers](GraphElementRegistry.md#register_flow) an append [Flow](Flow.md) in the active [GraphElementRegistry](GraphElementRegistry.md).
+1. `QueryFunction = Callable[[], DataFrame]` is a Python function that takes no arguments and returns a PySpark `DataFrame`.
+
+[Registers](GraphElementRegistry.md#register_flow) an append [Flow](Flow.md) (in the active [GraphElementRegistry](GraphElementRegistry.md))
 
 `target` is the name of the dataset (_destination_) this flow writes to.
 
@@ -469,7 +476,7 @@ $SPARK_HOME/bin/spark-pipelines --help
         dry-run           Launch a run that just validates the graph and checks
                           for errors.
         init              Generate a sample pipeline project, including a spec
-                          file and example definitions.
+                          file and example transformations.
 
     options:
       -h, --help          show this help message and exit
