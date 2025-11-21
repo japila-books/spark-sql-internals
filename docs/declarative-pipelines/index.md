@@ -44,7 +44,12 @@ Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (o
 
 ## Pipeline Specification File
 
-The heart of a Declarative Pipelines project is a **pipeline specification file** (in YAML format).
+A Declarative Pipelines project is defined using a **pipeline specification file** (in YAML format).
+
+Unless specified using spark-pipelines CLI's [--spec](SparkPipelines.md#run) option, Declarative Pipelines uses the following file names as the defaults:
+
+* `spark-pipeline.yml`
+* `spark-pipeline.yaml`
 
 In the pipeline specification file, Declarative Pipelines developers specify files (`libraries`) with tables, views and flows (transformations) definitions in [Python](#python) and [SQL](#sql). A SDP project can use both languages simultaneously.
 
@@ -67,7 +72,7 @@ The following fields are supported:
 name: hello-spark-pipelines
 catalog: default_catalog
 schema: default
-storage: storage-root
+storage: file:///absolute/path/to/storage/dir
 configuration:
   spark.key1: value1
 libraries:
@@ -486,7 +491,7 @@ $SPARK_HOME/bin/spark-pipelines --help
 
 You've only created an empty Python project so far (using `uv`).
 
-Create a demo double `hello-spark-pipelines` pipelines project with a sample `pipeline.yml` and sample transformations (in Python and in SQL).
+Create a demo double `hello-spark-pipelines` pipelines project with a sample `spark-pipeline.yml` and sample transformations (in Python and in SQL).
 
 ```shell
 $SPARK_HOME/bin/spark-pipelines init --name hello-spark-pipelines && \
@@ -495,7 +500,7 @@ rm -rf hello-spark-pipelines
 ```
 
 ```shell
-cat pipeline.yml
+cat spark-pipeline.yml
 ```
 
 === "Output"
@@ -548,7 +553,7 @@ $SPARK_HOME/bin/spark-pipelines dry-run
 === "Output"
 
     ```text
-    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/pipeline.yml...
+    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/spark-pipeline.yml...
     Creating Spark session...
     Creating dataflow graph...
     Registering graph elements...
@@ -571,7 +576,7 @@ $SPARK_HOME/bin/spark-pipelines run
 === "Output"
 
     ```text
-    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/pipeline.yml...
+    Loading pipeline spec from /Users/jacek/sandbox/hello-spark-pipelines/spark-pipeline.yml...
     Creating Spark session...
     Creating dataflow graph...
     Registering graph elements...
