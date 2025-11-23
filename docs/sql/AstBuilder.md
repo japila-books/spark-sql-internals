@@ -698,8 +698,8 @@ Creates an [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) logi
 
 ```antlr
 streamRelationPrimary
-    : STREAM multipartIdentifier         [WITH options]? (AS? strictIdentifier identifierList?)? #streamTableName
-    | STREAM '(' multipartIdentifier ')' [WITH options]? (AS? strictIdentifier identifierList?)? #streamTableName
+    : STREAM multipartIdentifier         [WITH options]? [WATERMARK colName DELAY OF delay] (AS? strictIdentifier identifierList?)? #streamTableName
+    | STREAM '(' multipartIdentifier ')' [WITH options]? [WATERMARK colName DELAY OF delay] (AS? strictIdentifier identifierList?)? #streamTableName
     ;
 ```
 
@@ -1148,6 +1148,25 @@ With no `namedArgumentExpression` used, `extractNamedArgument` creates an [Expre
 `extractNamedArgument` is used when:
 
 * `AstBuilder` is requested to [visitFunctionCall](#visitFunctionCall) and [visitTableValuedFunction](#visitTableValuedFunction)
+
+## createUnresolvedRelation { #createUnresolvedRelation }
+
+```scala
+createUnresolvedRelation(
+  ctx: IdentifierReferenceContext,
+  optionsClause: Option[OptionsClauseContext] = None,
+  writePrivileges: Seq[TableWritePrivilege] = Nil): LogicalPlan // (1)!
+createUnresolvedRelation(
+  ctx: ParserRuleContext,
+  ident: Seq[String],
+  optionsClause: Option[OptionsClauseContext],
+  writePrivileges: Seq[TableWritePrivilege],
+  isStreaming: Boolean): UnresolvedRelation
+```
+
+1. Creates an [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) logical operator with [isStreaming](../logical-operators/UnresolvedRelation.md#isStreaming) flag disabled (`false`)
+
+`createUnresolvedRelation` creates an [UnresolvedRelation](../logical-operators/UnresolvedRelation.md) logical operator.
 
 ## Create UnresolvedTable Logical Operator { #createUnresolvedTable }
 

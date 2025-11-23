@@ -14,7 +14,7 @@ title: UnresolvedRelation
 
 * <span id="multipartIdentifier"> Multi-part identifier
 * <span id="options"> Options
-* <span id="isStreaming"> [isStreaming](LogicalPlan.md#isStreaming) flag (default:`false`)
+* [isStreaming](#isStreaming) flag
 
 `UnresolvedRelation` is created (possibly indirectly using [apply](#apply) factory) when:
 
@@ -26,6 +26,19 @@ title: UnresolvedRelation
     * [DataFrameWriterV2.overwritePartitions](../DataFrameWriterV2.md#overwritePartitions)
 * `DataStreamReader.table` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader#table)) operator is used
 * [table](../catalyst-dsl/index.md#table) ([Catalyst DSL](../catalyst-dsl/index.md)) operator is used
+
+### isStreaming Flag { #isStreaming }
+
+`UnresolvedRelation` is given [isStreaming](LogicalPlan.md#isStreaming) flag when [created](#creating-instance).
+
+`isStreaming` can be specified with [apply](#apply) factory method.
+
+`isStreaming` is disabled (`false`) by default.
+
+`isStreaming` is enabled (`true`) when:
+
+* `AstBuilder` is requested to [parse STREAM relation clause](../sql/AstBuilder.md#visitStreamTableName)
+* `DataStreamReader.table` ([Spark Structured Streaming]({{ book.structured_streaming }}/DataStreamReader/#table)) operator is used
 
 ## Creating UnresolvedRelation { #apply }
 
@@ -49,7 +62,7 @@ apply(
 
 ## Name { #name }
 
-??? note "Signature"
+??? note "NamedRelation"
 
     ```scala
     name: String
@@ -69,7 +82,7 @@ tableName: String
 
 ## resolved
 
-??? note "Signature"
+??? note "LogicalPlan"
 
     ```scala
     resolved: Boolean
@@ -81,7 +94,7 @@ tableName: String
 
 ## nodePatterns { #nodePatterns }
 
-??? note "Signature"
+??? note "TreeNode"
 
     ```scala
     nodePatterns: Seq[TreePattern]
