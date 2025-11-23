@@ -3,9 +3,9 @@
 `UnresolvedFlow` is a [Flow](Flow.md) that represents a flow in the Python and SQL transformations in [Spark Declarative Pipelines](index.md):
 
 * [register_flow](GraphElementRegistry.md#register_flow) in PySpark's decorators
-* [CREATE FLOW ... AS INSERT INTO ... BY NAME](../logical-operators/CreateFlowCommand.md)
+* [CREATE FLOW AS INSERT INTO BY NAME](../logical-operators/CreateFlowCommand.md)
 * [CREATE MATERIALIZED VIEW](../logical-operators/CreateMaterializedViewAsSelect.md)
-* [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
+* [CREATE STREAMING TABLE AS](../logical-operators/CreateStreamingTableAsSelect.md)
 * [CREATE VIEW](../logical-operators/CreateView.md) and the other variants of [CREATE VIEW](../logical-operators/CreateViewCommand.md)
 
 `UnresolvedFlow` is registered to a [GraphRegistrationContext](GraphRegistrationContext.md) with [register a flow](GraphRegistrationContext.md#registerFlow).

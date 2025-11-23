@@ -6,8 +6,8 @@ title: CreatePipelineDatasetAsSelect
 
 `CreatePipelineDatasetAsSelect` is an [extension](#contract) of [BinaryCommand](Command.md#BinaryCommand) and [CreatePipelineDataset](CreatePipelineDataset.md) abstractions for [CTAS-like CREATE statements](#implementations):
 
-* [CREATE MATERIALIZED VIEW ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
-* [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE MATERIALIZED VIEW AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 
 `CreatePipelineDatasetAsSelect` is a `CTEInChildren`.
 

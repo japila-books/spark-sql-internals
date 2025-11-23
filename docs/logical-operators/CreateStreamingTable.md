@@ -8,8 +8,8 @@ title: CreateStreamingTable
 
 `CreateStreamingTable` is handled by [SqlGraphRegistrationContext](../declarative-pipelines/SqlGraphRegistrationContext.md#CreateStreamingTable).
 
-??? note "CreateStreamingTableAsSelect for `CREATE STREAMING TABLE ... AS` SQL Statement"
-    [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement (with `AS` clause) gives a [CreateStreamingTableAsSelect](CreateStreamingTableAsSelect.md) binary logical command.
+??? note "CreateStreamingTableAsSelect for `CREATE STREAMING TABLE AS` SQL Statement"
+    [CREATE STREAMING TABLE AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement (with `AS` clause) gives a [CreateStreamingTableAsSelect](CreateStreamingTableAsSelect.md) binary logical command.
 
 ## Creating Instance
 

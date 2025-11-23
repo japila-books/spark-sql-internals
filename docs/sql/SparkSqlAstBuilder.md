@@ -130,8 +130,9 @@ ANTLR labeled alternative: `#createHiveTable`
 Creates an append (insert into) flow (a [CreateFlowCommand](../logical-operators/CreateFlowCommand.md) logical operator) for `CREATE FLOW` SQL statement
 
 ```sql
-CREATE FLOW [ flow_name ]
-AS INSERT INTO [ destination_name ] BY NAME
+CREATE FLOW [flow_name] (commentSpec)? AS
+INSERT INTO (TABLE)? [destination_name] BY NAME
+[query]
 ```
 
 ANTLR labeled alternative: `#createPipelineInsertIntoFlow`
@@ -157,8 +158,8 @@ Creates the following logical operators for [Spark Declarative Pipelines](../dec
 Logical Operator | SQL Statement
 -|-
  [CreateMaterializedViewAsSelect](../logical-operators/CreateMaterializedViewAsSelect.md) | `CREATE MATERIALIZED VIEW`
- [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) | `CREATE STREAMING TABLE ... AS`
  [CreateStreamingTable](../logical-operators/CreateStreamingTable.md) | `CREATE STREAMING TABLE`
+ [CreateStreamingTableAsSelect](../logical-operators/CreateStreamingTableAsSelect.md) | `CREATE STREAMING TABLE AS`
 
 ```sql
 CREATE MATERIALIZED VIEW (IF NOT EXISTS)? [ materialized_view_identifier ]

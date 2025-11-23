@@ -4,7 +4,7 @@ title: CreateStreamingTableAsSelect
 
 # CreateStreamingTableAsSelect Binary Logical Command
 
-`CreateStreamingTableAsSelect` is a [CreatePipelineDatasetAsSelect](CreatePipelineDatasetAsSelect.md) binary logical command that represents [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement in [Spark Declarative Pipelines](../declarative-pipelines/index.md) framework.
+`CreateStreamingTableAsSelect` is a [CreatePipelineDatasetAsSelect](CreatePipelineDatasetAsSelect.md) binary logical command that represents [CREATE STREAMING TABLE AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset) SQL statement in [Spark Declarative Pipelines](../declarative-pipelines/index.md) framework.
 
 `CreateStreamingTableAsSelect` is handled by [SqlGraphRegistrationContext](../declarative-pipelines/SqlGraphRegistrationContext.md#CreateStreamingTableAsSelect).
 
@@ -25,4 +25,4 @@ title: CreateStreamingTableAsSelect
 
 `CreateStreamingTableAsSelect` is created when:
 
-* `SparkSqlAstBuilder` is requested to [parse CREATE STREAMING TABLE ... AS SQL statement](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* `SparkSqlAstBuilder` is requested to [parse CREATE STREAMING TABLE AS SQL statement](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)

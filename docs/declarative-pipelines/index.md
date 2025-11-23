@@ -44,7 +44,7 @@ Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (o
 
 ## Configuration Properties { #spark.sql.pipelines }
 
-[spark.sql.pipelines Configuration Properties](../configuration-properties/spark.sql.pipelines.md)
+[spark.sql.pipelines Configuration Properties](./configuration-properties.md)
 
 ## Pipeline Specification File
 
@@ -93,9 +93,9 @@ libraries:
 Declarative Pipelines supports the following dataset types:
 
 * [Append Flows](#append-flows)
-* **Materialized views** that are published to a catalog.
-* **Table** that are published to a catalog.
+* [Materialized Views](#materialized-views)
 * [Streaming tables](#streaming-tables)
+* **Table** that are published to a catalog.
 * **Views** that are not published to a catalog.
 
 ### Append Flows
@@ -105,6 +105,15 @@ Declarative Pipelines supports the following dataset types:
 * [@dp.append_flow](#append_flow)
 * [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
 
+### Materialized Views
+
+**Materialized Views** can be created with the following:
+
+* [@dp.materialized_view](#materialized_view)
+* [CREATE MATERIALIZED VIEW AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+
+**Materialized Views** are published to a catalog.
+
 ### Streaming Tables
 
 **Streaming tables** are tables whose content is produced by one or more streaming flows.
@@ -112,7 +121,7 @@ Declarative Pipelines supports the following dataset types:
 Streaming tables can be created with the following:
 
 * [@dp.create_streaming_table](#create_streaming_table) or [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineDataset) (with no flows that can be defined later with [@dp.append_flow](#append_flow) or [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineInsertIntoFlow))
-* [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE AS](../sql/SparkSqlAstBuilder.md/#visitCreatePipelineDataset)
 
 ## Spark Connect Only { #spark-connect }
 
@@ -285,9 +294,9 @@ Pipelines elements are defined in SQL files included as `libraries` in a [pipeli
 Supported SQL statements:
 
 * [CREATE FLOW AS INSERT INTO BY NAME](../sql/SparkSqlAstBuilder.md#visitCreatePipelineInsertIntoFlow)
-* [CREATE MATERIALIZED VIEW ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE MATERIALIZED VIEW AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * [CREATE STREAMING TABLE](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
-* [CREATE STREAMING TABLE ... AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
+* [CREATE STREAMING TABLE AS](../sql/SparkSqlAstBuilder.md#visitCreatePipelineDataset)
 * [CREATE (PERSISTED) VIEW](../sql/SparkSqlAstBuilder.md#visitCreateView)
 * [CREATE TEMPORARY VIEW](../sql/SparkSqlAstBuilder.md#visitCreateView)
 * [SET](../logical-operators/SetCommand.md)

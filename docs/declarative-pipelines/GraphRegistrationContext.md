@@ -114,9 +114,9 @@ registerFlow(
 
 * `PipelinesHandler` is requested to [define a flow](PipelinesHandler.md#defineFlow)
 * `SqlGraphRegistrationContext` is requested to [process the following SQL queries](SqlGraphRegistrationContext.md#processSqlQuery):
-    * [CREATE FLOW ... AS INSERT INTO ... BY NAME](../logical-operators/CreateFlowCommand.md)
-    * [CREATE MATERIALIZED VIEW ... AS](../logical-operators/CreateMaterializedViewAsSelect.md)
-    * [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
+    * [CREATE FLOW AS INSERT INTO BY NAME](../logical-operators/CreateFlowCommand.md)
+    * [CREATE MATERIALIZED VIEW AS](../logical-operators/CreateMaterializedViewAsSelect.md)
+    * [CREATE STREAMING TABLE AS](../logical-operators/CreateStreamingTableAsSelect.md)
     * [CREATE TEMPORARY VIEW](../logical-operators/CreateViewCommand.md)
     * [CREATE VIEW](../logical-operators/CreateView.md)
 
@@ -150,6 +150,6 @@ registerTable(
 
 * `PipelinesHandler` is requested to [define an output](PipelinesHandler.md#defineOutput)
 * `SqlGraphRegistrationContext` is requested to [process the following SQL queries](SqlGraphRegistrationContext.md#processSqlQuery):
-    * [CREATE MATERIALIZED VIEW ... AS](../logical-operators/CreateMaterializedViewAsSelect.md)
-    * [CREATE STREAMING TABLE ... AS](../logical-operators/CreateStreamingTableAsSelect.md)
+    * [CREATE MATERIALIZED VIEW AS](../logical-operators/CreateMaterializedViewAsSelect.md)
     * [CREATE STREAMING TABLE](../logical-operators/CreateStreamingTable.md)
+    * [CREATE STREAMING TABLE AS](../logical-operators/CreateStreamingTableAsSelect.md)
