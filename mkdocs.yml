@@ -191,7 +191,7 @@ nav:
     - Columnar Execution:
       - columnar-execution/index.md
     - ... | common-table-expressions/**.md
-    - Configuration Properties: configuration-properties.md
+    - ... | configuration-properties/**.md
     # FIXME No idea how to include a subdirectory (connector/expressions)
     #       to be under Connector API using awesome-pages
     - Connector Expressions:

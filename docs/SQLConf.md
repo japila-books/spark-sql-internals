@@ -63,7 +63,9 @@ scala> conf.numShufflePartitions
 res3: Int = 200
 ```
 
-## <span id="ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD"> ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD
+## spark.sql.adaptive
+
+### <span id="ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD"> ADAPTIVE_AUTO_BROADCASTJOIN_THRESHOLD
 
 [spark.sql.adaptive.autoBroadcastJoinThreshold](configuration-properties.md#spark.sql.adaptive.autoBroadcastJoinThreshold)
 
@@ -71,7 +73,7 @@ Used when:
 
 * `JoinSelectionHelper` is requested to [canBroadcastBySize](JoinSelectionHelper.md#canBroadcastBySize)
 
-## <span id="ADAPTIVE_EXECUTION_FORCE_APPLY"> ADAPTIVE_EXECUTION_FORCE_APPLY
+### <span id="ADAPTIVE_EXECUTION_FORCE_APPLY"> ADAPTIVE_EXECUTION_FORCE_APPLY
 
 [spark.sql.adaptive.forceApply](configuration-properties.md#spark.sql.adaptive.forceApply) configuration property
 
@@ -79,7 +81,7 @@ Used when:
 
 * [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 
-## <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
+### <span id="ADAPTIVE_EXECUTION_ENABLED"><span id="adaptiveExecutionEnabled"> adaptiveExecutionEnabled
 
 The value of [spark.sql.adaptive.enabled](configuration-properties.md#spark.sql.adaptive.enabled) configuration property
 
@@ -88,13 +90,13 @@ Used when:
 * [InsertAdaptiveSparkPlan](physical-optimizations/InsertAdaptiveSparkPlan.md) physical optimization is executed
 * `SQLConf` is requested for the [numShufflePartitions](#numShufflePartitions)
 
-## <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel
+### <span id="ADAPTIVE_EXECUTION_LOG_LEVEL"><span id="adaptiveExecutionLogLevel"> adaptiveExecutionLogLevel
 
 The value of [spark.sql.adaptive.logLevel](configuration-properties.md#spark.sql.adaptive.logLevel) configuration property
 
 Used when [AdaptiveSparkPlanExec](physical-operators/AdaptiveSparkPlanExec.md) physical operator is executed
 
-## <span id="ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD"> ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD
+### <span id="ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD"> ADAPTIVE_MAX_SHUFFLE_HASH_JOIN_LOCAL_MAP_THRESHOLD
 
 [spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold](configuration-properties.md#spark.sql.adaptive.maxShuffledHashJoinLocalMapThreshold) configuration property
 
@@ -102,11 +104,11 @@ Used when:
 
 * `DynamicJoinSelection` is requested to [preferShuffledHashJoin](logical-optimizations/DynamicJoinSelection.md#preferShuffledHashJoin)
 
-## <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
+### <span id="ADAPTIVE_OPTIMIZER_EXCLUDED_RULES"> ADAPTIVE_OPTIMIZER_EXCLUDED_RULES
 
 [spark.sql.adaptive.optimizer.excludedRules](configuration-properties.md#spark.sql.adaptive.optimizer.excludedRules)
 
-## <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
+### <span id="ADVISORY_PARTITION_SIZE_IN_BYTES"> ADVISORY_PARTITION_SIZE_IN_BYTES
 
 [spark.sql.adaptive.advisoryPartitionSizeInBytes](configuration-properties.md#spark.sql.adaptive.advisoryPartitionSizeInBytes) configuration property
 
@@ -1118,3 +1120,33 @@ Used when:
 Used when:
 
 * [WindowExec](physical-operators/WindowExec.md) unary physical operator is executed
+
+## spark.sql.pipelines
+
+### <span id="PIPELINES_STREAM_STATE_POLLING_INTERVAL"> streamStatePollingInterval { #streamStatePollingInterval }
+
+[spark.sql.pipelines.execution.streamstate.pollingInterval](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.execution.streamstate.pollingInterval)
+
+### <span id="PIPELINES_WATCHDOG_MIN_RETRY_TIME_IN_SECONDS"> watchdogMinRetryTimeInSeconds { #watchdogMinRetryTimeInSeconds }
+
+[spark.sql.pipelines.execution.watchdog.minRetryTime](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.execution.watchdog.minRetryTime)
+
+### <span id="PIPELINES_WATCHDOG_MAX_RETRY_TIME_IN_SECONDS"> watchdogMaxRetryTimeInSeconds { #watchdogMaxRetryTimeInSeconds }
+
+[spark.sql.pipelines.execution.watchdog.maxRetryTime](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.execution.watchdog.maxRetryTime)
+
+### <span id="PIPELINES_MAX_CONCURRENT_FLOWS"> maxConcurrentFlows { #maxConcurrentFlows }
+
+[spark.sql.pipelines.execution.maxConcurrentFlows](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.execution.maxConcurrentFlows)
+
+### <span id="PIPELINES_TIMEOUT_MS_FOR_TERMINATION_JOIN_AND_LOCK"> timeoutMsForTerminationJoinAndLock { #timeoutMsForTerminationJoinAndLock }
+
+[spark.sql.pipelines.timeoutMsForTerminationJoinAndLock](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.timeoutMsForTerminationJoinAndLock)
+
+### <span id="PIPELINES_MAX_FLOW_RETRY_ATTEMPTS"> maxFlowRetryAttempts { #maxFlowRetryAttempts }
+
+[spark.sql.pipelines.maxFlowRetryAttempts](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.maxFlowRetryAttempts)
+
+### <span id="PIPELINES_EVENT_QUEUE_CAPACITY"> queueCapacity { #queueCapacity }
+
+[spark.sql.pipelines.event.queue.capacity](./declarative-pipelines/configuration-properties.md#spark.sql.pipelines.event.queue.capacity)

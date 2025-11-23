@@ -42,6 +42,10 @@ Streaming flows are backed by streaming sources, and batch flows are backed by b
 
 Once described, a pipeline can be [started](PipelineExecution.md#runPipeline) (on a [PipelineExecution](PipelineExecution.md)).
 
+## Configuration Properties { #spark.sql.pipelines }
+
+[spark.sql.pipelines Configuration Properties](../configuration-properties/spark.sql.pipelines.md)
+
 ## Pipeline Specification File
 
 A Declarative Pipelines project is defined using a **pipeline specification file** (in YAML format).
