@@ -1,6 +1,11 @@
 # GraphElementRegistry
 
-`GraphElementRegistry` is an [abstraction](#contract) of [graph element registries](#implementations).
+`GraphElementRegistry` is an [abstraction](#contract) of [graph element registries](#implementations):
+
+* [Output](#register_output)s
+* [Flow](#register_flow)s
+
+Graph elements can be defined in Python and [SQL](#register_sql).
 
 ## Contract
 
@@ -13,16 +18,21 @@ register_output(
 ) -> None
 ```
 
+Registers the given [Output](Output.md)
+
 See:
 
 * [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_output)
 
-Used when:
+Used for the following:
 
-* [create_sink](./index.md#create_sink) is used
-* [@create_streaming_table](./index.md#create_streaming_table), [@table](./index.md#table), [@materialized_view](./index.md#materialized_view), [@temporary_view](./index.md#temporary_view) decorators are used
+* [dp.create_sink](./index.md#create_sink)
+* [@dp.create_streaming_table](./index.md#create_streaming_table)
+* [@dp.table](./index.md#table)
+* [@dp.materialized_view](./index.md#materialized_view)
+* [@dp.temporary_view](./index.md#temporary_view)
 
-### register_flow { #register_flow }
+### Register Flow { #register_flow }
 
 ```py
 register_flow(
@@ -31,15 +41,20 @@ register_flow(
 ) -> None
 ```
 
+Registers the given [Flow](Flow.md)
+
 See:
 
 * [SparkConnectGraphElementRegistry](SparkConnectGraphElementRegistry.md#register_flow)
 
-Used when:
+Used for the following:
 
-* [@append_flow](./index.md#append_flow), [@table](./index.md#table), [@materialized_view](./index.md#materialized_view), [@temporary_view](./index.md#temporary_view) decorators are used
+* [@dp.append_flow](./index.md#append_flow)
+* [@dp.table](./index.md#table)
+* [@dp.materialized_view](./index.md#materialized_view)
+* [@dp.temporary_view](./index.md#temporary_view)
 
-### register_sql { #register_sql }
+### Register SQL File { #register_sql }
 
 ```py
 register_sql(
@@ -55,7 +70,7 @@ See:
 
 Used when:
 
-* `pyspark.pipelines.cli` is requested to [register_definitions](#register_definitions)
+* Pipelines CLI is requested to [register graph element definitions (from SQL files)](#register_definitions)
 
 ## Implementations
 
