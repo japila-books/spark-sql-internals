@@ -11,9 +11,13 @@ load(
   readOptions: InputReadOptions): DataFrame
 ```
 
+Loads a `DataFrame` with the given [InputReadOptions](InputReadOptions.md)
+
 See:
 
+* [ResolvedFlow](ResolvedFlow.md#load)
 * [Table](Table.md#load)
+* [VirtualTableInput](VirtualTableInput.md#load)
 
 Used when:
 

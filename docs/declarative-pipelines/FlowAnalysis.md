@@ -104,7 +104,11 @@ readStreamInput(
   streamingReadOptions: StreamingReadOptions): DataFrame
 ```
 
-`readStreamInput`...FIXME
+`readStreamInput` resolves the given `name` (in the given [FlowAnalysisContext](FlowAnalysisContext.md)).
+
+For an `InternalDatasetIdentifier` (that is defined by the current pipeline), `readStreamInput` [readGraphInput](#readGraphInput).
+
+For an `ExternalDatasetIdentifier` (that is external to the current pipeline), `readStreamInput` [readExternalStreamInput](#readExternalStreamInput).
 
 ---
 
@@ -133,7 +137,22 @@ readGraphInput(
   readOptions: InputReadOptions): DataFrame
 ```
 
-`readGraphInput`...FIXME
+!!! note "Load DataFrame"
+    It is up to the [Input](Input.md) (for the given `InternalDatasetIdentifier`) to [load a DataFrame](Input.md#load) that may either be batch or streaming.
+
+`readGraphInput` records the input dataset identifier in the given [FlowAnalysisContext](FlowAnalysisContext.md#requestedInputs).
+
+??? note "SparkException"
+    For a dataset not defined in the dataflow graph (the given `InternalDatasetIdentifier` not being available in the [FlowAnalysisContext](FlowAnalysisContext.md#allInputs)),
+    `readGraphInput` reports a `SparkException`.
+
+`readGraphInput` finds the [Input](Input.md) for the given `InternalDatasetIdentifier` (in the [FlowAnalysisContext](FlowAnalysisContext.md#availableInput)).
+
+`readGraphInput` requests the `Input` to [load a DataFrame](Input.md#load) (with the given [InputReadOptions](InputReadOptions.md)).
+
+`readGraphInput` records a `ResolvedInput` in the [FlowAnalysisContext](FlowAnalysisContext.md) (in [streamingInputs](FlowAnalysisContext.md#streamingInputs) or [batchInputs](FlowAnalysisContext.md#batchInputs) for `StreamingReadOptions` or `BatchReadOptions`, respectively).
+
+In the end, `readGraphInput` creates a (streaming or batch) `Dataset`.
 
 ---
 
