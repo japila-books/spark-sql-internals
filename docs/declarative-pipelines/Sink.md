@@ -2,6 +2,10 @@
 
 `Sink` is an [extension](#contract) of the [GraphElement](GraphElement.md) and [Output](Output.md) abstractions for [pipeline sinks](#implementations) that can define their [write format](#format) and [options](#options).
 
+A sink is a generic target for a flow to send data that is external to a pipeline.
+
+Sinks are not registered in a Spark catalog.
+
 ## Contract
 
 ### Format { #format }

@@ -18,6 +18,14 @@ identifier: TableIdentifier
 destination: Output
 ```
 
+[Output](Output.md)
+
+See:
+
+* [BatchTableWrite](BatchTableWrite.md#destination)
+* [SinkWrite](SinkWrite.md#destination)
+* [StreamingTableWrite](StreamingTableWrite.md#destination)
+
 ### QueryOrigin { #getOrigin }
 
 ```scala
@@ -33,6 +41,7 @@ isStreaming: Boolean
 See:
 
 * [BatchTableWrite](BatchTableWrite.md#isStreaming)
+* [StreamingFlowExecution](StreamingFlowExecution.md#isStreaming)
 
 ### PipelineUpdateContext { #updateContext }
 
