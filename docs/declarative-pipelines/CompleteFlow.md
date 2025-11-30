@@ -9,7 +9,7 @@
 `CompleteFlow` takes the following to be created:
 
 * <span id="flow"> [UnresolvedFlow](UnresolvedFlow.md)
-* <span id="funcResult"> `FlowFunctionResult`
+* <span id="funcResult"> [FlowFunctionResult](FlowFunctionResult.md)
 * <span id="mustBeAppend"> `mustBeAppend` flag (default: `false`)
 
 `CompleteFlow` is created when:

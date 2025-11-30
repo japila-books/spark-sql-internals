@@ -7,7 +7,7 @@
 `ResolutionFailedFlow` takes the following to be created:
 
 * <span id="flow"> [UnresolvedFlow](UnresolvedFlow.md)
-* <span id="funcResult"> `FlowFunctionResult`
+* <span id="funcResult"> [FlowFunctionResult](FlowFunctionResult.md)
 
 `ResolutionFailedFlow` is created when:
 
