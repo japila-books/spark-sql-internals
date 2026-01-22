@@ -3,23 +3,25 @@ site_url: https://books.japila.pl/spark-sql-internals
 site_author: Jacek Laskowski
 site_description: Demystifying inner-workings of Spark SQL
 
-repo_name: spark-sql-internals
+repo_name: Github
 repo_url: https://github.com/japila-books/spark-sql-internals
 edit_uri: edit/main/docs/
 
-copyright: Copyright &copy; 2025 Jacek Laskowski
+copyright: Copyright &copy; 2026 Jacek Laskowski
 
 theme:
   name: material
   language: en
   icon:
     logo: material/book-open-page-variant
-    repo: fontawesome/brands/github
+    repo: material/github
   features:
     # https://squidfunk.github.io/mkdocs-material/reference/code-blocks/#adding-annotations
     - content.code.annotate
     # https://squidfunk.github.io/mkdocs-material/upgrade/#contentcodecopy
     - content.code.copy
+    # https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#linked-content-tabs
+    - content.tabs.link
     - content.tooltips
     - navigation.indexes
     - navigation.instant
@@ -32,19 +34,22 @@ theme:
     - search.highlight
     - search.share
     - search.suggest
+    - toc.follow
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
+    - media: "(prefers-color-scheme)"
       toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-    - scheme: slate
-      primary: blue
-      accent: blue
-      toggle:
-        icon: material/toggle-switch
+        icon: material/brightness-auto
         name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
 
 markdown_extensions:
   - admonition
@@ -107,27 +112,27 @@ extra:
     spark_connect: https://books.japila.pl/spark-connect-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   hadoop:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L126
-    version: 3.4.1
-    docs: https://hadoop.apache.org/docs/r3.4.1
-    api: https://hadoop.apache.org/docs/r3.4.1/api
+    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L130
+    version: 3.4.2
+    docs: https://hadoop.apache.org/docs/r3.4.2
+    api: https://hadoop.apache.org/docs/r3.4.2/api
   hive:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L135
+    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L139
     version: 2.3.10
     api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.10/api
   java:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L117
+    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L120
     version: 17
     api: https://docs.oracle.com/en/java/javase/17/docs/api/java.base
     spec: https://docs.oracle.com/javase/specs/jls/se17/html
   kafka:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L137C20-L137C25
-    version: 3.9.0
+    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L141
+    version: 3.9.1
     api: https://kafka.apache.org/39/javadoc
   scala:
-    # https://github.com/apache/spark/blob/v4.0.0/pom.xml#L173
-    version: 2.13.16
-    api: https://www.scala-lang.org/api/2.13.16
+    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L176
+    version: 2.13.17
+    api: https://www.scala-lang.org/api/2.13.17
     docs: https://docs.scala-lang.org/
     spec: https://www.scala-lang.org/files/archive/spec/2.13
   social:
@@ -144,9 +149,9 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 4.0.0
+    version: 4.1.1
     commit: https://github.com/apache/spark/commit
-    github: https://github.com/apache/spark/blob/v4.0.1
+    github: https://github.com/apache/spark/blob/v4.1.1
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
