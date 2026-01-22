@@ -1,0 +1,543 @@
+# https://lukasgeiter.github.io/mkdocs-awesome-nav/
+nav:
+  - index.md
+  - Features:
+    - features/index.md
+    - Aggregate Queries: aggregations
+    - Adaptive Query Execution: adaptive-query-execution
+    - Bloom Filter Join: bloom-filter-join
+    - Bucketing: bucketing
+    - Cache Serialization: cache-serialization
+    - Catalog Plugin API: connector/catalog
+    - Columnar Execution: columnar-execution
+    - Common Table Expressions: common-table-expressions
+    - Configuration Properties: configuration-properties
+    - Connector Expressions: connector/expressions
+    - Cost-Based Optimization: cost-based-optimization
+    - Default Columns: default-columns
+    - Direct Queries on Files: direct-queries-on-files
+    - Dynamic Partition Pruning: dynamic-partition-pruning
+    - File-Based Data Scanning: file-based-data-scanning
+    - Generated Columns: generated-columns
+    - Hidden File Metadata: hidden-file-metadata
+    - Hints (SQL): hints
+    - Join Queries:
+      - Joins: joins.md
+      - Broadcast Joins: spark-sql-joins-broadcast.md
+    - Logging: spark-logging.md
+    - Metadata Columns: metadata-columns
+    - named-function-arguments.md
+    - Parameterized Queries: parameterized-queries
+    - Partition File Metadata Caching: partition-file-metadata-caching
+    - Runtime Filtering: runtime-filtering
+    - spark-connect.md
+    - Spark Declarative Pipelines: declarative-pipelines
+    - Spark Thrift Server: thrift-server
+    - new-and-noteworthy/statistics.md
+    - Storage-Partitioned Joins: storage-partitioned-joins
+    - Subexpression Elimination: subexpression-elimination
+    - Subqueries: subqueries
+    - Table-Valued Functions: table-valued-functions
+    - Time Travel: time-travel
+    - Transactional Writes: transactional-writes
+    - User-Defined Functions: user-defined-functions
+    - Vectorized Decoding: vectorized-decoding
+    - ANSI Intervals: new-and-noteworthy/intervals.md
+    - Catalog Plugin API and Multi-Catalog Support: new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support.md
+    - Explaining Query Plans Improved: new-and-noteworthy/explain-command-improved.md
+    - Observable Metrics: new-and-noteworthy/observable-metrics.md
+    - hive-integration.md
+    - dynamic-partition-inserts.md
+    - Vectorized Query Execution: vectorized-query-execution
+    - Whole-Stage Code Generation: whole-stage-code-generation
+    - Catalyst DSL: catalyst-dsl
+    - variable-substitution.md
+  - Query Execution:
+    - query-execution/index.md
+    - Catalyst: catalyst
+    - Catalyst Expressions:
+      - expressions/index.md
+      - AggregateExpression: expressions/AggregateExpression.md
+      - AggregateFunction: expressions/AggregateFunction.md
+      - AggregateWindowFunction: expressions/AggregateWindowFunction.md
+      - Aggregator: expressions/Aggregator.md
+      - ArrayFilter: expressions/ArrayFilter.md
+      - AttributeSeq: expressions/AttributeSeq.md
+      - Attribute: expressions/Attribute.md
+      - BasePredicate: expressions/BasePredicate.md
+      - BinaryComparison: expressions/BinaryComparison.md
+      - BinaryOperator: expressions/BinaryOperator.md
+      - BloomFilterAggregate: expressions/BloomFilterAggregate.md
+      - BloomFilterMightContain: expressions/BloomFilterMightContain.md
+      - BoundReference: expressions/BoundReference.md
+      - CallMethodViaReflection: expressions/CallMethodViaReflection.md
+      - CodeGeneratorWithInterpretedFallback: expressions/CodeGeneratorWithInterpretedFallback.md
+      - CodegenFallback: expressions/CodegenFallback.md
+      - Collect: expressions/Collect.md
+      - CollectSet: expressions/CollectSet.md
+      - Count: expressions/Count.md
+      - CreateNamedStruct: expressions/CreateNamedStruct.md
+      - CreateStruct: expressions/CreateStruct.md
+      - CumeDist: expressions/CumeDist.md
+      - DeclarativeAggregate: expressions/DeclarativeAggregate.md
+      - DecodeUsingSerializer: expressions/DecodeUsingSerializer.md
+      - DynamicPruningExpression: expressions/DynamicPruningExpression.md
+      - DynamicPruningSubquery: expressions/DynamicPruningSubquery.md
+      - EncodeUsingSerializer: expressions/EncodeUsingSerializer.md
+      - EqualNullSafe: expressions/EqualNullSafe.md
+      - EqualTo: expressions/EqualTo.md
+      - ExecSubqueryExpression: expressions/ExecSubqueryExpression.md
+      - Exists: expressions/Exists.md
+      - ExpectsInputTypes: expressions/ExpectsInputTypes.md
+      - ExplodeBase: expressions/ExplodeBase.md
+      - Expression: expressions/Expression.md
+      - First: expressions/First.md
+      - Generator: expressions/Generator.md
+      - HashExpression: expressions/HashExpression.md
+      - HashPartitioning: expressions/HashPartitioning.md
+      - Higher-Order Functions:
+        - HigherOrderFunction: expressions/HigherOrderFunction.md
+        - ArrayBasedSimpleHigherOrderFunction: expressions/ArrayBasedSimpleHigherOrderFunction.md
+        - MapBasedSimpleHigherOrderFunction: expressions/MapBasedSimpleHigherOrderFunction.md
+        - SimpleHigherOrderFunction: expressions/SimpleHigherOrderFunction.md
+      - ImperativeAggregate: expressions/ImperativeAggregate.md
+      - In: expressions/In.md
+      - Inline: expressions/Inline.md
+      - InSet: expressions/InSet.md
+      - InSubquery: expressions/InSubquery.md
+      - InSubqueryExec: expressions/InSubqueryExec.md
+      - InterpretedProjection: expressions/InterpretedProjection.md
+      - JsonToStructs: expressions/JsonToStructs.md
+      - LessThanOrEqual: expressions/LessThanOrEqual.md
+      - ListQuery: expressions/ListQuery.md
+      - Literal: expressions/Literal.md
+      - MonotonicallyIncreasingID: expressions/MonotonicallyIncreasingID.md
+      - MaxBy: expressions/MaxBy.md
+      - Murmur3Hash: expressions/Murmur3Hash.md
+      - MutableProjection: expressions/MutableProjection.md
+      - NamedExpression: expressions/NamedExpression.md
+      - Nondeterministic: expressions/Nondeterministic.md
+      - OffsetWindowFunction: expressions/OffsetWindowFunction.md
+      - ParseToDate: expressions/ParseToDate.md
+      - ParseToTimestamp: expressions/ParseToTimestamp.md
+      - PlanExpression: expressions/PlanExpression.md
+      - Predicate: expressions/Predicate.md
+      - Projection: expressions/Projection.md
+      - expressions/PythonUDF.md
+      - RowNumber: expressions/RowNumber.md
+      - RowNumberLike: expressions/RowNumberLike.md
+      - RowOrdering: expressions/RowOrdering.md
+      - RuntimeReplaceable: expressions/RuntimeReplaceable.md
+      - ScalaAggregator: expressions/ScalaAggregator.md
+      - ScalarSubquery: expressions/ScalarSubquery.md
+      - ScalarSubquery (ExecSubqueryExpression): expressions/ExecSubqueryExpression-ScalarSubquery.md
+      - ScalaUDAF: expressions/ScalaUDAF.md
+      - ScalaUDF: expressions/ScalaUDF.md
+      - SimpleTypedAggregateExpression: expressions/SimpleTypedAggregateExpression.md
+      - SortOrder: expressions/SortOrder.md
+      - SparkUserDefinedFunction: expressions/SparkUserDefinedFunction.md
+      - Stateful: expressions/Stateful.md
+      - StaticInvoke: expressions/StaticInvoke.md
+      - SubqueryExpression: expressions/SubqueryExpression.md
+      - TimeWindow: expressions/TimeWindow.md
+      - TypedImperativeAggregate: expressions/TypedImperativeAggregate.md
+      - UnaryExpression: expressions/UnaryExpression.md
+      - Unevaluable: expressions/Unevaluable.md
+      - UnixTimestamp: expressions/UnixTimestamp.md
+      - UnresolvedAttribute: expressions/UnresolvedAttribute.md
+      - UnresolvedFunction: expressions/UnresolvedFunction.md
+      - UnresolvedGenerator: expressions/UnresolvedGenerator.md
+      - UnresolvedOrdinal: expressions/UnresolvedOrdinal.md
+      - UnresolvedStar: expressions/UnresolvedStar.md
+      - UnsafeProjection: expressions/UnsafeProjection.md
+      - UserDefinedAggregator: expressions/UserDefinedAggregator.md
+      - User-Defined Functions:
+        - spark-sql-udfs.md
+        - UserDefinedExpression: expressions/UserDefinedExpression.md
+        - UserDefinedFunction: expressions/UserDefinedFunction.md
+        - UDFs are Blackbox: spark-sql-udfs-blackbox.md
+      - UserDefinedAggregateFunction: expressions/UserDefinedAggregateFunction.md
+      - WindowExpression: expressions/WindowExpression.md
+      - WindowFunction: expressions/WindowFunction.md
+      - WindowSpecDefinition: expressions/WindowSpecDefinition.md
+    - Execution Planning Strategies: execution-planning-strategies
+    - Logical Analyzer: Analyzer.md
+    - Logical Analysis Rules: logical-analysis-rules
+    - Logical Operators: logical-operators
+    - Logical Optimizations: logical-optimizations
+    - Physical Operators:
+      - physical-operators/index.md
+      - AdaptiveSparkPlanExec: physical-operators/AdaptiveSparkPlanExec.md
+      - AggregateCodegenSupport: physical-operators/AggregateCodegenSupport.md
+      - AliasAwareOutputExpression: physical-operators/AliasAwareOutputExpression.md
+      - AliasAwareQueryOutputOrdering: physical-operators/AliasAwareQueryOutputOrdering.md
+      - AlterTableExec: physical-operators/AlterTableExec.md
+      - AQEShuffleReadExec: physical-operators/AQEShuffleReadExec.md
+      - AtomicTableWriteExec: physical-operators/AtomicTableWriteExec.md
+      - BaseAggregateExec: physical-operators/BaseAggregateExec.md
+      - BaseCacheTableExec: physical-operators/BaseCacheTableExec.md
+      - BaseJoinExec: physical-operators/BaseJoinExec.md
+      - BaseSubqueryExec: physical-operators/BaseSubqueryExec.md
+      - BatchWriteHelper: physical-operators/BatchWriteHelper.md
+      - BatchScanExec: physical-operators/BatchScanExec.md
+      - BroadcastExchangeExec: physical-operators/BroadcastExchangeExec.md
+      - BroadcastExchangeLike: physical-operators/BroadcastExchangeLike.md
+      - BroadcastHashJoinExec: physical-operators/BroadcastHashJoinExec.md
+      - BroadcastNestedLoopJoinExec: physical-operators/BroadcastNestedLoopJoinExec.md
+      - BroadcastQueryStageExec: physical-operators/BroadcastQueryStageExec.md
+      - physical-operators/CacheTableAsSelectExec.md
+      - physical-operators/CacheTableExec.md
+      - CoalesceExec: physical-operators/CoalesceExec.md
+      - CollectLimitExec: physical-operators/CollectLimitExec.md
+      - CollectMetricsExec: physical-operators/CollectMetricsExec.md
+      - ColumnarToRowExec: physical-operators/ColumnarToRowExec.md
+      - ColumnarToRowTransition: physical-operators/ColumnarToRowTransition.md
+      - CreateTableAsSelectExec: physical-operators/CreateTableAsSelectExec.md
+      - CodegenSupport: physical-operators/CodegenSupport.md
+      - DataSourceScanExec: physical-operators/DataSourceScanExec.md
+      - DataSourceV2ScanExecBase: physical-operators/DataSourceV2ScanExecBase.md
+      - DataWritingCommandExec: physical-operators/DataWritingCommandExec.md
+      - DebugExec: physical-operators/DebugExec.md
+      - DeleteFromTableExec: physical-operators/DeleteFromTableExec.md
+      - DescribeTableExec: physical-operators/DescribeTableExec.md
+      - DeserializeToObjectExec: physical-operators/DeserializeToObjectExec.md
+      - DropNamespaceExec: physical-operators/DropNamespaceExec.md
+      - EvalPythonExec: physical-operators/EvalPythonExec.md
+      - Exchange: physical-operators/Exchange.md
+      - ExecutedCommandExec: physical-operators/ExecutedCommandExec.md
+      - ExpandExec: physical-operators/ExpandExec.md
+      - ExternalRDDScanExec: physical-operators/ExternalRDDScanExec.md
+      - FileSourceScanExec: physical-operators/FileSourceScanExec.md
+      - FilterExec: physical-operators/FilterExec.md
+      - GenerateExec: physical-operators/GenerateExec.md
+      - HashAggregateExec: physical-operators/HashAggregateExec.md
+      - HashedRelation: physical-operators/HashedRelation.md
+      - HashJoin: physical-operators/HashJoin.md
+      - InMemoryTableScanExec: physical-operators/InMemoryTableScanExec.md
+      - InputAdapter: physical-operators/InputAdapter.md
+      - JoinCodegenSupport: physical-operators/JoinCodegenSupport.md
+      - LocalTableScanExec: physical-operators/LocalTableScanExec.md
+      - LongHashedRelation: physical-operators/LongHashedRelation.md
+      - ObjectConsumerExec: physical-operators/ObjectConsumerExec.md
+      - ObjectHashAggregateExec: physical-operators/ObjectHashAggregateExec.md
+      - ObjectProducerExec: physical-operators/ObjectProducerExec.md
+      - OrderPreservingUnaryExecNode: physical-operators/OrderPreservingUnaryExecNode.md
+      - OverwriteByExpressionExec: physical-operators/OverwriteByExpressionExec.md
+      - PartitioningPreservingUnaryExecNode: physical-operators/PartitioningPreservingUnaryExecNode.md
+      - ProjectExec: physical-operators/ProjectExec.md
+      - QueryStageExec: physical-operators/QueryStageExec.md
+      - RangeExec: physical-operators/RangeExec.md
+      - ReusedExchangeExec: physical-operators/ReusedExchangeExec.md
+      - ReusedSubqueryExec: physical-operators/ReusedSubqueryExec.md
+      - RowDataSourceScanExec: physical-operators/RowDataSourceScanExec.md
+      - RowToColumnarExec: physical-operators/RowToColumnarExec.md
+      - SerializeFromObjectExec: physical-operators/SerializeFromObjectExec.md
+      - SetCatalogAndNamespaceExec: physical-operators/SetCatalogAndNamespaceExec.md
+      - ShowCreateTableExec: physical-operators/ShowCreateTableExec.md
+      - ShowTablesExec: physical-operators/ShowTablesExec.md
+      - ShowTablePropertiesExec: physical-operators/ShowTablePropertiesExec.md
+      - ShuffleExchangeExec: physical-operators/ShuffleExchangeExec.md
+      - ShuffleExchangeLike: physical-operators/ShuffleExchangeLike.md
+      - ShuffledHashJoinExec: physical-operators/ShuffledHashJoinExec.md
+      - ShuffledJoin: physical-operators/ShuffledJoin.md
+      - ShuffleOrigin: physical-operators/ShuffleOrigin.md
+      - ShuffleQueryStageExec: physical-operators/ShuffleQueryStageExec.md
+      - SortAggregateExec: physical-operators/SortAggregateExec.md
+      - SortMergeJoinExec:
+        - SortMergeJoinExec: physical-operators/SortMergeJoinExec.md
+        - SortMergeJoinScanner: physical-operators/SortMergeJoinScanner.md
+      - SortExec: physical-operators/SortExec.md
+      - SparkPlan: physical-operators/SparkPlan.md
+      - SubqueryExec: physical-operators/SubqueryExec.md
+      - TableWriteExecHelper: physical-operators/TableWriteExecHelper.md
+      - physical-operators/TruncateTableExec.md
+      - UnaryExecNode: physical-operators/UnaryExecNode.md
+      - V2CommandExec: physical-operators/V2CommandExec.md
+      - V2ExistingTableWriteExec: physical-operators/V2ExistingTableWriteExec.md
+      - V2TableWriteExec: physical-operators/V2TableWriteExec.md
+      - WholeStageCodegenExec: physical-operators/WholeStageCodegenExec.md
+      - WindowExec: physical-operators/WindowExec.md
+      - WindowExecBase: physical-operators/WindowExecBase.md
+      - WriteDeltaExec: physical-operators/WriteDeltaExec.md
+      - WriteFilesExec: physical-operators/WriteFilesExec.md
+      - Distribution and Partitioning:
+        - Distribution: physical-operators/Distribution.md
+        - Partitioning: physical-operators/Partitioning.md
+        - Distribution Specifications:
+          - AllTuples: physical-operators/AllTuples.md
+          - BroadcastDistribution: physical-operators/BroadcastDistribution.md
+          - ClusteredDistribution: physical-operators/ClusteredDistribution.md
+          - HashClusteredDistribution: physical-operators/HashClusteredDistribution.md
+          - OrderedDistribution: physical-operators/OrderedDistribution.md
+          - UnspecifiedDistribution: physical-operators/UnspecifiedDistribution.md
+        - Broadcast Modes:
+          - BroadcastMode: physical-operators/BroadcastMode.md
+          - HashedRelationBroadcastMode: physical-operators/HashedRelationBroadcastMode.md
+        - ShuffleSpec: physical-operators/ShuffleSpec.md
+    - Physical Optimizations: physical-optimizations
+    - QueryExecution: QueryExecution.md
+    - QueryPlanningTracker: QueryPlanningTracker.md
+    - SparkOptimizer: SparkOptimizer.md
+    - SparkPlanner: SparkPlanner.md
+  - Internals:
+    - Overview: overview.md
+    - DataSource: DataSource.md
+    - developer-api.md
+    - ExecutionListenerBus: ExecutionListenerBus.md
+    - ExecutionListenerManager: ExecutionListenerManager.md
+    - SharedState: SharedState.md
+    - SQLConf: SQLConf.md
+    - SQLConfHelper: SQLConfHelper.md
+    - StaticSQLConf: StaticSQLConf.md
+    - SparkSession Registries:
+      - Catalog:
+        - Catalog: Catalog.md
+        - CatalogImpl: CatalogImpl.md
+        - CatalogStatistics: CatalogStatistics.md
+        - CatalogUtils: CatalogUtils.md
+      - ExperimentalMethods: ExperimentalMethods.md
+      - ExternalCatalog:
+        - ExternalCatalog: ExternalCatalog.md
+        - InMemoryCatalog: InMemoryCatalog.md
+        - ExternalCatalogWithListener.md
+      - FunctionRegistry:
+        - FunctionRegistry: FunctionRegistry.md
+        - FunctionRegistryBase: FunctionRegistryBase.md
+        - SimpleFunctionRegistry: SimpleFunctionRegistry.md
+        - SimpleFunctionRegistryBase: SimpleFunctionRegistryBase.md
+        - SimpleTableFunctionRegistry: SimpleTableFunctionRegistry.md
+        - TableFunctionRegistry: TableFunctionRegistry.md
+      - GlobalTempViewManager: GlobalTempViewManager.md
+      - SessionCatalog:
+        - SessionCatalog: SessionCatalog.md
+        - CatalogStorageFormat: CatalogStorageFormat.md
+        - CatalogTable: CatalogTable.md
+        - CatalogTablePartition: CatalogTablePartition.md
+      - V2SessionCatalog: V2SessionCatalog.md
+      - SessionState:
+        - SessionState: SessionState.md
+        - BaseSessionStateBuilder: BaseSessionStateBuilder.md
+        - SessionStateBuilder: SessionStateBuilder.md
+      - CacheManager:
+        - CacheManager: CacheManager.md
+      - RuntimeConfig: RuntimeConfig.md
+    - Encoder:
+      - Encoder: Encoder.md
+      - ExpressionEncoder: ExpressionEncoder.md
+      - RowEncoder: RowEncoder.md
+      - ScalaReflection: ScalaReflection.md
+    - SQLExecution: SQLExecution.md
+    - SQLMetric: SQLMetric.md
+    - Tungsten Execution Backend:
+      - tungsten/index.md
+      - CatalystSerde: CatalystSerde.md
+      - ExternalAppendOnlyUnsafeRowArray: ExternalAppendOnlyUnsafeRowArray.md
+      - HashMapGenerator: HashMapGenerator.md
+      - InternalRow: InternalRow.md
+      - UnsafeHashedRelation: UnsafeHashedRelation.md
+      - UnsafeRow: UnsafeRow.md
+      - UnsafeRowSerializerInstance: tungsten/UnsafeRowSerializerInstance.md
+    - RDDs:
+      - DataSourceRDD: DataSourceRDD.md
+      - DataSourceRDDPartition: DataSourceRDDPartition.md
+      - FileScanRDD: rdds/FileScanRDD.md
+      - ShuffledRowRDD: ShuffledRowRDD.md
+      - SQLExecutionRDD: SQLExecutionRDD.md
+  - SQL:
+    - sql/index.md
+    - AbstractSqlParser: sql/AbstractSqlParser.md
+    - AstBuilder: sql/AstBuilder.md
+    - CatalystSqlParser: sql/CatalystSqlParser.md
+    - ParserInterface: sql/ParserInterface.md
+    - SparkSqlParser: sql/SparkSqlParser.md
+    - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
+    - VariableSubstitution: sql/VariableSubstitution.md
+  - Connectors:
+    - connectors/index.md
+    - Avro:
+      - avro/index.md
+      - AvroOptions: avro/AvroOptions.md
+      - AvroFileFormat: avro/AvroFileFormat.md
+      - CatalystDataToAvro: avro/CatalystDataToAvro.md
+      - AvroDataToCatalyst: avro/AvroDataToCatalyst.md
+    - Files:
+      - files/index.md
+      - AggregatePushDownUtils: files/AggregatePushDownUtils.md
+      - BaseDynamicPartitionDataWriter: files/BaseDynamicPartitionDataWriter.md
+      - BasicWriteJobStatsTracker: files/BasicWriteJobStatsTracker.md
+      - BasicWriteTaskStats: files/BasicWriteTaskStats.md
+      - BasicWriteTaskStatsTracker: files/BasicWriteTaskStatsTracker.md
+      - CompressionCodecs: files/CompressionCodecs.md
+      - DynamicPartitionDataSingleWriter: files/DynamicPartitionDataSingleWriter.md
+      - DynamicPartitionDataConcurrentWriter: files/DynamicPartitionDataConcurrentWriter.md
+      - FileBatchWrite: files/FileBatchWrite.md
+      - FileDataSourceV2: files/FileDataSourceV2.md
+      - FileFormat: files/FileFormat.md
+      - FileFormatDataWriter: files/FileFormatDataWriter.md
+      - FileFormatWriter: files/FileFormatWriter.md
+      - FileIndex:
+        - files/FileIndex.md
+        - files/CatalogFileIndex.md
+        - files/InMemoryFileIndex.md
+        - files/PartitioningAwareFileIndex.md
+        - files/PrunedInMemoryFileIndex.md
+      - FilePartition: files/FilePartition.md
+      - FilePartitionReaderFactory: files/FilePartitionReaderFactory.md
+      - FileScan: files/FileScan.md
+      - FileScanBuilder: files/FileScanBuilder.md
+      - FileStatusCache: files/FileStatusCache.md
+      - FileTable: files/FileTable.md
+      - FileWrite: files/FileWrite.md
+      - FileWriterFactory: files/FileWriterFactory.md
+      - HadoopFileLinesReader: files/HadoopFileLinesReader.md
+      - HadoopFsRelation: files/HadoopFsRelation.md
+      - PartitionedFile: files/PartitionedFile.md
+      - PartitionedFileUtil: files/PartitionedFileUtil.md
+      - RecordReaderIterator: files/RecordReaderIterator.md
+      - SharedInMemoryCache: files/SharedInMemoryCache.md
+      - SchemaMergeUtils: files/SchemaMergeUtils.md
+      - SingleDirectoryDataWriter: files/SingleDirectoryDataWriter.md
+      - WriteJobStatsTracker: files/WriteJobStatsTracker.md
+      - WriteTaskStats: files/WriteTaskStats.md
+      - WriteTaskStatsTracker: files/WriteTaskStatsTracker.md
+    - Hive:
+      - hive/index.md
+      - Configuration Properties: hive/configuration-properties.md
+      - Hive Metastore: hive/spark-sql-hive-metastore.md
+      - DataSinks: hive/DataSinks.md
+      - HiveClient: hive/HiveClient.md
+      - HiveClientImpl: hive/HiveClientImpl.md
+      - HiveFileFormat: hive/HiveFileFormat.md
+      - HiveUtils: hive/HiveUtils.md
+      - IsolatedClientLoader: hive/IsolatedClientLoader.md
+      - HiveTableRelation: hive/HiveTableRelation.md
+      - CreateHiveTableAsSelectCommand: hive/CreateHiveTableAsSelectCommand.md
+      - SaveAsHiveFile: hive/SaveAsHiveFile.md
+      - InsertIntoHiveDirCommand: hive/InsertIntoHiveDirCommand.md
+      - InsertIntoHiveTable: hive/InsertIntoHiveTable.md
+      - HiveTableScans: hive/HiveTableScans.md
+      - HiveTableScanExec: hive/HiveTableScanExec.md
+      - TableReader: hive/TableReader.md
+      - HadoopTableReader: hive/HadoopTableReader.md
+      - HiveSessionStateBuilder: hive/HiveSessionStateBuilder.md
+      - HiveExternalCatalog: hive/HiveExternalCatalog.md
+      - HiveSessionCatalog: hive/HiveSessionCatalog.md
+      - HiveMetastoreCatalog: hive/HiveMetastoreCatalog.md
+      - RelationConversions: hive/RelationConversions.md
+      - ResolveHiveSerdeTable: hive/ResolveHiveSerdeTable.md
+      - DetermineTableStats: hive/DetermineTableStats.md
+      - HiveAnalysis: hive/HiveAnalysis.md
+    - JDBC: jdbc
+    - Kafka:
+      - kafka/index.md
+      - Configuration Properties: kafka/configuration-properties.md
+      - KafkaBatch: kafka/KafkaBatch.md
+      - KafkaBatchWrite: kafka/KafkaBatchWrite.md
+      - KafkaBatchWriterFactory: kafka/KafkaBatchWriterFactory.md
+      - KafkaDataConsumer: kafka/KafkaDataConsumer.md
+      - KafkaDataWriter: kafka/KafkaDataWriter.md
+      - KafkaOffsetRangeLimit: kafka/KafkaOffsetRangeLimit.md
+      - KafkaOffsetReader: kafka/KafkaOffsetReader.md
+      - KafkaRelation: kafka/KafkaRelation.md
+      - KafkaScan: kafka/KafkaScan.md
+      - KafkaSourceProvider: kafka/KafkaSourceProvider.md
+      - KafkaSourceRDD: kafka/KafkaSourceRDD.md
+      - KafkaSourceRDDPartition: kafka/KafkaSourceRDDPartition.md
+      - KafkaTable: kafka/KafkaTable.md
+      - KafkaWrite: kafka/KafkaWrite.md
+      - KafkaWriter: kafka/KafkaWriter.md
+      - KafkaWriteTask: kafka/KafkaWriteTask.md
+      - Misc:
+        - ConsumerStrategy: kafka/ConsumerStrategy.md
+        - InternalKafkaConsumer: kafka/InternalKafkaConsumer.md
+        - InternalKafkaProducerPool: kafka/InternalKafkaProducerPool.md
+        - JsonUtils: kafka/JsonUtils.md
+        - KafkaRowWriter: kafka/KafkaRowWriter.md
+        - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
+      - Options: kafka/options.md
+    - Noop:
+      - noop/index.md
+      - NoopDataSource: noop/NoopDataSource.md
+      - NoopTable: noop/NoopTable.md
+      - NoopWriteBuilder: noop/NoopWriteBuilder.md
+      - NoopBatchWrite: noop/NoopBatchWrite.md
+      - NoopStreamingWrite: noop/NoopStreamingWrite.md
+    - Parquet: parquet
+    - DataWritingSparkTask: connectors/DataWritingSparkTask.md
+    - DataSourceV2Utils: connectors/DataSourceV2Utils.md
+    - OutputWriter: connectors/OutputWriter.md
+  - High-Level APIs:
+    - Column: Column.md
+    - ColumnarRule: ColumnarRule.md
+    - Connector API: connector
+    - Data Types: types
+    - DataFrame: DataFrame.md
+    - DataFrameNaFunctions.md
+    - DataFrameReader.md
+    - DataFrameStatFunctions.md
+    - DataFrameWriter.md
+    - DataFrameWriterV2.md
+    - Dataset.md
+    - Dataset API: dataset
+    - DataSource V1 API:
+      - DataSourceRegister: DataSourceRegister.md
+      - CreatableRelationProvider: CreatableRelationProvider.md
+      - RelationProvider: RelationProvider.md
+      - SchemaRelationProvider: SchemaRelationProvider.md
+      - BaseRelation: BaseRelation.md
+      - FileRelation: FileRelation.md
+      - InsertableRelation: InsertableRelation.md
+      - PrunedFilteredScan: PrunedFilteredScan.md
+      - PrunedScan: PrunedScan.md
+      - TableScan: TableScan.md
+      - Filter: Filter.md
+    - Encoders: Encoders.md
+    - KeyValueGroupedDataset: KeyValueGroupedDataset.md
+    - Observation: Observation.md
+    - QueryExecutionListener: QueryExecutionListener.md
+    - RelationalGroupedDataset: RelationalGroupedDataset.md
+    - SparkSession: SparkSession.md
+    - SparkSession.Builder: SparkSession-Builder.md
+    - SparkSessionExtensions: SparkSessionExtensions.md
+    - Standard Functions: standard-functions
+    - TypedColumn: TypedColumn.md
+    - Window Functions: window-functions
+  - Web UI: ui
+  - Demo: demo
+  - Misc:
+    - AggregatingAccumulator: AggregatingAccumulator.md
+    - DistinctKeyVisitor: DistinctKeyVisitor.md
+    - FilterEvaluatorFactory: FilterEvaluatorFactory.md
+    - JoinSelectionHelper.md
+    - PushDownUtils: PushDownUtils.md
+    - UnsafeExternalRowSorter: UnsafeExternalRowSorter.md
+    - BindReferences: BindReferences.md
+    - IntervalUtils: IntervalUtils.md
+    - ExplainUtils: ExplainUtils.md
+    - SerializerBuildHelper: SerializerBuildHelper.md
+    - Dataset, DataFrame and RDD: spark-sql-dataset-rdd.md
+    - Dataset and SQL: spark-sql-dataset-vs-sql.md
+    - DDLUtils: connectors/DDLUtils.md
+    - Implicits: implicits.md
+    - Row: Row.md
+    - Data Source API:
+      - CreateTableWriter: CreateTableWriter.md
+      - WriteConfigMethods: WriteConfigMethods.md
+    - Column Operators: spark-sql-column-operators.md
+    - Caching and Persistence:
+      - Caching and Persistence: caching-and-persistence.md
+      - User-Friendly Names of Cached Queries in web UI: caching-webui-storage.md
+    - Checkpointing: checkpointing.md
+    - Performance Tuning and Debugging:
+      - Debugging Query Execution: debugging-query-execution.md
+      - Performance Tuning: spark-sql-performance-tuning.md
+      - Case Study: spark-sql-performance-tuning-groupBy-aggregation.md
+    - CheckAnalysis: CheckAnalysis.md
+    - CatalystTypeConverters: CatalystTypeConverters.md
+    - SubExprUtils: SubExprUtils.md
+    - PredicateHelper: PredicateHelper.md
+    - ExtractEquiJoinKeys: ExtractEquiJoinKeys.md
+    - ExtractSingleColumnNullAwareAntiJoin: ExtractSingleColumnNullAwareAntiJoin.md
+    - ExtractJoinWithBuckets: ExtractJoinWithBuckets.md
+    - PhysicalOperation: PhysicalOperation.md
+    - KnownSizeEstimation: KnownSizeEstimation.md

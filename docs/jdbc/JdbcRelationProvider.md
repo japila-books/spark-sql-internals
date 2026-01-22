@@ -7,7 +7,7 @@
 `JdbcRelationProvider` is the [DataSourceRegister](../DataSourceRegister.md) to handle **jdbc** data source format.
 
 !!! note
-    `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for registration that is available in the [source code]({{ spark.github }}/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister#L2) of Apache Spark.
+    `JdbcRelationProvider` uses `META-INF/services/org.apache.spark.sql.sources.DataSourceRegister` file for registration that is available in the [source code]({{ spark.github }}/sql/core/src/main/resources/META-INF/services/org.apache.spark.sql.sources.DataSourceRegister#L19) of Apache Spark.
 
 ## <span id="createRelation-RelationProvider"> Creating BaseRelation
 

@@ -1,3 +1,7 @@
+---
+title: V2TableWithV1Fallback
+---
+
 # V2TableWithV1Fallback Tables
 
 `V2TableWithV1Fallback` is an [extension](#contract) of the [Table](../Table.md) abstraction for [tables](#implementations) with [V1 fallback support](#v1Table) (using [CatalogTable](../../CatalogTable.md)).

@@ -13,7 +13,7 @@ subtitle: ANTLR-based SQL Parser
 
 `AstBuilder` is an ANTLR `AbstractParseTreeVisitor` (as `SqlBaseParserBaseVisitor`) that is generated from the ANTLR grammar of Spark SQL.
 
-`SqlBaseParserBaseVisitor` is a ANTLR-specific base class that is generated at build time from the ANTLR grammar of Spark SQL. The Spark SQL grammar is available in the Apache Spark repository at [SqlBaseParser.g4]({{ spark.github }}/sql/catalyst/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4).
+`SqlBaseParserBaseVisitor` is a ANTLR-specific base class that is generated at build time from the ANTLR grammar of Spark SQL. The Spark SQL grammar is available in the Apache Spark repository at [SqlBaseParser.g4]({{ spark.github }}/sql/api/src/main/antlr4/org/apache/spark/sql/catalyst/parser/SqlBaseParser.g4).
 
 `SqlBaseParserBaseVisitor` is an [AbstractParseTreeVisitor](http://www.antlr.org/api/Java/org/antlr/v4/runtime/tree/AbstractParseTreeVisitor.html) in ANTLR.
 

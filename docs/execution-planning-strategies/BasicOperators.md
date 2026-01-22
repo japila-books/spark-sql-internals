@@ -28,4 +28,4 @@ Logical Operator | Physical Operator
  [WriteFiles](../logical-operators/WriteFiles.md) | [WriteFilesExec](../physical-operators/WriteFilesExec.md)
 
 !!! tip
-    Refer to the source code of [BasicOperators]({{ spark.github }}/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L775-L943) to confirm the most up-to-date operator mapping.
+    Refer to the source code of [BasicOperators]({{ spark.github }}/sql/core/src/main/scala/org/apache/spark/sql/execution/SparkStrategies.scala#L905-L1110) to confirm the most up-to-date operator mapping.

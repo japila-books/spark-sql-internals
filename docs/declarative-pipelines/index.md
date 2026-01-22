@@ -1,32 +1,6 @@
----
-subtitle: ⚠️ 4.1.0-SNAPSHOT
----
-
 # Spark Declarative Pipelines
 
 **Spark Declarative Pipelines (SDP)** is a declarative framework for building data processing (ETL) pipelines on Apache Spark in [Python](#python) and [SQL](#sql) languages.
-
-??? warning "Apache Spark 4.1.0-SNAPSHOT"
-    Declarative Pipelines framework is only available in the development branch of Apache Spark 4.1.0-SNAPSHOT.
-
-    Declarative Pipelines has not been released in any Spark version yet.
-
-    ```console
-    ❯ $SPARK_HOME/bin/pyspark --version
-    Welcome to
-         ____              __
-        / __/__  ___ _____/ /__
-       _\ \/ _ \/ _ `/ __/  '_/
-      /___/ .__/\_,_/_/ /_/\_\   version 4.1.0-SNAPSHOT
-         /_/
-
-    Using Scala version 2.13.16, OpenJDK 64-Bit Server VM, 17.0.16
-    Branch master
-    Compiled by user jacek on 2025-08-04T11:30:08Z
-    Revision 6ef9a9d340539fc870acca042bd036f33ea995c3
-    Url https://github.com/apache/spark.git
-    Type --help for more information.
-    ```
 
 A Declarative Pipelines project is defined and configured in a [pipeline specification file](#pipeline-specification-file).
 
@@ -689,4 +663,4 @@ updateCtx.pipelineExecution.runPipeline()
 
 ## Learning Resources
 
-1. [Spark Declarative Pipelines Programming Guide](https://github.com/apache/spark/blob/master/docs/declarative-pipelines-programming-guide.md)
+* [Spark Declarative Pipelines Programming Guide]({{ spark.docs }}/declarative-pipelines-programming-guide.html)
