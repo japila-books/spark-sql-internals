@@ -99,7 +99,7 @@ Streaming tables can be created with the following:
 
 ## Spark Connect Only { #spark-connect }
 
-Declarative Pipelines currently only supports Spark Connect.
+Declarative Pipelines currently only supports [Spark Connect]({{ book.spark_connect }}).
 
 ```console
 $ ./bin/spark-pipelines --conf spark.api.mode=xxx
