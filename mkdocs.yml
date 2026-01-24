@@ -106,6 +106,7 @@ extra:
     property: !ENV GOOGLE_ANALYTICS_KEY
   book:
     title: Spark SQL
+    declarative_pipelines: https://books.japila.pl/spark-declarative-pipelines
     delta: https://books.japila.pl/delta-lake-internals
     kafka: https://books.japila.pl/kafka-internals
     pyspark: https://books.japila.pl/pyspark-internals

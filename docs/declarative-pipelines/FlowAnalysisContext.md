@@ -1,3 +1,0 @@
-# FlowAnalysisContext
-
-`FlowAnalysisContext` is...FIXME

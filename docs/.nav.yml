@@ -30,7 +30,6 @@ nav:
     - Parameterized Queries: parameterized-queries
     - Partition File Metadata Caching: partition-file-metadata-caching
     - Runtime Filtering: runtime-filtering
-    - Spark Declarative Pipelines: declarative-pipelines
     - Spark Thrift Server: thrift-server
     - new-and-noteworthy/statistics.md
     - Storage-Partitioned Joins: storage-partitioned-joins

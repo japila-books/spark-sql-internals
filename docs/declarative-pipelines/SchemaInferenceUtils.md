@@ -1,3 +1,0 @@
-# SchemaInferenceUtils
-
-`SchemaInferenceUtils` is...FIXME

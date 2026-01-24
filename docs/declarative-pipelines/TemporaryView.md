@@ -1,3 +1,0 @@
-# TemporaryView
-
-`TemporaryView` is...FIXME

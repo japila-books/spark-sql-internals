@@ -1,3 +1,0 @@
-# FlowProgressEventLogger
-
-`FlowProgressEventLogger` is...FIXME

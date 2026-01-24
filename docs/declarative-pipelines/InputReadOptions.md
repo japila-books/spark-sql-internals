@@ -1,3 +1,0 @@
-# InputReadOptions
-
-`InputReadOptions` is...FIXME

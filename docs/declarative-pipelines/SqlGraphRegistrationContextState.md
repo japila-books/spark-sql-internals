@@ -1,3 +1,0 @@
-# SqlGraphRegistrationContextState
-
-`SqlGraphRegistrationContextState` is...FIXME

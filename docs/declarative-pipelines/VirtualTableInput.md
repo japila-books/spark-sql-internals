@@ -1,3 +1,0 @@
-# VirtualTableInput
-
-`VirtualTableInput` is...FIXME

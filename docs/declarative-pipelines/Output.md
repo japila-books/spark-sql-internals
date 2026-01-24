@@ -1,3 +1,0 @@
-# Output
-
-`Output` is...FIXME

@@ -1,3 +1,0 @@
-# GraphOperations
-
-`GraphOperations` is...FIXME

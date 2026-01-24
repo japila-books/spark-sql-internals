@@ -1,3 +1,0 @@
-# TableInput
-
-`TableInput` is...FIXME

@@ -1,3 +1,0 @@
-# PipelinesErrors
-
-`PipelinesErrors` is...FIXME

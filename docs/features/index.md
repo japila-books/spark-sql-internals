@@ -14,7 +14,6 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Default Columns](../default-columns/index.md)
 * [Metadata Columns](../metadata-columns/index.md)
 * [Named Function Arguments](../named-function-arguments.md)
-* [Spark Declarative Pipelines](../declarative-pipelines/index.md)
 * [Table-Valued Functions](../table-valued-functions/index.md)
 * [Time Travel](../time-travel/index.md)
 * [Variable Substitution](../variable-substitution.md)
