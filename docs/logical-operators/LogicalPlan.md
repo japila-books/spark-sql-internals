@@ -208,7 +208,7 @@ resolved: Boolean
 ??? note "Lazy Value"
     `resolved` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
 
-## Metadata Output Attributes { #metadataOutput }
+## Metadata Output Columns { #metadataOutput }
 
 ```scala
 metadataOutput: Seq[Attribute]

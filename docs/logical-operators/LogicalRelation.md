@@ -6,6 +6,8 @@ title: LogicalRelation
 
 `LogicalRelation` is a [leaf logical operator](LeafNode.md) that represents a [BaseRelation](#relation) in a [logical query plan](LogicalPlan.md).
 
+`LogicalRelation` is a [ExposesMetadataColumns](ExposesMetadataColumns.md).
+
 `LogicalRelation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
 ## Creating Instance
@@ -17,9 +19,9 @@ title: LogicalRelation
 * <span id="catalogTable"> Optional [CatalogTable](../CatalogTable.md)
 * <span id="isStreaming"> `isStreaming` flag
 
-`LogicalRelation` is created using [apply](#apply) factory.
+`LogicalRelation` is created using [apply](#apply) utility.
 
-## <span id="apply"> apply Utility
+## Create LogicalRelation { #apply }
 
 ```scala
 apply(
@@ -41,36 +43,43 @@ val baseRelation: BaseRelation = ???
 val data = spark.baseRelationToDataFrame(baseRelation)
 ```
 
+---
+
 `apply` is used when:
 
-* `SparkSession` is requested for a [DataFrame for a BaseRelation](../SparkSession.md#baseRelationToDataFrame)
 * [CreateTempViewUsing](CreateTempViewUsing.md) command is executed
 * `FallBackFileSourceV2` logical resolution rule is executed
-* [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
+* `FileStreamSource` ([Spark Structured Streaming]({{ book.structured_streaming }}/datasources/file/FileStreamSource/#getBatch)) is requested to `getBatch`
 * `HiveMetastoreCatalog` is requested to [convert a HiveTableRelation](../hive/HiveMetastoreCatalog.md#convertToLogicalRelation)
-* `FileStreamSource` ([Spark Structured Streaming]({{ book.structured_streaming }}/connectors/file/FileStreamSource/)) is requested to `getBatch`
+* [ResolveDataSource](../logical-analysis-rules/ResolveDataSource.md) logical analysis rule is executed (to [resolve a V1BatchSource](../logical-analysis-rules/ResolveDataSource.md#loadV1BatchSource))
+* [ResolveSQLOnFile](../logical-analysis-rules/ResolveSQLOnFile.md) and [FindDataSourceTable](../logical-analysis-rules/FindDataSourceTable.md) logical evaluation rules are executed
+* `SparkSession` is requested for a [DataFrame for a BaseRelation](../SparkSession.md#baseRelationToDataFrame)
 
-## <span id="refresh"> refresh
+## Refresh (Files of HadoopFsRelation) { #refresh }
 
-```scala
-refresh(): Unit
-```
+??? note "LogicalPlan"
 
-`refresh` is part of [LogicalPlan](LogicalPlan.md#refresh) abstraction.
+    ```scala
+    refresh(): Unit
+    ```
+
+    `refresh` is part of [LogicalPlan](LogicalPlan.md#refresh) abstraction.
 
 `refresh` requests the [FileIndex](../files/HadoopFsRelation.md#location) (of the [HadoopFsRelation](#relation)) to refresh.
 
-!!! note
+??? note "HadoopFsRelation Supported Only"
     `refresh` does the work for [HadoopFsRelation](../files/HadoopFsRelation.md) relations only.
 
-## <span id="simpleString"> Simple Text Representation
+## Simple Text Representation { #simpleString }
 
-```scala
-simpleString(
-  maxFields: Int): String
-```
+??? note "QueryPlan"
 
-`simpleString` is part of the [QueryPlan](../catalyst/QueryPlan.md#simpleString) abstraction.
+    ```scala
+    simpleString(
+      maxFields: Int): String
+    ```
+
+    `simpleString` is part of the [QueryPlan](../catalyst/QueryPlan.md#simpleString) abstraction.
 
 `simpleString` is made up of the [output schema](#output) (truncated to `maxFields`) and the [relation](#relation):
 
@@ -78,7 +87,7 @@ simpleString(
 Relation[[output]] [relation]
 ```
 
-### <span id="simpleString-demo"> Demo
+### Demo { #simpleString-demo }
 
 ```text
 val q = spark.read.text("README.md")
@@ -88,21 +97,55 @@ scala> println(logicalPlan.simpleString)
 Relation[value#2] text
 ```
 
-## <span id="computeStats"> computeStats
+## Statistics { #computeStats }
 
-```scala
-computeStats(): Statistics
-```
+??? note "LeafNode"
 
-`computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
+    ```scala
+    computeStats(): Statistics
+    ```
 
----
+    `computeStats` is part of the [LeafNode](LeafNode.md#computeStats) abstraction.
 
 `computeStats` takes the optional [CatalogTable](#catalogTable).
 
 If available, `computeStats` requests the `CatalogTable` for the [CatalogStatistics](../CatalogTable.md#stats) that, if available, is requested to [toPlanStats](#toPlanStats) (with the `planStatsEnabled` flag enabled when either [spark.sql.cbo.enabled](../SQLConf.md#cboEnabled) or [spark.sql.cbo.planStats.enabled](../SQLConf.md#planStatsEnabled) is enabled).
 
 Otherwise, `computeStats` creates a [Statistics](../cost-based-optimization/Statistics.md) with the `sizeInBytes` only to be the [sizeInBytes](../BaseRelation.md#sizeInBytes) of the [BaseRelation](#relation).
+
+## Metadata Output Columns { #metadataOutput }
+
+??? note "LogicalPlan"
+
+    ```scala
+    metadataOutput: Seq[AttributeReference]
+    ```
+
+    `metadataOutput` is part of the [LogicalPlan](LogicalPlan.md#metadataOutput) abstraction.
+
+`metadataOutput` checks out whether this [BaseRelation](#relation) is a [HadoopFsRelation](../files/HadoopFsRelation.md).
+If so, `metadataOutput` requests the [FileFormat](../files/HadoopFsRelation.md#fileFormat) (of this [BaseRelation](#relation)) for [metadata columns](../files/FileFormat.md#createFileMetadataCol).
+
+Otherwise, `metadataOutput` returns no metadata columns (`Nil`).
+
+??? note "Lazy Value"
+    `metadataOutput` is a Scala **lazy value** to guarantee that the code to initialize it is executed once only (when accessed for the first time) and the computed value never changes afterwards.
+
+    Learn more in the [Scala Language Specification]({{ scala.spec }}/05-classes-and-objects.html#lazy).
+
+## Add Metadata Columns to Output Columns { #withMetadataColumns }
+
+??? note "ExposesMetadataColumns"
+
+    ```scala
+    withMetadataColumns(): LogicalRelation
+    ```
+
+    `withMetadataColumns` is part of the [ExposesMetadataColumns](ExposesMetadataColumns.md#withMetadataColumns) abstraction.
+
+`withMetadataColumns` determines whether thare are any extra [metadata columns](#metadataOutput) to be added to this [output columns](#output).
+
+If so, `withMetadataColumns` creates a new `LogicalRelation` with the extra [metadata columns](#metadataOutput) added. Otherwise, `withMetadataColumns` does nothing.
 
 ## Demo
 
@@ -114,23 +157,23 @@ val path = "../datasets/people.csv"
 ```
 
 ```scala
-val q = spark
+val loadQuery = spark
   .read
-  .option("header", true)
   .format(format)
+  .option("header", true)
   .load(path)
 ```
 
 ```text
-scala> println(q.queryExecution.logical.numberedTreeString)
-00 Relation[id#16,name#17] csv
+scala> println(loadQuery.queryExecution.logical.numberedTreeString)
+00 UnresolvedDataSource format: csv, isStreaming: false, paths: 1 provided
 ```
 
 ```scala
-val q = sql(s"select * from `$format`.`$path`")
+val selectQuery = sql(s"select * from `$format`.`$path`")
 ```
 
 ```text
-scala> println(q.queryExecution.optimizedPlan.numberedTreeString)
-00 Relation[_c0#74,_c1#75] csv
+scala> println(selectQuery.queryExecution.optimizedPlan.numberedTreeString)
+00 Relation [_c0#75,_c1#76] csv
 ```
