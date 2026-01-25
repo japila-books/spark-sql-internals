@@ -4,7 +4,7 @@ title: ExposesMetadataColumns
 
 # ExposesMetadataColumns Logical Operators
 
-`ExposesMetadataColumns` is an [extension](#contract) of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that can [add extra metadata columns to output columns](#withMetadataColumns).
+`ExposesMetadataColumns` is an [extension](#contract) of the [LogicalPlan](LogicalPlan.md) abstraction for [logical operators](#implementations) that can [add extra metadata columns to the output columns](#withMetadataColumns).
 
 ## Contract
 
@@ -28,4 +28,5 @@ Used when:
 
 * [DataSourceV2Relation](DataSourceV2Relation.md)
 * [LogicalRelation](LogicalRelation.md)
+* `StreamingRelation` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/StreamingRelation))
 * `StreamingRelationV2` ([Spark Structured Streaming]({{ book.structured_streaming }}/logical-operators/StreamingRelationV2))

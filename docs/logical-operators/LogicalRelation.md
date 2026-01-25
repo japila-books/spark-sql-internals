@@ -6,7 +6,7 @@ title: LogicalRelation
 
 `LogicalRelation` is a [leaf logical operator](LeafNode.md) that represents a [BaseRelation](#relation) in a [logical query plan](LogicalPlan.md).
 
-`LogicalRelation` is a [ExposesMetadataColumns](ExposesMetadataColumns.md).
+`LogicalRelation` is a [ExposesMetadataColumns](ExposesMetadataColumns.md) and [can add extra metadata columns to the output columns](#withMetadataColumns).
 
 `LogicalRelation` is a [MultiInstanceRelation](MultiInstanceRelation.md).
 
@@ -143,9 +143,9 @@ Otherwise, `metadataOutput` returns no metadata columns (`Nil`).
 
     `withMetadataColumns` is part of the [ExposesMetadataColumns](ExposesMetadataColumns.md#withMetadataColumns) abstraction.
 
-`withMetadataColumns` determines whether thare are any extra [metadata columns](#metadataOutput) to be added to this [output columns](#output).
+`withMetadataColumns` creates a new `LogicalRelation` with the extra [metadata columns](#metadataOutput) added (if there are any) to this [output columns](#output).
 
-If so, `withMetadataColumns` creates a new `LogicalRelation` with the extra [metadata columns](#metadataOutput) added. Otherwise, `withMetadataColumns` does nothing.
+Otherwise, `withMetadataColumns` does nothing.
 
 ## Demo
 
