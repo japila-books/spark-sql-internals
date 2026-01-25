@@ -2369,6 +2369,10 @@
          <lastmod>2026-01-25</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/logical-operators/DataSourceV2RelationBase/</loc>
+         <lastmod>2026-01-25</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/logical-operators/DataSourceV2ScanRelation/</loc>
          <lastmod>2026-01-25</lastmod>
     </url>
