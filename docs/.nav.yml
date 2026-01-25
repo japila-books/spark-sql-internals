@@ -341,23 +341,10 @@ nav:
       - FileScanRDD: rdds/FileScanRDD.md
       - ShuffledRowRDD: ShuffledRowRDD.md
       - SQLExecutionRDD: SQLExecutionRDD.md
-  - SQL:
-    - sql/index.md
-    - AbstractSqlParser: sql/AbstractSqlParser.md
-    - AstBuilder: sql/AstBuilder.md
-    - CatalystSqlParser: sql/CatalystSqlParser.md
-    - ParserInterface: sql/ParserInterface.md
-    - SparkSqlParser: sql/SparkSqlParser.md
-    - SparkSqlAstBuilder: sql/SparkSqlAstBuilder.md
-    - VariableSubstitution: sql/VariableSubstitution.md
+  - SQL: sql
   - Connectors:
     - connectors/index.md
-    - Avro:
-      - avro/index.md
-      - AvroOptions: avro/AvroOptions.md
-      - AvroFileFormat: avro/AvroFileFormat.md
-      - CatalystDataToAvro: avro/CatalystDataToAvro.md
-      - AvroDataToCatalyst: avro/AvroDataToCatalyst.md
+    - Avro: avro
     - Files:
       - files/index.md
       - AggregatePushDownUtils: files/AggregatePushDownUtils.md
@@ -453,13 +440,7 @@ nav:
         - KafkaRowWriter: kafka/KafkaRowWriter.md
         - KafkaRecordToRowConverter: kafka/KafkaRecordToRowConverter.md
       - Options: kafka/options.md
-    - Noop:
-      - noop/index.md
-      - NoopDataSource: noop/NoopDataSource.md
-      - NoopTable: noop/NoopTable.md
-      - NoopWriteBuilder: noop/NoopWriteBuilder.md
-      - NoopBatchWrite: noop/NoopBatchWrite.md
-      - NoopStreamingWrite: noop/NoopStreamingWrite.md
+    - Noop: noop
     - Parquet: parquet
     - DataWritingSparkTask: connectors/DataWritingSparkTask.md
     - DataSourceV2Utils: connectors/DataSourceV2Utils.md
