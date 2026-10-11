@@ -2981,6 +2981,46 @@
          <lastmod>2026-10-11</lastmod>
     </url>
     <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/CreateMetricView/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/CreateMetricViewCommand/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/CreateV2MetricViewExec/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricView/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricViewBase/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricViewFactory/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricViewHelper/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricViewPlanner/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
+         <loc>https://books.japila.pl/spark-sql-internals/metric-views/MetricViewV01/</loc>
+         <lastmod>2026-10-11</lastmod>
+    </url>
+    <url>
          <loc>https://books.japila.pl/spark-sql-internals/new-and-noteworthy/catalog-plugin-api-and-multi-catalog-support/</loc>
          <lastmod>2026-10-11</lastmod>
     </url>
