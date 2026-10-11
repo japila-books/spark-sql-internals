@@ -67,10 +67,15 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.mark
   - pymdownx.smartsymbols
+  - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.tasklist:
       custom_checkbox: true
@@ -114,27 +119,27 @@ extra:
     spark_connect: https://books.japila.pl/spark-connect-internals
     structured_streaming: https://books.japila.pl/spark-structured-streaming-internals
   hadoop:
-    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L130
-    version: 3.4.2
-    docs: https://hadoop.apache.org/docs/r3.4.2
-    api: https://hadoop.apache.org/docs/r3.4.2/api
+    # https://github.com/apache/spark/blob/v4.2.0/pom.xml#L132
+    version: 3.5.0
+    docs: https://hadoop.apache.org/docs/r3.5.0
+    api: https://hadoop.apache.org/docs/r3.5.0/api
   hive:
-    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L139
+    # https://github.com/apache/spark/blob/v4.2.0/pom.xml#L141
     version: 2.3.10
     api: https://svn.apache.org/repos/infra/websites/production/hive/content/javadocs/r2.3.10/api
   java:
-    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L120
+    # https://github.com/apache/spark/blob/v4.2.0/pom.xml#L122
     version: 17
     api: https://docs.oracle.com/en/java/javase/17/docs/api/java.base
     spec: https://docs.oracle.com/javase/specs/jls/se17/html
   kafka:
-    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L141
-    version: 3.9.1
+    # https://github.com/apache/spark/blob/v4.2.0/pom.xml#L143
+    version: 3.9.2
     api: https://kafka.apache.org/39/javadoc
   scala:
-    # https://github.com/apache/spark/blob/v4.1.1/pom.xml#L176
-    version: 2.13.17
-    api: https://www.scala-lang.org/api/2.13.17
+    # https://github.com/apache/spark/blob/v4.2.0/pom.xml#L175
+    version: 2.13.18
+    api: https://www.scala-lang.org/api/2.13.18
     docs: https://docs.scala-lang.org/
     spec: https://www.scala-lang.org/files/archive/spec/2.13
   social:
@@ -151,10 +156,10 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://fosstodon.org/@jaceklaskowski
   spark:
-    version: 4.1.1
+    version: 4.2.0
     commit: https://github.com/apache/spark/commit
-    docs: https://spark.apache.org/docs/4.1.1
-    github: https://github.com/apache/spark/blob/v4.1.1
+    docs: https://spark.apache.org/docs/4.2.0
+    github: https://github.com/apache/spark/blob/v4.2.0
     jira: https://issues.apache.org/jira/browse
   # https://squidfunk.github.io/mkdocs-material/reference/#setting-the-page-status
   status:
@@ -169,6 +174,7 @@ validation:
   omitted_files: warn
   absolute_links: warn
   unrecognized_links: warn
+  unresolved_references: false
 
 # nav section is in the separate file ".nav.yml" managed by Awesome Nav for MkDocs plugin
 # https://lukasgeiter.github.io/mkdocs-awesome-nav/features/nav/
