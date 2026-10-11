@@ -133,6 +133,26 @@ toLinkedHashMap: LinkedHashMap[String, String]
 * `CatalogTable` is requested to [toString](#toString) and [simpleString](#simpleString)
 * [DescribeTableCommand](logical-operators/DescribeTableCommand.md) is executed (and [describeFormattedTableInfo](logical-operators/DescribeTableCommand.md#describeFormattedTableInfo))
 
+## isMetricView { #isMetricView }
+
+```scala
+isMetricView(
+  table: CatalogTable): Boolean
+```
+
+`isMetricView` indicates whether the given `CatalogTable` is a [metric view](./metric-views/index.md) or not.
+
+---
+
+`isMetricView` is positive (`true`) when the [tableType](CatalogTable.md#tableType) of the given `CatalogTable` is `METRIC_VIEW`.
+Otherwise, `isMetricView` is negative (`false`).
+
+---
+
+`isMetricView` is used when:
+
+* `SessionCatalog` is requested to [getRelation](SessionCatalog.md#getRelation)
+
 ## Demo: Accessing Table Metadata
 
 ### Catalog

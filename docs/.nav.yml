@@ -26,6 +26,7 @@ nav:
       - Broadcast Joins: spark-sql-joins-broadcast.md
     - Logging: spark-logging.md
     - Metadata Columns: metadata-columns
+    - Metric Views: metric-views
     - named-function-arguments.md
     - Parameterized Queries: parameterized-queries
     - Partition File Metadata Caching: partition-file-metadata-caching

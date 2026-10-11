@@ -334,12 +334,15 @@ getRelation(
   options: CaseInsensitiveStringMap): LogicalPlan
 ```
 
+!!! note "FIXME: metric views"
+
 `getRelation` creates a [LogicalPlan](logical-operators/LogicalPlan.md) with a [SubqueryAlias](logical-operators/SubqueryAlias.md) logical operator with a child logical operator based on the [table type](CatalogTable.md#tableType) of the given [CatalogTable](CatalogTable.md) metadata:
 
-Table Type | Child Logical Operator
+Catalog Table Type | Child Logical Operator
 -|-
  `VIEW` | [fromCatalogTable](#fromCatalogTable)
  `EXTERNAL` or `MANAGED` | [UnresolvedCatalogRelation](logical-operators/UnresolvedCatalogRelation.md)
+ `METRIC_VIEW` | [parseMetricViewDefinition](#parseMetricViewDefinition)
 
 ---
 
@@ -347,3 +350,12 @@ Table Type | Child Logical Operator
 
 * [ResolveRelations](logical-analysis-rules/ResolveRelations.md) logical analysis rule is executed
 * `SessionCatalog` is requested to [lookupRelation](#lookupRelation)
+
+### parseMetricViewDefinition { #parseMetricViewDefinition }
+
+```scala
+parseMetricViewDefinition(
+  metadata: CatalogTable): LogicalPlan
+```
+
+`parseMetricViewDefinition`...FIXME

@@ -125,6 +125,23 @@ Creates a [CreateTable](../logical-operators/CreateTable.md)
 
 ANTLR labeled alternative: `#createHiveTable`
 
+### CREATE VIEW WITH METRICS { #visitCreateMetricView }
+
+Creates a [CreateMetricView](../metric-views/CreateMetricView.md) unary logical operator for 
+
+```antlr
+CREATE (OR REPLACE)?
+  VIEW (IF (NOT | '!') EXISTS)? identifierReference
+  identifierCommentList?
+  ((WITH METRICS) |
+    (LANGUAGE (SQL | IDENTIFIER)) |
+    COMMENT text |
+    (TBLPROPERTIES propertyList))*
+  AS '$' code '$'
+```
+
+ANTLR labeled alternative: `#createMetricView`
+
 ### CREATE FLOW AS INSERT INTO BY NAME { #visitCreatePipelineInsertIntoFlow }
 
 Creates an append (insert into) flow (a [CreateFlowCommand]({{ book.declarative_pipelines }}/logical-operators/CreateFlowCommand) logical operator) for `CREATE FLOW` SQL statement
