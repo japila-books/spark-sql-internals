@@ -1,28 +1,45 @@
-# Based on https://github.com/squidfunk/mkdocs-material/blob/master/.github/workflows/ci.yml
+# Based on https://github.com/squidfunk/mkdocs-material/blob/master/.github/workflows/documentation.yml
 
 name: Deploying to GitHub Pages
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.x'
 
 jobs:
   deploy:
-    if: github.event.pull_request.head.repo.fork == false
+    name: Deploy the docs
+    if: github.repository == 'japila-books/spark-sql-internals'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v7
         with:
-          python-version: 3.x
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Configure Git credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
       - name: Install dependencies
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           pip install -r requirements.txt
-      - name: Build documentation
+      - name: Deploy documentation
         env:
           GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
         run: |
