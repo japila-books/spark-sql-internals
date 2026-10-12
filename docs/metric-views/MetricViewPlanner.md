@@ -10,7 +10,9 @@ planRead(
   expectedSchema: StructType): MetricViewPlaceholder
 ```
 
-`planRead`...FIXME
+`planRead` [creates a MetricView](#parseYAML) (from the given `yaml` text).
+
+In the end, `planRead` returns a `MetricViewPlaceholder`.
 
 ---
 
@@ -27,7 +29,9 @@ planWrite(
   sqlParser: ParserInterface): (MetricViewPlaceholder, MetricView)
 ```
 
-`planWrite`...FIXME
+`planWrite` [creates a MetricView](#parseYAML) (from the given `yaml` text).
+
+In the end, `planWrite` returns a `MetricViewPlaceholder` with `isCreate` flag enabled (to differentiate `planWrite` from [planRead](#planRead)) and the `MetricView`.
 
 ---
 
@@ -35,7 +39,7 @@ planWrite(
 
 * `MetricViewHelper` is requested to [analyzeMetricViewText](MetricViewHelper.md#analyzeMetricViewText)
 
-## parseYAML { #parseYAML }
+## Create MetricView from YAML Definition File { #parseYAML }
 
 ```scala
 parseYAML(
@@ -43,7 +47,7 @@ parseYAML(
   sqlParser: ParserInterface): (MetricView, LogicalPlan)
 ```
 
-`parseYAML`...FIXME
+`parseYAML` [creates a MetricView from YAML definition](MetricViewFactory.md#fromYAML).
 
 ---
 

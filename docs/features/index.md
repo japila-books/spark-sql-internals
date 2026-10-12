@@ -12,7 +12,7 @@ The following are the features of Spark SQL that help place it in the top of the
 * [Catalog Plugin API](../connector/catalog/index.md)
 * [Connector API](../connector/index.md)
 * [Default Columns](../default-columns/index.md)
-* [Metadata Columns](../metadata-columns/index.md)
+* [Metric Views](../metric-views/)
 * [Named Function Arguments](../named-function-arguments.md)
 * [Table-Valued Functions](../table-valued-functions/index.md)
 * [Time Travel](../time-travel/index.md)

@@ -5,7 +5,7 @@
 `MetricView` takes the following to be created:
 
 * <span id="version"> Version
-* <span id="from"> `from` source
+* <span id="from"> [Source](Source.md)
 * <span id="where"> Optional `where` clause
 * <span id="select"> `select` columns
 

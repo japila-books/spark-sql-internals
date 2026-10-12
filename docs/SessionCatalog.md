@@ -334,15 +334,14 @@ getRelation(
   options: CaseInsensitiveStringMap): LogicalPlan
 ```
 
-!!! note "FIXME: metric views"
+For the [CatalogTable](CatalogTable.md) being a [metric view](CatalogTable.md#isMetricView), `getRelation` [parseMetricViewDefinition](#parseMetricViewDefinition).
 
-`getRelation` creates a [LogicalPlan](logical-operators/LogicalPlan.md) with a [SubqueryAlias](logical-operators/SubqueryAlias.md) logical operator with a child logical operator based on the [table type](CatalogTable.md#tableType) of the given [CatalogTable](CatalogTable.md) metadata:
+Otherwise, `getRelation` creates a [LogicalPlan](logical-operators/LogicalPlan.md) with a [SubqueryAlias](logical-operators/SubqueryAlias.md) logical operator with a child logical operator based on the [table type](CatalogTable.md#tableType) of the given [CatalogTable](CatalogTable.md) metadata:
 
 Catalog Table Type | Child Logical Operator
 -|-
  `VIEW` | [fromCatalogTable](#fromCatalogTable)
  `EXTERNAL` or `MANAGED` | [UnresolvedCatalogRelation](logical-operators/UnresolvedCatalogRelation.md)
- `METRIC_VIEW` | [parseMetricViewDefinition](#parseMetricViewDefinition)
 
 ---
 

@@ -1,10 +1,23 @@
 # Metric Views :material-new-box:{ title="New in 4.2.0" }
 
-[Apache Spark 4.2.0](https://issues.apache.org/jira/browse/SPARK-54119) introduces support for **metric views**.
+[Apache Spark 4.2.0](https://issues.apache.org/jira/browse/SPARK-54119) introduces support for **metric views** which are views with measures and dimensions.
 
 Per the [SPIP](https://docs.google.com/document/d/1xVTLijvDTJ90lZ_ujwzf9HvBJgWg0mY6cYM44Fcghl0/edit?tab=t.0#heading=h.5fdy0uyv19hp), Spark users can define business metrics (e.g., "active users", "revenue", or "revenue per customer") once and then ask for those metrics by dimension (date, country, product).
 
 Metric views are created using [CREATE VIEW WITH METRICS](../sql/SparkSqlAstBuilder.md#visitCreateMetricView) SQL statement.
+
+```sql
+CREATE OR REPLACE VIEW metric_view
+WITH METRICS
+LANGUAGE YAML
+AS $$
+version: 0.1
+
+source: SELECT * FROM range(5)
+$$
+```
+
+Metric views use dimensions and measures for proper aggregation semantics.
 
 ## How Metric Views Was Tested
 
@@ -36,3 +49,8 @@ build/sbt "catalyst/testOnly org.apache.spark.sql.metricview.serde.MetricViewFac
 [info] Tests: succeeded 16, failed 0, canceled 0, ignored 0, pending 0
 [info] All tests passed.
 ```
+
+## Learn More
+
+1. [Introducing Apache Spark 4.2](https://www.databricks.com/blog/introducing-apache-spark-42)
+1. [Why do we need Unity Catalog Metric Views?](https://medium.com/@cheegodchang/why-do-we-need-unity-catalog-metric-views-455ce259519e?sharedUserId=jaceklaskowski)

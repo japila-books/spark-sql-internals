@@ -127,7 +127,7 @@ ANTLR labeled alternative: `#createHiveTable`
 
 ### CREATE VIEW WITH METRICS { #visitCreateMetricView }
 
-Creates a [CreateMetricView](../metric-views/CreateMetricView.md) unary logical operator for 
+Creates a [CreateMetricView](../metric-views/CreateMetricView.md) unary logical operator for `CREATE VIEW WITH METRICS` SQL statement.
 
 ```antlr
 CREATE (OR REPLACE)?
