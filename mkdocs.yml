@@ -11,6 +11,8 @@ copyright: Copyright &copy; 2026 Jacek Laskowski
 
 theme:
   name: material
+  # https://zensical.org/docs/compatibility/mkdocs/migration/#theme-variant
+  variant: modern
   language: en
   icon:
     logo: material/book-open-page-variant
